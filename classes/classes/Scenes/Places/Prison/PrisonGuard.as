@@ -48,12 +48,12 @@ package classes.Scenes.Places.Prison
 		{
 			if(prison.prisonCanEscapeFight(false))
 			{
-				outputText("It occurs to you that if you were to resist you just might get the better of your guard and make good an escape. ",false);
+				outputText("It occurs to you that if you were to resist you just might get the better of your guard and make good an escape. ");
 				if(rand(100) < player.obey - (player.level + player.esteem * 0.25))
 				{
 					if(player.obey < 45)
 					{
-						outputText("However, something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as your guard looms over you.\n",false);
+						outputText("However, something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as your guard looms over you.\n");
 					}
 					else if(player.obey < 75)
 					{
@@ -71,7 +71,7 @@ package classes.Scenes.Places.Prison
 				else
 				{
 					outputText("Do you make an escape attempt? " + prison.prisonWillCostDescript(15),false);
-					outputText("\n",false);
+					outputText("\n");
 					doYesNo(prisonGuardAttackFight, prisonGuardAttackSubmit);
 					if (player.will >= prison.prisonWillCost(10)) {
 						outputText("\nYou could tell the " + guardType + " to fuck off and leave you alone. " + prison.prisonWillCostDescript(10));
@@ -84,20 +84,20 @@ package classes.Scenes.Places.Prison
 			{
 				if(player.obey < 45)
 				{
-					outputText("Unfortunately for you,",false);
+					outputText("Unfortunately for you,");
 				}
 				else if(player.obey < 75)
 				{
-					outputText("Something inside you is relieved that",false);
+					outputText("Something inside you is relieved that");
 					dynStats("lus", 15);
 				}
 				else
 				{
-					outputText("It gives you pleasure when you realize that",false);
+					outputText("It gives you pleasure when you realize that");
 					dynStats("lus", 30);
 				}
 				
-				outputText(" your restraints prevent you from putting up any significant fight",false);
+				outputText(" your restraints prevent you from putting up any significant fight");
 				if(player.lust > 80)
 				{
 					outputText(" -- not that you'd last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n",false);
@@ -121,7 +121,7 @@ package classes.Scenes.Places.Prison
 		{
 			if(player.will > prison.prisonWillCost(15))
 			{
-				outputText("\n\nYou steel yourself for combat, feeling a sudden rush of self confidence.",false);
+				outputText("\n\nYou steel yourself for combat, feeling a sudden rush of self confidence.");
 				prison.changeWill(-prison.prisonWillCost(15));
 				prison.prisonEscapeFightStart();
 			}
@@ -135,7 +135,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonGuardAttackSubmit():void
 		{
-			outputText("\n\n",false);
+			outputText("\n\n");
 			if(player.obey < 45)
 			{
 				outputText("Something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as the " + guardType + " looms over you.\n",false);

@@ -3447,7 +3447,7 @@ use namespace kGAMECLASS;
 			var devirgined:Boolean = wasVirgin && !vaginas[0].virgin;
 			if (devirgined){
 				if(spacingsF) outputText("  ");
-				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>", false);
+				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>");
 				if(spacingsB) outputText("  ");
 			}
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
@@ -3556,7 +3556,7 @@ use namespace kGAMECLASS;
 			if (ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
 			if (ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
 			if (ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
-			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
+			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>");
 		}
 
 		public function slimeFeed():void{
@@ -3677,7 +3677,7 @@ use namespace kGAMECLASS;
 			}
 			else if(breastRows.length > 1) {
 				//multiple
-				outputText("\n", false);
+				outputText("\n");
 				//temp2 = amount changed
 				//temp3 = counter
 				var temp2:Number = 0;
@@ -3688,16 +3688,16 @@ use namespace kGAMECLASS;
 						breastRows[temp3].breastRating--;
 						if(breastRows[temp3].breastRating < 0) breastRows[temp3].breastRating = 0;
 						temp2++;
-						outputText("\n", false);
-						if(temp3 < breastRows.length - 1) outputText("...and y", false);
-						else outputText("Y", false);
+						outputText("\n");
+						if(temp3 < breastRows.length - 1) outputText("...and y");
+						else outputText("Y");
 						outputText("our " + breastDescript(temp3) + " shrink, dropping to " + breastCup(temp3) + "s.", false);
 					}
 					if(breastRows[temp3].breastRating < 0) breastRows[temp3].breastRating = 0;
 				}
-				if(temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
-				if(temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
-				if(temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
+				if(temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+				if(temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+				if(temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
 			}
 		}
 
@@ -5207,7 +5207,7 @@ use namespace kGAMECLASS;
 			//Display LengthChange
 			if(temp2 > 0) {
 				if(cocks[0].cockLength >= 8 && cocks[0].cockLength-temp2 < 8){
-					if(cocks.length == 1) outputText("  <b>Most men would be overly proud to have a tool as long as yours.</b>", false);
+					if(cocks.length == 1) outputText("  <b>Most men would be overly proud to have a tool as long as yours.</b>");
 					if(cocks.length > 1) outputText("  <b>Most men would be overly proud to have one cock as long as yours, let alone " + multiCockDescript() + ".</b>", false);
 				}
 				if(cocks[0].cockLength >= 12 && cocks[0].cockLength-temp2 < 12) {
@@ -5219,7 +5219,7 @@ use namespace kGAMECLASS;
 					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " would look more at home on a large horse than on your body.</b>", false);
 					if (biggestTitSize() >= BREAST_CUP_C) {
 						if (cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give yourself the titty-fuck of a lifetime.", false);
-						if (cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.", false);
+						if (cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.");
 					}
 					else {
 						if(cocks.length == 1) outputText("  Your " + cockDescript(0) + " is so long it easily reaches your chest.  The possibility of autofellatio is now a foregone conclusion.", false);
@@ -5231,7 +5231,7 @@ use namespace kGAMECLASS;
 					if(cocks.length > 1) outputText("  <b>As if the pulsing heat of your " + multiCockDescriptLight() + " wasn't bad enough, every time you get hard, the tips of your " + multiCockDescriptLight() + " wave before you, obscuring the lower portions of your vision.</b>", false);
 					if(cor > 40 && cor <= 60) {
 						if(cocks.length > 1) outputText("  You wonder if there is a demon or beast out there that could take the full length of one of your " + multiCockDescriptLight() + "?", false);
-						if(cocks.length ==1) outputText("  You wonder if there is a demon or beast out there that could handle your full length.", false);
+						if(cocks.length ==1) outputText("  You wonder if there is a demon or beast out there that could handle your full length.");
 					}
 					if(cor > 60 && cor <= 80) {
 						if(cocks.length > 1) outputText("  You daydream about being attacked by a massive tentacle beast, its tentacles engulfing your " + multiCockDescriptLight() + " to their hilts, milking you dry.\n\nYou smile at the pleasant thought.", false);
@@ -5300,8 +5300,8 @@ use namespace kGAMECLASS;
 			//Texts
 			if (removed == 1) {
 				if (cocks.length == 0) {
-					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>", false);
-					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>");
+					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
 				if (cocks.length == 1) {
 					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one " + cockDescript(0) + ".</b>", false);
@@ -5312,8 +5312,8 @@ use namespace kGAMECLASS;
 			}
 			if (removed > 1) {
 				if (cocks.length == 0) {
-					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>", false);
-					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>");
+					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
 				if (cocks.length == 1) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
@@ -5441,7 +5441,7 @@ use namespace kGAMECLASS;
 			}
 			else {
 				if(output) {
-					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!");
 				}
 				
 				//v1 - bonus cum production

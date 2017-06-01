@@ -440,8 +440,8 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n", true);
 		//Worms be immune
 		if(monster.short == "worms") {
-			outputText("The worms appear to be unaffected by your magic!", false);
-			outputText("\n\n", false);
+			outputText("The worms appear to be unaffected by your magic!");
+			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
@@ -451,7 +451,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		if(monster.lustVuln == 0) {
-			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
+			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
@@ -468,7 +468,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
 			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -492,7 +492,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		monster.teased(lustDmg);
-		outputText("\n\n", false);
+		outputText("\n\n");
 		doNext(playerMenu);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -522,7 +522,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (backfire < 15) backfire = 15;
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 			if(player.gender == 1) {
 				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
@@ -533,7 +533,7 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else spellHealEffect();
-		outputText("\n\n", false);
+		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -562,7 +562,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		temp = Math.round(temp);
 		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
-		if (crit == true) outputText(" <b>*Critical Heal!*</b>", false);
+		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(temp,false);
 	}
 	/**
@@ -656,7 +656,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (backfire < 15) backfire = 15;
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 			if(player.gender == 1) {
 				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
@@ -667,10 +667,10 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			outputText("The rush of success and power flows through your body.  You feel like you can do anything!", false);
+			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
 			doEffect.call();
 		}
-		outputText("\n\n", false);
+		outputText("\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -762,7 +762,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (backfire < 15) backfire = 15;
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 			if(player.gender == 1) {
 				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
@@ -773,10 +773,10 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			outputText("The rush of success and power flows through your body.  You feel like you can do anything!", false);
+			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
 			doEffect.call();
 		}
-		outputText("\n\n", false);
+		outputText("\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -850,7 +850,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -927,7 +927,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1006,7 +1006,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1084,7 +1084,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1298,7 +1298,7 @@ public class CombatMagic extends BaseCombatContent {
 				outputText("\n\n<i>“Damn you, fight!”</i> Lethice screams, grabbing her whip and lashing out at the back-most demons, driving them forward -- and causing the middle bunch to be crushed between competing forces of retreating demons! <i>“Fight, or you'll be in the submission tanks for the rest of your miserable lives!”</i>");
 
 				monster.createStatusEffect(StatusEffects.Blind, 5 * spellModWhite(), 0, 0, 0);
-				outputText("\n\n", false);
+				outputText("\n\n");
 				flags[kFLAGS.SPELLS_CAST]++;
 				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
@@ -1313,21 +1313,21 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			else if(rand(3) != 0) {
 				outputText(" <b>" + monster.capitalA + monster.short + " ", false);
-				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>", false);
-				else outputText("is blinded!</b>", false);
+				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
+				else outputText("is blinded!</b>");
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
 				if(monster.short == "Isabella")
-					if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
-					else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.", false);
-				if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.", false);
+					if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
+					else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.");
+				if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.");
 				if(monster.short == "plain girl") {
-					outputText("  Remarkably, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused. The girl flashes a radiant smile at you, and the battle continues.", false);
+					outputText("  Remarkably, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused. The girl flashes a radiant smile at you, and the battle continues.");
 					monster.removeStatusEffect(StatusEffects.Blind);
 				}
 			}
 		}
 		else outputText(monster.capitalA + monster.short + " blinked!", false);
-		outputText("\n\n", false);
+		outputText("\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -1426,7 +1426,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1513,7 +1513,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);

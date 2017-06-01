@@ -1292,7 +1292,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 //PC lays 2 eggs per 10 points of Fertility they have
 public function popOutBenoitEggs():void {
 	if(player.vaginas.length == 0) {
-		outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
+		outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
 		player.createVagina();
 	}
 	outputText("\nA sudden pressure in your belly rouses you, making you moan softly in pain as you feel your womb rippling and squeezing, the walls contracting around the ripe eggs inside you.  You drag yourself from your bedding, divesting yourself of your lower clothes and staggering out into the middle of the camp.  Squatting upright, you inhale deeply and start to concentrate.");

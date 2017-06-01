@@ -9,19 +9,19 @@ package classes.Scenes.Places.Boat
 		
 		//Corrupted Marae's specials
 		public function tentacleAttack():void {
-			outputText("You spot barrage of tentacles coming your way! You attempt to dodge your way out ", false);
+			outputText("You spot barrage of tentacles coming your way! You attempt to dodge your way out ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_SPEED)
 			{
-				outputText("and you successfully dodge her tentacles!", false);
+				outputText("and you successfully dodge her tentacles!");
 			}
 			else if (evade != null)
 			{
-				outputText("and you successfully dodge her tentacles thanks to your superior evasion!", false);
+				outputText("and you successfully dodge her tentacles thanks to your superior evasion!");
 			}
 			else
 			{
-				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ", false);
+				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
 				var damage:int = ((str + 100) + rand(50))
 				game.dynStats("lust", rand(5) + 5);
 				damage = player.reduceDamage(damage);
@@ -32,19 +32,19 @@ package classes.Scenes.Places.Boat
 		
 		public function tentacleRape():void {
 			
-			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin! ", false);
+			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin! ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_SPEED)
 			{
-				outputText("You manage to successfully run from her tentacles! ", false);
+				outputText("You manage to successfully run from her tentacles! ");
 			}
 			else if (evade != null)
 			{
-				outputText("You manage to avoid her tentacles thanks to your superior evasion!", false);
+				outputText("You manage to avoid her tentacles thanks to your superior evasion!");
 			}
 			else
 			{
-				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ", false);
+				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
 				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
 				game.dynStats("lust", lustDmg, "resisted", false);
 				outputText("(+" + lustDmg + " lust)");

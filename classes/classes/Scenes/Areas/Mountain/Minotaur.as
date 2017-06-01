@@ -33,7 +33,7 @@
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
-				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
+				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
 				game.cleanupAfterCombat();
 			} else
 				game.mountain.minotaurScene.getRapedByMinotaur();

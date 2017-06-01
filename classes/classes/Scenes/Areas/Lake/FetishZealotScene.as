@@ -56,7 +56,7 @@ package classes.Scenes.Areas.Lake
 			}
 			player.changeStatusValue(StatusEffects.FetishOn, 1, 1);
 			clearOutput();
-			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.", false);
+			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.");
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.Lake
 		private function zealotRepeat():void
 		{
 			clearOutput();
-			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.", false);
+			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.");
 			startCombat(new FetishZealot());
 			spriteSelect(20);
 		}
@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Lake
 				outputText("You collapse from the pain of the zealot's attacks.  You feel your head swimming from the aphrodisiac; it seems to be having a stronger and stronger effect on you.  Soon your head is swimming with images of fetish scenes of all kinds.  The zealot walks up to you and puts his hand on your forehead.  Suddenly, all the images cascade into one.\n\n", false);
 			//Pre Rape Scene – lose by lust
 			else
-				outputText("The constant images of fetishes overwhelm you and you fall to your knees, unable to resist the temptation. The zealot walks up to you and puts his hand on your forehead.  Suddenly all the images cascade into one.\n\n", false);
+				outputText("The constant images of fetishes overwhelm you and you fall to your knees, unable to resist the temptation. The zealot walks up to you and puts his hand on your forehead.  Suddenly all the images cascade into one.\n\n");
 
 			//Student rape
 			//Zealot in a student costume, the player is in a teacher costume.  The zealot asks for a sex aid lesson in a very nervous way.  The player is afraid of what his parents may do to them if they refuse, so they agree to help him.
@@ -99,7 +99,7 @@ package classes.Scenes.Areas.Lake
 				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "formal vest, tie, and crotchless pants";  //can you think of a better way of putting this?
 				}
-				outputText("You smooth down your detached pants, and look at your exposed dick for a few moments, wondering if there was anything you said that may have upset him.  ", false);
+				outputText("You smooth down your detached pants, and look at your exposed dick for a few moments, wondering if there was anything you said that may have upset him.  ");
 			}
 			//no its a girl, or it looks like one
 			else {
@@ -107,28 +107,28 @@ package classes.Scenes.Areas.Lake
 				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "backless female teacher's clothes";  // again, change this if you've got a better name
 				}
-				outputText("You smooth out your half-skirt, trying to busy yourself as you try to remember if there was anything you said to upset him.  ", false);
+				outputText("You smooth out your half-skirt, trying to busy yourself as you try to remember if there was anything you said to upset him.  ");
 			}
-			outputText("\"<i>Professor?</i>\"  You hear him call out to you.  You look up and see him standing in front of your desk looking at the ground nervously.  \"<i>Yes, what is it?</i>\" you reply.  ", false);
+			outputText("\"<i>Professor?</i>\"  You hear him call out to you.  You look up and see him standing in front of your desk looking at the ground nervously.  \"<i>Yes, what is it?</i>\" you reply.  ");
 			//same as before
 			if (broseph == "dude") {
-				outputText("He starts to look up, but then his gazes fixes directly on your ", false);
+				outputText("He starts to look up, but then his gazes fixes directly on your ");
 				if (player.cockTotal() > 0) {
 					outputText(multiCockDescriptLight() + ".  You feel yourself grow hard ", false);
 					if (player.hasVagina()) {
-						outputText("and wet ", false);
+						outputText("and wet ");
 					}
-					outputText("under his gaze, ", false);
+					outputText("under his gaze, ");
 				}
-				else outputText("bare crotch, ", false);
-				outputText("and you silently wish that the dress code allowed for a small flap for covering your ", false);
+				else outputText("bare crotch, ");
+				outputText("and you silently wish that the dress code allowed for a small flap for covering your ");
 				if (player.gender == 0) {
-					outputText("lack of ", false);
+					outputText("lack of ");
 				}
-				else outputText("genitals.  ", false);
+				else outputText("genitals.  ");
 			}
 			else {
-				outputText("He starts to look up, but his gazes fixes on your skirt, just barely covering your ", false);
+				outputText("He starts to look up, but his gazes fixes on your skirt, just barely covering your ");
 				if (player.hasVagina()) {
 					outputText(vaginaDescript(0) + " ", false);
 					if (player.cockTotal() > 0) {
@@ -136,26 +136,26 @@ package classes.Scenes.Areas.Lake
 					}
 				}
 				else {
-					outputText("bare crotch ", false);
+					outputText("bare crotch ");
 				}
-				outputText("from this angle.  You feel hot under his gaze ", false);
+				outputText("from this angle.  You feel hot under his gaze ");
 				if (player.cockTotal() > 0) {
 					outputText(", and your " + multiCockDescriptLight() + " start", false);
 					if (player.cockTotal() == 1) {
-						outputText("s", false);
+						outputText("s");
 					}
-					outputText(" to get hard, as your ", false);
+					outputText(" to get hard, as your ");
 				}
-				outputText("cleft starts to moisten.  ", false);
+				outputText("cleft starts to moisten.  ");
 			}
-			outputText("You clear your throat nervously and he starts, finally raising his eyes to your face.\n\n", false);
+			outputText("You clear your throat nervously and he starts, finally raising his eyes to your face.\n\n");
 			outputText("\"<i>Ah, professor,</i>\" he says again, \"<i>I just got a " + player.mf("boyfriend", "girlfriend") + " and I have no idea how to have sex.  Could you please give me a lesson?</i>\"  You stare at him in disbelief.  This boy still hadn't had a " + player.mf("man", "woman") + " at this school?  It would almost be laughable, if the threat of his parents didn't loom in the back of your mind.\n\n", false);
 			outputText("\"<i>Ok,</i>\"  you say nervously, \"<i>I can give you a lesson on pleasing " + player.mf("men", "women") + ".</i>\"  He jumps up excitedly and runs around to the other side of the desk saying \"<i>Ok, what do I have to do?</i>\"  Feeling a bit put on the spot, you stop for a moment to take in the situation.  ", false);
 			//again, is that a guy?  Or just look like one?
 			if (broseph == "dude") {
 				outputText("You're standing in front of your student behind your desk in your empty classroom.  You are in regular teacher's attire: an open vest and tie over your otherwise bare " + player.allBreastsDescript() + ", with formal dress pant legs attached to your vest with suspenders, plus your black dress shoes for dancing.  Your student is wearing the standard male student uniform, a collection of pieces of material held together with straps, that will all fall away easily when one gets pulled; but otherwise gives full coverage.\n\n", false);
 				//How to please a man (in this zealot boy's fantasy)
-				outputText("You take a deep breath and start to explain how to please a man.  You explain how important it is for men to have friendly competitions with each other.  Of special note is who can give the best blowjob, and who can jerk themselves off the best.  He nods to you and explains that he knew about the dick sucking part, but not the rest.  Usually one of them issues a challenge to the other, the one being challenged has the first go at the other's cock.  Then the challenger has their turn.  After that the two have to do their best to orgasm before the other by pumping their cocks with their hands.\n\n", false);
+				outputText("You take a deep breath and start to explain how to please a man.  You explain how important it is for men to have friendly competitions with each other.  Of special note is who can give the best blowjob, and who can jerk themselves off the best.  He nods to you and explains that he knew about the dick sucking part, but not the rest.  Usually one of them issues a challenge to the other, the one being challenged has the first go at the other's cock.  Then the challenger has their turn.  After that the two have to do their best to orgasm before the other by pumping their cocks with their hands.\n\n");
 				//now if the player can have sex...
 				if (player.gender != 0) {
 					//Give the zealot a blowjob
@@ -163,7 +163,7 @@ package classes.Scenes.Areas.Lake
 					//now the favor is returned
 					outputText("You stand up and indicate to him that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your exposed " + multiCockDescriptLight() + " and licks his lips eagerly.  He tries to imitate your performance on his manhood onto your " + cockDescript(0) + ", but he sometimes messes up the order, or does something too fast or slow.  Fortunately, he is a good student, and under your guidance he is soon sucking cock like a pro.  He tickles you with his tongue in just the right way, and gives just the right amount of attention to each part of your length.  ", false);
 					if (player.hasVagina()) outputText("You slip one of your fingers inside your " + vaginaDescript(0) + ", wishing that it could get some attention, but this lesson is about pleasing <i>men</i>.  ", false);
-					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n", false);
+					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n");
 					//jerking off contest
 					outputText("He eagerly stands up and wraps his hands around his fine cock, you quickly try to do the same with your " + multiCockDescript() + ".  \"<i>I won't lose to you so easily, professor!</i>\" he declares to you, \"<i>Don't act so confidently on your first time.</i>\" you reply.  Then the two of you are madly jerking yourselves off in a mad effort to get off before the other, your respective cocks already moist from the blowjobs they just received.  ", false);
 					//just one cock
@@ -178,16 +178,16 @@ package classes.Scenes.Areas.Lake
 					else {
 						outputText("Rapidly moving your hands between each rod in your " + multiCockDescriptLight() + ", you manage to piston each of them at an incredible rate, ", false);
 					}
-					outputText("pushing your pleasure to incredible levels at an impressive rate.  Though, to your amazement, you hear your student give a gasp of pleasure just before you yourself are pushed over the edge.  The student had surpassed the teacher.\n\n", false);
+					outputText("pushing your pleasure to incredible levels at an impressive rate.  Though, to your amazement, you hear your student give a gasp of pleasure just before you yourself are pushed over the edge.  The student had surpassed the teacher.\n\n");
 				}
 			}
 			else {
 				outputText("You're standing in front of your student behind your desk in your empty classroom.  You are in your regular dress clothes; a formal backless blouse and short semi skirt that only blocks the front from view, plus your two inch tall high heels.  Your student is wearing the standard male student uniform, a collection of pieces of material held together with straps, that will all fall away easily when one gets pulled; but otherwise gives full coverage.\n\n", false);
 				//How to please a woman (in this zealot boy's fantasy...)
-				outputText("You take a deep breath and start to explain how to please a woman.  You explain that one of the most important things is to show the woman that you want her, you want her body, and you want her to suck your dick.  He nods to you and explains that he knew about the dick sucking part, but not the rest.  Then you explain the proper way to thank a woman for the blowjob, by licking and sucking on her vagina.  After that, the man penetrates the pussy with his cock.\n\n", false);
+				outputText("You take a deep breath and start to explain how to please a woman.  You explain that one of the most important things is to show the woman that you want her, you want her body, and you want her to suck your dick.  He nods to you and explains that he knew about the dick sucking part, but not the rest.  Then you explain the proper way to thank a woman for the blowjob, by licking and sucking on her vagina.  After that, the man penetrates the pussy with his cock.\n\n");
 				if (player.gender != 0) {
 					//he wants to do that to you, doesn't he?
-					outputText("Throughout the whole conversation, your student gets more and more excited before finally saying \"<i>Can we do it now?!</i>\" and pulling his waist strings, causing his crotch piece to fall open.  At the site of his impressive erection, you eagerly kneel down in front of him as he says \"<i>I want you, I want you to suck my cock <b>so</b> much!</i>\"  You waste no time in obliging him.\n\n", false);
+					outputText("Throughout the whole conversation, your student gets more and more excited before finally saying \"<i>Can we do it now?!</i>\" and pulling his waist strings, causing his crotch piece to fall open.  At the site of his impressive erection, you eagerly kneel down in front of him as he says \"<i>I want you, I want you to suck my cock <b>so</b> much!</i>\"  You waste no time in obliging him.\n\n");
 					//blowjob
 					outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length,  making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n", false);
 					//cunalinguss
@@ -199,13 +199,13 @@ package classes.Scenes.Areas.Lake
 					if (player.cockTotal() > 0) {
 						outputText("You give your " + multiCockDescriptLight() + " a few gentle strokes, wishing he would give that a little attention too, but this is a lesson on how to please a <i>woman</i>.  ", false);
 					}
-					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n", false);
+					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n");
 					//prick in the twat
 					outputText("He eagerly stands up and starts to push you back against your desk, his fine cock already inside your " + vaginaDescript(0) + ".  He pushes you onto your back and grabs ahold of your legs, starting to make strong thrusts deep inside you, his cock seeming to fit your " + vaginaDescript(0) + " perfectly.  Any pretense of professionalism is lost in the moment, as all you can care about is the feeling of his exquisite cock perfectly filling you, pushing in and out.  All too soon, you hear him gasp, and the wonderful feeling of sweet release fills you.  ", false);
 					if (player.cockTotal() > 0) {
 						outputText("Your " + multiCockDescriptLight() + " spasms and covers you with a liberal amount of your own fluids.  ", false);
 					}
-					outputText("After a moment, your student pulls out of you and helps you back up.\n\n", false);
+					outputText("After a moment, your student pulls out of you and helps you back up.\n\n");
 				}
 			}
 			//Wrapping things up
@@ -213,7 +213,7 @@ package classes.Scenes.Areas.Lake
 				outputText("The two of you stand looking at each other again for a moment.  Then you help your student get his clothes back together.  Once you have him fixed up, you notice that he is looking at the ground again.  \"<i>Professor?  I have a confession to make.</i>\" he says very quietly.  \"<i>What is it?</i>\" you ask him.  \"<i>I lied to you about getting a " + player.mf("boyfriend", "girlfriend") + ", I actually just wanted you.</i>\"  Before you have a chance to respond, he quickly gives you a kiss on the mouth, before rushing out the door, blushing furiously.  You can't help but smile at how he is growing up.\n\n", false);
 			}
 			if (player.gender == 0) {
-				outputText("Throughout the whole conversation, your student gets more and more excited.  Half way though he starts masturbating, and by the end he is ready to go over the edge.  \"<i>Thank you so much for the lesson professor, gaahh.</i>\" he tells you as he begins to cum. The sight of him cumming in front of you is enough to drive you to your own orgasm.  Breathing a sigh of relief, you let your student out of the room and go back to cleaning up.\n\n", false);
+				outputText("Throughout the whole conversation, your student gets more and more excited.  Half way though he starts masturbating, and by the end he is ready to go over the edge.  \"<i>Thank you so much for the lesson professor, gaahh.</i>\" he tells you as he begins to cum. The sight of him cumming in front of you is enough to drive you to your own orgasm.  Breathing a sigh of relief, you let your student out of the room and go back to cleaning up.\n\n");
 			}
 			//After any zealot rape
 			//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
@@ -221,14 +221,14 @@ package classes.Scenes.Areas.Lake
 			dynStats("int", -1, "cor", 2);
 			//Trigger bad end if player's intelligence is less than 10 after being drained.
 			if (player.inte < 10 && rand(2) == 0) {
-				outputText("You find that your mind is unable to return to reality, and it moves on to another, then another.  Later you feel a female body come and pick you up, but you are too messed up to react to it...", false);
+				outputText("You find that your mind is unable to return to reality, and it moves on to another, then another.  Later you feel a female body come and pick you up, but you are too messed up to react to it...");
 				doNext(lake.fetishCultistScene.cultistBadEnd2);
 				return;
 			}
 			//Otherwise, continue on here
 			//continue on to Cultist bad end.  I'll expand these later when where doing the cathedral.
 			else {
-				outputText("A few hours later your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the zealot is nowhere to be seen.", false);
+				outputText("A few hours later your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the zealot is nowhere to be seen.");
 			}
 			//If there were changes to the player's genitals
 			//same as cultist
@@ -242,7 +242,7 @@ package classes.Scenes.Areas.Lake
 			else {
 				outputText("\n\nYou find that your " + player.armorName + " are back to normal, and there is no sign of the strange clothes you were wearing before.", false);
 			}
-			outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
+			outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
 			dynStats("lus", player.cor / 20 + player.lib / 10);
 			cleanupAfterCombat();
 		}
@@ -250,11 +250,11 @@ package classes.Scenes.Areas.Lake
 		public function zealotDefeated():void
 		{
 			//Defeated by health
-			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.", false);
+			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.");
 			//Defeated by lust
-			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.", false);
+			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.");
 			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
+				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
 				var bikiniTits:Function = null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 				simpleChoices("Yes", zealotWinRape, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
@@ -268,25 +268,25 @@ package classes.Scenes.Areas.Lake
 		{
 			clearOutput();
 			//Religious Costume Rape
-			outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n", false);
+			outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n");
 			//If player has a dick, chose one of these at random if the player has both
 			if (player.cockTotal() > 0 && (player.gender != 3 || rand(2) == 0)) {
-				outputText("As you move towards him, he drops onto all fours with his head down and ass in the air.  He seems to have started making a prayer: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ", false);
+				outputText("As you move towards him, he drops onto all fours with his head down and ass in the air.  He seems to have started making a prayer: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ");
 				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out to you, \"<i>Please, let me finish my prayer, put your " + cockDescript(0) + " in my ass.</i>\"  Well, he did ask you...\n\n", false);
-				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n", false);
+				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n");
 				outputText("You remove your " + player.armorName + " and stride up behind him, and grab his rear end to line up your " + cockDescript(0) + " with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your " + cockDescript(0) + " inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n", false);
 				outputText("\"<i>My shame brings the one within me their pleasure; such a tragedy has befallen me.</i>\" he continues.  \"<i>Shut up and take it like a man!</i>\" you tell him, and start fucking him more and more roughly.  You reach around him and grab his balls, and start to grip them painfully.    He isn't perturbed, and continues his prayers between his gasps: \"<i>Agh, The horror, I'm being tortur- ah, while being raped ungh, and I'm loving every moment.  Oug!</i>\"  Having had enough, you squeeze his sack hard, at the same time as you cum inside his ass.\n\n", false);
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still doubled over in pain from the damage you did to his balls.\n\n", false);
 			}
 			//If player has a vagina, again, if both, chose one at random
 			else if (player.hasVagina()) {
-				outputText("As you move towards him, he lays back onto the ground, his cock almost pointing straight up in the air.  He clasps his hands in front of his face and starts praying: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ", false);
+				outputText("As you move towards him, he lays back onto the ground, his cock almost pointing straight up in the air.  He clasps his hands in front of his face and starts praying: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ");
 				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out at you, \"<i>Please, let me finish my prayer, take me within your " + vaginaDescript(0) + " for your own pleasure.</i>\"  Well, he did ask you...\n\n", false);
-				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n", false);
+				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n");
 				outputText("You remove your " + player.armorName + " and stride over top of him, looking down at the defeated zealot as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n", false);
-				outputText("With a laugh, you impale yourself on his cock and despite how ", false);
-				if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE) outputText("tight", false);
-				else outputText("loose", false);
+				outputText("With a laugh, you impale yourself on his cock and despite how ");
+				if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE) outputText("tight");
+				else outputText("loose");
 				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n", false);
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ", false);
 				player.cuntChange(monster.cockArea(0), true);

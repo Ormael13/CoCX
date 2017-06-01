@@ -28,7 +28,7 @@ public class PlayerAppearance extends BaseContent {
 		describeArms();
 		describeLowerBody();
 
-		outputText("\n", false);
+		outputText("\n");
 	if (player.hasStatusEffect(StatusEffects.GooStuffed))
 
 	{
@@ -39,30 +39,30 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)
 		{
-			outputText("<b>", false);
+			outputText("<b>");
 			//Compute size
 			temp = player.statusEffectv3(StatusEffects.Eggs) + player.statusEffectv2(StatusEffects.Eggs) * 10;
 			if(player.pregnancyIncubation <= 50 && player.pregnancyIncubation > 20)
 			{
-				outputText("Your swollen pregnant belly is as large as a ", false);
+				outputText("Your swollen pregnant belly is as large as a ");
 				if(temp < 10)
-					outputText("basketball.", false);
+					outputText("basketball.");
 				if(temp >= 10 && temp < 20)
-					outputText("watermelon.", false);
+					outputText("watermelon.");
 				if(temp >= 20)
-					outputText("beach ball.", false);
+					outputText("beach ball.");
 			}
 			if(player.pregnancyIncubation <= 20)
 			{
-				outputText("Your swollen pregnant belly is as large as a ", false);
+				outputText("Your swollen pregnant belly is as large as a ");
 				if(temp < 10)
-					outputText("watermelon.", false);
+					outputText("watermelon.");
 				if(temp >= 10 && temp < 20)
-					outputText("beach ball.", false);
+					outputText("beach ball.");
 				if(temp >= 20)
-					outputText("large medicine ball.", false);
+					outputText("large medicine ball.");
 			}
-			outputText("</b>", false);
+			outputText("</b>");
 			temp = 0;
 		}
 		//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
@@ -70,23 +70,23 @@ public class PlayerAppearance extends BaseContent {
 		{
 			if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75)
 			{
-				outputText("<b>You've got the beginnings of a small pot-belly.</b>", false);
+				outputText("<b>You've got the beginnings of a small pot-belly.</b>");
 			}
 			else if(player.buttPregnancyIncubation >= 50)
 			{
-				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy, yet it feels odd inside you - wrong somehow.</b>", false);
+				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy, yet it feels odd inside you - wrong somehow.</b>");
 			}
 			else if(player.buttPregnancyIncubation >= 30)
 			{
-				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>", false);
+				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>");
 			}
 			else
 			{ //Surely Benoit and Cotton deserve their place in this list
 				if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (kGAMECLASS.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)) || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH)
-					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
+					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>");
 				else if(player.pregnancyType != PregnancyStore.PREGNANCY_MARBLE)
-					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>", false);
-				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>", false);
+					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>");
+				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>");
 			}
 		}
 		//URTA PREG
@@ -94,31 +94,31 @@ public class PlayerAppearance extends BaseContent {
 		{
 			if(player.pregnancyIncubation <= 432 && player.pregnancyIncubation > 360)
 			{
-				outputText("<b>Your belly is larger than it used to be.</b>\n", false);
+				outputText("<b>Your belly is larger than it used to be.</b>\n");
 			}
 			if(player.pregnancyIncubation <= 360 && player.pregnancyIncubation > 288)
 			{
-				outputText("<b>Your belly is more noticeably distended.   You're pretty sure it's Urta's.</b>", false);
+				outputText("<b>Your belly is more noticeably distended.   You're pretty sure it's Urta's.</b>");
 			}
 			if(player.pregnancyIncubation <= 288 && player.pregnancyIncubation > 216)
 			{
-				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy, and the baby within is kicking nowadays.</b>", false);
+				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy, and the baby within is kicking nowadays.</b>");
 			}
 			if(player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 144)
 			{
-				outputText("<b>Your belly is large and very obviously pregnant to anyone who looks at you.  It's gotten heavy enough to be a pain to carry around all the time.</b>", false);
+				outputText("<b>Your belly is large and very obviously pregnant to anyone who looks at you.  It's gotten heavy enough to be a pain to carry around all the time.</b>");
 			}
 			if(player.pregnancyIncubation <= 144 && player.pregnancyIncubation > 72)
 			{
-				outputText("<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.  It's large and round, frequently moving.</b>", false);
+				outputText("<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.  It's large and round, frequently moving.</b>");
 			}
 			if(player.pregnancyIncubation <= 72 && player.pregnancyIncubation > 48)
 			{
-				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>", false);
+				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>");
 			}
 			if(player.pregnancyIncubation <= 48)
 			{
-				outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
+				outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>");
 			}
 		}
 		else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL)
@@ -139,42 +139,42 @@ public class PlayerAppearance extends BaseContent {
 		{
 			if(player.pregnancyIncubation <= 336 && player.pregnancyIncubation > 280)
 			{
-				outputText("<b>Your belly is larger than it used to be.</b>", false);
+				outputText("<b>Your belly is larger than it used to be.</b>");
 			}
 			if(player.pregnancyIncubation <= 280 && player.pregnancyIncubation > 216)
 			{
-				outputText("<b>Your belly is more noticeably distended.   You are probably pregnant.</b>", false);
+				outputText("<b>Your belly is more noticeably distended.   You are probably pregnant.</b>");
 			}
 			if(player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 180)
 			{
-				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy.</b>", false);
+				outputText("<b>The unmistakable bulge of pregnancy is visible in your tummy.</b>");
 			}
 			if(player.pregnancyIncubation <= 180 && player.pregnancyIncubation > 120)
 			{
-				outputText("<b>Your belly is very obviously pregnant to anyone who looks at you.</b>", false);
+				outputText("<b>Your belly is very obviously pregnant to anyone who looks at you.</b>");
 			}
 			if(player.pregnancyIncubation <= 120 && player.pregnancyIncubation > 72)
 			{
-				outputText("<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.</b>", false);
+				outputText("<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.</b>");
 			}
 			if(player.pregnancyIncubation <= 72 && player.pregnancyIncubation > 48)
 			{
-				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>", false);
+				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>");
 			}
 			if (player.pregnancyIncubation <= 48)
 			{ //Surely Benoit and Cotton deserve their place in this list
 				if(player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && kGAMECLASS.monk <= 0) || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH)
-					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
+					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>");
 				else if (player.pregnancyType != PregnancyStore.PREGNANCY_MARBLE)
-					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>", false);
-				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>", false);
+					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>");
+				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>");
 			}
 		}
-		outputText("\n", false);
+		outputText("\n");
 	}
-	outputText("\n", false);
+	outputText("\n");
 	if(player.gillType == GILLS_ANEMONE)
-		outputText("A pair of feathery gills are growing out just below your neck, spreading out horizontally and draping down your chest.  They allow you to stay in the water for quite a long time.  ", false);
+		outputText("A pair of feathery gills are growing out just below your neck, spreading out horizontally and draping down your chest.  They allow you to stay in the water for quite a long time.  ");
 	//Chesticles..I mean bewbz.
 	if(player.breastRows.length == 1)
 	{
@@ -188,7 +188,7 @@ public class PlayerAppearance extends BaseContent {
 		if(player.breastRows[0].breastRating >= 1)
 			outputText("  You could easily fill a " + player.breastCup(temp) + " bra.", false);
 		//Done with tits.  Move on.
-		outputText("\n", false);
+		outputText("\n");
 	}
 	//many rows
 	else
@@ -197,15 +197,15 @@ public class PlayerAppearance extends BaseContent {
 		while (temp < player.breastRows.length)
 		{
 			if(temp == 0)
-				outputText("--Your uppermost rack houses ", false);
+				outputText("--Your uppermost rack houses ");
 			if(temp == 1)
-				outputText("\n--The second row holds ", false);
+				outputText("\n--The second row holds ");
 			if(temp == 2)
-				outputText("\n--Your third row of breasts contains ", false);
+				outputText("\n--Your third row of breasts contains ");
 			if(temp == 3)
-				outputText("\n--Your fourth set of tits cradles ", false);
+				outputText("\n--Your fourth set of tits cradles ");
 			if(temp == 4)
-				outputText("\n--Your fifth and final mammary grouping swells with ", false);
+				outputText("\n--Your fifth and final mammary grouping swells with ");
 			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ", false);
 			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
 			if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
@@ -218,35 +218,35 @@ public class PlayerAppearance extends BaseContent {
 			temp++;
 		}
 		//Done with tits.  Move on.
-		outputText("\n", false);
+		outputText("\n");
 	}
 	//Crotchial stuff - mention snake
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA && player.gender > 0)
 	{
-		outputText("\nYour sex", false);
+		outputText("\nYour sex");
 		if(player.gender == 3 || player.totalCocks() > 1)
-			outputText("es are ", false);
-		else outputText(" is ", false);
-		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n", false);
+			outputText("es are ");
+		else outputText(" is ");
+		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
 	if(player.lowerBody == LOWER_BODY_TYPE_SCYLLA)
 	{
 		if(player.gender == 1)
 		{
-			outputText("\nYour sex is concealed between your front octopus tentacle legs dangling freely when not in use.\n", false);
+			outputText("\nYour sex is concealed between your front octopus tentacle legs dangling freely when not in use.\n");
 		}
 		if(player.gender == 2)
 		{
-			outputText("\nYour sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.\n", false);
+			outputText("\nYour sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.\n");
 		}
 		if(player.gender == 3)
 		{
-			outputText("\nYour sex", false);
+			outputText("\nYour sex");
 			if(player.totalCocks() > 1)
-				outputText("es are ", false);
-			else outputText(" is ", false);
-			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n", false);
+				outputText("es are ");
+			else outputText(" is ");
+			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n");
 		}
 	}
 	//Cock stuff!
@@ -254,10 +254,10 @@ public class PlayerAppearance extends BaseContent {
 	if(player.cocks.length == 1)
 	{
 		if(player.isTaur())
-			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
+			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ", false);
 		else if (player.isScylla())
-			outputText("\nYour equipment has shifted to lie between your front tentacles.", false);
+			outputText("\nYour equipment has shifted to lie between your front tentacles.");
 		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10)
 		{
@@ -276,7 +276,7 @@ public class PlayerAppearance extends BaseContent {
 		//Horsecock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.HORSE)
 		{
-			outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your shaft flares proudly, just like a horse's.", false);
+			outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your shaft flares proudly, just like a horse's.");
 		}
 		//dog cock flavor
 		if((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX) || (player.cocks[temp].cockType == CockTypesEnum.WOLF))
@@ -294,37 +294,37 @@ public class PlayerAppearance extends BaseContent {
 		//Demon cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.DEMON)
 		{
-			outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.", false);
+			outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.");
 		}
 		//Tentacle cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE)
 		{
-			outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.", false);
+			outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.");
 		}
 		//Stamen cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.STAMEN)
 		{
-			outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.", false);
+			outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.");
 		}
 		//Cat cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.CAT)
 		{
-			outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.", false);
+			outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.");
 		}
 		//Snake cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.LIZARD)
 		{
-			outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.", false);
+			outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.");
 		}
 		//Anemone cock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.ANEMONE)
 		{
-			outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.", false);
+			outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.");
 		}
 		//Kangawang flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.KANGAROO)
 		{
-			outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.", false);
+			outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.");
 		}
 		//Draconic Cawk Flava flav
 		if(player.cocks[temp].cockType == CockTypesEnum.DRAGON)
@@ -357,7 +357,7 @@ public class PlayerAppearance extends BaseContent {
 		if(player.cocks[temp].sock)
 			sockDescript(temp);
 		//DONE WITH COCKS, moving on!
-		outputText("\n", false);
+		outputText("\n");
 	}
 	if(player.cocks.length > 1)
 	{
@@ -375,60 +375,60 @@ public class PlayerAppearance extends BaseContent {
 			//middle cock description
 			if(rando == 0)
 			{
-				if(temp == 0)outputText("--Your first ", false);
-				else outputText("--Your next ", false);
+				if(temp == 0)outputText("--Your first ");
+				else outputText("--Your next ");
 				outputText(player.cockDescript(temp), false);
-				outputText(" is ", false);
+				outputText(" is ");
 				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches wide.", false);
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
-						outputText("one inch wide.", false);
+						outputText("one inch wide.");
 					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches wide.", false);
 				}
 			}
 			if(rando == 1)
 			{
-				outputText("--One of your ", false);
+				outputText("--One of your ");
 				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
-						outputText("one inch thick.", false);
+						outputText("one inch thick.");
 					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
 				}
 			}
 			if(rando == 2)
 			{
 				if(temp > 0)
-					outputText("--Another of your ", false);
-				else outputText("--One of your ", false);
+					outputText("--Another of your ");
+				else outputText("--One of your ");
 				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
-						outputText("one inch thick.", false);
+						outputText("one inch thick.");
 					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
 				}
 			}
 			if(rando == 3)
 			{
 				if(temp > 0)
-					outputText("--Your next ", false);
-				else outputText("--Your first ", false);
+					outputText("--Your next ");
+				else outputText("--Your first ");
 				outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.", false);
 				else
 				{
 					if(Math.round(player.cocks[temp].cockThickness*10)/10 == 1)
-						outputText("one inch in diameter.", false);
+						outputText("one inch in diameter.");
 					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches in diameter.", false);
 				}
 			}
@@ -451,37 +451,37 @@ public class PlayerAppearance extends BaseContent {
 			//Demon cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.DEMON)
 			{
-				outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.", false);
+				outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.");
 			}
 			//Tentacle cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE)
 			{
-				outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.", false);
+				outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.");
 			}
 			//Stamen cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.STAMEN)
 			{
-				outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.", false);
+				outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.");
 			}
 			//Cat cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.CAT)
 			{
-				outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.", false);
+				outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.");
 			}
 			//Snake cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.LIZARD)
 			{
-				outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.", false);
+				outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.");
 			}
 			//Anemone cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.ANEMONE)
 			{
-				outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.", false);
+				outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.");
 			}
 			//Kangwang flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.KANGAROO)
 			{
-				outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.", false);
+				outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.");
 			}
 			//Draconic Cawk Flava flav
 			if(player.cocks[temp].cockType == CockTypesEnum.DRAGON)
@@ -519,7 +519,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 			temp++;
 			rando++;
-			outputText("\n", false);
+			outputText("\n");
 			if(rando > 3) rando = 0;
 		}
 		//Worm flavor
@@ -573,24 +573,24 @@ public class PlayerAppearance extends BaseContent {
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
 		if(Math.round(player.ballSize) == 1)
-			outputText("inch", false);
-		else outputText("inches", false);
-		outputText(" across.\n", false);
+			outputText("inch");
+		else outputText("inches");
+		outputText(" across.\n");
 	}
 	//VAGOOZ
 	if(player.vaginas.length > 0)
 	{
 		if(player.gender == 2 && player.isTaur() && player.lowerBody != 26)
-			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.", false);
+			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if(player.gender == 2 && player.isScylla())
-			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.", false);
-		outputText("\n", false);
+			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
+		outputText("\n");
 		if (player.vaginas.length == 1)
 			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);
 			else outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
 		if(player.vaginas[0].virgin)
-			outputText(" and an intact hymen", false);
-		outputText(".  ", false);
+			outputText(" and an intact hymen");
+		outputText(".  ");
 		if (player.vaginas.length > 1)
 			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ", false);
 			else outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
@@ -599,11 +599,11 @@ public class PlayerAppearance extends BaseContent {
 		{
 			//Wetness
 			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< VAGINA_WETNESS_DROOLING)
-				outputText("Moisture gleams in ", false);
+				outputText("Moisture gleams in ");
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_DROOLING)
 			{
-				outputText("Occasional beads of ", false);
-				outputText("lubricant drip from ", false);
+				outputText("Occasional beads of ");
+				outputText("lubricant drip from ");
 			}
 			//Different description based on vag looseness
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_WET)
@@ -621,16 +621,16 @@ public class PlayerAppearance extends BaseContent {
 		{
 			//Wetness
 			if(player.vaginas[0].vaginalWetness< VAGINA_WETNESS_WET)
-				outputText("Moisture gleams in ", false);
+				outputText("Moisture gleams in ");
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< VAGINA_WETNESS_DROOLING)
 			{
-				outputText("Occasional beads of ", false);
-				outputText("lubricant drip from ", false);
+				outputText("Occasional beads of ");
+				outputText("lubricant drip from ");
 			}
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_DROOLING)
 			{
-				outputText("Thin streams of ", false);
-				outputText("lubricant occasionally dribble from ", false);
+				outputText("Thin streams of ");
+				outputText("lubricant occasionally dribble from ");
 			}
 			//Different description based on vag looseness
 			if(player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE)
@@ -647,20 +647,20 @@ public class PlayerAppearance extends BaseContent {
 			if(player.vaginas[0].vaginalWetness< VAGINA_WETNESS_WET)
 
 			{
-				outputText("Occasional beads of ", false);
-				outputText("lubricant drip from ", false);
+				outputText("Occasional beads of ");
+				outputText("lubricant drip from ");
 			}
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< VAGINA_WETNESS_DROOLING)
 
 			{
-				outputText("Thin streams of ", false);
-				outputText("lubricant occasionally dribble from ", false);
+				outputText("Thin streams of ");
+				outputText("lubricant occasionally dribble from ");
 			}
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_DROOLING)
 
 			{
-				outputText("Thick streams of ", false);
-				outputText("lubricant drool constantly from ", false);
+				outputText("Thick streams of ");
+				outputText("lubricant drool constantly from ");
 			}
 			//Different description based on vag looseness
 			if(player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE)
@@ -668,20 +668,20 @@ public class PlayerAppearance extends BaseContent {
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE)
 				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your cunt.  ", false);
+				outputText("the massive hole that is your cunt.  ");
 		}
 		//Line Drop for next descript!
-		outputText("\n", false);
+		outputText("\n");
 	}
 	//Genderless lovun'
 	if(player.cockTotal() == 0 && player.vaginas.length == 0)
-		outputText("\nYou have a curious lack of any sexual endowments.\n", false);
+		outputText("\nYou have a curious lack of any sexual endowments.\n");
 
 
 	//BUNGHOLIO
 	if(player.ass)
 	{
-		outputText("\n", false);
+		outputText("\n");
 		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
 	}
 	//Piercings!
@@ -707,7 +707,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1)
-		outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);
+		outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.");
 	if(player.hasVagina())
 	{
 		if(player.vaginas[0].labiaPierced > 0)
@@ -717,7 +717,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	//MONEY!
 	if(player.gems == 0)
-		outputText("\n\n<b>Your money-purse is devoid of any currency.", false);
+		outputText("\n\n<b>Your money-purse is devoid of any currency.");
 	if(player.gems > 1)
 		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.", false);
 	if(player.gems == 1)
@@ -728,14 +728,14 @@ public class PlayerAppearance extends BaseContent {
 	flushOutputTextToGUI();
 }
 	public function describeBodyShape():void {
-		outputText("You have a humanoid shape with the usual body", false);
+		outputText("You have a humanoid shape with the usual body");
 		if (player.skin.coverage == Skin.COVERAGE_LOW) {
 			outputText(" partialy covered with [skin coat]");
 		} else if (player.skin.coverage >= Skin.COVERAGE_MEDIUM) {
 			outputText(" covered with [skin coat]");
 		}
-		outputText(", arms, hands and fingers.", false);
-		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.", false);
+		outputText(", arms, hands and fingers.");
+		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
 		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a melee weapon", false);
@@ -748,7 +748,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Girding one of your fingers is " + player.jewelryName + ".");
 		if (player.jewelryName == "fox hairpin")
 			outputText("  In your hair is " + player.jewelryName + ".");
-		if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  On your neck is Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.", false);
+		if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  On your neck is Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
 		outputText("</b>");
 	}
 	public function describeRace():void {
@@ -758,7 +758,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("You are a ");
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText(Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre");
 		else outputText(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch");
-		outputText(" tall [malefemaleherm] [race], with [bodytype].", false);
+		outputText(" tall [malefemaleherm] [race], with [bodytype].");
 	}
 	public function describeLowerBody():void {
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY || player.lowerBody == LOWER_BODY_TYPE_SCYLLA || player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
@@ -781,63 +781,63 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have " + hipDescript(), false);
 				if (player.hipRating < 6) {
 					if (player.tone < 65)
-						outputText(" buried under a noticeable muffin-top, and", false);
-					else outputText(" that blend into your pillar-like waist, and", false);
+						outputText(" buried under a noticeable muffin-top, and");
+					else outputText(" that blend into your pillar-like waist, and");
 				}
 				if (player.hipRating >= 6 && player.hipRating < 10)
-					outputText(" that blend into the rest of your thick form, and", false);
+					outputText(" that blend into the rest of your thick form, and");
 				if (player.hipRating >= 10 && player.hipRating < 15)
-					outputText(" that would be much more noticeable if you weren't so wide-bodied, and", false);
+					outputText(" that would be much more noticeable if you weren't so wide-bodied, and");
 				if (player.hipRating >= 15 && player.hipRating < 20)
-					outputText(" that sway and emphasize your thick, curvy shape, and", false);
+					outputText(" that sway and emphasize your thick, curvy shape, and");
 				if (player.hipRating >= 20)
-					outputText(" that sway hypnotically on your extra-curvy frame, and", false);
+					outputText(" that sway hypnotically on your extra-curvy frame, and");
 			}
 			else if (player.thickness < 30) {
 				outputText("  You have " + hipDescript(), false);
 				if (player.hipRating < 6)
-					outputText(" that match your trim, lithe body, and", false);
+					outputText(" that match your trim, lithe body, and");
 				if (player.hipRating >= 6 && player.hipRating < 10)
-					outputText(" that sway to and fro, emphasized by your trim body, and", false);
+					outputText(" that sway to and fro, emphasized by your trim body, and");
 				if (player.hipRating >= 10 && player.hipRating < 15)
-					outputText(" that swell out under your trim waistline, and", false);
+					outputText(" that swell out under your trim waistline, and");
 				if (player.hipRating >= 15 && player.hipRating < 20)
-					outputText(", emphasized by your narrow waist, and", false);
+					outputText(", emphasized by your narrow waist, and");
 				if (player.hipRating >= 20)
-					outputText(" that swell disproportionately wide on your lithe frame, and", false);
+					outputText(" that swell disproportionately wide on your lithe frame, and");
 			}
 			//STANDARD
 			else {
 				outputText("  You have " + hipDescript(), false);
 				if (player.hipRating < 6)
-					outputText(", and", false);
+					outputText(", and");
 				if (player.femininity > 50) {
 					if (player.hipRating >= 6 && player.hipRating < 10)
-						outputText(" that draw the attention of those around you, and", false);
+						outputText(" that draw the attention of those around you, and");
 					if (player.hipRating >= 10 && player.hipRating < 15)
-						outputText(" that make you walk with a sexy, swinging gait, and", false);
+						outputText(" that make you walk with a sexy, swinging gait, and");
 					if (player.hipRating >= 15 && player.hipRating < 20)
-						outputText(" that make it look like you've birthed many children, and", false);
+						outputText(" that make it look like you've birthed many children, and");
 					if (player.hipRating >= 20)
-						outputText(" that make you look more like an animal waiting to be bred than any kind of human, and", false);
+						outputText(" that make you look more like an animal waiting to be bred than any kind of human, and");
 				}
 				else {
 					if (player.hipRating >= 6 && player.hipRating < 10)
-						outputText(" that give you a graceful stride, and", false);
+						outputText(" that give you a graceful stride, and");
 					if (player.hipRating >= 10 && player.hipRating < 15)
-						outputText(" that add a little feminine swing to your gait, and", false);
+						outputText(" that add a little feminine swing to your gait, and");
 					if (player.hipRating >= 15 && player.hipRating < 20)
-						outputText(" that force you to sway and wiggle as you move, and", false);
+						outputText(" that force you to sway and wiggle as you move, and");
 					if (player.hipRating >= 20) {
-						outputText(" that give your ", false);
+						outputText(" that give your ");
 						if (player.balls > 0)
-							outputText("balls plenty of room to breathe", false);
+							outputText("balls plenty of room to breathe");
 						else if (player.hasCock())
 							outputText(player.multiCockDescript() + " plenty of room to swing", false);
 						else if (player.hasVagina())
 							outputText(vaginaDescript() + " a nice, wide berth", false);
-						else outputText("vacant groin plenty of room", false);
-						outputText(", and", false);
+						else outputText("vacant groin plenty of room");
+						outputText(", and");
 					}
 				}
 			}
@@ -849,33 +849,33 @@ public class PlayerAppearance extends BaseContent {
 			if (player.tone < 65) {
 				outputText("  Your " + buttDescript(), false);
 				if (player.buttRating < 4)
-					outputText(" is lean, from what you can see of it.", false);
+					outputText(" is lean, from what you can see of it.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
-					outputText(" looks fairly average.", false);
+					outputText(" looks fairly average.");
 				if (player.buttRating >= 6 && player.buttRating < 10)
-					outputText(" is fairly plump and healthy.", false);
+					outputText(" is fairly plump and healthy.");
 				if (player.buttRating >= 10 && player.buttRating < 15)
-					outputText(" jiggles a bit as you trot around.", false);
+					outputText(" jiggles a bit as you trot around.");
 				if (player.buttRating >= 15 && player.buttRating < 20)
-					outputText(" jiggles and wobbles as you trot about.", false);
+					outputText(" jiggles and wobbles as you trot about.");
 				if (player.buttRating >= 20)
-					outputText(" is obscenely large, bordering freakish, even for a horse.", false);
+					outputText(" is obscenely large, bordering freakish, even for a horse.");
 			}
 			//GIRL LOOK AT DAT BOOTY
 			else {
 				outputText("  Your " + buttDescript(), false);
 				if (player.buttRating < 4)
-					outputText(" is barely noticeably, showing off the muscles of your haunches.", false);
+					outputText(" is barely noticeably, showing off the muscles of your haunches.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
-					outputText(" matches your toned equine frame quite well.", false);
+					outputText(" matches your toned equine frame quite well.");
 				if (player.buttRating >= 6 && player.buttRating < 10)
-					outputText(" gives hints of just how much muscle you could put into a kick.", false);
+					outputText(" gives hints of just how much muscle you could put into a kick.");
 				if (player.buttRating >= 10 && player.buttRating < 15)
-					outputText(" surges with muscle whenever you trot about.", false);
+					outputText(" surges with muscle whenever you trot about.");
 				if (player.buttRating >= 15 && player.buttRating < 20)
-					outputText(" flexes its considerable mass as you move.", false);
+					outputText(" flexes its considerable mass as you move.");
 				if (player.buttRating >= 20)
-					outputText(" is stacked with layers of muscle, huge even for a horse.", false);
+					outputText(" is stacked with layers of muscle, huge even for a horse.");
 			}
 		}
 		//Non-horse PCs
@@ -884,33 +884,33 @@ public class PlayerAppearance extends BaseContent {
 			if (player.tone < 60) {
 				outputText(" your " + buttDescript(), false);
 				if (player.buttRating < 4)
-					outputText(" looks great under your gear.", false);
+					outputText(" looks great under your gear.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
-					outputText(" has the barest amount of sexy jiggle.", false);
+					outputText(" has the barest amount of sexy jiggle.");
 				if (player.buttRating >= 6 && player.buttRating < 10)
-					outputText(" fills out your clothing nicely.", false);
+					outputText(" fills out your clothing nicely.");
 				if (player.buttRating >= 10 && player.buttRating < 15)
-					outputText(" wobbles enticingly with every step.", false);
+					outputText(" wobbles enticingly with every step.");
 				if (player.buttRating >= 15 && player.buttRating < 20)
-					outputText(" wobbles like a bowl full of jello as you walk.", false);
+					outputText(" wobbles like a bowl full of jello as you walk.");
 				if (player.buttRating >= 20)
-					outputText(" is obscenely large, bordering freakish, and makes it difficult to run.", false);
+					outputText(" is obscenely large, bordering freakish, and makes it difficult to run.");
 			}
 			//FITBUTT
 			else {
 				outputText(" your " + buttDescript(), false);
 				if (player.buttRating < 4)
-					outputText(" molds closely against your form.", false);
+					outputText(" molds closely against your form.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
-					outputText(" contracts with every motion, displaying the detailed curves of its lean musculature.", false);
+					outputText(" contracts with every motion, displaying the detailed curves of its lean musculature.");
 				if (player.buttRating >= 6 && player.buttRating < 10)
-					outputText(" fills out your clothing nicely.", false);
+					outputText(" fills out your clothing nicely.");
 				if (player.buttRating >= 10 && player.buttRating < 15)
-					outputText(" stretches your gear, flexing it with each step.", false);
+					outputText(" stretches your gear, flexing it with each step.");
 				if (player.buttRating >= 15 && player.buttRating < 20)
-					outputText(" threatens to bust out from under your kit each time you clench it.", false);
+					outputText(" threatens to bust out from under your kit each time you clench it.");
 				if (player.buttRating >= 20)
-					outputText(" is marvelously large, but completely stacked with muscle.", false);
+					outputText(" is marvelously large, but completely stacked with muscle.");
 			}
 		}
 		//TAILS
@@ -928,7 +928,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_WOLF)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
-			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.", false);
+			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 		//Horse body is placed higher for readability purposes
 		else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
@@ -991,48 +991,48 @@ public class PlayerAppearance extends BaseContent {
 		if (player.tailType == TAIL_TYPE_HORSE)
 			outputText("  A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
 		if (player.tailType == TAIL_TYPE_FERRET)
-			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [skin coat.color] fur.", false);
+			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [skin coat.color] fur.");
 		if (player.tailType == TAIL_TYPE_DOG)
 			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
 		if (player.tailType == TAIL_TYPE_DEMONIC)
 			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
 		if (player.tailType == TAIL_TYPE_COW)
-			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.", false);
+			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
-			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny black chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.", false);
+			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny black chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
-				outputText("  Your bulging arachnid posterior feels fairly full of webbing.", false);
+				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
 			if (player.tailVenom >= 80 && player.tailVenom < 100)
-				outputText("  Your arachnid rear bulges and feels very full of webbing.", false);
+				outputText("  Your arachnid rear bulges and feels very full of webbing.");
 			if (player.tailVenom == 100)
-				outputText("  Your swollen spider-butt is distended with the sheer amount of webbing it's holding.", false);
+				outputText("  Your swollen spider-butt is distended with the sheer amount of webbing it's holding.");
 		}
 		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
-			outputText("  A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.", false);
+			outputText("  A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
-				outputText("  A single drop of poison hangs from your exposed stinger.", false);
+				outputText("  A single drop of poison hangs from your exposed stinger.");
 			if (player.tailVenom >= 80 && player.tailVenom < 100)
-				outputText("  Poisonous bee venom coats your stinger completely.", false);
+				outputText("  Poisonous bee venom coats your stinger completely.");
 			if (player.tailVenom == 100)
-				outputText("  Venom drips from your poisoned stinger regularly.", false);
+				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == TAIL_TYPE_SCORPION) {
-			outputText("  A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin and tipped with a stinger.", false);
+			outputText("  A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin and tipped with a stinger.");
 			if (player.tailVenom > 75 && player.tailVenom < 120)
-				outputText("  A single drop of poison hangs from your exposed stinger.", false);
+				outputText("  A single drop of poison hangs from your exposed stinger.");
 			if (player.tailVenom >= 120 && player.tailVenom < 150)
-				outputText("  Poisonous bee venom coats your stinger completely.", false);
+				outputText("  Poisonous bee venom coats your stinger completely.");
 			if (player.tailVenom == 150)
-				outputText("  Venom drips from your poisoned stinger regularly.", false);
+				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
-			outputText("  Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and it’s pussy-like interior can be used to milk male organs. ", false);
-			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.", false);
+			outputText("  Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and it’s pussy-like interior can be used to milk male organs. ");
+			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
 		if (player.tailType == TAIL_TYPE_MANTIS_ABDOMEN)
-			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard greenish chitinous material.", false);
+			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard greenish chitinous material.");
 		if (player.tailType == TAIL_TYPE_SHARK) {
-			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.", false);
+			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
 		if (player.tailType == TAIL_TYPE_CAT) {
 			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
@@ -1048,7 +1048,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == TAIL_TYPE_HARPY)
 			outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.", false);
 		else if (player.tailType == TAIL_TYPE_KANGAROO) {
-			outputText("  A conical, ", false);
+			outputText("  A conical, ");
 			if (player.hasFur()) outputText("furry, " + player.coatColor, false);
 			else outputText("gooey, " + player.skinTone, false);
 			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
@@ -1105,41 +1105,41 @@ public class PlayerAppearance extends BaseContent {
 	public function describeArms():void {
 //Wing arms
 		if (player.armType == ARM_TYPE_HARPY)
-			outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.", false);
+			outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		if (player.armType == ARM_TYPE_PHOENIX)
-			outputText("  Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.", false);
+			outputText("  Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		else if (player.armType == ARM_TYPE_SPIDER)
-			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);
+			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
 		else if (player.armType == ARM_TYPE_MANTIS)
-			outputText("  Shining green exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.", false);
+			outputText("  Shining green exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (player.armType == ARM_TYPE_BEE)
-			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.", false);
+			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (player.armType == ARM_TYPE_SALAMANDER)
-			outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+			outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
 		else if (player.armType == ARM_TYPE_PLANT)
-			outputText("  Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.", false);
+			outputText("  Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.");
 		else if (player.armType == ARM_TYPE_PLANT2)
-			outputText("  Vines crawl down from your shoulders to your wrists, tipped with slits that drool precum. They look like innocent decorations from a distance.", false);
+			outputText("  Vines crawl down from your shoulders to your wrists, tipped with slits that drool precum. They look like innocent decorations from a distance.");
 		else if (player.armType == ARM_TYPE_SHARK)
-			outputText("  A middle sized shark-like fin has sprouted on each of your forearms near the elbow.  Additionaly skin between your fingers forming a small webbings helpful when swimming.", false);
+			outputText("  A middle sized shark-like fin has sprouted on each of your forearms near the elbow.  Additionaly skin between your fingers forming a small webbings helpful when swimming.");
 		else if (player.armType == ARM_TYPE_GARGOYLE) {
 			outputText("  Your ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" arms end up with a pair of stone sharp clawed hand.", false);
+			outputText(" arms end up with a pair of stone sharp clawed hand.");
 		}
 		else if (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX)
-			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.", false);
+			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
 		else if (player.armType == ARM_TYPE_LION)
-			outputText("  Your arms are covered in dark-fur up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.", false);
+			outputText("  Your arms are covered in dark-fur up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
 		else if (player.armType == ARM_TYPE_KITSUNE)
-			outputText("  Your arms are somewhat human save for your sharp nails.", false);
+			outputText("  Your arms are somewhat human save for your sharp nails.");
 		else if (player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON)
-			outputText("  Shining thick, leathery scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+			outputText("  Shining thick, leathery scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
 		else if (player.armType == ARM_TYPE_YETI)
-			outputText("  Your two arms covered with thick fur end with large, powerful yeti hands. You can use them to smash or punch things when you're angry.", false);
+			outputText("  Your two arms covered with thick fur end with large, powerful yeti hands. You can use them to smash or punch things when you're angry.");
 		else if (player.armType == ARM_TYPE_ORCA)
-			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.", false);
+			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody == REAR_BODY_FENRIR_ICE_SPIKES) {
@@ -1158,29 +1158,29 @@ public class PlayerAppearance extends BaseContent {
 	public function describeWings():void {
 //WINGS!
 		if (player.wingType == WING_TYPE_BEE_LIKE_SMALL)
-			outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.", false);
+			outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
 		if (player.wingType == WING_TYPE_BEE_LIKE_LARGE)
-			outputText("  A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.", false);
+			outputText("  A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.");
 		if (player.wingType == WING_TYPE_MANTIS_LIKE_SMALL)
-			outputText("  A pair of tiny mantis-wings sprout from your back, too small to allow you to fly.", false);
+			outputText("  A pair of tiny mantis-wings sprout from your back, too small to allow you to fly.");
 		if (player.wingType == WING_TYPE_MANTIS_LIKE_LARGE)
-			outputText("  A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.", false);
+			outputText("  A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.");
 		if (player.wingType == WING_TYPE_BAT_LIKE_TINY)
-			outputText("  A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.", false);
+			outputText("  A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
 		if (player.wingType == WING_TYPE_BAT_LIKE_LARGE)
-			outputText("  A pair of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.", false);
+			outputText("  A pair of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
 		if (player.wingType == WING_TYPE_BAT_LIKE_LARGE_2)
-			outputText("  Two pairs of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.", false);
+			outputText("  Two pairs of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_SMALL)
-			outputText("  A pair of small leathery wings covered with fur rest on your back. Despite being too small to allow flight they at least look cute on you.", false);
+			outputText("  A pair of small leathery wings covered with fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_LARGE)
-			outputText("  A pair of large ominous leathery wings covered with fur expand from your back. You can open them wide to soar high in search of your next prey.", false);
+			outputText("  A pair of large ominous leathery wings covered with fur expand from your back. You can open them wide to soar high in search of your next prey.");
 		if (player.wingType == WING_TYPE_FEATHERED_LARGE)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
 		if (player.wingType == WING_TYPE_FEATHERED_ALICORN)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
 		if (player.wingType == WING_TYPE_FEATHERED_PHOENIX)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
 		if (player.wingType == WING_TYPE_DRACONIC_SMALL)
 			outputText("  Small, vestigial wings sprout from your shoulders.  They might look like bat's wings, but the membranes are covered in fine, delicate scales.");
 		else if (player.wingType == WING_TYPE_DRACONIC_LARGE)
@@ -1215,15 +1215,15 @@ public class PlayerAppearance extends BaseContent {
 		//Minotaur horns
 		if (player.hornType == HORNS_COW_MINOTAUR) {
 			if (player.horns < 3)
-				outputText("  Two tiny horn-like nubs protrude from your forehead, resembling the horns of the young livestock kept by your village.", false);
+				outputText("  Two tiny horn-like nubs protrude from your forehead, resembling the horns of the young livestock kept by your village.");
 			if (player.horns >= 3 && player.horns < 6)
-				outputText("  Two moderately sized horns grow from your forehead, similar in size to those on a young bovine.", false);
+				outputText("  Two moderately sized horns grow from your forehead, similar in size to those on a young bovine.");
 			if (player.horns >= 6 && player.horns < 12)
-				outputText("  Two large horns sprout from your forehead, curving forwards like those of a bull.", false);
+				outputText("  Two large horns sprout from your forehead, curving forwards like those of a bull.");
 			if (player.horns >= 12 && player.horns < 20)
-				outputText("  Two very large and dangerous looking horns sprout from your head, curving forward and over a foot long.  They have dangerous looking points.", false);
+				outputText("  Two very large and dangerous looking horns sprout from your head, curving forward and over a foot long.  They have dangerous looking points.");
 			if (player.horns >= 20)
-				outputText("  Two huge horns erupt from your forehead, curving outward at first, then forwards.  The weight of them is heavy, and they end in dangerous looking points.", false);
+				outputText("  Two huge horns erupt from your forehead, curving outward at first, then forwards.  The weight of them is heavy, and they end in dangerous looking points.");
 		}
 		//Lizard horns
 		if (player.hornType == HORNS_DRACONIC_X2) {
@@ -1232,7 +1232,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Super lizard horns
 		if (player.hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
-			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.", false);
+			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
 		//Antlers!
 		if (player.hornType == HORNS_ANTLERS) {
 			if (player.horns > 0)
@@ -1259,15 +1259,15 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.hornType == HORNS_UNICORN) {
 			if (player.horns < 3)
-				outputText("  Tiny horn-like nub protrude from your forehead, resembling the horn of the young unicorn.", false);
+				outputText("  Tiny horn-like nub protrude from your forehead, resembling the horn of the young unicorn.");
 			if (player.horns >= 3 && player.horns < 6)
-				outputText("  One moderately sized horn grow from your forehead, similar in size to those on a young unicorn.", false);
+				outputText("  One moderately sized horn grow from your forehead, similar in size to those on a young unicorn.");
 			if (player.horns >= 6 && player.horns < 12)
-				outputText("  One large horn sprout from your forehead, spiraling and pointing forwards like those of an unicorn.", false);
+				outputText("  One large horn sprout from your forehead, spiraling and pointing forwards like those of an unicorn.");
 			if (player.horns >= 12 && player.horns < 20)
-				outputText("  One very large and dangerous looking spiraling horn sprout from your forehead, pointing forward and over a foot long.  It have dangerous looking tip.", false);
+				outputText("  One very large and dangerous looking spiraling horn sprout from your forehead, pointing forward and over a foot long.  It have dangerous looking tip.");
 			if (player.horns >= 20)
-				outputText("  One huge and long spiraling horn erupt from your forehead, pointing forward.  The weight of it is heavy and ends with dangerous and sharp looking tip.", false);
+				outputText("  One huge and long spiraling horn erupt from your forehead, pointing forward.  The weight of it is heavy and ends with dangerous and sharp looking tip.");
 		}
 		if (player.hornType == HORNS_OAK) {
 			if (player.horns > 0)
@@ -1285,9 +1285,9 @@ public class PlayerAppearance extends BaseContent {
 	public function describeTongue():void {
 //Tongue
 		if (player.tongueType == TONUGE_SNAKE)
-			outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.", false);
+			outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.");
 		else if (player.tongueType == TONUGE_DEMONIC)
-			outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.", false);
+			outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
 		else if (player.tongueType == TONUGE_DRACONIC)
 			outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
 		else if (player.tongueType == TONUGE_ECHIDNA)
@@ -1312,11 +1312,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeEyes():void {
 		if(player.eyeType == EYES_FOUR_SPIDER_EYES)
-			outputText("  In addition to your primary two eyes, you have a second, smaller pair on your forehead.", false);
+			outputText("  In addition to your primary two eyes, you have a second, smaller pair on your forehead.");
 		else if(player.eyeType == EYES_BLACK_EYES_SAND_TRAP)
-			outputText("  Your eyes are solid spheres of inky, alien darkness.", false);
+			outputText("  Your eyes are solid spheres of inky, alien darkness.");
 		else if(player.eyeType == EYES_CAT_SLITS)
-			outputText("  Your eyes have vertically slit like those of cat.", false);
+			outputText("  Your eyes have vertically slit like those of cat.");
 		else if(player.eyeType == EYES_GORGON)
 			outputText("  Your eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(player.eyeType == EYES_FENRIR)
@@ -1337,34 +1337,34 @@ public class PlayerAppearance extends BaseContent {
 		if(player.hairLength == 0)
 		{
 			if(player.skinType == SKIN_TYPE_FUR)
-				outputText("  You have no hair, only a thin layer of fur atop of your head.  ", false);
+				outputText("  You have no hair, only a thin layer of fur atop of your head.  ");
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + "");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				outputText(" where your hair should be.", false);
+				outputText(" where your hair should be.");
 			}
 			if(player.earType == EARS_HORSE)
-				outputText("  A pair of horse-like ears rise up from the top of your head.", false);
+				outputText("  A pair of horse-like ears rise up from the top of your head.");
 			else if(player.earType == EARS_FERRET)
-				outputText("  A pair of small, rounded ferret ears sit on top of your head.", false);
+				outputText("  A pair of small, rounded ferret ears sit on top of your head.");
 			else if(player.earType == EARS_DOG)
-				outputText("  A pair of dog ears protrude from your skull, flopping down adorably.", false);
+				outputText("  A pair of dog ears protrude from your skull, flopping down adorably.");
 			else if(player.earType == EARS_COW)
-				outputText("  A pair of round, floppy cow ears protrude from the sides of your skull.", false);
+				outputText("  A pair of round, floppy cow ears protrude from the sides of your skull.");
 			else if(player.earType == EARS_ELFIN)
-				outputText("  A pair of large pointy ears stick out from your skull.", false);
+				outputText("  A pair of large pointy ears stick out from your skull.");
 			else if(player.earType == EARS_CAT)
-				outputText("  A pair of cute, fuzzy cat ears have sprouted from the top of your head.", false);
+				outputText("  A pair of cute, fuzzy cat ears have sprouted from the top of your head.");
 			else if(player.earType == EARS_PIG)
-				outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.", false);
+				outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
 			else if(player.earType == EARS_LIZARD)
-				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.", false);
+				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.");
 			else if(player.earType == EARS_BUNNY)
-				outputText("  A pair of floppy rabbit ears stick up from the top of your head, flopping around as you walk.", false);
+				outputText("  A pair of floppy rabbit ears stick up from the top of your head, flopping around as you walk.");
 			else if(player.earType == EARS_FOX)
 				outputText("  A pair of large, adept fox ears sit high on your head, always listening.");
 			else if(player.earType == EARS_DRAGON)
-				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.", false);
+				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
 			else if(player.earType == EARS_RACCOON)
 				outputText("  A pair of vaguely egg-shaped, furry raccoon ears adorns your head.");
 			else if(player.earType == EARS_MOUSE)
@@ -1376,17 +1376,17 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.earType == EARS_ECHIDNA)
 				outputText("  A pair of small rounded openings appear on your head that are your ears.");
 			else if (player.earType == EARS_DEER)
-				outputText("  A pair of deer-like ears rise up from the top of your head.", false);
+				outputText("  A pair of deer-like ears rise up from the top of your head.");
 			else if(player.earType == EARS_WOLF)
-				outputText("  A pair of pointed wolf ears rise up from the top of your head.", false);
+				outputText("  A pair of pointed wolf ears rise up from the top of your head.");
 			else if(player.earType == EARS_LION)
-				outputText("  A pair of lion ears have sprouted from the top of your head.", false);
+				outputText("  A pair of lion ears have sprouted from the top of your head.");
 			else if(player.earType == EARS_YETI)
-				outputText("  A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.", false);
+				outputText("  A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.");
 			else if(player.earType == EARS_ORCA)
-				outputText("  A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.", false);
+				outputText("  A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
 			else if(player.earType == EARS_SNAKE)
-				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.", false);
+				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
 			//</mod>
 			if (player.gillType == GILLS_FISH)
 			{
@@ -1395,37 +1395,37 @@ public class PlayerAppearance extends BaseContent {
 			}
 			// GILLS_ANEMONE are handled below
 			if(player.antennae == ANTENNAE_MANTIS)
-				outputText("  Long prehensile antennae also appear on your skull, bouncing and swaying in the breeze.", false);
+				outputText("  Long prehensile antennae also appear on your skull, bouncing and swaying in the breeze.");
 			if(player.antennae == ANTENNAE_BEE)
-				outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.", false);
+				outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 		}
 		//not bald
 		else
 		{
 			if(player.earType == EARS_HUMAN)
-				outputText("  Your [hair] looks good on you, accentuating your features well.", false);
+				outputText("  Your [hair] looks good on you, accentuating your features well.");
 			else if(player.earType == EARS_FERRET)
-				outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].", false);
+				outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].");
 			else if(player.earType == EARS_HORSE)
-				outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.", false);
+				outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.");
 			else if(player.earType == EARS_DOG)
-				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.", false);
+				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
 			else if(player.earType == EARS_COW)
-				outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.", false);
+				outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.");
 			else if(player.earType == EARS_ELFIN)
-				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.", false);
+				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 			else if(player.earType == EARS_CAT)
-				outputText("  The [hair] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.", false);
+				outputText("  The [hair] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
 			else if(player.earType == EARS_LIZARD)
-				outputText("  The [hair] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.", false);
+				outputText("  The [hair] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
 			else if(player.earType == EARS_BUNNY)
-				outputText("  A pair of floppy rabbit ears stick up out of your [hair], bouncing around as you walk.", false);
+				outputText("  A pair of floppy rabbit ears stick up out of your [hair], bouncing around as you walk.");
 			else if(player.earType == EARS_KANGAROO)
-				outputText("  The [hair] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.", false);
+				outputText("  The [hair] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
 			else if(player.earType == EARS_FOX)
 				outputText("  The [hair] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
 			else if(player.earType == EARS_DRAGON)
-				outputText("  The [hair] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.", false);
+				outputText("  The [hair] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
 			else if(player.earType == EARS_RACCOON)
 				outputText("  The [hair] on your head parts around a pair of egg-shaped, furry raccoon ears.");
 			else if(player.earType == EARS_MOUSE)
@@ -1437,29 +1437,29 @@ public class PlayerAppearance extends BaseContent {
 			else if(player.earType == EARS_ECHIDNA)
 				outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
 			else if(player.earType == EARS_DEER)
-				outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.", false);
+				outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.");
 			else if(player.earType == EARS_WOLF)
-				outputText("  The [hair] on your head is overlapped by a pair of pointed wolf ears.", false);
+				outputText("  The [hair] on your head is overlapped by a pair of pointed wolf ears.");
 			else if(player.earType == EARS_LION)
-				outputText("  The [hair] is parted by a pair of lion ears that listen to every sound.", false);
+				outputText("  The [hair] is parted by a pair of lion ears that listen to every sound.");
 			else if(player.earType == EARS_YETI)
-				outputText("  The [hair] is parted by a pair of yeti ears, bigger than your old human ones.", false);
+				outputText("  The [hair] is parted by a pair of yeti ears, bigger than your old human ones.");
 			else if(player.earType == EARS_ORCA)
-				outputText("  The [hair] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.", false);
+				outputText("  The [hair] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
 			else if(player.earType == EARS_SNAKE)
-				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.", false);
+				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
 			//</mod>
 			if(player.antennae == ANTENNAE_MANTIS)
 			{
 				if(player.earType == EARS_BUNNY)
-					outputText("  Long prehensile antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.", false);
-				else outputText("  Long prehensile antennae also grow from just behind your hairline, bouncing and swaying in the breeze.", false);
+					outputText("  Long prehensile antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.");
+				else outputText("  Long prehensile antennae also grow from just behind your hairline, bouncing and swaying in the breeze.");
 			}
 			if(player.antennae == ANTENNAE_BEE)
 			{
 				if(player.earType == EARS_BUNNY)
-					outputText("  Limp antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.", false);
-				else outputText("  Floppy antennae also grow from just behind your hairline, bouncing and swaying in the breeze.", false);
+					outputText("  Limp antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.");
+				else outputText("  Floppy antennae also grow from just behind your hairline, bouncing and swaying in the breeze.");
 			}
 		}
 	}
@@ -1492,38 +1492,38 @@ public class PlayerAppearance extends BaseContent {
 			outputText(".");
 
 			if (player.faceType == FACE_SHARK_TEETH)
-				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.", false);
+				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.");
 			else if (player.faceType == FACE_BUNNY)
-				outputText("  The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.", false);
+				outputText("  The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.");
 			else if (player.faceType == FACE_SPIDER_FANGS)
-				outputText("  A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.", false);
+				outputText("  A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.");
 			else if (player.faceType == FACE_FERRET_MASK)
-				outputText("  The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.", false);
+				outputText("  The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.");
 			else if (player.faceType == FACE_MANTICORE)
-				outputText("  You have a set of sharp cat-like teeth in your mouth.", false);
+				outputText("  You have a set of sharp cat-like teeth in your mouth.");
 			else if (player.faceType == FACE_SNAKE_FANGS) {
 				if (odd==0) {
-					outputText("  The only oddity is your pair of dripping fangs which often hang over your lower lip.", false);
+					outputText("  The only oddity is your pair of dripping fangs which often hang over your lower lip.");
 				} else {
-					outputText("  In addition, a pair of fangs hang over your lower lip, dripping with venom.", false);
+					outputText("  In addition, a pair of fangs hang over your lower lip, dripping with venom.");
 		}
 			} else if (player.faceType == FACE_SALAMANDER_FANGS) {
 				if (odd == 0) {
-					outputText(".  The only oddity is your salamander fangs giving you a menacing smile.", false);
+					outputText(".  The only oddity is your salamander fangs giving you a menacing smile.");
 				} else {
-					outputText("  In addition, a pair of salamander fangs grows out of your mouth giving you a menacing smile.", false);
+					outputText("  In addition, a pair of salamander fangs grows out of your mouth giving you a menacing smile.");
 				}
 			} else if (player.faceType == FACE_YETI_FANGS) {
 				if (odd == 0){
-					outputText(".  Your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.", false);
+					outputText(".  Your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				} else {
-					outputText("  In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.", false);
+					outputText("  In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				}
 			}
 		} else if (player.faceType == FACE_FERRET) {
 			if (player.hasFullCoatOfType(SKIN_TYPE_FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
-			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].", false);
-			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.", false);
+			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].");
+			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.");
 		}
 		else if (player.faceType == FACE_RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
@@ -1576,9 +1576,9 @@ public class PlayerAppearance extends BaseContent {
 			if (!player.hasCoat()) {
 				outputText("  Your face is equine in shape and structure.  The odd visage is hairless and covered with [skin base].");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  Your face is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].", false);
+				outputText("  Your face is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].");
 			} else {
-				outputText("  You have the face and head structure of a horse, overlaid with glittering [skin coat].", false);
+				outputText("  You have the face and head structure of a horse, overlaid with glittering [skin coat].");
 			}
 		}
 		//dog-face
@@ -1586,26 +1586,26 @@ public class PlayerAppearance extends BaseContent {
 			if (!player.hasCoat()) {
 				outputText("  You have a dog-like face, complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.", false);
+				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
 			} else {
-				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skin coat]", false);
+				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skin coat]");
 			}
 		}
 		//wolf-face
 		if (player.faceType == FACE_WOLF) {
 			if (!player.hasCoat()) {
-				outputText("  You have a wolf-like face, complete with a wet nose.  ", false);
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
+				outputText("  You have a wolf-like face, complete with a wet nose.  ");
+				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				outputText(".", false);
+				outputText(".");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ", false);
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
-				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.", false);
+				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
+				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
-				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering [skin coat].", false);
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.", false);
+				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering [skin coat].");
+				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
 			}
 		}
 		//cat-face
@@ -1613,9 +1613,9 @@ public class PlayerAppearance extends BaseContent {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				outputText(".", false);
+				outputText(".");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.", false);
+				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
@@ -1635,13 +1635,13 @@ public class PlayerAppearance extends BaseContent {
 		//Lizard-face
 		if (player.faceType == FACE_LIZARD) {
 			if (!player.hasCoat()) {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].", false);
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.", false);
+				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.");
 			} else if (player.hasFullCoat()) {
-				outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skin coat] complete the look, making you look quite fearsome.", false);
+				outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skin coat] complete the look, making you look quite fearsome.");
 			} else {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin coat].", false);
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin coat].");
 			}
 		}
 		if (player.faceType == FACE_DRAGON) {
@@ -1651,12 +1651,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
 		if (player.faceType == FACE_KANGAROO) {
-			outputText("  Your face is ", false);
+			outputText("  Your face is ");
 			if (!player.hasCoat()) {
 				outputText("bald");
 				if (player.skin.base.adj == "tattooed") outputText(" covered with magical tattoo");
 			} else outputText("covered with [skin coat]");
-			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.", false);
+			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.");
 		}
 		//<mod>
 		if (player.faceType == FACE_PIG) {
@@ -1704,7 +1704,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.faceType == FACE_ORCA) {
 			if (player.skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
-				outputText("  Your face is fairly human in shape save for a wider yet adorable nose. Your skin is pitch black with a white underbelly. From your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes. While at first one could mistake it for human skin, it has a glossy shine only found on sea animals.", false);
+				outputText("  Your face is fairly human in shape save for a wider yet adorable nose. Your skin is pitch black with a white underbelly. From your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes. While at first one could mistake it for human skin, it has a glossy shine only found on sea animals.");
 			else if (!player.hasFullCoat()) {
 				if (player.skin.hasCoatOfType(SKIN_COAT_SCALES, SKIN_COAT_FUR)) {
 					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
@@ -1712,42 +1712,42 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  You have a fairly normal face, with [skin base]");
 					if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				}
-				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
+				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  Under your [skin coat] you have a human-shaped head with [skin base].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
+				outputText("  Under your [skin coat] you have a human-shaped head with [skin base].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			} else {
-				outputText("  Your face is fairly human in shape, but is covered in [skin coat].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
+				outputText("  Your face is fairly human in shape, but is covered in [skin coat].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			}
 		}
 		//</mod>
 	}
 public function RacialScores():void {
 	clearOutput();
-	outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n", false);
+	outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 	if (player.alicornScore() >= 6) outputText("\n<font color=\"#0000a0\">Alicorn: " + player.alicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>", false);
 	else if (player.alicornScore() >= 1 && player.alicornScore() < 6) outputText("\n<font color=\"#008000\">Alicorn: " + player.alicornScore() + "</font>", false);
-	else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn: 0</font>", false);
+	else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn: 0</font>");
 	if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.alrauneScore() >= 1 && player.alrauneScore() < 10) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>", false);
-	else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>", false);
+	else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
 	if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.beeScore() >= 5 && player.beeScore() < 9) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.beeScore() >= 1 && player.beeScore() < 5) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>", false);
-	else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>", false);
+	else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
 	if (player.bunnyScore() >= 4) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.bunnyScore() >= 1 && player.bunnyScore() < 4) outputText("\n<font color=\"#008000\">Bunny-morph: " + player.bunnyScore() + "</font>", false);
-	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Bunny-morph: 0</font>", false);
+	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Bunny-morph: 0</font>");
 	if (player.catScore() >= 4) {
 		outputText("\n<font color=\"#0000a0\">Cat-morph: " + player.catScore() + " (", false);
 		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe)</font>", false);
+		outputText("max Spe)</font>");
 	}
 	else if (player.catScore() >= 1 && player.catScore() < 4) outputText("\n<font color=\"#008000\">Cat-morph: " + player.catScore() + "</font>", false);
-	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Cat-morph: 0</font>", false);
+	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Cat-morph: 0</font>");
 	if (player.centaurScore() >= 5) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.centaurScore() >= 1 && player.centaurScore() < 5) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>", false);
-	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>", false);
+	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
 	outputText("\nCHIMERA: " + player.chimeraScore(), false);
 	if (player.couatlScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (", false);
@@ -1756,23 +1756,23 @@ public function RacialScores():void {
 		outputText("max Str, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ", false);
 		if (player.isNaga()) outputText("+" + (115 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 		else outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe)</font>", false);//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
+		outputText("max Spe)</font>");//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
 	}
 	else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>", false);
-	else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>", false);
+	else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
 	if (player.cowScore() > 5) outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.cowScore() >= 1 && player.cowScore() < 6) outputText("\n<font color=\"#008000\">Cow-morph: " + player.cowScore() + "</font>", false);
-	else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Cow-morph: 0</font>", false);
+	else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Cow-morph: 0</font>");
 	if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.deerScore() >= 1 && player.deerScore() < 4) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>", false);
-	else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>", false);
+	else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
 	if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.demonScore() >= 5 && player.demonScore() < 11) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.demonScore() >= 1 && player.demonScore() < 5) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>", false);
-	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>", false);
+	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>", false);
-	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>", false);
+	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
 	if (player.dragonScore() >= 16) {
 		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
 		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
@@ -1787,22 +1787,22 @@ public function RacialScores():void {
 	}
 	else if (player.dragonScore() >= 4 && player.dragonScore() < 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.dragonScore() >= 1 && player.dragonScore() < 4) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>", false);
-	else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>", false);
+	else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
 	outputText("\nDragonne: " + player.dragonneScore(), false);
 	outputText("\nEchidna: " + player.echidnaScore(), false);
 	outputText("\nFerret-morph: " + player.ferretScore(), false);
 	if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
 	else if (player.foxScore() >= 4 && player.foxScore() < 7) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.foxScore() >= 1 && player.foxScore() < 4) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>", false);
-	else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>", false);
+	else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 	outputText("\nGARGOYLE: " + player.gargoyleScore(), false);
 	if (player.goblinScore() >= 4) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.goblinScore() >= 1 && player.goblinScore() < 4) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>", false);
-	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>", false);
+	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
 	if (player.gooScore() >= 8) outputText("\n<font color=\"#0000a0\">Goo: " + player.gooScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.gooScore() >= 4 && player.gooScore() < 8) outputText("\n<font color=\"#0000a0\">Half Goo: " + player.gooScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.gooScore() >= 1 && player.gooScore() < 4) outputText("\n<font color=\"#008000\">Half Goo: " + player.gooScore() + "</font>", false);
-	else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Goo: 0</font>", false);
+	else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Goo: 0</font>");
 	if (player.gorgonScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (", false);
 		if (player.isNaga()) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
@@ -1813,15 +1813,15 @@ public function RacialScores():void {
 		outputText("max Spe, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	}
 	else if (player.gorgonScore() >= 1 && player.gorgonScore() < 11) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>", false);
-	else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>", false);
+	else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
 	outputText("\nGRAND CHIMERA: " + player.grandchimeraScore(), false);
 	if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.harpyScore() >= 4 && player.harpyScore() < 8) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.harpyScore() >= 1 && player.harpyScore() < 4) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>", false);
-	else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>", false);
+	else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
 	if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Horse-morph: " + player.horseScore() + "</font>", false);
-	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Horse-morph: 0</font>", false);
+	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Horse-morph: 0</font>");
 	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
 	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
 	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
@@ -1834,17 +1834,17 @@ public function RacialScores():void {
 	if (player.internalChimeraScore() >= 1) {
 		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>", false);
 	}
-	else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>", false);
+	else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
 	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.kangaScore() >= 1 && player.kangaScore() < 4) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>", false);
-	else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>", false);
+	else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>");
 	//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>", false);
 	//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>", false);
-	//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>", false);
+	//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
 	if (player.kitsuneScore() >= 6) {
 		if (player.tailType == 13 && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
-			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:", false);
-			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:", false);
+			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
+			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:");
 			outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
 			if (player.tailCount < 9) {
 				outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
@@ -1863,18 +1863,18 @@ public function RacialScores():void {
 		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
 	}
 	else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>", false);
-	else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>", false);
+	else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
 	if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
 	else if (player.lizardScore() >= 4 && player.lizardScore() < 8) outputText("\n<font color=\"#0000a0\">Half Lizard-morph: " + player.lizardScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
 	else if (player.lizardScore() >= 1 && player.lizardScore() < 4) outputText("\n<font color=\"#008000\">Half Lizard-morph: " + player.lizardScore() + "</font>", false);
-	else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Half Lizard-morph: 0</font>", false);
+	else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Half Lizard-morph: 0</font>");
 	if (player.manticoreScore() >= 10) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.manticoreScore() >= 5 && player.manticoreScore() < 10) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.manticoreScore() >= 1 && player.manticoreScore() < 5) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>", false);
-	else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>", false);
+	else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
 	if (player.minoScore() >= 4) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minoScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.minoScore() >= 1 && player.manticoreScore() < 4) outputText("\n<font color=\"#008000\">Minotaur: " + player.minoScore() + "</font>", false);
-	else if (player.minoScore() < 1) outputText("\n<font color=\"#ff0000\">Minotaur: 0</font>", false);
+	else if (player.minoScore() < 1) outputText("\n<font color=\"#ff0000\">Minotaur: 0</font>");
 	if (player.mantisScore() >= 5) {
 		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
 		if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
@@ -1889,7 +1889,7 @@ public function RacialScores():void {
 		outputText("max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	}
 	else if (player.mantisScore() >= 1 && player.mantisScore() < 5) outputText("\n<font color=\"#008000\">Mantis-morph: " + player.mantisScore() + "</font>", false);
-	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Mantis-morph: 0</font>", false);
+	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Mantis-morph: 0</font>");
 	outputText("\nMouse-morph: " + player.mouseScore(), false);
 	if (player.nagaScore() >= 8) {
 		outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (", false);
@@ -1898,36 +1898,36 @@ public function RacialScores():void {
 		outputText("max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ", false);
 		if (player.isNaga()) outputText("+" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 		else outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe)</font>", false);
+		outputText("max Spe)</font>");
 	}
 	else if (player.nagaScore() >= 4 && player.nagaScore() < 8) {
 		outputText("\n<font color=\"#0000a0\">Half-Naga: " + player.nagaScore() + " (", false);
 		if (player.isNaga()) outputText("+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 		else outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe)</font>", false);
+		outputText("max Spe)</font>");
 	}
 	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>", false);
-	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>", false);
+	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
 	if (player.orcaScore() >= 12) outputText("\n<font color=\"#0000a0\">Orca-morph: " + player.orcaScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.orcaScore() >= 6 && player.orcaScore() < 12) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.orcaScore() >= 1 && player.orcaScore() < 6) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>", false);
-	else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>", false);
+	else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
 	if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.phoenixScore() >= 1 && player.phoenixScore() < 10) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>", false);
-	else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>", false);
+	else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 	outputText("\nPig-morph: " + player.pigScore(), false);
 	if (player.plantScore() >= 7) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
 	else if (player.plantScore() == 6) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (8 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
 	else if (player.plantScore() == 5) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (4 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
 	else if (player.plantScore() == 4) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
 	else if (player.plantScore() >= 1 && player.plantScore() < 4) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>", false);
-	else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>", false);
+	else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>");
 	if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.raccoonScore() >= 1 && player.raccoonScore() < 4) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>", false);
-	else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>", false);
+	else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
 	if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.rhinoScore() >= 1 && player.rhinoScore() < 4) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>", false);
-	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>", false);
+	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
 	if (player.salamanderScore() >= 7) {
 		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
 		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
@@ -1941,13 +1941,13 @@ public function RacialScores():void {
 		outputText("max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	}
 	else if (player.salamanderScore() >= 1 && player.salamanderScore() < 4) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>", false);
-	else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>", false);
+	else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
 	if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.satyrScore() >= 1 && player.satyrScore() < 4) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>", false);
-	else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>", false);/*
+	else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>");/*
 	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Scorpion-morph: " + player.scorpionScore() + "</font>", false);
 	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Scorpion-morph: " + player.scorpionScore() + "</font>", false);
-	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Scorpion-morph: 0</font>", false);*/
+	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Scorpion-morph: 0</font>");*/
 	outputText("\nScorpion-morph: " + player.scorpionScore(), false);
 	if (player.scyllaScore() >= 5) {
 		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ", false);
@@ -1956,46 +1956,46 @@ public function RacialScores():void {
 		outputText("max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	}
 	else if (player.scyllaScore() >= 1 && player.scyllaScore() < 5) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>", false);
-	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>", false);
+	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>");
 	if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
 	else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.sharkScore() >= 4 && player.sharkScore() < 8) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
 	else if (player.sharkScore() >= 1 && player.sharkScore() < 4) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>", false);
-	else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>", false);
+	else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
 	if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.sirenScore() >= 1 && player.sirenScore() < 10) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>", false);
-	else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>", false);
+	else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 	if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.spiderScore() >= 4 && player.spiderScore() < 7) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.spiderScore() >= 1 && player.spiderScore() < 4) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>", false);
-	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>", false);
+	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>", false);
-	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>", false);
+	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
 	if (player.unicornScore() >= 5) outputText("\n<font color=\"#0000a0\">Unicorn: " + player.unicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>", false);
 	else if (player.unicornScore() >= 1 && player.unicornScore() < 5) outputText("\n<font color=\"#008000\">Unicorn: " + player.unicornScore() + "</font>", false);
-	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn: 0</font>", false);
+	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn: 0</font>");
 	if (player.vouivreScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (", false);
 		if (player.isNaga()) outputText("+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe)</font>", false);//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
+		outputText("max Spe)</font>");//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
 	}
 	else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>", false);
-	else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>", false);
+	else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
 	if (player.yetiScore() >= 12) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.yetiScore() >= 6 && player.yetiScore() < 12) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.yetiScore() >= 1 && player.yetiScore() < 6) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>", false);
-	else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>", false);
+	else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
 	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 //	else if (player.yggdrasilScore() == 9) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 //	else if (player.yggdrasilScore() == 8) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 //	else if (player.yggdrasilScore() == 7) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
 	else if (player.yggdrasilScore() >= 1 && player.yggdrasilScore() < 10) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>", false);
-	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>", false);
+	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);
 }

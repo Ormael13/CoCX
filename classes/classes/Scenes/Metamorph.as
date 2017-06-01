@@ -508,7 +508,7 @@ private function metamorphGoo():void {
 private function metamorphSharkFin():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n", false);
+	outputText("\n\n");
 	outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your " + player.armorName + " just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your " + player.armorName + " to accommodate your new fin.", false);
 	player.rearBody = REAR_BODY_SHARK_FIN;
 	doNext(accessMetamorphMenu);
@@ -524,7 +524,7 @@ private function metamorphSharkLegs():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
-	outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>", false);
+	outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>");
 	player.lowerBody = LOWER_BODY_TYPE_SHARK;
 	doNext(accessMetamorphMenu);
 }
@@ -532,16 +532,16 @@ private function metamorphSharkTail():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your " + player.armorName + " down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.", false);
-	else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.", false);
+	else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.");
 	player.tailType = TAIL_TYPE_SHARK;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphSharkTeeth():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n", false);
+	outputText("\n\n");
 	if (player.faceType > FACE_HUMAN && player.faceType != FACE_SHARK_TEETH) outputText("Your " + player.face() + " explodes with agony, reshaping into a more human-like visage.  ", false);
-	outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)", false);
+	outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)");
 	player.faceType = FACE_SHARK_TEETH;
 	doNext(accessMetamorphMenu);
 }
@@ -556,7 +556,7 @@ private function metamorphDriderLegs():void {
 private function metamorphSpiderTail():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n", false);
+	outputText("\n\n");
 	if (player.tailType > TAIL_TYPE_NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your " + buttDescript() + " and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>\n\n", false);
 	else outputText("A burst of pain hits you just above your " + buttDescript() + ", coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>", false);
 	player.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
@@ -575,14 +575,14 @@ private function metamorphSpiderLegs():void {
 private function metamorphSpiderArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n", false);
+	outputText("\n\n");
 	if (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_HUMAN) {
-		if (player.armType == ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ", false);
+		if (player.armType == ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
 		outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.", false);
 	}
 	else {
-		if (player.armType == ARM_TYPE_BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.", false);
-		if (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD) outputText("The sclaes covering your upper arms starting to fall down leaving only shiny black chitin clad arms.", false);
+		if (player.armType == ARM_TYPE_BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
+		if (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD) outputText("The sclaes covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
 		if (player.armType == ARM_TYPE_MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.", false);
 	}
 	player.armType = ARM_TYPE_SPIDER;
@@ -591,21 +591,21 @@ private function metamorphSpiderArms():void {
 private function metamorphSpiderFangs():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>", false);
+	outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>");
 	player.faceType = FACE_SPIDER_FANGS;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphSpiderFourEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!", false);
+	outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!");
 	player.eyeType = EYES_FOUR_SPIDER_EYES;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphElfinEars():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>", false);
+	outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
 	player.earType = EARS_ELFIN;
 	doNext(accessMetamorphMenu);
 }
@@ -621,7 +621,7 @@ private function metamorphHarpyWings():void {
 private function metamorphHarpyHair():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!", false);
+	outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
 	player.hairType = 1;
 	doNext(accessMetamorphMenu);
 }
@@ -644,7 +644,7 @@ private function metamorphHarpyLegs():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (!player.isGoo()) outputText("\n\nYour " + player.legs() + " creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your " + player.feet() + " have changed.  ", false);
-	else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ", false);
+	else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ");
 	outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in " + player.hairColor + " feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>", false);
 	player.lowerBody = LOWER_BODY_TYPE_HARPY;
 	player.legCount = 2;
@@ -716,7 +716,7 @@ private function metamorphLizardFace():void {
 private function metamorphLizardEars():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers.  <b>You have reptilian ears!</b>", false);
+	outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers.  <b>You have reptilian ears!</b>");
 	player.earType = EARS_LIZARD;
 	doNext(accessMetamorphMenu);
 }
@@ -732,25 +732,25 @@ private function metamorphLizardTail():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>", false);
-	else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>", false);
+	else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>");
 	player.tailType = TAIL_TYPE_LIZARD;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphLizardArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>", false);
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>");
 	player.armType = ARM_TYPE_LIZARD;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphLizardLegs():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.", false);
-	else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with lizard-like claws.", false);
-	else if (player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DOG || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_CAT || player.lowerBody == LOWER_BODY_TYPE_LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.", false);
+	if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+	else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with lizard-like claws.");
+	else if (player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DOG || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_CAT || player.lowerBody == LOWER_BODY_TYPE_LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
 	else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
-	outputText("  <b>You have reptilian legs and claws!</b>", false);
+	outputText("  <b>You have reptilian legs and claws!</b>");
 	player.lowerBody = LOWER_BODY_TYPE_LIZARD;
 	player.legCount = 2;
 	doNext(accessMetamorphMenu);
@@ -758,7 +758,7 @@ private function metamorphLizardLegs():void {
 private function metamorphHornsDraconicX4():void {
 	clearOutput();
 	player.soulforce -= 200;
-	outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
+	outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
 	player.horns = 12;
 	player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 	doNext(accessMetamorphMenu);
@@ -766,7 +766,7 @@ private function metamorphHornsDraconicX4():void {
 private function metamorphHornsDraconicX2():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.", false);
+	outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
 	player.horns = 4;
 	player.hornType = HORNS_DRACONIC_X2;
 	doNext(accessMetamorphMenu);
@@ -774,7 +774,7 @@ private function metamorphHornsDraconicX2():void {
 private function metamorphWingsDemonicLarge2():void {
 	clearOutput();
 	player.soulforce -= 300;
-	outputText("\n\nYour large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have splited into two pairs!</b>", false);
+	outputText("\n\nYour large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have splited into two pairs!</b>");
 	player.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
 	player.wingDesc = "two large pairs of bat-like";
 	doNext(accessMetamorphMenu);
@@ -782,7 +782,7 @@ private function metamorphWingsDemonicLarge2():void {
 private function metamorphWingsDemoncLarge():void {
 	clearOutput();
 	player.soulforce -= 200;
-	outputText("\n\nYour small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>", false);
+	outputText("\n\nYour small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
 	player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 	player.wingDesc = "large, bat-like";
 	doNext(accessMetamorphMenu);
@@ -800,7 +800,7 @@ private function metamorphLegsDemonicClaws():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
-	outputText("\n\n", false);
+	outputText("\n\n");
 	outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
 	player.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
 	doNext(accessMetamorphMenu);
@@ -809,7 +809,7 @@ private function metamorphLegsDemonicHighHeels():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
-	outputText("\n\n", false);
+	outputText("\n\n");
 	outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);
 	player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 	doNext(accessMetamorphMenu);
@@ -817,8 +817,8 @@ private function metamorphLegsDemonicHighHeels():void {
 private function metamorphTonugeDemonic():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n", false);
-	outputText("Your snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>", false);
+	outputText("\n\n");
+	outputText("Your snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>");
 	player.tongueType = TONUGE_DEMONIC;
 	doNext(accessMetamorphMenu);
 }
@@ -826,18 +826,18 @@ private function metamorphHornsDemonic():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.horns < 12 && (player.hornType == HORNS_NONE || player.hornType == HORNS_DEMON)) {
-		outputText("\n\n", false);
+		outputText("\n\n");
 		if (player.horns == 0) {
-			outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>", false);
+			outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>");
 		}
-		else outputText("Another pair of demon horns, larger than the last, forms behind the first row.", false);
+		else outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
 		if (player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
 		player.horns++;
 		player.horns++;
 	}
 	else if (player.hornType > HORNS_DEMON && player.hornType != HORNS_ORCHID) {
-		outputText("\n\n", false);
-		outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
+		outputText("\n\n");
+		outputText("Your horns shift, shrinking into two small demonic-looking horns.");
 		player.horns = 2;
 		player.hornType = HORNS_DEMON;
 	}
@@ -847,12 +847,12 @@ private function metamorphTailDemonic():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.tailType != TAIL_TYPE_NONE) {
-		outputText("\n\n", false);
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ", false);
-		else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ", false);
-		outputText("<b>Your tail is now demonic in appearance.</b>", false);
+		outputText("\n\n");
+		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ");
+		else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ");
+		outputText("<b>Your tail is now demonic in appearance.</b>");
 	}
-	else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
+	else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.");
 	player.tailType = TAIL_TYPE_DEMONIC;
 	doNext(accessMetamorphMenu);
 }
@@ -860,7 +860,7 @@ private function metamorphKitsuneArms():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.armType != ARM_TYPE_HUMAN) restoreHumanArms();
-	outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>", false);
+	outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>");
 	player.armType = ARM_TYPE_KITSUNE;
 	doNext(accessMetamorphMenu);
 }
@@ -959,7 +959,7 @@ private function metamorphArmsFox():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.armType != ARM_TYPE_HUMAN) restoreHumanArms();
-	outputText("Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>", false);
+	outputText("Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>");
 	player.armType = ARM_TYPE_FOX;
 	doNext(accessMetamorphMenu);
 }
@@ -1018,7 +1018,7 @@ private function metamorphChitin():void {
 	if (player.hasCoat()) {
 		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, " + chitinColor + " chitin underneath.", false);
 	} else {
-		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
+		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
 	}
 	outputText("  <b>You now have " + chitinColor + " chitin exoskeleton covering your body.</b>", false);
 	player.skin.growCoat(SKIN_COAT_CHITIN,{adj:"",color:chitinColor});
@@ -1076,8 +1076,8 @@ private function removeOddEyes():void {
 	}
 	else {
 		outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-		if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-		outputText("  <b>You have normal, humanoid eyes again.</b>", false);
+		if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+		outputText("  <b>You have normal, humanoid eyes again.</b>");
 	}
 	player.eyeType = EYES_HUMAN;
 }
@@ -1088,29 +1088,29 @@ private function removeOldWings():void {
 }
 private function restoreHumanLegs():void {
 	if (player.isTaur()) {
-		outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
+		outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!");
 	}
 	else {
 		if (player.isGoo()) {
-			outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.", false);
+			outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.");
 		}
 		if (player.isNaga()) {
-			outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.", false);
+			outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.");
 		}
 		if (player.isScylla()) {
-			outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.", false);
+			outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.");
 		}
 		//(Non-human -> Normal Human Legs)
 		if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN) {
-			outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.", false);
+			outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.");
 		}
-		outputText("  <b>You now have normal feet!</b>", false);
+		outputText("  <b>You now have normal feet!</b>");
 	}
 	player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 	player.legCount = 2;
 }
 private function restoreHumanArms():void {
-	outputText("You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your ", false);
+	outputText("You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your ");
 	if (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) {
 		outputText("feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
 	}
@@ -1124,8 +1124,8 @@ private function restoreHumanArms():void {
 		outputText("arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
 	}
 	if (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD) {
-		outputText("arms' scales are flaking away.  The leathery ", false);
-		if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
+		outputText("arms' scales are flaking away.  The leathery ");
+		if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ");
 		outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
 	}
 	if (player.armType == ARM_TYPE_PLANT) {
@@ -1138,9 +1138,9 @@ private function restoreHumanArms():void {
 		outputText("arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
 	}
 	if (player.armType == ARM_TYPE_KITSUNE) {
-		outputText("arms' claws retracting back into ordinary nails. You hand looks human again.", false);
+		outputText("arms' claws retracting back into ordinary nails. You hand looks human again.");
 	}
-	outputText("\n\n", false);
+	outputText("\n\n");
 	player.armType = ARM_TYPE_HUMAN;
 }
 	}

@@ -23,22 +23,22 @@
 			if(temp2 == 0) color = "red";
 			if(temp2 == 1) color = "black";
 			//Throw offensive potions at the player
-			outputText("Clara suddenly snatches something from a pouch at her belt. \"<i>Try this, little cutie!</i>\" She snarls, and throws a vial of potion at you.", false);
+			outputText("Clara suddenly snatches something from a pouch at her belt. \"<i>Try this, little cutie!</i>\" She snarls, and throws a vial of potion at you.");
 			//Dodge chance!
 			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
-				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);		
+				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else
 			{
 				//Get hit!
 				//Temporary heat
 				if(color == "red") {
-					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
+					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
 					if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 				}
 				//Increase fatigue
 				if(color == "black") {
-					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
+					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 					game.fatigue(10 + rand(25));
 				}
 			}

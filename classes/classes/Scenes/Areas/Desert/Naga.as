@@ -29,7 +29,7 @@
 				player.takeDamage(5+rand(5));
 			}
 			else {
-				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.", false);
+				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 3) {
 					//stats(0,0,-2,0,0,0,0,0);
 					player.spe -= 2;
@@ -58,19 +58,19 @@
 		//2c) Abiliy - Tail Whip - minus ??? HP 
 		//(base it on toughness?)
 		protected function nagaTailWhip():void {
-			outputText("The naga tenses and twists herself forcefully.  ", false);
+			outputText("The naga tenses and twists herself forcefully.  ");
 			//[if evaded]
 			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
 			}
 			else if(player.spe > rand(300)) {
-				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
-				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ", false);
+				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ");
 				var damage:Number = str;
 				if(player.armorDef < 20) damage += 20 - player.armorDef;
 				damage += rand(10);
@@ -88,7 +88,7 @@
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.", false);
+				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {

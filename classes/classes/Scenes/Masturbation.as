@@ -148,7 +148,7 @@ package classes.Scenes {
 			//In Ingnam or not in cabin.
 			else if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
 				if (player.cor < 15) {
-					outputText("You sheepishly find some rocks to hide in, where ", false);
+					outputText("You sheepishly find some rocks to hide in, where ");
 					if (player.armor == armors.GOOARMR) {
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
@@ -158,7 +158,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}
 				if (player.cor >= 15 && player.cor < 30) {
-					outputText("You make sure you are alone and ", false);
+					outputText("You make sure you are alone and ");
 					if (player.armor == armors.GOOARMR) {
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
@@ -168,7 +168,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}
 				if (player.cor >= 30 && player.cor < 60) {
-					outputText("You happily ", false);
+					outputText("You happily ");
 					if (player.armor == armors.GOOARMR) {
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and ");
 						outputText("reach your hand into your goo-covered groin");
@@ -208,7 +208,7 @@ package classes.Scenes {
 			//In cabin
 			else {
 				if (player.cor < 15) {
-					outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ", false);
+					outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
@@ -219,7 +219,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}
 				if (player.cor >= 15 && player.cor < 30) {
-					outputText("You enter your cabin and close the door, forgetting to close the shutters. ", false);
+					outputText("You enter your cabin and close the door, forgetting to close the shutters. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
@@ -230,7 +230,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}
 				if (player.cor >= 30 && player.cor < 60) {
-					outputText("You enter your cabin and leave the shutters open. ", false);
+					outputText("You enter your cabin and leave the shutters open. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
@@ -241,7 +241,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}
 				if (player.cor >= 60 && player.cor < 80) {
-					outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ", false);
+					outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
@@ -252,7 +252,7 @@ package classes.Scenes {
 					outputText("\n\n");
 				}	
 				if (player.cor >= 80) {
-					outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ", false);
+					outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
 						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
@@ -1013,16 +1013,16 @@ package classes.Scenes {
 			if(player.lib >= 45 && player.lib < 70) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ", false);
 			if(player.lib >= 70) outputText("Without hesitation, you shove the tip of your " + cockDescript(0) + " into ", false);
 			//More than one row?
-			if(player.breastRows.length > 1) outputText("one of the ",false);
-			if(player.breastRows.length == 1) outputText("one of your ",false);
+			if(player.breastRows.length > 1) outputText("one of the ");
+			if(player.breastRows.length == 1) outputText("one of your ");
 			//More than 1 nip per boob?
-			if(player.averageNipplesPerBreast() > 1) outputText("many ", false);
+			if(player.averageNipplesPerBreast() > 1) outputText("many ");
 			//Different based on looseness (again)
-			if(player.averageVaginalLooseness() < 2) outputText("painfully stretched nipples", false);
-			if(player.averageVaginalLooseness() >= 2 && player.averageVaginalLooseness() < 4) outputText("freakishly swollen nipples", false);
-			if(player.averageVaginalLooseness() >= 4) outputText("huge, bloated cunt-nipples", false);
-			if(player.breastRows.length > 1) outputText(" on one of your lower breasts",false);
-			outputText(". ", false);*/
+			if(player.averageVaginalLooseness() < 2) outputText("painfully stretched nipples");
+			if(player.averageVaginalLooseness() >= 2 && player.averageVaginalLooseness() < 4) outputText("freakishly swollen nipples");
+			if(player.averageVaginalLooseness() >= 4) outputText("huge, bloated cunt-nipples");
+			if(player.breastRows.length > 1) outputText(" on one of your lower breasts");
+			outputText(". ");*/
 			
 			//different based on player.libido
 			if (player.lib < 45)

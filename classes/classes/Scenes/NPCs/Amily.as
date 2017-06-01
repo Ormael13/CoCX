@@ -36,27 +36,27 @@
 			damage = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
 			//Dodged
 			if(dodged != null) {
-				outputText("Amily dashes at you and swipes her knife, but you quickly sidestep the blow.", false);
+				outputText("Amily dashes at you and swipes her knife, but you quickly sidestep the blow.");
 				//Add tags for miss/evade/flexibility/etc.
 				switch(dodged) {
 					case EVASION_SPEED:
-						outputText(" [Dodge]", false);
+						outputText(" [Dodge]");
 						break;
 					case EVASION_EVADE:
-						outputText(" [Evade]", false);
+						outputText(" [Evade]");
 						break;
 					case EVASION_MISDIRECTION:
-						outputText(" [Misdirect]", false);
+						outputText(" [Misdirect]");
 						break;
 					case EVASION_FLEXIBILITY:
-						outputText(" [Flexibility]", false);
+						outputText(" [Flexibility]");
 						break;
 					case EVASION_UNHINDERED:
-						outputText(" [Unhindered]", false);
+						outputText(" [Unhindered]");
 						break;
 					default:
 						CoC_Settings.error();
-						outputText(" <b>[ERROR]</b>", false);
+						outputText(" <b>[ERROR]</b>");
 						break;
 				}
 			}
@@ -69,7 +69,7 @@
 			}
 			//Got hit!
 			else {
-				outputText("Amily dashes at you and swipes her knife, cutting you. ", false);
+				outputText("Amily dashes at you and swipes her knife, cutting you. ");
 				damage = player.takeDamage(damage, true);
 			}
 			if(damage > 0) {
@@ -80,7 +80,7 @@
 				}
 			}
 			game.statScreenRefresh();
-			outputText("\n", false);
+			outputText("\n");
 			game.combatRoundOver();
 		}
 
@@ -119,18 +119,18 @@
 				if(dodged == 0) damage *= 2;
 				//Blocked?
 				if(damage == 0) {
-					outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow, but she can't cut deep enough to wound you!", false);
+					outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow, but she can't cut deep enough to wound you!");
 				}
 				//NOT BLOCKED!
 				else {
 					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you", false);
-					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow", false);
-					outputText("! ", false);
+					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow");
+					outputText("! ");
 					damage = player.takeDamage(damage, true);
 				}
 			}
 			//Dodge all!
-			else outputText("Amily dashes at you and quickly slashes you twice, but you quickly sidestep her first blow and jump back to avoid any follow-ups.", false);
+			else outputText("Amily dashes at you and quickly slashes you twice, but you quickly sidestep her first blow and jump back to avoid any follow-ups.");
 
 			game.combatRoundOver();
 		}
@@ -167,20 +167,20 @@
 				//Add tags for miss/evade/flexibility/etc.
 				switch (dodged) {
 					case 1:
-						outputText(" [Dodge]", false);
+						outputText(" [Dodge]");
 						break;
 					case 2:
-						outputText(" [Evade]", false);
+						outputText(" [Evade]");
 						break;
 					case 3:
-						outputText(" [Misdirect]", false);
+						outputText(" [Misdirect]");
 						break;
 					case 4:
-						outputText(" [Flexibility]", false);
+						outputText(" [Flexibility]");
 						break;
 					default:
 						CoC_Settings.error("");
-						outputText(" <b>[ERROR]</b>", false);
+						outputText(" <b>[ERROR]</b>");
 						break;
 				}
 			}
@@ -209,7 +209,7 @@
 				}
 				//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.
 				if (player.spe <= 2 && player.str <= 2) {
-					outputText("  You've become so weakened that you can't even make an attempt to defend yourself, and Amily rains blow after blow down upon your helpless form.", false);
+					outputText("  You've become so weakened that you can't even make an attempt to defend yourself, and Amily rains blow after blow down upon your helpless form.");
 					player.takeDamage(8999);
 				}
 			}
@@ -218,7 +218,7 @@
 
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
-			outputText("Amily takes a deep breath and attempts to concentrate on your movements.", false);
+			outputText("Amily takes a deep breath and attempts to concentrate on your movements.");
 			createStatusEffect(StatusEffects.Concentration,0,0,0,0);
 			game.combatRoundOver();
 		}

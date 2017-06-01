@@ -102,12 +102,12 @@ package classes.Scenes.Areas
 					if (rand(2) == 0) {
 						//50/50 strength/toughness
 						if (rand(2) == 0 && player.str < 100) {
-							outputText("The effort of struggling with the sand has made you stronger.", false);
+							outputText("The effort of struggling with the sand has made you stronger.");
 							dynStats("str", .5);
 						}
 						//Toughness
 						else if (player.tou < 100) {
-							outputText("The effort of struggling with the sand has made you tougher.", false);
+							outputText("The effort of struggling with the sand has made you tougher.");
 							dynStats("tou", .5);
 						}
 					}
@@ -118,9 +118,9 @@ package classes.Scenes.Areas
 		public function discoverSeaBoat():void {
 			flags[kFLAGS.DISCOVERED_OCEAN] = 1;
 			outputText("You journey around the beach, seeking demons to fight", true);
-			if(player.cor > 60) outputText(" or fuck", false);
-			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n", false);
-			outputText("<b>You have discovered the sea boat!</b>", false);
+			if(player.cor > 60) outputText(" or fuck");
+			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
+			outputText("<b>You have discovered the sea boat!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

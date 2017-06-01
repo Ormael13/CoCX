@@ -11,7 +11,7 @@ package classes.Scenes.Places.Prison
 		public function deliverChildWhileInPrison():Boolean {
 			if (flags[kFLAGS.IN_PRISON] == 0) return false;
 			if (player.vaginas.length == 0) {
-				outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
+				outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
 				player.createVagina();
 			}
 			outputText("\nIt's time! You " + player.clothedOrNakedLower("remove your [lowergarment] and ") + "sit down at one of the corners and spread your [legs]. A sudden gush of fluids erupt from your [pussy] - your water just broke. You grunt painfully as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards. ");
@@ -80,11 +80,11 @@ package classes.Scenes.Places.Prison
 			initialMessage("Izma");
 			outputText("\"<i>Hello, my Alpha. Today I gave birth to a ");
 			if(rand(100) <= 59) {
-				outputText("shark-girl", false);
+				outputText("shark-girl");
 				flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 			}
 			else {
-				outputText("tigershark", false);
+				outputText("tigershark");
 				flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
 			}
 			outputText("daughter and you should come. She has already grew up quite a bit.  -Izma.</i>\"");

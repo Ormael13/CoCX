@@ -91,7 +91,7 @@ package classes.Scenes.Monsters
 			//Might
 			else if (spellChooser == 5 && fatigue <= (eMaxFatigue() - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
-				outputText("The rush of success and power flows through his body.  He feels like he can do anything!", false);
+				outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}

@@ -4032,7 +4032,7 @@ package classes.Scenes.Dungeons
 		public function birthAWitch():void {
 			outputText("\n<b><u>Something amazing happens...</u></b>\n");
 			if(player.vaginas.length == 0) {
-				outputText("You feel a terrible pressure in your groin... then an incredible discomfort accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
+				outputText("You feel a terrible pressure in your groin... then an incredible discomfort accompanied by the rending of flesh.  You look down and behold a vagina.  ");
 				player.createVagina();
 			}
 			outputText("You moan in pain as a sudden sharp spike ripples through your distended midriff.  You clumsily haul yourself upright and waddle out into camp, collapsing as you hear your water break, soaking the dry earth of the wasteland below you.  Placing yourself in the most comfortable position you can manage, you grit your teeth and start to push...");

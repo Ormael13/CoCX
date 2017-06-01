@@ -30,8 +30,8 @@ public class PerkMenu extends BaseContent {
 		addButton(button++, "Next", playerMenu);
 		if(player.perkPoints > 0) {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
-			if(player.perkPoints > 1) outputText("s", false);
-			outputText(" to spend.</b>", false);
+			if(player.perkPoints > 1) outputText("s");
+			outputText(" to spend.</b>");
 			addButton(button++, "Perk Up", kGAMECLASS.perkBuyMenu);
 		}
 		if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {

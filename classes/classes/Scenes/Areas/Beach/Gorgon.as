@@ -23,7 +23,7 @@ package classes.Scenes.Areas.Beach
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nThe gorgon's eyes go wide and she turns to leave, no longer interested in you.", false);
+				outputText("\n\nThe gorgon's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {
@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Beach
 				player.takeDamage(15+rand(15));
 			}
 			else {
-				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.", false);
+				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 5) {
 					//stats(0,0,-2,0,0,0,0,0);
 					player.spe -= 4;
@@ -111,19 +111,19 @@ package classes.Scenes.Areas.Beach
 		}
 		
 		public function TailWhip():void {
-			outputText("The gorgon tenses and twists herself forcefully.  ", false);
+			outputText("The gorgon tenses and twists herself forcefully.  ");
 			//[if evaded]
 			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
 			}
 			else if(player.spe > rand(300)) {
-				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
-				outputText("Before you can even think, you feel a sharp pain at your side as the gorgon's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ", false);
+				outputText("Before you can even think, you feel a sharp pain at your side as the gorgon's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ");
 				var damage:Number = str;
 				if(player.armorDef < 50) damage += 50 - player.armorDef;
 				damage += rand(25);
@@ -133,7 +133,7 @@ package classes.Scenes.Areas.Beach
 		}
 		
 		public function petrify():void {
-			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ", false);
+			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);

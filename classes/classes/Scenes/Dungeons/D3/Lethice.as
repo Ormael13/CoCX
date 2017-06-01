@@ -216,7 +216,7 @@ package classes.Scenes.Dungeons.D3
 
 			game.doNext(game.combat.combatMenu);
 			game.fatigue(30,1);
-			outputText("\n\n", false);
+			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			game.combat.spellPerkUnlock();
 			game.statScreenRefresh();

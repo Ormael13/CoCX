@@ -1577,8 +1577,8 @@ import classes.GlobalFlags.*;
 			//------------
 			//Removes wings
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.wingType > WING_TYPE_NONE) {
-			//	if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!", false);
-				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!", false);
+			//	if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!");
+				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!");
 				player.wingType = WING_TYPE_NONE;
 				changes++;
 			}
@@ -1638,8 +1638,8 @@ import classes.GlobalFlags.*;
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != HAIR_NORMAL) {
 				switch(player.hairType) {
 					case HAIR_FEATHER:
-						if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer feathery!</b>", false);
-						else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your feathers. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer feathery!</b>", false);
+						if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer feathery!</b>");
+						else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your feathers. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer feathery!</b>");
 						break;
 					case HAIR_GOO:
 						outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>");
@@ -2041,7 +2041,7 @@ import classes.GlobalFlags.*;
 				temp *= 0.1;
 				player.cumMultiplier += temp;
 				//Flavor text
-				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.", false);
+				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
 				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.", false);
 				outputText(" A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.", false);
 				changes++;

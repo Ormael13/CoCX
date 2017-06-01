@@ -446,11 +446,11 @@ package classes.Scenes
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales", false);
-					outputText(".\n\n<b>You've discovered the Desert!</b>", false);
+					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
+					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
+					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
+					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales");
+					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
@@ -475,9 +475,9 @@ package classes.Scenes
 					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
+					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
 					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
-					outputText("<b>You've discovered the Swamp!</b>", false);
+					outputText("<b>You've discovered the Swamp!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
@@ -486,21 +486,21 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.", false);
-					if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...", false);
-					outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n", false);
-					outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n", false);
+					outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.");
+					if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...");
+					outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n");
+					outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n");
 					if (player.cor < 66) {
-						outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.", false);
-						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.", false);
-						outputText("\n\n", false);
+						outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.");
+						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.");
+						outputText("\n\n");
 					}
 					else if (player.cor >= 66) {
-						outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.", false);
-						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.", false);
-						outputText("\n\n", false);
+						outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.");
+						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.");
+						outputText("\n\n");
 					}
-					outputText("<b>You've discovered the Blight Ridge!</b>", false);
+					outputText("<b>You've discovered the Blight Ridge!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}				
@@ -509,8 +509,8 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_BEACH] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.", false);
-					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>", false);
+					outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
+					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
@@ -520,7 +520,7 @@ package classes.Scenes
 					player.explored++;
 					clearOutput();
 					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
-					outputText("<b>You've discovered the Glacial Rift!</b>", false);
+					outputText("<b>You've discovered the Glacial Rift!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
@@ -529,8 +529,8 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n", false);
-					outputText("<b>You've discovered the Volcanic Crag!</b>", false);
+					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
+					outputText("<b>You've discovered the Volcanic Crag!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}/*
@@ -539,8 +539,8 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_ABYSS] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You walk \n\n", false);
-					outputText("<b>You've discovered the Abyss!</b>", false);
+					outputText("You walk \n\n");
+					outputText("<b>You've discovered the Abyss!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
@@ -549,8 +549,8 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_PIT] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You walk \n\n", false);
-					outputText("<b>You've discovered the Pit!</b>", false);
+					outputText("You walk \n\n");
+					outputText("<b>You've discovered the Pit!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
@@ -591,7 +591,7 @@ package classes.Scenes
 				else if (choosey == 4 && flags[kFLAGS.HEXINDAO_UNLOCKED] < 1) {
 					player.explored++;
 					clearOutput();
-					outputText("Against your better judgement, curiosity gets the better of you and you find yourself walking into the strange area.", false);
+					outputText("Against your better judgement, curiosity gets the better of you and you find yourself walking into the strange area.");
 					outputText("\n\nNot long into your journey you see a hooded figure, looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest and you start to follow it. Taking a moment to look around, there's still no one else around so you continue to tail the mysterious being.");
 					outputText("\n\nHalf an hour or so later, still following the cloaked figure you begin to hear the sound of running water, moving on you eventually come across the source, a decently sized river flows across the land, populated by variously sized island. Stopping for a second to take a look around the hooded person seems to be moving towards one of the several islands. He, she… It is still oblivious to your presence.");
 					outputText("\n\n\"<i> Did you came to visit He'Xin'Dao stranger? </i>\" Suddenly you hear some voice from behind you.");
@@ -658,7 +658,7 @@ package classes.Scenes
 
 			if (player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ".", false);
 			else if (player.cocks.length >= 2) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.", false);
-			outputText("\n\n", false);
+			outputText("\n\n");
 
 			//PARAGRAPH 2
 
@@ -674,7 +674,7 @@ package classes.Scenes
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ", false);
+					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 				}
 			}
 			//FOR CENTAURS
@@ -688,19 +688,19 @@ package classes.Scenes
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.", false);
+					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 				}
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 			//PARAGRAPH 3
-			outputText("You realize you are effectively trapped here by your own body.", false);
+			outputText("You realize you are effectively trapped here by your own body.");
 			//CORRUPTION BASED CHARACTER'S VIEW OF SITUATION
-			if (player.cor < 33) outputText("  Panic slips into your heart as you realize that if any dangerous predator were to find you in this state, you'd be completely defenseless.  You must find a way to regain your mobility immediately!", false);
-			else if (player.cor < 66) outputText("  You realize that if any dangerous predator were to find you in this state you'd be completely defenseless.  You must find a way to regain your mobility... yet there is a certain appeal to imagining how pleasurable it would be for a sexual predator to take advantage of your obscene body.", false);
-			else outputText("  Your endowments have rendered you completely helpless should any predators find you.  Somewhere in your heart, you're exhilarated at the prospect.  The idea of being a helpless fucktoy for a wandering beast is unusually inviting to you.  Were it not for the thought that you might die of thirst in the desert, you'd be incredibly tempted to remain right where you are.", false);
+			if (player.cor < 33) outputText("  Panic slips into your heart as you realize that if any dangerous predator were to find you in this state, you'd be completely defenseless.  You must find a way to regain your mobility immediately!");
+			else if (player.cor < 66) outputText("  You realize that if any dangerous predator were to find you in this state you'd be completely defenseless.  You must find a way to regain your mobility... yet there is a certain appeal to imagining how pleasurable it would be for a sexual predator to take advantage of your obscene body.");
+			else outputText("  Your endowments have rendered you completely helpless should any predators find you.  Somewhere in your heart, you're exhilarated at the prospect.  The idea of being a helpless fucktoy for a wandering beast is unusually inviting to you.  Were it not for the thought that you might die of thirst in the desert, you'd be incredibly tempted to remain right where you are.");
 
 			//SCENE END = IF CHARACTER HAS FULL WINGS ADD SENTENCE
-			if (player.canFly()) outputText("  You extend your wings and flap as hard as you can, until at last you manage to lighten the bulk of your body somewhat - enough to allow yourself to drag your genitals across the hot sands and back to camp.  The ordeal takes nearly an hour.", false);
+			if (player.canFly()) outputText("  You extend your wings and flap as hard as you can, until at last you manage to lighten the bulk of your body somewhat - enough to allow yourself to drag your genitals across the hot sands and back to camp.  The ordeal takes nearly an hour.");
 			//SCENE END IF CHARACTER HAS CENTAUR BODY
 			else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.", false);
 			//SCENE END = FOR ALL OTHER CHARACTERS

@@ -9,7 +9,7 @@ package classes.Scenes.Dungeons.DeepCave
 		public function zetazAI():void {
 			//Zetaz taunts.
 			zetazTaunt();
-			outputText("\n\n", false);
+			outputText("\n\n");
 			//If afflicted by blind or whispered and over 50% lust,
 			//burns lust and clears statuses before continuing with 
 			//turn.
@@ -17,12 +17,12 @@ package classes.Scenes.Dungeons.DeepCave
 				removeStatusEffect(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Blind);
 				lust -= 10;
-				outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!", false);
+				outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!");
 			}
 			
 			//STANDARD COMBAT STATUS EFFECTS HERE
 			if(hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("Your foe is too dazed from your last hit to strike back!", false);
+				outputText("Your foe is too dazed from your last hit to strike back!");
 				removeStatusEffect(StatusEffects.Stunned);
 				combatRoundOver();
 				return;
@@ -32,11 +32,11 @@ package classes.Scenes.Dungeons.DeepCave
 			//Exgartuan gets to do stuff!
 			if(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				game.exgartuan.exgartuanCombatUpdate();
-				outputText("\n\n", false);
+				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Constricted)) {
 				//Enemy struggles - 
-				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
+				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 				if(statusEffectv1(StatusEffects.Constricted) <= 0) {
 					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
 					removeStatusEffect(StatusEffects.Constricted);
@@ -49,7 +49,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//-If over 50 lust and below 50% hp
 			//--burns 20 lust to restore 20% hp. 
 			if(lust > 50 && HPRatio() <= .5) {
-				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!", false);
+				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
 				addHP(0.25 * eMaxHP());
 				lust -= 20;
 				game.dynStats("lus", 2);
@@ -58,12 +58,12 @@ package classes.Scenes.Dungeons.DeepCave
 				var attackChoice:Number = rand(3);
 				if(attackChoice == 0) {
 					//Chucks faux-heat draft ala goblins. - 
-					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ", false);
+					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
 					if((player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) ||
 						(player.findPerk(PerkLib.Flexibility) >= 0 && rand(6) == 0) ||
 						(player.spe > 65 && rand(10) == 0) ||
 						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit")) {
-						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!", false);
+						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {
 						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skinDesc + " and leaves a pleasant, residual tingle in its wake.  Oh no...", false);
@@ -75,15 +75,15 @@ package classes.Scenes.Dungeons.DeepCave
 					//'Gust' – channels a pidgy's spirit to beat 
 					//his wings and kick up dust, blinding the PC 
 					//next turn and dealing light damage. - 
-					outputText("The imp leaps into the air with a powerful spring, beating his wings hard to suspend himself in the center of his bedchamber.  Dust kicks up into the air from the force of his flight and turns the room into a blinding tornado!  Small objects smack off of you, ", false);
+					outputText("The imp leaps into the air with a powerful spring, beating his wings hard to suspend himself in the center of his bedchamber.  Dust kicks up into the air from the force of his flight and turns the room into a blinding tornado!  Small objects smack off of you, ");
 					//(causing little damage/
-					if(player.tou > 60) outputText("causing little damage", false);
+					if(player.tou > 60) outputText("causing little damage");
 					else {
 						var dmg:Number = 1 + rand(6);
-						outputText("wounding you slightly ", false);
+						outputText("wounding you slightly ");
 						dmg = player.takeDamage(dmg, true);
 					}
-					outputText(" while the dust gets into your eyes, temporarily blinding you!", false);
+					outputText(" while the dust gets into your eyes, temporarily blinding you!");
 					player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 				}
 				//Gigarouse – A stronger version of normal imp's 
@@ -99,9 +99,9 @@ package classes.Scenes.Dungeons.DeepCave
 		public function gigaArouse():void {
 			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n", false);
 			game.dynStats("lus", rand(player.lib/10)+player.cor/10+15);
-			if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ", false);
-			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ", false);
-			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ", false);
+			if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
+			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
+			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
 			if(player.cocks.length > 0) {
 				if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel " + player.SMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ", false);
 				if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ", false);
@@ -121,21 +121,21 @@ package classes.Scenes.Dungeons.DeepCave
 		public function zetazTaunt():void {
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
-				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ", false);
-				if(player.humanScore() >= 4) outputText("human", false);
-				else outputText("'human'", false);
-				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"", false);
+				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
+				if(player.humanScore() >= 4) outputText("human");
+				else outputText("'human'");
+				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}
 			else {
 				addStatusValue(StatusEffects.round,1,1);
-				if(statusEffectv1(StatusEffects.round) == 2) outputText("\"<i>I lost my post!  And when you screwed up the factory?  I barely escaped with my life!  You ruined EVERYTHING!</i>\" screams Zetaz.", false);
-				else if(statusEffectv1(StatusEffects.round) == 3) outputText("Zetaz snarls, \"<i>Do you know how hard it is to hide from Lethice?  DO YOU HAVE ANY IDEA!?  I've had to live in this fetid excuse for a jungle, and just when I found some friends and made it livable, you show up and DESTROY EVERYTHING!</i>\"", false);
-				else if(statusEffectv1(StatusEffects.round) == 4) outputText("Zetaz explains, \"<i>I won't let you go.  I'm going to break you.</i>\"", false);
-				else if(statusEffectv1(StatusEffects.round) == 5) outputText("\"<i>Would it have been that bad to go along with me?  You've seen the factory.  We would've kept you fed, warm, and provided you with limitless pleasure.  You would've tasted heaven and served a greater purpose.  It's not too late.  If you come willingly I can make sure they find a good machine to milk you with,</i>\" offers the imp lord.", false);
-				else if(statusEffectv1(StatusEffects.round) == 6) outputText("\"<i>Why won't you fall?</i>\" questions Zetaz incredulously.", false);
-				else if(statusEffectv1(StatusEffects.round) == 7) outputText("The imp lord suggests, \"<i>If you give up and let me fuck your ass maybe I'll let you go.</i>\"", false);
-				else if(statusEffectv1(StatusEffects.round) == 8) outputText("Zetaz pants, \"<i>Just give up!  I'm nothing like the weakling you met so long ago!  I've been through hell to get here and I'm not giving it up just because you've shown up to destroy my hard work!</i>\"", false);
-				else outputText("He glares at you silently.", false);
+				if(statusEffectv1(StatusEffects.round) == 2) outputText("\"<i>I lost my post!  And when you screwed up the factory?  I barely escaped with my life!  You ruined EVERYTHING!</i>\" screams Zetaz.");
+				else if(statusEffectv1(StatusEffects.round) == 3) outputText("Zetaz snarls, \"<i>Do you know how hard it is to hide from Lethice?  DO YOU HAVE ANY IDEA!?  I've had to live in this fetid excuse for a jungle, and just when I found some friends and made it livable, you show up and DESTROY EVERYTHING!</i>\"");
+				else if(statusEffectv1(StatusEffects.round) == 4) outputText("Zetaz explains, \"<i>I won't let you go.  I'm going to break you.</i>\"");
+				else if(statusEffectv1(StatusEffects.round) == 5) outputText("\"<i>Would it have been that bad to go along with me?  You've seen the factory.  We would've kept you fed, warm, and provided you with limitless pleasure.  You would've tasted heaven and served a greater purpose.  It's not too late.  If you come willingly I can make sure they find a good machine to milk you with,</i>\" offers the imp lord.");
+				else if(statusEffectv1(StatusEffects.round) == 6) outputText("\"<i>Why won't you fall?</i>\" questions Zetaz incredulously.");
+				else if(statusEffectv1(StatusEffects.round) == 7) outputText("The imp lord suggests, \"<i>If you give up and let me fuck your ass maybe I'll let you go.</i>\"");
+				else if(statusEffectv1(StatusEffects.round) == 8) outputText("Zetaz pants, \"<i>Just give up!  I'm nothing like the weakling you met so long ago!  I've been through hell to get here and I'm not giving it up just because you've shown up to destroy my hard work!</i>\"");
+				else outputText("He glares at you silently.");
 			}
 		}
 

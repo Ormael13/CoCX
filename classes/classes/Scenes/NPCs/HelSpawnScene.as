@@ -683,7 +683,7 @@ private function applyHelspawnName():void {
 			|| mainView.nameBox.text == "Mini-doofus") 
 	{
 		clearOutput();
-		if(mainView.nameBox.text == "") outputText("<b>You must select a name.</b>", false);
+		if(mainView.nameBox.text == "") outputText("<b>You must select a name.</b>");
 		else if(mainView.nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");
 		else if(mainView.nameBox.text == "Kid") outputText("\"<i>Wow, what are you, five?</i>\"");
 		else if(mainView.nameBox.text == "Phoenix") outputText("\"<i>Oh hell no.  You're not naming my little girl after one of those... things!  Sorry Kiri, but still!</i>\"");

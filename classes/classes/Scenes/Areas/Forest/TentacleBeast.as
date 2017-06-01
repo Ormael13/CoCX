@@ -8,27 +8,27 @@
 	public class TentacleBeast extends Monster
 	{
 		private function tentaclePhysicalAttack():void {
-			outputText("The shambling horror throws its tentacles at you with a murderous force.\n", false);
+			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if(temp < 0) temp = 0;
 			//Miss
 			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
-				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.", false);
+				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.");
 			}
 			//Hit
 			else {
-				outputText("The tentacles crash upon your body mercilessly. ", false);
+				outputText("The tentacles crash upon your body mercilessly. ");
 				player.takeDamage(temp, true);
 			}
 			combatRoundOver();
 		}
 		private function tentacleEntwine():void {
-			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n", false);
+			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n");
 			//Not Trapped yet
 			if(!player.hasStatusEffect(StatusEffects.TentacleBind)) {
 				//Success
 				if(int(Math.random()*(((player.spe)/2))) > 15 || (player.findPerk(PerkLib.Evade) >= 0 && int(Math.random()*(((player.spe)/2))) > 15)) {
-					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n", false);
+					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n");
 				}
 				//Fail
 				else {
@@ -52,7 +52,7 @@
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
 				game.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
 			} else {
-				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.", false);
+				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
 			if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);

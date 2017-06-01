@@ -12,11 +12,11 @@ package classes.Scenes.Areas.Swamp
 			//SPIDER HORDE ATTACK - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
 			if(hasStatusEffect(StatusEffects.MissFirstRound) || player.getEvasionRoll()) {
 				removeStatusEffect(StatusEffects.MissFirstRound);
-				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.", false);
+				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.");
 			}
 			//SPIDER HORDE ATTACK - Hit
 			else {
-				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to knock most of them away, but a few nasty hits manage to punch through your [armorName].  ", false);
+				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to knock most of them away, but a few nasty hits manage to punch through your [armorName].  ");
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 20;
 				if(damage > 0) damage = player.takeDamage(damage);
@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Swamp
 		private function spoidahHordeWebLaunchahs():void {
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
 			if(hasStatusEffect(StatusEffects.MissFirstRound) || player.getEvasionRoll()) {
-				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!", false);
+				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!");
 				combatRoundOver();
 			}
 			else {
@@ -63,9 +63,9 @@ package classes.Scenes.Areas.Swamp
 		}
 
 		private function kihaSPOIDAHAI():void {
-			outputText("[pg]", false);
+			outputText("[pg]");
 			game.spriteSelect(72);
-			outputText("While they're tangled up with you, however, Kiha takes the opportunity to get in a few shallow swings with her axe, to the accompaniment of crunching chitin.", false);
+			outputText("While they're tangled up with you, however, Kiha takes the opportunity to get in a few shallow swings with her axe, to the accompaniment of crunching chitin.");
 			//horde loses HP
 			HP -= 50;
 			combatRoundOver();

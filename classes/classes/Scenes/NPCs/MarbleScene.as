@@ -91,7 +91,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 					if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 						spriteSelect(41);
-						outputText("\n<b>Marble lets you know that she's finished building a rather secure nursery for your coming offspring.</b>\n", false);
+						outputText("\n<b>Marble lets you know that she's finished building a rather secure nursery for your coming offspring.</b>\n");
 						needNext = true;
 						flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] = 100;
 					}
@@ -102,7 +102,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					if (!player.hasStatusEffect(StatusEffects.MarbleItemCooldown)) {
 						if (rand(10) == 0) {
 							spriteSelect(41);
-							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n", false);
+							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n");
 							player.createStatusEffect(StatusEffects.MarbleItemCooldown,(24 + rand(24)),0,0,0);
 							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(10),0,0,0);
 							needNext = true;
@@ -126,22 +126,22 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					player.removeStatusEffect(StatusEffects.MarblesMilk);
 					//Text for when Marble's Milk effect wears off:
 					//[addiction is 10 or less] 
-					if (player.statusEffectv2(StatusEffects.Marble) <= 10) outputText("\nYou feel the euphoria from drinking Marble's milk fade from you. Only now that it's gone do you notice that it was actually making you tougher.\n", false);
+					if (player.statusEffectv2(StatusEffects.Marble) <= 10) outputText("\nYou feel the euphoria from drinking Marble's milk fade from you. Only now that it's gone do you notice that it was actually making you tougher.\n");
 					//[addiction is 11-30]
-					else if (player.statusEffectv2(StatusEffects.Marble) <= 30) outputText("\nYou feel a slight sense of loss as the euphoria from Marble's milk fades.  You kinda want to drink more, but the desire is not overpowering.\n", false);
+					else if (player.statusEffectv2(StatusEffects.Marble) <= 30) outputText("\nYou feel a slight sense of loss as the euphoria from Marble's milk fades.  You kinda want to drink more, but the desire is not overpowering.\n");
 					//[addiction is 31-50, player is not addicted]
-					else if (player.statusEffectv2(StatusEffects.Marble) <= 50) outputText("\nYou shiver slightly as the euphoria from Marble's milk fades.  You really feel like suckling her breasts again.\n", false);
+					else if (player.statusEffectv2(StatusEffects.Marble) <= 50) outputText("\nYou shiver slightly as the euphoria from Marble's milk fades.  You really feel like suckling her breasts again.\n");
 					//IF ADDICTED
 					if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 						//If player is under bottled milk effects
 						if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
-							outputText("\nYour hands develop a tiny tremble as the effects of Marble's fresh milk wear off.  Thanks to the bottled milk you drank, you don't go into withdrawal just yet.\n", false);
+							outputText("\nYour hands develop a tiny tremble as the effects of Marble's fresh milk wear off.  Thanks to the bottled milk you drank, you don't go into withdrawal just yet.\n");
 						}
 						else {
 							//[addiction is <90, player is addicted]
-							if (player.statusEffectv2(StatusEffects.Marble) <= 90) outputText("\nYour hands start to tremble as you lose the only true relief you get to your cravings.  You desperately want to go see Marble again, especially if it means a chance to drink her wonderful milk.\n", false);
+							if (player.statusEffectv2(StatusEffects.Marble) <= 90) outputText("\nYour hands start to tremble as you lose the only true relief you get to your cravings.  You desperately want to go see Marble again, especially if it means a chance to drink her wonderful milk.\n");
 							//[addiction is >=90, player is addicted]
-							else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n", false);
+							else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n");
 							//If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
 							player.createStatusEffect(StatusEffects.MarbleWithdrawl,0,0,0,0);
 							dynStats("tou", -5, "int", -5);
@@ -155,7 +155,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				if (!player.hasStatusEffect(StatusEffects.MarblesMilk) && !player.hasStatusEffect(StatusEffects.BottledMilk)) {
 					//If player is not yet in withdrawl
 					if (!player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-						outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n", false);
+						outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n");
 						needNext = true;
 						player.createStatusEffect(StatusEffects.MarbleWithdrawl,0,0,0,0);
 						dynStats("tou", -5, "int", -5);
@@ -171,12 +171,12 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				if (player.statusEffectv2(StatusEffects.Marble) <= 25) {
 					player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 					dynStats("tou", 5, "int", 5);
-					outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
+					outputText("\nYou no longer feel the symptoms of withdrawal.\n");
 					needNext = true;
 				}
 				//Remove withdrawl if you have bottled milk affect
 				else if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
-					outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
+					outputText("\nYou no longer feel the symptoms of withdrawal.\n");
 					needNext = true;
 					player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 					dynStats("tou", 5, "int", 5);
@@ -203,8 +203,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
 			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 				spriteSelect(41);
-				outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
-				outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
+				outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n");
+				outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n");
 				//(reduce corr by 5)
 				dynStats("cor", -5);
 				//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal)
@@ -214,18 +214,18 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				if (player.statusEffectv3(StatusEffects.Marble) == 1) {
 					//Affection 0-29, version 1
 					if (player.statusEffectv1(StatusEffects.Marble) < 30) {
-						outputText("\nMarble looks horrified at your words and exclaims, \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, but she will have none of it.  \"<i>That's it, I'm leaving, don't come looking for me.</i>\"  She storms out the door.  Having no further reason to stay here, you leave too.\n", false);
+						outputText("\nMarble looks horrified at your words and exclaims, \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, but she will have none of it.  \"<i>That's it, I'm leaving, don't come looking for me.</i>\"  She storms out the door.  Having no further reason to stay here, you leave too.\n");
 						//(Marble leaves the farm, she is no longer encountered)
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 					}
 					//Affection 30-89, version 1
 					if (player.statusEffectv1(StatusEffects.Marble) >= 30 && player.statusEffectv1(StatusEffects.Marble) < 90) {
-						outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says, \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles at you.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n", false);
+						outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says, \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles at you.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n");
 						//(Marble can be met at the farm)
 					}
 					//Affection 90+, version 1
 					if (player.statusEffectv1(StatusEffects.Marble) >= 90) {
-						outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
+						outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n");
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
@@ -246,29 +246,29 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				else {
 					//Affection 0-29, version 2
 					if (player.statusEffectv1(StatusEffects.Marble) < 30) {
-						outputText("\nMarble seems impassive at the news of hearing that you are no longer addicted.  Her eyes have gone cold, her old passion gone.  \"<i>Good,</i>\" she states simply and points at a paper on the table in her room.  \"<i>That's for you. Goodbye.</i>\" With that, she turns and walks out the room.  Since you are unsure how to react, you decide to take a look at the paper.\n\n", false);
+						outputText("\nMarble seems impassive at the news of hearing that you are no longer addicted.  Her eyes have gone cold, her old passion gone.  \"<i>Good,</i>\" she states simply and points at a paper on the table in her room.  \"<i>That's for you. Goodbye.</i>\" With that, she turns and walks out the room.  Since you are unsure how to react, you decide to take a look at the paper.\n\n");
 						//[This section should be indented and/or italicized] - put the codex entry here
-						outputText("The piece of paper looks like a page torn from a book.  It looks like an entry from an encyclopedia of sorts, it reads in formal script:\n", false);
-						outputText("<b><u>Codex: Lacta Bovine</u></b>\n", false);
-						outputText("Description: <i>A race of all female bovine-morphs, more commonly called cow-girls.  They appear as tall well endowed women, with numerous bovine characteristics.  Generally they have bovine horns, ears, tail, and legs.  Like all minotaurs, they are very strong and resilient, however, they are unusually sensitive compared to their relatives.</i>\n", false);
-						outputText("Skin and Fur: <i>The skin tone for these creatures is very close to being human, their fur more closely follows the common minotaur fur colors: brown, black or white with brown spots.</i>\n", false);
-						outputText("Behavior: <i>The behavior of Lacta Minotaurs varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n", false);
+						outputText("The piece of paper looks like a page torn from a book.  It looks like an entry from an encyclopedia of sorts, it reads in formal script:\n");
+						outputText("<b><u>Codex: Lacta Bovine</u></b>\n");
+						outputText("Description: <i>A race of all female bovine-morphs, more commonly called cow-girls.  They appear as tall well endowed women, with numerous bovine characteristics.  Generally they have bovine horns, ears, tail, and legs.  Like all minotaurs, they are very strong and resilient, however, they are unusually sensitive compared to their relatives.</i>\n");
+						outputText("Skin and Fur: <i>The skin tone for these creatures is very close to being human, their fur more closely follows the common minotaur fur colors: brown, black or white with brown spots.</i>\n");
+						outputText("Behavior: <i>The behavior of Lacta Minotaurs varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n");
 						outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and grants limited powers of control over them to the Lacta Minotaur that nursed them.  Finally, the breasts of Lacta Minotaurs are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n", false);
-						outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n", false);
+						outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n");
 						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
 						outputText("\n\n<b>New codex entry unlocked!</b>");
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 					}
 					//Affection 30-69, version 2
 					if (player.statusEffectv1(StatusEffects.Marble) >= 30 && player.statusEffectv1(StatusEffects.Marble) < 70) {
-						outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>Now, no one will mind if I disappear.</i>\"  You look at her in surprise and ask her why she says that.  She explains that the only way to be sure that no one else ever drinks her milk is for her to disappear, forever.  You tell her not to think like that and that the people on the farm still appreciate her help with the chores and duties, insisting that they would all be sorry to see her go. Besides, now that you both know that her milk is addictive, the two of you have a big advantage compared to what happened the first time.  \"<i>Plus, we got through it, didn't we?</i>\" you say with a smile.  At this, her face lights up, \"<i>You're right! Thanks for being such a good friend, sweetie.</i>\"  She smiles at you in return.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n", false);
+						outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>Now, no one will mind if I disappear.</i>\"  You look at her in surprise and ask her why she says that.  She explains that the only way to be sure that no one else ever drinks her milk is for her to disappear, forever.  You tell her not to think like that and that the people on the farm still appreciate her help with the chores and duties, insisting that they would all be sorry to see her go. Besides, now that you both know that her milk is addictive, the two of you have a big advantage compared to what happened the first time.  \"<i>Plus, we got through it, didn't we?</i>\" you say with a smile.  At this, her face lights up, \"<i>You're right! Thanks for being such a good friend, sweetie.</i>\"  She smiles at you in return.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n");
 						//(Marble can be encountered at the farm)
 					}
 					//Affection 70+, version 2
 					if (player.statusEffectv1(StatusEffects.Marble) >= 70) {
 						outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>Now, no one will mind if I disappear.</i>\"  You look at her in surprise and quickly grab her arms.  You tell her with no uncertainty that if she disappeared, you would forever miss her.  You don't care about her milk, it doesn't matter; it is her as a person that matters to you.  You wouldn't have done all those things or spent all that time together if you didn't care about her.  She bursts into tears and hugs you tightly to her breasts.\n\n", false);
 						marbleAddictionSex(false);
-						outputText("\n", false);
+						outputText("\n");
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 						if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
@@ -284,7 +284,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 					}
 				}
-				outputText("\n<b>You have gained the perk Marble Resistance</b> (You know how to avoid the addictive qualities of her milk!)\n", false);
+				outputText("\n<b>You have gained the perk Marble Resistance</b> (You know how to avoid the addictive qualities of her milk!)\n");
 				doNext(playerMenu);
 				return true;
 			}
@@ -292,7 +292,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 				spriteSelect(41);
 				outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
-				outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
+				outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n");
 				//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal, they are instead permanently given the stat increases of 5 str, and 10 tou as part of a perk called 'Marble's Milk' and automatically drink Marble's milk every morning if a bad end is not triggered)
 				player.createPerk(PerkLib.MarblesMilk,0,0,0,0);
 				//Clear withdrawl
@@ -314,7 +314,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					//Affection 0-49, type 1:
 					if (player.statusEffectv1(StatusEffects.Marble) < 49) {
 						//outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>I was hoping you might help me out with my chores. Then I'll see about getting you some milk.</i>\"  The idea of working for her milk seems oddly right, and you put a huge effort into helping Marble with her chores.  Afterwards, Marble gladly agrees to give you her milk. While you are nursing from her, she starts to talk: \"<i>Sweetie, I've been thinking.  I think you should stay here with me from now on, since you need my milk to survive.</i>\"  She starts to stroke your head.  \"<i>You always do such a good job with the chores too; do you really want to do anything else?</i>\"  You try to pull back from her and tell her about your quest, but she keeps your mouth from straying from her breast.  \"<i>No, of course you don't.</i>\"  She says with finality, and you feel your need to do anything else fade....\n\n", false);
-						//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.", false);
+						//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.");
 						outputText("Marble grabs you and pulls your head into her chest.  \"<i>Mmm, if you need me so much, then I want you to move in with me on the farm,</i>\" she says happily above you.  \"<i>That way, I can take care of you and you can help me, and we'll both be happy.</i>\"  You panic a bit; while you'd certainly be happy to have the source of her delicious milk at your fingertips, leaving the portal unguarded means the demons will be free to set up shop there again!  Marble responds to your squirming by tightening her arms and says, \"<i>Ah, ah, remember, sweetie; you need my milk and I control whether or not you can drink it.  I'm happy to share it, but if I'm being so generous, I think the least you could do is make it easier for me.  I don't think living here and helping me with the farmwork is too much to ask, do you?</i>\"  Her face contorts into an open-mouthed smile and her eyes glitter.  You sigh into her chest, she's right, there isn't much you can do about it now...");
 						doNext(marbleBadEndFollowup);
 						return true;
@@ -322,16 +322,16 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					//Affection 50-79, type 1:
 					if (player.statusEffectv1(StatusEffects.Marble) >= 50 && player.statusEffectv1(StatusEffects.Marble) < 79) {
 	
-						outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, Marble sighs and gives you a smile.  \"<i>I was thinking that maybe you should live with me from now on, but I think I like seeing you visit like this too much.  It always makes me so happy to see you come by, so why don't we just leave things the way they are?</i>\"  You agree with her and she says \"<i>I'll see you tomorrow when you're thirsty again.</i>\"  You nod again and return to your camp.\n", false);
+						outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, Marble sighs and gives you a smile.  \"<i>I was thinking that maybe you should live with me from now on, but I think I like seeing you visit like this too much.  It always makes me so happy to see you come by, so why don't we just leave things the way they are?</i>\"  You agree with her and she says \"<i>I'll see you tomorrow when you're thirsty again.</i>\"  You nod again and return to your camp.\n");
 						//(Marble can be encountered at the farm)
 						//(every morning, the player goes to Marble for milk, it costs them the first hour of the day)
 					}
 					//High affection
 					if (player.statusEffectv1(StatusEffects.Marble) >= 80) {
-						outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n", false);
+						outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n");
 						//(player chose yes) do after addiction sex event
 						marbleAddictionSex(false);
-						outputText("\n", false);
+						outputText("\n");
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
@@ -354,7 +354,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					//Replacement scene for when the player becomes addicted, Marble is ashamed, and her affection is low (<20)
 					if (player.statusEffectv1(StatusEffects.Marble) < 30) {
 						//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
-						//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
+						//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n");
 						outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.  \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
 						doNext(marbleBadEndFollowup);
 						return true;
@@ -370,7 +370,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						outputText("Marble's face falls at your words.  \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You shake your head and tell her it wasn't something either of you could stop.  Despite what you said before, what happened happened.  You care too much for her to let her feel bad about it, and you tell her you forgive her for the part she played in getting you addicted to her milk.  She bursts into tears and hugs you tightly to her breasts, before letting you drink your morning milk.  Afterwards she looks at you intently. \"<i>Can we do something special?</i>\" she asks you, suggestively.  You agree without having to give it any thought.\n\n", false);
 						//(player chose yes) do after addiction sex event
 						marbleAddictionSex(false);
-						outputText("\n", false);
+						outputText("\n");
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
@@ -388,7 +388,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						}
 					}
 				}
-				outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n", false);
+				outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n");
 				doNext(playerMenu);
 				return true;
 			}
@@ -459,21 +459,21 @@ public function encounterMarbleInitially():void {
 	spriteSelect(41);
 	player.createStatusEffect(StatusEffects.Marble,0,0,0,40);
 	outputText("While exploring at Whitney's farm, you run across the furry southern belle almost immediately.  She looks like she has a job for you.\n\n", true);
-	outputText("Whitney tells you that one of her barn's residents, a cow-girl named Marble, is sore from overusing the milk machines.  She asks you to go and give the cow-girl a gentler touch from a living being.\n\n", false);
+	outputText("Whitney tells you that one of her barn's residents, a cow-girl named Marble, is sore from overusing the milk machines.  She asks you to go and give the cow-girl a gentler touch from a living being.\n\n");
 	//(description of barn may need to be edited, I don't know what it's supposed to look like)
-	outputText("You walk in to Whitney's barn and head over to a series of small rooms for the cow-girls.  You find Marble's room and knock on the door. A friendly earthy female voice calls out in response and invites you in.  Inside is a rather pleasant little room.  There are several shelves on the walls and a small sitting table in the corner with seating for two.  A large portion of the room is dominated by a large bed, the owner filling most of it.  Lastly, you notice a mini-dresser next to the bed.  The room's owner looks over at you and starts, \"<i>Oh, I've never met you before.</i>\"\n\nAs she gets up, you are given a chance to get a good look at her.  She is over six feet tall, with long brown hair tipped with two cow horns and a pair of cow ears in place of normal human ones.  Rounding out her relatively unchanged face are a pair of deep, brown eyes.  She is wearing only a short plain skirt, so you get a full frontal view of her two HH-cup assets. They look rather sore right now, with big red circles around her puffy nipples.  Her hands and arms appear mostly human save for thick-looking nails.  A soft 'clop' brings your eyes down to see that she is covered in thick, dark blond fur going from at least mid-way down her thighs to where a human's feet normally would be, in place of which are hooves.  A cow tail with a bow tied on it swings between her legs.\n\n", false);
+	outputText("You walk in to Whitney's barn and head over to a series of small rooms for the cow-girls.  You find Marble's room and knock on the door. A friendly earthy female voice calls out in response and invites you in.  Inside is a rather pleasant little room.  There are several shelves on the walls and a small sitting table in the corner with seating for two.  A large portion of the room is dominated by a large bed, the owner filling most of it.  Lastly, you notice a mini-dresser next to the bed.  The room's owner looks over at you and starts, \"<i>Oh, I've never met you before.</i>\"\n\nAs she gets up, you are given a chance to get a good look at her.  She is over six feet tall, with long brown hair tipped with two cow horns and a pair of cow ears in place of normal human ones.  Rounding out her relatively unchanged face are a pair of deep, brown eyes.  She is wearing only a short plain skirt, so you get a full frontal view of her two HH-cup assets. They look rather sore right now, with big red circles around her puffy nipples.  Her hands and arms appear mostly human save for thick-looking nails.  A soft 'clop' brings your eyes down to see that she is covered in thick, dark blond fur going from at least mid-way down her thighs to where a human's feet normally would be, in place of which are hooves.  A cow tail with a bow tied on it swings between her legs.\n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
 		outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
 	}
 	//(if player height is under 5 feet)
 	if(player.tallness < 60) {
-		outputText("She looks down at you with a smile and says \"<i>Aww, you're so cute!  Did you come for my milk?  I'm always happy to give it, but since I'm kinda sore right now, you'll have to be gentle. Okay little one?</i>\"  She moves towards you and tries to pick you up.", false);
+		outputText("She looks down at you with a smile and says \"<i>Aww, you're so cute!  Did you come for my milk?  I'm always happy to give it, but since I'm kinda sore right now, you'll have to be gentle. Okay little one?</i>\"  She moves towards you and tries to pick you up.");
 		//- player chooses resist or don't resist
 		simpleChoices("Let Her", marblePicksYouUpInitially, "Don't", resistMarbleInitially, "", null, "", null, "", null);
 		return;
 	}
-	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?", false);
+	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
 	//- player chooses caress, suckle, or rape
 	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "Leave", turnOffMarbleForever);
@@ -579,7 +579,7 @@ internal function marbleFightWin():void {
 	//Win by hp
 	if(monster.HP < 1) outputText("Marble falls to the ground defeated; she looks up at you helplessly, wondering what you're going to do next.  ", false);
 	//win by lust
-	else outputText("Marble collapses and looks at you longingly, pulling up her skirt with a look of desperation in her eyes.  ", false);
+	else outputText("Marble collapses and looks at you longingly, pulling up her skirt with a look of desperation in her eyes.  ");
 	//after the lust+HP defeat scenes if the player wins
 	outputText("You've gathered a bit of a crowd around you now, thanks to the noise of this cow clunking around with her huge hooves and hammer.  It might not be a terribly good idea to rape Marble...  you'd have to drag her up to her room just to avoid interruption and Whitney would likely find out and be upset.  What do you do?");
 	//Options, rape in room, milk (Spy's submission - not included yet) and, don't rape.
@@ -591,10 +591,10 @@ internal function marbleFightLose():void {
 	spriteSelect(41);
 	clearOutput();
 	//lose by hp
-	if(player.HP < 1) outputText("After a few too many blows to the head, you topple over to the ground.  ", false);
+	if(player.HP < 1) outputText("After a few too many blows to the head, you topple over to the ground.  ");
 	//lose by lust
-	else outputText("Overcome by desire, you fall to your knees, and start masturbating furiously.  Disgusted with you, Marble hits you upside the head once more, knocking you over.  ", false);
-	outputText("She leans in close to your head and whispers \"<i>Don't ever come near me again, or I will crush your head with this hammer.</i>\"  She stands up and walks away from you as you pass out from your head injuries.  ", false);	
+	else outputText("Overcome by desire, you fall to your knees, and start masturbating furiously.  Disgusted with you, Marble hits you upside the head once more, knocking you over.  ");
+	outputText("She leans in close to your head and whispers \"<i>Don't ever come near me again, or I will crush your head with this hammer.</i>\"  She stands up and walks away from you as you pass out from your head injuries.  ");
 	cleanupAfterCombat();
 }
 
@@ -605,8 +605,8 @@ private function rapeMarbleInHerRoom():void {
 	outputText("You aren't going to give up on this opportunity, but you don't want to have an audience either.  So you drag Marble and her hammer back to her room, and throw Marble onto her bed, grabbing and twisting her nipples, causing her to cry out in pain and pleasure.");
 	//continue onto original rape
 	spriteSelect(41);
-	outputText("  You suddenly grab at her breasts and squeeze them roughly, at which point she screams and ", false);
-	outputText("tries to slap you.  You easily duck under her hand and start twisting her nipples.  She squeals and begins to go limp under your painful ministrations.  You move her around and force her to kneel, pushing her face down into her bed.  Keeping one of your hands on her nipple, you pull down her skirt and expose her beautiful womanhood and asshole.\n\n", false);
+	outputText("  You suddenly grab at her breasts and squeeze them roughly, at which point she screams and ");
+	outputText("tries to slap you.  You easily duck under her hand and start twisting her nipples.  She squeals and begins to go limp under your painful ministrations.  You move her around and force her to kneel, pushing her face down into her bed.  Keeping one of your hands on her nipple, you pull down her skirt and expose her beautiful womanhood and asshole.\n\n");
 	//dicked players
 	if(player.cocks.length > 0) {
 		outputText("Chuckling to yourself, you free your " + multiCockDescriptLight() + " from your " + player.armorName + ".  You spend a moment to ask the helpless cow-girl if she is ready, her only response being a whimper, before ", false);
@@ -620,11 +620,11 @@ private function rapeMarbleInHerRoom():void {
 				outputText("forcing your " + cockDescript(0) + " in to the hilt.  ", false);
 			}
 			//the raping proper
-			outputText("With a grunt of pleasure, you start to push in and out while simultaneously manhandling her sensitive breasts.  Her pained cries and squeals only make you hornier and the experience all the more enjoyable for you.  You laugh from the pleasure you're getting at the expense of her pain.  Slapping her ass and marvelling at how it jiggles, you quicken the pace of your thrusts inside her.  Marble gasps at the increased rate, alternating between tones of pleasure and pain.\n\n", false);
+			outputText("With a grunt of pleasure, you start to push in and out while simultaneously manhandling her sensitive breasts.  Her pained cries and squeals only make you hornier and the experience all the more enjoyable for you.  You laugh from the pleasure you're getting at the expense of her pain.  Slapping her ass and marvelling at how it jiggles, you quicken the pace of your thrusts inside her.  Marble gasps at the increased rate, alternating between tones of pleasure and pain.\n\n");
 			//is the player corrupt enough to get the fantasy?
 			if(player.cor>=33) 
 				marbleRapeCorruptFantasy();
-			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
+			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ");
 			//set player's lust to 0
 			player.orgasm();
 		}
@@ -634,29 +634,29 @@ private function rapeMarbleInHerRoom():void {
 			//is the player corrupt enough to get the fantasy?
 			if(player.cor>=33) 
 				marbleRapeCorruptFantasy();
-			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
+			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ");
 			//set player's lust to 0
 			player.orgasm();
 		}
 	}
 	//dickless girls
 	else if(player.vaginas.length > 0) {
-		outputText("You take a quick look around the room to see if you can find something to make this more enjoyable, and notice a double dildo laying on the end table.  You grab the tool and push it into Marble's womanhood, causing a small gasp of pleasure from her that turns into one of pain as you twist one of her nipples.\n\n", false);
+		outputText("You take a quick look around the room to see if you can find something to make this more enjoyable, and notice a double dildo laying on the end table.  You grab the tool and push it into Marble's womanhood, causing a small gasp of pleasure from her that turns into one of pain as you twist one of her nipples.\n\n");
 		outputText("Keeping Marble in place, you get your " + vaginaDescript(0) + " ready to take in the other end of the dildo before doing so with gusto.  Much to Marble's discomfort, you manipulate the dildo in ways to heighten your own pleasure but give Marble a less enjoyable experience.  You ask her if she likes it, to which she responds with a whine and an attempt to move into a more comfortable position.  You tighten your grip on her, and she freezes again.\n\n", false);
 		//is the player corrupt enough to get the fantasy?
 		if(player.cor>=33)
 			marbleRapeCorruptFantasy();
-		outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
+		outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ");
 		//set player's lust to 0
 		player.orgasm();
 	}
 	//the genderless option
 	else {
-		outputText("Your lack of genitals makes it difficult to actually rape Marble, but there are other things you can do.  With your free hand, you push one of your fingers into her womanhood, causing Marble to squeal as you start wriggling it around.  Of course, that's just the beginning, as soon there are two fingers in there, and then three.  As each one goes in, there is another gasp from Marble.  You pinch her nipples as your fourth goes in, pulling out a rather interesting gasp of both pain and pleasure.\n\n", false);
+		outputText("Your lack of genitals makes it difficult to actually rape Marble, but there are other things you can do.  With your free hand, you push one of your fingers into her womanhood, causing Marble to squeal as you start wriggling it around.  Of course, that's just the beginning, as soon there are two fingers in there, and then three.  As each one goes in, there is another gasp from Marble.  You pinch her nipples as your fourth goes in, pulling out a rather interesting gasp of both pain and pleasure.\n\n");
 		//is the player corrupt enough to get the fantasy?
 		if(player.cor >= 33) 
 			marbleRapeCorruptFantasy();
-		outputText("With just one more thing to do, you laugh at Marble before shoving your full fist inside her.  The act results in that familiar gasp of pain and pleasure.  Playing with her is indeed quite satisfying.  ", false);
+		outputText("With just one more thing to do, you laugh at Marble before shoving your full fist inside her.  The act results in that familiar gasp of pain and pleasure.  Playing with her is indeed quite satisfying.  ");
 		//Reduce player lust by 20
 		dynStats("lus", -20);
 	}
@@ -713,9 +713,9 @@ private function resistMarbleInitially():void {
 	spriteSelect(41);
 	//(player chose resist)
 	clearOutput();
-	outputText("Surprised by your resistance, she pulls back and apologizes for being presumptuous.  ", false);
+	outputText("Surprised by your resistance, she pulls back and apologizes for being presumptuous.  ");
 	//- continue to the next part
-	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?", false);
+	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	//- player chooses caress, suckle, or rape
 	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "", null);
 }
@@ -724,12 +724,12 @@ private function marblePicksYouUpInitially():void {
 	spriteSelect(41);
 	//(player chose don't resist)
 	clearOutput();
-	outputText("She gently lifts you up and carries you over to her bed. Laying you down on her lap, she lifts your head to one of her nipples and pushes your lips against it.  She smiles and holds you there firmly as you feel a warm and delicious fluid start to fill your mouth.  Once you've had a taste of her milk, you can't help yourself and eagerly start to gulp it down.  After a little while you hear Marble sigh, \"<i>Oh sweetie, that's just what I needed.  I know it's annoying to stop for a moment, but could you do the other teat too?</i>\"  She pulls her hand back and flips you around on her lap before lifting you to her other nipple.  You don't need any encouragement this time, and start drinking eagerly without hesitation.  \"<i>Drink your fill sweetie, I know we're both enjoying this.</i>\"\n\n", false);
+	outputText("She gently lifts you up and carries you over to her bed. Laying you down on her lap, she lifts your head to one of her nipples and pushes your lips against it.  She smiles and holds you there firmly as you feel a warm and delicious fluid start to fill your mouth.  Once you've had a taste of her milk, you can't help yourself and eagerly start to gulp it down.  After a little while you hear Marble sigh, \"<i>Oh sweetie, that's just what I needed.  I know it's annoying to stop for a moment, but could you do the other teat too?</i>\"  She pulls her hand back and flips you around on her lap before lifting you to her other nipple.  You don't need any encouragement this time, and start drinking eagerly without hesitation.  \"<i>Drink your fill sweetie, I know we're both enjoying this.</i>\"\n\n");
 	player.refillHunger(30);
 	//new paragraph
-	outputText("Once you'd had enough, you take your mouth off her teat and lean against her chest.  Marble puts her hands around you and ", false);
-	if(player.earType > EARS_HUMAN) outputText("gently scratches behind your ears.  ", false);
-	else outputText("lightly caresses your head.  ", false);
+	outputText("Once you'd had enough, you take your mouth off her teat and lean against her chest.  Marble puts her hands around you and ");
+	if(player.earType > EARS_HUMAN) outputText("gently scratches behind your ears.  ");
+	else outputText("lightly caresses your head.  ");
 	outputText("\"<i>Thanks for your gentle mouth, sweetie,</i>\"  she says, \"<i>Do you think you could tell me your name?  I'm Marble.</i>\"  You let out a soft sigh and tell her who you are and why you came to visit.  She giggles, \"<i>Don't worry sweetie, I feel much better now thanks to you.  I'm really glad I got to meet you in such a pleasant way.</i>\"  You decide that it is probably time to leave now and say your farewells to this cow-girl.  \"<i>Come back to visit me anytime; I'll look forward to seeing you again soon!</i>\" she says beaming at you.  With that, you leave the farm, feeling a strange sense of euphoria passing over you.", false);
 	//(increase affection by 30)
 	//(increase addiction by 10)
@@ -752,10 +752,10 @@ private function caressMarble():void {
 private function suckleMarble():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You suggest that you could gently suckle her breasts to make her feel better.  \"<i>That sounds wonderful!</i>\" she exclaims cheerfully, putting her hands under her ample mounds.  \"<i>There is nothing I love more than giving milk to living things.</i>\"  ", false);
+	outputText("You suggest that you could gently suckle her breasts to make her feel better.  \"<i>That sounds wonderful!</i>\" she exclaims cheerfully, putting her hands under her ample mounds.  \"<i>There is nothing I love more than giving milk to living things.</i>\"  ");
 	//[if player is under 5 feet tall]
-	if(player.tallness < 60) outputText("Realizing you might have trouble reaching her breasts, you grab one of the chairs from the table.  ", false);
-	outputText("You walk over to her and lean in to suck from her nipple.  Your mouth is soon filled with a delicious warm fluid, and you eagerly begin to gulp it down.  As you drink, you can hear Marble sighing softly above you. \"<i>Thank you, sweetie.  Could you put your mouth on the other teat too?</i>\"  She says after a few minutes. You eagerly comply, and just like before, the fluid fills your mouth. Her milk is easily the most delicious thing you've ever drunk, and not only that, drinking it from her breast just feels so right.  You hear Marble sigh again, but this time it turns into a moan.  Once you'd had enough, you slowly pull back. You feel very satisfied with your drink, and you can see that Marble is quite satisfied too.  She smiles at you and says \"<i>That was wonderful. You're welcome to come and visit any time.</i>\"  With that, the two of you part company. You feel an odd euphoria as you walk away from the barn.", false);
+	if(player.tallness < 60) outputText("Realizing you might have trouble reaching her breasts, you grab one of the chairs from the table.  ");
+	outputText("You walk over to her and lean in to suck from her nipple.  Your mouth is soon filled with a delicious warm fluid, and you eagerly begin to gulp it down.  As you drink, you can hear Marble sighing softly above you. \"<i>Thank you, sweetie.  Could you put your mouth on the other teat too?</i>\"  She says after a few minutes. You eagerly comply, and just like before, the fluid fills your mouth. Her milk is easily the most delicious thing you've ever drunk, and not only that, drinking it from her breast just feels so right.  You hear Marble sigh again, but this time it turns into a moan.  Once you'd had enough, you slowly pull back. You feel very satisfied with your drink, and you can see that Marble is quite satisfied too.  She smiles at you and says \"<i>That was wonderful. You're welcome to come and visit any time.</i>\"  With that, the two of you part company. You feel an odd euphoria as you walk away from the barn.");
 	player.refillHunger(30);
 	//(increase affection by 15)
 	//(increase addiction by 10)
@@ -781,19 +781,19 @@ private function rapeMarble():void {
 public function encounterMarbleExploring():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("While wandering around the farm, you meet the cow-girl Marble heading towards the barn.  ", false);
+	outputText("While wandering around the farm, you meet the cow-girl Marble heading towards the barn.  ");
 	//[player height < 5 feet]
-	if(player.tallness < 60) outputText("Marble gives her customary greeting of hugging you to her breast before telling you that she is off to get milked at the barn.  ", false);
+	if(player.tallness < 60) outputText("Marble gives her customary greeting of hugging you to her breast before telling you that she is off to get milked at the barn.  ");
 	//[player hight >= 5 feet]
-	else outputText("You exchange a quick greeting before Marble tells you that she is off to get milked at the barn.  ", false);
+	else outputText("You exchange a quick greeting before Marble tells you that she is off to get milked at the barn.  ");
 	//[affection <30]
 	if(player.statusEffectv1(StatusEffects.Marble) < 30) {
-		outputText("\n\nIt seems that she is looking forward to it and doesn't want to put it off to talk.  She hurries off and you're left to look around some more.  <b>Maybe if you got her to like you a little more while doing some work around the farm?</b>", false);
+		outputText("\n\nIt seems that she is looking forward to it and doesn't want to put it off to talk.  She hurries off and you're left to look around some more.  <b>Maybe if you got her to like you a little more while doing some work around the farm?</b>");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//[affection >=30]
 	else {
-		outputText("\n\n\"<i>But, since you're here, maybe you could suckle me yourself?</i>\" she asks smiling.\n\n", false);
+		outputText("\n\n\"<i>But, since you're here, maybe you could suckle me yourself?</i>\" she asks smiling.\n\n");
 		//[if addiction is under 40]
 		if(player.statusEffectv2(StatusEffects.Marble) < 40) {
 			outputText("\n\nDo you drink her milk?");
@@ -802,7 +802,7 @@ public function encounterMarbleExploring():void {
 		}
 		//[if addiction is 40 or over] 
 		else {
-			outputText("\n\nYou really want some of that milk and eagerly agree.\n\n", false);
+			outputText("\n\nYou really want some of that milk and eagerly agree.\n\n");
 			doNext(drinkMarbleMilk);
 		}
 	}
@@ -812,11 +812,11 @@ public function encounterMarbleExploring():void {
 private function drinkMarbleMilk():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("Beaming, Marble leads you back to her room and sits down on the bed.  She invites you onto her lap and lets you start sucking at one of her nipples.  The moment that wonderful taste meets your tongue, you start gulping down the milk with reckless abandon. She sighs in pleasure in response.  From time to time, Marble gets you to switch nipples, all the while gently stroking your head", false);
+	outputText("Beaming, Marble leads you back to her room and sits down on the bed.  She invites you onto her lap and lets you start sucking at one of her nipples.  The moment that wonderful taste meets your tongue, you start gulping down the milk with reckless abandon. She sighs in pleasure in response.  From time to time, Marble gets you to switch nipples, all the while gently stroking your head");
 	//[player has animal ears]
-	if(player.earType > EARS_HUMAN) outputText(" and occasionally scratching behind your ears", false);
-	outputText(".  ", false);
-	outputText("Once you've had your fill, you pull back and the two of you smile at each other.  \"<i>It's really nice for you isn't it sweetie?  Nice for me too to have someone like you that can give a good suck on my itching nipples.</i>\"\n\n", false);
+	if(player.earType > EARS_HUMAN) outputText(" and occasionally scratching behind your ears");
+	outputText(".  ");
+	outputText("Once you've had your fill, you pull back and the two of you smile at each other.  \"<i>It's really nice for you isn't it sweetie?  Nice for me too to have someone like you that can give a good suck on my itching nipples.</i>\"\n\n");
 	//(first increase addiction by 10,
 	marbleStatusChange(0,10);
 	//if addiction is now over 50, skip straight to addiction event without doing anything else)
@@ -843,7 +843,7 @@ private function drinkMarbleMilk():void {
 	}
 	//[if addiction is under 50] 
 	if(player.statusEffectv2(StatusEffects.Marble) < 50)
-	outputText("After drinking Marble's milk, a feeling of euphoria spreads through you as you leave the farm in high spirits.", false);
+	outputText("After drinking Marble's milk, a feeling of euphoria spreads through you as you leave the farm in high spirits.");
 	applyMarblesMilk();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -852,7 +852,7 @@ private function drinkMarbleMilk():void {
 private function playerRefusesMarbleMilk():void {
 	clearOutput();
 	spriteSelect(41);
-	outputText("\n\nTaken aback by your refusal, she gives an annoyed hurumph before continuing on her way to the barn. You shake your head and return to your explorations.", false);
+	outputText("\n\nTaken aback by your refusal, she gives an annoyed hurumph before continuing on her way to the barn. You shake your head and return to your explorations.");
 	//- either do another explore event, or end event
 	//(reduce affection by 5)
 	//(reduce addiction by 5)
@@ -865,9 +865,9 @@ private function playerRefusesMarbleMilk():void {
 public function encounterMarbleExploring2():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You decide to pay Marble a visit at her room.  ", false);
+	outputText("You decide to pay Marble a visit at her room.  ");
 	//[player height <5]
-	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
+	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ");
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
 	player.refillHunger(20, false);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
@@ -878,12 +878,12 @@ public function encounterMarbleExploring2():void {
 	else outputText("While you talk mostly about unimportant things, there is some discussion about the world and the dangers within.");
 	//[addiction >30]
 	if(player.statusEffectv2(StatusEffects.Marble) > 30) {
-		outputText("\n\nThe entire time you spend talking, you find yourself oddly attracted to Marble's scent, especially when you get an odd whiff of her milk.  ", false);
+		outputText("\n\nThe entire time you spend talking, you find yourself oddly attracted to Marble's scent, especially when you get an odd whiff of her milk.  ");
 		dynStats("lus", 10);
 	}
 	//[affection <60]
 	if(player.statusEffectv1(StatusEffects.Marble) < 60) {
-		outputText("\n\nAfter the pleasant interlude to your quest, you bid farewell to the pretty cow-girl and return to your camp.", false);
+		outputText("\n\nAfter the pleasant interlude to your quest, you bid farewell to the pretty cow-girl and return to your camp.");
 		//(increase affection by 3)
 		marbleStatusChange(1,0);
 		//(increase player inte)
@@ -895,13 +895,13 @@ public function encounterMarbleExploring2():void {
 	else {
 		//[affection >=60, player has not had sex with Marble]
 		if(!player.hasStatusEffect(StatusEffects.FuckedMarble)) {
-			outputText("\n\nAs the two of you finish chatting, Marble gives you an intense look.  \"<i>You know that I really like you right, sweetie?  I'd like it if I can do something special with you,</i>\" she hesitates for a moment, \"<i>Will you come to my bed?</i>\"\n\nDo you accept her invitation?", false);
+			outputText("\n\nAs the two of you finish chatting, Marble gives you an intense look.  \"<i>You know that I really like you right, sweetie?  I'd like it if I can do something special with you,</i>\" she hesitates for a moment, \"<i>Will you come to my bed?</i>\"\n\nDo you accept her invitation?");
 			dynStats("lus", 10);
 			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexFirstTime);
 		}
 		//[affection >=60, player has had sex with Marble]
 		else {
-			outputText("\n\nAfter you finish talking, Marble gives you another intense look.  \"<i>Sweetie, will you come into my bed again?</i>\" You can feel a tingle in your groin at the thought of having sex with her again.\n\nDo you accept her invitation?", false);
+			outputText("\n\nAfter you finish talking, Marble gives you another intense look.  \"<i>Sweetie, will you come into my bed again?</i>\" You can feel a tingle in your groin at the thought of having sex with her again.\n\nDo you accept her invitation?");
 			//player chooses yes/no
 			dynStats("lus", 10);
 			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexRepeat);
@@ -913,7 +913,7 @@ public function encounterMarbleExploring2():void {
 private function turnDownMarbleSexFirstTime():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("She stares at you for a few moments as your refusal sinks in.  \"<i>So you don't feel the same way about me...  I'm sorry, I won't ever ask you again,</i>\" she says sadly.  \"<i>Maybe I'll see you later.</i>\" She directs you out the door.  You realize that refusing her will permanently affect your relationship.", false);
+	outputText("She stares at you for a few moments as your refusal sinks in.  \"<i>So you don't feel the same way about me...  I'm sorry, I won't ever ask you again,</i>\" she says sadly.  \"<i>Maybe I'll see you later.</i>\" She directs you out the door.  You realize that refusing her will permanently affect your relationship.");
 	//(affection drops to 50, it can no longer be raised above 50)
 	player.changeStatusValue(StatusEffects.Marble, 1, 50);
 	//(increase player inte)
@@ -924,7 +924,7 @@ private function turnDownMarbleSexFirstTime():void {
 private function turnDownMarbleSexRepeat():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("She looks disappointed at your refusal but quickly brightens up and says, \"<i>Ok sweetie, next time then.</i>\" On that note, you bid farewell to the pretty cow-girl and return to your camp.", false);
+	outputText("She looks disappointed at your refusal but quickly brightens up and says, \"<i>Ok sweetie, next time then.</i>\" On that note, you bid farewell to the pretty cow-girl and return to your camp.");
 	//(affection is unchanged)
 	//(increase player inte)
 	dynStats("int", 1);
@@ -948,18 +948,18 @@ private function AcceptMarblesSexualAdvances():void {
 public function helpMarble1():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("\"<i>You know, Marble is moving some produce right now. How about you go help her out?</i>\" Whitney suggests.  You agree to help the well-endowed anthropomorph and Whitney directs you to the storage shed.  You arrive to find that Marble is quite busy carrying stacks of crates into the barn.  She gives you a smile when she sees you and calls out, \"<i>Hey, sweetie!  Nice to see you.</i>\"  When you tell her you came to help her smile broadens.  \"<i>Oh, I'd love to have some help.  It'll save me some trips if you give me a hand,</i>\" she says happily before putting on a serious face and continuing, \"<i>but don't strain yourself sweetie, these are heavy. I don't want you to get hurt.</i>\"  With that, you get to work with her.\n\n", false);
+	outputText("\"<i>You know, Marble is moving some produce right now. How about you go help her out?</i>\" Whitney suggests.  You agree to help the well-endowed anthropomorph and Whitney directs you to the storage shed.  You arrive to find that Marble is quite busy carrying stacks of crates into the barn.  She gives you a smile when she sees you and calls out, \"<i>Hey, sweetie!  Nice to see you.</i>\"  When you tell her you came to help her smile broadens.  \"<i>Oh, I'd love to have some help.  It'll save me some trips if you give me a hand,</i>\" she says happily before putting on a serious face and continuing, \"<i>but don't strain yourself sweetie, these are heavy. I don't want you to get hurt.</i>\"  With that, you get to work with her.\n\n");
 	//[player str <20] 
-	if(player.str < 20) outputText("Unfortunately, the crates are quite heavy and you end up having to stick with small ones to keep up with Marble's pace.  She doesn't appear to mind, just enjoying having someone to talk to while she works, even if it doesn't save her many trips.\n\n", false);
+	if(player.str < 20) outputText("Unfortunately, the crates are quite heavy and you end up having to stick with small ones to keep up with Marble's pace.  She doesn't appear to mind, just enjoying having someone to talk to while she works, even if it doesn't save her many trips.\n\n");
 	//[player str >=20, <50]
-	if(player.str >= 20 && player.str < 50) outputText("You try your best, but for every crate you carry, Marble caries three. She doesn't mind though, since you'll end up saving her a quarter of the trips she would have had to make.\n\n", false);
+	if(player.str >= 20 && player.str < 50) outputText("You try your best, but for every crate you carry, Marble caries three. She doesn't mind though, since you'll end up saving her a quarter of the trips she would have had to make.\n\n");
 	//[player str >=50, <80]
-	if(player.str >= 50 && player.str < 80) outputText("You put your back into the job and manage to match Marble in her efforts.  She is really impressed with your strength, and together you can cut the number of trips needed in half.\n\n", false);
+	if(player.str >= 50 && player.str < 80) outputText("You put your back into the job and manage to match Marble in her efforts.  She is really impressed with your strength, and together you can cut the number of trips needed in half.\n\n");
 	//[player str >=80]
-	if(player.str >= 80) outputText("Marble may be strong, but you are stronger.  She is amazed as you manage to take even more crates at a time than she can, only held back by the number you can balance.  Thanks to your efforts, the chore only takes a third of the number of trips it normally would have taken.\n\n", false);
+	if(player.str >= 80) outputText("Marble may be strong, but you are stronger.  She is amazed as you manage to take even more crates at a time than she can, only held back by the number you can balance.  Thanks to your efforts, the chore only takes a third of the number of trips it normally would have taken.\n\n");
 	outputText("After a little while, you notice that Marble is walking with an almost mesmerizing sway in her hips as she carries the crates; it is rather hard to take your eyes off her.  ", false);
 	if(afterMarbleHelp()) return;
-	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you.  Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source.</i>\" she says, patting her sizable chest.\n\n", false);
+	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you.  Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source.</i>\" she says, patting her sizable chest.\n\n");
 	//(increase player str)
 	dynStats("str", 1);
 	//(increase affection by one tenth the player's str)
@@ -976,13 +976,13 @@ public function helpMarble2():void {
 	outputText("You run into Whitney at the farm, and ask if there's something you could do.\n\n", true);
 	outputText("\"<i>I've got it; you can help Marble do some weeding.  She's in the field over there right now,</i>\" Whitney says, pointing to a nearby pasture.  Nodding to her, you set off to help the pretty cow-girl with her chores.  It takes you a while to find her, but you eventually find Marble bent over with her rump in the air.  Once you get closer you realize that she is munching on a weed.  \"<i>Oh!</i>\" she exclaims, noticing you.  She hurriedly straightens up and looks around a little embarrassed.  \"<i>Hi there sweetie, what are you doing here?</i>\"  You explain that Whitney suggested you could help her with the weeding.  \"<i>Oh!</i>\" she exclaims again, \"<i>I guess that would be nice, but don't stare at my bum too much while I'm eating, ok?</i>\"  You agree and set to work.\n\n", false);
 	//[player spd <20] 
-	if(player.spe < 20) outputText("Even though Marble often stops to munch on a weed, she is still able to get more weeds then you do.  Despite her size, she can move surprisingly fast.  Regardless, she enjoys simply having you there while she works, and you get to enjoy the view.\n\n", false);
+	if(player.spe < 20) outputText("Even though Marble often stops to munch on a weed, she is still able to get more weeds then you do.  Despite her size, she can move surprisingly fast.  Regardless, she enjoys simply having you there while she works, and you get to enjoy the view.\n\n");
 	//[player spd >=20, <50]
-	if(player.spe >= 20 && player.spe < 50) outputText("You put in a good effort at cleaning out the weeds, and Marble often gives you a good look at her rear when she finds a tasty looking weed.\n\n", false);
+	if(player.spe >= 20 && player.spe < 50) outputText("You put in a good effort at cleaning out the weeds, and Marble often gives you a good look at her rear when she finds a tasty looking weed.\n\n");
 	//[player spd >=50, <80]
-	if(player.spe >= 50 && player.spe < 80) outputText("Moving quickly through the fields, you surprise Marble with your speed so much that she jokingly pouts that you're getting to all the tasty weeds before she has a chance to eat them.  You still end up getting a few good views of her ass.\n\n", false);
+	if(player.spe >= 50 && player.spe < 80) outputText("Moving quickly through the fields, you surprise Marble with your speed so much that she jokingly pouts that you're getting to all the tasty weeds before she has a chance to eat them.  You still end up getting a few good views of her ass.\n\n");
 	//[player spd >=80] 
-	if(player.spe >= 80) outputText("Weeding the field is a breeze for you, going fast enough that you're able to bring weeds to Marble faster than she can eat them.  In the end, you do almost all the work yourself.  She does reward you with a good view for your efforts.\n\n", false);
+	if(player.spe >= 80) outputText("Weeding the field is a breeze for you, going fast enough that you're able to bring weeds to Marble faster than she can eat them.  In the end, you do almost all the work yourself.  She does reward you with a good view for your efforts.\n\n");
 	//(increase player spd)
 	dynStats("spe", 1.5);
 	//(increase affection by one tenth the player's spd)
@@ -990,7 +990,7 @@ public function helpMarble2():void {
 	//(increase player lust)
 	dynStats("lus", 10);
 	if(afterMarbleHelp()) return;
-	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you.  Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source,</i>\" she says, patting her sizable chest.\n\n", false);
+	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you.  Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source,</i>\" she says, patting her sizable chest.\n\n");
 	//(player receives a bottle of Marble's milk)
 	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 }
@@ -1004,8 +1004,8 @@ private function afterMarbleHelp():Boolean {
 	if(player.statusEffectv2(StatusEffects.Marble) >= 40) {
 		//[the player fails the int check]
 		if(player.inte < 40 && rand(2) == 0) {
-			outputText("You find that the more time you spend being around Marble, the thirstier you grow for her milk.  Finally, as the two of you are finishing, you are unable to take it any longer and beg Marble to let you drink her milk.  After a moment, your words sink in and she blushes deeply.  \"<i>Ok sweetie, since you helped me out and all, let's go back to my room.</i>\"  You enter into her pleasant room once again.  She invites you onto her lap and lets you start sucking at one of her nipples.  The moment that wonderful taste meets your tongue, you start gulping down the milk without abandon. She sighs in pleasure in response.  From time to time, Marble gets you to switch nipples, all the while gently stroking your head and occasionally scratching behind your ears.\n\n", false);
-			outputText("Once you've had your fill, you pull back and the two of you smile at each other.  \"<i>It's really nice for you isn't it sweetie?  Nice for me too to have someone like you that can give a good suck on my sensitive nipples.</i>\"\n\n", false);
+			outputText("You find that the more time you spend being around Marble, the thirstier you grow for her milk.  Finally, as the two of you are finishing, you are unable to take it any longer and beg Marble to let you drink her milk.  After a moment, your words sink in and she blushes deeply.  \"<i>Ok sweetie, since you helped me out and all, let's go back to my room.</i>\"  You enter into her pleasant room once again.  She invites you onto her lap and lets you start sucking at one of her nipples.  The moment that wonderful taste meets your tongue, you start gulping down the milk without abandon. She sighs in pleasure in response.  From time to time, Marble gets you to switch nipples, all the while gently stroking your head and occasionally scratching behind your ears.\n\n");
+			outputText("Once you've had your fill, you pull back and the two of you smile at each other.  \"<i>It's really nice for you isn't it sweetie?  Nice for me too to have someone like you that can give a good suck on my sensitive nipples.</i>\"\n\n");
 			//(increase addiction by 10, skip straight to addiction event without doing anything else)
 			marbleStatusChange(0,10);
 			//Call addiction event here?
@@ -1014,7 +1014,7 @@ private function afterMarbleHelp():Boolean {
 		}
 		//[player succeeds the int check] 
 		else {
-			outputText("While you're working, you are continually plagued by the thought of drinking from Marble's breasts, but you're able to keep those thoughts at bay and continue working normally.\n\n", false);
+			outputText("While you're working, you are continually plagued by the thought of drinking from Marble's breasts, but you're able to keep those thoughts at bay and continue working normally.\n\n");
 		}
 	}
 	return false;
@@ -1025,10 +1025,10 @@ private function marbleAddiction(newPage:Boolean):void {
 	spriteSelect(41);
 	//[start a new page]
 	if(newPage) clearOutput();
-	outputText("You lean against her chest and breathe in her smell.  You feel oddly at peace with yourself and fall asleep, still buried in her bust.  You wake up a while later and notice the two of you are now lying down on her bed, Marble absentmindedly stroking your head.  She notices you stirring and giggles, \"<i>Good morning, sleepyhead. That's the first time I've ever had someone fall asleep while drinking my special milk.  Did you enjoy it?</i>\"  At the mention of her milk, you suddenly feel like you want more of it. In fact, you really want more.  You start to shake as you turn around, overwhelmed by you need for more, and beg Marble to let you drink more of her milk.  She is surprised at your need, but agrees to let you drink.  As her milk rushes into your mouth, you feel your body calm down as the feeling of euphoria once again passes over your body.  An alarming thought enters your head and your eyes go wide. You hear Marble gasp above you as she comes to the same realization that you just did.\n\n", false);
+	outputText("You lean against her chest and breathe in her smell.  You feel oddly at peace with yourself and fall asleep, still buried in her bust.  You wake up a while later and notice the two of you are now lying down on her bed, Marble absentmindedly stroking your head.  She notices you stirring and giggles, \"<i>Good morning, sleepyhead. That's the first time I've ever had someone fall asleep while drinking my special milk.  Did you enjoy it?</i>\"  At the mention of her milk, you suddenly feel like you want more of it. In fact, you really want more.  You start to shake as you turn around, overwhelmed by you need for more, and beg Marble to let you drink more of her milk.  She is surprised at your need, but agrees to let you drink.  As her milk rushes into your mouth, you feel your body calm down as the feeling of euphoria once again passes over your body.  An alarming thought enters your head and your eyes go wide. You hear Marble gasp above you as she comes to the same realization that you just did.\n\n");
 	//(bold text)
-	outputText("<b>Marble's milk is addictive, and you are now addicted to it.</b>\n\n", false);
-	outputText("You pull back from her and look up into her eyes.  \"<i>Sweetie, how are you feeling?  Do you like drinking my milk?  Do you want to always drink my milk?</i>\" she says to you with uncertainty.  How do you reply?\n\n", false);
+	outputText("<b>Marble's milk is addictive, and you are now addicted to it.</b>\n\n");
+	outputText("You pull back from her and look up into her eyes.  \"<i>Sweetie, how are you feeling?  Do you like drinking my milk?  Do you want to always drink my milk?</i>\" she says to you with uncertainty.  How do you reply?\n\n");
 	doYesNo(wantMarbleAddiction,doNotWantMarbleAddiction);
 }
 
@@ -1036,7 +1036,7 @@ private function marbleAddiction(newPage:Boolean):void {
 private function wantMarbleAddiction():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You smile and tell her that her milk is the most wonderful thing you've ever had. You'll always want to drink it and do not care if it's addictive.  She gives a small smile before softly saying, \"<i>Are you sure, sweetie?</i>\"  You nod eagerly and try to continue drinking... but you can't bring yourself to do it.  You really want to drink from her, but your body doesn't seem to let you.  \"<i>What's wrong, sweetie?</i>\" she asks, confused at your hesitation, \"<i>I thought you wanted to drink my milk?</i>\"  You explain to her that you're trying, but you just can't bring yourself to.  \"<i>I'm not stopping you sweetie, go ahead.</i>\"  As if a floodgate had been opened, you rush forward and start guzzling down her breast milk once again.  After you've finished, you pull back and look up at Marble. She takes a moment to think before saying slowly, \"<i>So you can't drink without my permission?</i>\"  She smiles down at you, though you can't help but feel a little uncomfortable at this apparent power she has over you.  You decide to excuse yourself and get up.  As you go to the door, Marble calls out to you, \"<i>Sweetie, just come back whenever you get thirsty ok?  I'm looking forward to seeing how you are.</i>\"  She giggles softly as you go out the door, leaving you to wonder if you just made a big mistake.", false);
+	outputText("You smile and tell her that her milk is the most wonderful thing you've ever had. You'll always want to drink it and do not care if it's addictive.  She gives a small smile before softly saying, \"<i>Are you sure, sweetie?</i>\"  You nod eagerly and try to continue drinking... but you can't bring yourself to do it.  You really want to drink from her, but your body doesn't seem to let you.  \"<i>What's wrong, sweetie?</i>\" she asks, confused at your hesitation, \"<i>I thought you wanted to drink my milk?</i>\"  You explain to her that you're trying, but you just can't bring yourself to.  \"<i>I'm not stopping you sweetie, go ahead.</i>\"  As if a floodgate had been opened, you rush forward and start guzzling down her breast milk once again.  After you've finished, you pull back and look up at Marble. She takes a moment to think before saying slowly, \"<i>So you can't drink without my permission?</i>\"  She smiles down at you, though you can't help but feel a little uncomfortable at this apparent power she has over you.  You decide to excuse yourself and get up.  As you go to the door, Marble calls out to you, \"<i>Sweetie, just come back whenever you get thirsty ok?  I'm looking forward to seeing how you are.</i>\"  She giggles softly as you go out the door, leaving you to wonder if you just made a big mistake.");
 	//(increase affection by 5)
 	//(set knowAddiction to 1)
 	marbleStatusChange(5,0,1);
@@ -1051,7 +1051,7 @@ private function wantMarbleAddiction():void {
 private function doNotWantMarbleAddiction():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You tell her that you've realized that her milk is addictive and you can't afford to depend on it.  Tears well up in her eyes and she breaks down. \"<i>I'm so sorry, I didn't know!</i>\" she says between sobs, \"<i>I guess I'm just another wretched creature of this world.  I thought I was special, but it looks like I'm corrupt too...</i>\"  She suddenly reaches out and hugs your head tightly to her chest as she rocks back and forth.  After a few minutes she holds you out and looks into your eyes. \"<i>Please forgive me!</i>\" she says before jumping off her bed and running out the door.  You spend some time looking around the farm for Marble, but you're unable to find her.  You tell Whitney what happened, and she promises that as soon as she knows where Marble went, you'll be the first to know.", false);
+	outputText("You tell her that you've realized that her milk is addictive and you can't afford to depend on it.  Tears well up in her eyes and she breaks down. \"<i>I'm so sorry, I didn't know!</i>\" she says between sobs, \"<i>I guess I'm just another wretched creature of this world.  I thought I was special, but it looks like I'm corrupt too...</i>\"  She suddenly reaches out and hugs your head tightly to her chest as she rocks back and forth.  After a few minutes she holds you out and looks into your eyes. \"<i>Please forgive me!</i>\" she says before jumping off her bed and running out the door.  You spend some time looking around the farm for Marble, but you're unable to find her.  You tell Whitney what happened, and she promises that as soon as she knows where Marble went, you'll be the first to know.");
 	//(increase affection by 5)
 	//(set knowAddiction to 2)
 	marbleStatusChange(5,0,2);
@@ -1068,7 +1068,7 @@ private function doNotWantMarbleAddiction():void {
 //[player goes to the farm while suffering from withdrawal]
 private function withdrawlFarmVisit():void {
 	spriteSelect(41);
-	outputText("You visit Whitney's farm once again. She quickly sees the tell-tale signs of your need and lets you know where Marble is.\n\n", false);
+	outputText("You visit Whitney's farm once again. She quickly sees the tell-tale signs of your need and lets you know where Marble is.\n\n");
 	//- do an addiction event + new paragraph 
 	//Happy addiction event
 	if(player.statusEffectv3(StatusEffects.Marble) == 1)
@@ -1086,7 +1086,7 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 	if(clearS) clearOutput();
 	//First visit post addiction:
 	if(!player.hasStatusEffect(StatusEffects.MalonVisitedPostAddiction)) {
-		outputText("You find Marble coming out of the barn, holding one of her bottles of milk.  When she spots you, she hurries over and hands you the bottle.  \"<i>I want to find something out. Can you drink from that bottle?</i>\" she asks.  Do you drink it?", false);
+		outputText("You find Marble coming out of the barn, holding one of her bottles of milk.  When she spots you, she hurries over and hands you the bottle.  \"<i>I want to find something out. Can you drink from that bottle?</i>\" she asks.  Do you drink it?");
 		//- player chooses yes/no
 		doYesNo(playerAgreesToDrinkMarbleMilkBottled,playerRefusesToDrinkBottledMilk);
 		player.createStatusEffect(StatusEffects.MalonVisitedPostAddiction,0,0,0,0);
@@ -1095,10 +1095,10 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 	else {
 		//Addiction event version 1:
 		if(rand(2) == 0) {
-			outputText("You find Marble in her room, softly humming while reading a book on her bed.  You walk up to her, and without looking away from her book she says, \"<i>I can smell your need, sweetie. Are you ready for your drink?</i>\" She sets the book down and turns to you, her hands under her breasts as she leans forward.\n\n", false);
+			outputText("You find Marble in her room, softly humming while reading a book on her bed.  You walk up to her, and without looking away from her book she says, \"<i>I can smell your need, sweetie. Are you ready for your drink?</i>\" She sets the book down and turns to you, her hands under her breasts as she leans forward.\n\n");
 			//- inte check to avoid immediately drinking, if succeeded: 
 			if(player.inte >= 40) {
-				outputText("Will you drink her milk?", false);
+				outputText("Will you drink her milk?");
 				//- player chooses yes/no
 				doYesNo(playerDrinksMarbleMilk,playerDeclinesToDrinkMarbleMilk);
 			}
@@ -1109,7 +1109,7 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 		}
 		//Addiction event version 2:
 		else {
-			outputText("You find Marble in the midst of one of her chores.  She smiles at you and says that if you help her with her chores, she will give you a bottle of milk to soothe your nerves.  Do you do it for the milk, Marble, or refuse?", false);
+			outputText("You find Marble in the midst of one of her chores.  She smiles at you and says that if you help her with her chores, she will give you a bottle of milk to soothe your nerves.  Do you do it for the milk, Marble, or refuse?");
 			//player chooses milk / Marble / refuse
 			simpleChoices("Marble", marbleChoreHelpChooseMarble, "Milk", marbleChoreHelpChooseMilk, "", null, "", null, "Refuse", marbleChoreRefusal);
 		}
@@ -1119,7 +1119,7 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 private function playerAgreesToDrinkMarbleMilkBottled():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You easily guzzle down the milk and feel your shakes calming down.  Looking disappointed, Marble says, \"<i>You didn't have my permission to drink that did you?</i>\" You don't think so, and after a moment you realize what she was testing.  You need her permission to drink directly from her breasts, but you can drink it from the bottles without any. Sighing softly, Marble asks you to tell her when you feel thirsty and come by.  \"<i>I'll be waiting for you,</i>\" she says, winking at you.  You then head back to camp and try to get some work done before you need to come back.", false);
+	outputText("You easily guzzle down the milk and feel your shakes calming down.  Looking disappointed, Marble says, \"<i>You didn't have my permission to drink that did you?</i>\" You don't think so, and after a moment you realize what she was testing.  You need her permission to drink directly from her breasts, but you can drink it from the bottles without any. Sighing softly, Marble asks you to tell her when you feel thirsty and come by.  \"<i>I'll be waiting for you,</i>\" she says, winking at you.  You then head back to camp and try to get some work done before you need to come back.");
 	//(increase addiction by 5)
 	marbleStatusChange(0,5);
 	//(delay withdrawal effect)
@@ -1134,7 +1134,7 @@ private function playerAgreesToDrinkMarbleMilkBottled():void {
 private function playerRefusesToDrinkBottledMilk():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You decide not to drink the milk and force yourself to hand it back to Marble.  She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\"  In response, you say that you would prefer to suckle her breasts directly.  She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request.  She goes back inside the barn and you're left to go back to your camp.  For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.", false);
+	outputText("You decide not to drink the milk and force yourself to hand it back to Marble.  She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\"  In response, you say that you would prefer to suckle her breasts directly.  She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request.  She goes back inside the barn and you're left to go back to your camp.  For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.");
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
@@ -1162,10 +1162,10 @@ private function playerDrinksMarbleMilk():void {
 	dynStats("lib", 1, "lus", 20, "cor", 1);
 	//if player lust is over a threshold like 60, trigger milk sex scene)
 	if(player.lust >= 60) {
-		outputText("\n\n", false);
+		outputText("\n\n");
 		marbleMilkSex(false);
 	}
-	outputText("\n\nMarble gives you a kiss on the forehead before sending you on your way.", false);
+	outputText("\n\nMarble gives you a kiss on the forehead before sending you on your way.");
 	//(apply Marble's Milk effect)
 	applyMarblesMilk();
 	doNext(camp.returnToCampUseOneHour);
@@ -1174,7 +1174,7 @@ private function playerDrinksMarbleMilk():void {
 private function playerDeclinesToDrinkMarbleMilk():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You're just barely able to pull yourself back and run out of the room, ignoring Marble's protests.  There was no way you could avoid drinking her milk if you'd stayed.  As you are catching your breath at the edge of the farm, your body feels like is tearing itself apart after refusing Marble's milk.  Fortunately, your withdrawal symptoms seem to relax for now.", false);
+	outputText("You're just barely able to pull yourself back and run out of the room, ignoring Marble's protests.  There was no way you could avoid drinking her milk if you'd stayed.  As you are catching your breath at the edge of the farm, your body feels like is tearing itself apart after refusing Marble's milk.  Fortunately, your withdrawal symptoms seem to relax for now.");
 	//(decrease addiction by 5)
 	//(decrease affection by 5)
 	marbleStatusChange(-5,-5);
@@ -1225,7 +1225,7 @@ private function marbleChoreHelpChooseMarble():void {
 private function marbleChoreRefusal():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset.  Your body seems to be upset at your refusal too, feeling painful all over.  Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.", false);
+	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset.  Your body seems to be upset at your refusal too, feeling painful all over.  Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
 	//(decrease str and tou by 1.5)
 	dynStats("str", -1,"tou", -1);
 	//(decrease affection by 5)
@@ -1247,9 +1247,9 @@ public function marbleEncounterAddictedNonWithdrawl():void {
 	player.refillHunger(30);
 	outputText("\n\n");
 	if(player.statusEffectv1(StatusEffects.Marble) >= 80) {
-		outputText("As you eat, she looks deeply into your eyes for a moment. You think she is going to say something, but she shakes her head and avoids your questions about it for the rest of your time together.\n\n", false);
+		outputText("As you eat, she looks deeply into your eyes for a moment. You think she is going to say something, but she shakes her head and avoids your questions about it for the rest of your time together.\n\n");
 	}
-	outputText("After you finish, she thanks you for treating her to your company and asks you to come back soon.  You return to your camp, knowing you will probably be seeing her again soon for something less pleasant.", false);
+	outputText("After you finish, she thanks you for treating her to your company and asks you to come back soon.  You return to your camp, knowing you will probably be seeing her again soon for something less pleasant.");
 	//(increase affection by 10)
 	marbleStatusChange(5,0);
 	doNext(camp.returnToCampUseOneHour);
@@ -1261,7 +1261,7 @@ public function encounterMarbleAshamedAddiction(clearS:Boolean = true):void {
 	spriteSelect(41);
 	//First visit post addiction:
 	if(!player.hasStatusEffect(StatusEffects.MalonVisitedPostAddiction)) {
-		outputText("You find Marble walking out of the barn, a tank in her arms.  You decide to follow her as she goes behind the barn.  When you round the corner, you see her pouring the contents of the tank out onto the ground.  You ask her what she's doing, \"<i>I'm getting rid of this corrupted milk,</i>\" she says in disgust.  As you approach her, you recognize the smell of her milk and lick your lips unconsciously.  \"<i>I make so much of it each day, I'm a monster,</i>\" she says coldly, \"<i>and I made you need it.</i>\"  As the last of the milk splashes onto the ground, Marble looks towards you. Surprisingly, her face seems hard and cold.  Do you blame her for what happened to you, or do you comfort her?", false);
+		outputText("You find Marble walking out of the barn, a tank in her arms.  You decide to follow her as she goes behind the barn.  When you round the corner, you see her pouring the contents of the tank out onto the ground.  You ask her what she's doing, \"<i>I'm getting rid of this corrupted milk,</i>\" she says in disgust.  As you approach her, you recognize the smell of her milk and lick your lips unconsciously.  \"<i>I make so much of it each day, I'm a monster,</i>\" she says coldly, \"<i>and I made you need it.</i>\"  As the last of the milk splashes onto the ground, Marble looks towards you. Surprisingly, her face seems hard and cold.  Do you blame her for what happened to you, or do you comfort her?");
 		//- player chooses blame her or comfort her
 		simpleChoices("Comfort", AshamedAddictionComfort, "Blame", AshamedAddictionBlame, "", null, "", null, "", null);
 		player.createStatusEffect(StatusEffects.MalonVisitedPostAddiction,0,0,0,0);
@@ -1270,13 +1270,13 @@ public function encounterMarbleAshamedAddiction(clearS:Boolean = true):void {
 	//REPEAT
 	//Addiction event version 1:
 	if(rand(2) == 0) {
-		outputText("You find Marble reading a book in her room.  As you enter, she tells you that she has been continuing with her research on the effects of addiction.  She stands up in front of you and starts playing with her breasts. You quickly feel your desire for her milk intensifying.  \"<i>Try to fight your need,</i>\" she tells you as she continues rubbing her chest. You oblige her and try your best, but it's a struggle you do not enjoy as your body feels like it's pulling itself apart from the strain.  Do you fight off your need?", false);
+		outputText("You find Marble reading a book in her room.  As you enter, she tells you that she has been continuing with her research on the effects of addiction.  She stands up in front of you and starts playing with her breasts. You quickly feel your desire for her milk intensifying.  \"<i>Try to fight your need,</i>\" she tells you as she continues rubbing her chest. You oblige her and try your best, but it's a struggle you do not enjoy as your body feels like it's pulling itself apart from the strain.  Do you fight off your need?");
 		//- player chooses fight / give in
 		simpleChoices("Resist", resistAddiction, "Give In", addictionGiveIn, "", null, "", null, "", null);
 	}
 	//Addiction event version 2:
 	else {
-		outputText("You find Marble as she exits the barn, holding a bottle of her milk.  She looks at you and holds out the bottle.  \"<i>Take this,</i>\" she tells you, \"<i>and say what a horrible thing it is.  Say you wish you'd never tasted it before.  Say it should never exist.  Then dump that trash onto the dirt.</i>\"  Her eyes start to tear up as she finishes the last part. You could do what she says to help beat your addiction, or refuse because you feel that saying such things would hurt her. Or you could just beg her not to waste the milk like that. What do you do?", false);
+		outputText("You find Marble as she exits the barn, holding a bottle of her milk.  She looks at you and holds out the bottle.  \"<i>Take this,</i>\" she tells you, \"<i>and say what a horrible thing it is.  Say you wish you'd never tasted it before.  Say it should never exist.  Then dump that trash onto the dirt.</i>\"  Her eyes start to tear up as she finishes the last part. You could do what she says to help beat your addiction, or refuse because you feel that saying such things would hurt her. Or you could just beg her not to waste the milk like that. What do you do?");
 		//- player chooses dump it / refuse / beg
 		simpleChoices("Dump It", dumpMarblesMilk, "Refuse", refuseMarblesMilkAddiction, "Beg For It", ashamedAddictionBegForIt, "", null, "", null);
 	}
@@ -1285,7 +1285,7 @@ public function encounterMarbleAshamedAddiction(clearS:Boolean = true):void {
 private function AshamedAddictionBlame():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You decide to take out your anger at your current state on Marble and start yelling at her.  As you wind down from your rant, you can see that her hands are shaking.  Her voice cracks slightly as she says, \"You're right... I have to take responsibility for what I did to you and make it better.  Come to me when you need my milk, and I'll help you get rid of your addiction.  Then I'll make sure no one gets addicted ever again.</i>\"  Her face still cold, Marble turns and walks away.  You feel a little relief after venting at her, but you know that you'll really want to drink her milk again before too long.  It doesn't help that you feel sore after yelling at her like that.", false);
+	outputText("You decide to take out your anger at your current state on Marble and start yelling at her.  As you wind down from your rant, you can see that her hands are shaking.  Her voice cracks slightly as she says, \"You're right... I have to take responsibility for what I did to you and make it better.  Come to me when you need my milk, and I'll help you get rid of your addiction.  Then I'll make sure no one gets addicted ever again.</i>\"  Her face still cold, Marble turns and walks away.  You feel a little relief after venting at her, but you know that you'll really want to drink her milk again before too long.  It doesn't help that you feel sore after yelling at her like that.");
 	//(drop affection to 0)
 	//(reduce addiction by 15)
 	marbleStatusChange(-100,-15);
@@ -1302,12 +1302,12 @@ private function AshamedAddictionBlame():void {
 private function AshamedAddictionComfort():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You walk straight up to her and wrap your arms around her.  She just stands there idly for a moment before embracing you back.  ", false);
+	outputText("You walk straight up to her and wrap your arms around her.  She just stands there idly for a moment before embracing you back.  ");
 	//[player height less than 5 feet]
-	if(player.tallness < 60) outputText("She pulls you into her chest and you feel relieved to see the Marble you know is still in there.  You feel warm drops of water fall on your head and look up to find Marble crying fresh tears, but this time with a big smile on her face.\n\n", false);
+	if(player.tallness < 60) outputText("She pulls you into her chest and you feel relieved to see the Marble you know is still in there.  You feel warm drops of water fall on your head and look up to find Marble crying fresh tears, but this time with a big smile on her face.\n\n");
 	//[player height greater than or equal to 5 feet]
-	else outputText("You hear her breath start to come in short breaths and look at her face to find Marble crying fresh tears, but this time with a big smile on her face.\n\n", false);
-	outputText("\"<i>Thank you, sweetie.</i>\" She whispers so softly that you almost don't hear it.  Unfortunately, being so close to her starts to remind you of what you so desperately need. The moment feels somewhat ruined as you unsuccessfully try to hold back your shaking.  She pulls back and looks you straight in the eye.  \"<i>Don't worry sweetie, we'll find a way to make this better together,</i>\" she says, holding you tightly in her arms.  You can tell she's putting on a brave face and you don't think she actually has any idea of what to do.  \"<i>Come back when you start to feel a need for my milk again,</i>\"' she tells you as you leave, little hiccups accompanying her words, \"<i>We will get through this.</i>\"", false);
+	else outputText("You hear her breath start to come in short breaths and look at her face to find Marble crying fresh tears, but this time with a big smile on her face.\n\n");
+	outputText("\"<i>Thank you, sweetie.</i>\" She whispers so softly that you almost don't hear it.  Unfortunately, being so close to her starts to remind you of what you so desperately need. The moment feels somewhat ruined as you unsuccessfully try to hold back your shaking.  She pulls back and looks you straight in the eye.  \"<i>Don't worry sweetie, we'll find a way to make this better together,</i>\" she says, holding you tightly in her arms.  You can tell she's putting on a brave face and you don't think she actually has any idea of what to do.  \"<i>Come back when you start to feel a need for my milk again,</i>\"' she tells you as you leave, little hiccups accompanying her words, \"<i>We will get through this.</i>\"");
 	//(increase affection by 10)
 	marbleStatusChange(10,0);
 	//(delay withdrawal effect)
@@ -1334,7 +1334,7 @@ private function resistAddiction():void {
 	spriteSelect(41);
 	//(player fight it)
 	clearOutput();
-	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you.  It does calm your nerves, but still leaves you feeling wholly unsatisfied.", false);
+	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you.  It does calm your nerves, but still leaves you feeling wholly unsatisfied.");
 	//(decrease addiction by 5)
 	marbleStatusChange(0,-5);
 	//(decrease player str and tou by 1.5)
@@ -1350,7 +1350,7 @@ private function resistAddiction():void {
 private function addictionGiveIn():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You can't bear to see her jiggling in front of you and yet be unable to drink from those delicious looking breasts.  You break down and beg Marble to let you drink her milk.  She can't stand seeing you like this and agrees with a sad look in her eyes.  You waste no time in gulping down her milk and feel it fill you with new strength.  When you finish, you look up at her with some milk still dripping from your face.  You are met with a sad smile as she wipes your face off.", false);
+	outputText("You can't bear to see her jiggling in front of you and yet be unable to drink from those delicious looking breasts.  You break down and beg Marble to let you drink her milk.  She can't stand seeing you like this and agrees with a sad look in her eyes.  You waste no time in gulping down her milk and feel it fill you with new strength.  When you finish, you look up at her with some milk still dripping from your face.  You are met with a sad smile as she wipes your face off.");
 	//(increase addiction by 10)
 	//(increase affection by 3)
 	marbleStatusChange(10,3);
@@ -1362,7 +1362,7 @@ private function addictionGiveIn():void {
 	dynStats("lib", 1, "lus", 20);
 	//if player lust is over a threshold like 60, trigger milk sex scene)
 	if(player.lust >= 60) {
-		outputText("\n\n", false);
+		outputText("\n\n");
 		marbleMilkSex(false);
 	}
 	doNext(camp.returnToCampUseOneHour);
@@ -1373,7 +1373,7 @@ private function addictionGiveIn():void {
 private function dumpMarblesMilk():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("Holding the bottle in your hands, you repeat her words exactly. Her face falls more and more with each declaration. Finally and to your body's great distress, you upturn the bottle and poor out the contents onto the ground.  As the last drop splashes into the dirt, you feel a small relief from the symptoms of your withdrawal. When you look back up, you find that Marble has vanished.  It hurts you in both mind and body to see Marble suffer like that, but at least it will be a while before you need to do something like that again.", false);
+	outputText("Holding the bottle in your hands, you repeat her words exactly. Her face falls more and more with each declaration. Finally and to your body's great distress, you upturn the bottle and poor out the contents onto the ground.  As the last drop splashes into the dirt, you feel a small relief from the symptoms of your withdrawal. When you look back up, you find that Marble has vanished.  It hurts you in both mind and body to see Marble suffer like that, but at least it will be a while before you need to do something like that again.");
 	//(reduce affection by 5)
 	//(reduce addiction by 5)
 	marbleStatusChange(-5,-5);
@@ -1390,9 +1390,9 @@ private function dumpMarblesMilk():void {
 private function refuseMarblesMilkAddiction():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You look at Marble and refuse to do as she says.  She looks at you in surprise and asks why. You tell her you can't bear to talk about her like that, and that if you have to make her feel bad to get over this need, it's not worth it.  After a moment to let your words sink in, she rushes over to you and ", false);
-	if(player.tallness < 60) outputText("hugs you to her chest, ", false);
-	else outputText("gives you a big hug, ", false);
+	outputText("You look at Marble and refuse to do as she says.  She looks at you in surprise and asks why. You tell her you can't bear to talk about her like that, and that if you have to make her feel bad to get over this need, it's not worth it.  After a moment to let your words sink in, she rushes over to you and ");
+	if(player.tallness < 60) outputText("hugs you to her chest, ");
+	else outputText("gives you a big hug, ");
 	outputText("all the while saying how wonderful you are.  The bottle ends up getting dumped on the ground during the embrace anyway, but neither of you care to notice until afterwards. But then, it doesn't matter anyway; you'll be fine for at least a little while. Right now, you just want to enjoy Marble's warm form wrapped around you.", false);
 	//(increase affection by 5)
 	marbleStatusChange(5,0);
@@ -1407,7 +1407,7 @@ private function refuseMarblesMilkAddiction():void {
 private function ashamedAddictionBegForIt():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You look at her in horror at the suggestion of wasting her delicious milk in such a way. You snatch the milk bottle and hold it tightly to your chest.  You beg her not to talk about it like that and not to throw her milk away so easily.  She seems to be even more upset by your declaration and grabs hold of your hands.  Marble looks into your eyes for a moment and tells you that there is always hope to change before she runs off.  You are left with the milk bottle, but you think that you can wait until later to drink it.  It just felt right to make that bold declaration and it seems to have made you feel better, if only for now.", false);
+	outputText("You look at her in horror at the suggestion of wasting her delicious milk in such a way. You snatch the milk bottle and hold it tightly to your chest.  You beg her not to talk about it like that and not to throw her milk away so easily.  She seems to be even more upset by your declaration and grabs hold of your hands.  Marble looks into your eyes for a moment and tells you that there is always hope to change before she runs off.  You are left with the milk bottle, but you think that you can wait until later to drink it.  It just felt right to make that bold declaration and it seems to have made you feel better, if only for now.");
 	//(player gets a bottle of Marble's Milk)
 	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 	//(delay withdrawal for a few hours)
@@ -1422,21 +1422,21 @@ private function ashamedAddictionBegForIt():void {
 public function marbleEncounterAddictedNonWithdrawlAshamed():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You decide to pay Marble a visit, as it would be nice to spend some time with her while you aren't in withdrawal.  You find her in her room and she looks at you ", false);
+	outputText("You decide to pay Marble a visit, as it would be nice to spend some time with her while you aren't in withdrawal.  You find her in her room and she looks at you ");
 	//[affection >= 30]
-	if(player.statusEffectv1(StatusEffects.Marble) >= 30) outputText("worriedly ", false);
-	outputText("for a moment before it dawns on her that you aren't shaking.\n\n", false);
+	if(player.statusEffectv1(StatusEffects.Marble) >= 30) outputText("worriedly ");
+	outputText("for a moment before it dawns on her that you aren't shaking.\n\n");
 	//[affection >= 30] 
-	if(player.statusEffectv1(StatusEffects.Marble) >= 30) outputText("\"<i>Sweetie, w", false);
-	else outputText("\"<i>W", false);
-	outputText("hy are you here if you don't need my milk?</i>\"  You explain that you just want to enjoy her company like you used to.  She gives a genuine smile that probably hasn't been on her face for a while, and the two of you have a meal together in her room. ", false);
+	if(player.statusEffectv1(StatusEffects.Marble) >= 30) outputText("\"<i>Sweetie, w");
+	else outputText("\"<i>W");
+	outputText("hy are you here if you don't need my milk?</i>\"  You explain that you just want to enjoy her company like you used to.  She gives a genuine smile that probably hasn't been on her face for a while, and the two of you have a meal together in her room. ");
 	player.refillHunger(30, false);
 	outputText("\n\n");
 	//[affection is 80 or more]
 	if(player.statusEffectv1(StatusEffects.Marble) >= 80) {
-		outputText("While you're eating, Marble looks into your eyes deeply for a moment and you think she is going to say something, but she shakes her head and seems more reserved for the rest of your time together.\n\n", false);
+		outputText("While you're eating, Marble looks into your eyes deeply for a moment and you think she is going to say something, but she shakes her head and seems more reserved for the rest of your time together.\n\n");
 	}
-	outputText("After you finish, she thanks you for thinking of her like this, even with what you are going through.  You return to your camp, knowing you will probably be seeing her again soon for something less pleasant.", false);
+	outputText("After you finish, she thanks you for thinking of her like this, even with what you are going through.  You return to your camp, knowing you will probably be seeing her again soon for something less pleasant.");
 	//increase affection by 10)
 	marbleStatusChange(10,0);
 	doNext(camp.returnToCampUseOneHour);
@@ -1448,7 +1448,7 @@ public function postAddictionFarmMornings():void {
 	spriteSelect(41);
 	//(if player is completely addicted, do this event at the start of every day)
 	clearOutput();
-	outputText("You hurry over to the farm to get your daily dose of Marble's milk.  It takes an hour of your day, but your body is satisfied.", false);
+	outputText("You hurry over to the farm to get your daily dose of Marble's milk.  It takes an hour of your day, but your body is satisfied.");
 	//(increase player corr by 2 if corr is under 30, otherwise increase corr by 1 up to a max of 40)
 	player.refillHunger(20);
 	player.slimeFeed();
@@ -1463,9 +1463,9 @@ public function postAddictionFarmMornings():void {
 public function postAddictionFarmExplorings():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("You decide to pay Marble a visit at her room.  ", false);
+	outputText("You decide to pay Marble a visit at her room.  ");
 	//[player height <5]
-	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
+	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ");
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
 	player.refillHunger(20, false);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
@@ -1474,10 +1474,10 @@ public function postAddictionFarmExplorings():void {
 		return;
 	}
 	else outputText("While you talk mostly about unimportant things, there is some discussion about the world and the dangers within.");
-	outputText("\n\nThe whole time, you are ", false);
+	outputText("\n\nThe whole time, you are ");
 	//[player is no longer addicted]
-	if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("uncomfortably ", false);
-	outputText("aware of the smell of Marble's milk.", false);
+	if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("uncomfortably ");
+	outputText("aware of the smell of Marble's milk.");
 	dynStats("int", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1608,9 +1608,9 @@ private function extendedMurbelFarmTalkz():void {
 public function postAddictionFarmHelpings():void {
 	spriteSelect(41);
 	clearOutput();
-	outputText("Smiling, Whitney suggests that you go help Marble out with her chores.  You readily agree and go out to meet with her.  Afterwards, Marble offers you a bottle of her milk.  ", false);
+	outputText("Smiling, Whitney suggests that you go help Marble out with her chores.  You readily agree and go out to meet with her.  Afterwards, Marble offers you a bottle of her milk.  ");
 	//[if player is no longer addicted]
-	if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you can't get addicted to it again if you don't drink her milk directly from her breasts.", false);
+	if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you can't get addicted to it again if you don't drink her milk directly from her breasts.");
 	//(randomly raise either str or spd)
 	dynStats("str", rand(2),"spe", rand(2));
 	//(player gets a bottle of Marble's milk)
@@ -1622,7 +1622,7 @@ public function postAddictionFarmHelpings():void {
 public function postAddictionCampMornings(extra:Boolean = true):void {
 	spriteSelect(41);
 	//(if player is completely addicted, do this event at the start of every day)
-	outputText("\nAs you are getting up, you are greeted by the smell of fresh milk.  You smile as Marble raises your head to her breast and gives you your morning milk.\n", false);
+	outputText("\nAs you are getting up, you are greeted by the smell of fresh milk.  You smile as Marble raises your head to her breast and gives you your morning milk.\n");
 	//(increase player corr by 2 if corr is under 30, otherwise increase corr by 1 up to a max of 40)
 	if(player.cor < 40) {
 		if(player.cor < 30) dynStats("cor", 1);
@@ -1634,9 +1634,9 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
 	if(!player.hasItem(consumables.M__MILK, 5)) {
-		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ", false);
+		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ");
 		//[if the player is no longer addicted]
-		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.", false);
+		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
 		//(player gains a bottle of Marble's milk)
 		inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 	}
@@ -1658,7 +1658,7 @@ private function standardSex(newpage:Boolean = true):void {
 	//(Standard sex, player has genitals, position: player lies on top of Marble)
 	//(This scene only needs a slight taur variation)
 	if(player.gender > 0) {
-		outputText("Marble smiles at you and leads you towards her bed.  She gets you to sit on one end while she moves to the head. As she sits down, she slowly starts to remove her clothes:  First she pulls off her top and gives you a full view of her breasts, rubbing and caressing them before running one hand down to her skirt and slipping it off.  She pulls her tail up between her breasts and gives you a coy smile as she slips the ribbon on it off. She is now completely naked.  \"<i>Now it's your turn,</i>\" she tells you with a smile.\n\n", false);
+		outputText("Marble smiles at you and leads you towards her bed.  She gets you to sit on one end while she moves to the head. As she sits down, she slowly starts to remove her clothes:  First she pulls off her top and gives you a full view of her breasts, rubbing and caressing them before running one hand down to her skirt and slipping it off.  She pulls her tail up between her breasts and gives you a coy smile as she slips the ribbon on it off. She is now completely naked.  \"<i>Now it's your turn,</i>\" she tells you with a smile.\n\n");
 		//(player is wearing fetish gear)		
 		if(player.armorName == "bondage patient clothes" ||
 		   player.armorName == "crotch-revealing clothes" || player.armorName == "cute servant's clothes" ||
@@ -1668,32 +1668,32 @@ private function standardSex(newpage:Boolean = true):void {
 			if(player.totalCocks() > 0) {
 				outputText(multiCockDescriptLight(), false);
 				//player has at least one dick and a vagina]
-				if(player.vaginas.length > 0) outputText(" and your ", false);
+				if(player.vaginas.length > 0) outputText(" and your ");
 			}
 			//[player has a vagina]
 			if(player.vaginas.length > 0) outputText(vaginaDescript(0), false);
-			outputText(".  You also make sure that there is no lingering clothing on your body for her, just as she did for you.\n\n", false);
+			outputText(".  You also make sure that there is no lingering clothing on your body for her, just as she did for you.\n\n");
 		}
 		//(player is not wearing fetish gear)
 		else {
 			outputText("You smile in return and begin removing your " + player.armorName + " from your body.  You start by slowly slipping off your top to reveal your " + allBreastsDescript() + ", ", false);
 			//[player's breasts are at least B cup]
-			if(player.biggestTitSize() >= 2) outputText("running one of your hands down them before continuing.", false);
+			if(player.biggestTitSize() >= 2) outputText("running one of your hands down them before continuing.");
 			//[player has small or no breasts]
-			else outputText("running one of your hands over them before continuing on.", false);
-			outputText("  You slip open the lower half of your clothes, revealing your ", false);
+			else outputText("running one of your hands over them before continuing on.");
+			outputText("  You slip open the lower half of your clothes, revealing your ");
 			if(player.totalCocks() > 0) {
 				outputText(multiCockDescriptLight(), false);
 				//player has at least one dick and a vagina]
-				if(player.vaginas.length > 0) outputText(" and your ", false);
+				if(player.vaginas.length > 0) outputText(" and your ");
 			}
 			//[player has a vagina]
 			if(player.vaginas.length > 0) outputText(vaginaDescript(0), false);
-			outputText(".  You then remove any other clothing, leaving your body bare.\n\n", false);
+			outputText(".  You then remove any other clothing, leaving your body bare.\n\n");
 		}
 		//(player is a herm)
 		if(player.gender == 3) {
-			outputText("Marble's eyes widen as you show off your equipment.  \"<i>You have both?</i>\" she says in awe. \"<i>I'm not sure if I can pleasure both parts of you at the same time... which would you prefer to use?</i>\"\n\nWhich of your genitals do you want to have sex with?", false);
+			outputText("Marble's eyes widen as you show off your equipment.  \"<i>You have both?</i>\" she says in awe. \"<i>I'm not sure if I can pleasure both parts of you at the same time... which would you prefer to use?</i>\"\n\nWhich of your genitals do you want to have sex with?");
 			//– player chooses: dick(s)/vagina, base on choice, treat the rest of the encounter as if they were male or female
 			menu();
 			addButton(0, "Maleness", marbleSex2Continued, -1);
@@ -1718,30 +1718,30 @@ public function marbleSex2Continued(genders:int):void {
 	if(genders == 1) {
 		outputText("Marble leans back and invites you to come.  With a coy grin, you slowly crawl towards her, each movement bringing the two of you closer until you are on top of her body. She puts her hands around you and lies back completely.  You carefully line up your " + cockDescript(0) + " and thrust into her warm snatch.  ", false);
 		//[player is less than 8 inches in length]
-		if(player.cocks[0].cockLength < 8) outputText("You easily slide all the way into her depths before beginning your hungry thrusts.  ", false);
+		if(player.cocks[0].cockLength < 8) outputText("You easily slide all the way into her depths before beginning your hungry thrusts.  ");
 		//[player is more than 8 inches in length]
-		else outputText("She is unable to take all of you, but you're hardly discouraged as you begin your hungry thrusts.  ", false);
-		outputText("She gasps slightly and her arms clamp down on you, ", false);
+		else outputText("She is unable to take all of you, but you're hardly discouraged as you begin your hungry thrusts.  ");
+		outputText("She gasps slightly and her arms clamp down on you, ");
 		//[player is between 4 and 5 feet in height]
-		if(player.tallness < 60 && player.tallness >= 48) outputText("keeping your head tightly locked between her breasts.  ", false);
+		if(player.tallness < 60 && player.tallness >= 48) outputText("keeping your head tightly locked between her breasts.  ");
 		//[player is not between 4 and 5 feet in height] 
-		else outputText("keeping your body tightly locked against her.  ", false);
-		outputText("Her tight grip does nothing to slow your thrusts, only helping to bring the both of you closer and closer to sweet release.  Finally, you push into her as far as you can", false);
+		else outputText("keeping your body tightly locked against her.  ");
+		outputText("Her tight grip does nothing to slow your thrusts, only helping to bring the both of you closer and closer to sweet release.  Finally, you push into her as far as you can");
 		//[player has a knot and is not more than 8 inches long]
-		if(player.cocks[0].cockLength < 8 && player.hasKnot(0)) outputText(", and with a pop, your knot slips inside of her", false);
+		if(player.cocks[0].cockLength < 8 && player.hasKnot(0)) outputText(", and with a pop, your knot slips inside of her");
 		outputText(".  Deep within her, your " + cockDescript(0) + " explodes.  Within moments, Marble feels her orgasm too, her grip intensifying immensely.  You hear her give a sigh that sounds almost like a moo and her grip relents.  The two of you lay there panting, your " + cockDescript(0) + " still inside her.\n\n", false);
 	}
 	//(player is female, I hope I did this right, I'm not familiar with the exact mechanics of female/female toys)
 	else {
 		outputText("Marble grins at you and reaches into the drawers of the mini-dresser next to her bed, pulling out a long, double-ended dildo. She slips one half into her own hole and invites you over to her.  With a coy grin, you slowly crawl towards her, each movement bringing the two of you closer until you slip your " +  vaginaDescript(0) + " onto the other end of the dildo.  Sighing, Marble lies down underneath you and begins to rock back and forth.  You bring your own ministrations to the mix in response. Soon, the two of you are panting and moaning against each other with the dildo sliding around between you.  Suddenly, she locks her arms around you tightly and ", false);
 		//[player is between 4 and 5 feet in height]
-		if(player.tallness < 60 && player.tallness >= 48) outputText("squeezes your head into her breasts.  ", false);
+		if(player.tallness < 60 && player.tallness >= 48) outputText("squeezes your head into her breasts.  ");
 		//[player is not between 4 and 5 feet in height]
-		else outputText("pulls you securely against her.  ", false);
-		outputText("Marble shudders with pleasure and redoubles her efforts at moving the dildo, quickly pushing you over the edge as well", false);
+		else outputText("pulls you securely against her.  ");
+		outputText("Marble shudders with pleasure and redoubles her efforts at moving the dildo, quickly pushing you over the edge as well");
 		//[player has at least one dick]
 		if(player.totalCocks() > 0) outputText(".  Your " + multiCockDescriptLight() + " erupts while clamped between your bodies", false);
-		outputText(".  Her grip soon relents and the two of you lay there panting, the dildo still connecting you.  You can hear Marble say under her breath \"<i>That was way better than on my own...</i>\"\n\n", false);
+		outputText(".  Her grip soon relents and the two of you lay there panting, the dildo still connecting you.  You can hear Marble say under her breath \"<i>That was way better than on my own...</i>\"\n\n");
 		//(remove vaginal virginity?  "Your hymen is torn...")
 		player.cuntChange(8,true);
 	}
@@ -1752,7 +1752,7 @@ public function marbleSex2Continued(genders:int):void {
 	}
 	//(repeat sex)
 	else {
-		outputText("Marble sighs and gives you a big smile. \"<i>Sweetie, you're just as wonderful to be with as ever.  I'm always looking forward to our times together,</i>\" she tells you.  You would be inclined to agree with her.", false);
+		outputText("Marble sighs and gives you a big smile. \"<i>Sweetie, you're just as wonderful to be with as ever.  I'm always looking forward to our times together,</i>\" she tells you.  You would be inclined to agree with her.");
 	}
 	player.orgasm();
 	//– return to trigger
@@ -1775,7 +1775,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 	if(player.armorName == "bondage patient clothes" ||
 		   player.armorName == "crotch-revealing clothes" || player.armorName == "cute servant's clothes" ||
 		   player.armorName == "maid's clothes" || player.armorName == "servant's clothes") {
-		 outputText("She moves first to get a good view of your equipment.  ", false);
+		 outputText("She moves first to get a good view of your equipment.  ");
 	}
 	//[player is not wearing fetish gear]
 	else {
@@ -1789,7 +1789,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		}
 		//[player has at least one of a different kind of dick]
 		else {
-			outputText("Marble gives a long hard look before pointing at your ", false);
+			outputText("Marble gives a long hard look before pointing at your ");
 			temp = player.cocks.length;
 			while(temp > 0) {
 				temp--;
@@ -1798,7 +1798,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 					temp = -1;
 				}
 			}
-			outputText(".  \"<i>Sweetie, what the heck is that?</i>\" she asks in an unsure tone. You smile at her and tell her that she should touch it.  After a moment, Marble reaches out and seems to visibly relax after feeling its texture and stiffness.  She pushes you back onto her bed before slipping free of her own garments and climbing on top of you.  She gives you a sly smile as she puts her legs on your sides.\n\n", false);
+			outputText(".  \"<i>Sweetie, what the heck is that?</i>\" she asks in an unsure tone. You smile at her and tell her that she should touch it.  After a moment, Marble reaches out and seems to visibly relax after feeling its texture and stiffness.  She pushes you back onto her bed before slipping free of her own garments and climbing on top of you.  She gives you a sly smile as she puts her legs on your sides.\n\n");
 		}
 		//[after either]
 		//[player has more than one dick]
@@ -1807,9 +1807,9 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		//[dick(0) is less than 8 inches long]
 		if(player.cocks[0].cockLength < 8) outputText("every bit of your " + cockDescript(0) + " is deep inside.  ", false);
 		// //[dick(0) is more than 8 inches long]
-		else outputText("Marble bottoms out at eight inches and you can go no further.  ", false);
-		outputText("With a delighted shiver, Marble starts to push herself up and down on you, her movements growing more and more frantic over time.  You try to slow her down but she seems to be beyond the capability of listening to you now, giving only louder and more frantic moans of pleasure.  Sooner than you would have preferred, you explode inside her. At that moment, Marble gives a final moan that sounds almost exactly like a moo.  She slows down, seeming to have already reached her peak.\n\n", false);
-		outputText("You can see that Marble is quite pleased and satisfied after that milking and sex combo session.  She rolls off you onto her bed and is soon asleep.  It takes you a few moments to get cleaned up, still in a slight daze after that frantic lovemaking.  As you depart, you give a final glance to Marble and see her still dozed off on her bed in a slightly lopsided position.", false);
+		else outputText("Marble bottoms out at eight inches and you can go no further.  ");
+		outputText("With a delighted shiver, Marble starts to push herself up and down on you, her movements growing more and more frantic over time.  You try to slow her down but she seems to be beyond the capability of listening to you now, giving only louder and more frantic moans of pleasure.  Sooner than you would have preferred, you explode inside her. At that moment, Marble gives a final moan that sounds almost exactly like a moo.  She slows down, seeming to have already reached her peak.\n\n");
+		outputText("You can see that Marble is quite pleased and satisfied after that milking and sex combo session.  She rolls off you onto her bed and is soon asleep.  It takes you a few moments to get cleaned up, still in a slight daze after that frantic lovemaking.  As you depart, you give a final glance to Marble and see her still dozed off on her bed in a slightly lopsided position.");
 	}
 	//(player is female)
 	else if(player.vaginas.length > 0) {
@@ -1820,12 +1820,12 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		//[player has smaller then C breasts]
 		else {
 			outputText("She teases your " + vaginaDescript(0) + " with her fingers for a moment before putting her hand on one of your " + biggestBreastSizeDescript() + ".  \"<i>I'm not sure what to do with teats this small, but I'll do my best. Though I feel kinda sorry for you, sweetie.</i>\"  You open your mouth to make an indignant response, but Marble puts a figure on your lips to shush you. She gives you an intense stare and tells you in no uncertain terms that since you enjoyed her breasts so much, it's only fair that she gets to experience your " + allBreastsDescript() + ".  She then sticks out her tongue at you before giving your " + nippleDescript(0) + " a lick and rub down, which she extends to the ", false);
-			if(player.totalNipples() > 2) outputText("other", false);
-			else outputText("rest", false);
-			outputText(".\n\n", false);
+			if(player.totalNipples() > 2) outputText("other");
+			else outputText("rest");
+			outputText(".\n\n");
 		}
 		//[after either]
-		outputText("After finishing up", false);
+		outputText("After finishing up");
 		//[if player has more than two breasts]
 		if(player.totalBreasts() > 2) outputText(" with each of your " + allBreastsDescript(), false);
 		else outputText(" with each of your " + breastDescript(0), false);
@@ -1834,16 +1834,16 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		if(player.hasFuckableNipples()) {
 			outputText("As Marble's tongue rubs against your " + nippleDescript(0) + " it slips inside, much to her surprise.  She pulls back for a moment and gives you a confused look.  You tell her it isn't a problem; it only makes you happier. Understanding, Marble quickly resumes her efforts.  Her talented tongue fucks your " + nippleDescript(0) + " in earnest.", false);
 			//[player is lactating]
-			if(player.biggestLactation() > 1) outputText("  The whole while, Marble continues to gulp down your milk.", false);
+			if(player.biggestLactation() > 1) outputText("  The whole while, Marble continues to gulp down your milk.");
 		}
 		//[if player is lactating]
-		else if(player.biggestLactation() > 1) outputText("Her suckling soon brings a stream of milk to her lips that she gulps down eagerly.  You give a contented sigh, but are soon brought out of your revelry as her sucking becomes more stimulating and intense.", false);
+		else if(player.biggestLactation() > 1) outputText("Her suckling soon brings a stream of milk to her lips that she gulps down eagerly.  You give a contented sigh, but are soon brought out of your revelry as her sucking becomes more stimulating and intense.");
 		//[player is neither lactating or has nipplecunts]
 		if(player.biggestLactation() <= 1 && !player.hasFuckableNipples()) outputText("Of course, since you aren't lactating, nothing but your " + nippleDescript(0) + " reaches her lips.  Marble doesn't seem to be put off by this and still gives you a thoroughly enjoyable experience.", false);
-		outputText("\n\n", false);
+		outputText("\n\n");
 		outputText("After a while, Marble pulls back from your " + nippleDescript(0) + " and tells you, \"<i>Sweetie, I know how annoying it is to only have one of your nipples serviced, so I will be sure to finish the job.</i>\"  She dives right into your ", false);
-		if(player.totalNipples() > 2) outputText("next", false);
-		else outputText("other", false);
+		if(player.totalNipples() > 2) outputText("next");
+		else outputText("other");
 		outputText(" " + nippleDescript(0) + " and starts the experience all over again.  By the end, her efforts have successfully rung an orgasm from you. After cleaning up a bit, Marble sends you off in high spirits.", false);
 	}
 	player.orgasm();
@@ -1861,35 +1861,35 @@ public function marbleAddictionSex(newpage:Boolean = true):void {
 		marbleGenderlessNoFuck();
 		return;
 	}
-	outputText("You rock against each other, your hands working to remove Marble's clothes while her hands work at yours.  As your respective clothing falls to the floor, ", false);
+	outputText("You rock against each other, your hands working to remove Marble's clothes while her hands work at yours.  As your respective clothing falls to the floor, ");
 	//[player is under 5.5 feet in height]
-	if(player.tallness < 66) outputText("Marble bends over and kisses you deeply on the lips, a kiss that you eagerly return.  She lifts you up into the air, her lips still locked on yours, and holds you tightly against her body. A full minute passes before she lowers you down so your bodies can be joined.\n\n", false);
+	if(player.tallness < 66) outputText("Marble bends over and kisses you deeply on the lips, a kiss that you eagerly return.  She lifts you up into the air, her lips still locked on yours, and holds you tightly against her body. A full minute passes before she lowers you down so your bodies can be joined.\n\n");
 	//[player is between 5.5 feet and 6.5 feet in height]
-	else if(player.tallness < 78) outputText("Marble lowers her head and locks her lips with yours, a show of passion that you eagerly return.  The two of you stay like that for a while, time seeming to standing still.  Then Marble breaks the kiss and looks deeply into your eyes as a sly grin spreads across her face.\n\n", false);
+	else if(player.tallness < 78) outputText("Marble lowers her head and locks her lips with yours, a show of passion that you eagerly return.  The two of you stay like that for a while, time seeming to standing still.  Then Marble breaks the kiss and looks deeply into your eyes as a sly grin spreads across her face.\n\n");
 	//[player is over 6.5 feet in height]
-	else outputText("Marble grabs a hold of your head and pulls your mouth to hers for a passionate kiss.  You are only too eager to comply and join in.  Even without her vice grip on your head, it feels like you couldn't possibly leave her wonderful mouth. But you eventually push back and look into her eyes intensely.\n\n", false);
+	else outputText("Marble grabs a hold of your head and pulls your mouth to hers for a passionate kiss.  You are only too eager to comply and join in.  Even without her vice grip on your head, it feels like you couldn't possibly leave her wonderful mouth. But you eventually push back and look into her eyes intensely.\n\n");
 	//[player has at least one dick]
 	if(player.totalCocks() > 0) {
 		outputText("The feeling of need is almost palpable within the two of you, and when the time comes, neither of you hesitate. You and Marble push yourselves together, forcing your " + cockDescript(0) + " deep into the soft folds of Marble's sex.  The two of you shudder and bask for a moment in the wonderful feeling of being connected, before gently starting to rock against one another.  Little else matters to you right now other than the warm, loving body that your arms are wrapped tightly around", false);
 		//[player height is between 4 feet and 5 feet]
-		if(player.tallness >= 48 && player.tallness <= 60) outputText(", the breasts your head is clamped between,", false);
+		if(player.tallness >= 48 && player.tallness <= 60) outputText(", the breasts your head is clamped between,");
 		outputText(" and the warm folds where your " + cockDescript(0) + " is embedded.  You can't help but think about how wonderful a person Marble is, and you bet that Marble feels the same way about you.  \"<i>I love you sweetie.</i>\" Marble says to you gently.  You assure her that you feel the same, and at the moment, nothing else matters.\n\n", false);
 	}
 	//[player only has a vagina]
 	else if(player.vaginas.length > 0) {
 		outputText("The feeling of need is almost palpable within the two of you.  Marble giggles and reaches behind her to grab something.  She shows you a long double-ended dildo and explains it will connect the two of you.  She pushes one end of it into your " + vaginaDescript(0) + " and the other end into the folds of her own sex.  The two of you shudder and bask for a moment in the wonderful feeling of being connected, before gently starting to rock against one another.  Little else matters to you right now other than the warm, loving body that your arms are wrapped tightly around", false);
 		//[player height is between 4 feet and 5 feet]
-		if(player.tallness >= 48 && player.tallness <= 60) outputText(" and the breasts your head is clamped between", false);
-		outputText(".  You can't help but think about how wonderful a person Marble is, and you bet that Marble feels the same way about you.  \"<i>I love you sweetie.</i>\" Marble says to you gently.  You assure her that you feel the same, and at the moment, nothing else matters.", false);
+		if(player.tallness >= 48 && player.tallness <= 60) outputText(" and the breasts your head is clamped between");
+		outputText(".  You can't help but think about how wonderful a person Marble is, and you bet that Marble feels the same way about you.  \"<i>I love you sweetie.</i>\" Marble says to you gently.  You assure her that you feel the same, and at the moment, nothing else matters.");
 		//(remove vaginal virginity? "Your hymen is torn...")
 		player.cuntChange(8, true);
-		outputText("\n\n", false);
+		outputText("\n\n");
 	}
 	//[after either]
-	outputText("Long after the two of you finish your lovemaking, you still continue to hold on to one another.  Eventually Marble ", false);
+	outputText("Long after the two of you finish your lovemaking, you still continue to hold on to one another.  Eventually Marble ");
 	//[player height is under 5.5 feet]
-	if(player.tallness < 66) outputText("sets you down and ", false);
-	outputText("pushes you to arms length and asks you, \"<i>If it's all right with you, could we live together?</i>\"  You hesitate, before explaining that you don't think that's such a good idea. You explain that you aren't from this world, why you came here, and what you've found since doing so.  Marble looks at you for a moment before letting go of you and going over to her bed. Effortlessly, she lifts it up off the ground and turns to you.  \"<i>I can pull my weight, so don't you dare think I can't help you do something so important, champion.</i>\"  She says, setting the bed back down.  She barely is able to keep a straight face as she says \"<i>champion</i>\".  You smile and wonder how could you possibly turn down someone so wonderful?  \"<i>Well I guess that settles it, then,</i>\" she says happily, \"<i>I'll move right in.</i>\"", false);
+	if(player.tallness < 66) outputText("sets you down and ");
+	outputText("pushes you to arms length and asks you, \"<i>If it's all right with you, could we live together?</i>\"  You hesitate, before explaining that you don't think that's such a good idea. You explain that you aren't from this world, why you came here, and what you've found since doing so.  Marble looks at you for a moment before letting go of you and going over to her bed. Effortlessly, she lifts it up off the ground and turns to you.  \"<i>I can pull my weight, so don't you dare think I can't help you do something so important, champion.</i>\"  She says, setting the bed back down.  She barely is able to keep a straight face as she says \"<i>champion</i>\".  You smile and wonder how could you possibly turn down someone so wonderful?  \"<i>Well I guess that settles it, then,</i>\" she says happily, \"<i>I'll move right in.</i>\"");
 	//(set player lust to 0)
 	player.orgasm();
 }
@@ -1905,8 +1905,8 @@ private function marbleCampFuckFUCKFUCKFUCK():void {
 //(this part would only need a slight variation for taurs)
 private function marbleGenderlessNoFuck():void {
 	spriteSelect(41);
-	outputText("Just before the two of you start, you remember that you have no genitals.  When you tell Marble this, she is visibly annoyed.  \"<i>Well then, I guess I can't pleasure you, but I suppose you can still pleasure me.</i>\"  You agree, since you don't want to leave Marble hanging after having already agreed to have sex.\n\n", false);
-	outputText("Marble sits down at the head of her bed and removes her skirt and undergarments.  She spreads her legs wide to give you a full view of her moist lower lips.  She smiles at you and slowly waves you over to her.  You climb up onto the other end of the bed and with a coy grin, you slowly crawl towards her.  Each movement brings the two of you closer until your head is over her hungry slit. She puts both her hands on the back of your head and lowers you towards her waiting sex.  She is covered with a strong sexual animalistic smell that excites you more and more the closer you get.  Finally, your eager tongue slips out of your mouth and pushes against her moist lips before plunging inside of her.\n\n", false);
+	outputText("Just before the two of you start, you remember that you have no genitals.  When you tell Marble this, she is visibly annoyed.  \"<i>Well then, I guess I can't pleasure you, but I suppose you can still pleasure me.</i>\"  You agree, since you don't want to leave Marble hanging after having already agreed to have sex.\n\n");
+	outputText("Marble sits down at the head of her bed and removes her skirt and undergarments.  She spreads her legs wide to give you a full view of her moist lower lips.  She smiles at you and slowly waves you over to her.  You climb up onto the other end of the bed and with a coy grin, you slowly crawl towards her.  Each movement brings the two of you closer until your head is over her hungry slit. She puts both her hands on the back of your head and lowers you towards her waiting sex.  She is covered with a strong sexual animalistic smell that excites you more and more the closer you get.  Finally, your eager tongue slips out of your mouth and pushes against her moist lips before plunging inside of her.\n\n");
 	outputText("You hear Marble give a contented sigh, but her grip on you does not lessen at all. There is no way you could pull away at this point, even if you wanted to.  Your tongue snakes all around her insides, pushing into every crevice it can find and tasting every surface.  You are quite happy doing this until Marble's hands push your head to the top of her sex and she tells you breathlessly; \"<i>Suck.</i>\" You oblige.  Marble quickly lets out a soft sigh sounding almost like a moo, before finally letting go of your head.  \"<i>Thank you so much, sweetie, that was great.</i>\"", false);
 	//(be sure to do the after sex events for whatever sex scene triggered this one)
 	//(increase player lust)
@@ -2231,47 +2231,47 @@ private function talkWithMarbleAtCamp():void {
 	//The player has met the Goddess Marae
 	if(flags[kFLAGS.MET_MARAE] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 1)
 	{
-		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world...</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"",false);
+		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world...</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"");
 		//Level up!
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 1;
 	}
 	//The player has discovered the factory
 	else if(player.hasStatusEffect(StatusEffects.FoundFactory) && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 2)
 	{
-		outputText("You tell Marble you found a demonic factory and relate everything you know about it.  \"<i>Be careful in there,</i>\" Marble tells you, \"<i>I'm certain that place will consume you if you're unprepared.</i>\"", false);
+		outputText("You tell Marble you found a demonic factory and relate everything you know about it.  \"<i>Be careful in there,</i>\" Marble tells you, \"<i>I'm certain that place will consume you if you're unprepared.</i>\"");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 2;		
 	}
 	//The player has cleared the factory and shut it down
 	else if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 3)
 	{
-		outputText("You tell Marble about what you found inside the factory.  She is horrified at what was being done to the other champions and assures you that no one should ever <i>belong</i> in a place like that. You continue and tell of the overseer and her fate. Marble reacts with surprise, ", false); 
+		outputText("You tell Marble about what you found inside the factory.  She is horrified at what was being done to the other champions and assures you that no one should ever <i>belong</i> in a place like that. You continue and tell of the overseer and her fate. Marble reacts with surprise, ");
 		if(player.findPerk(PerkLib.OmnibusGift) >= 0)
-			outputText("and hopes that you've learned your lesson about accepting <i>gifts</i> from demons.  ", false);
+			outputText("and hopes that you've learned your lesson about accepting <i>gifts</i> from demons.  ");
 		else 
-			outputText("but concludes that what you did was probably for the best.  At least you didn't fall for her trick.  ", false);
-		outputText("Finally, you tell her how you shut down the factory and what happened to the captured champions.  Marble is shocked that some stayed, but says she doesn't think there is much the two of you could do to help them if they're already addicted. \"<i>You should probably just leave them be, for now.</i>\"", false);
+			outputText("but concludes that what you did was probably for the best.  At least you didn't fall for her trick.  ");
+		outputText("Finally, you tell her how you shut down the factory and what happened to the captured champions.  Marble is shocked that some stayed, but says she doesn't think there is much the two of you could do to help them if they're already addicted. \"<i>You should probably just leave them be, for now.</i>\"");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 3;
 	}
 	//The player has met Marae after doing a shutdown of the factory and smashing the controls
 	else if(flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
 	{
-		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, the both of you will probably sleep a little easier tonight. ", false);
+		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, the both of you will probably sleep a little easier tonight. ");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 
 	}
 	//The player has met the corrupted Marae after blowing the storage tanks
 	else if(flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
 	{
-		outputText("Your story about what had happened to Marae seems to have shaken up Marble a little.  Though, you notice that she seems to be getting more and more aroused as you relate your story.  ", false);
+		outputText("Your story about what had happened to Marae seems to have shaken up Marble a little.  Though, you notice that she seems to be getting more and more aroused as you relate your story.  ");
 		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0)
-			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.", false);
+			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.");
 		//[[EDITOR'S NOTE: The original said "I can't believe that tried that." I was unsure about the context, if it originally meant 'you tried that' or 'it tried that', so I went with the former. If I'm wrong here, my bad.]]
 		else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0)
-			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>", false);
+			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>");
 		//increase the player's lust by 35 if they are under 50, so they can breed right away
 		if(player.lust<50) dynStats("lus", 35);
 		if(player.findPerk(PerkLib.MaraesGiftFertility) < 0 && player.findPerk(PerkLib.MaraesGiftStud) < 0) {
-			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.", false);
+			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.");
 		}
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 	}
@@ -2319,29 +2319,29 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] = -1;
 	}
 	//If talked about nothing!
-	else outputText("You have no new stories to share with Marble, so you chat for a bit about inconsequential things.", false);
+	else outputText("You have no new stories to share with Marble, so you chat for a bit about inconsequential things.");
 	//New PG for next stuff
-	outputText("\n\n", false);
+	outputText("\n\n");
 	
 	
 	//Comments on next course of action, only mentions main story events and quests the player is undergoing
-	outputText("The topic of conversation turns to your mission and you ask Marble what she thinks you should be doing next.  ", false);
+	outputText("The topic of conversation turns to your mission and you ask Marble what she thinks you should be doing next.  ");
 	//If (player has not yet met Marae)
 	if(flags[kFLAGS.MET_MARAE] <= 0) {
-		outputText("\"<i>Well sweetie, I guess you should start with getting to know the place a little better.  Why don't you look some more around the lake outside the farm?  I think that's the safest place to start.</i>\"",false);
+		outputText("\"<i>Well sweetie, I guess you should start with getting to know the place a little better.  Why don't you look some more around the lake outside the farm?  I think that's the safest place to start.</i>\"");
 	}
 	else if(flags[kFLAGS.MET_MARAE] > 0 && flags[kFLAGS.FACTORY_FOUND] <= 0)
 	{
 		//check if the player is far too weak to go to the factory
-		if(player.level < 3) outputText("\"<i>I think we should help out Marae and shut down that factory she mentioned was in the mountains, but I don't think you're ready to go into the Mountains yet. They can be brutal - get a little more practice, and make sure you've got a good weapon.</i>\"", false);
-		else outputText("\"<i>I think we should help out Marae and shut down that factory she mentioned was in the mountains. I have no idea what will happen in there, though, so make sure you're as ready as you can be before you go.</i>\"\n\n", false);
+		if(player.level < 3) outputText("\"<i>I think we should help out Marae and shut down that factory she mentioned was in the mountains, but I don't think you're ready to go into the Mountains yet. They can be brutal - get a little more practice, and make sure you've got a good weapon.</i>\"");
+		else outputText("\"<i>I think we should help out Marae and shut down that factory she mentioned was in the mountains. I have no idea what will happen in there, though, so make sure you're as ready as you can be before you go.</i>\"\n\n");
 	}
 	//Player has found factory but not shut it down.
 	else if(flags[kFLAGS.FACTORY_FOUND] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] <= 0)
-		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"", false);		
+		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"");
 	//(player has completed the factory but has not returned to Marae)
 	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0)
-		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
+		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"");
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 || player.statusEffectv1(StatusEffects.TelAdre) == 0)
 		outputText("\"<i>Well sweetie, maybe you should explore the world more?  From what I've heard from the centaurs who stop by the farm, I'm sure you could find something interesting in the deep forest, or maybe the desert,</i>\" she suggests.");
@@ -2359,8 +2359,8 @@ private function talkWithMarbleAtCamp():void {
 	else if(flags[kFLAGS.D3_DISCOVERED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0)
 		outputText("\"<i>Well sweetie, this is it. Your mission has been to stop the demons, Lethice is their leader. Once you're ready, you need to go to their high mountain lair and take them down. Make sure you've finished everything else you want to do before you face Lethice, you won't get a second chance.</i>\"");
 	//Nothing to advise!
-	else  outputText("\"<i>Sweetie, you've finished the main story of the game!</i>\" she says to you winking. \"<i>Why not explore? There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);
-	//else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);
+	else  outputText("\"<i>Sweetie, you've finished the main story of the game!</i>\" she says to you winking. \"<i>Why not explore? There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"");
+	//else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"");
 	doNext(interactWithMarbleAtCamp);
 }
 
@@ -2403,19 +2403,19 @@ private function marbleGathered():void {
 private function marbleInfo():void {
 	spriteSelect(41);
 	outputText("Marble is a loyal friend and lover who has decided to help you with your quest.  She can be interacted with while she is at camp.  ",true);
-	outputText("She can share some of her thoughts and give advice on your current situation, or supply you with bottles of her milk and other useful items that she has found while scavenging.  You can also get Marble to consume some of the items you find.\n\n", false);
+	outputText("She can share some of her thoughts and give advice on your current situation, or supply you with bottles of her milk and other useful items that she has found while scavenging.  You can also get Marble to consume some of the items you find.\n\n");
 	//explain morning drinking sessions if the player is an addict
 	if(player.findPerk(PerkLib.MarblesMilk) >= 0)
 	{
-		outputText("She will nurse you every morning automatically to satisfy your addiction.  ",false);
+		outputText("She will nurse you every morning automatically to satisfy your addiction.  ");
 		//otherwise tell the player that drinking bottles of her milk is safe
 	} 
 	else
 	{
-		if(flags[kFLAGS.MARBLE_PURIFIED] == 0) outputText("So long as you don't drink milk from Marble's breasts again, you don't have to worry about getting addicted.  ", false);
+		if(flags[kFLAGS.MARBLE_PURIFIED] == 0) outputText("So long as you don't drink milk from Marble's breasts again, you don't have to worry about getting addicted.  ");
 		else outputText("Now that she's been purified, you can drink as much of her milk as you like without fear.  ");
 	}
-	outputText("Once camp improvements have been implemented, you will be able to get her to work on upgrading the camp instead of searching for supplies.", false);
+	outputText("Once camp improvements have been implemented, you will be able to get her to work on upgrading the camp instead of searching for supplies.");
 	doNext(interactWithMarbleAtCamp);
 }
 
@@ -2467,9 +2467,9 @@ public function giveMarbleLactaid():void {
 	player.consumeItem(consumables.LACTAID);
 	//Give Marble a dose of Lactaid to gain powerful but temporary boost to your stats, it takes an hour to do.
 	outputText("You show Marble the bottle of Lactaid that you found and ask her if she could drink it.  She gives you a knowing smile. \"<i>So you want a special treat?  Ok sweetie, give it here.</i>\"  She takes the bottle from you and easily drinks the liquid.  Within moments, she gasps and ", true);
-	if(player.tallness<60) outputText("lifts you up to her chest before saying breathlessly saying \"<i>Drink now!</i>\"  You waste no time obliging her.\n\n", false);
-	else if(player.tallness > 72) outputText("breathlessly says\"<i>Drink now!</i>\"  You waste no time and descend upon her breasts.\n\n", false);
-	else outputText("breathlessly says, \"<i>Drink now!</i>\"  You quickly move forward to get a drink.\n\n", false);
+	if(player.tallness<60) outputText("lifts you up to her chest before saying breathlessly saying \"<i>Drink now!</i>\"  You waste no time obliging her.\n\n");
+	else if(player.tallness > 72) outputText("breathlessly says\"<i>Drink now!</i>\"  You waste no time and descend upon her breasts.\n\n");
+	else outputText("breathlessly says, \"<i>Drink now!</i>\"  You quickly move forward to get a drink.\n\n");
 	outputText("What meets your lips surprises you; it feels tastier, healthier, and just plain better than normal.  With an effort, you manage to empty her breasts, even though they seemed to have been filled with more milk than usual.  You feel even more powerful than normal and the whole world seems clearer.  However, Marble seems a little disappointed; it seems the Lactaid's effects on her were only temporary.\n\n", false);
 	// Give the player an increase to their stats of 10 str, 5 tou, and 10 inte for about 24 hours
 	dynStats("str", 1,"tou", 1, "int", 1);
@@ -2652,21 +2652,21 @@ private function marbleCampSexNew():void {
 			outputText("\"<i>You feeling antsy, sweetie?</i>\" Marble asks as you walk up to her.  \"<i>Don't worry; I'm ready and able to help.</i>\"  ", true);
 			//Select one option based on the sum of the player's and Marble's Corr, similar to the one in regular masterbation
 			if(player.cor + player.statusEffectv4(StatusEffects.Marble) < 66) {
-				outputText("The two of you find a secluded place in the camp and slip off your clothes.\n\n", false);
+				outputText("The two of you find a secluded place in the camp and slip off your clothes.\n\n");
 			} 
 			else if (player.cor + player.statusEffectv4(StatusEffects.Marble) < 132) {
-				outputText("The two of you strip down right there in the middle of camp.\n\n", false);
+				outputText("The two of you strip down right there in the middle of camp.\n\n");
 			} 
 			else {
-				outputText("You both look around for another member to join in. No one jumps at the offer, so the two of you strip down.\n\n", false);
+				outputText("You both look around for another member to join in. No one jumps at the offer, so the two of you strip down.\n\n");
 			}
 			//all the foreplay here
-			outputText("Marble smiles at you and playfully pushes her sizable breasts together a few times before ", false);
+			outputText("Marble smiles at you and playfully pushes her sizable breasts together a few times before ");
 			//Marble titfucks the players upper body, two variations, boobs and no
 			if(player.biggestTitSize() > 3) {
 				outputText("pressing them against your own " + biggestBreastSizeDescript() + ".  She giggles slightly as she puts one of them between her mounds and rubs them up and down around it, teasing your " + nippleDescript(0) + " with her own " + marbleNips() + ", a trickle of milk leaking out onto your locked chests.", false);
 			} else {
-				outputText("pressing them against your chest.  She rubs them up and down against you as she moves around, making sure she has rubbed each part of your upper body at least three times over.  She is especially happy with moving your head around between her breasts.", false);
+				outputText("pressing them against your chest.  She rubs them up and down against you as she moves around, making sure she has rubbed each part of your upper body at least three times over.  She is especially happy with moving your head around between her breasts.");
 			}
 			//If Player has at least one dick, Marble titfucks that
 			if(player.cocks.length > 0) {
@@ -2692,29 +2692,29 @@ private function marbleCampSexNew():void {
 				outputText("  She then says, \"<i>I think I've found a way to make you cum, sweetie,</i>\" with a sly expression.  She moves down from your upper body and starts rubbing and caressing your lower body too. It is extremely arousing, but it doesn't seem to be enough to push you over the edge.  Marble stands up, kisses you and rubs a single finger against the smooth skin of your groin.  You are so close to going over the edge.  Then one of her fingers pushes up against your " + assholeDescript() + ", causing you to go rigid from the new stimulation.", false);
 			}
 			//Sweet release
-			outputText("\n\nThe sensations overwhelm you and your body is racked with a powerful orgasm, much stronger than what you might've pulled off on your own.", false);
+			outputText("\n\nThe sensations overwhelm you and your body is racked with a powerful orgasm, much stronger than what you might've pulled off on your own.");
 			//If Player has at least one dick
 			if(player.cocks.length > 0) {
 				//Select one based on overall cum production
 				//I don't know how to determine this, but I assume it would be based on balls and the cum multiplier
-				if(player.cumQ() < 25) outputText("  In moments, a small amount of your cum is covering Marble's breasts.", false);
-				else if(player.cumQ() < 250) outputText("  After a few moments, a fair amount of your cum is covering Marble's breasts and face.", false);
-				else if(player.cumQ() < 500) outputText("  You keep cumming and cumming, until eventually Marble is completely drenched in your cum.", false);
-				else outputText("  Your seemingly endless orgasm eventually results in the two of you becoming completely drenched in your cum, as well as a large part of the ground around you.", false);
+				if(player.cumQ() < 25) outputText("  In moments, a small amount of your cum is covering Marble's breasts.");
+				else if(player.cumQ() < 250) outputText("  After a few moments, a fair amount of your cum is covering Marble's breasts and face.");
+				else if(player.cumQ() < 500) outputText("  You keep cumming and cumming, until eventually Marble is completely drenched in your cum.");
+				else outputText("  Your seemingly endless orgasm eventually results in the two of you becoming completely drenched in your cum, as well as a large part of the ground around you.");
 			}
 			//if Player has a vagina
 			if(player.vaginas.length > 0) {
 				//Select one based on vagina wetness, similarly to the cum production, you should do the logic for this part
-				if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("  As you recover, you see that a small amount of your girly fluids has leaked onto Marble's breasts.", false);
-				else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("  As you recover, you see that Marble has been covered fairly liberally with your girly fluids.", false);
-				else if(player.vaginas[0].vaginalWetness <  5) outputText("  As you recover, you see that Marble is decently drenched in your girly fluids.", false);
-				else outputText("  It takes you a minute to recover, but upon doing so, you blush and realize just how soaked with fluid you've become.", false);
+				if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("  As you recover, you see that a small amount of your girly fluids has leaked onto Marble's breasts.");
+				else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("  As you recover, you see that Marble has been covered fairly liberally with your girly fluids.");
+				else if(player.vaginas[0].vaginalWetness <  5) outputText("  As you recover, you see that Marble is decently drenched in your girly fluids.");
+				else outputText("  It takes you a minute to recover, but upon doing so, you blush and realize just how soaked with fluid you've become.");
 			}
 			//finally some philosophy on what an orgasm would feel like for someone who is genderless
-			if(player.gender == 0) outputText("  It's not quite the same as when you had genitals, but it is undeniably an orgasm.  While it is essentially a pointless orgasm, it's also almost pure in a way.  There is not a feeling inside you but the explosion of pleasure.", false);
+			if(player.gender == 0) outputText("  It's not quite the same as when you had genitals, but it is undeniably an orgasm.  While it is essentially a pointless orgasm, it's also almost pure in a way.  There is not a feeling inside you but the explosion of pleasure.");
 		
 			//wrapping things up
-			outputText("\n\nFinally satisfied with her efforts, Marble stands up and the two of you find a nearby river to get yourselves cleaned off.", false);
+			outputText("\n\nFinally satisfied with her efforts, Marble stands up and the two of you find a nearby river to get yourselves cleaned off.");
 			//Set player stats for masterbating with Marble, 
 		}
 	}
@@ -2804,18 +2804,18 @@ private function rapeDAHMARBLEZ():void {
 	//This is an expansion for the scene during Marble's initial encounter, when the player chooses rape.
 	var raped:Boolean = false; //records whether or not the player was successful in raping Marble
 	clearOutput();
-	outputText("You decide that rather than helping her, you are going to roughly manhandle her breasts and rape her.  You suddenly grab at her breasts and squeeze them roughly, at which point she screams and ", false);
+	outputText("You decide that rather than helping her, you are going to roughly manhandle her breasts and rape her.  You suddenly grab at her breasts and squeeze them roughly, at which point she screams and ");
 	if(player.findPerk(PerkLib.Evade) >= 0)
 	{
-		outputText("tries to slap you.  You easily duck under her hand and start twisting her nipples.  She squeals and begins to go limp under your painful ministrations.  You move her around and force her to kneel, pushing her face down into her bed.  Keeping one of your hands on her nipple, you pull down her skirt and expose her beautiful womanhood and asshole.\n\n", false);
+		outputText("tries to slap you.  You easily duck under her hand and start twisting her nipples.  She squeals and begins to go limp under your painful ministrations.  You move her around and force her to kneel, pushing her face down into her bed.  Keeping one of your hands on her nipple, you pull down her skirt and expose her beautiful womanhood and asshole.\n\n");
 		raped = true;
 	} 
 	else if(player.str >= 80) {
-		outputText("slaps you.  Unperturbed by the hit, you push her back onto the edge of the bed, much to her dismay.  You forcibly flip her over onto her stomach and her knees hit the ground.  You keep one hand on her back to stop her from getting up and use your other to pull down her skirt, exposing her beautiful womanhood and asshole.\n\n", false);
+		outputText("slaps you.  Unperturbed by the hit, you push her back onto the edge of the bed, much to her dismay.  You forcibly flip her over onto her stomach and her knees hit the ground.  You keep one hand on her back to stop her from getting up and use your other to pull down her skirt, exposing her beautiful womanhood and asshole.\n\n");
 		raped = true;
 	} 
 	if(!raped) {
-		outputText("slaps you.  While you are still reeling from the blow, she uses a surprising amount of strength to force you out the door.  She slams it behind you and yells, \"<i>Don't you ever come back!</i>\" through the door. You hear her start to cry as you walk away.  She seems to be much stronger than she looks. You think to yourself that if you see her again, you won't make the mistake of underestimating her. While lost in your thoughts, you stumble and accidentally fall over.  <i>Maybe you'll teach her a lesson once you've stopped seeing stars.</i>  As you try to get up, you stumble in the other direction and fall over again.  <i>Then again, it may not be worth the trouble.</i>", false);
+		outputText("slaps you.  While you are still reeling from the blow, she uses a surprising amount of strength to force you out the door.  She slams it behind you and yells, \"<i>Don't you ever come back!</i>\" through the door. You hear her start to cry as you walk away.  She seems to be much stronger than she looks. You think to yourself that if you see her again, you won't make the mistake of underestimating her. While lost in your thoughts, you stumble and accidentally fall over.  <i>Maybe you'll teach her a lesson once you've stopped seeing stars.</i>  As you try to get up, you stumble in the other direction and fall over again.  <i>Then again, it may not be worth the trouble.</i>");
 	}
 	//If Marble was overpowered
 	if(raped) {
@@ -2832,11 +2832,11 @@ private function rapeDAHMARBLEZ():void {
 					outputText("forcing your " + cockDescript(0) + " in to the hilt.  ", false);
 				}
 				//the raping proper
-				outputText("With a grunt of pleasure, you start to push in and out while simultaneously manhandling her sensitive breasts.  Her pained cries and squeals only make you hornier and the experience all the more enjoyable for you.  You laugh from the pleasure you're getting at the expense of her pain.  Slapping her ass and marvelling at how it jiggles, you quicken the pace of your thrusts inside her.  Marble gasps at the increased rate, alternating between tones of pleasure and pain.\n\n", false);
+				outputText("With a grunt of pleasure, you start to push in and out while simultaneously manhandling her sensitive breasts.  Her pained cries and squeals only make you hornier and the experience all the more enjoyable for you.  You laugh from the pleasure you're getting at the expense of her pain.  Slapping her ass and marvelling at how it jiggles, you quicken the pace of your thrusts inside her.  Marble gasps at the increased rate, alternating between tones of pleasure and pain.\n\n");
 				//is the player corrupt enough to get the fantasy?
 				if(player.cor>=33) 
 					marbleRapeCorruptFantasy();
-				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
+				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ");
 				//set player's lust to 0
 				player.orgasm();
 			}
@@ -2846,34 +2846,34 @@ private function rapeDAHMARBLEZ():void {
 				//is the player corrupt enough to get the fantasy?
 				if(player.cor>=33) 
 					marbleRapeCorruptFantasy();
-				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
+				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ");
 				//set player's lust to 0
 				player.orgasm();
 			}
 		}
 		//dickless girls
 		else if(player.vaginas.length > 0) {
-			outputText("You take a quick look around the room to see if you can find something to make this more enjoyable, and notice a double dildo laying on the end table.  You grab the tool and push it into Marble's womanhood, causing a small gasp of pleasure from her that turns into one of pain as you twist one of her nipples.\n\n", false);
+			outputText("You take a quick look around the room to see if you can find something to make this more enjoyable, and notice a double dildo laying on the end table.  You grab the tool and push it into Marble's womanhood, causing a small gasp of pleasure from her that turns into one of pain as you twist one of her nipples.\n\n");
 			outputText("Keeping Marble in place, you get your " + vaginaDescript(0) + " ready to take in the other end of the dildo before doing so with gusto.  Much to Marble's discomfort, you manipulate the dildo in ways to heighten your own pleasure but give Marble a less enjoyable experience.  You ask her if she likes it, to which she responds with a whine and an attempt to move into a more comfortable position.  You tighten your grip on her, and she freezes again.\n\n", false);
 			//is the player corrupt enough to get the fantasy?
 			if(player.cor>=33)
 				marbleRapeCorruptFantasy();
-			outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
+			outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ");
 			//set player's lust to 0
 			player.orgasm();
 		}
 		//the genderless option
 		else {
-			outputText("Your lack of genitals makes it difficult to actually rape Marble, but there are other things you can do.  With your free hand, you push one of your fingers into her womanhood, causing Marble to squeal as you start wriggling it around.  Of course, that's just the beginning, as soon there are two fingers in there, and then three.  As each one goes in, there is another gasp from Marble.  You pinch her nipples as your fourth goes in, pulling out a rather interesting gasp of both pain and pleasure.\n\n", false);
+			outputText("Your lack of genitals makes it difficult to actually rape Marble, but there are other things you can do.  With your free hand, you push one of your fingers into her womanhood, causing Marble to squeal as you start wriggling it around.  Of course, that's just the beginning, as soon there are two fingers in there, and then three.  As each one goes in, there is another gasp from Marble.  You pinch her nipples as your fourth goes in, pulling out a rather interesting gasp of both pain and pleasure.\n\n");
 			//is the player corrupt enough to get the fantasy?
 			if(player.cor >= 33) 
 				marbleRapeCorruptFantasy();
-			outputText("With just one more thing to do, you laugh at Marble before shoving your full fist inside her.  The act results in that familiar gasp of pain and pleasure.  Playing with her is indeed quite satisfying.  ", false);
+			outputText("With just one more thing to do, you laugh at Marble before shoving your full fist inside her.  The act results in that familiar gasp of pain and pleasure.  Playing with her is indeed quite satisfying.  ");
 			//Reduce player lust by 20
 			dynStats("lus", -20);
 		}
 		//wrapping things up
-		outputText("You close your eyes and revel in the moment before feeling Marble roll over and grab one of your hands.  You open your eyes just in time to see a big hammer-head flying towards your face...  ", false);
+		outputText("You close your eyes and revel in the moment before feeling Marble roll over and grab one of your hands.  You open your eyes just in time to see a big hammer-head flying towards your face...  ");
 		//The player is knocked out, Set player health to 0
 		player.takeDamage(9001);
 		player.HP = 1;
@@ -2889,13 +2889,13 @@ private function rapeDAHMARBLEZ():void {
 //a little fantasy for relly corrupt players, this can come up in multiple places exactly the same, so I figured another function would be a good idea.
 private function marbleRapeCorruptFantasy():void {
 	spriteSelect(41);
-	outputText("Marble is helpless before your onslaught with your superior position, and you find it immensely enjoyable to have someone trapped under you like this.  You start to fantasize just what it would be like if everyone were like this to you, just from being in your presence.  You imagine a sea of asses and pussies all stuck up in the air for you to rape at your leisure, and none of the owners able to do a damn thing about it.\n\n", false);
+	outputText("Marble is helpless before your onslaught with your superior position, and you find it immensely enjoyable to have someone trapped under you like this.  You start to fantasize just what it would be like if everyone were like this to you, just from being in your presence.  You imagine a sea of asses and pussies all stuck up in the air for you to rape at your leisure, and none of the owners able to do a damn thing about it.\n\n");
 	//do they really want to have this fantasy?  How far are they gone?
 	if(player.cor>=66) {
-		outputText("You shake your head, clearing the bizarre fantasy from your mind and returning to the more immediate enjoyment.\n\n", false);
+		outputText("You shake your head, clearing the bizarre fantasy from your mind and returning to the more immediate enjoyment.\n\n");
 	} 
 	else {
-		outputText("You smile to yourself and think, \"<i>One day,</i>\" before returning to the more immediate enjoyment.\n\n", false);
+		outputText("You smile to yourself and think, \"<i>One day,</i>\" before returning to the more immediate enjoyment.\n\n");
 	}
 }
 
@@ -2978,12 +2978,12 @@ public function marbleBadEndFollowup():void {
 	//very short is probably <4.5 feet, short is between 4.5 and 5.5, average is between 5.5 and 6, tall is between 6 and 7, very tall is > 7.
 	
 	//BEGIN BAD-ENDNESS
-	outputText("Over time, the two of you learn to get along and accept the way things have gone.  Before long, the two of you become close friends, then even lovers.  At the same time, you learn the ways of life on the farm and adjust to your new life successfully.  As the months pass, things remain much the same from day to day. Until nearly a year later...\n\n\n", false);
+	outputText("Over time, the two of you learn to get along and accept the way things have gone.  Before long, the two of you become close friends, then even lovers.  At the same time, you learn the ways of life on the farm and adjust to your new life successfully.  As the months pass, things remain much the same from day to day. Until nearly a year later...\n\n\n");
 	//SHIFT ABOVE TO END OF RELEVANT BAD ENDS
 	outputText("The young champion moved quickly towards the barn; he was really looking forward to seeing this 'person he might know' as that dog-girl had described.  Maybe it was another one of the champions!  He thought as he hurried over.\n\n", false);
 	//does he find a human?
 	if(morph=="human") {
-		outputText("His eyes light up as he spots a very attractive ", false);
+		outputText("His eyes light up as he spots a very attractive ");
 		//does that person have a noteworthy stature?
 		if(approxHeight!="average height")
 			outputText(approxHeight + " ", false);
@@ -2997,39 +2997,39 @@ public function marbleBadEndFollowup():void {
 	}
 	//does he comment on the player's height?
 	if(approxHeight=="very short" || approxHeight=="short") {
-		outputText("Though I see you've gotten a little shorter then I saw you last.  ", false);
+		outputText("Though I see you've gotten a little shorter then I saw you last.  ");
 	} 
 	else if(approxHeight=="tall" || approxHeight=="very tall") {
-		outputText("You've gotten bigger since I saw you last.  ", false);
+		outputText("You've gotten bigger since I saw you last.  ");
 	}
 	outputText("Could you join me at my camp?  </i>\" the younger champion asks, \"<i>Your experience would help me out a great deal, and I'd be glad to have another fighter on my side.</i>\"  The older champion shakes " + player.mf("his", "her") + " head and replies, \"<i>I'm sorry, but I abandoned my quest some time ago.  There is simply something here that is more important to me than that.</i>\"  The younger champion looks at " + player.mf("him", "her") + " in alarm and asks \"<i>What could be more important than our mission?</i>\"\n\n", false);
 	outputText( "At that moment, an earthly female voice calls out from inside the barn.  \"<i>Sweetie, is that someone you know?</i>\"  The older champion smiles and replies to the voice, \"<i>Yes Marble, it is.  You should come out and meet him.</i>\"  <i>\"Alright,</i>\" the voice calls back.  ", false);
 	//could the player get Marble pregnant?
 	if (player.gender == 1 || player.gender == 3) {
-		outputText("A tall female cow-girl then steps out of the barn entrance.  The young champion notes just how pretty she is, if a bit imposing, but he also quickly notices that she is quite clearly pregnant.  \n\n", false);
-		outputText("<i>\"Marble,</i>\" the older champion says to her, \"<i>this is a friend, he's actually from my village.  This is Marble, she is the reason I left my mission.  I care about her too much, and she is carrying my child.</i>\"  ", false);
+		outputText("A tall female cow-girl then steps out of the barn entrance.  The young champion notes just how pretty she is, if a bit imposing, but he also quickly notices that she is quite clearly pregnant.  \n\n");
+		outputText("<i>\"Marble,</i>\" the older champion says to her, \"<i>this is a friend, he's actually from my village.  This is Marble, she is the reason I left my mission.  I care about her too much, and she is carrying my child.</i>\"  ");
 		//mysterious baby?
 		if(player.gender == 3 && player.mf("m", "f") == "f" && player.biggestCockArea() < 15) {
 			outputText("\"<i>Wait, your child?!  How?</i>\" the younger champion stammers. The older one grins at him and says, \"<i>So I'm the first you've met?  Well then...</i>\" before dropping " + player.mf("his", "her") + " pants and revealing " + player.mf("his", "her") + " " + multiCockDescriptLight() + " and " + player.mf("his", "her") + " " + vaginaDescript(0) + " to him.  The younger champion's jaw drops and he simply stares at " + player.mf("him", "her") + " for a time, during which " + player.mf("he", "she") + " giggles at him and says, \"<i>They're fully functional too.  Would you like to see them in action?</i>\"  The younger champion finds he is only able to stammer out an incoherent answer to this.  \"<i>I think I'll take that as a 'yes'. Don't worry, it'll be fun.</i>\" the older champion says, leading the young one along with Marble back inside the barn.  \"<i>Afterwards, maybe I can give you some advice on dealing with this world.</i>\"  ", false);
 		}
 		//if this isn't a herm, then met the family
 		else {
-			outputText("\"<i>Really?  Well I guess I should congratulate you on your new family,</i>\" the young champion says with a little uncertainty.  \"<i>Oh, it's not really a new family,<i>\" the other responds as a pair of little girls that look very much like little Marbles come running out of the barn, one chasing the other.  \"<i>Oh wow, you've found a nice family to join,</i>\" the younger champion says, watching the girls run off towards the farm house.  \"<i>Were those twins?</i>\"  \"<i>No,</i>\" the older champion responds, \"<i>Mili is several weeks older then Aura, but they're both my children.</i>\"  The younger champion stares at him incredulously before stammering \"<i>But how?  They're at least a few years old!</i>\"  The older champion puts his arm around the younger one's shoulder and leads him and Marble inside the barn telling him.  \"<i>You have a lot to learn about this world if you're going to last.</i>\"  ", false);
+			outputText("\"<i>Really?  Well I guess I should congratulate you on your new family,</i>\" the young champion says with a little uncertainty.  \"<i>Oh, it's not really a new family,<i>\" the other responds as a pair of little girls that look very much like little Marbles come running out of the barn, one chasing the other.  \"<i>Oh wow, you've found a nice family to join,</i>\" the younger champion says, watching the girls run off towards the farm house.  \"<i>Were those twins?</i>\"  \"<i>No,</i>\" the older champion responds, \"<i>Mili is several weeks older then Aura, but they're both my children.</i>\"  The younger champion stares at him incredulously before stammering \"<i>But how?  They're at least a few years old!</i>\"  The older champion puts his arm around the younger one's shoulder and leads him and Marble inside the barn telling him.  \"<i>You have a lot to learn about this world if you're going to last.</i>\"  ");
 		}
 		//girls and those without naughty bits go here 
 	}
 	else {
-		outputText("A tall female cow-girl then steps out of the barn entrance.  The young champion notes just how pretty she is, if a bit imposing.\n\n", false);
+		outputText("A tall female cow-girl then steps out of the barn entrance.  The young champion notes just how pretty she is, if a bit imposing.\n\n");
 		outputText("<i>\"Marble,</i.>\" the older champion says to her, \"<i>this is the new champion, he's actually from my village.  This is Marble, she is the reason I left my mission.  I care about her too much.</i>\"  The younger champion looks at the other in confusion.  \"<i>What do you mean by that?<i>\" he asks " + player.mf("him", "her") + ".  Marble giggles, and invites the older champion to suckle her nipples, which they eagerly begin doing.  \"<i>I- what?  Huh?!</i>\" the younger champion stammers at the sight, unable to believe his eyes.  \"<i>Like my sweetie here said, we have a special relationship,</i>\" she tells him smiling, easily recognizing the tell-tale signs of arousal at what he was seeing.  \"<i>Does your relationship extend to, um, other things?</i>\" he asks a little nervously.  The older champion turns away from Marble's breast and walks over to the younger one, putting " + player.mf("his", "her") + " arm around the young champion's shoulders.  With a little milk still dripping from " + player.mf("his", "her") + " mouth, the older champion leads the younger one inside the barn with Marble, saying \"<i>Yes, would you care to join us?</i>\"  ", false);
 	}
 	//If Marble is a pusher, she starts to tempt this champion
 	if(player.statusEffectv3(StatusEffects.Marble) == 1) {
-		outputText("After a moment, \"<i>By the way,</i>\" Marble's voice can be heard from inside saying, \"<i>do you like milk?\"</i>", false);
+		outputText("After a moment, \"<i>By the way,</i>\" Marble's voice can be heard from inside saying, \"<i>do you like milk?\"</i>");
 		//dun dun dun!  That was dumb; I apologize for the lame joke.
 	}
 	//wrap things up
-	outputText("\n\n", false);
-	outputText("You've abandoned your quest due to your inability to refuse Marble, thanks to the effect her milk has on you.  However, you may have a chance to help the next one complete his quest, or maybe you won't.  As it stands now, this is where your story ends.", false);
+	outputText("\n\n");
+	outputText("You've abandoned your quest due to your inability to refuse Marble, thanks to the effect her milk has on you.  However, you may have a chance to help the next one complete his quest, or maybe you won't.  As it stands now, this is where your story ends.");
 	getGame().gameOver();
 }
 
@@ -3043,9 +3043,9 @@ public function marblePoopsBaybees():void {
 			return;
 		}
 		//Gives birth at 28 days
-		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n", false);
+		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n");
 		
-		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n", false);
+		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n");
 		if(flags[kFLAGS.MARBLE_PURIFIED] > 0 && rand(2) == 0)
 		{
 			outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts balling and see that it is infact a young bovine boy that the two of you have brought into the world.  You can already tell he has all the bovine features of his mother, save his gender.  The little boy’s face is a really cute one; you’re sure that he’ll grow up to be a strong handsome man.", false);
@@ -3053,81 +3053,81 @@ public function marblePoopsBaybees():void {
 			//is this Marble's first boy?  Flag n is the number of male children Marble has given birth to
 			if (flags[kFLAGS.MARBLE_BOYS] ==0)
 			{
-				outputText("\n\nWhen you hand the boy to Marble she looks at the boy for a few moments in surprise before putting the crying child to her chest.  The little boy stops crying at once and starts eagerly gobbling down Marble’s milk\n\n", false);
+				outputText("\n\nWhen you hand the boy to Marble she looks at the boy for a few moments in surprise before putting the crying child to her chest.  The little boy stops crying at once and starts eagerly gobbling down Marble’s milk\n\n");
 
-				outputText("You ask her why she hesitated like that.  \"<i>Oh?</i>\" she starts, looking up at you, \"<i>Sorry sweetie, it's just that I never thought I would give birth to a boy.  It just never occurred to me.</i>\"  Then her expression changes.", false);
+				outputText("You ask her why she hesitated like that.  \"<i>Oh?</i>\" she starts, looking up at you, \"<i>Sorry sweetie, it's just that I never thought I would give birth to a boy.  It just never occurred to me.</i>\"  Then her expression changes.");
 			}
 			else
 			{
-				outputText("\n\nYou hand Marble the child and she puts the crying child to her chest. The little boy stops crying at once and starts eagerly gobbling down Marble’s milk.", false);
+				outputText("\n\nYou hand Marble the child and she puts the crying child to her chest. The little boy stops crying at once and starts eagerly gobbling down Marble’s milk.");
 			}
 
 			outputText("\n\n\"<i>Oh my,\"</i> Marble says to you, \"<i>Its just as wonderful as when you suckled me when my milk was addictive; I’d forgotten the feeling.\"</i>  ", false);
-			outputText("\n\nMarble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.", false);
+			outputText("\n\nMarble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.");
 
 			//since the PC must either be addicted, or have removed Marble’s addictive trait in order to father a child with her, there is no need for a check for addiction here!
-			outputText("\n\nOnce the two of you have had your fill, Marble puts the child inside the nursery.  The little boy is already starting to look like he is a few years old, and is already trotting around on his little hoofs.  Marble turns to look at you and says, \”<i>Hmm, well Sweetie, I can’t think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
+			outputText("\n\nOnce the two of you have had your fill, Marble puts the child inside the nursery.  The little boy is already starting to look like he is a few years old, and is already trotting around on his little hoofs.  Marble turns to look at you and says, \”<i>Hmm, well Sweetie, I can’t think of a good name right now, I'll figure one out tomorrow.</i>\"");
 
 			//note that these may have to change, I'm not sure if they'll belong here or not
 			flags[kFLAGS.MARBLE_BOYS]++;  //again, n is the flag for the number of male kids Marble has had
 		} 
 		else
 		{
-			outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has", false);
+			outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has");
 			//Does the PC note that she is not a futa?
 			//If (Marble has a cock)
-			if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
+			if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on");
 			outputText(".  The little girl's face is a really pretty one; you're sure that she'll grow up to be like her mom.  You hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble's milk.\n\n", false);
 			//If (PC is addicted to Marble)
 			if(player.findPerk(PerkLib.MarblesMilk) >= 0) {
-				outputText("\"<i>Don't worry sweetie,</i>\" Marble tells you, \"<i>somehow I know that she won't get addicted.\"</i>  ", false);
+				outputText("\"<i>Don't worry sweetie,</i>\" Marble tells you, \"<i>somehow I know that she won't get addicted.\"</i>  ");
 			} 
 			else {
 				outputText("\"<i>Oh my,\"</i> Marble says to you, \"<i>It's just as wonderful as when you suckled me when my milk was addictive; I'd forgotten the feeling.\"</i>  ", false);
 			}
-			outputText("Marble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.\n\n", false);
+			outputText("Marble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.\n\n");
 			//since the PC must either be addicted, or have removed Marble's addictive trait in order to father a child with her, there is no need for a check for addiction here!
-			outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ", false);
+			outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ");
 			//Marble chooses a random name from this list, assuming that there isn't already a child with that name, in which case she'll say she can't think of a name, and ask the PC to come up with one.
 			if(flags[kFLAGS.MARBLE_KIDS] == 0) {
 				temp = rand(10);
 				switch(temp) {
 					case 0:
-						outputText("Aura", false);
+						outputText("Aura");
 						break;
 					case 1:
-						outputText("Miran", false);
+						outputText("Miran");
 						break;
 					case 2:
-						outputText("Lin", false);
+						outputText("Lin");
 						break;
 					case 3:
-						outputText("Mary", false);
+						outputText("Mary");
 						break;
 					case 4:
-						outputText("Bess", false);
+						outputText("Bess");
 						break;
 					case 5:
-						outputText("Tina", false);
+						outputText("Tina");
 						break;
 					case 6:
-						outputText("Rill", false);
+						outputText("Rill");
 						break;
 					case 7:
-						outputText("Wendy", false);
+						outputText("Wendy");
 						break;
 					case 8:
-						outputText("Rainy", false);
+						outputText("Rainy");
 						break;
 					case 9:
-						outputText("Nicky", false);
+						outputText("Nicky");
 						break;
 				}
-				outputText(", yes, that's a good name for her.</i>\"", false);
+				outputText(", yes, that's a good name for her.</i>\"");
 
 			}
 			else {
-				outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
+				outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"");
 			}
 		}
 		//cow-girl child is added to the nursery, her name is set to \"<i>childName</i>\"
@@ -3138,18 +3138,18 @@ public function marblePoopsBaybees():void {
 	else if(pregnancy.type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 		//Birthing eggs
 		//Gives birth as the standard time for eggs
-		outputText("\nYou hear moaning coming from a secluded part of the rocks and go over to investigate.  You find Marble squatted down on the ground with a ", false);
+		outputText("\nYou hear moaning coming from a secluded part of the rocks and go over to investigate.  You find Marble squatted down on the ground with a ");
 		//how big is the pile of eggs?
 		if(rand(2) == 0) {
-			outputText("small pile of eggs next to her.  You ask her what's going on, but Marble stops you and grunts slightly before pushing out one final egg and standing up.  \"<i>Sweetie, I've finished laying the eggs from that elixir,</i>\" she tells you before taking a few breaths and continuing, \"<i>I was actually expecting them to be a bit bigger, but it doesn't really matter.  You're welcome to take one of them, but only one, ok?</i>\"\n\n", false);
+			outputText("small pile of eggs next to her.  You ask her what's going on, but Marble stops you and grunts slightly before pushing out one final egg and standing up.  \"<i>Sweetie, I've finished laying the eggs from that elixir,</i>\" she tells you before taking a few breaths and continuing, \"<i>I was actually expecting them to be a bit bigger, but it doesn't really matter.  You're welcome to take one of them, but only one, ok?</i>\"\n\n");
 		} 
 		else if(rand(2) == 0) {
 			outputText("pile of large eggs next to her.  It looks like a similar egg is coming out of her womanhood right now; it quickly falls to the ground and Marble pushes it into the pile with the others.  It looks she has been at this for a while now. You put your hand on her shoulder and ask her what is going on.  She turns to you and says, \"<i>Ah sweetie, just laying the eggs from the elixir.  I think there is one more.</i>\"  She grunts and pushes out a final egg, before putting it in the pile with the rest.  \"<i>You're welcome to take one of them, but only one, ok?</i>\"\n\n", false);	
 		} 
 		else {
-			outputText("a rather large pile of eggs under her.  She keeps gasping and moaning as another egg comes plopping down, then another, and another.  You can't believe your eyes at how many eggs are coming out, and how much Marble seems to be enjoying it.  After a minute, the eggs stop coming out, but Marble keeps squatting there and grunting.  You walk over to her and grab her shoulders, forcing her to look you in the eye as you tell her that there are no more.  She looks at you blankly for a moment before shaking her head and putting a hand to her stomach.  \"<i>Oh sweetie, it looks like I've finished laying those eggs from the elixir.  There were a lot more than I was expecting, I guess I spaced out.  It felt so good...</i>\" her eyes start to glaze over again and you give her a shake.  \"<i>Oh!  Sorry, uh, go ahead and take one of the eggs, but please, only the one, ok?</i>\"\n\n", false);
+			outputText("a rather large pile of eggs under her.  She keeps gasping and moaning as another egg comes plopping down, then another, and another.  You can't believe your eyes at how many eggs are coming out, and how much Marble seems to be enjoying it.  After a minute, the eggs stop coming out, but Marble keeps squatting there and grunting.  You walk over to her and grab her shoulders, forcing her to look you in the eye as you tell her that there are no more.  She looks at you blankly for a moment before shaking her head and putting a hand to her stomach.  \"<i>Oh sweetie, it looks like I've finished laying those eggs from the elixir.  There were a lot more than I was expecting, I guess I spaced out.  It felt so good...</i>\" her eyes start to glaze over again and you give her a shake.  \"<i>Oh!  Sorry, uh, go ahead and take one of the eggs, but please, only the one, ok?</i>\"\n\n");
 		}
-		outputText("Marble stands up and gives her legs a stretch before clopping off.  You shrug your shoulders and look at the pile of eggs before grabbing the nicest looking one.\n\n", false);
+		outputText("Marble stands up and gives her legs a stretch before clopping off.  You shrug your shoulders and look at the pile of eggs before grabbing the nicest looking one.\n\n");
 		//Gain appropriate egg
 		//default
 		var itype:ItemType;
@@ -3173,12 +3173,12 @@ public function marbleNightSleepFlavor():Boolean {
 	spriteSelect(41);
 	//If player is marble-preggo, she builds nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && (player.pregnancyIncubation <= 128)) {
-		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n", false);
+		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n");
 		flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 	}
 	//PREGGO ALERTZ
 	switch (pregnancy.eventTriggered()) {
-		case 2: outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n", false); //3 days in
+		case 2: outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n"); //3 days in
 				break;
 		case 3: outputText("<b>Marble's belly has gotten a fair bit bigger; she may be pregnant.</b>\n\n", false); //8 days in
 				break;
@@ -3186,13 +3186,13 @@ public function marbleNightSleepFlavor():Boolean {
 				//(if the nursery has not yet been built, she is forced to start working on it here and her job cannot be changed until it has been finished)
 				if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && pregnancy.type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 					flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
-					outputText("  She lets you know that she'll be busy working on a nursery for her child for a while.", false);
+					outputText("  She lets you know that she'll be busy working on a nursery for her child for a while.");
 				}
-				outputText("</b>\n\n", false);
+				outputText("</b>\n\n");
 				break;
-		case 5: outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n", false); //18 days in
+		case 5: outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n"); //18 days in
 				break;
-		case 6: outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n", false); //24 days in
+		case 6: outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n"); //24 days in
 		default:
 	}
 	//Both under 30 - no sex
@@ -3210,7 +3210,7 @@ public function marbleNightSleepFlavor():Boolean {
 	///START NEW MARBLE NIGHT LOGIC
 	//This section does not happen if Marble's lust is at or over 50, the requests for sex or oral come instead then.
 	if(player.gender == 0) {
-		outputText("As you and Marble lie down for the night, she whispers into your ear, \"<i>Sweetie, if it isn't too much trouble, I'd really like it if you would grow a penis for me.  If you can't do that, then could you at least get a vagina?  I'll understand if it's too much trouble, I just wanted to get that off my chest...</i>\" After a moment of getting comfortable, the two of you go to sleep.\n\n", false);
+		outputText("As you and Marble lie down for the night, she whispers into your ear, \"<i>Sweetie, if it isn't too much trouble, I'd really like it if you would grow a penis for me.  If you can't do that, then could you at least get a vagina?  I'll understand if it's too much trouble, I just wanted to get that off my chest...</i>\" After a moment of getting comfortable, the two of you go to sleep.\n\n");
 		return false;
 	}
 	else if(flags[kFLAGS.MARBLE_LUST] < 50 || player.gender == 0) {
@@ -3243,12 +3243,12 @@ public function marbleNightSleepFlavor():Boolean {
 		outputText("You lie down and notice that Marble hasn't gone to bed yet.  You decide not worry about it too much until you hear Marble come clopping up outside.  \"<i>Sweetie?</i>\" she calls out to you as she crawls in next to you.  \"<i>Sweetie, I'm feeling really horny ");
 		//if (PC's lust is under minimum to request sex)
 		if(player.lust < 33) {
-			outputText("and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her what it is.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
+			outputText("and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her what it is.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ");
 			//If (Marble is a herm)
 			if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 				outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 			else
-				outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"", false);
+				outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"");
 			outputText("\n\nWill you orally pleasure Marble?");
 			//options: yes/no (yes continues the current scene, this is a bit awkward as the current breaks are in the middle of if statements, so new futa/female if statements will need to be added)
 			var tailJob:Function = null;
@@ -3279,12 +3279,12 @@ private function marblePregWithPCKids():Boolean {
 }
 
 private function marbleCuddlin():void {
-	outputText("  Before too long, Marble reaches over and ", false);
+	outputText("  Before too long, Marble reaches over and ");
 	//Neither PC or Marble are preggers with the other's child
 	if(!pcPregWithMarblesKids() && !marblePregWithPCKids()) {
 		//if (PC is 6.5 feet or less tall)
 		if(player.tallness <= 78) outputText("pulls your head on top of her chest.  She idly strokes your " + hairDescript() + " and says, \"<i>Sweetie, how about I be your pillow for the night?</i>\"  You happily agree, and soon you drift off to the sound of her steady breathing while you lay between her sizable breasts.", false);
-		else outputText("wraps her arms around you, gently pulling you against her.  \"<i>Sweetie, do you mind if we stay like this for a while?</i>\"  There is no way you could refuse, and before long, the two of you drift off to sleep in each other's arms.", false);
+		else outputText("wraps her arms around you, gently pulling you against her.  \"<i>Sweetie, do you mind if we stay like this for a while?</i>\"  There is no way you could refuse, and before long, the two of you drift off to sleep in each other's arms.");
 	}
 	//Preg-cuddles
 	else {
@@ -3336,44 +3336,44 @@ private function marbleNightSexIntro(clear:Boolean = true):void {
 		doNext(playerMenu);
 	}
 	//Ok lets light this fire!
-	outputText("At that moment, you feel Marble breathe in your ear, \"<i>I know you want this, don't you sweetie?</i>\"\n\n", false);
+	outputText("At that moment, you feel Marble breathe in your ear, \"<i>I know you want this, don't you sweetie?</i>\"\n\n");
 	//If (PC is under 5 feet tall) {
 	if(player.tallness < 60) {
-		outputText("Marble rolls you onto your back and pulls your head up onto her ample cleavage.  \"<i>I want it too. Just relax and let me take care of this.</i>\"  Marble keeps your head locked in her cleavage as she uses her other hand to slowly free the two of you of your garments.\n\n", false);
+		outputText("Marble rolls you onto your back and pulls your head up onto her ample cleavage.  \"<i>I want it too. Just relax and let me take care of this.</i>\"  Marble keeps your head locked in her cleavage as she uses her other hand to slowly free the two of you of your garments.\n\n");
 		outputText("Your head rests comfortably between Marble's breasts the entire time, her warm breath blowing softly on your hair.  You feel almost completely relaxed, yet incredibly turned on at the same time.  For some reason, it just feels right to lay there and breathe in her scent, enjoying the wonderful love pillows she is forcing you to relax between.  She runs her hand down your " + biggestBreastSizeDescript() + ", gently cooing to you.  Her hand slips down to your ", false);
 		//If (PC has dick) {
 		if(player.cockTotal() > 0) {
 			outputText(multiCockDescriptLight(), false);
 			//If (PC both dick and vag) 
-			if(player.hasVagina()) outputText(" and your ", false);
+			if(player.hasVagina()) outputText(" and your ");
 		}
 		//If (PC has vag) 
 		if(player.hasVagina()) outputText(vaginaDescript(), false);
-		outputText(" and gently caresses you.  She whispers into your ear, \"<i>Soon sweetie, soon we'll both get what we want.</i>\"\n\n", false);
-		outputText("Finished with removing your clothes and her own, Marble releases her grip on your head and turns your body over.\n\n", false);
+		outputText(" and gently caresses you.  She whispers into your ear, \"<i>Soon sweetie, soon we'll both get what we want.</i>\"\n\n");
+		outputText("Finished with removing your clothes and her own, Marble releases her grip on your head and turns your body over.\n\n");
 	} 
 	else 
 	{
-		outputText("She reaches over and puts her hand onto your waist, gently slipping her hand inside your undergarments to touch your ", false);
+		outputText("She reaches over and puts her hand onto your waist, gently slipping her hand inside your undergarments to touch your ");
 		//If (PC has dick) {
 		if(player.cockTotal() > 0) {
 			outputText(multiCockDescriptLight(), false);
 			//If (PC both dick and vag) 
-			if(player.hasVagina()) outputText(" and your ", false);
+			if(player.hasVagina()) outputText(" and your ");
 		}
 		//If (PC has vag) 
 		if(player.hasVagina()) outputText(vaginaDescript(0), false);
-		outputText(" while you slip your own hand into her clothes and ", false);
+		outputText(" while you slip your own hand into her clothes and ");
 		//If (Marble is a herm) {
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 			outputText("gently rub her " + marbleCock() + ".  After a moment, you move your hand down lower and ", false);
 		}
-		outputText(" run your fingers down her moist womanhood.  The two of you quiver under each other's ministrations.  Both of you work to quickly free yourselves from your clothing, growing increasingly excited at where things are going.  Free of your garments, you move overtop of Marble.\n\n", false);
+		outputText(" run your fingers down her moist womanhood.  The two of you quiver under each other's ministrations.  Both of you work to quickly free yourselves from your clothing, growing increasingly excited at where things are going.  Free of your garments, you move overtop of Marble.\n\n");
 	}
 	//If (player is a herm, and their dick can fit inside Marble)
 	if(player.gender == 3) {
 		if(player.cockArea(x) <= marbleCuntCapacity()) {
-			outputText("\"<i>So sweetie, what part will you be using today?</i>\" she asks you.", false);
+			outputText("\"<i>So sweetie, what part will you be using today?</i>\" she asks you.");
 			//Player chooses if they want to use their dick or their vagina.
 			simpleChoices("Dick", marbleNightSexDudes, "Vagina", marbleNightSexChicks, "", null, "", null, "", null);
 		}
@@ -3412,10 +3412,10 @@ private function marbleNightSexDudes():void {
 	outputText("You look Marble in the eye and the two of you relish the moment; you are two lovers, connected in the most enjoyable of ways.  ", false);
 	//Is Marble going to take the initiative here?
 	if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10) {
-		outputText("You get so caught up in the moment that Marble takes the initiative. \"<i>Now, now, it's not nice to keep me waiting, sweetie,</i>\" she says before lifting up your hips and repeatedly inserting you inside her at a fair pace.  You're caught off guard and fall forward, ", false);
+		outputText("You get so caught up in the moment that Marble takes the initiative. \"<i>Now, now, it's not nice to keep me waiting, sweetie,</i>\" she says before lifting up your hips and repeatedly inserting you inside her at a fair pace.  You're caught off guard and fall forward, ");
 		//Do you fall into the boobies?
 		if(player.tallness < 66) {
-			outputText("straight back into her ample bosom.  Marble giggles at your predicament, but doesn't stop moving your hips.  Rather than do anything more about it, you decide to just let Marble have her fun. After all, it's not like you aren't enjoying the situation.  You can already feel yourself getting close to release, and from the sound of Marble's breathing, she is too.\n\n", false);
+			outputText("straight back into her ample bosom.  Marble giggles at your predicament, but doesn't stop moving your hips.  Rather than do anything more about it, you decide to just let Marble have her fun. After all, it's not like you aren't enjoying the situation.  You can already feel yourself getting close to release, and from the sound of Marble's breathing, she is too.\n\n");
 		}
 		//nah, but if you have boobies, maybe they hit hers?
 		else if (player.tallness < 84) {
@@ -3427,10 +3427,10 @@ private function marbleNightSexDudes():void {
 				outputText("landing your " + biggestBreastSizeDescript() + " into Marble's face!  You hear a slight muffled cry underneath you as Marble takes her hands off your hips and lifts you up off of her.  ", false);
 			} 
 			else {
-				outputText("crashing down on Marble and doing a good job of flattening her breasts under your size.  \"<i>Hey!</i>\" she cries out, letting go of your hips to lift your body off of her.  ", false);
+				outputText("crashing down on Marble and doing a good job of flattening her breasts under your size.  \"<i>Hey!</i>\" she cries out, letting go of your hips to lift your body off of her.  ");
 			}
 		}
-		outputText("You look down at her annoyed expression, before grinning at her and beginning to impale her moist and wonderful snatch yourself.  In a moment, her expression changes from a pouty face to one of ecstasy.  The two of you are nearing your peaks now.\n\n", false);
+		outputText("You look down at her annoyed expression, before grinning at her and beginning to impale her moist and wonderful snatch yourself.  In a moment, her expression changes from a pouty face to one of ecstasy.  The two of you are nearing your peaks now.\n\n");
 	}
 	//nope the PC is the one
 	else 
@@ -3441,25 +3441,25 @@ private function marbleNightSexDudes():void {
 		else outputText("The sensations are quickly becoming too much for you, and you're unable to do anything but focus on the feeling of your " + cockDescript(x) + " inside her wonderful confines.  Marble grins at your difficulties and teases, \"<i>Am I just too much for you, sweetie?  Ah!</i>\" She gasps; it seems that you're becoming too much for her too.\n\n", false);
 	}
 	//ORGASMO
-	outputText("You gasp as you feel your insides churning and the walls of Marble's sex collapsing tightly down on you.  Once again, you've brought each other to the point of blissful orgasm around the same time.  ", false);
+	outputText("You gasp as you feel your insides churning and the walls of Marble's sex collapsing tightly down on you.  Once again, you've brought each other to the point of blissful orgasm around the same time.  ");
 	//let's talk about the PC's cum production
 	if(player.cumQ() < 250) {
 		outputText("Marble cries out in joy as your " + cockDescript(x) + " unleashes its load within her insides.  ", false);
 	} 
 	else {
-		outputText("Marble gasps in both pleasure and pain as you fill up her insides to almost bursting, and large amounts of your jizz spill out around her slit.  ", false);
+		outputText("Marble gasps in both pleasure and pain as you fill up her insides to almost bursting, and large amounts of your jizz spill out around her slit.  ");
 	}
 	//Now, does the PC have more than one cock?  Cum comes out of those too.
 	if(player.totalCocks() > 1) 
 	{
-		outputText("Of course, ", false);
+		outputText("Of course, ");
 		if(player.totalCocks() > 2) { 
 			outputText("the rest of your " + multiCockDescriptLight(), false);
 		} 
 		else { 
-			outputText("your other tool", false);
+			outputText("your other tool");
 		}
-		outputText(" unleashes its own load, liberally covering both of you.  ", false);
+		outputText(" unleashes its own load, liberally covering both of you.  ");
 	}
 	//does Marble spray her cock?
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
@@ -3480,11 +3480,11 @@ private function marbleNightSexChicks():void {
 		//Loosen PC's vagina if they are really tight, also removes virginity
 		player.cuntChange(14,true);
 		//(Message about vagina becoming looser)
-		outputText("After adjusting to the feeling of the shaft inside you, you can't deny what a wonderful feeling it is to be connected like this.  ", false);
+		outputText("After adjusting to the feeling of the shaft inside you, you can't deny what a wonderful feeling it is to be connected like this.  ");
 		//Does Marble take the initiative?
 		if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10) {
 			outputText("Marble gives you a grin and starts lifting your hips up and down, while simultaneously bouncing her own hips.  The combination results in both your " + vaginaDescript(0) + " and Marble's being pistoned by her double dildo.  The two of you start moaning in unison from the overwhelming feelings, leaving you unable to do anything but let her buckle and bounce you around like a rough wagon, and you love every second of it.\n\n", false);
-			outputText("\"<i>Oh sweetie, am I going too fast for you?  Here, let me give you a chance to catch your breath.</i>\"  She offers as she slows down her rapid movement, letting your mind settle back into place.\n\n", false);
+			outputText("\"<i>Oh sweetie, am I going too fast for you?  Here, let me give you a chance to catch your breath.</i>\"  She offers as she slows down her rapid movement, letting your mind settle back into place.\n\n");
 			//If (PC's breasts are D cup or bigger)
 			if(player.biggestTitSize() >= 4) {
 				outputText("Marble takes her hands off your hips and lets you start to rise and fall on her in your own time.  She still rises up to meet you as you descend and lowers herself down each time you rise, matching your timing, but her hands have a much more pressing concern: your " + biggestBreastSizeDescript() + ".  Marble starts working her hands expertly to tease and play with your " + biggestBreastSizeDescript() + ". She seems to know all the right ways to move her fingers, clearly having a lot of experience with her own, and you can't help but moan at the attention.  She giggles and pants in pleasure herself; it seems she may be enjoying this play just as much as you!\n\n", false);
@@ -3494,8 +3494,8 @@ private function marbleNightSexChicks():void {
 			}
 		}//no, no, the PC is much hornier than she is
 		else {
-			outputText("You give a horny moan and start to bounce up and down on her dildo, relishing the feeling of it within your walls.  Marble gasps at the sudden rapid stimulation and starts to writhe on the ground helplessly underneath you.  You grin down at her as you continue your movements of rising, falling and rolling.  You slow down for a moment so you can get a good grip on her ample breasts.\n\n", false);
-			outputText("\"<i>Sweetie!</i>\" Marble gasps as you start to play with her breasts.  ", false);
+			outputText("You give a horny moan and start to bounce up and down on her dildo, relishing the feeling of it within your walls.  Marble gasps at the sudden rapid stimulation and starts to writhe on the ground helplessly underneath you.  You grin down at her as you continue your movements of rising, falling and rolling.  You slow down for a moment so you can get a good grip on her ample breasts.\n\n");
+			outputText("\"<i>Sweetie!</i>\" Marble gasps as you start to play with her breasts.  ");
 			//Does Marble help out, or does she go for the PC's breasts?
 			if(player.biggestTitSize() >= 4) {
 				outputText("She reaches her hands up and starts to play with your " + biggestBreastSizeDescript() + ", flicking and toying with them at the same pace that you play with hers.  The two of you start a friendly little contest to see who can stimulate the other's chest better; all the while, you continue to rise and fall above her.\n\n", false);
@@ -3503,7 +3503,7 @@ private function marbleNightSexChicks():void {
 			else {
 				outputText("Marble reaches her hands up and grabs onto yours, pulling them down tightly against her chest.  She gets you to play with each of her " + marbleNips() + " in turn, making sure that you flick them and tease them in just the right way to get her to cry out in ecstasy again and again.\n\n", false);
 			}
-			outputText("Within moments, your rapid pistoning on the dildo is pushing the two of you closer and closer to the edge.  ", false);
+			outputText("Within moments, your rapid pistoning on the dildo is pushing the two of you closer and closer to the edge.  ");
 		}
 		outputText("The two of you cry out in orgasm as your " + vaginaDescript(0) + " clamps down on one end of her dildo and her womanhood clamps down on the other end.  ", false);
 		//Does this PC have a cock too?
@@ -3511,7 +3511,7 @@ private function marbleNightSexChicks():void {
 		if(player.totalCocks() > 0) {
 			outputText("At the same time, your " + multiCockDescriptLight() + " sprays its own load onto Marble's chest and stomach.  ", false);
 		}
-		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
+		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
 	}
 	//PC is female, Marble is a herm
 	else {
@@ -3520,19 +3520,19 @@ private function marbleNightSexChicks():void {
 		//is she satisfied?
 		//If (player can fit all of her cock and PC is not a virgin) {
 		if(player.vaginalCapacity() > flags[kFLAGS.MARBLE_DICK_LENGTH] * flags[kFLAGS.MARBLE_DICK_THICKNESS]) {
-			outputText("until she is fully within you.  The two of you shudder in pleasure, and Marble says, \"<i>Oh sweetie, you got it all in there.  Being inside another woman like this is something I'll never really get used to, but I can't deny how good it feels.</i>\"\n\n", false);
+			outputText("until she is fully within you.  The two of you shudder in pleasure, and Marble says, \"<i>Oh sweetie, you got it all in there.  Being inside another woman like this is something I'll never really get used to, but I can't deny how good it feels.</i>\"\n\n");
 		}
 		//Marble seems to think you can take more than maybe you should be able to take
 		else {
 			outputText("until you bottom out and can take no more of her.  \"<i>No more?</i>\" Marble asks you a little sadly, \"<i>You sure you can't take a little more?</i>\" she adds as she starts pushing you down onto her " + marbleCock() + ". You are forced to stretch to accommodate more of her and you shudder slightly from the strain.  ", false);
 			//(Message about vagina becoming looser)
-			outputText("Marble grins at you and says, \"<i>See?  I knew you that you could fit a little more.</i>\"\n\n", false);
+			outputText("Marble grins at you and says, \"<i>See?  I knew you that you could fit a little more.</i>\"\n\n");
 		}
-		outputText("After adjusting to the feeling of her inside you, you can't deny what a wonderful feeling it is to be connected like this.  ", false);
+		outputText("After adjusting to the feeling of her inside you, you can't deny what a wonderful feeling it is to be connected like this.  ");
 		//Does Marble take the initiative?
 		if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10) {
 			outputText("Marble gives you a grin and starts lifting your hips up and down, while simultaneously bouncing her own hips.  The combination results in your " + vaginaDescript(0) + " being pistoned by her " + marbleCock() + ".  The two of you start moaning in unison from the overwhelming feelings, leaving you unable to do anything but let her buckle and bounce you around like a rough wagon, and you love every second of it.\n\n", false);
-			outputText("\"<i>Oh sweetie, am I going too fast for you?  Here, let me give you a chance to catch your breath.</i>\"  She offers as she slows down her rapid movement, letting your mind settle back into place.  ", false);
+			outputText("\"<i>Oh sweetie, am I going too fast for you?  Here, let me give you a chance to catch your breath.</i>\"  She offers as she slows down her rapid movement, letting your mind settle back into place.  ");
 			if(player.biggestTitSize() >= 4) {
 				outputText("Marble takes her hands off your hips and lets you start to rise and fall on her in your own time.  She still rises up to meet you as you descend and lowers herself down each time you rise, matching your timing, but her hands have a much more pressing concern: your " + biggestBreastSizeDescript() + ".  Marble starts working her hands expertly to tease and play with your " + biggestBreastSizeDescript() + ". She seems to know all the right ways to move her fingers, clearly having a lot of experience with her own, and you can't help but moan at the attention.  She giggles and pants in pleasure herself; it seems she may be enjoying this play just as much as you!\n\n", false);
 			} 
@@ -3543,7 +3543,7 @@ private function marbleNightSexChicks():void {
 		//no, no, the PC is much hornier than she is
 		else {
 			outputText("You give a horny moan and start to ride her " + marbleCock() + ", bouncing up and down on her and relishing the feeling of her within your walls.  Marble gasps at the sudden rapid stimulation and starts to writhe on the ground helplessly underneath you.  You grin down at her as you continue your movements of rising and falling.  You slow down for a moment so you can get a good grip on her ample breasts.\n\n", false);
-			outputText("\"<i>Sweetie!</i>\" Marble gasps, as you start to play with her breasts.  ", false);
+			outputText("\"<i>Sweetie!</i>\" Marble gasps, as you start to play with her breasts.  ");
 			//Does Marble help out, or does she go for the PC's breasts?
 			if(player.biggestTitSize() >= 4) {
 				outputText("She reaches her hands up and starts to play with your " + biggestBreastSizeDescript() + ", flicking and toying with them at the same pace that you play with hers.  The two of you start a friendly little contest to see who can stimulate the other's chest better; all the while, you continue to rise and fall above her.\n\n", false);
@@ -3556,11 +3556,11 @@ private function marbleNightSexChicks():void {
 		outputText("The two of you cry out in orgasm as your " + vaginaDescript(0) + " clamps down on her " + marbleCock() + " as it fills you with its seed.  ", false);
 		//Does this PC have a cock too?
 		if(player.totalCocks() > 0) {
-			outputText("At the same time, ", false);
-			if(player.totalCocks() > 1) outputText("each of ", false);
+			outputText("At the same time, ");
+			if(player.totalCocks() > 1) outputText("each of ");
 			outputText("your " + multiCockDescriptLight() + " sprays its own load onto Marble's chest and stomach.  ", false);
 		}
-		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
+		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
 		//Pregnancy chance for PC, ¼ their fertility
 		player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
@@ -3611,7 +3611,7 @@ private function marblePreggoChance(preggerMult:Number):void {
 private function marbleSexFinish():void {
 	spriteSelect(41);
 	//After all Marble sex
-	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.", false);
+	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.");
 	//Set PC lust to 0
 	player.orgasm();
 	dynStats("sen", -1);
@@ -3641,7 +3641,7 @@ private function marbleNomNoms():void {
 		if(player.hasStatusEffect(StatusEffects.SlimeCraving) || player.lib + player.cor - player.inte > 35) {
 			outputText("For some reason, your head starts to feel a bit fuzzy from the animalistic smell, and for a moment you forget what you were doing.  It comes back to you quickly, as there is a big juicy " + marbleCock() + " right there in front of you.  It gives off such a nice smell; it probably tastes really good, too.  You open your mouth and bring yourself closer, taking it inside.\n\n", false);
 			outputText("You hear a soft sigh and moan above you, \"<i>Oh sweetie,</i>\" it says in pleasure as you feel something get placed on the back of your head, pushing you forward.  The heady aroma is so strong that you can do nothing more than run your tongue over every part of this wonderful " + marbleCock() + ", letting the hand guide your movements while you hear happy noises coming from above you.  Those noises and words sound happy, so they make you feel happy too.\n\n", false);
-			outputText("Finally, you hear a gasp coming from the hand's owner, as a salty fluid starts to fill your mouth.  You swallow it instinctively and relish its taste.  About a minute later, you're finally able to collect your thoughts and realize that you'd lost control for a moment there.  From the satisfied look on Marble's face, it doesn't look like she's aware.  ", false);
+			outputText("Finally, you hear a gasp coming from the hand's owner, as a salty fluid starts to fill your mouth.  You swallow it instinctively and relish its taste.  About a minute later, you're finally able to collect your thoughts and realize that you'd lost control for a moment there.  From the satisfied look on Marble's face, it doesn't look like she's aware.  ");
 			//maybe there's a little mino power in there?
 			//Reduce PC intelligence by 0.2, increase libido by 0.2
 			dynStats("int", -0.2, "lib", -0.2);
@@ -3653,13 +3653,13 @@ private function marbleNomNoms():void {
 		}
 	} 
 	else {
-		//outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"\n\n", false);
+		//outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"\n\n");
 		//licking her pussy scene
-		outputText("Marble lifts up her skirt and gives you a clear view of her very wet womanhood.  You lower your head and take a deep breath of her animalistic scent.  It makes you feel a bit giddy and you can feel a wave of arousal pass over you.  You give the walls of her wet box a gentle lick and hear Marble give an approving sigh, before you really get to work.\n\n", false);
+		outputText("Marble lifts up her skirt and gives you a clear view of her very wet womanhood.  You lower your head and take a deep breath of her animalistic scent.  It makes you feel a bit giddy and you can feel a wave of arousal pass over you.  You give the walls of her wet box a gentle lick and hear Marble give an approving sigh, before you really get to work.\n\n");
 		outputText("Her taste is almost like honey, and it quickly spurs you on to lick at every part of her walls the best you can.  Marble puts her hand on the back of your head and begins to guide you where she wants you to go.  You push your tongue deeper and deeper inside her, probing every part of her that you can reach.  Though now it seems that Marble wants you to get to the main course; you're soon using your tongue to ease and play with her clit, drawing out more and more excited noises from above you. Finally, you hear her give a cry of joy and her womanhood sprays you with its juices.\n\n", false);
 	}
 	//After any scene where the PC pleases Marble:
-	outputText("\"<i>Thank you so much sweetie.  Next time if you're in the mood, maybe we can have fun together,</i>\" says Marble.", false);
+	outputText("\"<i>Thank you so much sweetie.  Next time if you're in the mood, maybe we can have fun together,</i>\" says Marble.");
 	//Increase PC lust by (random number 0-10) + lib/10
 	dynStats("lus", rand(10) + player.lib/10);
 	doNext(playerMenu);
@@ -3672,17 +3672,17 @@ public function MarbleDigsDraftsYo():void {
 	clearOutput();
 	player.consumeItem(consumables.P_DRAFT);
 	//gives Marble a 7 inch long, 2 inch thick dick by default, no other effect.  Can only be given while she does not have a dick.
-	outputText("You hand Marble the bottle.  She looks at it for a moment before ", false);
+	outputText("You hand Marble the bottle.  She looks at it for a moment before ");
 	if(player.statusEffectv4(StatusEffects.Marble) > 60) {
-		outputText("giving you a smile and saying, \"<i>So you want me to partake in corruption, and to have a nice cock to stick my sweet with?</i>\"  You tell her that the bottle has been purified, so it won't give corruption, but otherwise, you're hoping it gives her the <i>additional</i> effect.  She grins at you and downs the bottle.\n\n", false);
+		outputText("giving you a smile and saying, \"<i>So you want me to partake in corruption, and to have a nice cock to stick my sweet with?</i>\"  You tell her that the bottle has been purified, so it won't give corruption, but otherwise, you're hoping it gives her the <i>additional</i> effect.  She grins at you and downs the bottle.\n\n");
 	} 
 	else {
-		outputText("looking at you uncertainly and saying, \"<i>Uh, sweetie, I'm not going to drink this demon stuff.  It'll warp my body, and I think this will give me a cock...</i>\"  You assure her that the draft has been purified, so it won't warp her body or corrupt her... aside from that last effect she mentioned, but that's what you want her to get.  She sighs before yielding, and says, \"<i>Ok sweetie, if you really want me to have one, I'll take it for you.</i>\"  She takes a deep breath before drinking the bottle, and grimaces at the taste.\n\n", false);
+		outputText("looking at you uncertainly and saying, \"<i>Uh, sweetie, I'm not going to drink this demon stuff.  It'll warp my body, and I think this will give me a cock...</i>\"  You assure her that the draft has been purified, so it won't warp her body or corrupt her... aside from that last effect she mentioned, but that's what you want her to get.  She sighs before yielding, and says, \"<i>Ok sweetie, if you really want me to have one, I'll take it for you.</i>\"  She takes a deep breath before drinking the bottle, and grimaces at the taste.\n\n");
 	}
-	outputText("Marble drops the potion and grabs at her crotch.  Turning away from you, she gives an excited cry that is a mix between a moo and a moan as her body convulses slightly.  After a moment, she turns back to you and shows her new 7\" long and 2\" wide human cock.  She gives you a ", false);
-	if(player.statusEffectv4(StatusEffects.Marble) > 50) outputText("big ", false);
-	else outputText("nervous ", false);
-	outputText("smile.  <b>Marble is now a hermaphrodite.</b>  ", false);
+	outputText("Marble drops the potion and grabs at her crotch.  Turning away from you, she gives an excited cry that is a mix between a moo and a moan as her body convulses slightly.  After a moment, she turns back to you and shows her new 7\" long and 2\" wide human cock.  She gives you a ");
+	if(player.statusEffectv4(StatusEffects.Marble) > 50) outputText("big ");
+	else outputText("nervous ");
+	outputText("smile.  <b>Marble is now a hermaphrodite.</b>  ");
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.MARBLE_DICK_TYPE] = 1;
 	flags[kFLAGS.MARBLE_DICK_LENGTH] = 7;
@@ -3703,12 +3703,12 @@ private function MarblePEggEffects():void {
 	spriteSelect(41);
 	clearOutput();
 //removes her dick, no other effect.  Can only be given if Marble has a dick.
-	outputText("You hand Marble the pink egg.  She looks at it thoughtfully for a moment before her eyes light up in recognition.  \"<i>This is one of those magic eggs made from those egg elixirs.  If I remember right, this one removes the male traits of those who eat them.  ", false);
+	outputText("You hand Marble the pink egg.  She looks at it thoughtfully for a moment before her eyes light up in recognition.  \"<i>This is one of those magic eggs made from those egg elixirs.  If I remember right, this one removes the male traits of those who eat them.  ");
 	if(player.statusEffectv4(StatusEffects.Marble) > 50 ) {
-		outputText("So my sweet, tired of my cock?  Well, what if I like it?  Do you really want me to get rid of it?</i>\"  You assure her that yes, you do want her to get rid of it.  She frowns at you in annoyance, but ultimately agrees to take the egg.  \"<i>Eventually you'll want it back, I'm sure of it,</i>\" she says just before eating the egg.\n\n", false);
+		outputText("So my sweet, tired of my cock?  Well, what if I like it?  Do you really want me to get rid of it?</i>\"  You assure her that yes, you do want her to get rid of it.  She frowns at you in annoyance, but ultimately agrees to take the egg.  \"<i>Eventually you'll want it back, I'm sure of it,</i>\" she says just before eating the egg.\n\n");
 	} 
 	else {
-		outputText("So does this mean you don't want me to have a cock anymore, sweetie?</i>\"  You assure her that yes, you don't want her to have it anymore.  She seems relieved by this and admits, \"<i>Thank you sweetie, I don't think I really liked having it,</i>\" before eating the egg.\n\n", false);
+		outputText("So does this mean you don't want me to have a cock anymore, sweetie?</i>\"  You assure her that yes, you don't want her to have it anymore.  She seems relieved by this and admits, \"<i>Thank you sweetie, I don't think I really liked having it,</i>\" before eating the egg.\n\n");
 	}
 	outputText("She lifts up her skirt and the two of you watch as her " + marbleCock() + " is absorbed back into her body.  <b>Marble is now purely female.</b>  ", false);
 	flags[kFLAGS.MARBLE_DICK_TYPE] = 0;
@@ -3724,18 +3724,18 @@ public function marbleOvulatesLikeMadDawg():void {
 	//gives her eggs if she isn't pregnant, speeds pregnancy if she is.  She will refuse to take it if she is visibly pregnant with something other than eggs, and the nursery hasn't been built yet.
 	//Marble is visibly pregnant with non-eggs, and the nursery has not been built yet) {
 	if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
-		outputText("Marble refuses to take the elixir to speed up her pregnancy until after she has finished the nursery. ", false);
+		outputText("Marble refuses to take the elixir to speed up her pregnancy until after she has finished the nursery. ");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	else if (pregnancy.isPregnant) {
-		outputText("After taking the elixir, Marble's belly rumbles slightly.  You can both tell that her pregnancy has advanced.  ", false);
+		outputText("After taking the elixir, Marble's belly rumbles slightly.  You can both tell that her pregnancy has advanced.  ");
 		var newIncubation:int = pregnancy.incubation - (40 + rand(30));
 		if (newIncubation <= 0) newIncubation = 1;
 		pregnancy.knockUpForce(pregnancy.type, newIncubation);
 	}
 	else {
-		outputText("After taking the elixir, Marble tells you that her belly feels full.  It sounds like she'll be laying eggs soon.  ", false);
+		outputText("After taking the elixir, Marble tells you that her belly feels full.  It sounds like she'll be laying eggs soon.  ");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS + 46);
 	}
 	player.consumeItem(consumables.OVIELIX);
@@ -3818,13 +3818,13 @@ private function marbleAppearance():void {
 
 	outputText("Her shoulder-length brown hair is parted by a pair of rounded cow-ears that stick out sideways from her head.  ");
 	
-	if(player.statusEffectv4(StatusEffects.Marble) <= 20) outputText("Two small horns grow from her forehead, similar in size and appearance to those on a young female bovine.  ", false);
-	else if(player.statusEffectv4(StatusEffects.Marble) <= 50) outputText("Two medium sized horns grow from her forehead, similar in size and appearance to those on a female bovine.  ", false);
-	else outputText("Two fairly large horns grow from her forehead, similar in appearance to those on a female bovine.  ", false);
+	if(player.statusEffectv4(StatusEffects.Marble) <= 20) outputText("Two small horns grow from her forehead, similar in size and appearance to those on a young female bovine.  ");
+	else if(player.statusEffectv4(StatusEffects.Marble) <= 50) outputText("Two medium sized horns grow from her forehead, similar in size and appearance to those on a female bovine.  ");
+	else outputText("Two fairly large horns grow from her forehead, similar in appearance to those on a female bovine.  ");
 	outputText("She has wide womanly thighs that draw the attention of those around her, and her large butt fills out her clothing nicely.  A long cow-tail with a puffy tip swishes back and forth between her legs, as if swatting at flies. A pretty bow has been tied to her tail.  Two legs grow down from her waist");
 	
-	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <=1) outputText(", human until about half-way down her thigh.  The lower portion of her legs is covered in thick dark brown fur and ends in a pair of bestial hooves.\n\n",false);
-	else outputText(" that are oddly jointed and end in a pair of bestial hooves.\n\n",false);
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <=1) outputText(", human until about half-way down her thigh.  The lower portion of her legs is covered in thick dark brown fur and ends in a pair of bestial hooves.\n\n");
+	else outputText(" that are oddly jointed and end in a pair of bestial hooves.\n\n");
 
 	if(player.statusEffectv4(StatusEffects.Marble) <= 15) outputText("She has two pillowy breasts, each supporting a 0.4-inch lactating " + marbleNip() + ".  She could easily fill a " + marbleBreastSize() + " bra.\n\n", false);
 	else if(player.statusEffectv4(StatusEffects.Marble) <= 25) outputText("She has two large breasts, each supporting a 0.6-inch lactating " + marbleNip() + ".  She could easily fill a " + marbleBreastSize() + ".\n\n", false);
@@ -3836,7 +3836,7 @@ private function marbleAppearance():void {
 	//Marble's cock
 	//These pieces of text should appear in the same place as they do for the PC
 	switch (pregnancy.event) {
-		case 2: outputText("It looks like she's put on some weight since coming to your camp.\n\n", false); //3 to 8 days in
+		case 2: outputText("It looks like she's put on some weight since coming to your camp.\n\n"); //3 to 8 days in
 				break;
 		case 3: outputText("Her belly has swollen a bit; she may be pregnant.\n\n", false); //8 to 12 days in
 				break;
@@ -3844,7 +3844,7 @@ private function marbleAppearance():void {
 				break;
 		case 5: outputText("Her belly is very swollen; she is very pregnant.\n\n", false); //18 to 24 days in
 				break;
-		case 6: outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n", false); //24+ days in
+		case 6: outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n"); //24+ days in
 		default:
 	}
 	
@@ -3855,12 +3855,12 @@ private function marbleAppearance():void {
 	
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText("She has grown a " + marbleCock() + " since you brought her to camp. It is " + num2Text(int(flags[kFLAGS.MARBLE_DICK_LENGTH])) + " inches long and " + num2Text(int(flags[kFLAGS.MARBLE_DICK_THICKNESS])) + " inches thick.\n\n", false);
 	
-	if(player.statusEffectv4(StatusEffects.Marble) <= 50) outputText("She has a pussy, with a 0.5 inch clit.\n\n", false);
-	else if(player.statusEffectv4(StatusEffects.Marble) <= 75) outputText("She has a cunt, with a 0.6 inch clit.  You can see moisture gleaming from it.\n\n", false);
-	else outputText("She has a fuck-hole, with a 0.7 inch clit.  Moisture gleams in her cunt, its lips slightly parted.\n\n", false);
+	if(player.statusEffectv4(StatusEffects.Marble) <= 50) outputText("She has a pussy, with a 0.5 inch clit.\n\n");
+	else if(player.statusEffectv4(StatusEffects.Marble) <= 75) outputText("She has a cunt, with a 0.6 inch clit.  You can see moisture gleaming from it.\n\n");
+	else outputText("She has a fuck-hole, with a 0.7 inch clit.  Moisture gleams in her cunt, its lips slightly parted.\n\n");
 	//since I assume Marble may become ass fucked in the future, Boolean Marble.analVirgin:
-	if(player.statusEffectv1(StatusEffects.MarbleSpecials) == 0) outputText("She has one virgin bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.", false);
-	else outputText("She has one bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.", false);
+	if(player.statusEffectv1(StatusEffects.MarbleSpecials) == 0) outputText("She has one virgin bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.");
+	else outputText("She has one bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.");
 	doNext(interactWithMarbleAtCamp);
 }
 

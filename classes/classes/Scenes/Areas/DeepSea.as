@@ -44,17 +44,17 @@ package classes.Scenes.Areas
 					if (rand(2) == 0) {
 						//1/3 chance for strength
 						if (rand(3) == 0 && player.str < 200) {
-							outputText("The effort of struggling in the ocean depths has made you stronger.", false);
+							outputText("The effort of struggling in the ocean depths has made you stronger.");
 							dynStats("str", .5);
 						}
 						//1/3 chance for toughness
 						else if (rand(3) == 1 && player.tou < 200) {
-							outputText("The effort of struggling in the ocean depths has made you tougher.", false);
+							outputText("The effort of struggling in the ocean depths has made you tougher.");
 							dynStats("tou", .5);
 						}
 						//1/3 chance for speed
 						else if (rand(3) == 2 && player.spe < 200) {
-							outputText("The effort of struggling in the ocean depths has made you faster.", false);
+							outputText("The effort of struggling in the ocean depths has made you faster.");
 							dynStats("tou", .5);
 						}
 					}

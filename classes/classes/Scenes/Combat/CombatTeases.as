@@ -614,8 +614,8 @@ public class CombatTeases extends BaseContent {
 			case 0:
 				//Display
 				outputText("You slap your " + buttDescript(), false);
-				if (player.buttRating >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.", false);
-				else outputText(".", false);
+				if (player.buttRating >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.");
+				else outputText(".");
 				//Mod success
 				ass = true;
 				break;
@@ -632,7 +632,7 @@ public class CombatTeases extends BaseContent {
 					//50 + 10% per breastRow + breastSize%
 					outputText("You lift your top, freeing your rows of " + breastDescript(0) + " to jiggle freely.  You shake them from side to side enticingly", false);
 					if (player.lust >= (player.maxLust() * 0.5)) outputText(", your " + nippleDescript(0) + "s painfully visible.", false);
-					else outputText(".", false);
+					else outputText(".");
 					chance++;
 				}
 				breasts = true;
@@ -651,28 +651,28 @@ public class CombatTeases extends BaseContent {
 						damage++;
 						if (player.cocks.length == 1) outputText(player.cockDescript(0), false);
 						if (player.cocks.length > 1) outputText(player.multiCockDescriptLight(), false);
-						outputText(" and ", false);
+						outputText(" and ");
 						if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
 							damage += 5;
 						}
 						penis = true;
 					}
 					outputText(vaginaDescript(0), false);
-					outputText(".", false);
+					outputText(".");
 				}
 				vagina = true;
 				break;
 				//3 cock flash
 			case 3:
 				if (player.isTaur() && player.horseCocks() > 0) {
-					outputText("You let out a bestial whinny and stomp your hooves at your enemy.  They prepare for an attack, but instead you kick your front hooves off the ground, revealing the hefty horsecock hanging beneath your belly.  You let it flop around, quickly getting rigid and to its full erect length.  You buck your hips as if you were fucking a mare in heat, letting your opponent know just what's in store for them if they surrender to pleasure...", false);
+					outputText("You let out a bestial whinny and stomp your hooves at your enemy.  They prepare for an attack, but instead you kick your front hooves off the ground, revealing the hefty horsecock hanging beneath your belly.  You let it flop around, quickly getting rigid and to its full erect length.  You buck your hips as if you were fucking a mare in heat, letting your opponent know just what's in store for them if they surrender to pleasure...");
 					if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
 				}
 				else {
 					outputText("You open your " + player.armorName + ", revealing your ", false);
 					if (player.cocks.length == 1) outputText(player.cockDescript(0), false);
 					if (player.cocks.length > 1) outputText(player.multiCockDescriptLight(), false);
-					if (player.hasVagina()) outputText(" and ", false);
+					if (player.hasVagina()) outputText(" and ");
 					//Bulgy bonus!
 					if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
 						damage += 5;
@@ -682,7 +682,7 @@ public class CombatTeases extends BaseContent {
 						outputText(vaginaDescript(0), false);
 						vagina = true;
 					}
-					outputText(".", false);
+					outputText(".");
 				}
 				penis = true;
 				break;
@@ -711,7 +711,7 @@ public class CombatTeases extends BaseContent {
 				if (player.lust >= (player.maxLust() * 0.5)) {
 					if (player.hasFuckableNipples()) {
 						chance++;
-						outputText("  Clear slime leaks from them, making it quite clear that they're more than just nipples.", false);
+						outputText("  Clear slime leaks from them, making it quite clear that they're more than just nipples.");
 					}
 					else outputText("  Your hard nipples seem to demand " + monster.pronoun3 + " attention.", false);
 					chance += 1;
@@ -727,10 +727,10 @@ public class CombatTeases extends BaseContent {
 				}
 				else {
 					outputText("You coyly open your " + player.armorName + " and purr, \"<i>Does the thought of a hot, ", false);
-					if (futa) outputText("futanari ", false);
-					else if (player.findPerk(PerkLib.BimboBody) >= 0) outputText("bimbo ", false);
+					if (futa) outputText("futanari ");
+					else if (player.findPerk(PerkLib.BimboBody) >= 0) outputText("bimbo ");
 					else outputText("sexy ");
-					outputText("body turn you on?</i>\"  ", false);
+					outputText("body turn you on?</i>\"  ");
 				}
 				if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds seductively.", false);
 				else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds seductively.", false);
@@ -747,7 +747,7 @@ public class CombatTeases extends BaseContent {
 				//7 special Adjatha-crafted bend over bimbo times
 			case 7:
 				outputText("The glinting of light catches your eye and you whip around to inspect the glittering object, turning your back on " + monster.a + monster.short + ".  Locking your knees, you bend waaaaay over, " + chestDesc() + " swinging in the open air while your " + buttDescript() + " juts out at the " + monster.a + monster.short + ".  Your plump cheeks and " + hipDescript() + " form a jiggling heart-shape as you eagerly rub your thighs together.\n\n", false);
-				outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your [skin] to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.", false);
+				outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your [skin] to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.");
 				vagina = true;
 				chance++;
 				damage += 2;
@@ -755,7 +755,7 @@ public class CombatTeases extends BaseContent {
 				//==BRO STUFF=====
 				//8 Pec Dance
 			case 8:
-				outputText("You place your hands on your hips and flex repeatedly, skillfully making your pecs alternatively bounce in a muscular dance.  ", false);
+				outputText("You place your hands on your hips and flex repeatedly, skillfully making your pecs alternatively bounce in a muscular dance.  ");
 				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Damn, " + monster.a + monster.short + " has got to love this!", false);
 				else outputText(monster.capitalA + monster.short + " will probably enjoy the show, but you feel a bit silly doing this.", false);
 				chance += (player.tone - 75) / 5;
@@ -764,9 +764,9 @@ public class CombatTeases extends BaseContent {
 				break;
 				//9 Heroic Pose
 			case 9:
-				outputText("You lift your arms and flex your incredibly muscular arms while flashing your most disarming smile.  ", false);
+				outputText("You lift your arms and flex your incredibly muscular arms while flashing your most disarming smile.  ");
 				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText(monster.capitalA + monster.short + " can't resist such a heroic pose!", false);
-				else outputText("At least the physical changes to your body are proving useful!", false);
+				else outputText("At least the physical changes to your body are proving useful!");
 				chance += (player.tone - 75) / 5;
 				damage += (player.tone - 70) / 5;
 				auto = false;
@@ -775,10 +775,10 @@ public class CombatTeases extends BaseContent {
 			case 10:
 				outputText("You lean back and pump your hips at " + monster.a + monster.short + " in an incredibly vulgar display.  The bulging, barely-contained outline of your " + player.cockDescript(0) + " presses hard into your gear.  ", false);
 				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could " + monster.pronoun1 + " resist your huge cock!", false);
-				else outputText("This is so crude, but at the same time, you know it'll likely be effective.", false);
-				outputText("  You go on like that, humping the air for your foe", false);
-				outputText("'s", false);
-				outputText(" benefit, trying to entice them with your man-meat.", false);
+				else outputText("This is so crude, but at the same time, you know it'll likely be effective.");
+				outputText("  You go on like that, humping the air for your foe");
+				outputText("'s");
+				outputText(" benefit, trying to entice them with your man-meat.");
 				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
 				penis = true;
 				break;
@@ -787,8 +787,8 @@ public class CombatTeases extends BaseContent {
 				if (silly() && rand(2) == 0) outputText("You strike a herculean pose and flex, whispering, \"<i>Do you even lift?</i>\" to " + monster.a + monster.short + ".", false);
 				else {
 					outputText("You open your " + player.armorName + " just enough to let your " + player.cockDescript(0) + " and " + ballsDescriptLight() + " dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ", false);
-					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Bitches love a cum-leaking cock.", false);
-					else outputText("You've got to admit, you look pretty good down there.", false);
+					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Bitches love a cum-leaking cock.");
+					else outputText("You've got to admit, you look pretty good down there.");
 				}
 				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
 				penis = true;
@@ -867,29 +867,29 @@ public class CombatTeases extends BaseContent {
 				break;
 				//18 DOG TEASE
 			case 18:
-				outputText("You sit down like a dog, your [legs] are spread apart, showing your ", false);
-				if (player.hasVagina()) outputText("parted cunt-lips", false);
-				else outputText("puckered asshole, hanging, erect maleness,", false);
-				outputText(" and your hands on the ground in front of you.  You pant heavily with your tongue out and promise, \"<i>I'll be a good little bitch for you</i>.\"", false);
+				outputText("You sit down like a dog, your [legs] are spread apart, showing your ");
+				if (player.hasVagina()) outputText("parted cunt-lips");
+				else outputText("puckered asshole, hanging, erect maleness,");
+				outputText(" and your hands on the ground in front of you.  You pant heavily with your tongue out and promise, \"<i>I'll be a good little bitch for you</i>.\"");
 				vagina = true;
 				chance += 1;
 				damage += 2;
 				break;
 				//19 MAX FEM TEASE - SYMPHONIE
 			case 19:
-				outputText("You make sure to capture your foe's attention, then slowly and methodically allow your tongue to slide along your lush, full lips.  The glistening moisture that remains on their plump beauty speaks of deep lust and deeper throats.  Batting your long lashes a few times, you pucker them into a playful blown kiss, punctuating the act with a small moan. Your gorgeous feminine features hint at exciting, passionate moments together, able to excite others with just your face alone.", false);
+				outputText("You make sure to capture your foe's attention, then slowly and methodically allow your tongue to slide along your lush, full lips.  The glistening moisture that remains on their plump beauty speaks of deep lust and deeper throats.  Batting your long lashes a few times, you pucker them into a playful blown kiss, punctuating the act with a small moan. Your gorgeous feminine features hint at exciting, passionate moments together, able to excite others with just your face alone.");
 				chance += 2;
 				damage += 4;
 				break;
 				//20 MAX MASC TEASE
 			case 20:
-				outputText("As your foe regards you, you recognize their attention is fixated on your upper body.  Thrusting your strong jaw forward you show off your chiseled chin, handsome features marking you as a flawless specimen.  Rolling your broad shoulders, you nod your head at your enemy.  The strong, commanding presence you give off could melt the heart of an icy nun.  Your perfect masculinity speaks to your confidence, allowing you to excite others with just your face alone.", false);
+				outputText("As your foe regards you, you recognize their attention is fixated on your upper body.  Thrusting your strong jaw forward you show off your chiseled chin, handsome features marking you as a flawless specimen.  Rolling your broad shoulders, you nod your head at your enemy.  The strong, commanding presence you give off could melt the heart of an icy nun.  Your perfect masculinity speaks to your confidence, allowing you to excite others with just your face alone.");
 				chance += 2;
 				damage += 4;
 				break;
 				//21 MAX ADROGYN
 			case 21:
-				outputText("You reach up and run your hands down your delicate, androgynous features.  With the power of a man but the delicacy of a woman, looking into your eyes invites an air of enticing mystery.  You blow a brief kiss to your enemy while at the same time radiating a sexually exciting confidence.  No one could identify your gender by looking at your features, and the burning curiosity they encourage could excite others with just your face alone.", false);
+				outputText("You reach up and run your hands down your delicate, androgynous features.  With the power of a man but the delicacy of a woman, looking into your eyes invites an air of enticing mystery.  You blow a brief kiss to your enemy while at the same time radiating a sexually exciting confidence.  No one could identify your gender by looking at your features, and the burning curiosity they encourage could excite others with just your face alone.");
 				damage -= 3;
 				break;
 				//22 SPOIDAH SILK
@@ -900,11 +900,11 @@ public class CombatTeases extends BaseContent {
 				//23 RUT TEASE
 			case 23:
 				if (player.horseCocks() > 0 && player.longestHorseCockLength() >= 12) {
-					outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.", false);
+					outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.");
 				}
 				else {
 					outputText("Panting with your unstoppable lust for the delicious, impregnable cunt before you, you yank off your " + player.armorName + " with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state and grab her shoulders.  ", false);
-					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!", false);
+					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!");
 				}
 				penis = true;
 				break;
@@ -953,7 +953,7 @@ public class CombatTeases extends BaseContent {
 				break;
 				//31 Centaur harness clothes
 			case 31:
-				outputText("You rear back, and declare that, \"<i>This horse is ready to ride, all night long!</i>\"", false);
+				outputText("You rear back, and declare that, \"<i>This horse is ready to ride, all night long!</i>\"");
 				chance += 2;
 				damage += 4;
 				break;
@@ -986,12 +986,12 @@ public class CombatTeases extends BaseContent {
 				break;
 				//36 Bondage Patient Clothes (done):
 			case 36:
-				outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care, feeling up for it?</i>\" you tease.", false);
+				outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care, feeling up for it?</i>\" you tease.");
 				damage += 2;
 				chance++;
 				break;
 			default:
-				outputText("You shimmy and shake sensually. (An error occurred.)", false);
+				outputText("You shimmy and shake sensually. (An error occurred.)");
 				break;
 			case 37:
 				outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailCount > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
@@ -1457,8 +1457,8 @@ public class CombatTeases extends BaseContent {
 			else if (!justText) monster.teased(damage);
 
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta()) {
-				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
-				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
+				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
+				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
 
@@ -1473,7 +1473,7 @@ public class CombatTeases extends BaseContent {
 			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
 			else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 		}
-		outputText("\n\n", false);
+		outputText("\n\n");
 	}
 
 	public function teaseXP(XP:Number = 0):void {

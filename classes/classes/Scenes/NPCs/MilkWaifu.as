@@ -48,7 +48,7 @@ private function nameZeMilkBath():void
 	else if(mainView.nameBox.text == "" || mainView.nameBox.text is Number) 
 	{
 		clearOutput();
-		outputText("<b>You must give her a name.</b>", false);
+		outputText("<b>You must give her a name.</b>");
 		menu();
 		addButton(0,"Next",nameZeMilkBath);
 		mainView.nameBox.visible = true;

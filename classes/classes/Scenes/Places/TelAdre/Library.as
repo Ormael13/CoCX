@@ -121,32 +121,32 @@ private function studyInTA():void {
 			//(Intelligence increase)
 			//Smart enough for arouse and doesnt have it
 			if(player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
 				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
 			else if(player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
 			else if(player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
 				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
 			else if(player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
 				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
 			else if(player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
 			else if(player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
 				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			}
 		}

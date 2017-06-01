@@ -57,19 +57,19 @@
 			} else {
 				outputText("You struggle to keep your mind on the fight and fail to do so. ", true);
 				if (pcCameWorms){
-					outputText("\n\nThe demons joke and smile, obviously unconcerned with your state.\n\n", false);
+					outputText("\n\nThe demons joke and smile, obviously unconcerned with your state.\n\n");
 				}
 				if(player.cocks.length > 0) {
-					if(player.cockTotal() > 1) outputText("Each of y", false);
-					else outputText("Y", false);
+					if(player.cockTotal() > 1) outputText("Each of y");
+					else outputText("Y");
 					outputText("our " + player.multiCockDescriptLight() + " throbs ", false);
-					if(player.hasVagina()) outputText(" and your ", false);
+					if(player.hasVagina()) outputText(" and your ");
 				}
 				if(player.vaginas.length > 0) {
-					if(!player.hasCock()) outputText("Your ", false);
+					if(!player.hasCock()) outputText("Your ");
 					outputText(game.vaginaDescript(0) + " burns ", false);
 				}
-				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.", false);
+				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.");
 				doNext(game.desert.oasis.oasisSexing);
 			}
 		}
@@ -77,11 +77,11 @@
 
 		override public function teased(lustDelta:Number):void
 		{
-			outputText("\n", false);
+			outputText("\n");
 			if(lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
-			else if(lustDelta > 0 && lustDelta < 5) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.", false);
-			else if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.", false);
-			else if(lustDelta >= 10) outputText("The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.", false);
+			else if(lustDelta > 0 && lustDelta < 5) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
+			else if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
+			else if(lustDelta >= 10) outputText("The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
 			applyTease(lustDelta);
 		}
 

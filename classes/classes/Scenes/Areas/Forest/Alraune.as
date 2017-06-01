@@ -44,17 +44,17 @@ package classes.Scenes.Areas.Forest
 		
 		public function alrauneTeaseAttack():void {
 			if (rand(2) == 1) {
-				outputText("The alraune parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n", false);
-				outputText("\"<i>Don’t you want a taste of what my lovely body can offer? It is all yours to play with, all you need to do is give in to me.</i>\"\n\n", false);
+				outputText("The alraune parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n");
+				outputText("\"<i>Don’t you want a taste of what my lovely body can offer? It is all yours to play with, all you need to do is give in to me.</i>\"\n\n");
 			}
 			else {
-				outputText("The alraune grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n", false);
-				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n", false);
+				outputText("The alraune grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n");
+				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n");
 			}
-			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ", false);
+			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
 			var lustDmg:int = rand(player.lib / 10) + 20;
 			game.dynStats("lus", lustDmg);
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		
 		override protected function performCombatAction():void

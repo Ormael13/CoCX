@@ -17,7 +17,7 @@ package classes.Scenes.NPCs
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe-spe) / 4) + 80)) > 80) {
-				outputText("You nimbly dodge the salamander's massive sword thrust!", false);
+				outputText("You nimbly dodge the salamander's massive sword thrust!");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
@@ -43,7 +43,7 @@ package classes.Scenes.NPCs
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				//Take Damage
-				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. ", false);
+				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. ");
 				if(damage > 0) {
 					if(lustVuln > 0 && (player.armor.name == "barely-decent bondage straps" || player.armor.name == "nothing")) {
 						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ", false);
@@ -54,7 +54,7 @@ package classes.Scenes.NPCs
 			}
 			
 			statScreenRefresh();
-			outputText("\n", false);
+			outputText("\n");
 			combatRoundOver();
 		}
 
@@ -71,7 +71,7 @@ package classes.Scenes.NPCs
 			}
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 83) {
-				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  She lashes out at your feet with her tail, and you're only just able to dodge the surprise attack.", false);
+				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  She lashes out at your feet with her tail, and you're only just able to dodge the surprise attack.");
 				return;
 			}
 			//Determine if evaded
@@ -86,7 +86,7 @@ package classes.Scenes.NPCs
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 3) {
-				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -98,11 +98,11 @@ package classes.Scenes.NPCs
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The salamander's tail-swipe harmlessly deflects off your armor!", false);
-				else outputText("The salamander's tail-swipe hits you but fails to move or damage you.", false);
+				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The salamander's tail-swipe harmlessly deflects off your armor!");
+				else outputText("The salamander's tail-swipe hits you but fails to move or damage you.");
 			}
 			//Take Damage
-			else outputText("The salamander rushes at you, knocking aside your defensive feint and sliding in past your guard.  She lashes out at your feet with her tail, and you can feel the heated wake of the fiery appendage on your ensuing fall toward the now-smouldering grass. ", false);
+			else outputText("The salamander rushes at you, knocking aside your defensive feint and sliding in past your guard.  She lashes out at your feet with her tail, and you can feel the heated wake of the fiery appendage on your ensuing fall toward the now-smouldering grass. ");
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 					outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
@@ -111,7 +111,7 @@ package classes.Scenes.NPCs
 			}
 			if(damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
-			outputText("\n", false);
+			outputText("\n");
 			combatRoundOver();
 		}
 

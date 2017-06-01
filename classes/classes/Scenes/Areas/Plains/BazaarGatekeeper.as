@@ -17,7 +17,7 @@ package classes.Scenes.Areas.Plains
 		
 		public function scimitarAttack():void {
 			
-			outputText("The gatekeeper raises his scimitars ", false);
+			outputText("The gatekeeper raises his scimitars ");
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 				outputText("and slashes his scimitars blindly, missing you by a great deal!");
 				combatRoundOver();
@@ -29,19 +29,19 @@ package classes.Scenes.Areas.Plains
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE || evade == EVASION_MISDIRECTION)
 			{
-				outputText("and you successfully dodge his scimitars thanks to your superior evasion! ", false);
+				outputText("and you successfully dodge his scimitars thanks to your superior evasion! ");
 			}
 			else if (evade == EVASION_FLEXIBILITY)
 			{
-				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
+				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!");
 			}
 			else if (evade == EVASION_SPEED || evade != null)
 			{
-				outputText("and you successfully dodge his scimitars! ", false);
+				outputText("and you successfully dodge his scimitars! ");
 			}
 			else
 			{
-				outputText("but you get hit instead! ", false);
+				outputText("but you get hit instead! ");
 				var damage:int = int(str + weaponAttack + 100);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
@@ -62,7 +62,7 @@ package classes.Scenes.Areas.Plains
 				outputText("The blind gatekeeper slashes his scimitars wide, missing you by a great deal!");
 			}
 			else {
-				outputText("The gatekeeper slashes you brutally! You are in a lot of pain. ", false);
+				outputText("The gatekeeper slashes you brutally! You are in a lot of pain. ");
 				var damage:int = int(str + weaponAttack + 250);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);

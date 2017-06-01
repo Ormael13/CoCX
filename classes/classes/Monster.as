@@ -800,7 +800,7 @@
 					outputAttack(damage);
 					postAttack(damage);
 					game.statScreenRefresh();
-					outputText("\n", false);
+					outputText("\n");
 				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
 					addStatusValue(StatusEffects.Attacks, 1, -1);
@@ -841,7 +841,7 @@
 			else if (damage < 11) {
 				outputText(capitalA + short + " wound");
 				if (!plural) outputText("s");
-				outputText(" you! ", false);
+				outputText(" you! ");
 			}
 			else if (damage < 21) {
 				outputText(capitalA + short + " stagger");
@@ -850,7 +850,7 @@
 			}
 			else if (damage > 20) {
 				outputText(capitalA + short + " <b>mutilate", false);
-				if (!plural) outputText("s", false);
+				if (!plural) outputText("s");
 				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 			}
 			if (damage > 0) {
@@ -901,7 +901,7 @@
 			if (evasionResult == EVASION_EVADE) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
 				if (!plural) outputText("s");
-				outputText(" attack.\n", false);
+				outputText(" attack.\n");
 				return true;
 			}
 			//("Misdirection"
@@ -912,19 +912,19 @@
 			//Determine if cat'ed
 			if (evasionResult == EVASION_FLEXIBILITY) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
-				if (plural) outputText("' attacks.\n", false);
-				else outputText("'s attack.\n", false);
+				if (plural) outputText("' attacks.\n");
+				else outputText("'s attack.\n");
 				return true;
 			}
 			if (evasionResult != null) { // Failsafe fur unhandled
-				outputText("Using your superior combat skills you manage to avoid attack completely.\n", false);
+				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
 				return true;
 			}
 			//Parry with weapon
 			if (combatParry()) {
 				outputText("You manage to block " + a + short + "");
-				if (plural) outputText("' attacks ", false);
-				else outputText("'s attack ", false);
+				if (plural) outputText("' attacks ");
+				else outputText("'s attack ");
 				outputText("with your " + player.weaponName + ".\n");
 				return true;
 			}
@@ -946,7 +946,7 @@
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
+				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
 				if (!handleConstricted()) return;
@@ -974,7 +974,7 @@
 				 mainClassPtr.doNext(3);
 				 return;
 				 }
-				 mainClassPtr.outputText("Lust Placeholder!!", false);
+				 mainClassPtr.outputText("Lust Placeholder!!");
 				 mainClassPtr.doNext(3);
 				 return;*/
 //			}
@@ -987,7 +987,7 @@
 		protected function handleConstricted():Boolean
 		{
 			if (player.lowerBody == 26) {
-			game.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.", false);
+			game.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.", false);
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
@@ -1007,7 +1007,7 @@
 			return false;
 			}
 			else {
-			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
+			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
 				removeStatusEffect(StatusEffects.Constricted);
@@ -1026,11 +1026,11 @@
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foes shake free of their fear and ready themselves for battle.", false);
+					game.outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}
 				else {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foe shakes free of its fear and readies itself for battle.", false);
+					game.outputText("Your foe shakes free of its fear and readies itself for battle.");
 				}
 			}
 			else {
@@ -1049,12 +1049,12 @@
 		{
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
-			if (hasStatusEffect(StatusEffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
-			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
+			if (hasStatusEffect(StatusEffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
 			else {
-			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!", false);
-			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
+			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
+			else game.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
 			game.combatRoundOver();
 			return false;
@@ -1149,7 +1149,7 @@
 			if(lustDelta > 0) {
 				//Imp mob uber interrupt!
 			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class
-					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
+					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.");
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;
 					lust -= 15;
@@ -1503,30 +1503,30 @@
 				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
-				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n", false);
-				if(player.lust >= (player.maxLust() * 0.45) && player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n", false);
-				if(player.lust >= (player.maxLust() * 0.70) && player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n", false);
-				if(player.lust >= (player.maxLust() * 0.90)) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n", false);
+				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
+				if(player.lust >= (player.maxLust() * 0.45) && player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
+				if(player.lust >= (player.maxLust() * 0.70) && player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
+				if(player.lust >= (player.maxLust() * 0.90)) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
 				game.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
 				if(this is OmnibusOverseer) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
+					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) {
-						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ", false);
+						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 						temp = rand(4);
-						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n", false);
-						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n", false);
-						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n", false);
-						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n", false);
+						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
+						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
+						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
+						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
 					}
 				}
 				if (this is Alraune) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n", false);
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n", false);
-					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n", false);
+					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
+					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
 				}
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}

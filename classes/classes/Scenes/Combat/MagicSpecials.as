@@ -193,19 +193,19 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Enemy too strong or multiplesI think you
 		if(player.inte < monster.inte || monster.plural) {
-			outputText("You reach for your enemy's mind, but can't break through.\n", false);
+			outputText("You reach for your enemy's mind, but can't break through.\n");
 			fatigue(10);
 			enemyAI();
 			return;
 		}
 		//[Failure]
 		if(rand(10) == 0) {
-			outputText("As you reach for your enemy's mind, you are distracted and the chorus of voices screams out all at once within your mind. You're forced to hastily silence the voices to protect yourself.", false);
+			outputText("As you reach for your enemy's mind, you are distracted and the chorus of voices screams out all at once within your mind. You're forced to hastily silence the voices to protect yourself.");
 			fatigue(10);
 			enemyAI();
 			return;
 		}
-		outputText("You reach for your enemy's mind, watching as its sudden fear petrifies your foe.\n\n", false);
+		outputText("You reach for your enemy's mind, watching as its sudden fear petrifies your foe.\n\n");
 		monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
 		enemyAI();
 	}
@@ -253,12 +253,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
@@ -268,7 +268,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -360,12 +360,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
@@ -375,7 +375,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -419,7 +419,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.CooldownCompellingAria,10,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-			outputText("\n\n", false);
+			outputText("\n\n");
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -456,7 +456,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
-			outputText("\n\n", false);
+			outputText("\n\n");
 			enemyAI();
 		}
 	}
@@ -531,12 +531,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
@@ -551,7 +551,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
@@ -671,12 +671,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
@@ -691,7 +691,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
@@ -788,12 +788,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the iceball back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the iceball back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
@@ -803,7 +803,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -890,12 +890,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the lightning bolt back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the lightning bolt back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
@@ -905,7 +905,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -992,12 +992,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the darkness shard back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the darkness shard back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
@@ -1007,7 +1007,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = takeDamage(damage);
 				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -1048,9 +1048,9 @@ public class MagicSpecials extends BaseCombatContent {
 		//[Failure]
 		//(high damage to self, +10 fatigue on top of ability cost)
 		if(rand(5) == 0 || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			if(player.hasStatusEffect(StatusEffects.WebSilence)) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
+			if(player.hasStatusEffect(StatusEffects.WebSilence)) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ");
 			else if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
-			else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
+			else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ");
 			fatigue(10);
 			takeDamage(10 + rand(20), true);
 			outputText("\n\n");
@@ -1094,26 +1094,26 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
-			outputText("<b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b> ", false);
+			outputText("<b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b> ");
 			player.removeStatusEffect(StatusEffects.GooArmorSilence);
 			damage += 25;
 		}
-		else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ", false);
+		else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ");
 
 		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
-			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
+			outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
+			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
+			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
 			enemyAI();
 			return;
 		}
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
+			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
@@ -1130,7 +1130,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 				takeDamage(damage);
 			}
-			outputText("\n\n", false);
+			outputText("\n\n");
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
@@ -1220,31 +1220,31 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 
-		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
+		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.");
 
 		if(player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("  <b>The fire burns through the webs blocking your mouth!</b>", false);
+			outputText("  <b>The fire burns through the webs blocking your mouth!</b>");
 			player.removeStatusEffect(StatusEffects.WebSilence);
 		}
 		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
-			outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>", false);
+			outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>");
 			player.removeStatusEffect(StatusEffects.GooArmorSilence);
 			damage += 25;
 		}
 		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
-			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
+			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
+			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
+			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
 			enemyAI();
 			return;
 		}
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ", false);
+			outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ");
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!", false);
+				outputText("You dive out of the way and evade it!");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!", false);
+				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
@@ -1253,14 +1253,14 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = int(damage / 6);
-				outputText("Your own fire smacks into your face, arousing you!", false);
+				outputText("Your own fire smacks into your face, arousing you!");
 				dynStats("lus", damage);
 			}
-			outputText("\n", false);
+			outputText("\n");
 		}
 		else {
 			if(monster.inte < 10) {
-				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.", false);
+				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");
 				if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 				if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 				if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
@@ -1273,7 +1273,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				if(monster.lustVuln > 0) {
-					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.", false);
+					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.");
 					monster.teased(monster.lustVuln * damage / 6);
 					outputText("\n");
 				}
@@ -1282,7 +1282,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
-		outputText("\n", false);
+		outputText("\n");
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
@@ -1367,8 +1367,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		temp = Math.round(temp);
 		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>", false);
-		outputText("\n\n", false);
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
 		checkAchievementDamage(temp);
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -1519,7 +1519,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 dmg = Math.round(dmg);
 	 dmg = doDamage(dmg);
 	 if (monster.lustVuln == 0) {
-	 outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.", false);
+	 outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 	 }
 	 var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 	 if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
@@ -1530,7 +1530,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 	 outputText(monster.capitalA + monster.short + "'");
 	 if(!monster.plural) outputText("s");
-	 outputText(" eyes glaze over with desire for a moment.  ", false);
+	 outputText(" eyes glaze over with desire for a moment.  ");
 	 }
 	 if (monster.cocks.length > 0) {
 	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -1560,7 +1560,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 monster.teased(lustDmg);
 	 outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>", false);
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-	 outputText("\n\n", false);
+	 outputText("\n\n");
 	 statScreenRefresh();
 	 flags[kFLAGS.SPELLS_CAST]++;
 	 if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1644,7 +1644,7 @@ public class MagicSpecials extends BaseCombatContent {
 		dmg = Math.round(dmg);
 		dmg = doDamage(dmg);
 		if (monster.lustVuln == 0) {
-			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.", false);
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
@@ -1655,7 +1655,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
 			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -1687,7 +1687,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1768,7 +1768,7 @@ public class MagicSpecials extends BaseCombatContent {
 		dmg = Math.round(dmg);
 		dmg = doDamage(dmg);
 		if (monster.lustVuln == 0) {
-			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.", false);
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
@@ -1779,7 +1779,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
 			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -1810,7 +1810,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1896,7 +1896,7 @@ public class MagicSpecials extends BaseCombatContent {
 		dmg = Math.round(dmg);
 		dmg = doDamage(dmg);
 		if (monster.lustVuln == 0) {
-			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.", false);
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
@@ -1907,7 +1907,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
 			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -1939,7 +1939,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n", false);
+		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2067,7 +2067,7 @@ public class MagicSpecials extends BaseCombatContent {
 //		outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");
 //	}
 		if (monster.lustVuln == 0) {
-			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.", false);
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
@@ -2078,7 +2078,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
 			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -2123,11 +2123,11 @@ public class MagicSpecials extends BaseCombatContent {
 		var lusttransfered:Number = 0;
 		lusttransfered += Math.round(player.lust * 0.15);
 		player.lust -= lusttransfered;
-		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy", false);
-		if(!monster.plural) outputText(".", false);
-		else outputText("s.", false);
+		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy");
+		if(!monster.plural) outputText(".");
+		else outputText("s.");
 		if(monster.lustVuln == 0) {
-			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
+			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			player.lust += lusttransfered;
 			enemyAI();
 			return;
@@ -2154,7 +2154,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		monster.lust += lusttransfered;
-		outputText("\n\n", false);
+		outputText("\n\n");
 		doNext(playerMenu);
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
@@ -2191,7 +2191,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var lustDmg:Number = 5;
 		if (player.findPerk(PerkLib.BlackHeart) >= 0) lustDmg += 5;
 		if(monster.lustVuln == 0) {
-			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
+			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();
 			return;
 		}
@@ -2203,7 +2203,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
 			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -2233,7 +2233,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasStatusEffect(StatusEffects.TimesCharmed)) monster.createStatusEffect(StatusEffects.TimesCharmed, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1, 0, 0, 0);
 			else monster.addStatusValue(StatusEffects.TimesCharmed, 1, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1);
 		}
-		outputText("\n\n", false);
+		outputText("\n\n");
 		doNext(playerMenu);
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
@@ -2263,7 +2263,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.findPerk(PerkLib.BlackHeart) >= 0) lustDmg += player.inte / 10;
 		if(monster.lustVuln == 0) {
-			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
+			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();
 			return;
 		}
@@ -2275,7 +2275,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
-			outputText(" eyes glaze over with desire for a moment.  ", false);
+			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
 			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
@@ -2299,7 +2299,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		monster.teased(lustDmg);
-		outputText("\n\n", false);
+		outputText("\n\n");
 		doNext(playerMenu);
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
@@ -2309,7 +2309,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if(monster.short == "plain girl" || monster.findPerk(PerkLib.Incorporeality) >= 0) {
-			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.", false);
+			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.");
 		}
 		else if (monster is LivingStatue)
 		{
@@ -2317,20 +2317,20 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Sample possession text (>79 int, perhaps?):
 		else if((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > 100) {
-			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame.  Unfortunately, it seems ", false);
-			if(monster.inte > 100) outputText("they were FAR more mentally prepared than anything you can handle, and you're summarily thrown out of their body before you're even able to have fun with them.  Darn, you muse.\n\n", false);
-			else outputText("they have a body that's incompatible with any kind of possession.\n\n", false);
+			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame.  Unfortunately, it seems ");
+			if(monster.inte > 100) outputText("they were FAR more mentally prepared than anything you can handle, and you're summarily thrown out of their body before you're even able to have fun with them.  Darn, you muse.\n\n");
+			else outputText("they have a body that's incompatible with any kind of possession.\n\n");
 		}
 		//Success!
 		else if(player.inte >= (monster.inte - 10) + rand(21)) {
-			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.", false);
+			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.");
 			var damage:Number = Math.round(player.inte/5) + rand(player.level) + player.level;
 			monster.teased(monster.lustVuln * damage);
 			outputText("\n\n");
 		}
 		//Fail
 		else {
-			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.\n\n", false);
+			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.\n\n");
 		}
 		if(!combatRoundOver()) enemyAI();
 	}

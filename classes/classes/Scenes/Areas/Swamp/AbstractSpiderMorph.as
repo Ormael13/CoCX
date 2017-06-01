@@ -40,15 +40,15 @@ package classes.Scenes.Areas.Swamp
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				outputText("You dodge away, avoiding the sticky strands!", false);
+				outputText("You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands!", false);
+				outputText("You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands!", false);
+				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
@@ -57,13 +57,13 @@ package classes.Scenes.Areas.Swamp
 			//Got hit
 			else {
 				if (!player.hasStatusEffect(StatusEffects.Web)) {
-					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.", false);
-					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.", false);
-					outputText("\n", false);
+					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.");
+					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
+					outputText("\n");
 					player.createStatusEffect(StatusEffects.Web, 0, 0, 0, 0);
 				}
 				else {
-					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n", false);
+					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
 				}
 				//Only apply as much speed slow as necessary.
 				var amount:Number = 25;
@@ -90,16 +90,16 @@ package classes.Scenes.Areas.Swamp
 				if (player.hasCock()) {
 					outputText(player.SMultiCockDesc() + " turns rock hard and squirts weakly, suddenly so aroused that it starts soaking your " + player.armorName, false);
 					if (player.hasVagina()) outputText(" along with your " + player.vaginaDescript(), false);
-					outputText(".  ", false);
+					outputText(".  ");
 				}
 				else if (player.hasVagina()) outputText("Your " + player.vaginaDescript() + " grows wet as hell and so sensitive that every step and movement reminds you of the powerful need for something between your sopping nether-lips.  ", false);
 				outputText("While " + mf("his", "her") + " venom pours into you, the spider-" + mf("boy", "girl") + " reaches into your gear to play with your " + player.nippleDescript(0) + ", and you moan like a whore from the dual stimulation of " + mf("his", "her") + " venom and nipple-play.\n\n", false);
-				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ", false);
-				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ", false);
+				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ");
+				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ");
 				game.dynStats("lus", 60);
-				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.", false);
-				else outputText("struggle not to fall down and start masturbating on the spot.", false);
-				outputText("\n", false);
+				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
+				else outputText("struggle not to fall down and start masturbating on the spot.");
+				outputText("\n");
 				combatRoundOver();
 				return;
 			}
@@ -114,11 +114,11 @@ package classes.Scenes.Areas.Swamp
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You evade, avoiding the bite!", false);
+				outputText("You evade, avoiding the bite!");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Your misleading movements allow you to easily sidestep the spider bite!", false);
+				outputText("Your misleading movements allow you to easily sidestep the spider bite!");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
@@ -146,28 +146,28 @@ package classes.Scenes.Areas.Swamp
 			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your " + player.weaponName + ".  ", false);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.", false);
+				outputText("The blind web-shot goes horribly wide, missing you entirely.");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				outputText("You pull your weapon back and the webbing goes wide, missing entirely.", false);
+				outputText("You pull your weapon back and the webbing goes wide, missing entirely.");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!", false);
+				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!", false);
+				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n", false);
 			}
 			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
-				outputText("The webbing hits your ", false);
-				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n", false);
-				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n", false);
+				outputText("The webbing hits your ");
+				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");
+				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");
 			}
 			else {
 				outputText("You don't react fast enough and the sticky webbing pulls your " + player.weaponName + " out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!", false);
@@ -186,26 +186,26 @@ package classes.Scenes.Areas.Swamp
 			outputText(capitalA + short + " squirts a concentrated spray of " + mf("his", "her") + " webs directly at your face!  ", false);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.", false);
+				outputText("The blind web-shot goes horribly wide, missing you entirely.");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.", false);
+				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.", false);
+				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!", false);
+				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n", false);
 			}
 			else {
-				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n", false);
+				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n");
 				player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0);
 			}
 			combatRoundOver();

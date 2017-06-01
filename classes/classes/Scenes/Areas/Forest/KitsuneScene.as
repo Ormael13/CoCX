@@ -665,7 +665,7 @@ package classes.Scenes.Areas.Forest
 				if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
 				if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 4) {
 					flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
-					outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>", false);
+					outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>");
 				}
 				model.time.hours = 6;
 				model.time.days++;

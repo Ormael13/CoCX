@@ -774,7 +774,7 @@ package classes.Scenes.Places.Prison
 			outputText("\"<i>Rest now, dear. It will be there for you to enjoy when you wake up.</i>\" She gives you one more gentle pat on your head, coaxing you to give up the fight, and you drift quietly into a blissful sleep.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			player.slimeFeed();
 			player.refillHunger(5);
@@ -794,10 +794,10 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingOrgasmTrainingPerform():void
 		{
 			clearOutput();
-			outputText("(Placehoder) You let yourself go and give her an excellent BJ while masturbating furiously, and orgasm prodigiously when told to. She is quite pleased, and rewards you with an untainted meal.\n\n",false);
+			outputText("(Placehoder) You let yourself go and give her an excellent BJ while masturbating furiously, and orgasm prodigiously when told to. She is quite pleased, and rewards you with an untainted meal.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			player.slimeFeed();
 			player.refillHunger(15, true);
@@ -817,11 +817,11 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingAnalTrainingAccept():void
 		{
 			clearOutput();
-			outputText("(Placehoder) You meekly agree and clumsily pound her dick into your ass while masturbating, but don't orgasm exactly when she does. You have to keep fucking away with an ass stuffed with cum until you finally manage to cum, and then lick her dick clean greatful to have the ordeal overwith. She is happy, but since you didn't put your heart into it you get a bowl of cum. Try harder next time!",false);
-			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
+			outputText("(Placehoder) You meekly agree and clumsily pound her dick into your ass while masturbating, but don't orgasm exactly when she does. You have to keep fucking away with an ass stuffed with cum until you finally manage to cum, and then lick her dick clean greatful to have the ordeal overwith. She is happy, but since you didn't put your heart into it you get a bowl of cum. Try harder next time!");
+			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			player.buttChange(32,true,true,false);
 			player.slimeFeed();
@@ -841,10 +841,10 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingAnalTrainingPerform():void
 		{
 			clearOutput();
-			outputText("(Placehoder) You let yourself go and plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, and for an encore lick the pools of cum off the floor that dripped from your ass. She is quite pleased, and rewards you with an untainted meal.\n\n",false);
+			outputText("(Placehoder) You let yourself go and plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, and for an encore lick the pools of cum off the floor that dripped from your ass. She is quite pleased, and rewards you with an untainted meal.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			player.buttChange(32, true, true, false);
 			player.obeySoftCap = false;
@@ -868,7 +868,7 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			if(prison.prisonCaptor.captorName != "Elly")
 			{
-				outputText("The door opens and a guard tosses a pathetic piece of bread at your feet.\n\n",false);
+				outputText("The door opens and a guard tosses a pathetic piece of bread at your feet.\n\n");
 				inventory.takeItem(consumables.P_BREAD, playerMenu);
 				return true;
 			}
@@ -904,11 +904,11 @@ package classes.Scenes.Places.Prison
 			var lustChange:int = 0;
 			if(player.will < prison.prisonWillCost(5))
 			{
-				outputText("While you'd like to preserve a bit of your dignity and refuse to do as you have been told, you simply don't have the willpower to resist Mistress Elly right now. ",false);
+				outputText("While you'd like to preserve a bit of your dignity and refuse to do as you have been told, you simply don't have the willpower to resist Mistress Elly right now. ");
 				if(rand(player.esteem * 3) > player.obey + player.lust + player.cor)
 				{
 					prison.changeEsteem(2,prison.inPrison);
-					outputText("\n\n",false);
+					outputText("\n\n");
 					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
@@ -933,9 +933,9 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n",false);
+					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n");
 					prison.changeEsteem(2,prison.inPrison);
-					outputText("\n\n",false);
+					outputText("\n\n");
 					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
@@ -969,28 +969,28 @@ package classes.Scenes.Places.Prison
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				}
 				prison.changeWill(-prison.prisonWillCost(5));
-				outputText("Though you are unwilling to obey [if (obey <= 25) your captor][if (obey > 25) your Mistress] in this moment, ",false);
+				outputText("Though you are unwilling to obey [if (obey <= 25) your captor][if (obey > 25) your Mistress] in this moment, ");
 				if(player.obey < 10)
 				{
 					if(player.esteem < 15)
 					{
-						outputText("you are afraid of what might happen should you truly anger her.",false);
+						outputText("you are afraid of what might happen should you truly anger her.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("you don't feel confident enough to confront her right now.",false);
+						outputText("you don't feel confident enough to confront her right now.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("you would prefer not to anger her, either.",false);
+						outputText("you would prefer not to anger her, either.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("you see no reason to provoke her, either.",false);
+						outputText("you see no reason to provoke her, either.");
 					}
 					else
 					{
-						outputText("you see no advantage to provoking her, either.",false);
+						outputText("you see no advantage to provoking her, either.");
 					}
 					
 				}
@@ -998,23 +998,23 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("you desperately hope that your failure does not upset her.",false);
+						outputText("you desperately hope that your failure does not upset her.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("you hope that your refusal does not upset her.",false);
+						outputText("you hope that your refusal does not upset her.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("you know your life will be a lot easier if you can avoid upsetting her.",false);
+						outputText("you know your life will be a lot easier if you can avoid upsetting her.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("you feel it would be wise to remain civil.",false);
+						outputText("you feel it would be wise to remain civil.");
 					}
 					else
 					{
-						outputText("you feel that you should at least remain tactful.",false);
+						outputText("you feel that you should at least remain tactful.");
 					}
 					
 				}
@@ -1022,23 +1022,23 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("you hope that she can forgive your inability to please her.",false);
+						outputText("you hope that she can forgive your inability to please her.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("you hope that she knows you are sorry to have refused her.",false);
+						outputText("you hope that she knows you are sorry to have refused her.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("you know it's better to keep your Mistress happy with you whenever you can.",false);
+						outputText("you know it's better to keep your Mistress happy with you whenever you can.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("you do not wish to displease her, either.",false);
+						outputText("you do not wish to displease her, either.");
 					}
 					else
 					{
-						outputText("you want to remain as courteous as possible.",false);
+						outputText("you want to remain as courteous as possible.");
 					}
 					
 				}
@@ -1046,45 +1046,45 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("you find the anticipation of her disappointment more harrowing than any punishment.",false);
+						outputText("you find the anticipation of her disappointment more harrowing than any punishment.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("you feel immediately  ashamed by your petty defiance.",false);
+						outputText("you feel immediately  ashamed by your petty defiance.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("the thought of disappointing your Mistress is hard to stomach..",false);
+						outputText("the thought of disappointing your Mistress is hard to stomach..");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("you earnestly regret your inability to perform for her.",false);
+						outputText("you earnestly regret your inability to perform for her.");
 					}
 					else
 					{
-						outputText("you tacitly realize that your failure to perform warrants punishment.",false);
+						outputText("you tacitly realize that your failure to perform warrants punishment.");
 					}
 					
 				}
 				else if(player.esteem < 15)
 				{
-					outputText("you feel the need for her to protect you from your lingering defiance.",false);
+					outputText("you feel the need for her to protect you from your lingering defiance.");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("you hope that she can help you learn to be a better slave.",false);
+					outputText("you hope that she can help you learn to be a better slave.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("you feel compelled to prove your desire to be a better slave.",false);
+					outputText("you feel compelled to prove your desire to be a better slave.");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("you wish you could bring yourself to always do as she asks.",false);
+					outputText("you wish you could bring yourself to always do as she asks.");
 				}
 				else
 				{
-					outputText("you hope that she knows how sorry you are to require her discipline.",false);
+					outputText("you hope that she knows how sorry you are to require her discipline.");
 				}
 				
 				if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) == 3)
@@ -1099,45 +1099,45 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("meekly explain your refusal to do as asked, your eyes to the floor and your voice barely audible.",false);
+						outputText("meekly explain your refusal to do as asked, your eyes to the floor and your voice barely audible.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+						outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 					}
 					else
 					{
-						outputText("calmly declare your defiance, briefly seeking out her violet eyes to show your resolve.",false);
+						outputText("calmly declare your defiance, briefly seeking out her violet eyes to show your resolve.");
 					}
 					
 				}
 				else if(player.esteem < 15)
 				{
-					outputText("beg forgiveness for your refusal to do as asked, your eyes to the floor and your voice barely audible.",false);
+					outputText("beg forgiveness for your refusal to do as asked, your eyes to the floor and your voice barely audible.");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.",false);
+					outputText("state your refusal to do as asked, making a point to avoid Mistress Elly's gaze.");
 				}
 				else
 				{
-					outputText("calmly declare your defiance, briefly seeking out her violet eyes to show your resolve.",false);
+					outputText("calmly declare your defiance, briefly seeking out her violet eyes to show your resolve.");
 				}
 				
 				outputText(" A moment that feels like an eternity passes as you sit in the shadow of her imposing figure, awaiting her rebuke ");
@@ -1145,53 +1145,53 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("and visibly shivering with uncertainty.",false);
+						outputText("and visibly shivering with uncertainty.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("with growing trepidation.",false);
+						outputText("with growing trepidation.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("with growing trepidation.",false);
+						outputText("with growing trepidation.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("with growing trepidation.",false);
+						outputText("with growing trepidation.");
 					}
 					else
 					{
-						outputText("with a hard, stoic expression.",false);
+						outputText("with a hard, stoic expression.");
 					}
 					
 				}
 				else if(player.esteem < 15)
 				{
-					outputText(", heart pounding in anticipation.",false);
+					outputText(", heart pounding in anticipation.");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else
 				{
-					outputText("as an unbidden curiosity ignites inside you.",false);
+					outputText("as an unbidden curiosity ignites inside you.");
 				}
 				
 				outputText("\n\n");
 				outcomeSelect = rand(5);
 				if(outcomeSelect == 0)
 				{
-					outputText("To your great relief, you see her look of stern disappointment soften into one of concern and caring. She takes a gentle step towards you then reaches down and lifts you to your feet, cupping your [face] softly in her hands. \"<i>Oh, you poor, pitiful little creature. I can only imagine how hard it must be coming to terms with what you are, and I can see how desperately you want to.</i>\" As she speaks, still cradling your cheek in her left hand, her right descends with delicate purpose. Her fingers trace the nape of your neck, briefly lingering on your collarbone, before slowly snaking their way over your [chest]. A wave of goosebumps follows her touch, and she gives a savage twist to one of your suddenly erect [nipples][if (milkQuantity > 10) , eliciting a tentative spurt of milk in response]. \"<i>Yes, quite desperately.</i>\"\n\n",false);
-					outputText("A wicked, satisfied smile crosses her lips at your surprised gasp, but just as quickly her expression returns to its previous nurturing state as she pulls you into a sympathetic embrace. Her right hand fondles and pinches at your [nipple] with calculated cruelty, but her left hand now rhythmically strokes up and down your spine, inducing ever stronger waves of gooseflesh which shiver their way through your body. Reflexive or not, the pleasant sensations momentarily overwhelm you causing your [asshole] to pucker uncontrollably and leaving your mind blank as her soothing voice continues to speak.\n\n",false);
+					outputText("To your great relief, you see her look of stern disappointment soften into one of concern and caring. She takes a gentle step towards you then reaches down and lifts you to your feet, cupping your [face] softly in her hands. \"<i>Oh, you poor, pitiful little creature. I can only imagine how hard it must be coming to terms with what you are, and I can see how desperately you want to.</i>\" As she speaks, still cradling your cheek in her left hand, her right descends with delicate purpose. Her fingers trace the nape of your neck, briefly lingering on your collarbone, before slowly snaking their way over your [chest]. A wave of goosebumps follows her touch, and she gives a savage twist to one of your suddenly erect [nipples][if (milkQuantity > 10) , eliciting a tentative spurt of milk in response]. \"<i>Yes, quite desperately.</i>\"\n\n");
+					outputText("A wicked, satisfied smile crosses her lips at your surprised gasp, but just as quickly her expression returns to its previous nurturing state as she pulls you into a sympathetic embrace. Her right hand fondles and pinches at your [nipple] with calculated cruelty, but her left hand now rhythmically strokes up and down your spine, inducing ever stronger waves of gooseflesh which shiver their way through your body. Reflexive or not, the pleasant sensations momentarily overwhelm you causing your [asshole] to pucker uncontrollably and leaving your mind blank as her soothing voice continues to speak.\n\n");
 					outputText("\"<i>As ever, my dear, I'm here to help you get what you want. You want to be a good little " + player.mf("boy", "girl") + " and do as your Mistress asks, but you have too many unhelpful thoughts bouncing around your head. At moments like that, you need to learn to listen to your body instead.</i>\" Her left hand drifts around to your crotch and begins to gingerly pet your ",false);
 					if(player.hasCock())
 					{
@@ -1211,7 +1211,7 @@ package classes.Scenes.Places.Prison
 					outputText("All at once she releases her grasp on you and steps back. Your [legs] make a halfhearted attempt to find their strength, but collapse in the riptide of sensations left behind by her abrupt absence. As you slowly regain control of your senses, your ears are ringing and you find your body crumpled into a quivering mass at Mistress Elly's feet[if (milkQuantity > 250) , your [face] resting in a sticky pool of your own milk]. She favors you with one last triumphant smile, then turns her back and walks out the door.\n\n");
 					if(prison.prisonIsRestrained())
 					{
-						outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+						outputText("As the door closes behind her, your restraints reappear.\n\n");
 					}
 					lustChange = 40;
 					dynStats("lus", lustChange);
@@ -1221,17 +1221,17 @@ package classes.Scenes.Places.Prison
 				}
 				if(outcomeSelect == 1)
 				{
-					outputText("You can't help but feel a rush of shame as you see her look of stern disappointment cloud over with pity. She moves back towards the door, pauses to think for a moment, then turns back toward you. \"<i>Apology or not, you've disobeyed me and have not earned the right to eat today. But I have a soft spot for you, little slave, and you have shown that you have a desire to be a better servant. While you should still expect to be punished for anything but absolute obedience, today I will make an exception and reward your desire despite your failure to please me.</i>\" Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink and a flick of her spade-tipped tail before leaving you alone in the cell.\n\n",false);
+					outputText("You can't help but feel a rush of shame as you see her look of stern disappointment cloud over with pity. She moves back towards the door, pauses to think for a moment, then turns back toward you. \"<i>Apology or not, you've disobeyed me and have not earned the right to eat today. But I have a soft spot for you, little slave, and you have shown that you have a desire to be a better servant. While you should still expect to be punished for anything but absolute obedience, today I will make an exception and reward your desire despite your failure to please me.</i>\" Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink and a flick of her spade-tipped tail before leaving you alone in the cell.\n\n");
 					if(prison.prisonIsRestrained())
 					{
-						outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+						outputText("As the door closes behind her, your restraints reappear.\n\n");
 					}
 					prison.changeEsteem(3,prison.inPrison);
 					inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 					
 					return;
 				}
-				outputText("Your stomach fills with lead as you watch her look of stern dissapointment harden on her face. \"<i>Apology or not, you've disobeyed me. I am glad to see that you have a desire to please me, but desire alone does not earn you the privilege of being fed. But I am not heartless -- quite to the contrary, I think you are coming to understand just how much I want to help you. And so now I'm going to help you embrace your desire to please me by showing you what happens when you do not.</i>\"\n\n",false);
+				outputText("Your stomach fills with lead as you watch her look of stern dissapointment harden on her face. \"<i>Apology or not, you've disobeyed me. I am glad to see that you have a desire to please me, but desire alone does not earn you the privilege of being fed. But I am not heartless -- quite to the contrary, I think you are coming to understand just how much I want to help you. And so now I'm going to help you embrace your desire to please me by showing you what happens when you do not.</i>\"\n\n");
 				prison.changeEsteem(3,prison.inPrison);
 				prison.prisonPunishment(80);
 				return;
@@ -1243,11 +1243,11 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			if(player.will < prison.prisonWillCost(15))
 			{
-				outputText("While you'd like to preserve a bit of your dignity and refuse to do as you have been told, you simply don't have the willpower to resist Mistress Elly right now. ",false);
+				outputText("While you'd like to preserve a bit of your dignity and refuse to do as you have been told, you simply don't have the willpower to resist Mistress Elly right now. ");
 				if(rand(player.esteem * 3) > player.obey + player.lust + player.cor)
 				{
 					prison.changeEsteem(2,prison.inPrison);
-					outputText("\n\n",false);
+					outputText("\n\n");
 					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
@@ -1272,9 +1272,9 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n",false);
+					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n");
 					prison.changeEsteem(2,prison.inPrison);
-					outputText("\n\n",false);
+					outputText("\n\n");
 					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
@@ -1308,28 +1308,28 @@ package classes.Scenes.Places.Prison
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				}
 				prison.changeWill(-prison.prisonWillCost(15));
-				outputText("Mistress Elly has simply asked too much from you -- you can't bring yourself to do as you have been instructed. What's more, ",false);
+				outputText("Mistress Elly has simply asked too much from you -- you can't bring yourself to do as you have been instructed. What's more, ");
 				if(player.obey < 10)
 				{
 					if(player.esteem < 15)
 					{
-						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.",false);
+						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.",false);
+						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.",false);
+						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.",false);
+						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.");
 					}
 					else
 					{
-						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.",false);
+						outputText("the ball of rage and indignation building in the pit of your stomach demands that you resist as fiercely as possible.");
 					}
 					
 					
@@ -1339,23 +1339,23 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
+						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
+						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
+						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
+						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.");
 					}
 					else
 					{
-						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
+						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.");
 					}
 					
 				}
@@ -1363,23 +1363,23 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.",false);
+						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.",false);
+						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.",false);
+						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.",false);
+						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.");
 					}
 					else
 					{
-						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.",false);
+						outputText("your fear of displeasing your Mistress will not be be enough to keep you respectful in your refusal to comply.");
 					}
 					
 				}
@@ -1387,23 +1387,23 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.",false);
+						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.",false);
+						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.",false);
+						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.",false);
+						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.");
 					}
 					else
 					{
-						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.",false);
+						outputText("while the shameful nature of the request is undeniably arousing, it has also robbed you of your ability to be civil about it. Perhaps your Mistress will find a good way to help you learn to accept it better.");
 					}
 					
 					
@@ -1411,23 +1411,23 @@ package classes.Scenes.Places.Prison
 				}
 				else if(player.esteem < 15)
 				{
-					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
+					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
+					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
+					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
+					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.");
 				}
 				else
 				{
-					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
+					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.");
 				}
 				
 				if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) == 3)
@@ -1442,45 +1442,45 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("angrily",false);
+						outputText("angrily");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("angrily",false);
+						outputText("angrily");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("angrily",false);
+						outputText("angrily");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("angrily",false);
+						outputText("angrily");
 					}
 					else
 					{
-						outputText("angrily",false);
+						outputText("angrily");
 					}
 					
 				}
 				else if(player.esteem < 15)
 				{
-					outputText("flatly",false);
+					outputText("flatly");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("flatly",false);
+					outputText("flatly");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("flatly",false);
+					outputText("flatly");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("flatly",false);
+					outputText("flatly");
 				}
 				else
 				{
-					outputText("flatly",false);
+					outputText("flatly");
 				}
 				
 				outputText(" refuse to do as she has asked. You await her response ");
@@ -1488,48 +1488,48 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.esteem < 15)
 					{
-						outputText("in stoic foreboding.",false);
+						outputText("in stoic foreboding.");
 					}
 					else if(player.esteem < 40)
 					{
-						outputText("in stoic foreboding.",false);
+						outputText("in stoic foreboding.");
 					}
 					else if(player.esteem < 60)
 					{
-						outputText("in stoic foreboding.",false);
+						outputText("in stoic foreboding.");
 					}
 					else if(player.esteem < 85)
 					{
-						outputText("in stoic foreboding.",false);
+						outputText("in stoic foreboding.");
 					}
 					else
 					{
-						outputText("in stoic foreboding.",false);
+						outputText("in stoic foreboding.");
 					}
 					
 				}
 				else if(player.esteem < 15)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else if(player.esteem < 40)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else if(player.esteem < 85)
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				else
 				{
-					outputText("with a mixture of fear and excitement.",false);
+					outputText("with a mixture of fear and excitement.");
 				}
 				
-				outputText("\n\n",false);
+				outputText("\n\n");
 				outputText("Mistress Elly simply stares at you with a mixture of disappointment and patience, like a caring parent deciding how to discipline a petulant child. There is no anger or frustration in her voice or her body language as she crouches down and takes a firm grip on your shoulder. \"<i>I know this is a hard process. I know you are still learning to cope with the shame of what you are. But that doesn't excuse rudeness.</i>\" With just a light flick of her wrist she flings you onto your back so forcefully that the wind is knocked out of you, and in a blink of an eye she is crouched on top of you with her right knee crushing your [fullChest]. She leans in so close that you can feel the warmth of her breath on your [face] and see her violet eyes fill with fire. \"<i>But I am not vengeful, nor am I unkind. I want to help you learn, and even your rudeness won't keep me from teaching you a useful lesson today.</i>\" \n\n");
 				outputText("Satisfied with your reaction, she stands back up and pauses for a moment.\n\n");
 				prison.changeEsteem(5,prison.inPrison);
@@ -1549,7 +1549,7 @@ package classes.Scenes.Places.Prison
 			outputText("\"<i>It's a start, but I'm afraid it's not enough for a full meal. Practice, and try harder next time. For now I'm afraid you'll have to make do with soup.</i>\" Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink and a flick of her spade-tipped tail before leaving you alone in the cell.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			prison.changeEsteem(-3,prison.inPrison);
 			prison.changeObey(1,prison.inPrison);
@@ -1598,7 +1598,7 @@ package classes.Scenes.Places.Prison
 			outputText("She walks towards the door and almost as an afterthought tosses a pitiful loaf of bread over her shoulder. \"<i>Enjoy your well-earned meal, slave.</i>\" The satisfaction in her voice is palpable.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(1.5,prison.inPrison);
@@ -1631,7 +1631,7 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("having weighed your options, [if (esteem < 50) the consequences of upsetting her seem][if (esteem >= 50) the potential risk of disobedience seems] worth avoiding -- even considering what has been asked of you[if (esteem >= 70) -- especially if you can keep things from getting out of hand].");
 				}
-				outputText(" Despite having rationalized the decision, humiliation burns through your body like wild fire as you lean forward onto your hands and knees and lift your [ass] into the air. Watching intently from across the room, Mistress Elly beckons with two fingers as she sees you begin to move. \n\n",false);
+				outputText(" Despite having rationalized the decision, humiliation burns through your body like wild fire as you lean forward onto your hands and knees and lift your [ass] into the air. Watching intently from across the room, Mistress Elly beckons with two fingers as she sees you begin to move. \n\n");
 				outputText("You reach forward with your left hand and lock your eyes on the ground directly below you.\n");
 				outputText("You follow with your right hand and pull your [legs] forward behind you.\n");
 				outputText("You reach again with your left hand, and notice your fingers wavering.\n\n");
@@ -2077,10 +2077,10 @@ package classes.Scenes.Places.Prison
 			}
 			
 			outputText(" And so you lie still, defiled cheek resting in the sticky pool dribbling from the corner of your mouth, arms still held behind your back crushing your [chest] to the floor, [nipples] hard and chafing against the cold stone. \"<i>You may swallow when I have left the room; consider it a gift for your good behavior at the end. Still, I'm afraid you'll need to perform that way the entire time if you want to earn a meal beyond a simple bowl of soup.</i>\"\n\n");
-			outputText("Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed, making you wonder if there is any end to her supply. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
+			outputText("Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed, making you wonder if there is any end to her supply. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n");
 			if(prison.prisonIsRestrained())
 			{
-				outputText("As the door closes behind her, your restraints reappear.\n\n",false);
+				outputText("As the door closes behind her, your restraints reappear.\n\n");
 			}
 			player.slimeFeed();
 			player.refillHunger(5);
@@ -2833,7 +2833,7 @@ package classes.Scenes.Places.Prison
 			}
 			if(prison.prisonIsRestrained())
 			{
-				outputText("With the door once again closed behind her, your restraints reappear.\n\n",false);
+				outputText("With the door once again closed behind her, your restraints reappear.\n\n");
 			}
 			player.slimeFeed();
 			player.refillHunger(15);
@@ -2860,64 +2860,64 @@ package classes.Scenes.Places.Prison
 			var perform:Function = prisonCaptorFeedingTitleTrainingPerform;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
-				outputText("Curled up on the floor in a miserable fog of thought and pondering how you found yourself in this hopeless situation, you are startled by the sound of the door to your cell being quickly opened and confidently slammed shut. You look up to see [captorTitle] [captorName] studying you with an amused expression. Just as when you first met her, you are alarmed by the extent to which her commanding presence, intoxicating charisma, and exotic beauty pacifies you. For some reason, your usual instinct when presented with a threat, to defend yourself with force, refuses to activate  -- and even if it did, ",false);
+				outputText("Curled up on the floor in a miserable fog of thought and pondering how you found yourself in this hopeless situation, you are startled by the sound of the door to your cell being quickly opened and confidently slammed shut. You look up to see [captorTitle] [captorName] studying you with an amused expression. Just as when you first met her, you are alarmed by the extent to which her commanding presence, intoxicating charisma, and exotic beauty pacifies you. For some reason, your usual instinct when presented with a threat, to defend yourself with force, refuses to activate  -- and even if it did, ");
 				if(player.level < 3)
 				{
-					outputText("you know without a doubt that you lack the experience to fight a creature this powerful.",false);
+					outputText("you know without a doubt that you lack the experience to fight a creature this powerful.");
 				}
 				else if(player.level < 8)
 				{
-					outputText("her clearly formidable power erodes your usual confidence when evaluating an opponent.",false);
+					outputText("her clearly formidable power erodes your usual confidence when evaluating an opponent.");
 				}
 				else
 				{
-					outputText("as confident and experienced a warrior as you may be, an uncommon sense of self doubt drives you to exercise caution.",false);
+					outputText("as confident and experienced a warrior as you may be, an uncommon sense of self doubt drives you to exercise caution.");
 				}
 				
-				outputText("\n\nIt crosses your mind that this feeling could be the result of some foul spell or trickery being worked on you, but the result is the same: you have no choice but to engage her in a battle of her choosing, one of willpower and cunning, rather than your preferred approach to combat. As you steel yourself for the first salvo, she clearly notices your change in countenance and gives a light hearted and disarming laugh.",false);
+				outputText("\n\nIt crosses your mind that this feeling could be the result of some foul spell or trickery being worked on you, but the result is the same: you have no choice but to engage her in a battle of her choosing, one of willpower and cunning, rather than your preferred approach to combat. As you steel yourself for the first salvo, she clearly notices your change in countenance and gives a light hearted and disarming laugh.");
 				outputText("\n\n\"<i>Oh dear, you look rather upset. You should be happy; I'm here to feed you. But it's understandable, I suppose -- after all, you are a poor, frightened, directionless little wreck of a creature aren't you? Oh, it makes me so sad to see you this way.</i>\" She is anything but sad. In fact, with each sentence she seems less and less able to contain her mirth, clearly enjoying your every grimace like a mischievous cat toying with a cornered mouse. \"<i>Well, put your mind at ease, slave. Today we are going to begin the process of fixing you, and before long I'll have you living contentedly with your true nature. We'll start small and simple, too -- you'll be surprised by how painless and easy it is to please your Mistress and earn your meal for the day.</i>\"",false);
 				if(prison.prisonIsRestrained())
 				{
-					outputText("\n\nWith a snap of her fingers, your restraints vanish into thin air.",false);
+					outputText("\n\nWith a snap of her fingers, your restraints vanish into thin air.");
 				}
-				outputText("\n\nShe gives you a condescending pat on the head, and you seethe with shame and impotent rage, meekly enduring the gesture. As she then trails her graceful fingers down the side of your face, the shame intensifies but the rage melts into desire, and [if (sensitivity < 50) it is all you can do to resist the urge to][if (sensitivity >= 50) you are overcome by an urge to] lean into her electrifying caress. Her capacity to play your emotions like a fine instrument is deeply alarming, and for a moment it occurs to you that you may even be less equipped to fight this demon emotionally than you are phyiscally. You are denied the time to dwell on it, though, as she ends her caress. Squatting down on her haunches, she takes your chin in a soft but firm grasp, enthralling your gaze with her piercing violet eyes.\n\n",false);
-				outputText("\"<i>The first step is to learn to show your Mistress the proper respect.</i>\" Just as in your first encounter she drifts closer to you as she speaks, overwhelming your senses with her powerful scent. \"<i>All you need to do is politely say one little sentence for me.</i>\" She lightly tilts your chin in her grasp, your eyes drifting down to watch her moist, shapely lips mouth the words you are to learn with a lilting, pliable voice. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 60) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 60) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face[if (libido >= 60)  and her tail curls behind her back], but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
+				outputText("\n\nShe gives you a condescending pat on the head, and you seethe with shame and impotent rage, meekly enduring the gesture. As she then trails her graceful fingers down the side of your face, the shame intensifies but the rage melts into desire, and [if (sensitivity < 50) it is all you can do to resist the urge to][if (sensitivity >= 50) you are overcome by an urge to] lean into her electrifying caress. Her capacity to play your emotions like a fine instrument is deeply alarming, and for a moment it occurs to you that you may even be less equipped to fight this demon emotionally than you are phyiscally. You are denied the time to dwell on it, though, as she ends her caress. Squatting down on her haunches, she takes your chin in a soft but firm grasp, enthralling your gaze with her piercing violet eyes.\n\n");
+				outputText("\"<i>The first step is to learn to show your Mistress the proper respect.</i>\" Just as in your first encounter she drifts closer to you as she speaks, overwhelming your senses with her powerful scent. \"<i>All you need to do is politely say one little sentence for me.</i>\" She lightly tilts your chin in her grasp, your eyes drifting down to watch her moist, shapely lips mouth the words you are to learn with a lilting, pliable voice. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 60) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 60) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face[if (libido >= 60)  and her tail curls behind her back], but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			else if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
 			{
-				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room with an air of stern disappointment. ",false);
+				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room with an air of stern disappointment. ");
 				if(prison.prisonIsRestrained())
 				{
-					outputText("She snaps her fingers and your restraints vanish into thin air. ",false);
+					outputText("She snaps her fingers and your restraints vanish into thin air. ");
 				}
-				outputText("\"<i>You poor little slave. I'm afraid I've come dangerously close to letting you down. I was so excited by your progress that I moved you on to more advanced lessons before you truly absorbed the first one. Thankfully, we still have time to fix that, but I'm afraid that we're going to have to go back to basics today and give you another chance to focus on learning the proper respect.</i>\" She approaches you with genuine compassion, her expression sympathetic and her steps surprisingly gentle against the hard floor. Then, more quickly than your eye can track the motion, her leather laced arm snaps back and her palm strikes your cheek with enough force to send you tumbling over sidewise onto the floor.\n\n",false);
-				outputText("Just as quickly, she kneels at your side and lifts your head up by your [hair]. Her posture is now imposing and her face now fierce, but she maintains her caring tone of conversation. \"<i>Now, you remember your lesson, don't you? All you need to do is politely say one little sentence for me and you'll have a nice nourishing meal to enjoy. You know the words to say, yes?</i>\" She lets loose her grip on you and stands back up, looming over you with her cock fully erect and throbbing. \"<i>Hello Mistress, how may I serve you today?</i>\" As she intones the words her body seems to clinch with pleasure, her tail twisting through the air, and several drops of precum leak from her shaft and splash across your [face]. One final drop lands on your lips",false);
+				outputText("\"<i>You poor little slave. I'm afraid I've come dangerously close to letting you down. I was so excited by your progress that I moved you on to more advanced lessons before you truly absorbed the first one. Thankfully, we still have time to fix that, but I'm afraid that we're going to have to go back to basics today and give you another chance to focus on learning the proper respect.</i>\" She approaches you with genuine compassion, her expression sympathetic and her steps surprisingly gentle against the hard floor. Then, more quickly than your eye can track the motion, her leather laced arm snaps back and her palm strikes your cheek with enough force to send you tumbling over sidewise onto the floor.\n\n");
+				outputText("Just as quickly, she kneels at your side and lifts your head up by your [hair]. Her posture is now imposing and her face now fierce, but she maintains her caring tone of conversation. \"<i>Now, you remember your lesson, don't you? All you need to do is politely say one little sentence for me and you'll have a nice nourishing meal to enjoy. You know the words to say, yes?</i>\" She lets loose her grip on you and stands back up, looming over you with her cock fully erect and throbbing. \"<i>Hello Mistress, how may I serve you today?</i>\" As she intones the words her body seems to clinch with pleasure, her tail twisting through the air, and several drops of precum leak from her shaft and splash across your [face]. One final drop lands on your lips");
 				if(player.cor > 30)
 				{
-					outputText("and momentarily overwhelmed by the musty scent of it, your tongue darts out to taste it.",false);
+					outputText("and momentarily overwhelmed by the musty scent of it, your tongue darts out to taste it.");
 				}
 				else
 				{
-					outputText(" and the musty scent of it nearly overwhelms you.",false);
+					outputText(" and the musty scent of it nearly overwhelms you.");
 				}
-				outputText(" A knowing smile crosses her face, but she doesn't press the advantage. Instead she steps back, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
+				outputText(" A knowing smile crosses her face, but she doesn't press the advantage. Instead she steps back, perhaps to see how you react when not so directly under her overpowering influence.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			else
 			{
-				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room swinging her hips with cheerful, seductive purpose. She approaches you and treats you to a mocking pouty face. \"<i>Looking a bit hungry there, slave. Are you ready for your lesson then?</i>\" [if (hunger > 50) As if on cue, your stomach rumbles. ]She reaches out and runs her fingers softly over your chin and jaw.\"<i>All you need to do is politely say that one little sentence for me.</i>\"\n\n",false);
+				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room swinging her hips with cheerful, seductive purpose. She approaches you and treats you to a mocking pouty face. \"<i>Looking a bit hungry there, slave. Are you ready for your lesson then?</i>\" [if (hunger > 50) As if on cue, your stomach rumbles. ]She reaches out and runs her fingers softly over your chin and jaw.\"<i>All you need to do is politely say that one little sentence for me.</i>\"\n\n");
 				if(prison.prisonIsRestrained())
 				{
-					outputText("With a snap of her fingers, your restraints vanish into thin air. ",false);
+					outputText("With a snap of her fingers, your restraints vanish into thin air. ");
 				}
-				outputText("She lightly tilts your chin and your eyes drift down to see her moist, shapely lips as she mouths the words you are to learn. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 40) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 40) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face, but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
+				outputText("She lightly tilts your chin and your eyes drift down to see her moist, shapely lips as she mouths the words you are to learn. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 40) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 40) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face, but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n");
 			}
 			
-			outputText("You consider how you should respond to Mistress Elly's order.\n\n",false);
+			outputText("You consider how you should respond to Mistress Elly's order.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 40 || player.esteem < 60 && player.obey > 10))
 			{
-				outputText("\nYou are simply too hungry to refuse to do as you are told.\n",false);
+				outputText("\nYou are simply too hungry to refuse to do as you are told.\n");
 				refuse = null;
 				reject = null;
 			}
@@ -2926,7 +2926,7 @@ package classes.Scenes.Places.Prison
 				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
 				if(player.esteem < 20 || player.esteem < 40 && player.obey > 25)
 				{
-					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.",false);
+					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
 					reject = null;
 				}
 				else
@@ -2936,21 +2936,21 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.hunger > 0 && player.esteem > 75 && player.obey < 5)
 			{
-				outputText("\n\nYou have too much dignity to do as you have been told.\n",false);
+				outputText("\n\nYou have too much dignity to do as you have been told.\n");
 				accept = null;
 				perform = null;
 			}
 			else
 			{
-				outputText("\n\nYou could give in and accept Mistress Elly's order, ",false);
+				outputText("\n\nYou could give in and accept Mistress Elly's order, ");
 				if(player.esteem > 90 || player.esteem > 60 && player.obey < 8)
 				{
-					outputText("but you have too much dignity to really put your heart into it.\n",false);
+					outputText("but you have too much dignity to really put your heart into it.\n");
 					perform = null;
 				}
 				else
 				{
-					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n",false);
+					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n");
 				}
 			}
 			addButton(0, "Refuse", refuse);
@@ -2989,7 +2989,7 @@ package classes.Scenes.Places.Prison
 				outputText("Though her composure returns, she continues to grin from ear to ear, making no attempt to conceal how pleased she is with herself. \"<i>A good slave knows to ask [his] Mistress what she wants without thinking. A better slave begins answering the question as [he] asks it. But to do so, a slave needs to understand what [his] owner wants from [him]. Some Masters might want to see their slaves pose seductively, or hear them speak words of reverence and praise, or simply have them wait motionless for direction. That's all fine, but I like my slaves to be a bit more... expressive of their love for me.</i>\"");
 				if(prison.prisonIsRestrained())
 				{
-					outputText(" With a snap of her fingers, your restraints vanish into thin air.\n\n",false);
+					outputText(" With a snap of her fingers, your restraints vanish into thin air.\n\n");
 				}
 				else
 				{
@@ -3057,7 +3057,7 @@ package classes.Scenes.Places.Prison
 				outputText("The door to your cell opens and you realize it must be feeding time as [captorTitle] [captorName] enters the room. ");
 				if(prison.prisonIsRestrained())
 				{
-					outputText("She snaps her fingers to remove your restraints and looks at you expectantly,",false);
+					outputText("She snaps her fingers to remove your restraints and looks at you expectantly,");
 				}
 				else
 				{
@@ -3127,7 +3127,7 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" you find yourself saying in the lilting, sycophantic tone that she suggested while teaching you this lesson. [if (esteem > 60) While it stings your ego to repeat the words again, the thought that you may have at least earned yourself some good favor provides some comfort.]\n\n");
 				if(prison.prisonIsRestrained())
 				{
-					outputText("With a snap of her fingers, your restraints vanish into thin air.",false);
+					outputText("With a snap of her fingers, your restraints vanish into thin air.");
 				}
 				outputText("\"<i>You're a good slave for asking, but you know that you would be a better slave if you were already acting.</i>\" She crosses her arms, shifts her weight to her other foot, and you hear a note of impatience lace her voice. \"<i>If you want to eat, you need to learn to please me even before I give you instructions. So:</i>\"\n\n");
 				outputText("\"<i>First, crawl across the room. Be sure to arch your back so that you present your [ass] like a bitch in heat");
@@ -3178,10 +3178,10 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>Understand? Good. Now, slave: <b>start crawling</b>.</i>\"\n\n");
 			}
 			
-			outputText("You consider how you should respond to Mistress Elly.\n\n",false);
+			outputText("You consider how you should respond to Mistress Elly.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 40 || player.esteem < 60 && player.obey > 25))
 			{
-				outputText("\nYou are simply too hungry to refuse to do as you are told.\n",false);
+				outputText("\nYou are simply too hungry to refuse to do as you are told.\n");
 				refuse = null;
 				reject = null;
 			}
@@ -3190,7 +3190,7 @@ package classes.Scenes.Places.Prison
 				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
 				if(player.esteem < 15 || player.esteem < 35 && player.obey > 35)
 				{
-					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.",false);
+					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
 					reject = null;
 				}
 				else
@@ -3200,21 +3200,21 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.hunger > 0 && player.esteem > 85 && player.obey < 15)
 			{
-				outputText("\n\nYou have too much dignity to do as you have been told.\n",false);
+				outputText("\n\nYou have too much dignity to do as you have been told.\n");
 				accept = null;
 				perform = null;
 			}
 			else
 			{
-				outputText("\n\nYou could give in and accept Mistress Elly's order, ",false);
+				outputText("\n\nYou could give in and accept Mistress Elly's order, ");
 				if(player.esteem > 70 && player.obey < 20)
 				{
-					outputText("but you have too much dignity to really put your heart into it.\n",false);
+					outputText("but you have too much dignity to really put your heart into it.\n");
 					perform = null;
 				}
 				else
 				{
-					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n",false);
+					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n");
 				}
 			}
 			addButton(0, "Refuse", refuse);
@@ -3234,7 +3234,7 @@ package classes.Scenes.Places.Prison
 			{
 				if(prison.prisonIsRestrained())
 				{
-					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.",false);
+					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.");
 				}
 				else
 				{
@@ -3279,7 +3279,7 @@ package classes.Scenes.Places.Prison
 					player.createKeyItem("Mistress Elly's Slave Collar",0,0,0,0);
 					prison.trainingPet.prisonCaptorPetTierUpdate();
 					outputText(" \"<i>Now that you've accepted what an insatiable, dutiful little cocksucker you are, I think it is time for me to give you a very special gift.</i>\" She produces a long, thin strip of malevolent shiny black material about an inch wide, with a violet gemstone affixed in the middle and a steel ring on one end. \"<i>This collar is an acknowledgment of what you've been working so hard to become. It will be a constant reminder to you and everyone who sees you that you are my valued property.</i>\" She leans forward and wraps it around your neck so that the gem rests atop your windpipe, but instead of the sound of a buckle or snap that you expect to hear there is an odd sizzle and pop. \"<i>There you go, darling.</i>\"\n\n");
-					outputText("You reach up to feel your new adornment. It is fit so snugly around your throat that you feel its constriction every time you swallow or inhale deeply, and it will not rotate or shift about your neck even the smallest bit. Your fingers follow its line around to the back of your neck and find the steel ring positioned in the center, where it provides a convenient location to attach a leash or chain. But as the sounds you heard hinted, there is no buckle or button or fastener of any other sort to be found. The strap seems to have fused to itself to form a permanent unbroken loop, with no apparent method of removal. The thought of it sits heavily in your gut.\n\n",false);
+					outputText("You reach up to feel your new adornment. It is fit so snugly around your throat that you feel its constriction every time you swallow or inhale deeply, and it will not rotate or shift about your neck even the smallest bit. Your fingers follow its line around to the back of your neck and find the steel ring positioned in the center, where it provides a convenient location to attach a leash or chain. But as the sounds you heard hinted, there is no buckle or button or fastener of any other sort to be found. The strap seems to have fused to itself to form a permanent unbroken loop, with no apparent method of removal. The thought of it sits heavily in your gut.\n\n");
 					outputText("\"<i>Oh, such a pretty sight. Don't you just love it, slave?</i>\" ");
 					if(player.esteem < 40)
 					{
@@ -3376,7 +3376,7 @@ package classes.Scenes.Places.Prison
 			{
 				if(prison.prisonIsRestrained())
 				{
-					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.\n\n",false);
+					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.\n\n");
 				}
 				else
 				{
@@ -3492,7 +3492,7 @@ package classes.Scenes.Places.Prison
 			{
 				if(prison.prisonIsRestrained())
 				{
-					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.",false);
+					outputText("Mistress Elly enters the room and with a snap of her fingers, your restraints vanish into thin air.");
 				}
 				else
 				{
@@ -3607,10 +3607,10 @@ package classes.Scenes.Places.Prison
 			player.slimeFeed();
 			player.refillHunger(15);
 			dynStats("lus", 30);
-			outputText("You consider how you should respond to Mistress Elly.\n\n",false);
+			outputText("You consider how you should respond to Mistress Elly.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 30 || player.esteem < 50 && player.obey > 45))
 			{
-				outputText("\nYou are simply too hungry to refuse to do as you are told.\n",false);
+				outputText("\nYou are simply too hungry to refuse to do as you are told.\n");
 				refuse = null;
 				reject = null;
 			}
@@ -3619,7 +3619,7 @@ package classes.Scenes.Places.Prison
 				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
-					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.",false);
+					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
 					reject = null;
 				}
 				else
@@ -3629,21 +3629,21 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.hunger > 0 && (player.esteem > 95 || player.esteem > 80 && player.obey < 30))
 			{
-				outputText("\n\nYou have too much dignity to do as you have been told.\n",false);
+				outputText("\n\nYou have too much dignity to do as you have been told.\n");
 				accept = null;
 				perform = null;
 			}
 			else
 			{
-				outputText("\n\nYou could give in and accept Mistress Elly's order, ",false);
+				outputText("\n\nYou could give in and accept Mistress Elly's order, ");
 				if(player.esteem > 90 || player.esteem > 80 && player.obey < 35)
 				{
-					outputText("but you have too much dignity to really put your heart into it.\n",false);
+					outputText("but you have too much dignity to really put your heart into it.\n");
 					perform = null;
 				}
 				else
 				{
-					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n",false);
+					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n");
 				}
 			}
 			addButton(0, "Refuse", refuse);
@@ -3661,25 +3661,25 @@ package classes.Scenes.Places.Prison
 			var perform:Function = prisonCaptorFeedingAnalTrainingPerform;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
-				outputText("(Placeholder) Intro to new level of training.\n\n",false);
+				outputText("(Placeholder) Intro to new level of training.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
 			{
-				outputText("(Placeholder) Intro to reduced training level.\n\n",false);
+				outputText("(Placeholder) Intro to reduced training level.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(prison.prisonIsRestrained())
 			{
-				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n",false);
+				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n");
 			}
-			outputText("(Placeholder) You have now been trained to say \"Hello Mistress, how may I serve you?\" and to suck her cock without thinking while masturbating (only coming when told to) when Elly comes to feed you. This no longer earns your meal or your orgasm, though. Now she requires that you follow your warmup cocksucking by fucking yourself in the ass with her cock -- you will then be allowed to orgasm once your ass is full of her cum and you have sucked her cock clean.\n\n",false);
+			outputText("(Placeholder) You have now been trained to say \"Hello Mistress, how may I serve you?\" and to suck her cock without thinking while masturbating (only coming when told to) when Elly comes to feed you. This no longer earns your meal or your orgasm, though. Now she requires that you follow your warmup cocksucking by fucking yourself in the ass with her cock -- you will then be allowed to orgasm once your ass is full of her cum and you have sucked her cock clean.\n\n");
 			player.slimeFeed();
 			player.refillHunger(5);
-			outputText("You consider how you should respond to Mistress Elly.\n\n",false);
+			outputText("You consider how you should respond to Mistress Elly.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 30 || player.esteem < 50 && player.obey > 45))
 			{
-				outputText("\nYou are simply too hungry to refuse to do as you are told.\n",false);
+				outputText("\nYou are simply too hungry to refuse to do as you are told.\n");
 				refuse = null;
 				reject = null;
 			}
@@ -3688,7 +3688,7 @@ package classes.Scenes.Places.Prison
 				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
-					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.",false);
+					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
 					reject = null;
 				}
 				else
@@ -3698,21 +3698,21 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.hunger > 0 && (player.esteem > 95 || player.esteem > 90 && player.obey < 45))
 			{
-				outputText("\n\nYou have too much dignity to do as you have been told.\n",false);
+				outputText("\n\nYou have too much dignity to do as you have been told.\n");
 				accept = null;
 				perform = null;
 			}
 			else
 			{
-				outputText("\n\nYou could give in and accept Mistress Elly's order, ",false);
+				outputText("\n\nYou could give in and accept Mistress Elly's order, ");
 				if(player.esteem > 40 || player.esteem > 85 && player.obey < 45)
 				{
-					outputText("but you have too much dignity to really put your heart into it.\n",false);
+					outputText("but you have too much dignity to really put your heart into it.\n");
 					perform = null;
 				}
 				else
 				{
-					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n",false);
+					outputText("or you could really show your acceptance of your position and perform above and beyond what she's asked for. \n");
 				}
 			}
 			addButton(0, "Refuse", refuse);
@@ -3749,30 +3749,30 @@ package classes.Scenes.Places.Prison
 			}
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
-				outputText("(Placeholder) Intro to new level of training.\n\n",false);
+				outputText("(Placeholder) Intro to new level of training.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
 			{
-				outputText("(Placeholder) Intro to reduced training level.\n\n",false);
+				outputText("(Placeholder) Intro to reduced training level.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(prison.prisonIsRestrained())
 			{
-				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n",false);
+				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n");
 			}
-			outputText("(Placeholder) You are fully trained at this point. When Elly enters your room to feed you, you instinctually do all the depraved things she has trained you to do in exchange for food, and you have no choice in the matter.\n\n",false);
-			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.\n\n",false);
+			outputText("(Placeholder) You are fully trained at this point. When Elly enters your room to feed you, you instinctually do all the depraved things she has trained you to do in exchange for food, and you have no choice in the matter.\n\n");
+			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.\n\n");
 			player.buttChange(32,true,true,false);
 			outputText("\n\n");
 			outputText("(Placehoder) Now, though, she wants you to show your devotion by completing a humiliating quest.\n\n");
 			prisonCaptorFeedingQuestTrainingSelect();
 			player.slimeFeed();
 			player.refillHunger(25);
-			outputText("You consider how you should respond to Mistress Elly.\n\n",false);
+			outputText("You consider how you should respond to Mistress Elly.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 30 || player.esteem < 50 && player.obey > 45))
 			{
-				outputText("\nYou are simply too hungry to refuse to do as you are told.\n",false);
+				outputText("\nYou are simply too hungry to refuse to do as you are told.\n");
 				refuse = null;
 				reject = null;
 			}
@@ -3781,7 +3781,7 @@ package classes.Scenes.Places.Prison
 				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
-					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.",false);
+					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
 					reject = null;
 				}
 				else
@@ -3791,13 +3791,13 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.hunger > 0 && player.esteem > 75 && player.obey < 55)
 			{
-				outputText("\n\nYou have too much dignity to do as you have been told.\n",false);
+				outputText("\n\nYou have too much dignity to do as you have been told.\n");
 				accept = null;
 				perform = null;
 			}
 			else
 			{
-				outputText("\n\nYou could accept Mistress Elly's order. ",false);
+				outputText("\n\nYou could accept Mistress Elly's order. ");
 			}
 			menu();
 			addButton(0, "Refuse", refuse);
@@ -3852,20 +3852,20 @@ package classes.Scenes.Places.Prison
 			var lustChange:int = 0;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
-				outputText("(Placeholder) Intro to new level of training.\n\n",false);
+				outputText("(Placeholder) Intro to new level of training.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
 			{
-				outputText("(Placeholder) Intro to reduced training level.\n\n",false);
+				outputText("(Placeholder) Intro to reduced training level.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			if(prison.prisonIsRestrained())
 			{
-				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n",false);
+				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n");
 			}
-			outputText("(Placeholder) You are now a willing slave. When Elly enters your room to feed you, you instinctually do all the depraved things she has trained you to do in exchange for food, and afterward you automatically accept whatever quest she gives you with no choice in the matter.\n\n",false);
-			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.",false);
+			outputText("(Placeholder) You are now a willing slave. When Elly enters your room to feed you, you instinctually do all the depraved things she has trained you to do in exchange for food, and afterward you automatically accept whatever quest she gives you with no choice in the matter.\n\n");
+			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.");
 			player.buttChange(32,true,true,false);
 			outputText("\n\n");
 			prisonCaptorFeedingQuestTrainingSelect();
@@ -3882,8 +3882,8 @@ package classes.Scenes.Places.Prison
 				prisonCaptorFeedingAnalTrainingAccept();
 				return;
 			}
-			outputText("(Placeholder) You agree to attempt the quest, and she unlocks the door (and does not return any other restraints you might have had) but makes sure you understand that this does NOT mean you are free. She instructs you to find your way back as soon as you complete your task, and warns you that as soon as you run out of time you WILL find yourself back in your cell. Finally, she decides to give you a going away present, but warns you that you might want to eat it before you leave.",false);
-			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
+			outputText("(Placeholder) You agree to attempt the quest, and she unlocks the door (and does not return any other restraints you might have had) but makes sure you understand that this does NOT mean you are free. She instructs you to find your way back as soon as you complete your task, and warns you that as soon as you run out of time you WILL find yourself back in your cell. Finally, she decides to give you a going away present, but warns you that you might want to eat it before you leave.");
+			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n");
 			if(prison.prisonIsRestrained())
 			{
 			}
@@ -4015,7 +4015,7 @@ package classes.Scenes.Places.Prison
 				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
 				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				outputText("(Placeholder) As a reward you get a bowl of cum, since that\'s pretty much what you want at this point, right?\n\n");
-				outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
+				outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n");
 				prison.changeEsteem(-7, prison.inPrison);
 				prison.changeObey(3, prison.inPrison);
 				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);

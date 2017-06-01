@@ -530,7 +530,7 @@ package classes.Scenes.Dungeons.D3
 			if(mainView.nameBox.text == "") 
 			{
 				clearOutput();
-				outputText("<b>You must select a name.</b>", false);
+				outputText("<b>You must select a name.</b>");
 				mainView.nameBox.x = mainView.mainText.x + 5;
 				mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 				menu();

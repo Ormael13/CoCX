@@ -75,21 +75,21 @@
 		//Perverted religious costume;
 		if(armorName == RELIGIOUS_CLOTHES) {
 			//The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.
-			outputText("The zealot cries out \"<i>Child, are you ready to present your offering to the holy rod?</i>\" while indicating his cock sliding between his robes.  The whole scene leaves you distracted for a few moments and significantly aroused.", false);
+			outputText("The zealot cries out \"<i>Child, are you ready to present your offering to the holy rod?</i>\" while indicating his cock sliding between his robes.  The whole scene leaves you distracted for a few moments and significantly aroused.");
 		}	
 		//A pirate costume; 
 		if(armorName == PIRATE_CLOTHES) {
 			//You are faced with one of the strangest things you have ever seen in your life.  A stereotypical pirate, who has not replaced his hand with a hook, but rather a collection of sex toys.  You can see at least two dildos, a fleshlight, and numerous other toys that you're incapable of recognizing.
-			outputText("The zealot turns to the side holding his prosthetic towards you and doing something that sends the devices spinning and clicking.  <i>So that's how that would work...<i> you find yourself thinking for a few moments before realizing that he had both distracted and aroused you.", false);
+			outputText("The zealot turns to the side holding his prosthetic towards you and doing something that sends the devices spinning and clicking.  <i>So that's how that would work...<i> you find yourself thinking for a few moments before realizing that he had both distracted and aroused you.");
 		}
 		//Military attire;
 		if(armorName == MILITARY_CLOTHES) {
 			//In front of you is someone wearing a green military uniform.  They obviously aren't in any military you've ever heard of, as on his shoulder he has emblazoned <i>FF Army Sex Instructor</i>.  It seems you are his latest Recruit...
-			outputText("He suddenly barks, \"<i>Let's see those genitals, soldier!</i>\" ", false);
+			outputText("He suddenly barks, \"<i>Let's see those genitals, soldier!</i>\" ");
 			//[player is corrupt] 
-			if(player.cor > 50) outputText("You eagerly cry out \"<i>Yes, sir!</i>\" and show yourself off to the best of your ability.  The whole act is extremely arousing.", false);
+			if(player.cor > 50) outputText("You eagerly cry out \"<i>Yes, sir!</i>\" and show yourself off to the best of your ability.  The whole act is extremely arousing.");
 			//[player is not corrupt] 
-			else outputText("You have no idea why, but you promptly display yourself in the most provocative way possible.  After a moment you realize what you're doing and quickly stop, flushed with embarrassment and arousal.", false);
+			else outputText("You have no idea why, but you promptly display yourself in the most provocative way possible.  After a moment you realize what you're doing and quickly stop, flushed with embarrassment and arousal.");
 		}
 		//Gimp gear;
 		if(armorName == LEATHER_CLOTHES) {
@@ -99,7 +99,7 @@
 		//Well dressed and well groomed student in uniform;
 		if(armorName == STUDENTS_CLOTHES) {
 			//The Zealot seems to have taken on the appearance of a young adult wearing a student uniform of sorts; of course, this isn't any less perverted than any of the other costumes this man wears.  This one includes a number of loose straps that you're certain would cause large sections of his clothes to fall off if somebody pulled on them.
-			outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.", false);
+			outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.");
 		}
 		game.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
 		combatRoundOver();
@@ -117,9 +117,9 @@
 		override protected function postAttack(damage:int):void
 		{
 			if (damage > 0){
-				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
-				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
-				else outputText(".", false);
+				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound");
+				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?");
+				else outputText(".");
 				game.dynStats("lus", (player.lib / 20 + 5));
 			}
 			super.postAttack(damage);
@@ -133,7 +133,7 @@
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms){
-				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
+				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...");
 				player.orgasm();
 				doNext(game.lake.fetishZealotScene.zealotLossRape);
 			} else {

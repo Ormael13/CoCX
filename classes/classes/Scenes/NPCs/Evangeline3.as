@@ -153,7 +153,7 @@ package classes.Scenes.NPCs
 		/*
 		public function BlinkSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
-			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>", false);
+			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
 			fatigue += spellCostBlink();
@@ -165,7 +165,7 @@ package classes.Scenes.NPCs
 			createStatusEffect(StatusEffects.ChargeWeapon, 50, 0, 0, 0);
 			this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
-			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n", false);
+			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n");
 			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
 			this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
 			this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
@@ -173,7 +173,7 @@ package classes.Scenes.NPCs
 			createStatusEffect(StatusEffects.ChargeArmor, 50, 0, 0, 0);
 			this.armorDef += (4 + (inte / 15)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
-			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>\n\n", false);
+			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>\n\n");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
 			fatigue += spellCostChargeWeaponMightChargeArmorBlink();

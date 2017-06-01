@@ -1617,15 +1617,15 @@ package classes.Scenes.NPCs
 					if (player.horns > 0) {
 						//High quantity demon horns
 						if (player.hornType == HORNS_DEMON && player.horns > 4) {
-							outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.", false);
+							outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
 							player.horns = 12;
 							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 						}
 						else {
-							outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.", false);
+							outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
 							player.hornType = HORNS_DRACONIC_X2;
 							if (player.horns > 13) {
-								outputText("  The change seems to have shrunken the horns, they're about a foot long now.", false);
+								outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
 								player.horns = 12;
 							}
 						}
@@ -1634,7 +1634,7 @@ package classes.Scenes.NPCs
 					//No horns
 					else {
 						//-If no horns, grow a pair
-						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>", false);
+						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>");
 						player.horns = 4;
 						player.hornType = HORNS_DRACONIC_X2;
 						changes++;
@@ -1645,20 +1645,20 @@ package classes.Scenes.NPCs
 					if (player.hornType == HORNS_DRACONIC_X2) {
 						if (player.horns < 12) {
 							if (rand(2) == 0) {
-								outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.", false);
+								outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.");
 								player.horns += 1;
 							}
 							else {
-								outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.", false);
+								outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
 								player.horns += 2 + rand(4);
 							}
-							if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>", false);
+							if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
 							changes++;
 						}
 						//maxxed out, new row
 						else {
 							//--Next horn growth adds second row and brings length up to 12\"
-							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
+							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
 							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 							changes++;
 						}
@@ -1674,7 +1674,7 @@ package classes.Scenes.NPCs
 			//Gain Dragon Eyes
 			if (player.earType == EARS_DRAGON && player.eyeType != EYES_DRAGON && rand(3) == 0 && changes < changeLimit) {
 				player.eyeType = EYES_DRAGON;
-				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.", false);
+				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
 				changes++;
 			}
 			//Gain Dragon Tongue
@@ -1729,7 +1729,7 @@ package classes.Scenes.NPCs
 			}
 			//Arms
 			if (player.armType != ARM_TYPE_DRAGON && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>", false);
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
 			//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
 			//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
@@ -1823,9 +1823,9 @@ package classes.Scenes.NPCs
 				if (player.tallness >= 96 && player.tallness < 120) temp = Math.floor(temp / 2);
 				//Never 0
 				if (temp == 0) temp = 1;
-				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.", false);
-				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.", false);
-				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.", false);
+				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
 				player.tallness += temp;
 				changes++;
 			}

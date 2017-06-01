@@ -69,7 +69,7 @@ public function eventParser(eventNo:Function):void {
 		*/
 		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
-			outputText("\n\n", false);
+			outputText("\n\n");
 			if(!combatRoundOver()) enemyAI();
 			else outputText(monster.capitalA + monster.short + " is defeated!");
 			return;
@@ -106,7 +106,7 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 		outputText("</font>");
 		//Delete save on hardcore.
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-			outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+			outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>");
 			flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
 			var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
 			if (test.data.exists)
@@ -822,7 +822,7 @@ private function pregnancyProgress():int {
 	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
-			outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.", false);
+			outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
 			needNext = true;
 		}
 		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {

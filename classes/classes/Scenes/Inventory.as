@@ -250,7 +250,7 @@ package classes.Scenes
 				else outputText("next to your bedroll.");	
 				addButton(2, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
 				if (inventory.jewelryBoxDescription()) addButton(3, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
-				outputText("\n\n", false);
+				outputText("\n\n");
 			}
 			//Dresser
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0) {

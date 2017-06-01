@@ -40,11 +40,11 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function frostbite():void {
-			outputText("The wolf lunge, biting viciously at your leg.", false);
+			outputText("The wolf lunge, biting viciously at your leg.");
 			var dmgtaken:Number = 0;
 			var damage:Number = 0;
 			if(!player.hasStatusEffect(StatusEffects.Frostbite)) {
-				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.", false);
+				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.");
 				if(player.str > 7) {
 					player.str -= 6;
 					showStatDown( 'str' );
@@ -62,7 +62,7 @@ package classes.Scenes.Areas.GlacialRift
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)", false);
 			}
 			else {
-				outputText(" The coldness effects intensify as your movement slowing down even more.", false);
+				outputText(" The coldness effects intensify as your movement slowing down even more.");
 				if(player.str > 6) {
 					player.str -= 5;
 					showStatDown( 'str' );
@@ -82,7 +82,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		protected function wolfHold():void {
-			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.", false);
+			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(8+rand(10));
@@ -91,7 +91,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function paw():void {
-			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.", false);
+			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.");
 			player.takeDamage(str);
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);

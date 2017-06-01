@@ -57,12 +57,12 @@ package classes.Scenes.Areas
 					if (rand(2) == 0) {
 						//50/50 strength/speed
 						if (rand(2) == 0 && player.str < 150) {
-							outputText("Despite tiredness you feel that you became stronger.", false);
+							outputText("Despite tiredness you feel that you became stronger.");
 							dynStats("str", .5);
 						}
 						//Toughness
 						else if (player.spe < 150) {
-							outputText("Despite tiredness you feel that you became faster.", false);
+							outputText("Despite tiredness you feel that you became faster.");
 							dynStats("spe", .5);
 						}
 					}

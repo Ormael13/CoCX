@@ -198,7 +198,7 @@ package classes.Scenes.NPCs
 		
 		public function MightSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
-			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>", false);
+			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>");
 			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
 			if (findPerk(PerkLib.JobEnchanter) >= 0) {
 				this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
@@ -214,7 +214,7 @@ package classes.Scenes.NPCs
 		
 		public function BlinkSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
-			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>", false);
+			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			if (findPerk(PerkLib.JobEnchanter) >= 0) this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
 			else this.spe += (5 + (inte / 10)) * 1.2 * SpellMod();

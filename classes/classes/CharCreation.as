@@ -1449,12 +1449,12 @@
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
 			outputText("Choose a game mode.\n\n", true);
-			outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n", false);
-			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n", false);
-			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n", false);
-			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
-			outputText("<b>Brutal Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
-			outputText("<b>Xianxia MC mode:</b> The game mode for everyone that want feel like an every Xianxia MC. Hunger waiting behind a corner and enemies are always stronger than you! How long will take to you to reach top dog position?\n", false);
+			outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n");
+			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n");
+			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n");
+			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n");
+			outputText("<b>Brutal Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n");
+			outputText("<b>Xianxia MC mode:</b> The game mode for everyone that want feel like an every Xianxia MC. Hunger waiting behind a corner and enemies are always stronger than you! How long will take to you to reach top dog position?\n");
 			menu();
 			addButton(0, "Normal", chooseModeNormal);
 			addButton(1, "Survival", chooseModeSurvival);

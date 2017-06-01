@@ -1367,12 +1367,12 @@ private function weaponBuy(itype:ItemType):void {
 	outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
 	//outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
 	if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-		outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.", false);
+		outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
 		//Goto shop main menu
 		doNext(soulequipmentmerchant);
 		return;
 	}
-	else outputText("\n\nDo you buy it?\n\n", false);
+	else outputText("\n\nDo you buy it?\n\n");
 	//Go to debit/update function or back to shop window
 	doYesNo(curry(debitWeapon,itype), soulequipmentmerchant);
 }
@@ -1409,12 +1409,12 @@ private function weaponrangeBuy(itype:ItemType):void {
 	outputText("\"<i>That'll be " + itype.value + " gems.</i>\"");
 	//outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
-		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.");
 		//Goto shop main menu
 		doNext(soularrowmerchant);
 		return;
 	}
-	else outputText("\n\nDo you buy it?\n\n", false);
+	else outputText("\n\nDo you buy it?\n\n");
 	//Go to debit/update function or back to shop window
 	doYesNo(curry(debitWeaponRange,itype), soularrowmerchant);
 }

@@ -372,7 +372,7 @@ private function genderlessShouldraMasturbation():void {
 	outputText("\n\nYou wake some time later, having passed out on top of your clothes.  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.  For now, at least.  Your attempt to rise back to your [feet] is halted; your ass is still sore... and about as wide as before.  There's also a bottle at your side, full of <b>ectoplasm</b> - you hope this didn't come from where you think it came from.  You can only snicker to yourself, reflecting on the absurdity of it all.  When it comes right down to it, your spooky friend will really go to any means necessary.  It would pay to remember that for a change.");
 	//{analLooseness is now 5} {player receives ectoplasm}
 	player.ass.analLooseness = 5;
-	outputText("\n\n", false);
+	outputText("\n\n");
 	player.orgasm();
 	dynStats("sen", -2);
 	shouldraSleeping((10 + rand(26)), true);
@@ -457,7 +457,7 @@ private function nongenderlessAnalShouldraMasturbation():void {
 	dynStats("sen", -2);
 	player.ass.analLooseness = 5;
 	shouldraSleeping((10 + rand(26)), true);
-	outputText("\n\n", false);
+	outputText("\n\n");
 	flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT]++;
 	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
 }
@@ -491,7 +491,7 @@ private function maleMasturbationProper():void {
 	outputText("  She reaches into her tunic and tosses you a full bottle of ectoplasm, giving you a wink before incorporealizing once more and floating into you.  All's well that ends well.");
 	player.orgasm();
 	dynStats("sen", -2);
-	outputText("\n\n", false);
+	outputText("\n\n");
 	shouldraSleeping((10 + rand(26)), true);
 	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
 }
@@ -999,7 +999,7 @@ private function shouldraCockBloating101():void {
 		outputText("Several more inches push their way from your ");
 		if(!player.hasSheath()) outputText("crotch");
 		else outputText("sheath");
-		outputText(" in short order.  Shouldra happily grasps your fuller dick, stroking it vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.", false);
+		outputText(" in short order.  Shouldra happily grasps your fuller dick, stroking it vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
 		player.increaseCock(0, 4);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .25;

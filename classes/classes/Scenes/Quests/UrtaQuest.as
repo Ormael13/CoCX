@@ -1061,7 +1061,7 @@ private function urtaComboAttack():void {
 	}
 	//Blind
 	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	var damage:Number;
 	//Determine if dodged!
@@ -1069,13 +1069,13 @@ private function urtaComboAttack():void {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n", false);
+		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.Attacks)) {
 			urtaComboAttack();
 			return;
 		}
 		else {
-			outputText("\n", false);
+			outputText("\n");
 			kGAMECLASS.enemyAI();
 			return;
 		}
@@ -1154,7 +1154,7 @@ private function urtaComboAttack():void {
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.hasStatusEffect(StatusEffects.Attacks)) {
@@ -1163,7 +1163,7 @@ private function urtaComboAttack():void {
 			return;
 		}
 		trace("DONE ATTACK");
-		outputText("\n", false);
+		outputText("\n");
 		kGAMECLASS.enemyAI();
 	}
 	else {
@@ -1186,7 +1186,7 @@ private function urtaDirtKick():void {
 	fatigue(5);
 	//Blind
 	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
 	//Dodged!
@@ -1219,7 +1219,7 @@ private function urtaSidewinder():void {
 	fatigue(10);
 	//Blind
 	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	var damage:Number;
@@ -1228,7 +1228,7 @@ private function urtaSidewinder():void {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n\n", false);
+		outputText("\n\n");
 		kGAMECLASS.enemyAI();
 		return;
 	}
@@ -1316,14 +1316,14 @@ private function urtaSidewinder():void {
 	else if(monster.findPerk(PerkLib.Resolute) >= 0) {
 		outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		outputText("\n", false);
+		outputText("\n");
 		kGAMECLASS.enemyAI();
 	}
 	else {
@@ -1346,13 +1346,13 @@ private function urtaVaultAttack():void {
 	}
 	fatigue(20);
 	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
-		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
+		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n");
 		kGAMECLASS.enemyAI();
 		return;
 	}
 	//Blind
 	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("You leap into the air, intent on slamming your " + player.weaponName + " into your foe!  ");
 	var damage:Number;
@@ -1361,12 +1361,12 @@ private function urtaVaultAttack():void {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n", false);
+		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		else outputText("\n", false);
+		else outputText("\n");
 		enemyAI();
 		return;
 	}
@@ -1445,14 +1445,14 @@ private function urtaVaultAttack():void {
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		outputText("\n", false);
+		outputText("\n");
 		combat.enemyAIImpl();
 	}
 	else {

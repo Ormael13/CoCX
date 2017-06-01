@@ -231,7 +231,7 @@ package classes.Scenes.Areas.Forest
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
 				if (player.armType != ARM_TYPE_PLANT2 && changes < changeLimit) {
-					outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>", false);
+					outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
 					player.armType = ARM_TYPE_PLANT2;
 					changes++;
 				}
@@ -239,14 +239,14 @@ package classes.Scenes.Areas.Forest
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
 					if (player.armType != ARM_TYPE_PLANT2 && changes < changeLimit) {
-						outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>", false);
+						outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
 						player.armType = ARM_TYPE_PLANT2;
 						changes++;
 					}
 				}
 				else {
 					if (player.armType != ARM_TYPE_PLANT && changes < changeLimit) {
-						outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>", false);
+						outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
 						player.armType = ARM_TYPE_PLANT;
 						changes++;
 					}
@@ -254,7 +254,7 @@ package classes.Scenes.Areas.Forest
 			}
 			if (player.cor < 33) {
 				if (player.armType != ARM_TYPE_PLANT && changes < changeLimit) {
-					outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>", false);
+					outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
 					player.armType = ARM_TYPE_PLANT;
 					changes++;
 				}
@@ -271,38 +271,38 @@ package classes.Scenes.Areas.Forest
 			}
 			//Bark claws
 		//	if (player.armType != ARM_TYPE_ORCA && changes < changeLimit) {
-		//		outputText("\n\nRemarkably, the sunscreen has no effect.  Maybe next time?", false);
+		//		outputText("\n\nRemarkably, the sunscreen has no effect.  Maybe next time?");
 		//		player.armType = ARM_TYPE_ORCA;
 		//		changes++;
 		//	}
 			//Root claws
 			if (player.wingType == WING_TYPE_PLANT && player.lowerBody != LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
-				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n", false);
+				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
 				player.lowerBody = LOWER_BODY_TYPE_YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
 				changes++;//player.armType == ARM_TYPE_ORCA && 
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS && player.faceType != FACE_PLANT_DRAGON && changes < changeLimit) {
-				outputText("The familiar tingle of transformation spreads across your face. Your ", false);
-				if (player.hasMuzzle()) outputText("muzzle", false);
-				else outputText("face", false);
-				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n", false);
+				outputText("The familiar tingle of transformation spreads across your face. Your ");
+				if (player.hasMuzzle()) outputText("muzzle");
+				else outputText("face");
+				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n");
 				player.faceType = FACE_PLANT_DRAGON;
 				changes++;
 			}
 			//Plant dragon tail
 			if (player.faceType == FACE_PLANT_DRAGON && player.tailType != TAIL_TYPE_YGGDRASIL && changes < changeLimit) {
-				outputText("You feel a weird sensation in your ", false);
+				outputText("You feel a weird sensation in your ");
 				if (player.tailType > TAIL_TYPE_NONE) {
-					outputText("tail", false);
-					if (player.tailCount > 1) outputText("s", false);
+					outputText("tail");
+					if (player.tailCount > 1) outputText("s");
 				}
-				else outputText("tailbone", false);
-				outputText(". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ", false);
-				if (player.tailType > TAIL_TYPE_NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage", false);
-				else outputText("your tailbone erupts and elongates into a new limb, your new tail", false);
-				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>\n\n", false);
+				else outputText("tailbone");
+				outputText(". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ");
+				if (player.tailType > TAIL_TYPE_NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage");
+				else outputText("your tailbone erupts and elongates into a new limb, your new tail");
+				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>\n\n");
 				player.tailType = TAIL_TYPE_YGGDRASIL;
 				if (player.tailCount != 1) player.tailCount = 1;
 				changes++;

@@ -11,19 +11,19 @@
 			var damage:Number = 0;
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Marble unwisely tries to make a massive swing while blinded, which you are easily able to avoid.", false);
+				outputText("Marble unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
 				combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
-				outputText("You manage to roll out of the way of a massive overhand swing.", false);
+				outputText("You manage to roll out of the way of a massive overhand swing.");
 				combatRoundOver();
 				return;
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
-				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.", false);
+				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.");
 				combatRoundOver();
 				return;
 			}
@@ -32,10 +32,10 @@
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				outputText("You somehow manage to deflect and block Marble's massive overhead swing.", false);
+				outputText("You somehow manage to deflect and block Marble's massive overhead swing.");
 			}
 			if(damage > 0) {
-				outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  ", false);
+				outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  ");
 				damage = player.takeDamage(damage, true);
 			}
 			statScreenRefresh();
@@ -46,11 +46,11 @@
 			var damage:Number = 0;
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n", false);
+				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n");
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.", false);
+				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.");
 				combatRoundOver();
 				return;
 			}
@@ -60,9 +60,9 @@
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				outputText("You easily deflect and block the damage from Marble's wide swing.", false);
+				outputText("You easily deflect and block the damage from Marble's wide swing.");
 			}
-			outputText("Marble easily hits you with a wide, difficult to avoid swing.  ", false);
+			outputText("Marble easily hits you with a wide, difficult to avoid swing.  ");
 			if(damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			combatRoundOver();

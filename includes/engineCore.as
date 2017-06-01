@@ -121,7 +121,7 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 public function HPChangeNotify(changeNum:Number):void {
 	if (changeNum == 0) {
 		if(player.HP >= maxHP())
-			outputText("You're as healthy as you can be.\n", false);
+			outputText("You're as healthy as you can be.\n");
 	}
 	else if (changeNum > 0) {
 		if(player.HP >= maxHP())
@@ -492,7 +492,7 @@ private function finishAttributes():void {
 	}
 	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt + player.tempWis + player.tempLib <= 0 || player.statPoints > 0)
 	{
-		outputText("\nYou may allocate your remaining stat points later.", false);
+		outputText("\nYou may allocate your remaining stat points later.");
 	}
 	player.str += player.tempStr;
 	player.tou += player.tempTou;

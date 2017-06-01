@@ -46,9 +46,9 @@ import classes.internals.*;
 		public function medusaPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
-			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin", false);
-			else outputText("The gorgon", false);
-			outputText("'s strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
+			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+			else outputText("The gorgon");
+			outputText("'s strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.", false);
 				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 7) {
@@ -91,7 +91,7 @@ import classes.internals.*;
 				player.takeDamage(5+rand(5));
 			}
 			else {
-				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.", false);
+				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
 				if(player.str > 7 && player.tou > 7 && player.spe > 7 && player.inte > 7) {
 					player.str -= 1;
 					showStatDown( 'str' );
@@ -137,9 +137,9 @@ import classes.internals.*;
 		}
 		
 		public function medusaConstrict():void {
-			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin", false);
-			else outputText("The gorgon", false);
-			outputText(" draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
+			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+			else outputText("The gorgon");
+			outputText(" draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(3+rand(6));
@@ -147,24 +147,24 @@ import classes.internals.*;
 		}
 		
 		public function TailWhip():void {
-			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin", false);
-			else outputText("The gorgon", false);
-			outputText(" tenses and twists herself forcefully.  ", false);
+			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+			else outputText("The gorgon");
+			outputText(" tenses and twists herself forcefully.  ");
 			//[if evaded]
 			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
 			}
 			else if(player.spe > rand(400)) {
-				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
-				outputText("Before you can even think, you feel a sharp pain at your side as ", false);
-				if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin", false);
-				else outputText("the gorgon's", false);
-				outputText(" tail slams into you and knocking over. You fast pick yourself up, wincing at the pain in your side. ", false);
+				outputText("Before you can even think, you feel a sharp pain at your side as ");
+				if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+				else outputText("the gorgon's");
+				outputText(" tail slams into you and knocking over. You fast pick yourself up, wincing at the pain in your side. ");
 				var damage:Number = str;
 				if(player.armorDef < 100) damage += 100 - player.armorDef;
 				damage += rand(30);
@@ -173,7 +173,7 @@ import classes.internals.*;
 		}
 		
 		public function petrify():void {
-			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ", false);
+			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);

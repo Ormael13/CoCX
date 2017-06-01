@@ -30,55 +30,55 @@
 			//Drink blue pots
 			else {
 				if(short == "Tamani's daughters") {
-					outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.", false);
+					outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.");
 					if(HPRatio() < 1) {
-						outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n", false);
+						outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n");
 						addHP(80 * multiplier);
 					}
-					else outputText("  There doesn't seem to be any effect.\n", false);			
-					outputText("\n", false);
+					else outputText("  There doesn't seem to be any effect.\n");
+					outputText("\n");
 				}
 				else {
 					outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
 					if(HPRatio() < 1) {
-						outputText("  She looks to have recovered from some of her wounds!\n", false);
+						outputText("  She looks to have recovered from some of her wounds!\n");
 						addHP((eMaxHP() / 4) * multiplier);
 						if (short == "Tamani") addHP((eMaxHP() / 4) * multiplier);
 					}
-					else outputText("  There doesn't seem to be any effect.\n", false);
+					else outputText("  There doesn't seem to be any effect.\n");
 					combatRoundOver();
 				}
 				return;
 			}
 			//Dodge chance!
 			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
-				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);
+				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else {
 				//Get hit!
 				if (color == "red") {
 					//Temporary heat
-					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
+					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
 					if (!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat, 0, multiplier, 0, 0);
 				}
 				else if (color == "green") {
 					//Green poison
-					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
+					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n");
 					if (!player.hasStatusEffect(StatusEffects.Poison)) player.createStatusEffect(StatusEffects.Poison, 0, multiplier, 0, 0);
 				}
 				else if (color == "white") {
 					//sticky flee prevention
-					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
+					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n");
 					if (!player.hasStatusEffect(StatusEffects.NoFlee)) player.createStatusEffect(StatusEffects.NoFlee, 0, 0, 0, 0);
 				}
 				else if (color == "black") {
 					//Increase fatigue
-					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
+					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 					game.fatigue(10 + rand(25) * multiplier);
 				}
 			}
 			if (!plural) combatRoundOver();
-			else outputText("\n", false);
+			else outputText("\n");
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
@@ -108,7 +108,7 @@
 			if (short == "goblin shaman") lustDmg *= 1.6;
 			if (short == "goblin elder") lustDmg *= 2;
 			game.dynStats("lus", lustDmg);
-			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n", false);
+			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
 			combatRoundOver();
 		}
 		
@@ -120,10 +120,10 @@
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
+				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.");
 				game.cleanupAfterCombat();
 			} else if (pcCameWorms) {
-				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
+				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {

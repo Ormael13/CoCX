@@ -14,56 +14,56 @@ package classes.Scenes.Areas.Swamp
 		//Drider kiss!
 		public function driderKiss():void {
 			var temp:int;
-			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibers.\n\n", false);
+			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibers.\n\n");
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("She's too blind to get anywhere near you.\n", false);
+				outputText("She's too blind to get anywhere near you.\n");
 			}
 			//Dodge
 			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("Somehow, you manage to drag yourself out of the way.  She sighs and licks her lips.  \"<i>", false);
+				outputText("Somehow, you manage to drag yourself out of the way.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
+				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
+				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
+				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
 			}
 			//Determine if evaded
 			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Somehow, you manage to evade her lusty attack.  She sighs and licks her lips.  \"<i>", false);
+				outputText("Somehow, you manage to evade her lusty attack.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
+				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
+				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
+				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("You manage to misdirect her lusty attack, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
+				outputText("You manage to misdirect her lusty attack, avoiding it at the last second.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
+				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
+				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
+				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("You manage to twist your cat-like body out of the way at the last second, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
+				outputText("You manage to twist your cat-like body out of the way at the last second, avoiding it at the last second.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
+				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
+				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
+				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
 			}
 			
 			else if(!player.hasStatusEffect(StatusEffects.DriderKiss)) {
 				//(HIT? + 10 lust)
 				game.dynStats("lus", 10);
-				outputText("Before you can move, she's right on top of you, leaning ", false);
-				if(player.tallness < 72) outputText("down", false);
-				else outputText("over", false);
-				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.", false);
-				if(player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.", false);
+				outputText("Before you can move, she's right on top of you, leaning ");
+				if(player.tallness < 72) outputText("down");
+				else outputText("over");
+				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.");
+				if(player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.");
 				player.createStatusEffect(StatusEffects.DriderKiss,0,0,0,0);
 			}
 			//Get hit 2nd time) 
@@ -75,8 +75,8 @@ package classes.Scenes.Areas.Swamp
 					outputText("Again, the drider ties your mouth up in her syrupy lip-lock, seeming to bind your mouth as effectively as her webs bind your body.  Her sweet venom bubbles and froths at the corners of the oral embrace, dripping over her many-breasted bosom and your " + player.chestDesc() + ".", false);
 					if(player.hasCock()) outputText("  " + SMultiCockDesc() + " spews a rope of pre-cum into your " + player.armorName + ", desperate to get out and fuck.", false);
 					if(player.hasVagina()) outputText("  Fem-cum dribbles down your " + player.legs() + " while your " + player.clitDescript() + " gets so hard you think it'll explode.", false);
-					outputText("  This time, the drider is the one to break the kiss.  She asks, \"<i>Are you ready, my horny little morsel?</i>\"\n", false);
-					if(player.lust <= 99) outputText("You shake your head 'no' and stand your ground!\n", false);
+					outputText("  This time, the drider is the one to break the kiss.  She asks, \"<i>Are you ready, my horny little morsel?</i>\"\n");
+					if(player.lust <= 99) outputText("You shake your head 'no' and stand your ground!\n");
 				}
 				//(Get hit 3rd+ time)
 				else {
@@ -84,12 +84,12 @@ package classes.Scenes.Areas.Swamp
 					//(HIT? + 20 lust)
 					game.dynStats("lus", 20);
 					if(player.hasCock() || player.hasVagina()) {
-						outputText("  The moisture in your crotch only gets worse.  At this point, a ", false);
-						if(player.wetness() < 3 && player.cumQ() < 200) outputText("small", false);
-						else if(player.wetness() < 5 && player.cumQ() < 500) outputText("large", false);
-						else outputText("massive", false);
+						outputText("  The moisture in your crotch only gets worse.  At this point, a ");
+						if(player.wetness() < 3 && player.cumQ() < 200) outputText("small");
+						else if(player.wetness() < 5 && player.cumQ() < 500) outputText("large");
+						else outputText("massive");
 						outputText(" wet stain that reeks of your sheer sexual ache has formed in your " + player.armorName + ".", false);
-						if(player.lust <= 99) outputText("  Amazingly, you resist her and pull back, panting for breath.", false);
+						if(player.lust <= 99) outputText("  Amazingly, you resist her and pull back, panting for breath.");
 					}
 				}
 			}
@@ -100,12 +100,12 @@ package classes.Scenes.Areas.Swamp
 			//-Masturbate - (Lowers lust by 50, raises PC lust)
 			lust -= 30;
 			game.dynStats("lus", (10+player.lib/20));
-			outputText("The spider-woman skitters back and gives you a lusty, hungry expression.  She shudders and moans, \"<i>Mmm, just watch what you're missing out on...</i>\"\n\n", false);
-			outputText("As soon as she finishes, her large clit puffs up, balloon-like.  A second later, it slides forward, revealing nine inches of glossy, girl-spunk-soaked shaft.  Nodules ring the corrupted penis' surface, while the tiny cum-slit perched atop the tip dribbles heavy flows of pre-cum.  She pumps at the fleshy organ while her other hand paws at her jiggling breasts, tugging on the hard ", false);
-			if(nipplesPierced > 0) outputText("pierced ", false);
-			outputText("nipple-flesh.  Arching her back in a lurid pose, she cries out in high-pitched bliss, her cock pulsing in her hand and erupting out a stream of seed that lands in front of her.\n\n", false);
+			outputText("The spider-woman skitters back and gives you a lusty, hungry expression.  She shudders and moans, \"<i>Mmm, just watch what you're missing out on...</i>\"\n\n");
+			outputText("As soon as she finishes, her large clit puffs up, balloon-like.  A second later, it slides forward, revealing nine inches of glossy, girl-spunk-soaked shaft.  Nodules ring the corrupted penis' surface, while the tiny cum-slit perched atop the tip dribbles heavy flows of pre-cum.  She pumps at the fleshy organ while her other hand paws at her jiggling breasts, tugging on the hard ");
+			if(nipplesPierced > 0) outputText("pierced ");
+			outputText("nipple-flesh.  Arching her back in a lurid pose, she cries out in high-pitched bliss, her cock pulsing in her hand and erupting out a stream of seed that lands in front of her.\n\n");
 			
-			outputText("The display utterly distracts you until it finishes, and as you adopt your combat pose once more, you find your own needs harder to ignore, while hers seem to be sated, for now.\n", false);
+			outputText("The display utterly distracts you until it finishes, and as you adopt your combat pose once more, you find your own needs harder to ignore, while hers seem to be sated, for now.\n");
 			combatRoundOver();
 		}
 

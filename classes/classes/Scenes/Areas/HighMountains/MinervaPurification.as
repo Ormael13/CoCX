@@ -876,8 +876,8 @@ package classes.Scenes.Areas.HighMountains
 			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sleepwith-pure"), false);
 			outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Of course! I'd love to spend the night with you,</i>\" she says. \n\n", true);
-			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText("Minerva guides you to the most comfortable spot under the huge oak tree. Being under the tree gives you a great sense of shelter. She takes off her tube top, exposing her breasts completely.\n\n", false);
-			else outputText("Minerva guides you to the most comfortable spot. She takes off her tube top, exposing her breasts completely.\n\n", false);
+			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText("Minerva guides you to the most comfortable spot under the huge oak tree. Being under the tree gives you a great sense of shelter. She takes off her tube top, exposing her breasts completely.\n\n");
+			else outputText("Minerva guides you to the most comfortable spot. She takes off her tube top, exposing her breasts completely.\n\n");
 			if (player.armorName == "goo armor") outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you. ", false)
 			else outputText("You take your time to get your " + player.armorName + " off until you're completely naked. ", false)
 			outputText("You lay next to Minerva while you rest your head on her soft breasts. ", false)
@@ -889,7 +889,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sleepwith2-pure"), false);
-			outputText("<b>Ten hours pass...</b>\n\n", false);
+			outputText("<b>Ten hours pass...</b>\n\n");
 			outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n", false)
 			if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up ", false)
 			else outputText("You get re-dressed in your " + player.armorName + " ", false)

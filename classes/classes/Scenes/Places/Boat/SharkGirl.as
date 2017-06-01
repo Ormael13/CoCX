@@ -10,7 +10,7 @@
 		private function sharkTease():void {
 			game.spriteSelect(70);
 			if(rand(2) == 0) {
-				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\" ", false);
+				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
 				player.takeDamage(4+rand(4), true);
 				game.dynStats("lus", (10+(player.lib/20)));

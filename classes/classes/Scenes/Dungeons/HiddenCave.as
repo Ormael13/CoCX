@@ -148,7 +148,7 @@ package classes.Scenes.Dungeons
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five pill bottles.\n\n", false);
+				outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
 				addButton(0, "SoulPill", takeSoulPill);
 			}
 		}
@@ -230,7 +230,7 @@ package classes.Scenes.Dungeons
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five glowing tiger shark teeth inside.", false);
+				outputText("\n\nThere is an unopened crate with five glowing tiger shark teeth inside.");
 				addButton(0, "TSharkT", takeTSharkTooth);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED] > 0) {
@@ -240,7 +240,7 @@ package classes.Scenes.Dungeons
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five golden seeds inside.", false);
+				outputText("\n\nThere is an unopened crate with five golden seeds inside.");
 				addButton(1, "GoldSeed", takeGoldenSeed);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU] > 0) {
@@ -250,7 +250,7 @@ package classes.Scenes.Dungeons
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five Mara fruits inside.", false);
+				outputText("\n\nThere is an unopened crate with five Mara fruits inside.");
 				addButton(2, "MaraFruit", takeMaraFruit);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW] > 0) {
@@ -260,7 +260,7 @@ package classes.Scenes.Dungeons
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five bottles of Salamander firewater inside.", false);
+				outputText("\n\nThere is an unopened crate with five bottles of Salamander firewater inside.");
 				addButton(3, "SalamFW", takeSalamFireWat);
 			}
 		}
@@ -281,7 +281,7 @@ package classes.Scenes.Dungeons
 				addButtonDisabled(0, "???", "???");
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with something inside.\n\n", false);
+				outputText("\n\nThere is an unopened crate with something inside.\n\n");
 				addButton(0, "Crate 1", takeGuidedBow);
 			}
 		}

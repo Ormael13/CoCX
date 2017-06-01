@@ -18,17 +18,17 @@ package classes.Scenes.NPCs
 			doNext(game.playerMenu);
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.", false);
+				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//("Misdirection"
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.", false);
+				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.", false);
+				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -43,11 +43,11 @@ package classes.Scenes.NPCs
 			else {
 				var choice:Number = rand(3);
 				//(regular attack 1)
-				if(choice == 0) outputText("Ducking in close, the girl thunders a punch against your midsection, leaving a painful sting. ", false);
+				if(choice == 0) outputText("Ducking in close, the girl thunders a punch against your midsection, leaving a painful sting. ");
 				//(regular attack 2)
 				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + kGAMECLASS.hipDescript() + ". You stagger, correct your posture, and plunge back into combat. ", false);
 				//(regular attack 3)
-				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso. ", false);
+				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso. ");
 				damage = player.takeDamage(damage, true);
 			}
 			if(damage > 0) {
@@ -57,20 +57,20 @@ package classes.Scenes.NPCs
 				}
 			}
 			statScreenRefresh();
-			outputText("\n", false);
+			outputText("\n");
 			combatRoundOver();
 		}
 
 		//(lust attack 1)
 		private function shouldraLustAttack():void {
-			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n", false);
+			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n");
 			else outputText("The girl's feet get tangled on each other and she tumbles to the ground. Before you can capitalize on her slip, she rolls with the impact and comes up smoothly. As she rises, however, you reel back and raise an eyebrow in confusion; are her breasts FILLING the normally-loose tunic? She notices your gaze and smiles, performing a small pirouette on her heel before squaring up to you again. Your confusion only heightens when her torso comes back into view, her breasts back to their normal proportions. A trick of the light, perhaps? You shake your head and try to fall into the rhythm of the fight.\n", false);
 			game.dynStats("lus", (8+player.lib/10));
 			combatRoundOver();
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
-			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ", false);
+			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
 			var damage:Number = player.takeDamage(int + rand(10), true);
 			outputText("\n");
 			combatRoundOver();
