@@ -6,8 +6,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	
-	public class CeaniScene extends NPCAwareContent
+import classes.Items.WeaponRangeLib;
+
+public class CeaniScene extends NPCAwareContent
 	{
 		
 		public function CeaniScene() 
@@ -108,7 +109,7 @@ public function basicarcherytraining2():void
 public function beachInteractionsAfterArcheryTraining():void
 {
 	clearOutput();
-	if (player.statusAffectv1(StatusAffects.Kindra) > 145 && player.weaponRangeName == "sea huntress harpoons" && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
+	if (player.statusAffectv1(StatusAffects.Kindra) > 145 && player.weaponRange == weaponsrange.SHUNHAR && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
 		outputText("You have gone a long way in learning how to use various ranged weapons. It occurs to you Ceani could learn a thing or two from you, and, as you spot the orca girl lazily resting on the beach you give her a wave.\n\n");
 		outputText("\"<i>Hey it’s [name] long time no see! How has the demon fishing been going?</i>\"\n\n");
 		outputText("You laugh and tell her that you’re doing well. As a matter of fact you even learned more tricks since you left out. The orca make a playful smile.\n\n");

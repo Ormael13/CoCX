@@ -394,7 +394,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		if (player.weaponRangePerk == "Crossbow")
 			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
 		if (player.weaponRangePerk == "Throwing") {
-			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRangeName != "sea huntress harpoons") addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
+			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRange != weaponsrange.SHUNHAR) addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
 			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
 		}
 		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
@@ -1102,6 +1102,16 @@ public function oneArrowTotalCost():Number {
 	if (player.findPerk(PerkLib.BowShooting) >= 0) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
 	return onearrowcost;
 }
+public function oneThrowTotalCost():Number {
+	var onearrowcost:Number = 25;
+	//additional arrow effects costs
+//	if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1 || flags[kFLAGS.ELEMENTAL_ARROWS] == 2) onearrowcost += 15;
+//	if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 5;
+//	if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 5;
+	//Bow Shooting perk cost reduction
+//	if (player.findPerk(PerkLib.BowShooting) >= 0) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
+	return onearrowcost;
+}
 
 public function speedscalingbonus():Number {
 	var speedscalingvalue:Number = 0;
@@ -1178,7 +1188,7 @@ public function fireBow():void {
 		}
 	//	fatigue(fireBowCost);
 	}
-	if (player.weaponRangePerk == "Throwing" && player.weaponRangeName != "sea huntress harpoons") {
+	if (player.weaponRangePerk == "Throwing") {
 		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
 		else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
 		else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
@@ -1289,7 +1299,16 @@ public function fireBow():void {
 		if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at " + monster.short + ".\n\n");
 		multiArrowsStrike();
 	}
-	if (player.weaponRangePerk == "Throwing") throwWeapon();
+	if (player.weaponRangePerk == "Throwing") {
+		var fc:Number       = oneThrowTotalCost();
+		if (player.fatigue + fc > player.maxFatigue()) {
+			outputText("You're too fatigued to throw the "+player.weaponRangeName+"!");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		throwWeapon();
+	}
 	if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") shootWeapon();
 }
 
@@ -1298,8 +1317,8 @@ public function multiArrowsStrike():void {
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
 	if (player.weaponRangeName == "Guided bow") accRange = 100;
+	fatigue(oneArrowTotalCost());
 	if (rand(100) < accRange) {
-		fatigue(oneArrowTotalCost());
 		var damage:Number = 0;
 		if (player.weaponRangePerk == "Bow") {
 			damage += player.spe;
@@ -1663,10 +1682,12 @@ public function bowPerkUnlock():void {
 }
 
 public function throwWeapon():void {
+	var fc:Number       = oneThrowTotalCost();
 	var accRange:Number = 0;
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	if (player.weaponRangeName != "sea huntress harpoons") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
+	if (player.weaponRange != weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
+	fatigue(fc);
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
 		damage += player.str;
@@ -1797,24 +1818,11 @@ public function throwWeapon():void {
 		}
 		if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
 		enemyAI();
-	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) {
+	} else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
 		throwWeapon();
 	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) {
-		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-		flags[kFLAGS.ARROWS_ACCURACY] += 15;
-		throwWeapon();
-	}
-	
-	if (monster is Lethice && (monster as Lethice).fightPhase == 3)
-		{
-			outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic weapon?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
-		}
-	enemyAI();
 }
 
 public function shootWeapon():void {
@@ -3926,7 +3934,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "training javelins") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 10;
 	if (player.weaponRangeName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	if (player.weaponRangeName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
-	if (player.weaponRangeName == "sea huntress harpoons") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 1;
+	if (player.weaponRange == weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "resisted", false);
 		doNext(endLustLoss);
