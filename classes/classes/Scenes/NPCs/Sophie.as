@@ -24,7 +24,7 @@
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ");
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n", false);
+				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n");
 				return;
 			}
 			//Determine if dodged!
@@ -34,16 +34,16 @@
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				return;
 			}
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
 				return;
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				outputText("'s attack.\n");
 				return;
 			}
@@ -52,14 +52,14 @@
 			
 			//Already affected by it
 			if(player.hasStatusEffect(StatusEffects.Luststick)) {
-				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
+				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ");
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);
+				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
@@ -67,9 +67,9 @@
 				game.dynStats("lus", 8+player.lib/10);
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);
+				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 		}
 		
@@ -80,29 +80,29 @@
 		//Easily dodged with evade or flexibility.
 		private function sophieHarpyBoatsPC():void {
 			game.sophieBimbo.sophieSprite();
-			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ", false);
+			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ");
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
+				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
 				return;
 			}
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText(a + short + "'s movements are incredibly fast but you manage to sidestep them.\n", false);
+				outputText(a + short + "'s movements are incredibly fast but you manage to sidestep them.\n");
 				return;
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you determine " + a + short + " is aiming for your upper body and slide under the attack.\n", false);
+				outputText("Using your skills at evading attacks, you determine " + a + short + " is aiming for your upper body and slide under the attack.\n");
 				return;
 			}
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 40 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
 				return;
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				outputText("'s attack.\n");
 				return;
 			}
@@ -121,7 +121,7 @@
 			//autofails if player inte > 80
 			//Player fails:
 			if(player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
-				outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + player.sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.", false);
+				outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + player.sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.");
 				outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.");
 				game.dynStats("lus", (15 + player.cor/20 + player.lib/20));
 			}
@@ -140,36 +140,36 @@
 			var damage:Number = 0;
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
+				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
 				return;
 			}
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText(a + short + "'s tears through the air, but you manage to just barely dodge it.\n", false);
+				outputText(a + short + "'s tears through the air, but you manage to just barely dodge it.\n");
 				return;
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you watch " + a + short + " and deftly sidestep her brutal talons.\n", false);
+				outputText("Using your skills at evading attacks, you watch " + a + short + " and deftly sidestep her brutal talons.\n");
 				return;
 			}
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 30 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
 				return;
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				outputText("'s attack.\n");
 				return;
 			}
-			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skinDesc + " with her razor-sharp talons! ", false);
+			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skinDesc + " with her razor-sharp talons! ");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage += 40;
 			damage = player.takeDamage(damage);
-			outputText("(" + damage + ")\n", false);
+			outputText("(" + damage + ")\n");
 			
 		}
 		//Batter (Female Only)
@@ -183,22 +183,22 @@
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage = player.takeDamage(damage);
-			outputText("Her left primary wing batters your head! (" + damage + ")\n", false);
+			outputText("Her left primary wing batters your head! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage = player.takeDamage(damage);
-			outputText("Her right, wing-like arm slaps at your torso! (" + damage + ")\n", false);
+			outputText("Her right, wing-like arm slaps at your torso! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage = player.takeDamage(damage);
-			outputText("Her other feathery arm punches at your shoulder! (" + damage + ")\n", false);
+			outputText("Her other feathery arm punches at your shoulder! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage = player.takeDamage(damage);
-			outputText("Her right wing slams into the other side of your head! (" + damage + ")\n", false);
+			outputText("Her right wing slams into the other side of your head! (" + damage + ")\n");
 		}
 
 		override protected function performCombatAction():void

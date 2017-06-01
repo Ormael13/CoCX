@@ -16,11 +16,11 @@
 			if(temp2 == 4) color = "black";
 			//Throw offensive potions at the player
 			if (color != "blue") {
-				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
+				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.");
 			}
 			//Drink blue pots
 			else {
-				outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
+				outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.");
 				if(HPRatio() < 1) {
 					outputText("  She looks to have recovered from some of her wounds!\n");
 					addHP(eMaxHP() /4);

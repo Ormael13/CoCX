@@ -65,15 +65,18 @@ package classes.Scenes.Areas
 					phoenixScene.encounterPhoenix2();
 					break;
 				case 2:
-					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ", true);
+					clearOutput();
+					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
 					break;
 				case 3: //True Fire Golems
-					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your " + player.weaponName + " for a fight!", true);
+					clearOutput();
+					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your " + player.weaponName + " for a fight!");
 					startCombat(new GolemsTrueFire());
 					break;
 				default:
-					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting, yet you this time you managed walk a little further inside this place than the last time.", true);
+					clearOutput();
+					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting, yet you this time you managed walk a little further inside this place than the last time.");
 					dynStats("spe", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}

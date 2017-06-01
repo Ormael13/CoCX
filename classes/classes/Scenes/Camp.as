@@ -100,7 +100,7 @@
 public function EzekielCurseQuickFix():void
 {
 	clearOutput();
-	outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.", true);
+	outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.");
 	if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
 	statScreenRefresh();
@@ -345,7 +345,8 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	if(timeQ > 0) {
 		if(!campQ) {
-			outputText("More time passes...\n", true);
+			clearOutput();
+			outputText("More time passes...\n");
 			goNext(timeQ, false);
 			return;
 		}
@@ -579,7 +580,7 @@ private function doCamp():void { //Only called by playerMenu
 	clearOutput();
 	updateAchievements();
 	
-	outputText(images.showImage("camping"), false);
+	outputText(images.showImage("camping"));
 	//Isabella upgrades camp level!
 
 
@@ -600,25 +601,25 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	if(model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the camp's perimeter.\n\n");
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of camp.\n\n", false)
-	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and camp edge is set place where you will store piles of wood or stones used for constructions. ", false)
-	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and camp edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ", false)
-	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and camp edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n", false)
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n");
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n");
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n");
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of camp.\n\n");
+	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and camp edge is set place where you will store piles of wood or stones used for constructions. ");
+	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and camp edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
+	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and camp edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
 		if(flags[kFLAGS.MARBLE_KIDS] == 0) outputText("future children");
 		else {
-			outputText(num2Text(flags[kFLAGS.MARBLE_KIDS]) + " child", false);
+			outputText(num2Text(flags[kFLAGS.MARBLE_KIDS]) + " child");
 			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("ren");
 		}
 		outputText(".\n\n");
@@ -719,7 +720,7 @@ private function doCamp():void { //Only called by playerMenu
 	//MOUSEBITCH
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.\n\n");
-		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin": "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n", false);
+		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin": "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n");
 	}
 	
 	campLoversMenu(true);
@@ -736,7 +737,7 @@ private function doCamp():void { //Only called by playerMenu
 	//Hunger check!
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
-		outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". </b>", false);
+		outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". </b>");
 		if (player.hunger < 10) {
 			outputText("<b>You are getting thinner and you're losing muscles. </b>");
 		}
@@ -783,7 +784,8 @@ private function doCamp():void { //Only called by playerMenu
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 7)
 	{
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
-		outputText("You realize that you have spent week sleeping in tent every night. You think of something so you can sleep nicely and comfortably. Perhaps a cabin will suffice?", true)
+		clearOutput();
+		outputText("You realize that you have spent week sleeping in tent every night. You think of something so you can sleep nicely and comfortably. Perhaps a cabin will suffice?");
 		doNext(playerMenu);
 		return;
 	}
@@ -1135,7 +1137,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 		temp = rand(5);
-		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
+		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 		//Normal Murbles
 		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 		//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
@@ -1185,7 +1187,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		//(Choose one of these at random to display each hour)
 		else if(temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
 		else if(temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
-		else if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.", false);
+		else if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
 		else if(temp == 3) {
 			outputText("Marble herself is resting on her bedroll right now.");
 		}
@@ -1428,7 +1430,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 private function campActions():void {
 	hideMenus();
 	menu();
-	outputText("What would you like to do?", true)
+	clearOutput();
+	outputText("What would you like to do?");
 	addButton(0, "SwimInStream", swimInStream, null, null, null, "Swim in stream and relax to pass time.", "Swim In Stream");
 	addButton(1, "ExaminePortal", examinePortal, null, null, null, "Examine the portal. This scene is placeholder.", "Examine Portal"); //Examine portal.
 	if (model.time.hours == 19) {
@@ -1458,29 +1461,30 @@ private function campActions():void {
 
 public function spellHealcamp():void {
 	//if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
+	clearOutput();
 	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + 30 > player.maxFatigue()) {
-		outputText("You are too tired to cast this spell.", true);
+		outputText("You are too tired to cast this spell.");
 		doNext(campActions);
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(30);
-	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
+	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
 	//30% backfire!
 	var backfire:int = 30;
 	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
-	backfire -= (player.inte * 0,15)
+	backfire -= (player.inte * 0,15);
 	if (backfire < 15) backfire = 15;
 	else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 	if(rand(100) < backfire) {
 		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
+		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
 		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 		}
-		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 		dynStats("lib", .25, "lus", 15);
 	}
 	else {
@@ -1521,7 +1525,7 @@ public function spellHealcamp():void {
 			//temp *= 1.75;
 		//}
 		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
+		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 		HPChange(temp,false);
 	}
 	outputText("\n\n");
@@ -1541,7 +1545,8 @@ private function swimInStream():void {
 	var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
 	
 	var prankChooser:Number = rand(3);
-	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ", true);
+	clearOutput();
+	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ");
 	if (player.armorName == "slutty swimwear") outputText("you are going to swim while wearing just your swimwear. ");
 	else outputText("you strip off your [armor] until you are completely naked. ");
 	outputText("You step into the flowing waters. You shiver at first but you step in deeper. Incredibly, it's not too deep. ");
@@ -1571,37 +1576,37 @@ private function swimInStream():void {
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
 	{
-		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini", false)
-		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", especially when her penis is exposed", false)
-		outputText(". She walks into the waters and swims.  ", false)
+		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini");
+		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", especially when her penis is exposed");
+		outputText(". She walks into the waters and swims.  ");
 		amilyJoinsStream = true;
 	}
 	//Ember 
 	if (rand(4) == 0 && camp.followerEmber())
 	{
-		outputText("\n\nYou catch a glimpse of Ember taking a daily bath.", false)
+		outputText("\n\nYou catch a glimpse of Ember taking a daily bath.");
 		emberJoinsStream = true;
 	}
 	//Rathazul (RARE)
 	if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul))
 	{
-		outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.", false)
+		outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.");
 		rathazulJoinsStream = true;
 	}
 	//Pranks!
 	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
 	{
-		outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?", false)
+		outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?");
 		doYesNo(swimInStreamPrank1, swimInStreamFinish);
 		return;
 	}
 	/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
 	{
-		outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?", false)
+		outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?");
 		doYesNo(swimInStreamPrank2, swimInStreamFinish);
 	}*/
 	/*if (prankChooser == 2 && player.lust >= 33) {
-		outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?", false)
+		outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?");
 		doYesNo(swimInStreamFap, swimInStreamFinish);
 		return;
 	}*/
@@ -1616,10 +1621,11 @@ private function swimInStreamPrank1():void {
 	if (izmaJoinsStream) prankRoll++;
 	if (marbleJoinsStream) prankRoll++;
 	if (heliaJoinsStream) prankRoll++;
-	if (amilyJoinsStream) prankRoll++
+	if (amilyJoinsStream) prankRoll++;
 	if (prankRoll > 4) prankRoll = 4;
 	//Play joke on them!
-	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ", true)
+	clearOutput();
+	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ");
 	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true)
 	{
 		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.");
@@ -1647,7 +1653,7 @@ private function swimInStreamPrank1():void {
 }
 
 private function swimInStreamFap():void {
-	clearOutput()
+	clearOutput();
 	doNext(swimInStreamFinish);
 }
 
@@ -1661,19 +1667,20 @@ private function swimInStreamFinish():void {
 		dynStats("lust", 15, "resisted", true);
 	}
 	outputText("Eventually, you swim back to the riverbank and dry yourself off");
-	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName, false);
-	outputText(".", false)
+	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName);
+	outputText(".");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 private function examinePortal():void {
+	clearOutput();
 	if (flags[kFLAGS.CAMP_PORTAL_PROGRESS] <= 0) {
-		outputText("You walk over to the portal, reminded by how and why you came. You wonder if you can go back to Ingnam. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
-		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1
+		outputText("You walk over to the portal, reminded by how and why you came. You wonder if you can go back to Ingnam. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.");
+		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1;
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	else outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.", true)
+	else outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.");
 	doNext(playerMenu);
 }
 
@@ -1730,7 +1737,7 @@ private function watchSunset():void {
 		dynStats("lust", -30, "resisted", false);
 
 	}
-	outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.", false)
+	outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1807,17 +1814,17 @@ public function rest():void {
 		
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		{
-			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n", false);
+			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n");
 		}
 		else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
 		{
-			if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n", false);
+			if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n");
 		}
 		else 
 		{
-			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n", false);
+			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down to rest for an hour.\n");
 		}
 		//Ayane
@@ -1847,8 +1854,9 @@ public function rest():void {
 		kGAMECLASS.HPChangeNotify(player.HP - hpBefore);
 	}
 	else {
-		if(timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n", true);
-		else outputText("You continue to rest for another hour.\n", true);
+		clearOutput();
+		if(timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n");
+		else outputText("You continue to rest for another hour.\n");
 	}
 	goNext(timeQ,true);
 }
@@ -1866,8 +1874,8 @@ public function doWait():void {
 	if (timeQ == 0) {
 		timeQ = 4;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
-		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n", false);
-		else outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
+		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
+		else outputText("You wait " + num2Text(timeQ) + " hours...\n");
 		//Marble withdrawl
 		if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
@@ -1890,7 +1898,7 @@ public function doWait():void {
 		}
 	}
 	else {
-		if(timeQ != 1) outputText("You continue to wait for " + num2Text(timeQ) + " more hours.\n", false);
+		if(timeQ != 1) outputText("You continue to wait for " + num2Text(timeQ) + " more hours.\n");
 		else outputText("You continue to wait for another hour.\n");
 	}
 	goNext(timeQ,true);
@@ -2026,15 +2034,16 @@ public function doSleep(clrScreen:Boolean = true):void {
 				outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
 			}
 			//Normal sleep message
-			else outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ", false);
+			else outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
 			if(timeQ == 1) outputText("hour.\n");
 			else outputText("hours.\n");
 		}
 		sleepRecovery(true);
 	}
 	else {
-		if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n", true);
-		else outputText("You lie down to resume sleeping for the remaining hour.\n", true);
+		clearOutput();
+		if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
+		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	}
 	goNext(timeQ, true);
 }
@@ -2056,8 +2065,9 @@ public function sleepWrapper():void {
 	if(model.time.hours == 5) timeQ = 1;
 	if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 	clearOutput();
-	if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n", true);
-	else outputText("You lie down to resume sleeping for the remaining hour.\n", true);
+	clearOutput();
+	if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
+	else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	sleepRecovery(true);
 	goNext(timeQ, true);
 }
@@ -2115,40 +2125,43 @@ public function sleepRecovery(display:Boolean = false):void {
 
 //Bad End if your balls are too big. Only happens in Realistic Mode.
 public function badEndGIANTBALLZ():void {
-	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n", true)
-	outputText("You know that you can't move and you're aware that you're going to eventually starve to death.", false)
+	clearOutput();
+	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n");
+	outputText("You know that you can't move and you're aware that you're going to eventually starve to death.");
 	menu();
 	if (player.hasItem(consumables.REDUCTO, 1)) {
-		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!", false)
+		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!");
 		addButton(1, "Reducto", applyReductoAndEscapeBadEnd);
 	}
 	else if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
-		outputText("\n\nYou could call for Rathazul to help you.", false)
+		outputText("\n\nYou could call for Rathazul to help you.");
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
 	}
 	else getGame().gameOver();
 }
 private function applyReductoAndEscapeBadEnd():void {
-	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
+	clearOutput();
+	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
 	if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 17 + (player.str / 2) + (player.tallness / 4);
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ");
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
 	dynStats("lib", -2, "lus", -10);
 	player.consumeItem(consumables.REDUCTO, 1);
 	doNext(camp.returnToCampUseOneHour);
 }
 private function callRathazulAndEscapeBadEnd():void {
-	outputText("You shout as loud as you can to call Rathazul.  Your call is answered as the alchemist walks up to you.\n\n", true);
-	outputText("\"<i>My, my... Look at yourself! Don't worry, I can help, </i>\" he says.  He rushes to his alchemy equipment and mixes ingredients.  He returns to you with a Reducto.\n\n", false)
-	outputText("He rubs the paste all over your massive balls. It's incredibly effective. \n\n", false)
+	clearOutput();
+	outputText("You shout as loud as you can to call Rathazul.  Your call is answered as the alchemist walks up to you.\n\n");
+	outputText("\"<i>My, my... Look at yourself! Don't worry, I can help, </i>\" he says.  He rushes to his alchemy equipment and mixes ingredients.  He returns to you with a Reducto.\n\n");
+	outputText("He rubs the paste all over your massive balls. It's incredibly effective. \n\n");
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
-	if (player.ballSize > 18 + (player.str/2) + (player.tallness / 4)) player.ballSize = 16 + (player.str/2) + (player.tallness / 4)
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	if (player.ballSize > 18 + (player.str/2) + (player.tallness / 4)) player.ballSize = 16 + (player.str/2) + (player.tallness / 4);
+	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ");
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
-	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
+	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2182,7 +2195,7 @@ public function badEndMinLust():void {
 
 public function allNaturalSelfStimulationBeltContinuation():void {
 	clearOutput();
-	outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n", true);
+	outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n");
 	outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n");
 	outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n");
 	outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.");
@@ -2195,12 +2208,12 @@ public function allNaturalSelfStimulationBeltContinuation():void {
 public function allNaturalSelfStimulationBeltBadEnd():void {
 	spriteSelect(23);
 	clearOutput();
-	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n", true);
+	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 	outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
-	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor " + player.mf("man", "woman") + " is a total slave to the beast!</i>\"\n\n", false);
+	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor " + player.mf("man", "woman") + " is a total slave to the beast!</i>\"\n\n");
 	outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n");
 	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
-	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n", false);
+	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n");
 	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
 	getGame().gameOver();
 }
@@ -2347,7 +2360,7 @@ private function exgartuanCampUpdate():void {
 		else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 		{
 			clearOutput();
-			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
+			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
 			player.removeStatusEffect(StatusEffects.Exgartuan);
 		}		
 	}
@@ -2788,15 +2801,15 @@ public function getCampPopulation():int {
 private function fixFlags():void {
 	//Marae
 	if (player.hasStatusEffect(StatusEffects.MetMarae)) {
-		flags[kFLAGS.MET_MARAE] = 1
+		flags[kFLAGS.MET_MARAE] = 1;
 		player.removeStatusEffect(StatusEffects.MetMarae);
 	}
 	if (player.hasStatusEffect(StatusEffects.MaraesQuestStart)) {
-		flags[kFLAGS.MARAE_QUEST_START] = 1
+		flags[kFLAGS.MARAE_QUEST_START] = 1;
 		player.removeStatusEffect(StatusEffects.MaraesQuestStart);
 	}
 	if (player.hasStatusEffect(StatusEffects.MaraeComplete)) {
-		flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1
+		flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1;
 		player.removeStatusEffect(StatusEffects.MaraeComplete);
 	}
 	if (player.hasStatusEffect(StatusEffects.MaraesLethicite)) {
@@ -2834,11 +2847,11 @@ private function fixFlags():void {
 		player.removeStatusEffect(StatusEffects.FactoryOverload);
 	}
 	if (player.hasStatusEffect(StatusEffects.TakenLactaid)) {
-		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusEffectv1(StatusEffects.TakenLactaid))
+		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusEffectv1(StatusEffects.TakenLactaid));
 		player.removeStatusEffect(StatusEffects.TakenLactaid);
 	}
 	if (player.hasStatusEffect(StatusEffects.TakenGroPlus)) {
-		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusEffectv1(StatusEffects.TakenGroPlus))
+		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusEffectv1(StatusEffects.TakenGroPlus));
 		player.removeStatusEffect(StatusEffects.TakenGroPlus);
 	}
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
@@ -3199,28 +3212,29 @@ private function updateSaveFlags():void {
 	var current:int = 0;
 	var target:int = 65;
 	while (current < target) {
-		trace(flags[startOldIds + current])
+		trace(flags[startOldIds + current]);
 		if (flags[startOldIds + current] != 0) {
 			flags[startNewIds + current] = flags[startOldIds + current];
-			trace(flags[startNewIds + current])
+			trace(flags[startNewIds + current]);
 			flags[startOldIds + current] = 0;
 		}
-		else trace("Skipped")
+		else trace("Skipped");
 		current++;
 	}
 	if (player.ass.analLooseness > 0 && flags[kFLAGS.TIMES_ORGASMED] <= 0) flags[kFLAGS.TIMES_ORGASMED] = 1;
-	outputText("Your save file has been updated by changing the variables used in this mod from old flag position to new flag position.\n\n", true)
-	outputText("As you know, the base game update tends to change flags and that may screw up saves when mod gets updated.\n\n", false)
-	outputText("Unfortunately, I can't guarantee if every flags are retained. You may have lost some furniture or may have lost cabin. I'm sorry if this happens. Your codex entries are still unlocked, don't worry. And if your cabin is built, don't worry, it's still intact and you can re-construct furniture again.\n\n", false)
+	clearOutput();
+	outputText("Your save file has been updated by changing the variables used in this mod from old flag position to new flag position.\n\n");
+	outputText("As you know, the base game update tends to change flags and that may screw up saves when mod gets updated.\n\n");
+	outputText("Unfortunately, I can't guarantee if every flags are retained. You may have lost some furniture or may have lost cabin. I'm sorry if this happens. Your codex entries are still unlocked, don't worry. And if your cabin is built, don't worry, it's still intact and you can re-construct furniture again.\n\n");
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
-		outputText("As a compensation, here's 50 wood and 150 nails to re-construct your furniture.\n\n", false)
+		outputText("As a compensation, here's 50 wood and 150 nails to re-construct your furniture.\n\n");
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 50;
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			player.addKeyValue("Carpenter's Toolbox", 1, 150);
 		}
 	}
 	//flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Moved to unFuckSave().
-	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!", false)
+	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!");
 	doNext(doCamp);
 }
 
@@ -3339,7 +3353,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.SPELLS_CAST] >= 1 ) awardAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD);
 	
 	//Realistic
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING)
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING);
 
 	//Holiday
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) awardAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III);

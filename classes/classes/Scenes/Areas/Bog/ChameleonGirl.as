@@ -24,7 +24,7 @@ package classes.Scenes.Areas.Bog
 		{
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n");
 			}
 			//Evade:
 			else if (player.getEvasionRoll()) outputText("The chameleon girl's claws slash towards you, but you lean away from them and they fly by in a harmless blur.");
@@ -46,7 +46,7 @@ package classes.Scenes.Areas.Bog
 		{
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n");
 			}
 			//Evade:
 			else if (player.getEvasionRoll()) {

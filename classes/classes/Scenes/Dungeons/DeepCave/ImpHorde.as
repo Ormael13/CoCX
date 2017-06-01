@@ -16,7 +16,7 @@
 			}
 			//(½ chance during any round):
 			if(rand(2) == 0) {
-				outputText("\nOne of the tiny demons latches onto one of your " + player.legs() + " and starts humping it.  You shake the little bastard off and keep fighting!", false);
+				outputText("\nOne of the tiny demons latches onto one of your " + player.legs() + " and starts humping it.  You shake the little bastard off and keep fighting!");
 				game.dynStats("lus", 1);
 			}
 			combatRoundOver();
@@ -31,11 +31,11 @@
 				//(OH SHIT IT GOES OFF) 
 				//+50 lust!
 				game.dynStats("lus", 50);
-				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0), false);
+				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0));
 				if(player.biggestLactation() > 1) outputText(" as they begin to drip milk");
 				outputText(".  The lower portions of your coverings ");
 				if(player.cockTotal() > 0) {
-					outputText("are pulled tight by your " + multiCockDescript() + ", ", false);
+					outputText("are pulled tight by your " + multiCockDescript() + ", ");
 					if(player.totalCocks() > 1) outputText("each ");
 					outputText("beading a drop of pre-cum at the tip");
 					if(player.hasVagina()) outputText(", and in addition, the clothes around your groin ");
@@ -64,7 +64,7 @@
 				damage = 0;
 				//Blind dodge change
 				if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-					outputText(capitalA + short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n", false);
+					outputText(capitalA + short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n");
 				}
 				//Determine if dodged!
 				else if(player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
@@ -103,11 +103,11 @@
 				else {
 					damage = rand(6);
 					if(damage == 0) outputText("A squirt of hot demonic cum splatters into your face!\n");
-					if(damage == 1) outputText("Your " + player.allBreastsDescript() + " are coated with thick demonic spunk!\n", false);
-					if(damage == 2) outputText("Some of the fluid splatters into your midriff and drools down to your waist, making your " + player.armorName + " slimy and wet.\n", false);
-					if(damage == 3) outputText("Seed lands in your " + player.hairDescript() + ", slicking you with demonic fluid.\n", false);
+					if(damage == 1) outputText("Your " + player.allBreastsDescript() + " are coated with thick demonic spunk!\n");
+					if(damage == 2) outputText("Some of the fluid splatters into your midriff and drools down to your waist, making your " + player.armorName + " slimy and wet.\n");
+					if(damage == 3) outputText("Seed lands in your " + player.hairDescript() + ", slicking you with demonic fluid.\n");
 					if(damage == 4) outputText("Another blast of jizz splatters against your face, coating your lips and forcing a slight taste of it into your mouth.\n");
-					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your " + player.armorName + ", turning it a sticky white.\n", false);
+					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your " + player.armorName + ", turning it a sticky white.\n");
 					game.dynStats("lus", (7+int(player.lib/40+player.cor/40)));
 				}
 				lust -= 5;
@@ -130,24 +130,24 @@
 				damage = 0;
 				//Blind dodge change
 				if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+					outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				}
 				//Determine if dodged!
 				else if(player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
-					if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
-					else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
-					else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n", false);
+					if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
+					else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
+					else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 				}
 				//Determine if evaded
 				else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
 				else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-					outputText("With the easy movement afforded by your bodysuit and Raphael's teachings, you easily avoid " + a + short + "'s attack.\n", false);
+					outputText("With the easy movement afforded by your bodysuit and Raphael's teachings, you easily avoid " + a + short + "'s attack.\n");
 				}
 				//Determine if cat'ed
 				else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 					if(plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");
 				}

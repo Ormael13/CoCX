@@ -25,7 +25,7 @@
 			//(Harpy special attack 1, part two if PC does anything but "Wait")
 			else {
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 0) {
-					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ", false);
+					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ");
 					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
 					player.takeDamage(damage, true);					
 					removeStatusEffect(StatusEffects.Uber);
@@ -85,7 +85,7 @@
 			if (damage <= 0) {
 				outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.");
 			} else {
-				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 		}
 

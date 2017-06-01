@@ -13,28 +13,28 @@
 			var damage:Number = 0;
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
-				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n", false);
+				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
 			}
 			//Determine if dodged!
 			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
 				if (player.spe - spe < 8)
-					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!", false);
+					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20)
-					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!", false);
+					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20)
-					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".", false);
+					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
 				game.combatRoundOver();
 				return;
 			}
 			//Determine if evaded
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 				game.combatRoundOver();
 				return;
 			}
 			//Determine if flexibilitied
 			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10) {
-				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.", false);
+				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.");
 				game.combatRoundOver();
 				return;
 			}
@@ -46,7 +46,7 @@
 				if (damage <= 0) {
 					outputText("Akbal lunges forwards but with your toughness");
 					if (player.armorDef > 0)
-						outputText(" and " + player.armorName + ", he fails to deal any damage.", false);
+						outputText(" and " + player.armorName + ", he fails to deal any damage.");
 					else
 						outputText(" he fails to deal any damage.");
 				}
@@ -60,7 +60,7 @@
 				if (damage == 0) {
 					outputText("Akbal lunges forwards but between your toughness ");
 					if (player.armorDef > 0)
-						outputText("and " + player.armorName + ", he fails to deal any damage.", false);
+						outputText("and " + player.armorName + ", he fails to deal any damage.");
 				}
 				else {
 					outputText("Akbal snarls as he flies towards you, snapping his ivory teeth on your arm. You scream out in pain as you throw him off.");
@@ -124,25 +124,25 @@
 				if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80)
 				{
 					if (player.spe - spe < 8)
-						outputText("You narrowly avoid " + a + short + "'s fire!", false);
+						outputText("You narrowly avoid " + a + short + "'s fire!");
 					if (player.spe - spe >= 8 && player.spe - spe < 20)
-						outputText("You dodge " + a + short + "'s fire with superior quickness!", false);
+						outputText("You dodge " + a + short + "'s fire with superior quickness!");
 					if (player.spe - spe >= 20)
-						outputText("You deftly avoid " + a + short + "'s slow fire-breath.", false);
+						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
 					game.combatRoundOver();
 					return;
 				}
 				//Determine if evaded
 				if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 20)
 				{
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.", false);
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
 					game.combatRoundOver();
 					return;
 				}
 				//Determine if flexibilitied
 				if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10)
 				{
-					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.", false);
+					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
 					game.combatRoundOver();
 					return;
 				}

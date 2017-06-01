@@ -1349,13 +1349,13 @@ private function umYum():void {
 	}
 	else
 	{
-		outputText("\n\nCringing, you are about to set the offered bowl back down but you are reminded by your growling stomach. You have no choice but to cover your nose and just gulp down the contents of the stew. ", false)
+		outputText("\n\nCringing, you are about to set the offered bowl back down but you are reminded by your growling stomach. You have no choice but to cover your nose and just gulp down the contents of the stew. ");
 		player.refillHunger(25);
-		outputText("\nYou feel a bit nauseous. That stew surely is strange.", false)
+		outputText("\nYou feel a bit nauseous. That stew surely is strange.");
 		if (rand(3) == 0)
 		{
 			//Player vomits. Poor player. Damages hunger by 15-25.
-			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and you get up. ", false)
+			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and you get up. ");
 			player.takeDamage(player.maxHP() / 4);
 			player.damageHunger(rand(10) + 15);
 			dynStats("lib", -10);

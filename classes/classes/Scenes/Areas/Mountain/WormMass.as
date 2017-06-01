@@ -14,7 +14,7 @@
 			}
 			//Evade
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n");
 				combatRoundOver();
 				return;
 			}
@@ -22,7 +22,7 @@
 			if(temp <= 0) temp = 1;
 			if(temp > 0) player.takeDamage(temp);
 			outputText("The worm colony strikes at you with its makeshift limbs. It strikes you for ");
-			outputText(String(temp), false);
+			outputText(String(temp));
 			outputText(" damage and the limb splatters, dispersing the worms comprising the false arm.");
 			statScreenRefresh();
 			outputText("\n");
@@ -40,7 +40,7 @@
 			}
 			//SUCCESS
 			if(player.lust < 50) {
-				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + player.cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n", false);
+				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + player.cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n");
 				game.dynStats("lus", 10+player.lib/20+player.cor/20);
 			}
 			else {

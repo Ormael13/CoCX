@@ -11,7 +11,7 @@ package classes.Scenes.Areas.Plains
 			outputText("The satyr swings at you with one knuckled fist.  ");
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind punch!\n");
 			}
 			//Evade: 
 			else if(player.getEvasionRoll()) {
@@ -39,7 +39,7 @@ package classes.Scenes.Areas.Plains
 		internal function satyrCharge():void {
 			outputText("Lowering his horns, the satyr digs his hooves on the ground and begins snorting; he's obviously up to something.  ");
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
+				outputText(capitalA + short + " completely misses you due to blindness!\n");
 			}
 			else {
 				var evade:String = player.getEvasionReason();
@@ -89,7 +89,7 @@ package classes.Scenes.Areas.Plains
 		private function highLustChugRape():void {
 			outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
+				outputText(capitalA + short + " completely misses you due to blindness!\n");
 			}
 			else if(player.getEvasionRoll()) {
 				outputText("As he charges you, you grab him by the horns and spin around, sending him away.");

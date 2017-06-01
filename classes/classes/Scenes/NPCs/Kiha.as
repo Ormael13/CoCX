@@ -20,7 +20,7 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
 			//Miss:
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("You take the opportunity to walk away, watching the slow-motion attack unravel before you; the fire bursts from her knuckle in the shape of a bird in flight, wings unfurled.  ", false);
+				outputText("You take the opportunity to walk away, watching the slow-motion attack unravel before you; the fire bursts from her knuckle in the shape of a bird in flight, wings unfurled.  ");
 				if(rand(2) == 0) outputText("You only owned an XJasun back home, so you don't really understand the reference.");
 				else outputText("You stifle a laugh as your memories turn to many an evening spent with your friends in front of your SharkCube console, contesting each other in games of ridiculous, stylized combat.");
 			}
@@ -74,7 +74,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ", false);
+				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
 				damage = player.takeDamage(damage, true);
 				outputText("\n");
 			}
@@ -89,15 +89,15 @@ import classes.GlobalFlags.kFLAGS;
 			//Miss:
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your talent for evasion, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
+				outputText("Using your talent for evasion, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using your talent for misdirection, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
+				outputText("Using your talent for misdirection, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
+				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
 			}
 			else {
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));

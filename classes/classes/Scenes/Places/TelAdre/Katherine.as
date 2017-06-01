@@ -564,7 +564,7 @@ public function catMorphIntr():void {
 public function katherineGreeting():void {
 	clearOutput();
 	//[If Player chooses 'Scylla' button]
-	outputText("Scylla smiles when she sees you approaching, and politely greets you.  “<i>Why, hello, " + player.short + "; it's good to see you.  Do you need something?</i>”\n\n", false);
+	outputText("Scylla smiles when she sees you approaching, and politely greets you.  “<i>Why, hello, " + player.short + "; it's good to see you.  Do you need something?</i>”\n\n");
 
 	outputText("You tell her that you do, and, showing her the bell you have, you ask her if she remembers that little mission the two of you went on where she ended up ministering to those milk-hungry cats.\n\n");
 
@@ -576,7 +576,7 @@ public function katherineGreeting():void {
 
 	outputText("You're caught off-guard by Scylla's actions, but then spot a familiar-ish feline face peeking warily out from behind a corner.  You make a point of walking away from Scylla, and one of the male cats who basically mugged Scylla for her milk promptly slips out of hiding, the other eleven or so males and females quickly joining him.  The mutated nun, smiling with all three lips, is already innocently removing her habit to expose her huge, milk-filled breasts.  The cats barely hesitate before swarming towards her, pushing and shoving to be the first to start making out with her lipples and drinking their fill of creamy nun-milk.  You watch the situation dispassionately - it is, after all, a lot more voluntary on Scylla's part than it was the first time - and then pull out the silver bell, which you start idly jingling.\n\n");
 
-	outputText("“<i>...Is that really you?  You actually came?</i>”  A voice from just off to the side sounds; quiet, hesitant, filled with hope, doubt and fear in equal parts.\n\n",false);
+	outputText("“<i>...Is that really you?  You actually came?</i>”  A voice from just off to the side sounds; quiet, hesitant, filled with hope, doubt and fear in equal parts.\n\n");
 
 	outputText("Looking around, you quickly spot the lonely herm cat-morph, the reason behind your coming here.  Still dressed in her ragged clothes, her too-large shirt covers up her B-cup breasts, while her too-tight pants make her canine sheath and small balls stand out to a casual observer.  Under these calmer conditions, you can make out her eyes, a rather pretty shade of green, while her shoulder-length hair is neon pink, a stark contrast to her black fur.  Funny, you don't recall it being that color before... finally remembering that she's addressed you, you smile and agree.\n\n");
 
@@ -584,7 +584,7 @@ public function katherineGreeting():void {
 
 	outputText("You smile and assure her that you are interested... though you have to confess that more intimate conversations may have to wait for another time.  As if on cue, the happy purring of other cat-morphs reaches you in the alleyway as they start to finish up with Scylla.\n\n");
 
-	outputText("The dog-dicked cat nods.  “<i>Right.... hey, there's a pawnshop in the main street - run by a golden retriever named Oswald?  You know it?</i>”  When you nod your head, she continues, “<i>Well, Oswald's a pretty nice guy, he buys things I find sometimes and always gives me a fair price even though it's obvious how desperate I am; these guys don't really care whether I'm here or not, so I'll start hanging around in the back alley behind his place.  We can meet up there - is that okay with you?</i>”\n\n", false);
+	outputText("The dog-dicked cat nods.  “<i>Right.... hey, there's a pawnshop in the main street - run by a golden retriever named Oswald?  You know it?</i>”  When you nod your head, she continues, “<i>Well, Oswald's a pretty nice guy, he buys things I find sometimes and always gives me a fair price even though it's obvious how desperate I am; these guys don't really care whether I'm here or not, so I'll start hanging around in the back alley behind his place.  We can meet up there - is that okay with you?</i>”\n\n");
 
 	outputText("You tell her that sounds much better than needing to get Scylla to come here as a distraction each time.  The silver bell you return to her, with a coy remark that it looks better on her anyway.  Giving you a heartfelt smile, she gently takes it, then reattaches it to her leather collar.\n\n");
 

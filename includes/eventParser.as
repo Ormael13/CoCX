@@ -985,63 +985,63 @@ public function growHair(amount:Number = .1):Boolean {
 	temp = player.hairLength;
 	player.hairLength += amount;
 	if(player.hairLength > 0 && temp == 0) {
-		outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
+		outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 1 && temp < 1) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 3 && temp < 3) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 6 && temp < 6) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 6 && temp < 6) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 10 && temp < 10) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 10 && temp < 10) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 16 && temp < 16) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 16 && temp < 16) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 26 && temp < 26) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 26 && temp < 26) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 40 && temp < 40) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 40 && temp < 40) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.hairType == HAIR_GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
-		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
 	return false;
@@ -1054,27 +1054,27 @@ public function growBeard(amount:Number = .1):Boolean {
 	player.beardLength += amount;
 
 	if(player.beardLength > 0 && tempBeard == 0) {
-		outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>", false);
+		outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>");
 		return true;
 	}
 	else if(player.beardLength >= 0.2 && tempBeard < 0.2) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.beardLength >= 0.5 && tempBeard < 0.5) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.beardLength >= 1.5 && tempBeard < 1.5) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.beardLength >= 3 && tempBeard < 3) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>");
 		return true;
 	}
 	else if(player.beardLength >= 6 && tempBeard < 6) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>");
 		return true;
 	}
 

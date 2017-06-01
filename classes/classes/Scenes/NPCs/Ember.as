@@ -31,7 +31,7 @@ package classes.Scenes.NPCs
 			outputText("With a growl, the dragon lashes out in a ferocious splay-fingered slash, "+ emberMF("his","her") + " claws poised to rip into your flesh.  ");
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) {
-				outputText(capitalA + short + " completely misses you with a blind attack!", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Miss/dodge
 			else if(player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
@@ -80,7 +80,7 @@ package classes.Scenes.NPCs
 		private function emberTailSlap():void {
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText(capitalA + short + " completely misses you with a blind tail-slap!", false);
+				outputText(capitalA + short + " completely misses you with a blind tail-slap!");
 				combatRoundOver();
 				return;
 			}

@@ -143,7 +143,7 @@ package classes.Scenes {
 		public function doStripCheck():void 
 		{
 			if (player.hasVagina() && player.isScylla()) {
-				outputText("You take off your " + player.armorName + " and sit on the ground.", false);
+				outputText("You take off your " + player.armorName + " and sit on the ground.");
 			}
 			//In Ingnam or not in cabin.
 			else if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
@@ -1009,9 +1009,9 @@ package classes.Scenes {
 		{
 			/*DUPLICATE WITH SCENE BELOW)
 			//different based on libido
-			if(player.lib < 45) outputText("You grip your " + cockDescript(0) + " and begin cautiously guiding it towards ", false);
-			if(player.lib >= 45 && player.lib < 70) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ", false);
-			if(player.lib >= 70) outputText("Without hesitation, you shove the tip of your " + cockDescript(0) + " into ", false);
+			if(player.lib < 45) outputText("You grip your " + cockDescript(0) + " and begin cautiously guiding it towards ");
+			if(player.lib >= 45 && player.lib < 70) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ");
+			if(player.lib >= 70) outputText("Without hesitation, you shove the tip of your " + cockDescript(0) + " into ");
 			//More than one row?
 			if(player.breastRows.length > 1) outputText("one of the ");
 			if(player.breastRows.length == 1) outputText("one of your ");
@@ -1050,14 +1050,14 @@ package classes.Scenes {
 				}
 				outputText("tip of your " + player.cockDescript() + " against the opening of ");
 		/* Old method
-				if(player.horseCocks() > 0) outputText("Shivering with anticipation, you place the flared tip of your " + horseDescript(0) + " against the opening of ", false);
-				else if(player.normalCocks() > 0) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ", false);
-				else if(player.dogCocks() > 0) outputText("Shivering with anticipation, you place the pointed tip of your " + dogDescript(0) + " against the opening of ", false);
-				else if(player.tentacleCocks() > 0) outputText("Shivering with anticipation, you place the bulbous tip of your " + cockDescript(0) + " against the opening of ", false);
-				else if(player.demonCocks() > 0) outputText("Shivering with anticipation, you place the bump-encircled tip of your " + cockDescript(0) + " against the opening of ", false);
-				else if(player.catCocks() > 0) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ", false);
-				else if(player.anemoneCocks() > 0 || player.displacerCocks() > 0) outputText("Shivering with anticipation, you place the wriggling tip of your " + cockDescript(0) + " against the opening of ", false);
-				else outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ", false);
+				if(player.horseCocks() > 0) outputText("Shivering with anticipation, you place the flared tip of your " + horseDescript(0) + " against the opening of ");
+				else if(player.normalCocks() > 0) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ");
+				else if(player.dogCocks() > 0) outputText("Shivering with anticipation, you place the pointed tip of your " + dogDescript(0) + " against the opening of ");
+				else if(player.tentacleCocks() > 0) outputText("Shivering with anticipation, you place the bulbous tip of your " + cockDescript(0) + " against the opening of ");
+				else if(player.demonCocks() > 0) outputText("Shivering with anticipation, you place the bump-encircled tip of your " + cockDescript(0) + " against the opening of ");
+				else if(player.catCocks() > 0) outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ");
+				else if(player.anemoneCocks() > 0 || player.displacerCocks() > 0) outputText("Shivering with anticipation, you place the wriggling tip of your " + cockDescript(0) + " against the opening of ");
+				else outputText("Shivering with anticipation, you place the tip of your " + cockDescript(0) + " against the opening of ");
 		*/
 			}
 			else {
@@ -1090,14 +1090,14 @@ package classes.Scenes {
 				}
 				outputText("your " + player.cockDescript() + " into ");
 		/* Old method
-				if(player.normalCocks() > 0) outputText("Without hesitation, you shove the tip of your " + cockDescript(0) + " into ", false);
-				else if(player.horseCocks() > 0) outputText("Without hesitation, you shove the engorged flare of your " + cockDescript(0) + " into ", false);
-				else if(player.dogCocks() > 0) outputText("Without hesitation, you shove the pointed tip of your " + dogDescript(0) + " into ", false);
-				else if(player.tentacleCocks() > 0) outputText("Without hesitation, you shove the over-sized mushroom that is your " + cockDescript(0) + " into ", false);
-				else if(player.demonCocks() > 0) outputText("Without hesitation, you shove the bump-ringed monstrosity that is your " + cockDescript(0) + " into ", false);
-				else if(player.anemoneCocks() > 0) outputText("Without hesitation, you shove the tentacle-laden mushroom that is your " + cockDescript(0) + " into ", false);
+				if(player.normalCocks() > 0) outputText("Without hesitation, you shove the tip of your " + cockDescript(0) + " into ");
+				else if(player.horseCocks() > 0) outputText("Without hesitation, you shove the engorged flare of your " + cockDescript(0) + " into ");
+				else if(player.dogCocks() > 0) outputText("Without hesitation, you shove the pointed tip of your " + dogDescript(0) + " into ");
+				else if(player.tentacleCocks() > 0) outputText("Without hesitation, you shove the over-sized mushroom that is your " + cockDescript(0) + " into ");
+				else if(player.demonCocks() > 0) outputText("Without hesitation, you shove the bump-ringed monstrosity that is your " + cockDescript(0) + " into ");
+				else if(player.anemoneCocks() > 0) outputText("Without hesitation, you shove the tentacle-laden mushroom that is your " + cockDescript(0) + " into ");
 				else if(player.displacerCocks() > 0) outputText("Without hesitation, you shove the opened top of your " + cockDescript(x) + " into ");
-				else outputText("Without hesitation, you shove the " + cockHead(0) + " of your " + cockDescript(0) + " into ", false);
+				else outputText("Without hesitation, you shove the " + cockHead(0) + " of your " + cockDescript(0) + " into ");
 		*/
 			}
 			//More than one row?
@@ -1151,16 +1151,16 @@ package classes.Scenes {
 					}
 					outputText("your " + player.cockDescript() + " and y");
 		/* Old method
-					if(player.normalCocks() > 0) outputText("Slick juices dribble down the skin of your " + cockDescript(0) + " and y", false);
-					else if(player.horseCocks() > 0) outputText("Slick juices dribble down the mottled skin of your " + horseDescript(0) + " and y", false);
-					else if(player.dogCocks() > 0) outputText("Slick juices dribble down the red, shiny skin of your " + dogDescript(0) + " and y", false);
-					else if(player.tentacleCocks() > 0) outputText("Slick juices dribble down the rubbery skin of your " + cockDescript(0) + " and y", false);
-					else if(player.demonCocks() > 0) outputText("Slick juices dribble down the shiny purplish skin and nodules of your " + cockDescript(0) + " and y", false);
-					else if(player.lizardCocks() > 0) outputText("Slick juices dribble down the bumpy purple skin of your " + cockDescript(0) + " and y", false);
-					else if(player.catCocks() > 0) outputText("Slick juices dribble over the pink, spiny protrusions that cover your " + cockDescript(0) + " and y", false);
-					else if(player.anemoneCocks() > 0) outputText("Slick juices dribble over the nearly transparent skin of your " + cockDescript(0) + " and y", false);
-					else if(player.displacerCocks() > 0) outputText("Slick juices dribble over the dusky purple of your " + cockDescript(0) + " and y", false);
-					else outputText("Slick juices dribble down the skin of your " + cockDescript(0) + " and y", false);
+					if(player.normalCocks() > 0) outputText("Slick juices dribble down the skin of your " + cockDescript(0) + " and y");
+					else if(player.horseCocks() > 0) outputText("Slick juices dribble down the mottled skin of your " + horseDescript(0) + " and y");
+					else if(player.dogCocks() > 0) outputText("Slick juices dribble down the red, shiny skin of your " + dogDescript(0) + " and y");
+					else if(player.tentacleCocks() > 0) outputText("Slick juices dribble down the rubbery skin of your " + cockDescript(0) + " and y");
+					else if(player.demonCocks() > 0) outputText("Slick juices dribble down the shiny purplish skin and nodules of your " + cockDescript(0) + " and y");
+					else if(player.lizardCocks() > 0) outputText("Slick juices dribble down the bumpy purple skin of your " + cockDescript(0) + " and y");
+					else if(player.catCocks() > 0) outputText("Slick juices dribble over the pink, spiny protrusions that cover your " + cockDescript(0) + " and y");
+					else if(player.anemoneCocks() > 0) outputText("Slick juices dribble over the nearly transparent skin of your " + cockDescript(0) + " and y");
+					else if(player.displacerCocks() > 0) outputText("Slick juices dribble over the dusky purple of your " + cockDescript(0) + " and y");
+					else outputText("Slick juices dribble down the skin of your " + cockDescript(0) + " and y");
 		*/
 				}
 				else outputText("Slick juices squirt out from around your " + player.cockDescript() + " and y");
@@ -1202,15 +1202,15 @@ package classes.Scenes {
 					}
 					outputText("your " + player.cockDescript() + " and y");
 		/* Old method
-					if(player.normalCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the skin of your " + cockDescript(0) + " and y", false);
-					else if(player.horseCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the mottled skin of your " + horseDescript(0) + " and y", false);
-					else if(player.dogCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the red, shiny skin of your " + dogDescript(0) + " and y", false);
-					else if(player.tentacleCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the rubbery skin of your " + cockDescript(0) + " and y", false);
-					else if(player.demonCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the shiny purplish skin and nodules of your " + cockDescript(0) + " and y", false);
-					else if(player.catCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the spiny, pink flesh of your " + cockDescript(0) + " and y", false);
-					else if(player.lizardCocks() > 0 || player.displacerCocks()) outputText("Rivulets of milky girlcum drizzle over the purplish, knotted flesh of your " + cockDescript(0) + " and y", false);
-					else if(player.anemoneCocks() > 0) outputText("Rivulets of milky girlcum drizzle and drip from the many tiny tentacles of your " + cockDescript(0) + " and y", false);
-					else outputText("Rivulets of milky girlcum drizzle over the sensitive skin of your " + cockDescript(0) + " and y", false);
+					if(player.normalCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the skin of your " + cockDescript(0) + " and y");
+					else if(player.horseCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the mottled skin of your " + horseDescript(0) + " and y");
+					else if(player.dogCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the red, shiny skin of your " + dogDescript(0) + " and y");
+					else if(player.tentacleCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the rubbery skin of your " + cockDescript(0) + " and y");
+					else if(player.demonCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the shiny purplish skin and nodules of your " + cockDescript(0) + " and y");
+					else if(player.catCocks() > 0) outputText("Rivulets of milky girlcum drizzle down the spiny, pink flesh of your " + cockDescript(0) + " and y");
+					else if(player.lizardCocks() > 0 || player.displacerCocks()) outputText("Rivulets of milky girlcum drizzle over the purplish, knotted flesh of your " + cockDescript(0) + " and y");
+					else if(player.anemoneCocks() > 0) outputText("Rivulets of milky girlcum drizzle and drip from the many tiny tentacles of your " + cockDescript(0) + " and y");
+					else outputText("Rivulets of milky girlcum drizzle over the sensitive skin of your " + cockDescript(0) + " and y");
 		*/
 				}
 				else {
@@ -1248,15 +1248,15 @@ package classes.Scenes {
 							outputText("its length white.  Y");
 					}
 		/* Old method
-					if(player.normalCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining it white.  Y", false);
-					else if(player.horseCocks() > 0) outputText("Milky girlcum squirts out from around your " + horseDescript(0) + ", staining its mottled skin white.  Y", false);
-					else if(player.dogCocks() > 0) outputText("Milky girlcum squirts out from around your " + dogDescript(0) + ", staining its shiny skin white.  Y", false);
-					else if(player.tentacleCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its rubbery skin white.  Y", false);
-					else if(player.demonCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its purplish-skin white.  Y", false);
-					else if(player.catCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the pink kitty-skin white.  Y", false);
-					else if(player.lizardCocks() > 0 || player.displacerCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the purple, knotty flesh white.  Y", false);
-					else if(player.anemoneCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the odd aquatic shaft wide.  Y", false);
-					else outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its length white.  Y", false);
+					if(player.normalCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining it white.  Y");
+					else if(player.horseCocks() > 0) outputText("Milky girlcum squirts out from around your " + horseDescript(0) + ", staining its mottled skin white.  Y");
+					else if(player.dogCocks() > 0) outputText("Milky girlcum squirts out from around your " + dogDescript(0) + ", staining its shiny skin white.  Y");
+					else if(player.tentacleCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its rubbery skin white.  Y");
+					else if(player.demonCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its purplish-skin white.  Y");
+					else if(player.catCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the pink kitty-skin white.  Y");
+					else if(player.lizardCocks() > 0 || player.displacerCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the purple, knotty flesh white.  Y");
+					else if(player.anemoneCocks() > 0) outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining the odd aquatic shaft wide.  Y");
+					else outputText("Milky girlcum squirts out from around your " + cockDescript(0) + ", staining its length white.  Y");
 		*/
 				}
 			}
@@ -1315,16 +1315,16 @@ package classes.Scenes {
 								outputText("tips of your bloated nipples wrap around the " + player.cockHead() + " of your " + player.cockDescript() + ", swallowing it like an enormous mouth.  ");
 						}
 		/* Old method
-						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the tip of your " + cockDescript(0) + " swallowing it like an enormous mouth. ", false);
-						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the flared tip of your " + horseDescript(0) + " swallowing it like an enormous mouth. ", false);
-						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the pointed tip of your " + dogDescript(0) + " swallowing it like an enormous mouth. ", false);
-						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the rounded tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ", false);
-						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the nodule-ringed tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ", false);
-						else if(player.catCocks() > 0) outputText("The swollen tips of your bloated nipples stretch around the barbed tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ", false);
-						else if(player.lizardCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your " + cockDescript(0) + ", stretching oddly as it swallows the knot-covered appendage. ", false);
-						else if(player.anemoneCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the stinging tentacles that surround your " + cockDescript(0) + "'s tip, convulsing with wet squishing sounds as they become red and enflamed with artificial lust.  ", false);
+						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the tip of your " + cockDescript(0) + " swallowing it like an enormous mouth. ");
+						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the flared tip of your " + horseDescript(0) + " swallowing it like an enormous mouth. ");
+						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the pointed tip of your " + dogDescript(0) + " swallowing it like an enormous mouth. ");
+						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the rounded tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ");
+						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the nodule-ringed tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ");
+						else if(player.catCocks() > 0) outputText("The swollen tips of your bloated nipples stretch around the barbed tip of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ");
+						else if(player.lizardCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your " + cockDescript(0) + ", stretching oddly as it swallows the knot-covered appendage. ");
+						else if(player.anemoneCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the stinging tentacles that surround your " + cockDescript(0) + "'s tip, convulsing with wet squishing sounds as they become red and enflamed with artificial lust.  ");
 						else if(player.displacerCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the outstretched head of your " + cockDescript(0) + ", convulsing with wet, squishing sounds as it wriggles inside you.");
-						else outputText("The swollen tips of your bloated nipples wrap around the " + cockHead(0) + " of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ", false);
+						else outputText("The swollen tips of your bloated nipples wrap around the " + cockHead(0) + " of your " + cockDescript(0) + ", swallowing it like an enormous mouth. ");
 		*/
 					}
 					outputText("With each thrust, you bury your " + player.cockDescript() + " deeper into your greedy tit. Overwhelmed by the combined sensations, your mind is barely able to cope with the intense feeling of fullness where no such feeling should be possible.");
@@ -1369,16 +1369,16 @@ package classes.Scenes {
 								outputText("The swollen lips of your bloated nipple gape wide, but the " + player.cockHead() + " of your " + player.cockDescript() + " spreads them even wider.  ");
 						}
 		/* Old method
-						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ", false);
-						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the flared tip of your " + horseDescript(0) + " spreads them even wider. ", false);
-						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the massive girth of your " + dogDescript(0) + " spreads them even wider. ", false);
-						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ", false);
-						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ", false);
-						else if(player.catCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the barbed tip of your " + cockDescript(0) + " spreads them even wider. ", false);
-						else if(player.lizardCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your " + cockDescript(0) + " slowly spreads them even wider. ", false);
-						else if(player.anemoneCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the stinging tip of your " + cockDescript(0) + " spreads them wider and fills them with artificial lust. ", false);
-						else if(player.displacerCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the wide head of your " + cockDescript(0) + " spreads them even wider. ", false);
-						else outputText("The swollen lips of your bloated nipple gape wide, but the " + cockHead(0) + " of your " + cockDescript(0) + " spreads them even wider. ", false);
+						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ");
+						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the flared tip of your " + horseDescript(0) + " spreads them even wider. ");
+						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the massive girth of your " + dogDescript(0) + " spreads them even wider. ");
+						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ");
+						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + cockDescript(0) + " spreads them even wider. ");
+						else if(player.catCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the barbed tip of your " + cockDescript(0) + " spreads them even wider. ");
+						else if(player.lizardCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your " + cockDescript(0) + " slowly spreads them even wider. ");
+						else if(player.anemoneCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the stinging tip of your " + cockDescript(0) + " spreads them wider and fills them with artificial lust. ");
+						else if(player.displacerCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the wide head of your " + cockDescript(0) + " spreads them even wider. ");
+						else outputText("The swollen lips of your bloated nipple gape wide, but the " + cockHead(0) + " of your " + cockDescript(0) + " spreads them even wider. ");
 		*/
 					}
 					outputText("Grunting and sweating with effort, you stuff as much of your " + player.cockDescript() + " into your overstretched nipple as you can fit. The feeling of incredible tightness around your " + player.cockDescript() + " combines with the pain of your distended nipple to form a mindbending sensation that makes your head spin. ");
@@ -1417,15 +1417,15 @@ package classes.Scenes {
 							outputText("pooling at your crotch.  ");
 					}
 		/* Old method
-					if(player.normalCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling at your crotch. ", false);
-					else if(player.horseCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling in and around your sheath. ", false);
-					else if(player.tentacleCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, mixing with the tentacles own lubricants. ", false);
-					else if(player.demonCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the base of your member. ", false);
-					else if(player.catCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the spines near your base. ", false);
-					else if(player.lizardCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the bulbs near your base. ", false);
-					else if(player.anemoneCocks() > 0)  outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the wriggling tentacles near your base. ", false);
-					else if(player.hasKnot()) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the bulb near your base. ", false);
-					else  outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the spines near your base. ", false);
+					if(player.normalCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling at your crotch. ");
+					else if(player.horseCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling in and around your sheath. ");
+					else if(player.tentacleCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, mixing with the tentacles own lubricants. ");
+					else if(player.demonCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the base of your member. ");
+					else if(player.catCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the spines near your base. ");
+					else if(player.lizardCocks() > 0) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the bulbs near your base. ");
+					else if(player.anemoneCocks() > 0)  outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the wriggling tentacles near your base. ");
+					else if(player.hasKnot()) outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the bulb near your base. ");
+					else  outputText("girl-lube drizzles down the length of your " + cockDescript(0) + " in thick streams, pooling around the spines near your base. ");
 		*/
 				}
 				else outputText("girl-lube spurts out of your tortured nipple with each thrust of your " + player.cockDescript() + ", spattering your arms and face with your secretions. ");
@@ -1472,15 +1472,15 @@ package classes.Scenes {
 							outputText("swallowing it completely.  ");
 					}
 		/* Old method
-					if(player.normalCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely. ", false);
-					else if(player.horseCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the flared tip of your " + horseDescript(0) + " and begin to slide down its length, swallowing it completely. ", false);
-					else if(player.dogCocks() > 0 || player.displacerCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + dogDescript(0) + " and begin to slide down its length, even swallowing your bulging knot without difficulty. ", false);
-					else if(player.tentacleCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as it twists and pulses on its own, fucking your nipple.  ", false);
-					else if(player.demonCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each bump and nodule makes you quiver with unholy pleasures.  ", false);
-					else if(player.catCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each springy barb makes you quiver with pleasure.  ", false);
-					else if(player.lizardCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each of the bulgy knots along its length stretch the orifice further.  ", false);
-					else if(player.anemoneCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely and leaving a searing trail of desire in its path.  ", false);
-					else outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely. ", false);
+					if(player.normalCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely. ");
+					else if(player.horseCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the flared tip of your " + horseDescript(0) + " and begin to slide down its length, swallowing it completely. ");
+					else if(player.dogCocks() > 0 || player.displacerCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + dogDescript(0) + " and begin to slide down its length, even swallowing your bulging knot without difficulty. ");
+					else if(player.tentacleCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as it twists and pulses on its own, fucking your nipple.  ");
+					else if(player.demonCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each bump and nodule makes you quiver with unholy pleasures.  ");
+					else if(player.catCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each springy barb makes you quiver with pleasure.  ");
+					else if(player.lizardCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely as each of the bulgy knots along its length stretch the orifice further.  ");
+					else if(player.anemoneCocks() > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely and leaving a searing trail of desire in its path.  ");
+					else outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + cockDescript(0) + " and begin to slide down its length, swallowing it completely. ");
 		*/
 				}
 				outputText("You revel in the sensation as you slowly stroke your " + player.cockDescript() + " in and out of your distended nipple. Your shaft is enveloped in the warm, wet embrace of your freakish tit, and ");

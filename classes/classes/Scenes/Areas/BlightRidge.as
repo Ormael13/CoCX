@@ -50,7 +50,8 @@ package classes.Scenes.Areas
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
 					break;
 				default:
-					outputText("You spend one hour exploring the tainted ridge but you don't manage to find anything interesting, unless feeling of becoming slight more horny counts.", true);
+					clearOutput();
+					outputText("You spend one hour exploring the tainted ridge but you don't manage to find anything interesting, unless feeling of becoming slight more horny counts.");
 					dynStats("lib", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}

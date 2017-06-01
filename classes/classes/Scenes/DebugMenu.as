@@ -528,7 +528,7 @@ import classes.BodyParts.SkinLayer;
 			var pa:PlayerAppearance = getGame().playerAppearance;
 			pa.describeRace();
 			pa.describeFaceShape();
-			outputText("  It has " + player.faceDesc() + ".", false); //M/F stuff!
+			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 			pa.describeEyes();
 			pa.describeHairAndEars();
 			pa.describeBeard();

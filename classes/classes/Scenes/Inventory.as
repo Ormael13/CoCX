@@ -420,12 +420,13 @@ package classes.Scenes
 		public function hasItemInPearlStorage(itype:ItemType):Boolean { return itemTypeInStorage(pearlStorage, 0, 98, itype); }
 		
 		public function giveHumanizer():void {
+			clearOutput();
 			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
-				outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
+				outputText("<b>I was a cheater until I took an arrow to the knee...</b>");
 				getGame().gameOver();
 				return;
 			}
-			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
+			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n");
 			inventory.takeItem(consumables.HUMMUS_, playerMenu);
 			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 		}

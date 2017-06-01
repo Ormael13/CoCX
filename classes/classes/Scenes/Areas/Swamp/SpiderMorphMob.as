@@ -22,22 +22,22 @@ package classes.Scenes.Areas.Swamp
 				if(damage > 0) damage = player.takeDamage(damage);
 				if(damage <= 0) {
 					damage = 0;
-					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
-				else if(damage < 11) outputText(capitalA + short + " wounds you! ", false);
-				else if(damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
+				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ");
+				else if(damage < 11) outputText(capitalA + short + " wounds you! ");
+				else if(damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				else if(damage > 20) {
-					outputText(capitalA + short + " <b>mutilate", false);
-					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
+					outputText(capitalA + short + " <b>mutilate");
+					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 				if(damage > 0) {
 					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-						if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-						else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+						if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
+						else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 						lust += 10 * lustVuln;
 					}
 				}
@@ -54,7 +54,7 @@ package classes.Scenes.Areas.Swamp
 				combatRoundOver();
 			}
 			else {
-				outputText("Some of the spiders and driders launch huge globs of wet webbing right at you, hitting you in the torso!  You try to wiggle out, but it's no use; you're stuck like this for now.  Though comfortingly, the driders' open stance and self-satisfaction allow Kiha to blast them in the side with a huge conflagration!", false);
+				outputText("Some of the spiders and driders launch huge globs of wet webbing right at you, hitting you in the torso!  You try to wiggle out, but it's no use; you're stuck like this for now.  Though comfortingly, the driders' open stance and self-satisfaction allow Kiha to blast them in the side with a huge conflagration!");
 				//(PC cannot attack or use spells for one turn; can use Magical Special and Possess)
 				player.createStatusEffect(StatusEffects.UBERWEB,0,0,0,0);
 				HP -= 250;

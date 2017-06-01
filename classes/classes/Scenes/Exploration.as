@@ -47,16 +47,17 @@ package classes.Scenes
 		//const BOG_EXPLORED:int = 1016;
 		public function doExplore():void
 		{
+			clearOutput();
 			if (player.explored <= 0) {
-				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
+				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
 				tryDiscover();
 				return;
 			} else if (player.explored == 1) {
-				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>", true);
+				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
 				tryDiscover();
 				player.exploredForest++;
 				return;
-			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.", true);
+			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.");
 
 			if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
 				explorePageII();
@@ -155,7 +156,8 @@ package classes.Scenes
 					return;
 				}
 				else {
-					outputText("An imp wings out of the sky and attacks!", true);
+					clearOutput();
+					outputText("An imp wings out of the sky and attacks!");
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
 						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
@@ -177,15 +179,16 @@ package classes.Scenes
 					else if (player.level < 33 && golemChooser >= 40) golemChooser = 39;
 					else if (player.level < 42 && golemChooser >= 50) golemChooser = 49;
 					else if (player.level < 51 && golemChooser >= 60) golemChooser = 59;
+					clearOutput();
 					//Improved dummy golem or golems
 					if (golemChooser >= 10 && golemChooser < 20) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsDummyImproved());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemDummyImproved());
 							return;
 						}
@@ -193,12 +196,12 @@ package classes.Scenes
 					//Advanced dummy golem or golems
 					if (golemChooser >= 20 && golemChooser < 30) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsDummyAdvanced());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemDummyAdvanced());
 							return;
 						}
@@ -206,12 +209,12 @@ package classes.Scenes
 					//Superior dummy golem or golems
 					if (golemChooser >= 30 && golemChooser < 40) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsDummySuperior());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemDummySuperior());
 							return;
 						}
@@ -219,12 +222,12 @@ package classes.Scenes
 					//Basic true golem or golems
 					if (golemChooser >= 40 && golemChooser < 50) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsTrueBasic());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemTrueBasic());
 							return;
 						}
@@ -232,12 +235,12 @@ package classes.Scenes
 					//Improved true golem or golems
 					if (golemChooser >= 50 && golemChooser < 60) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsTrueImproved());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemTrueImproved());
 							return;
 						}
@@ -245,12 +248,12 @@ package classes.Scenes
 					//Advanced true golem or golems
 					if (golemChooser >= 60) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemsTrueAdvanced());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your " + player.weaponName + " for a fight!");
 							startCombat(new GolemTrueAdvanced());
 							return;
 						}
@@ -258,7 +261,7 @@ package classes.Scenes
 					//Dummy golem or golems
 					else {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your " + player.weaponName + " for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
 								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
@@ -267,7 +270,7 @@ package classes.Scenes
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your " + player.weaponName + " for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
 								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
@@ -312,7 +315,8 @@ package classes.Scenes
 						return;
 					}
 					if (player.gender > 0) {
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
 						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
@@ -322,7 +326,8 @@ package classes.Scenes
 						return;
 					}
 					else {
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
 						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
@@ -429,23 +434,24 @@ package classes.Scenes
 				return;
 			}
 			if (player.explored > 1) {
-				
+
+				clearOutput();
 				if (player.exploredForest <= 0) {
-					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>", true);
-					player.exploredForest == 1;
+					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
+					player.exploredForest = 1;
 					player.exploredForest++;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredLake <= 0) {
-					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>", true);
+					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
 					player.exploredLake = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
-					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
+					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
 					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
 					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
 					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
@@ -457,7 +463,7 @@ package classes.Scenes
 					return;
 				}
 				if (player.exploredDesert >= 1 && rand(3) == 0 && player.exploredMountain <= 0) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>", true);
+					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;
 					doNext(camp.returnToCampUseOneHour);
@@ -466,7 +472,7 @@ package classes.Scenes
 				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
-					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
+					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
@@ -476,7 +482,7 @@ package classes.Scenes
 					player.explored++;
 					clearOutput();
 					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
-					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
+					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
 					outputText("<b>You've discovered the Swamp!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
@@ -519,7 +525,7 @@ package classes.Scenes
 					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
+					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
 					outputText("<b>You've discovered the Glacial Rift!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
@@ -609,7 +615,6 @@ package classes.Scenes
 					genericGolGobImpEncounters(true);
 					return;
 				}
-				outputText("You wander around, fruitlessly searching for new places.", true);
 			}
 			player.explored++;
 			doNext(camp.returnToCampUseOneHour);
@@ -617,7 +622,8 @@ package classes.Scenes
 
 		public function pearldiscovery():void {
 			flags[kFLAGS.SKY_POISON_PEARL] = 1;
-			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n", true);
+			clearOutput();
+			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n");
 			inventory.takeItem(consumables.SPPEARL, camp.returnToCampUseOneHour);
 		}
 		
@@ -631,12 +637,14 @@ package classes.Scenes
 		
 		public function ryubifirstenc():void {
 			flags[kFLAGS.RYUBI_LVL_UP] = 1;
-			outputText("While exploring (rest is placeholder atm).\n\n", true);
+			clearOutput();
+			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
 		
 		public function ryubirepenc():void {
-			outputText("While exploring (rest is placeholder atm).\n\n", true);
+			clearOutput();
+			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
 		
@@ -654,39 +662,39 @@ package classes.Scenes
 			clearOutput();
 			var x:Number = player.longestCock();
 			//PARAGRAPH 1
-			outputText("Walking along the sandy dunes of the desert you find yourself increasingly impeded by the bulk of your " + cockDescript(x) + " dragging along the sandscape behind you.  The incredibly hot surface of the desert causes your loins to sweat heavily and fills them with relentless heat.", false);
+			outputText("Walking along the sandy dunes of the desert you find yourself increasingly impeded by the bulk of your " + cockDescript(x) + " dragging along the sandscape behind you.  The incredibly hot surface of the desert causes your loins to sweat heavily and fills them with relentless heat.");
 
-			if (player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ".", false);
-			else if (player.cocks.length >= 2) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.", false);
+			if (player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ".");
+			else if (player.cocks.length >= 2) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.");
 			outputText("\n\n");
 
 			//PARAGRAPH 2
 
 			//FOR NON-CENTAURS]
 			if (!player.isTaur()) {
-				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces your torso to the ground.  Normally your erection would merely raise itself skyward but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead you feel your body forcibly pivoting at the hips until your torso is compelled to rest face down on top of your obscene " + multiCockDescriptLight() + ".", false);
+				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces your torso to the ground.  Normally your erection would merely raise itself skyward but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead you feel your body forcibly pivoting at the hips until your torso is compelled to rest face down on top of your obscene " + multiCockDescriptLight() + ".");
 
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
-				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.", false);
+				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your " + ballsDescriptLight() + " to pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".", false);
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your " + ballsDescriptLight() + " to pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 				}
 			}
 			//FOR CENTAURS
 			else {
-				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body being forcibly pulled down at your hindquarters until you rest atop your " + multiCockDescriptLight() + ".", false);
+				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body being forcibly pulled down at your hindquarters until you rest atop your " + multiCockDescriptLight() + ".");
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
-				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.", false);
+				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".", false);
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 				}
@@ -702,9 +710,9 @@ package classes.Scenes
 			//SCENE END = IF CHARACTER HAS FULL WINGS ADD SENTENCE
 			if (player.canFly()) outputText("  You extend your wings and flap as hard as you can, until at last you manage to lighten the bulk of your body somewhat - enough to allow yourself to drag your genitals across the hot sands and back to camp.  The ordeal takes nearly an hour.");
 			//SCENE END IF CHARACTER HAS CENTAUR BODY
-			else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.", false);
+			else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.");
 			//SCENE END = FOR ALL OTHER CHARACTERS
-			else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.", false);
+			else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.");
 			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
 			fatigue(5);
 			doNext(camp.returnToCampUseOneHour);

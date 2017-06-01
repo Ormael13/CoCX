@@ -32,7 +32,8 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_1");
-			outputText("Game saved to slot 1!", true);
+			clearOutput();
+			outputText("Game saved to slot 1!");
 			doNext(playerMenu);
 		}
 	});
@@ -45,7 +46,8 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_2");
-			outputText("Game saved to slot 2!", true);
+			clearOutput();
+			outputText("Game saved to slot 2!");
 			doNext(playerMenu);
 		}
 	});
@@ -58,7 +60,8 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_3");
-			outputText("Game saved to slot 3!", true);
+			clearOutput();
+			outputText("Game saved to slot 3!");
 			doNext(playerMenu);
 		}
 	});
@@ -71,7 +74,8 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_4");
-			outputText("Game saved to slot 4!", true);
+			clearOutput();
+			outputText("Game saved to slot 4!");
 			doNext(playerMenu);
 		}
 	});
@@ -84,7 +88,8 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_5");
-			outputText("Game saved to slot 5!", true);
+			clearOutput();
+			outputText("Game saved to slot 5!");
 			doNext(playerMenu);
 		}
 	});
@@ -102,7 +107,8 @@ inputManager.AddBindableControl(
 				{
 					showStats();
 					statScreenRefresh();
-					outputText("Slot 1 Loaded!", true);
+					clearOutput();
+					outputText("Slot 1 Loaded!");
 					doNext(playerMenu);
 				}
 			}
@@ -122,7 +128,8 @@ inputManager.AddBindableControl(
 				{
 					showStats();
 					statScreenRefresh();
-					outputText("Slot 2 Loaded!", true);
+					clearOutput();
+					outputText("Slot 2 Loaded!");
 					doNext(playerMenu);
 				}
 			}
@@ -142,7 +149,8 @@ inputManager.AddBindableControl(
 				{
 					showStats();
 					statScreenRefresh();
-					outputText("Slot 3 Loaded!", true);
+					clearOutput();
+					outputText("Slot 3 Loaded!");
 					doNext(playerMenu);
 				}
 			}
@@ -162,7 +170,8 @@ inputManager.AddBindableControl(
 				{
 					showStats();
 					statScreenRefresh();
-					outputText("Slot 4 Loaded!", true);
+					clearOutput();
+					outputText("Slot 4 Loaded!");
 					doNext(playerMenu);
 				}
 			}
@@ -182,7 +191,8 @@ inputManager.AddBindableControl(
 				{
 					showStats();
 					statScreenRefresh();
-					outputText("Slot 5 Loaded!", true);
+					clearOutput();
+					outputText("Slot 5 Loaded!");
 					doNext(playerMenu);
 				}
 			}

@@ -114,7 +114,8 @@ package classes.Scenes.Areas
 			
 			//Generic harpy
 			if (chooser == 0) {
-				outputText("A harpy wings out of the sky and attacks!", true);
+				clearOutput();
+				outputText("A harpy wings out of the sky and attacks!");
 				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
 					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
@@ -131,7 +132,8 @@ package classes.Scenes.Areas
 			//Sophie
 			if (chooser == 2) {
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || kGAMECLASS.sophieFollowerScene.sophieFollower()) {
-					outputText("A harpy wings out of the sky and attacks!", true);
+					clearOutput();
+					outputText("A harpy wings out of the sky and attacks!");
 					startCombat(new Harpy());
 					spriteSelect(26);
 				}

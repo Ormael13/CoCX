@@ -611,7 +611,8 @@ package classes.Scenes.Dungeons
 		//[Torture Gear]
 		public function tortureGear():void {
 			menu();
-			outputText("You walk up to the torture rack.  ", true);
+			clearOutput();
+			outputText("You walk up to the torture rack.  ");
 			if(flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0 || flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] == 0 || flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] == 0) {
 				outputText("The rack contains: ");
 				if(flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0) {
@@ -1202,7 +1203,8 @@ package classes.Scenes.Dungeons
 		//ROOMS
 		public function roomGuardHall():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
-			outputText("<b><u>Guard Hall</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Guard Hall</u></b>\n");
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
 			dungeons.setDungeonButtons(roomStairwell, null, null, null);
 			//[If Armor has not been taken/fought with: 
@@ -1224,7 +1226,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomCellar():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
-			outputText("<b><u>Wine Cellar</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Wine Cellar</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Accessed from the Trapdoor button)
 			outputText("You've dropped down into a small underground hidey-hole, with ");
@@ -1245,7 +1248,7 @@ package classes.Scenes.Dungeons
 		public function roomStairwell():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_STAIR_WELL;
 			clearOutput();
-			outputText("<b><u>Stair Well</u></b>\n", true);
+			outputText("<b><u>Stair Well</u></b>\n");
 			dungeons.setDungeonButtons(null, roomGuardHall, null, null);
 			if(flags[kFLAGS.HEL_HARPIES_DEFEATED] == 0) {
 				outputText("You open the heavy double doors and cringe as a loud \"<i>SCREECH!</i>\" echoes out and up the next room - a wide open stairwell, it seems, with minimal cover.  The perfect place for a harpy to fight... Oh, shit!");
@@ -1276,7 +1279,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomDungeon():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_DUNGEON;
-			outputText("<b><u>Dungeon</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Dungeon</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro -- Before Fight)
 			if(flags[kFLAGS.HEL_BRIGID_DEFEATED] == 0) {
@@ -1312,7 +1316,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomMezzanine():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_MEZZANINE;
-			outputText("<b><u>Mezzanine</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Mezzanine</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro; Before Battle)
 			if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
@@ -1334,7 +1339,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomThroneRoom():void {
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
-			outputText("<b><u>Throne Room</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Throne Room</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
 			//Throne Room Descript (Before Combat!)
 			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {

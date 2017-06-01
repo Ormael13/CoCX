@@ -248,7 +248,8 @@ package classes.Scenes.Explore {
 		
 		public function pitchCondom():void {
 			spriteSelect(23);
-			outputText("Giacomo holds up the packet and says, \"<i>Ah, yes! This is a condom. Just slip it on any cocks and have it penetrate any holes. It's guaranteed to prevent the spread of STDs and it will help to prevent pregnancy. I must warn you that it does not completely prevent pregnancy. Rarely, it will fail. However, it will work most of the time. So, <b>ten gems</b>. What do you say?</i>\"", true);
+			clearOutput();
+			outputText("Giacomo holds up the packet and says, \"<i>Ah, yes! This is a condom. Just slip it on any cocks and have it penetrate any holes. It's guaranteed to prevent the spread of STDs and it will help to prevent pregnancy. I must warn you that it does not completely prevent pregnancy. Rarely, it will fail. However, it will work most of the time. So, <b>ten gems</b>. What do you say?</i>\"");
 			doYesNo(buyCondom, eroticaMenu);
 		}
 		
@@ -256,7 +257,8 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			if (player.gems < 10)
 			{
-				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.", true);
+				clearOutput();
+				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.");
 				doNext(eroticaMenu);
 			}
 			else
@@ -824,20 +826,21 @@ package classes.Scenes.Explore {
 			if(player.gender == 1) {
 				if(player.cor < 66) {
 					outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ");
-					if(player.isTaur()) outputText(" crouch between your legs and impale herself on your " + cockDescript(0) + " with a wet sound caused by her well-lubricated vulva. Y", false);
-					else outputText(" open her womb and quickly consume your " + cockDescript(0) + ". She embraces you, entrapping your head in her cleavage as y", false);
-					outputText("ou quickly feel her superhuman vaginal muscles work and stroke your " + cockDescript(0) + " better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks the both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n", false);
-					if(player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0), false);
+					if(player.isTaur()) outputText(" crouch between your legs and impale herself on your " + cockDescript(0) + " with a wet sound caused by her well-lubricated vulva. Y");
+					else outputText(" open her womb and quickly consume your " + cockDescript(0) + ". She embraces you, entrapping your head in her cleavage as y");
+					outputText("ou quickly feel her superhuman vaginal muscles work and stroke your " + cockDescript(0) + " better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks the both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n");
+					if(player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0));
 					else outputText("Almost crushing your pelvis, she wraps her legs around your body");
 					outputText(" and her muscles churn mercilessly demanding that you release your 'milk' as freely as she has released hers into you. Stimulated beyond any human ability to maintain control, you bear down and release a milky flood of your own inside the succubus. Moaning in ecstasy, she ");
-					if(player.isTaur()) outputText("arches under your belly as you feel your " + cockDescript(0) + " bending pleasurably inside her, and", false);
+					if(player.isTaur()) outputText("arches under your belly as you feel your " + cockDescript(0) + " bending pleasurably inside her, and");
 					else outputText("releases you from her grip, allowing you to finally breathe deeply, and leans back, arching high to reveal your joined genitals in the moonlight. You visibly see");
-					outputText(" her contractions milking your " + cockDescript(0) + " as fiercely as a maid milks a cow! Another torrent of cum pushes its way out of your body and you let out a moan of pleasure and exhaustion.\n\n", false);
+					outputText(" her contractions milking your " + cockDescript(0) + " as fiercely as a maid milks a cow! Another torrent of cum pushes its way out of your body and you let out a moan of pleasure and exhaustion.\n\n");
 					outputText("As you are passing out, you feel a deep kiss upon your lips from the succubus. \"You taste better each time we join. Call upon me soon, lest I take what I want from you anyway,\", says the lustful creature.\n\n");
 					outputText("Fatigue takes you and you collapse into a deep sleep.  ");
 				}
 				else {
-					outputText("\nKnowing the succubus will come, you do not even bother trying to sleep. Instead, you prepare a little surprise for her. You briefly jerk off and start edging yourself, preparing a massive batch to unload inside her. Hopefully, she will be the one to get more than she bargained for.\n\n", true);
+					clearOutput();
+					outputText("\nKnowing the succubus will come, you do not even bother trying to sleep. Instead, you prepare a little surprise for her. You briefly jerk off and start edging yourself, preparing a massive batch to unload inside her. Hopefully, she will be the one to get more than she bargained for.\n\n");
 					outputText("The succubus comes, as you predicted. Despite her obvious strength and size difference to you, you grab her and push her down to the ground and immediately push your angry cock into her hairy hole. The succubus, surprised and enthralled, laughs at your aggression.\n\n");
 					outputText("\"<i>I thought I was the hungry one.</i>\", she chuckles. \"I am all yours, little man. FEED ME!\"\n\n");
 					outputText("You begin bucking your ");
@@ -845,12 +848,12 @@ package classes.Scenes.Explore {
 					else outputText("hips");
 					outputText(" in the all-too-familiar rhythm, hammering away at the succubus' cunt. Impressed with your initiative, she chooses to remain submissive as you work up an impressive load of spunk. Trying with all of your might, you continue to hold off your orgasm, painfully, as you continue stimulating your inhuman lover.\n\n");
 					outputText("However, she senses your control and immediately brings her own muscles into the little love game. With one good squeeze, she breaks down any control and resistance you have. Sensing you are about to explode, she ");
-					if(player.isTaur()) outputText("pushes on your forelegs, impaling herself even deeper on your " + cockDescript(0), false);
+					if(player.isTaur()) outputText("pushes on your forelegs, impaling herself even deeper on your " + cockDescript(0));
 					else outputText("wraps her legs around your hips and bears down");
 					outputText(". You feel the head of your prick push past the dilated opening in her cervix, which immediately contracts around your head. Your penis is literally trapped and caught in her womb!\n\n");
 					outputText("Groaning loudly, long muscle spasms release the painfully stored semen into the deepest parts of the succubus. The sensation of your hot cum so deep inside her body triggers her peak. ");
 					
-					if(player.isTaur()) outputText("She moans inhumanly, and reflexively digs her claws into your forelegs. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You press your " + cockDescript(0) + " into her", false);
+					if(player.isTaur()) outputText("She moans inhumanly, and reflexively digs her claws into your forelegs. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You press your " + cockDescript(0) + " into her");
 					else outputText("She embraces you, moaning inhumanly, and reflexively digs her claws into your back. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You slam your pelvis into hers");
 					outputText(", as if to force yourself to cum harder than you already are capable of, prompting an equally pleasurable reaction from her.\n\n");
 					outputText("For the first time since you have had your 'visits', the succubus appears winded. Without another word, her muscles release your manhood, which she quickly licks clean of your intermingled juices.  She tongues your face in lustful approval and flies away. You quickly fall asleep, utterly spent.  ");

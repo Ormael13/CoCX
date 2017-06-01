@@ -157,17 +157,20 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > player.maxFatigue())
 		{
-			outputText("You are too tired to focus this ability.", true);
+			clearOutput();
+			outputText("You are too tired to focus this ability.");
 			doNext(combatMenu);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
+			clearOutput();
+			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.");
 			doNext(combatMenu);
 			return;
 		}
 		if(monster.short == "pod" || monster.inte == 0) {
-			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
+			clearOutput();
+			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
 			enemyAI();
 			return;
@@ -215,7 +218,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(150) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe ice.", true);
+			clearOutput();
+			outputText("You are too tired to breathe ice.");
 			doNext(combatMenu);
 			return;
 		}
@@ -241,7 +245,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -266,7 +271,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -300,7 +305,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe ice.", true);
+			clearOutput();
+			outputText("You are too tired to breathe ice.");
 			doNext(combatMenu);
 			return;
 		}
@@ -348,7 +354,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -373,7 +380,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -409,7 +416,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.", true);
+			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmgF *= 1.5;
 			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 5;
@@ -443,13 +450,15 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 			{
-				outputText("You are too tired to sing.", true);
+				clearOutput();
+				outputText("You are too tired to sing.");
 				doNext(combatMenu);
 				return;
 			}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 			fatigue(50, 1);
-			outputText("You start singing a enrapturing song.", true);
+			clearOutput();
+			outputText("You start singing a enrapturing song.");
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmg *= 1.5;
 			lustDmg = Math.round(lustDmg);
@@ -466,7 +475,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe fire.", true);
+			clearOutput();
+			outputText("You are too tired to breathe fire.");
 			doNext(combatMenu);
 			return;
 		}
@@ -494,7 +504,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -549,17 +560,17 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
-			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
 			damage = doDamage(damage);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		}
 		else {
 			damage = doDamage(damage);
@@ -596,7 +607,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe fire.", true);
+			clearOutput();
+			outputText("You are too tired to breathe fire.");
 			doNext(combatMenu);
 			return;
 		}
@@ -634,7 +646,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -689,18 +702,18 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
-			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
 			damage = doDamage(damage);
 			monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -733,7 +746,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe ice.", true);
+			clearOutput();
+			outputText("You are too tired to breathe ice.");
 			doNext(combatMenu);
 			return;
 		}
@@ -771,7 +785,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -801,7 +816,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -835,7 +850,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe lightning.", true);
+			clearOutput();
+			outputText("You are too tired to breathe lightning.");
 			doNext(combatMenu);
 			return;
 		}
@@ -873,7 +889,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -903,7 +920,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -937,7 +954,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
-			outputText("You are too tired to breathe dakness.", true);
+			outputText("You are too tired to breathe dakness.");
 			doNext(combatMenu);
 			return;
 		}
@@ -975,7 +992,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -1005,7 +1023,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = takeDamage(damage);
-				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -1038,7 +1056,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.fatigue + 20 > player.maxFatigue()) {
-			outputText("You are too tired to breathe fire.", true);
+			clearOutput();
+			outputText("You are too tired to breathe fire.");
 			doNext(combatMenu);
 			return;
 		}
@@ -1075,7 +1094,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
 			enemyAI();
 			return;
 		}
@@ -1127,7 +1147,7 @@ public class MagicSpecials extends BaseCombatContent {
 					combatRoundOver();
 					return;
 				}
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				takeDamage(damage);
 			}
 			outputText("\n\n");
@@ -1153,7 +1173,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
-				outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
+				outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 				if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 				damage = Math.round(damage * 1.5);
 			}
@@ -1161,7 +1181,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("<b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>  ");
 				damage = Math.round(0.5 * damage);
 			}
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 			monster.HP -= damage;
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
@@ -1180,7 +1200,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
-			outputText("You are too tired to breathe fire.\n", true);
+			outputText("You are too tired to breathe fire.\n");
 			doNext(combatMenu);
 			return;
 		}
@@ -1190,7 +1210,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcInfernoMod(damage);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
 		}
@@ -1268,7 +1289,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 				damage = Math.round(damage);
 				damage = int(damage);
-				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n", false);
+				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n");
 				monster.HP -= damage;
 			}
 			else {
@@ -1278,7 +1299,7 @@ public class MagicSpecials extends BaseCombatContent {
 					outputText("\n");
 				}
 				else {
-					outputText("  The corrupted fire doesn't seem to have effect on " + monster.a + monster.short + "!\n", false);
+					outputText("  The corrupted fire doesn't seem to have effect on " + monster.a + monster.short + "!\n");
 				}
 			}
 		}
@@ -1366,7 +1387,7 @@ public class MagicSpecials extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		checkAchievementDamage(temp);
@@ -1387,7 +1408,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 //	if(monster.lustVuln > 0) {
 //			if(player.weaponPerk == "Aphrodisiac Weapon") {
-//				outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.", false);
+//				outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.");
 //				monster.teased(monster.lustVuln * (5 + player.cor / 10));
 //			}
 	}
@@ -1395,15 +1416,15 @@ public class MagicSpecials extends BaseCombatContent {
 	public function berzerk():void {
 		clearOutput();
 		if(player.hasStatusEffect(StatusEffects.Berzerking)) {
-			outputText("You're already pretty goddamn mad!", true);
+			outputText("You're already pretty goddamn mad!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.findPerk(PerkLib.ColdFury) >= 0) {
-			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n", true);
+			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
 		}
-		else outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n", true);
+		else outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
 		enemyAI();
 	}
@@ -1411,12 +1432,12 @@ public class MagicSpecials extends BaseCombatContent {
 	public function lustzerk():void {
 		clearOutput();
 		if(player.hasStatusEffect(StatusEffects.Lustzerking)) {
-			outputText("You're already pretty goddamn mad & lustfull!", true);
+			outputText("You're already pretty goddamn mad & lustfull!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n", true);
+		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
 		enemyAI();
 	}
@@ -1424,12 +1445,12 @@ public class MagicSpecials extends BaseCombatContent {
 	public function petrify():void {
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(100) > player.maxFatigue()) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
 		if (monster is LivingStatue) {
-			outputText("Your enemy seems to be immune to the petrify immobilizing effect.", true);
+			outputText("Your enemy seems to be immune to the petrify immobilizing effect.");
 			doNext(msMenu);
 			return;
 		}
@@ -1499,7 +1520,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
 	 //Using fire attacks on the goo]
 	 if(monster.short == "goo-girl") {
-	 outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ", false);
+	 outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 	 if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	 }
 	 if (monster.findPerk(PerkLib.IceNature) >= 0) dmg *= 5;
@@ -1522,10 +1543,10 @@ public class MagicSpecials extends BaseCombatContent {
 	 outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 	 }
 	 var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-	 if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+	 if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-	 if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-	 else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+	 if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+	 else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 	 }
 	 if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 	 outputText(monster.capitalA + monster.short + "'");
@@ -1533,24 +1554,24 @@ public class MagicSpecials extends BaseCombatContent {
 	 outputText(" eyes glaze over with desire for a moment.  ");
 	 }
 	 if (monster.cocks.length > 0) {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 	 }
 	 if (monster.vaginas.length > 0) {
 	 if (monster.plural) {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 	 }
 	 else {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 	 }
 	 }
 	 lustDmg *= 0.25;
@@ -1558,7 +1579,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 	 lustDmg = Math.round(lustDmg);
 	 monster.teased(lustDmg);
-	 outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>", false);
+	 outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>");
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 	 outputText("\n\n");
 	 statScreenRefresh();
@@ -1577,12 +1598,12 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if ((player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(100) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 40 * soulskillCost() * soulskillcostmulti())) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
+			outputText("You cannot focus to use this ability while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
@@ -1632,7 +1653,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ", false);
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (monster.findPerk(PerkLib.IceNature) >= 0) dmg *= 5;
@@ -1647,10 +1668,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -1658,24 +1679,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		lustDmg *= 0.5;
@@ -1685,7 +1706,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -1703,12 +1724,12 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if ((player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(250) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 100 * soulskillCost() * soulskillcostmulti())) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
+			outputText("You cannot focus to use this ability while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
@@ -1757,7 +1778,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ", false);
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (monster.findPerk(PerkLib.IceNature) >= 0) dmg *= 5;
@@ -1771,10 +1792,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -1782,24 +1803,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		lustDmg *= 0.5;
@@ -1808,7 +1829,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -1826,12 +1847,12 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if ((player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(100) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 40 * soulskillCost() * soulskillcostmulti())) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
+			outputText("You cannot focus to use this ability while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
@@ -1885,7 +1906,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ", false);
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (monster.findPerk(PerkLib.IceNature) >= 0) dmg *= 5;
@@ -1899,10 +1920,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -1910,24 +1931,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		lustDmg *= 0.125;
@@ -1937,7 +1958,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -1963,7 +1984,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		//Fatigue Cost: 25
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
@@ -1973,12 +1994,12 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
+			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
 		if(monster.short == "pod" || monster.inte == 0) {
-			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
+			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
 			enemyAI();
 			return;
@@ -2012,17 +2033,17 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		//Fatigue Cost: 25
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
+			outputText("You cannot focus to use this ability while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
 		if(monster.short == "pod" || monster.inte == 0) {
-			outputText("In the tight confines of this pod, there's no use making such an attack!\n\n", true);
+			outputText("In the tight confines of this pod, there's no use making such an attack!\n\n");
 			fatigue(1);
 			enemyAI();
 			return;
@@ -2070,10 +2091,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if (monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -2081,24 +2102,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		lustDmg *= 0.1;
@@ -2115,7 +2136,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function lustTransfer():void {
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
@@ -2133,24 +2154,24 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		monster.lust += lusttransfered;
@@ -2165,7 +2186,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Fascinate():void {
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
@@ -2175,13 +2196,13 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(monster.short == "pod" || monster.inte == 0) {
-			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
+			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
 			enemyAI();
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("You cannot focus to reach the enemy's mind with your charming display while you can't even move.", true);
+			outputText("You cannot focus to reach the enemy's mind with your charming display while you can't even move.");
 			doNext(msMenu);
 			return;
 		}
@@ -2195,10 +2216,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -2206,24 +2227,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		monster.teased(lustDmg);
@@ -2244,7 +2265,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function LustStrike():void {
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to use this ability.", true);
+			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
@@ -2254,7 +2275,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("You cannot focus on drawing symbols while you're having so much difficult breathing.", true);
+			outputText("You cannot focus on drawing symbols while you're having so much difficult breathing.");
 			doNext(msMenu);
 			return;
 		}
@@ -2267,10 +2288,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -2278,24 +2299,24 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		monster.teased(lustDmg);

@@ -474,7 +474,7 @@ package classes {
 			if (player.findPerk(PerkLib.Androgyny) < 0) { //Fix femininity ratings if out of whack!
 				var textHolder:String = player.fixFemininity();
 				if (textHolder != "") {
-					outputText(textHolder, false);
+					outputText(textHolder);
 					needNext = true;
 				}
 			}

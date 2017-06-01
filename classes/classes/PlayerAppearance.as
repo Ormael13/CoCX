@@ -11,11 +11,12 @@ public class PlayerAppearance extends BaseContent {
 		var rando:Number = 0;
 		//Determine race type:
 
-		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n",true);
+		clearOutput();
+		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		describeRace();
 		describeGear();
 		describeFaceShape();
-		outputText("  It has " + player.faceDesc() + ".", false); //M/F stuff!
+		outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 		describeEyes();
 		describeHairAndEars();
 		describeBeard();
@@ -178,22 +179,22 @@ public class PlayerAppearance extends BaseContent {
 	//Chesticles..I mean bewbz.
 	if(player.breastRows.length == 1)
 	{
-		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + ", each supporting ", false);
+		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + ", each supporting ");
 		outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples.
 		if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter display
 		else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches display
-		outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
+		outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s.")); //Nipple description and plural
 		if(player.breastRows[0].milkFullness > 75)
-			outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
+			outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.");
 		if(player.breastRows[0].breastRating >= 1)
-			outputText("  You could easily fill a " + player.breastCup(temp) + " bra.", false);
+			outputText("  You could easily fill a " + player.breastCup(temp) + " bra.");
 		//Done with tits.  Move on.
 		outputText("\n");
 	}
 	//many rows
 	else
 	{
-		outputText("You have " + num2Text(player.breastRows.length) + " rows of breasts, the topmost pair starting at your chest.\n", false);
+		outputText("You have " + num2Text(player.breastRows.length) + " rows of breasts, the topmost pair starting at your chest.\n");
 		while (temp < player.breastRows.length)
 		{
 			if(temp == 0)
@@ -206,15 +207,15 @@ public class PlayerAppearance extends BaseContent {
 				outputText("\n--Your fourth set of tits cradles ");
 			if(temp == 4)
 				outputText("\n--Your fifth and final mammary grouping swells with ");
-			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ", false);
+			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ");
 			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
 			if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
 			else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches
-			outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
+			outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each.")); //Description and Plural
 			if(player.breastRows[temp].breastRating >= 1)
-				outputText("  They could easily fill a " + player.breastCup(temp) + " bra.", false);
+				outputText("  They could easily fill a " + player.breastCup(temp) + " bra.");
 			if(player.breastRows[temp].milkFullness > 75)
-				outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
+				outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.");
 			temp++;
 		}
 		//Done with tits.  Move on.
@@ -255,24 +256,24 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.isTaur())
 			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
-		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ", false);
+		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ");
 		else if (player.isScylla())
 			outputText("\nYour equipment has shifted to lie between your front tentacles.");
-		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10)
 		{
 			if (flags[kFLAGS.USE_METRICS] > 0) {
 				if(Math.round(10*player.cocks[temp].cockThickness*2.54)/10 == 1)
-					outputText(int(10*player.cocks[temp].cockThickness*2.54)/10 + " centimetre thick.", false);
-				else outputText(Math.round(10 * player.cocks[temp].cockThickness*2.54) / 10 + " centimetres thick.", false);
+					outputText(int(10*player.cocks[temp].cockThickness*2.54)/10 + " centimetre thick.");
+				else outputText(Math.round(10 * player.cocks[temp].cockThickness*2.54) / 10 + " centimetres thick.");
 			}
 			else {
 				if(Math.round(10*player.cocks[temp].cockThickness)/10 == 1)
-					outputText(int(10*player.cocks[temp].cockThickness)/10 + " inch thick.", false);
-				else outputText(Math.round(10 * player.cocks[temp].cockThickness) / 10 + " inches thick.", false);
+					outputText(int(10*player.cocks[temp].cockThickness)/10 + " inch thick.");
+				else outputText(Math.round(10 * player.cocks[temp].cockThickness) / 10 + " inches thick.");
 			}
 		}
-		else outputText (num2Text(Math.round(10*player.cocks[temp].cockThickness)/10) + " inches wide.", false);
+		else outputText (num2Text(Math.round(10*player.cocks[temp].cockThickness)/10) + " inches wide.");
 		//Horsecock flavor
 		if(player.cocks[temp].cockType == CockTypesEnum.HORSE)
 		{
@@ -282,13 +283,13 @@ public class PlayerAppearance extends BaseContent {
 		if((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX) || (player.cocks[temp].cockType == CockTypesEnum.WOLF))
 		{
 			if(player.cocks[temp].knotMultiplier >= 1.8)
-				outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost too big for your cock.", false);
+				outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost too big for your cock.");
 			else if(player.cocks[temp].knotMultiplier >= 1.4)
-				outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+				outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.");
 			else if(player.cocks[temp].knotMultiplier > 1)
-				outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.", false);
+				outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.");
 			//List thickness
-			outputText("  The knot is " + Math.round(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches wide when at full size.", false);
+			outputText("  The knot is " + Math.round(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches wide when at full size.");
 		}
 		//
 		//Demon cock flavor
@@ -353,7 +354,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Worm flavor
 		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.", false);
+			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.");
 		if(player.cocks[temp].sock)
 			sockDescript(temp);
 		//DONE WITH COCKS, moving on!
@@ -364,10 +365,10 @@ public class PlayerAppearance extends BaseContent {
 		temp = 0;
 		rando = rand(4);
 		if(player.isTaur())
-			outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n", false);
+			outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
 		else if (player.isScylla())
-			outputText("\nBetween front tentacles of your bestial body you have grown " + player.multiCockDescript() + "!\n", false);
-		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
+			outputText("\nBetween front tentacles of your bestial body you have grown " + player.multiCockDescript() + "!\n");
+		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
 		while(temp < player.cocks.length)
 
 		{
@@ -377,29 +378,29 @@ public class PlayerAppearance extends BaseContent {
 			{
 				if(temp == 0)outputText("--Your first ");
 				else outputText("--Your next ");
-				outputText(player.cockDescript(temp), false);
+				outputText(player.cockDescript(temp));
 				outputText(" is ");
-				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
-					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches wide.", false);
+					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches wide.");
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
 						outputText("one inch wide.");
-					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches wide.", false);
+					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches wide.");
 				}
 			}
 			if(rando == 1)
 			{
 				outputText("--One of your ");
-				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
-					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
+					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.");
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
 						outputText("one inch thick.");
-					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
+					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.");
 				}
 			}
 			if(rando == 2)
@@ -407,14 +408,14 @@ public class PlayerAppearance extends BaseContent {
 				if(temp > 0)
 					outputText("--Another of your ");
 				else outputText("--One of your ");
-				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
-					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
+					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.");
 				else
 				{
 					if(player.cocks[temp].cockThickness == 1)
 						outputText("one inch thick.");
-					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
+					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.");
 				}
 			}
 			if(rando == 3)
@@ -422,20 +423,20 @@ public class PlayerAppearance extends BaseContent {
 				if(temp > 0)
 					outputText("--Your next ");
 				else outputText("--Your first ");
-				outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+				outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2)
-					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.", false);
+					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.");
 				else
 				{
 					if(Math.round(player.cocks[temp].cockThickness*10)/10 == 1)
 						outputText("one inch in diameter.");
-					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches in diameter.", false);
+					else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches in diameter.");
 				}
 			}
 			//horse cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.HORSE)
 			{
-				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + player.cockDescript(temp) + " flares proudly, just like a horse's.", false);
+				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + player.cockDescript(temp) + " flares proudly, just like a horse's.");
 			}
 			//dog cock flavor
 			if((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.WOLF) || (player.cocks[temp].cockType == CockTypesEnum.FOX))
@@ -503,13 +504,13 @@ public class PlayerAppearance extends BaseContent {
 
 			if(player.cocks[temp].knotMultiplier > 1) {
 				if(player.cocks[temp].knotMultiplier >= 1.8)
-					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
+					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".");
 				else if(player.cocks[temp].knotMultiplier >= 1.4)
-					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.");
 				else
-					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
+					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.");
 				//List knot thickness
-				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10) / 10 + " inches thick when at full size.", false);
+				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10) / 10 + " inches thick when at full size.");
 			}
 
 			if(player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
@@ -524,7 +525,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Worm flavor
 		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
+			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 		//DONE WITH COCKS, moving on!
 	}
 	//Of Balls and Sacks!
@@ -540,38 +541,38 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.cockTotal() == 0)
 		{
 			if(player.skin.hasMagicalTattoo())
-				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
 			else if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
 			else if(player.hasFur())
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
+				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.");
 			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
-				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.hasScales())
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.skinType == SKIN_TYPE_STONE)
-				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
 			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
 		}
 		else
 		{
 			if(player.skin.hasMagicalTattoo())
-				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
 			else if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
 			else if(player.hasFur())
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".");
 			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
-				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.hasScales())
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.skinType == SKIN_TYPE_STONE)
-				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
 			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
 		}
-		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
+		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
 			outputText("inch");
 		else outputText("inches");
@@ -586,14 +587,14 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		outputText("\n");
 		if (player.vaginas.length == 1)
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);
-			else outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit");
+			else outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit");
 		if(player.vaginas[0].virgin)
 			outputText(" and an intact hymen");
 		outputText(".  ");
 		if (player.vaginas.length > 1)
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ", false);
-			else outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ");
+			else outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ");
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
 		{
@@ -609,11 +610,11 @@ public class PlayerAppearance extends BaseContent {
 			if(player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_WET)
 			{
 				if(player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE)
-					outputText("your " + vaginaDescript(0) + ". ", false);
+					outputText("your " + vaginaDescript(0) + ". ");
 				if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE)
-					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
 				if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE)
-					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ", false);
+					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
 			}
 		}
 		if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) //kinda horny
@@ -634,11 +635,11 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//Different description based on vag looseness
 			if(player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ", false);
+				outputText("your " + vaginaDescript(0) + ". ");
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ", false);
+				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
 		}
 		if((player.lib> 80 || player.lust > 80)) //WTF horny!
 
@@ -664,9 +665,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//Different description based on vag looseness
 			if(player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ", false);
+				outputText("your " + vaginaDescript(0) + ". ");
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
 			if(player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE)
 				outputText("the massive hole that is your cunt.  ");
 		}
@@ -682,28 +683,28 @@ public class PlayerAppearance extends BaseContent {
 	if(player.ass)
 	{
 		outputText("\n");
-		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
+		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n");
 	}
 	//Piercings!
 	if(player.eyebrowPierced > 0)
-		outputText("\nA solitary " + player.eyebrowPShort + " adorns your eyebrow, looking very stylish.", false);
+		outputText("\nA solitary " + player.eyebrowPShort + " adorns your eyebrow, looking very stylish.");
 	if(player.earsPierced > 0)
-		outputText("\nYour ears are pierced with " + player.earsPShort + ".", false);
+		outputText("\nYour ears are pierced with " + player.earsPShort + ".");
 	if(player.nosePierced > 0)
-		outputText("\nA " + player.nosePShort + " dangles from your nose.", false);
+		outputText("\nA " + player.nosePShort + " dangles from your nose.");
 	if(player.lipPierced > 0)
-		outputText("\nShining on your lip, a " + player.lipPShort + " is plainly visible.", false);
+		outputText("\nShining on your lip, a " + player.lipPShort + " is plainly visible.");
 	if(player.tonguePierced > 0)
-		outputText("\nThough not visible, you can plainly feel your " + player.tonguePShort + " secured in your tongue.", false);
+		outputText("\nThough not visible, you can plainly feel your " + player.tonguePShort + " secured in your tongue.");
 	if(player.nipplesPierced == 3)
-		outputText("\nYour " + nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.", false);
+		outputText("\nYour " + nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.");
 	else if(player.nipplesPierced > 0)
-		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".", false);
+		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".");
 	if(player.totalCocks() > 0)
 	{
 		if(player.cocks[0].pierced > 0)
 		{
-			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + player.cockDescript(0) + ".", false);
+			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + player.cockDescript(0) + ".");
 		}
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1)
@@ -711,17 +712,17 @@ public class PlayerAppearance extends BaseContent {
 	if(player.hasVagina())
 	{
 		if(player.vaginas[0].labiaPierced > 0)
-			outputText("\nYour " + vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.", false);
+			outputText("\nYour " + vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.");
 		if(player.vaginas[0].clitPierced > 0)
-			outputText("\nImpossible to ignore, your " + clitDescript() + " glitters with its " + player.vaginas[0].clitPShort + ".", false);
+			outputText("\nImpossible to ignore, your " + clitDescript() + " glitters with its " + player.vaginas[0].clitPShort + ".");
 	}
 	//MONEY!
 	if(player.gems == 0)
 		outputText("\n\n<b>Your money-purse is devoid of any currency.");
 	if(player.gems > 1)
-		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.", false);
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.");
 	if(player.gems == 1)
-		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.", false);
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.");
 	menu();
 	addButton(0, "Next", playerMenu);
 	addButton(10, "RacialScores", RacialScores);
@@ -738,7 +739,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
-		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a melee weapon", false);
+		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a melee weapon");
 		if (player.weaponRangeName != "nothing")
 			outputText(",  " + player.weaponRangeName + " as range weapon");
 		if (player.shieldName != "nothing")
@@ -753,7 +754,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeRace():void {
 //Discuss race
-		if (player.race() != player.startingRace) outputText("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ", false);
+		if (player.race() != player.startingRace) outputText("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
 		//Height and race.
 		outputText("You are a ");
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText(Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre");
@@ -763,22 +764,22 @@ public class PlayerAppearance extends BaseContent {
 	public function describeLowerBody():void {
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY || player.lowerBody == LOWER_BODY_TYPE_SCYLLA || player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
 			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)
-				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.", false);
+				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_PONY)
-				outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount) + " legs ending in flat, rounded feet.", false);
+				outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount) + " legs ending in flat, rounded feet.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY)
-				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.", false);
+				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA)
-				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].", false);
+				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
 			else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
-				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.", false);
+				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else
-				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.", false);
+				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
 		//Hip info only displays if you aren't a centaur.
 		if (player.isBiped() || player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 			if (player.thickness > 70) {
-				outputText("  You have " + hipDescript(), false);
+				outputText("  You have " + hipDescript());
 				if (player.hipRating < 6) {
 					if (player.tone < 65)
 						outputText(" buried under a noticeable muffin-top, and");
@@ -794,7 +795,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" that sway hypnotically on your extra-curvy frame, and");
 			}
 			else if (player.thickness < 30) {
-				outputText("  You have " + hipDescript(), false);
+				outputText("  You have " + hipDescript());
 				if (player.hipRating < 6)
 					outputText(" that match your trim, lithe body, and");
 				if (player.hipRating >= 6 && player.hipRating < 10)
@@ -808,7 +809,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//STANDARD
 			else {
-				outputText("  You have " + hipDescript(), false);
+				outputText("  You have " + hipDescript());
 				if (player.hipRating < 6)
 					outputText(", and");
 				if (player.femininity > 50) {
@@ -833,9 +834,9 @@ public class PlayerAppearance extends BaseContent {
 						if (player.balls > 0)
 							outputText("balls plenty of room to breathe");
 						else if (player.hasCock())
-							outputText(player.multiCockDescript() + " plenty of room to swing", false);
+							outputText(player.multiCockDescript() + " plenty of room to swing");
 						else if (player.hasVagina())
-							outputText(vaginaDescript() + " a nice, wide berth", false);
+							outputText(vaginaDescript() + " a nice, wide berth");
 						else outputText("vacant groin plenty of room");
 						outputText(", and");
 					}
@@ -847,7 +848,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.isTaur()) {
 			//FATBUTT
 			if (player.tone < 65) {
-				outputText("  Your " + buttDescript(), false);
+				outputText("  Your " + buttDescript());
 				if (player.buttRating < 4)
 					outputText(" is lean, from what you can see of it.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
@@ -863,7 +864,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//GIRL LOOK AT DAT BOOTY
 			else {
-				outputText("  Your " + buttDescript(), false);
+				outputText("  Your " + buttDescript());
 				if (player.buttRating < 4)
 					outputText(" is barely noticeably, showing off the muscles of your haunches.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
@@ -882,7 +883,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.isBiped() || player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 			//TUBBY ASS
 			if (player.tone < 60) {
-				outputText(" your " + buttDescript(), false);
+				outputText(" your " + buttDescript());
 				if (player.buttRating < 4)
 					outputText(" looks great under your gear.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
@@ -898,7 +899,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//FITBUTT
 			else {
-				outputText(" your " + buttDescript(), false);
+				outputText(" your " + buttDescript());
 				if (player.buttRating < 4)
 					outputText(" molds closely against your form.");
 				if (player.buttRating >= 4 && player.buttRating < 6)
@@ -918,50 +919,50 @@ public class PlayerAppearance extends BaseContent {
 		//</mod>
 		//LOWERBODY SPECIAL
 		if (player.lowerBody == LOWER_BODY_TYPE_HUMAN)
-			outputText("  " + Num2Text(player.legCount) + " normal human legs grow down from your waist, ending in normal human feet.", false);
+			outputText("  " + Num2Text(player.legCount) + " normal human legs grow down from your waist, ending in normal human feet.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_FERRET)
-			outputText("  " + Num2Text(player.legCount) + " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
+			outputText("  " + Num2Text(player.legCount) + " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)
-			outputText("  Your " + num2Text(player.legCount) + " legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_DOG)
-			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.", false);
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_WOLF)
-			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.", false);
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 		//Horse body is placed higher for readability purposes
 		else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS)
-			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
+			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS)
-			outputText("  Your " + num2Text(player.legCount) + " lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.", false);
+			outputText("  Your " + num2Text(player.legCount) + " lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_BEE)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_GOO)
-			outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your " + player.armorName + " float around inside you, bringing you no discomfort.", false);
+			outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your " + player.armorName + " float around inside you, bringing you no discomfort.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_CAT)
-			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.", false);
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_LIZARD)
-			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_SALAMANDER)
-			outputText("  " + Num2Text(player.legCount) + " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY)
-			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_HARPY)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [haircolor] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [haircolor] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO)
-			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
+			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_FOX)
 			outputText("  Your " + num2Text(player.legCount) + " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_DRAGON)
-			outputText("  " + Num2Text(player.legCount) + " human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+			outputText("  " + Num2Text(player.legCount) + " human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_RACCOON)
 			outputText("  Your " + num2Text(player.legCount) + " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs form below your [hips], ending in cloven hooves.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_MANTIS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering green, insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering green, insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_SHARK)
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webing between your toes.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_GARGOYLE) {
@@ -971,11 +972,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" legs ends up with stone sharp clawed feet. There are three long toes on the front, and a small hind claw on the back.");
 		}
 		else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS)
-			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length.", false);
+			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS)
-			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal aside feet.  They turned literally into roots only vaguely retaining the shape of the feet.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal aside feet.  They turned literally into roots only vaguely retaining the shape of the feet.");
 //	else if(player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
-//		outputText("  Around your waist just under your nectar coated pussy expends the petals of a large orchid big enough to engulf you entirely. While you don't technically have legs you can walk around on your " + num2Text(player.legCount)+ " vines which pretty much look like tentacle cocks.", false);
+//		outputText("  Around your waist just under your nectar coated pussy expends the petals of a large orchid big enough to engulf you entirely. While you don't technically have legs you can walk around on your " + num2Text(player.legCount)+ " vines which pretty much look like tentacle cocks.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_LION)
 			outputText("  Your " + num2Text(player.legCount) + " legs, covered in dark fur up to the thigh where it turns white, end up with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_YETI)
@@ -985,17 +986,17 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
-			outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false); // isn't goo transparent anyway?
+			outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
 	public function describeTail():void {
 		if (player.tailType == TAIL_TYPE_HORSE)
-			outputText("  A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
+			outputText("  A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.");
 		if (player.tailType == TAIL_TYPE_FERRET)
 			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [skin coat.color] fur.");
 		if (player.tailType == TAIL_TYPE_DOG)
-			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
+			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.");
 		if (player.tailType == TAIL_TYPE_DEMONIC)
-			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
+			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.");
 		if (player.tailType == TAIL_TYPE_COW)
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
@@ -1035,23 +1036,23 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
 		if (player.tailType == TAIL_TYPE_CAT) {
-			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
+			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
 		}
 		if (player.tailType == TAIL_TYPE_LIZARD) {
-			outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.", false);
+			outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.");
 		}
 		if (player.tailType == TAIL_TYPE_SALAMANDER) {
-			outputText("  A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.", false);
+			outputText("  A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
 		}
 		if (player.tailType == TAIL_TYPE_RABBIT)
-			outputText("  A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.", false);
+			outputText("  A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.");
 		else if (player.tailType == TAIL_TYPE_HARPY)
-			outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.", false);
+			outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
 		else if (player.tailType == TAIL_TYPE_KANGAROO) {
 			outputText("  A conical, ");
-			if (player.hasFur()) outputText("furry, " + player.coatColor, false);
-			else outputText("gooey, " + player.skinTone, false);
-			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
+			if (player.hasFur()) outputText("furry, " + player.coatColor);
+			else outputText("gooey, " + player.skinTone);
+			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.");
 		}
 		else if (player.tailType == TAIL_TYPE_FOX) {
 			if (player.tailCount <= 1)
@@ -1204,13 +1205,13 @@ public class PlayerAppearance extends BaseContent {
 		//Demonic horns
 		if (player.hornType == HORNS_DEMON) {
 			if (player.horns == 2)
-				outputText("  A small pair of pointed horns has broken through the " + player.skinDesc + " on your forehead, proclaiming some demonic taint to any who see them.", false);
+				outputText("  A small pair of pointed horns has broken through the " + player.skinDesc + " on your forehead, proclaiming some demonic taint to any who see them.");
 			if (player.horns == 4)
-				outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.", false);
+				outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.");
 			if (player.horns == 6)
-				outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.", false);
+				outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.");
 			if (player.horns >= 8)
-				outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.", false);
+				outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");
 		}
 		//Minotaur horns
 		if (player.hornType == HORNS_COW_MINOTAUR) {
@@ -1227,8 +1228,8 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Lizard horns
 		if (player.hornType == HORNS_DRACONIC_X2) {
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("  A pair of " + num2Text(int(player.horns * 2.54)) + " centimetre horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
-			else outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("  A pair of " + num2Text(int(player.horns * 2.54)) + " centimetre horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.");
+			else outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.");
 		}
 		//Super lizard horns
 		if (player.hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
@@ -1724,277 +1725,277 @@ public class PlayerAppearance extends BaseContent {
 public function RacialScores():void {
 	clearOutput();
 	outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
-	if (player.alicornScore() >= 6) outputText("\n<font color=\"#0000a0\">Alicorn: " + player.alicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>", false);
-	else if (player.alicornScore() >= 1 && player.alicornScore() < 6) outputText("\n<font color=\"#008000\">Alicorn: " + player.alicornScore() + "</font>", false);
+	if (player.alicornScore() >= 6) outputText("\n<font color=\"#0000a0\">Alicorn: " + player.alicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>");
+	else if (player.alicornScore() >= 1 && player.alicornScore() < 6) outputText("\n<font color=\"#008000\">Alicorn: " + player.alicornScore() + "</font>");
 	else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn: 0</font>");
-	if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.alrauneScore() >= 1 && player.alrauneScore() < 10) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>", false);
+	if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.alrauneScore() >= 1 && player.alrauneScore() < 10) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
 	else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
-	if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.beeScore() >= 5 && player.beeScore() < 9) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.beeScore() >= 1 && player.beeScore() < 5) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>", false);
+	if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.beeScore() >= 5 && player.beeScore() < 9) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.beeScore() >= 1 && player.beeScore() < 5) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
 	else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
-	if (player.bunnyScore() >= 4) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.bunnyScore() >= 1 && player.bunnyScore() < 4) outputText("\n<font color=\"#008000\">Bunny-morph: " + player.bunnyScore() + "</font>", false);
+	if (player.bunnyScore() >= 4) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.bunnyScore() >= 1 && player.bunnyScore() < 4) outputText("\n<font color=\"#008000\">Bunny-morph: " + player.bunnyScore() + "</font>");
 	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Bunny-morph: 0</font>");
 	if (player.catScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Cat-morph: " + player.catScore() + " (", false);
-		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+		outputText("\n<font color=\"#0000a0\">Cat-morph: " + player.catScore() + " (");
+		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		outputText("max Spe)</font>");
 	}
-	else if (player.catScore() >= 1 && player.catScore() < 4) outputText("\n<font color=\"#008000\">Cat-morph: " + player.catScore() + "</font>", false);
+	else if (player.catScore() >= 1 && player.catScore() < 4) outputText("\n<font color=\"#008000\">Cat-morph: " + player.catScore() + "</font>");
 	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Cat-morph: 0</font>");
-	if (player.centaurScore() >= 5) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.centaurScore() >= 1 && player.centaurScore() < 5) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>", false);
+	if (player.centaurScore() >= 5) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.centaurScore() >= 1 && player.centaurScore() < 5) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
 	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
-	outputText("\nCHIMERA: " + player.chimeraScore(), false);
+	outputText("\nCHIMERA: " + player.chimeraScore());
 	if (player.couatlScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (", false);
-		if (player.isNaga()) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Str, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ", false);
-		if (player.isNaga()) outputText("+" + (115 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+		outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (");
+		if (player.isNaga()) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ");
+		if (player.isNaga()) outputText("+" + (115 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		outputText("max Spe)</font>");//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
 	}
-	else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>", false);
+	else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 	else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
-	if (player.cowScore() > 5) outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.cowScore() >= 1 && player.cowScore() < 6) outputText("\n<font color=\"#008000\">Cow-morph: " + player.cowScore() + "</font>", false);
+	if (player.cowScore() > 5) outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.cowScore() >= 1 && player.cowScore() < 6) outputText("\n<font color=\"#008000\">Cow-morph: " + player.cowScore() + "</font>");
 	else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Cow-morph: 0</font>");
-	if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.deerScore() >= 1 && player.deerScore() < 4) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>", false);
+	if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.deerScore() >= 1 && player.deerScore() < 4) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>");
 	else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
-	if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.demonScore() >= 5 && player.demonScore() < 11) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.demonScore() >= 1 && player.demonScore() < 5) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>", false);
+	if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.demonScore() >= 5 && player.demonScore() < 11) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.demonScore() >= 1 && player.demonScore() < 5) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>");
 	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
-	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>", false);
+	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
 	if (player.dragonScore() >= 16) {
-		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
-		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ");
+		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
 	else if (player.dragonScore() >= 12 && player.dragonScore() < 16) {
-		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
-		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ");
+		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
 	else if (player.dragonScore() >= 8 && player.dragonScore() < 12) {
-		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
-		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ");
+		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
-	else if (player.dragonScore() >= 4 && player.dragonScore() < 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.dragonScore() >= 1 && player.dragonScore() < 4) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>", false);
+	else if (player.dragonScore() >= 4 && player.dragonScore() < 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.dragonScore() >= 1 && player.dragonScore() < 4) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>");
 	else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
-	outputText("\nDragonne: " + player.dragonneScore(), false);
-	outputText("\nEchidna: " + player.echidnaScore(), false);
-	outputText("\nFerret-morph: " + player.ferretScore(), false);
-	if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
-	else if (player.foxScore() >= 4 && player.foxScore() < 7) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.foxScore() >= 1 && player.foxScore() < 4) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>", false);
+	outputText("\nDragonne: " + player.dragonneScore());
+	outputText("\nEchidna: " + player.echidnaScore());
+	outputText("\nFerret-morph: " + player.ferretScore());
+	if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>");
+	else if (player.foxScore() >= 4 && player.foxScore() < 7) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.foxScore() >= 1 && player.foxScore() < 4) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 	else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
-	outputText("\nGARGOYLE: " + player.gargoyleScore(), false);
-	if (player.goblinScore() >= 4) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.goblinScore() >= 1 && player.goblinScore() < 4) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>", false);
+	outputText("\nGARGOYLE: " + player.gargoyleScore());
+	if (player.goblinScore() >= 4) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.goblinScore() >= 1 && player.goblinScore() < 4) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
 	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
-	if (player.gooScore() >= 8) outputText("\n<font color=\"#0000a0\">Goo: " + player.gooScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.gooScore() >= 4 && player.gooScore() < 8) outputText("\n<font color=\"#0000a0\">Half Goo: " + player.gooScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.gooScore() >= 1 && player.gooScore() < 4) outputText("\n<font color=\"#008000\">Half Goo: " + player.gooScore() + "</font>", false);
+	if (player.gooScore() >= 8) outputText("\n<font color=\"#0000a0\">Goo: " + player.gooScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.gooScore() >= 4 && player.gooScore() < 8) outputText("\n<font color=\"#0000a0\">Half Goo: " + player.gooScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.gooScore() >= 1 && player.gooScore() < 4) outputText("\n<font color=\"#008000\">Half Goo: " + player.gooScore() + "</font>");
 	else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Goo: 0</font>");
 	if (player.gorgonScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (", false);
-		if (player.isNaga()) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Str, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ", false);
-		if (player.isNaga()) outputText("+" + (85 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (");
+		if (player.isNaga()) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ");
+		if (player.isNaga()) outputText("+" + (85 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Spe, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
-	else if (player.gorgonScore() >= 1 && player.gorgonScore() < 11) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>", false);
+	else if (player.gorgonScore() >= 1 && player.gorgonScore() < 11) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>");
 	else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
-	outputText("\nGRAND CHIMERA: " + player.grandchimeraScore(), false);
-	if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.harpyScore() >= 4 && player.harpyScore() < 8) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.harpyScore() >= 1 && player.harpyScore() < 4) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>", false);
+	outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
+	if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.harpyScore() >= 4 && player.harpyScore() < 8) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.harpyScore() >= 1 && player.harpyScore() < 4) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
 	else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
-	if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Horse-morph: " + player.horseScore() + "</font>", false);
+	if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Horse-morph: " + player.horseScore() + "</font>");
 	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Horse-morph: 0</font>");
-	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 22) outputText("\n<font color=\"#0000a0\">HUMANITY: 22 (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 21) outputText("\n<font color=\"#0000a0\">HUMANITY: 21 (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 20) outputText("\n<font color=\"#0000a0\">HUMANITY: 20 (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() == 19) outputText("\n<font color=\"#0000a0\">HUMANITY: 19 (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);	//+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe,
-//	else if (player.humanScore() == 18) outputText("\n<font color=\"#0000a0\">HUMANITY: 18 (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>", false);
-	else if (player.humanScore() < 19) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>", false);
+	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 22) outputText("\n<font color=\"#0000a0\">HUMANITY: 22 (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 21) outputText("\n<font color=\"#0000a0\">HUMANITY: 21 (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 20) outputText("\n<font color=\"#0000a0\">HUMANITY: 20 (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() == 19) outputText("\n<font color=\"#0000a0\">HUMANITY: 19 (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");	//+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe,
+//	else if (player.humanScore() == 18) outputText("\n<font color=\"#0000a0\">HUMANITY: 18 (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe, +" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int / Wis / Lib)</font>");
+	else if (player.humanScore() < 19) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 	if (player.internalChimeraScore() >= 1) {
-		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>", false);
+		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
 	}
 	else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
-	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.kangaScore() >= 1 && player.kangaScore() < 4) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>", false);
+	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.kangaScore() >= 1 && player.kangaScore() < 4) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
 	else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>");
-	//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>", false);
-	//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>", false);
+	//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>");
+	//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>");
 	//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
 	if (player.kitsuneScore() >= 6) {
 		if (player.tailType == 13 && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
 			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
 			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:");
-			outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
+			outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ");
 			if (player.tailCount < 9) {
-				outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
+				outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>");
 			}
 			else if (player.tailCount == 9) {
-				outputText("+" + (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +40% max Soulforce)</font>", false);
+				outputText("+" + (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +40% max Soulforce)</font>");
 			}
 		}
 		else {
-			outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
-			outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
+			outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ");
+			outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>");
 		}
 	}
 	else if (player.kitsuneScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
-		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ");
+		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>");
 	}
-	else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>", false);
+	else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
 	else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
-	if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
-	else if (player.lizardScore() >= 4 && player.lizardScore() < 8) outputText("\n<font color=\"#0000a0\">Half Lizard-morph: " + player.lizardScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>", false);
-	else if (player.lizardScore() >= 1 && player.lizardScore() < 4) outputText("\n<font color=\"#008000\">Half Lizard-morph: " + player.lizardScore() + "</font>", false);
+	if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>");
+	else if (player.lizardScore() >= 4 && player.lizardScore() < 8) outputText("\n<font color=\"#0000a0\">Half Lizard-morph: " + player.lizardScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue)</font>");
+	else if (player.lizardScore() >= 1 && player.lizardScore() < 4) outputText("\n<font color=\"#008000\">Half Lizard-morph: " + player.lizardScore() + "</font>");
 	else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Half Lizard-morph: 0</font>");
-	if (player.manticoreScore() >= 10) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.manticoreScore() >= 5 && player.manticoreScore() < 10) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.manticoreScore() >= 1 && player.manticoreScore() < 5) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>", false);
+	if (player.manticoreScore() >= 10) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.manticoreScore() >= 5 && player.manticoreScore() < 10) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.manticoreScore() >= 1 && player.manticoreScore() < 5) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
 	else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
-	if (player.minoScore() >= 4) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minoScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.minoScore() >= 1 && player.manticoreScore() < 4) outputText("\n<font color=\"#008000\">Minotaur: " + player.minoScore() + "</font>", false);
+	if (player.minoScore() >= 4) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minoScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.minoScore() >= 1 && player.manticoreScore() < 4) outputText("\n<font color=\"#008000\">Minotaur: " + player.minoScore() + "</font>");
 	else if (player.minoScore() < 1) outputText("\n<font color=\"#ff0000\">Minotaur: 0</font>");
 	if (player.mantisScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
+		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ");
 		if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else if (player.skinType == SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else if (player.hasCoatOfType(SKIN_COAT_CHITIN)) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else if (player.skinType == SKIN_TYPE_SCALES) outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+			else if (player.skinType == SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+			else if (player.hasCoatOfType(SKIN_COAT_CHITIN)) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+			else if (player.skinType == SKIN_TYPE_SCALES) outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+			else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		}
-		else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
+		else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
 	}
-	else if (player.mantisScore() >= 1 && player.mantisScore() < 5) outputText("\n<font color=\"#008000\">Mantis-morph: " + player.mantisScore() + "</font>", false);
+	else if (player.mantisScore() >= 1 && player.mantisScore() < 5) outputText("\n<font color=\"#008000\">Mantis-morph: " + player.mantisScore() + "</font>");
 	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Mantis-morph: 0</font>");
-	outputText("\nMouse-morph: " + player.mouseScore(), false);
+	outputText("\nMouse-morph: " + player.mouseScore());
 	if (player.nagaScore() >= 8) {
-		outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (", false);
-		if (player.isNaga()) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ", false);
-		if (player.isNaga()) outputText("+" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+		outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (");
+		if (player.isNaga()) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, ");
+		if (player.isNaga()) outputText("+" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		outputText("max Spe)</font>");
 	}
 	else if (player.nagaScore() >= 4 && player.nagaScore() < 8) {
-		outputText("\n<font color=\"#0000a0\">Half-Naga: " + player.nagaScore() + " (", false);
-		if (player.isNaga()) outputText("+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+		outputText("\n<font color=\"#0000a0\">Half-Naga: " + player.nagaScore() + " (");
+		if (player.isNaga()) outputText("+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		outputText("max Spe)</font>");
 	}
-	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>", false);
+	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
-	if (player.orcaScore() >= 12) outputText("\n<font color=\"#0000a0\">Orca-morph: " + player.orcaScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.orcaScore() >= 6 && player.orcaScore() < 12) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.orcaScore() >= 1 && player.orcaScore() < 6) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>", false);
+	if (player.orcaScore() >= 12) outputText("\n<font color=\"#0000a0\">Orca-morph: " + player.orcaScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.orcaScore() >= 6 && player.orcaScore() < 12) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.orcaScore() >= 1 && player.orcaScore() < 6) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
 	else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
-	if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.phoenixScore() >= 1 && player.phoenixScore() < 10) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>", false);
+	if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.phoenixScore() >= 1 && player.phoenixScore() < 10) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
 	else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
-	outputText("\nPig-morph: " + player.pigScore(), false);
-	if (player.plantScore() >= 7) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
-	else if (player.plantScore() == 6) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (8 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
-	else if (player.plantScore() == 5) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (4 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
-	else if (player.plantScore() == 4) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>", false);
-	else if (player.plantScore() >= 1 && player.plantScore() < 4) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>", false);
+	outputText("\nPig-morph: " + player.pigScore());
+	if (player.plantScore() >= 7) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>");
+	else if (player.plantScore() == 6) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (8 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>");
+	else if (player.plantScore() == 5) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (4 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>");
+	else if (player.plantScore() == 4) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " Armor)</font>");
+	else if (player.plantScore() >= 1 && player.plantScore() < 4) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>");
 	else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>");
-	if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.raccoonScore() >= 1 && player.raccoonScore() < 4) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>", false);
+	if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.raccoonScore() >= 1 && player.raccoonScore() < 4) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
 	else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
-	if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.rhinoScore() >= 1 && player.rhinoScore() < 4) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>", false);
+	if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	else if (player.rhinoScore() >= 1 && player.rhinoScore() < 4) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
 	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
 	if (player.salamanderScore() >= 7) {
-		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ");
+		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	}
 	else if (player.salamanderScore() >= 4 && player.salamanderScore() < 7) {
-		outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ");
+		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Lib, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	}
-	else if (player.salamanderScore() >= 1 && player.salamanderScore() < 4) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>", false);
+	else if (player.salamanderScore() >= 1 && player.salamanderScore() < 4) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
 	else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
-	if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.satyrScore() >= 1 && player.satyrScore() < 4) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>", false);
+	if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.satyrScore() >= 1 && player.satyrScore() < 4) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>");
 	else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>");/*
-	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Scorpion-morph: " + player.scorpionScore() + "</font>", false);
-	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Scorpion-morph: " + player.scorpionScore() + "</font>", false);
+	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Scorpion-morph: " + player.scorpionScore() + "</font>");
+	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Scorpion-morph: " + player.scorpionScore() + "</font>");
 	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Scorpion-morph: 0</font>");*/
-	outputText("\nScorpion-morph: " + player.scorpionScore(), false);
+	outputText("\nScorpion-morph: " + player.scorpionScore());
 	if (player.scyllaScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ", false);
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("(+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		outputText("max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ");
+		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("(+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
-	else if (player.scyllaScore() >= 1 && player.scyllaScore() < 5) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>", false);
+	else if (player.scyllaScore() >= 1 && player.scyllaScore() < 5) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>");
 	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>");
-	if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>", false);
-	else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.sharkScore() >= 4 && player.sharkScore() < 8) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>", false);
-	else if (player.sharkScore() >= 1 && player.sharkScore() < 4) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>", false);
+	if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
+	else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.sharkScore() >= 4 && player.sharkScore() < 8) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
+	else if (player.sharkScore() >= 1 && player.sharkScore() < 4) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
 	else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
-	if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.sirenScore() >= 1 && player.sirenScore() < 10) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>", false);
+	if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.sirenScore() >= 1 && player.sirenScore() < 10) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 	else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
-	if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.spiderScore() >= 4 && player.spiderScore() < 7) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.spiderScore() >= 1 && player.spiderScore() < 4) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>", false);
+	if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.spiderScore() >= 4 && player.spiderScore() < 7) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.spiderScore() >= 1 && player.spiderScore() < 4) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
 	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
-	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>", false);
+	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
+	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
 	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
-	if (player.unicornScore() >= 5) outputText("\n<font color=\"#0000a0\">Unicorn: " + player.unicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>", false);
-	else if (player.unicornScore() >= 1 && player.unicornScore() < 5) outputText("\n<font color=\"#008000\">Unicorn: " + player.unicornScore() + "</font>", false);
+	if (player.unicornScore() >= 5) outputText("\n<font color=\"#0000a0\">Unicorn: " + player.unicornScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Soulforce)</font>");
+	else if (player.unicornScore() >= 1 && player.unicornScore() < 5) outputText("\n<font color=\"#008000\">Unicorn: " + player.unicornScore() + "</font>");
 	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn: 0</font>");
 	if (player.vouivreScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (", false);
-		if (player.isNaga()) outputText("+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+		outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (");
+		if (player.isNaga()) outputText("+" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
 		outputText("max Spe)</font>");//, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP
 	}
-	else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>", false);
+	else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
 	else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
-	if (player.yetiScore() >= 12) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.yetiScore() >= 6 && player.yetiScore() < 12) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.yetiScore() >= 1 && player.yetiScore() < 6) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>", false);
+	if (player.yetiScore() >= 12) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.yetiScore() >= 6 && player.yetiScore() < 12) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.yetiScore() >= 1 && player.yetiScore() < 6) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
 	else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
-	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-//	else if (player.yggdrasilScore() == 9) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-//	else if (player.yggdrasilScore() == 8) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-//	else if (player.yggdrasilScore() == 7) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>", false);
-	else if (player.yggdrasilScore() >= 1 && player.yggdrasilScore() < 10) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>", false);
+	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+//	else if (player.yggdrasilScore() == 9) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+//	else if (player.yggdrasilScore() == 8) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+//	else if (player.yggdrasilScore() == 7) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
+	else if (player.yggdrasilScore() >= 1 && player.yggdrasilScore() < 10) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
 	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);

@@ -19,25 +19,25 @@ package classes.Scenes.Areas.Plains
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 			}
 			//Determine if dodged!
 			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
-				else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
-				else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n", false);
+				if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
+				else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
+				else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 			}
 			//Determine if evaded
 			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if(plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
 			}
@@ -49,8 +49,8 @@ package classes.Scenes.Areas.Plains
 					//hapies have their own shit
 					if(short == "harpy") outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.");
 					//Due to toughness or amor...
-					else if(rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					else if(rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				//everyone else
 				else {
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.Plains
 					}
 					//Gnoll Attack #3
 					else if(attack == 2) {
-						outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.", false);
+						outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.");
 						damage += 13;
 					}
 					//Gnoll Attack #4
@@ -132,25 +132,25 @@ package classes.Scenes.Areas.Plains
 			doNext(game.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
-				else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
-				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n", false);
+				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
+				else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
+				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if (plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
 			}
@@ -162,8 +162,8 @@ package classes.Scenes.Areas.Plains
 					//hapies have their own shit
 					if (short == "harpy") outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.");
 					//Due to toughness or amor...
-					else if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					else if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				//everyone else
 				else {
@@ -179,7 +179,7 @@ package classes.Scenes.Areas.Plains
 					}
 					//Gnoll Attack #3
 					else if (attack == 2) {
-						outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.", false);
+						outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.");
 						damage += 13;
 					}
 					//Gnoll Attack #4
@@ -224,8 +224,8 @@ package classes.Scenes.Areas.Plains
 				}
 				else {
 					addStatusValue(StatusEffects.Fear, 1, -1);
-					if (plural) outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
-					else outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
+					if (plural) outputText(capitalA + short + " are too busy shivering with fear to fight.");
+					else outputText(capitalA + short + " is too busy shivering with fear to fight.");
 				}
 				combatRoundOver();
 			}
@@ -240,7 +240,7 @@ package classes.Scenes.Areas.Plains
 				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 				if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
+					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
 					removeStatusEffect(StatusEffects.Constricted);
 				}
 				addStatusValue(StatusEffects.Constricted, 1, -1);
@@ -271,25 +271,25 @@ package classes.Scenes.Areas.Plains
 				doNext(game.playerMenu);
 //Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+					outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				}
 				//Determine if dodged!
 				else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-					if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
-					else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
-					else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n", false);
+					if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
+					else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
+					else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 				}
 				//Determine if evaded
 				else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
 				//("Misdirection"
 				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				}
 				//Determine if cat'ed
 				else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 					if (plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");
 				}
@@ -301,8 +301,8 @@ package classes.Scenes.Areas.Plains
 						//hapies have their own shit
 						if (short == "harpy") outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.");
 						//Due to toughness or amor...
-						else if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-						else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+						else if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+						else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 					}
 					//everyone else
 					else {
@@ -318,7 +318,7 @@ package classes.Scenes.Areas.Plains
 						}
 						//Gnoll Attack #3
 						else if (attack == 2) {
-							outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.", false);
+							outputText("The gnoll tumbles to the ground, then comes up with a handful of sand.  The sand goes in your face; the club goes into your cheek.  Ow.");
 							damage += 13;
 						}
 						//Gnoll Attack #4

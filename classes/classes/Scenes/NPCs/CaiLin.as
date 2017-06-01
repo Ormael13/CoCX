@@ -50,7 +50,7 @@ import classes.internals.*;
 			else outputText("The gorgon");
 			outputText("'s strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.MedusaVenom)) {
-				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.", false);
+				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.");
 				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 7) {
 					player.str -= 2;
 					showStatDown( 'str' );
@@ -155,7 +155,7 @@ import classes.internals.*;
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(400)) {
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");

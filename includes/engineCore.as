@@ -125,15 +125,15 @@ public function HPChangeNotify(changeNum:Number):void {
 	}
 	else if (changeNum > 0) {
 		if(player.HP >= maxHP())
-			outputText("Your HP maxes out at " + maxHP() + ".\n", false);
+			outputText("Your HP maxes out at " + maxHP() + ".\n");
 		else
-			outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
+			outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
 	}
 	else {
 		if(player.HP <= 0)
-			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n");
 		else
-			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n");
 	}
 }
 
@@ -188,7 +188,7 @@ public function clone(source:Object):* {
 public function speech(output:String, speaker:String):void {
 	var speech:String = "";
 	speech = speaker + " says, \"<i>" + output + "</i>\"\n";
-	outputText(speech, false);
+	outputText(speech);
 }
 */
 
@@ -251,9 +251,7 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
  * @param	purgeText Clear the old text.
  * @param	parseAsMarkdown Parses the text using Markdown.
  */
-public function outputText(output:String, 
-						purgeText:Boolean = false, 
-						parseAsMarkdown:Boolean = false):void
+public function outputText(output:String):void
 {
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
@@ -263,22 +261,12 @@ public function outputText(output:String,
 	// It's needed since those buttons are available even when in the event-tester
 	mainView.hideTestInputPanel();
 
-	if (purgeText)
-	{
-		clearOutput();
-	}
 
-	output = this.parser.recursiveParser(output, parseAsMarkdown);
+	output = this.parser.recursiveParser(output, false);
 
 	//OUTPUT!
-	if(purgeText) {
-		//if(!debug) mainText.htmlText = output;
-		currentText = output;
-	}
-	else {
-		currentText += output;
-		//if(!debug) mainText.htmlText = currentText;
-	}
+	currentText += output;
+	//if(!debug) mainText.htmlText = currentText;
 	/*if(debug)
 	{
 		mainView.setOutputText( currentText );
@@ -319,7 +307,8 @@ public function levelUpGo(e:MouseEvent = null):void {
 		//if (player.level % 2 == 0) player.ascensionPerkPoints++;
 		//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
 		//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
-		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!", true);
+		clearOutput();
+		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!");
 		doNext(attributeMenu);
 	}
 	//Spend attribute points
@@ -1458,7 +1447,7 @@ public function displayStats(e:MouseEvent = null):void
 	combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
 	
 	if (combatStats != "")
-		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
+		outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
 	// End Combat Stats
 	
 	if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
@@ -1591,7 +1580,7 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Alraune daughters:</b> " + flags[kFLAGS.ALRAUNE_SEEDS] + " <b>(Oldest ones: " + (flags[kFLAGS.ALRAUNE_GROWING] - 1) + " days)</b>\n";
 	
 	if (childStats != "")
-		outputText("\n<b><u>Children</u></b>\n" + childStats, false);
+		outputText("\n<b><u>Children</u></b>\n" + childStats);
 	// End Children Stats
 
 	// Begin Body Stats
@@ -1688,7 +1677,7 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	if (bodyStats != "")
-		outputText("\n<b><u>Body Stats</u></b>\n" + bodyStats, false);
+		outputText("\n<b><u>Body Stats</u></b>\n" + bodyStats);
 	// End Body Stats
 
 	// Begin Misc Stats
@@ -1782,7 +1771,7 @@ public function displayStats(e:MouseEvent = null):void
 		addictStats += "Manticore Hunger: " + flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] + "%\n";
 	
 	if (addictStats != "")
-		outputText("\n<b><u>Addictions</u></b>\n" + addictStats, false);
+		outputText("\n<b><u>Addictions</u></b>\n" + addictStats);
 	// End Addition Stats
 	
 	// Begin Interpersonal Stats
@@ -1892,7 +1881,7 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	if (interpersonStats != "")
-		outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats, false);
+		outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats);
 	// End Interpersonal Stats
 	
 	// Begin Evangeline Stats
@@ -1932,7 +1921,7 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	if (evangelineStats != "")
-		outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats, false);
+		outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
 	// End Evangeline Stats
 	
 	// Begin Ongoing Stat Effects
@@ -1975,7 +1964,7 @@ public function displayStats(e:MouseEvent = null):void
 		statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
 	if (statEffects != "")
-		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
+		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
 	// End Ongoing Stat Effects
 	menu();
 	if (player.statPoints > 0) {
@@ -2098,7 +2087,8 @@ public function applyOperator(old:Number, op:String, val:Number):Number {
 }
 
 public function testDynStatsEvent():void {
-	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n",true);
+	clearOutput();
+	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
 	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
@@ -2417,7 +2407,7 @@ public function range(min:Number, max:Number, round:Boolean = false):Number
 public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	//Virginity check
 	if(player.vaginas[vIndex].virgin) {
-		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses its virginity!", false);
+		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses its virginity!");
 		player.vaginas[vIndex].virgin = false;
 	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
@@ -2425,11 +2415,11 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
 			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
@@ -2439,11 +2429,11 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
 			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}

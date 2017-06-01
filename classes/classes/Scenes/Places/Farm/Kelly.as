@@ -100,7 +100,8 @@ public function breakingKeltOptions():void {
 }
 
 public function fightToBeatKelt():void {
-	outputText("Deciding you've had enough with Kelt, you ready your " + player.weaponName + ". Kelt readies his bow. \"<i>Do you really think you can beat me, slut?</i>\"", true);
+	clearOutput();
+	outputText("Deciding you've had enough with Kelt, you ready your " + player.weaponName + ". Kelt readies his bow. \"<i>Do you really think you can beat me, slut?</i>\"");
 	flags[kFLAGS.KELT_KILL_PLAN] = 1;
 	startCombat(new Kelt());
 }

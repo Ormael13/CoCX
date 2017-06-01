@@ -1550,7 +1550,7 @@ import classes.GlobalFlags.*;
 				dynStats("spe", -1);
 			}
 			if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
-				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!", false);
+				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("sen", -1);
 			}
 			if (rand(3) == 0 && player.inte > 15 && player.faceType == FACE_RHINO && player.horns == 2) {
@@ -1630,7 +1630,7 @@ import classes.GlobalFlags.*;
 			}
 			//Removes antennaes!
 			if (rand(3) == 0 && changes < changeLimit && player.antennae > ANTENNAE_NONE) {
-				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>", false);
+				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>");
 				changes++;
 				player.antennae = ANTENNAE_NONE;
 			}
@@ -1782,7 +1782,7 @@ import classes.GlobalFlags.*;
 				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 60) {
 					if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accommodating somehow. Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
+					outputText("\n\nYou feel... more accommodating somehow. Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
 					changes++;
 				}
 			}
@@ -2042,8 +2042,8 @@ import classes.GlobalFlags.*;
 				player.cumMultiplier += temp;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
-				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.", false);
-				outputText(" A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.", false);
+				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.");
+				outputText(" A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.");
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.gender == GENDER_MALE && player.averageBreastSize() > 2 && flags[kFLAGS.HYPER_HAPPY] == 0) {

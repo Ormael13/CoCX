@@ -26,7 +26,7 @@
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				game.combatRoundOver();
 				return;
 			}
@@ -64,8 +64,8 @@
 			else if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 			}
 			//Got hit!
 			else {
@@ -74,8 +74,8 @@
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
+					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 10 * lustVuln;
 				}
 			}
@@ -123,7 +123,7 @@
 				}
 				//NOT BLOCKED!
 				else {
-					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you", false);
+					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you");
 					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow");
 					outputText("! ");
 					damage = player.takeDamage(damage, true);
@@ -141,7 +141,7 @@
 			var dodged:Number = 0;
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n");
 				game.combatRoundOver();
 				return;
 			}
@@ -163,7 +163,7 @@
 			}
 			//Dodged
 			if (dodged > 0) {
-				outputText("Amily dashes at you and swipes her knife rather slowly. You easily dodge the attack; but it was all a feint, her other hands tries to strike at you with a poisoned dart. Luckily you manage to avoid it.", false);
+				outputText("Amily dashes at you and swipes her knife rather slowly. You easily dodge the attack; but it was all a feint, her other hands tries to strike at you with a poisoned dart. Luckily you manage to avoid it.");
 				//Add tags for miss/evade/flexibility/etc.
 				switch (dodged) {
 					case 1:
@@ -186,7 +186,7 @@
 			}
 			//Else hit!
 			else {
-				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.", false);
+				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.");
 				//Set status
 				if (!player.hasStatusEffect(StatusEffects.AmilyVenom)) player.createStatusEffect(StatusEffects.AmilyVenom, 0, 0, 0, 0);
 				var poison:Number = 2 + rand(5);
@@ -228,7 +228,7 @@
 		override public function teased(lustDelta:Number):void
 		{
 			if(hasStatusEffect(StatusEffects.Concentration)) {
-				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
+				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!");
 				lustDelta += 25+lustDelta;
 				removeStatusEffect(StatusEffects.Concentration);
 				applyTease(lustDelta);

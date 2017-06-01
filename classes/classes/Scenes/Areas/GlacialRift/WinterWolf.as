@@ -59,7 +59,7 @@ package classes.Scenes.Areas.GlacialRift
 				damage += 20 + Math.round(rand(str / 4));
 				player.takeDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)", false);
+				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
 			else {
 				outputText(" The coldness effects intensify as your movement slowing down even more.");
@@ -76,7 +76,7 @@ package classes.Scenes.Areas.GlacialRift
 				damage += 20 + Math.round(rand(str / 4));
 				player.takeDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)", false);
+				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
 			combatRoundOver();
 		}

@@ -185,11 +185,11 @@ package classes.Scenes.Places.Prison
 			var reject:Function = prisonCaptorRandomEventJizzJanitorReject;
 			var perform:Function = prisonCaptorRandomEventJizzJanitorPerform;
 			outputText("You look up as the door squeaks open and see a skinny imp enter the room with a mop and a bucket.  He's wearing a janitor's scrub top with a nametag that reads \"Scruffy\" but you doubt it originally belonged to him since it is about five sizes too large and he is very noticeably not wearing the matching scrub pants that should go with it. He flatly ignores you as he begins the unenviable task of cleaning your cell, but after a few minutes of lackadaisical cleaning he turns and seems to notice your presence for the first time. ");
-			outputText("\n\n\"<i>Well, aren't you a tasty little thing?  The " + prison.prisonCaptor.captorTitle + " sure knows how to pick em'.</i>\" he growls, looking you up and down appraisingly. You notice his not insubstantial cock begin to stir and start to get a sinking feeling.\n\n",false);
-			outputText("\"<i>Anyway, don't ever let me hear you complainin' about " + prison.prisonCaptor.captorPronoun2 + ", 'cause ",false);
+			outputText("\n\n\"<i>Well, aren't you a tasty little thing?  The " + prison.prisonCaptor.captorTitle + " sure knows how to pick em'.</i>\" he growls, looking you up and down appraisingly. You notice his not insubstantial cock begin to stir and start to get a sinking feeling.\n\n");
+			outputText("\"<i>Anyway, don't ever let me hear you complainin' about " + prison.prisonCaptor.captorPronoun2 + ", 'cause ");
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0)
 			{
-				outputText(prison.prisonCaptor.captorPronoun1 + "'s givin' you a break today sending me in to help clean out this pigsty of a cell that you seem to be content to live in.",false);
+				outputText(prison.prisonCaptor.captorPronoun1 + "'s givin' you a break today sending me in to help clean out this pigsty of a cell that you seem to be content to live in.");
 				newCleanliness = player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) - 50;
 				if(newCleanliness < 0)
 				{
@@ -199,9 +199,9 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText(prison.prisonCaptor.captorPronoun1 + " makes most of the cum-dumpsters in training clean up their own filth. Clearly " + prison.prisonCaptor.captorPronoun1 + " thinks you're something special though, sending me in to do your dirty work for you. ",false);
+				outputText(prison.prisonCaptor.captorPronoun1 + " makes most of the cum-dumpsters in training clean up their own filth. Clearly " + prison.prisonCaptor.captorPronoun1 + " thinks you're something special though, sending me in to do your dirty work for you. ");
 			}
-			outputText("Seriously, I'll never understand the way you ungrateful little sluts disrespect " + prison.prisonCaptor.captorPronoun2 + ".</i>\" As he finishes the sentence he seems to drift off in a cloud of love and reverence, but he soon comes back down to earth and turns his attention back to you.",false);
+			outputText("Seriously, I'll never understand the way you ungrateful little sluts disrespect " + prison.prisonCaptor.captorPronoun2 + ".</i>\" As he finishes the sentence he seems to drift off in a cloud of love and reverence, but he soon comes back down to earth and turns his attention back to you.");
 			outputText("\n\n\"<i>Speaking of respect and gratitude,</i>\" he says with a lecherous grin,\"<i>");
 			if(player.hunger < 20)
 			{
@@ -221,7 +221,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could politely refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could politely refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 20 || player.esteem < 40 && player.obey > 25)
 				{
 					outputText(" but you don't think you could manage any stronger a rebuke to someone trying to show you kindness due to your your obvious powerlessness and insignificance.");
@@ -229,7 +229,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the offer " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the offer " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && (player.esteem > 90 || player.esteem > 70 && player.obey < 10))
@@ -317,7 +317,7 @@ package classes.Scenes.Places.Prison
 		{
 			clearOutput();
 			outputText("Acknowledging how true it is that a good meal is hard to come by in your current situation, you decide that it wouldn't hurt to (as the imp put it) show a bit of gratitude in exchange for some extra food, especially considering that relative to your other experiences in this place Scruffy's offer was downright good natured. ");
-			outputText("Your mind made up, you assume a subservient posture and meeky communicate your acceptance ",true);
+			outputText("Your mind made up, you assume a subservient posture and meeky communicate your acceptance ");
 			if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
 				outputText("with a mumbled word. ");

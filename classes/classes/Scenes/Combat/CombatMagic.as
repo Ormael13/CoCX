@@ -416,7 +416,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function spellArouse():void {
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -437,7 +437,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n", true);
+		outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n");
 		//Worms be immune
 		if(monster.short == "worms") {
 			outputText("The worms appear to be unaffected by your magic!");
@@ -460,10 +460,10 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 		if(player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmg *= 1.5;
-		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
+		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
-			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ", false);
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
 		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
@@ -471,24 +471,24 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
+			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		monster.teased(lustDmg);
@@ -501,8 +501,9 @@ public class CombatMagic extends BaseCombatContent {
 		else enemyAI();
 	}
 	public function spellHeal():void {
+		clearOutput();
 		if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -514,7 +515,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
+		outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
@@ -523,13 +524,13 @@ public class CombatMagic extends BaseCombatContent {
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
 			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else spellHealEffect();
@@ -561,7 +562,7 @@ public class CombatMagic extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
+		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(temp,false);
 	}
@@ -634,8 +635,9 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
+		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
@@ -649,7 +651,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n", true);
+		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
@@ -657,13 +659,13 @@ public class CombatMagic extends BaseCombatContent {
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
 			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
@@ -741,8 +743,9 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
+		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
@@ -755,7 +758,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You flush, drawing on your body's desires to empower your muscles and hasten you up.\n\n", true);
+		outputText("You flush, drawing on your body's desires to empower your muscles and hasten you up.\n\n");
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
@@ -763,13 +766,13 @@ public class CombatMagic extends BaseCombatContent {
 		else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
 			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
@@ -789,7 +792,7 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -817,7 +820,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n", true);
+		clearOutput();
+		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
 		temp = 0;
 		temp += inteligencescalingbonus();
 		temp *= spellModBlack();
@@ -843,10 +847,10 @@ public class CombatMagic extends BaseCombatContent {
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -866,7 +870,7 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -894,7 +898,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n", true);
+		clearOutput();
+		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
 		temp = 0;
 		temp += inteligencescalingbonus();
 		temp *= spellModBlack();
@@ -920,10 +925,10 @@ public class CombatMagic extends BaseCombatContent {
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -944,7 +949,7 @@ public class CombatMagic extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
@@ -972,7 +977,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n", true);
+		clearOutput();
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
 		temp = 0;
 		temp += inteligencescalingbonus();
 		temp *= spellMod();
@@ -999,10 +1005,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
 		if (monster.plural == true) temp *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -1023,7 +1029,7 @@ public class CombatMagic extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
@@ -1051,7 +1057,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n", true);
+		clearOutput();
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n");
 		temp = 0;
 		temp += inteligencescalingbonus();
 		temp *= spellMod();
@@ -1077,10 +1084,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
 		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your fire storm lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+			outputText("  Your fire storm lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -1144,7 +1151,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
@@ -1156,7 +1164,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n", true);
+		clearOutput();
+		outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1213,7 +1222,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
@@ -1225,7 +1235,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You utter words of power, summoning an electrical charge around your " + player.armorName + ".  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n", true);
+		clearOutput();
+		outputText("You utter words of power, summoning an electrical charge around your " + player.armorName + ".  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1238,7 +1249,7 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -1306,13 +1317,14 @@ public class CombatMagic extends BaseCombatContent {
 				enemyAI();
 				return;
 			}
-			outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n", true);
+			clearOutput();
+			outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n");
 			if (monster is LivingStatue)
 			{
 				// noop
 			}
 			else if(rand(3) != 0) {
-				outputText(" <b>" + monster.capitalA + monster.short + " ", false);
+				outputText(" <b>" + monster.capitalA + monster.short + " ");
 				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
 				else outputText("is blinded!</b>");
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
@@ -1326,7 +1338,7 @@ public class CombatMagic extends BaseCombatContent {
 				}
 			}
 		}
-		else outputText(monster.capitalA + monster.short + " blinked!", false);
+		else outputText(monster.capitalA + monster.short + " blinked!");
 		outputText("\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1339,7 +1351,8 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -1392,7 +1405,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else
 		{
-			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
+			clearOutput();
+			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 			temp = 0;
 			temp += inteligencescalingbonus();
 			temp *= spellModWhite();
@@ -1417,11 +1431,11 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
 			temp = Math.round(temp);
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 				if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			}
 		}
@@ -1453,7 +1467,8 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
@@ -1481,7 +1496,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n", true);
+		clearOutput();
+		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
 		temp = 0;
 		temp += inteligencescalingbonus();
 		temp *= spellModWhite();
@@ -1506,10 +1522,10 @@ public class CombatMagic extends BaseCombatContent {
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -1528,7 +1544,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellBlizzard():void {
 		clearOutput();
 		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
@@ -1540,7 +1557,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You utter words of power, summoning an ice storm.  It swirls arounds you, ensuring that you'll have more protection from the fire attacks for a few moments.\n\n", true);
+		clearOutput();
+		outputText("You utter words of power, summoning an ice storm.  It swirls arounds you, ensuring that you'll have more protection from the fire attacks for a few moments.\n\n");
 		if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) {
 			player.createStatusEffect(StatusEffects.Blizzard, 2 + player.inte / 10,0,0,0);
 		}
@@ -1559,7 +1577,8 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.", true);
+			clearOutput();
+			outputText("You are too tired to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}

@@ -112,7 +112,7 @@ package classes.Scenes.Places.Prison
 			}
 			if(branchChoice == "1" || branchChoice == "2")
 			{
-				outputText("",true);
+				clearOutput();
 				if(branchChoice == "1")
 				{
 					outputText("\"<i>Yes, Mistress,</i>\" ");
@@ -269,7 +269,7 @@ package classes.Scenes.Places.Prison
 				resistanceCounter++;
 				prison.prisonCaptor.prisonCaptorScratchChange(2,1);
 				totalResistance++;
-				outputText("",true);
+				clearOutput();
 				prison.changeEsteem(1,prison.inPrison);
 				if(saidNo == 1)
 				{
@@ -443,7 +443,7 @@ package classes.Scenes.Places.Prison
 			}
 			if(branchChoice == "4")
 			{
-				outputText("",true);
+				clearOutput();
 				outputText("Every muscle in your legs has become a twitching, gelatinous mass, and as the last twinkle of willpower within you blinks out they all collapse at once. Thankfully, Mistress Elly is there to support your weight as you fall");
 				if(totalResistance - saidNo > 0)
 				{
@@ -459,7 +459,7 @@ package classes.Scenes.Places.Prison
 			if(branchChoice == "5" || branchChoice == "6")
 			{
 				begVariation = totalResistance - resistanceCounter;
-				outputText("",true);
+				clearOutput();
 				prison.changeEsteem(-1,prison.inPrison);
 				if(resistanceCounter == totalResistance)
 				{
@@ -1192,7 +1192,7 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("To your great relief, you see her look of stern disappointment soften into one of concern and caring. She takes a gentle step towards you then reaches down and lifts you to your feet, cupping your [face] softly in her hands. \"<i>Oh, you poor, pitiful little creature. I can only imagine how hard it must be coming to terms with what you are, and I can see how desperately you want to.</i>\" As she speaks, still cradling your cheek in her left hand, her right descends with delicate purpose. Her fingers trace the nape of your neck, briefly lingering on your collarbone, before slowly snaking their way over your [chest]. A wave of goosebumps follows her touch, and she gives a savage twist to one of your suddenly erect [nipples][if (milkQuantity > 10) , eliciting a tentative spurt of milk in response]. \"<i>Yes, quite desperately.</i>\"\n\n");
 					outputText("A wicked, satisfied smile crosses her lips at your surprised gasp, but just as quickly her expression returns to its previous nurturing state as she pulls you into a sympathetic embrace. Her right hand fondles and pinches at your [nipple] with calculated cruelty, but her left hand now rhythmically strokes up and down your spine, inducing ever stronger waves of gooseflesh which shiver their way through your body. Reflexive or not, the pleasant sensations momentarily overwhelm you causing your [asshole] to pucker uncontrollably and leaving your mind blank as her soothing voice continues to speak.\n\n");
-					outputText("\"<i>As ever, my dear, I'm here to help you get what you want. You want to be a good little " + player.mf("boy", "girl") + " and do as your Mistress asks, but you have too many unhelpful thoughts bouncing around your head. At moments like that, you need to learn to listen to your body instead.</i>\" Her left hand drifts around to your crotch and begins to gingerly pet your ",false);
+					outputText("\"<i>As ever, my dear, I'm here to help you get what you want. You want to be a good little " + player.mf("boy", "girl") + " and do as your Mistress asks, but you have too many unhelpful thoughts bouncing around your head. At moments like that, you need to learn to listen to your body instead.</i>\" Her left hand drifts around to your crotch and begins to gingerly pet your ");
 					if(player.hasCock())
 					{
 						outputText("[cock]'s [cockHead]");
@@ -2875,7 +2875,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText("\n\nIt crosses your mind that this feeling could be the result of some foul spell or trickery being worked on you, but the result is the same: you have no choice but to engage her in a battle of her choosing, one of willpower and cunning, rather than your preferred approach to combat. As you steel yourself for the first salvo, she clearly notices your change in countenance and gives a light hearted and disarming laugh.");
-				outputText("\n\n\"<i>Oh dear, you look rather upset. You should be happy; I'm here to feed you. But it's understandable, I suppose -- after all, you are a poor, frightened, directionless little wreck of a creature aren't you? Oh, it makes me so sad to see you this way.</i>\" She is anything but sad. In fact, with each sentence she seems less and less able to contain her mirth, clearly enjoying your every grimace like a mischievous cat toying with a cornered mouse. \"<i>Well, put your mind at ease, slave. Today we are going to begin the process of fixing you, and before long I'll have you living contentedly with your true nature. We'll start small and simple, too -- you'll be surprised by how painless and easy it is to please your Mistress and earn your meal for the day.</i>\"",false);
+				outputText("\n\n\"<i>Oh dear, you look rather upset. You should be happy; I'm here to feed you. But it's understandable, I suppose -- after all, you are a poor, frightened, directionless little wreck of a creature aren't you? Oh, it makes me so sad to see you this way.</i>\" She is anything but sad. In fact, with each sentence she seems less and less able to contain her mirth, clearly enjoying your every grimace like a mischievous cat toying with a cornered mouse. \"<i>Well, put your mind at ease, slave. Today we are going to begin the process of fixing you, and before long I'll have you living contentedly with your true nature. We'll start small and simple, too -- you'll be surprised by how painless and easy it is to please your Mistress and earn your meal for the day.</i>\"");
 				if(prison.prisonIsRestrained())
 				{
 					outputText("\n\nWith a snap of her fingers, your restraints vanish into thin air.");
@@ -2923,7 +2923,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 20 || player.esteem < 40 && player.obey > 25)
 				{
 					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
@@ -2931,7 +2931,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && player.esteem > 75 && player.obey < 5)
@@ -3187,7 +3187,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 15 || player.esteem < 35 && player.obey > 35)
 				{
 					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
@@ -3195,7 +3195,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && player.esteem > 85 && player.obey < 15)
@@ -3616,7 +3616,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
 					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
@@ -3624,7 +3624,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && (player.esteem > 95 || player.esteem > 80 && player.obey < 30))
@@ -3685,7 +3685,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
 					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
@@ -3693,7 +3693,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && (player.esteem > 95 || player.esteem > 90 && player.obey < 45))
@@ -3778,7 +3778,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5),false);
+				outputText("You could meekly refuse " + prison.prisonWillCostDescript(5));
 				if(player.esteem < 10 || player.esteem < 25 && player.obey > 40)
 				{
 					outputText(" but you don't think you could manage any stronger a defense of your dignity due to your your obvious powerlessness and insignificance.");
@@ -3786,7 +3786,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".",false);
+					outputText(" or you could angrily reject the order " + prison.prisonWillCostDescript(15) + ".");
 				}
 			}
 			if(player.hunger > 0 && player.esteem > 75 && player.obey < 55)

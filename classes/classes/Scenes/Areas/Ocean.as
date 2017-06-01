@@ -53,7 +53,8 @@ package classes.Scenes.Areas
 					kGAMECLASS.exploration.genericDemonsEncounters1();
 					break;
 			*/	default:
-					outputText("You row for over an hour, until your arms practically burn with exhaustion from all the rowing.\n\n", true);
+					clearOutput();
+					outputText("You row for over an hour, until your arms practically burn with exhaustion from all the rowing.\n\n");
 					if (rand(2) == 0) {
 						//50/50 strength/speed
 						if (rand(2) == 0 && player.str < 150) {

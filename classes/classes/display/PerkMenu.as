@@ -22,14 +22,14 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		displayHeader("Perks");
 		while(temp < player.perks.length) {
-			outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n", false);
+			outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
 			temp++;
 		}
 		menu();
 		var button:int = 0;
 		addButton(button++, "Next", playerMenu);
 		if(player.perkPoints > 0) {
-			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
+			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
 			addButton(button++, "Perk Up", kGAMECLASS.perkBuyMenu);

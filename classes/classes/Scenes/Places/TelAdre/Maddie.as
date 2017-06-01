@@ -137,8 +137,8 @@ public function runAwayMaddieFollowup():void {
 //[TRY TO TALK]
 private function talkToMaddie():void {
 	spriteSelect(39);
-	outputText("",true);
-	outputText("You try to speak as calmly as you can in the face of a giant, jiggling sex-pastry, but she ignores your demands to 'wait', 'listen', or 'stop'.  Sponge-cake-soft fists envelop your arms, lifting you from the ground to pin you against some flour sacks.   The cherries covering the cupcake-girl's whipped-cream bra drop off, pushed away by two candy-pink nipples the size of water bottles.  As one, they discharge thick splorts of thick, gooey icing to splatter over the length of your exposed arms.  It hardens nigh-instantaneously in the comparatively cool air, and you're helpless to do anything but squirm as she applies the same treatment to your " + player.legs() + ", immobilizing you completely.\n\n", false);
+	clearOutput();
+	outputText("You try to speak as calmly as you can in the face of a giant, jiggling sex-pastry, but she ignores your demands to 'wait', 'listen', or 'stop'.  Sponge-cake-soft fists envelop your arms, lifting you from the ground to pin you against some flour sacks.   The cherries covering the cupcake-girl's whipped-cream bra drop off, pushed away by two candy-pink nipples the size of water bottles.  As one, they discharge thick splorts of thick, gooey icing to splatter over the length of your exposed arms.  It hardens nigh-instantaneously in the comparatively cool air, and you're helpless to do anything but squirm as she applies the same treatment to your " + player.legs() + ", immobilizing you completely.\n\n");
 	outputText("The cock-crazed confection looks down at you and nods, a satisfied smile spreading over glistening, pale blue lips.  She breathlessly exclaims, \"<i>My creat- cr... Dad ");
 	if(player.hasCock()) outputText("is like, all out of icing mix!  So I'm going to borrow a few cups from you, 'kay?");
 	else outputText("gave me so much icing mix, and you like, would look soooo much better with some vanil- van... yummy frosting!");
@@ -148,7 +148,7 @@ private function talkToMaddie():void {
 	if(player.hasCock()) {
 		var x:Number = player.cockThatFits(60);
 		if (x < 0) x = 0;
-		outputText("\"<i>Dad said my name is Madeleine, but that's no fun.  Just call me Maddie.  You've got lots of icing like Dad, right?  I-I... need more icing.  It's in my recipe,</i>\" says Maddie.  The baked broad strips your " + player.armorName + " to expose your " + multiCockDescriptLight() + ".  Cooing with excitement, she examines your ", false);
+		outputText("\"<i>Dad said my name is Madeleine, but that's no fun.  Just call me Maddie.  You've got lots of icing like Dad, right?  I-I... need more icing.  It's in my recipe,</i>\" says Maddie.  The baked broad strips your " + player.armorName + " to expose your " + multiCockDescriptLight() + ".  Cooing with excitement, she examines your ");
 		if(player.lust >= 75) outputText("rock-hard");
 		else outputText("hardening");
 		outputText(" shaft");
@@ -160,21 +160,21 @@ private function talkToMaddie():void {
 		if(player.cor < 33) outputText("You muster as much authority as you can in such a compromising position and explain to Maddie that what comes out of there is NOT icing.");
 		else if(player.cor < 66) outputText("You offhandedly mention that you don't actually make icing.");
 		else outputText("You smirk and mention that what you squirt isn't quite icing.");
-		outputText("  \"<i>Liar!  If that wasn't icing, then why would Daddy have put his in all those eclairs and me?</i>\" retorts the busty cupcake, continuing on to say, \"<i>I know, I can suck it out!</i>\"  She purses her jelly-like lips and plunges forward, slurping all " + num2Text(Math.floor(player.cocks[x].cockLength)) + " inches into her oven-warmed esophagus.  Your protests are cut off by the tightness squeezing around your " + cockDescript(x) + ".  It milks you in rippling motions, buttery-slick and pulsing hungrily.\n\n", false);
+		outputText("  \"<i>Liar!  If that wasn't icing, then why would Daddy have put his in all those eclairs and me?</i>\" retorts the busty cupcake, continuing on to say, \"<i>I know, I can suck it out!</i>\"  She purses her jelly-like lips and plunges forward, slurping all " + num2Text(Math.floor(player.cocks[x].cockLength)) + " inches into her oven-warmed esophagus.  Your protests are cut off by the tightness squeezing around your " + cockDescript(x) + ".  It milks you in rippling motions, buttery-slick and pulsing hungrily.\n\n");
 		
 		outputText("A half-melted tongue ");
 		if(!player.hasSheath()) outputText("encircles the base");
 		else outputText("pokes and prods into your sheath");
-		outputText(", leaving a syrupy residue trailing over your " + cockDescript(x) + ".  You groan, sagging into the sugary suspension.  The strength is completely gone from your limbs, stolen by the pastry's prick-devouring maw.  Her shining eyes look up to gloat once she realizes how completely you've submitted to her ministrations, and in no time, her cake-soft hands catch and squeeze your " + cockDescript(x) + " into the gargantuan swell of her spongy breasts.  A smile crosses your face as you get pleasured by the motherly mounds and the familiar, sweet smell that Maddie exudes.\n\n", false);
+		outputText(", leaving a syrupy residue trailing over your " + cockDescript(x) + ".  You groan, sagging into the sugary suspension.  The strength is completely gone from your limbs, stolen by the pastry's prick-devouring maw.  Her shining eyes look up to gloat once she realizes how completely you've submitted to her ministrations, and in no time, her cake-soft hands catch and squeeze your " + cockDescript(x) + " into the gargantuan swell of her spongy breasts.  A smile crosses your face as you get pleasured by the motherly mounds and the familiar, sweet smell that Maddie exudes.\n\n");
 		
-		outputText("Suction starts, hollowing the cupcake-girl's plush cheeks into a concave, cock-slurping form.  The constant squeezing of your " + cockDescript(x) + " combines with the sucking to make you swell larger inside Maddie's gullet while she kisses your groin.  The confection's oral charms show no signs of stopping as she noisily slurps away at her treat, and her pillowy breasts are so spongy-soft and calming that you're happy to let her sample your 'icing' if it means you can feel like this.  Your " + hipDescript() + " push back into the baby blue lips, pumping and thrusting as your instinct to fuck and breed takes over, working your " + cockDescript(x) + " in and out of the pastry's puckered mouth.\n\n", false);
+		outputText("Suction starts, hollowing the cupcake-girl's plush cheeks into a concave, cock-slurping form.  The constant squeezing of your " + cockDescript(x) + " combines with the sucking to make you swell larger inside Maddie's gullet while she kisses your groin.  The confection's oral charms show no signs of stopping as she noisily slurps away at her treat, and her pillowy breasts are so spongy-soft and calming that you're happy to let her sample your 'icing' if it means you can feel like this.  Your " + hipDescript() + " push back into the baby blue lips, pumping and thrusting as your instinct to fuck and breed takes over, working your " + cockDescript(x) + " in and out of the pastry's puckered mouth.\n\n");
 		
-		outputText("Maddie pushes further forward, her bosom crushing you against the wall to hold your hips immobile while she sucks harder and harder.  Your cock balloons from the suction, thickening inside her neck and beginning to twitch from the irresistible fellative pleasure. An orgasm grows in your " + ballsDescriptLight(), false);
+		outputText("Maddie pushes further forward, her bosom crushing you against the wall to hold your hips immobile while she sucks harder and harder.  Your cock balloons from the suction, thickening inside her neck and beginning to twitch from the irresistible fellative pleasure. An orgasm grows in your " + ballsDescriptLight());
 		if(player.balls > 0) outputText(", the cum-heavy spheres bouncing in your twitching sack as they get ready to explode");
 		outputText(".  Maddie squeezes her puckered cock-suckers tight around the turgid shaft while she whips her melty tongue in circles around it.  Your climax hits like a hammer-blow to the temple, knocking the thoughts from your head while you pump rope after rope of 'icing' down the cupcake's dick-gripping neck-hole.  The suction relaxes as you fill the ravenous pastry with your seed and let your head limply sink deeper against the cushion of her sponge-cake-soft breast.\n\n");
 		
 		outputText("Maddie milks you for what seems like ages");
-		if(player.cockTotal() == 1) outputText(", your " + cockDescript(x) + " emptying every drop of jizz into the baked cum-tank.", false);
+		if(player.cockTotal() == 1) outputText(", your " + cockDescript(x) + " emptying every drop of jizz into the baked cum-tank.");
 		else {
 			outputText(" while her skin absorbs the generous donation of your other member");
 			if(player.cockTotal() > 2) outputText("s");
@@ -187,9 +187,9 @@ private function talkToMaddie():void {
 		}
 		outputText(".  Satisfied, your body goes limp and sags against the wall while your face leans on the cupcake-girl's departing breast.\n\n");
 		
-		outputText("The cream-filled creation leans back and squirts some more icing onto the straps holding you, but instead of reinforcing the bonds, it eats through the hardened confection to release you into her waiting bosom.  She catches you in the pillowy chest-embrace, stroking your hair while she says in a sing-song voice, \"<i>Thanks for all the icing " + player.mf("mister","miss") + "!  I think I have enough for now.  I think I'll go like, check on my Dad and stuff.  Maybe he wants to add some icing to the recipe?</i>\"\n\n", false);
+		outputText("The cream-filled creation leans back and squirts some more icing onto the straps holding you, but instead of reinforcing the bonds, it eats through the hardened confection to release you into her waiting bosom.  She catches you in the pillowy chest-embrace, stroking your hair while she says in a sing-song voice, \"<i>Thanks for all the icing " + player.mf("mister","miss") + "!  I think I have enough for now.  I think I'll go like, check on my Dad and stuff.  Maybe he wants to add some icing to the recipe?</i>\"\n\n");
 	
-		outputText("Oven-warmed tiles kiss your exposed " + buttDescript() + " as you're gently placed on the floor next to your discarded equipment.  Exhausted and satiated as you are, your eyes drift closed, lulling you into slumber.\n\n", false);
+		outputText("Oven-warmed tiles kiss your exposed " + buttDescript() + " as you're gently placed on the floor next to your discarded equipment.  Exhausted and satiated as you are, your eyes drift closed, lulling you into slumber.\n\n");
 		
 		outputText("<b>Later...</b>\n");
 		outputText("You're woken by a furry hand squeezing your shoulder and violently shaking you around.  With such rough treatment, you snap to full alertness in no time.  The minotaur chef is smiling down at you, the expression looking quite strange on his bestial muzzle as he says, \"<i>Sorry.  Experiment backfired.  Glad you gave her what she needed.  Much calmer now.  Will make great assistant.</i>\"\n\n");
@@ -203,7 +203,7 @@ private function talkToMaddie():void {
 		
 		outputText("It's delicious – creamy, gooey, and sugary-sweet while at the same time as fluid as mother's milk. You swallow the first mouthful reflexively before you remember you were trying to avoid this exact fate.  The thick icing coats your esophagus with the cupcake's warm secretion. It radiates gentle, oven-like heat throughout you, clouding your mind and dulling your vision with its hazy warmth.  You relax against your saccharine bonds nervelessly and begin to drink of your own volition.\n\n");
 		
-		outputText("\"<i>Shhh, shhh... that's a good " + player.mf("boy","girl") + ".  Isn't my icing the absolute best?</i>\" she verbally gushes, just like the nipple between your teeth.  \"<i>Drink up", false);
+		outputText("\"<i>Shhh, shhh... that's a good " + player.mf("boy","girl") + ".  Isn't my icing the absolute best?</i>\" she verbally gushes, just like the nipple between your teeth.  \"<i>Drink up");
 		if(player.thickness < 60) outputText(", you're looking awful thin");
 		else if(player.tone >= 70) outputText(", you look like you're carved from stone.  A little softness would do you good");
 		else outputText(", you look like you'd better eat to keep up your gorgeous figure");
@@ -226,8 +226,8 @@ private function talkToMaddie():void {
 		outputText("You're woken by a furry hand squeezing your shoulder and violently shaking you around.  With such rough treatment, you snap to full alertness in no time.  The minotaur chef is smiling down at you, the expression looking quite strange on his bestial muzzle as he says, \"<i>Sorry.  Experiment backfired.  Glad you okay.  Gave her more filling and all calm now.  Will make great assistant.</i>\"\n\n");
 		
 		outputText("Once the beast-man has finished talking you realize the cupcake-girl, Madeleine, is standing behind him.  Her blue-iced 'clothes' have been remade, shaped into a form-fitting apron that accentuates her massive, otherworldly curves.  The minotaur chef utters, \"<i>We go now.  Get dressed.  Maybe sometime can visit Maddie.</i>\"  Maddie claps her hands, bouncing and jiggling with excitement as the two of them leave you there to get dressed.");
-		outputText(player.modThickness(100,10), false);
-		outputText(player.modTone(0,10), false);  
+		outputText(player.modThickness(100,10));
+		outputText(player.modTone(0,10));  
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 3;
 	doNext(camp.returnToCampUseOneHour);

@@ -22,7 +22,8 @@ package classes.Scenes.Places
 		}
 		public function discoverBoat():void {
 			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);
-			outputText("You journey around the lake, seeking demons to fight", true);
+			clearOutput();
+			outputText("You journey around the lake, seeking demons to fight");
 			if(player.cor > 60) outputText(" or fuck");
 			outputText(".  The air is fresh, and the grass is cool and soft under your feet.   Soft waves lap against the muddy sand of the lake-shore, as if radiating outward from the lake.   You pass around a few bushes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
 			outputText("<b>You have discovered the lake boat!</b>\n(You may return and use the boat to explore the lake's interior by using the 'places' menu.)");
@@ -41,7 +42,8 @@ package classes.Scenes.Places
 				etnaScene.repeatYandereEnc();
 				return;
 			}
-			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ", true);
+			clearOutput();
+			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				outputText("The water appears somewhat muddy and has a faint pungent odor.  ");
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ");

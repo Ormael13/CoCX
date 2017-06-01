@@ -49,7 +49,8 @@ package classes.Scenes.Dungeons
 		}
 		public function exitDungeon():void {
 			kGAMECLASS.inDungeon = false;
-			outputText("You leave the cave behind and take off through the hills back towards camp.", true);
+			clearOutput();
+			outputText("You leave the cave behind and take off through the hills back towards camp.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -72,14 +73,16 @@ package classes.Scenes.Dungeons
 		//Rooms
 		public function roomEntrance():void {
 			kGAMECLASS.dungeonLoc = 39;
-			outputText("<b><u>Entrance</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Entrance</u></b>\n");
 			outputText("The entrance of this old cave is decorated with torches. Someone seems to like the idea of decorating his lair with fancy lights.");
 			dungeons.setDungeonButtons(null, null, roomSEUP, null);
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomSEUP():void {
 			kGAMECLASS.dungeonLoc = 40;
-			outputText("<b><u>SE Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>SE Underground Passage</u></b>\n");
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomEUP, null, roomSUP, roomEntrance);
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 1) {
@@ -92,13 +95,15 @@ package classes.Scenes.Dungeons
 		}
 		public function roomEUP():void {
 			kGAMECLASS.dungeonLoc = 41;
-			outputText("<b><u>E Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>E Underground Passage</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(roomNEUP, roomSEUP, null, null);
 		}
 		public function roomNEUP():void {
 			kGAMECLASS.dungeonLoc = 42;
-			outputText("<b><u>NE Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>NE Underground Passage</u></b>\n");
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(null, roomEUP, roomNUP, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 1) {
@@ -111,26 +116,30 @@ package classes.Scenes.Dungeons
 		}
 		public function roomNUP():void {
 			kGAMECLASS.dungeonLoc = 43;
-			outputText("<b><u>N Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>N Underground Passage</u></b>\n");
 			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
 			kGAMECLASS.dungeonLoc = 44;
-			outputText("<b><u>Stone Staircase</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Stone Staircase</u></b>\n");
 			outputText("This room was hidden by a secret passage. It leads down below.");
 			dungeons.setDungeonButtons(null, null, null, roomSStorage);
 			addButton(7, "Downstairs", roomSStaircaseB);
 		}
 		public function roomSUP():void {
 			kGAMECLASS.dungeonLoc = 45;
-			outputText("<b><u>S Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>S Underground Passage</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
 		}
 		public function roomSStorage():void {
 			kGAMECLASS.dungeonLoc = 46;
-			outputText("<b><u></u>Small Storage</b>\n", true);
+			clearOutput();
+			outputText("<b><u></u>Small Storage</b>\n");
 			outputText("This room is filled with storage crates.");
 			dungeons.setDungeonButtons(roomSWUP, null, null, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] < 1) {
@@ -143,7 +152,7 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 2) addButton(10, "West", roomSStaircase);
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]) + " pill bottles inside.\n\n", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]) + " pill bottles inside.\n\n");
 					addButton(0, "SoulPill", takeSoulPill);
 				}
 			}
@@ -154,7 +163,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomNWUP():void {
 			kGAMECLASS.dungeonLoc = 47;
-			outputText("<b><u>NW Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>NW Underground Passage</u></b>\n");
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(null, roomWUP, null, roomNUP);
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 3) {
@@ -167,14 +177,16 @@ package classes.Scenes.Dungeons
 		}
 		public function roomWUP():void {
 			kGAMECLASS.dungeonLoc = 48;
-			outputText("<b><u>W Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>W Underground Passage</u></b>\n");
 			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(10, "West", roomNTE);
 		}
 		public function roomSWUP():void {
 			kGAMECLASS.dungeonLoc = 49;
-			outputText("<b><u>SW Underground Passage</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>SW Underground Passage</u></b>\n");
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomWUP, null, null, roomSUP);
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 2) {
@@ -188,13 +200,15 @@ package classes.Scenes.Dungeons
 		}
 		public function roomNTE():void {
 			kGAMECLASS.dungeonLoc = 50;
-			outputText("<b><u>Narrow Tunnel (E)</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Narrow Tunnel (E)</u></b>\n");
 			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNT, roomWUP);
 		}
 		public function roomNT():void {
 			kGAMECLASS.dungeonLoc = 51;
-			outputText("<b><u>Narrow Tunnel</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Narrow Tunnel</u></b>\n");
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomNTN, null, null, roomNTE);
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 4) {
@@ -207,13 +221,15 @@ package classes.Scenes.Dungeons
 		}
 		public function roomNTN():void {
 			kGAMECLASS.dungeonLoc = 52;
-			outputText("<b><u>Narrow Tunnel (N)</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Narrow Tunnel (N)</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(roomLStorageW, roomNT, null, null);
 		}
 		public function roomLStorageW():void {
 			kGAMECLASS.dungeonLoc = 53;
-			outputText("<b><u>Large Storage (W)</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Large Storage (W)</u></b>\n");
 			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
 			dungeons.setDungeonButtons(null, roomNTN, null, roomLStorageE);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 1) {
@@ -225,7 +241,7 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.");
 					addButton(0, "TSharkT", takeTSharkTooth);
 				}
 			}
@@ -235,7 +251,7 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]) + " golden seed inside.", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]) + " golden seed inside.");
 					addButton(1, "GoldSeed", takeGoldenSeed);
 				}
 			}
@@ -245,7 +261,7 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]) + " Mara fruit inside.", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]) + " Mara fruit inside.");
 					addButton(2, "MaraFruit", takeMaraFruit);
 				}
 			}
@@ -255,7 +271,7 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]) + " bottle of Salamander firewater inside.", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]) + " bottle of Salamander firewater inside.");
 					addButton(3, "SalamFW", takeSalamFireWat);
 				}
 			}
@@ -266,7 +282,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomLStorageE():void {
 			kGAMECLASS.dungeonLoc = 54;
-			outputText("<b><u>Large Storage (E)</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Large Storage (E)</u></b>\n");
 			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
 			dungeons.setDungeonButtons(null, null, roomLStorageW, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 2) {
@@ -277,7 +294,7 @@ package classes.Scenes.Dungeons
 				return;
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS] == 1) {
-		//		outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.\n\n", false);
+		//		outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.\n\n");
 				addButtonDisabled(0, "???", "???");
 			}
 			else {
@@ -287,26 +304,30 @@ package classes.Scenes.Dungeons
 		}
 		public function roomSStaircaseB():void {
 			kGAMECLASS.dungeonLoc = 55;
-			outputText("<b><u>Stone Staircase (Basement)</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Stone Staircase (Basement)</u></b>\n");
 			outputText("In front of you is a stairway leading back to the upper level.");
 			dungeons.setDungeonButtons(roomTunnel00, null, null, null);
 			addButton(5, "Upstairs", roomSStaircase);
 		}
 		public function roomTunnel00():void {
 			kGAMECLASS.dungeonLoc = 56;
-			outputText("<b><u>Tunnel</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, roomSStaircaseB, roomTunnel01, null);
 		}
 		public function roomTunnel01():void {
 			kGAMECLASS.dungeonLoc = 57;
-			outputText("<b><u>Tunnel</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomTunnel02, roomTunnel00);
 		}
 		public function roomTunnel02():void {
 			kGAMECLASS.dungeonLoc = 58;
-			outputText("<b><u>Tunnel</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(null, roomTedsLair, null, roomTunnel01);
 			if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButton(6, "North", roomTunnel03);
@@ -320,7 +341,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomTedsLair():void {
 			kGAMECLASS.dungeonLoc = 59;
-			outputText("<b><u>Ted's Lair</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Ted's Lair</u></b>\n");
 			outputText("This room is huge. At the center is the throne where the dragon man used to sit. ");
 			if (player.findPerk(PerkLib.SoulSense) >= 0) outputText("There is a small suspicious lever on the right next to a bed. ");
 			outputText("On the left is a small tatami used for meditations.");
@@ -336,7 +358,8 @@ package classes.Scenes.Dungeons
 		}
 		public function roomTunnel03():void {
 			kGAMECLASS.dungeonLoc = 60;
-			outputText("<b><u>Tunnel</u></b>\n", true);
+			clearOutput();
+			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(null, roomTunnel02, null, null);//north(6), south(11), west(10), east(12), up(5), down(7)
 		}

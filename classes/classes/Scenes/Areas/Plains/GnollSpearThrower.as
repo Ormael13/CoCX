@@ -16,7 +16,7 @@ package classes.Scenes.Areas.Plains
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if(statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -33,7 +33,7 @@ package classes.Scenes.Areas.Plains
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if(statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -45,7 +45,7 @@ package classes.Scenes.Areas.Plains
 			}
 			//("Misdirection"
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if(statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Plains
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if(plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
 				//See below, removes the attack count once it hits rock bottom.
@@ -74,12 +74,12 @@ package classes.Scenes.Areas.Plains
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.", false);
-				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
+				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 			}
 			else {
 				if(damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.");
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.", false);
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
 			}
 			if(damage > 0) {
 				if(short == "fetish zealot") {
@@ -89,8 +89,8 @@ package classes.Scenes.Areas.Plains
 					game.dynStats("lus", (player.lib/20 + rand(4)+1));
 				}
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
+					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 5 * lustVuln;
 				}
 			}
@@ -116,26 +116,26 @@ package classes.Scenes.Areas.Plains
 			}
 			//Determine if evaded
 			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s thrown spear.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s thrown spear.\n");
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' thrown spear.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' thrown spear.\n");
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "'s thrown spear.", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "'s thrown spear.");
 			}
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Absorbed>
 			else if(player.armorDef > 10 && rand(2) == 0) {
-				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the air but hits at an angle, sliding off your " + player.armorName + " without doing any damage.  It disappears into the grass.", false);
+				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the air but hits at an angle, sliding off your " + player.armorName + " without doing any damage.  It disappears into the grass.");
 			}
 			else if(player.findPerk(PerkLib.Resolute) >= 0 && player.tou >= 75) {
 				outputText("You resolutely ignore the spear, brushing the blunted tip away when it hits you.\n");
 			}
 			//<Hyena Attack 2 – Javelin – Successful – Player Entangled>
 			else if(rand(3) >= 1) {
-				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your " + player.armorName + ".  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ", false);
+				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your " + player.armorName + ".  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
 				if(!player.hasStatusEffect(StatusEffects.GnollSpear)) player.createStatusEffect(StatusEffects.GnollSpear,0,0,0,0);
 				slow = 15;
 				while(slow > 0 && player.spe > 2) {
@@ -166,19 +166,19 @@ package classes.Scenes.Areas.Plains
 			}
 			//Determine if dodged!
 			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("The gnoll grins at you before striding forward and pivoting.  A spotted leg snaps up and out, flashing through the air towards your " + chestDesc() + ".  You step back just in time, robbing the blow of force.  The paw lightly strikes your torso before the female hyena springs back, glaring at you.", false);
+				outputText("The gnoll grins at you before striding forward and pivoting.  A spotted leg snaps up and out, flashing through the air towards your " + chestDesc() + ".  You step back just in time, robbing the blow of force.  The paw lightly strikes your torso before the female hyena springs back, glaring at you.");
 			}
 			//Determine if evaded
 			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s snap-kick.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s snap-kick.\n");
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' snap-kick.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' snap-kick.\n");
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "'s snap-kick.", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "'s snap-kick.");
 			}
 			//Determine damage - str modified by enemy toughness!
 			else {
@@ -187,11 +187,11 @@ package classes.Scenes.Areas.Plains
 				damage += int(str - Math.random()*(player.tou) - player.armorDef);
 				//No damage
 				if(damage <= 0) {
-					outputText("The gnoll tries to catch your " + chestDesc() + " with a snap-kick, but you manage to block the vicious blow.", false);
+					outputText("The gnoll tries to catch your " + chestDesc() + " with a snap-kick, but you manage to block the vicious blow.");
 				}
 				//<Hyena Attack 3 – Snap Kick – Successful>
 				else {
-					outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + chestDesc(), false);
+					outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + chestDesc());
 					if(player.biggestTitSize() >= 1) outputText(", sending a wave of pain through the sensitive flesh");
 					outputText(".  A small, traitorous part of you can't help but notice a flash of long, dark flesh beneath her loincloth even as you stagger back from the impact. ");
 					game.dynStats("lus", 2);
@@ -228,7 +228,7 @@ package classes.Scenes.Areas.Plains
 			doNext(game.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if (statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -243,7 +243,7 @@ package classes.Scenes.Areas.Plains
 			}
 //Determine if evaded
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if (statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -254,7 +254,7 @@ package classes.Scenes.Areas.Plains
 			}
 //("Misdirection"
 			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if (statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
@@ -265,7 +265,7 @@ package classes.Scenes.Areas.Plains
 			}
 //Determine if cat'ed
 			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if (plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
 				//See below, removes the attack count once it hits rock bottom.
@@ -282,12 +282,12 @@ package classes.Scenes.Areas.Plains
 			if (damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.", false);
-				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
+				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 			}
 			else {
 				if (damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.");
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.", false);
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
 			}
 			if (damage > 0) {
 				if (short == "fetish zealot") {
@@ -297,8 +297,8 @@ package classes.Scenes.Areas.Plains
 					game.dynStats("lus", (player.lib / 20 + rand(4) + 1));
 				}
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
+					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 5 * lustVuln;
 				}
 			}

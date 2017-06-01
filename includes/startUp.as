@@ -55,7 +55,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	gameState = 3;
 	clearOutput();
 	//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
+	outputText("<b>Corruption of Champions (" + version + ")</b>");
 	
 	if (CoC_Settings.debugBuild)
 		outputText(" Debug Build");
@@ -451,13 +451,15 @@ private function setWorms(enabled:Boolean, half:Boolean):void {
 
 //Survival Mode
 public function enableSurvivalPrompt():void {
-	outputText("Are you sure you want to enable Survival Mode?\n\n", true)
-	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	clearOutput();
+	outputText("Are you sure you want to enable Survival Mode?\n\n");
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
 	doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
 }
 
 public function enableSurvivalForReal():void {
-	outputText("Survival mode is now enabled.", true)
+	clearOutput();
+	outputText("Survival mode is now enabled.");
 	player.hunger = 80;
 	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 	doNext(settingsScreenGameSettings);
@@ -465,13 +467,15 @@ public function enableSurvivalForReal():void {
 
 //Realistic Mode
 public function enableRealisticPrompt():void {
-	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
-	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	clearOutput();
+	outputText("Are you sure you want to enable Realistic Mode?\n\n");
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
 	doYesNo(enableRealisticForReal, settingsScreenGameSettings);
 }
 
 public function enableRealisticForReal():void {
-	outputText("Realistic mode is now enabled.", true)
+	clearOutput();
+	outputText("Realistic mode is now enabled.");
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
 	doNext(settingsScreenGameSettings);
 }

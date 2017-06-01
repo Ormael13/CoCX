@@ -74,7 +74,7 @@ package classes.Scenes.Areas.Plains
 		override public function doAI():void
 		{
 			if (hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("Your foe is too dazed from your last hit to strike back!", false)
+				outputText("Your foe is too dazed from your last hit to strike back!");
 				if (hasStatusEffect(StatusEffects.Uber)) {
 					outputText(" You've managed to interrupt his special attack!");
 					removeStatusEffect(StatusEffects.Uber);

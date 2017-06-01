@@ -13,7 +13,7 @@ package classes.Scenes.NPCs
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe-spe) / 4) + 80)) > 80) {
@@ -21,15 +21,15 @@ package classes.Scenes.NPCs
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 			}
 			//Determine damage - str modified by enemy toughness!
 			else
@@ -39,14 +39,14 @@ package classes.Scenes.NPCs
 				if(damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				//Take Damage
 				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. ");
 				if(damage > 0) {
 					if(lustVuln > 0 && (player.armor.name == "barely-decent bondage straps" || player.armor.name == "nothing")) {
-						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ", false);
+						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ");
 						lust += 5 * lustVuln;
 					}
 				}
@@ -66,7 +66,7 @@ package classes.Scenes.NPCs
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				return;
 			}
 			//Determine if dodged!
@@ -76,12 +76,12 @@ package classes.Scenes.NPCs
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 5) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n");
 				return;
 			}
 			//("Misdirection"
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 5 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n", false);
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n");
 				return;
 			}
 			//Determine if cat'ed
@@ -105,7 +105,7 @@ package classes.Scenes.NPCs
 			else outputText("The salamander rushes at you, knocking aside your defensive feint and sliding in past your guard.  She lashes out at your feet with her tail, and you can feel the heated wake of the fiery appendage on your ensuing fall toward the now-smouldering grass. ");
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 5 * lustVuln;
 				}
 			}
@@ -118,18 +118,18 @@ package classes.Scenes.NPCs
 		private function helCleavage():void {
 			//FAIL
 			if((player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) || (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
-				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n", false);
+				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n");
 			}
 			//Attack 3 – Lust – Cleavage (Failure)
 			else {
-				outputText("To your surprise, the salamander suddenly yanks up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms encircles your waist, and the other forcefully shoves your face into her cleavage.  She jiggles her tits around your face for a moment before you're able to break free, though you can feel a distinct heat rising in your loins.  As quickly as they were revealed, the breasts are concealed again and your opponent is ready for more combat!", false);
+				outputText("To your surprise, the salamander suddenly yanks up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms encircles your waist, and the other forcefully shoves your face into her cleavage.  She jiggles her tits around your face for a moment before you're able to break free, though you can feel a distinct heat rising in your loins.  As quickly as they were revealed, the breasts are concealed again and your opponent is ready for more combat!");
 				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20);
 				game.dynStats("lus", lust);
 				//Apply resistance
 				lust *= game.lustPercent()/100;
 				//Clean up
 				lust = Math.round(lust * 10)/10;
-				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n", false);
+				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n");
 			}
 			combatRoundOver();
 		}

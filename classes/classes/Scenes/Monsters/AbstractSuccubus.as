@@ -13,7 +13,7 @@ package classes.Scenes.Monsters
 			if (hasStatusEffect(StatusEffects.WhipReady)) {
 				//Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind)) {
-					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!", false);
+					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!");
 					combatRoundOver();
 					return;
 				}
@@ -31,7 +31,7 @@ package classes.Scenes.Monsters
 				}
 				//Whip yo tits!
 				if (temp == 1) {
-					if (player.breastRows.length > 0 && player.biggestTitSize() > 0) outputText(player.allBreastsDescript() + "", false);
+					if (player.breastRows.length > 0 && player.biggestTitSize() > 0) outputText(player.allBreastsDescript() + "");
 					else outputText("chest");
 					damage = 9 - player.armor.def;
 					if (damage <= 0) {
@@ -70,7 +70,7 @@ package classes.Scenes.Monsters
 							damage = int(damage / (groinProtection + 1)); 
 						}
 						if (player.gender == 1) {
-							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + ", doubling you over in agony", false);
+							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + ", doubling you over in agony");
 							damage = int((player.maxHP()) / 4);
 							if (groinProtection > 0) {
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
@@ -81,12 +81,12 @@ package classes.Scenes.Monsters
 							game.dynStats("lus", -15);
 						}
 						if (player.gender == 2) {
-							outputText("groin, making your " + vaginaDescript(0) + " sting with pain", false);
+							outputText("groin, making your " + vaginaDescript(0) + " sting with pain");
 							damage = 10;
 							game.dynStats("lus", -8);
 						}
 						if (player.gender == 3) {
-							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + " and " + player.vaginaDescript(0) + ", doubling you over in agony", false);
+							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + " and " + player.vaginaDescript(0) + ", doubling you over in agony");
 							damage = int((player.maxHP()) / 3)
 							if (groinProtection > 0) {
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
@@ -160,7 +160,7 @@ package classes.Scenes.Monsters
 			temp = rand(3);
 			//Butt slap!
 			if (temp == 0) {
-				outputText(capitalA + short + " slaps her " + Appearance.buttDescriptionShort(this), false);
+				outputText(capitalA + short + " slaps her " + Appearance.buttDescriptionShort(this));
 				if (buttRating >= 10) {
 					outputText(", making it jiggle delightfully.");
 					//85% success rate for the jiggly girls
@@ -186,8 +186,8 @@ package classes.Scenes.Monsters
 				//Single breast row
 				if (breastRows.length == 1) {
 					//50+ breastsize% success rate
-					outputText(capitalA + short + " caresses some of her ample chest-flesh before shaking it from side to side enticingly.", false);
-					if (lust >= 50) outputText("  " + pronoun2 + " hard nipples seem to demand your attention.", false);
+					outputText(capitalA + short + " caresses some of her ample chest-flesh before shaking it from side to side enticingly.");
+					if (lust >= 50) outputText("  " + pronoun2 + " hard nipples seem to demand your attention.");
 					if (rand(100) <= (65 + biggestTitSize())) {
 						game.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length + 10);
 						outputText("\nThe display is quite arousing.");
@@ -196,8 +196,8 @@ package classes.Scenes.Monsters
 				}
 				if (breastRows.length > 1) {
 					//50 + 10% per breastRow + breastSize%
-					outputText(capitalA + short + " caresses " + pronoun2 + " some of her rows of ample chest-flesh before shaking it all from side to side enticingly.", false);
-					if (lust >= 50) outputText(", your " + nippleDescript(0) + "s painfully visible.", false);
+					outputText(capitalA + short + " caresses " + pronoun2 + " some of her rows of ample chest-flesh before shaking it all from side to side enticingly.");
+					if (lust >= 50) outputText(", your " + nippleDescript(0) + "s painfully visible.");
 					else outputText(".");
 					if (rand(100) <= (54 + (breastRows.length - 1) * 15 + breastRows[0].breastRating)) {
 						game.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length * breastRows[0].breasts + 5);
@@ -208,8 +208,8 @@ package classes.Scenes.Monsters
 			}
 			//Genetals flash!
 			if (temp == 2) {
-				if (this.short == "omnibus") outputText(capitalA + short + "spreads her legs and buries three fingers in her sopping twat, her thumb vigorously rubbing against the base of her bumpy prick.  Her other hand wraps around the meaty pole and begins jerking it rapidly.  In one practiced movement she stops jerking long enough to wrap the whip around her nodule-studded demon-cock, using it like a cockring.  The organ swells thanks to the forced blood-flow, and after a few more seconds of intense masturbation, the demoness cums hard.  Her cunny squirts all over her hand, dripping clear feminine drool down her thighs.  Omnibus masculine endowment pulses and twitches, blasting out two big squirts of jizm before it slows to a trickle.", false);
-				else outputText(capitalA + short + " reaches down and strokes her moist lips.  She sighs and licks her fingers clean, giving you a smoldering gaze.", false);
+				if (this.short == "omnibus") outputText(capitalA + short + "spreads her legs and buries three fingers in her sopping twat, her thumb vigorously rubbing against the base of her bumpy prick.  Her other hand wraps around the meaty pole and begins jerking it rapidly.  In one practiced movement she stops jerking long enough to wrap the whip around her nodule-studded demon-cock, using it like a cockring.  The organ swells thanks to the forced blood-flow, and after a few more seconds of intense masturbation, the demoness cums hard.  Her cunny squirts all over her hand, dripping clear feminine drool down her thighs.  Omnibus masculine endowment pulses and twitches, blasting out two big squirts of jizm before it slows to a trickle.");
+				else outputText(capitalA + short + " reaches down and strokes her moist lips.  She sighs and licks her fingers clean, giving you a smoldering gaze.");
 				//Success = 50% + 10% times each cock/vagina
 				//rand(vaginas*2 + cocks*2) + wetness and/or length/6
 				if (rand(101) <= (65 + vaginas.length * 10 + cocks.length * 10)) {

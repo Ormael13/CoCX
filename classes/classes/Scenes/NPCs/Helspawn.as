@@ -124,7 +124,7 @@ private function calledShot():void {
 				// lustDown.visible = false;
 				// lustUp.visible = true;
 				lustDelta = Math.round(lustDelta * 10)/10;
-				outputText(" (" + lustDelta + ")", false);
+				outputText(" (" + lustDelta + ")");
 			}
 		}
 

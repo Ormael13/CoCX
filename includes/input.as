@@ -38,8 +38,9 @@ public function hideControls():void
 public function resetControls():void
 {
 	inputManager.HideBindingPane();
-	
-	outputText("Are you sure you want to reset all of the currently bound controls to their defaults?", true);
+
+	clearOutput();
+	outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
 	
 	doYesNo(resetControlsYes, displayControls);
 }
@@ -47,8 +48,9 @@ public function resetControls():void
 public function resetControlsYes():void
 {
 	inputManager.ResetToDefaults();
-	
-	outputText("Controls have been reset to defaults!\n\n", true);
+
+	clearOutput();
+	outputText("Controls have been reset to defaults!\n\n");
 	
 	doNext(displayControls);
 }
@@ -56,8 +58,9 @@ public function resetControlsYes():void
 public function clearControls():void
 {
 	inputManager.HideBindingPane();
-	
-	outputText("Are you sure you want to clear all of the currently bound controls?", true);
+
+	clearOutput();
+	outputText("Are you sure you want to clear all of the currently bound controls?");
 	
 	doYesNo(clearControlsYes, displayControls);
 }
@@ -65,8 +68,9 @@ public function clearControls():void
 public function clearControlsYes():void
 {
 	inputManager.ClearAllBinds();
-	
-	outputText("Controls have been cleared!", true);
+
+	clearOutput();
+	outputText("Controls have been cleared!");
 	
 	doNext(displayControls);
 }

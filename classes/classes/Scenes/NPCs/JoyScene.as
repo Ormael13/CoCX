@@ -2246,12 +2246,12 @@ package classes.Scenes.NPCs
 			if(player.buttRating < 14 && rand(2) == 0) {
 				if(player.buttRating < 10) {
 					player.buttRating++;
-					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);				
+					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
 				//Big butts grow slower!
 				else if(player.buttRating < 14 && rand(2) == 0) {
 					player.buttRating++;
-					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);
+					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
 			}
 			outputText("\n");

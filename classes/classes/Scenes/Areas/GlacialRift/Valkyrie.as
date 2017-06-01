@@ -36,7 +36,7 @@ package classes.Scenes.Areas.GlacialRift
 				}
 			else
 			{
-				outputText("but she follows through with a rapid flurry of spear strikes, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ", false);
+				outputText("but she follows through with a rapid flurry of spear strikes, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
 				var attacks:int = 1 + rand(3);
 				var damage:int = 0
 				while (attacks > 0) {
@@ -82,10 +82,10 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you ");
 				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
 				{
-					outputText("off balance. ", false)
+					outputText("off balance. ");
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
-				else outputText("backwards. ", false)
+				else outputText("backwards. ");
 				var damage:int = ((str + 50) + rand(50))
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);

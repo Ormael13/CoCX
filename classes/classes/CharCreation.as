@@ -331,7 +331,7 @@
 				}
 			}
 			//Clear key items
-			var keyItemTemp:Array = []
+			var keyItemTemp:Array = [];
 			for (i = 0; i < player.keyItems.length; i++) {
 				if (isSpecialKeyItem(player.keyItems[i].keyName)) keyItemTemp.push(player.keyItems[i]);
 			}
@@ -567,7 +567,8 @@
 			player.createBreastRow();
 			
 			//Choices
-			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
+			clearOutput();
+			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?");
 			menu();
 			addButton(0, "Fem. Slender", buildSlenderFemale, null, null, null, "Feminine build. \n\nWill make you a futanari.", "Feminine, Slender");
 			addButton(1, "Fem. Average", buildAverageFemale, null, null, null, "Feminine build. \n\nWill make you a futanari.", "Feminine, Average");
@@ -780,7 +781,8 @@
 		//-- SKIN COLOURS
 		//-----------------
 		private function menuSkinComplexion():void {
-			outputText("What is your complexion?", true);
+			clearOutput();
+			outputText("What is your complexion?");
 			menu();
 			addButton(0, "Light", confirmComplexion, "light");
 			addButton(1, "Fair", confirmComplexion, "fair");
@@ -800,7 +802,8 @@
 		//-- HAIR COLOURS
 		//-----------------
 		private function menuHairColor():void {
-			outputText("What is your hair color?", true);
+			clearOutput();
+			outputText("What is your hair color?");
 			menu();
 			addButton(0, "Blonde", chooseHairColor, "blonde");
 			addButton(1, "Brown", chooseHairColor, "brown");
@@ -821,15 +824,17 @@
 		//-- BEARD STYLE
 		//-----------------
 		private function menuBeardSettings():void {
-			outputText("You can choose your beard length and style.\n\n", true)
-			outputText("Beard: " + player.beardDescript())
-			menu()
+			clearOutput();
+			outputText("You can choose your beard length and style.\n\n");
+			outputText("Beard: " + player.beardDescript());
+			menu();
 			addButton(0, "Style", menuBeardStyle);
 			addButton(1, "Length", menuBeardLength);
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function menuBeardStyle():void {
-			outputText("What beard style would you like?", true);
+			clearOutput();
+			outputText("What beard style would you like?");
 			menu();
 			addButton(0, "Normal", chooseBeardStyle, 0);
 			addButton(1, "Goatee", chooseBeardStyle, 1);
@@ -842,7 +847,8 @@
 			menuBeardSettings();
 		}
 		private function menuBeardLength():void {
-			outputText("How long would you like your beard be? \n\nNote: Beard will slowly grow over time, just like in the real world. Unless you have no beard. You can change your beard style later in the game.", true);
+			clearOutput();
+			outputText("How long would you like your beard be? \n\nNote: Beard will slowly grow over time, just like in the real world. Unless you have no beard. You can change your beard style later in the game.");
 			menu();
 			addButton(0, "No Beard", chooseBeardLength, 0);
 			addButton(1, "Trim", chooseBeardLength, 0.1);
@@ -900,21 +906,24 @@
 			mainView.nameBox.visible = false;
 			if (int(mainView.nameBox.text) < 48)
 			{
-				outputText("That is below your minimum height choices!", true)
+				clearOutput();
+				outputText("That is below your minimum height choices!");
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
 			}
 			if (int(mainView.nameBox.text) > 96)
 			{
-				outputText("That is above your maximum height choices!", true)
+				clearOutput();
+				outputText("That is above your maximum height choices!");
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
 			}
 			if (mainView.nameBox.text == "")
 			{
-				outputText("Please input your height. Off you go to the height selection!", true)
+				clearOutput();
+				outputText("Please input your height. Off you go to the height selection!");
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
@@ -922,7 +931,8 @@
 			player.tallness = int(mainView.nameBox.text);
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
-			outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)
+			clearOutput();
+			outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?");
 			doYesNo(genericStyleCustomizeMenu, setHeight);
 		}
 
@@ -1055,7 +1065,8 @@
 		
 		private function confirmEndowmentPerversion():void {
 			clearOutput();
-			outputText("Are you unusually perverted?  (+5 Corruption)\n\Corruption affects certain scenes and having a higher corruption makes you more prone to Bad Ends.\n", true);
+			clearOutput();
+			outputText("Are you unusually perverted?  (+5 Corruption)\n\Corruption affects certain scenes and having a higher corruption makes you more prone to Bad Ends.\n");
 			menu();
 			addButton(0, "Yes", setEndowmentPerversion);
 			addButton(1, "No", chooseEndowment, true);
@@ -1376,7 +1387,8 @@
 		//-- GAME MODES
 		//-----------------
 		private function chooseModeNormal():void {
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			clearOutput();
+			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1384,7 +1396,8 @@
 		}	
 
 		private function chooseModeSurvival():void {
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			clearOutput();
+			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1393,7 +1406,8 @@
 		}	
 
 		private function chooseModeRealistic():void {
-			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			clearOutput();
+			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1402,12 +1416,13 @@
 		}	
 
 		private function chooseModeHardcore():void {
-			outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>", true)
+			clearOutput();
+			outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 1;
 			player.hunger = 80;
-			menu()
+			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
@@ -1415,12 +1430,13 @@
 		}
 
 		private function chooseModeBrutalHardcore():void {
-			outputText("You have chosen Brutal Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>", true)
+			clearOutput();
+			outputText("You have chosen Brutal Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
 			player.hunger = 80;
-			menu()
+			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
@@ -1428,12 +1444,13 @@
 		}	
 
 		private function chooseModeXianxia():void {
-			outputText("You have chosen Xianxia MC Mode. This is the mode to fell like a true XIANXIA MC. \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>", true)
+			clearOutput();
+			outputText("You have chosen Xianxia MC Mode. This is the mode to fell like a true XIANXIA MC. \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 4;
 			player.hunger = 80;
-			menu()
+			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
@@ -1448,7 +1465,8 @@
 
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
-			outputText("Choose a game mode.\n\n", true);
+			clearOutput();
+			outputText("Choose a game mode.\n\n");
 			outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n");
 			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n");
 			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n");
@@ -1467,7 +1485,7 @@
 		private function startTheGame():void {
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
+				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
 			}
 			kGAMECLASS.saves.loadPermObject();

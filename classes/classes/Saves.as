@@ -185,7 +185,7 @@ public function loadScreenAIR():void
 			continue;
 
 		gameObjects[i] = getGameObjectFromFile(fileList[fileCount]);
-		outputText(loadSaveDisplay(gameObjects[i], String(i+1)), false);
+		outputText(loadSaveDisplay(gameObjects[i], String(i+1)));
 				
 		if (gameObjects[i].data.exists)
 		{
@@ -242,13 +242,14 @@ public function getGameObjectFromFile(aFile:File):Object
 public function loadScreen():void
 {
 	var slots:Array = new Array(saveFileNames.length);
-		
-	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
+
+	clearOutput();
+	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
-		outputText(loadSaveDisplay(test, String(i + 1)), false);
+		outputText(loadSaveDisplay(test, String(i + 1)));
 		if (test.data.exists/* && test.data.flags[2066] == undefined*/)
 		{
 			//trace("Creating function with indice = ", i);
@@ -262,7 +263,8 @@ public function loadScreen():void
 						doNext(playerMenu);
 						showStats();
 						statScreenRefresh();
-						outputText("Slot " + i + " Loaded!", true);
+						clearOutput();
+						outputText("Slot " + i + " Loaded!");
 					}
 				}
 			})(i);
@@ -294,14 +296,15 @@ public function saveScreen():void
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
 	{
 		saveGame(flags[kFLAGS.HARDCORE_SLOT])
-		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", true);
+		clearOutput();
+		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.");
 		doNext(playerMenu);
 		return;
 	}
 	
 	clearOutput();
 	if (player.slotName != "VOID")
-		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r", false);
+		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r");
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 	
 	var saveFuncs:Array = [];
@@ -310,7 +313,7 @@ public function saveScreen():void
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
-		outputText(loadSaveDisplay(test, String(i + 1)), false);
+		outputText(loadSaveDisplay(test, String(i + 1)));
 		trace("Creating function with indice = ", i);
 		(function(i:int) : void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 		{
@@ -421,7 +424,8 @@ private function autosaveToggle():void {
 
 public function deleteScreen():void
 {
-	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
+	clearOutput();
+	outputText("Slot,  Race,  Sex,  Game Days Played\n");
 	
 
 	var delFuncs:Array = [];
@@ -430,7 +434,7 @@ public function deleteScreen():void
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
-		outputText(loadSaveDisplay(test, String(i + 1)), false);
+		outputText(loadSaveDisplay(test, String(i + 1)));
 		if (test.data.exists)
 		{
 			//slots[i] = loadFuncs[i];
@@ -472,7 +476,8 @@ public function deleteScreen():void
 
 public function confirmDelete():void
 {
-	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
+	clearOutput();
+	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?");
 	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", null, "", null, "", null);
 }
 
@@ -484,7 +489,8 @@ public function purgeTheMutant():void
 	
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
-	outputText(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".", true);
+	clearOutput();
+	outputText(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".");
 	test.clear();
 	doNext(deleteScreen);
 }
@@ -542,7 +548,8 @@ public function loadGame(slot:String):void
 	if (numProps < sfVer)
 	{
 		trace("Got " + numProps + " file properties -- failed!");
-		outputText("<b>Aborting load.  The current save file is missing a number of expected properties.</b>\n\n", true);
+		clearOutput();
+		outputText("<b>Aborting load.  The current save file is missing a number of expected properties.</b>\n\n");
 		
 		var backup:SharedObject = SharedObject.getLocal(slot + "_backup", "/");
 		
@@ -1220,7 +1227,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// There should be 124 root properties minimum in the save file. Give some wiggleroom for things that might be omitted? (All of the broken saves I've seen are MUCH shorter than expected)
 		if (numProps < versionProperties[ver])
 		{
-			outputText("<b>Aborting save.  Your current save file is broken, and needs to be bug-reported.</b>\n\nWithin the save folder for CoC, there should be a pair of files named \"" + slot + ".sol\" and \"" + slot + "_backup.sol\"\n\n<b>We need BOTH of those files, and a quick report of what you've done in the game between when you last saved, and this message.</b>\n\n", true);
+			clearOutput();
+			outputText("<b>Aborting save.  Your current save file is broken, and needs to be bug-reported.</b>\n\nWithin the save folder for CoC, there should be a pair of files named \"" + slot + ".sol\" and \"" + slot + "_backup.sol\"\n\n<b>We need BOTH of those files, and a quick report of what you've done in the game between when you last saved, and this message.</b>\n\n");
 			outputText("When you've sent us the files, you can copy the _backup file over your old save to continue from your last save.\n\n");
 			outputText("Alternatively, you can just hit the restore button to overwrite the broken save with the backup... but we'd really like the saves first!");
 			trace("Backup Save Aborted! Broken save detected!");
@@ -1232,8 +1240,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			backup.flush();
 		}
 		
-		if (!backupAborted)
-			outputText("Saved to slot" + slot + "!", true);
+		if (!backupAborted) {
+			clearOutput();
+			outputText("Saved to slot" + slot + "!");
+		}
 	}
 	else
 	{
@@ -1269,8 +1279,9 @@ public function restore(slotName:String):void
 	}
 	
 	overwriteFile.flush();
-	
-	outputText("Restored backup of " + slotName, true);
+
+	clearOutput();
+	outputText("Restored backup of " + slotName);
 	menu();
 	doNext(playerMenu);
 }
@@ -1329,13 +1340,15 @@ public function onFileLoaded(evt:Event):void
 	}
 	catch (error:Error)
 	{
-		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.\n\nLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.",true);
+		clearOutput();
+		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.\n\nLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.");
 	}
 }
 
 public function ioErrorHandler(e:IOErrorEvent):void
 {
-	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
+	clearOutput();
+	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.");
 	doNext(returnToSaveMenu);
 }
 
@@ -1351,7 +1364,8 @@ public function onDataLoaded(evt:Event):void
 	{
 		// I want to be able to write some debug stuff to the GUI during the loading process
 		// Therefore, we clear the display *before* calling loadGameObject
-		outputText("Loading save...", true);
+		clearOutput();
+		outputText("Loading save...");
 		trace("OnDataLoaded! - Reading data", loader, loader.data.readObject);
 		var tmpObj:Object = loader.data.readObject();
 		trace("Read in object = ", tmpObj);
@@ -1368,12 +1382,14 @@ public function onDataLoaded(evt:Event):void
 	}
 	catch (rangeError:RangeError)
 	{
-		outputText("<b>!</b> File is either corrupted or not a valid save", true);
+		clearOutput();
+		outputText("<b>!</b> File is either corrupted or not a valid save");
 		doNext(returnToSaveMenu);
 	}
 	catch (error:Error)
 	{
-		outputText("<b>!</b> Unhandled Exception", true);
+		clearOutput();
+		outputText("<b>!</b> Unhandled Exception");
 		outputText("[pg]Failed to load save. The file may be corrupt!");
 
 		doNext(returnToSaveMenu);

@@ -40,7 +40,7 @@ package classes.Scenes.Areas.Forest
 					outputText("With effort you manage to wrench your eyes away from the inviting folds of Tamani's vagina.  ");
 					if(player.totalCocks() > 1) outputText("Each of y");
 					else outputText("Y");
-					outputText("our " + multiCockDescriptLight(), false);
+					outputText("our " + multiCockDescriptLight());
 					if(player.lust > 80) outputText(" drips pre-cum");
 					else if(player.lust > 40) outputText(" grows harder");
 					else outputText(" hardens");
@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Forest
 				else {
 					outputText("Struggling, you pull your eyes back into your head and away from Tamani's gorgeous slit.  You shudder, feeling ");
 					if(player.totalCocks () > 1) outputText("each of ");
-					outputText("your " + player.multiCockDescriptLight(), false);
+					outputText("your " + player.multiCockDescriptLight());
 					if(player.lust <= 41) outputText(" thicken perceptibly");
 					else if(player.lust <= 81) outputText(" twitch eagerly");
 					else outputText("drip pre-cum");
@@ -64,13 +64,13 @@ package classes.Scenes.Areas.Forest
 				if(selector == 0) {
 					outputText("You barely manage to step yourself from lunging forward to bury your mouth between your mistress's legs.  Hard and trembling between your legs, ");
 					if(player.totalCocks() > 1) outputText("each of ");
-					outputText("your " + player.multiCockDescriptLight() + " aches with need.  You battle with the compulsion to kneel before your short, stacked mistress and perform your duties as her breeder husband.", false);
+					outputText("your " + player.multiCockDescriptLight() + " aches with need.  You battle with the compulsion to kneel before your short, stacked mistress and perform your duties as her breeder husband.");
 				}
 				else {
 					outputText("You wrench your gaze from the juicy mound before you with great difficulty.  The desire to submit to your wife and fuck her on the spot rages through your body, melting your resistance into liquid lust and pooling it in your groin.  ");
 					if(player.totalCocks() > 1) outputText("Each of y");
 					else outputText("Y");
-					outputText("our " + player.multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
+					outputText("our " + player.multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.");
 				}
 			}
 			game.dynStats("lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));

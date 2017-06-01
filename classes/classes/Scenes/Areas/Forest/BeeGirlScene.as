@@ -183,7 +183,7 @@ package classes.Scenes.Areas.Forest
 					outputText("You wrap your arms around your insectoid lover from the shock of the stimulation as each of the knots bumps against your " + clitDescript() + " and then run against the inner walls of your " + vaginaDescript(0) + ".");
 					player.cuntChange(25, true);
 					outputText("  Your unearthly partner proceeds to use one hand to massage and tweek your " + clitDescript() + ", while the other moves to play with your " + chestDesc() + ".  Not wanting to be left behind, you bring your own ministrations into the mix on the bee girl’s own chest, and her currently neglected honeypot.  In moments, she gasps from the multitude of different sensations, and grabs onto your body in the same way you just were holding onto hers.\n\n");
-					outputText("You rub your abdomen, feeling her ovipositor deep inside you.  You smile, it’s time to pick up the pace and lift up your body, then drop it back down, impaling yourself on the intruder.  You love every second of it, but the sensations aren’t as overwhelming as the handmaiden seems to be finding them.  All she can do at this point is hold onto you as tightly as she can, unable to to do anything else at this point as she pants, moans, and screams from the sensation overload from her ovipositor.  Suddenly there is a sharp stinging feeling in your " + nippleDescript(0) + " as the bee girl bites down in orgasm, causing you to be pushed over the edge as well.  " + (player.vaginas[0].vaginalWetness >= CoC.VAGINA_WETNESS_WET ? "This leads to you liberally drenching your lower body and hers with" : "This brings out a small spray of") + " girl fluids from your " + vaginaDescript(0) + ".  A few minutes later, the bee girl finally recovers.  It seems that she is looking forward to the next meeting between you two as well.  Leaving you with <i>“Next time, we’re putting that to itzzz proper uzzze!”</i> and a happy wave.");
+					outputText("You rub your abdomen, feeling her ovipositor deep inside you.  You smile, it’s time to pick up the pace and lift up your body, then drop it back down, impaling yourself on the intruder.  You love every second of it, but the sensations aren’t as overwhelming as the handmaiden seems to be finding them.  All she can do at this point is hold onto you as tightly as she can, unable to to do anything else at this point as she pants, moans, and screams from the sensation overload from her ovipositor.  Suddenly there is a sharp stinging feeling in your " + nippleDescript(0) + " as the bee girl bites down in orgasm, causing you to be pushed over the edge as well.  " + (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET ? "This leads to you liberally drenching your lower body and hers with" : "This brings out a small spray of") + " girl fluids from your " + vaginaDescript(0) + ".  A few minutes later, the bee girl finally recovers.  It seems that she is looking forward to the next meeting between you two as well.  Leaving you with <i>“Next time, we’re putting that to itzzz proper uzzze!”</i> and a happy wave.");
 			}
 			else {
 				outputText("You brush her long hair out of her eyes and point out that you can’t actually have sex with her, since you don’t have any genitals.  She gently shushes you with a finger to your lips and says, <i>“That izzz for the bezzzt.  Thizzz way you don’t get dizzztracted by lezzzer partzzz.”</i>  She gently runs her fingers over your body, " + (player.beeScore() > 0 ? "paying special attention to your bee like alterations.  She seems to really like them, and you wonder if maybe she’ll do something special for you if you get more?" : "teasing every sensitive spot of your body that she can find.") + "  Your own fingers carefully explore her body.  It’s a unique sensation, the feel of her fine downy fuzz, and the slightly moist but almost rubbery texture of her exoskeleton.\n\n");
@@ -216,7 +216,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The bee girl pulls back from you after a few minutes and pulls her abdomen between her fuzzy legs, letting it rest wedged between them.  With a delicate hand, she gently rubs her finger along a differently textured part of her carapace close to the base of the stinger.  In a moment, a knotted appendage emerges from it, her ovipositor.  She lies down on her back, and indicates that you should mount her lubricated organ with your " + assholeDescript() + ".  You take another steadying breath and gently lower yourself onto the organ.  As you feel each knot pass inside you, your partner gives a gentle buzz of pleasure.\n\n");
 			if (player.analCapacity() < 25) {
 				outputText("Inserting the organ into your body is a slow but sure process.  The lubrication makes it much easier to get the organ inside you, but you can definitely feel it stretching your rear entrance out.  ");
-				if (player.ass.analLooseness == CoC.ANAL_LOOSENESS_VIRGIN)
+				if (player.ass.analLooseness == ANAL_LOOSENESS_VIRGIN)
 					outputText("<b>Well, at least you’re losing your anal virginity willingly.  That’s something to be said in this world.</b>");
 				else outputText("<b>Your " + assholeDescript() + " has become looser thanks to the knotted appendage penetrating you.</b>");
 				player.buttChange(25, true);
@@ -412,7 +412,7 @@ package classes.Scenes.Areas.Forest
 			if (attitude == BEE_GIRL_TALKED_AND_LEFT || attitude == BEE_GIRL_TALKED_AND_LEFT_TWICE) attitude = BEE_GIRL_TALKED; //Reset your friendly conversation path if autorape or accepted
 			//TAUR SPECIAL!
 			if (player.isTaur()) {
-				outputText("As if you have lost control of your body, you trot up beside her, utterly entranced by the sweet smell pervading the area. She assesses your strange body, walking in circles around you while stroking you with her chitin covered hands. When she reaches your flank she lifts your tail and traces around your " + assholeDescript() + ", smearing a bit of honey inside and causing you to shiver. The sensation is mind numbing and you find yourself hugging a tree to support yourself. Evidently satisfied with what she's seen, the bee-girl walks in front of you and smears more honey all over the tree you're holding. You lick it without a second thought, the smell quickly overpowering whatever sense you had left. Seeing this, the bee-girl giggles and pats you, moving back toward your flank.\n\n", false);
+				outputText("As if you have lost control of your body, you trot up beside her, utterly entranced by the sweet smell pervading the area. She assesses your strange body, walking in circles around you while stroking you with her chitin covered hands. When she reaches your flank she lifts your tail and traces around your " + assholeDescript() + ", smearing a bit of honey inside and causing you to shiver. The sensation is mind numbing and you find yourself hugging a tree to support yourself. Evidently satisfied with what she's seen, the bee-girl walks in front of you and smears more honey all over the tree you're holding. You lick it without a second thought, the smell quickly overpowering whatever sense you had left. Seeing this, the bee-girl giggles and pats you, moving back toward your flank.\n\n");
 				outputText("She beats her wings with a visible effort and drags herself onto your back, taking a moment to rest. The soft humming she emits seems to make her whole body vibrate and you delight in the oddness of the sensation. A stinger slowly emerges from her abdomen, as well as a thick knot-like organ, both covered in a sweet smelling lubricant. You don't protest as her stinger injects what feels like liquid lust into you, causing a rush of blood to your hindquarters and your anus to relax completely.\n\n");
 				outputText("With no warning, she inserts the thick, lengthy appendage and knot inside of you. Her 'cock' slips in slowly, your relaxed sphincter easily taking the entirety while you continue to lap at the copious amounts of honey she so graciously smeared on the tree for you.\n\n");
 				outputText("Her ovipositor begins to pump even more of the aphrodisiac-like fluid into your rectum as it works its way further and further inside you. She hums louder and the vibrations on your back grow stronger as large spherical objects begin injecting themselves into you.\n\n");
@@ -422,27 +422,27 @@ package classes.Scenes.Areas.Forest
 					if (player.gender == 1) {
 						outputText("You grasp ");
 						if (player.cockTotal() > 1) outputText("one of ");
-						outputText("your engorged " + multiCockDescriptLight() + " and jerk it off violently, cumming again and again as the bee-girl violates your " + assholeDescript() + ".  ", false);
+						outputText("your engorged " + multiCockDescriptLight() + " and jerk it off violently, cumming again and again as the bee-girl violates your " + assholeDescript() + ".  ");
 						//[Without testicles:
 						if (player.balls == 0) outputText("With your cock quivering and spasming you continue to lap at the honey covered tree until the vibrating bee-girl finishes.  ");
 						//[With testicles:
 						else outputText("With your cock quivering and spasming semen erupts from the tip.  ");
 						//[Little-normal cum amount:
-						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles the base of the tree and tiny puddles form underneath you as you groan in satisfaction.\n\n", false);
+						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles the base of the tree and tiny puddles form underneath you as you groan in satisfaction.\n\n");
 						//[Huge cum amount:
-						else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating the base of the tree along with a number of the ones behind it. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n", false);
+						else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating the base of the tree along with a number of the ones behind it. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n");
 					}
 					//[Herm (bypasses the bucking scene):
 					else if (player.gender == 3) {
-						outputText("You grasp your engorged " + multiCockDescriptLight() + " and jerk it off violently, cumming again and again as the bee-girl violates your " + assholeDescript() + " and your " + vaginaDescript(0) + " pumps out enough femcum to drench your hind legs.  ", false);
+						outputText("You grasp your engorged " + multiCockDescriptLight() + " and jerk it off violently, cumming again and again as the bee-girl violates your " + assholeDescript() + " and your " + vaginaDescript(0) + " pumps out enough femcum to drench your hind legs.  ");
 						//[Without testicles:
-						if (player.balls == 0) outputText("With your cock quivering and spasming and your untended to " + vaginaDescript(0) + " squirting repeatedly, you continue to lap at the honey covered tree until the vibrating bee-girl finishes.  ", false);
+						if (player.balls == 0) outputText("With your cock quivering and spasming and your untended to " + vaginaDescript(0) + " squirting repeatedly, you continue to lap at the honey covered tree until the vibrating bee-girl finishes.  ");
 						//[With testicles:
 						else outputText("With your cock quivering and spasming semen erupts from the tip.  ");
 						//[Little-normal cum amount:
-						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles the base of the tree and tiny puddles form underneath you as you groan in satisfaction.\n\n", false);
+						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles the base of the tree and tiny puddles form underneath you as you groan in satisfaction.\n\n");
 						//[Huge cum amount:
-						else outputText(SMultiCockDesc() + " goes off like a firehouse, coating the base of the tree along with a number of the ones behind it. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n", false);
+						else outputText(SMultiCockDesc() + " goes off like a firehouse, coating the base of the tree along with a number of the ones behind it. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n");
 					}
 					//[Genderless (if gender() = 0?):
 					else {
@@ -454,14 +454,14 @@ package classes.Scenes.Areas.Forest
 				//Route 1 
 				else {
 					//[Male:
-					if (player.gender == 1) outputText("Your inability to reach your engorged " + multiCockDescriptLight() + " quickly becomes a problem as the pleasure from the bee-maiden's scent courses through you. You ache to be tended to, gushing out pre.", false);
+					if (player.gender == 1) outputText("Your inability to reach your engorged " + multiCockDescriptLight() + " quickly becomes a problem as the pleasure from the bee-maiden's scent courses through you. You ache to be tended to, gushing out pre.");
 					//[Female:
-					else if (player.gender == 2) outputText("Your inability to reach your " + vaginaDescript(0) + " quickly becomes a problem as the pleasure from the bee maiden's scent courses through you, it starts reflexively rippling, trying to milk the cock it so desperately wants while your " + clitDescript() + " quivers.", false);
+					else if (player.gender == 2) outputText("Your inability to reach your " + vaginaDescript(0) + " quickly becomes a problem as the pleasure from the bee maiden's scent courses through you, it starts reflexively rippling, trying to milk the cock it so desperately wants while your " + clitDescript() + " quivers.");
 					//[Herm:
-					else if (player.gender == 3) outputText("Your inability to reach your engorged " + multiCockDescriptLight() + " quickly becomes a problem as the pleasure from the bee maiden's scent courses through you. It aches to be tended to, gushing out pre. Your " + clitDescript() + " quivers, desperate for contact as your vagina starts reflexively rippling, trying to milk the cock it isn't going to get.", false);
+					else if (player.gender == 3) outputText("Your inability to reach your engorged " + multiCockDescriptLight() + " quickly becomes a problem as the pleasure from the bee maiden's scent courses through you. It aches to be tended to, gushing out pre. Your " + clitDescript() + " quivers, desperate for contact as your vagina starts reflexively rippling, trying to milk the cock it isn't going to get.");
 					//[With breasts: 
 					if (player.biggestTitSize() > 1) {
-						outputText("  You begin pounding away at your " + kGAMECLASS.player.allBreastsDescript() + " in an attempt to alleviate the pressure in your inaccessible groin.", false);
+						outputText("  You begin pounding away at your " + kGAMECLASS.player.allBreastsDescript() + " in an attempt to alleviate the pressure in your inaccessible groin.");
 						//[Fuckable breasts:
 						if (player.hasFuckableNipples()) outputText("  Your fingers slip in and out of them, sending femcum flying everywhere. But the effects of the bee's honey appear to prevent you from getting off.");
 						//[Other:
@@ -469,73 +469,73 @@ package classes.Scenes.Areas.Forest
 					}
 					outputText("\n\n");
 
-					outputText("The stimulation grows too painful and you begin to buck wildly. The bee-girl holds on desperately, her stinger still lodged in your " + assholeDescript() + " and pumping fluids. She seems to realize the problem though and attempts to solve it.  ", false);
+					outputText("The stimulation grows too painful and you begin to buck wildly. The bee-girl holds on desperately, her stinger still lodged in your " + assholeDescript() + " and pumping fluids. She seems to realize the problem though and attempts to solve it.  ");
 					//[Male:
 					if (player.gender == 1) {
-						outputText("Her legs wrap around your body and her 'feet' clasp onto your " + multiCockDescriptLight() + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
+						outputText("Her legs wrap around your body and her 'feet' clasp onto your " + multiCockDescriptLight() + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ");
 						//[Without testicles:
-						if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ", false);
+						if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ");
 						//[With testicles:
-						else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ", false);
+						else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ");
 						//[Little-normal cum amount:
-						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n", false);
+						if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n");
 						//[Huge cum amount:
-						else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n", false);
+						else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n");
 					}
 					//[Female:
 					else if (player.gender == 2) {
-						outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
+						outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ");
 						//[Tiny-normal clit:
-						if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+						if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ");
 						//[Cock-like clit:
-						else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ", false);
+						else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ");
 						outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n");
 					}
 					//[Herm:
 					else if (player.gender == 3) {
 						//[Same as male followed by:]
 						if (rand(2) == 0) {
-							outputText("Her legs wrap around your body and her 'feet' clasp onto your " + multiCockDescriptLight() + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
+							outputText("Her legs wrap around your body and her 'feet' clasp onto your " + multiCockDescriptLight() + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ");
 							//[Without testicles:
-							if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ", false);
+							if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ");
 							//[With testicles:
-							else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ", false);
+							else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ");
 							//[Little-normal cum amount:
-							if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n", false);
+							if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n");
 							//[Huge cum amount:
-							else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n", false);
+							else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n");
 
-							outputText("Thinking you still not satisfied, she pulls her 'feet' up slightly and she begins to rub your " + vaginaDescript(0) + ".  ", false);
+							outputText("Thinking you still not satisfied, she pulls her 'feet' up slightly and she begins to rub your " + vaginaDescript(0) + ".  ");
 							// [Same as female without intro]
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ");
 							//[Cock-like clit:
-							else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ", false);
+							else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ");
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.");
 						}
 						//- OR -
 						//[Same as female followed by:]
 						else {
-							outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
+							outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ");
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + clitDescript() + " cause a gush of fluids from your " + vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ");
 							//[Cock-like clit:
-							else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ", false);
+							else outputText("She quickly finds your " + clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + vaginaDescript(0) + " gushes fluid.  ");
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n");
 
-							outputText("Thinking you're still not satisfied, she lowers her 'feet' slightly and she begins to rub your " + multiCockDescriptLight() + ".  ", false);
+							outputText("Thinking you're still not satisfied, she lowers her 'feet' slightly and she begins to rub your " + multiCockDescriptLight() + ".  ");
 							//[Same as male without intro]
 							//[Without testicles:
-							if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ", false);
+							if (player.balls == 0) outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming.  ");
 							//[With testicles:
-							else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ", false);
+							else outputText("You cum violently, your " + multiCockDescriptLight() + " quivering and spasming while semen erupts from the tip.  ");
 							//[Little-normal cum amount:
-							if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n", false);
+							if (player.cumQ() < 100) outputText("You spurt out more cum than you thought your " + ballsDescriptLight() + " could hold. White speckles your underside and tiny puddles form underneath you as you groan in satisfaction.\n\n");
 							//[Huge cum amount:
-							else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n", false);
+							else outputText("Your " + ballsDescriptLight() + " goes off like a firehouse, coating your underside with white and dripping down your front legs. Soon you're standing in a massive puddle of your own splooge, the scent threatening to overpower that of the honey. The bee-girl compensates by splashing more onto your back, causing you to release yet another burst of thick white cum.\n\n");
 						}
 					}
-					outputText("After hours of her forcefully filling your hole, her stinger pumping what feels like gallons of her bee-seed into your bowels while awkwardly dealing with your needs; she finally pulls out. She smiles and lies down on your back and your legs finally give out from exhaustion.\n\n", false);
+					outputText("After hours of her forcefully filling your hole, her stinger pumping what feels like gallons of her bee-seed into your bowels while awkwardly dealing with your needs; she finally pulls out. She smiles and lies down on your back and your legs finally give out from exhaustion.\n\n");
 					outputText("When you awaken, you're covered in honey and what you can only assume is the lubrication from her ovipositor. You stand with a bit of a struggle and notice that in your wild state you seem to have devastated the little clearing, as it's covered with broken trees and trampled plants. A thin trail of honey leads away from the devastation into the undergrowth.");
 				}
 				player.orgasm();
@@ -579,8 +579,8 @@ package classes.Scenes.Areas.Forest
 				//Coochie talk!
 				else {
 					if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET)outputText("centering around your now puffy vulva.  ");
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING)outputText("growing more potent around your " + vaginaDescript(0) + " as it begins to leak with the honey of your desire.  ", false);
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("inflaming your " + vaginaDescript(0) + " with need, and allowing a river of your wetness to gush from between your puffy vulva.  ", false);
+					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING)outputText("growing more potent around your " + vaginaDescript(0) + " as it begins to leak with the honey of your desire.  ");
+					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("inflaming your " + vaginaDescript(0) + " with need, and allowing a river of your wetness to gush from between your puffy vulva.  ");
 				}
 				//Boobies!
 				if (player.biggestTitSize() > 1) {
@@ -598,13 +598,13 @@ package classes.Scenes.Areas.Forest
 				}
 				//Continue as normal!
 				outputText("Instinctively, your butt clenches as a wet presence presses tightly against it.  You try to gather your thoughts, but a particularly forceful hum drives them away and totally relaxes you, allowing the bulbous thickness of her ovipositor to slip inside you.   Slowly at first, then with increasing urgency, the bee-girl rocks it further and further inside of you, humming happily and placing a handful of honey before you.   Your tongue darts forwards of its own accord, lapping at the honey");
-				if (player.vaginas.length > 0) outputText(" as your hand is guided to your " + vaginaDescript(0), false);
+				if (player.vaginas.length > 0) outputText(" as your hand is guided to your " + vaginaDescript(0));
 				outputText(".\n\n");
 				//Cum text
 				if (player.vaginas.length > 0) outputText("Your fingers dance over your clit as you lap up her honey");
 				else outputText("Your fingers explore every inch of both your bodies as you lap up her honey");
 				outputText(", your hips writhing and squirming underneath your insectile lover.  A pressure builds in your ass as fluids begin flowing into your rectum, triggering a body-shaking orgasm that rolls your eyes back into your head.  You come down, but the lust in your veins hasn't dissipated – in fact between being pumped full of honey-spooge");
-				if (player.vaginas.length > 0) outputText(", the constant aphrodisiac honey you're mindlessly devouring, and your fingers' instinctual ravaging of your " + vaginaDescript(0) + ", ", false);
+				if (player.vaginas.length > 0) outputText(", the constant aphrodisiac honey you're mindlessly devouring, and your fingers' instinctual ravaging of your " + vaginaDescript(0) + ", ");
 				else outputText(" and the constant aphrodisiac honey you're mindlessly devouring, ");
 				outputText("you drive yourself to orgasm after orgasm.  For hours you lie there, licking, masturbating, and allowing your backside to be slowly filled with sweet fluid and the occasional bump of what you can only assume is an egg.\n\n");
 				//Recovery
@@ -698,15 +698,15 @@ package classes.Scenes.Areas.Forest
 			outputText("Her face breaks into a wide knowing smile.  <i>“Hello again, my fine cocked friend,”</i> she says rising and gently hovering over to you.  <i>“You know, the queen izzz eagerly waiting to meet you.  Zzzhe will be able to take care of you much better than I ever could, but I think we can zzztill zzzpend zzzome time together if you’re up for it.”</i>\n\n");
 			outputText("You look at her a bit confused, unsure exactly what she is telling you.  <i>“Zzzzilly boy, I’ve been telling the queen about our meetingzzz, and zzzhe is eager to aczzzzept you into the hive!”</i>  She moves forward and pulls your " + player.armorName + " from your body and gently rubs your " + player.cockDescript(0) + ".  <i>“I told you that only a queen bee could help you with zzzomething thizzz big, and you’ll be able to fill her with it and fertilize all her eggzzz.  Thizzz izzz the releazzze you’ve been craving all thizzz time, come on!”</i>\n\n");
 			outputText("Her offer intrigues you incredibly, and you can’t imagine turning her down, not now.  Once, you might have been able to turn away from it, but now that you’ve got this bee prick and have felt the release that bee’s honey gives you, there's just no way.  You nod eagerly to the bee girl and \n\n");
-			if (player.wingType == CoC.WING_TYPE_BEE_LIKE_LARGE) {
+			if (player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
 				outputText("spread your wings.  She takes your hand and before rising up into the air and leading you home.\n\n");
 			}
 			else {
 				outputText("accept the bottle of special honey that she hands you which you down in an instant.  ");
-				if (player.wingType == CoC.WING_TYPE_NONE) {
+				if (player.wingType == WING_TYPE_NONE) {
 					outputText("At once your back starts to tingle, and a pair of bee wings erupt behind you, they quickly grow large and with a few experimental flaps you find that they can carry your weight.");
 				}
-				else if (player.wingType == CoC.WING_TYPE_BEE_LIKE_SMALL) {
+				else if (player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
 					outputText("Your wings tingle before suddenly growing much larger.  You test them for a moment finding that they are now big enough to allow you to fly!");
 				}
 				else {
@@ -862,9 +862,9 @@ package classes.Scenes.Areas.Forest
 			else outputText("You barely keep yourself from jumping her in your excitement, but you manage to stay where you are so she can make the first move.");
 			if (player.hasVagina()) {
 				outputText("  <i>“Repeat after me.”</i>  She intones before giving a soft buzzing giggle and slips one of her hands into her honey pot and liberally covers it in her private sweetness.  You follow suit slipping your fingers to your " + vaginaDescript(0) + " and ");
-				if (player.wetness() <= CoC.VAGINA_WETNESS_NORMAL)
+				if (player.wetness() <= VAGINA_WETNESS_NORMAL)
 					outputText("barely");
-				else if (player.wetness() <= CoC.VAGINA_WETNESS_SLICK)
+				else if (player.wetness() <= VAGINA_WETNESS_SLICK)
 					outputText("easily");
 				else outputText("liberally");
 				outputText(" cover them with your own fluids.\n\n");
@@ -984,7 +984,8 @@ package classes.Scenes.Areas.Forest
 		{
 			spriteSelect(6);
 			player.slimeFeed();
-			outputText("You mull her offer over for a moment before deciding to pursue the sweet nectar dripping from her exposed sex.  She leans back in her flower, spreading her legs obscenely and pulling an empty vial out from a tiny pack that sits on the ground.\n\n", true);
+			clearOutput();
+			outputText("You mull her offer over for a moment before deciding to pursue the sweet nectar dripping from her exposed sex.  She leans back in her flower, spreading her legs obscenely and pulling an empty vial out from a tiny pack that sits on the ground.\n\n");
 			outputText("\"<i>Here, take thizzz,</i>\" she says, handing you the crystal vial, \"<i>When I cum you will want to zzzave the excess honey... once it has cooled, it will be able to do amazzzing thingzzz to... for you.</i>\"\n\n");
 			outputText("You take the vial absently as you kneel between her legs and take in deep breaths of the scent.  It fills your head and groin with its warmth and sticky sweetness.  You part your lips, leaning ever closer to her delicate flower, tensing with anticipation.  When your tongue finally meets the slickened surface of her vulva you swoon.  The taste is better than anything you've ever experienced - sweet, pure, and yet totally sexual.  You dart over her clit, and are rewarded with a burst of heavenly sweetness.  The maddening taste of her ambrosia gets in your veins – you NEED more and you attack her honeypot mercilessly, until at last she squeals in orgasm, clamping her fuzz-covered thighs around your head.\n\n");
 			outputText("The force of her orgasm splatters you with the honey, far more than you could possibly try to lap up. You dimly remember the vial she gave to you, and steady it under the dripping fluid.  You catch as much of her sweetness as you can while still mashing your face against her quivering cunt.  You are in heaven, but after a time she pushes you back, smiling contentedly.  Her free hand offers you a small cork.   You reluctantly accept it and cap off the pure honey to save for later.\n\n");
@@ -999,12 +1000,12 @@ package classes.Scenes.Areas.Forest
 			if (player.gender == 3) {
 				outputText("Panting, your arousal evident, you stand defiant before the bee-girl. She looks at you quizzically, shifting her head ot the side. You feel the pheromones thicken in the air, the desire to surrender yourself to her rising. You bite it back and steel yourself, your willpower coming through.  Surprisingly, the bee-girl smiles.  Her stance becomes relaxed, and she begins to walk towards you.  You shift your guard slightly, on edge, yet losing a bit of tension.  ");
 				outputText("As she draws near you see her smile at you and you feel the genuine warmth in it. She brings her hand to your cheek, gently caressing it before leaning in to kiss you. You relax fully, your hands resting on her hips as you return the kiss. She breaks it, still smiling. Her hand trails down your chest, cupping your breast briefly before ");
-				if (player.isTaur()) outputText(" leaning between your knees to reach your bulging member.\n\nShe drops to her own knees, gazing at your " + cockDescript(0) + " before", false);
+				if (player.isTaur()) outputText(" leaning between your knees to reach your bulging member.\n\nShe drops to her own knees, gazing at your " + cockDescript(0) + " before");
 				else outputText(" continuing , sliding to the front of your pants to feel your bulging member.\n\nShe falls to her knees, sliding your cock free before");
 				outputText(" running her tongue over the length. She slips her lips over the tip, gently sucking before sliding it entirely into her mouth. You can do little but moan, your hands gripping her head as she sucks and licks. Her hands squeeze the base of your shaft, stroking it");
 				if (player.balls > 0) outputText(", sliding down and over your balls,");
 				outputText(" until her fingers begin to play with the lips of your pussy. A groan escapes your open mouth as she slides a finger inside, your pussy clenching tightly and dribbling juices onto her hands.\n\n");
-				outputText("Pulling back, she releases your " + cockDescript(0) + ", now slick with her saliva. She lies on her back, her legs spread wide with he abdomen laying flat against the ground. Her hands urge you forward, and you follow immediately. Her body is soft and accepting, and you quickly slide the head of your " + cockDescript(0) + " into her pussy lips, a mutual moan escaping from both of your lips. Pushing further in, the bee-girl wraps her arms around you, holding you against her as you begin to thrust. Each push makes her wetter, the slickness making your cock slide faster and faster. She arches her back and you feel the tip of her stinger against your " + vaginaDescript(0) + ". Before you can protest, it pushes in, gently but quickly, until it pierces your cervix.\n\n", false);
+				outputText("Pulling back, she releases your " + cockDescript(0) + ", now slick with her saliva. She lies on her back, her legs spread wide with he abdomen laying flat against the ground. Her hands urge you forward, and you follow immediately. Her body is soft and accepting, and you quickly slide the head of your " + cockDescript(0) + " into her pussy lips, a mutual moan escaping from both of your lips. Pushing further in, the bee-girl wraps her arms around you, holding you against her as you begin to thrust. Each push makes her wetter, the slickness making your cock slide faster and faster. She arches her back and you feel the tip of her stinger against your " + vaginaDescript(0) + ". Before you can protest, it pushes in, gently but quickly, until it pierces your cervix.\n\n");
 				outputText("You cry out as she releases her aphrodisiac venom directly into your deepest recess, flooding you with warmth. You kiss her, your tongues playing against each other as you increase the pace of your thrusts, pushing deeper and deeper inside of her. The bee-girl starts to grunt and groan, her body tensing as effort plays over her face.  ");
 				//UNUSED OPTION VAG PREGGERS
 				//outputText("You can feel pressure building against your pussy lips, her stinger bulging as something slips inside of you. Gasping, you feel it push deeper and deeper inside, until it finaly deposits itself into your womb, the heavy feeling oddly comforting.  ");
@@ -1029,23 +1030,23 @@ package classes.Scenes.Areas.Forest
 			if (player.isTaur()) {
 				//Damage:
 				if (player.HP < 1) {
-					outputText("The bee-girl smirks at you and approaches. Her chitin covered hand slides along your flank and you shiver with anticipation. She slaps your haunch, hard, and you reflexively buck. Displeased, she gives you a shove and you run into a tree. A honey covered hand is rammed inside your " + assholeDescript() + " and you grab the tree for support.\n\n", false);
+					outputText("The bee-girl smirks at you and approaches. Her chitin covered hand slides along your flank and you shiver with anticipation. She slaps your haunch, hard, and you reflexively buck. Displeased, she gives you a shove and you run into a tree. A honey covered hand is rammed inside your " + assholeDescript() + " and you grab the tree for support.\n\n");
 
 					outputText("She tests the insides of your ass for a bit before pulling her arm out. She knocks out your hind legs and you land hard, your front ones not capable of holding the weight and your grip on the tree is too weak to provide much help.\n\n");
 
-					outputText("With you thoroughly incapacitated, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind altering honey. She obliges you by splashing some onto your face and you quickly begin lapping at it with your tongue.\n\n", false);
+					outputText("With you thoroughly incapacitated, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind altering honey. She obliges you by splashing some onto your face and you quickly begin lapping at it with your tongue.\n\n");
 					//Male with testicles:
 					if (player.gender == 1 && player.balls > 0) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
 						outputText("She can't see that, of course, and busies herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n");
 
 						outputText("Your stomach churns as you see four more bee maidens appear out of the undergrowth, stingers exposed and glistening with a clear fluid. The bee on your back stabs with her own stinger and you turn away again, desperately licking at the honey in an attempt to deal with the awful heat in your lower body.\n\n");
 
-						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n", false);
+						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n");
 
-						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n", false);
+						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n");
 
-						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick at your " + ballsDescriptLight() + " with their feet.\n\n", false);
+						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick at your " + ballsDescriptLight() + " with their feet.\n\n");
 
 						outputText("You shudder and shake as the painful beating continues, your balls burning with pent up seed and your cock writhing under the combined weight atop it. You sigh with relief as you feel your testicles release their load, but it can't escape: <b>your urethra is constricted too much</b>!\n\n");
 
@@ -1053,160 +1054,160 @@ package classes.Scenes.Areas.Forest
 						//[If huge cum amount:
 						if (player.cumQ() > 1500) {
 							outputText("You awake in a massive puddle of cum, the scent so strong that it almost causes you to pass out again. You manage to stay conscious long enough to stagger to your hooves and wobbly walk away, grasping trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						//[All other cum amounts:
 						else {
 							outputText("You awake in a puddle of cum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						player.orgasm();
 						dynStats("int", -.5);
 					}
 					//[Male without testicles:
 					else if (player.gender == 1 && player.balls == 0) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
 
 						outputText("She can't see that, of course, and busies herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n");
 
 						outputText("Your stomach churns as you see four more bee maidens appear out of the undergrowth, stingers exposed and glistening with a clear fluid. The bee on your back stabs with her own stinger and you turn away again, desperately licking at the honey in an attempt to deal with the awful heat in your lower body.\n\n");
 
-						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n", false);
+						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n");
 
-						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n", false);
+						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n");
 
 						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick at where your balls ought to be with their feet.\n\n");
 
 						outputText("The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
-						outputText("When you awake, despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+						outputText("When you awake, despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						dynStats("int", -.5, "lus=", 100);
 					}
 					//[Female:
 					else if (player.gender == 2) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n");
 
 						outputText("She pays no attention to that though, and busies herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n");
 
 						outputText("Your stomach churns as you see four more bee maidens appear out of the undergrowth, stingers exposed and glistening with a clear fluid. The bee on your back stabs with her own stinger and you turn away again, desperately licking at the honey in an attempt to deal with the awful heat in your lower body.\n\n");
 
-						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n", false);
+						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n");
 
-						outputText("The sensation proves too much for your massively engorged " + clitDescript() + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n", false);
+						outputText("The sensation proves too much for your massively engorged " + clitDescript() + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you and the weight of the bee-girls preventing you from getting the leverage needed to hump the hard ground.\n\n");
 
-						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick at where your balls ought to be with their feet. A handful of blows land on your " + clitDescript() + " and you cum hard, squirting behind you with surprising force.\n\n", false);
+						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick at where your balls ought to be with their feet. A handful of blows land on your " + clitDescript() + " and you cum hard, squirting behind you with surprising force.\n\n");
 
 						outputText("The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
 						//[If huge cum amount:
 						if (player.wetness() == 5) {
 							outputText("You awake in a massive puddle of femcum, the scent so strong that it almost causes you to pass out again. You manage to stay conscious long enough to stagger to your hooves and wobbly walk away, grasping trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						//[All other cum amounts:
 						else {
 							outputText("You awake in a puddle of femcum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						dynStats("int", -.5, "lus=", 100);
 					}
 					//[Herm:
 					else if (player.gender == 3) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard and your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard and your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n");
 
 						outputText("She can't see your cock, of course, and pays no attention to your outbursts of fluid, instead busying herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n");
 
 						outputText("Your stomach churns as you see four more bee maidens appear out of the undergrowth, stingers exposed and glistening with a clear fluid. The bee on your back stabs with her own stinger and you turn away again, desperately licking at the honey in an attempt to deal with the awful heat in your lower body.\n\n");
 
-						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n", false);
+						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n");
 
-						outputText("The sensations prove too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " and sopping " + vaginaDescript(0) + " to take and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground and the other is hopelessly out of reach.\n\n", false);
+						outputText("The sensations prove too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " and sopping " + vaginaDescript(0) + " to take and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground and the other is hopelessly out of reach.\n\n");
 
-						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + vaginaDescript(0), false);
-						if (player.balls > 0) outputText(" and " + ballsDescriptLight(), false);
+						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + vaginaDescript(0));
+						if (player.balls > 0) outputText(" and " + ballsDescriptLight());
 						outputText(".\n\n");
 
-						outputText("A handful of blows land on your " + clitDescript() + " and you cum hard, squirting behind you with surprising force and splattering your underside with jism. The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n", false);
+						outputText("A handful of blows land on your " + clitDescript() + " and you cum hard, squirting behind you with surprising force and splattering your underside with jism. The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
 						//[If huge cum amount:
 						if (player.cumQ() > 1500 || player.wetness() >= 5) {
 							outputText("You awake in a massive puddle of various sexual fluids, the scent so strong that it almost causes you to pass out again. You manage to stay conscious long enough to stagger to your hooves and wobbly walk away, grasping trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						//[All other cum amounts:
 						else {
 							outputText("You awake in a puddle of various sexual fluids, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
-							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
 						dynStats("int", -.5, "lus=", 100);
 					}
 					//[Genderless:
 					else {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + assholeDescript() + " to wink.\n\n", false);
-						outputText("She can't see your " + assholeDescript() + ", of course, and pays no attention to your outbursts, instead busying herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + assholeDescript() + " to wink.\n\n");
+						outputText("She can't see your " + assholeDescript() + ", of course, and pays no attention to your outbursts, instead busying herself with something on your back. A loud unpleasant buzzing fills the air and you manage to break free of the control of the honey long enough to twist around.\n\n");
 						outputText("Your stomach churns as you see four more bee maidens appear out of the undergrowth, stingers exposed and glistening with a clear fluid. The bee on your back stabs with her own stinger and you turn away again, desperately licking at the honey in an attempt to deal with the awful heat in your lower body.\n\n");
 
-						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n", false);
+						outputText("Chitin covered arms begin stroking and scraping at you as you close your eyes as hard as possible, having exhausted your face of the mind numbing honey. Your pain and lust filled mind comes up with an idea and you quickly act; rubbing your sticky " + chestDesc() + " against the tree before swinging your head down violently and gnawing at it.\n\n");
 
 						outputText("The sensations prove too much for you to take and you begin to shake violently, incapable of alleviating the awful pressure in your rear.\n\n");
 
-						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + assDescript() + ". The volley of blows is enough to stop you from shaking, but the pressure doesn't go away.\n\n", false);
+						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + assDescript() + ". The volley of blows is enough to stop you from shaking, but the pressure doesn't go away.\n\n");
 
 						outputText("The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
-						outputText("You awake in a couple of hours and stagger to your hooves, wobbly walking away using trees to steady yourself.  Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
+						outputText("You awake in a couple of hours and stagger to your hooves, wobbly walking away using trees to steady yourself.  Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						dynStats("int", -.5, "lus=", 100);
 					}
 				}
 				//Lust:
 				else {
-					outputText("The bee-girl smiles at you and sways her hips sensuously as she approaches. Her chitin covered hand slides along your flank and you shiver with anticipation. She slaps your haunch gently, and you feel your anticipation grow. Pleased, she guides you toward a tree before gently sliding a honey covered hand inside your " + assholeDescript() + ", causing you to grab the tree for support.\n\n", false);
-					outputText("She tests the insides of your ass for a bit before pulling her arm out and your hind legs start to quake as your desires aren't satisfied. You feel her stroke your hindquarters, encouraging you to lie down. You happily do so, using the tree as support.  With you safely down, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind altering honey. She obliges you by holding a handful of the thick elixir to your mouth and you lap at it eagerly. Once you've consumed a fair amount she spreads more onto your face and giggles cutely as you stretch your tongue to lick at it.\n\n", false);
+					outputText("The bee-girl smiles at you and sways her hips sensuously as she approaches. Her chitin covered hand slides along your flank and you shiver with anticipation. She slaps your haunch gently, and you feel your anticipation grow. Pleased, she guides you toward a tree before gently sliding a honey covered hand inside your " + assholeDescript() + ", causing you to grab the tree for support.\n\n");
+					outputText("She tests the insides of your ass for a bit before pulling her arm out and your hind legs start to quake as your desires aren't satisfied. You feel her stroke your hindquarters, encouraging you to lie down. You happily do so, using the tree as support.  With you safely down, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind altering honey. She obliges you by holding a handful of the thick elixir to your mouth and you lap at it eagerly. Once you've consumed a fair amount she spreads more onto your face and giggles cutely as you stretch your tongue to lick at it.\n\n");
 					//[Male with testicles:
 					if (player.gender == 1 && player.balls > 0) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
 
-						outputText("She can't see that, of course, and busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively engorged " + multiCockDescriptLight() + " to take and you begin to shake violently, incapable of touching ", false);
+						outputText("She can't see that, of course, and busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively engorged " + multiCockDescriptLight() + " to take and you begin to shake violently, incapable of touching ");
 						if (player.cockTotal() == 1) outputText("it as it's ");
 						else outputText("them as they're ");
 						outputText("trapped underneath you, the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground.\n\n");
 
-						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage your " + ballsDescriptLight() + " with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate.\n\n", false);
+						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage your " + ballsDescriptLight() + " with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate.\n\n");
 
 						outputText("The amazingly peculiar vibrations and surprisingly adept massage is more than enough to get you off and you cum hard, splattering your underside.\n\n");
 						//[If huge cum amount:
 						if (player.cumQ() >= 1500) outputText("Your massive cum amount soon causes you to be lying in a deep puddle of splooge, the scent so strong that it's almost enough to overwhelm that of the honey, despite it coating your face.\n\n");
-						outputText("She continues pumping into you as you pass out, " + sMultiCockDesc() + " and " + ballsDescriptLight() + " aching.  The combined scent of cum and honey completely overwhelms you.", false);
+						outputText("She continues pumping into you as you pass out, " + sMultiCockDesc() + " and " + ballsDescriptLight() + " aching.  The combined scent of cum and honey completely overwhelms you.");
 					}
 					//[Male without testicles:
 					else if (player.gender == 1) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n", false);
-						outputText("She can't see that, of course, and busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you, and the weight of the bee-girl prevents you from getting the leverage needed to hump the hard ground.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
+						outputText("She can't see that, of course, and busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " to take and you begin to shake violently, incapable of touching it as it's trapped underneath you, and the weight of the bee-girl prevents you from getting the leverage needed to hump the hard ground.\n\n");
 						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage the area where your balls should be with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate, more than enough to get you to cum hard.\n\n");
-						outputText("She continues pumping into you as you pass out, " + sMultiCockDesc() + " aching and the scent of honey overwhelming you.\n\n", false);
+						outputText("She continues pumping into you as you pass out, " + sMultiCockDesc() + " aching and the scent of honey overwhelming you.\n\n");
 					}
 					//[Female:
 					else if (player.gender == 2) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n", false);
-						outputText("She sees the spray and strokes your ass gently, but can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively enflamed " + vaginaDescript(0) + " and you begin to shake violently, incapable of touching yourself and alleviating the dreadful pressure. Your " + clitDescript() + " begins to throb painfully as it swells larger than normal.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + vaginaDescript(0) + " to squirt fluid behind you.\n\n");
+						outputText("She sees the spray and strokes your ass gently, but can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively enflamed " + vaginaDescript(0) + " and you begin to shake violently, incapable of touching yourself and alleviating the dreadful pressure. Your " + clitDescript() + " begins to throb painfully as it swells larger than normal.\n\n");
 
-						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to stroke your " + vaginaDescript(0) + " with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. This combined with the handful of times her chitin covered appendages slide across your " + clitDescript() + " cause you to cum hard, squirting behind you with surprising force.\n\n", false);
+						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to stroke your " + vaginaDescript(0) + " with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. This combined with the handful of times her chitin covered appendages slide across your " + clitDescript() + " cause you to cum hard, squirting behind you with surprising force.\n\n");
 						//[Huge cum amount:
 						if (player.wetness() == 5) outputText("Your massive cum amount soon causes you to be lying in a deep puddle of femcum, the scent so strong that it's almost enough to overwhelm that of the honey, despite it coating your face.\n\n");
 						outputText("She continues pumping into you as you pass out, your entire rear aching and the combined scent of cum and honey overwhelming you.");
 					}
 					//[Herm:
 					else if (player.gender == 3) {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard and your " + vaginaDescript() + " to squirt fluid behind you.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard and your " + vaginaDescript() + " to squirt fluid behind you.\n\n");
 
-						outputText("She can't see your cock, of course, and while she sees the spray and strokes your ass gently, can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels.\n\n", false);
+						outputText("She can't see your cock, of course, and while she sees the spray and strokes your ass gently, can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels.\n\n");
 
-						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " and " + vaginaDescript(0) + " to take and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground and the other is hopelessly out of reach.\n\n", false);
-						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage your " + vaginaDescript() + " with her 'feet' while periodically stroking the back of your " + cockDescript(0) + ".\n\n", false);
-						outputText("As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. This combined with the handful of times her chitin covered appendages slide across your " + clitDescript() + " cause you to cum hard, squirting behind you with surprising force and splattering your underside with jism.\n\n", false);
+						outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[0].cockType) + " and " + vaginaDescript(0) + " to take and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground and the other is hopelessly out of reach.\n\n");
+						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage your " + vaginaDescript() + " with her 'feet' while periodically stroking the back of your " + cockDescript(0) + ".\n\n");
+						outputText("As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. This combined with the handful of times her chitin covered appendages slide across your " + clitDescript() + " cause you to cum hard, squirting behind you with surprising force and splattering your underside with jism.\n\n");
 						//[If huge cum amount:
 						if (player.cumQ() >= 1500) outputText("Your massive cum amount soon causes you to be lying in a deep puddle of splooge and femcum, the scent so strong that it's almost enough to overwhelm that of the honey, despite it coating your face.\n\n");
 						outputText("She continues pumping into you as you pass out, your entire rear aching and the combined scent of cum and honey overwhelming you.");
 					}
 					//[Genderless:
 					else {
-						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + assholeDescript() + " to wink.\n\n", false);
+						outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing your " + assholeDescript() + " to wink.\n\n");
 						outputText("She pays no attention to that though, and busies herself with inserting her ovipositor inside it. The thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for you and you begin to shake violently, incapable of touching yourself and alleviating the dreadful pressure.\n\n");
 						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to stroke where your genitals should be with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. The mix of sensations is enough to stop you from shaking, but the pressure doesn't go away and you pass out as she continues her task.\n\n");
 					}
@@ -1222,11 +1223,11 @@ package classes.Scenes.Areas.Forest
 				if ((player.hasStatusEffect(StatusEffects.ParalyzeVenom) || player.hasStatusEffect(StatusEffects.lustvenom)) && !sexed && player.cockTotal() == 1) {
 					outputText("The bee-girl stands directly over you, looking down at you with a triumphant cute smile across her face, her eyes surveying every millimeter of your body. All you can do is lay there looking up at her fine figure and a profile of her ample breasts with a knowing smile on your face. She crouches down on all fours, just out of your reach, and begins to rhythmically shake her extended abdomen like a child's toy.\n\n");
 
-					outputText("Suddenly reality kicks in as you feel the venom coursing though your body, and your heart begins to race faster and faster by the minute. A dull pain swells deep inside your head as if it were about to explode; you try to lift your arms to cradle your head but can't, and slowly a new sensation takes over as your manhood begins to swell in size and length, trying to break through your clothes. A faint buzzing sound comes seemingly from nowhere, growing louder and getting closer every second. As the pain in your head decreases, you suddenly feel parched, your mouth as dry as the desert sands.  You try to let out a moan but all you can do is breathe rapidly, as if you are burning up inside.\n\n", false);
+					outputText("Suddenly reality kicks in as you feel the venom coursing though your body, and your heart begins to race faster and faster by the minute. A dull pain swells deep inside your head as if it were about to explode; you try to lift your arms to cradle your head but can't, and slowly a new sensation takes over as your manhood begins to swell in size and length, trying to break through your clothes. A faint buzzing sound comes seemingly from nowhere, growing louder and getting closer every second. As the pain in your head decreases, you suddenly feel parched, your mouth as dry as the desert sands.  You try to let out a moan but all you can do is breathe rapidly, as if you are burning up inside.\n\n");
 
-					outputText("Several more bee-girls appear and gracefully land all around you, apparently communicating with each other by vibrating their abdomens. She leans forward over you, brushing one of her breasts across the side of your face as she loosens your clothing to release your fully erect manhood. She forcefully grabs it with both hands and begins to squeeze it, as if trying to choke it. Your vision starts to blur; if she were to stroke your member right now, you could die happily knowing you had felt that kind of pleasure. The bee-girl continues to choke your member for several minutes, forcing the blood upwards.\n\n", false);
+					outputText("Several more bee-girls appear and gracefully land all around you, apparently communicating with each other by vibrating their abdomens. She leans forward over you, brushing one of her breasts across the side of your face as she loosens your clothing to release your fully erect manhood. She forcefully grabs it with both hands and begins to squeeze it, as if trying to choke it. Your vision starts to blur; if she were to stroke your member right now, you could die happily knowing you had felt that kind of pleasure. The bee-girl continues to choke your member for several minutes, forcing the blood upwards.\n\n");
 
-					outputText("Slowly she gets to her feet and stands directly over your manhood.  'At last,' you think to yourself, 'one final moment of pleasure.'  You close your eyes and allow yourself the fantasy of her lowering herself upon you. A few seconds pass before you open your eyes to see what she is doing. A sudden wave of panic comes over you as you watch her arch her abdomen down between her legs; a split second later you feel a sharp pain at the base of your member. Your eyes close as you try in vain to scream before you pass out.", false);
+					outputText("Slowly she gets to her feet and stands directly over your manhood.  'At last,' you think to yourself, 'one final moment of pleasure.'  You close your eyes and allow yourself the fantasy of her lowering herself upon you. A few seconds pass before you open your eyes to see what she is doing. A sudden wave of panic comes over you as you watch her arch her abdomen down between her legs; a split second later you feel a sharp pain at the base of your member. Your eyes close as you try in vain to scream before you pass out.");
 					cleanupAfterCombat();
 					outputText("\n\nSeveral hours later you wake up free of pain - if anything you feel great, a warm tingling sensation rippling through your whole body every time you move as you sit upright. As you look down you see you are still naked and covered in your own seed. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 					sexed = true;
@@ -1235,8 +1236,9 @@ package classes.Scenes.Areas.Forest
 				}
 				//Generic male bee-rape
 				if (player.gender == 1) {
-					if (player.lust >= player.maxLust()) outputText("Overcome by lust, you throw yourself into her waiting arms.  ", true);
-					else outputText("Overcome by your wounds, you are unable to resist as she lifts you into her arms and embraces you.  ", true);
+					clearOutput();
+					if (player.lust >= player.maxLust()) outputText("Overcome by lust, you throw yourself into her waiting arms.  ");
+					else outputText("Overcome by your wounds, you are unable to resist as she lifts you into her arms and embraces you.  ");
 					outputText("At first she holds you close, but as she does, a stinger slowly emerges from her abdomen, as well as a thick knot like organ, both covered in a sweet-smelling lubricant. Your mind synaesthetically sees a myriad of colors and scents, and you don't resist as she gently pushes you down to your stomach. Nor do you protest as she leans over you, her stinger - thank goodness it isn't poison - looming close to your anus. With no more words she shoves the thick, lengthy stinger and knot inside of you. Her 'cock' slipping in slowly, the lube keeping you from shaking out of your scent-induced pleasure coma. Your hand even ventures to your own engorged ");
 					if (player.cockTotal() == 1) outputText("member");
 					if (player.cockTotal() > 1) outputText("members");
@@ -1258,23 +1260,24 @@ package classes.Scenes.Areas.Forest
 				//FEMALES
 				//Fan-submitted - female funtimes with a bit o' end breathplay
 				if (player.gender == 2) {
-					if (player.lust < 100) outputText("Barely conscious, you look up as the bee approaches.  ", true);
-					else outputText("Overcome with desire, you look up as the bee approaches.  ", true);
-					outputText("You feel weary and weak as your body begins to betray you to the pheromones of your foe.  You try and struggle as she moves over you, holding your hands against the ground as her chest pushes into your face, blocking sunlight and air as you protest. Your " + player.armorName + " are pulled from your body as the bee-girl moves on top of you.\n\n", false);
-					outputText("A sharp pain hits your stomach as the bee-girl's stinger penetrates your flesh. Before you can cry out, a sickening warmth floods from the wound, washing away the pain and oozing through your body. Your " + vaginaDescript(0) + " juices flow between your ", false);
+					clearOutput();
+					if (player.lust < 100) outputText("Barely conscious, you look up as the bee approaches.  ");
+					else outputText("Overcome with desire, you look up as the bee approaches.  ");
+					outputText("You feel weary and weak as your body begins to betray you to the pheromones of your foe.  You try and struggle as she moves over you, holding your hands against the ground as her chest pushes into your face, blocking sunlight and air as you protest. Your " + player.armorName + " are pulled from your body as the bee-girl moves on top of you.\n\n");
+					outputText("A sharp pain hits your stomach as the bee-girl's stinger penetrates your flesh. Before you can cry out, a sickening warmth floods from the wound, washing away the pain and oozing through your body. Your " + vaginaDescript(0) + " juices flow between your ");
 					if (player.isTaur()) outputText("rear legs");
 					else outputText("legs");
 					outputText(", making your thighs slick as your clit throbs almost painfully in the cold air. You begin to pant, your heart racing as the bee-girl slides back down your body, moaning as her breasts snag your nipples, rubbing them in a pleasurable way. She stops at head level, looking into your eyes with her own black orbs. She smiles at you and you realize that she is no longer pinning you with anything more than her own relatively light weight. You crease your brow with worry as you realize that running is the last thing on your mind, before the warm haze slips inside your skull.  The sexy bee leans in and kisses you softly, robbing you of your last shreds of resistance.\n\n");
 
 					if (player.isTaur()) {
-						outputText("She slips further down your chest, grabbing your " + player.allBreastsDescript() + " playfully. You feel her knee nudging against your " + vaginaDescript(0) + ", grinding roughly against it and sending shivers through your body. You yelp slightly as she bites one of your nipples, the sudden sensation giving way to moans of pleasure as she massages and pinches the other one. Her knee slides against your " + vaginaDescript(0) + ", flicking your " + clitDescript() + " and coating the bee-girl with your juices. You feel her straddle your legs, her feet deftly pulling your thigh into contact with her pussy, before she starts to rock against you.\n\n", false);
+						outputText("She slips further down your chest, grabbing your " + player.allBreastsDescript() + " playfully. You feel her knee nudging against your " + vaginaDescript(0) + ", grinding roughly against it and sending shivers through your body. You yelp slightly as she bites one of your nipples, the sudden sensation giving way to moans of pleasure as she massages and pinches the other one. Her knee slides against your " + vaginaDescript(0) + ", flicking your " + clitDescript() + " and coating the bee-girl with your juices. You feel her straddle your legs, her feet deftly pulling your thigh into contact with her pussy, before she starts to rock against you.\n\n");
 						outputText("Her juices mix with your own as you feel yourself working steadily to climax. Noticing your heavy breathing and sudden vigor, she pulls away.  ");
 					}
 					outputText("In one swift motion, she slides up your body until her pussy is jammed against your face. Her hands grip the back of your head, pulling you tightly into her snatch as she smears her honey over your face.  The smell is incredibly sweet, and you instinctively begin to pleasure her.  You slide your tongue inside her folds, drinking down the thick liquid that fills your mouth as you suckle. ");
 
 					if (player.isTaur()) outputText("After a while, her hot and sweet pussy swiftly disappears from your sight, and you feel the bee-girl's weight on your butt, right before her stinger,");
 					else outputText("You feel the bee-girl's stinger");
-					outputText(" sliding against your nether-lips, pushing against them and parting the outer folds. Her abdomen shifts, shifting the stinger up and down, keeping your " + vaginaDescript(0) + " parted while rubbing your clit.\n\n", false);
+					outputText(" sliding against your nether-lips, pushing against them and parting the outer folds. Her abdomen shifts, shifting the stinger up and down, keeping your " + vaginaDescript(0) + " parted while rubbing your clit.\n\n");
 					if (player.isTaur()) outputText("Suddenly, you feel a sharp pain right into your clit, followed by a sexual warmth so intense this time, that it engulfs you and turns you into a sex-craving slut.  Anticipating the effect, she repositions her honeyed pussy over your face.  You begin to lick, suck and kiss it frenetically, burying your tongue into her deepest recesses.  She giggles at first, but soon the only noises you hear from her are moans becoming more and more intense. As her arousal shoots through the roof, you feel her legs twitching, and she suddenly grabs your head and forces your face into her crotch. You continue eating her out voraciously, oblivious to secondary things like breathing.\n\n");
 					else outputText("Your moans are muffled by the honeyed pussy on your face, and you hear her starting to squeal loudly. Her thighs clamp tightly around your ears, grinding harder into your face as her stinger picks up the pace.  ");
 					outputText("It gets harder and harder to breathe, the thick flow of honey threatening to suffocate you as the bee-girl reaches her climax.  You feel your body finally succumbing to the pleasure and oxygen deprivation and cum HARD, the world going comfortably dark as you lose your grip on consciousness.");
@@ -1286,7 +1289,8 @@ package classes.Scenes.Areas.Forest
 				}
 				//Hermz/Genderless (Lazy way, unfinished?)
 				if (player.gender == 3 || player.gender == 0) {
-					outputText("Defeated, there is little you can do to stop the bee-girl as she approaches, buzzing and humming intently.  Cooing and humming into your ear, her pheromones filling the air, she rapidly overwhelms your mental resistance.\n\n", true);
+					clearOutput();
+					outputText("Defeated, there is little you can do to stop the bee-girl as she approaches, buzzing and humming intently.  Cooing and humming into your ear, her pheromones filling the air, she rapidly overwhelms your mental resistance.\n\n");
 					//Link to standard bee rape scene #3.
 					doNext(beeEncounterClassicSex);
 				}
@@ -1298,7 +1302,8 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			var sexed:Boolean = false;
-			outputText("With your mind made up, you approach the ", true);
+			clearOutput();
+			outputText("With your mind made up, you approach the ");
 			if (monster.HP <= 0) outputText("helpless ");
 			else outputText("horny ");
 			outputText("bee-girl with a devilish smile painted across your face.\n\nHow will you take her?\n\n");
@@ -1316,15 +1321,15 @@ package classes.Scenes.Areas.Forest
 				outputText("(You could dose her with venom and lay YOUR eggs in her.)\n");
 			}
 			if (player.hasCock()) {
-				outputText("(You could fuck her with " + oMultiCockDesc() + ".)\n", false);
+				outputText("(You could fuck her with " + oMultiCockDesc() + ".)\n");
 				cock = rapeTheBeeGirlWithADick;
 			}
 			if (player.cockTotal() > 1) {
-				outputText("(You could use more than one of your " + multiCockDescriptLight() + " on her.)\n", false);
+				outputText("(You could use more than one of your " + multiCockDescriptLight() + " on her.)\n");
 				multiCock = rapeTheBeeMultiCockStuff;
 			}
 			if (player.hasVagina()) {
-				outputText("(You could make her get off your " + vaginaDescript() + ".)\n", false);
+				outputText("(You could make her get off your " + vaginaDescript() + ".)\n");
 				vagina = rapeABeeGirlWithYourVagina;
 			}
 			if (player.gender == 3) {
@@ -1352,22 +1357,22 @@ package classes.Scenes.Areas.Forest
 			//HermCock supreme by mallowman
 			if (player.cockTotal() >= 5 && player.biggestTitSize() > 2
 					&& player.vaginas.length > 0 && rand(2) == 0) {
-				outputText("As you approach, she starts to edge away, her battered wings flapping in a futile attempt to escape.  Reaching her, you grip her wrists before she can fight back, squeezing tightly as her struggling increases. Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your " + multiCockDescript() + " and " + vaginaDescript(0) + ".  She gasps at the alien sight of your multiple 'stingers', while you take a moment to decide what's going to go where.\n\n", false);
-				outputText("You shift a bit upward, your brace of " + multiCockDescriptLight() + " sliding above the bee-girl's slick honey pot.  For a moment she breathes a sigh of relief, then gasps as two of your manhoods press against her front and back doors at once.\n\n", false);
+				outputText("As you approach, she starts to edge away, her battered wings flapping in a futile attempt to escape.  Reaching her, you grip her wrists before she can fight back, squeezing tightly as her struggling increases. Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your " + multiCockDescript() + " and " + vaginaDescript(0) + ".  She gasps at the alien sight of your multiple 'stingers', while you take a moment to decide what's going to go where.\n\n");
+				outputText("You shift a bit upward, your brace of " + multiCockDescriptLight() + " sliding above the bee-girl's slick honey pot.  For a moment she breathes a sigh of relief, then gasps as two of your manhoods press against her front and back doors at once.\n\n");
 				outputText("You begin to push forward, sliding your dickmeat against the soft folds of her pussy and pressing the tip of your prick firmly against her quivering hole, her whimpers punctuated by rhythmic gasps.  Your grin widens as you penetrate her roughly in one strong stroke, the bee-girl's body tensing underneath you as a squeal leaves her lips.  Your other cocks slide between her plump breasts, the soft pillows enveloping your shafts.  Defiance escapes her, her abdomen locking in place as she becomes unable to concentrate on moving her stinger without being overwhelmed by the feeling of your meat stuffing her ass.\n\n");
-				outputText("Unhindered, you start to fuck her.  Her pussy tightens and convulses around your " + cockDescript(0) + ", her ample honey dribbling down onto your lowermost shaft and adding a little more lube on every thrust into the tight heat of her ass.  Her whimpers turn to moans, her scent shifting from fear to lust as the bee-girl discovers the unexpected pleasure of being reamed in both holes at once.  You keep your breathing steady, listening to her moans grow more lustful with every thrust and more needy every time you pull back in preparation for another.  Soon you've fucked all thought of resistance out of her, in favor of squealing with glee every time your mighty cock forces a little deeper into her tight honey pot.\n\n", false);
-				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases.  You show her how to press her breasts together against your " + cockDescript(0) + ", and she obliges, rubbing them back and forth as you fuck her.  With your jiggling breasts added to the mix, it becomes even more enjoyable, your " + breastDescript(0) + " mashing against hers.  The milk leaking out of your immense jugs runs down your bodies and adds further to the ocean of fluids forming between your hips.\n\n", false);
-				outputText("The heads of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " rub back and forth against the bee-girl's lips and face, and finally curiosity leads her to begin tasting, her surprisingly long tongue lassoing and swirling around every tip she can reach in turn, darting from one to another as if tasting flowers to provide an experience almost as unique as her pussy.\n\n", false);
+				outputText("Unhindered, you start to fuck her.  Her pussy tightens and convulses around your " + cockDescript(0) + ", her ample honey dribbling down onto your lowermost shaft and adding a little more lube on every thrust into the tight heat of her ass.  Her whimpers turn to moans, her scent shifting from fear to lust as the bee-girl discovers the unexpected pleasure of being reamed in both holes at once.  You keep your breathing steady, listening to her moans grow more lustful with every thrust and more needy every time you pull back in preparation for another.  Soon you've fucked all thought of resistance out of her, in favor of squealing with glee every time your mighty cock forces a little deeper into her tight honey pot.\n\n");
+				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases.  You show her how to press her breasts together against your " + cockDescript(0) + ", and she obliges, rubbing them back and forth as you fuck her.  With your jiggling breasts added to the mix, it becomes even more enjoyable, your " + breastDescript(0) + " mashing against hers.  The milk leaking out of your immense jugs runs down your bodies and adds further to the ocean of fluids forming between your hips.\n\n");
+				outputText("The heads of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " rub back and forth against the bee-girl's lips and face, and finally curiosity leads her to begin tasting, her surprisingly long tongue lassoing and swirling around every tip she can reach in turn, darting from one to another as if tasting flowers to provide an experience almost as unique as her pussy.\n\n");
 				outputText("You feel her abdomen pressing against your rear as you drive into her, the pressure in your groin building as her pussy and ass tighten around you. With a groan you cum, your hot seed gushing in alternating spurts out of each of your shafts into her eager little holes while your tight cunt juices itself with your own brand of honey. She clenches you tightly, her belly distending slightly as you empty your load into her pussy and ass while she squeals again at getting her face covered in seed.  Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.");
 				player.orgasm();
 				cleanupAfterCombat();
 				return;
 			}
 			if (player.cockTotal() == 2 && rand(2) == 0) {
-				outputText("The bee-girl turns around, scampering across the floor to try to escape. As you close in to your prey you can feel your " + multiCockDescriptLight() + " harden and rise up at the sight of her form and you swiftly grab on to her abdomen and hold fast. She screams in futility as you flip her over and greedily look across her body.\n\n", false);
-				outputText("Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your " + multiCockDescriptLight() + ". The bee-girl opens her eyes for a scant moment and realizes what's about to happen. She tries one more time to plead for you to let her escape as your " + multiCockDescriptLight() + " slide up and down against her nectar-drenched pussy lips. Your grin widens as you penetrate her roughly in one savage stroke, taking her with one of them. Screaming and squirming, the bee-girl struggles.  Your right hand braces against her flapping arms to settle them to the ground as you push in once again. Letting her know just how little control she has against your will, you lean forward, planting her hands against the ground and licking her cheek as your " + multiCockDescriptLight() + " push up deep inside her. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realization hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick ", false);
+				outputText("The bee-girl turns around, scampering across the floor to try to escape. As you close in to your prey you can feel your " + multiCockDescriptLight() + " harden and rise up at the sight of her form and you swiftly grab on to her abdomen and hold fast. She screams in futility as you flip her over and greedily look across her body.\n\n");
+				outputText("Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your " + multiCockDescriptLight() + ". The bee-girl opens her eyes for a scant moment and realizes what's about to happen. She tries one more time to plead for you to let her escape as your " + multiCockDescriptLight() + " slide up and down against her nectar-drenched pussy lips. Your grin widens as you penetrate her roughly in one savage stroke, taking her with one of them. Screaming and squirming, the bee-girl struggles.  Your right hand braces against her flapping arms to settle them to the ground as you push in once again. Letting her know just how little control she has against your will, you lean forward, planting her hands against the ground and licking her cheek as your " + multiCockDescriptLight() + " push up deep inside her. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realization hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick ");
 				outputText("abdomen down and remove the threat. You smack her across the face for her defiance to reaffirm your dominance and you push forward back into her. She whimpers slightly, but then her face snaps back to a fierce visage although cracks begin to form as you continue pushing into her. As much as she wants to resist, the pleasure is mounting and you have it in mind to completely solidify your dominance over her.\n\n");
-				outputText("You decide that it's time to bring your other gift into play. Atop the bee-girl you fire in one more stroke of your " + cockDescript(0) + " and then you run your free hand from her black lips across her breast and across her abdomen before you rest it on her clit. You tweak her sensitive spot along with the strokes from your intruding member and then when the rush of nectar and cum juices from her pussy seem up to the task you grab hold of your other " + cockDescript(1) + " and forcefully ram it into her pussy right below your first entry.\n\n", false);
+				outputText("You decide that it's time to bring your other gift into play. Atop the bee-girl you fire in one more stroke of your " + cockDescript(0) + " and then you run your free hand from her black lips across her breast and across her abdomen before you rest it on her clit. You tweak her sensitive spot along with the strokes from your intruding member and then when the rush of nectar and cum juices from her pussy seem up to the task you grab hold of your other " + cockDescript(1) + " and forcefully ram it into her pussy right below your first entry.\n\n");
 				outputText("At this the bee-girl shrieks in utter bliss as her eyes roll back and she can't fight back the tingles coursing through her as you stretch her pussy lips.  You let go of her hands and watch with a satisfied grin as she tosses, turns, and clings to the dirt with a rich mix of pain and pleasure from the rough double-penetration. Suddenly you're caught off guard slightly as she pushes forward, almost tackling you. For an instant you're prepared to finish off the bee-girl, but the lust in her eyes is easy enough to read and she looks down, begging to be fucked and filled.  Grabbing onto her arms to brace against and suckling at her ample breast, you force your twin rods into her again and again while a pool of her sexual juices and sweet nectar form at your crotch from each slip in to her moist wetness. The bee-slut moans as you push your rock-hard cocks into her slick pussy, and you can just see the detectable bump of your cock head edging along her stomach, but strong as you are the tightness is overwhelming as her pussy muscles clench about your cocks.\n\n");
 				outputText("Letting go of your hands the bee-girl leans back and her mouth opens in a powerful scream of ecstasy that you're sure will scatter any wild-life or imps who hear the noise. As she flings herself back, your body clenches and a torrential storm of white, warm cum soars from the tip of your members into her innermost spaces. Unable to cope with the feelings coursing through her, the bee-girl nearly faints as she comes to a rest on your chest.  You catch your breath and the last couple of cum shots is milked by her still clenching pussy. Rolling over, you free both of your cocks from her fuck-hole and watch with more than a bit of satisfaction.  The dam breaks and a sea of white escapes her stretched, well-lubricated pussy. Pleased with your latest jaunt through the forest, you collect your gear and settle off, leaving the cum-drenched bee-girl covered in your seed.");
 				player.orgasm();
@@ -1392,11 +1397,11 @@ package classes.Scenes.Areas.Forest
 
 				outputText("You reach down and stroke her hair. She flinches from your hand at first before realizing that you genuinely mean her no harm. Her own hand reaches to slide up your arm as you pull yourself down to kiss her. She happily kisses you back, her long, thin, dexterous tongue wrapping around your own.\n\n");
 
-				outputText("Pulling back, you consider her for a moment. She watches as you slip out of your " + player.armorName + ", licking her lips at the sight of your " + chestDesc() + ". Once your torso is free you reach down again and pick up the bee maiden. She's surprisingly light and you lift her with ease, feeling her legs wrap around you as you hug and kiss her.\n\n", false);
+				outputText("Pulling back, you consider her for a moment. She watches as you slip out of your " + player.armorName + ", licking her lips at the sight of your " + chestDesc() + ". Once your torso is free you reach down again and pick up the bee maiden. She's surprisingly light and you lift her with ease, feeling her legs wrap around you as you hug and kiss her.\n\n");
 
 				outputText("It's not long before she's gently grinding her cunt against your body and you find your hand sliding down her front to slip gently inside her sticky folds. She moans into your mouth and vibrates as a little gush of honey squirts out of her. You bring your hand back up and the pair of you clean it off with your tongues.\n\n");
 
-				outputText("The sweet substance causes your hindquarters to heat up. You feel your " + assholeDescript() + " pucker and " + sMultiCockDesc() + " grow, dripping pre onto the ground. At the same time, your thoughts start to get fuzzy and you have to fight off the sensation to throw the bee down and fuck her wildly.\n\n", false);
+				outputText("The sweet substance causes your hindquarters to heat up. You feel your " + assholeDescript() + " pucker and " + sMultiCockDesc() + " grow, dripping pre onto the ground. At the same time, your thoughts start to get fuzzy and you have to fight off the sensation to throw the bee down and fuck her wildly.\n\n");
 
 				outputText("The honey is gone relatively quickly, much to your disappointment. You reach down to fetch some more, but her hand stops you. \"<i>You don't want that, you want thezze.</i>\" she says, lifting your hand back up and placing it on her breast.\n\n");
 
@@ -1404,39 +1409,39 @@ package classes.Scenes.Areas.Forest
 
 				//Cock short enough to penetrate her:
 				if (player.cockArea(x) <= monster.vaginalCapacity()) {
-					outputText("She looks under your arm toward your manhood and seems delighted by the sight of your " + cockDescript(x) + ". Her body swings about your torso with the help of her wings and she crawls down your back toward your rear. You lift your tail and allow the bee maiden to examine your " + assholeDescript() + ", sliding her fingers around the edge and teasing at it.", false);
+					outputText("She looks under your arm toward your manhood and seems delighted by the sight of your " + cockDescript(x) + ". Her body swings about your torso with the help of her wings and she crawls down your back toward your rear. You lift your tail and allow the bee maiden to examine your " + assholeDescript() + ", sliding her fingers around the edge and teasing at it.");
 					//Has testicles:
-					if (player.balls > 0) outputText("  Her other hand slides down and begins to massage your " + ballsDescriptLight() + ", squeezing and tugging gently at your scrotum. Her tongue joins them, sliding in and out of your ass before wrapping around your sack. You feel incredible and your " + cockDescript(x) + " drips pre, forming a puddle on the ground.", false);
+					if (player.balls > 0) outputText("  Her other hand slides down and begins to massage your " + ballsDescriptLight() + ", squeezing and tugging gently at your scrotum. Her tongue joins them, sliding in and out of your ass before wrapping around your sack. You feel incredible and your " + cockDescript(x) + " drips pre, forming a puddle on the ground.");
 					//No testicles:\
-					else outputText("Her other hand starts pulling it open and soon her tongue joins them, sliding in and out of your ass delicately. Your " + cockDescript(x) + " quivers with anticipation and you swish your tail happily.", false);
+					else outputText("Her other hand starts pulling it open and soon her tongue joins them, sliding in and out of your ass delicately. Your " + cockDescript(x) + " quivers with anticipation and you swish your tail happily.");
 					outputText("\n\n");
 
 					outputText("All of a sudden her ministrations stop, causing you to look over your shoulder to find out what's going on. She turns around on your back and gives you a look of complete innocence. Powerless to resist such a cute look, you turn your head back around as her legs swing down onto your flanks.\n\n");
 
-					outputText("You think at first she's going to ride you like a horse, but she doesn't. Instead, you feel her whole body slide sideways as she flips around to grab onto your belly. You're surprised at her strength, managing to hold herself up fairly effectively with just her arms and legs gripping your body. She doesn't intend to rely on that alone though, as her abdomen is gently held in place between your rear legs. You feel something latch onto your " + assholeDescript() + ", but are unable to do anything about it or even see what it is. The sudden changes are surprising and you can't help but wonder what she intends.\n\n", false);
+					outputText("You think at first she's going to ride you like a horse, but she doesn't. Instead, you feel her whole body slide sideways as she flips around to grab onto your belly. You're surprised at her strength, managing to hold herself up fairly effectively with just her arms and legs gripping your body. She doesn't intend to rely on that alone though, as her abdomen is gently held in place between your rear legs. You feel something latch onto your " + assholeDescript() + ", but are unable to do anything about it or even see what it is. The sudden changes are surprising and you can't help but wonder what she intends.\n\n");
 
-					outputText("You get your answer as a hot, wet, vice wraps around your " + cockDescript(x) + " and whatever is inside your ass pushes slightly further in. It feels good, but you know that even with her surprising strength she wouldn't be able to hold on if you tried driving into her. Thinking this defeats the purpose somewhat you're about to propose that some other arrangement be considered when she starts to buzz.\n\n", false);
+					outputText("You get your answer as a hot, wet, vice wraps around your " + cockDescript(x) + " and whatever is inside your ass pushes slightly further in. It feels good, but you know that even with her surprising strength she wouldn't be able to hold on if you tried driving into her. Thinking this defeats the purpose somewhat you're about to propose that some other arrangement be considered when she starts to buzz.\n\n");
 
-					outputText("It's gentle at first, not much more than a regular bee to your ear, but it slowly builds, and builds, and builds; until eventually it's so loud you find it hard to think of anything but the strange noise. The noise isn't the only thing though, as the sound grows so too do the vibrations in the bee-girl's body. By the time the buzzing has reached its crescendo your entire belly feels like it's being vibrated off.\n\n", false);
+					outputText("It's gentle at first, not much more than a regular bee to your ear, but it slowly builds, and builds, and builds; until eventually it's so loud you find it hard to think of anything but the strange noise. The noise isn't the only thing though, as the sound grows so too do the vibrations in the bee-girl's body. By the time the buzzing has reached its crescendo your entire belly feels like it's being vibrated off.\n\n");
 
-					outputText("The sensation is incredible; her muscles spasm and milk your " + cockDescript(x) + " while the object in your " + assholeDescript() + " (which you think is probably her ovipositor) begins pumping fluids into you, all while your genitals are vibrated unceasingly.", false);
+					outputText("The sensation is incredible; her muscles spasm and milk your " + cockDescript(x) + " while the object in your " + assholeDescript() + " (which you think is probably her ovipositor) begins pumping fluids into you, all while your genitals are vibrated unceasingly.");
 					//Has testicles:
-					if (player.balls > 0) outputText("  Your " + ballsDescriptLight() + " really feel spectacular, the vibrations causing the hot spunk inside to roil about.", false);
+					if (player.balls > 0) outputText("  Your " + ballsDescriptLight() + " really feel spectacular, the vibrations causing the hot spunk inside to roil about.");
 					outputText("  Her hot cunt constricts around you as she cums repeatedly, coating your hind legs in sweet honey.\n\n");
 
-					outputText("You find it increasingly difficult to control yourself as your equine body demands to hump something. The unusual ministrations are spectacular, but your " + cockDescript(x) + " is demanding a mare. With a supreme effort you overcome your bestial desires, reveling in the pleasure without feeling the overwhelming desire to inseminate. Just as you're celebrating this personal victory you feel the familiar pressure of your orgasm build in your groin", false);
+					outputText("You find it increasingly difficult to control yourself as your equine body demands to hump something. The unusual ministrations are spectacular, but your " + cockDescript(x) + " is demanding a mare. With a supreme effort you overcome your bestial desires, reveling in the pleasure without feeling the overwhelming desire to inseminate. Just as you're celebrating this personal victory you feel the familiar pressure of your orgasm build in your groin");
 					//has testicles: 
-					if (player.balls > 0) outputText(", and your " + ballsDescriptLight() + " constrict", false);
+					if (player.balls > 0) outputText(", and your " + ballsDescriptLight() + " constrict");
 					outputText(".\n\n");
 
-					outputText("Your seed is propelled through your pulsating " + Appearance.cockNoun(player.cocks[x].cockType) + " with surprising force.", false);
+					outputText("Your seed is propelled through your pulsating " + Appearance.cockNoun(player.cocks[x].cockType) + " with surprising force.");
 					//No testicles: 
 					if (player.balls == 0) outputText("  It dribbles into the bee-girl as her honey squirts out of her once again. Her body trembles as the extreme exertions take their toll, and she slides off of your member with a damp plop, splashing into a puddle of her own fluids.");
 					else {
 						//Normal cum amount: 
 						if (player.cumQ() < 500) outputText("  It sprays inside the bee-girl as her honey squirts out of her once again. Her body trembles as the extreme exertions take their toll, and she slides off of your member with a damp plop, splashing into a puddle of her own fluids as your spunk dribbles onto her.");
 						//Huge cum amount:
-						else outputText("  It sprays inside the bee-girl, quickly overfilling her and causing her belly to expand. Her sudden increased girth and the extreme exertion cause her to lose her grip on you, and she is propelled off of you into a puddle of spunk and honey. You can't control yourself as your " + ballsDescriptLight() + " continue to pump out more and more fluid, spraying down the exhausted bee and coating her flower with enough gunk to cause it to wilt slightly. Eventually it stops, with only periodic gushes spraying out.", false);
+						else outputText("  It sprays inside the bee-girl, quickly overfilling her and causing her belly to expand. Her sudden increased girth and the extreme exertion cause her to lose her grip on you, and she is propelled off of you into a puddle of spunk and honey. You can't control yourself as your " + ballsDescriptLight() + " continue to pump out more and more fluid, spraying down the exhausted bee and coating her flower with enough gunk to cause it to wilt slightly. Eventually it stops, with only periodic gushes spraying out.");
 					}
 					outputText("\n\n");
 
@@ -1447,45 +1452,45 @@ package classes.Scenes.Areas.Forest
 				}
 				//Cock too long to penetrate her:
 				else {
-					outputText("She looks under your arm toward your manhood but seems disappointed at your " + cockDescript(x) + "'s large size. . Her body swings about your torso with the help of her wings and she crawls down your back toward your rear. You lift your tail and allow the bee maiden to examine your " + assholeDescript() + ", sliding her fingers around the edge and teasing at it. Her tongue licks at you but you can tell her mind is elsewhere and you wonder what the problem is.\n\n", false);
+					outputText("She looks under your arm toward your manhood but seems disappointed at your " + cockDescript(x) + "'s large size. . Her body swings about your torso with the help of her wings and she crawls down your back toward your rear. You lift your tail and allow the bee maiden to examine your " + assholeDescript() + ", sliding her fingers around the edge and teasing at it. Her tongue licks at you but you can tell her mind is elsewhere and you wonder what the problem is.\n\n");
 
 					outputText("She giggles all of a sudden and retracts her tongue, turning around atop you. Her chitin covered legs swing down to rest on your flanks and you wonder if she intends to ride you like a horse.\n\n");
 
-					outputText("She doesn't though, as with a buzz her body swings about beneath you. As she slides sideways, one arm is pulled off for a moment, long enough to catch your " + cockDescript(x) + " between her body and your own, before catching onto your other flank. Her abdomen slides up behind your rear legs and you feel something latch onto your " + assholeDescript() + ", but are unable to do anything about it or even see what it is.\n\n", false);
+					outputText("She doesn't though, as with a buzz her body swings about beneath you. As she slides sideways, one arm is pulled off for a moment, long enough to catch your " + cockDescript(x) + " between her body and your own, before catching onto your other flank. Her abdomen slides up behind your rear legs and you feel something latch onto your " + assholeDescript() + ", but are unable to do anything about it or even see what it is.\n\n");
 
 					outputText("Her grip is surprisingly strong for such a frail looking creature but you don't think she'll be able to handle much movement. Thinking this defeats the purpose somewhat you're about to propose that some other arrangement be considered when she starts to buzz.\n\n");
 
-					outputText("It's gentle at first, not much more than a regular bee to your ear, but it slowly builds, and builds, and builds; until eventually it's so loud you find it hard to think of anything but the strange noise. The noise isn't the only thing though, as the sound grows so too do the vibrations in the bee-girl's body. By the time the buzzing has reached its crescendo your entire belly feels like it's being vibrated off.\n\n", false);
+					outputText("It's gentle at first, not much more than a regular bee to your ear, but it slowly builds, and builds, and builds; until eventually it's so loud you find it hard to think of anything but the strange noise. The noise isn't the only thing though, as the sound grows so too do the vibrations in the bee-girl's body. By the time the buzzing has reached its crescendo your entire belly feels like it's being vibrated off.\n\n");
 
-					outputText("Your " + cockDescript(x) + " feels wonderful though, pumping out fluid and swelling with more and more blood.", false);
+					outputText("Your " + cockDescript(x) + " feels wonderful though, pumping out fluid and swelling with more and more blood.");
 					//Has testicles: 
-					if (player.balls > 0) outputText("  The vibrations do a number on your " + ballsDescriptLight() + " too, as the semen stored within starts to shake and dance about inside.", false);
-					outputText("  The thing in your " + assholeDescript() + " (which you believe is her ovipositor) is vibrating along with her as it pumps fluid inside, and you feel yourself puckering in pleasure.", false);
+					if (player.balls > 0) outputText("  The vibrations do a number on your " + ballsDescriptLight() + " too, as the semen stored within starts to shake and dance about inside.");
+					outputText("  The thing in your " + assholeDescript() + " (which you believe is her ovipositor) is vibrating along with her as it pumps fluid inside, and you feel yourself puckering in pleasure.");
 					//Cock long enough to masturbate: 
 					if (player.tallness * (5 / 6) < player.cocks[player.longestCock()].cockLength) {
-						outputText("  Her tongue wraps around your " + cockDescript(x) + " and starts jerking off the small section it can reach. The wet ring feels amazing and you decide to help her efforts by gripping the head of your member and playing with it yourself. Soon though, your cock trembles as the familiar sensation of orgasm begins creeping up on you.", false);
+						outputText("  Her tongue wraps around your " + cockDescript(x) + " and starts jerking off the small section it can reach. The wet ring feels amazing and you decide to help her efforts by gripping the head of your member and playing with it yourself. Soon though, your cock trembles as the familiar sensation of orgasm begins creeping up on you.");
 					}
 					//Other cocks: 
-					else outputText("  Her tongue wraps around your " + cockDescript(x) + " and slides up and down the small area it can reach before flicking about at the tip of your urethra. Her expert licking feels amazing and it's not long before your feel the familiar sensation of orgasm creeping up on you.", false);
+					else outputText("  Her tongue wraps around your " + cockDescript(x) + " and slides up and down the small area it can reach before flicking about at the tip of your urethra. Her expert licking feels amazing and it's not long before your feel the familiar sensation of orgasm creeping up on you.");
 					outputText("\n\n");
 
-					outputText("With all the combined sensations your " + cockDescript(x) + " begins to unload. ", false);
+					outputText("With all the combined sensations your " + cockDescript(x) + " begins to unload. ");
 					//With testicles, masturbatable cock:
 					if (player.balls > 0 && player.tallness * (5 / 6) < player.cocks[player.longestCock()].cockLength) {
-						outputText("Your " + ballsDescriptLight() + " contract and propel your seed down your member toward the fresh air. It fires out of you and hits the bee's flower, splattering it in white.", false);
+						outputText("Your " + ballsDescriptLight() + " contract and propel your seed down your member toward the fresh air. It fires out of you and hits the bee's flower, splattering it in white.");
 						//Huge cum amount: 
 						if (player.cumQ() >= 750) outputText("  You don't stop there though, as your firehose of a cock sprays it down until it's sagging with the weight of your seed.");
 					}
 					//With testicles, other cocks:
 					else if (player.balls > 0) {
-						outputText("Your " + ballsDescriptLight() + " contract and propel your seed down your member toward the waiting bee-girl. It fires out of you and hits her face, splattering it in white.", false);
+						outputText("Your " + ballsDescriptLight() + " contract and propel your seed down your member toward the waiting bee-girl. It fires out of you and hits her face, splattering it in white.");
 						//Huge cum amount: 
 						if (player.cumQ() >= 750) outputText("  You don't stop there though, as your firehose of a cock sprays wildly, coating her head and her flower, hosing it down until it's sagging with the weight of your seed.");
 					}
 					//Without testicles: 
-					else outputText("Your " + assholeDescript() + " tightens uncontrollably around its intruder, making the vibrations feel even stronger there. Your member jerks as you orgasm and a few droplets of semen land on the bee maiden.", false);
+					else outputText("Your " + assholeDescript() + " tightens uncontrollably around its intruder, making the vibrations feel even stronger there. Your member jerks as you orgasm and a few droplets of semen land on the bee maiden.");
 
-					outputText("\n\nShe releases you from her grasp and lands with a wet thud on the ground. Looking down, you see that her vibrating against your " + cockDescript(x) + " was enough to get her off, a lot. She's lying in a puddle of mixed sexual fluids and honey, unconscious after what must have been an extreme effort on her part.", false);
+					outputText("\n\nShe releases you from her grasp and lands with a wet thud on the ground. Looking down, you see that her vibrating against your " + cockDescript(x) + " was enough to get her off, a lot. She's lying in a puddle of mixed sexual fluids and honey, unconscious after what must have been an extreme effort on her part.");
 
 					outputText("You take pity on her and pick up the giant bee as gently as possible. She hums gently in your arms as you carry her over to her flower, sliding her onto it");
 					//Huge cum amount: 
@@ -1497,18 +1502,18 @@ package classes.Scenes.Areas.Forest
 			}
 			else if (rand(2) == 0) {
 				outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ");
-				if (player.isTaur()) outputText("as your " + cockDescript(x) + " hardens under your belly.", false);
-				else outputText("as you disrobe, revealing your " + cockDescript(x) + " to her.", false);
+				if (player.isTaur()) outputText("as your " + cockDescript(x) + " hardens under your belly.");
+				else outputText("as you disrobe, revealing your " + cockDescript(x) + " to her.");
 				outputText("  Wasting no time, you get down to the business of ");
 				if (player.cockTotal() == 1) outputText("penetrating her slick snatch, forcing in inch after inch.  ");
-				if (player.cockTotal() == 2) outputText("cramming your " + multiCockDescript() + " into her, double-stuffing the poor bee-slut with your double dongs.  ", false);
-				if (player.cockTotal() >= 3) outputText("cramming two out of your " + num2Text(player.cockTotal()) + " " + multiCockDescript() + "s into her, double-stuffing the poor bee-slut with double the dicks.  ", false);
+				if (player.cockTotal() == 2) outputText("cramming your " + multiCockDescript() + " into her, double-stuffing the poor bee-slut with your double dongs.  ");
+				if (player.cockTotal() >= 3) outputText("cramming two out of your " + num2Text(player.cockTotal()) + " " + multiCockDescript() + "s into her, double-stuffing the poor bee-slut with double the dicks.  ");
 				outputText("She swoons, flopping back and opening her legs completely, an expression of shock crossing her features, as if she can't comprehend why her body isn't listening to her.\n\n");
 				//sex
-				outputText("You begin pounding away at her, splattering honey over her thighs with your enthusiastic fucking.  Her passage is unlike anything you've ever had before.  It's tight, but overly slick and textured with small nubs and bumps that tease and caress in wonderful ways.   Her muscles clamp and squeeze her vaginal entrance tightly, turning it into an organic cock-ring.  You hold still while her cunt begins twitching and slightly rotating back and forth around your " + cockDescript(x) + ".    Her head is thrown back in what you assume is an orgasm, her arms mashing her tits together for even more pleasure.  The vacuum seal around your " + cockDescript(x) + " only gets tighter as her rippling, squeezing, twisting cunt stimulates your over-engorged " + cockDescript(x) + ".\n\n", false);
+				outputText("You begin pounding away at her, splattering honey over her thighs with your enthusiastic fucking.  Her passage is unlike anything you've ever had before.  It's tight, but overly slick and textured with small nubs and bumps that tease and caress in wonderful ways.   Her muscles clamp and squeeze her vaginal entrance tightly, turning it into an organic cock-ring.  You hold still while her cunt begins twitching and slightly rotating back and forth around your " + cockDescript(x) + ".    Her head is thrown back in what you assume is an orgasm, her arms mashing her tits together for even more pleasure.  The vacuum seal around your " + cockDescript(x) + " only gets tighter as her rippling, squeezing, twisting cunt stimulates your over-engorged " + cockDescript(x) + ".\n\n");
 				//cum
 				outputText("Taken beyond your limit, you lose control, feeling the tightness and warmth of your orgasm build at the base of your cock.   It builds and builds, held back by the bee's vice-like cunt, almost becoming painful with its intensity.   Just when you think you can't take any more pressure, you cum, HARD.   Your body clenches hard, spurting out each wave of fuck-juice with more force than the last.    Honey squirts from the bee-slut's fuck-hole, drenching the fuzz on her thighs and your legs with slippery sweetness.   Her cunt doesn't show any signs of slowing down, and your body obliges it, providing more cum than you thought yourself capable of.");
-				if (player.gender == 3 && !player.isTaur()) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.", false);
+				if (player.gender == 3 && !player.isTaur()) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.");
 				outputText("\n\n");
 				//wind down
 				outputText("At last her quivering quim releases your sore member");
@@ -1523,10 +1528,10 @@ package classes.Scenes.Areas.Forest
 			}
 			//Male 2
 			else {
-				outputText("As you approach she starts to edge away, her battered wings flapping in a futile attempt to escape.  Reaching her, you grip her wrists before she can fight back, squeezing tightly as her struggling increases. Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your erect member.  ", false);
-				outputText("You begin to push forward, sliding your " + cockDescript(x) + " against the soft folds of her pussy, her whimpers shifting gently into moans. Your grin widens as you penetrate her roughly in one strong stroke, the bee-girl's body tensing underneath you as a squeal leaves her lips. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realization hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick abdomen down and remove the threat.\n\n", false);
-				outputText("Unhindered, you start to fuck her. Her pussy tightens and convulses around your cock, becoming slick with her juices and your pre-cum. You can smell the sickly combination of nectar, sweat and love juices hanging thickly in the air. Your breathing becomes heavy while her moans get deeper and lust-filled. Her reluctance evaporates, her struggling shifts into more receptive movements against your body, her hips rocking against yours with each thrust, forcing your " + cockDescript(x) + " deeper into her tight honeypot.\n\n", false);
-				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases. You feel her abdomen pressing against your rear as you drive into her, the pressure in your " + ballsDescriptLight() + " building as her pussy tightens around you. With a groan you cum, your hot seed gushing inside of her. She clenches you tightly, her pussy milking your " + cockDescript(x) + " for every ounce, until the sticky white fluid is pouring from around your " + cockDescript(x) + ". Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.", false);
+				outputText("As you approach she starts to edge away, her battered wings flapping in a futile attempt to escape.  Reaching her, you grip her wrists before she can fight back, squeezing tightly as her struggling increases. Forcing her onto her back, you hold her wrists tightly in one hand to allow you to pull off your " + player.armorName + ", freeing your erect member.  ");
+				outputText("You begin to push forward, sliding your " + cockDescript(x) + " against the soft folds of her pussy, her whimpers shifting gently into moans. Your grin widens as you penetrate her roughly in one strong stroke, the bee-girl's body tensing underneath you as a squeal leaves her lips. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realization hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick abdomen down and remove the threat.\n\n");
+				outputText("Unhindered, you start to fuck her. Her pussy tightens and convulses around your cock, becoming slick with her juices and your pre-cum. You can smell the sickly combination of nectar, sweat and love juices hanging thickly in the air. Your breathing becomes heavy while her moans get deeper and lust-filled. Her reluctance evaporates, her struggling shifts into more receptive movements against your body, her hips rocking against yours with each thrust, forcing your " + cockDescript(x) + " deeper into her tight honeypot.\n\n");
+				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases. You feel her abdomen pressing against your rear as you drive into her, the pressure in your " + ballsDescriptLight() + " building as her pussy tightens around you. With a groan you cum, your hot seed gushing inside of her. She clenches you tightly, her pussy milking your " + cockDescript(x) + " for every ounce, until the sticky white fluid is pouring from around your " + cockDescript(x) + ". Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.");
 				player.orgasm();
 				cleanupAfterCombat();
 			}
@@ -1540,13 +1545,13 @@ package classes.Scenes.Areas.Forest
 			if (player.isTaur()) {
 				outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n");
 
-				outputText("You make your intentions clear by sliding the " + player.armorName + " from your torso and stroking your " + chestDesc() + ". As you slide your hands around your chest and play with your " + nippleDescript(0) + "s, you begin to moan sensually. Your own ministrations cause your " + vaginaDescript(0) + " to heat up and you feel small dribbles of femcum slowly slide down your hind legs. Responding to your arousal, your tail starts to wave about on its own to spread your musky scent and your " + assholeDescript() + " begins to open and close.\n\n", false);
+				outputText("You make your intentions clear by sliding the " + player.armorName + " from your torso and stroking your " + chestDesc() + ". As you slide your hands around your chest and play with your " + nippleDescript(0) + "s, you begin to moan sensually. Your own ministrations cause your " + vaginaDescript(0) + " to heat up and you feel small dribbles of femcum slowly slide down your hind legs. Responding to your arousal, your tail starts to wave about on its own to spread your musky scent and your " + assholeDescript() + " begins to open and close.\n\n");
 
 				outputText("The bee maiden is at first confused by the unexpected display, but the combination of sight, sound and smell soon overrides her inhibitions. She spreads her legs wider, letting you see more of her honey-dripping cunt as she begins to finger herself. Her own moans come thick and fast, accompanied by small gushes of sticky fluid and a strong, sweet smell. It mixes with your musk and seems to become trapped in the little clearing, building and building until the pair of you are incapable of thinking of anything but sex.\n\n");
 
-				outputText("But while she can reach herself, you can't. The puddle of fluid around your rear hooves continues to grow as your " + vaginaDescript(0) + " becomes more desperate for relief and the muscles in your " + assholeDescript() + " start to ache from the strength of their clenching. You mash your " + chestDesc() + " hard, desperate for release, but it's not enough.", false);
+				outputText("But while she can reach herself, you can't. The puddle of fluid around your rear hooves continues to grow as your " + vaginaDescript(0) + " becomes more desperate for relief and the muscles in your " + assholeDescript() + " start to ache from the strength of their clenching. You mash your " + chestDesc() + " hard, desperate for release, but it's not enough.");
 				//[Fuckable nipples: 
-				if (player.hasFuckableNipples()) outputText("  Not even repeated penetration of your " + nippleDescript(0) + "s seems to bring the relief you need.", false);
+				if (player.hasFuckableNipples()) outputText("  Not even repeated penetration of your " + nippleDescript(0) + "s seems to bring the relief you need.");
 				outputText("\n\n");
 
 				outputText("Despite her ability to reach, the bee-girl seems to be having a similar trouble getting herself off. Her hands seem to blur with the speed of her rubbing as her back arcs. She cries out in frustration and begins beating her wings violently, lifting off from the flower.\n\n");
@@ -1554,21 +1559,21 @@ package classes.Scenes.Areas.Forest
 				outputText("In a haze of sexual frustration, you leap forward and grab the bee by the hips, dragging her sopping cunt to your lips and eating her out. Her entire body vibrates in your arms but she makes no attempt to stop you, going so far as to push your head further into her crotch and wrapping her legs around you. Your fingers find another hole and penetrate it, thinking it to be her anus. Whether it is or not, you're rewarded with a massive gush of honey coating your face as she cries out and goes limp.\n\n");
 
 				//[Breasts >D: 
-				if (player.biggestTitSize() > 4) outputText("Her legs release your head and she falls back, knocking into your " + player.allBreastsDescript() + " and causing them to jiggle lewdly. You grab her before she hits the ground, surprised at how light she is.", false);
+				if (player.biggestTitSize() > 4) outputText("Her legs release your head and she falls back, knocking into your " + player.allBreastsDescript() + " and causing them to jiggle lewdly. You grab her before she hits the ground, surprised at how light she is.");
 				//[Breasts <=C: 
 				else outputText("Her legs release and she falls back, but you catch her before she hits the ground and are surprised by how light she is.");
-				outputText("  Her body stiffens as she realizes her situation and with your aid manages to right herself. By now the pressure in your loins is unbearable and you're breathing hard. Your " + nippleDescript(0) + "s ache just as badly as your " + assholeDescript(), false);
+				outputText("  Her body stiffens as she realizes her situation and with your aid manages to right herself. By now the pressure in your loins is unbearable and you're breathing hard. Your " + nippleDescript(0) + "s ache just as badly as your " + assholeDescript());
 				//[Fuckable nipples and/or lactating: 
 				if (player.hasFuckableNipples() || player.lactationQ() >= 20) outputText(" and ooze fluids in a constant stream down your front");
 				outputText(". The bee-girl obviously understands your situation and almost as soon as she's upright buzzes onto your back.");
 
-				outputText("The peculiar sensation of her chitin covered appendages climbing along your back is lost on your lust addled mind, but the sudden penetration of your " + assholeDescript() + " is most definitely not. You cry out as the weak contact is more than enough to make you cum, spraying hot femcum beneath you.  Meanwhile, your tongue lolls out of your mouth and you shiver with barely restrained pleasure.\n\n", false);
+				outputText("The peculiar sensation of her chitin covered appendages climbing along your back is lost on your lust addled mind, but the sudden penetration of your " + assholeDescript() + " is most definitely not. You cry out as the weak contact is more than enough to make you cum, spraying hot femcum beneath you.  Meanwhile, your tongue lolls out of your mouth and you shiver with barely restrained pleasure.\n\n");
 
-				outputText("She's not done yet though, as her finger is quickly replaced with a long, wet tongue. It writhes about inside you while cum continues to spray out of your " + vaginaDescript(), false);
+				outputText("She's not done yet though, as her finger is quickly replaced with a long, wet tongue. It writhes about inside you while cum continues to spray out of your " + vaginaDescript());
 				if (player.hasLongTail() > 0) outputText(" and your flailing tail is held firmly in place by her hand");
-				outputText(". Her other hand slides into your " + vaginaDescript() + " and scrapes around inside, causing an explosion of pleasure inside you. Your love canal grabs her and pulls her arm deeper inside you, your equine muscles making her powerless to resist.", false);
+				outputText(". Her other hand slides into your " + vaginaDescript() + " and scrapes around inside, causing an explosion of pleasure inside you. Your love canal grabs her and pulls her arm deeper inside you, your equine muscles making her powerless to resist.");
 				//[Asses other than tight: 
-				if (player.ass.analLooseness >= 2) outputText("  Not wanting this, she attempts to brace her other hand between your " + assDescript() + "'s cheeks, but your " + assholeDescript() + " opens and she slides inside. With an immense effort she pulls out of your ass, nearly pushing you over the edge in the process, but the arm stuck on your vagina is stuck tight.", false);
+				if (player.ass.analLooseness >= 2) outputText("  Not wanting this, she attempts to brace her other hand between your " + assDescript() + "'s cheeks, but your " + assholeDescript() + " opens and she slides inside. With an immense effort she pulls out of your ass, nearly pushing you over the edge in the process, but the arm stuck on your vagina is stuck tight.");
 				outputText("  It's not long before her hand finds your uterus and begin probing it, pushing you beyond your limit.\n\n");
 
 				//[Huge cum amount: 
@@ -1580,9 +1585,9 @@ package classes.Scenes.Areas.Forest
 				outputText("You trot up to the flower and slide the exhausted creature off of you, then rearrange her to be more comfortable. With a final pat on the head and after collecting your things, you head back to camp on slightly wobbly legs.");
 			}
 			else {
-				outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest as you disrobe, revealing your " + vaginaDescript(0), false);
-				if (player.breastRows.length > 1) outputText(" and " + player.allBreastsDescript(), false);
-				outputText(".  You waste no time, pushing her down and draping yourself across her body.  You let your ready sex bump her chin as you push her thighs further apart and drink in the scent of her woman-hood.   Mashing your " + vaginaDescript(0) + " against her face, you make it very clear what she is to do, and thankfully, the bee-bitch gets the idea and starts licking.  You coo in pleasure, delighted at the length and texture of her tongue as she goes to work.  ", false);
+				outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest as you disrobe, revealing your " + vaginaDescript(0));
+				if (player.breastRows.length > 1) outputText(" and " + player.allBreastsDescript());
+				outputText(".  You waste no time, pushing her down and draping yourself across her body.  You let your ready sex bump her chin as you push her thighs further apart and drink in the scent of her woman-hood.   Mashing your " + vaginaDescript(0) + " against her face, you make it very clear what she is to do, and thankfully, the bee-bitch gets the idea and starts licking.  You coo in pleasure, delighted at the length and texture of her tongue as she goes to work.  ");
 				if (!player.isTaur()) {
 					outputText("You return the favor and dive into her muff, planting kisses and licks down as a reward for your victim's rather skilled efforts.\n\n");
 					//new PG
@@ -1610,35 +1615,35 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ");
 
-			if (player.isTaur()) outputText("as you idly fondle your " + player.allBreastsDescript() + " as you feel your blood-gorged " + multiCockDescriptLight() + " swaying under your belly.  ", false);
-			else outputText("as you disrobe, revealing your " + player.allBreastsDescript() + ", " + vaginaDescript(0) + ", and " + multiCockDescriptLight() + ".  ", false);
+			if (player.isTaur()) outputText("as you idly fondle your " + player.allBreastsDescript() + " as you feel your blood-gorged " + multiCockDescriptLight() + " swaying under your belly.  ");
+			else outputText("as you disrobe, revealing your " + player.allBreastsDescript() + ", " + vaginaDescript(0) + ", and " + multiCockDescriptLight() + ".  ");
 			outputText("You step forwards, straddling her and rubbing your outer lips in preparation.  ");
-			if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_NORMAL) outputText("Your " + vaginaDescript(0) + " becomes puffy and moist with excitement, ready for what you have planned.", false);
-			if (player.vaginas[0].vaginalWetness > VAGINA_WETNESS_NORMAL && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " squicks wetly from your gentle ministrations as your vulva become sensitive and engorged.", false);
-			if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " gushes in response, dripping steadily over your victim's face, covering it with a spattering of girl-cum.", false);
+			if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_NORMAL) outputText("Your " + vaginaDescript(0) + " becomes puffy and moist with excitement, ready for what you have planned.");
+			if (player.vaginas[0].vaginalWetness > VAGINA_WETNESS_NORMAL && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " squicks wetly from your gentle ministrations as your vulva become sensitive and engorged.");
+			if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " gushes in response, dripping steadily over your victim's face, covering it with a spattering of girl-cum.");
 			//New PG
 			outputText("\n\nWithout warning, you plant your crotch onto her face, gyrating over her mouth as the defeated bee-maiden struggles against you.  ");
 			//BALLZ
 			if (player.balls >= 2) {
-				if (player.ballSize < 5) outputText("Your " + ballsDescriptLight() + " droop into her eyes, blinding and humiliating her in equal measure.  ", false);
-				else outputText("Your " + ballsDescriptLight() + " obscure most of her face, making it difficult to see her reactions, but her mouth gives you all the feedback you need.  It doesn't take more than a few moments for her struggles to cease, and soon, her long insectile tongue is worming its way into your " + vaginaDescript(0) + ".  ", false);
+				if (player.ballSize < 5) outputText("Your " + ballsDescriptLight() + " droop into her eyes, blinding and humiliating her in equal measure.  ");
+				else outputText("Your " + ballsDescriptLight() + " obscure most of her face, making it difficult to see her reactions, but her mouth gives you all the feedback you need.  It doesn't take more than a few moments for her struggles to cease, and soon, her long insectile tongue is worming its way into your " + vaginaDescript(0) + ".  ");
 			}
-			outputText("Happy with your victim's compliance, you grind harder into her face.  Allowing your hands a bit of freedom, you begin to stroke your already erect " + cockDescript(0), false);
+			outputText("Happy with your victim's compliance, you grind harder into her face.  Allowing your hands a bit of freedom, you begin to stroke your already erect " + cockDescript(0));
 			if (player.cumQ() < 75) outputText(", enjoying the chance to cut loose and explore your male half.  ");
 			if (player.cumQ() >= 75 && player.cumQ() < 500) outputText(", smearing your hardness in copious pre-cum and reveling at the marvelous sensation it gives you.  ");
 			if (player.cumQ() >= 500) outputText(".  A few drops of your pre manage to drip onto her face, mixing with the fluids from your cunt.  ");
-			outputText("You nearly bounce off her in alarm as her tongue probes deep, pressing against and penetrating your cervix in one slippery stroke.  Being licked from the inside out makes you squeal with equal parts surprise and pleasure, and you mash your " + vaginaDescript(0) + " harder against her in response.  Your hands masturbate your " + multiCockDescriptLight() + " in time with her licks, the speed gradually increasing to keep pace with the fire of your ever-growing lust.  ", false);
+			outputText("You nearly bounce off her in alarm as her tongue probes deep, pressing against and penetrating your cervix in one slippery stroke.  Being licked from the inside out makes you squeal with equal parts surprise and pleasure, and you mash your " + vaginaDescript(0) + " harder against her in response.  Your hands masturbate your " + multiCockDescriptLight() + " in time with her licks, the speed gradually increasing to keep pace with the fire of your ever-growing lust.  ");
 			if (player.cumQ() >= 100) {
-				outputText(" More and more pre begins to drip from your " + cockDescript(0) + ", soaking your ", false);
-				if (player.balls >= 2) outputText(ballsDescriptLight() + " and ", false);
+				outputText(" More and more pre begins to drip from your " + cockDescript(0) + ", soaking your ");
+				if (player.balls >= 2) outputText(ballsDescriptLight() + " and ");
 				outputText("the bee-bitch's face.  ");
 			}
 			if (player.breastRows.length > 0) {
-				if (player.biggestTitSize() >= 2) outputText("You free a hand to tend to your " + player.allBreastsDescript() + " and aching nipples, alternating between squeezing your female flesh and tugging on your erect nipples.  ", false);
+				if (player.biggestTitSize() >= 2) outputText("You free a hand to tend to your " + player.allBreastsDescript() + " and aching nipples, alternating between squeezing your female flesh and tugging on your erect nipples.  ");
 			}
 			outputText("\n\n");
 			//New PG
-			outputText("You moan in ecstasy, your " + vaginaDescript(0) + " clamping against her tongue and lips like a vice.  She responds by pulling it from your uterus and swirling it around the inside of your " + vaginaDescript(0) + " to stimulate the walls of your trembling love-canal.  ", false);
+			outputText("You moan in ecstasy, your " + vaginaDescript(0) + " clamping against her tongue and lips like a vice.  She responds by pulling it from your uterus and swirling it around the inside of your " + vaginaDescript(0) + " to stimulate the walls of your trembling love-canal.  ");
 			if (player.breastRows.length > 0) {
 				if (player.biggestTitSize() >= 2) {
 					outputText("You pinch a nipple hard");
@@ -1649,30 +1654,30 @@ package classes.Scenes.Areas.Forest
 					if (player.biggestLactation() <= 1) outputText(".  ");
 				}
 			}
-			if (player.balls >= 2) outputText("The warmth and pleasurable pressure of your male orgasm builds in your " + ballsDescriptLight() + ", growing stronger as it migrates up your groin to the base of your pulsing member.  You squeeze your " + cockDescript(0) + " tightly, trying to hold on a bit longer, but the squirming tongue inside you is too much.  ", false);
+			if (player.balls >= 2) outputText("The warmth and pleasurable pressure of your male orgasm builds in your " + ballsDescriptLight() + ", growing stronger as it migrates up your groin to the base of your pulsing member.  You squeeze your " + cockDescript(0) + " tightly, trying to hold on a bit longer, but the squirming tongue inside you is too much.  ");
 			//Mmmmmmangasm!
 			if (player.isTaur()) outputText("As you're going to explode, you smile evilly as an idea crosses your mind. You turn around swiftly, leaving her surprised and still in the position of licking your pussy, her slender and squirming tongue out, and her face covered in girl-cum.  ");
 			if (player.cumQ() < 25) {
-				outputText("You erupt, your " + cockDescript(0) + " pulsing and spraying ribbons of cum.  You milk your dick hard, pistoning your hand up and down mercilessly, trying to squeeze out every drop.  You watch each burst splatter into the bee-girl's hair and grin cruelly.  ", false);
+				outputText("You erupt, your " + cockDescript(0) + " pulsing and spraying ribbons of cum.  You milk your dick hard, pistoning your hand up and down mercilessly, trying to squeeze out every drop.  You watch each burst splatter into the bee-girl's hair and grin cruelly.  ");
 				if (!player.isTaur()) outputText("Spent at last, you rise up off of her, shivering as her tongue retracts from your woman-hood.");
 			}
 			if (player.cumQ() >= 25 && player.cumQ() < 250) {
-				outputText("You erupt, your " + cockDescript(0) + " pulsing in your hands and spraying out thick ribbons of cum.  You milk your dick hard, pistoning it relentlessly as it spurts more and more jism.  The orgasm drags on and on, your cum soaking your poor victim's hair and forehead with your sticky white juices.   Satisfied at last, ", false);
+				outputText("You erupt, your " + cockDescript(0) + " pulsing in your hands and spraying out thick ribbons of cum.  You milk your dick hard, pistoning it relentlessly as it spurts more and more jism.  The orgasm drags on and on, your cum soaking your poor victim's hair and forehead with your sticky white juices.   Satisfied at last, ");
 				if (player.balls >= 2) outputText("with empty balls, ");
-				if (!player.isTaur()) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".", false);
+				if (!player.isTaur()) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".");
 				else outputText("you walk away from her smiling, and sated.");
 			}
 			if (player.cumQ() >= 250 && player.cumQ() < 500) {
-				outputText("Your " + cockDescript(0) + " erupts, writhing in your hands from the force of your orgasm as thick ropes of cum burst from you.   Each pulse of juice seems to drag on and on, each nearly as long as a normal man's orgasm.  Looking down, you see the bee's hair and face totally slimed with your cum, and a puddle forming below her.  ", false);
+				outputText("Your " + cockDescript(0) + " erupts, writhing in your hands from the force of your orgasm as thick ropes of cum burst from you.   Each pulse of juice seems to drag on and on, each nearly as long as a normal man's orgasm.  Looking down, you see the bee's hair and face totally slimed with your cum, and a puddle forming below her.  ");
 				if (!player.isTaur()) outputText("You rise up off of her in mid-orgasm, aiming lower and painting her with each blast of seed.  ");
 				else outputText("You aim right at the oval of her face and paint her with each blast of seed.  ");
-				outputText("Your " + cockDescript(0) + " flexes powerfully with each load, until your victim is soaked from the waist up, her breasts and face plastered with goo.  You sigh contentedly and step away, watching the bee scoop up your leavings in both hands, one going to her mouth, the other to her sweet wet snatch.  Giggling to yourself, you walk away, sated.", false);
+				outputText("Your " + cockDescript(0) + " flexes powerfully with each load, until your victim is soaked from the waist up, her breasts and face plastered with goo.  You sigh contentedly and step away, watching the bee scoop up your leavings in both hands, one going to her mouth, the other to her sweet wet snatch.  Giggling to yourself, you walk away, sated.");
 			}
 			if (player.cumQ() >= 500) {
-				outputText("Your " + cockDescript(0) + " erupts like a volcano, shooting a constant thick stream of cum that pulses with each clench of your pelvic muscles.  The pressure only seems to increase as your urethra tries to deal with the huge load your body is producing.  ", false);
+				outputText("Your " + cockDescript(0) + " erupts like a volcano, shooting a constant thick stream of cum that pulses with each clench of your pelvic muscles.  The pressure only seems to increase as your urethra tries to deal with the huge load your body is producing.  ");
 				if (!player.isTaur()) outputText("You stand up off your victim, letting her tongue slip free from your soaked folds, and");
 				else outputText("You");
-				outputText(" plunge your " + cockDescript(0) + " deep into the bee-girl's mouth and throat, pumping cum directly into her belly.  She writhes underneath you, her oxygen supply cut off as your spunk floods her belly.  The feeling of her inhuman lips wrapped tight around your base only makes it worse, intensifying the eruption of baby-batter that's pumping into her.  Her eyes roll back as cum begins leaking from her nose, her belly beginning to look distended and pregnant with the amount of jism you've pumped in.   Certain she's had enough, you pull free, marveling at how your last spurt made her look nearly nine months pregnant.   You note she's passed out, but your orgasm is far from over, so you resume jacking off, hosing her down from head to toe in thick white goop.  ", false);
+				outputText(" plunge your " + cockDescript(0) + " deep into the bee-girl's mouth and throat, pumping cum directly into her belly.  She writhes underneath you, her oxygen supply cut off as your spunk floods her belly.  The feeling of her inhuman lips wrapped tight around your base only makes it worse, intensifying the eruption of baby-batter that's pumping into her.  Her eyes roll back as cum begins leaking from her nose, her belly beginning to look distended and pregnant with the amount of jism you've pumped in.   Certain she's had enough, you pull free, marveling at how your last spurt made her look nearly nine months pregnant.   You note she's passed out, but your orgasm is far from over, so you resume jacking off, hosing her down from head to toe in thick white goop.  ");
 				if (player.balls >= 2) outputText("Your balls eventually empty");
 				else outputText("Your body's cum supply eventually empties");
 				outputText(", and you turn your back on your soaked, cum-bloated conquest and the puddle of spooge that's rapidly wicking into the ground.");
@@ -1710,35 +1715,35 @@ package classes.Scenes.Areas.Forest
 
 			//(if naga tongue)
 			if (select == 0) {
-				outputText("As you work your hand up and down the burgeoning black growth, the tip of it opens up roughly an inch and begins to secrete a honey-like fluid that smells of both sweetness and sex pheromones.  In fact, as your oversensitive elongated tongue flits between your lips tasting the air, you decide it's the most appealing smell you've noticed in years!  Almost unintentionally you follow the intoxicating, hypnotic aroma, moving your face closer and closer to the bee-girl's bumpy ovipositor until you're right on top of it.  Finally losing all restraint, you slip your snake-like tongue out of your mouth and down the hole, and you explode with a moan at the incredible taste as the bee-girl simultaneously squeals with rapture at the added stimulation.  Her cunt orgasms and squirts a gob of honeyed juice that hits you right in the side of the face, but you don't care as you're too busy licking up every drop you can find on the slick inner walls and around the mounting number of eggs themselves; bringing up mouthfuls of the amazing substance with your engorged tongue.  You lick for minutes that stretch on like hours and the pheromones in the stuff set off several orgasms of your own", false);
+				outputText("As you work your hand up and down the burgeoning black growth, the tip of it opens up roughly an inch and begins to secrete a honey-like fluid that smells of both sweetness and sex pheromones.  In fact, as your oversensitive elongated tongue flits between your lips tasting the air, you decide it's the most appealing smell you've noticed in years!  Almost unintentionally you follow the intoxicating, hypnotic aroma, moving your face closer and closer to the bee-girl's bumpy ovipositor until you're right on top of it.  Finally losing all restraint, you slip your snake-like tongue out of your mouth and down the hole, and you explode with a moan at the incredible taste as the bee-girl simultaneously squeals with rapture at the added stimulation.  Her cunt orgasms and squirts a gob of honeyed juice that hits you right in the side of the face, but you don't care as you're too busy licking up every drop you can find on the slick inner walls and around the mounting number of eggs themselves; bringing up mouthfuls of the amazing substance with your engorged tongue.  You lick for minutes that stretch on like hours and the pheromones in the stuff set off several orgasms of your own");
 				//[(if penis then)
 				if (player.hasCock()) outputText(", spraying the fuzzy side of the bee's abdomen with your sticky come,");
-				outputText(" before you get enough.  Ahh, who knew that stuff would be this much better when it was still fresh in the bee?  You feel a strong urge to take the girl home with you and make her your 'pantry', but you groggily realize that she has to be fertilized with eggs by the queen bee before she produces your treat.  Shaking your head to clear the sugary haze, you take a firm grip on the bee's knob and decide to enact your original plan now; maybe you can capture the queen later.\n\n", false);
+				outputText(" before you get enough.  Ahh, who knew that stuff would be this much better when it was still fresh in the bee?  You feel a strong urge to take the girl home with you and make her your 'pantry', but you groggily realize that she has to be fertilized with eggs by the queen bee before she produces your treat.  Shaking your head to clear the sugary haze, you take a firm grip on the bee's knob and decide to enact your original plan now; maybe you can capture the queen later.\n\n");
 				//(gain 2 libido and 2 sensitivity)
 				player.orgasm();
 				dynStats("lib", 2, "sen", 2);
 			}
 			//(if penis)
 			else if (select == 1) {
-				outputText("Seeing the girl's resistance end in an eye-rolling gasp, you decide to get in on the fun too.  With some difficulty you unfasten and shed the bottoms of your " + player.armorName + " with your one free hand and maneuver your " + cockDescript(0) + " to her now-gushing honeypot.  Considering there's enough foreplay going on with her ovipositor to wet her enough for a minotaur, you unceremoniously slam your " + cockDescript(0) + " into her.", false);
+				outputText("Seeing the girl's resistance end in an eye-rolling gasp, you decide to get in on the fun too.  With some difficulty you unfasten and shed the bottoms of your " + player.armorName + " with your one free hand and maneuver your " + cockDescript(0) + " to her now-gushing honeypot.  Considering there's enough foreplay going on with her ovipositor to wet her enough for a minotaur, you unceremoniously slam your " + cockDescript(0) + " into her.");
 				//[(if dicksize>beevagdepth)
 				if (player.cockArea(0) > monster.vaginalCapacity()) outputText("  The bee-girl barely winces as the head of your shaft bumps up painfully against her cervix, quickly returning to a rictus of ecstasy as you continue jerking her ovipositor off with your now-sticky hand.");
 				outputText("  You work up a solid rhythm of fucking the poor girl's sopping snatch and tugging on the grotesque black shaft, never taking your eyes off the bulges forming at the base of her tumescent organ.  Soon you see the telltale bumps of eggs starting to slide into position for a deposit and you grip down harder while jerking the bee-girl off to build up an even bigger load.  Despite her whimpering, she convulses in orgasm from the dual stimulation and her body obliges you, sending up another batch of ready eggs.  The increased pressure forces a squirt of her nectar through despite your tight grip, shooting it nearly a foot in the air before it falls back down and wets the soft fuzz of her abdomen.\n\n");
 			}
 			//(if vagina)
 			else if (select == 2) {
-				outputText("As the bee-maiden's tongue lolls out of her mouth and she buzzes weakly in pleasure you relax your grip on the downy fuzz of her abdomen and concentrate on the knotty stalk that's steadily growing in your hand.  Thinking to yourself that you might as well have a little extra fun before you go ahead with your idea, you manage to unfasten the bottom part of your " + player.armorName + " one-handed.  After you step out of your clothing, you raise your leg up and straddle the bee's abdomen, then slide your " + vaginaDescript(0) + " down the ticklish fuzzy surface.  The uneven rubbing sensation elicits a gasp of surprise from you.  You feel your " + clitDescript() + " poke out as the fuzz slowly rubs your labia enroute to your anticipated destination. Reaching the end containing the sting and the now-throbbing ovipositor, you lift up your body and position your " + vaginaDescript(0) + " over the latter, then plunge down as honey splashes out of the bee's business end and into your slick folds.  Using one hand wrapped around the stinger to keep it pointed away and the other to grasp a patch of fuzz not yet slicked-up by your pussy juices, you start pumping the black bulging shaft in and out of you.  The honey that escaped into you starts squishing out mixed with your own natural juices, and the increased slickness just makes every thrust that much hotter.  After several minutes of wet penetration you feel the bee-girl's erstwhile invader develop a bumpier pattern and recognize that her eggs must be getting ready to erupt; a few get pushed out by the twitching knob into your pussy, giving you a little shiver of extra pleasure.  You quickly rise up off the bee-girl and grasp the ovipositor firmly while the prematurely-released eggs slip out of your drenched slit and fall onto the ground.\n\n", false);
+				outputText("As the bee-maiden's tongue lolls out of her mouth and she buzzes weakly in pleasure you relax your grip on the downy fuzz of her abdomen and concentrate on the knotty stalk that's steadily growing in your hand.  Thinking to yourself that you might as well have a little extra fun before you go ahead with your idea, you manage to unfasten the bottom part of your " + player.armorName + " one-handed.  After you step out of your clothing, you raise your leg up and straddle the bee's abdomen, then slide your " + vaginaDescript(0) + " down the ticklish fuzzy surface.  The uneven rubbing sensation elicits a gasp of surprise from you.  You feel your " + clitDescript() + " poke out as the fuzz slowly rubs your labia enroute to your anticipated destination. Reaching the end containing the sting and the now-throbbing ovipositor, you lift up your body and position your " + vaginaDescript(0) + " over the latter, then plunge down as honey splashes out of the bee's business end and into your slick folds.  Using one hand wrapped around the stinger to keep it pointed away and the other to grasp a patch of fuzz not yet slicked-up by your pussy juices, you start pumping the black bulging shaft in and out of you.  The honey that escaped into you starts squishing out mixed with your own natural juices, and the increased slickness just makes every thrust that much hotter.  After several minutes of wet penetration you feel the bee-girl's erstwhile invader develop a bumpier pattern and recognize that her eggs must be getting ready to erupt; a few get pushed out by the twitching knob into your pussy, giving you a little shiver of extra pleasure.  You quickly rise up off the bee-girl and grasp the ovipositor firmly while the prematurely-released eggs slip out of your drenched slit and fall onto the ground.\n\n");
 			}
 			//(if D+ breastsize)
 			else if (select == 3) {
-				outputText("Noticing the bee abating her thrashing resistance in favor of buzzing pleasantly and fixing you with beseeching gazes, and seeking some way to get yourself closer to orgasm so you can climax at the same time as you bring your plan off, you absently stroke the bee's knob as you clumsily unfasten and remove the top part of your " + player.armorName + " with one hand.  Casting it aside, you give an involuntary shudder as a gobbet of warm fluid spattering from the engorged black shaft flies up and lands on your now-exposed " + breastDescript(0) + ".  With your free hand you smear the sensual pheromone-enhanced fluid around your chest, making sure the area between your cleavage is slick, and sending further shivers from your sensitive breast-flesh down your body.  Bending over the increasingly-knotty appendage, you trap it between your " + breastDescript(0) + " and start pushing them up and down its length, all the while tweaking your " + nippleDescript(0) + "s viciously.  The bee-bitch's black pseudo-cock develops new bumps as eggs move up the tunnel in response to your ministrations, rather resembling a far-fetched sex toy.  You pinch your nipples together in one hand and give a little moan while the other hand slides to the tip of the ovipositor and grabs firmly to hold the eggs in until you're ready for her to release them; and then you start sliding your pair of pinched and sensitive nipples up and down the far side of the girl's bumpy rod.  As the eggs backlog in the tool you hold your " + nippleDescript(0) + "s in place around the wet expanding stalk, letting the arriving spheres give you an irregular massage that pushes you to the verge of climax.\n\n", false);
+				outputText("Noticing the bee abating her thrashing resistance in favor of buzzing pleasantly and fixing you with beseeching gazes, and seeking some way to get yourself closer to orgasm so you can climax at the same time as you bring your plan off, you absently stroke the bee's knob as you clumsily unfasten and remove the top part of your " + player.armorName + " with one hand.  Casting it aside, you give an involuntary shudder as a gobbet of warm fluid spattering from the engorged black shaft flies up and lands on your now-exposed " + breastDescript(0) + ".  With your free hand you smear the sensual pheromone-enhanced fluid around your chest, making sure the area between your cleavage is slick, and sending further shivers from your sensitive breast-flesh down your body.  Bending over the increasingly-knotty appendage, you trap it between your " + breastDescript(0) + " and start pushing them up and down its length, all the while tweaking your " + nippleDescript(0) + "s viciously.  The bee-bitch's black pseudo-cock develops new bumps as eggs move up the tunnel in response to your ministrations, rather resembling a far-fetched sex toy.  You pinch your nipples together in one hand and give a little moan while the other hand slides to the tip of the ovipositor and grabs firmly to hold the eggs in until you're ready for her to release them; and then you start sliding your pair of pinched and sensitive nipples up and down the far side of the girl's bumpy rod.  As the eggs backlog in the tool you hold your " + nippleDescript(0) + "s in place around the wet expanding stalk, letting the arriving spheres give you an irregular massage that pushes you to the verge of climax.\n\n");
 			}
 
-			outputText("You pull your body apart from hers; the bee-maiden's euphoric buzzing takes on a note of panic as her body tenses to release another load of her eggs, only to be prevented yet again by your firm grip on her member.  You make eye contact and smile diabolically, asking if she's ready to release all her pent-up eggs.  She nods vigorously at you and starts pumping her abdomen up and down of her own volition, working her tool into your slick fist and humming with renewed enthusiasm.  You bend her abdomen lightly upward towards your " + buttDescript() + " and her thrusting takes on a quicker pace as she imagines finally getting her load into your " + assholeDescript() + ".  Suddenly you spin around, moving your free hand under the bee's lower abdomen, and push upward and in, HARD.  The poor bewildered bee-girl, already in the middle of an eager upward thrust and directed by your hands' guidance, spears her own pucker with the tip of her ovipositor while the stinger lands directly in her glistening cunt.  Her harmonic humming instantly changes to an ear-splitting vibrato scream as the forceful anal penetration and the venom surging through her sensitive box combine with the agony you've inflicted by twisting her abdomen so severely; but the pain isn't enough to keep her now-massive black ovipositor from forcing out every egg it can now that its end is once again open.  The release of the pent-up eggs triggers another orgasm in the abused bee's body, increasing the sensitivity and therefore the pain of her envenomated cunt and spurring another load of eggs down her damaged abdomen to launch into her own rectum.  Her pained wail reaches an incredible intensity as she orgasms over and over inside herself and you busy the hand you're not using to hold her abdomen in place to ", false);
+			outputText("You pull your body apart from hers; the bee-maiden's euphoric buzzing takes on a note of panic as her body tenses to release another load of her eggs, only to be prevented yet again by your firm grip on her member.  You make eye contact and smile diabolically, asking if she's ready to release all her pent-up eggs.  She nods vigorously at you and starts pumping her abdomen up and down of her own volition, working her tool into your slick fist and humming with renewed enthusiasm.  You bend her abdomen lightly upward towards your " + buttDescript() + " and her thrusting takes on a quicker pace as she imagines finally getting her load into your " + assholeDescript() + ".  Suddenly you spin around, moving your free hand under the bee's lower abdomen, and push upward and in, HARD.  The poor bewildered bee-girl, already in the middle of an eager upward thrust and directed by your hands' guidance, spears her own pucker with the tip of her ovipositor while the stinger lands directly in her glistening cunt.  Her harmonic humming instantly changes to an ear-splitting vibrato scream as the forceful anal penetration and the venom surging through her sensitive box combine with the agony you've inflicted by twisting her abdomen so severely; but the pain isn't enough to keep her now-massive black ovipositor from forcing out every egg it can now that its end is once again open.  The release of the pent-up eggs triggers another orgasm in the abused bee's body, increasing the sensitivity and therefore the pain of her envenomated cunt and spurring another load of eggs down her damaged abdomen to launch into her own rectum.  Her pained wail reaches an incredible intensity as she orgasms over and over inside herself and you busy the hand you're not using to hold her abdomen in place to ");
 			//[(if dick)
-			if (player.hasCock()) outputText("stroke your " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
-			else if (player.hasVagina()) outputText("rub your " + vaginaDescript(0), false);
-			else outputText("tweak your " + nippleDescript(0) + "s", false);
+			if (player.hasCock()) outputText("stroke your " + Appearance.cockNoun(CockTypesEnum.HUMAN));
+			else if (player.hasVagina()) outputText("rub your " + vaginaDescript(0));
+			else outputText("tweak your " + nippleDescript(0) + "s");
 			outputText(", laughing as you climax");
 			//[(if dick, squirter vag, or lactating)
 			if (player.hasCock() || player.lactationQ() >= 100 || player.wetness() >= 5) outputText(" and spray your sticky fluids all over her tortured groin");
@@ -1759,59 +1764,60 @@ package classes.Scenes.Areas.Forest
 			var y:Number = player.biggestCockIndex2();
 			//MULTIPLE MULTIPLE SCENES!
 			if (rand(2) == 0) {
-				outputText("The dazed bee-woman stumbles, and you grab her abdomen just above the stinger.  Lifting it high, you force her onto her knees, and then bend her over, lowering her antennae to the ground.  With a heroic effort, you force her stinger into her own shoulder.  The bee-girl thrashes wildly for a moment, then moans as the venom you've forced her to inject into herself begins to take effect.  Her motions become less frantic and more wanton, and thick honey begins to drool from her exposed pussy, some of it dribbling down her inner thighs.", true);
+				clearOutput();
+				outputText("The dazed bee-woman stumbles, and you grab her abdomen just above the stinger.  Lifting it high, you force her onto her knees, and then bend her over, lowering her antennae to the ground.  With a heroic effort, you force her stinger into her own shoulder.  The bee-girl thrashes wildly for a moment, then moans as the venom you've forced her to inject into herself begins to take effect.  Her motions become less frantic and more wanton, and thick honey begins to drool from her exposed pussy, some of it dribbling down her inner thighs.");
 				//New PG
 				outputText("\n\n");
-				if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The largest cock - a tentacle - strains towards the bee-girl's pussy, clearly eager to sink itself into her warm, sticky confines.  Taking it in hand, you guide the mushroom-like glans against her pouting netherlips.  The bee-girl gasps and squirms, her motions clearly more in eagerness and humiliation than any serious attempt to escape.  You drag the broad head of your tentacle-cock up and down, gathering a thick coating of honey on it before releasing it.  Your cock strains against her folds, then sinks in slowly as you push your hips forward, and you sigh happily as you feel her warmth surround you.  She moans and arches her back even more, her antennae drooping submissively as your agile phallus squirms about inside her, stretching her tight little passage and leaving no nook or cranny unexplored.  ", false);
-				if (player.hasKnot(x)) outputText("You loosen your " + player.armorName + " and unleash your cocks.  Taking the largest in hand, you stroke its knobby shape until it's sufficiently stiff, then press the pointed end against her clit, teasing the little nub.  The bee-girl gasps and squirms, pushing her now pouting clit back against you.  You drag the tip up, gathering honey as you go until you reach her opening, then thrust with your hips.  Her pussylips part eagerly, and you find her tight but welcoming.  Still, as tempting as it is to rut the girl with abandon, you hold back, never letting your knot sink inside her.  ", false);
-				if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The equine flare of the largest is already drooling pre as you enjoy the sight of the helpless, squirming bee-girl.  Swinging it like a flogger, you spank her ass, making the girl yelp and leaving trails of sticky pre across the globes of her ass.  Grinning, you drag your shaft back and forth across her pussy, slicking it in her honey.  Finally, you press the tip against her opening.  She's a tight fit for you, and she squeals more loudly as your shaft spreads her little cunny inexorably.  ", false);
+				if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The largest cock - a tentacle - strains towards the bee-girl's pussy, clearly eager to sink itself into her warm, sticky confines.  Taking it in hand, you guide the mushroom-like glans against her pouting netherlips.  The bee-girl gasps and squirms, her motions clearly more in eagerness and humiliation than any serious attempt to escape.  You drag the broad head of your tentacle-cock up and down, gathering a thick coating of honey on it before releasing it.  Your cock strains against her folds, then sinks in slowly as you push your hips forward, and you sigh happily as you feel her warmth surround you.  She moans and arches her back even more, her antennae drooping submissively as your agile phallus squirms about inside her, stretching her tight little passage and leaving no nook or cranny unexplored.  ");
+				if (player.hasKnot(x)) outputText("You loosen your " + player.armorName + " and unleash your cocks.  Taking the largest in hand, you stroke its knobby shape until it's sufficiently stiff, then press the pointed end against her clit, teasing the little nub.  The bee-girl gasps and squirms, pushing her now pouting clit back against you.  You drag the tip up, gathering honey as you go until you reach her opening, then thrust with your hips.  Her pussylips part eagerly, and you find her tight but welcoming.  Still, as tempting as it is to rut the girl with abandon, you hold back, never letting your knot sink inside her.  ");
+				if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The equine flare of the largest is already drooling pre as you enjoy the sight of the helpless, squirming bee-girl.  Swinging it like a flogger, you spank her ass, making the girl yelp and leaving trails of sticky pre across the globes of her ass.  Grinning, you drag your shaft back and forth across her pussy, slicking it in her honey.  Finally, you press the tip against her opening.  She's a tight fit for you, and she squeals more loudly as your shaft spreads her little cunny inexorably.  ");
 				//Catchall scenario
-				if (player.cocks[x].cockType == CockTypesEnum.DEMON || player.cocks[x].cockType.Index > 4) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The glans of the largest is already drooling pre as you enjoy the sight of the helpless, squirming bee-girl.  Guiding it forwards, you spank her ass, making the girl yelp and leaving trails of sticky pre across the globes of her ass.  Grinning, you drag your shaft back and forth across her pussy, slicking it in her honey.  Finally, you press the tip against her opening.  She's a tight fit for you, and she squeals more loudly as your shaft spreads her little cunny inexorably.  ", false);
+				if (player.cocks[x].cockType == CockTypesEnum.DEMON || player.cocks[x].cockType.Index > 4) outputText("You loosen your " + player.armorName + " and unleash your cocks.  The glans of the largest is already drooling pre as you enjoy the sight of the helpless, squirming bee-girl.  Guiding it forwards, you spank her ass, making the girl yelp and leaving trails of sticky pre across the globes of her ass.  Grinning, you drag your shaft back and forth across her pussy, slicking it in her honey.  Finally, you press the tip against her opening.  She's a tight fit for you, and she squeals more loudly as your shaft spreads her little cunny inexorably.  ");
 				//CONTINUE
-				outputText("You enjoy loosening the girl up and exploring the depths of her cunt, taking your time.  Eventually, you draw yourself out of her, your " + cockDescript(x) + " escaping with a wet, slurping sound, dragging a thick drool of honey in its wake.  Taking a moment to inspect your handiwork, you see her pussy gapes wantonly, stretched out of shape by your shaft.", false);
+				outputText("You enjoy loosening the girl up and exploring the depths of her cunt, taking your time.  Eventually, you draw yourself out of her, your " + cockDescript(x) + " escaping with a wet, slurping sound, dragging a thick drool of honey in its wake.  Taking a moment to inspect your handiwork, you see her pussy gapes wantonly, stretched out of shape by your shaft.");
 				//New PG
 				outputText("\n\n");
 				//2nd cock love
-				outputText("Taking your slightly smaller " + cockDescript(y) + " in hand, you slip it in as a replacement.  She's not as tight as she was, poor dear, but just as warm and twice as slick as she was for your first " + cockDescript(x) + ".  Your larger " + cockDescript(x) + " slides along the side of her ass, painting the black-and-yellow fur there with her honey and matting it down.  But that's less than satisfying, and glancing down, you notice she has a hole back here that's not getting used.  ", false);
-				outputText("Withdrawing from her once more, you set the tip of your largest " + cockDescript(x) + " against the pucker of her ass.  She squeals and bucks as you press against her sphincter, but it's not long before the ring of muscle surrenders and your honey-soaked " + cockDescript(x) + " slides into her body.  She whimpers in humiliation, hands clawing at the grass as she shifts her hips to try to get more comfortable around your thickness.  You root around in the exquisite tightness of her ass, enjoying the way she shifts and wriggles under and around you.", false);
+				outputText("Taking your slightly smaller " + cockDescript(y) + " in hand, you slip it in as a replacement.  She's not as tight as she was, poor dear, but just as warm and twice as slick as she was for your first " + cockDescript(x) + ".  Your larger " + cockDescript(x) + " slides along the side of her ass, painting the black-and-yellow fur there with her honey and matting it down.  But that's less than satisfying, and glancing down, you notice she has a hole back here that's not getting used.  ");
+				outputText("Withdrawing from her once more, you set the tip of your largest " + cockDescript(x) + " against the pucker of her ass.  She squeals and bucks as you press against her sphincter, but it's not long before the ring of muscle surrenders and your honey-soaked " + cockDescript(x) + " slides into her body.  She whimpers in humiliation, hands clawing at the grass as she shifts her hips to try to get more comfortable around your thickness.  You root around in the exquisite tightness of her ass, enjoying the way she shifts and wriggles under and around you.");
 				//New PG
 				outputText("\n\n");
-				outputText("Drawing nearly, but not entirely, out of her, you take up your next largest cock and set it back at the entrance of her pussy again, and then thrust with your hips, sinking your largest deep into her ass while spearing her once more, burying your " + cockDescript(y) + " in her pussy.  She squeals loudly, wings flapping wildly a moment, then goes utterly limp with a whimper of surrender.  Grinning broadly, you begin to piston in and out of her, the sweet perfume of her lust wreathing your nostrils.  The plundering of her nether-regions fills the air with wet, slurping sounds, and soon she is moaning in time with every thrust, antennae quivering with need.  ", false);
-				outputText("You feel the pleasant quickening in your shafts and you redouble your efforts, fucking her harder with every thrust until, with a gasp of release you arch your back and nearly push her across the grass.  Your quivering cocks tremble in her depths, flooding her body with your seed.  The bee-girl lets out a trilling, buzzing shriek, then goes limp around you, her quivering muscles milking you of your seed.  Panting, you slip from her now-gaping holes.  The poor dear appears to have passed out; she slumps onto her side, your seed drooling out of her twitching body.  After wiping yourself clean on her fuzzy thigh, you arrange your clothing and search about for any loot the bee-girl may have had.", false);
+				outputText("Drawing nearly, but not entirely, out of her, you take up your next largest cock and set it back at the entrance of her pussy again, and then thrust with your hips, sinking your largest deep into her ass while spearing her once more, burying your " + cockDescript(y) + " in her pussy.  She squeals loudly, wings flapping wildly a moment, then goes utterly limp with a whimper of surrender.  Grinning broadly, you begin to piston in and out of her, the sweet perfume of her lust wreathing your nostrils.  The plundering of her nether-regions fills the air with wet, slurping sounds, and soon she is moaning in time with every thrust, antennae quivering with need.  ");
+				outputText("You feel the pleasant quickening in your shafts and you redouble your efforts, fucking her harder with every thrust until, with a gasp of release you arch your back and nearly push her across the grass.  Your quivering cocks tremble in her depths, flooding her body with your seed.  The bee-girl lets out a trilling, buzzing shriek, then goes limp around you, her quivering muscles milking you of your seed.  Panting, you slip from her now-gaping holes.  The poor dear appears to have passed out; she slumps onto her side, your seed drooling out of her twitching body.  After wiping yourself clean on her fuzzy thigh, you arrange your clothing and search about for any loot the bee-girl may have had.");
 			}
 			else {
-				outputText("After falling to the ground, the bee-girl looks up in dazed fear as you expose your " + multiCockDescriptLight() + ", her eyes watching as you throb with lust at the scared and helpless look on her face.", false);
+				outputText("After falling to the ground, the bee-girl looks up in dazed fear as you expose your " + multiCockDescriptLight() + ", her eyes watching as you throb with lust at the scared and helpless look on her face.");
 				//New PG
 				outputText("\n\n");
-				outputText("Once you're close enough, you grab her by the arms and force yourself down against her, shifting your knees to spread her legs.  Your " + multiCockDescriptLight() + " slap down against her slightly slick " + Appearance.vaginaDescript(monster,0) + ". Her face lights up with a look trapped somewhere between apprehension and interest at the unexpected touch, although the interest doesn't stop her from struggling valiantly to try and get away from you.  Finally, you force her arms against the ground and spread her wide enough to impale her " + Appearance.vaginaDescript(monster,0) + " on one of your " + multiCockDescriptLight() + " while watching her face contort with an alluring mixture of enjoyment and pain.  Her struggles weaken as you start to pound into her, tight abdominal muscles relaxing under you as she throws back her head, releasing a whimper at the rough penetration.  ", false);
-				outputText("At first, taking her more than satisfies you, but an idea strikes as you watch her face become distracted with each body-shaking thrusts of your hips.  Grabbing your remaining " + cockDescript(y) + " you push it against the already-impaled member, and on the next thrust you drive them both in.", false);
+				outputText("Once you're close enough, you grab her by the arms and force yourself down against her, shifting your knees to spread her legs.  Your " + multiCockDescriptLight() + " slap down against her slightly slick " + Appearance.vaginaDescript(monster,0) + ". Her face lights up with a look trapped somewhere between apprehension and interest at the unexpected touch, although the interest doesn't stop her from struggling valiantly to try and get away from you.  Finally, you force her arms against the ground and spread her wide enough to impale her " + Appearance.vaginaDescript(monster,0) + " on one of your " + multiCockDescriptLight() + " while watching her face contort with an alluring mixture of enjoyment and pain.  Her struggles weaken as you start to pound into her, tight abdominal muscles relaxing under you as she throws back her head, releasing a whimper at the rough penetration.  ");
+				outputText("At first, taking her more than satisfies you, but an idea strikes as you watch her face become distracted with each body-shaking thrusts of your hips.  Grabbing your remaining " + cockDescript(y) + " you push it against the already-impaled member, and on the next thrust you drive them both in.");
 				if (player.averageCockThickness() > 2) outputText("  She stretches against you amazingly, squeezing down on you like a vice.  You theorize it's only because of her strange body and the copious amounts of honey she's leaking against you that you aren't ripping her apart.");
 				//New PG
-				outputText("\n\nThe bee-girl shakes violently and screams in equal parts buzz and moan as a thick torrent of honey splashes against your dual members, making the pair of them slide in that much easier.  Her arms move up, the free one grabbing at your shoulder and clutching hard enough to leave bruises while the other squirms under your hand, her body tense under you. Stretched to the brink by the pair of " + multiCockDescriptLight() + "s, her hole is like a vice against you and every thrust visibly stretches her. The more you thrust the wetter she gets and her eyes seem to be wildly fluttering underneath you as you take her, her struggles turning to her thrusting her lower body up against you appreciatively. Your " + multiCockDescriptLight() + "s slap and pound into her abused " + Appearance.vaginaDescript(monster,0), false);
-				if (player.balls > 0) outputText(" with your " + ballsDescriptLight() + " hitting her abdomen hard enough to make smacking sounds ring out in the forest around you.", false);
+				outputText("\n\nThe bee-girl shakes violently and screams in equal parts buzz and moan as a thick torrent of honey splashes against your dual members, making the pair of them slide in that much easier.  Her arms move up, the free one grabbing at your shoulder and clutching hard enough to leave bruises while the other squirms under your hand, her body tense under you. Stretched to the brink by the pair of " + multiCockDescriptLight() + "s, her hole is like a vice against you and every thrust visibly stretches her. The more you thrust the wetter she gets and her eyes seem to be wildly fluttering underneath you as you take her, her struggles turning to her thrusting her lower body up against you appreciatively. Your " + multiCockDescriptLight() + "s slap and pound into her abused " + Appearance.vaginaDescript(monster,0));
+				if (player.balls > 0) outputText(" with your " + ballsDescriptLight() + " hitting her abdomen hard enough to make smacking sounds ring out in the forest around you.");
 				else outputText(".");
 				//New PG
 				outputText("\n\n");
 				//Extra multicock text
 				if (player.cocks.length >= 3) {
-					outputText("As you pound into her, you realize that large amounts of her juices are leaking from her " + Appearance.vaginaDescript(monster,0) + " over her abdomen, against the hole near the base of her stinger.  Reaching down with wicked intent, you grab one of your free " + multiCockDescriptLight() + "s and force it against her tight asshole while you pull your hips back.  Her eyes widen as she looks up at you, renewing her struggles as she kicks her legs at you, her wings slapping the ground with fierce determination as she tries to wriggle away.  You hold her tightly, pushing your hips against her to bury your " + multiCockDescriptLight() + " inside her.  The flow of honey barely lessens the friction as your " + cockDescript(2) + " sinks into her ass inch by inch.  Her " + Appearance.vaginaDescript(monster,0) + " is stretched even wider and she screams out something that sounds like a humming moan as her asshole begins to gape a bit with each of your thrusts. It takes a minute or two, but finally you hit bottom with all three of your " + multiCockDescriptLight() + "s.\n\n", false);
+					outputText("As you pound into her, you realize that large amounts of her juices are leaking from her " + Appearance.vaginaDescript(monster,0) + " over her abdomen, against the hole near the base of her stinger.  Reaching down with wicked intent, you grab one of your free " + multiCockDescriptLight() + "s and force it against her tight asshole while you pull your hips back.  Her eyes widen as she looks up at you, renewing her struggles as she kicks her legs at you, her wings slapping the ground with fierce determination as she tries to wriggle away.  You hold her tightly, pushing your hips against her to bury your " + multiCockDescriptLight() + " inside her.  The flow of honey barely lessens the friction as your " + cockDescript(2) + " sinks into her ass inch by inch.  Her " + Appearance.vaginaDescript(monster,0) + " is stretched even wider and she screams out something that sounds like a humming moan as her asshole begins to gape a bit with each of your thrusts. It takes a minute or two, but finally you hit bottom with all three of your " + multiCockDescriptLight() + "s.\n\n");
 				}
 				//Orgasm PG
-				outputText("After a while of fucking her, her buzzing complaints and wild struggles begin to melt as she cums against you, shuddering and forcing her hips up towards you, plunging your " + cockDescript(x) + " into her even deeper.  She begins to climax, her muscles becoming more and more relaxed with each time her stretched holes squeeze down on you.  Surges of pleasure begin to overwhelm you and soon you begin fucking her as hard as you can, honey splattering wetly over her body as she finally seems to collapse under your body's assault. Her eyes dim visibly, the buzzing cries of pleasure echoing faintly from her lips while her body goes completely limp underneath you.  Not to be stopped, you continue to take her, eventually feeling seed swell up inside ", false);
-				if (player.balls > 0) outputText("your " + ballsDescriptLight() + " ", false);
+				outputText("After a while of fucking her, her buzzing complaints and wild struggles begin to melt as she cums against you, shuddering and forcing her hips up towards you, plunging your " + cockDescript(x) + " into her even deeper.  She begins to climax, her muscles becoming more and more relaxed with each time her stretched holes squeeze down on you.  Surges of pleasure begin to overwhelm you and soon you begin fucking her as hard as you can, honey splattering wetly over her body as she finally seems to collapse under your body's assault. Her eyes dim visibly, the buzzing cries of pleasure echoing faintly from her lips while her body goes completely limp underneath you.  Not to be stopped, you continue to take her, eventually feeling seed swell up inside ");
+				if (player.balls > 0) outputText("your " + ballsDescriptLight() + " ");
 				else outputText("your prostate ");
 				outputText("as you plunge into her. Your release is very large, splattering her slick walls with thick loads of cum as you plunge as deep as you can thrust inside her.");
 				//Lots of cocks bonus cum texts
 				if (player.cocks.length >= 3) {
-					outputText("  Her battered " + Appearance.vaginaDescript(monster,0) + " grips down on your dual " + multiCockDescriptLight() + "s tightly, draining you of every drop she can.  Rivers of white begin to leak from her abused holes and mingle with her own release as it trails down her abdomen and drips off it slowly onto the forest floor.", false);
-					if (player.cocks.length == 4) outputText("  The " + cockDescript(3) + " not inside her shakes wildly as you cum; jets of your semen let loose over her abused frame, coating her in white.", false);
-					if (player.cocks.length > 4) outputText("  The " + multiCockDescriptLight() + "s not inside her shake wildly as you cum; jets of your semen let loose over her abused frame, coating her in white.", false);
+					outputText("  Her battered " + Appearance.vaginaDescript(monster,0) + " grips down on your dual " + multiCockDescriptLight() + "s tightly, draining you of every drop she can.  Rivers of white begin to leak from her abused holes and mingle with her own release as it trails down her abdomen and drips off it slowly onto the forest floor.");
+					if (player.cocks.length == 4) outputText("  The " + cockDescript(3) + " not inside her shakes wildly as you cum; jets of your semen let loose over her abused frame, coating her in white.");
+					if (player.cocks.length > 4) outputText("  The " + multiCockDescriptLight() + "s not inside her shake wildly as you cum; jets of your semen let loose over her abused frame, coating her in white.");
 				}
 				//New PG
 				outputText("\n\n");
-				outputText("The both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your " + multiCockDescriptLight() + " one by one.  Her lips part slightly on instinct and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ", false);
-				if (!player.isTaur()) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName, false);
-				else outputText("your glorious but spent " + multiCockDescriptLight() + " dangling under your belly,", false);
+				outputText("The both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your " + multiCockDescriptLight() + " one by one.  Her lips part slightly on instinct and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ");
+				if (!player.isTaur()) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName);
+				else outputText("your glorious but spent " + multiCockDescriptLight() + " dangling under your belly,");
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.");
 			}
 			player.orgasm();
@@ -1850,7 +1856,7 @@ package classes.Scenes.Areas.Forest
 				outputText("your " + multiCockDescriptLight());
 				if (player.cocks.length == 1) outputText(" is");
 				else outputText(" are");
-				outputText(" aching for release, and you tear off your " + player.armorName + " just in time as ", false);
+				outputText(" aching for release, and you tear off your " + player.armorName + " just in time as ");
 				if (player.totalCocks() > 1) outputText("they free themselves from ");
 				else outputText("it frees itself from ");
 				outputText("the slit between your legs.  Without needing to say a word, the message is transferred across some unknown medium: Suck my cock");
@@ -1859,15 +1865,15 @@ package classes.Scenes.Areas.Forest
 
 				outputText("The bee-girl drops to her knees and stares up at you vacantly. Your eyes never break contact: not while she wraps her tongue around ");
 				if (player.totalCocks() > 1) outputText("one of ");
-				outputText("your " + multiCockDescriptLight() + ", slurping soundly and driving you wild; ", false);
+				outputText("your " + multiCockDescriptLight() + ", slurping soundly and driving you wild; ");
 				//[if player has testicles] 
-				if (player.balls > 0) outputText("Not while her hands cup your " + sackDescript() + " and knead tenderly, infusing you with the craving for release; ", false);
+				if (player.balls > 0) outputText("Not while her hands cup your " + sackDescript() + " and knead tenderly, infusing you with the craving for release; ");
 				else outputText("not ");
-				outputText("even when she takes your " + cockDescript(0) + " to the hilt, her eyes straining up in their sockets. You watch " + int(player.cocks[0].cockLength) + " inches of " + cockDescript(0) + " disappear inside her mouth, and the vibrations in her throat tell you that you'd hear her cooing if it wasn't packed tight.\n\n", false);
+				outputText("even when she takes your " + cockDescript(0) + " to the hilt, her eyes straining up in their sockets. You watch " + int(player.cocks[0].cockLength) + " inches of " + cockDescript(0) + " disappear inside her mouth, and the vibrations in her throat tell you that you'd hear her cooing if it wasn't packed tight.\n\n");
 
-				outputText("Higher and higher you climb as your hypnotized handmaiden ceases stroking you with her lips and begins swallowing repeatedly, milking your hardness for all it's worth. Her chest begins to contract, and from the periphery of your vision you can tell that she's futilely trying to gulp in air. The contractions force her to milk you even more; ", false);
+				outputText("Higher and higher you climb as your hypnotized handmaiden ceases stroking you with her lips and begins swallowing repeatedly, milking your hardness for all it's worth. Her chest begins to contract, and from the periphery of your vision you can tell that she's futilely trying to gulp in air. The contractions force her to milk you even more; ");
 				//[if player has testicles]
-				if (player.balls > 0) outputText("your " + sackDescript() + " clenches as ", false);
+				if (player.balls > 0) outputText("your " + sackDescript() + " clenches as ");
 				outputText("you explode inside her chest, ");
 				//[normal cum load]
 				if (player.cumQ() < 50) outputText("a burst of cum settling itself in her belly.");
@@ -1887,9 +1893,9 @@ package classes.Scenes.Areas.Forest
 				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Wet");
 				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("Dripping");
 				else outputText("Soaking");
-				outputText(" with lubrication, you demand to be satisfied. With one hand you point to your " + vaginaDescript(0) + ", and you snap your fingers with the other. Your prey saunters up to you with a vacant, distant look in her eyes and begins to remove your " + player.armorName + " obediently. You tenderly caress her cheek as she finishes, and watch a rosy glow infuse her skin. Your captive handmaiden runs her hands tenderly up your body, smoothing the flesh of your " + biggestBreastSizeDescript() + " and making you pant. You allow yourself to enjoy the sensation for a brief while, and just before you can snap your fingers again, she goes down on her own.\n\n", false);
+				outputText(" with lubrication, you demand to be satisfied. With one hand you point to your " + vaginaDescript(0) + ", and you snap your fingers with the other. Your prey saunters up to you with a vacant, distant look in her eyes and begins to remove your " + player.armorName + " obediently. You tenderly caress her cheek as she finishes, and watch a rosy glow infuse her skin. Your captive handmaiden runs her hands tenderly up your body, smoothing the flesh of your " + biggestBreastSizeDescript() + " and making you pant. You allow yourself to enjoy the sensation for a brief while, and just before you can snap your fingers again, she goes down on her own.\n\n");
 
-				outputText("Her eyelids flutter even as her gaze remains locked, and she deeply inhales your musky and arid scent. Deep inside, you feel a level of affection that isn't betrayed by your facial features. You gasp as the bee-girl's lengthy tongue shoots inside your snatch, and retracts as quickly as it came; once, twice, again and again, striking your cervix and twisting out again. Her hands grip your scaly " + hipDescript() + " as she thrusts her tongue in and out, threatening the fixation of your glare with pleasure. You are moaning and screaming in your mind, while your stony expression betrays nothing; nothing but the locking gaze that makes your will her own. The bee-maiden's mouth wraps around your " + clitDescript() + ", rubbing it through its hood with the inside of her upper lip until it protrudes its full length.", false);
+				outputText("Her eyelids flutter even as her gaze remains locked, and she deeply inhales your musky and arid scent. Deep inside, you feel a level of affection that isn't betrayed by your facial features. You gasp as the bee-girl's lengthy tongue shoots inside your snatch, and retracts as quickly as it came; once, twice, again and again, striking your cervix and twisting out again. Her hands grip your scaly " + hipDescript() + " as she thrusts her tongue in and out, threatening the fixation of your glare with pleasure. You are moaning and screaming in your mind, while your stony expression betrays nothing; nothing but the locking gaze that makes your will her own. The bee-maiden's mouth wraps around your " + clitDescript() + ", rubbing it through its hood with the inside of her upper lip until it protrudes its full length.");
 				//[if clit size => 1"]: 
 				if (player.clitLength > 1) outputText("  Emergent from its sheath, she uses the base of her tongue as a bottom lip and begins to suck you off like a cock, unceasing in her lingual assault on the inside of your canal.");
 				outputText("\n\n");
@@ -1907,14 +1913,14 @@ package classes.Scenes.Areas.Forest
 			}
 			//[Player is herm]
 			else if (player.gender == 3) {
-				outputText("Fantasies course through your mind as you remove your " + player.armorName + ", filling your thoughts with all the things you can do to your mind-slave using your particular... endowments. Licking your lips, you bring your hand to the bee-girl's chin, gently moving her pretty face from side to side and examining her in your peripheral vision. Her eyes stay glued to yours even as you move her around. You're going to enjoy this.\n\n", false);
+				outputText("Fantasies course through your mind as you remove your " + player.armorName + ", filling your thoughts with all the things you can do to your mind-slave using your particular... endowments. Licking your lips, you bring your hand to the bee-girl's chin, gently moving her pretty face from side to side and examining her in your peripheral vision. Her eyes stay glued to yours even as you move her around. You're going to enjoy this.\n\n");
 
 				outputText("You place a hand on top of the bee-girl's head, and watch as she drops to her knees, craning her head to continue looking up at you. With a fistful of hair in one hand, you point to her wrist and crook your finger in a 'come hither' motion, and gesture towards your scaly snatch. Like clockwork, her arm reaches up and two fingers go inside you, seeking out and quickly finding that spot of spongy tissue up and behind your pubic bone. You begin to pant involuntarily as she starts to work it rhythmically. You let her settle into a steady pace before moving on to her next task.\n\n");
 
-				outputText("Touching a single index finger to the underside of your captive's chin, you pull with the slightest of forces and watch as she is dutifully drawn to your " + multiCockDescriptLight() + ", running her lengthy prehensile tongue up and down ", false);
+				outputText("Touching a single index finger to the underside of your captive's chin, you pull with the slightest of forces and watch as she is dutifully drawn to your " + multiCockDescriptLight() + ", running her lengthy prehensile tongue up and down ");
 				if (player.cockTotal() > 1) outputText("each of your shafts");
 				else outputText("your shaft");
-				outputText(". As the pulsing movement inside your body draws you slowly closer to orgasm, the bee-bitch uses her other hand to draw your " + cockDescript(0) + " down to an angle so it slides neatly into her throat", false);
+				outputText(". As the pulsing movement inside your body draws you slowly closer to orgasm, the bee-bitch uses her other hand to draw your " + cockDescript(0) + " down to an angle so it slides neatly into her throat");
 				//[if Player cock => 12\"]
 				if (player.cocks[0].cockLength > 12) outputText(", surprising you with its elasticity");
 				outputText(".");
@@ -1936,7 +1942,7 @@ package classes.Scenes.Areas.Forest
 			else {
 				outputText("Trapped inside your gaze, you tower over your captive and figure out how to proceed. Your lack of genitals requires you to come up with some creative solutions, and you decide to put your right brain to the test. For a moment, the two of you remain motionless save for the occasional flick of your tail. That's when you get an idea.\n\n");
 
-				outputText("You press the flat of your hand into her chest, indicating her to lie down. With some effort, she lowers herself awkwardly into a prone position, shimmying over her own abdomen and unable to look away. You position yourself between her legs and run your hands down the bulbous protrusion emanating from her tailbone; carefully, to avoid her stinger. Feeling your way around with your hands, you locate a fold of flesh just above the poisonous barb, and having found what you were looking for, unflinchingly insert a finger. It comes back out coated in a slick yellow goo that delights your senses of taste and smell. You return your hand; first with two fingers, and then three. An appendage textured with bumps and knots with an orifice at its tip begins to emerge, and you know you have found your target.\n\n", false);
+				outputText("You press the flat of your hand into her chest, indicating her to lie down. With some effort, she lowers herself awkwardly into a prone position, shimmying over her own abdomen and unable to look away. You position yourself between her legs and run your hands down the bulbous protrusion emanating from her tailbone; carefully, to avoid her stinger. Feeling your way around with your hands, you locate a fold of flesh just above the poisonous barb, and having found what you were looking for, unflinchingly insert a finger. It comes back out coated in a slick yellow goo that delights your senses of taste and smell. You return your hand; first with two fingers, and then three. An appendage textured with bumps and knots with an orifice at its tip begins to emerge, and you know you have found your target.\n\n");
 
 				outputText("The bee-girl's expression is blank and vacant, but you can tell by the heat coming off of her, the fresh smell of her pheromones and the flush of her skin that she is getting off on it. You bunch your fingers together to form a point, tucking your thumb as close into your palm as it will get, and slide your fist inside her ovipositor.\n\n");
 
@@ -1986,7 +1992,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			player.slimeFeed();
-			outputText("You sit the bee-girl up; she's a bit dazed from the fight as her head moves in circles.  You kiss her honey-flavored lips, sticking your tongue into her mouth and causing her to snap out of her daze.  She's surprised at this unexpected show of affection, but understanding her situation, she begins kissing you back.  Both of your tongues rub and slide against one another as you occasionally plunge into each other's mouth.  Your hand rubs up her thigh onto her honeypot.  You drive two fingers into it, circling them around.  Making sure they are covered in her sweet love-honey, you pull the two fingers out and raise them up.  The bee-girl sees your honey-covered fingers and slowly pulls back from the kiss.  You suck the honey off the index then you point the middle at her mouth and push forward.  Her lips wrap around the finger and suck it into her mouth as her tongue laps around it, cleaning all the honey off it.  You take the finger out of her mouth and examine the work she did.\n\n", false);
+			outputText("You sit the bee-girl up; she's a bit dazed from the fight as her head moves in circles.  You kiss her honey-flavored lips, sticking your tongue into her mouth and causing her to snap out of her daze.  She's surprised at this unexpected show of affection, but understanding her situation, she begins kissing you back.  Both of your tongues rub and slide against one another as you occasionally plunge into each other's mouth.  Your hand rubs up her thigh onto her honeypot.  You drive two fingers into it, circling them around.  Making sure they are covered in her sweet love-honey, you pull the two fingers out and raise them up.  The bee-girl sees your honey-covered fingers and slowly pulls back from the kiss.  You suck the honey off the index then you point the middle at her mouth and push forward.  Her lips wrap around the finger and suck it into her mouth as her tongue laps around it, cleaning all the honey off it.  You take the finger out of her mouth and examine the work she did.\n\n");
 
 			outputText("\"<i>Do you know what goes great with honey?</i>\" you ask.\n\n");
 
@@ -1998,7 +2004,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Your chuckling becomes louder.  ");
 
-			outputText("\"<i>Why don't you suck on one of my tits and find out?</i>\" you ask as you remove the top part of your " + player.armorName + ".  Curiosity gets the better of her as she picks a nipple and sucks on it.  Her curiosity is rewarded with a gush of milk down her throat.  Surprised that something is coming out, she recoils back.\n\n", false);
+			outputText("\"<i>Why don't you suck on one of my tits and find out?</i>\" you ask as you remove the top part of your " + player.armorName + ".  Curiosity gets the better of her as she picks a nipple and sucks on it.  Her curiosity is rewarded with a gush of milk down her throat.  Surprised that something is coming out, she recoils back.\n\n");
 
 			outputText("The bee-girl questions, \"<i>What wazzz that?</i>\"\n\n");
 
@@ -2008,7 +2014,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("\"<i>Sure, if I can have more honey.</i>\" you offer.\n\n");
 
-			outputText("The bee-girl nods her head and goes back to sucking on the nipple as you reach your hand down to rub honey off her flower. There isn't a lot on your fingers when you raise them up to be cleaned; you guess you'll have to stimulate the flower's bud if you want more honey. You reach back down, caressing her little clit as she lets out a muffled moan that sends vibrations through your nipple and " + breastDescript(0) + ".  More honey glistens on her flower; you rub what honey you can get onto your fingers and suck them off while the bee-girl is enjoying her easy meal.  She's getting the better end of the agreement, barely having to put any effort into her nursing.  You continue scraping up as much honey as you can, and though more honey leaks out as you go on, it's not enough to satisfy your sweet tooth or hunger.  She sees her honeypot isn't giving as much as your milk jugs.  Once she has her fill, she hands you a jar and stands up.\n\n", false);
+			outputText("The bee-girl nods her head and goes back to sucking on the nipple as you reach your hand down to rub honey off her flower. There isn't a lot on your fingers when you raise them up to be cleaned; you guess you'll have to stimulate the flower's bud if you want more honey. You reach back down, caressing her little clit as she lets out a muffled moan that sends vibrations through your nipple and " + breastDescript(0) + ".  More honey glistens on her flower; you rub what honey you can get onto your fingers and suck them off while the bee-girl is enjoying her easy meal.  She's getting the better end of the agreement, barely having to put any effort into her nursing.  You continue scraping up as much honey as you can, and though more honey leaks out as you go on, it's not enough to satisfy your sweet tooth or hunger.  She sees her honeypot isn't giving as much as your milk jugs.  Once she has her fill, she hands you a jar and stands up.\n\n");
 
 			outputText("\"<i>Hold thiz jar cloze to my puzzzy and catch the honey with it.</i>\"\n\n");
 

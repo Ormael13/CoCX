@@ -40,7 +40,7 @@ package classes.Scenes.Places.Prison
 				return prison.prisonCaptorRandomEventSounds();
 			}
 			prisonCaptorLoadGuard(true);
-			outputText("You are startled by the sound of the door opening, and quickly find yourself wishing you hadn't heard it at all. " + guardCaptitalA + " " + guardType + " guard enters the room and quickly secures the door behind " + guardPronoun2 + ", then turns towards you with the clear intent of fucking you and showing you your place.\n\n",false);
+			outputText("You are startled by the sound of the door opening, and quickly find yourself wishing you hadn't heard it at all. " + guardCaptitalA + " " + guardType + " guard enters the room and quickly secures the door behind " + guardPronoun2 + ", then turns towards you with the clear intent of fucking you and showing you your place.\n\n");
 			return prisonGuardAttack();
 		}
 		
@@ -57,12 +57,12 @@ package classes.Scenes.Places.Prison
 					}
 					else if(player.obey < 75)
 					{
-						outputText("However, your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardPronoun1 + " looms over you.\n",false);
+						outputText("However, your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardPronoun1 + " looms over you.\n");
 						dynStats("lus", 100);
 					}
 					else
 					{
-						outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment " + guardPronoun1 + " has in mind, and you silently communicate as much by bending over and assuming the most secuctively submissive stance you can manage.\n",false);
+						outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment " + guardPronoun1 + " has in mind, and you silently communicate as much by bending over and assuming the most secuctively submissive stance you can manage.\n");
 						dynStats("lus", 100);
 					}
 					
@@ -70,7 +70,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText("Do you make an escape attempt? " + prison.prisonWillCostDescript(15),false);
+					outputText("Do you make an escape attempt? " + prison.prisonWillCostDescript(15));
 					outputText("\n");
 					doYesNo(prisonGuardAttackFight, prisonGuardAttackSubmit);
 					if (player.will >= prison.prisonWillCost(10)) {
@@ -100,11 +100,11 @@ package classes.Scenes.Places.Prison
 				outputText(" your restraints prevent you from putting up any significant fight");
 				if(player.lust > 80)
 				{
-					outputText(" -- not that you'd last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n",false);
+					outputText(" -- not that you'd last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n");
 				}
 				else
 				{
-					outputText(". As you struggle ineffectually, the " + guardType + " beats you senseless then temporarily removes your bindings.\n",false);
+					outputText(". As you struggle ineffectually, the " + guardType + " beats you senseless then temporarily removes your bindings.\n");
 				}
 				doNext(prison.prisonEscapeFightAutoLose);
 				if (player.will >= prison.prisonWillCost(10)) {
@@ -127,7 +127,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("\n\nYou make a valiant effort to prepare for combat, but ultimately your will gives out and you collapse in front of the advancing " + guardType + ".",false);
+				outputText("\n\nYou make a valiant effort to prepare for combat, but ultimately your will gives out and you collapse in front of the advancing " + guardType + ".");
 				prison.changeEsteem(2, prison.inPrison);
 				prison.prisonEscapeFightAutoLose();
 			}
@@ -138,16 +138,16 @@ package classes.Scenes.Places.Prison
 			outputText("\n\n");
 			if(player.obey < 45)
 			{
-				outputText("Something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as the " + guardType + " looms over you.\n",false);
+				outputText("Something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as the " + guardType + " looms over you.\n");
 			}
 			else if(player.obey < 75)
 			{
-				outputText("Your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardType + " looms over you.\n",false);
+				outputText("Your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardType + " looms over you.\n");
 				dynStats("lus", 100);
 			}
 			else
 			{
-				outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment this " + guardType + " has in mind, and you silently communicate as much bending over and assuming the most secuctively submissive stance you can manage.\n",false);
+				outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment this " + guardType + " has in mind, and you silently communicate as much bending over and assuming the most secuctively submissive stance you can manage.\n");
 				dynStats("lus", 100);
 			}
 			

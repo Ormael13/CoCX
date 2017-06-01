@@ -40,7 +40,8 @@ package classes.Scenes.Areas
 					kGAMECLASS.exploration.genericDemonsEncounters1();
 					break;
 			*/	default:
-					outputText("You swim through the depths of the sea barely seeing anything for over an hour, finding nothing before you decied to give up and return to the shore.\n\n", true);
+					clearOutput();
+					outputText("You swim through the depths of the sea barely seeing anything for over an hour, finding nothing before you decied to give up and return to the shore.\n\n");
 					if (rand(2) == 0) {
 						//1/3 chance for strength
 						if (rand(3) == 0 && player.str < 200) {

@@ -108,7 +108,7 @@ private function liftWhileIfrisWatches():void {
 	dynStats("lus", 5);
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)), false);
+	outputText(player.modTone(85,5+rand(5)));
 	fatigue(30);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -144,7 +144,7 @@ private function showOffForIfris():void {
 	if(player.str < 75) {
 		outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, but the considerable weight barely budges. You hear her make a little disappointed, \"<i>awww...</i>\" as she watches you for a few long moments, but no matter how much the humiliation motivates you, you just can't seem to do it.\n\n");
 
-		outputText("\"<i>Oh well...</i>\" She sighs, clearly crestfallen. Cocking one fist on her hip, she gives your " + player.leg() + " a light pat as she leaves your presence, vanishing out the door within moments.\n\n", false);
+		outputText("\"<i>Oh well...</i>\" She sighs, clearly crestfallen. Cocking one fist on her hip, she gives your " + player.leg() + " a light pat as she leaves your presence, vanishing out the door within moments.\n\n");
 
 		outputText("Well, at least you had the good sense to stop before you hurt yourself...\n\n");
 		doNext(camp.returnToCampUseOneHour);
@@ -159,7 +159,7 @@ private function showOffForIfris():void {
 		if(player.tou < 40) dynStats("tou", .3);
 		//Body changes here
 		//Muscleness boost!
-		outputText(player.modTone(85,5+rand(5)), false);
+		outputText(player.modTone(85,5+rand(5)));
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
@@ -178,7 +178,7 @@ private function showOffForIfris():void {
 	
 			outputText("\"<i>Mmm, keep going, darling... I like what I see,</i>\" she all but purrs out.\n\n");
 	
-			outputText("Spurred on by your ego, you lift the huge weight with seeming effortlessness.  The devil-girl seems to move closer as your muscles burn and strain. Suddenly you feel one of her slender hands sliding up your " + player.leg() + ", the smooth palm stroking your thigh, and then cupping your crotch. A surge of arousal ripples through your cock, making the length twitch and immediately begin to swell as she squeezes, making you pause in your efforts.\n\n", false);
+			outputText("Spurred on by your ego, you lift the huge weight with seeming effortlessness.  The devil-girl seems to move closer as your muscles burn and strain. Suddenly you feel one of her slender hands sliding up your " + player.leg() + ", the smooth palm stroking your thigh, and then cupping your crotch. A surge of arousal ripples through your cock, making the length twitch and immediately begin to swell as she squeezes, making you pause in your efforts.\n\n");
 	
 			outputText("\"<i>Mmmm, don't stop now,</i>\" she teases in that husky voice, even as she grips the waistband of your bottoms, tugging them down suddenly and exposing your member then and there. Those lithe, soft fingers wrap around the base of the shaft, squeezing gently in soft, pulsing grips as she watches it harden completely. Her eyes stay fixated on your dick, a dark, nearly-black tongue dabbing her lips as she gives a slow, almost languid stroke up the shaft.\n\n");
 	
@@ -186,7 +186,7 @@ private function showOffForIfris():void {
 	
 			outputText("Pleased with her effect on you thus far, her gaze shifts to your face while her lovely mouth parts, the heat of her breath much greater than a normal human by several degrees.  It washes over your cock in heavy, moist puffs. With a little teasing flick of her wet tongue over the tip of your shaft, she takes it into her mouth, suckling gently. The devil's mouth is so wet, so delightfully hot, her cheeks hollowing out almost instantly as she sucks hard on that pulsing tip. Slowly she descends, thick cock-pillows smoothly gliding down your shaft as she takes more and more into her mouth. There isn't even a pause as you hit the back of her throat and she keeps going, eyes narrowing in lust as she gazes at your expression when her lips meet your crotch in the most intimate kiss you can imagine.\n\n");
 	
-			outputText("Suddenly it seems she loses her patience for teasing, much to your delight, and the hard, long pull on your cock as she pulls back is like heaven, her cheeks caved inward. She descends quickly, all but face-fucking herself on your rod again and again, lewd, wet squelching rising up from her stuffed throat. It isn't long before you're groaning in ecstasy, wishing you had the strength to grip her head, make her slow down so you can draw it out and enjoy it, but all too soon the pleasure is rushing up to meet you, your " + ballsDescriptLight() + " tightening, even as she cups ", false);
+			outputText("Suddenly it seems she loses her patience for teasing, much to your delight, and the hard, long pull on your cock as she pulls back is like heaven, her cheeks caved inward. She descends quickly, all but face-fucking herself on your rod again and again, lewd, wet squelching rising up from her stuffed throat. It isn't long before you're groaning in ecstasy, wishing you had the strength to grip her head, make her slow down so you can draw it out and enjoy it, but all too soon the pleasure is rushing up to meet you, your " + ballsDescriptLight() + " tightening, even as she cups ");
 			if(player.balls > 0) outputText("them and gently squeezes the sack.\n\n");
 			else if(player.hasVagina()) outputText("your lower lips and gently squeezes.\n\n");
 			else outputText("your taint and gently squeezes.\n\n");
@@ -195,20 +195,20 @@ private function showOffForIfris():void {
 		}
 		//5a-Repeat oral scene, male/herm-
 		else {
-			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, tugging your bottoms down right away to get at your " + cockDescript(0) + ". She sits upon your " + player.legs() + ", her posh butt so nice and soft against you as she waits for you to begin.\n\n", false);
+			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, tugging your bottoms down right away to get at your " + cockDescript(0) + ". She sits upon your " + player.legs() + ", her posh butt so nice and soft against you as she waits for you to begin.\n\n");
 
 			outputText("The moment you lift the weight for the first time, she bends down, rubbing her smooth cheek against your half-turgid member");
-			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight(), false);
-			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + player.cockHead() + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
+			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight());
+			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + player.cockHead() + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n");
 
 			outputText("The sexy little dark-haired devil takes your dick to the ");
 			if(player.hasSheath()) outputText("sheath");
 			else outputText("base");
-			outputText(" in her throat once again, holding there until you push the weight up, sliding up the length with your movement, and then back down as you lower, encouraging your exercise with the pleasure of her sweet mouth. Knowing you can't keep it up forever though, she merely urges you to do better before giving in, her hand gripping the base of your " + cockDescript(0) + " tightly as her head starts to bob purposefully up and down your massive length.\n\n", false);
+			outputText(" in her throat once again, holding there until you push the weight up, sliding up the length with your movement, and then back down as you lower, encouraging your exercise with the pleasure of her sweet mouth. Knowing you can't keep it up forever though, she merely urges you to do better before giving in, her hand gripping the base of your " + cockDescript(0) + " tightly as her head starts to bob purposefully up and down your massive length.\n\n");
 
-			outputText("With your strength spent, your lips dry from your constant moans, and your " + cockDescript(0) + " throbbing so wonderfully, Ifris smiles around your shaft as she feels your orgasm closing in. She doesn't stop this time, still bobbing along your shaft, tongue mercilessly undulating against the underside, as your peak rushes to meet you. She swallows those spurts of cum expertly, pulling back between each one to catch a burst in her mouth and taste it, and then shoving you back down her throat to swallow the next, alternating in an erotic rhythm until you're spent.\n\n", false);
+			outputText("With your strength spent, your lips dry from your constant moans, and your " + cockDescript(0) + " throbbing so wonderfully, Ifris smiles around your shaft as she feels your orgasm closing in. She doesn't stop this time, still bobbing along your shaft, tongue mercilessly undulating against the underside, as your peak rushes to meet you. She swallows those spurts of cum expertly, pulling back between each one to catch a burst in her mouth and taste it, and then shoving you back down her throat to swallow the next, alternating in an erotic rhythm until you're spent.\n\n");
 
-			outputText("With that slow, almost painfully-hard suckle, she pops from the " + player.cockHead() + " of your " + cockDescript(0) + " out and sucks in a deep breath, giggling and leaning down to kiss you.  She murmurs, \"<i>You do better each time, darling. I'll see you again I hope.</i>\"  With that, she's leaving you again, all but skipping out the door, that wetness trickling down her long, red legs...", false);
+			outputText("With that slow, almost painfully-hard suckle, she pops from the " + player.cockHead() + " of your " + cockDescript(0) + " out and sucks in a deep breath, giggling and leaning down to kiss you.  She murmurs, \"<i>You do better each time, darling. I'll see you again I hope.</i>\"  With that, she's leaving you again, all but skipping out the door, that wetness trickling down her long, red legs...");
 		}
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB]++;
 	}
@@ -234,14 +234,14 @@ private function showOffForIfris():void {
 		}
 		//5b-Repeat oral scene, female-
 		else {
-			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, leaning up to give your cheek a little peck as she pulls your " + chestDesc() + " free of your top.\n\n", false);
+			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, leaning up to give your cheek a little peck as she pulls your " + chestDesc() + " free of your top.\n\n");
 
-			outputText("She leans in before you've started, peppering your " + nippleDescript(0) + "s and ", false);
+			outputText("She leans in before you've started, peppering your " + nippleDescript(0) + "s and ");
 			if(player.biggestTitSize() >= 1) outputText("breasts");
 			else outputText("chest");
-			outputText(" with soft kisses, teasing the nubs to hardness with flicks of her tongue. You eagerly lift your " + player.legs() + " as she slides down, pulling your bottoms away to expose your moistening cunt to her hungry gaze.  Urging your " + player.legs() + " apart, she crawls between them, tail swaying behind her as she waits for you to begin. You comply with her wishes, eager to feel the pleasure of her mouth more than the burn of your exercise, and you're not left wanting.\n\n", false);
+			outputText(" with soft kisses, teasing the nubs to hardness with flicks of her tongue. You eagerly lift your " + player.legs() + " as she slides down, pulling your bottoms away to expose your moistening cunt to her hungry gaze.  Urging your " + player.legs() + " apart, she crawls between them, tail swaying behind her as she waits for you to begin. You comply with her wishes, eager to feel the pleasure of her mouth more than the burn of your exercise, and you're not left wanting.\n\n");
 
-			outputText("With the first push, that long devil-tongue slides up along your " + vaginaDescript() + ", not teasing, but firmly lapping between the lips, spreading them slightly as she tastes you. With a pretty little moan, Ifris laves her tongue up your pussy over and over again as you pump your iron, enjoying your flavor, but knowing you'll need more to really get you going. Two fingers spread your " + vaginaDescript() + " open as her lips seal over your " + clitDescript() + ", suckling it gingerly, tongue swirling over it. Her fingers pump into you nice and quickly, your pleasureful reward for... well, you don't quite understand why this gets her excited, nor do you care.\n\n", false);
+			outputText("With the first push, that long devil-tongue slides up along your " + vaginaDescript() + ", not teasing, but firmly lapping between the lips, spreading them slightly as she tastes you. With a pretty little moan, Ifris laves her tongue up your pussy over and over again as you pump your iron, enjoying your flavor, but knowing you'll need more to really get you going. Two fingers spread your " + vaginaDescript() + " open as her lips seal over your " + clitDescript() + ", suckling it gingerly, tongue swirling over it. Her fingers pump into you nice and quickly, your pleasureful reward for... well, you don't quite understand why this gets her excited, nor do you care.\n\n");
 
 			outputText("That tongue joins her fingers in spreading your cunt, making you cry out in pleasure and surprise, leaving the weights unattended as you arch hard. Your orgasm rips through you, making your body shudder under the intensity as she laps up and suckles down your release eagerly, her ministrations softening, slowing to draw out your orgasm and let you enjoy it. As you come down, she slowly rises up, giving you another of those lecherous, devious grins before climbing off you.\n\n");
 
@@ -255,22 +255,22 @@ private function showOffForIfris():void {
 	player.orgasm();
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)), false);
+	outputText(player.modTone(85,5+rand(5)));
 	doNext(camp.returnToCampUseOneHour);
 }
 
 //Ifrs double-penetrates herself on you while you work out.
 private function ifrisDP():void {
 	outputText("You set the machine to an impressive weight that you're sure you can handle and set to work, your muscles rippling and tightening as they repeatedly raise and lower the weight for the demonic-looking woman's amusement.  Feeling Ifris' glowing, crimson visage devouring in your workout, you push yourself harder, working up a sheen of sweat that drips from your body.  Your arms haven't yet begun to burn, but deep inside your chest, your heart is beating faster, either from the oiled gym-junky's gaze or the constant, heavy lifting - perhaps both.\n\n");
-	outputText("With the first set finished, you lower the bar until the weight is released from your well-developed musculature.  The demonic beauty is leaning down, over your " + chestDesc() + ", drinking in every sweat-slicked part of you.  With her breasts wobbling dangerously, her glossy, dark lips slowly part to blow you a kiss.  Then, the onyx pillows open to purr, \"<i>Mmmm... marvelous work darling.</i>\"  She leans a little lower, letting her slick breasts rub over the crotch of your " + player.armorName + " as she asks, \"<i>Do you think... you could lift more?  Enough to truly handle anything the world might throw at you?</i>\"  Ifris trails her fingers over your " + player.armorName + ", slowly undoing the equipment with each enunciated syllable.\n\n", false);
+	outputText("With the first set finished, you lower the bar until the weight is released from your well-developed musculature.  The demonic beauty is leaning down, over your " + chestDesc() + ", drinking in every sweat-slicked part of you.  With her breasts wobbling dangerously, her glossy, dark lips slowly part to blow you a kiss.  Then, the onyx pillows open to purr, \"<i>Mmmm... marvelous work darling.</i>\"  She leans a little lower, letting her slick breasts rub over the crotch of your " + player.armorName + " as she asks, \"<i>Do you think... you could lift more?  Enough to truly handle anything the world might throw at you?</i>\"  Ifris trails her fingers over your " + player.armorName + ", slowly undoing the equipment with each enunciated syllable.\n\n");
 	
-	outputText("Spurred on by the crimson cutie's urgings, you set the machine a bit higher and set your mind to lifting, trusting her to follow through on her teases.  You flex and strain, hefting the heavier weight higher and higher, until you've completely raised it.  As soon as you reach that glorious apex, your coverings fall away to expose your " + multiCockDescriptLight() + " to the musky gym air.  They pulsate, slowly filling with blood while you hold the bulky weights aloft.  You gradually bring the machine back down, exhaling a moan of relief once Ifris takes two of your half-swollen shafts in her hands, feeling the flesh filling out between her hot, oiled fingers.\n\n", false);
+	outputText("Spurred on by the crimson cutie's urgings, you set the machine a bit higher and set your mind to lifting, trusting her to follow through on her teases.  You flex and strain, hefting the heavier weight higher and higher, until you've completely raised it.  As soon as you reach that glorious apex, your coverings fall away to expose your " + multiCockDescriptLight() + " to the musky gym air.  They pulsate, slowly filling with blood while you hold the bulky weights aloft.  You gradually bring the machine back down, exhaling a moan of relief once Ifris takes two of your half-swollen shafts in her hands, feeling the flesh filling out between her hot, oiled fingers.\n\n");
 	
-	outputText("\"<i>Mmmm... don't stop darling.  You're... more than a handful.  Just keep lifting, and I'll take care of everything down here,</i>\" promises the sultry voice of your companion.  Nodding in understanding, you return to the task you've been given - putting on a show in exchange for sexual pleasure.  " + SMultiCockDesc() + " fill, to the muscle-focused demon's delight, getting coos of pleased surprise as they fully engorge.  She strokes them slowly, letting the tightening dick-flesh slide through her oily grip a few times to make sure you're absolutely ready, always stopping the moment you start to hesitate in your assigned workout.\n\n", false);
+	outputText("\"<i>Mmmm... don't stop darling.  You're... more than a handful.  Just keep lifting, and I'll take care of everything down here,</i>\" promises the sultry voice of your companion.  Nodding in understanding, you return to the task you've been given - putting on a show in exchange for sexual pleasure.  " + SMultiCockDesc() + " fill, to the muscle-focused demon's delight, getting coos of pleased surprise as they fully engorge.  She strokes them slowly, letting the tightening dick-flesh slide through her oily grip a few times to make sure you're absolutely ready, always stopping the moment you start to hesitate in your assigned workout.\n\n");
 
 	outputText("After five big pushes, the hands disappear, but only long enough for her light, toned body to climb atop your own, the oiled thighs sliding up your sweat-glazed form towards your groin.  Ifris coos, \"<i>Mmm... keep at it, my darling.  Fitness is its own reward...</i>\"\n\n");
 	
-	outputText("You gasp at the pleasant sensation of her moist swimsuit against " + oMultiCockDesc() + " and start to push yourself, straining harder, grunting as you begin to feel the onset of fatigue.  Just before the next lift, Ifris squeezes two of your " + multiCockDescriptLight() + ", angling them straight up.  You pause in confusion a moment, until you feel wet lips on one and tight, oiled skin squeezing the other.  Like you've been charged by lightning, energy fills your body, and you push yourself to keep going.  As the bar rises, Ifris' pussy and asshole lower, squeezing the two lucky dicks in her hot, clenching innards.  Holding that position, you struggle to control your muscles and adjust to the exquisite pleasure.  The bar lowers slowly, but Ifris' holes levitate in the same motion, coming just up off your sensitive, hungry shafts.\n\n", false);
+	outputText("You gasp at the pleasant sensation of her moist swimsuit against " + oMultiCockDesc() + " and start to push yourself, straining harder, grunting as you begin to feel the onset of fatigue.  Just before the next lift, Ifris squeezes two of your " + multiCockDescriptLight() + ", angling them straight up.  You pause in confusion a moment, until you feel wet lips on one and tight, oiled skin squeezing the other.  Like you've been charged by lightning, energy fills your body, and you push yourself to keep going.  As the bar rises, Ifris' pussy and asshole lower, squeezing the two lucky dicks in her hot, clenching innards.  Holding that position, you struggle to control your muscles and adjust to the exquisite pleasure.  The bar lowers slowly, but Ifris' holes levitate in the same motion, coming just up off your sensitive, hungry shafts.\n\n");
 
 	outputText("The demonic-looking woman's tortuous orifices keep you hard, battling through the tide of pleasure so that you can keep lifting, and in return receive even more sensation.  Your arms are starting to feel sore, and lifting such enormous quantities of mass is getting harder and harder.  Ifris still seems pleased with your progress, and she murmurs words of encouragement.  \"<i>So... strong... mmmhmmm, go on.  You can do it.</i>\"  Her pussy squeezes and ripples around the main dick while her sphincter clamps tight on the other, massaging you to compensate for the slower speeds.  Droplets of sweat drip onto you, mingling with your own exhausted beads and falling to the floor, both of you soaked with the stink of exercise and sex.\n\n");
 
@@ -299,7 +299,7 @@ private function ifrisDP():void {
 	else if(player.tentacleCocks() >= 2 || player.stamenCocks() > 1) {
 		outputText("Both your plant-like pricks explode inside Ifris, the purplish tips swelling up inside her to disproportionate sizes.  A moment later, the vine-dicks explode out twin pillars of ropey seed, painting her inner walls with spunk.  ");
 		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ");
-		outputText("At the same time, both tentacle-shafts curl and piston, winding around in other in the space between your bodies, curling and thrusting to rub every inch of your sensitive, prehensile shafts against Ifris' pussy-walls.  You shake and shudder, feeling more like a tentacle beast than a " + player.mf("man","woman") + ".  ", false);
+		outputText("At the same time, both tentacle-shafts curl and piston, winding around in other in the space between your bodies, curling and thrusting to rub every inch of your sensitive, prehensile shafts against Ifris' pussy-walls.  You shake and shudder, feeling more like a tentacle beast than a " + player.mf("man","woman") + ".  ");
 	}
 	//(Anemone - stinging funtimes)
 	else if(player.anemoneCocks() >= 2) {
@@ -337,7 +337,7 @@ private function ifrisDP():void {
 	player.orgasm();
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)), false);
+	outputText(player.modTone(85,5+rand(5)));
 	doNext(camp.returnToCampUseOneHour);
 }
 }

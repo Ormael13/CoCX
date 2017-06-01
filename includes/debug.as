@@ -1,6 +1,6 @@
 ﻿public function doThatTestingThang():void
 {
-
+	clearOutput();
 	// Excercise the parser. This should catch parser regressions, I think.
 	//
 	//
@@ -233,7 +233,7 @@ convert "
 "derp a herp"
 
 
-	]]>, true, true);
+	]]>);
 
 
 	menu();

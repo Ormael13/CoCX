@@ -2413,17 +2413,17 @@
 			clearOutput();
 			//Text for when the player uses the bottle:
 			//[before the player is addicted, Addiction < 30]
-			if (player.statusEffectv2(StatusEffects.Marble) < 30 && player.statusEffectv3(StatusEffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
+			if (player.statusEffectv2(StatusEffects.Marble) < 30 && player.statusEffectv3(StatusEffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n");
 			//[before the player is addicted, Addiction < 50]
-			else if (player.statusEffectv3(StatusEffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n", false);
+			else if (player.statusEffectv3(StatusEffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n");
 			else if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 				//[player is completely addicted]
-				if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n", false);
+				if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n");
 				else {
 					//[player is no longer addicted]
-					if (player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.\n\n", false);
+					if (player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.\n\n");
 					//[player is addicted]
-					else outputText("You gulp down the bottle's contents; you really needed that.\n\n", false);
+					else outputText("You gulp down the bottle's contents; you really needed that.\n\n");
 				}
 			}
 			//Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
@@ -2509,7 +2509,7 @@
 				temp = 60 - player.tou;
 				if (temp <= 0) temp = 0;
 				else {
-					if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.", false);
+					if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
 					else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
 					dynStats("tou", temp / 10);
 					changes++;
@@ -2554,8 +2554,8 @@
 					outputText("  ");
 					if (player.cockTotal() == 1 && !player.hasVagina()) {
 						outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-						if (player.balls > 0) outputText("  At the same time, your " + ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.", false);
-						outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>", false);
+						if (player.balls > 0) outputText("  At the same time, your " + ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+						outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
 						player.balls = 0;
 						player.ballSize = 1;
 						player.createVagina();
@@ -2611,7 +2611,7 @@
 			}
 			//If breasts are D or bigger and are not lactating, they also start lactating:
 			if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
-				outputText("\n\nYou gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.", false);
+				outputText("\n\nYou gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.");
 				player.breastRows[0].lactationMultiplier = 1.25;
 				changes++;
 				dynStats("sen", .5);
@@ -3099,7 +3099,7 @@
 			//antianemone corollary:
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-				outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>", false);
+				outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
 				setHairType(HAIR_NORMAL);
 				changes++;
 			}
@@ -4417,7 +4417,7 @@
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Text go!
 			clearOutput();
-			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.", false);
+			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
 			//Speed raises up to 75
 			if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
 				//low speed
@@ -4644,7 +4644,7 @@
 					if (temp == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
 					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
 				}
-				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>", false);
+				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
 				setTailType(TAIL_TYPE_CAT);
 				changes++;
 			}
@@ -5063,7 +5063,7 @@
 			}
 			//-Lizard-like face.
 			if (player.faceType != FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
-				outputText("\n\nTerrible agony wracks your " + player.face() + " as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>", false);
+				outputText("\n\nTerrible agony wracks your " + player.face() + " as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>");
 				setFaceType(FACE_LIZARD);
 				changes++;
 			}
@@ -6031,7 +6031,7 @@
 			//antianemone corollary:
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>", false);
+				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
 				setHairType(HAIR_FEATHER);
 				changes++;
 			}
@@ -6367,7 +6367,7 @@
 				//2 points up if below 40!
 				if (player.spe < 40) dynStats("spe", 1);
 				dynStats("spe", 1);
-				outputText("\n\nYour legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.", false);
+				outputText("\n\nYour legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.");
 				changes++;
 			}
 			//-Int to 10
@@ -6376,7 +6376,7 @@
 				//Gain dumb (smart!)
 				if (player.inte > 30) outputText("\n\nYou feel... antsy. You momentarily forget your other concerns as you look around you, trying to decide which direction you'd be most likely to find more food in.  You're about to set out on the search when your mind refocuses and you realize you already have some stored at camp.");
 				//gain dumb (30-10 int):
-				else if (player.inte > 10) outputText("\n\nYour mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.", false);
+				else if (player.inte > 10) outputText("\n\nYour mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.");
 				//gain dumb (10-1 int):
 				else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
 				dynStats("int", -1);
@@ -6473,7 +6473,7 @@
 			//-Face (Req: Fur + Feet)
 			if (player.faceType != FACE_KANGAROO && ((player.hasFur() && player.lowerBody == LOWER_BODY_TYPE_KANGAROO) || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				//gain roo face from human/naga/shark/bun:
-				if (player.faceType == FACE_HUMAN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY) outputText("\n\nThe base of your nose suddenly hurts, as though someone were pinching and pulling at it.  As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating.  This continues for about twenty seconds as you stand there, quaking.  When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils.  You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>", false);
+				if (player.faceType == FACE_HUMAN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY) outputText("\n\nThe base of your nose suddenly hurts, as though someone were pinching and pulling at it.  As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating.  This continues for about twenty seconds as you stand there, quaking.  When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils.  You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>");
 				//gain roo face from other snout:
 				else outputText("\n\nYour nose tingles. As you focus your eyes toward the end of it, it twitches and shifts into a muzzle similar to a stretched-out rabbit's, complete with harelip and whiskers.  <b>You now have a kangaroo face!</b>");
 				changes++;
@@ -6489,13 +6489,13 @@
 			//-Roo footsies (Req: Tail)
 			if (player.lowerBody != LOWER_BODY_TYPE_KANGAROO && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (type == 1 || player.tailType == TAIL_TYPE_KANGAROO) && changes < changeLimit && rand(4) == 0) {
 				//gain roo feet from centaur:
-				if (player.isTaur()) outputText("\n\nYour backlegs suddenly wobble and collapse, causing you to pitch over onto your side.  Try as you might, you can't get them to stop spasming so you can stand back up; you thrash your hooves wildly as a pins-and-needles sensation overtakes your lower body.  A dull throbbing along your spine makes you moan in agony; it's as though someone had set an entire bookshelf on your shoulders and your spine were being compressed far beyond its limit.  After a minute of pain, the pressure evaporates and you look down at your legs.  Not only are your backlegs gone, but your forelegs have taken on a dogleg shape, with extremely long feet bearing a prominent middle toe!  You set about rubbing the feeling back into your legs and trying to move the new feet.  <b>You now have kangaroo legs!</b>", false);
+				if (player.isTaur()) outputText("\n\nYour backlegs suddenly wobble and collapse, causing you to pitch over onto your side.  Try as you might, you can't get them to stop spasming so you can stand back up; you thrash your hooves wildly as a pins-and-needles sensation overtakes your lower body.  A dull throbbing along your spine makes you moan in agony; it's as though someone had set an entire bookshelf on your shoulders and your spine were being compressed far beyond its limit.  After a minute of pain, the pressure evaporates and you look down at your legs.  Not only are your backlegs gone, but your forelegs have taken on a dogleg shape, with extremely long feet bearing a prominent middle toe!  You set about rubbing the feeling back into your legs and trying to move the new feet.  <b>You now have kangaroo legs!</b>");
 				//gain roo feet from naga:
-				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYour tail quivers, then shakes violently, planting you on your face.  As you try to bend around to look at it, you can just see the tip shrinking out of your field of vision from the corner of your eye.  The scaly skin below your waist tightens intolerably, then splits; you wriggle out of it, only to find yourself with a pair of long legs instead!  A bit of hair starts to grow in as you stand up unsteadily on your new, elongated feet.  <b>You now have kangaroo legs!</b>  Now, what are you going to do with a giant shed snakeskin?", false);
+				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYour tail quivers, then shakes violently, planting you on your face.  As you try to bend around to look at it, you can just see the tip shrinking out of your field of vision from the corner of your eye.  The scaly skin below your waist tightens intolerably, then splits; you wriggle out of it, only to find yourself with a pair of long legs instead!  A bit of hair starts to grow in as you stand up unsteadily on your new, elongated feet.  <b>You now have kangaroo legs!</b>  Now, what are you going to do with a giant shed snakeskin?");
 				//gain roo feet from slime:
 				else if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("\n\nYour mounds of goo shrink and part involuntarily, exposing your crotch.  Modesty overwhelms you and you try to pull them together, but the shrinkage is continuing faster than you can shift your gooey body around.  Before long you've run out of goo to move, and your lower body now ends in a pair of slippery digitigrade legs with long narrow feet.  They dry in the air and a bit of fur begins to sprout as you look for something to cover up with.  <b>You now have kangaroo legs!</b> You sigh.  Guess this means it's back to wearing underpants again.");
 				//gain roo feet from human/bee/demon/paw/lizard:
-				else outputText("\n\nYour feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them!  <b>You now have kangaroo legs!</b>", false);
+				else outputText("\n\nYour feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them!  <b>You now have kangaroo legs!</b>");
 				setLowerBody(LOWER_BODY_TYPE_KANGAROO);
 				player.legCount = 2;
 				changes++;
@@ -6503,7 +6503,7 @@
 			//-Roo tail (Req: Ears)
 			if (player.tailType != TAIL_TYPE_KANGAROO && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0 && (type != 1 || player.earType == EARS_KANGAROO)) {
 				//gain roo tail:
-				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA painful pressure in your lower body causes you to stand straight and lock up.  At first you think it might be gas.  No... something is growing at the end of your tailbone.  As you hold stock still so as not to exacerbate the pain, something thick pushes out from the rear of your garments.  The pain subsides and you crane your neck around to look; a long, tapered tail is now attached to your butt and a thin coat of fur is already growing in!  <b>You now have a kangaroo tail!</b>", false);
+				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA painful pressure in your lower body causes you to stand straight and lock up.  At first you think it might be gas.  No... something is growing at the end of your tailbone.  As you hold stock still so as not to exacerbate the pain, something thick pushes out from the rear of your garments.  The pain subsides and you crane your neck around to look; a long, tapered tail is now attached to your butt and a thin coat of fur is already growing in!  <b>You now have a kangaroo tail!</b>");
 				//gain roo tail from bee tail:
 				else if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTIS_ABDOMEN) {
 					outputText("\n\nYour chitinous backside shakes and cracks once you finish eating.  Peering at it as best you can, it appears as though the fuzz is falling out in clumps and the chitin is flaking off.  As convulsions begin to wrack your body and force you to collapse, the ");
@@ -6521,9 +6521,9 @@
 			//-Roo ears
 			if (player.earType != EARS_KANGAROO && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				//Bunbun ears get special texts!
-				if (player.earType == EARS_BUNNY) outputText("\n\nYour ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well.  As you touch them, you can feel them swiveling in place in response to nearby sounds.  <b>You now have a pair of kangaroo ears!</b>", false);
+				if (player.earType == EARS_BUNNY) outputText("\n\nYour ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well.  As you touch them, you can feel them swiveling in place in response to nearby sounds.  <b>You now have a pair of kangaroo ears!</b>");
 				//Everybody else?  Yeah lazy.
-				else outputText("\n\nYour ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>", false);
+				else outputText("\n\nYour ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>");
 				changes++;
 				setEarType(EARS_KANGAROO);
 			}
@@ -7030,14 +7030,14 @@
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Effect script 1:  (higher intelligence)
 			if (player.inte < 100 && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.", false);
+				outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
 				dynStats("int", 1);
 				if (player.inte < 50) dynStats("int", 1);
 				changes++;
 			}
 			//Effect script 2:  (lower sensitivity)
 			if (player.sens >= 20 && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nWoah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.", false);
+				outputText("\n\nWoah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.");
 				dynStats("sen", -2);
 				if (player.sens >= 75) dynStats("sen", -2);
 				changes++;
@@ -7121,7 +7121,7 @@
 		public function shriveledTentacle(player:Player):void
 		{
 			clearOutput();
-			outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.", false);
+			outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.");
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -7133,7 +7133,7 @@
 			//possible use effects:
 			//- toughess up, sensitivity down
 			if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
-				outputText("\n\nYour skin feels clammy and a little rubbery.  You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips.  Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!", false);
+				outputText("\n\nYour skin feels clammy and a little rubbery.  You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips.  Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("tou", 1, "sen", -1);
 				changes++;
 			}
@@ -7155,19 +7155,19 @@
 			//physical changes:
 			//- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
 			if (rand(4) == 0 && changes < changeLimit && player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
-				outputText("\n\nAs the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>\n\n", false);
+				outputText("\n\nAs the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>\n\n");
 				setTailType(TAIL_TYPE_NONE);
 				changes++;
 			}
 			//-may randomly remove bee wings:
 			if (rand(4) == 0 && (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) && changes < changeLimit) {
-				outputText("\n\nYour wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>", false);
+				outputText("\n\nYour wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>");
 				setWingType(WING_TYPE_NONE, "non-existent");
 				changes++;
 			}
 			//-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 			if (player.gillType == GILLS_ANEMONE && player.hairType != 4 && changes < changeLimit && rand(5) == 0) {
-				outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
+				outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
 				setHairType(HAIR_ANEMONE);
 				player.hairLength = 5;
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
@@ -7185,7 +7185,7 @@
 				updateGills(GILLS_ANEMONE);
 			//-[aphotic] skin tone (blue-black)
 			if (rand(5) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.skinTone != "aphotic blue-black") {
-				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>", false);
+				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>");
 				player.skinTone = "aphotic blue-black";
 				changes++;
 			}
@@ -7194,7 +7194,7 @@
 					rand(2) == 0 && changes < changeLimit) {
 				temp = 5 + rand(3);
 				player.hairLength += temp;
-				outputText("\n\nAs you laboriously chew the rubbery dried anemone, your head begins to feel heavier.  Using your newfound control, you snake one of your own tentacles forward; holding it out where you can see it, the first thing you notice is that it appears quite a bit longer.  <b>Your head-tentacles are now " + num2Text(temp) + " inches longer!</b>", false);
+				outputText("\n\nAs you laboriously chew the rubbery dried anemone, your head begins to feel heavier.  Using your newfound control, you snake one of your own tentacles forward; holding it out where you can see it, the first thing you notice is that it appears quite a bit longer.  <b>Your head-tentacles are now " + num2Text(temp) + " inches longer!</b>");
 				//(add one level of hairlength)
 				changes++;
 			}
@@ -9585,8 +9585,8 @@
 					outputText("  ");
 					if (player.cockTotal() == 1 && !player.hasVagina()) {
 						outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-						if (player.balls > 0) outputText("  At the same time, your " + ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.", false);
-						outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>", false);
+						if (player.balls > 0) outputText("  At the same time, your " + ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+						outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
 						player.balls = 0;
 						player.ballSize = 1;
 						player.createVagina();

@@ -326,7 +326,7 @@ public function benoitsBuyMenu():void {
 	{
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating his latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
-	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>", false);
+	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>");
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));

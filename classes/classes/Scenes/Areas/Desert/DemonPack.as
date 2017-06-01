@@ -62,12 +62,12 @@
 				if(player.cocks.length > 0) {
 					if(player.cockTotal() > 1) outputText("Each of y");
 					else outputText("Y");
-					outputText("our " + player.multiCockDescriptLight() + " throbs ", false);
+					outputText("our " + player.multiCockDescriptLight() + " throbs ");
 					if(player.hasVagina()) outputText(" and your ");
 				}
 				if(player.vaginas.length > 0) {
 					if(!player.hasCock()) outputText("Your ");
-					outputText(game.vaginaDescript(0) + " burns ", false);
+					outputText(game.vaginaDescript(0) + " burns ");
 				}
 				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.");
 				doNext(game.desert.oasis.oasisSexing);

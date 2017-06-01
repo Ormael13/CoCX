@@ -3,7 +3,7 @@
 public function eventTestingPane():void
 {
 
-
+	clearOutput();
 	outputText(<![CDATA[
 
 
@@ -87,7 +87,7 @@ consequatur aut perferendis doloribus asperiores repellat.
 
 
 
-	]]>, true, true);
+	]]>);
 
 	//trace("Maintext content @ eventTestingPane = ", mainText.htmlText.length)
 	//menu();
@@ -132,7 +132,8 @@ public function eventTesterGo():void
 	trace("Temp = ", temp);
 
 	menu();
-	outputText(temp, true, true);
+	clearOutput();
+	outputText(temp);
 
 	addButton(14, "Back", eventTester)
 	flushOutputTextToGUI();

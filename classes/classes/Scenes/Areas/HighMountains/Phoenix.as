@@ -46,11 +46,11 @@ package classes.Scenes.Areas.HighMountains
 					damage = Math.round(damage);
 					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " slightly due to still swirling around you ice shards. ", false);
+						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " slightly due to still swirling around you ice shards. ");
 						damage *= 0.2;
 					}
 					else {
-						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " badly. ", false);
+						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " badly. ");
 					}
 					damage = Math.round(damage);
 					damage = player.reduceDamage(damage);

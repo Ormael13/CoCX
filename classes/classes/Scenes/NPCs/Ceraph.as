@@ -41,7 +41,7 @@
 					}
 					//(AUTO-LOSE)
 					else {
-						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your " + player.feet() + ".  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.", false);
+						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your " + player.feet() + ".  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 						game.dynStats("lus", 1000);
 					}
 				}
@@ -63,7 +63,7 @@
 			//[SPECIAL WHILE PC RESTRAINED]
 			else {
 				if (rand(2) == 0) {
-					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.", false);
+					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.");
 					game.dynStats("lus", 9 + player.sens / 10);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
@@ -114,7 +114,7 @@
 		public function ceraphBoundWait():void
 		{
 			clearOutput();
-			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.", false);
+			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
 				game.dynStats("lus", 5);
@@ -150,20 +150,20 @@
 			doNext(game.playerMenu);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
-				outputText(capitalA + short + " completely misses you with a blind attack!", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!", false);
-				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!", false);
-				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".", false);
+				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
+				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
+				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
-				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.", false);
+				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			//Determine damage - str modified by enemy toughness!
 			else {
@@ -174,43 +174,43 @@
 				if (damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! ", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! ", false);
+					outputText(capitalA + short + " wounds you! ");
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
 			game.statScreenRefresh();
 			outputText("\n");
 			//SECOND ATTACK HERE------
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
-				outputText(capitalA + short + " completely misses you with a blind attack!", false);
+				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!", false);
-				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!", false);
-				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".", false);
+				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
+				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
+				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.", false);
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
-				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.", false);
+				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!
@@ -221,23 +221,23 @@
 				if (damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! ", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! ", false);
+					outputText(capitalA + short + " wounds you! ");
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
 			game.statScreenRefresh();
 			outputText("\n");

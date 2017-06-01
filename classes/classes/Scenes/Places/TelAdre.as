@@ -85,7 +85,7 @@ public var piercingType:Number = 0;
 public function discoverTelAdre():void {
 	clearOutput();
 	if(!player.hasStatusEffect(StatusEffects.TelAdre)) {
-		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?", false);
+		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?");
 		outputText("\n\nDo you investigate the city in the distance?");
 	}
 	else {
@@ -103,7 +103,7 @@ private function encounterTelAdre():void {
 		outputText("\"<i>Hold it!</i>\" barks the fox, her dark gray fur bristling in suspicion at your sudden appearance, \"<i>What's your business in the city of Tel'Adre?</i>\"\n\n");
 		outputText("You shrug and explain that you know nothing about this town, and just found it while exploring the desert.  The girl stares at you skeptically for a moment and then blows a shrill whistle.  She orders, \"<i>No sudden moves.</i>\"\n\n");
 		outputText("Deciding you've nothing to lose by complying, you stand there, awaiting whatever reinforcements this cute vulpine-girl has summoned.  Within the minute, a relatively large-chested centauress emerges from a smaller door cut into the gate, holding a massive bow with an arrow already nocked.\n\n");
-		outputText("\"<i>What's the problem, Urta?  A demon make it through the barrier?</i>\" asks the imposing horse-woman.\n\nUrta the fox shakes her head, replying, \"<i>I don't think so, Edryn.  " + player.mf("He's","She's") + " something else.  We should use the crystal and see if " + player.mf("he","she") + "'s fit to be allowed entry to Tel'Adre.</i>\"\n\n", false);
+		outputText("\"<i>What's the problem, Urta?  A demon make it through the barrier?</i>\" asks the imposing horse-woman.\n\nUrta the fox shakes her head, replying, \"<i>I don't think so, Edryn.  " + player.mf("He's","She's") + " something else.  We should use the crystal and see if " + player.mf("he","she") + "'s fit to be allowed entry to Tel'Adre.</i>\"\n\n");
 		outputText("You watch the big centaur cautiously as she pulls out a pendant, and approaches you.  \"<i>Hold still,</i>\" she says, \"<i>this will do you no harm.</i>\"\n\n");
 		outputText("She places one hand on your shoulder and holds the crystal in the other.  Her eyes close, but her brow knits as she focuses on something.  ");
 		telAdreCrystal();
@@ -174,7 +174,7 @@ public function telAdreMenu():void {
 		case  0: //Still potentially recruitable
 			if (flags[kFLAGS.KATHERINE_RANDOM_RECRUITMENT_DISABLED] == 0 && player.gems > 34 && rand(25) == 0) {
 				if (flags[kFLAGS.KATHERINE_UNLOCKED] == 0)
-					katherine.ambushByVagrantKittyKats()
+					katherine.ambushByVagrantKittyKats();
 				else katherine.repeatAmbushKatherineRecruitMent();
 				return;
 			}
@@ -213,7 +213,8 @@ public function telAdreMenu():void {
 	}
 	spriteSelect(-1);
 	outputText(images.showImage("location-teladre"));
-	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n", true);
+	clearOutput();
+	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n");
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.");
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !kGAMECLASS.raphael.RaphaelLikes()) {
 		outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
@@ -292,7 +293,7 @@ private function piercingStudio():void {
 	if(!player.hasStatusEffect(StatusEffects.Yara)) about = aboutYara;
 	clearOutput();
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n");
-	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
+	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"");
 	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 		simpleChoices("Pierce", pierceMenu, "Remove", piercingRemove, "About Her", about, "", null, "Leave", telAdreMenu);
 	else
@@ -314,7 +315,8 @@ private function piercingStudio():void {
 private function aboutYara():void {
 	spriteSelect(63);
 	player.createStatusEffect(StatusEffects.Yara,0,0,0,0);
-	outputText("You introduce yourself and ask Yara about her past, noting that ", true);
+	clearOutput();
+	outputText("You introduce yourself and ask Yara about her past, noting that ");
 	if(player.humanScore() <= 2) outputText("you were once a human too.");
 	else outputText("you haven't seen many other humans about.");
 	outputText("\n\nShe blushes a little when she answers, her tail curling about her protectively, \"<i>My home city was built around a portal, and the Baron that ruled it insisted that we send a sacrifice through every year.  We were raised believing that if we didn't sacrifice SOMEONE, the gods would become angry and bring our city to ruin.  Of course the whole thing was a sham, but the families of those sacrificed get compensation.  My father tried to whore me out first, but when that didn't work, the bastard had me drugged and sacrificed.  I woke up next to a lake, ate some weird fruit when I got hungry, and I... well, I changed.  Thankfully I found my way here before I ran into any demons, or who knows what would have happened to me!  Tel'Adre has been good to me, and I'm sure it'll be good to you.  Now, how about getting a piercing?</i>\"");
@@ -359,7 +361,8 @@ private function pierceMenu():void {
 	{
 		if(player.vaginas[0].labiaPierced == 0) vulva = vulvaPierce;
 	}
-	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
+	clearOutput();
+	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"");
 	if(clit != null || dick != null || ears != null || eyebrow != null || lip != null || nipples != null || nose != null || tongue != null || vulva != null)
 		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
 	else
@@ -371,9 +374,10 @@ private function pierceMenu():void {
 
 private function dickPierce():void {
 	spriteSelect(63);
-	if(player.totalCocks() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.", true);
+	clearOutput();
+	if(player.totalCocks() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.");
 	else {
-		outputText("You realize you don't have a dick to pierce.  Whoops!  Better pick something else...", true);
+		outputText("You realize you don't have a dick to pierce.  Whoops!  Better pick something else...");
 		doNext(pierceMenu);
 		return;
 	}
@@ -383,9 +387,10 @@ private function dickPierce():void {
 
 private function clitPierce():void {
 	spriteSelect(63);
-	if(player.hasVagina()) outputText("\"<i>Ohhh, that's going to be suckably cute!</i>\" exclaims Yara, blushing more than a little. \"<i>What kind of piercing would you like?</i>", true);
+	clearOutput();
+	if(player.hasVagina()) outputText("\"<i>Ohhh, that's going to be suckably cute!</i>\" exclaims Yara, blushing more than a little. \"<i>What kind of piercing would you like?</i>");
 	else {
-		outputText("You realize you don't have a clit to pierce.  Whoops!  Better pick something else...", true);
+		outputText("You realize you don't have a clit to pierce.  Whoops!  Better pick something else...");
 		doNext(pierceMenu);
 		return;
 	}
@@ -396,50 +401,57 @@ private function clitPierce():void {
 private function earPierce():void {
 	spriteSelect(63);
 	piercingLoc = 2;
-	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.", true);
+	clearOutput();
+	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.");
 	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "Hoop", chooseHoop, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function eyebrowPierce():void {
 	spriteSelect(63);
 	piercingLoc = 3;
-	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.", true);
+	clearOutput();
+	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.");
 	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function lipPierce():void {
 	spriteSelect(63);
 	piercingLoc = 4;
-	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.", true);
+	clearOutput();
+	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.");
 	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function nipplePierce():void {
 	spriteSelect(63);
 	piercingLoc = 5;
-	outputText("\"<i>Yeah, sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.", true);
+	clearOutput();
+	outputText("\"<i>Yeah, sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.");
 	simpleChoices("Studs", chooseStud, "Rings", chooseRing, "Chain", chooseChain, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function nosePierce():void {
 	spriteSelect(63);
 	piercingLoc = 6;
-	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"", true);
+	clearOutput();
+	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"");
 	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
-	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll be fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
+	clearOutput();
+	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll be fun!  I'm afraid I can only put a stud there though, ok?</i>\"");
 	simpleChoices("Ok", chooseStud, "", null, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 private function vulvaPierce():void {
 	spriteSelect(63);
 	piercingLoc = 8;
-	if(player.hasVagina()) outputText("Yara explains, \"<i>This is gonna hurt a lot, but I think you'll love how it feels after.  I know I do!  Now what kind of jewelry do you want down-town?</i>\"", true);
+	clearOutput();
+	if(player.hasVagina()) outputText("Yara explains, \"<i>This is gonna hurt a lot, but I think you'll love how it feels after.  I know I do!  Now what kind of jewelry do you want down-town?</i>\"");
 	else {
-		outputText("You realize you don't have a pussy to pierce.  Whoops!  Better pick something else...", true);
+		outputText("You realize you don't have a pussy to pierce.  Whoops!  Better pick something else...");
 		doNext(pierceMenu);
 		return;
 	}
@@ -468,7 +480,8 @@ private function chooseChain():void {
 
 private function chooseMaterials():void {
 	spriteSelect(63);
-	outputText("Yara gathers up her materials and says, \"<i>Ok, now what type of material do you want it made from?  Don't worry about price, none of these are that rare, so the piercing will only be 100 gems.  Though I do have some rarer materials; you'll need 1,000 gems to spend if you want to check them out.</i>\"", true);
+	clearOutput();
+	outputText("Yara gathers up her materials and says, \"<i>Ok, now what type of material do you want it made from?  Don't worry about price, none of these are that rare, so the piercing will only be 100 gems.  Though I do have some rarer materials; you'll need 1,000 gems to spend if you want to check them out.</i>\"");
 	if(player.gems < 100) {
 		outputText("\n\nYou realize you don't have enough gems to get a piercing.");
 		doNext(piercingStudio);
@@ -533,7 +546,8 @@ private function chooseIcestone():void {
 
 private function areYouSure():void {
 	spriteSelect(63);
-	outputText("Yara says, \"<i>Ok, last chance to back out, are you sure you want to go ahead with this?  Remember, once I put it in, it's permanent.</i>\"", true);
+	clearOutput();
+	outputText("Yara says, \"<i>Ok, last chance to back out, are you sure you want to go ahead with this?  Remember, once I put it in, it's permanent.</i>\"");
 	doYesNo(normalPierceAssemble,piercingStudio);
 }
 	//9. Lethite (Demon Lure)
@@ -542,7 +556,8 @@ private function areYouSure():void {
 	//12. Crimstone - + min lust
 private function chooseAdvancedMaterials():void {
 	spriteSelect(63);
-	outputText("Yara goes back into the back and comes out with a gilded tray full of exotic materials.  She hands you a brochure and asks, \"<i>Ok, now what am I going to be working with?</i>\"", true);
+	clearOutput();
+	outputText("Yara goes back into the back and comes out with a gilded tray full of exotic materials.  She hands you a brochure and asks, \"<i>Ok, now what am I going to be working with?</i>\"");
 	outputText("\n\nThere's a number of materials listed here:");
 	outputText("\n1. Lethite - Fake lethicite.  While beautiful, it's known to attract demons.");
 	outputText("\n2. Fertite - A green gem sometimes fished up from the bottom of Mareth's great lake, it is said to enhance the fertility of both genders.");
@@ -556,7 +571,8 @@ private function chooseAdvancedMaterials():void {
 
 private function normalPierceAssemble():void {
 	spriteSelect(63);
-	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled and before you know it, your piercing is done!", true);
+	clearOutput();
+	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled and before you know it, your piercing is done!");
 	//1. Amethyst (+1 int, +1 lib)
 	//2. Diamond (+2 int, -1 cor)
 	//3. Gold (+1 int, +1 sens)
@@ -868,18 +884,21 @@ private function piercingRemove():void {
 		if(player.vaginas[0].labiaPierced > 0) vulva = removeVulvaPierce;
 	}
 	if(clit == null && dick == null && ears == null && eyebrow == null && lip == null && nipples == null && nose == null && tongue == null && vulva == null) {
-		outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"", true);
+		clearOutput();
+		outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"");
 		doNext(piercingStudio);
 		return;
 	}
-	outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"", true);
+	clearOutput();
+	outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
 	if(player.gems < 100) {
 		outputText("\n\n<b>You do not have enough gems.</b>");
 		doNext(piercingStudio);
 		return;
 	}
 	if(player.tou <= 5.5) {
-		outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good " + player.short + ".  I don't think your body could handle it right now.</i>\"", true);
+		clearOutput();
+		outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good " + player.short + ".  I don't think your body could handle it right now.</i>\"");
 		doNext(piercingStudio);
 		return;
 	}
@@ -888,7 +907,8 @@ private function piercingRemove():void {
 
 private function removeClitPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.vaginas[0].clitPierced = 0;
 	player.vaginas[0].clitPShort = "";
 	player.vaginas[0].clitPLong = "";
@@ -900,7 +920,8 @@ private function removeClitPierce():void {
 
 private function removeCockPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.cocks[0].pierced = 0;
 	player.cocks[0].pShortDesc = "";
 	player.cocks[0].pLongDesc = "";
@@ -912,7 +933,8 @@ private function removeCockPierce():void {
 
 private function removeEarsPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.earsPierced = 0;
 	player.earsPShort = "";
 	player.earsPLong = "";
@@ -924,7 +946,8 @@ private function removeEarsPierce():void {
 
 private function removeEyebrowPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.eyebrowPierced = 0;
 	player.eyebrowPShort = "";
 	player.eyebrowPLong = "";
@@ -936,7 +959,8 @@ private function removeEyebrowPierce():void {
 
 private function removeLipPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.lipPierced = 0;
 	player.lipPShort = "";
 	player.lipPLong = "";
@@ -948,7 +972,8 @@ private function removeLipPierce():void {
 
 private function removeNipplesPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.nipplesPierced = 0;
 	player.nipplesPShort = "";
 	player.nipplesPLong = "";
@@ -960,7 +985,8 @@ private function removeNipplesPierce():void {
 
 private function removeNosePierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.nosePierced = 0;
 	player.nosePShort = "";
 	player.nosePLong = "";
@@ -972,7 +998,8 @@ private function removeNosePierce():void {
 
 private function removeTonguePierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.tonguePierced = 0;
 	player.tonguePShort = "";
 	player.tonguePLong = "";
@@ -984,7 +1011,8 @@ private function removeTonguePierce():void {
 
 private function removeVulvaPierce():void {
 	spriteSelect(63);
-	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
+	clearOutput();
+	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.");
 	player.vaginas[0].labiaPierced = 0;
 	player.vaginas[0].labiaPShort = "";
 	player.vaginas[0].labiaPLong = "";
@@ -1007,7 +1035,7 @@ public function oswaldPawn():void {
 		player.createStatusEffect(StatusEffects.Oswald,0,0,0,0);
 	}
 	else {
-		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
 		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
 	}
 	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
@@ -1152,7 +1180,7 @@ public function barTelAdre():void {
 						return;
 					}
 					else { //Edryn re-preggers appearance!
-						outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);				
+						outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?");				
 					}
 				}
 				else { //Mid-pregnancy appearance
@@ -1314,7 +1342,7 @@ private function oldbarTelAdre():void {
 			//Edryn re-preggers appearance!
 			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
 				flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
-				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
+				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?");
 			}
 			//Edryn just had a kid and hasn't talked about it!
 			else if(flags[kFLAGS.EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
@@ -1534,8 +1562,8 @@ private function buyClothes(itype:ItemType):void {
 	else if(player.hasVagina()) outputText("rub against your outer lips");
 	else outputText("slip a finger along your crotch");
 	outputText(" more than a few times.  You could swear you catch her licking her lips when she stands up, but she quickly turns away, saying, \"<i>I've got one in the back that should fit perfectly!  Be right with you!</i>\"\n\n");
-	outputText("She disappears in the back for a few moments, then returns with " + itype.longName + " that looks as if it were tailor-made for you.\n\n", false);
-	outputText("\"<i>" + itype.value + " gems and it can be yours,</i>\" she says.  ", false);
+	outputText("She disappears in the back for a few moments, then returns with " + itype.longName + " that looks as if it were tailor-made for you.\n\n");
+	outputText("\"<i>" + itype.value + " gems and it can be yours,</i>\" she says.  ");
 	if(player.gems < itype.value) {
 		outputText("You count out your gems and realize it's beyond your price range.");
 		//Goto shop main menu
@@ -1561,7 +1589,7 @@ private function debitClothes(itype:ItemType):void {
 public function armorShop():void {
 	clearOutput();
 	spriteSelect(64);
-	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
+	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n");
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.");
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
 
@@ -1594,11 +1622,11 @@ private function armorBuy(itype:ItemType):void {
 	clearOutput();
 	if (itype is Armor) { 
 		outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n");
-		outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+		outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"");
 	}
 	else {
 		outputText("Yvonne gives you a serious look, then nods.  She pulls the shield off a rack and shows it to you.\n\n");
-		outputText("She smiles broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+		outputText("She smiles broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"");
 
 	}
 	if(player.gems < itype.value) {
@@ -1647,7 +1675,7 @@ public function weaponShop():void {
 private function weaponBuy(itype:ItemType):void {
 	clearOutput();
 	spriteSelect(80);
-	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
+	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.");
 		//Goto shop main menu
@@ -1672,25 +1700,28 @@ private function forgeScarredBlade():void {
 }
 
 private function forgeScarredBladeStart():void {
-	outputText("The blacksmith turns an appraising eye on you as you approach him without looking at any of the weapons on display.\n\n", true)
-	outputText("\"<i>What do you want?</i>\" he says, with characteristic gruffness.\n\n")
-	outputText("You pull out the dark purple crystal you received from Sheila and ask if it would be possible to alloy a blade from it.  He doesn't move to take it from your outstretched hand just yet, but you can see a hint of interest in the softening of his features.  \"<i>That's a lethicite.  Where'd you get it?</i>\" asks the smith.\n\n")
-	outputText("\"<i>Stole it from a demon,</i>\" you lie.\n\n")
-	outputText("He considers for a moment more before responding.  \"<i>Well done, then.</i>\"  At that, he takes the crystal gingerly from your hand.  \"<i>Never worked with this before.  I promise nothing, but come back in two weeks.  I should have an update for you.</i>\"\n\n")
+	clearOutput();
+	outputText("The blacksmith turns an appraising eye on you as you approach him without looking at any of the weapons on display.\n\n");
+	outputText("\"<i>What do you want?</i>\" he says, with characteristic gruffness.\n\n");
+	outputText("You pull out the dark purple crystal you received from Sheila and ask if it would be possible to alloy a blade from it.  He doesn't move to take it from your outstretched hand just yet, but you can see a hint of interest in the softening of his features.  \"<i>That's a lethicite.  Where'd you get it?</i>\" asks the smith.\n\n");
+	outputText("\"<i>Stole it from a demon,</i>\" you lie.\n\n");
+	outputText("He considers for a moment more before responding.  \"<i>Well done, then.</i>\"  At that, he takes the crystal gingerly from your hand.  \"<i>Never worked with this before.  I promise nothing, but come back in two weeks.  I should have an update for you.</i>\"\n\n");
 	flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] = model.time.days;
 	player.removeKeyItem("Sheila's Lethicite");	
 	doNext(weaponShop);
 }
 private function forgeScarredBladeMiddle():void {
-	outputText("The weaponsmith looks up from the forge as you enter.  \"<i>Oh, it's you.  I'm not done yet.</i>\"  With a gesture, he dismisses you.  You can only content yourself with looking at the finished products.\n\n", true);
+	clearOutput();
+	outputText("The weaponsmith looks up from the forge as you enter.  \"<i>Oh, it's you.  I'm not done yet.</i>\"  With a gesture, he dismisses you.  You can only content yourself with looking at the finished products.\n\n");
 	doNext(weaponShop);
 }
 private function forgeScarredBladeEnd():void {
-	outputText("The smith looks up as you enter, and you could swear the already-thin, no-nonsense line of his mouth becomes even tighter.  \"<i>It's you.  Come here.</i>\"\n\n", true)
-	outputText("Obligingly, you approach him, though the forge's heat is stifling.  \"<i>I finished.  The crystal impregnated the metal easily, but the blade itself... just have a look.</i>\"  He picks up a tatty scabbard from a pile of half-finished weapons and holds it to you - as he does, you notice for the first time the numerous bandages on his hands.  A bit wary, you unsheathe the blade halfway; it hisses against the oiled leather as you draw it.  The revealed form of the weapon is slim, curved rakishly, and glows with an umbral light against the backdrop of the lit forge, but its broad side is covered in deep lines.\n\n")
-	outputText("\"<i>Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade.</i>\"\n\n")
-	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n")
-	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n")
+	clearOutput();
+	outputText("The smith looks up as you enter, and you could swear the already-thin, no-nonsense line of his mouth becomes even tighter.  \"<i>It's you.  Come here.</i>\"\n\n");
+	outputText("Obligingly, you approach him, though the forge's heat is stifling.  \"<i>I finished.  The crystal impregnated the metal easily, but the blade itself... just have a look.</i>\"  He picks up a tatty scabbard from a pile of half-finished weapons and holds it to you - as he does, you notice for the first time the numerous bandages on his hands.  A bit wary, you unsheathe the blade halfway; it hisses against the oiled leather as you draw it.  The revealed form of the weapon is slim, curved rakishly, and glows with an umbral light against the backdrop of the lit forge, but its broad side is covered in deep lines.\n\n");
+	outputText("\"<i>Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade.</i>\"\n\n");
+	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n");
+	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n");
 	inventory.takeItem(weapons.SCARBLD, weaponShop);
 }
 
@@ -1747,7 +1778,7 @@ public function jewelShopBuyBox():void {
 	clearOutput();
 	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)
 	{
-		outputText("<b>You already own a jewelry box!</b>", true)
+		outputText("<b>You already own a jewelry box!</b>");
 		doNext(jewelShopInside);
 		return;
 	}
@@ -1769,14 +1800,16 @@ public function jewelShopBuyBox():void {
 public function jewelShopBuyBoxYes():void {
 	player.gems -= 500;
 	statScreenRefresh();
-	outputText("You hand over five hundred gems to the lizan. ", true);
+	clearOutput();
+	outputText("You hand over five hundred gems to the lizan. ");
 	outputText("He then exclaims\"<i>Sold!</i>\" as he hands over the jewelry box to you. You take your time to set the combination and memorize it should you need to access your jewelry box.\n\n");
-	outputText("<b>Gained Key Item: Jewelry Box!</b>", false)
+	outputText("<b>Gained Key Item: Jewelry Box!</b>");
 	player.createKeyItem("Equipment Storage - Jewelry Box", 0, 0, 0, 0);
 	doNext(jewelShopInside);
 }	
 public function jewelShopBuyBoxNo():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
 	outputText("\"<i>Very well. Let me know if you've changed your mind,</i>\" he says.");
 	doNext(jewelShopInside);
 }	
@@ -1799,18 +1832,20 @@ public function jewelShopBuyStatue():void {
 public function jewelShopBuyStatueYes():void {
 	player.gems -= 2000;
 	statScreenRefresh();
-	outputText("You buy the gold statue and pocket it in your backpack.", false)
+	clearOutput();
+	outputText("You buy the gold statue and pocket it in your backpack.");
 	inventory.takeItem(useables.GLDSTAT, jewelShopInside);
 }	
 public function jewelShopBuyStatueNo():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
 	outputText("\"<i>Very well. Let me know if you've changed your mind,</i>\" he says.");
 	doNext(jewelShopInside);
 }	
 
 private function jewelBuy(itype:ItemType):void {
 	clearOutput();
-	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"", false);
+	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"");
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.");
 		//Goto shop main menu
@@ -1877,14 +1912,15 @@ public function carpentryShopBuyNails():void {
 		addButton(14, "Back", carpentryShopInside)
 	}
 	else {
-		outputText("You ask him if he has nails for sale. He replies \"<i>I do. But I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
+		outputText("You ask him if he has nails for sale. He replies \"<i>I do. But I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ");
 		doNext(carpentryShopInside);
 	}
 }
 
 private function carpentryShopBuyNailsAmount(amount:int):void {
 	nails = amount;
-	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 2) + " gems, please.</i>\" \n\nDo you buy the nails?", true);
+	clearOutput();
+	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 2) + " gems, please.</i>\" \n\nDo you buy the nails?");
 	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
 }
 
@@ -1910,19 +1946,20 @@ private function carpentryShopBuyNailsYes():void {
 			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopBuyNails);
 }
 
 //Buy wood
 public function carpentryShopBuyWood():void {
-	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n", true);
+	clearOutput();
+	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900", false)
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300", false)
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
@@ -1935,18 +1972,20 @@ public function carpentryShopBuyWood():void {
 
 private function carpentryShopBuyWoodAmount(amount:int):void {
 	wood = amount;
-	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 10) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
+	clearOutput();
+	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 10) + " gems, please.</i>\" \n\nDo you buy the wood?");
 	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
 }
 
 private function carpentryShopBuyWoodYes():void {
+	clearOutput();
 	if (player.gems >= (wood * 10))
 	{
 		player.gems -= (wood * 10);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
-		outputText("You hand over " + (wood * 10) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		outputText("You hand over " + (wood * 10) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
 			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900) * 10);
@@ -1960,19 +1999,20 @@ private function carpentryShopBuyWoodYes():void {
 			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopBuyWood);
 }
 
 //Buy Stones
 public function carpentryShopBuyStone():void {
-	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 20 gems per stone.</i>\" \n\n", true);
+	clearOutput();
+	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 20 gems per stone.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900", false)
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300", false)
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
@@ -1985,18 +2025,20 @@ public function carpentryShopBuyStone():void {
 
 private function carpentryShopBuyStoneAmount(amount:int):void {
 	stone = amount;
-	outputText("You ask him for " + amount + " stones. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the stones?", true);
+	clearOutput();
+	outputText("You ask him for " + amount + " stones. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the stones?");
 	doYesNo(carpentryShopBuyStoneYes, carpentryShopBuyStone);
 }
 
 private function carpentryShopBuyStoneYes():void {
+	clearOutput();
 	if (player.gems >= (stone * 20))
 	{
 		player.gems -= (stone * 20);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += stone;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
-		outputText("You hand over " + (stone * 20) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		outputText("You hand over " + (stone * 20) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
 			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900) * 10);
@@ -2010,14 +2052,15 @@ private function carpentryShopBuyStoneYes():void {
 			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopBuyStone);
 }
 
 //Sell Nails
 public function carpentryShopSellNails():void {
-	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n", true);
+	clearOutput();
+	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
 	}
@@ -2036,16 +2079,18 @@ public function carpentryShopSellNails():void {
 
 private function carpentryShopSellNailsAmount(amount:int):void {
 	nails = amount;
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?", true);
+	clearOutput();
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?");
 	doYesNo(carpentryShopSellNailsYes, carpentryShopSellNails);
 }
 
 private function carpentryShopSellNailsYes():void {
+	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= nails)
 	{
 		player.gems += nails;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
-		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n", true);
+		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
 		}
@@ -2053,19 +2098,20 @@ private function carpentryShopSellNailsYes():void {
  		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopSellNails);
 }
 
 //Sell wood
 public function carpentryShopSellWood():void {
-	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of five gems per piece.</i>\" \n\n", true);
+	clearOutput();
+	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of five gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900", false)
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300", false)
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
@@ -2078,16 +2124,18 @@ public function carpentryShopSellWood():void {
 
 private function carpentryShopSellWoodAmount(amount:int):void {
 	wood = amount;
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 5) + " gems.</i>\" \n\nDo you sell the wood?", true);
+	clearOutput();
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 5) + " gems.</i>\" \n\nDo you sell the wood?");
 	doYesNo(carpentryShopSellWoodYes, carpentryShopSellWood);
 }
 
 private function carpentryShopSellWoodYes():void {
+	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= wood)
 	{
 		player.gems += (wood * 5);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
-		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 5) + " gems,</i>\" he says.\n\n", true);
+		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 5) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
 		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
 		}
@@ -2095,19 +2143,20 @@ private function carpentryShopSellWoodYes():void {
 		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopSellWood);
 }
 
 //Sell Stones
 public function carpentryShopSellStone():void {
-	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of ten gems per piece.</i>\" \n\n", true);
+	clearOutput();
+	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of ten gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900", false)
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300", false)
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
@@ -2120,16 +2169,18 @@ public function carpentryShopSellStone():void {
 
 private function carpentryShopSellStoneAmount(amount:int):void {
 	stone = amount;
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 10) + " gems.</i>\" \n\nDo you sell the stones?", true);
+	clearOutput();
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 10) + " gems.</i>\" \n\nDo you sell the stones?");
 	doYesNo(carpentryShopSellStoneYes, carpentryShopSellStone);
 }
 
 private function carpentryShopSellStoneYes():void {
+	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stone)
 	{
 		player.gems += (stone * 10);
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
-		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 10) + " gems,</i>\" he says.\n\n", true);
+		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 10) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
 		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
 		}
@@ -2137,21 +2188,22 @@ private function carpentryShopSellStoneYes():void {
 		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
 		}
 	}
-	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"", true);
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"");
 	statScreenRefresh();
 	doNext(carpentryShopSellStone);
 }
 
 //Buy toolbox
 public function carpentryShopBuySet():void {
+	clearOutput();
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
 	{
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 1) flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] = 1;
-		outputText("<b>You already own a set of carpentry tools!</b>", true)
+		outputText("<b>You already own a set of carpentry tools!</b>");
 		doNext(carpentryShopInside);
 		return;
 	}
-	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n", true);
+	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n");
 	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
 	outputText("Do you buy it?");
 	if (player.gems >= 200)
@@ -2167,9 +2219,10 @@ public function carpentryShopBuySet():void {
 
 public function carpentryShopBuySetYes():void {
 	player.gems -= 200;
-	outputText("You hand over two hundred gems to the shopkeeper. ", true);
+	clearOutput();
+	outputText("You hand over two hundred gems to the shopkeeper. ");
 	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n");
-	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
+	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>");
 	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
 	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] = 1;
 	statScreenRefresh();
@@ -2177,20 +2230,22 @@ public function carpentryShopBuySetYes():void {
 }
 
 public function carpentryShopBuySetNo():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
 	outputText("\"<i>Suit yourself,</i>\" he says as you put the box of tools back where it was.");
 	doNext(carpentryShopInside);
 }
 
 //Nails Box
 public function carpentryShopBuySet2():void {
+	clearOutput();
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
 	{
-		outputText("<b>You already own box for nails!</b>", true)
+		outputText("<b>You already own box for nails!</b>");
 		doNext(carpentryShopInside);
 		return;
 	}
-	outputText("You walk around for a while until you see a wooden box. It's similar to the one you owns already. Asking zebra owner about it purpose he saying it's to keep nails that couldn't be keep inside toolbox. Exactly what you need in case building something will need more nails than your toolbox can hold. \n\n", true);
+	outputText("You walk around for a while until you see a wooden box. It's similar to the one you owns already. Asking zebra owner about it purpose he saying it's to keep nails that couldn't be keep inside toolbox. Exactly what you need in case building something will need more nails than your toolbox can hold. \n\n");
 	outputText("\"<i>Fifty gems and it's all yours,</i>\" the shopkeeper says.\n\n");
 	outputText("Do you buy it?");
 	if (player.gems >= 50)
@@ -2206,9 +2261,10 @@ public function carpentryShopBuySet2():void {
 
 public function carpentryShopBuySet2Yes():void {
 	player.gems -= 50;
-	outputText("You hand over fifty gems to the shopkeeper. ", true);
+	clearOutput();
+	outputText("You hand over fifty gems to the shopkeeper. ");
 	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to been able store much more than two hundred of nails that you can use for building stuff without need of traveling to Tel'Adre in case of nails shortage! \n\n");
-	outputText("<b>Gained Key Item: Nail's Box!</b>", false)
+	outputText("<b>Gained Key Item: Nail's Box!</b>");
 	player.createKeyItem("Nail's Box", 0, 0, 0, 0);
 	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
 	statScreenRefresh();
@@ -2216,20 +2272,22 @@ public function carpentryShopBuySet2Yes():void {
 }
 
 public function carpentryShopBuySet2No():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
 	outputText("\"<i>Suit yourself,</i>\" he says as you put the nails box back where it was.");
 	doNext(carpentryShopInside);
 }
 
 //Stone Buildings
 public function carpentryShopBuySet3():void {
+	clearOutput();
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5)
 	{
-		outputText("<b>You already own this guide!</b>", true)
+		outputText("<b>You already own this guide!</b>");
 		doNext(carpentryShopInside);
 		return;
 	}
-	outputText("You walk around for a while until you see leather-bound book. It's titled 'Stone Building Guide' and briefly looking over contest you notice is about how to use stone along few other materials to make stronger than wooden structures. What is more interesting it even has project instructions for at lest few things that you think will be good to have constructed in camp! Just what you need to upgrade your steady growning settlment to next 'civilization' level. \n\n", true);
+	outputText("You walk around for a while until you see leather-bound book. It's titled 'Stone Building Guide' and briefly looking over contest you notice is about how to use stone along few other materials to make stronger than wooden structures. What is more interesting it even has project instructions for at lest few things that you think will be good to have constructed in camp! Just what you need to upgrade your steady growning settlment to next 'civilization' level. \n\n");
 	outputText("\"<i>One hundred gems and it's all yours,</i>\" as usual the shopkeeper says.\n\n");
 	outputText("Do you buy it?");
 	if (player.gems >= 100)
@@ -2244,10 +2302,11 @@ public function carpentryShopBuySet3():void {
 }
 
 public function carpentryShopBuySet3Yes():void {
+	clearOutput();
 	player.gems -= 100;
-	outputText("You hand over a hundred gems to the shopkeeper. ", true);
+	outputText("You hand over a hundred gems to the shopkeeper. ");
 	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have guide to building stone structures! \n\n");
-	outputText("<b>Gained Key Item: Stone Building Guide!</b>", false)
+	outputText("<b>Gained Key Item: Stone Building Guide!</b>");
 	player.createKeyItem("Stone Building Guide", 0, 0, 0, 0);
 	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
 	statScreenRefresh();
@@ -2255,7 +2314,8 @@ public function carpentryShopBuySet3Yes():void {
 }
 
 public function carpentryShopBuySet3No():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
 	outputText("\"<i>Suit yourself,</i>\" he says as you put the book back where it was.");
 	doNext(carpentryShopInside);
 }
@@ -2307,7 +2367,7 @@ public function gymDesc():void {
 	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)
 	outputText("  There's a centauress in a tank-top just inside the doorway with huge, rounded melons and perky nipples, but she merely coughs to get you to look up and says, \"<i>");
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.");
-	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"", false);
+	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"");
 
 	if(player.gems < 10 && flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("\n\n<b>You reach into your pockets for the fee and come up empty.  It looks like you don't have enough money to use the equipment or meet anyone.  Damn!</b>");
@@ -2420,7 +2480,7 @@ private function weightLifting():void {
 	if(player.tou < 40) dynStats("tou", .3);
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)), false);
+	outputText(player.modTone(85,5+rand(5)));
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
@@ -2459,7 +2519,7 @@ private function goJogging():void {
 	//(<40 tou)
 	else if(player.tou < 40) outputText("but your performance isn't that great.  You nearly stop jogging a few times but manage to push through until you're completely exhausted.");
 	//(<60 tou)
-	else if(player.tou < 60) outputText("and you do quite well.  You jog around for nearly an hour, working up a healthy lather of sweat.  Even your " + player.legs() + " tingle and burn with exhaustion.", false);
+	else if(player.tou < 60) outputText("and you do quite well.  You jog around for nearly an hour, working up a healthy lather of sweat.  Even your " + player.legs() + " tingle and burn with exhaustion.");
 	//(<80 tou)
 	else if(player.tou < 80) outputText("and it doesn't faze you in the slightest.  You run lap after lap at a decent clip, working yourself until you're soaked with sweat and fairly tired.");
 	//(<90 tou)
@@ -2472,46 +2532,46 @@ private function goJogging():void {
 
 	//If butt is over 15 guaranteed reduction
 	if(player.buttRating >= 15) {
-		outputText("\n\nAll that running must have done some good, because your " + buttDescript() + " feels a little less bouncy.", false);
+		outputText("\n\nAll that running must have done some good, because your " + buttDescript() + " feels a little less bouncy.");
 		player.buttRating--;
 	}
 	else {
 		if(player.buttRating >= 10 && rand(3) == 0) {
-			outputText("\n\nThe jogging really helped trim up your " + buttDescript() + ".", false);
+			outputText("\n\nThe jogging really helped trim up your " + buttDescript() + ".");
 			player.buttRating--;
 		}
 		else if(player.buttRating >= 5 && rand(3) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.", false);
+			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
 			player.buttRating--;
 		}
 		else if(player.buttRating > 1 && rand(4) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.", false);
+			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
 			player.buttRating--;
 		}
 	}//If hips is over 15 guaranteed reduction
 	if(player.hipRating >= 15) {
-		outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.", false);
+		outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.");
 		player.hipRating--;
 	}
 	else {
 		if(player.hipRating >= 10 && rand(3) == 0) {
-			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.", false);
+			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.");
 			player.hipRating--;
 		}
 		else if(player.hipRating >= 5 && rand(3) == 0) {
-			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.", false);
+			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.");
 			player.hipRating--;
 		}
 		else if(player.hipRating > 1 && rand(4) == 0) {
-			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.", false);
+			outputText("\n\nIt feels like your " + hipDescript() + " have shed some pounds and narrowed.");
 			player.hipRating--;
 		}
 	}
 
 	//Thickness decrease!
-	outputText(player.modThickness(1,5+rand(2)), false);
+	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
-	outputText(player.modTone(100,2+rand(4)), false);
+	outputText(player.modTone(100,2+rand(4)));
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
@@ -2527,7 +2587,7 @@ private function yaraSex(girl:Boolean = true):void {
 	clearOutput();
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty");
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText(" despite the guilty thrill");
-	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
+	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n");
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?");
 	//[not at all] [yeah baby]
@@ -2564,24 +2624,24 @@ private function letsDoYaraSex(girl:Boolean = true):void {
 	outputText(", neatly silencing you with the lust-filled fires simmering in her eyes.  \"<i>Call it quality testing,</i>\" she purrs.  Her free hand runs up and down your inner thigh, the ticklish teasing nearly making your head spin.  Licking her lips in anticipation, Yara wiggles out of her clothes and clambers onto the chair, kneeling on the armrests.  Due to her awkward posture, you find your gaze drifting to her wide-spread legs.  Nestled there, twinkling with a radiant luster, is a golden ring, looped through her already-throbbing clit.  A blush darkens her cheeks as she notices your stare, but she seems almost empowered by it.\n\n");
 
 	outputText("Yara's free hand slides down her belly - past the stud in her navel - down to her box.  Using two fingers, she spreads her lips apart, giving you a great view of both her glistening button-piercing and the fleshy recesses past it.  She bites her bottom lip gently");
-	if(!girl && player.hasCock()) outputText(" as your " + cockDescript(x) + " rises to attention, her eyes fixed upon the stiffened tool.  You resist the urge to grab her thin-yet-girlish hips and power into her right then and there, curious enough to allow her teasing.", false);
+	if(!girl && player.hasCock()) outputText(" as your " + cockDescript(x) + " rises to attention, her eyes fixed upon the stiffened tool.  You resist the urge to grab her thin-yet-girlish hips and power into her right then and there, curious enough to allow her teasing.");
 	else outputText(" as a growing puddle of love stains the cushioned chair.  It takes most of your power to not drag her down and force her face into your box.");
 	outputText("\n\n");
 
 	outputText("She leans forward, planting you with a wet and lingering kiss.  She moves lower, kissing ");
 	if(player.biggestTitSize() < 1) outputText("your chest");
 	else outputText("your nipples, one at a time");
-	outputText(" and smooching your belly.  Even with her racially characteristic flexibility, however, she's not able to get any lower from that angle.  \"<i>Hold this, dear,</i>\" she says somewhat snarkily, pivoting around and resting her ass against your " + chestDesc() + ".  In this new posture, Yara can easily have her way with your junk, and by the way her wagging tail keeps bopping you in the face you can tell she's excited.\n\n", false);
+	outputText(" and smooching your belly.  Even with her racially characteristic flexibility, however, she's not able to get any lower from that angle.  \"<i>Hold this, dear,</i>\" she says somewhat snarkily, pivoting around and resting her ass against your " + chestDesc() + ".  In this new posture, Yara can easily have her way with your junk, and by the way her wagging tail keeps bopping you in the face you can tell she's excited.\n\n");
 
 	outputText("Not content with simple penetration, it seems, the cat girl gets to work.");
-	if(player.balls > 0) outputText("  Her dexterous fingertips brush against your " + ballsDescriptLight() + ", light and fluttery strokes that send shivers coursing through you.  The near-lack of contact is at least as titillating as the less-subtle Marethians you've come across.", false);
+	if(player.balls > 0) outputText("  Her dexterous fingertips brush against your " + ballsDescriptLight() + ", light and fluttery strokes that send shivers coursing through you.  The near-lack of contact is at least as titillating as the less-subtle Marethians you've come across.");
 	outputText("  She scoots forward a bit, dragging her soaking cunt down your chest in an effort to reach your crotch.\n\n");
 
 	//male
 	if(!girl && player.hasCock()) {
-		outputText("Yara's pursed lips touch down upon your cockhead, her head tilting from side to side as she vexingly and repeatedly kisses your " + cockDescript(x) + ".  However, she abruptly pauses, glancing sidelong at you expectantly.  When you don't immediately respond, she huffs a sigh - onto your dick - and raises her hips level with your nose.  After momentarily getting lost in the bouncing of her tight-yet-jiggly cheeks, you get the message, leaning forward and giving her puffy sex a long and lingering lick.  You're rewarded with a low-pitched and very satisfied groan.  Though you go in for another taste, the shining ring looped through her joy-buzzer attracts your oral attention like a magnet.  Gently as a newborn kitten, your teeth close down on the clit-embedded trinket.  Yara goes absolutely stiff as you begin to softly tug the piercing around, neatly paralyzed by the sensitivity.  Indistinguishable mewling tumbles from her mouth as she attempts to attune herself to your yanking antics.  Her lithe frame spasms in ecstasy, forcing you to release your grip on her, lest something unfortunate happen to her undercarriage.\n\n", false);
+		outputText("Yara's pursed lips touch down upon your cockhead, her head tilting from side to side as she vexingly and repeatedly kisses your " + cockDescript(x) + ".  However, she abruptly pauses, glancing sidelong at you expectantly.  When you don't immediately respond, she huffs a sigh - onto your dick - and raises her hips level with your nose.  After momentarily getting lost in the bouncing of her tight-yet-jiggly cheeks, you get the message, leaning forward and giving her puffy sex a long and lingering lick.  You're rewarded with a low-pitched and very satisfied groan.  Though you go in for another taste, the shining ring looped through her joy-buzzer attracts your oral attention like a magnet.  Gently as a newborn kitten, your teeth close down on the clit-embedded trinket.  Yara goes absolutely stiff as you begin to softly tug the piercing around, neatly paralyzed by the sensitivity.  Indistinguishable mewling tumbles from her mouth as she attempts to attune herself to your yanking antics.  Her lithe frame spasms in ecstasy, forcing you to release your grip on her, lest something unfortunate happen to her undercarriage.\n\n");
 
-		outputText("As soon as you release her from the mind-numbing grasp, she whips her hips forward - spattering your " + player.armorName + " with her downpour of girlcum in the process - and leaning back, hastily lining herself up with your " + cockDescript(x) + ".  Only hesitating for a second to leak a bit of lubricant onto your eager shaft, she plummets downwards, not stopping until her ass slams against your pelvis.\n\n", false);
+		outputText("As soon as you release her from the mind-numbing grasp, she whips her hips forward - spattering your " + player.armorName + " with her downpour of girlcum in the process - and leaning back, hastily lining herself up with your " + cockDescript(x) + ".  Only hesitating for a second to leak a bit of lubricant onto your eager shaft, she plummets downwards, not stopping until her ass slams against your pelvis.\n\n");
 
 		outputText("Yara takes total control, her death-grip on the armrests giving her full coital maneuverability.  Despite the easy entry, you can't believe how well her sopping-wet folds squeeze against you.  For a long while the only sounds heard are the slapping of her cheeks and the studded-up cat girl's halting pants of pleasure.  \"<i>I wanna say... your new piercing... works like a charm,</i>\" she mutters between throaty groans.\n\n");
 
@@ -2593,9 +2653,9 @@ private function letsDoYaraSex(girl:Boolean = true):void {
 		//light and medium
 		if(player.cumQ() < 500) outputText("Yara's entire frame spasms as your load paints her private passage with snowy-white seed.  The cat girl writhes happily, arching her spine so far back your eyes nearly meet.\n\nYara dismounts your dick and hops to the ground in one fluid movement.");
 		//heavy
-		else if(player.cumQ() <= 1500) outputText("Yara's belly visibly plumps with the quantity of cum you pour into her, the extra weight bending her over to rest heavily against your " + player.leg() + ".  She purrs happily, patting her distended gut even while the tremors of her own orgasm run through her.\n\nYara lifts herself off you, pressing a hand against her tummy as she somewhat ungracefully steps off the chair.", false);
+		else if(player.cumQ() <= 1500) outputText("Yara's belly visibly plumps with the quantity of cum you pour into her, the extra weight bending her over to rest heavily against your " + player.leg() + ".  She purrs happily, patting her distended gut even while the tremors of her own orgasm run through her.\n\nYara lifts herself off you, pressing a hand against her tummy as she somewhat ungracefully steps off the chair.");
 		//special (super-big)
-		else outputText("Her low-pitched ecstatic moans swiftly escalate to piercing shrieks as her taut belly quickly balloons to roughly beach ball-sized in moments.  With a huge effort, she manages to haul herself off your semen-pumping staff, falling back against you.  Sighing contentedly, Yara nestles herself into your " + chestDesc() + ", getting comfortable despite the seed drizzling from her overstuffed nethers.  You just sit there for a few minutes, waiting patiently as your ejaculatory rampage ceases.\n\nYara makes a noble attempt to rise that is ultimately thwarted by her huge fluid-filled belly.  Casting a sidelong sheepish grin at you, she giggles nervously.  \"<i>Mind helping me out here, friend?</i>\" she says after a moment's hesitation.  With your assistance, she rises and stands on wobbling feet.  She tries her best to compose herself with your cum still streaming down her thighs, the flow only intensifying as she impatiently presses against the bloated belly.", false);
+		else outputText("Her low-pitched ecstatic moans swiftly escalate to piercing shrieks as her taut belly quickly balloons to roughly beach ball-sized in moments.  With a huge effort, she manages to haul herself off your semen-pumping staff, falling back against you.  Sighing contentedly, Yara nestles herself into your " + chestDesc() + ", getting comfortable despite the seed drizzling from her overstuffed nethers.  You just sit there for a few minutes, waiting patiently as your ejaculatory rampage ceases.\n\nYara makes a noble attempt to rise that is ultimately thwarted by her huge fluid-filled belly.  Casting a sidelong sheepish grin at you, she giggles nervously.  \"<i>Mind helping me out here, friend?</i>\" she says after a moment's hesitation.  With your assistance, she rises and stands on wobbling feet.  She tries her best to compose herself with your cum still streaming down her thighs, the flow only intensifying as she impatiently presses against the bloated belly.");
 
 		outputText("\n\n\"<i>Works like a charm,</i>\" she concludes as you both redress");
 		if(player.cumQ() > 1500) outputText(", Yara trying her best to fit her clothes over the bump in her midsection");
@@ -2606,12 +2666,12 @@ private function letsDoYaraSex(girl:Boolean = true):void {
 	else {
 		outputText("A duo of errant forefingers run along the perimeter of your feminine fortress, your signal to prepare for a siege.  Yara reaches down off the side of your seat, pushing on a lever that sends the back of the chair down to about a 30º angle.  She grasps for the armrests of the chair next, promptly lifting her body up and going into what looks like a forward somersault.  Before you can complement the feat, her legs fly up either side of your head.   The only things to have made contact were her nimble feet, gently stroking their way up from your belly, past your chest, off of your shoulders and soaring beyond the back of the chair.  The feline acrobat calls for you to lay your hands open at the sides of the chair, an order you fulfill with due haste.  She wastes no time in seizing your upper arms, causing her body to slide forward off of you.  You return the favor by clasping onto her as well in the same manner, stopping her descent.\n\n");
 
-		outputText("Trying to parse out the scene at play here is a fool's errand.  Yara must have done this before as your two sprawled out bodies have stopped in just the right fashion to make both of your fleshy orifices in plain view of one another's faces.  Air escapes your pursed lips as the \"<i>quality testing</i>\" commences on your " + vaginaDescript() + ", your kitty comrade going in tongue first towards your silken fringes.  ", false);
+		outputText("Trying to parse out the scene at play here is a fool's errand.  Yara must have done this before as your two sprawled out bodies have stopped in just the right fashion to make both of your fleshy orifices in plain view of one another's faces.  Air escapes your pursed lips as the \"<i>quality testing</i>\" commences on your " + vaginaDescript() + ", your kitty comrade going in tongue first towards your silken fringes.  ");
 		if(player.wetness() >= 3) outputText("She may as well be licking a melting popsicle with how wet your snatch is.");
 		else outputText("Your relatively dry perimeter makes for an easy target.");
 		outputText("  Not to be outdone, your ambitious tongue moves in as if it has everything to prove, mirroring your partner's efforts. Both of your lapping endeavors are periodically interrupted by moaning or slight gasps, your grasps on one another only growing more tense.\n\n");
 
-		outputText("Yara looks up - down in her case - at your " + clitDescript() + ", your feminine fragrance riling her up as if it were catnip. Your work on her box is interrupted as your pleasure buzzer gets the oral shebang of a lifetime, eliciting a knowing laugh from deep within your teammate's throat.  Yara's lucky you redouble your clamp on her arms rather than sending the poor woman sliding to the ground as your body writhes in satisfaction.  But this is war, and you'll be damned if you're weak enough to go straight for the crown jewel as she has. No, you go to town, redefining what it means to eat out a pussy.  Your laborious toil is rewarded as the kitten's assault on your button eases up.  Her hold begins to waver, however, forcing you to yank your prey towards you.  The movement pierces through her contentment, her armlock strengthening as the air fills with the sound of a duo of muffled moans.\n\n", false);
+		outputText("Yara looks up - down in her case - at your " + clitDescript() + ", your feminine fragrance riling her up as if it were catnip. Your work on her box is interrupted as your pleasure buzzer gets the oral shebang of a lifetime, eliciting a knowing laugh from deep within your teammate's throat.  Yara's lucky you redouble your clamp on her arms rather than sending the poor woman sliding to the ground as your body writhes in satisfaction.  But this is war, and you'll be damned if you're weak enough to go straight for the crown jewel as she has. No, you go to town, redefining what it means to eat out a pussy.  Your laborious toil is rewarded as the kitten's assault on your button eases up.  Her hold begins to waver, however, forcing you to yank your prey towards you.  The movement pierces through her contentment, her armlock strengthening as the air fills with the sound of a duo of muffled moans.\n\n");
 
 		outputText("Judging by the contortionist's wobbly embrace, you decide it's the perfect time to go in for the kill.  Yara stands no chance as you pounce for her pierced clit, your tongue lodging itself between the loop and her love-button.  It takes all of her willpower to maintain the offensive on your nub nexus while standing firm in her grasp on your arms.  Your oral tugging and teasing proves to be the victor, however, marked by the femspunk making its way right onto your face.  The cocktail combined with the orgasmic-enhanced last ditch effort by Yara on your nether regions triggers your own satisfying outburst.  The chain reaction ends in both your couplings faltering, sending the feline sliding headfirst for the floor.\n\n");
 

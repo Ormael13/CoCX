@@ -999,12 +999,12 @@ public function urtaMSpecials():void {
 private function berzerk():void {
 	clearOutput();
 	if(player.hasStatusEffect(StatusEffects.Berzerking)) {
-		outputText("You're already pretty goddamn mad!", true);
+		outputText("You're already pretty goddamn mad!");
 		menu();
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n", true);
+	outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
 	player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
 	kGAMECLASS.enemyAI();
 }
@@ -1066,9 +1066,9 @@ private function urtaComboAttack():void {
 	var damage:Number;
 	//Determine if dodged!
 	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80))) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.Attacks)) {
 			urtaComboAttack();
@@ -1143,10 +1143,10 @@ private function urtaComboAttack():void {
 	}
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -1225,9 +1225,9 @@ private function urtaSidewinder():void {
 	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n\n");
 		kGAMECLASS.enemyAI();
 		return;
@@ -1296,10 +1296,10 @@ private function urtaSidewinder():void {
 	}
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -1358,9 +1358,9 @@ private function urtaVaultAttack():void {
 	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
@@ -1434,10 +1434,10 @@ private function urtaVaultAttack():void {
 	}
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {

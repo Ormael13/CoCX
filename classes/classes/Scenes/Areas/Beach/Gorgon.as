@@ -68,9 +68,9 @@ package classes.Scenes.Areas.Beach
 		public function gorgonPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
-			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
+			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
-				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
+				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 6) {
 					//stats(0,0,-3,0,0,0,0,0);
 					player.spe -= 5;
@@ -102,7 +102,7 @@ package classes.Scenes.Areas.Beach
 		}
 		
 		public function gorgonConstrict():void {
-			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
+			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(4+rand(8));
@@ -117,7 +117,7 @@ package classes.Scenes.Areas.Beach
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(300)) {
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
