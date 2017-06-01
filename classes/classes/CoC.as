@@ -12,6 +12,8 @@ package classes
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
+import flash.utils.setTimeout;
+
 // This file contains most of the persistent gamestate flags.
 	import classes.Scenes.Combat.Combat;
 	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
@@ -337,6 +339,7 @@ the text from being too boring.
 //No longer used:		public var itemSubMenu:Boolean;
 //No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
+		public var textHistory:Array;
 		public var currentText:String;
 
 		public var explored:Boolean;
@@ -579,7 +582,8 @@ the text from being too boring.
 
 			//The string holds all the "story" text, mainly used in engineCore
 			currentText = "";
-			//}endregion 
+			textHistory = [];
+			//}endregion
 
 			/**
 			 * Item variables
@@ -724,6 +728,18 @@ the text from being too boring.
 				mainViewManager.hideSprite();
 			}
 		}
+	}
+
+	public function outputHistory():void {
+		mainView.hideTestInputPanel();
+		clearOutputTextOnly();
+		var txt:String = textHistory.join("<br>");
+		textHistory = [];
+		rawOutputText(txt);
+		// On the next animation frame
+		setTimeout(function():void {
+			mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+		},0);
 	}
 }
 }

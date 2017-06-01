@@ -192,13 +192,21 @@ public function speech(output:String, speaker:String):void {
 }
 */
 
+public function clearOutputTextOnly(forget:Boolean=false):void {
+	if (!forget && currentText.length>0) {
+		textHistory.push(currentText);
+		while (textHistory.length > 20) textHistory.shift();
+	}
+	currentText = "";
+	mainView.clearOutputText();
+}
+
 /**
  * Clear the text on screen.
  */
 public function clearOutput():void {
 	forceUpdate();
-	currentText = "";
-	mainView.clearOutputText();
+	clearOutputTextOnly();
 	if(gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -235,6 +243,8 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 
 }
 
+
+
 /**
  * Output the text on main text interface.
  * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
@@ -269,10 +279,10 @@ public function outputText(output:String,
 		currentText += output;
 		//if(!debug) mainText.htmlText = currentText;
 	}
-	if(debug) 
+	/*if(debug)
 	{
 		mainView.setOutputText( currentText );
-	}
+	}*/
 
 }
 
@@ -941,7 +951,11 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
 	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
-	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
+	mainView.showBottomButton(pos, text,
+			function():void {
+				textHistory.push("<br>["+text+"]<br>");
+				callback();
+			}, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
 }

@@ -265,10 +265,9 @@ import classes.Scenes.Places.Ingnam;
 			kGAMECLASS.outputText(output, purgeText, parseAsMarkdown);
 		}
 		
-		protected function clearOutput():void
+		protected function clearOutput(forget:Boolean=false):void
 		{
-			kGAMECLASS.currentText = "";
-			kGAMECLASS.mainView.clearOutputText();
+			kGAMECLASS.clearOutputTextOnly(forget);
 		}
 		protected function displayHeader(string:String):void
 		{
