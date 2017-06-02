@@ -32,7 +32,7 @@ public function hideControls():void
 {
 	inputManager.HideBindingPane();
 	
-	settingsScreenMain();
+	gameSettings.settingsScreenMain();
 }
 
 public function resetControls():void

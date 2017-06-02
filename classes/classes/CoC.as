@@ -276,6 +276,7 @@ the text from being too boring.
 		public var perkMenu:PerkMenu = new PerkMenu();
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
+		public var gameSettings:GameSettings = new GameSettings();
 
 		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
@@ -742,5 +743,8 @@ the text from being too boring.
 			mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
 		},0);
 	}
+
+	public static const STAT_GAIN_CLASSIC:int = 0;
+	public static const STAT_GAIN_DAILY:int = 1;
 }
 }

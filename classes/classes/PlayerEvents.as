@@ -1042,10 +1042,11 @@ package classes {
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 			
 			if (getGame().model.time.hours > 23) { //Once per day
-				var sp:int = (player.statPerDayConst + player.statPerDayPerLevel*player.level);
-				if (sp > player.statPoints) {
-					player.statPoints = sp;
-					camp.setLevelButton(false);
+				if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
+					if (player.level > player.statPoints) {
+						player.statPoints = player.level;
+						camp.setLevelButton(false);
+					}
 				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
 				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {

@@ -76,10 +76,7 @@ use namespace kGAMECLASS;
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
 		public var ascensionPerkPoints:Number = 0;
-		public var statPerLevelUp:int     = 5;
-		public var statPerDayConst:int    = 0;
-		public var statPerDayPerLevel:int = 0;
-		
+
 		public var tempStr:Number = 0;
 		public var tempTou:Number = 0;
 		public var tempSpe:Number = 0;
