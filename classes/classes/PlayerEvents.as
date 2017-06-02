@@ -1042,6 +1042,11 @@ package classes {
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 			
 			if (getGame().model.time.hours > 23) { //Once per day
+				var sp:int = (player.statPerDayConst + player.statPerDayPerLevel*player.level);
+				if (sp > player.statPoints) {
+					player.statPoints = sp;
+					camp.setLevelButton(false);
+				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
 				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
 					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
@@ -1100,7 +1105,7 @@ package classes {
 						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
-					//reset hair growth multiplier and timer when 
+					//reset hair growth multiplier and timer when
 					//expired.
 					if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
 						flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 0;
@@ -1144,7 +1149,7 @@ package classes {
 			}
 			return needNext;
 		}
-		
+
 		public function timeChangeLarge():Boolean {
 			if (rand(4) == 0 && getGame().isHolidays() && player.gender > 0 && getGame().model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < getGame().date.fullYear) {
 				getGame().getAChristmasChicken();

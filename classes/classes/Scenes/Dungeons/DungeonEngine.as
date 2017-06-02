@@ -200,26 +200,7 @@ package classes.Scenes.Dungeons
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.hideMenuButton( MainView.MENU_DATA );
-			if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-				if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
-				{
-					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
-					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
-				}
-				else {
-					mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
-					if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-						kGAMECLASS.playerInfo.levelUpGo();
-						return;
-					}
-				}
-				mainView.showMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.showLevelUp();
-			}
-			else {
-				mainView.hideMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.hideLevelUp();
-			}
+			kGAMECLASS.camp.setLevelButton(true);
 		}
 		
 		/**

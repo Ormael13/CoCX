@@ -49,7 +49,7 @@ package classes.Scenes.Places
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
-			if (camp.setLevelButton()) return;
+			if (camp.setLevelButton(true)) return;
 			hideUpDown();
 			menu();
 			addButton(0, "Explore", exploreIngnam);

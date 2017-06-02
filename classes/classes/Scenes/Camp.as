@@ -573,7 +573,7 @@ private function doCamp():void { //Only called by playerMenu
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if (setLevelButton()) return;
+	if (setLevelButton(true)) return;
 	//Build main menu
 	var exploreEvent:Function = getGame().exploration.doExplore;
 	var placesEvent:Function = (placesKnown() ? places : null);
@@ -2718,10 +2718,10 @@ private function ascendForReal():void {
 	doNext(kGAMECLASS.charCreation.ascensionMenu);
 }
 
-public function setLevelButton():Boolean {
-	if ((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
-		{
+public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
+	var levelup:Boolean = player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap;
+	if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
+		if (!levelup) {
 			if (player.statPoints > 0) {
 				mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 				mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
@@ -2746,7 +2746,7 @@ public function setLevelButton():Boolean {
 			if (player.findPerk(PerkLib.UnlockId) >= 0) lust += 1;
 			if (lust > 0) mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
 			else mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + " and maximum Fatigue by " + fatigue + "; gain 5 attribute points and 1 perk points.";
-			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
+			if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 				getGame().playerInfo.levelUpGo();
 				return true; //True indicates that you should be routed to level-up.
 			}

@@ -1296,7 +1296,7 @@ package classes.Scenes.Places
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
 			//Level up
-			if (camp.setLevelButton()) return;
+			if (camp.setLevelButton(true)) return;
 			mainView.statsView.hideLevelUp();
 			//Set menus
 			menu();
