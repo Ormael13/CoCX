@@ -3617,7 +3617,7 @@ use namespace kGAMECLASS;
 		{
 			return [StatusEffects.KnowsArouse,StatusEffects.KnowsHeal,StatusEffects.KnowsMight,StatusEffects.KnowsCharge,StatusEffects.KnowsBlind,StatusEffects.KnowsWhitefire,StatusEffects.KnowsChargeA,StatusEffects.KnowsBlink,StatusEffects.KnowsBlizzard,StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt,StatusEffects.KnowsDarknessShard,StatusEffects.KnowsFireStorm,StatusEffects.KnowsIceRain]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
-						return this.hasStatusAffect(item);},this)
+						return this.hasStatusEffect(item);},this)
 					.length;
 		}
 
