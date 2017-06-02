@@ -475,7 +475,7 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8d2";
+			ver = "1.0.2_mod_Xianxia_0.8e??";
 			version = ver + " (<b></b>)";
 
 			//Indicates if building for mobile?
