@@ -14,7 +14,7 @@ package classes.Items.Undergarments
 		
 		public function RunedEbonweaveJock() 
 		{
-			super("R. Jock", "Rune Jock", "rune jock", "runed ebonweave jock", TYPE_LOWERWEAR, 1200, "A pair of comfortable undergarment. \n\nType: Undergarments (Lower)");
+			super("R. Jock", "Rune Jock", "rune jock", "runed ebonweave jock", TYPE_LOWERWEAR, 1200, "This jock is ebonweave, made from refined ebonbloom petals. This jock is comfortable and elastic, providing support while comfortably containing assets of any size. Adorning the front is a rune of lust, glowing with dark magic. \n\nType: Undergarment (Lower)");
 		}
 		
 		override public function playerEquip():Undergarment {
