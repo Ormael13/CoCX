@@ -167,10 +167,12 @@ public function loadScreenAIR():void
 	}
 	catch (error:Error)
 	{
-		outputText("Error reading save directory: " + airSaveDir.url + " (" + error.message + ")", true);
+		clearOutput();
+		outputText("Error reading save directory: " + airSaveDir.url + " (" + error.message + ")");
 		return;		
 	}
-	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
+	clearOutput();
+	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 	
 	var i:uint = 0;
 	for (var fileCount:uint = 0; fileCount < fileList.length; fileCount++)
@@ -232,7 +234,8 @@ public function getGameObjectFromFile(aFile:File):Object
 	}
 	catch (error:Error)
 	{
-		outputText("Failed to read save file, " + aFile.url + " (" + error.message + ")", true);
+		clearOutput();
+		outputText("Failed to read save file, " + aFile.url + " (" + error.message + ")");
 	}
 	return null;
  }
@@ -1189,13 +1192,15 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 					stream.open(airFile, FileMode.WRITE);
 					stream.writeBytes(bytes);
 					stream.close();
-					outputText("Saved to file: " + airFile.url, true);
+					clearOutput();
+					outputText("Saved to file: " + airFile.url);
 					doNext(playerMenu);
 				}
 				catch (error:Error)
 				{
 					backupAborted = true;
-					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")", true);
+					clearOutput();
+					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")");
 					doNext(playerMenu);
 				}
 			}
@@ -1203,7 +1208,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			{
 				file = new FileReference();
 				file.save(bytes, null);
-				outputText("Attempted to save to file.");//, true
+				clearOutput();
+				outputText("Attempted to save to file.");
 			}
 		}
 	}
