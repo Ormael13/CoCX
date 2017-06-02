@@ -7,9 +7,11 @@ package classes.Scenes.Areas.Forest
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.StatusEffects;
+	import classes.Items.MutationsHelper;
 
 	public class WorldTree extends BaseContent
 	{
+		public var mutations:MutationsHelper = new MutationsHelper();
 		
 		public function WorldTree() 
 		{
@@ -227,7 +229,56 @@ package classes.Scenes.Areas.Forest
 				}
 			}
 			//{hair exists, no leaves/tentacle hair: leaves/tentacle hair tf}
-			
+			if (player.hairColor == "green" && player.hairLength > 0 && (player.hairType != HAIR_LEAF && player.hairType != HAIR_GRASS && player.hairType != HAIR_ANEMONE) && !player.isGargoyle() && changes < changeLimit)
+			{
+				if (player.cor >= 66) {
+					outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
+					player.hairType = HAIR_ANEMONE;
+					player.hairLength = 5;
+					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+						outputText("  <b>(Your hair has stopped growing.)</b>");
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
+					}
+				}
+				if (player.cor >= 33 && player.cor < 66) {
+					if (rand(2) == 0) {
+						outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
+						player.hairType = HAIR_ANEMONE;
+						player.hairLength = 5;
+						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+							outputText("  <b>(Your hair has stopped growing.)</b>");
+							flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
+						}
+					}
+					else {
+						if (rand(2) == 0) {
+							outputText("\n\nYour [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
+							player.hairType = HAIR_GRASS;
+						}
+						else {
+							outputText("\n\nYour [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
+							player.hairType = HAIR_LEAF;
+						}
+					}
+				}
+				if (player.cor < 33) {
+					if (rand(2) == 0) {
+						outputText("\n\nYour [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
+						player.hairType = HAIR_GRASS;
+					}
+					else {
+						outputText("\n\nYour [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
+						player.hairType = HAIR_LEAF;
+					}
+				}
+				changes++;
+			}
+			//green hair
+			if (player.hairColor != "green" && !player.isGargoyle() && changes < changeLimit)
+			{
+				outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
+				player.hairColor = "green";
+			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
 				if (player.armType != ARM_TYPE_PLANT2 && changes < changeLimit) {
@@ -308,7 +359,19 @@ package classes.Scenes.Areas.Forest
 				changes++;
 			}
 			//Moss (fur)/else Bark skin
-			
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && player.faceType == FACE_PLANT_DRAGON) {
+				mutations.humanizeSkin();
+				changes++;
+			}
+			if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && changes < changeLimit && rand(2) == 0) {
+				if (rand(10) == 0) player.skinTone = "turquoise";
+				else {
+					if (rand(5) == 0) player.skinTone = "lime green";
+					else player.skinTone = "leaf green";
+				}
+				changes++;
+				outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		

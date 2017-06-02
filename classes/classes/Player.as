@@ -3103,13 +3103,17 @@ use namespace kGAMECLASS;
 			var yggdrasilCounter:Number = 0;
 			if (faceType == 29)
 				yggdrasilCounter += 2;
-			if (armType == 7 || armType == 18)
+			if ((hairType == 4 || hairType == 7 || hairType == 9) && hairColor == "green")
 				yggdrasilCounter++;
+			if (armType == 7 || armType == 18)
+				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both amrs and claws tf
 			//claws?
 
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
+			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
+				yggdrasilCounter++;//temporal fix for now till I put true skin tf to code tomorrow or day after tomorrow
 
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
 				yggdrasilCounter++;
@@ -4382,11 +4386,11 @@ use namespace kGAMECLASS;
 				maxLib += (100 * (1 + newGamePlusMod));
 			}
 			if (yggdrasilScore() >= 10) {
-				maxTou += (30 * (1 + newGamePlusMod));
-				maxSpe -= (10 * (1 + newGamePlusMod));
-				maxInt += (30 * (1 + newGamePlusMod));
-				maxLib -= (10 * (1 + newGamePlusMod));
-			}
+				maxTou += (40 * (1 + newGamePlusMod));
+				maxSpe -= (30 * (1 + newGamePlusMod));
+				maxInt += (80 * (1 + newGamePlusMod));
+				maxLib -= (40 * (1 + newGamePlusMod));
+			}//+50
 			if (deerScore() >= 4) {
 				maxSpe += (20 * (1 + newGamePlusMod));
 			}//+20/10-20

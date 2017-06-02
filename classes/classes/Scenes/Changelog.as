@@ -43,6 +43,15 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
@@ -81,6 +90,12 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
