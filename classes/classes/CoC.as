@@ -274,6 +274,7 @@ the text from being too boring.
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
 		public var perkMenu:PerkMenu = new PerkMenu();
+		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
 
 		public var perkTree:PerkTree = new PerkTree();
@@ -446,9 +447,9 @@ the text from being too boring.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
 			this.mainView.onAppearanceClick = playerAppearance.appearance;
 			this.mainView.onDataClick = saves.saveLoad;
-			this.mainView.onLevelClick = levelUpGo;
+			this.mainView.onLevelClick = playerInfo.levelUpGo;
 			this.mainView.onPerksClick = perkMenu.displayPerks;
-			this.mainView.onStatsClick = displayStats;
+			this.mainView.onStatsClick = playerInfo.displayStats;
 
 			// Set up all the messy global stuff:
 			
@@ -653,8 +654,8 @@ the text from being too boring.
 			// ******************************************************************************************
 
 			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
-			 
+			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.perkCbChangeHandler);
+
 			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 

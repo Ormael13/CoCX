@@ -32,7 +32,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
-			addButton(button++, "Perk Up", kGAMECLASS.perkBuyMenu);
+			addButton(button++, "Perk Up", kGAMECLASS.playerInfo.perkBuyMenu);
 		}
 		if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
@@ -363,5 +363,31 @@ public class PerkMenu extends BaseContent {
 		else addButtonDisabled(1,"Next");
 		addButton(9, "Back", playerMenu);
 	}
+	/* [INTERMOD: revamp]
+	 public function ascToleranceOption():void{
+	 clearOutput();
+	 menu();
+	 if (player.perkv2(PerkLib.AscensionTolerance) == 0){
+	 outputText("Corruption Tolerance is under effect, giving you " + player.corruptionTolerance() + " tolerance on most corruption events." +
+	 "\n\nYou can disable this perk's effects at any time.<b>Some camp followers may leave you immediately after doing this. Save beforehand!</b>");
+	 addButton(0, "Disable", disableTolerance);
+	 }else addButtonDisabled(0, "Disable", "The perk is already disabled.");
+	 if (player.perkv2(PerkLib.AscensionTolerance) == 1){
+	 outputText("Ascension Tolerance is not under effect. You may enable it at any time.");
+	 addButton(1, "Enable", enableTolerance);
+	 }else addButtonDisabled(1, "Enable", "The perk is already enabled.");
+	 addButton(4, "Back", displayPerks);
+	 }
+
+	 public function disableTolerance():void{
+	 player.setPerkValue(PerkLib.AscensionTolerance, 2, 1);
+	 ascToleranceOption();
+	 }
+	 public function enableTolerance():void{
+	 player.setPerkValue(PerkLib.AscensionTolerance, 2, 0);
+	 ascToleranceOption();
+	 }
+	 */
+
 }
 }

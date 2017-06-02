@@ -2747,14 +2747,14 @@ public function setLevelButton():Boolean {
 			if (lust > 0) mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
 			else mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + " and maximum Fatigue by " + fatigue + "; gain 5 attribute points and 1 perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-				kGAMECLASS.levelUpGo();
+				getGame().playerInfo.levelUpGo();
 				return true; //True indicates that you should be routed to level-up.
 			}
 			
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.playerInfo.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
 			mainView.statsView.hideLevelUp();
 		}
 	}

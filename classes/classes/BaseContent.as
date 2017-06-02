@@ -928,10 +928,6 @@ import classes.Scenes.Places.Ingnam;
 		protected function buttonIsVisible(index:int):Boolean {
 			return kGAMECLASS.buttonIsVisible(index);
 		}
-		
-		protected function levelUpGo():void {
-			return kGAMECLASS.levelUpGo();
-		}
 				
 		/**
 		 * PRIMO BULLSHIT FUNCTION ACCESS

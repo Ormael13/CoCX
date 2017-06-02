@@ -209,7 +209,7 @@ package classes.Scenes.Dungeons
 				else {
 					mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
 					if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-						kGAMECLASS.levelUpGo();
+						kGAMECLASS.playerInfo.levelUpGo();
 						return;
 					}
 				}

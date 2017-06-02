@@ -10,7 +10,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_STATS) && player.str > 0)
 		{
-			displayStats(undefined);
+			playerInfo.displayStats();
 		}
 	});
 
@@ -20,7 +20,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && player.str > 0)
 		{
-			levelUpGo(undefined);
+			playerInfo.levelUpGo();
 		}
 	});
 
