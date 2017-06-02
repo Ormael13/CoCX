@@ -691,75 +691,100 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		//Add
 		if (player.statPoints > 0) {
-			if ((player.str + player.tempStr) < maxes.str) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point to Strength.", "Add Strength");
-			if ((player.tou + player.tempTou) < maxes.tou) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
-			if ((player.spe + player.tempSpe) < maxes.spe) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
-			if ((player.inte + player.tempInt) < maxes.inte) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
-			if ((player.wis + player.tempWis) < maxes.wis) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point to Wisdom.", "Add Wisdom");
-			if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point to Libido.", "Add Libido");
+			if ((player.str + player.tempStr) < maxes.str) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point (5 points with Shift) to Strength.", "Add Strength");
+			if ((player.tou + player.tempTou) < maxes.tou) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point (5 points with Shift) to Toughness.", "Add Toughness");
+			if ((player.spe + player.tempSpe) < maxes.spe) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
+			if ((player.inte + player.tempInt) < maxes.inte) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
+			if ((player.wis + player.tempWis) < maxes.wis) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
+			if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
 		}
 		//Subtract
-		if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point from Strength.", "Subtract Strength");
-		if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou", null, null, "Subtract 1 point from Toughness.", "Subtract Toughness");
-		if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe", null, null, "Subtract 1 point from Speed.", "Subtract Speed");
-		if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int", null, null, "Subtract 1 point from Intelligence.", "Subtract Intelligence");
-		if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point from Wisdom.", "Subtract Wisdom");
-		if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point from Libido.", "Subtract Libido");
+		if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point (5 points with Shift) from Strength.", "Subtract Strength");
+		if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou", null, null, "Subtract 1 point (5 points with Shift) from Toughness.", "Subtract Toughness");
+		if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe", null, null, "Subtract 1 point (5 points with Shift) from Speed.", "Subtract Speed");
+		if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int", null, null, "Subtract 1 point (5 points with Shift) from Intelligence.", "Subtract Intelligence");
+		if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point (5 points with Shift) from Wisdom.", "Subtract Wisdom");
+		if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point (5 points with Shift) from Libido.", "Subtract Libido");
 
 		addButton(13, "Reset", resetAttributes);
 		addButton(14, "Done", finishAttributes);
 	}
 
 	private function addAttribute(attribute:String):void {
+		var maxes:Object = player.getAllMaxStats();
+		var n:int=1;
+		var m:int;
+		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;
+		if (n > player.statPoints) n = player.statPoints;
 		switch (attribute) {
 			case "str":
-				player.tempStr++;
+				m = maxes.str - int(player.str + player.tempStr);
+				if (m < n) n = m;
+				player.tempStr+=n;
 				break;
 			case "tou":
-				player.tempTou++;
+				m = maxes.tou - int(player.tou + player.tempTou);
+				if (m < n) n = m;
+				player.tempTou+=n;
 				break;
 			case "spe":
-				player.tempSpe++;
+				m = maxes.spe - int(player.spe + player.tempSpe);
+				if (m < n) n = m;
+				player.tempSpe+=n;
 				break;
 			case "int":
-				player.tempInt++;
+				m = maxes.inte - int(player.inte + player.tempInt);
+				if (m < n) n = m;
+				player.tempInt+=n;
 				break;
 			case "wis":
-				player.tempWis++;
+				m = maxes.wis - int(player.wis + player.tempWis);
+				if (m < n) n = m;
+				player.tempWis+=n;
 				break;
 			case "lib":
-				player.tempLib++;
+				m = maxes.lib - int(player.lib + player.tempLib);
+				if (m < n) n = m;
+				player.tempLib+=n;
 				break;
 			default:
-				player.statPoints++; //Failsafe
+				n=0; //Failsafe
 		}
-		player.statPoints--;
+		player.statPoints-=n;
 		attributeMenu();
 	}
 	private function subtractAttribute(attribute:String):void {
+		var n:int=1;
+		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;
 		switch (attribute) {
 			case "str":
-				player.tempStr--;
+				if (player.tempStr < n) n = player.tempStr;
+				player.tempStr-=n;
 				break;
 			case "tou":
-				player.tempTou--;
+				if (player.tempTou < n) n = player.tempTou;
+				player.tempTou-=n;
 				break;
 			case "spe":
-				player.tempSpe--;
+				if (player.tempSpe < n) n = player.tempSpe;
+				player.tempSpe-=n;
 				break;
 			case "int":
-				player.tempInt--;
+				if (player.tempInt < n) n = player.tempInt;
+				player.tempInt-=n;
 				break;
 			case "wis":
-				player.tempWis--;
+				if (player.tempWis < n) n = player.tempWis;
+				player.tempWis-=n;
 				break;
 			case "lib":
+				if (player.tempLib < n) n = player.tempLib;
 				player.tempLib--;
 				break;
 			default:
-				player.statPoints--; //Failsafe
+				n=0; //Failsafe
 		}
-		player.statPoints++;
+		player.statPoints+=n;
 		attributeMenu();
 	}
 	private function resetAttributes():void {
