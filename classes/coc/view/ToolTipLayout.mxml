@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+  Created by aimozg on 03.06.2017.
+-->
+<fd:Sprite xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:fd="flash.display.*" xmlns:coc="coc.view.*" scaleX="1"
+           scaleY="1"
+           xmlns:ft="flash.text.*">
+    <fx:Declarations>
+        <ft:TextField id="mouseOverText" name="mouseOverText" multiline="true"
+                      width="316" height="176" x="787" y="-268">
+            <ft:defaultTextFormat>
+                <ft:TextFormat size="15"/>
+            </ft:defaultTextFormat>
+            <ft:text>Mouse over text!&#xD;More mouse over text!</ft:text>
+        </ft:TextField>
+        <ft:TextField id="mouseOverHeader" name="mouseOverHeader" multiline="true" wordWrap="false"
+                      width="316" height="25.35" x="787" y="-293.1">
+            <ft:defaultTextFormat>
+                <ft:TextFormat size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Header!</ft:text>
+        </ft:TextField>
+        <coc:BitmapDataSprite id="mouseOverLine" name="mouseOverLine" x="785" y="-270" width="320" height="1" fillColor="#000000"/>
+        <coc:BitmapDataSprite id="popUpBG" name="popUpBG" x="770" y="-310" bdClass="{tooltipBg}"/>
+    </fx:Declarations>
+    <fx:Script><![CDATA[
+        [Embed(source='../../../res/ui/tooltip.png')]
+        public static var tooltipBg:Class;
+        ]]></fx:Script>
+</fd:Sprite>

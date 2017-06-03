@@ -3,7 +3,7 @@
 	import classes.display.BindingPane;
 	import coc.view.MainView;
 	import fl.controls.UIScrollBar;
-	import fl.containers.ScrollPane;
+//	import fl.containers.ScrollPane;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -68,23 +68,25 @@
 		/**
 		 * Init the InputManager. Attach the keyboard event listener to the stage and prepare the subobjects for usage.
 		 * @param	stage	Reference to core stage on which to add display objects
+		 * @param	_mainView
 		 * @param	debug	Emit debugging trace statements
 		 */
-		public function InputManager(stage:Stage, debug:Boolean = true)
+		public function InputManager(stage:Stage,
+									 _mainView: MainView,
+									 debug:Boolean = true)
 		{
 			_bindingMode = false;
 			_debug = debug;
 			
 			_stage = stage;
-			_mainView = _stage.getChildByName("mainView") as MainView;
+			this._mainView = _mainView;
 			_availableControlMethods = 0;
 			_availableCheatControlMethods = 0;
 			
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
 			
-			_mainView = _stage.getChildByName("mainView") as MainView;
-			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
-			_mainTextScollBar = (_stage.getChildByName("mainView") as MovieClip).scrollBar as UIScrollBar;
+			_mainText = _mainView.mainText as TextField;
+			_mainTextScollBar = _mainView.scrollBar as UIScrollBar;
 			
 			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height, _mainTextScollBar.width);
 		}

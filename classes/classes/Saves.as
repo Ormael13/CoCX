@@ -465,15 +465,15 @@ public function deleteScreen():void
 	}
 	addButton(14, "Back", returnToSaveMenu);
 	/*
-	choices("Slot 1", delFuncs[0], 
-			"Slot 2", delFuncs[1], 
-			"Slot 3", delFuncs[2], 
-			"Slot 4", delFuncs[3], 
-			"Slot 5", delFuncs[4], 
-			"Slot 6", delFuncs[5], 
-			"Slot 7", delFuncs[6], 
-			"Slot 8", delFuncs[7], 
-			"Slot 9", delFuncs[8], 
+	choices("Slot 1", delFuncs[0],
+			"Slot 2", delFuncs[1],
+			"Slot 3", delFuncs[2],
+			"Slot 4", delFuncs[3],
+			"Slot 5", delFuncs[4],
+			"Slot 6", delFuncs[5],
+			"Slot 7", delFuncs[6],
+			"Slot 8", delFuncs[7],
+			"Slot 9", delFuncs[8],
 			"Back", returnToSaveMenu);*/
 }
 
@@ -694,7 +694,7 @@ public function loadPermObject():void {
 					achievements[i] = saveFile.data.achievements[i];
 			}
 		}
-		
+
 		if (saveFile.data.permObjVersionID != undefined) {
 			getGame().permObjVersionID = saveFile.data.permObjVersionID;
 			trace("Found internal permObjVersionID:", getGame().permObjVersionID);
@@ -1056,13 +1056,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.gearStorage[i].quantity = gearStorageGet()[i].quantity;
 			saveFile.data.gearStorage[i].unlocked = gearStorageGet()[i].unlocked;
 		}
-		
+
 		//Set gear slot array
 		for (i = 0; i < pearlStorageGet().length; i++)
 		{
 			saveFile.data.pearlStorage.push([]);
 		}
-		
+
 		//Populate pearl slot array
 		for (i = 0; i < pearlStorageGet().length; i++)
 		{
@@ -1099,7 +1099,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.sand = getGame().sand;
 		saveFile.data.giacomo = getGame().giacomo;
 		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
-		
+
 		saveFile.data.isabellaOffspringData = [];
 		for (i = 0; i < kGAMECLASS.isabellaScene.isabellaOffspringData.length; i++) {
 			saveFile.data.isabellaOffspringData.push(kGAMECLASS.isabellaScene.isabellaOffspringData[i]);
@@ -1460,7 +1460,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (saveFile.data.flags[i] != undefined)
 				flags[i] = saveFile.data.flags[i];
 		}
-		
+
 		if (saveFile.data.versionID != undefined) {
 			game.versionID = saveFile.data.versionID;
 			trace("Found internal versionID:", game.versionID);
@@ -1768,12 +1768,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = HORNS_NONE;
 		else
 			player.hornType = saveFile.data.hornType;
-		
+
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
 		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE : saveFile.data.rearBody;
-		
+
 		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
 		player.hipRating = saveFile.data.hipRating;
@@ -2107,7 +2107,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				storage.unlocked = savedIS.unlocked;
 			}
 		}
-		
+
 		//Set pearl slot array
 		if (saveFile.data.pearlStorage == undefined)
 		{
@@ -2135,7 +2135,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
 			}
 		}
-		
+
 		//Set gear slot array
 		if (saveFile.data.gearStorage == undefined)
 		{
@@ -2163,7 +2163,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
-		
+
 		//Set soulforce
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
 		//Set wisdom
@@ -2326,7 +2326,7 @@ public function unFuckSave():void
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 	while (player.perkDuplicated(PerkLib.KitsuneThyroidGland)) player.removePerk(PerkLib.KitsuneThyroidGland);
-	
+
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
 		player.removeStatusEffect(StatusEffects.KnockedBack);
@@ -2532,7 +2532,7 @@ public function unFuckSave():void
 		if (flags[kFLAGS.BEHEMOTH_CHILDREN] >= 2 && flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] <= 0) flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
 		if (flags[kFLAGS.BEHEMOTH_CHILDREN] >= 3 && flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] <= 0) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 	}
-	if ((flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1; 
+	if ((flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1;
 	if (pearlStorageGet().length < 98) {
 		while (pearlStorageGet().length < 98) {
 			pearlStorageGet().push(new ItemSlotClass());

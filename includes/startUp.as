@@ -1,6 +1,9 @@
 ﻿import classes.Scenes.Achievements;
 import coc.view.CoCButton;
+import coc.view.MainLayout;
 import coc.view.MainView;
+import coc.view.StatsLayout;
+
 import flash.display.Stage;
 import flash.display.StageQuality;
 import flash.text.TextField;
@@ -30,8 +33,8 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
-	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
-	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainView.background.bdClass = MainLayout.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+	mainView.statsView.sideBarBG.bdClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
 	mainViewManager.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
 	mainViewManager.setTheme();

@@ -1,6 +1,9 @@
 package classes.display 
 {
-	import flash.display.MovieClip;
+import coc.view.BitmapDataSprite;
+
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 	import flash.text.Font;
 	import flash.text.TextField;
 	import coc.view.CoCButton;
@@ -8,8 +11,8 @@ package classes.display
 	import flash.text.TextFormatAlign;
 	import flash.text.AntiAliasType;
 	
-	import buttonBackground0;
-	import ButtonLabelFont;
+//	import buttonBackground0;
+//	import ButtonLabelFont;
 	
 	/**
 	 * Defines a composite display object of all the seperate components required to display a 
@@ -29,7 +32,7 @@ package classes.display
 		// TODO: this should probably be statically initialized. Global static formatting class?
 		private var _textFormatLabel:TextFormat;
 		private var _textFormatButton:TextFormat;
-		private var _textFont:Font;
+//		private var _textFont:Font;
 		
 		// Storage attributes for the button text, so we can wrap it seperately in HTML tags
 		// and store the raw value here, for return on demand.
@@ -66,15 +69,15 @@ package classes.display
 		 */
 		private function InitFormatting():void
 		{
-			_textFont = new ButtonLabelFont();
+//			_textFont = new ButtonLabelFont();
 			
 			_textFormatLabel = new TextFormat();
-			_textFormatLabel.font = _textFont.fontName; // Pulls in our embedded fonts from the swc to use dynamically!
+			_textFormatLabel.font = CoCButton.ButtonLabelFontName; // Pulls in our embedded fonts from the swc to use dynamically!
 			_textFormatLabel.size = 18;
 			_textFormatLabel.align = TextFormatAlign.RIGHT;
 			
 			_textFormatButton = new TextFormat();
-			_textFormatButton.font = _textFont.fontName;
+			_textFormatButton.font = CoCButton.ButtonLabelFontName;
 			_textFormatButton.size = 18;
 			_textFormatButton.align = TextFormatAlign.CENTER;
 		}
@@ -92,7 +95,7 @@ package classes.display
 			_buttons = new Array();
 			_buttonBgs = new Array();
 			
-			var b:MovieClip;
+			var b:BitmapDataSprite;
 			var button:CoCButton;
 			var tf:TextField;
 			
@@ -101,7 +104,7 @@ package classes.display
 			
 			for (var i:int = 0; i < 2; i++)
 			{
-				b = new buttonBackground0();
+				b = new BitmapDataSprite(CoCButton.buttonBackground0);
 				b.name = "ctrlBtn" + String(i);
 				b.x = xPos;
 				xPos += BUTTON_X_DELTA;

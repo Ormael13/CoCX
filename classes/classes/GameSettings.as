@@ -1,7 +1,10 @@
 package classes {
 import classes.GlobalFlags.*;
 
+import coc.view.MainLayout;
+
 import coc.view.MainView;
+import coc.view.StatsLayout;
 
 import flash.display.StageQuality;
 import flash.text.TextFormat;
@@ -466,12 +469,12 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 	}
 
-	public function setMainBackground(type:int):void {
-		flags[kFLAGS.BACKGROUND_STYLE] = type;
-		mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
-		mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
-		settingsScreenInterfaceSettings();
-	}
+		public function setMainBackground(type:int):void {
+			flags[kFLAGS.BACKGROUND_STYLE] = type;
+			mainView.background.bdClass = MainLayout.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			mainView.statsView.sideBarBG.bdClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			settingsScreenInterfaceSettings();
+		}
 
 	public function setTextBackground(type:int):void {
 		mainView.textBGWhite.visible = false;

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  Created by aimozg on 03.06.2017.
+-->
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+                addedToStage="new CoC(box)"
+                layout="vertical"
+                xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:s="library://ns.adobe.com/flex/spark">
+    <mx:UIComponent id="box" width="1000" height="800">
+
+    </mx:UIComponent>
+    <fx:Script><![CDATA[
+        import classes.CoC;
+        ]]></fx:Script>
+</mx:Application>

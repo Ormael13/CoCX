@@ -2,7 +2,10 @@ package classes.display
 {
 	import classes.BoundControlMethod;
 	import classes.InputManager;
-	import fl.containers.ScrollPane;
+
+import mx.core.ScrollControlBase;
+
+//	import fl.containers.ScrollPane;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Stage;
@@ -21,7 +24,7 @@ package classes.display
 	 * keyboard controls.
 	 * @author Gedan
 	 */
-	public class BindingPane extends ScrollPane
+	public class BindingPane extends ScrollControlBase
 	{	
 		private var _inputManager:InputManager;
 		private var _stage:Stage;
@@ -115,7 +118,7 @@ package classes.display
 				UpdateContentObjects();
 			}
 			
-			this.source = _content;
+			this.addChild(_content);
 		}
 		
 		/**

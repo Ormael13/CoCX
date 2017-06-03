@@ -1,0 +1,99 @@
+<?xml version="1.0"?> <!-- Created by aimozg on 03.06.2017. -->
+<fd:Sprite xmlns:fx="http://ns.adobe.com/mxml/2009"
+           xmlns:fd="flash.display.*"
+           xmlns:ft="flash.text.*" xmlns:coc="coc.view.*"
+           name="MainLayout"
+           scaleX="1" scaleY="1"
+           width="1000" height="800">
+    <fx:Declarations>
+        <ft:TextField id="statsText" name="statsText" selectable="false"
+                      width="129" height="28.35" x="375.7" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Stats</ft:text>
+        </ft:TextField>
+        <ft:TextField id="appearanceText" name="appearanceText" selectable="false"
+                      width="129" height="28.35" x="841.75" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Appearance</ft:text>
+        </ft:TextField>
+        <ft:TextField id="perksText" name="perksText" selectable="false"
+                      width="129" height="28.35" x="686.5" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Perks</ft:text>
+        </ft:TextField>
+        <ft:TextField id="levelText2" name="levelText2" selectable="false"
+                      width="129" height="29.55" x="529.05" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Level Up</ft:text>
+        </ft:TextField>
+        <ft:TextField id="dataText" name="dataText" selectable="false"
+                      width="129" height="28.35" x="180.25" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>Data</ft:text>
+        </ft:TextField>
+        <ft:TextField id="newGameText" name="newGameText" selectable="false"
+                      width="129" height="28.35" x="15.5" y="16">
+            <ft:defaultTextFormat>
+                <ft:TextFormat font="{CoCButton.ButtonLabelFontName}" bold="true" align="center" size="18"/>
+            </ft:defaultTextFormat>
+            <ft:text>New Game</ft:text>
+        </ft:TextField>
+        <fd:MovieClip id="sprite" name="sprite" x="6" y="720"/>
+        <fd:MovieClip id="spriteOld" name="spriteOld" x="6" y="720"/>
+        <ft:TextField id="eventTestInput" name="eventTestInput" type="input" border="true"
+                      width="766.45" height="593.85" x="-49.1" y="-662.05"
+                      text="Paste event text &amp; codes here.">
+            <ft:defaultTextFormat>
+                <ft:TextFormat size="16"/>
+            </ft:defaultTextFormat>
+        </ft:TextField>
+        <ft:TextField id="nameBox" name="nameBox" border="true" type="input"
+                      width="159.95" height="24.35" x="821.85" y="-601.05">
+            <ft:defaultTextFormat>
+                <ft:TextFormat size="22"/>
+            </ft:defaultTextFormat>
+        </ft:TextField>
+        <ft:TextField id="mainText" name="mainText" multiline="true" wordWrap="true"
+                      width="767.4" height="591.5" x="210.5" y="62">
+            <ft:defaultTextFormat>
+                <ft:TextFormat size="20"/>
+            </ft:defaultTextFormat>
+        </ft:TextField>
+
+        <coc:BitmapDataSprite id="appearanceBG" name="appearanceBG" x="830" y="7" bdClass="{CoCButton.buttonBackground2}"/>
+        <coc:BitmapDataSprite id="perksBG" name="perksBG" x="675" y="7" bdClass="{CoCButton.buttonBackground3}"/>
+        <coc:BitmapDataSprite id="levelBG" name="levelBG" x="520" y="7" bdClass="{CoCButton.buttonBackground8}"/>
+        <coc:BitmapDataSprite id="statsBG" name="statsBG" x="365" y="7" bdClass="{CoCButton.buttonBackground6}"/>
+        <coc:BitmapDataSprite id="dataBG" name="dataBG" x="169.6" y="7" bdClass="{CoCButton.buttonBackground9}"/>
+        <coc:BitmapDataSprite id="newGameBG" name="newGameBG" x="5" y="7" bdClass="{CoCButton.buttonBackground1}"/>
+        <coc:BitmapDataSprite id="textBGTan" name="textBGTan" x="208.5" y="54" width="770" height="599" fillColor="#9933CC"/>
+        <coc:BitmapDataSprite id="textBGWhite" name="textBGWhite" x="208.5" y="54" width="770" height="599" fillColor="#FF800A"/>
+        <coc:BitmapDataSprite id="background" name="background" width="1000" height="800" fillColor="#ffffff"/>
+        <coc:BitmapDataSprite id="blackBackground" name="blackBackground" x="-500" y="-56.1" width="1000" height="800" fillColor="#000000"/>
+    </fx:Declarations>
+    <fx:Script><![CDATA[
+        [Embed(source = "../../../res/ui/background1.png")]
+        public static var Background1:Class;
+        [Embed(source = "../../../res/ui/background2.png")]
+        public static var Background2:Class;
+        [Embed(source = "../../../res/ui/background3.png")]
+        public static var Background3:Class;
+        [Embed(source = "../../../res/ui/background4.png")]
+        public static var Background4:Class;
+        [Embed(source = "../../../res/ui/backgroundKaizo.png")]
+        public static var BackgroundKaizo:Class;
+       	[Embed(source = "../../../res/ui/StatsBarBottom.png")]
+        public static var StatsBarTrim:Class;
+        public static var Backgrounds:Array = [Background1,Background2,Background3,Background4,BackgroundKaizo];
+        ]]></fx:Script>
+</fd:Sprite>

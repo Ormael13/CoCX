@@ -328,6 +328,11 @@ package classes.internals
 			if (n == 1) return "one " + name;
 			return n + " " + pluralForm;
 		}
+		public static function repeatString(s:String,n:int):String {
+			var rslt:String = "";
+			while (n-->0) rslt += s;
+			return rslt;
+		}
 
 		private static var PF_NAME:Array  = [];
 		private static var PF_START:Array = [];

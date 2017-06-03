@@ -1483,7 +1483,7 @@ public function showUpDown():void { //Moved from StatsView.
 		oldStatName:String,
 		allStats:Array;
 
-	mainView.statsView.upDownsContainer.visible = true;
+//	mainView.statsView.upDownsContainer.visible = true;
 
 //	allStats = ["str", "tou", "spe", "inte", "wis" "lib", "sens", "cor", "HP", "lust", "wraith", "fatigue", "soulforce", "hunger"];
 	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];

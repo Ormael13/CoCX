@@ -718,11 +718,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	//MONEY!
 	if(player.gems == 0)
-		outputText("\n\n<b>Your money-purse is devoid of any currency.");
+		outputText("\n\n<b>Your money-purse is devoid of any currency.</b>");
 	if(player.gems > 1)
-		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.");
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.</b>");
 	if(player.gems == 1)
-		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.");
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.</b>");
 	menu();
 	addButton(0, "Next", playerMenu);
 	addButton(10, "RacialScores", RacialScores);

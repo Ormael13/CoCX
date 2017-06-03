@@ -12,6 +12,8 @@ package classes
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
+import flash.display.DisplayObjectContainer;
+
 import flash.utils.setTimeout;
 
 // This file contains most of the persistent gamestate flags.
@@ -262,9 +264,9 @@ the text from being too boring.
 		public var kitsuneScene:KitsuneScene = new KitsuneScene();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
-		
+
 		public var debugMenu:DebugMenu = new DebugMenu();
-		
+
 		public var soulforce:Soulforce = new Soulforce();
 		public var metamorph:Metamorph = new Metamorph();
 		public var crafting:Crafting = new Crafting();
@@ -302,8 +304,8 @@ the text from being too boring.
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
-	
-		
+
+
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -404,9 +406,9 @@ the text from being too boring.
 	}
 
 		private function gameStateDirectGet():int { return gameState; }
-		
+
 		private function gameStateDirectSet(value:int):void { gameState = value; }
-		
+
 		public function rand(max:int):int
 		{
 			return Utils.rand(max);
@@ -433,17 +435,19 @@ the text from being too boring.
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
 			testingBlockExiting = false;
-			
+
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
 			CoC_Settings.haltOnErrors = false;
-			
+
 			this.parser = new Parser(this, CoC_Settings);
 
 			this.model = new GameModel();
 			this.mainView = new MainView(/*this.model*/);
 			this.mainView.name = "mainView";
+			this.mainView.addEventListener("addedToStage",_postInit);
 			this.stage.addChild( this.mainView );
-
+			}
+		private function _postInit(e:Event):void{
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
 			this.mainView.onAppearanceClick = playerAppearance.appearance;
@@ -482,8 +486,8 @@ the text from being too boring.
 			mobile = false;
 			model.mobile = mobile;
 
-			this.images = new ImageManager(stage);
-			this.inputManager = new InputManager(stage, false);
+			this.images = new ImageManager(stage, mainView);
+			this.inputManager = new InputManager(stage, mainView, false);
 			include "../../includes/ControlBindings.as";
 
 			this.monkey = new ChaosMonkey(this);
@@ -522,7 +526,7 @@ the text from being too boring.
 			//or state information to do with the game. 
 			flags = new DefaultDict();
 			//model.flags = flags;
-			
+
 			achievements = new DefaultDict();
 			//model.achievements = achievements;
 
@@ -570,7 +574,7 @@ the text from being too boring.
 			//State variable used to indicate whether inside an item submenu
 			//The item sub menu
 //			itemSubMenu = false;
-			//} endregion 
+			//} endregion
 
 			/**
 			 * Display Variables
@@ -682,6 +686,7 @@ the text from being too boring.
 			mainView.statsView.hideUpDown();
 
 			this.addFrameScript( 0, this.run );
+			//setTimeout(this.run,0);
 		}
 
 		public function run():void
@@ -689,14 +694,16 @@ the text from being too boring.
 			mainMenu();
 			this.stop();
 
-			_updateHack.name = "wtf";
-			_updateHack.graphics.beginFill(0xFF0000, 1);
-			_updateHack.graphics.drawRect(0, 0, 2, 2);
-			_updateHack.graphics.endFill();
+			if (_updateHack) {
+				_updateHack.name = "wtf";
+				_updateHack.graphics.beginFill(0xFF0000, 1);
+				_updateHack.graphics.drawRect(0, 0, 2, 2);
+				_updateHack.graphics.endFill();
 
-			stage.addChild(_updateHack);
-			_updateHack.x = 999;
-			_updateHack.y = 799;
+				stage.addChild(_updateHack);
+				_updateHack.x = 999;
+				_updateHack.y = 799;
+			}
 		}
 
 		public function forceUpdate():void
@@ -743,7 +750,16 @@ the text from being too boring.
 			mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
 		},0);
 	}
+	/*
+	public static function main(container:DisplayObjectContainer):void {
+//			MainView._layout = layout;
 
+		container.addChild(new CoC(container.stage).mainView);
+		/!*var e:DisplayObjectContainer = main.parent;
+		 while (e && !e.stage) e = e.parent;
+		 new CoC(e?e.stage:null);*!/
+	}
+	*/
 	public static const STAT_GAIN_CLASSIC:int = 0;
 	public static const STAT_GAIN_DAILY:int = 1;
 }

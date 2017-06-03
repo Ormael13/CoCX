@@ -37,7 +37,7 @@ inputManager.AddBindableControl(
 			doNext(playerMenu);
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quicksave 2",
 	"Quicksave the current game to slot 2",
@@ -51,7 +51,7 @@ inputManager.AddBindableControl(
 			doNext(playerMenu);
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quicksave 3",
 	"Quicksave the current game to slot 2",
@@ -65,7 +65,7 @@ inputManager.AddBindableControl(
 			doNext(playerMenu);
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quicksave 4",
 	"Quicksave the current game to slot 4",
@@ -79,7 +79,7 @@ inputManager.AddBindableControl(
 			doNext(playerMenu);
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quicksave 5",
 	"Quicksave the current game to slot 5",
@@ -93,7 +93,7 @@ inputManager.AddBindableControl(
 			doNext(playerMenu);
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quickload 1",
 	"Quickload the current game from slot 1",
@@ -135,7 +135,7 @@ inputManager.AddBindableControl(
 			}
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quickload 3",
 	"Quickload the current game from slot 3",
@@ -156,7 +156,7 @@ inputManager.AddBindableControl(
 			}
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quickload 4",
 	"Quickload the current game from slot 4",
@@ -177,7 +177,7 @@ inputManager.AddBindableControl(
 			}
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Quickload 5",
 	"Quickload the current game from slot 5",
@@ -198,7 +198,7 @@ inputManager.AddBindableControl(
 			}
 		}
 	});
-	
+
 inputManager.AddBindableControl(
 	"Show Menu",
 	"Show the main menu",
@@ -502,6 +502,7 @@ inputManager.AddBindableControl(
 	"History",
 	"Show text history",
 	function():void {
+		kGAMECLASS.mainViewManager.traceSelf();
 		kGAMECLASS.outputHistory();
 	}
 )
