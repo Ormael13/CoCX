@@ -3661,14 +3661,13 @@
 				}
 				if (player.hasFur()) {
 					//set new skinTone
-					player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
 					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>");
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of "+color+" scales.</b>");
 				}
-				player.skin.growCoat(SKIN_COAT_SCALES,{color:color},Skin.COVERAGE_MEDIUM);
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color},Skin.COVERAGE_LOW);
 				changes++;
 			}
 			//Snake eyes
