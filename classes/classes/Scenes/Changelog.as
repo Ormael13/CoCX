@@ -24,7 +24,7 @@ package classes.Scenes
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-Text History. In new games bound to 'H' button; in old saves need manual binding to hotkey.\n");
 			outputText("<b>Version 0.8d2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: Salamander\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

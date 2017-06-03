@@ -7,6 +7,8 @@ package classes.Scenes.Areas.Forest
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Areas.GlacialRift.SnowLily;
+	import classes.Scenes.Areas.VolcanicCrag.Cinderbloom;
 
 	public class AlrauneScene extends BaseContent
 	{
@@ -22,7 +24,22 @@ package classes.Scenes.Areas.Forest
 		outputText("\"<i>Mmmmmm such a nice catch... come closer into my pitcher.</i>\"\n\n");
 		outputText("There's no way you will let this thing pull you in!\n\n");
 		startCombat(new Alraune());
-	//	playerMenu();
+	}
+	
+	public function alrauneVolcanicCrag():void {
+		clearOutput();
+		outputText("As you wander the crag you come across a rather large flower growing in the ash. You ponder how plants even manage to grow in this inhospitable landscape. The flower has petals the same color as lava and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with chocolate skin and deep red eyes.\n\n");
+		outputText("\"<i>Mmmmmm such a nice catch... come closer into my pitcher.</i>\"\n\n");
+		outputText("There's no way you will let this thing pull you in!\n\n");
+		startCombat(new Cinderbloom());
+	}
+	
+	public function alrauneGlacialRift():void {
+		clearOutput();
+		outputText("As you wander the rift you come across a rather large flower growing in the snow. You ponder how plants even manage to grow in this icy landscape. The flower has petals the same color as the snow and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with sky blue skin and light blue eyes.\n\n");
+		outputText("\"<i>Mmmmmm such a nice catch... come closer into my pitcher.</i>\"\n\n");
+		outputText("There's no way you will let this thing pull you in!\n\n");
+		startCombat(new SnowLily());
 	}
 	
 	public function alrauneDeepwoodsWon():void {

@@ -323,6 +323,7 @@ use namespace kGAMECLASS;
 				else if (plantScore() == 5) armorDef += (4 * (1 + newGamePlusMod));
 				else armorDef += (2 * (1 + newGamePlusMod));
 			}
+			if (yggdrasilScore() >= 10) armorDef += (10 * (1 + newGamePlusMod));
 			//Bonus defense
 			if (armType == ARM_TYPE_YETI) armorDef += (1 * (1 + newGamePlusMod));
 			if (armType == ARM_TYPE_SPIDER || armType == ARM_TYPE_MANTIS || armType == ARM_TYPE_BEE || armType == ARM_TYPE_SALAMANDER) armorDef += (2 * (1 + newGamePlusMod));
@@ -3068,6 +3069,10 @@ use namespace kGAMECLASS;
 		//		plantCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && plantCounter >= 3)
 				plantCounter += 1;
+			if (alrauneScore() >= 10)
+				plantCounter -= 7;
+			if (yggdrasilScore() >= 10)
+				plantCounter -= 4;
 			End("Player","racialScore");
 			return plantCounter;
 		}
@@ -3112,7 +3117,7 @@ use namespace kGAMECLASS;
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
-			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
+			if (skinType == 6)
 				yggdrasilCounter++;//temporal fix for now till I put true skin tf to code tomorrow or day after tomorrow
 
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
@@ -4386,11 +4391,13 @@ use namespace kGAMECLASS;
 				maxLib += (100 * (1 + newGamePlusMod));
 			}
 			if (yggdrasilScore() >= 10) {
-				maxTou += (40 * (1 + newGamePlusMod));
-				maxSpe -= (30 * (1 + newGamePlusMod));
-				maxInt += (80 * (1 + newGamePlusMod));
-				maxLib -= (40 * (1 + newGamePlusMod));
-			}//+50
+				maxStr += (50 * (1 + newGamePlusMod));
+				maxTou += (70 * (1 + newGamePlusMod));
+				maxSpe -= (50 * (1 + newGamePlusMod));
+				maxInt += (50 * (1 + newGamePlusMod));
+				maxWis += (80 * (1 + newGamePlusMod));
+				maxLib -= (50 * (1 + newGamePlusMod));
+			}//+150
 			if (deerScore() >= 4) {
 				maxSpe += (20 * (1 + newGamePlusMod));
 			}//+20/10-20

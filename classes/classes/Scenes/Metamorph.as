@@ -21,7 +21,7 @@ package classes.Scenes
 public function accessMetamorphMenu():void {
 	clearOutput();
 	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.");
-	outputText("<b>Race added to Metamorph: Bee, Demon, Fox, Harpy, Kitsune (up to 6th tail), Lizard</b>");
+	outputText("<b>Race added to Metamorph: Bee, Demon, Fox, Harpy, Kitsune, Lizard, Salamander</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
@@ -35,7 +35,7 @@ private function accessPage1MetamorphMenu():void {
 	addButton(0, "Skin", accessSkinMenu);
 	addButton(1, "Hair", accessHairMenu);
 	addButton(2, "Face(1)", accessPage1FaceMenu);
-//	addButton(3, "Face(2)", accessPage2FaceMenu);
+	addButton(3, "Face(2)", accessPage2FaceMenu);
 	addButton(4, "Tongue", accessTongueMenu);
 	addButton(5, "Eyes", accessEyesMenu);
 	addButton(6, "Ears(1)", accessPage1EarsMenu);
@@ -43,9 +43,9 @@ private function accessPage1MetamorphMenu():void {
 	addButton(8, "Horns", accessHornsMenu);
 	addButton(9, "Antennae", accessAntennaeMenu);
 	addButton(10, "Gills", accessGillsMenu);
-	addButton(11, "Arms", accessArmsMenu);
-	addButton(12, "Tail(1)", accessPage1TailMenu);
-	addButton(13, "Tail(2)", accessPage2TailMenu);
+	addButton(11, "Arms(1)", accessPage1ArmsMenu);
+//	addButton(12, "Arms(2)", accessPage2ArmsMenu);
+//	addButton(13, "Back", accessMetamorphMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessSkinMenu():void {
@@ -94,6 +94,10 @@ private function accessPage1FaceMenu():void {
 }
 private function accessPage2FaceMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType != FACE_SALAMANDER_FANGS && player.soulforce >= 100) addButton(11, "Salamander", metamorphSalamanderFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType == FACE_SALAMANDER_FANGS) addButtonDisabled(11, "Salamander", "You already have salamander fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType != FACE_SALAMANDER_FANGS && player.soulforce < 100) addButtonDisabled(11, "Salamander", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
@@ -173,7 +177,7 @@ private function accessGillsMenu():void {
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
-private function accessArmsMenu():void {
+private function accessPage1ArmsMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.armType != ARM_TYPE_HARPY && player.soulforce >= 100) addButton(0, "Harpy", metamorphHarpyArms);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.armType == ARM_TYPE_HARPY) addButtonDisabled(0, "Harpy", "You already have harpy arms.");
@@ -183,9 +187,13 @@ private function accessArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.armType == ARM_TYPE_SPIDER) addButtonDisabled(1, "Spider", "You already have spider arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.armType != ARM_TYPE_SPIDER && player.soulforce < 100) addButtonDisabled(1, "Spider", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType != ARM_TYPE_BEE && player.soulforce >= 100) addButton(4, "Bee", metamorphBeeArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType == ARM_TYPE_BEE) addButtonDisabled(4, "Bee", "You already have bee arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType != ARM_TYPE_BEE && player.soulforce < 100) addButtonDisabled(4, "Bee", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType != ARM_TYPE_BEE && player.soulforce >= 100) addButton(3, "Bee", metamorphBeeArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType == ARM_TYPE_BEE) addButtonDisabled(3, "Bee", "You already have bee arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.armType != ARM_TYPE_BEE && player.soulforce < 100) addButtonDisabled(3, "Bee", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.armType != ARM_TYPE_SALAMANDER && player.soulforce >= 100) addButton(4, "Salamander", metamorphSalamanderArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.armType == ARM_TYPE_SALAMANDER) addButtonDisabled(4, "Salamander", "You already have salamander arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.armType != ARM_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(4, "Salamander", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.armType != ARM_TYPE_SHARK && player.soulforce >= 100) addButton(7, "Shark", metamorphSharkArms);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.armType == ARM_TYPE_SHARK) addButtonDisabled(7, "Shark", "You already have shark arms.");
@@ -204,6 +212,29 @@ private function accessArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.armType != ARM_TYPE_LIZARD && player.soulforce < 100) addButtonDisabled(13, "Lizard", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage2ArmsMenu():void {
+	menu();
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+
+private function accessPage2MetamorphMenu():void {
+	menu();
+	addButton(0, "Tail(1)", accessPage1TailMenu);
+	addButton(1, "Tail(2)", accessPage2TailMenu);
+	addButton(2, "Tail(3)", accessPage3TailMenu);
+	addButton(3, "Wings(1)", accessPage1WingsMenu);
+//	addButton(4, "Wings(2)", accessPage2WingsMenu);
+	addButton(5, "Legs(1)", accessPage1LegsMenu);
+	addButton(6, "Legs(2)", accessPage2LegsMenu);
+//	addButton(7, "Legs(3)", accessPage3LegsMenu);
+	addButton(8, "Rear B.", accessRearBodyMenu);
+//	addButton(9, "Back", accessMetamorphMenu);
+//	addButton(10, "Back", accessMetamorphMenu);
+//	addButton(11, "Back", accessMetamorphMenu);
+//	addButton(12, "Back", accessMetamorphMenu);
+//	addButton(13, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessPage1TailMenu():void {
 	menu();
@@ -235,7 +266,7 @@ private function accessPage1TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 1) addButtonDisabled(13, "Fox", "You already have single fox tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType != TAIL_TYPE_FOX && player.soulforce < 100) addButtonDisabled(13, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage2TailMenu():void {
 	menu();
@@ -279,29 +310,14 @@ private function accessPage2TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.soulforce < 900) addButtonDisabled(7, "Fox 9th", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 8) addButtonDisabled(7, "Fox 9th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-
-private function accessPage2MetamorphMenu():void {
-	menu();
-//	addButton(0, "Tail(3)", accessPage3TailMenu);
-	addButton(1, "Wings(1)", accessPage1WingsMenu);
-//	addButton(2, "Wings(2)", accessPage2WingsMenu);
-	addButton(3, "Legs(1)", accessPage1LegsMenu);
-	addButton(4, "Legs(2)", accessPage2LegsMenu);
-//	addButton(5, "Legs(3)", accessPage3LegsMenu);
-	addButton(6, "Rear B.", accessRearBodyMenu);
-//	addButton(7, "Back", accessMetamorphMenu);
-//	addButton(8, "Back", accessMetamorphMenu);
-//	addButton(9, "Back", accessMetamorphMenu);
-//	addButton(10, "Back", accessMetamorphMenu);
-//	addButton(11, "Back", accessMetamorphMenu);
-//	addButton(12, "Back", accessMetamorphMenu);
-//	addButton(13, "Back", accessMetamorphMenu);
-	addButton(14, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage3TailMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != TAIL_TYPE_SALAMANDER && player.soulforce >= 100) addButton(5, "Salamander", metamorphSalamanderTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType == TAIL_TYPE_SALAMANDER) addButtonDisabled(5, "Salamander", "You already have salamander tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != TAIL_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(5, "Salamander", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
@@ -379,6 +395,10 @@ private function accessPage2LegsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.lowerBody == LOWER_BODY_TYPE_FOX) addButtonDisabled(1, "Fox", "You already have fox lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.lowerBody != LOWER_BODY_TYPE_FOX && player.soulforce < 100) addButtonDisabled(1, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody != LOWER_BODY_TYPE_SALAMANDER && player.soulforce >= 100) addButton(6, "Salamander", metamorphSalamanderLegs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER) addButtonDisabled(6, "Salamander", "You already have salamander lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody != LOWER_BODY_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(6, "Salamander", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs) && player.lowerBody != LOWER_BODY_TYPE_SHARK && player.soulforce >= 100) addButton(9, "Shark", metamorphSharkLegs);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs) && player.lowerBody == LOWER_BODY_TYPE_SHARK) addButtonDisabled(9, "Shark", "You already have shark lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs) && player.lowerBody != LOWER_BODY_TYPE_SHARK && player.soulforce < 100) addButtonDisabled(9, "Shark", "You not have enough Soulforce for this metamorphosis.");
@@ -505,6 +525,40 @@ private function metamorphGoo():void {
 	
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphSalamanderFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
+	player.faceType = FACE_SALAMANDER_FANGS;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSalamanderArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+	player.armType = ARM_TYPE_SALAMANDER;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSalamanderLegs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+	else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with salamander-like claws.");
+	else if (player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DOG || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_CAT || player.lowerBody == LOWER_BODY_TYPE_LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+	else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
+	outputText("  <b>You have salamander legs and claws!</b>");
+	player.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+	player.legCount = 2;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSalamanderTail():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>");
+	else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>");
+	player.tailType = TAIL_TYPE_SALAMANDER;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphSharkFin():void {
 	clearOutput();
 	player.soulforce -= 100;
