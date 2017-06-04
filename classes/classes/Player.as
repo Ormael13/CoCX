@@ -1324,6 +1324,10 @@ use namespace kGAMECLASS;
 			{
 				race = "Alraune";
 			}
+			if (yggdrasilScore() >= 10)
+			{
+				race = "Yggdrasil";
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -1586,8 +1590,8 @@ use namespace kGAMECLASS;
 			if (dogScore() >= 4)
 				grandchimeraCounter++;
 			if (wolfScore() >= 6)
-				grandchimeraCounter++;*/
-			if (foxScore() >= 7)
+				grandchimeraCounter++;
+*/			if (foxScore() >= 7)
 				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
@@ -1602,8 +1606,8 @@ use namespace kGAMECLASS;
 			if (minoScore() >= 4)
 				grandchimeraCounter++;
 			if (cowScore() >= 4)
-				grandchimeraCounter++;*/
-			if (beeScore() >= 9)
+				grandchimeraCounter++;
+*/			if (beeScore() >= 9)
 				grandchimeraCounter++;
 //			if (goblinScore() >= 4)
 //				grandchimeraCounter++;
@@ -1626,8 +1630,8 @@ use namespace kGAMECLASS;
 			if (scorpionScore() >= 4)
 				grandchimeraCounter++;
 			if (mantisScore() >= 5)
-				grandchimeraCounter++;*/
-			if (salamanderScore() >= 7)
+				grandchimeraCounter++;
+*/			if (salamanderScore() >= 7)
 				grandchimeraCounter++;
 			if (nagaScore() >= 8)
 				grandchimeraCounter++;
@@ -1639,11 +1643,15 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (phoenixScore() >= 10)
 				grandchimeraCounter++;
-/*			if (scyllaScore() >= 5)
+//			if (scyllaScore() >= 5)
+//				grandchimeraCounter++;
+//			if (plantScore() >= 6)
+//				grandchimeraCounter++;
+			if (alrauneScore() >= 10)
 				grandchimeraCounter++;
-			if (plantScore() >= 6)
+			if (yggdrasilScore() >= 10)
 				grandchimeraCounter++;
-			if (pigScore() >= 4)
+/*			if (pigScore() >= 4)
 				grandchimeraCounter++;
 			if (satyrScore() >= 4)
 				grandchimeraCounter++;
@@ -1652,8 +1660,8 @@ use namespace kGAMECLASS;
 			if (echidnaScore() >= 4)
 				grandchimeraCounter++;
 			if (deerScore() >= 4)
-				grandchimeraCounter++;*/
-			if (manticoreScore() >= 10)
+				grandchimeraCounter++;
+*/			if (manticoreScore() >= 10)
 				grandchimeraCounter += 2;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
