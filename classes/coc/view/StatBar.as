@@ -133,6 +133,7 @@ public class StatBar extends Block {
 			bitmapClass: ArrowUp,
 			width: arrowSz,
 			height: arrowSz,
+			stretch: true,
 			x: 1+(options.width-arrowSz),
 			y: 1,
 			visible: false
@@ -141,6 +142,7 @@ public class StatBar extends Block {
 			bitmapClass: ArrowDown,
 			width: arrowSz,
 			height: arrowSz,
+			stretch: true,
 			x: 1+(options.width-arrowSz),
 			y: 1,
 			visible: false
