@@ -60,9 +60,9 @@
 			clearOutput();
 			outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.");
 			if (rand(3) == 0) outputText(player.modTone(15, 1));
-			if (player.wis < 50) dynStats("wis", 1 + rand(4));
-			else if (player.wis < 100) dynStats("wis", 1 + rand(3));
-			else dynStats("wis", 1 + rand(2));
+			if (player.wis < 100) dynStats("wis", 2 + rand(4));
+			else if (player.wis < 200) dynStats("wis", 2 + rand(3));
+			else dynStats("wis", 2 + rand(2));
 			player.refillHunger(10);
 		}
 */
