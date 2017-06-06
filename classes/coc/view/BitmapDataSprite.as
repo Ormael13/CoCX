@@ -58,7 +58,8 @@ public class BitmapDataSprite extends Sprite {
 	private var _stretch:Boolean = false;
 	private var _repeat:Boolean  = false;
 	public function set bitmapClass(value:Class):void {
-		bitmap = (new value()) as Bitmap;
+		if (value as Class) bitmap = (new value()) as Bitmap;
+		else bitmap = null;
 	}
 	public function get bitmapClass():Class {
 		return null;
@@ -68,8 +69,10 @@ public class BitmapDataSprite extends Sprite {
 	}
 	public function set bitmap(value:Bitmap):void {
 		_bitmap = value;
-		if (_width == 0 || !stretch && !repeat) _width = value.width;
-		if (_height == 0 || !stretch && !repeat) _height = value.height;
+		if (value) {
+			if (_width == 0 || !stretch && !repeat) _width = value.width;
+			if (_height == 0 || !stretch && !repeat) _height = value.height;
+		}
 		redraw();
 	}
 	public function get fillColor():uint {

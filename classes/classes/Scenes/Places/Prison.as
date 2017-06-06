@@ -1292,7 +1292,7 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
-			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
+			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
 			//Level up

@@ -21,7 +21,13 @@ import flash.events.MouseEvent;
 
 public class CoCButton extends Block {
 
-	public static const ButtonLabelFontName:String = "Palatino Linotype";
+	[Embed(source='../../../res/ui/Shrewsbury-Titling_Bold.ttf',
+			advancedAntiAliasing='true',
+			fontName='ShrewsburyTitlingBold',
+			embedAsCFF='false')]
+	private static const ButtonLabelFont:Class;
+	public static const ButtonLabelFontName:String = (new ButtonLabelFont() as Font).fontName;
+
 
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
@@ -34,17 +40,18 @@ public class CoCButton extends Block {
 	public function CoCButton(options:Object = null):void {
 		super();
 		_backgroundGraphic = addBitmapDataSprite({
-			stretch    : true,
-			width      : MainView.BTN_W,
-			height     : MainView.BTN_H
+			stretch: true,
+			width  : MainView.BTN_W,
+			height : MainView.BTN_H
 		});
 		_labelField        = addTextField({
-			width : MainView.BTN_W,
-			height: MainView.BTN_H,
+			width            : MainView.BTN_W,
+			embedFonts       : true,
+			y                : 8,
+			height           : MainView.BTN_H - 8,
 			defaultTextFormat: {
-				font: ButtonLabelFontName,
-				bold: true,
-				size: 18,
+				font : ButtonLabelFontName,
+				size : 18,
 				align: 'center'
 			}
 		});
@@ -52,7 +59,7 @@ public class CoCButton extends Block {
 		this.mouseChildren = true;
 		this.buttonMode    = true;
 		this.visible       = true;
-		UIUtils.setProperties(this,options);
+		UIUtils.setProperties(this, options);
 
 		this.addEventListener(MouseEvent.ROLL_OVER, this.hover);
 		this.addEventListener(MouseEvent.ROLL_OUT, this.dim);
@@ -63,12 +70,12 @@ public class CoCButton extends Block {
 
 	public function hover(event:MouseEvent = null):void {
 		if (this._backgroundGraphic)
-			this._backgroundGraphic.alpha = enabled?0.5:0.4;
+			this._backgroundGraphic.alpha = enabled ? 0.5 : 0.4;
 	}
 
 	public function dim(event:MouseEvent = null):void {
 		if (this._backgroundGraphic)
-			this._backgroundGraphic.alpha = enabled?1:0.4;
+			this._backgroundGraphic.alpha = enabled ? 1 : 0.4;
 	}
 
 	public function click(event:MouseEvent = null):void {
@@ -80,9 +87,9 @@ public class CoCButton extends Block {
 		return _enabled;
 	}
 	public function set enabled(value:Boolean):void {
-		_enabled = value;
-		this._labelField.alpha = value?1:0.4;
-		this._backgroundGraphic.alpha = value?1:0.4;
+		_enabled                      = value;
+		this._labelField.alpha        = value ? 1 : 0.4;
+		this._backgroundGraphic.alpha = value ? 1 : 0.4;
 	}
 //////// Getters and Setters ////////
 

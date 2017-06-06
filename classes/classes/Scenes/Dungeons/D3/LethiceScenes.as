@@ -86,7 +86,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function quitToMenu():void {
 			player.str = 0;
-			getGame().mainMenu();
+			getGame().mainMenu.mainMenu();
 		}
 
 		public function LethiceScenes()

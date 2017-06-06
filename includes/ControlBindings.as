@@ -1,4 +1,5 @@
 import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kGAMECLASS;
 import flash.ui.Keyboard;
 import coc.view.MainView;
 
@@ -205,7 +206,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_NEW_MAIN) && mainView.menuButtonHasLabel(MainView.MENU_NEW_MAIN, "Main Menu"))
 		{
-			mainMenu(undefined);
+			kGAMECLASS.mainMenu.mainMenu();
 		}
 	});
 
@@ -502,7 +503,7 @@ inputManager.AddBindableControl(
 	"History",
 	"Show text history",
 	function():void {
-		kGAMECLASS.mainViewManager.traceSelf();
+		trace(kGAMECLASS.mainViewManager.traceSelf());
 		kGAMECLASS.outputHistory();
 	}
 )

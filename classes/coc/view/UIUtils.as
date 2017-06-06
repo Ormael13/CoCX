@@ -11,8 +11,7 @@ public class UIUtils {
 	public static function convertColor(input:Object):uint {
 		var s:String = input as String;
 		if (s) return parseColorString(s);
-		var n:Number = input as Number;
-		if (n) return uint(n);
+		if (input is Number) return uint(input);
 		if (!input) return INVALID_COLOR;
 		if ('r' in input && 'g' in input && 'b' in input) {
 			var r:Number = input.r;
@@ -30,6 +29,7 @@ public class UIUtils {
 		return fromRgb(r*255,g*255,b*255);
 	}
 	public static function convertTextFormat(input:Object):TextFormat {
+		if (input is TextFormat) return input as TextFormat;
 		var tf:TextFormat = new TextFormat();
 		setProperties(tf,input,{
 			'color':convertColor
@@ -44,7 +44,7 @@ public class UIUtils {
 		}
 		return Number(value);
 	}
-	public static function setProperties(e:Object,options:Object,special:Object=null):void {
+	public static function setProperties(e:Object,options:Object,special:Object=null):Object {
 		if (options) for (var key:String in options) {
 			if (options.hasOwnProperty(key) && key in e) {
 				var spc:Function = special ? special[key] as Function : null;
@@ -52,12 +52,13 @@ public class UIUtils {
 				e[key] = spc ? spc(value) : value;
 			}
 		}
+		return e;
 	}
 	public static function parseColorString(s:String):uint {
 		var a:Array;
-		if ((a = s.match(/^(?:0x|\$|#)([a-f0-9]{6})$/))) {
+		if ((a = s.match(/^(?:0x|\$|#)([a-fA-F0-9]{6})$/))) {
 			return parseInt(a[1], 16);
-		} else if ((a = s.match(/^(?:0x|\$|#)([a-f0-9]{3})$/))) {
+		} else if ((a = s.match(/^(?:0x|\$|#)([a-fA-F0-9]{3})$/))) {
 			var rgb12:uint = parseInt(a[1], 16);
 			return ((rgb12 & 0xf00) << (5 - 2) |
 					(rgb12 & 0xf00) << (4 - 2) |
@@ -65,7 +66,9 @@ public class UIUtils {
 					(rgb12 & 0x0f0) << (2 - 1) |
 					(rgb12 & 0x00f) << (1 - 0) |
 					(rgb12 & 0x00f) << (0 - 0));
-		} else return INVALID_COLOR;
+		} else {
+			return INVALID_COLOR;
+		}
 	}
 }
 }

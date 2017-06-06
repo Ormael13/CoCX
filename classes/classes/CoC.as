@@ -129,7 +129,6 @@ the text from being too boring.
 		include "../../includes/descriptors.as";
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
-		include "../../includes/startUp.as";
 		include "../../includes/eventParser.as";
 		include "../../includes/engineCore.as";
 		// Lots of constants
@@ -275,6 +274,7 @@ the text from being too boring.
 		private var _updateHack:Sprite = new Sprite();
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
+		public var mainMenu:MainMenu = new MainMenu();
 		public var perkMenu:PerkMenu = new PerkMenu();
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
@@ -373,6 +373,10 @@ the text from being too boring.
 		public function get inCombat():Boolean { return gameState == 1; }
 		
 		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
+
+	public function resetGameState():void {
+		gameState = 3;
+	}
 
 	public function cleanupAfterCombat(nextFunc:Function = null):void {
 		combat.cleanupAfterCombatImpl(nextFunc);
@@ -519,16 +523,12 @@ the text from being too boring.
 			 */
 			//{ region StateVariables
 
-			//User all over the place whenever items come up
-//No longer used:			itemSwapping = false;
 
 			//The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 			//or state information to do with the game. 
 			flags = new DefaultDict();
-			//model.flags = flags;
 
 			achievements = new DefaultDict();
-			//model.achievements = achievements;
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -536,44 +536,8 @@ the text from being too boring.
 			//1 = in combat
 			//2 = in combat in grapple
 			//3 = at start or game over screen
-//GameState 4 eliminated			//4 = at giacomo
-//GameState 5 eliminated			//5 = getting succubi potion
-//GameState 6 eliminated			//6 = at alchemist choices.
-//GameState 7 eliminated			//7 = item duuuuump
-//GameState 8 eliminated			//8 = worked at farm
 			gameState = 0;
 
-//Gone, last use replaced by newRound arg for combatMenu
-			//Another state variable used for menu display used everywhere
-			//menuLoc
-			//0 - normal
-			//1 - items menu - no heat statuses when leaving it in combat
-			//2 - needs to add an hour after grabbing item
-			//3 - In tease menu - no heat statuses when leaving it.
-//MenuLoc 8 eliminated			//8 - Find Farm Pepper - 2 hours wait
-//MenuLoc 9 eliminated			//9 - Armor shop
-//MenuLoc 10 eliminated			//10- Tailor shop
-//MenuLoc 11 eliminated			//11- Midsleep loot
-//MenuLoc 12 eliminated			//12 - lumi potions
-//MenuLoc 13 eliminated			//13 - lumi enhancements
-//MenuLoc 14 eliminated			//14 - late night receive item
-//MenuLoc 15 eliminated			//15 - Weapon shop in TelAdra
-//MenuLoc 16 eliminated			//16 - Incubus Shop
-//MenuLoc 17 eliminated			//17 - 4 hours wait
-//MenuLoc 18 eliminated			//18 - 8 hours wait
-//MenuLoc 19 eliminated			//19 - Bakery!
-//MenuLoc 20 eliminated			//20 - weapon rack stuffing
-//MenuLoc 21 eliminated			//21 - weapon rack taking
-//MenuLoc 24 eliminated			//24 - Niamh booze
-//MenuLoc 25 eliminated			//25 - Owca Shop
-//MenuLoc 26 eliminated			//26 - Benoit Shop
-//MenuLoc 27 eliminated			//27 - Chicken Harpy Shop
-//MenuLoc 28 eliminated			//28 - Items menu
-//			menuLoc = 0;
-
-			//State variable used to indicate whether inside an item submenu
-			//The item sub menu
-//			itemSubMenu = false;
 			//} endregion
 
 			/**
@@ -592,12 +556,6 @@ the text from being too boring.
 			//}endregion
 
 			/**
-			 * Item variables
-			 * Holds all the information about items in your inventory and stashes away
-			 */
-			//{region ItemVariables
-
-			/**
 			 * Plot Variables
 			 * Booleans and numbers about whether you've found certain places
 			 */
@@ -613,10 +571,7 @@ the text from being too boring.
 			monk = 0;
 			sand = 0;
 			giacomo = 0;
-//Replaced by flag			beeProgress = 0;
 
-//			itemStorage = [];
-//			gearStorage = [];
 			//}endregion
 
 
@@ -626,10 +581,6 @@ the text from being too boring.
 
 			// *************************************************************************************
 
-			// import flash.events.MouseEvent;
-
-			//const DOUBLE_ATTACK_STYLE:int = 867;
-			//const SPELLS_CAST:int = 868;
 
 			//Fenoxo loves his temps
 			temp = 0;
@@ -653,8 +604,6 @@ the text from being too boring.
 			oldStats.oldFatigue = 0;
 			oldStats.oldSoulforce = 0;
 			oldStats.oldHunger = 0;
-			
-			//model.maxHP = maxHP;
 
 			// ******************************************************************************************
 
@@ -691,7 +640,7 @@ the text from being too boring.
 
 		public function run():void
 		{
-			mainMenu();
+			mainMenu.mainMenu();
 			this.stop();
 
 			if (_updateHack) {

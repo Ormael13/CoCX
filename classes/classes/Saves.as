@@ -385,7 +385,7 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (player.str == 0) {
-		addButton(14, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 		return;
 	}
 	if (inDungeon) {
@@ -396,7 +396,7 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", saveToFile);
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
-		addButton(14, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 	}
 	else
 	{

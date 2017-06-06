@@ -244,9 +244,6 @@ import classes.Scenes.Places.Ingnam;
 			return kGAMECLASS.doSFWloss();
 		}
 		
-		protected function showCredits():void {
-			kGAMECLASS.creditsScreen();
-		}
 		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
@@ -796,18 +793,6 @@ import classes.Scenes.Places.Ingnam;
 		}
 */
 		
-/* Classes should now use inCombat instead of setting gameState directly
-		protected function get gameState():Number
-		{
-			return kGAMECLASS.gameState;
-		}
-		
-		protected function set gameState(val:Number):void
-		{
-			kGAMECLASS.gameState = val;
-		}
-*/
-
 /*
 		protected function get itemSlots():Array
 		{

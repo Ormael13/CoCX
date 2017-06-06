@@ -1,269 +1,344 @@
-//We won't be needing this anymore!
 package coc.view {
-    import flash.display.MovieClip;
-    import flash.display.Sprite;
-    import flash.display.DisplayObject;
+import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Player;
+import classes.internals.Utils;
 
-    import flash.text.TextField;
+import flash.text.TextField;
 
-    //import coc.model.GameModel;
+public class StatsView extends Block {
+	[Embed(source = "../../../res/ui/sidebar1.png")]
+	public static var SidebarBg1:Class;
+	[Embed(source = "../../../res/ui/sidebar2.png")]
+	public static var SidebarBg2:Class;
+	[Embed(source = "../../../res/ui/sidebar3.png")]
+	public static var SidebarBg3:Class;
+	[Embed(source = "../../../res/ui/sidebar4.png")]
+	public static var SidebarBg4:Class;
+	[Embed(source = "../../../res/ui/sidebarKaizo.png")]
+	public static var SidebarBgKaizo:Class;
+	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
+	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
+	public static const ValueFont:String       = 'Georgia';
 
-    // Remove dynamic once you've added all the DOs as instance properties.
-    public dynamic class StatsView extends StatsLayout {
-        // add things from main view here?
-        // yes because we'll need to update all the TFs and progress bars.
+	private var sideBarBG:BitmapDataSprite;
+	private var nameText:TextField;
+	private var coreStatsText:TextField;
+	private var combatStatsText:TextField;
+	private var advancementText:TextField;
+	private var timeText:TextField;
+	private var strBar:StatBar;
+	private var touBar:StatBar;
+	private var speBar:StatBar;
+	private var intBar:StatBar;
+	private var wisBar:StatBar;
+	private var libBar:StatBar;
+	private var senBar:StatBar;
+	private var corBar:StatBar;
+	private var hpBar:StatBar;
+	private var lustBar:StatBar;
+	private var fatigueBar:StatBar;
+	private var soulforceBar:StatBar;
+	private var hungerBar:StatBar;
+	private var esteemBar:StatBar;
+	private var willBar:StatBar;
+	private var obeyBar:StatBar;
+	private var levelBar:StatBar;
+	private var xpBar:StatBar;
+	private var gemsBar:StatBar;
 
-        //protected var model:GameModel;
+	private var allStats:Array;
 
-        public function StatsView(mainView:MainView/*, model:GameModel*/) {
-            super();
 
-            if (! mainView) {
-                return;
-            }
 
-            //this.model = model;
-			addChild(timeBG);
-			addChild(sideBarBG);
-			addChild(strBar);
-			addChild(strText);
-			addChild(strNum);
-			addChild(touBar);
-			addChild(touText);
-			addChild(touNum);
-			addChild(speBar);
-			addChild(speText);
-			addChild(speNum);
-			addChild(inteBar);
-			addChild(inteText);
-			addChild(inteNum);
-			addChild(libBar);
-			addChild(libText);
-			addChild(libNum);
-			addChild(sensBar);
-			addChild(senText);
-			addChild(senNum);
-			addChild(corBar);
-			addChild(corText);
-			addChild(corNum);
-			addChild(HPBar);
-			addChild(HPText);
-			addChild(HPNum);
-			addChild(lustBar);
-			addChild(minLustBar);
-			addChild(lustText);
-			addChild(lustNum);
-			addChild(fatigueBar);
-			addChild(fatigueText);
-			addChild(fatigueNum);
-			addChild(hungerBar);
-			addChild(hungerText);
-			addChild(hungerNum);
-			addChild(esteemBar);
-			addChild(esteemText);
-			addChild(esteemNum);
-			addChild(willBar);
-			addChild(willText);
-			addChild(willNum);
-			addChild(obeyBar);
-			addChild(obeyText);
-			addChild(obeyNum);
-			addChild(levelText);
-			addChild(levelNum);
-			addChild(xpBar);
-			addChild(xpText);
-			addChild(xpNum);
-			addChild(nameText);
-			addChild(coreStatsText);
-			addChild(advancementText);
-			addChild(combatStatsText);
-			addChild(gemsText);
-			addChild(gemsNum);
-			addChild(timeText);
-			addChild(strUp);
-			addChild(strDown);
-			addChild(touUp);
-			addChild(touDown);
-			addChild(speUp);
-			addChild(speDown);
-			addChild(inteUp);
-			addChild(inteDown);
-			addChild(libUp);
-			addChild(libDown);
-			addChild(sensUp);
-			addChild(sensDown);
-			addChild(corUp);
-			addChild(corDown);
-			addChild(hpUp);
-			addChild(hpDown);
-			addChild(lustUp);
-			addChild(lustDown);
-			addChild(fatigueUp);
-			addChild(fatigueDown);
-			addChild(hungerUp);
-			addChild(hungerDown);
-			addChild(esteemUp);
-			addChild(esteemDown);
-			addChild(willUp);
-			addChild(willDown);
-			addChild(obeyUp);
-			addChild(obeyDown);
-			addChild(xpUp);
-			addChild(xpDown);
-			addChild(levelUp);
-        }
-
-		//Will be handled in one of class files.
-        /*protected function setStatText(name:String, value:*) {
-            if (/Num$/.test(name))
-			{
-				var fVal:* = Math.floor(value);
-				var dispText:String;
-				
-				if (fVal >= 1000000)
-				{
-					dispText = "++++";
-				}
-				else
-				{
-					dispText = String(fVal);
-				}
-				
-                (this.getChildByName(name) as TextField).htmlText = dispText
+	public function StatsView(mainView:MainView/*, model:GameModel*/) {
+		super({
+			width: MainView.STATBAR_W,
+			height: MainView.STATBAR_H,
+			layoutConfig: {
+				padding: MainView.GAP,
+				type: 'flow',
+				direction: 'column',
+				ignoreHidden: true,
+				gap: 2
 			}
-            else
-                (this.getChildByName(name) as TextField).htmlText = value;
-        }*/
+		});
+		const LABEL_FORMAT:Object = {
+			font:'Times New Roman',
+			bold:true,
+			size:22
+		};
+		const TIME_FORMAT:Object = {
+			font:'Lucida Sans Typewriter',
+			size:18
+		};
+		StatBar.setDefaultOptions({
+			barColor: '#600000',
+			width: innerWidth
+		});
+		sideBarBG     = addBitmapDataSprite({
+			width: MainView.STATBAR_W,
+			height: MainView.STATBAR_H,
+			stretch: true
+		},{ ignore:true });
+		nameText      = addTextField({
+			defaultTextFormat: LABEL_FORMAT
+		});
+		coreStatsText = addTextField({
+			text: 'Core stats:',
+			defaultTextFormat: LABEL_FORMAT
+		},{before:4});
+		addElement(strBar = new StatBar({statName: "Strength:"}));
+		addElement(touBar = new StatBar({statName: "Toughness:"}));
+		addElement(speBar = new StatBar({statName: "Speed:"}));
+		addElement(intBar = new StatBar({statName: "Intelligence:"}));
+		addElement(wisBar = new StatBar({statName: "Wisdom:"}));
+		addElement(libBar = new StatBar({statName: "Libido:"}));
+		addElement(senBar = new StatBar({statName: "Sensitivity:"}));
+		addElement(corBar = new StatBar({statName: "Corruption:"}));
+		combatStatsText = addTextField({
+			text: 'Combat stats',
+			defaultTextFormat: LABEL_FORMAT
+		},{before:4});
+		addElement(hpBar = new StatBar({
+			statName: "HP:",
+			showMax : true
+		}));
+		addElement(lustBar = new StatBar({
+			statName   : "Lust:",
+			minBarColor: '#ff0000',
+			hasMinBar  : true,
+			showMax    : true
+		}));
+		addElement(fatigueBar = new StatBar({
+			statName: "Fatigue:",
+			showMax : true
+		}));
+		addElement(soulforceBar = new StatBar({
+			statName: "Soulforce:",
+			showMax : true
+		}));
+		addElement(hungerBar = new StatBar({
+			statName: "Satiety:",
+			showMax : true
+		}));
+		addElement(esteemBar = new StatBar({
+			statName: "Self Esteem:",
+			showMax : true
+		}));
+		addElement(willBar = new StatBar({
+			statName: "Willpower:",
+			showMax : true
+		}));
+		addElement(obeyBar = new StatBar({
+			statName: "Obedience:",
+			showMax : true
+		}));
+		advancementText = addTextField({
+			text:'Advancement',
+			defaultTextFormat: LABEL_FORMAT
+		},{before:4});
+		addElement(levelBar = new StatBar({
+			statName: "Level:",
+			hasBar  : false
+		}));
+		addElement(xpBar = new StatBar({
+			statName: "XP:"
+		}));
+		addElement(gemsBar = new StatBar({
+			statName: "Gems:",
+			hasBar: false
+		}));
+		timeText = addTextField({
+			htmlText: '<u>Day#: 0</u>\nTime: 00:00',
+			defaultTextFormat: TIME_FORMAT
+		},{before:4});
+		///////////////////////////
+		allStats = [];
+		for (var ci:int = 0, cn:int = this.numElements; ci < cn; ci++) {
+			var e:StatBar = this.getElementAt(ci) as StatBar;
+			if (e) allStats.push(e);
+		}
+	}
 
-        /*protected function setStatBar(name:String, progress:Number) {
-            this.getChildByName(name).width = Math.round(progress * 115);
-        }*/
 
-        // <- statsScreenRefresh (Will be done in class file.)
-        /*public function refresh():void {
-            // this.show();
-            // this.visible = true;
+	public function show():void {
+		this.visible = true;
+	}
 
-            setStatText("coreStatsText",
-                "<b><u>Name: {NAME}</u>\nCore Stats</b>"
-                    .replace("{NAME}", model.player.short));
+	public function hide():void {
+		this.visible = false;
+	}
 
-            setStatText("strNum", model.player.str);
-            setStatText("touNum", model.player.tou);
-            setStatText("speNum", model.player.spe);
-            setStatText("inteNum", model.player.inte);
-            setStatText("libNum", model.player.lib);
-            setStatText("senNum", model.player.sens);
-            setStatText("corNum", model.player.cor);
-            setStatText("fatigueNum", model.player.fatigue + "/" + model.player.maxFatigue());
-            setStatText("HPNum", model.player.HP + "/" + model.player.maxHP());
-            setStatText("lustNum", model.player.lust + "/" + model.player.maxLust());
-            setStatText("levelNum", model.player.level);
-            setStatText("xpNum", model.player.XP + " / " + model.player.level * 100 + " (" + Math.floor(model.player.XP / (model.player.level * 100)) + "%)");
+	// <- hideUpDown
+	public function hideUpDown():void {
+		var ci:int, cc:int = this.allStats.length;
+		for (ci = 0; ci < cc; ++ci) {
+			var c:StatBar = this.allStats[ci];
+			c.isUp        = false;
+			c.isDown      = false;
+		}
+	}
 
-            setStatText("timeText",
-                "<b><u>Day#: {DAYS}</u></b>\n<b>Time: {HOURS}:{MINUTES}</b>"
-                    .replace("{DAYS}", model.time.days)
-                    .replace("{HOURS}", model.time.hours) 
-					.replace("{MINUTES}", model.time.minutes));
+	public function showLevelUp():void {
+		this.levelBar.isUp = true;
+	}
 
-            setStatBar("strBar", model.player.str/100);
-            setStatBar("touBar", model.player.tou/100);
-            setStatBar("speBar", model.player.spe/100);
-            setStatBar("inteBar", model.player.inte/100);
-            setStatBar("libBar", model.player.lib/100);
-            setStatBar("sensBar", model.player.sens/100);
-            setStatBar("corBar", model.player.cor/100);
-            setStatBar("fatigueBar", model.player.fatigue / model.player.maxFatigue());
-            setStatBar("HPBar", model.player.HP / model.player.maxHP());
-            setStatBar("lustBar", model.player.lust / model.player.maxLust());
-			setStatBar("minLustBar", model.player.minLust / model.player.maxLust());
-			setStatBar("XPBar", (model.player.XP / (model.player.level * 100)));
-            setStatText("gemsNum", model.player.gems);
-        }*/
+	public function hideLevelUp():void {
+		this.levelBar.isUp = false;
+	}
 
-        // <- showStats
-        public function show():void {
-            // make all the stats DOs visible.
-            //this.refresh();
-            this.visible = true;
-        }
+	public function statByName(statName:String):StatBar {
+		switch (statName) {
+			case 'str':
+				return strBar;
+			case 'tou':
+				return touBar;
+			case 'spe':
+				return speBar;
+			case 'inte':
+			case 'int':
+				return intBar;
+			case 'wis':
+				return wisBar;
+			case 'lib':
+				return libBar;
+			case 'sens':
+			case 'sen':
+				return senBar;
+			case 'cor':
+				return corBar;
+			case 'hp':
+				return hpBar;
+			case 'lust':
+				return lustBar;
+			case 'fatigue':
+				return fatigueBar;
+			case 'soulforce':
+				return soulforceBar;
+			case 'hunger':
+				return hungerBar;
+			case 'level':
+				return levelBar;
+			case 'xp':
+				return xpBar;
+			case 'gems':
+				return gemsBar;
+		}
+		return null;
+	}
+	public function showStatUp(statName:String):void {
+		var stat:StatBar = statByName(statName);
+		stat.isUp        = true;
+	}
 
-        // <- hideStats
-        public function hide():void {
-            // body...
-            this.visible = false;
-        }
+	public function showStatDown(statName:String):void {
+		var stat:StatBar = statByName(statName);
+		stat.isDown      = true;
+	}
+	public function toggleHungerBar(show:Boolean):void {
+		hungerBar.visible = show;
+		invalidateLayout();
+	}
+	public function refreshStats(game:CoC):void {
+		var player:Player            = game.player;
+		var maxes:Object      = player.getAllMaxStats();
+		nameText.htmlText     = "<b>Name: " + player.short + "</b>";
+		strBar.maxValue       = maxes.str;
+		strBar.value          = player.str;
+		touBar.maxValue       = maxes.tou;
+		touBar.value          = player.tou;
+		speBar.maxValue       = maxes.spe;
+		speBar.value          = player.spe;
+		intBar.maxValue       = maxes.inte;
+		intBar.value          = player.inte;
+		wisBar.maxValue       = maxes.wis;
+		wisBar.value          = player.wis;
+		libBar.maxValue       = maxes.lib;
+		libBar.value          = player.lib;
+		hpBar.maxValue        = player.maxHP();
+		hpBar.value           = player.HP;
+		lustBar.maxValue      = player.maxLust();
+		lustBar.minValue      = player.minLust();
+		lustBar.value         = player.lust;
+		fatigueBar.maxValue   = player.maxFatigue();
+		fatigueBar.value      = player.fatigue;
+		soulforceBar.maxValue = player.maxSoulforce();
+		soulforceBar.value    = player.soulforce;
+		hungerBar.maxValue    = player.maxHunger();
+		hungerBar.value       = player.hunger;
+		var inPrison:Boolean          = game.prison.inPrison;
+		esteemBar.visible     = inPrison;
+		willBar.visible       = inPrison;
+		obeyBar.visible       = inPrison;
+		levelBar.visible      = !inPrison;
+		xpBar.visible         = !inPrison;
+		gemsBar.visible       = !inPrison;
+		if (inPrison) {
+			advancementText.htmlText = "<b>Prison Stats</b>";
+			esteemBar.maxValue       = 100;
+			esteemBar.value          = player.esteem;
+			willBar.maxValue         = 100;
+			willBar.value            = player.will;
+			obeyBar.maxValue         = 100;
+			obeyBar.value            = player.obey;
+		} else {
+			advancementText.htmlText = "<b>Advancement</b>";
+			levelBar.value           = player.level;
+			if (player.level < kGAMECLASS.levelCap) {
+				xpBar.maxValue = player.requiredXP();
+				xpBar.value    = player.XP;
+			} else {
+				xpBar.maxValue  = player.XP;
+				xpBar.value     = player.XP;
+				xpBar.valueText = 'MAX';
+			}
+			gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
+		}
 
-        // <- hideUpDown
-        public function hideUpDown():void {
-            var ci:int,
-                cc:int = this.numChildren;
+		var minutesDisplay:String = "" + game.model.time.minutes;
+		if (minutesDisplay.length == 1) minutesDisplay = "0" + minutesDisplay;
 
-            // children also need to be hidden because they're selectively shown on change.
-            for(ci = 0; ci < cc; ++ci) {
-				var c:DisplayObject = this.getChildAt(ci);
-				if (c.name.indexOf("Up")==c.name.length-2 || c.name.indexOf("Down")==c.name.length-4) {
-					c.visible = false;
-				}
-            }
+		var hours:Number = game.model.time.hours;
+		var hrs:String, ampm:String;
+		if (game.flags[kFLAGS.USE_12_HOURS] == 0) {
+			hrs  = "" + hours;
+			ampm = "";
+		} else {
+			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
+			ampm = hours < 12 ? "am" : "pm";
+		}
+		timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
+						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
 
-            this.hideLevelUp();
-        }
+		invalidateLayout();
+	}
 
-        /*public function showUpDown() { //Not used as it would crash.
-            function _oldStatNameFor(statName:String) {
-                return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
-            }
-
-            var statName:String,
-                oldStatName:String,
-                allStats:Array;
-
-            this.upDownsContainer.visible = true;
-
-            allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
-
-            for each(statName in allStats) {
-                oldStatName = _oldStatNameFor(statName);
-
-                if (this.model.player[statName] > this.model.oldStats[oldStatName]) {
-                    this.showStatUp(statName);
-                }
-                if (this.model.player[statName] < this.model.oldStats[oldStatName]) {
-                    this.showStatDown(statName);
-                }
-            }
-        }*/
-
-        public function showLevelUp():void {
-            this.levelUp.visible = true;
-        }
-
-        public function hideLevelUp():void {
-            this.levelUp.visible = false;
-        }
-
-        public function showStatUp(statName:String):void {
-            var statUp:DisplayObject,
-                statDown:DisplayObject;
-
-            statUp = this.getChildByName(statName.toLowerCase() + 'Up');
-            statDown = this.getChildByName(statName.toLowerCase() + 'Down');
-
-            statUp.visible = true;
-            statDown.visible = false;
-        }
-
-        public function showStatDown(statName:String):void {
-            var statUp:DisplayObject,
-                statDown:DisplayObject;
-
-            statUp = this.getChildByName(statName.toLowerCase() + 'Up');
-            statDown = this.getChildByName(statName.toLowerCase() + 'Down');
-
-            statUp.visible = false;
-            statDown.visible = true;
-        }
-    }
+	public function setBackground(bitmapClass:Class):void {
+		sideBarBG.bitmapClass = bitmapClass;
+	}
+	public function setTheme(font:String,
+							 textColor:uint,
+							 barAlpha:Number):void {
+		for each(var e:StatBar in allStats) {
+			e.valueLabel.defaultTextFormat.color = textColor;
+			e.valueLabel.defaultTextFormat.font = font;
+			e.valueLabel.setTextFormat(e.valueLabel.defaultTextFormat);
+			e.nameLabel.defaultTextFormat.color = textColor;
+			e.nameLabel.setTextFormat(e.nameLabel.defaultTextFormat);
+			if (e.bar) e.bar.alpha    = barAlpha;
+			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) * 2);
+		}
+		nameText.defaultTextFormat.color        = textColor;
+		nameText.setTextFormat(nameText.defaultTextFormat);
+		coreStatsText.defaultTextFormat.color   = textColor;
+		coreStatsText.setTextFormat(coreStatsText.defaultTextFormat);
+		combatStatsText.defaultTextFormat.color = textColor;
+		combatStatsText.setTextFormat(combatStatsText.defaultTextFormat);
+		advancementText.defaultTextFormat.color = textColor;
+		advancementText.setTextFormat(advancementText.defaultTextFormat);
+		timeText.defaultTextFormat.color        = textColor;
+	}
+}
 }

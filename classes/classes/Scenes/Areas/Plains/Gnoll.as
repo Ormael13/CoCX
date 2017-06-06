@@ -246,23 +246,7 @@ package classes.Scenes.Areas.Plains
 				addStatusValue(StatusEffects.Constricted, 1, -1);
 				combatRoundOver();
 			}
-//If grappling...
-/* Grappling was never included
-			if (game.gameState == 2) {
-				//temperment - used for determining grapple behaviors
-				//0 - avoid grapples/break grapple
-				//1 - lust determines > 50 grapple
-				//2 - random
-				//3 - love grapples
-				//		if(temperment == 0) eGrappleRetreat();
-				if (temperment == 1) {
-					//			if(lust < 50) eGrappleRetreat();
-					doNext(3);
-				}
-				outputText("Lust Placeholder!!");
-				doNext(3);
-			}
-*/
+
 			if (rand(2) == 0) gnollTease();
 			else {
 				var damage:Number = 0;

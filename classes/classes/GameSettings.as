@@ -3,7 +3,7 @@ import classes.GlobalFlags.*;
 
 
 import coc.view.MainView;
-import coc.view.StatsLayout;
+import coc.view.StatsView;
 
 import flash.display.StageQuality;
 import flash.text.TextFormat;
@@ -28,7 +28,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", getGame().displayControls);
 
-		addButton(14, "Back", getGame().mainMenu);
+		addButton(14, "Back", getGame().mainMenu.mainMenu);
 
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -471,7 +471,7 @@ public class GameSettings extends BaseContent {
 		public function setMainBackground(type:int):void {
 			flags[kFLAGS.BACKGROUND_STYLE]           = type;
 			mainView.background.bitmapClass          = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-			mainView.statsView.sideBarBG.bitmapClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			mainView.statsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
 			settingsScreenInterfaceSettings();
 		}
 

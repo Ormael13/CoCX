@@ -31,9 +31,7 @@ public class MainView extends Block {
 	public static var Background4:Class;
 	[Embed(source="../../../res/ui/backgroundKaizo.png")]
 	public static var BackgroundKaizo:Class;
-	[Embed(source="../../../res/ui/StatsBarBottom.png")]
-	public static var StatsBarTrim:Class;
-	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4, BackgroundKaizo];
+	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4,null, BackgroundKaizo];
 
 	[Embed(source="../../../res/ui/button0.jpg")]
 	public static var ButtonBackground0:Class;
@@ -85,15 +83,16 @@ public class MainView extends Block {
 	internal static const SCREEN_W:Number = 1200;
 	internal static const SCREEN_H:Number = 800;
 
-	internal static const TOPROW_Y:Number       = GAP;
+	internal static const TOPROW_Y:Number       = 0;
 	internal static const TOPROW_H:Number       = 50;
 	internal static const TOPROW_NUMBTNS:Number = 6;
 
 	internal static const STATBAR_W:Number = 205;
-	internal static const STATBAR_Y:Number = TOPROW_Y + TOPROW_H + GAP;
+	internal static const STATBAR_Y:Number = TOPROW_Y + TOPROW_H;
+	internal static const STATBAR_H:Number = SCREEN_H - STATBAR_Y;
 
-	internal static const TEXTZONE_X:Number = STATBAR_W + GAP;
-	internal static const TEXTZONE_Y:Number = TOPROW_H + GAP;
+	internal static const TEXTZONE_X:Number = STATBAR_W;
+	internal static const TEXTZONE_Y:Number = TOPROW_H;
 	internal static const TEXTZONE_W:Number = 770;//SCREEN_W-STATBAR_W+GAP;
 	internal static const TEXTZONE_H:Number = 600;
 
@@ -157,51 +156,41 @@ public class MainView extends Block {
 			bitmapClass: Background1,
 			width      : SCREEN_W,
 			height     : SCREEN_H,
+			fillColor  : 0,
 			repeat     : true
 		}));
 		addElement(topRow = new Block({
+			width  : TOPROW_W,
+			height : TOPROW_H,
 			layoutConfig: {
 				type   : 'grid',
 				cols   : 6,
-				padding: GAP,
-				width  : TOPROW_W
+				padding: GAP
 			}
 		}));
 		topRow.addElement(newGameButton = new CoCButton({
 			labelText  : 'New Game',
 			bitmapClass: ButtonBackground1
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 0,
-//			y          : GAP
 		}));
 		topRow.addElement(dataButton = new CoCButton({
 			labelText  : 'Data',
 			bitmapClass: ButtonBackground2
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 1,
-//			y          : GAP
 		}));
 		topRow.addElement(statsButton = new CoCButton({
 			labelText  : 'Stats',
 			bitmapClass: ButtonBackground3
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 2,
-//			y          : GAP
 		}));
 		topRow.addElement(levelButton = new CoCButton({
 			labelText  : 'Level Up',
 			bitmapClass: ButtonBackground4
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 3,
-//			y          : GAP
 		}));
 		topRow.addElement(perksButton = new CoCButton({
 			labelText  : 'Perks',
 			bitmapClass: ButtonBackground5
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 4,
-//			y          : GAP
 		}));
 		topRow.addElement(appearanceButton = new CoCButton({
 			labelText  : 'Appearance',
 			bitmapClass: ButtonBackground6
-//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 5,
-//			y          : GAP
 		}));
 		addElement(textBGWhite = new BitmapDataSprite({
 			fillColor: '#FFFFFF',
@@ -259,19 +248,12 @@ public class MainView extends Block {
 //		scrollBar.visible = true;
 //		addChild(scrollBar);
 //		scrollBar.scrollTargetName = "mainText";
-		/*if (! model) {
-		 trace("MainView/constructor: Game model not passed in.  Don't publish MainView.fla with Ctrl-Enter/Cmd-Enter.  Rather, go to File > Publish to build the SWC.");
-		 throw new ArgumentError("MainView/constructor: MainView must be constructed with a GameModel as its first argument.");
-		 }*/
-
 		// Init subviews.
 		this.statsView = new StatsView(this/*, this.model*/);
+		this.statsView.y = STATBAR_Y;
 		this.statsView.hide();
-		this.addChild(this.statsView);
+		this.addElement(this.statsView);
 
-		this.toolTipView = new ToolTipView(this/*, this.model*/);
-		this.toolTipView.hide();
-		this.addChild(this.toolTipView);
 
 		this.formatMiscItems();
 
@@ -282,6 +264,9 @@ public class MainView extends Block {
 		for each (button in [newGameButton, dataButton, statsButton, levelButton, perksButton, appearanceButton]) {
 			this.allButtons.push(button);
 		}
+		this.toolTipView = new ToolTipView(this/*, this.model*/);
+		this.toolTipView.hide();
+		this.addElement(this.toolTipView);
 		// disable interaction for any remaining TFs.
 		disableMouseForMostTextFields();
 

@@ -51,7 +51,7 @@ public class DebugInfo extends BaseContent {
 		addButton(1, "Test Input", eventTester);
 		addButton(5, "Parser Tests", doThatTestingThang);
 		addButton(6, "Halt on Errors", toggleHaltSettings);
-		addButton(14, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 	}
 
 	public function toggleHaltSettings():void

@@ -243,7 +243,7 @@ package classes.Scenes
 			addButton(10, "" + achievementsEarned + " of " + achievementsTotal + "", kGAMECLASS.doNothing);
 			addButton(11, "achievements", kGAMECLASS.doNothing);
 			addButton(12, "unlocked", kGAMECLASS.doNothing);
-			addButton(14, "Back", kGAMECLASS.mainMenu);
+			addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
 		
 	}

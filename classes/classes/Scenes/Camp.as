@@ -117,7 +117,6 @@ private function doCamp():void { //Only called by playerMenu
 		
 		getGame().saves.saveGame(player.slotName);
 	}
-	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
 	if (ingnam.inIngnam) { //Ingnam
 		kGAMECLASS.ingnam.menuIngnam();
@@ -567,7 +566,7 @@ private function doCamp():void { //Only called by playerMenu
 	mainView.showMenuButton( MainView.MENU_DATA );
 	showStats();
 	//Change settings of new game buttons to go to main menu
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
 	mainView.newGameButton.toolTipText = "Return to main menu.";
 	mainView.newGameButton.toolTipHeader = "Main Menu";
 	//clear up/down arrows
