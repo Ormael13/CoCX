@@ -35,12 +35,12 @@ package classes.Scenes
 			outputText("-Three new enemies: Alraune (lvl 20 enc in Deepwoods), Snow Lily (lvl 40 enc in Glcial Rift) and Cinderbloom (lvl 40 enc in Vulcanic Crag).\n");
 			outputText("-Finding reason within Kitteh decision I also locks out access to Prison content till it would be more complete than it's now.\n");
 			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
+			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn crr glades when below 7 fox tails\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

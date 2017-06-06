@@ -100,7 +100,8 @@ private function ayaneShop():void {
 	addButton(7, "Fox Jewel", sellFoxJewel);
 	addButton(10, "Agility B.", sellAgilityElixir);
 	addButton(11, "Scholar T.", sellScholarTea);
-	addButton(12, "Vixen Tea", sellVixenTea);
+	addButton(12, "IncenOfInsig", sellIncenseOfInsight);
+	addButton(13, "Vixen Tea", sellVixenTea);
 	addButton(14, "Back", ayaneCampMenu);
 }
 private function sellWhiteKimono():void {
@@ -280,6 +281,24 @@ private function buyScholarTea():void {
 		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
 		player.gems -= 15;
 		inventory.takeItem(consumables.SMART_T, ayaneShop);
+		statScreenRefresh();
+	}
+}
+private function sellIncenseOfInsight():void {
+	clearOutput();
+	outputText("\"<i>These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.</i>\"");
+	doYesNo(buyIncenseOfInsight, ayaneShop);
+}
+private function buyIncenseOfInsight():void {
+	if (player.gems < 15) {
+		clearOutput();
+		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+		doNext(ayaneShop);
+	}
+	else {
+		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+		player.gems -= 15;
+		inventory.takeItem(consumables.INCOINS, ayaneShop);
 		statScreenRefresh();
 	}
 }
