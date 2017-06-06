@@ -1,48 +1,27 @@
 //The code that is responsible for managing MainView.
 package classes 
 {
-	import classes.*
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 import coc.view.BitmapDataSprite;
-
-import coc.view.MainLayout;
+import coc.view.MainView;
 import coc.view.StatsLayout;
 
 import flash.display.BitmapData;
-import flash.display.Shape;
-	import flash.display.GradientType;
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
 import flash.display.Stage;
-import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.text.TextFormat;
-
-	import coc.view.MainView;
-	import coc.view.StatsView;
-	import coc.view.CoCButton;
-	
-	import flash.events.MouseEvent;
-
-	import flash.display.MovieClip;
-    import flash.display.Sprite;
-    import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	
-	import flash.text.Font;
+import flash.events.KeyboardEvent;
+import flash.events.TimerEvent;
+import flash.text.TextFormat;
+import flash.ui.Keyboard;
+import flash.utils.Timer;
 import flash.utils.getQualifiedClassName;
 
 //import flash.text.TextField;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-	import flash.text.TextFieldAutoSize;
-
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
-
-	import flash.utils.Timer;
-
-	//import fl.transition.Tween;
+//import fl.transition.Tween;
 	//import fl.transition.easing.*
 	
 	public class MainViewManager extends BaseContent
@@ -95,7 +74,7 @@ import flash.utils.getQualifiedClassName;
 			barsDecorated = true;
 			var barsToDecorate:Array = ["strBar", "touBar", "speBar", "inteBar", "libBar", "sensBar", "corBar", "HPBar", "lustBar", "fatigueBar", "hungerBar", "esteemBar", "willBar", "obeyBar", "xpBar"];
 			for (var i:int = 0; i < barsToDecorate.length; i++) {
-				var marker:Sprite = new BitmapDataSprite(MainLayout.StatsBarTrim);
+				var marker:Sprite = new BitmapDataSprite(MainView.StatsBarTrim);
 				marker.name = barsToDecorate[i] + "Trim";
 				marker.x = mainView.statsView[barsToDecorate[i]].x - 2;
 				marker.y = mainView.statsView[barsToDecorate[i]].y + 18;
@@ -313,8 +292,8 @@ import flash.utils.getQualifiedClassName;
 				);
 			}
 			//Set background
-			mainView.background.bdClass = MainLayout.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-			mainView.statsView.sideBarBG.bdClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			mainView.background.bitmapClass          = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			mainView.statsView.sideBarBG.bitmapClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
 			//Set font
 			if (flags[kFLAGS.USE_OLD_FONT] > 0) {
 				for (i = 0; i < fontableTexts.length; i++) {
@@ -342,45 +321,18 @@ import flash.utils.getQualifiedClassName;
 		public function hideSprite():void {
 			// Inlined from lib/src/coc/view/MainView.as
 			mainView.sprite.visible = false;
-			mainView.spriteOld.visible = false;
-		}
-		public function showSpriteFrame(frame:int):void {
-			// Inlined from lib/src/coc/view/MainView.as
-			var type:Boolean = flags[kFLAGS.SPRITE_STYLE] == 0;
-			var element:MovieClip;
-			var other:MovieClip;
-			if (type) {
-				other = mainView.spriteOld;
-				element = mainView.sprite;
-			} else if (type == 1) {
-				other = mainView.sprite;
-				element = mainView.spriteOld;
-			} else {
-				return;
-			}
-			other.visible = false;
-			element.visible = true;
-			element.gotoAndStop(frame);
-			rescaleSprite(element);
 		}
 		public function showSpriteBitmap(bmp:BitmapData):void {
 			if (!bmp) return;
-			mainView.spriteOld.visible = false;
-			var element:MovieClip = mainView.sprite;
-			element.gotoAndStop(200);
+			var element:BitmapDataSprite = mainView.sprite;
 			element.visible = true;
-			element.scaleX = 1;
-			element.scaleY = 1;
+			var scale:Number = 80 / bmp.height;
+			element.scaleX = scale;
+			element.scaleY = scale;
 			element.graphics.clear();
 			element.graphics.beginBitmapFill(bmp,null,false,false);
 			element.graphics.drawRect(0, 0, bmp.width, bmp.height);
 			element.graphics.endFill();
-			rescaleSprite(element);
-		}
-		private function rescaleSprite(element:MovieClip):void {
-			var scale:Number = 80 / element.height;
-			element.scaleX = scale;
-			element.scaleY = scale;
 		}
 		//------------
 		// REFRESH

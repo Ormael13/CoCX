@@ -282,67 +282,67 @@
             </ft:defaultTextFormat>
         </ft:TextField>
         <coc:BitmapDataSprite id="strDown" name="strDown"
-                              x="175" y="120" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="120" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="strUp" name="strUp"
-                              x="175" y="120" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="120" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="touDown" name="touDown"
-                              x="175" y="150" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="150" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="touUp" name="touUp"
-                              x="175" y="150" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="150" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="speDown" name="speDown"
-                              x="175" y="180" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="180" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="speUp" name="speUp"
-                              x="175" y="180" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="180" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="inteDown" name="inteDown"
-                              x="175" y="210" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="210" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="inteUp" name="inteUp"
-                              x="175" y="210" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="210" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="libDown" name="libDown"
-                              x="175" y="240" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="240" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="libUp" name="libUp"
-                              x="175" y="240" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="240" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="sensDown" name="sensDown"
-                              x="175" y="270" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="270" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="sensUp" name="sensUp"
-                              x="175" y="270" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="270" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="corDown" name="corDown"
-                              x="175" y="300" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="300" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="corUp" name="corUp"
-                              x="175" y="300" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="300" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="hpDown" name="hpDown"
-                              x="175" y="360" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="360" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="hpUp" name="hpUp"
-                              x="175" y="360" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="360" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="lustDown" name="lustDown"
-                              x="175" y="390" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="390" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="lustUp" name="lustUp"
-                              x="175" y="390" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="390" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="fatigueDown" name="fatigueDown"
-                              x="175" y="420" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="420" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="fatigueUp" name="fatigueUp"
-                              x="175" y="420" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="420" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="hungerDown" name="hungerDown"
-                              x="175" y="450" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="450" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="hungerUp" name="hungerUp"
-                              x="175" y="450" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="450" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="esteemDown" name="esteemDown"
-                              x="175" y="510" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="510" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="esteemUp" name="esteemUp"
-                              x="175" y="510" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="510" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="willDown" name="willDown"
-                              x="175" y="540" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="540" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="willUp" name="willUp"
-                              x="175" y="540" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="540" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="obeyDown" name="obeyDown"
-                              x="175" y="570" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="570" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="obeyUp" name="obeyUp"
-                              x="175" y="570" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="570" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="xpDown" name="xpDown"
-                              x="175" y="540" scaleX="0.6" scaleY="0.6" bdClass="{ArrowDown}"/>
+                              x="175" y="540" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowDown}"/>
         <coc:BitmapDataSprite id="xpUp" name="xpUp"
-                              x="175" y="540" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="540" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="levelUp" name="levelUp"
-                              x="175" y="510" scaleX="0.6" scaleY="0.6" bdClass="{ArrowUp}"/>
+                              x="175" y="510" scaleX="0.6" scaleY="0.6" bitmapClass="{ArrowUp}"/>
         <coc:BitmapDataSprite id="strBar" name="strBar"
                               width="171" height="27" x="6" y="120"
                               fillColor="#660000" alpha="0.3984375"/>

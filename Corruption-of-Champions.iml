@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="CoC-debug">
     <configurations>
       <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$MODULE_DIR$">
-        <dependencies target-player="11.1" framework-linkage="Merged">
+        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -14,6 +14,7 @@
         <compiler-options>
           <map>
             <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;false" />
+            <entry key="compiler.keep-generated-actionscript" value="true" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
@@ -22,7 +23,7 @@
         <packaging-ios />
       </configuration>
       <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$" skip-build="true">
-        <dependencies target-player="11.1" framework-linkage="Merged">
+        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -40,8 +41,8 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-debug-mxml" main-class="coc.view.MainLayout" output-file="CoC-debug-mxml.swf" output-folder="$MODULE_DIR$">
-        <dependencies target-player="11.1" framework-linkage="Merged">
+      <configuration name="CoC-debug-mxml" main-class="coc.view.MainLayout" output-file="CoC-debug-mxml.swf" output-folder="$MODULE_DIR$" skip-build="true">
+        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -72,6 +73,7 @@
       <excludeFolder url="file://$MODULE_DIR$/assets" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/devTools" />
+      <excludeFolder url="file://$MODULE_DIR$/generated" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>
     <orderEntry type="jdk" jdkName="4.6.0" jdkType="Flex SDK Type (new)" />

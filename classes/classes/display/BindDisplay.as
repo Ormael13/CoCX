@@ -1,6 +1,7 @@
 package classes.display 
 {
 import coc.view.BitmapDataSprite;
+import coc.view.MainView;
 
 import flash.display.Bitmap;
 import flash.display.MovieClip;
@@ -11,9 +12,7 @@ import flash.display.MovieClip;
 	import flash.text.TextFormatAlign;
 	import flash.text.AntiAliasType;
 	
-//	import buttonBackground0;
-//	import ButtonLabelFont;
-	
+
 	/**
 	 * Defines a composite display object of all the seperate components required to display a 
 	 * single BoundControlMethod, its associated primary and secondary bindings with the buttons
@@ -104,7 +103,7 @@ import flash.display.MovieClip;
 			
 			for (var i:int = 0; i < 2; i++)
 			{
-				b = new BitmapDataSprite(CoCButton.buttonBackground0);
+				b = new BitmapDataSprite(MainView.ButtonBackground0);
 				b.name = "ctrlBtn" + String(i);
 				b.x = xPos;
 				xPos += BUTTON_X_DELTA;
@@ -118,7 +117,9 @@ import flash.display.MovieClip;
 				tf.antiAliasType = AntiAliasType.ADVANCED;
 				tf.htmlText = "<b>Unbound</b>";
 				
-				button = new CoCButton(tf, b);
+				button = new CoCButton({
+
+				});
 				
 				_buttons.push(button);
 				_buttonBgs.push(b);

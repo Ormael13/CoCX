@@ -16,7 +16,7 @@ package coc.view {
 
 		//protected var model:GameModel;
 
-		public function ToolTipView(mainView:MainLayout/*, model:GameModel*/):void {
+		public function ToolTipView(mainView:MainView/*, model:GameModel*/):void {
 			super();
 			//this.model = model;
 

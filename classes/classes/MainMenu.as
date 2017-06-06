@@ -4,7 +4,6 @@ package classes
 	import classes.GlobalFlags.*;
 	import classes.Scenes.Achievements;
 
-import coc.view.MainLayout;
 import coc.view.MainView;
 import coc.view.StatsLayout;
 
@@ -35,8 +34,8 @@ public class MainMenu extends BaseContent
 			game.mainView.eventTestInput.x = -10207.5;
 			game.mainView.eventTestInput.y = -1055.1;
 			hideStats();
-			game.mainView.background.bdClass = MainLayout.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-			game.mainView.statsView.sideBarBG.bdClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			game.mainView.background.bitmapClass          = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+			game.mainView.statsView.sideBarBG.bitmapClass = StatsLayout.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
 			game.mainViewManager.startUpButtons();
 			game.saves.loadPermObject();
 			game.mainViewManager.setTheme();

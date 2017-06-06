@@ -119,7 +119,7 @@ the text from being too boring.
 	// Add in descriptions for the include statements. Many of the description text code is inside of these.
 	// Suggest moving or removing old comments referencing things that aren't needed anymore.
 		
-	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
+	[SWF( width="1200", height="800", pageTitle="Corruption of Champions" )]
 
 	public class CoC extends MovieClip 
 	{

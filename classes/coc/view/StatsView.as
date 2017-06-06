@@ -15,7 +15,7 @@ package coc.view {
 
         //protected var model:GameModel;
 
-        public function StatsView(mainView:MainLayout/*, model:GameModel*/) {
+        public function StatsView(mainView:MainView/*, model:GameModel*/) {
             super();
 
             if (! mainView) {

@@ -12,51 +12,63 @@
  ****/
 
 package coc.view {
-import classes.GlobalFlags.kGAMECLASS;
-
-import coc.view.CoCButton;
-
+import fl.controls.ComboBox;
 import fl.controls.UIScrollBar;
 
-import flash.display.BitmapData;
-
-import flash.display.DisplayObjectContainer;
-import flash.display.IGraphicsData;
-
-import flash.display.MovieClip;
-import flash.display.DisplayObject;
-import flash.display.InteractiveObject;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.text.Font;
 import flash.text.TextField;
-import flash.text.TextFieldType;
-import flash.text.TextFormat;
-import flash.text.TextFormatAlign;
 
-import fl.controls.ComboBox;
-import fl.data.DataProvider;
+public class MainView extends Block {
+	[Embed(source="../../../res/ui/background1.png")]
+	public static var Background1:Class;
+	[Embed(source="../../../res/ui/background2.png")]
+	public static var Background2:Class;
+	[Embed(source="../../../res/ui/background3.png")]
+	public static var Background3:Class;
+	[Embed(source="../../../res/ui/background4.png")]
+	public static var Background4:Class;
+	[Embed(source="../../../res/ui/backgroundKaizo.png")]
+	public static var BackgroundKaizo:Class;
+	[Embed(source="../../../res/ui/StatsBarBottom.png")]
+	public static var StatsBarTrim:Class;
+	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4, BackgroundKaizo];
 
-import flash.utils.getQualifiedClassName;
+	[Embed(source="../../../res/ui/button0.jpg")]
+	public static var ButtonBackground0:Class;
+	[Embed(source="../../../res/ui/button1.jpg")]
+	public static var ButtonBackground1:Class;
+	[Embed(source="../../../res/ui/button2.jpg")]
+	public static var ButtonBackground2:Class;
+	[Embed(source="../../../res/ui/button3.jpg")]
+	public static var ButtonBackground3:Class;
+	[Embed(source="../../../res/ui/button4.jpg")]
+	public static var ButtonBackground4:Class;
+	[Embed(source="../../../res/ui/button5.jpg")]
+	public static var ButtonBackground5:Class;
+	[Embed(source="../../../res/ui/button6.jpg")]
+	public static var ButtonBackground6:Class;
+	[Embed(source="../../../res/ui/button7.jpg")]
+	public static var ButtonBackground7:Class;
+	[Embed(source="../../../res/ui/button8.jpg")]
+	public static var ButtonBackground8:Class;
+	[Embed(source="../../../res/ui/button9.jpg")]
+	public static var ButtonBackground9:Class;
+	public static var ButtonBackgrounds:Array = [
+		ButtonBackground0,
+		ButtonBackground1,
+		ButtonBackground2,
+		ButtonBackground3,
+		ButtonBackground4,
+		ButtonBackground5,
+		ButtonBackground6,
+		ButtonBackground7,
+		ButtonBackground8,
+		ButtonBackground9,
+	];
 
-import mx.controls.Text;
-import mx.controls.VScrollBar;
 
-//import coc.model.GameModel;
-
-//import buttonBackground0;
-//import buttonBackground1;
-//import buttonBackground2;
-//import buttonBackground3;
-//import buttonBackground4;
-//import buttonBackground5;
-//import buttonBackground6;
-//import buttonBackground7;
-//import buttonBackground8;
-//import buttonBackground9;
-
-public class MainView extends MainLayout {
 	// Menu button names.
 	public static const MENU_NEW_MAIN:String   = 'newGame';
 	public static const MENU_DATA:String       = 'data';
@@ -65,81 +77,182 @@ public class MainView extends MainLayout {
 	public static const MENU_PERKS:String      = 'perks';
 	public static const MENU_APPEARANCE:String = 'appearance';
 
-	private static const BOTTOM_BUTTON_COUNT:int         = 15;
-	private static const BOTTOM_BUTTON_PER_ROW_COUNT:int = 5;
 
-	private static const BUTTON_X_OFFSET:Number    = 200;
-	private static const BUTTON_Y_OFFSET:Number    = 668;
-	private static const BUTTON_X_DELTA:Number     = 160;
-	private static const BUTTON_Y_DELTA:Number     = 45;
-	private static const BUTTON_REAL_WIDTH:Number  = 150;
-	private static const BUTTON_REAL_HEIGHT:Number = 40;
+	internal static const GAP:Number   = 4;
+	internal static const BTN_W:Number = 150;
+	internal static const BTN_H:Number = 40;
 
+	internal static const SCREEN_W:Number = 1200;
+	internal static const SCREEN_H:Number = 800;
+
+	internal static const TOPROW_Y:Number       = GAP;
+	internal static const TOPROW_H:Number       = 50;
+	internal static const TOPROW_NUMBTNS:Number = 6;
+
+	internal static const STATBAR_W:Number = 205;
+	internal static const STATBAR_Y:Number = TOPROW_Y + TOPROW_H + GAP;
+
+	internal static const TEXTZONE_X:Number = STATBAR_W + GAP;
+	internal static const TEXTZONE_Y:Number = TOPROW_H + GAP;
+	internal static const TEXTZONE_W:Number = 770;//SCREEN_W-STATBAR_W+GAP;
+	internal static const TEXTZONE_H:Number = 600;
+
+	internal static const SPRITE_W:Number = 80;
+	internal static const SPRITE_H:Number = 80;
+	internal static const SPRITE_X:Number = SCREEN_W - SPRITE_W - GAP;
+	internal static const SPRITE_Y:Number = SCREEN_H - SPRITE_H - GAP;
+
+	internal static const TOPROW_W:Number = STATBAR_W + 2 * GAP + TEXTZONE_W;
+
+	internal static const BOTTOM_X:Number         = STATBAR_W + GAP;
+	internal static const BOTTOM_COLS:Number      = 5;
+	internal static const BOTTOM_ROWS:Number      = 3;
+	internal static const BOTTOM_BUTTON_COUNT:int = BOTTOM_COLS * BOTTOM_ROWS;
+	internal static const BOTTOM_H:Number         = (GAP + BTN_H) * BOTTOM_ROWS;
+	internal static const BOTTOM_W:Number         = TEXTZONE_W;
+	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS);
+	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H;
+
+	private var blackBackground:BitmapDataSprite;
+	public var textBGWhite:BitmapDataSprite;
+	public var textBGTan:BitmapDataSprite;
+	public var background:BitmapDataSprite;
+	public var sprite:BitmapDataSprite;
+
+	public var mainText:TextField;
+	public var nameBox:TextField;
+	public var eventTestInput:TextField;
+	public var aCb:ComboBox;
 
 	public var toolTipView:ToolTipView;
 	public var statsView:StatsView;
 	public var sideBarDecoration:Sprite;
+
 	public var bottomButtons:Array;
-	public var bottomButtonTexts:Array; // <TextField>
-	public var bottomButtonBGs:Array; // <Sprite>
-	public var menuButtonTexts:Array;
-	public var menuButtonBGs:Array;
 	private var currentActiveButtons:Array;
-	public var aCb:ComboBox;
-	protected var options:Object;
-	protected var allButtons:Array;
+	private var allButtons:Array;
+	private var topRow:Block;
 	public var newGameButton:CoCButton;
 	public var dataButton:CoCButton;
 	public var statsButton:CoCButton;
 	public var levelButton:CoCButton;
 	public var perksButton:CoCButton;
 	public var appearanceButton:CoCButton;
-	protected var callbacks:Object = {};
 	public var scrollBar:UIScrollBar;
 
+	protected var callbacks:Object = {};
+	protected var options:Object;
 
-	public function MainView(/*model:GameModel = null, options:Object = null*/):void {
-		// Note: Currently we can't touch this on construction
-		// due to the code being a mess.  We'll fix that at some point.
-		// maybe even get like update events or some shit like real MV*s or something.
-		//this.model = model;
-		//this.options = options || {} Is this even used?
+	public function MainView():void {
 		super();
-		addEventListener("addedToStage",_initHandler);
-	}
-	public static var _layout:DisplayObjectContainer = null;
-	private function _initHandler(e:Event):void {
-		if (_layout) {
-			for (var i:int = 0, n:int = _layout.numChildren; i < n; i++) {
-				var child:DisplayObject = _layout.getChildAt(i);
-				trace("Moving " + child.name + " (" + getQualifiedClassName(child) + ")");
-				this.addChild(child);
-				this[child.name] = child;
+		addElement(blackBackground = new BitmapDataSprite({
+			bitmapClass: ButtonBackground2,
+			x          : -SCREEN_W / 2,
+			width      : SCREEN_W * 2,
+			height     : SCREEN_H * 2,
+			y          : -SCREEN_H / 2,
+			fillColor  : '#000000'
+		}), {});
+		addElement(background = new BitmapDataSprite({
+			bitmapClass: Background1,
+			width      : SCREEN_W,
+			height     : SCREEN_H,
+			repeat     : true
+		}));
+		addElement(topRow = new Block({
+			layoutConfig: {
+				type   : 'grid',
+				cols   : 6,
+				padding: GAP,
+				width  : TOPROW_W
 			}
-			trace("Moved " + n + " children from Layout");
-		}
-		addChild(blackBackground);
-		addChild(background);
-		addChild(appearanceBG);
-		addChild(appearanceText);
-		addChild(perksBG);
-		addChild(perksText);
-		addChild(levelBG);
-		addChild(levelText2);
-		addChild(statsBG);
-		addChild(statsText);
-		addChild(dataBG);
-		addChild(dataText);
-		addChild(newGameText);
-		addChild(newGameBG);
-
-		addChild(textBGWhite);
-		addChild(textBGTan);
-		addChild(mainText);
-		addChild(nameBox);
-		addChild(eventTestInput);
-		addChild(spriteOld);
-		addChild(sprite);
+		}));
+		topRow.addElement(newGameButton = new CoCButton({
+			labelText  : 'New Game',
+			bitmapClass: ButtonBackground1
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 0,
+//			y          : GAP
+		}));
+		topRow.addElement(dataButton = new CoCButton({
+			labelText  : 'Data',
+			bitmapClass: ButtonBackground2
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 1,
+//			y          : GAP
+		}));
+		topRow.addElement(statsButton = new CoCButton({
+			labelText  : 'Stats',
+			bitmapClass: ButtonBackground3
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 2,
+//			y          : GAP
+		}));
+		topRow.addElement(levelButton = new CoCButton({
+			labelText  : 'Level Up',
+			bitmapClass: ButtonBackground4
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 3,
+//			y          : GAP
+		}));
+		topRow.addElement(perksButton = new CoCButton({
+			labelText  : 'Perks',
+			bitmapClass: ButtonBackground5
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 4,
+//			y          : GAP
+		}));
+		topRow.addElement(appearanceButton = new CoCButton({
+			labelText  : 'Appearance',
+			bitmapClass: ButtonBackground6
+//			x          : TOPROW_HGAP + (TOPROW_HGAP * 2 + BTN_W) * 5,
+//			y          : GAP
+		}));
+		addElement(textBGWhite = new BitmapDataSprite({
+			fillColor: '#FFFFFF',
+			x        : TEXTZONE_X,
+			y        : TEXTZONE_Y,
+			width    : TEXTZONE_W,
+			height   : TEXTZONE_H
+		}));
+		addElement(textBGTan = new BitmapDataSprite({
+			fillColor: '#EBD5A6',
+			x        : TEXTZONE_X,
+			y        : TEXTZONE_Y,
+			width    : TEXTZONE_W,
+			height   : TEXTZONE_H
+		}));
+		mainText       = addTextField({
+			multiline        : true,
+			wordWrap         : true,
+			x                : TEXTZONE_X,
+			y                : TEXTZONE_Y,
+			width            : TEXTZONE_W,
+			height           : TEXTZONE_H,
+			defaultTextFormat: {
+				size: 20
+			}
+		});
+		nameBox        = addTextField({
+			border : true,
+			type   : 'input',
+			visible: false,
+			width  : 160,
+			height : 25
+		});
+		eventTestInput = addTextField({
+			type             : 'input',
+			border           : 'true',
+			visible          : false,
+			text             : 'Paste event text & codes here.',
+			x                : TEXTZONE_X,
+			y                : TEXTZONE_Y,
+			width            : TEXTZONE_W,
+			height           : TEXTZONE_H,
+			defaultTextFormat: {
+				size: 16
+			}
+		});
+		addElement(sprite = new BitmapDataSprite({
+			x      : SPRITE_X,
+			y      : SPRITE_Y,
+			stretch: true
+		}));
 		scrollBar = new UIScrollBar();
 //		scrollBar.name = "scrollBar";
 //		scrollBar.direction = "vertical";
@@ -165,29 +278,31 @@ public class MainView extends MainLayout {
 		this.allButtons = [];
 
 		createBottomButtons();
-		createMenuButtons();
-
+		var button:CoCButton;
+		for each (button in [newGameButton, dataButton, statsButton, levelButton, perksButton, appearanceButton]) {
+			this.allButtons.push(button);
+		}
 		// disable interaction for any remaining TFs.
 		disableMouseForMostTextFields();
 
 		// hook!
 		hookBottomButtons();
 		hookAllButtons();
-		this.width = 1000;
+		this.width  = 1000;
 		this.height = 800;
 		this.scaleX = 1;
 		this.scaleY = 1;
 	}
 
 	/*override public function get width():Number {
-		return 1000;
-	}
-	override public function get height():Number {
-		return 800;
-	}
-	override public function get scaleX():Number {
-		return 1;
-	}*/
+	 return 1000;
+	 }
+	 override public function get height():Number {
+	 return 800;
+	 }
+	 override public function get scaleX():Number {
+	 return 1;
+	 }*/
 //////// Initialization methods. /////////
 
 	protected function formatMiscItems():void {
@@ -195,7 +310,7 @@ public class MainView extends MainLayout {
 
 //		this.nameBox.maxChars = 54;
 
-		this.sideBarDecoration = getChildByName("statsBarMarker") as Sprite;
+		this.sideBarDecoration = getElementByName("statsBarMarker") as Sprite;
 
 		this.aCb               = new ComboBox();
 		this.aCb.dropdownWidth = 200;
@@ -237,94 +352,33 @@ public class MainView extends MainLayout {
 	// positions them,
 	// and also assigns their index to a bottomIndex property on them.
 	protected function createBottomButtons():void {
-		var b:Sprite, bgClasses:Array,
+		var b:Sprite,
 			bi:int, r:int, c:int,
-			backgroundChildIndex:int,
 			button:CoCButton;
 
-		this.bottomButtonBGs = [];
-		this.bottomButtons   = [];
-		bgClasses            = [
-			CoCButton.buttonBackground0,
-			CoCButton.buttonBackground1,
-			CoCButton.buttonBackground2,
-			CoCButton.buttonBackground3,
-			CoCButton.buttonBackground4,
-			CoCButton.buttonBackground5,
-			CoCButton.buttonBackground6,
-			CoCButton.buttonBackground7,
-			CoCButton.buttonBackground8,
-			CoCButton.buttonBackground9];
+		this.bottomButtons = [];
 
-		backgroundChildIndex = this.getChildIndex(background);
 		//var originalTextFormat:TextFormat = this.toolTipView.hd.getTextFormat();
 //		var buttonFont:Font  = new ButtonLabelFont();
 		for (bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi) {
-			b = new BitmapDataSprite(bgClasses[bi % 10]);
-			b.name = 'b' + String((bi + 1) % 10) + 'BG';
+			r = (bi / BOTTOM_COLS) << 0;
+			c = bi % BOTTOM_COLS;
 
-			r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
-			c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
+//			b.x      = BUTTON_X_OFFSET + c * BUTTON_X_DELTA;
+//			b.y      = BUTTON_Y_OFFSET + r * BUTTON_Y_DELTA;
+//			b.width  = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
+//			b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
 
-			b.x      = BUTTON_X_OFFSET + c * BUTTON_X_DELTA;
-			b.y      = BUTTON_Y_OFFSET + r * BUTTON_Y_DELTA;
-			b.width  = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
-			b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
-			//Create new TextField.
-			var labelText:TextField     = new TextField();
-			labelText.x                 = b.x + 2;
-			labelText.y                 = b.y + 2;
-			labelText.width             = b.width - 4;
-			labelText.height            = b.height - 4;
-//			labelText.embedFonts        = true;
-			//Create format.
-			var labelFormat:TextFormat  = new TextFormat();
-			labelFormat.font            = CoCButton.ButtonLabelFontName;
-			labelFormat.bold            = true;
-			labelFormat.align           = TextFormatAlign.CENTER;
-			labelFormat.size            = 18;
-			//Assign text format.
-			labelText.defaultTextFormat = labelFormat;
-			//Create button and push.
-			button                      = new CoCButton(labelText, b);
-			this.bottomButtonBGs.push(b);
+			button = new CoCButton({
+				bitmapClass: ButtonBackgrounds[bi % 10],
+				visible    : false,
+				x          : BOTTOM_X + BOTTOM_HGAP + c * (BOTTOM_HGAP * 2 + BTN_W),
+				y          : BOTTOM_Y + r * (GAP + BTN_H)
+			});
 			this.bottomButtons.push(button);
-			this.addChildAt(button, backgroundChildIndex + 1);
+			this.addElement(button);
 		}
 		this.allButtons = this.allButtons.concat(this.bottomButtons);
-	}
-
-	protected function createMenuButtons():void {
-		var btf:TextField, bbg:Sprite,
-			bn:String,
-			backgroundChildIndex:int,
-			buttonNames:Array,
-			button:CoCButton;
-
-		buttonNames = [
-			MENU_NEW_MAIN,
-			MENU_DATA,
-			MENU_STATS,
-			MENU_LEVEL,
-			MENU_PERKS,
-			MENU_APPEARANCE
-		];
-		appearanceBG.graphics.drawGraphicsData(new <IGraphicsData>[])
-
-		backgroundChildIndex = this.getChildIndex(background);
-
-		for each(bn in buttonNames) {
-			button =
-					new CoCButton(
-							// second case is for levelBG.
-							(this.getChildByName(bn + 'Text2') || this.getChildByName(bn + 'Text')) as TextField,
-							(this.getChildByName(bn + 'BG2') || this.getChildByName(bn + 'BG')) as Sprite
-					);
-
-			this[bn + "Button"] = button
-			this.allButtons.push(button);
-			this.addChildAt(button, backgroundChildIndex + 1);
-		}
 	}
 
 	protected function hookBottomButtons():void {
@@ -366,7 +420,6 @@ public class MainView extends MainLayout {
 		button.callback      = null;
 		button.toolTipHeader = toolTipViewHeader;
 		button.toolTipText   = toolTipViewText;
-		button.alpha         = 0.4;
 		button.visible       = true;
 		button.enabled       = false;
 	}
@@ -398,7 +451,7 @@ public class MainView extends MainLayout {
 		if (currentActiveButtons.length == 0) return;
 
 		for (var i:int = 0; i < currentActiveButtons.length; i++) {
-			var btnIdx:int           = currentActiveButtons[i];
+			var btnIdx:int       = currentActiveButtons[i];
 			var button:CoCButton = this.bottomButtons[btnIdx] as CoCButton;
 
 			button.visible = true;
@@ -406,21 +459,6 @@ public class MainView extends MainLayout {
 	}
 
 	//////// Internal event handlers ////////
-
-	protected function textForBG(bg:DisplayObject):TextField {
-		var textName:String;
-
-		if (!bg) {
-			throw new ArgumentError("MainView.textForBG() must be called with a DisplayObject as its argument.");
-		}
-
-		textName = bg.name.replace(/BG$/, 'Text');
-
-		if (bg.name == 'levelBG')
-			textName += '2';
-
-		return this[textName] as TextField;
-	}
 
 	protected function executeBottomButtonClick(event:Event):void {
 		this.toolTipView.hide();
@@ -470,8 +508,6 @@ public class MainView extends MainLayout {
 	}
 
 	public function hasButton(labelText:String):Boolean {
-		var b:TextField;
-
 		return this.indexOfButtonWithLabel(labelText) !== -1;
 	}
 
@@ -488,7 +524,6 @@ public class MainView extends MainLayout {
 
 	public function clearBottomButtons():void {
 		var i:int;
-
 		for (i = 0; i < BOTTOM_BUTTON_COUNT; ++i) {
 			this.setButton(i);
 		}
@@ -512,19 +547,13 @@ public class MainView extends MainLayout {
 	// This function checks if the button at index has text
 	// that matches at least one of the possible texts passed as an argument.
 	public function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
-		var label:String,
-			buttonText:String;
-
-		buttonText = this.getButtonText(index);
-
-		return (possibleLabels.indexOf(buttonText) != -1);
+		return (possibleLabels.indexOf(this.getButtonText(index)) != -1);
 	}
 
 	public function buttonIsVisible(index:int):Boolean {
 		if (index < 0 || index > BOTTOM_BUTTON_COUNT) {
 			return undefined;
-		}
-		else {
+		} else {
 			return this.bottomButtons[index].visible;
 		}
 	}
@@ -533,7 +562,21 @@ public class MainView extends MainLayout {
 	//////// Menu Button Methods ////////
 
 	protected function getMenuButtonByName(name:String):CoCButton {
-		return this[name + 'Button'] as CoCButton;
+		switch (name) {
+			case MENU_NEW_MAIN:
+				return newGameButton;
+			case MENU_DATA:
+				return dataButton;
+			case MENU_STATS:
+				return statsButton;
+			case MENU_LEVEL:
+				return levelButton;
+			case MENU_PERKS:
+				return perksButton;
+			case MENU_APPEARANCE:
+				return appearanceButton;
+		}
+		return null;
 	}
 
 	////////
@@ -619,12 +662,7 @@ public class MainView extends MainLayout {
 	//////// misc... ////////
 
 	public function invert():void {
-		if (!this.blackBackground.visible) {
-			this.blackBackground.visible = true;
-		}
-		else {
-			this.blackBackground.visible = false;
-		}
+		this.blackBackground.visible = !this.blackBackground.visible;
 	}
 
 	public function clearOutputText():void {
@@ -644,40 +682,8 @@ public class MainView extends MainLayout {
 		this.scrollBar.update();
 	}
 
-	public function selectSprite(index:Number = 0, type:int = 0):void {
-		var scale:Number;
-
-		// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-		if (index < 0) { // = SHOW_SPRITES_FLAG from flagDefs...
-			this.sprite.visible    = false;
-			this.spriteOld.visible = false;
-		}
-		else {
-			if (type == 0) {
-				this.sprite.visible = true;
-				this.sprite.gotoAndStop(index);
-
-				this.sprite.scaleX = 1;
-				this.sprite.scaleY = 1;
-				scale              = 80 / this.sprite.height;
-				this.sprite.scaleX = scale;
-				this.sprite.scaleY = scale;
-			}
-			else if (type == 1) {
-				this.spriteOld.visible = true;
-				this.spriteOld.gotoAndStop(index);
-
-				this.spriteOld.scaleX = 1;
-				this.spriteOld.scaleY = 1;
-				scale                 = 80 / this.spriteOld.height;
-				this.spriteOld.scaleX = scale;
-				this.spriteOld.scaleY = scale;
-			}
-		}
-	}
-
 	public function hideSprite():void {
-		this.selectSprite(-1);
+		this.sprite.visible = false;
 	}
 
 	public function showTestInputPanel():void {
