@@ -3125,9 +3125,8 @@ use namespace kGAMECLASS;
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
-			if (skinType == 6)
-				yggdrasilCounter++;//temporal fix for now till I put true skin tf to code tomorrow or day after tomorrow
-
+			if (skinType == 2)
+				yggdrasilCounter++;
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
 				yggdrasilCounter++;
 			if (lowerBody == 38)

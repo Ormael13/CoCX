@@ -476,7 +476,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8d2";
-			version = ver + " (<b>Race rebalancing (part 4), Metamorph (part 3), World Tree/Yggdrasil TF, Alraune TF</b>)";
+			version = ver + " (<b>Metamorph (part 3), World Tree/Yggdrasil TF, Alraune TF</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

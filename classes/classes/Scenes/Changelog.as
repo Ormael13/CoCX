@@ -22,7 +22,6 @@ package classes.Scenes
 			clearOutput();
 			outputText("<b>Version 0.8d2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Salamander\n");
-			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-Text History. In new games bound to 'H' button; in old saves need manual binding to hotkey.\n");
 			outputText("-Perks Database. It gathers all lvl-up perks with their desc and req. to gain them. Made by aimozg.\n");
 			outputText("-When having enough high plant-morph score and soul sense perk PC can trigger dream about Wolrd Tree. With this it will be added as new souls ense encounter.\n");
@@ -36,15 +35,16 @@ package classes.Scenes
 			outputText("-Finding reason within Kitteh decision I also locks out access to Prison content till it would be more complete than it's now.\n");
 			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
 			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
+			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn corupted glades when below 7 fox tails\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn crr glades when below 7 fox tails\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
