@@ -4852,7 +4852,6 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.NagaVenom)) {
 				spe += statusEffectv1(StatusEffects.NagaVenom);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.NagaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
@@ -4864,13 +4863,11 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'tou' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Frostbite)) {
 				str += statusEffectv1(StatusEffects.Frostbite);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				//stats(0,0,statusEffectv1(StatusEffects.Frostbite),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
 			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
@@ -5471,6 +5468,65 @@ use namespace kGAMECLASS;
 			}
 			
 			return true;
+		}
+		public function orgasmReal():void
+		{
+			game.dynStats("lus=", 0, "res", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+
+			if (countCockSocks("gilded") > 0) {
+				var randomCock:int = rand( cocks.length );
+				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
+				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
+				gems += bonusGems;
+			}
+		}
+		public function orgasm(type:String = 'Default', real:Boolean = true):void
+		{
+			switch (type) {
+					// Start with that, whats easy
+				case 'Vaginal': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+					break;
+				case 'Anal':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+					break;
+				case 'Dick':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
+					break;
+				case 'Lips':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
+					break;
+				case 'Tits':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
+					break;
+				case 'Nipples': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
+					break;
+				case 'Ovi':     break;
+
+					// Now to the more complex types
+				case 'VaginalAnal':
+					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
+					return; // Prevent calling orgasmReal() twice
+
+				case 'DickAnal':
+					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
+					return;
+
+				case 'Default':
+				case 'Generic':
+				default:
+					if (!hasVagina() && !hasCock()) {
+						orgasm('Anal'); // Failsafe for genderless PCs
+						return;
+					}
+
+					if (hasVagina() && hasCock()) {
+						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
+						return;
+					}
+
+					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
+					return;
+			}
+
+			if (real) orgasmReal();
 		}
 
 	}

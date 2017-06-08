@@ -16,6 +16,7 @@
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.internals.ChainedDrop;
+	import classes.internals.MonsterCounters;
 	import classes.internals.RandomDrop;
 	import classes.internals.Utils;
 	import classes.internals.WeightedDrop;
@@ -89,6 +90,7 @@
 		//For enemies
 		public var bonusHP:Number = 0;
 		public var bonusLust:Number = 0;
+		public var monsterCounters:MonsterCounters = null;
 		public var bonusStr:Number = 0;
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
@@ -1127,6 +1129,11 @@
 		 */
 		public final function defeated_(hpVictory:Boolean):void
 		{
+			if (monsterCounters!=null) {
+				monsterCounters.lost_total++;
+				if (hpVictory) monsterCounters.lost_hp++;
+				else monsterCounters.lost_lust++;
+			}
 			if (onDefeated != null) onDefeated(hpVictory);
 			else defeated(hpVictory);
 		}
@@ -1136,6 +1143,11 @@
 		 */
 		public final function won_(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
+			if (monsterCounters!=null) {
+				monsterCounters.won_total++;
+				if (hpVictory) monsterCounters.won_hp++;
+				else monsterCounters.won_lust++;
+			}
 			if (onWon != null) onWon(hpVictory,pcCameWorms);
 			else won(hpVictory,pcCameWorms);
 		}

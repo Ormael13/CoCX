@@ -10,6 +10,8 @@ Corruption-of-Champions.as3proj
 
 *.pyc
 /dist
+/generated
+.idea/shelf
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
 node_modules
