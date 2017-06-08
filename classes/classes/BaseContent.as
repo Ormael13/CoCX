@@ -8,7 +8,8 @@ import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
-	import classes.internals.Utils;
+import classes.internals.RootCounters;
+import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
@@ -891,7 +892,11 @@ import classes.Scenes.Places.Ingnam;
 		{
 			return kGAMECLASS.flags;
 		}
-		
+
+		protected function get counters():RootCounters {
+			return kGAMECLASS.counters;
+		}
+
 		protected function set flags(val:DefaultDict):void
 		{
 			kGAMECLASS.flags = val;
