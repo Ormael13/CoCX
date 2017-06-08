@@ -4853,7 +4853,6 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.NagaVenom)) {
 				spe += statusEffectv1(StatusEffects.NagaVenom);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.NagaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
@@ -4865,13 +4864,11 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'tou' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Frostbite)) {
 				str += statusEffectv1(StatusEffects.Frostbite);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				//stats(0,0,statusEffectv1(StatusEffects.Frostbite),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
 			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);

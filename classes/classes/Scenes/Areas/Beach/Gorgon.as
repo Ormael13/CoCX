@@ -72,7 +72,6 @@ package classes.Scenes.Areas.Beach
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 6) {
-					//stats(0,0,-3,0,0,0,0,0);
 					player.spe -= 5;
 					showStatDown( 'spe' );
 					// speUp.visible = false;

@@ -15,7 +15,6 @@
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 4) {
-					//stats(0,0,-3,0,0,0,0,0);
 					player.spe -= 3;
 					showStatDown( 'spe' );
 					// speUp.visible = false;
@@ -31,7 +30,6 @@
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 3) {
-					//stats(0,0,-2,0,0,0,0,0);
 					player.spe -= 2;
 					showStatDown( 'spe' );
 					// speUp.visible = false;
