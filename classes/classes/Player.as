@@ -312,8 +312,8 @@ use namespace kGAMECLASS;
 			if(skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod);
 			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod);
 			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if(skin.hasBark()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
-			if(skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (8 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
+			if(skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
+			if(skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (10 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod));
 			//Plant score bonuses
@@ -324,6 +324,12 @@ use namespace kGAMECLASS;
 				else armorDef += (2 * (1 + newGamePlusMod));
 			}
 			if (yggdrasilScore() >= 10) armorDef += (10 * (1 + newGamePlusMod));
+			//Dragon score bonuses
+			if (dragonScore() >= 10) {
+				if (dragonScore() >= 28) armorDef += (10 * (1 + newGamePlusMod));
+				else if (dragonScore() >= 20) armorDef += (4 * (1 + newGamePlusMod));
+				else armorDef += (1 * (1 + newGamePlusMod));
+			}
 			//Bonus defense
 			if (armType == ARM_TYPE_YETI) armorDef += (1 * (1 + newGamePlusMod));
 			if (armType == ARM_TYPE_SPIDER || armType == ARM_TYPE_MANTIS || armType == ARM_TYPE_BEE || armType == ARM_TYPE_SALAMANDER) armorDef += (2 * (1 + newGamePlusMod));
@@ -988,7 +994,23 @@ use namespace kGAMECLASS;
 			}
 			if (dragonScore() >= 4)
 			{
-				if (dragonScore() >= 8) {
+				if (dragonScore() >= 28) {
+					if (isTaur()) race = "ancient dragon-taur";
+					else {
+						race = "ancient dragon";
+						if (faceType == 0)
+							race = "ancient dragon-" + mf("man", "girl");
+					}
+				}
+				else if (dragonScore() >= 20) {
+					if (isTaur()) race = " elder dragon-taur";
+					else {
+						race = "elder dragon";
+						if (faceType == 0)
+							race = "elder dragon-" + mf("man", "girl");
+					}
+				}
+				else if (dragonScore() >= 10) {
 					if (isTaur()) race = "dragon-taur";
 					else {
 						race = "dragon";
@@ -1583,7 +1605,7 @@ use namespace kGAMECLASS;
 //				grandchimeraCounter++;
 			if (lizardScore() >= 8)
 				grandchimeraCounter++;
-			if (dragonScore() >= 8)
+			if (dragonScore() >= 10)
 				grandchimeraCounter++;
 /*			if (raccoonScore() >= 4)
 				grandchimeraCounter++;
@@ -2267,8 +2289,8 @@ use namespace kGAMECLASS;
 		public function dragonScore():Number {
 			Begin("Player","racialScore","dragon");
 			var dragonCounter:Number = 0;
-		//	if (faceType == 12)
-		//		dragonCounter++;
+			if (faceType == 12 || faceType == 30)
+				dragonCounter++;
 			if (eyeType == 10)
 				dragonCounter++;
 			if (earType == 10)
@@ -2289,8 +2311,8 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 		//	if (tallness > 120 && dragonCounter > 0)
 		//		dragonCounter++;
-		//	if (skinType == 2 && dragonCounter > 0)
-		//		dragonCounter++;
+			if (skinType == 14)
+				dragonCounter++;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 				dragonCounter += 2;
 			if (hornType == HORNS_DRACONIC_X2)
@@ -4093,28 +4115,29 @@ use namespace kGAMECLASS;
 				}
 			}//+10/10-20
 			if (dragonScore() >= 4) {
-				if (dragonScore() >= 16) {
-				maxStr += (80 * (1 + newGamePlusMod));
-				maxTou += (80 * (1 + newGamePlusMod));
+				if (dragonScore() >= 28) {
+				maxStr += (100 * (1 + newGamePlusMod));
+				maxTou += (100 * (1 + newGamePlusMod));
+				maxSpe += (40 * (1 + newGamePlusMod));
+				maxInt += (50 * (1 + newGamePlusMod));
+				maxWis += (50 * (1 + newGamePlusMod));
+				maxLib += (20 * (1 + newGamePlusMod));
+				}//+60
+				else if (dragonScore() >= 20 && dragonScore() < 28) {
+				maxStr += (95 * (1 + newGamePlusMod));
+				maxTou += (95 * (1 + newGamePlusMod));
 				maxSpe += (20 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (25 * (1 + newGamePlusMod));
+				maxInt += (40 * (1 + newGamePlusMod));
+				maxWis += (40 * (1 + newGamePlusMod));
 				maxLib += (10 * (1 + newGamePlusMod));
 				}
-				else if (dragonScore() >= 12 && dragonScore() < 16) {
-				maxStr += (60 * (1 + newGamePlusMod));
-				maxTou += (60 * (1 + newGamePlusMod));
+				else if (dragonScore() >= 10 && dragonScore() < 20) {
+				maxStr += (50 * (1 + newGamePlusMod));
+				maxTou += (40 * (1 + newGamePlusMod));
 				maxSpe += (10 * (1 + newGamePlusMod));
 				maxInt += (20 * (1 + newGamePlusMod));
 				maxWis += (20 * (1 + newGamePlusMod));
 				maxLib += (10 * (1 + newGamePlusMod));
-				}
-				else if (dragonScore() >= 8 && dragonScore() < 12) {
-				maxStr += (40 * (1 + newGamePlusMod));
-				maxTou += (30 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (20 * (1 + newGamePlusMod));
-				maxWis += (20 * (1 + newGamePlusMod));
 				}
 				else {
 				maxStr += (15 * (1 + newGamePlusMod));
