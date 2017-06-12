@@ -22,7 +22,7 @@ public class MainViewManager extends BaseContent {
 	public var registeredShiftKey:Boolean = false;
 
 	public const textColorArray:Array = [0, 0, 0, 0xFFFFFF, 0xFFFFFF, 0, 0, 0, 0, 0];
-	public const mainColorArray:Array = [0, 0, 0, 0, 0xFFFFFF, 0, 0, 0, 0, 0];
+	public const darkThemes:Array = [false, false, false, false, true, false, false, false, false, false];
 	public const barAlphaArray:Array  = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
 
 	public var statsHidden:Boolean    = false;
@@ -35,6 +35,9 @@ public class MainViewManager extends BaseContent {
 	//------------
 	// SHOW/HIDE
 	//------------
+	public function darkThemeImpl():Boolean {
+		return darkThemes[flags[kFLAGS.BACKGROUND_STYLE]];
+	}
 
 	public function setTheme():void {
 		var i:int = 0; //Will be used for array.

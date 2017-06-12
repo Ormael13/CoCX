@@ -13,43 +13,17 @@ import flash.geom.Matrix;
 public class BitmapDataSprite extends Sprite {
 	public function BitmapDataSprite(options:Object = null) {
 		super();
-		var n:int = 0;
 		if (options) for (var key:String in options) {
 			if (options.hasOwnProperty(key)) {
 				var value:* = options[key];
-				n++;
-				switch (key) {
-					case "bitmap":
-						_bitmap = value as Bitmap;
-						break;
-					case "bitmapClass":
-						_bitmap = (new (value as Class)()) as Bitmap;
-						break;
-					case "fillColor":
-						_fillColor = UIUtils.convertColor(value);
-						break;
-					case "width":
-						_width = +value;
-						break;
-					case "height":
-						_height = +value;
-						break;
-					case "stretch":
-						_stretch = !!value;
-						break;
-					case "repeat":
-						_repeat = !!value;
-						break;
-					default:
-						if (key in this) {
-							this[key] = value;
-						} else {
-							trace("Unknown BitmapDataSprite property", key)
-						}
+				if (key == "fillColor") value = UIUtils.convertColor(value);
+				if (key in this) {
+					this[key] = value;
+				} else {
+					trace("Unknown BitmapDataSprite property", key)
 				}
 			}
 		}
-		if (n) redraw();
 	}
 	private var _bitmap:Bitmap   = null;
 	private var _fillColor:uint  = 0;
@@ -83,12 +57,12 @@ public class BitmapDataSprite extends Sprite {
 		redraw();
 	}
 	override public function set width(value:Number):void {
-		_width      = value;
+		_width = value;
 		redraw();
 		super.width = value;
 	}
 	override public function set height(value:Number):void {
-		_height      = value;
+		_height = value;
 		redraw();
 		super.height = value;
 	}

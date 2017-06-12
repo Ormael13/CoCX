@@ -720,5 +720,15 @@ the text from being too boring.
 	*/
 	public static const STAT_GAIN_CLASSIC:int = 0;
 	public static const STAT_GAIN_DAILY:int = 1;
+	public function flushOutputTextToGUI():void
+	{
+		var fmt:TextFormat = mainView.mainText.defaultTextFormat;
+
+		if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+		fmt.color                           = mainViewManager.darkThemeImpl() ? 0xffffff : 0;
+		mainView.mainText.defaultTextFormat = fmt;
+		mainView.setOutputText(currentText);
+	}
+
 }
 }

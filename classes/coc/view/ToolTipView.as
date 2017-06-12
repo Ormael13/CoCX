@@ -1,5 +1,6 @@
 package coc.view {
-	import flash.display.MovieClip;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.DisplayObject;
 	import flash.text.TextField;
@@ -7,7 +8,9 @@ package coc.view {
 
 	//import coc.model.GameModel;
 
-	public class ToolTipView extends ToolTipLayout {
+	public class ToolTipView extends Block {
+		[Embed(source='../../../res/ui/tooltip.png')]
+		public static var tooltipBg:Class;
 		public var
 			bg:Sprite,
 			ln:Sprite,
@@ -20,30 +23,30 @@ package coc.view {
 			super();
 			//this.model = model;
 
-			this.bg = popUpBG;
-			this.ln = mouseOverLine;
-			this.hd = mouseOverHeader;
-			this.tf = mouseOverText;
-
-			this.bg.x = 0;
-			this.bg.y = 0;
-			
-			this.ln.x = 15;
-			this.ln.y = 40;
-			
-			this.hd.x = 15;
-			this.hd.y = 15;
-			
-			this.tf.x = 15;
-			this.tf.y = 40;
-
-			this.hd.type = TextFieldType.DYNAMIC;
-			this.tf.type = TextFieldType.DYNAMIC;
-
-			this.addChild(this.bg);
-			this.addChild(this.ln);
-			this.addChild(this.hd);
-			this.addChild(this.tf);
+			this.bg = addBitmapDataSprite({
+				x:0,y:0,
+				bitmapClass: tooltipBg
+			});
+			this.ln = addBitmapDataSprite({
+				x:15,y:40,
+				width:320,height:1,fillColor:'#000000'
+			});
+			this.hd = addTextField({
+				x:15,y:15,
+				width:316,height:25.35,
+				multiline:true,wordWrap:false,
+				defaultTextFormat:{
+					size: 18
+				}
+			});
+			this.tf = addTextField({
+				x:15,y:40,
+				width:316,height:176,
+				multiline:true,
+				defaultTextFormat:{
+					size:15
+				}
+			});
 		}
 
 		public function showForButton(button:DisplayObject):void {

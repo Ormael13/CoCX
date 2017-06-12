@@ -274,20 +274,6 @@ public function outputText(output:String):void
 
 }
 
-public function flushOutputTextToGUI():void
-{
-	var fmt:TextFormat = mainView.mainText.getTextFormat();
-	
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
-	
-	mainView.setOutputText(currentText);
-	
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
-	{
-		mainView.mainText.setTextFormat(fmt);
-	}
-	if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-}
 
 public function displayHeader(string:String):void {
 	outputText("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");

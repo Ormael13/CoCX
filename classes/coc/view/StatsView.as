@@ -6,6 +6,7 @@ import classes.Player;
 import classes.internals.Utils;
 
 import flash.text.TextField;
+import flash.text.TextFormat;
 
 public class StatsView extends Block {
 	[Embed(source = "../../../res/ui/sidebar1.png")]
@@ -54,6 +55,8 @@ public class StatsView extends Block {
 
 	public function StatsView(mainView:MainView/*, model:GameModel*/) {
 		super({
+			x    : MainView.STATBAR_X,
+			y    : MainView.STATBAR_Y,
 			width: MainView.STATBAR_W,
 			height: MainView.STATBAR_H,
 			layoutConfig: {
@@ -190,7 +193,7 @@ public class StatsView extends Block {
 	}
 
 	public function statByName(statName:String):StatBar {
-		switch (statName) {
+		switch (statName.toLowerCase()) {
 			case 'str':
 				return strBar;
 			case 'tou':
@@ -321,24 +324,26 @@ public class StatsView extends Block {
 	public function setTheme(font:String,
 							 textColor:uint,
 							 barAlpha:Number):void {
+		var dtf:TextFormat;
 		for each(var e:StatBar in allStats) {
-			e.valueLabel.defaultTextFormat.color = textColor;
-			e.valueLabel.defaultTextFormat.font = font;
-			e.valueLabel.setTextFormat(e.valueLabel.defaultTextFormat);
-			e.nameLabel.defaultTextFormat.color = textColor;
-			e.nameLabel.setTextFormat(e.nameLabel.defaultTextFormat);
+			dtf = e.valueLabel.defaultTextFormat;
+			dtf.color = textColor;
+			dtf.font = font;
+			e.valueLabel.defaultTextFormat = dtf;
+			e.valueLabel.setTextFormat(dtf);
+			dtf = e.nameLabel.defaultTextFormat;
+			dtf.color = textColor;
+			e.nameLabel.defaultTextFormat = dtf;
+			e.nameLabel.setTextFormat(dtf);
 			if (e.bar) e.bar.alpha    = barAlpha;
 			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) * 2);
 		}
-		nameText.defaultTextFormat.color        = textColor;
-		nameText.setTextFormat(nameText.defaultTextFormat);
-		coreStatsText.defaultTextFormat.color   = textColor;
-		coreStatsText.setTextFormat(coreStatsText.defaultTextFormat);
-		combatStatsText.defaultTextFormat.color = textColor;
-		combatStatsText.setTextFormat(combatStatsText.defaultTextFormat);
-		advancementText.defaultTextFormat.color = textColor;
-		advancementText.setTextFormat(advancementText.defaultTextFormat);
-		timeText.defaultTextFormat.color        = textColor;
+		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,advancementText,timeText]) {
+			dtf = tf.defaultTextFormat;
+			dtf.color = textColor;
+			tf.defaultTextFormat = dtf;
+			tf.setTextFormat(dtf);
+		}
 	}
 }
 }
