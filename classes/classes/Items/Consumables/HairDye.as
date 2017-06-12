@@ -36,7 +36,7 @@ import classes.GlobalFlags.kGAMECLASS;
 				game.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.hasCoatOfType(Creature.SKIN_COAT_FUR)) {
+			if (game.player.hasCoatOfType(SKIN_COAT_FUR)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) game.addButton(1, "Fur", dyeFur);
 				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");

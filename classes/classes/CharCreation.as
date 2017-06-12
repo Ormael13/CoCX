@@ -1,13 +1,17 @@
 ﻿package classes 
 {
-	import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kCOUNTERS;
+import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Player;
 	import classes.Items.Armors.GooArmor;
 	import classes.Items.*;
 	import classes.Saves;
-	import fl.controls.ComboBox;
+import classes.internals.CountersStorage;
+import classes.internals.RootCounters;
+
+import fl.controls.ComboBox;
 	import fl.data.DataProvider;
 	import flash.events.Event;
 	
@@ -349,8 +353,10 @@
 				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
 			}
 			//Clear plot storage array!
-			flags = new DefaultDict();
-
+			kGAMECLASS.flags = new DefaultDict();
+			var countersStorage:CountersStorage = kCOUNTERS.create();
+			kCOUNTERS.initialize(countersStorage);
+			kGAMECLASS.counters = new RootCounters(countersStorage);
 			kGAMECLASS.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (newGamePlusLevel > 0) {

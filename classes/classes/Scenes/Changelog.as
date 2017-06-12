@@ -20,31 +20,31 @@ package classes.Scenes
 		
 		private function Changelog14():void {
 			clearOutput();
-			outputText("<b>Version 0.8e.??:</b>\n\n");
+			outputText("<b>Version 0.8d2:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Salamander\n");
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-Text History. In new games bound to 'H' button; in old saves need manual binding to hotkey.\n");
-			outputText("<b>Version 0.8d2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Perks Database. It gathers all lvl-up perks with their desc and req. to gain them. Made by aimozg.\n");
+			outputText("-When having enough high plant-morph score and soul sense perk PC can trigger dream about Wolrd Tree. With this it will be added as new souls ense encounter.\n");
+			outputText("-Visiting World Tree allow PC to gain material to make Warden weapon - Wolrd Branch or slowly transform into Yggdrasil race. Bonuses for been Yggrasil (scalable): +50 to max Str, +70 to max Tou, -50 to max Spe, +50 to max Int, +80 to max Wis, -50 to max Lib, +10 armor.\n");
+			outputText("-Visiting Marae (and before killing her in case of corrutped one) after finishing Factory and having any version of Holli in camp fully grown up allow PC tht is enough plant-morph to undergone transformation into Alraune.\n");
+			outputText("-Alraune brings new options after combat and it racial bonuses are: +100 to max Tou, -50 to max Spe, +100 to max Lib.\n");
+			outputText("-New physical special: Alraune Pollen Req. to be Alraune Effects: Works like arousing aura till end of fight.\n");
+			outputText("-New physical special: Entangle Req. to be Alraune Effects: Allow to bind enemy with PC vines till end of fight or untill enemy use something to free themself (none of enemies so far can do this).\n");
+			outputText("-New physical special: Strangulate Req. to be Alraune and using Entangle Effects: crushing enemy with vines.\n");
+			outputText("-Three new enemies: Alraune (lvl 20 enc in Deepwoods), Snow Lily (lvl 40 enc in Glcial Rift) and Cinderbloom (lvl 40 enc in Vulcanic Crag).\n");
+			outputText("-Finding reason within Kitteh decision I also locks out access to Prison content till it would be more complete than it's now.\n");
+			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
+			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn crr glades when below 7 fox tails\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -12,6 +12,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.VolcanicCrag.*;
 	import classes.Scenes.Areas.HighMountains.PhoenixScene;
+	import classes.Scenes.Areas.Forest.AlrauneScene;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
 	
@@ -22,6 +23,7 @@ package classes.Scenes.Areas
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
 		public function VolcanicCrag() 
 		{
@@ -39,7 +41,8 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) choice[choice.length] = 1; //Phoenix
 			if (rand(3) == 0) choice[choice.length] = 2; //Find Drake's Heart
 			choice[choice.length] = 3; //Fire True Golems
-			if (rand(3) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
+			choice[choice.length] = 4; //Cinderbloom
+			if (rand(3) == 0) choice[choice.length] = 5; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -74,6 +77,16 @@ package classes.Scenes.Areas
 					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
 					startCombat(new GolemsTrueFire());
 					break;
+				case 4:	//Cinderbloom
+					clearOutput();
+					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+						outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
+						menu();
+						addButton(0, "Yes", camp.returnToCampUseOneHour);
+						addButton(1, "No", alrauneScene.alrauneVolcanicCrag);
+					} else {
+						alrauneScene.alrauneVolcanicCrag();
+					}
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting, yet you this time you managed walk a little further inside this place than the last time.");

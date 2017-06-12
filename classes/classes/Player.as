@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.ISexyPart;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -18,6 +19,7 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.internals.Utils;
 
 use namespace kGAMECLASS;
 
@@ -323,6 +325,7 @@ use namespace kGAMECLASS;
 				else if (plantScore() == 5) armorDef += (4 * (1 + newGamePlusMod));
 				else armorDef += (2 * (1 + newGamePlusMod));
 			}
+			if (yggdrasilScore() >= 10) armorDef += (10 * (1 + newGamePlusMod));
 			//Bonus defense
 			if (armType == ARM_TYPE_YETI) armorDef += (1 * (1 + newGamePlusMod));
 			if (armType == ARM_TYPE_SPIDER || armType == ARM_TYPE_MANTIS || armType == ARM_TYPE_BEE || armType == ARM_TYPE_SALAMANDER) armorDef += (2 * (1 + newGamePlusMod));
@@ -1323,6 +1326,10 @@ use namespace kGAMECLASS;
 			{
 				race = "Alraune";
 			}
+			if (yggdrasilScore() >= 10)
+			{
+				race = "Yggdrasil";
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -1585,8 +1592,8 @@ use namespace kGAMECLASS;
 			if (dogScore() >= 4)
 				grandchimeraCounter++;
 			if (wolfScore() >= 6)
-				grandchimeraCounter++;*/
-			if (foxScore() >= 7)
+				grandchimeraCounter++;
+*/			if (foxScore() >= 7)
 				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
@@ -1601,8 +1608,8 @@ use namespace kGAMECLASS;
 			if (minoScore() >= 4)
 				grandchimeraCounter++;
 			if (cowScore() >= 4)
-				grandchimeraCounter++;*/
-			if (beeScore() >= 9)
+				grandchimeraCounter++;
+*/			if (beeScore() >= 9)
 				grandchimeraCounter++;
 //			if (goblinScore() >= 4)
 //				grandchimeraCounter++;
@@ -1625,8 +1632,8 @@ use namespace kGAMECLASS;
 			if (scorpionScore() >= 4)
 				grandchimeraCounter++;
 			if (mantisScore() >= 5)
-				grandchimeraCounter++;*/
-			if (salamanderScore() >= 7)
+				grandchimeraCounter++;
+*/			if (salamanderScore() >= 7)
 				grandchimeraCounter++;
 			if (nagaScore() >= 8)
 				grandchimeraCounter++;
@@ -1638,11 +1645,15 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (phoenixScore() >= 10)
 				grandchimeraCounter++;
-/*			if (scyllaScore() >= 5)
+//			if (scyllaScore() >= 5)
+//				grandchimeraCounter++;
+//			if (plantScore() >= 6)
+//				grandchimeraCounter++;
+			if (alrauneScore() >= 10)
 				grandchimeraCounter++;
-			if (plantScore() >= 6)
+			if (yggdrasilScore() >= 10)
 				grandchimeraCounter++;
-			if (pigScore() >= 4)
+/*			if (pigScore() >= 4)
 				grandchimeraCounter++;
 			if (satyrScore() >= 4)
 				grandchimeraCounter++;
@@ -1651,8 +1662,8 @@ use namespace kGAMECLASS;
 			if (echidnaScore() >= 4)
 				grandchimeraCounter++;
 			if (deerScore() >= 4)
-				grandchimeraCounter++;*/
-			if (manticoreScore() >= 10)
+				grandchimeraCounter++;
+*/			if (manticoreScore() >= 10)
 				grandchimeraCounter += 2;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
@@ -3068,6 +3079,10 @@ use namespace kGAMECLASS;
 		//		plantCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && plantCounter >= 3)
 				plantCounter += 1;
+			if (alrauneScore() >= 10)
+				plantCounter -= 7;
+			if (yggdrasilScore() >= 10)
+				plantCounter -= 4;
 			End("Player","racialScore");
 			return plantCounter;
 		}
@@ -3112,7 +3127,7 @@ use namespace kGAMECLASS;
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
-			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
+			if (skinType == 6)
 				yggdrasilCounter++;//temporal fix for now till I put true skin tf to code tomorrow or day after tomorrow
 
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
@@ -4386,11 +4401,13 @@ use namespace kGAMECLASS;
 				maxLib += (100 * (1 + newGamePlusMod));
 			}
 			if (yggdrasilScore() >= 10) {
-				maxTou += (40 * (1 + newGamePlusMod));
-				maxSpe -= (30 * (1 + newGamePlusMod));
-				maxInt += (80 * (1 + newGamePlusMod));
-				maxLib -= (40 * (1 + newGamePlusMod));
-			}//+50
+				maxStr += (50 * (1 + newGamePlusMod));
+				maxTou += (70 * (1 + newGamePlusMod));
+				maxSpe -= (50 * (1 + newGamePlusMod));
+				maxInt += (50 * (1 + newGamePlusMod));
+				maxWis += (80 * (1 + newGamePlusMod));
+				maxLib -= (50 * (1 + newGamePlusMod));
+			}//+150
 			if (deerScore() >= 4) {
 				maxSpe += (20 * (1 + newGamePlusMod));
 			}//+20/10-20
@@ -4838,7 +4855,6 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.NagaVenom)) {
 				spe += statusEffectv1(StatusEffects.NagaVenom);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.NagaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
@@ -4850,13 +4866,11 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'tou' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
-				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Frostbite)) {
 				str += statusEffectv1(StatusEffects.Frostbite);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				//stats(0,0,statusEffectv1(StatusEffects.Frostbite),0,0,0,0,0);
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
 			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
@@ -5457,6 +5471,92 @@ use namespace kGAMECLASS;
 			}
 			
 			return true;
+		}
+		public function orgasmReal():void
+		{
+			game.dynStats("lus=", 0, "res", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+
+			if (countCockSocks("gilded") > 0) {
+				var randomCock:int = rand( cocks.length );
+				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
+				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
+				gems += bonusGems;
+			}
+		}
+		public function orgasm(type:String = 'Default', real:Boolean = true):void
+		{
+			switch (type) {
+					// Start with that, whats easy
+				case 'Vaginal': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+					break;
+				case 'Anal':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+					break;
+				case 'Dick':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
+					break;
+				case 'Lips':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
+					break;
+				case 'Tits':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
+					break;
+				case 'Nipples': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
+					break;
+				case 'Ovi':     break;
+
+					// Now to the more complex types
+				case 'VaginalAnal':
+					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
+					return; // Prevent calling orgasmReal() twice
+
+				case 'DickAnal':
+					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
+					return;
+
+				case 'Default':
+				case 'Generic':
+				default:
+					if (!hasVagina() && !hasCock()) {
+						orgasm('Anal'); // Failsafe for genderless PCs
+						return;
+					}
+
+					if (hasVagina() && hasCock()) {
+						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
+						return;
+					}
+
+					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
+					return;
+			}
+
+			if (real) orgasmReal();
+		}
+		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
+			options = Utils.extend({
+				display:true,
+				orgasm:false
+			},options||{});
+
+			if (where.host != null && where.host != this) {
+				trace("Penetration confusion! Host is "+where.host);
+				return;
+			}
+
+			var size:Number = 8;
+			if ('size' in options) size = options.size;
+			else if (tool is Cock) size = (tool as Cock).cArea();
+
+			var otype:String = 'Default';
+			if (where is AssClass) {
+				buttChange(size, options.display);
+				otype = 'Anal';
+			} else if (where is VaginaClass) {
+				cuntChange(size, options.display);
+				otype = 'Vaginal';
+			}
+			if (options.orgasm) {
+				orgasm(otype);
+			}
 		}
 
 	}

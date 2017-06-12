@@ -52,7 +52,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n");
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
-			var lustDmg:int = rand(player.lib / 10) + 20;
+			var lustDmg:int = rand(player.lib / 20) + rand(this.lib / 10) + 10;
 			game.dynStats("lus", lustDmg);
 			outputText("\n\n");
 		}
@@ -134,7 +134,7 @@ package classes.Scenes.Areas.Forest
 			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 600;//x10
+			this.newgamebonusHP = 1800;
 			checkMonster();
 		}
 		

@@ -1,8 +1,9 @@
 ﻿package classes
 {
-	import classes.internals.Utils;
+import classes.BodyParts.IOrifice;
+import classes.internals.Utils;
 
-	public class AssClass
+	public class AssClass implements IOrifice
 	{
 		//constructor
 		public function AssClass()
@@ -24,7 +25,13 @@
 		//Used during sex to determine how full it currently is.  For multi-dick sex.
 		public var fullness:Number = 0;
 		public var virgin:Boolean = true; //Not used at the moment.
-		
+		private var _host:Creature     = null;
+		public function get host():Creature {
+			return _host;
+		}
+		public function set host(value:Creature):void {
+			_host = value;
+		}
 		public function validate():String {
 			var error:String = "";
 			error += Utils.validateNonNegativeNumberFields(this, "AssClass.validate",[

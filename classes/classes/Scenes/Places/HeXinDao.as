@@ -74,6 +74,7 @@ public function golemmerchant():void {
 	if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
 		addButton(10, "HGSFRecovPill", HighGradeSoulforceRecoveryPill, null, null, null, "High-grade Soulforce Recovery Pill.");
 	}
+	addButton(13, "IncenOfInsig", IncenseOfInsight, null, null, null, "Incense of Insight.");
 	addButton(14, "Back", riverislandVillageStuff);
 	statScreenRefresh();
 }
@@ -131,6 +132,25 @@ public function buyHighGradeSoulforceRecoveryPill():void {
 		player.gems -= 180;
 		outputText("\n");
 		inventory.takeItem(consumables.HG_SFRP, golemmerchant);
+		statScreenRefresh();
+	}
+}
+
+public function IncenseOfInsight():void {
+	clearOutput();
+	outputText("While you reach toward the one of the pills on the display golem says, \"<i>These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.  Interested?  It is <b>15 gems</b></i>.\"");
+	doYesNo(buyIncenseOfInsight, golemmerchant);
+}
+
+public function buyIncenseOfInsight():void {
+	if (player.gems < 15) {
+		clearOutput();
+		outputText("\n\nGolem shakes his head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+		doNext(golemmerchant);
+	}
+	else {
+		player.gems -= 15;
+		inventory.takeItem(consumables.INCOINS, golemmerchant);
 		statScreenRefresh();
 	}
 }

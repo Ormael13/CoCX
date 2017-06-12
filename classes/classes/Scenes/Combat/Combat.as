@@ -3449,7 +3449,6 @@ private function combatStatusesUpdate():void {
 		}
 		else if(player.spe > 3) {
 			player.addStatusValue(StatusEffects.NagaVenom,1,2);
-			//stats(0,0,-2,0,0,0,0,0);
 			player.spe -= 2;
 		}
 		else takeDamage(5);

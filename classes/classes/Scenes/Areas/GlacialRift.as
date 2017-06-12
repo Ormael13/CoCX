@@ -15,6 +15,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.GlacialRift.*;
+	import classes.Scenes.Areas.Forest.AlrauneScene;
 	import classes.Scenes.NPCs.GooArmor;
 	import classes.Player;
 	import classes.Scenes.NPCs.Etna;
@@ -29,6 +30,7 @@ package classes.Scenes.Areas
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
 		public function GlacialRift() 
 		{
@@ -46,12 +48,13 @@ package classes.Scenes.Areas
 			choice[choice.length] = 1; //Yeti
 			choice[choice.length] = 2; //Frost Giant
 			choice[choice.length] = 3; //Winter Wolf
-			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 4; //Valeria
-			if (rand(3) == 0) choice[choice.length] = 5; //Freebie items!
-			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) choice[choice.length] = 6; //Ornate Chest
-			if (player.faceType == 24 && player.earType == 18 && player.armType == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 7; //Fenrir ruined shrine
-			choice[choice.length] = 8; //Ice True Golems
-			choice[choice.length] = 9; //Find nothing!
+			choice[choice.length] = 4; //Ice True Golems
+			choice[choice.length] = 5; //Snow Lily
+			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
+			if (rand(3) == 0) choice[choice.length] = 7; //Freebie items!
+			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) choice[choice.length] = 8; //Ornate Chest
+			if (player.faceType == 24 && player.earType == 18 && player.armType == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
+			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -105,7 +108,22 @@ package classes.Scenes.Areas
 					outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
 					startCombat(new WinterWolf());
 					break;
-				case 4: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
+				case 4: //True Ice Golems
+					clearOutput();
+					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
+					startCombat(new GolemsTrueIce());
+					break;
+				case 5:	//Snow Lily
+					clearOutput();
+					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+						outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
+						menu();
+						addButton(0, "Yes", camp.returnToCampUseOneHour);
+						addButton(1, "No", alrauneScene.alrauneGlacialRift);
+					} else {
+						alrauneScene.alrauneGlacialRift();
+					}
+				case 6: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);
 					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 					clearOutput();
@@ -114,7 +132,7 @@ package classes.Scenes.Areas
 					addButton(0, "Fight", fightValeria);
 					addButton(1, "Submit", kGAMECLASS.valeria.pcWinsValeriaSparDefeat, true);
 					break;
-				case 5: //Find item!
+				case 7: //Find item!
 					clearOutput();
 					var itemChooser:Number = rand(2);
 					if (itemChooser == 0) {
@@ -126,7 +144,7 @@ package classes.Scenes.Areas
 						inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
 					}
 					break;
-				case 6: //Find ornate chest!
+				case 8: //Find ornate chest!
 					var gemsFound:int = 400 + rand(400);
 					outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
 					player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
@@ -138,7 +156,7 @@ package classes.Scenes.Areas
 					outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
 					doNext(camp.returnToCampUseOneHour);
 					break;
-				case 7: //Fenrir ruined shrine!
+				case 9: //Fenrir ruined shrine!
 					clearOutput();
 					if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
 						outputText("On your way to the glacial rift you find your way back to the temple again and the menacing voice of Fenrir echoes.");
@@ -162,11 +180,6 @@ package classes.Scenes.Areas
 						addButton(0, "Put the collar", putTheCollar);
 						addButton(1, "Leave", leaveShrine);
 					}
-					break;
-				case 8: //True Ice Golems
-					clearOutput();
-					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
-					startCombat(new GolemsTrueIce());
 					break;
 				default:
 					clearOutput();

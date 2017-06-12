@@ -569,6 +569,12 @@ package classes.Scenes
 					choosey = rand(5);
 					if(choosey >= 2) choosey++;
 				}
+				if (choosey == 3)
+				{
+					choosey = rand(5);
+					if(choosey == 2) choosey += 2;
+					if(choosey >= 3) choosey++;
+				}
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
