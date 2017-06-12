@@ -1,9 +1,10 @@
 package classes
 {
-	import classes.CockTypesEnum;
+import classes.BodyParts.IPhallic;
+import classes.CockTypesEnum;
 	import classes.internals.Utils;
 
-	public class Cock
+	public class Cock implements IPhallic
 	{		
 		private var _cockLength:Number;
 		private var _cockThickness:Number;		
@@ -22,7 +23,13 @@ package classes
 		
 		//Sock
 		private var _sock:String;
-
+		private var _host:Creature     = null;
+		public function get host():Creature {
+			return _host;
+		}
+		public function set host(value:Creature):void {
+			_host = value;
+		}
 
 		/**
 		 * @return string description of errors

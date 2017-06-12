@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.ISexyPart;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -18,6 +19,7 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.internals.Utils;
 
 use namespace kGAMECLASS;
 
@@ -5528,6 +5530,33 @@ use namespace kGAMECLASS;
 			}
 
 			if (real) orgasmReal();
+		}
+		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
+			options = Utils.extend({
+				display:true,
+				orgasm:false
+			},options||{});
+
+			if (where.host != null && where.host != this) {
+				trace("Penetration confusion! Host is "+where.host);
+				return;
+			}
+
+			var size:Number = 8;
+			if ('size' in options) size = options.size;
+			else if (tool is Cock) size = (tool as Cock).cArea();
+
+			var otype:String = 'Default';
+			if (where is AssClass) {
+				buttChange(size, options.display);
+				otype = 'Anal';
+			} else if (where is VaginaClass) {
+				cuntChange(size, options.display);
+				otype = 'Vaginal';
+			}
+			if (options.orgasm) {
+				orgasm(otype);
+			}
 		}
 
 	}

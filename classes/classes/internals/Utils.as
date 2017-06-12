@@ -52,13 +52,20 @@ package classes.internals
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
 		}
+		public static function boundFloat(min:Number, x:Number, max:Number):Number {
+			if (!isFinite(x)) return min;
+			return x < min ? min : x > max ? max : x;
+		}
 		/**
-		 * Performs a shallow copy of properties from `src` to `dest`.
+		 * Performs a shallow copy of properties from `src` to `dest`, then from `srcRest` to `dest`
 		 * A `hasOwnProperties` check is performed.
 		 */
-		public static function extend(dest:Object, src:Object):Object {
-			for (var k:String in src) {
-				if (src.hasOwnProperty(k)) dest[k] = src;
+		public static function extend(dest:Object, src:Object, ...srcRest:Array):Object {
+			srcRest.unshift(src);
+			for each(src in srcRest) {
+				for (var k:String in src) {
+					if (src.hasOwnProperty(k)) dest[k] = src[k];
+				}
 			}
 			return dest;
 		}
@@ -327,6 +334,11 @@ package classes.internals
 			if (n == 0) return "no " + pluralForm;
 			if (n == 1) return "one " + name;
 			return n + " " + pluralForm;
+		}
+		public static function repeatString(s:String,n:int):String {
+			var rslt:String = "";
+			while (n-->0) rslt += s;
+			return rslt;
 		}
 
 		private static var PF_NAME:Array  = [];
