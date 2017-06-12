@@ -2309,8 +2309,8 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (armType == 15)
 				dragonCounter++;
-		//	if (tallness > 120 && dragonCounter > 0)
-		//		dragonCounter++;
+			if (tallness > 120 && dragonCounter >= 10)
+				dragonCounter++;
 			if (skinType == 14)
 				dragonCounter++;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)

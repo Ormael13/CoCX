@@ -4970,7 +4970,6 @@
 								outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
 								player.horns = 12;
 							}
-
 						}
 						changes++;
 					}
