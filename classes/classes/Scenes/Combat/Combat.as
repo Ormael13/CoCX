@@ -2170,7 +2170,7 @@ public function attack():void {
 		}
 		if (monster is Alraune) {
 			outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
-			(monster as Alraune).trapLevel(-4);
+			(monster as Alraune).trapLevel(-6);
 		}
 	}
 	/*if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
@@ -2306,7 +2306,7 @@ public function attack():void {
 	else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 	else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 	//Bonus sand trap damage!
-	if (monster.hasStatusEffect(StatusEffects.Level) && monster is SandTrap) damage = Math.round(damage * 1.75);
+	if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 	//All special wepaon effects like...flames/ice
 	if (player.weapon == weapons.L_WHIP) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
@@ -4016,8 +4016,8 @@ public function display():void {
 				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
 			}
 			if (monster is Alraune) {
-				if (temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
-				else if(temp == 3) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
+				if (temp == 5|| temp == 6) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
+				else if(temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
 				else outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the plant woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
 				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the pitcher.  Alternately, you could try to tease it or hit it at range.");
 			}

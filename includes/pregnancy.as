@@ -1194,15 +1194,18 @@ public function updatePregnancy():Boolean {
 		//Alraune Pregnancy
 		else if (player.pregnancyType == PregnancyStore.PREGNANCY_ALRAUNE) {
 			if (player.pregnancyIncubation == 120) {
-				outputText("<b>You suddenly feel a change in the pitcher below your feet. It feels heavier than before.</b>");
+				if (player.isAlraune()) outputText("<b>You suddenly feel a change in the pitcher below your feet. It feels heavier than before.</b>");
+				else outputText("<b>Your belly increase in size as something not unlike pollen or nectar slowly drip out of your pussy.</b>");
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 80) {
-				outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
+				if (player.isAlraune()) outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
+				else outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely.</b>");
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 40) {
-				outputText("<b>Somehow due to the weight and delicious feeling in your pitcher you are certain you are pregnant with seeds. A soothing warmth fills you as you smile in delight of your motherhood.</b>");
+				if (player.isAlraune()) outputText("<b>Somehow due to the weight and delicious feeling in your pitcher you are certain you are pregnant with seeds. A soothing warmth fills you as you smile in delight of your motherhood.</b>");
+				else outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely. Something tells you you will be giving birth soon.</b>");
 				displayedUpdate = true;
 			}
 		}
@@ -2004,10 +2007,17 @@ public function updatePregnancy():Boolean {
 			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
 			player.createVagina();
 		}
-		outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
-		outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
+		if (player.isAlraune()) {
+			outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
+			outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
+		}
+		else {
+			outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, prying your body open with slow but steady progress. Something is coming out and it feels so good, causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. You pussy starts gushing and you know exactly what is coming next.");
+			outputText("\n\nYour eyes roll inward and you lose yourself to consecutive orgasms as you feel seeds the size of an apple drop, one by one, out of your abused pussy. One, two, three... Eventually, you lose count of the seeds as your mind temporarily loses the ability of rational thought.  Before long the ground is covered with seeds which you proceed to swiftly throw away in the forest. Despite how wrong it was you can’t help but think you want to do this again as soon as possible.");
+		}
 		flags[kFLAGS.ALRAUNE_SEEDS] += 5;
 		if (flags[kFLAGS.ALRAUNE_GROWING] < 1) flags[kFLAGS.ALRAUNE_GROWING] = 1; 
+		dynStats("lib", 1, "sen", 5);
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n");
 	}
