@@ -8,7 +8,8 @@ import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
-	import classes.internals.Utils;
+import classes.internals.RootCounters;
+import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
@@ -876,7 +877,11 @@ import classes.Scenes.Places.Ingnam;
 		{
 			return kGAMECLASS.flags;
 		}
-		
+
+		protected function get counters():RootCounters {
+			return kGAMECLASS.counters;
+		}
+
 		protected function set flags(val:DefaultDict):void
 		{
 			kGAMECLASS.flags = val;
@@ -914,28 +919,9 @@ import classes.Scenes.Places.Ingnam;
 			return kGAMECLASS.buttonIsVisible(index);
 		}
 				
-		/**
-		 * PRIMO BULLSHIT FUNCTION ACCESS
-		 */
-		// Need to work out a better way of doing this -- I THINK maybe treating external functions as a string and calling
-		// addButton like "addButton(0, "thing", "thisFunc");" might be a way to do it -- check if Func var is a Func type in this.addbutton args
-		// if it is, pass it into kGAMECLASS, if it isn't, check if string. If it is, use the string to pull the func from kGAMECLASS
-		// before passing it into addbutton etc.
-		// Going the string route also makes it... not awful to call into other content classes too - split string on . and chain
-		// lookups into objects ie "umasShop.firstVisitPart1" -> kGAMECLASS["umasShop"].["firstVisitPart1"]()
-		// @aimozg: but kGAMECLASS.umasShop.firstVisistPart1 instead of String is compile-time safe.
-		// Clearly this isn't going to fly long term, but it's... functional for now.
-
-		/* @aimozg commented this out because telAdre
-		protected function get armorShops():Function
-		{
-			return kGAMECLASS.armorShops;
+		protected function darkTheme():Boolean {
+			return kGAMECLASS.mainViewManager.darkThemeImpl();
 		}
-
-		protected function get telAdreMenu():Function
-		{
-			return kGAMECLASS.telAdreMenu;
-		}*/
 
 	}
 

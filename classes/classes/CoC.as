@@ -8,7 +8,10 @@
 package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kCOUNTERS;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.CountersStorage;
+import classes.internals.RootCounters;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
@@ -337,6 +340,7 @@ the text from being too boring.
 		public var monster:Monster;
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
+		public var counters:RootCounters;
 		public var achievements:DefaultDict;
 		private var gameState:int;
 //Gone, last use replaced by newRound arg for combatMenu:		public var menuLoc:Number;
@@ -368,6 +372,7 @@ the text from being too boring.
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
+		public var kCOUNTERS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
 
 		public function get inCombat():Boolean { return gameState == 1; }
@@ -431,7 +436,8 @@ the text from being too boring.
 			
 			useables = new UseableLib();
 			
-			this.kFLAGS_REF = kFLAGS; 
+			this.kFLAGS_REF = kFLAGS;
+			this.kCOUNTERS_REF = kCOUNTERS;
 			this.kACHIEVEMENTS_REF = kACHIEVEMENTS; 
 			// cheat for the parser to be able to find kFLAGS
 			// If you're not the parser, DON'T USE THIS
@@ -483,7 +489,7 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8e??";
+			ver = "1.0.2_mod_Xianxia_0.8d3";
 			version = ver + " (<b></b>)";
 
 			//Indicates if building for mobile?
@@ -529,6 +535,9 @@ the text from being too boring.
 			flags = new DefaultDict();
 
 			achievements = new DefaultDict();
+			var countersStorage:CountersStorage = kCOUNTERS.create();
+			kCOUNTERS.initialize(countersStorage);
+			counters = new RootCounters(countersStorage);
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -711,5 +720,15 @@ the text from being too boring.
 	*/
 	public static const STAT_GAIN_CLASSIC:int = 0;
 	public static const STAT_GAIN_DAILY:int = 1;
+	public function flushOutputTextToGUI():void
+	{
+		var fmt:TextFormat = mainView.mainText.defaultTextFormat;
+
+		if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+		fmt.color                           = mainViewManager.darkThemeImpl() ? 0xffffff : 0;
+		mainView.mainText.defaultTextFormat = fmt;
+		mainView.setOutputText(currentText);
+	}
+
 }
 }

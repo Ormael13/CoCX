@@ -1,8 +1,9 @@
 ﻿package classes
 {
-	import classes.internals.Utils;
+import classes.BodyParts.IOrifice;
+import classes.internals.Utils;
 
-	public class VaginaClass
+	public class VaginaClass implements IOrifice
 	{
 		include "../../includes/appearanceDefs.as";
 		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
@@ -30,19 +31,25 @@
 		//Type
 		//0 - Normal
 		//5 - Black bugvag
-		public var type:int = 0;
-		public var virgin:Boolean = true;
+		public var type:int            = 0;
+		public var virgin:Boolean      = true;
 		//Used during sex to determine how full it currently is.  For multi-dick sex.
-		public var fullness:Number = 0;
+		public var fullness:Number     = 0;
 		public var labiaPierced:Number = 0;
-		public var labiaPShort:String = "";
-		public var labiaPLong:String = "";		
-		public var clitPierced:Number = 0;
-		public var clitPShort:String = "";
-		public var clitPLong:String = "";
+		public var labiaPShort:String  = "";
+		public var labiaPLong:String   = "";
+		public var clitPierced:Number  = 0;
+		public var clitPShort:String   = "";
+		public var clitPLong:String    = "";
 		public var clitLength:Number;
 		public var recoveryProgress:int;
-
+		private var _host:Creature     = null;
+		public function get host():Creature {
+			return _host;
+		}
+		public function set host(value:Creature):void {
+			_host = value;
+		}
 		public function validate():String
 		{
 			var error:String = "";

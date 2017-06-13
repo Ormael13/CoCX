@@ -20,35 +20,35 @@ package classes.Scenes
 		
 		private function Changelog14():void {
 			clearOutput();
-			outputText("<b>Version 0.8e.??:</b>\n\n");
-			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
+			outputText("<b>Version 0.8d2 (Metamorph (part 3), World Tree/Yggdrasil TF, Alraune TF):</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Salamander\n");
 			outputText("-Text History. In new games bound to 'H' button; in old saves need manual binding to hotkey.\n");
-			outputText("<b>Version 0.8d2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Perks Database. It gathers all lvl-up perks with their desc and req. to gain them. Made by aimozg.\n");
+			outputText("-When having enough high plant-morph score and soul sense perk PC can trigger dream about Wolrd Tree. With this it will be added as new souls ense encounter.\n");
+			outputText("-Visiting World Tree allow PC to gain material to make Warden weapon - Wolrd Branch or slowly transform into Yggdrasil race. Bonuses for been Yggrasil (scalable): +50 to max Str, +70 to max Tou, -50 to max Spe, +50 to max Int, +80 to max Wis, -50 to max Lib, +10 armor.\n");
+			outputText("-Visiting Marae (and before killing her in case of corrutped one) after finishing Factory and having any version of Holli in camp fully grown up allow PC tht is enough plant-morph to undergone transformation into Alraune.\n");
+			outputText("-Alraune brings new options after combat and it racial bonuses are: +100 to max Tou, -50 to max Spe, +100 to max Lib.\n");
+			outputText("-New physical special: Alraune Pollen Req. to be Alraune Effects: Works like arousing aura till end of fight.\n");
+			outputText("-New physical special: Entangle Req. to be Alraune Effects: Allow to bind enemy with PC vines till end of fight or untill enemy use something to free themself (none of enemies so far can do this).\n");
+			outputText("-New physical special: Strangulate Req. to be Alraune and using Entangle Effects: crushing enemy with vines.\n");
+			outputText("-Three new enemies: Alraune (lvl 20 enc in Deepwoods), Snow Lily (lvl 40 enc in Glcial Rift) and Cinderbloom (lvl 40 enc in Vulcanic Crag).\n");
+			outputText("-Finding reason within Kitteh decision I also locks out access to Prison content till it would be more complete than it's now.\n");
+			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
+			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
+			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn corupted glades when below 7 fox tails\n\n");
+			outputText("<b>Version 0.8d3:</b>\n\n");
+			outputText("-Dragon racial bonuses changed. Half Dragon at 4+ points (+15 max str/tou/int/wis, +100 max HP - all scalable with NG tiers), Dragon at 10+ (+50 max str, +40 max tou, +10 max spe, +20 max int, +20 max wis, +10 max lib, +200 max HP, +1 armor - all scalable with NG tiers) and Elder Dragon at 20+ (+95 max str, +95 max tou, +20 max spe, +40 max int, +40 max wis, +10 max lib, ");
+			outputText("+300 max HP, +25 max Lust, +100 max Fatigue, +10% to max Soulforce, +4 armor - all scalable with NG tiers and non scalable +50 to max Hunger).\n");
+			outputText("-Dragon TF will be granting Dragon Scales that could be either partial or full coverage version (+4/8 to armor scalable).\n");
+			outputText("-New body part - face: Dragon fangs Not req. any other bodyparts. And it's now added as additional req. for Dragon Face TF.\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

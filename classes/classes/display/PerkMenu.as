@@ -339,17 +339,17 @@ public class PerkMenu extends BaseContent {
 			var pclass:PerkClass = player.perk(player.findPerk(ptype));
 
 			var color:String;
-			if (pclass) color='#000000'; // has perk
-			else if (ptype.available(player)) color='#228822'; // can take on next lvl
-			else color='#aa8822'; // requirements not met
+			if (pclass) color=(darkTheme()?'#ffffff':'#000000'); // has perk
+			else if (ptype.available(player)) color=darkTheme()?'#44cc44':'#228822'; // can take on next lvl
+			else color=darkTheme()?'#ffcc44':'#aa8822'; // requirements not met
 
 			outputText("<font color='" +color +"'><b>"+ptype.name+"</b></font>: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
 				var reqs:Array = [];
 				for each (var cond:Object in ptype.requirements) {
-					if (cond.fn(player)) color='#000000';
-					else color='#aa2222';
+					if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
+					else color=darkTheme()?'#ff4444':'#aa2222';
 					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 				}
 				outputText("<ul><li><b>Requires:</b> " + reqs.join(", ")+".</li></ul>");

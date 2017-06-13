@@ -292,7 +292,7 @@ package classes.Scenes.Areas.Forest {
 			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
 				addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 				addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {

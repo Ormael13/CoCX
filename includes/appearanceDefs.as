@@ -25,9 +25,9 @@ public static const SKIN_TYPE_PARTIAL_FUR:int										=	10;
 public static const SKIN_TYPE_PARTIAL_SCALES:int									=	11;
 public static const SKIN_TYPE_PARTIAL_CHITIN:int									=	12;//niedokończone
 public static const SKIN_TYPE_PARTIAL_BARK:int										=	13;//niedokończone
-public static const SKIN_TYPE_DRAGON_SCALES:int										=	14;//niedokończone
+public static const SKIN_TYPE_DRAGON_SCALES:int										=	14;
 public static const SKIN_TYPE_MOSS:int												=	15;
-public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;//niedokończone
+public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;
 public static const SKIN_TYPE_PARTIAL_STONE:int										=	17;//niedokończone
 public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończone
 
@@ -93,6 +93,7 @@ public static const FACE_SALAMANDER_FANGS:int                                   
 public static const FACE_YETI_FANGS:int                                		      	=   27;
 public static const FACE_ORCA:int                                		     	 	=   28;
 public static const FACE_PLANT_DRAGON:int                                		    =   29;
+public static const FACE_DRAGON_FANGS:int                                           =   30;
 
 // face.cheekDecoration etc
 public static const DECORATION_NONE:int                                             =    0;

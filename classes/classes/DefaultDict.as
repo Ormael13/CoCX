@@ -5,8 +5,6 @@ package classes
 {
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
-	import flash.utils.Dictionary
-	
 
 	// This is a special class that immitates a array/dictionary, and 
 	// yet has some special behaviour to make it look & act like any arbitrary aray value 
@@ -17,10 +15,14 @@ package classes
 		private var _dict:Object;
 
 		// Set to true to print any access to defaultDict members
-		private var debugPrintDict:Boolean = false;		
+		private var debugPrintDict:Boolean = false;
+		private var defaultValue:* = 0;
+		private var size:int = MAX_FLAG_VALUE;
 
-		public function DefaultDict()		// Constructor
+		public function DefaultDict(_defaultValue:*=0,_size:int=MAX_FLAG_VALUE)		// Constructor
 		{
+			defaultValue = _defaultValue;
+			size = _size;
 			_dict = new Object();
 			if (debugPrintDict) trace("Instantiating default dict class");
 		}
@@ -44,7 +46,7 @@ package classes
 			if (name == "length")
 			{
 				if (debugPrintDict) trace("Querying array length. Faking out retVal");
-				return 3000;
+				return size;
 			}
 
 			// If we have name as a key in _dict, return _dict[name]. Else, return 0
@@ -56,7 +58,7 @@ package classes
 			else
 			{
 				if (debugPrintDict) trace("Unset Flag " + name + " being accessed.");
-				return 0;
+				return defaultValue;
 			}
 		}
 
@@ -64,7 +66,7 @@ package classes
 		// If x == 0, it removes {name} from _dict if it's present, otherwise does nothing. Else, it sets _dict[name] = x
 		override flash_proxy function setProperty(name:*, value:*):void 
 		{
-			if (value != 0)
+			if (value != defaultValue)
 			{
 				if (debugPrintDict) trace("setProperty ", name, value);
 				_dict[name] = value;
@@ -83,7 +85,7 @@ package classes
 		// e.g. defaultDict.push(), etc...
 		// Since we don't have an array length, per se, we just swallow instances of push.
 		// otherwise, we just apply the called function name to _dict.
-		override flash_proxy function callProperty(methodName:*, ... args):* 
+		override flash_proxy function callProperty(methodName:*, ... args:Array):*
 		{
 			if (debugPrintDict) trace("call Property ", methodName);
 			if (String(methodName) == "push")
@@ -141,6 +143,7 @@ package classes
 			return index + 1;
 		}
 
+		public static const MAX_FLAG_VALUE:int                 = 3500;
 
 	}
 }

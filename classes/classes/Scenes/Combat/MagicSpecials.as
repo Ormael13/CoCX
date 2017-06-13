@@ -621,10 +621,11 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
 		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
-		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
-
+		var damage:Number = 0;
+		damage += inteligencescalingbonus();// * 0.5
+		damage += wisdomscalingbonus();// * 0.5
+		damage += rand(player.level + player.dragonScore());
 		damage = calcInfernoMod(damage);
-
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -760,10 +761,11 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
 		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
-		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
-
+		var damage:Number = 0;
+		damage += inteligencescalingbonus();// * 0.5
+		damage += wisdomscalingbonus();// * 0.5
+		damage += rand(player.level + player.dragonScore());
 		damage = calcGlacialMod(damage);
-
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -864,10 +866,11 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
 		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
-		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
-
+		var damage:Number = 0;
+		damage += inteligencescalingbonus();// * 0.5
+		damage += wisdomscalingbonus();// * 0.5
+		damage += rand(player.level + player.dragonScore());
 //	damage = calcGlacialMod(damage);
-
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -967,10 +970,11 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
 		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
-		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
-
+		var damage:Number = 0;
+		damage += inteligencescalingbonus();// * 0.5
+		damage += wisdomscalingbonus();// * 0.5
+		damage += rand(player.level + player.dragonScore());
 //	damage = calcGlacialMod(damage);
-
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;

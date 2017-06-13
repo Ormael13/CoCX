@@ -42,6 +42,9 @@ package classes.Items {
 				case SKIN_COAT_SCALES:
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>");
 					break;
+				case SKIN_COAT_DRAGON_SCALES:
+					outputText("\n\nYour dragon scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your dragon scales!</b>");
+					break;
 				default:
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
@@ -286,7 +289,7 @@ package classes.Items {
 		[ARM_TYPE_PHOENIX, null],
 		[ARM_TYPE_PLANT, null],
 		[ARM_TYPE_PLANT2, null],
-		[ARM_TYPE_SALAMANDER, null],
+		[ARM_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderArms],
 		[ARM_TYPE_SHARK, StatusEffects.UnlockedSharkArms],
 		[ARM_TYPE_SPIDER, StatusEffects.UnlockedSpiderArms],
 		[ARM_TYPE_WOLF, null],
@@ -367,7 +370,7 @@ package classes.Items {
 		[FACE_RACCOON, null],
 		[FACE_RACCOON_MASK, null],
 		[FACE_RHINO, null],
-		[FACE_SALAMANDER_FANGS, null],
+		[FACE_SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
 		[FACE_SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
 		[FACE_SNAKE_FANGS, null],
 		[FACE_SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
@@ -460,7 +463,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, null],
 		[LOWER_BODY_TYPE_PONY, null],
 		[LOWER_BODY_TYPE_RACCOON, null],
-		[LOWER_BODY_TYPE_SALAMANDER, null],
+		[LOWER_BODY_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
 		[LOWER_BODY_TYPE_SCYLLA, null],
 		[LOWER_BODY_TYPE_SHARK, StatusEffects.UnlockedSharkLegs],
 		[LOWER_BODY_TYPE_WOLF, null],
@@ -539,7 +542,7 @@ package classes.Items {
 		[TAIL_TYPE_RABBIT, null],
 		[TAIL_TYPE_RACCOON, null],
 		[TAIL_TYPE_RHINO, null],
-		[TAIL_TYPE_SALAMANDER, null],
+		[TAIL_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderTail],
 		[TAIL_TYPE_SCORPION, null],
 		[TAIL_TYPE_SHARK, StatusEffects.UnlockedSharkTail],
 		[TAIL_TYPE_SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],

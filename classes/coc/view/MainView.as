@@ -31,7 +31,7 @@ public class MainView extends Block {
 	public static var Background4:Class;
 	[Embed(source="../../../res/ui/backgroundKaizo.png")]
 	public static var BackgroundKaizo:Class;
-	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4,null, BackgroundKaizo];
+	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4, null, BackgroundKaizo];
 
 	[Embed(source="../../../res/ui/button0.jpg")]
 	public static var ButtonBackground0:Class;
@@ -76,41 +76,55 @@ public class MainView extends Block {
 	public static const MENU_APPEARANCE:String = 'appearance';
 
 
-	internal static const GAP:Number   = 4;
-	internal static const BTN_W:Number = 150;
+	internal static const GAP:Number   = 4; // Gap between UI panels
+	internal static const BTN_W:Number = 150; // Button size
 	internal static const BTN_H:Number = 40;
 
-	internal static const SCREEN_W:Number = 1200;
-	internal static const SCREEN_H:Number = 800;
+	internal static const SCREEN_W:Number       = 1200;
+	internal static const SCREEN_H:Number       = 800;
 
-	internal static const TOPROW_Y:Number       = 0;
-	internal static const TOPROW_H:Number       = 50;
+	// TOPROW: [Main Menu]/[New Game], [Data] ... [Appearance]
+
+	// [ TOP ROW           ] -empty-
+	// [STATBAR] [TEXT ZONE] -empty-
+	// [STATBAR] [ BUTTONS ] [SPRITE]
+
+	// Top Row.
+	internal static const TOPROW_X:Number       = GAP; // left = screen left
+	internal static const TOPROW_Y:Number       = GAP; // top = screen top
+	internal static const TOPROW_H:Number       = BTN_H + 2 * GAP; // height = button height
+	internal static const TOPROW_BOTTOM:Number  = TOPROW_Y+TOPROW_H;
+	// width = statbar width + textzone width, so calculated later
 	internal static const TOPROW_NUMBTNS:Number = 6;
-
-	internal static const STATBAR_W:Number = 205;
-	internal static const STATBAR_Y:Number = TOPROW_Y + TOPROW_H;
-	internal static const STATBAR_H:Number = SCREEN_H - STATBAR_Y;
-
-	internal static const TEXTZONE_X:Number = STATBAR_W;
-	internal static const TEXTZONE_Y:Number = TOPROW_H;
-	internal static const TEXTZONE_W:Number = 770;//SCREEN_W-STATBAR_W+GAP;
-	internal static const TEXTZONE_H:Number = 600;
-
+	// Stats panel
+	internal static const STATBAR_X:Number = GAP; // left = screen left
+	internal static const STATBAR_Y:Number = TOPROW_BOTTOM; // top = toprow bottom
+	internal static const STATBAR_W:Number = 205; // width = const
+	internal static const STATBAR_H:Number = SCREEN_H - STATBAR_Y - GAP; // height = all remaining space
+	internal static const STATBAR_RIGHT:Number = STATBAR_X + STATBAR_W + GAP;
+	// Text area
+	internal static const TEXTZONE_X:Number = STATBAR_RIGHT; // left = statbar right
+	internal static const TEXTZONE_Y:Number = TOPROW_BOTTOM; // top = toprow bottom
+	internal static const TEXTZONE_W:Number = 770; // width = const
+	// height = screen height - toprow height - buttons height, so calculated later
+	// Sprite (bottom right)
 	internal static const SPRITE_W:Number = 80;
 	internal static const SPRITE_H:Number = 80;
-	internal static const SPRITE_X:Number = SCREEN_W - SPRITE_W - GAP;
-	internal static const SPRITE_Y:Number = SCREEN_H - SPRITE_H - GAP;
-
-	internal static const TOPROW_W:Number = STATBAR_W + 2 * GAP + TEXTZONE_W;
-
-	internal static const BOTTOM_X:Number         = STATBAR_W + GAP;
+	internal static const SPRITE_X:Number = SCREEN_W - SPRITE_W - GAP; // right = screen right
+	internal static const SPRITE_Y:Number = SCREEN_H - SPRITE_H - GAP; // bottom = screen bottom
+	// toprow width = statbar width + textzone width, so calculated later
+	internal static const TOPROW_W:Number = TEXTZONE_X + TEXTZONE_W;
+	// Bottom buttons
+	internal static const BOTTOM_X:Number         = STATBAR_RIGHT; // left = statbar right
 	internal static const BOTTOM_COLS:Number      = 5;
 	internal static const BOTTOM_ROWS:Number      = 3;
 	internal static const BOTTOM_BUTTON_COUNT:int = BOTTOM_COLS * BOTTOM_ROWS;
-	internal static const BOTTOM_H:Number         = (GAP + BTN_H) * BOTTOM_ROWS;
-	internal static const BOTTOM_W:Number         = TEXTZONE_W;
-	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS);
-	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H;
+	internal static const BOTTOM_H:Number         = (GAP + BTN_H) * BOTTOM_ROWS; // height = rows x button height
+	internal static const BOTTOM_W:Number         = TEXTZONE_W; // width = textzone width
+	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS); // between btns
+	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H; // bottom = screen bottom
+	// textzone height = screen height - toprow height - buttons height, so calculated later
+	internal static const TEXTZONE_H:Number = 600;
 
 	private var blackBackground:BitmapDataSprite;
 	public var textBGWhite:BitmapDataSprite;
@@ -160,8 +174,10 @@ public class MainView extends Block {
 			repeat     : true
 		}));
 		addElement(topRow = new Block({
-			width  : TOPROW_W,
-			height : TOPROW_H,
+			x           : TOPROW_X,
+			y           : TOPROW_Y,
+			width       : TOPROW_W,
+			height      : TOPROW_H,
 			layoutConfig: {
 				type   : 'grid',
 				cols   : 6,
@@ -250,7 +266,6 @@ public class MainView extends Block {
 //		scrollBar.scrollTargetName = "mainText";
 		// Init subviews.
 		this.statsView = new StatsView(this/*, this.model*/);
-		this.statsView.y = STATBAR_Y;
 		this.statsView.hide();
 		this.addElement(this.statsView);
 

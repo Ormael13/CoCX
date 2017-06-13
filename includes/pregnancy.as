@@ -1198,7 +1198,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 80) {
-				outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about childrens.</b>");
+				outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 40) {

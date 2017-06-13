@@ -867,9 +867,9 @@ public class PlayerInfo extends BaseContent {
 			addButton(0, "Next", perkSelect, perkList[rand(perkList.length)].perk);
 		}
 		else {
-			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n");
-			mainView.aCb.x        = 210;
-			mainView.aCb.y        = 112;
+			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.");
+			if (player.perkPoints>1) outputText("\n\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
+			mainView.aCb.move(mainView.mainText.x+10, mainView.mainText.y+48);
 			mainView.aCb.rowCount = 15;
 
 			if (mainView.aCb.parent == null) {
@@ -903,8 +903,8 @@ public class PlayerInfo extends BaseContent {
 		//Store perk name for later addition
 		clearOutput();
 		var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
-		mainView.aCb.move(210, 85);
-		outputText("You have selected the following perk:\n\n");
+		mainView.aCb.move(mainView.mainText.x+10, mainView.mainText.y+24);
+		outputText("You have selected the following perk:\n\n\n");
 		outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
 		var unlocks:Array = getGame().perkTree.listUnlocks(selected.ptype);
 		if (unlocks.length > 0) {
@@ -913,6 +913,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("</ul>");
 		}
 		outputText("\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
@@ -943,7 +944,11 @@ public class PlayerInfo extends BaseContent {
 			HPChange(player.tou, false);
 			statScreenRefresh();
 		}
-		doNext(playerMenu);
+		if (player.perkPoints > 0) {
+			doNext(perkBuyMenu);
+		} else {
+			doNext(playerMenu);
+		}
 	}
 }
 

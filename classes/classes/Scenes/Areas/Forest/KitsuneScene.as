@@ -2577,7 +2577,7 @@ package classes.Scenes.Areas.Forest
 					outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
 					outputText("\"<i>It seems you are a true kitsune now. You formed your own star sphere. Hold on to it dearly, for your true essence resides in your star sphere, and should it be stolen, the thief could control you entirely, forcing you to do whatever it wishes.</i>\"\n\n");
 					outputText("<b>You acquired your own kitsune star sphere.</b>\n\n");
-					dynStats("int", 1, "lus", -10, "cor", -1);
+					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
 					player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
 					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 					player.consumeItem(consumables.FOXJEWL);
@@ -2589,7 +2589,7 @@ package classes.Scenes.Areas.Forest
 						outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
 						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
 						outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a vastly renewed vigor for your quest, you stand and set off for camp.");
-						dynStats("int", 2, "lus", -20, "cor", -2);
+						dynStats("int", 10, "wis", 10, "lus", -100, "cor", -10);
 						player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
@@ -2629,7 +2629,7 @@ package classes.Scenes.Areas.Forest
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
-					dynStats("int", 1, "lus", -10, "cor", -1);
+					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 					player.tailCount++;
@@ -2641,7 +2641,7 @@ package classes.Scenes.Areas.Forest
 						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 						outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 						player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-						dynStats("int", 1, "lus", -10, "cor", -1);
+						dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					player.tailCount = 7;
@@ -2658,14 +2658,12 @@ package classes.Scenes.Areas.Forest
 					player.tailCount = 2;
 				} else {
 					outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
-					//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
-					dynStats("int", 1, "lus", -20, "cor", -2);
+					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -2);
 				}
 			} else {
 				//Normal:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
-				//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
-				dynStats("int", 1, "lus", -20, "cor", -2);
+				dynStats("int", 5, "wis", 5, "lus", -50, "cor", -2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			var tailzAfter:int = player.tail.count;

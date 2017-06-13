@@ -142,9 +142,11 @@ public final class ConsumableLib extends BaseContent
 		public const C__MINT:Consumable = new Mint();
 		public const CERUL_P:Consumable = new CeruleanPotion();
 		public const COAL___:Consumable = new Coal();
+	//	public const DAO_DEW:SimpleConsumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft", "FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", 6, "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.", curry(m.lustDraft, true));
+		public const INCOINS:SimpleConsumable = mk("incOIns", "incenOfIns", "an incense of Insight", 15, "These stick when burned are rumored to fill an area with a incense that allows for deep meditation and grant greater insight.", m.incenseOfInsight);
 		public const H_PILL:Consumable = new HealPill();
 		public const HRBCNT:Consumable = new HerbalContraceptive();
 		public const ICICLE_:Consumable = new IceShard();
@@ -163,7 +165,7 @@ public final class ConsumableLib extends BaseContent
 		public const SENSDRF:Consumable = new SensitivityDraft();
 		public const SMART_T:Consumable = new ScholarsTea();
 		public const VITAL_T:Consumable = new VitalityTincture();
-		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 6, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
+		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
 		public const W_STICK:WingStick = new WingStick();
 		//Aqua Seed - prawdopodobnie nazwa dla Siren TF ; Bubble Lemonade - nazwa dla Dark Slime TF
 		//TRANSFORMATIVE ITEMS
