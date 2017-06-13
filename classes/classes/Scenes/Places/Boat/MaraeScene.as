@@ -235,7 +235,7 @@ private function alraunezeMeYes0():void {
 		outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 	}
-	if (player.cockTotal() == 0) {
+	if (player.cocks.length == 0) {
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
@@ -245,8 +245,8 @@ private function alraunezeMeYes0():void {
 		player.cocks[2].cockType = CockTypesEnum.STAMEN;
 		player.cocks[3].cockType = CockTypesEnum.STAMEN;
 	}
-	if (player.cockTotal() > 0) {
-		player.killCocks( -1);
+	if (player.cocks.length > 0) {
+		player.killCocks(-1);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);

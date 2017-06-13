@@ -62,9 +62,11 @@ package classes.Scenes {
 				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
 			}
 			if ((player.tentacleCocks() > 0 || player.stamenCocks() > 0) && player.hasVagina()) {
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenpussy", stamenSelfFuck);
 				addButton(button++, "Tentapussy", tentacleSelfFuck);
 			}
 			if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
@@ -3299,6 +3301,78 @@ package classes.Scenes {
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		private function stamenSelfFuck():void {
+			var x:int = -1;
+			var y:int = -1;
+			temp = 0;
+			while (temp < player.cocks.length) {
+				if (player.cocks[temp].cockType == CockTypesEnum.STAMEN) {
+					if (x == -1) x = temp;
+				}
+				temp++;
+			}
+			//Pick a second dick that isn't the first.
+			temp = 0;
+			while (temp < player.cocks.length) {
+				if (temp != x) {
+					if (y < 0)
+						y = temp;
+					else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.STAMEN)
+						y = temp;
+					else if (player.cocks[temp].cockType == CockTypesEnum.STAMEN)
+						y = temp;
+				}
+				temp++;
+			}
+			clearOutput();
+			doStripCheck();			
+			outputText("Aroused your twisting vine stamen perks up like a pet expecting to be fed, and you have to admit that you plan to give your vine exactly what it needs - a hot, slippery slit to nestle inside of. Already, your [vagina] has grown ");
+			if (player.wetness() <= 2)
+				outputText("moist");
+			else if (player.wetness() <= 3)
+				outputText("wet");
+			else if (player.wetness() <= 4)
+				outputText("sloppy and wet");
+			else outputText("beyond soaked");
+			outputText(" with your nectar.  The slick slit is slowly parting as you reach to wrangle the wiggly vine");
+			if (player.cocks.length > 1) {
+				outputText(", brushing your hand against your other ");
+				if (player.lust <= 70)
+					outputText("half-hard");
+				else outputText("erect");
+				outputText(" stamen");
+				if (player.cocks.length > 2) outputText("es");
+				outputText(" on the way");
+			}
+			outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from a human penis.  It’s almost like you’re compelled to thrust it inside of some orifice, any orifice, so long as it’s somewhere warm and tight.");
+			if (y >= 0) outputText("  It loops around your distended, wriggling plant-shaft while you fight with it, strangling the other stamens in tight coils of squeezing, floral friction.");
+			outputText("\n\nYou arch your back as you try to contain the unexpected waves of desire that flood your groin, but it’s no use. In the span of a few seconds, you decide to accept that you need to fuck something now. Foreplay is no longer an option.");
+			outputText("  You twist your wrist down.  That change in direction comes far easier than trying to stroke it. Releasing sets of alien muscles that you had held instinctively, you let your sinuous stamen mounted vine do what it was made to do. You slither it down sinuously, the head pressing heavy and hot against your juicy mound as you press back against it. It slowly spreads your clinging tunnel around its delicious girth one fold at a time.");
+			//Cunt change!
+			player.cuntChange(player.cockArea(x), true, true, false);
+			outputText("\n\nRipples of delight radiate along your " + cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible. The stamen stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your vine, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you. Your wide, squirming stamen mounted vine is getting jacked off by the engorged vine-coil’s motions and slowly leaks liquid pollen over the jerking length.");
+			if (y >= 0) {
+				outputText("  Still aroused, In no time flat you move your second tendril to reach for your unoccupied asshole. There’s a moment of token resistance before you violates your [asshole], but then, there’s only the warm heat of a torrid butt-fuck.");
+				player.buttChange(player.cockArea(y), true, true, false);
+			}
+			outputText("\n\nDelirious with excitement, you grab hold of your [chest]");
+			if (player.biggestTitSize() >= 1) outputText(", kneading the soft mammary");
+			outputText(" and twisting your [nipple] as your body goes white-hot with pleasure");
+			if (player.hasFuckableNipples()) outputText(", even stuffing a finger inside a sloppy, dripping nipplecunt");
+			outputText(".");
+			if (player.lactationQ() >= 250) outputText("  Milk squirts from your engorged teat almost immediately to fall in a moist, creamy rain across your writhing form.");
+			outputText("  The pleasured noises that have been issuing forth from your 'O'-gaped lips are cut off by the sudden from another of your vine stamen. This one punches straight into your throat without pause, sliding so smoothly across your tongue that you barely care about gagging when it feels so good.  Trickles of your sweet pollen are dribbling out from one of your writhing stamen into your holes");
+			if (player.stamenCocks() < player.cocks.length) outputText(" and the open air");
+			outputText(".");
+			if (player.biggestTitSize() >= 4) outputText("  Laying right between your boobs, it doesn't take long for the shaft to extend far enough to loop around each tit, sliding slowly encircling each curvy mound as it presses them together around itself, getting a titfuck while it plows your unresisting mouth.");
+			outputText("\n\nFamiliar twinges start down in your pitcher. Orgasm is rapidly closing in, and there’s no slowing your frenzied vines at this point.  You gurgle as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak. Then, as your multitude of stamens thrust deep inside yourself, a volcano of pleasure erupts, pumping thick flows of liquid pollen straight into your snatch, ass, and mouth.  You gulp the flow down as best you are able. Your birth canal is quickly flooded with pollen, while your squeezable ass’s interior is painted with more plant juice.");
+			outputText("\n\nAt once, your whole body sags back, limp and drained. You move your vines move back to their normal position, popping out of your vagina, ass, and mouth, leaving your orifices to dribble the spent passion. Damn, that was satisfying.");
+			//(-2 sens + 1 per tentacle dick, -100 lust)
+			player.orgasm();
+			dynStats("sen", (-1*(1 + player.stamenCocks())));
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 		//Replace n with the tentacle cock number
 		private function tentacleGoesUpYerPooperNewsAtEleven():void {
@@ -3362,6 +3436,27 @@ package classes.Scenes {
 					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
 			}
+			player.orgasm();
+			dynStats("sen", -2);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function stamenGoesUpYerPooperNewsAtEleven():void {
+			var tentacle:int;
+			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
+				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
+			}
+			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
+			}
+			clearOutput();
+			//[Standard text for stripping off goes here]
+			doStripCheck();			
+			outputText("You grab one of your stamen mounted vine, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your vine for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your stamen to your back, pointing it toward your buttocks. You grind the tip against your [butt], making liquid pollen flow from your stamen head and smearing it against your [skin]. Using your own seminal fluid as a natural lube, you press the tip of your stamen in front of your backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own stamen at full force inside your colon.");
+			//[anal tightness check]
+			player.buttChange(player.cockArea(tentacle), true, true, false);
+			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
+			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
 			player.orgasm();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
