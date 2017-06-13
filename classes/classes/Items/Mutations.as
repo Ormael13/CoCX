@@ -48,9 +48,18 @@
 			clearOutput();
 			outputText("You use the incense and sit to meditate as the perfume of flower and fruits fill the area. You see visions of things you could do and things you could have done good and bad and when you open your eyes you realise you found new insight on your goals.");
 			if (rand(3) == 0) outputText(player.modTone(15, 1));
-			if (player.wis < 50) dynStats("wis", 1 + rand(4));
-			else if (player.wis < 100) dynStats("wis", 1 + rand(3));
-			else dynStats("wis", 1 + rand(2));
+			if (player.wis < 50) {
+				player.wis += 1 + rand(4);
+				dynStats();
+			}
+			else if (player.wis < 100) {
+				player.wis += 1 + rand(3);
+				dynStats();
+			}
+			else {
+				player.wis += 1 + rand(2);
+				dynStats();
+			}
 		}
 /*
 //Dao Dew
@@ -59,7 +68,7 @@
 			player.slimeFeed();
 			clearOutput();
 			outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.");
-			if (rand(3) == 0) outputText(player.modTone(15, 1));
+			if (rand(3) == 0) outputText(player.modTone(10, 1));
 			if (player.wis < 100) dynStats("wis", 2 + rand(4));
 			else if (player.wis < 200) dynStats("wis", 2 + rand(3));
 			else dynStats("wis", 2 + rand(2));
@@ -3986,7 +3995,7 @@
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny ");
+					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny scales.</b>");
 				}
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
 				changes++;
@@ -4961,7 +4970,6 @@
 								outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
 								player.horns = 12;
 							}
-
 						}
 						changes++;
 					}

@@ -365,7 +365,7 @@ package classes.Scenes.Areas.Forest
 				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
 				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your “scales” are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
-				player.skin.growCoat(SKIN_COAT_BARK,{},Skin.COVERAGE_COMPLETE);
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
 				changes++;	
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

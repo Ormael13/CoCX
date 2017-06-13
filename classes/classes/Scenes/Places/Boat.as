@@ -55,7 +55,7 @@ package classes.Scenes.Places
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
 			//Alraune
-			if (rand(5) <= 2 && player.plantScore() >= 7 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) {
+			if (rand(5) <= 2 && player.plantScore() >= 7 && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) {
 				marae.alraunezeMe();
 				return;
 			}

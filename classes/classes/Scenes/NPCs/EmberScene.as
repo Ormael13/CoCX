@@ -4,6 +4,7 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.*;
 
 	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
@@ -1603,10 +1604,17 @@ package classes.Scenes.NPCs
 				player.cocks[select].cockType = CockTypesEnum.DRAGON;
 				player.cocks[select].knotMultiplier = 1.3;
 			}
-			//Gain Dragon Head
+			//Gain Dragon Head/Dragon Fangs
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
 				outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
 				player.faceType = FACE_DRAGON;
+				changes++;
+			}
+			//Gain Dragon Fangs
+			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON_FANGS) {
+				outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
+				outputText(" But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
+				player.faceType = FACE_DRAGON_FANGS;
 				changes++;
 			}
 			//-Existing horns become draconic, max of 4, max length of 1'
@@ -1686,16 +1694,22 @@ package classes.Scenes.NPCs
 			}
 			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 			//Gain Dragon Scales
-			if (!player.hasScales() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. ");
+			if (player.hasPartialCoat(SKIN_COAT_DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
+				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
+				outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
+				changes++;
+			}
+			if (!player.hasDragonScales() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. ");
 				var color:String;
 				if (rand(10) == 0) {
 					color = randomChoice("purple","silver");
 				} else {
 					color = randomChoice("red","green","white","blue","black");
 				}
-				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
-				outputText("<b>Your body is now covered in " + color + " shield-shaped dragon scales.</b>");
+				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{color:color},Skin.COVERAGE_LOW);
+				outputText("<b>Your body is now partially covered in " + color + " shield-shaped dragon scales.</b>");
 				changes++;
 			}
 			//Gain Dragon Legs
