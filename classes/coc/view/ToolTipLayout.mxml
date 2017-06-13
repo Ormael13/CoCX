@@ -21,7 +21,7 @@
             <ft:text>Header!</ft:text>
         </ft:TextField>
         <coc:BitmapDataSprite id="mouseOverLine" name="mouseOverLine" x="785" y="-270" width="320" height="1" fillColor="#000000"/>
-        <coc:BitmapDataSprite id="popUpBG" name="popUpBG" x="770" y="-310" bitmapClass="{tooltipBg}"/>
+        <coc:BitmapDataSprite id="popUpBG" name="popUpBG" x="770" y="-310" width="316" height="176" fillColor="#EBD5A6" />
     </fx:Declarations>
     <fx:Script><![CDATA[
         [Embed(source='../../../res/ui/tooltip.png')]
