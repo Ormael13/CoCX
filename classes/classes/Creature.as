@@ -2155,15 +2155,19 @@ package classes
 		public function looksMale():Boolean {
 			return !looksFemale();
 		}
+		
 		public function looksFemale():Boolean {
-			if (hasCock() && hasVagina()) // herm
-				return (biggestTitSize() >= 2 || biggestTitSize() == 1 && femininity >= 50 || femininity >= 75);
-			if (hasCock()) // male
-				return (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75);
-				if (hasVagina()) // pure female
-				return (biggestTitSize() > 1 || femininity >= 45);
-			// genderless
-			return (biggestTitSize() >= 3 || femininity >= 75);
+			var tits:Number = biggestTitSize();
+			switch(gender) {
+				case GENDER_HERM:
+                case GENDER_NONE:
+                    return (tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65);
+				case GENDER_MALE:
+                    return (tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95);
+                case GENDER_FEMALE:
+                    return (tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45);
+				default: return false;
+			}
 		}
 		//Rewritten!
 		public function mf(male:String, female:String):String

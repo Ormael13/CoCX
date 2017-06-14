@@ -236,6 +236,13 @@ private function alraunezeMeYes0():void {
 		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 	}
 	if (player.cocks.length == 0) {
+		if (player.balls > 0) player.balls = 0;
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
@@ -244,9 +251,22 @@ private function alraunezeMeYes0():void {
 		player.cocks[1].cockType = CockTypesEnum.STAMEN;
 		player.cocks[2].cockType = CockTypesEnum.STAMEN;
 		player.cocks[3].cockType = CockTypesEnum.STAMEN;
+		player.cocks[4].cockType = CockTypesEnum.STAMEN;
+		player.cocks[5].cockType = CockTypesEnum.STAMEN;
+		player.cocks[6].cockType = CockTypesEnum.STAMEN;
+		player.cocks[7].cockType = CockTypesEnum.STAMEN;
+		player.cocks[8].cockType = CockTypesEnum.STAMEN;
+		player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	}
 	if (player.cocks.length > 0) {
 		player.killCocks(-1);
+		if (player.balls > 0) player.balls = 0;
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
@@ -255,6 +275,12 @@ private function alraunezeMeYes0():void {
 		player.cocks[1].cockType = CockTypesEnum.STAMEN;
 		player.cocks[2].cockType = CockTypesEnum.STAMEN;
 		player.cocks[3].cockType = CockTypesEnum.STAMEN;
+		player.cocks[4].cockType = CockTypesEnum.STAMEN;
+		player.cocks[5].cockType = CockTypesEnum.STAMEN;
+		player.cocks[6].cockType = CockTypesEnum.STAMEN;
+		player.cocks[7].cockType = CockTypesEnum.STAMEN;
+		player.cocks[8].cockType = CockTypesEnum.STAMEN;
+		player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	}
 	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
 	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;

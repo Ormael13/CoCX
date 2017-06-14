@@ -63,11 +63,11 @@ package classes.Scenes {
 			}
 			if ((player.tentacleCocks() > 0 || player.stamenCocks() > 0) && player.hasVagina()) {
 				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenpussy", stamenSelfFuck);
-				addButton(button++, "Tentapussy", tentacleSelfFuck);
+				if (player.tentacleCocks() > 0) addButton(button++, "Tentapussy", tentacleSelfFuck);
 			}
 			if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
-				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
+				if (player.tentacleCocks() > 0) addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
 				addButton(button++, "LayInCock", getHugeEggsInCawk);

@@ -41,7 +41,7 @@ package classes.Scenes
 			outputText("+300 max HP, +25 max Lust, +100 max Fatigue, +10% to max Soulforce, +4 armor - all scalable with NG tiers and non scalable +50 to max Hunger).\n");
 			outputText("-Dragon TF will be granting Dragon Scales that could be either partial or full coverage version (+4/8 to armor scalable).\n");
 			outputText("-New body part - face: Dragon fangs Not req. any other bodyparts. And it's now added as additional req. for Dragon Face TF.\n");
-			outputText("-\n");
+			outputText("-Alraune have slight different scene versions of maturbation using tentacles that are in those scenes replaced by stamen cockvines.\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
