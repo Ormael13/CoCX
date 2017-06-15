@@ -123,10 +123,13 @@ public function minoVictoryRapeChoices():void {
 			if(player.isNaga()) addButton(6, "ProstateMilk", minoGetsTitFucked);
 		}
 		if (bj != null) addButton(7, "MakeHimSuck", minotaurBlowjob);
-		if(player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
-		if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
+		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
-		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(12, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+			addButton(11, "Vine in Butt", alrauneVineInButtScene);
+			addButton(12, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+		}
 	}
 	if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 	addButton(14, "Leave", cleanupAfterCombat);
@@ -428,6 +431,21 @@ private function bumRapeaMinotaur():void {
 		dynStats("lus", 15+player.lib/7);
 	}
 	cleanupAfterCombat();
+}
+private function alrauneVineInButtScene():void
+{
+	clearOutput();
+	outputText("The minotaur drops his arm. Transfixed by your a cluster of hard, plant-like stamens in front of his face, he barely notices as you move closer. Your vines grab his arm firmly, making certain there will be no retaliation during the pleasure. By the look on his face, and the state of his torn, rolled up loincloth, though, you doubt that will be a problem. You smirk smoothing, justifying to yourself that you are raping this beast because this is how this world works as you maneuver your obscene group of hard, squirming stamens towards his tailhole.\n\n");
+//	outputText("\"<i>You should have watered me.  It was so much harder to grow without proper nutrients</i>\"\n\n");
+	outputText("Your vines mounted stamen slams into his tailhole, spreading it wider as you thrust in and out of the opening, relishing in the feeling of the rough, yet lubricated insides of the minotaur. With your squirming vine stamens successfully embedded in the minotaur, you move your pitcher closer, positioning your " + vaginaDescript(0) + " to take the minotaur’s enormous length into yourself. You feel his member deliciously slide in, and feel the beast’s hot breath radiate as he starts panting in lust.");
+	//Check for stetchiness!
+	player.cuntChange(monster.cockArea(0), true);
+	outputText("Your remaining stamens wave around the minotaur, tending to his balls, weaving around his limbs, and generally rubbing and throbbing all over him, spreading liquid pollen around and through him, leaving both of you moaning in pleasure. Your vines throb and pulse, quickening in pace as you can feel the pollen swelling in your pitcher. They wave madly, and then, just as their motion makes you dizzy, you feel them stiffen suddenly, and start spewing their load all in and across the minotaur. You gasp and pause, collapsing on the strong back of the minotaur, basking in the afterglow.");
+	player.orgasm();
+	statScreenRefresh();
+	player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+	cleanupAfterCombat();
+	return;
 }
 private function girlRapeAMinotaur():void {
 	spriteSelect(44);
@@ -939,7 +957,6 @@ private function minoCumAddictBadEnd3():void {
 	hideUpDown();
 	clearOutput();
 	outputText("Days and weeks pass in a half-remembered haze.  You're violated countless time, and after the first day they don't even bother to keep you on a leash.  Why would they need to restrain such an eager slave?  You're tossed to the side whenever you're not needed as a cum-dump, but as soon as you start to come out of your daze, you crawl back, gaping, dripping, and ready for another dose.  For their part, your new masters seem happy to take care of your needs.  The only time you aren't drugged is when the minotaurs are sleeping, but the minitaurs seem all too happy to let you suckle the pre from their tiny horse-cocks in the huddled slave-pile.\n\n");
-	
 	outputText("You are no longer the Champion of your village.  The only thing you're a champion of is cum-guzzling.  You take immense pride in showing the other cum-sluts just how many thick loads you can coax from your horny masters every day.  Life couldn't be any better.");
 	getGame().gameOver();
 	dynStats("int", -1, "lib", 5, "sen", 30, "lus=", 100, "cor", 20);
@@ -949,7 +966,6 @@ private function minotaurDrinksMilkNewsAtEleven():void {
 	spriteSelect(44);
 	clearOutput();
 	outputText("You kneel next to the exhausted minotaur, lifting his head up to your " + breastDescript(0) + ". He turns his muzzle away from them, still trying to defy you. You force his head back toward your chest and push your " + nippleDescript(0) + " against his mouth, but he keeps his lips tightly shut. You pound your fist on his stomach, forcing a gasp of air out of his mouth as you cram your nipple inside. The minotaur is trying to shake his head to free up his mouth but you're holding his fur too firmly for him to wriggle free. His struggling only causes sips of milk to trickle down into his mouth. You squeeze your breast and send streams of milk down his throat. He soon stops fighting and just starts nursing. He's sucking hard, pulling the milk out of you, and stopping every few minutes to take a deep breath. He soon empties that teat and you put the other one up to his mouth. He obediently begins to nurse on that one, but he's a bit winded from the other, so his suckling is gentle and soothing. It takes him a bit longer for him to empty this nipple, but having such a strong minotaur reduced to a weak, suckling calf pleases you greatly for some reason.\n\n");
-
 	outputText("You pop your " + nippleDescript(0) + " from the dazed minotaur's mouth and leave him there to enjoy the afteraffects of his meal.");
 	//set lust to 0, increase sensitivity slightly
 	dynStats("lib", .2, "lus", -50);

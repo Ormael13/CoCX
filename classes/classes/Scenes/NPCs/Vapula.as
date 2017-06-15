@@ -193,6 +193,7 @@ package classes.Scenes.NPCs
 				outputText("moved out.");
 				outputText("\n\nMaybe it's past time you brought them around to your way of thinking?");
 				//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
+				doNext(playerMenu);
 			}
 			else {
 				outputText("\n\nYou assure them that you'll do your best to keep her away from ");

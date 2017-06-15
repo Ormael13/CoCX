@@ -3141,7 +3141,7 @@ use namespace kGAMECLASS;
 			if ((hairType == 4 || hairType == 7 || hairType == 9) && hairColor == "green")
 				yggdrasilCounter++;
 			if (armType == 7 || armType == 18)
-				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both amrs and claws tf
+				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both arms and claws tf
 			//claws?
 
 			if (wingType == WING_TYPE_PLANT)

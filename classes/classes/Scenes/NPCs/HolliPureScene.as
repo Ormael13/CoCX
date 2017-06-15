@@ -6,10 +6,13 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class HolliPureScene extends NPCAwareContent
 	{
-		
+	
+	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+	
 	public function HolliPureScene() 
 	{	
 	}
@@ -69,11 +72,14 @@ public function treeMenu():void {
 		menu();
 		if(player.hasCock() && player.lust >= 33) addButton(0, "Fuck Holli", holliGetsDickDommed);
 		if((player.tentacleCocks() >= 10 || player.stamenCocks() > 9) && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
-		if(player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
-		addButton(3, "Drink Sap", haveAMapleSyrupSnack);
-		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
-		addButton(5, "Guarding", askHolliToGuard);
-		if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(6, "Mara Fruit", getMaraFruit);
+		if (player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
+		addButton(3, "Get Pollinated", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		addButton(5, "Drink Sap", haveAMapleSyrupSnack);
+		if (flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6, "Eat A Fruit", eatHolliFruit);
+		else addButtonDisabled(6,"Eat A Fruit");
+		if (flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(7, "Mara Fruit", getMaraFruit);
+		else addButtonDisabled(7, "Mara Fruit");
+		addButton(8, "Guarding", askHolliToGuard);
 		addButton(14, "Leave", camp.campFollowers);
 	}
 }

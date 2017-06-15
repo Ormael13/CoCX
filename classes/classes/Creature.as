@@ -2063,6 +2063,14 @@ package classes
 			return false;
 		}
 
+		//Wraith Weapons
+		public function isLowGradeWraithWeapon():Boolean
+		{
+			if (game.player.weapon == game.weapons.BFSWORD)
+				return true;
+			return false;
+		}
+
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{

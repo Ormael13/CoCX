@@ -259,7 +259,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.isScylla())
 			outputText("\nYour equipment has shifted to lie between your front tentacles.");
 		if (player.isAlraune())
-			outputText("\nYour equipment has shifted to (ups still need pesk Lia to think how this ends lol).");
+			outputText("\nYour equipment has shifted to lie below your pitcher now in the form of a mass of tentacle vine.");
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ");
 		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ");
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10)

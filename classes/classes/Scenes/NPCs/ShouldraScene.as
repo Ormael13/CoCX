@@ -217,7 +217,7 @@ private function littlePigLittlePigLetMeIn():void {
 	
 	//CHOICES HURRAH
 	var lake:Function = null;
-	if(player.gender > 0 && ((player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
+	if(player.gender > 0 && ((player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
 		outputText("You could take her to the lake to find someone to play with...\n\n");
 		lake = nowOnVickiLake;
 	}
@@ -243,7 +243,7 @@ private function nowOnVickiLake():void {
 	//SHARK-GIRL - REQUIRES BOAT AND MET SHARKGIRL
 	//SLIME - REQUIRES MET SLIME
 	var shark:Function = null;
-	if(player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0)
+	if(player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0)
 		shark = sharkbustersVictory;
 	var ooze:Function = null;
 	if(flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
