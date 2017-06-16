@@ -42,9 +42,9 @@ package classes.Scenes
 			outputText("-Dragon TF will be granting Dragon Scales that could be either partial or full coverage version (+4/8 to armor scalable).\n");
 			outputText("-New body part - face: Dragon fangs Not req. any other bodyparts. And it's now added as additional req. for Dragon Face TF.\n");
 			outputText("-Alraune have slight different scene versions of maturbation using tentacles that are in those scenes replaced by stamen cockvines.\n");
-			outputText("-\n");
+			outputText("-Also when interacting with Holli or after beating minotaur Alraune PC's will have new scene added.\n");
+			outputText("-Izma can be given Bro Brew to turn into Izmael. Hopefully I didn't lost any part of Izmael during porting it from Revamp :D\n");
 			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl

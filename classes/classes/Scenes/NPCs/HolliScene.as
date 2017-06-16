@@ -136,15 +136,19 @@ public function treeMenu(output:Boolean = true):void {
 			addButtonDisabled(1, "RideTentacles");
 		}
 		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 1) {
-			if ((player.tentacleCocks() + player.stamenCocks()) >= 10 && player.lust >= 33) {
+			if (player.tentacleCocks() >= 10 && player.lust >= 33) {
 				addButton(2, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
-			} else {
-				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle or stamen cocks");
+			}
+		//	else if (player.stamenCocks() >= 10 && player.lust >= 33) {
+		//		addButton(2, "StamenBone", fullOnTentacleTasticGangBangForHolli);
+		//	}
+			else {
+				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle (or stamen) cocks");
 			}
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		addButton(3, "Get Pollinated", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
 		else addButtonDisabled(6,"Eat A Fruit");

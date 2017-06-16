@@ -96,7 +96,7 @@ public function alrauneExtraSceneWithHollicyntiaTentacleDuel():void
 	player.orgasm();
 	statScreenRefresh();
 	player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
-	return;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 	}

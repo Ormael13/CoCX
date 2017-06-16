@@ -25,7 +25,6 @@ public function minoVictoryRapeChoices():void {
 	//Determine if PC can rape with a dick!
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	var dickRape:Function = null;
-	var cuntRape:Function = null;
 	var tentaRape:Function = null;
 	var hermRape:Function = null;
 	var urethralPen:Function = null;
@@ -47,13 +46,11 @@ public function minoVictoryRapeChoices():void {
 		if(player.cockThatFits(80) >= 0) bj = minotaurBlowjob;
 	}
 	if(player.hasCock() && x >= 0) dickRape = bumRapeaMinotaur;
-	if(x >= 0 && player.cockTotal() > 1 && (player.tentacleCocks() > 0 || player.stamenCocks() > 0)) tentaRape = rapeMinotaurTentacles;
-	if(player.hasVagina()) cuntRape = girlRapeAMinotaur;
+	if(x >= 0 && player.cockTotal() > 1 && player.tentacleCocks() > 0) tentaRape = rapeMinotaurTentacles;
 	//Centaurs can't do the herm scene
 	//if(player.gender == 3 && x >= 0 && !player.isTaur()) hermRape = minotaurGetsRapedByHerms;
 	//Enable feeder scene if appropriate
 	var temp2:Function = null;
-	//if(player.findPerk(PerkLib.Feeder) >= 0) temp2 = minotaurDrinksMilkNewsAtEleven;
 	//Oviposit overlaps feeder
 	if(player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) {
 		feedposit = "Lay Eggs";
@@ -103,17 +100,16 @@ public function minoVictoryRapeChoices():void {
 	//No rapinz if not horney!
 /*	if(player.lust < 33) {
 		dickRape = null;
-		cuntRape = null;
 		tentaRape = null;
 		hermRape = null;
 		urethralPen = null;
 		bj = null;
 	}
-	choices("Use Cock", dickRape, "Use Vagina", cuntRape, "Use Both", hermRape, "TentacleDick", tentaRape, "UrethraFuck", urethralPen, "Get Filled", filled, tempText, temp, "MakeHimSuck", bj, feedposit, temp2, "Leave", cleanupAfterCombat);
+	choices("Use Cock", dickRape, "Use Both", hermRape, "TentacleDick", tentaRape, "UrethraFuck", urethralPen, "Get Filled", filled, tempText, temp, "MakeHimSuck", bj, feedposit, temp2, "Leave", cleanupAfterCombat);
 */	menu();
 	if (player.lust >= 33) {
 		if (dickRape != null) addButton(0, "Use Cock", bumRapeaMinotaur);
-		if (cuntRape != null) addButton(1, "Use Vagina", girlRapeAMinotaur);
+		if (player.hasVagina())  addButton(1, "Use Vagina", girlRapeAMinotaur);
 		if (player.gender == 3 && x >= 0 && !player.isTaur()) addButton(2, "Use Both", minotaurGetsRapedByHerms);
 		if (tentaRape != null) addButton(3, "TentacleDick", rapeMinotaurTentacles);
 		if (urethralPen != null) addButton(4, "UrethraFuck", minoUrethralPen);
@@ -435,7 +431,7 @@ private function bumRapeaMinotaur():void {
 private function alrauneVineInButtScene():void
 {
 	clearOutput();
-	outputText("The minotaur drops his arm. Transfixed by your a cluster of hard, plant-like stamens in front of his face, he barely notices as you move closer. Your vines grab his arm firmly, making certain there will be no retaliation during the pleasure. By the look on his face, and the state of his torn, rolled up loincloth, though, you doubt that will be a problem. You smirk smoothing, justifying to yourself that you are raping this beast because this is how this world works as you maneuver your obscene group of hard, squirming stamens towards his tailhole.\n\n");
+	outputText("The minotaur drops his arm. Transfixed by your a cluster of hard, plant-like stamens in front of his face, he barely notices as you move closer. Your vines grab his arm firmly, making certain there will be no retaliation during the pleasure. By the look on his face, and the state of his torn, rolled up loincloth, though, you doubt that will be a problem. You smirk, justifying to yourself that you are raping this beast because this is how this world works as you maneuver your obscene group of hard, squirming stamens towards his tailhole.\n\n");
 //	outputText("\"<i>You should have watered me.  It was so much harder to grow without proper nutrients</i>\"\n\n");
 	outputText("Your vines mounted stamen slams into his tailhole, spreading it wider as you thrust in and out of the opening, relishing in the feeling of the rough, yet lubricated insides of the minotaur. With your squirming vine stamens successfully embedded in the minotaur, you move your pitcher closer, positioning your " + vaginaDescript(0) + " to take the minotaur’s enormous length into yourself. You feel his member deliciously slide in, and feel the beast’s hot breath radiate as he starts panting in lust.");
 	//Check for stetchiness!

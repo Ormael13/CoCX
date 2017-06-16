@@ -20,8 +20,9 @@ package classes.Scenes
 	
 public function accessMetamorphMenu():void {
 	clearOutput();
-	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.");
-	outputText("<b>Race added to Metamorph: Bee, Demon, Fox, Harpy, Kitsune, Lizard, Salamander</b>");
+	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n\n");
+	outputText("<b>Race added to Metamorph:\n");
+	outputText("Bee, Demon, Fox, Harpy, Kitsune, Lizard, Salamander, Shark, Spider (+Drider)</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
