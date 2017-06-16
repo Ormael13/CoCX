@@ -850,7 +850,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.sens = player.sens;
 		saveFile.data.cor = player.cor;
 		saveFile.data.fatigue = player.fatigue;
+		saveFile.data.mana = player.mana;
 		saveFile.data.soulforce = player.soulforce;
+		saveFile.data.wrath = player.wrath;
 		//Combat STATS
 		saveFile.data.HP = player.HP;
 		saveFile.data.lust = player.lust;
@@ -1520,7 +1522,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.sens = saveFile.data.sens;
 		player.cor = saveFile.data.cor;
 		player.fatigue = saveFile.data.fatigue;
+		player.mana = saveFile.data.mana;
 		player.soulforce = saveFile.data.soulforce;
+		player.wrath = saveFile.data.wrath;
 
 		//CLOTHING/ARMOR
 		var found:Boolean = false;
@@ -2190,6 +2194,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
 		//Set wisdom
 		if (saveFile.data.wis == undefined) player.wis = 15;
+		//Set wrath
+		if (saveFile.data.wrath == undefined) player.wrath = 0;
+		//Set mana
+		if (saveFile.data.mana == undefined) player.mana = 50;
 
 		//player.cocks = saveFile.data.cocks;
 		player.ass.analLooseness = saveFile.data.ass.analLooseness;

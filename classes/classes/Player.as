@@ -51,6 +51,8 @@ use namespace kGAMECLASS;
 		public var startingRace:String = "human";
 		
 		public var soulforce:Number = 0;
+		public var mana:Number = 0;
+		public var wrath:Number = 0;
 		
 		//Autosave
 		public var slotName:String = "VOID";
