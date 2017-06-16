@@ -235,16 +235,16 @@ public static const UNKNOWN_FLAG_NUMBER_00226:int                               
 public static const UNKNOWN_FLAG_NUMBER_00227:int                                   =  227; // -Drinking Contest Bonus Score
 public static const UNKNOWN_FLAG_NUMBER_00228:int                                   =  228; // Diapause fluid store
 public static const UNKNOWN_FLAG_NUMBER_00229:int                                   =  229; // Diapause gain need displayed?
-public static const UNKNOWN_FLAG_NUMBER_00230:int                                   =  230; // Sharkgirls met? (Izma counter)
+public static const IZMA_ENCOUNTER_COUNTER:int                                   	=  230; // Sharkgirls met? (Izma counter)
 public static const IZMA_TIMES_FOUGHT_AND_WON:int                                   =  231; // Izma fight
-public static const UNKNOWN_FLAG_NUMBER_00232:int                                   =  232; // Times Talked At shark pussy
-public static const UNKNOWN_FLAG_NUMBER_00233:int                                   =  233; // Izma worm scare (1 = Izma has been scared off by worms)
+public static const IZMA_TALKED_AT_LAKE:int                                   		=  232; // Times Talked At shark pussy
+public static const IZMA_WORMS_SCARED:int                                  			=  233; // Izma worm scare (1 = Izma has been scared off by worms)
 public static const BONUS_ITEM_AFTER_COMBAT_ID:int                                  =  234; // Izma loot storage - Izma saved loot status
-public static const UNKNOWN_FLAG_NUMBER_00235:int                                   =  235; // Taken Izma gloves
-public static const UNKNOWN_FLAG_NUMBER_00236:int                                   =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
-public static const UNKNOWN_FLAG_NUMBER_00237:int                                   =  237; // Izma + Marble Freakout Status = (Above)
-public static const UNKNOWN_FLAG_NUMBER_00238:int                                   =  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
-public static const UNKNOWN_FLAG_NUMBER_00239:int                                   =  239; // Izma Talk level
+public static const IZMA_GLOVES_TAKEN:int                                  			=  235; // Taken Izma gloves
+public static const IZMA_AMILY_FREAKOUT_STATUS:int                                  =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
+public static const IZMA_MARBLE_FREAKOUT_STATUS:int                                 =  237; // Izma + Marble Freakout Status = (Above)
+public static const IZMA_FOLLOWER_STATUS:int                                  		=  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
+public static const IZMA_TALK_LEVEL:int                                  			=  239; // Izma Talk level
 public static const UNKNOWN_FLAG_NUMBER_00240:int                                   =  240; // Mino Chef First Meeting Happen?
 public static const UNKNOWN_FLAG_NUMBER_00241:int                                   =  241; // mino explained what he needs yet?
 public static const UNKNOWN_FLAG_NUMBER_00242:int                                   =  242; // , 3 =stayed, 4 = epilogue'ed
@@ -253,8 +253,8 @@ public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                        
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
 public static const UNKNOWN_FLAG_NUMBER_00246:int                                   =  246; // Tiger Tooth Countdown
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
-public static const UNKNOWN_FLAG_NUMBER_00248:int                                   =  248; // Izma Preggers Discussion
-public static const UNKNOWN_FLAG_NUMBER_00249:int                                   =  249; // Pregnancy Enabled (1 = yes)
+public static const IZMA_PREGNANCY_DISCUSSED:int                                   	=  248; // Izma Preggers Discussion
+public static const IZMA_PREGNANCY_ENABLED:int                                   	=  249; // Pregnancy Enabled (1 = yes)
 public static const IZMA_INCUBATION:int                                             =  250; // Izma's Incubation timer
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
@@ -2503,33 +2503,33 @@ public static const YGGDRASIL_BRANCH:int                                   			= 
 public static const ALRAUNE_SEEDS:int                                   			= 2495;
 public static const ALRAUNE_GROWING:int                                   			= 2496;
 public static const ALRAUNE_DAILY_WATERING:int                                   	= 2497;
-public static const UNKNOWN_FLAG_NUMBER_02498:int                                   = 2498;
-public static const UNKNOWN_FLAG_NUMBER_02499:int                                   = 2499;
-public static const UNKNOWN_FLAG_NUMBER_02500:int                                   = 2500;
-public static const UNKNOWN_FLAG_NUMBER_02501:int                                   = 2501;
-public static const UNKNOWN_FLAG_NUMBER_02502:int                                   = 2502;
-public static const UNKNOWN_FLAG_NUMBER_02503:int                                   = 2503;
-public static const UNKNOWN_FLAG_NUMBER_02504:int                                   = 2504;
-public static const UNKNOWN_FLAG_NUMBER_02505:int                                   = 2505;
-public static const UNKNOWN_FLAG_NUMBER_02506:int                                   = 2506;
-public static const UNKNOWN_FLAG_NUMBER_02507:int                                   = 2507;
-public static const UNKNOWN_FLAG_NUMBER_02508:int                                   = 2508;
-public static const UNKNOWN_FLAG_NUMBER_02509:int                                   = 2509;
-public static const UNKNOWN_FLAG_NUMBER_02510:int                                   = 2510;
-public static const UNKNOWN_FLAG_NUMBER_02511:int                                   = 2511;
-public static const UNKNOWN_FLAG_NUMBER_02512:int                                   = 2512;
-public static const UNKNOWN_FLAG_NUMBER_02513:int                                   = 2513;
-public static const UNKNOWN_FLAG_NUMBER_02514:int                                   = 2514;
-public static const UNKNOWN_FLAG_NUMBER_02515:int                                   = 2515;
-public static const UNKNOWN_FLAG_NUMBER_02516:int                                   = 2516;
-public static const UNKNOWN_FLAG_NUMBER_02517:int                                   = 2517;
-public static const UNKNOWN_FLAG_NUMBER_02518:int                                   = 2518;
-public static const UNKNOWN_FLAG_NUMBER_02519:int                                   = 2519;
-public static const UNKNOWN_FLAG_NUMBER_02520:int                                   = 2520;
-public static const UNKNOWN_FLAG_NUMBER_02521:int                                   = 2521;
-public static const UNKNOWN_FLAG_NUMBER_02522:int                                   = 2522;
-public static const UNKNOWN_FLAG_NUMBER_02523:int                                   = 2523;
-public static const UNKNOWN_FLAG_NUMBER_02524:int                                   = 2524;
+public static const IZMA_BROFIED:int                                  				= 2498;
+public static const IZMAEL_ANAL_PENETRATED:int                                  	= 2499;
+public static const IZMAEL_ENTRAPPED:int                                   			= 2500;
+public static const IZMAEL_BATHTIME_COUNTER:int                                   	= 2501;
+public static const IZMAEL_FRENZIED:int                                   	= 2502;//unused atm
+public static const IZMAEL_02503:int                                   = 2503;
+public static const IZMAEL_02504:int                                   = 2504;
+public static const ANZU_PALACE_UNLOCKED:int                                   		= 2505;
+public static const ANZU_RELATIONSHIP_LEVEL:int                                   	= 2506;
+public static const ANZU_AFFECTION:int                                   			= 2507;
+public static const ANZU_TIMES_TALKED:int                                  			= 2508;
+public static const ANZU_TALKED_PAST:int                                   			= 2509;
+public static const ANZU_TALKED_PALACE:int                                   		= 2510;
+public static const ANZU_TALKED_RIFT:int                                   			= 2511;
+public static const ANZU_TALKED_POWERS:int                                   		= 2512;
+public static const ANZU_TALKED_GODS:int                                   			= 2513;
+public static const ANZU_TIMES_DINED_BREAKFAST:int                                  = 2514; // 0 if haven't done, 1 if started, 2 if high relationship
+public static const ANZU_TIMES_DINED_LUNCH:int                                   	= 2515;
+public static const ANZU_TIMES_DINED_DINNER:int                                   	= 2516;
+public static const ANZU_TIMES_DRUNK_SEX:int                                   		= 2517;
+public static const ANZU_TIMES_RACED:int                                   			= 2518;
+public static const ANZU_ANAL_CATCH_COUNTER:int                                   	= 2519;
+public static const ANZU_VAGINAL_CATCH_COUNTER:int                                  = 2520;
+public static const ANZU_BLOWN_YOU_COUNTER:int                                   	= 2521;
+public static const ANZU_SUCKED_OFF_COUNTER:int                                   	= 2522;
+public static const ANZU_ANAL_PITCH_COUNTER:int                                   	= 2523;
+public static const ANZU_FED_COUNTER:int                                   			= 2524;
 public static const UNKNOWN_FLAG_NUMBER_02525:int                                   = 2525;
 public static const UNKNOWN_FLAG_NUMBER_02526:int                                   = 2526;
 public static const UNKNOWN_FLAG_NUMBER_02527:int                                   = 2527;

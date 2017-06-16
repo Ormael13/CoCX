@@ -490,7 +490,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8d3";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Bugfixing, Race rebalancing (part 4), Izmael</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

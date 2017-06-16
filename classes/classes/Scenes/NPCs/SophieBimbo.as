@@ -151,7 +151,7 @@ private function acceptBimboSophie():void {
 	{
 		outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.");
 	}
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
+	else if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1)
 	{
 		outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?");
 	}

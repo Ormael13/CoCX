@@ -11,11 +11,11 @@ package classes.Scenes.Areas.Forest
 	public class Alraune extends Monster
 	{
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,4,0,0,0);
+			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,6,0,0,0);
 			if(adjustment != 0) {
 				addStatusValue(StatusEffects.Level,1,adjustment);
 				if(statusEffectv1(StatusEffects.Level) < 1) changeStatusValue(StatusEffects.Level,1,1);
-				if(statusEffectv1(StatusEffects.Level) > 4) changeStatusValue(StatusEffects.Level,1,4);
+				if(statusEffectv1(StatusEffects.Level) > 6) changeStatusValue(StatusEffects.Level,1,6);
 			}
 			return statusEffectv1(StatusEffects.Level);
 		}
@@ -107,7 +107,7 @@ package classes.Scenes.Areas.Forest
 			this.skinTone = "light green";
 			this.hairColor = "dark green";
 			this.hairLength = 6;
-			initStrTouSpeInte(10, 120, 10, 60);
+			initStrTouSpeInte(10, 100, 10, 60);
 			initLibSensCor(100, 50, 0);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
@@ -130,11 +130,11 @@ package classes.Scenes.Areas.Forest
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1800;
+			this.newgamebonusHP = 1680;
 			checkMonster();
 		}
 		

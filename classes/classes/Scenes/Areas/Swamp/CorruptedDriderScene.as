@@ -33,24 +33,18 @@ package classes.Scenes.Areas.Swamp
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277] == 0) {
 				outputText("While you explore the swamp, the sun's light withers and fades.  You look up through the mossy trees, but the sky is totally blocked from sight.  It's nearly as purple as twilight here, but you press on, brushing aside old spider-webs as you go.  Faintly, you can hear the sound of skittering legs moving around you, but with the way the damp air muffles everything, it's impossible to tell from which direction.\n\n");
 				outputText("You catch a blur of movement to the side, but by the time you turn for a better look, it's gone.  How odd.  Turning your eyes back to your path, you're shocked to see the form of a massive spider-woman in front of you.  She isn't just some humanoid spider-morph - she's a full-fledged drider, with a giant spider's body from the waist down and eight spindly legs supporting her.  Her eyes practically glow bright " + drider.skinTone + " while her venom-soaked lips twist into a cruel, confident smile.\n\n");
-
 				outputText("\"<i>My, what lovely prey I seem to have found tonight,</i>\" croons the drider.\n\n");
-
 				outputText("Her tone makes it quite clear you'll have to run or fight your way out of this!");
 			}
 			//repeat intro:
 			else {
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");
-
 				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your [weapon].  A gentle tap on the shoulder answers you, but when you look the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
-
 				outputText("Spinning again, you lose your patience and loudly demand your ambusher present itself.  A soft tug on your ");
 				if (player.tailType > TAIL_TYPE_NONE) outputText("tail ");
 				else outputText("hair ");
 				outputText("pulls you back halfway, but as you open your mouth to yell, the ground gives a quiet thump.  Just barely in your periphery, you see a white apparition with a yawning mouth stretching out to bite, and your reflexes take over, dropping your weight and rolling you away from it.\n\n");
-
 				outputText("\"<i>Clever little pet,</i>\" the phantom spits, resolving into the shape of a drider as your eyes focus and your adrenaline haze clears.  Raising a cupped hand to her ghoulishly grinning mouth, she laughs into it; a minute shivering in the air reveals the taut threads of silk attached to her finger.  The vibrations travel down them, shaking several silk-tied leaves and producing the raspy, laughing audience from before.  \"<i>It'd be so much easier on you if you'd just walked into the trap, sweetness.</i>\"\n\n");
-
 				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and this one looks to be no different.");
 			}
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277]++;
@@ -71,7 +65,6 @@ package classes.Scenes.Areas.Swamp
 			if (monster.HP < 1) outputText("to try to continue the fight, her movements slowed by pain and weakness.");
 			else outputText("to masturbate her swollen pussy-lips and the thick, juicy demon-cock that's sprouted in place of her clit.  She's so focused on getting off that she utterly gives up on the idea of fighting back, let alone dominating you as she seemed to plan originally.");
 			outputText("  The spider-herm lies in a miserable, defeated heap.");
-
 			var buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK:Function =null;
 			if (player.cockThatFits(monster.analCapacity()) >= 0) buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK = buttFuckADriderOhBaby;
 			var vagFuck:Function =null;
@@ -132,7 +125,6 @@ package classes.Scenes.Areas.Swamp
 			if (player.hasVagina()) select[select.length] = 1;
 			//Genderless scene has low chance for gendered folks
 			if (player.gender == 0 || (player.gender > 0 && rand(3) == 0)) select[select.length] = 2;
-
 			//SELECT SCENE HERE
 			var choice:Number = select[rand(select.length)];
 			//*Loss Ride Ovi Anal unsexed - gats (done)

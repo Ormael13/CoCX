@@ -104,7 +104,6 @@ package classes.Scenes.Areas.Swamp
 			outputText("As soon as she finishes, her large clit puffs up, balloon-like.  A second later, it slides forward, revealing nine inches of glossy, girl-spunk-soaked shaft.  Nodules ring the corrupted penis' surface, while the tiny cum-slit perched atop the tip dribbles heavy flows of pre-cum.  She pumps at the fleshy organ while her other hand paws at her jiggling breasts, tugging on the hard ");
 			if(nipplesPierced > 0) outputText("pierced ");
 			outputText("nipple-flesh.  Arching her back in a lurid pose, she cries out in high-pitched bliss, her cock pulsing in her hand and erupting out a stream of seed that lands in front of her.\n\n");
-			
 			outputText("The display utterly distracts you until it finishes, and as you adopt your combat pose once more, you find your own needs harder to ignore, while hers seem to be sated, for now.\n");
 			combatRoundOver();
 		}
@@ -146,10 +145,8 @@ package classes.Scenes.Areas.Swamp
 
 		public function CorruptedDrider()
 		{
-
 			var hairColor:String = randomChoice("red", "orange", "green");
 			var skinTone:String = randomChoice("yellow", "purple", "red", "turquoise");
-
 			var pierced:Boolean = rand(2)==0;
 			this.a = "the ";
 			this.short = "corrupted drider";

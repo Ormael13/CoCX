@@ -638,7 +638,7 @@ public function updatePregnancy():Boolean {
 		//Shark Pregnancy!
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA) {
 			if(player.pregnancyIncubation == 275) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, [name]... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n");
+				if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, [name]... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n");
 				else outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n");
 				displayedUpdate = true;
 			}
@@ -647,7 +647,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.");
+				if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.");
 				else outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.");
 				outputText("</b>");
 				outputText("\n");
@@ -655,18 +655,18 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 180) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n");
+				if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n");
 				else outputText("\n<b>There is no denying your pregnancy.  Your belly bulges and occasionally squirms as your growing offspring shifts position.</b>\n");
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 120) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n");
+				if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n");
  				else outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n");
 				dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n");
+				if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n");
 				else outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in.  The time for delivery will probably come soon.</b>\n");
 				displayedUpdate = true;
 			}
@@ -1194,15 +1194,18 @@ public function updatePregnancy():Boolean {
 		//Alraune Pregnancy
 		else if (player.pregnancyType == PregnancyStore.PREGNANCY_ALRAUNE) {
 			if (player.pregnancyIncubation == 120) {
-				outputText("<b>You suddenly feel a change in the pitcher below your feet. It feels heavier than before.</b>");
+				if (player.isAlraune()) outputText("<b>You suddenly feel a change in the pitcher below your feet. It feels heavier than before.</b>");
+				else outputText("<b>Your belly increase in size as something not unlike pollen or nectar slowly drip out of your pussy.</b>");
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 80) {
-				outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
+				if (player.isAlraune()) outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
+				else outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely.</b>");
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 40) {
-				outputText("<b>Somehow due to the weight and delicious feeling in your pitcher you are certain you are pregnant with seeds. A soothing warmth fills you as you smile in delight of your motherhood.</b>");
+				if (player.isAlraune()) outputText("<b>Somehow due to the weight and delicious feeling in your pitcher you are certain you are pregnant with seeds. A soothing warmth fills you as you smile in delight of your motherhood.</b>");
+				else outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely. Something tells you you will be giving birth soon.</b>");
 				displayedUpdate = true;
 			}
 		}
@@ -2004,10 +2007,17 @@ public function updatePregnancy():Boolean {
 			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
 			player.createVagina();
 		}
-		outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
-		outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
+		if (player.isAlraune()) {
+			outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
+			outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
+		}
+		else {
+			outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, prying your body open with slow but steady progress. Something is coming out and it feels so good, causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. You pussy starts gushing and you know exactly what is coming next.");
+			outputText("\n\nYour eyes roll inward and you lose yourself to consecutive orgasms as you feel seeds the size of an apple drop, one by one, out of your abused pussy. One, two, three... Eventually, you lose count of the seeds as your mind temporarily loses the ability of rational thought.  Before long the ground is covered with seeds which you proceed to swiftly throw away in the forest. Despite how wrong it was you can’t help but think you want to do this again as soon as possible.");
+		}
 		flags[kFLAGS.ALRAUNE_SEEDS] += 5;
 		if (flags[kFLAGS.ALRAUNE_GROWING] < 1) flags[kFLAGS.ALRAUNE_GROWING] = 1; 
+		dynStats("lib", 1, "sen", 5);
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n");
 	}

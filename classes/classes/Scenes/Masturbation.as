@@ -61,13 +61,15 @@ package classes.Scenes {
 			if (player.hasVagina() && player.isScylla()) {
 				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
 			}
-			if ((player.tentacleCocks() > 0 || player.stamenCocks() > 0) && player.hasVagina()) {
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenpussy", stamenSelfFuck);
+			if (player.tentacleCocks() > 0 && player.hasVagina()) {
 				addButton(button++, "Tentapussy", tentacleSelfFuck);
 			}
-			if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
+			if (player.tentacleCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
+			}
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
+				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
 				addButton(button++, "LayInCock", getHugeEggsInCawk);

@@ -1,9 +1,12 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class HolliScene extends NPCAwareContent {
 
+	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+	
 	public function HolliScene()
 	{
 	}
@@ -133,24 +136,29 @@ public function treeMenu(output:Boolean = true):void {
 			addButtonDisabled(1, "RideTentacles");
 		}
 		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 1) {
-			if ((player.tentacleCocks() + player.stamenCocks()) >= 10 && player.lust >= 33) {
+			if (player.tentacleCocks() >= 10 && player.lust >= 33) {
 				addButton(2, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
-			} else {
-				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle or stamen cocks");
+			}
+		//	else if (player.stamenCocks() >= 10 && player.lust >= 33) {
+		//		addButton(2, "StamenBone", fullOnTentacleTasticGangBangForHolli);
+		//	}
+			else {
+				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle (or stamen) cocks");
 			}
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		addButton(3,"Drink Sap", haveAMapleSyrupSnack);
-		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4,"Eat A Fruit", eatHolliFruit);
-		else addButtonDisabled(4,"Eat A Fruit");
-		if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(5, "Mara Fruit", getMaraFruit);
-		else addButtonDisabled(5, "Mara Fruit");
+		addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
+		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
+		else addButtonDisabled(6,"Eat A Fruit");
+		if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(7, "Mara Fruit", getMaraFruit);
+		else addButtonDisabled(7, "Mara Fruit");
 		if(flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) {
-			if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) addButton(6,"Stop Guarding", askHolliToWatch);
-			else addButton(6,"Guard Camp", askHolliToWatch);
+			if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) addButton(8,"Stop Guarding", askHolliToWatch);
+			else addButton(8,"Guard Camp", askHolliToWatch);
 		} else {
-			addButton(6, "Guarding", askBrokenHolliToGuard);
+			addButton(8, "Guarding", askBrokenHolliToGuard);
 		}
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(9, "Farm Help", helpWithFarm);
 		addButton(14, "Leave", camp.campFollowers);

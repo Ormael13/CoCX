@@ -1334,7 +1334,7 @@ package classes
 			//player.createStatusEffect(StatusEffects.MetWhitney, 2, 0, 0, 0);
 			
 			// Izma
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;
+			flags[kFLAGS.IZMA_FOLLOWER_STATUS] = 1;
 			
 			// Vapula
 			flags[kFLAGS.VAPULA_FOLLOWER] = 1;

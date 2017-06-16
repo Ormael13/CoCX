@@ -2041,7 +2041,7 @@ import classes.Perks.*;
 					 .requirePerk(DragonIceBreath)
 					 .requirePerk(DragonLightningBreath)
 					 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
-			return player.dragonneScore() >= 4;
+			return player.dragonScore() >= 4;
 		}, "Dragon race");
 		GorgonsEyes.requireCustomFunction(function (player:Player):Boolean {
 			return player.gorgonScore() >= 5 && player.eyeType == 4

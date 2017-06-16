@@ -54,8 +54,11 @@ package classes.Scenes.Areas.Forest
 			//Chance to avoid the bee or not if smart enough...
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
+				menu();
+				addButton(0, "Yes", beeEncounterSelect);
+				addButton(4, "Back", camp.returnToCampUseOneHour);
 				//Yes goes to beeEncounterLevel2(), no goes to camp
-				simpleChoices("Yes", beeEncounterSelect, "", null, "", null, "", null, "Back", camp.returnToCampUseOneHour);
+				//simpleChoices("Yes", beeEncounterSelect, "", null, "", null, "", null, "Back", camp.returnToCampUseOneHour);
 			}
 			//If not smart enough, proceed.
 			else beeEncounterSelect(false);
@@ -65,6 +68,10 @@ package classes.Scenes.Areas.Forest
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly");
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) { 
+				AlrauneAndBee();
+				return;
+			}
 			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
@@ -406,13 +413,11 @@ package classes.Scenes.Areas.Forest
 				addButton(0, "Rape", rapeTheBeeGirl);
 				if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Rape", beeGirlsGetsDildoed);
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Alra & Bee", AlrauneAndBee);
 				addButton(14, "Leave", leaveAfterDefeating);
 			}
 			if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) { //Genderless can still breastfeed
 				menu();
 				addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Alra & Bee", AlrauneAndBee);
 				addButton(14, "Leave", leaveAfterDefeating);
 			}
 		}
