@@ -49,7 +49,7 @@ public class UIUtils {
 			if (options.hasOwnProperty(key) && key in e) {
 				var spc:Function = special ? special[key] as Function : null;
 				var value:*     = options[key];
-				e[key] = spc ? spc(value) : value;
+				e[key] = spc != null ? spc(value) : value;
 			}
 		}
 		return e;

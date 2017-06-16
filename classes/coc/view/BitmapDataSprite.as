@@ -13,14 +13,18 @@ import flash.geom.Matrix;
 public class BitmapDataSprite extends Sprite {
 	public function BitmapDataSprite(options:Object = null) {
 		super();
-		if (options) for (var key:String in options) {
-			if (options.hasOwnProperty(key)) {
-				var value:* = options[key];
-				if (key == "fillColor") value = UIUtils.convertColor(value);
-				if (key in this) {
-					this[key] = value;
-				} else {
-					trace("Unknown BitmapDataSprite property", key)
+		if (options) {
+			if ('stretch' in options) stretch = options.stretch;
+			if ('repeat' in options) repeat = options.stretch;
+			for (var key:String in options) {
+				if (options.hasOwnProperty(key)) {
+					var value:* = options[key];
+					if (key == "fillColor") value = UIUtils.convertColor(value);
+					if (key in this) {
+						this[key] = value;
+					} else {
+						trace("Unknown BitmapDataSprite property", key)
+					}
 				}
 			}
 		}
