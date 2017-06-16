@@ -306,6 +306,20 @@
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
+		
+		public function eMaxWrath():Number
+		{
+			//Base wrath
+			var temp:Number = 100;
+			return temp;
+		}
+		
+		public function eMaxMana():Number
+		{
+			//Base mana
+			var temp:Number = 100;
+			return temp;
+		}
 
 		/**
 		 * @return HP/eMaxHP()

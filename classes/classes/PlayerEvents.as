@@ -1044,7 +1044,11 @@ package classes {
 			if (getGame().model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
 					if (player.level > player.statPoints) {
-						player.statPoints = player.level;
+						if (player.level < 6) player.statPoints = 15;
+						else if (player.level >= 6 && player.level < 12) player.statPoints = 18;
+						else if (player.level >= 12 && player.level < 18) player.statPoints = 21;
+						else if (player.level >= 18 && player.level < 24) player.statPoints = 24;
+						else player.statPoints = player.level;
 						camp.setLevelButton(false);
 					}
 				}

@@ -898,6 +898,22 @@ import classes.GlobalFlags.kFLAGS;
 			return max;
 		}
 		
+		public function maxWrath():Number
+		{
+			var max:Number = 100;
+			
+			if (max > 999) max = 999;
+			return max;
+		}
+		
+		public function maxMana():Number
+		{
+			var max:Number = 100;
+			
+			if (max > 999) max = 999;
+			return max;
+		}
+		
 		public function maxVenom():Number
 		{
 			var maxven:Number = 0;

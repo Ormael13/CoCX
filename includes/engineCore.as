@@ -39,6 +39,14 @@ public function maxSoulforce():Number {
 	return player.maxSoulforce();
 }
 
+public function maxWrath():Number {
+	return player.maxWrath();
+}
+
+public function maxMana():Number {
+	return player.maxMana();
+}
+
 public function silly():Boolean {
 	return flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
 
@@ -1475,7 +1483,7 @@ public function showUpDown():void { //Moved from StatsView.
 
 //	mainView.statsView.upDownsContainer.visible = true;
 
-//	allStats = ["str", "tou", "spe", "inte", "wis" "lib", "sens", "cor", "HP", "lust", "wraith", "fatigue", "soulforce", "hunger"];
+//	allStats = ["str", "tou", "spe", "inte", "wis" "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
 	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
 
 	for each(statName in allStats) {

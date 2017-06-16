@@ -36,7 +36,7 @@ package classes.Scenes
 			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
 			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
 			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn corupted glades when below 7 fox tails\n\n");
-			outputText("<b>Version 0.8d3:</b>\n\n");
+			outputText("<b>Version 0.8d3 (Bugfixing, Race rebalancing (part 4), Izmael):</b>\n\n");
 			outputText("-Dragon racial bonuses changed. Half Dragon at 4+ points (+15 max str/tou/int/wis, +100 max HP - all scalable with NG tiers), Dragon at 10+ (+50 max str, +40 max tou, +10 max spe, +20 max int, +20 max wis, +10 max lib, +200 max HP, +1 armor - all scalable with NG tiers) and Elder Dragon at 20+ (+95 max str, +95 max tou, +20 max spe, +40 max int, +40 max wis, +10 max lib, ");
 			outputText("+300 max HP, +25 max Lust, +100 max Fatigue, +10% to max Soulforce, +4 armor - all scalable with NG tiers and non scalable +50 to max Hunger).\n");
 			outputText("-Dragon TF will be granting Dragon Scales that could be either partial or full coverage version (+4/8 to armor scalable).\n");
@@ -44,11 +44,22 @@ package classes.Scenes
 			outputText("-Alraune have slight different scene versions of maturbation using tentacles that are in those scenes replaced by stamen cockvines.\n");
 			outputText("-Also when interacting with Holli or after beating minotaur Alraune PC's will have new scene added.\n");
 			outputText("-Izma can be given Bro Brew to turn into Izmael. Hopefully I didn't lost any part of Izmael during porting it from Revamp :D\n");
-			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n");
+			outputText("<b>Version 0.8e:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -69,7 +80,6 @@ package classes.Scenes
 			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
-			outputText("<b>Version 0.8e:</b>\n\n");
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("<b>Version 0.8g:</b>\n\n");
 			outputText("\n");
@@ -90,16 +100,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

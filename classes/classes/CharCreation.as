@@ -154,6 +154,8 @@ import fl.controls.ComboBox;
 			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;
+			player.wrath = 0;
+			player.mana = 100;
 			player.hunger = 80;
 			player.obey = 10;
 			player.esteem = 50;
