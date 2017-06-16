@@ -38,8 +38,10 @@ public class StatsView extends Block {
 	private var senBar:StatBar;
 	private var corBar:StatBar;
 	private var hpBar:StatBar;
+	private var wrathBar:StatBar;
 	private var lustBar:StatBar;
 	private var fatigueBar:StatBar;
+	private var manaBar:StatBar;
 	private var soulforceBar:StatBar;
 	private var hungerBar:StatBar;
 	private var esteemBar:StatBar;
@@ -48,6 +50,7 @@ public class StatsView extends Block {
 	private var levelBar:StatBar;
 	private var xpBar:StatBar;
 	private var gemsBar:StatBar;
+	private var spiritstonesBar:StatBar;
 
 	private var allStats:Array;
 
@@ -64,7 +67,7 @@ public class StatsView extends Block {
 				type: 'flow',
 				direction: 'column',
 				ignoreHidden: true,
-				gap: 2
+				gap: 1
 			}
 		});
 		const LABEL_FORMAT:Object = {
@@ -91,7 +94,7 @@ public class StatsView extends Block {
 		coreStatsText = addTextField({
 			text: 'Core stats:',
 			defaultTextFormat: LABEL_FORMAT
-		},{before:4});
+		},{before:1});
 		addElement(strBar = new StatBar({statName: "Strength:"}));
 		addElement(touBar = new StatBar({statName: "Toughness:"}));
 		addElement(speBar = new StatBar({statName: "Speed:"}));
@@ -103,19 +106,30 @@ public class StatsView extends Block {
 		combatStatsText = addTextField({
 			text: 'Combat stats',
 			defaultTextFormat: LABEL_FORMAT
-		},{before:4});
+		},{before:1});
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
+			barColor: '#ff0000',
 			showMax : true
 		}));
 		addElement(lustBar = new StatBar({
 			statName   : "Lust:",
+			barColor   : '#ff69b4',
 			minBarColor: '#ff0000',
 			hasMinBar  : true,
 			showMax    : true
 		}));
+		addElement(wrathBar = new StatBar({
+			statName: "Wrath:",
+			showMax : true
+		}));
 		addElement(fatigueBar = new StatBar({
 			statName: "Fatigue:",
+			showMax : true
+		}));
+		addElement(manaBar = new StatBar({
+			statName: "Mana:",
+			barColor: '#0000ff',
 			showMax : true
 		}));
 		addElement(soulforceBar = new StatBar({
@@ -141,7 +155,7 @@ public class StatsView extends Block {
 		advancementText = addTextField({
 			text:'Advancement',
 			defaultTextFormat: LABEL_FORMAT
-		},{before:4});
+		},{before:1});
 		addElement(levelBar = new StatBar({
 			statName: "Level:",
 			hasBar  : false
@@ -153,10 +167,14 @@ public class StatsView extends Block {
 			statName: "Gems:",
 			hasBar: false
 		}));
+		addElement(spiritstonesBar = new StatBar({
+			statName: "Spirit Stones:",
+			hasBar: false
+		}));
 		timeText = addTextField({
 			htmlText: '<u>Day#: 0</u>\nTime: 00:00',
 			defaultTextFormat: TIME_FORMAT
-		},{before:4});
+		},{before:1});
 		///////////////////////////
 		allStats = [];
 		for (var ci:int = 0, cn:int = this.numElements; ci < cn; ci++) {
@@ -214,10 +232,14 @@ public class StatsView extends Block {
 				return corBar;
 			case 'hp':
 				return hpBar;
+			case 'wrath':
+				return wrathBar;
 			case 'lust':
 				return lustBar;
 			case 'fatigue':
 				return fatigueBar;
+			case 'mana':
+				return manaBar;
 			case 'soulforce':
 				return soulforceBar;
 			case 'hunger':
@@ -228,6 +250,8 @@ public class StatsView extends Block {
 				return xpBar;
 			case 'gems':
 				return gemsBar;
+			case 'spiritstones':
+				return spiritstonesBar;
 		}
 		return null;
 	}
@@ -262,22 +286,28 @@ public class StatsView extends Block {
 		libBar.value          = player.lib;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
+		wrathBar.maxValue 	  = player.maxWrath();
+		wrathBar.value    	  = player.wrath;
 		lustBar.maxValue      = player.maxLust();
 		lustBar.minValue      = player.minLust();
 		lustBar.value         = player.lust;
 		fatigueBar.maxValue   = player.maxFatigue();
 		fatigueBar.value      = player.fatigue;
+		manaBar.maxValue 	  = player.maxMana();
+		manaBar.value    	  = player.mana;
 		soulforceBar.maxValue = player.maxSoulforce();
 		soulforceBar.value    = player.soulforce;
+	//	soulforceBar.valueText= (player.soulforce/player.maxSoulforce()).toFixed(2)+'%';
 		hungerBar.maxValue    = player.maxHunger();
 		hungerBar.value       = player.hunger;
 		var inPrison:Boolean          = game.prison.inPrison;
-		esteemBar.visible     = inPrison;
-		willBar.visible       = inPrison;
-		obeyBar.visible       = inPrison;
-		levelBar.visible      = !inPrison;
-		xpBar.visible         = !inPrison;
-		gemsBar.visible       = !inPrison;
+		esteemBar.visible     		  = inPrison;
+		willBar.visible      		  = inPrison;
+		obeyBar.visible       		  = inPrison;
+		levelBar.visible      		  = !inPrison;
+		xpBar.visible         		  = !inPrison;
+		gemsBar.visible       		  = !inPrison;
+		spiritstonesBar.visible       = !inPrison;
 		if (inPrison) {
 			advancementText.htmlText = "<b>Prison Stats</b>";
 			esteemBar.maxValue       = 100;
@@ -298,6 +328,7 @@ public class StatsView extends Block {
 				xpBar.valueText = 'MAX';
 			}
 			gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
+			spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
 		}
 
 		var minutesDisplay:String = "" + game.model.time.minutes;

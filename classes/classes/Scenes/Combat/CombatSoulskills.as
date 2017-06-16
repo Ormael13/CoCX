@@ -21,7 +21,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		//enemyAI();
 		//return;
 		//}
-		outputText("\n<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
 		menu();
 		var button:int = 0;
 		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {

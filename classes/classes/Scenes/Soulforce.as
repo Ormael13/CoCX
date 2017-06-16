@@ -119,7 +119,6 @@ package classes.Scenes
 			else
 				outputText("Mortal\n");
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Spirit Stones:</b> " + flags[kFLAGS.SPIRIT_STONES] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 310\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
@@ -128,9 +127,7 @@ package classes.Scenes
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
-		*/	outputText("<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
-			outputText("<b>Wisdom:</b> " + player.wis + " / " + player.getMaxStats("wis") + " \n");
-			var dailySoulforceUsesLimit:Number = 0;
+		*/	var dailySoulforceUsesLimit:Number = 0;
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulOverlord) >= 0) dailySoulforceUsesLimit++;

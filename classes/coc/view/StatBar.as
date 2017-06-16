@@ -17,7 +17,7 @@ public class StatBar extends Block {
 	private static function factoryReset():Object {
 		return {
 			width      : 200,
-			height     : 30,
+			height     : 28,
 			minValue   : 0,
 			maxValue   : 100,
 			value      : 0,
