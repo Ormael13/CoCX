@@ -14,10 +14,11 @@ import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
 public class Block extends Sprite {
+	public static const ON_LAYOUT:String                       = 'coc$layout';
 	/**
 	 * Null layout. All elements' positions and sizes are NOT adjusted
 	 */
-	public static const LAYOUT_NONE:String = 'none';
+						public static const LAYOUT_NONE:String = 'none';
 	/**
 	 * Common layout parameters:
 	 * * padding{s,Horiz,Vert,Top,Right,Bottom,Left} - a distance from borders of this block to its elements
@@ -29,19 +30,23 @@ public class Block extends Sprite {
 	 * Grid layout. Aligns elements in a grid of fixed cell size, fixed cell count
 	 * Config:
 	 * * `rows`, `cols` - number or rows and columns. Default 1
+	 * * `setWidth`, `setHeight - should set width/height of elements. Default false
 	 * Hints:
 	 * * `row`, `col` - 2D position in grid. Defaults to "next cell"
+	 * * `setWidth`, `setHeight - should set width/height of this element. Default to layout config
 	 */
 	public static const LAYOUT_GRID:String = 'grid';
 	private function applyGridLayout():void {
-		var config:Object  = _layoutConfig;
-		var ignoreHidden:Boolean   = 'ignoreHidden' in config ? config['ignoreHidden'] : false;
-		var rows:Number    = config["rows"] || 1;
-		var cols:Number    = config["cols"] || 1;
-		var innerw:Number = innerWidth;
-		var innerh:Number = innerHeight;
-		var cellw:Number  = innerw / cols;
-		var cellh:Number  = innerh / rows;
+		var config:Object        = _layoutConfig;
+		var ignoreHidden:Boolean = 'ignoreHidden' in config ? config['ignoreHidden'] : false;
+		var rows:Number          = config["rows"] || 1;
+		var cols:Number          = config["cols"] || 1;
+		var innerw:Number        = innerWidth;
+		var innerh:Number        = innerHeight;
+		var cellw:Number         = innerw / cols;
+		var cellh:Number         = innerh / rows;
+		var setcw:Boolean        = config['setWidth'];
+		var setch:Boolean        = config['setHeight'];
 
 		var row:int = 0;
 		var col:int = 0;
@@ -49,13 +54,17 @@ public class Block extends Sprite {
 			var child:DisplayObject = _container.getChildAt(ci);
 			var hint:Object         = _layoutHints[child] || {};
 			if (hint['ignore'] || !child.visible && ignoreHidden) continue;
+			var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
+			var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
 			if ('row' in hint && 'col' in hint) {
 				row = hint['row'];
 				col = hint['col'];
 			}
 			child.x = col * cellw + paddingLeft;
 			child.y = row * cellh + paddingTop;
-			col     = col + 1;
+			if (setw) child.width = cellw;
+			if (seth) child.height = cellh;
+			col = col + 1;
 			if (col >= cols) {
 				col = 0;
 				row++;
@@ -73,12 +82,12 @@ public class Block extends Sprite {
 	 */
 	public static const LAYOUT_FLOW:String = 'flow';
 	private function applyFlowLayout():void {
-		var config:Object  = _layoutConfig;
-		var ignoreHidden:Boolean   = 'ignoreHidden' in config ? config['ignoreHidden'] : true;
-		var dir:String = config['direction'] || 'row';
-		var gap:Number = 'gap' in config ? config['gap'] : 2;
-		var x:Number = paddingLeft;
-		var y:Number = paddingTop;
+		var config:Object        = _layoutConfig;
+		var ignoreHidden:Boolean = 'ignoreHidden' in config ? config['ignoreHidden'] : true;
+		var dir:String           = config['direction'] || 'row';
+		var gap:Number           = 'gap' in config ? config['gap'] : 2;
+		var x:Number             = paddingLeft;
+		var y:Number             = paddingTop;
 		for (var ci:int = 0, cn:int = _container.numChildren; ci < cn; ci++) {
 			var child:DisplayObject = _container.getChildAt(ci);
 			var hint:Object         = _layoutHints[child] || {};
@@ -89,13 +98,13 @@ public class Block extends Sprite {
 			} else {
 				x += before;
 			}
-			child.x = x;
-			child.y = y;
-			var after:Number  = 'after' in hint ? hint['after'] : 0;
+			child.x          = x;
+			child.y          = y;
+			var after:Number = 'after' in hint ? hint['after'] : 0;
 			if (dir == 'column') {
-				y += child.height + after+gap;
+				y += child.height + after + gap;
 			} else {
-				x += child.width + after+gap;
+				x += child.width + after + gap;
 			}
 		}
 	}
@@ -104,6 +113,8 @@ public class Block extends Sprite {
 	private var _layoutHints:Dictionary = new Dictionary();
 	private var _dirty:Boolean          = false;
 	private var _layoutConfig:Object;
+	private var explicitWidth:Number    = 0;
+	private var explicitHeight:Number   = 0;
 
 	public function Block(options:Object = null) {
 		super();
@@ -115,23 +126,55 @@ public class Block extends Sprite {
 		invalidateLayout();
 	}
 
+	private function get xmin():Number {
+		var xmin:Number = 0;
+		if (_container) {
+			for (var i:int = 0, n:int = numElements; i < n; i++) {
+				xmin = Math.min(xmin, getElementAt(i).x);
+			}
+		}
+		return xmin;
+	}
+	private function get ymin():Number {
+		var ymin:Number = 0;
+		if (_container) {
+			for (var i:int = 0, n:int = numElements; i < n; i++) {
+				ymin = Math.min(ymin, getElementAt(i).y);
+			}
+		}
+		return ymin;
+	}
+	override public function get width():Number {
+		if (explicitWidth) return explicitWidth;
+		return super.width-xmin;
+	}
+	override public function get height():Number {
+		if (explicitHeight) return explicitHeight;
+		return super.height-ymin;
+	}
 	override public function set width(value:Number):void {
 		if (width != value) {
-			resize(value,height);
-			super.width = value;
+			explicitWidth = value;
+			resize();
 		}
 	}
 	override public function set height(value:Number):void {
 		if (height != value) {
-			resize(width,value);
-			super.height = value;
+			explicitHeight = value;
+			resize();
 		}
 	}
-	private function resize(w:int,h:int):void {
-		graphics.clear();
-		graphics.beginFill(0,0);
-		graphics.drawRect(0,0,w,h);
-		graphics.endFill();
+	private function resize():void {
+		if (width > 0 || height > 0) {
+			graphics.clear();
+			graphics.beginFill(0, 0);
+			graphics.drawRect(0, 0, width, height);
+			graphics.endFill();
+		}
+		if (width && height) {
+			super.width  = width+Math.max(0,-xmin);
+			super.height = height+Math.max(0,-ymin);
+		}
 	}
 	public function get layoutConfig():Object {
 		return _layoutConfig;
@@ -142,10 +185,10 @@ public class Block extends Sprite {
 		invalidateLayout();
 	}
 	public function get innerWidth():Number {
-		return Math.max(0,width - paddingLeft - paddingRight);
+		return Math.max(0, (width || explicitWidth) - paddingLeft - paddingRight);
 	}
 	public function get innerHeight():Number {
-		return Math.max(0,height - paddingTop - paddingBottom);
+		return Math.max(0, (height || explicitHeight) - paddingTop - paddingBottom);
 	}
 	protected function addedToStage(e:Event):void {
 	}
@@ -239,6 +282,7 @@ public class Block extends Sprite {
 				trace("Unknown layout config type ", type);
 				break;
 		}
+		dispatchEvent(new Event(ON_LAYOUT, true, true));
 	}
 
 	protected function maybeDoLayout():void {

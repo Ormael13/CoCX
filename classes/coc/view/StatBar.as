@@ -5,6 +5,7 @@ package coc.view {
 import classes.internals.Utils;
 
 import flash.text.TextField;
+import flash.text.TextLineMetrics;
 
 public class StatBar extends Block {
 	[Embed(source="../../../res/ui/StatsBarBottom.png")]
@@ -29,9 +30,10 @@ public class StatBar extends Block {
 			hasBar     : true,
 			hasMinBar  : false,
 			barAlpha   : 0.4,
-			barHeight  : 28,
+			barHeight  : 1.0, // relative to height
 			barColor   : '#0000ff',
-			minBarColor: '#8080ff'
+			minBarColor: '#8080ff',
+			bgColor    : null
 		};
 	}
 	private static var DEFAULT_OPTIONS:Object     = factoryReset();
@@ -44,6 +46,7 @@ public class StatBar extends Block {
 
 	private var _bar:BitmapDataSprite;
 	private var _minBar:BitmapDataSprite;
+	private var _bgBar:BitmapDataSprite;
 	private var _arrowUp:BitmapDataSprite;
 	private var _arrowDown:BitmapDataSprite;
 	private var _nameLabel:TextField;
@@ -58,33 +61,47 @@ public class StatBar extends Block {
 
 	public function StatBar(options:Object) {
 		super();
-		options          = Utils.extend({},DEFAULT_OPTIONS, options);
-		var arrowSz:Number = options.height-2;
-		var barWidth:Number = options.width-arrowSz-2;
+		options             = Utils.extend({},DEFAULT_OPTIONS, options);
+		var myWidth:Number = options.width;
+		var myHeight:Number = options.height;
+		var arrowSz:Number  = myHeight - 2;
+		var barWidth:Number = myWidth - arrowSz - 2;
 		if (options.hasBar) {
+			var barX:Number = 1;
+			var barHeight:Number = myHeight*options.barHeight;
+			var barY:Number = myHeight - barHeight;
+			if (options.bgColor != null) {
+				_bgBar = addBitmapDataSprite({
+					x:barX,y:barY,
+					alpha:options.barAlpha,
+					fillColor:options.bgColor,
+					width:barWidth,
+					height:barHeight
+				})
+			}
 			_bar = addBitmapDataSprite({
-				x        : 1,
-				y        : options.height - options.barHeight,
+				x        : barX,
+				y        : barY,
 				alpha    : options.barAlpha,
 				fillColor: options.barColor,
 				width    : 0,
-				height   : options.barHeight
+				height   : barHeight
 			});
 			if (options.hasMinBar) {
 				_minBar = addBitmapDataSprite({
-					x        : _bar.x,
-					y        : y,
+					x        : barX,
+					y        : barY,
 					alpha    : options.barAlpha,
 					fillColor: options.minBarColor,
 					width    : 0,
-					height   : _bar.height
+					height   : barHeight
 				});
 			}
 			if (options.hasGauge) {
 				/*gauge=*/
 				addBitmapDataSprite({
 					x          : 0,
-					y          : options.height - 10,
+					y          : myHeight - 10,
 					width      : barWidth+2,
 					height     : 10,
 					stretch    : true,
@@ -93,43 +110,43 @@ public class StatBar extends Block {
 			}
 		}
 		_nameLabel  = addTextField({
-			x:6,y:4,
-			width: barWidth,
-			height:options.height-4,
+			x                : 6, y: 4,
+			width            : barWidth,
+			height           : myHeight - 4,
 			defaultTextFormat: {
 				font: 'Georgia',
 				size: 15
 			}
 		});
 		_valueLabel = addTextField({
-			x:0,y:0,
-			width: barWidth-4,
-			height: options.height,
+			x                : 0, y: myHeight-33,
+			width            : barWidth,
+			height           : 33,
 			defaultTextFormat: {
-				font: 'Georgia',
-				size: 22,
+				font : 'Georgia',
+				size : 22,
 				align: 'right'
 			}
 		});
-		_arrowUp = addBitmapDataSprite({
+		_arrowUp    = addBitmapDataSprite({
 			bitmapClass: ArrowUp,
-			width: arrowSz,
-			height: arrowSz,
-			stretch: true,
-			x: 1+(options.width-arrowSz),
-			y: 1,
-			visible: false
+			width      : arrowSz,
+			height     : arrowSz,
+			stretch    : true,
+			x          : myWidth - arrowSz - 1,
+			y          : 1,
+			visible    : false
 		});
-		_arrowDown = addBitmapDataSprite({
+		_arrowDown  = addBitmapDataSprite({
 			bitmapClass: ArrowDown,
-			width: arrowSz,
-			height: arrowSz,
-			stretch: true,
-			x: 1+(options.width-arrowSz),
-			y: 1,
-			visible: false
+			width      : arrowSz,
+			height     : arrowSz,
+			stretch    : true,
+			x          : myWidth - arrowSz - 1,
+			y          : 1,
+			visible    : false
 		});
-		UIUtils.setProperties(this,options);
+		UIUtils.setProperties(this, options);
 		update();
 	}
 

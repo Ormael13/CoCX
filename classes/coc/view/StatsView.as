@@ -109,7 +109,8 @@ public class StatsView extends Block {
 		},{before:1});
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
-			barColor: '#ff0000',
+			barColor: '#00ff00',
+			bgColor : '#ff0000',
 			showMax : true
 		}));
 		addElement(lustBar = new StatBar({
@@ -367,7 +368,7 @@ public class StatsView extends Block {
 			e.nameLabel.defaultTextFormat = dtf;
 			e.nameLabel.setTextFormat(dtf);
 			if (e.bar) e.bar.alpha    = barAlpha;
-			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) * 2);
+			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
 		}
 		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,advancementText,timeText]) {
 			dtf = tf.defaultTextFormat;

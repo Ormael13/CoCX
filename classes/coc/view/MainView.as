@@ -288,8 +288,8 @@ public class MainView extends Block {
 		// hook!
 		hookBottomButtons();
 		hookAllButtons();
-		this.width  = 1000;
-		this.height = 800;
+		this.width  = SCREEN_W;
+		this.height = SCREEN_H;
 		this.scaleX = 1;
 		this.scaleY = 1;
 	}

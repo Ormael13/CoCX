@@ -37,6 +37,9 @@ public class CoCButton extends Block {
 	public var toolTipHeader:String,
 			   toolTipText:String;
 
+		/**
+		 * @param options  enabled, labelText, bitmapClass, callback
+		 */
 	public function CoCButton(options:Object = null):void {
 		super();
 		_backgroundGraphic = addBitmapDataSprite({
@@ -83,6 +86,10 @@ public class CoCButton extends Block {
 			this._callback();
 	}
 
+
+
+		//////// Getters and Setters ////////
+
 	public function get enabled():Boolean {
 		return _enabled;
 	}
@@ -91,7 +98,6 @@ public class CoCButton extends Block {
 		this._labelField.alpha        = value ? 1 : 0.4;
 		this._backgroundGraphic.alpha = value ? 1 : 0.4;
 	}
-//////// Getters and Setters ////////
 
 	public function get labelText():String {
 		return this._labelField.text;
