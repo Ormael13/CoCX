@@ -314,7 +314,7 @@ public class CombatMagic extends BaseCombatContent {
 					addButtonDisabled(0, "Blind", "Enemy still blinded");
 				}
 			}
-			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nMana Cost: " + spellCostWhite(40) + "");
 			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
 		}
 		//BLACK MAGICSKS
@@ -1346,19 +1346,18 @@ public class CombatMagic extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
+	//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 	public function spellWhitefire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
 			clearOutput();
-			outputText("You are too tired to cast this spell.");
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40,5);
+		useMana(40,5);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;

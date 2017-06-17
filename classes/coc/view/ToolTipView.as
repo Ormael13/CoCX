@@ -42,7 +42,7 @@ import flash.display.MovieClip;
 			this.tf = addTextField({
 				x:15,y:40,
 				width:316,height:176,
-				multiline:true,
+				multiline:true,wordWrap:true,
 				defaultTextFormat:{
 					size:15
 				}

@@ -56,24 +56,6 @@ public class StatBar extends Block {
 		return this.height-2;
 	}
 
-	/**
-	 * options.width      : default 200
-	 * options.height     : default 30
-	 * options.minValue   : default 0
-	 * options.maxValue   : default 100
-	 * options.value      : default 0
-	 * options.statName   : default ""
-	 * options.showMax    : default false
-	 * options.isUp       : default false
-	 * options.isDown     : default false
-	 * options.hasGauge   : default true
-	 * options.hasBar     : default true
-	 * options.hasMinBar  : default false
-	 * options.barAlpha   : default 0.4
-	 * options.barHeight  : default 28
-	 * options.barColor   : default '#0000ff'
-	 * options.minBarColor: default '#8080ff'
-	 */
 	public function StatBar(options:Object) {
 		super();
 		options          = Utils.extend({},DEFAULT_OPTIONS, options);
@@ -103,7 +85,7 @@ public class StatBar extends Block {
 				addBitmapDataSprite({
 					x          : 0,
 					y          : options.height - 10,
-					width      : barWidth,
+					width      : barWidth+2,
 					height     : 10,
 					stretch    : true,
 					bitmapClass: StatsBarBottom
@@ -113,7 +95,7 @@ public class StatBar extends Block {
 		_nameLabel  = addTextField({
 			x:6,y:4,
 			width: barWidth,
-			height:options.height,
+			height:options.height-4,
 			defaultTextFormat: {
 				font: 'Georgia',
 				size: 15

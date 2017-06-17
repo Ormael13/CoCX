@@ -2811,20 +2811,89 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 public function takeDamage(damage:Number, display:Boolean = false):Number {
 	return player.takeDamage(damage, display);
 }
-//Modify fatigue
-//types:
-//  0 - normal
-//	1 - magic
-//	2 - physical
-//	3 - non-bloodmage magic
-//  4 - bow usage
-//	5 - white magic
-//	6 - black magic
-//	7 - non-bloodmage white magic
-//	8 - non-bloodmage black magic
-public function fatigueImpl(mod:Number,type:Number  = 0):void {
+	public static const USEMANA_NORMAL:int = 0;
+	public static const USEMANA_MAGIC:int = 1;
+	public static const USEMANA_PHYSICAL:int = 2;
+	public static const USEMANA_MAGIC_NOBM:int = 3;
+	public static const USEMANA_BOW:int = 4;
+	public static const USEMANA_WHITE:int = 5;
+	public static const USEMANA_BLACK:int = 6;
+	public static const USEMANA_WHITE_NOBM:int = 7;
+	public static const USEMANA_BLACK_NOBM:int = 8;
+	//Modify mana (mod>0 - subtract, mod<0 - regen)
+	public function useManaImpl(mod:Number,type:int=USEMANA_NORMAL):void {
+		//Spell reductions
+		switch (type) {
+			case USEMANA_MAGIC:
+			case USEMANA_MAGIC_NOBM:
+				mod = spellCost(mod);
+				break;
+			case USEMANA_WHITE:
+			case USEMANA_WHITE_NOBM:
+				mod = spellCostWhite(mod);
+				break;
+			case USEMANA_BLACK:
+			case USEMANA_BLACK_NOBM:
+				mod = spellCostBlack(mod);
+				break;
+		}
+		//Blood mages use HP for spells
+		if (player.hasPerk(PerkLib.BloodMage)
+			&& (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
+			combat.takeDamage(mod);
+			statScreenRefresh();
+			return;
+		}
+		//Mana restoration buffs!
+		if (mod < 0) {
+			mod *= manaRecoveryMultiplier();
+		}
+		player.mana = boundFloat(0, player.mana - mod, player.maxMana());
+		if(mod > 0) {
+			mainView.statsView.showStatUp( 'mana' );
+		}
+		if(mod < 0) {
+			mainView.statsView.showStatDown( 'mana' );
+		}
+		statScreenRefresh();
+	}
+	public function manaRecoveryMultiplier():Number {
+		var multi:Number = 1;
+	//	if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
+	//	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
+		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 1;
+		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
+	//	if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
+	//	if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
+	//	if (player.findPerk(PerkLib.NaturesSpringIV) >= 0) multi += 0.05;
+	//	if (player.findPerk(PerkLib.NaturesSpringV) >= 0) multi += 0.05;
+		if (player.alicornScore() >= 6) multi += 0.1;
+		if (player.kitsuneScore() >= 5) {
+			if (player.kitsuneScore() >= 10) multi += 1;
+			else multi += 0.5;
+		}
+		if (player.unicornScore() >= 5) multi += 0.05;
+		return multi;
+	}
+	public static const USEFATG_NORMAL:int = 0;
+	public static const USEFATG_MAGIC:int = 1;
+	public static const USEFATG_PHYSICAL:int = 2;
+	public static const USEFATG_MAGIC_NOBM:int = 3;
+	public static const USEFATG_BOW:int = 4;
+	public static const USEFATG_WHITE:int = 5;
+	public static const USEFATG_BLACK:int = 6;
+	public static const USEFATG_WHITE_NOBM:int = 7;
+	public static const USEFATG_BLACK_NOBM:int = 8;
+//Modify fatigue (mod>0 - subtract, mod<0 - regen)//types:
+public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	//Spell reductions
-	if(type == 1) {
+	if(type == USEFATG_MAGIC) {
 		mod = spellCost(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
@@ -2834,16 +2903,16 @@ public function fatigueImpl(mod:Number,type:Number  = 0):void {
 		}
 	}
 	//Physical special reductions
-	if(type == 2) {
+	if(type == USEFATG_PHYSICAL) {
 		mod = physicalCost(mod);
 	}
-	if(type == 3) {
+	if(type == USEFATG_MAGIC_NOBM) {
 		mod = spellCost(mod);
 	}
-	if (type == 4) {
+	if (type == USEFATG_BOW) {
 		mod = bowCost(mod);
 	}
-	if (type == 5) {
+	if (type == USEFATG_WHITE) {
 		mod = spellCostWhite(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
@@ -2852,7 +2921,7 @@ public function fatigueImpl(mod:Number,type:Number  = 0):void {
 			return;
 		}
 	}
-	if (type == 6) {
+	if (type == USEFATG_BLACK) {
 		mod = spellCostBlack(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
@@ -2861,18 +2930,32 @@ public function fatigueImpl(mod:Number,type:Number  = 0):void {
 			return;
 		}
 	}
-	if (type == 7) {
+	if (type == USEFATG_WHITE_NOBM) {
 		mod = spellCostWhite(mod);
 	}
-	if (type == 8) {
+	if (type == USEFATG_BLACK_NOBM) {
 		mod = spellCostBlack(mod);
 	}
 	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
 	if(player.fatigue <= 0 && mod < 0) return;
 	//Fatigue restoration buffs!
 	if (mod < 0) {
+		mod *= fatigueRecoveryMultiplier();
+	}
+	player.fatigue += mod;
+	if(mod < 0) {
+		mainView.statsView.showStatUp( 'fatigue' );
+	}
+	if(mod > 0) {
+		mainView.statsView.showStatDown( 'fatigue' );
+	}
+	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
+	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
+	if(player.fatigue < 0) player.fatigue = 0;
+	statScreenRefresh();
+}
+	public function fatigueRecoveryMultiplier():Number {
 		var multi:Number = 1;
-
 		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
 		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
 		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
@@ -2893,25 +2976,8 @@ public function fatigueImpl(mod:Number,type:Number  = 0):void {
 			else multi += 0.5;
 		}
 		if (player.unicornScore() >= 5) multi += 0.05;
-
-		mod *= multi;
+		return multi;
 	}
-	player.fatigue += mod;
-	if(mod > 0) {
-		mainView.statsView.showStatUp( 'fatigue' );
-		// fatigueUp.visible = true;
-		// fatigueDown.visible = false;
-	}
-	if(mod < 0) {
-		mainView.statsView.showStatDown( 'fatigue' );
-		// fatigueDown.visible = true;
-		// fatigueUp.visible = false;
-	}
-	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
-	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
-	if(player.fatigue < 0) player.fatigue = 0;
-	statScreenRefresh();
-}
 //ENEMYAI!
 public function enemyAIImpl():void {
 	monster.doAI();

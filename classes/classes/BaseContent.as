@@ -657,9 +657,13 @@ import classes.internals.Utils;
 			kGAMECLASS.HPChange(changeNum,display);
 		}
 
-		protected function fatigue(mod:Number,type:Number=0):void
+		protected function fatigue(mod:Number,type:Number=0):void {
+			kGAMECLASS.fatigue(mod, type);
+		}
+
+		protected function useMana(mod:Number,type:Number=0):void
 		{
-			kGAMECLASS.fatigue(mod,type);
+			kGAMECLASS.combat.useManaImpl(mod,type);
 		}
 
 
