@@ -3823,6 +3823,38 @@ public function soulforceregeneration(combat:Boolean = true):void {
 	}
 }
 
+public function manaregeneration(combat:Boolean = true):void {
+	var gainedmana:Number = 0;
+	if (combat) {
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 1;
+	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedmana += 1;
+	*/	kGAMECLASS.ManaChange(gainedmana, false);
+	}
+	else {
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 2;
+	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedmana += 2;
+	*/	kGAMECLASS.ManaChange(gainedmana, false);
+	}
+}
+
 public function maximumRegeneration():Number {
 	var maxRegen:Number = 2;
 	if (player.newGamePlusMod() >= 1) maxRegen += 1;

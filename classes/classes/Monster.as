@@ -274,19 +274,9 @@
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) temp += 1000;
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) temp += 150;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) temp += 105;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
@@ -318,6 +308,16 @@
 		{
 			//Base mana
 			var temp:Number = 100;
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) temp += 150;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) temp += 105;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
 			return temp;
 		}
 

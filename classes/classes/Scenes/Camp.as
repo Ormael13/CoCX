@@ -1105,7 +1105,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
 			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
 			outputText("\n\n");
-			addButton(4, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+			addButton(6, "Izmael", izmaScene.izmaelScene.izmaelMenu);
 		}
 		else {
 			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
@@ -1115,7 +1115,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			addButton(4, "Izma", izmaScene.izmaFollowerMenu);
+			addButton(6, "Izma", izmaScene.izmaFollowerMenu);
 		}
 	}
 	//Kiha!
@@ -1357,7 +1357,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		addButton(7, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 	}
 	//Valaria
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 		addButton(8, "Valeria", valeria.valeriaFollower, null, null, null, "Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 	}
 	//RATHAZUL

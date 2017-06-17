@@ -753,16 +753,6 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.DancersVitalityIII) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityIV) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityV) >= 0) max += Math.round(spe*1.5);
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIV) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityV) >= 0) max += 35;
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringII) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringIII) >= 0) max += 20;
@@ -777,17 +767,9 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorEndurance) >= 0) max += 500;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) max += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) max += 1000;
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) max += 150;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) max += 105;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
@@ -798,7 +780,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 7;
-			if (max > 99999) max = 99999;
+			if (max > 49999) max = 49999;
 			return max;
 		}
 		
@@ -909,8 +891,25 @@ import classes.GlobalFlags.kFLAGS;
 		public function maxMana():Number
 		{
 			var max:Number = 100;
-			
-			if (max > 999) max = 999;
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
+			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
+			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
+			if (findPerk(PerkLib.ManaAffinityIV) >= 0) max += 35;
+			if (findPerk(PerkLib.ManaAffinityV) >= 0) max += 35;
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) max += 150;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) max += 105;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			if (max > 19999) max = 19999;
 			return max;
 		}
 		

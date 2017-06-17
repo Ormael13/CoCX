@@ -50,7 +50,7 @@ package classes.Scenes.Areas
 			choice[choice.length] = 3; //Winter Wolf
 			choice[choice.length] = 4; //Ice True Golems
 			choice[choice.length] = 5; //Snow Lily
-			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
+			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 7; //Freebie items!
 			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) choice[choice.length] = 8; //Ornate Chest
 			if (player.faceType == 24 && player.earType == 18 && player.armType == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine

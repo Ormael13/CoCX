@@ -590,20 +590,20 @@ import classes.Perks.*;
 				"You've trained in using your speed to enhance power of your dual large weapons swings.",
 				"You choose 'Hidden Dual Momentum' perk, allowing to use your speed to enhance power of your attacks with dual large weapons.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max fatigue by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity I' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain fatigue 10% faster.",
+				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max fatigue by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity II' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain fatigue 10% faster.",
+				"You choose the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max fatigue by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity III' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain fatigue 10% faster.",
+				"You choose the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max fatigue by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain fatigue 10% faster.",
+				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max fatigue by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity V' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain fatigue 10% faster.",
+				"You choose the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
 				"You choose the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
@@ -623,20 +623,20 @@ import classes.Perks.*;
 				"Mold your own body using genetic memory and soulforce.",
 				"You choose the 'Metamorph' perk, giving you a chance to mold your own body.");
 		public static const MindOverBodyI:PerkType = mk("Mind over Body I", "Mind over Body I",
-				"+2 extra fatigue per point of intelligence.",
-				"You choose the 'Mind over Body I' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+				"+2 extra mana per point of intelligence.",
+				"You choose the 'Mind over Body I' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyII:PerkType = mk("Mind over Body II", "Mind over Body II",
-				"+2 extra fatigue per point of intelligence.",
-				"You choose the 'Mind over Body II' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+				"+2 extra mana per point of intelligence.",
+				"You choose the 'Mind over Body II' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyIII:PerkType = mk("Mind over Body III", "Mind over Body III",
-				"+2 extra fatigue per point of intelligence.",
-				"You choose the 'Mind over Body III' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+				"+2 extra mana per point of intelligence.",
+				"You choose the 'Mind over Body III' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyIV:PerkType = mk("Mind over Body IV", "Mind over Body IV",
-				"+2 extra fatigue per point of intelligence.",
-				"You choose the 'Mind over Body IV' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+				"+2 extra mana per point of intelligence.",
+				"You choose the 'Mind over Body IV' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyV:PerkType = mk("Mind over Body V", "Mind over Body V",
-				"+2 extra fatigue per point of intelligence.",
-				"You choose the 'Mind over Body V' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+				"+2 extra mana per point of intelligence.",
+				"You choose the 'Mind over Body V' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
@@ -1287,18 +1287,18 @@ import classes.Perks.*;
 		WeaponGrandMastery.requirePerk(WeaponMastery)
 						  .requireStr(140)
 						  .requireLevel(24);
-		DualWieldLarge.requirePerk(DualWield)
+	/*	DualWieldLarge.requirePerk(DualWield)
 					  .requirePerk(TitanGrip)
 					  .requireStr(125)
 					  .requireLevel(24);
-		TripleAttackLarge.requirePerk(DoubleAttackLarge)
+	*/	TripleAttackLarge.requirePerk(DoubleAttackLarge)
 						 .requireStr(125)
 						 .requireSpe(100)
 						 .requireLevel(24);
 		//Tier 5 Strength Perks
 		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(150).requireMinSpe(100).requireMinLevel(30);
 		//Tier 6 Strength Perks
-		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(200).requireMinSpe(100).requireMinLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
+		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(175).requireMinSpe(100).requireMinLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
 		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
 		//Tier 7 Strength Perks
 		PrestigeJobBerserker.requirePrestigeJobSlot()
