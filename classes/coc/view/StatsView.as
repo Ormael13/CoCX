@@ -115,7 +115,7 @@ public class StatsView extends Block {
 		}));
 		addElement(lustBar = new StatBar({
 			statName   : "Lust:",
-			barColor   : '#ff69b4',
+		//	barColor   : '#ff1493',
 			minBarColor: '#ff0000',
 			hasMinBar  : true,
 			showMax    : true
@@ -130,11 +130,12 @@ public class StatsView extends Block {
 		}));
 		addElement(manaBar = new StatBar({
 			statName: "Mana:",
-			barColor: '#0000ff',
+		//	barColor: '#0000ff',
 			showMax : true
 		}));
 		addElement(soulforceBar = new StatBar({
 			statName: "Soulforce:",
+		//	barColor: '#ffd700',
 			showMax : true
 		}));
 		addElement(hungerBar = new StatBar({

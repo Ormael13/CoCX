@@ -1148,8 +1148,13 @@ package classes {
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
-					player.soulforce += 25;
+					player.soulforce += 50;
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+				//Daily regeneration of mana for non mages
+				if (player.findPerk(PerkLib.JobSorcerer) < 0 && (player.mana < player.maxMana())) {
+					player.mana += 100;
+					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
 			return needNext;

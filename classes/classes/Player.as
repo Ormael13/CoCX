@@ -812,6 +812,12 @@ use namespace kGAMECLASS;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
+				//Wrath
+				var gainedWrath:Number = 0;
+				gainedWrath += damage / 100;
+				gainedWrath = Math.round(gainedWrath);
+				wrath += gainedWrath;
+				if (wrath > maxWrath()) wrath = maxWrath();
 				//game.HPChange(-damage, display);
 				HP -= damage;
 				if (display) {

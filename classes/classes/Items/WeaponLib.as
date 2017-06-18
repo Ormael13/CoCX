@@ -9,7 +9,7 @@ package classes.Items
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 //1 atk for dual weapons = 80 lub 160 jeśli z dodatkowym perkiem
-		public static const FISTS:Fists = new Fists();//40 za 1 atk normalnie i 80 za 1 atk broni z perkiem/dod. efektem
+		public static const FISTS:Fists = new Fists();//40 za 1 atk normalnie lub za wrath weapon i 80 za 1 atk broni z perkiem/dod. efektem
 
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_SWORD:Weapon = new BeautifulSword();
