@@ -47,17 +47,28 @@ package classes.Scenes
 			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n");
 			outputText("<b>Version 0.8e:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-In 99% thanks to aimozg restless work mod have a brand new shiny UI. It adds Wisdom, Soulforce, Wrath, Mana bars and Spirit Stones counter to the side panel.\n");
+			outputText("-Spells would now req. using Mana. Perks to rase it max and increase regeneration would now affect mana not fatigue.\n");
+			outputText("-All perks of effect rising minimum lust now are addictive so it's possible to have more than 100 min lust. Still min lust can't be higher than (current max Lust - 10).\n");
+			outputText("-New tier 5 strength lvl-up perk: Unlock Id (2nd stage). Req. Unlock: Id perk and 150+ str. Effect: +1 wrath per lvl-up (grant bonus points to respective stat bar retroactively)\n");
+			outputText("-New tier 5 speed lvl-up perk: Unlock Body (2nd stage). Req. Unlock: Body perk and 150+ spe. Effect: +5 fatigue per lvl-up (grant bonus points to respective stat bar retroactively)\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Unlock Mind (2nd stage). Req. Unlock: Mind perk and 150+ wis. Effect: +5 soulforce per lvl-up (grant bonus points to respective stat bar retroactively)\n");
+			outputText("-New resource: Wrath. Generated in a few ways. Basic one is...been hit and loosing hp (10 hp lost = 1 wrath point gained).\n");
+			outputText("-Some of perks now adds small bonuses to max wrath. Job: Warrior and all perk for multi attacks for Job: Dervish +10, Job: Dervish, Job: Barbarian and both multi attack perks for Job: Barbarian +20.\n");
+			outputText("-(((line for desc usage of wrath)))\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
+			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
+			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -67,7 +78,6 @@ package classes.Scenes
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
-			outputText("-New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
@@ -100,6 +110,12 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

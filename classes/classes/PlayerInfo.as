@@ -406,7 +406,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (player.tailType == 28)
-			addictStats += "Manticore Hunger: " + flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] + "%\n";
+			addictStats += "<b>Manticore Hunger:</b> " + flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] + "%\n";
 
 		if (addictStats != "")
 			outputText("\n<b><u>Addictions</u></b>\n" + addictStats);
@@ -606,7 +606,7 @@ public class PlayerInfo extends BaseContent {
 		// End Ongoing Stat Effects
 		menu();
 		if (player.statPoints > 0) {
-			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.");
+			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
 		doNext(playerMenu);

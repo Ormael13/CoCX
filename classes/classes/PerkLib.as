@@ -115,9 +115,9 @@ import classes.Perks.*;
 		public static const PastLifeReligious:PerkType = mk("Past Life: Religious", "Past Life: Religious",
 				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.", null, true);
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
-				"Time spent focusing your mind makes spellcasting 20% less fatiguing.");
+				"Time spent focusing your mind makes spellcasting use 20% less mana.");
 		public static const PastLifeScholar:PerkType = mk("Past Life: Scholar", "Past Life: Scholar",
-				"Time spent focusing your mind makes spellcasting 20% less fatiguing.", null, true);
+				"Time spent focusing your mind makes spellcasting use 20% less mana.", null, true);
 		public static const HistoryScout:PerkType = mk("History: Scout", "History: Scout",
 				"A Past full of archery training increases physical range damage dealt by 10% and acc by 20%.");
 		public static const PastLifeScout:PerkType = mk("Past Life: Scout", "Past Life: Scout",
@@ -393,11 +393,11 @@ import classes.Perks.*;
 				"You choose the 'Grand Archmage' perk, increasing base spell strength by 40% and mana pool by 60.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=150)" +
-						"Increases base spell strength by 100%, mana pool by 150 and regain fatigue 100% faster." +
+						"Increases base spell strength by 100%, mana pool by 150 and regain it 100% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting fatigue recovery.");
+				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting it recovery.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=125)" +
 						"Increases base spell strength by 70% and mana pool by 105, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
@@ -505,6 +505,9 @@ import classes.Perks.*;
 		public static const IronMan:PerkType = mk("Iron Man", "Iron Man",
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
+		public static const IronStomach:PerkType = mk("Iron Stomach", "Iron Stomach",
+				"Reduces the fatigue cost of physical specials by 50%.",
+				"You choose the 'Iron Stomach' perk, reducing the fatigue cost of physical special attacks by 50%");
 		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
 				"You've combined all basic jobs training effects into an all-round fighting style.",
 				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs.");
@@ -590,20 +593,20 @@ import classes.Perks.*;
 				"You've trained in using your speed to enhance power of your dual large weapons swings.",
 				"You choose 'Hidden Dual Momentum' perk, allowing to use your speed to enhance power of your attacks with dual large weapons.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max mana by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain it 10% faster.",
+				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max mana by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain it 10% faster.",
+				"You choose the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max mana by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain it 10% faster.",
+				"You choose the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max mana by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain it 10% faster.",
+				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max mana by 35 and regain fatigue 10% faster.",
-				"You choose the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting your fatigue recovery rate.");
+				"Raises max mana by 35 and regain it 10% faster.",
+				"You choose the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
 				"You choose the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
@@ -650,19 +653,19 @@ import classes.Perks.*;
 				"Increase attack power of spears when you attack once each turn and have taur/drider lower body or twice higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 120+ for others).",
 				"You've chosen the 'Natural jouster' perk. As long you will have taur or drider lower body and attack once per turn your spear attack power will be three time higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
-				"Raises max fatigue by 20 and regain fatigue 5% faster.",
+				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const NaturesSpringII:PerkType = mk("Nature's Spring II", "Nature's Spring II",
-				"Raises max fatigue by 20 and regain fatigue 5% faster.",
+				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring II' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const NaturesSpringIII:PerkType = mk("Nature's Spring III", "Nature's Spring III",
-				"Raises max fatigue by 20 and regain fatigue 5% faster.",
+				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring III' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const NaturesSpringIV:PerkType = mk("Nature's Spring IV", "Nature's Spring IV",
-				"Raises max fatigue by 20 and regain fatigue 5% faster.",
+				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring IV' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const NaturesSpringV:PerkType = mk("Nature's Spring V", "Nature's Spring V",
-				"Raises max fatigue by 20 and regain fatigue 5% faster.",
+				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring V' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
 				"Raises minimum lust by up to 30.",
@@ -902,12 +905,21 @@ import classes.Perks.*;
 		public static const UnlockBody:PerkType = mk("Unlock: Body", "Unlock: Body",
 				"Unlocking body potential grants additional 15 HP on each lvl-up (retroactive effect).",
 				"You choose the 'Unlock: Body' perk, allowing you to increase passive HP gains on lvl-up!");
+		public static const UnlockBody2ndStage:PerkType = mk("Unlock: Body (2nd Stage)", "Unlock: Body (2nd Stage)",
+				"Unlocking body potential grants additional 5 Fatigue on each lvl-up (retroactive effect).",
+				"You choose the 'Unlock: Body (2nd Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!");
 		public static const UnlockId:PerkType = mk("Unlock: Id", "Unlock: Id",
 				"Unlocking id grants additional 1 Lust on each lvl-up (retroactive effect).",
 				"You choose the 'Unlock: Id' perk, allowing you to increase passive Lust gains on lvl-up!");
+		public static const UnlockId2ndStage:PerkType = mk("Unlock: Id (2nd Stage)", "Unlock: Id (2nd Stage)",
+				"Unlocking id grants additional 1 Wrath on each lvl-up (retroactive effect).",
+				"You choose the 'Unlock: Id (2nd Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!");
 		public static const UnlockMind:PerkType = mk("Unlock: Mind", "Unlock: Mind",
-				"Unlocking mind potential grants additional 5 Fatigue on each lvl-up (retroactive effect).",
-				"You choose the 'Unlock: Mind' perk, allowing you to increase passive Fatigue gains on lvl-up!");
+				"Unlocking mind potential grants additional 5 Mana on each lvl-up (retroactive effect).",
+				"You choose the 'Unlock: Mind' perk, allowing you to increase passive Mana gains on lvl-up!");
+		public static const UnlockMind2ndStage:PerkType = mk("Unlock: Mind (2nd Stage)", "Unlock: Mind (2nd Stage)",
+				"Unlocking mind potential grants additional 5 Soulforce on each lvl-up (retroactive effect).",
+				"You choose the 'Unlock: Mind (2nd Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
@@ -1297,6 +1309,9 @@ import classes.Perks.*;
 						 .requireLevel(24);
 		//Tier 5 Strength Perks
 		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(150).requireMinSpe(100).requireMinLevel(30);
+		UnlockId2ndStage.requirePerk(UnlockId)
+						.requireStr(150)
+						.requireLevel(30);
 		//Tier 6 Strength Perks
 		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(175).requireMinSpe(100).requireMinLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
 		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
@@ -1611,18 +1626,21 @@ import classes.Perks.*;
 		Multishot.requirePerk(WildQuiver)
 				 .requireSpe(150)
 				 .requireLevel(30);
+		UnlockBody2ndStage.requirePerk(UnlockBody)
+						  .requireSpe(150)
+						  .requireLevel(30);
 		//Tier 6 Speed Perks
 		//Tier 7 Speed Perks
-/*		PrestigeJobSoulArcher.requirePerk(SoulOverlord)
-							 .requirePrestigeJobSlot()
+/*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
+							 .requirePerk(SoulOverlord)
 							 .requirePerk(JobHunter)
 							 .requireSpe(200)
 							 .requireLevel(42);
-*/		PrestigeJobArcaneArcher.requirePerk(JobSorcerer)
-							   .requireInt(150)
-							   .requirePrestigeJobSlot()
+*/		PrestigeJobArcaneArcher.requirePrestigeJobSlot()
+							   .requirePerk(JobSorcerer)
 							   .requirePerk(JobHunter)
 							   .requireSpe(200)
+							   .requireInt(150)
 							   .requireLevel(42);
 		ElementalArrows.requireLevel(42)
 					   .requirePerk(PrestigeJobArcaneArcher)
@@ -1790,6 +1808,10 @@ import classes.Perks.*;
 				   .requireWis(125)
 				   .requireStr(100)
 				   .requireLevel(24);
+		//Tier 5 Wisdom perks
+		UnlockMind2ndStage.requirePerk(UnlockMind)
+						  .requireWis(150)
+						  .requireLevel(30);
 		//------------
 		// LIBIDO
 		//------------

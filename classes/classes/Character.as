@@ -681,7 +681,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * 15;
 			if (findPerk(PerkLib.UnlockBody) >= 0) max += level * 15;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 25;
+			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			max *= 1 + (countCockSocks("green") * 0.02);
 			max = Math.round(max);
@@ -778,8 +778,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			max += level * 5;
-			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 7;
+			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
 			if (max > 49999) max = 49999;
 			return max;
 		}
@@ -875,6 +875,7 @@ import classes.GlobalFlags.kFLAGS;
 				//if (findPerk(PerkLib.Ascension) >= 0) multimax += perkv1(PerkLib.Ascension) * 0.01;
 				max *= multimax;
 			}
+			if (findPerk(PerkLib.UnlockMind2ndStage) >= 0) max += level * 5;
 			max = Math.round(max);
 			if (max > 79999) max = 79999;
 			return max;
@@ -883,8 +884,18 @@ import classes.GlobalFlags.kFLAGS;
 		public function maxWrath():Number
 		{
 			var max:Number = 100;
-			
-			if (max > 999) max = 999;
+			if (findPerk(PerkLib.DoubleAttack) >= 0) max += 10;
+			if (findPerk(PerkLib.TripleAttack) >= 0) max += 10;
+			if (findPerk(PerkLib.QuadrupleAttack) >= 0) max += 10;
+			if (findPerk(PerkLib.PentaAttack) >= 0) max += 10;
+			if (findPerk(PerkLib.HexaAttack) >= 0) max += 10;
+			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
+			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
+			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
+			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
+			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
+			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
+			if (max > 999) max = 999;//obecnie max to 390
 			return max;
 		}
 		
@@ -909,6 +920,9 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			max += level * 5;
+			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
 			if (max > 19999) max = 19999;
 			return max;
 		}
@@ -922,7 +936,12 @@ import classes.GlobalFlags.kFLAGS;
 			if (game.player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) maxven += 150;
 			if (game.player.tailType == TAIL_TYPE_SCORPION) maxven += 150;
 			if (game.player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) maxven += 200;
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxven *= 2;
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
+				var multimaxven:Number = 1;
+				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
+				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
+				maxven *= multimaxven;
+			}
 			return maxven;
 		}
 		
@@ -963,10 +982,10 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
-			// (findPerk(PerkLib.xxxx) >= 0) max += xxx;	Iron Stomach perk chyba tutaj
+			// (findPerk(PerkLib.IronStomach) >= 0) max += level;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
-			if (max > 999) max = 999;//obecnie max to 895
+			if (max > 1099) max = 1099;//obecnie max to 1045
 			return max;
 		}
 

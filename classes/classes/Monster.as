@@ -301,13 +301,23 @@
 		{
 			//Base wrath
 			var temp:Number = 100;
+			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
+			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 10;
+			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 10;
+			if (findPerk(PerkLib.PentaAttack) >= 0) temp += 10;
+			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 10;
+			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
+			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;
 			return temp;
 		}
 		
 		public function eMaxMana():Number
 		{
 			//Base mana
-			var temp:Number = 100;
+			var temp:Number = 100 + this.level * 5;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;

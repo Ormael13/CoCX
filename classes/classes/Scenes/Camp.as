@@ -2744,17 +2744,30 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
 			var hp:int = 15;
 			var fatigue:int = 5;
+			var mana:int = 5;
+			var soulforce:int = 0;
+			var wrath:int = 0;
 			var lust:int = 0;
 			if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-				hp += 25;
-				fatigue += 7;
+				hp += 20;
+				fatigue += 6;
+				mana += 6;
 				lust += 2;
 			}
-			if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockMind) >= 0) fatigue += 5;
+		/*	if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
+				hp += 5;
+				fatigue += 2;
+				mana += 2;
+				lust += 2;
+			}
+		*/	if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
+			if (player.findPerk(PerkLib.UnlockMind) >= 0) mana += 5;
 			if (player.findPerk(PerkLib.UnlockId) >= 0) lust += 1;
-			if (lust > 0) mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
-			else mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + " and maximum Fatigue by " + fatigue + "; gain 5 attribute points and 1 perk points.";
+			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) fatigue += 5;
+			if (player.findPerk(PerkLib.UnlockMind2ndStage) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
+			if (lust > 0) mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
+			else mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + " and maximum Mana by " + mana + "; gain 5 attribute points and 1 perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 				getGame().playerInfo.levelUpGo();
 				return true; //True indicates that you should be routed to level-up.

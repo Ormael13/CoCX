@@ -814,7 +814,7 @@ use namespace kGAMECLASS;
 			if (damage>0){
 				//Wrath
 				var gainedWrath:Number = 0;
-				gainedWrath += damage / 100;
+				gainedWrath += damage / 10;
 				gainedWrath = Math.round(gainedWrath);
 				wrath += gainedWrath;
 				if (wrath > maxWrath()) wrath = maxWrath();
@@ -3939,43 +3939,19 @@ use namespace kGAMECLASS;
 		public function minLust():Number
 		{
 			var min:Number = 0;
-			var minCap:Number = 100;
+			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
-			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
-				if(min > 40) min += 10;
-				else if(min >= 20) min += 20;
-				else min += 40;
-			}
+			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) min += 40;
 			//Omnibus' Gift
-			if(findPerk(PerkLib.OmnibusGift) >= 0) {
-				if(min > 40) min += 10;
-				else if(min >= 20) min += 20;
-				else min += 35;
-			}
+			if(findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
 			//Nymph perk raises to 30
-			if(findPerk(PerkLib.Nymphomania) >= 0) {
-				if(min >= 40) min += 10;
-				else if(min >= 20) min += 15;
-				else min += 30;
-			}
+			if(findPerk(PerkLib.Nymphomania) >= 0) min += 30;
 			//Oh noes anemone!
-			if(hasStatusEffect(StatusEffects.AnemoneArousal)) {
-				if(min >= 40) min += 10;
-				else if(min >= 20) min += 20;
-				else min += 30;
-			}
+			if(hasStatusEffect(StatusEffects.AnemoneArousal)) min += 30;
 			//Hot blooded perk raises min lust!
-			if(findPerk(PerkLib.HotBlooded) >= 0) {
-				if(min > 0) min += perk(findPerk(PerkLib.HotBlooded)).value1 / 2;
-				else min += perk(findPerk(PerkLib.HotBlooded)).value1;
-			}
-			if(findPerk(PerkLib.LuststickAdapted) > 0) {
-				if(min < 50) min += 10;
-				else min += 5;
-			}
-			if(hasStatusEffect(StatusEffects.Infested)) {
-				if(min < 50) min = 50;
-			}
+			if(findPerk(PerkLib.HotBlooded) >= 0) min += perk(findPerk(PerkLib.HotBlooded)).value1;
+			if(findPerk(PerkLib.LuststickAdapted) > 0) min += 10;
+			if(hasStatusEffect(StatusEffects.Infested)) min += 50;
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
 			//Subtract points for Icestone!
@@ -3991,14 +3967,12 @@ use namespace kGAMECLASS;
 			}
 			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings. This effectively caps minimum lust at 90.
 			if (findPerk(PerkLib.PurityBlessing) >= 0) {
-				if (min >= 10) {
-					if (min <= 20) min -= (min - 10);
-					else min -= 10;
-				}
+				if (min >= 10) min -= 10;
+				else min = 0;
 				minCap -= 10;
 			}
 			//Harpy Lipstick status forces minimum lust to be at least 50.
-			if(min < 50 && hasStatusEffect(StatusEffects.Luststick)) min = 50;
+			if(hasStatusEffect(StatusEffects.Luststick)) min += 50;
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
@@ -4028,11 +4002,11 @@ use namespace kGAMECLASS;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (min < 30 && armorName == "lusty maiden's armor") min = 30;
-			if (min < 20 && armorName == "tentacled bark armor") min = 20;
+			if (armorName == "lusty maiden's armor") min += 30;
+			if (armorName == "tentacled bark armor") min += 20;
 			//Constrain values
 			if (min < 0) min = 0;
-			if (min > 95) min = 95;
+			if (min > (maxLust() - 10)) min = (maxLust() - 10);
 			if (min > minCap) min = minCap;
 			return min;
 		}
@@ -4055,6 +4029,8 @@ use namespace kGAMECLASS;
 			var maxInt:int = 100;
 			var maxWis:int = 100;
 			var maxLib:int = 100;
+			var maxSen:int = 100;
+			var maxCor:int = 100;
 			var newGamePlusMod:int = this.newGamePlusMod();
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
@@ -4807,7 +4783,9 @@ use namespace kGAMECLASS;
 				spe:maxSpe,
 				inte:maxInt,
 				wis:maxWis,
-				lib:maxLib
+				lib:maxLib,
+				sens:maxSen,
+				cor:maxCor
 			};
 		}
 		
