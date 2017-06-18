@@ -2591,6 +2591,13 @@ public function attack():void {
 public function meleeattackdamage():void {
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) {
 		if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 				attack();
 				return;
@@ -2606,6 +2613,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2617,6 +2631,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2628,6 +2649,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2639,6 +2667,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2650,6 +2685,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2661,6 +2703,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2672,6 +2721,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2683,6 +2739,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2694,6 +2757,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2705,6 +2775,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2716,6 +2793,13 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (player.isLowGradeWraithWeapon()) {
+				takeDamage(100);
+				if (player.HP < 1) {
+					doNext(endHpLoss);
+					return;
+				}
+			}
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
@@ -2959,12 +3043,12 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
 		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
 		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
-		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 1;
-		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 1;
+	//	if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
+	//	if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
 		if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
@@ -3892,7 +3976,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 1;
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 5;
 	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 1;
 		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 1;
@@ -3906,7 +3990,7 @@ public function manaregeneration(combat:Boolean = true):void {
 	*/	kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 2;
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
 	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 2;
 		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 2;

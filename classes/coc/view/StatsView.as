@@ -109,12 +109,12 @@ public class StatsView extends Block {
 		},{before:1});
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
-			barColor: '#ff0000',
+		//	barColor: '#ff0000',
 			showMax : true
 		}));
 		addElement(lustBar = new StatBar({
 			statName   : "Lust:",
-			barColor   : '#ff69b4',
+		//	barColor   : '#ff1493',
 			minBarColor: '#ff0000',
 			hasMinBar  : true,
 			showMax    : true
@@ -129,11 +129,12 @@ public class StatsView extends Block {
 		}));
 		addElement(manaBar = new StatBar({
 			statName: "Mana:",
-			barColor: '#0000ff',
+		//	barColor: '#0000ff',
 			showMax : true
 		}));
 		addElement(soulforceBar = new StatBar({
 			statName: "Soulforce:",
+		//	barColor: '#ffd700',
 			showMax : true
 		}));
 		addElement(hungerBar = new StatBar({
@@ -284,6 +285,10 @@ public class StatsView extends Block {
 		wisBar.value          = player.wis;
 		libBar.maxValue       = maxes.lib;
 		libBar.value          = player.lib;
+		senBar.maxValue       = maxes.sens;
+		senBar.value          = player.sens;
+		corBar.maxValue       = maxes.cor;
+		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
 		wrathBar.maxValue 	  = player.maxWrath();

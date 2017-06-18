@@ -308,14 +308,14 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				if (!monster.hasStatusEffect(StatusEffects.Blind))
-					addButton(0, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nFatigue Cost: " + spellCostWhite(30) + "");
+					addButton(0, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nMana Cost: " + spellCostWhite(30) + "");
 				else {
 					outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 					addButtonDisabled(0, "Blind", "Enemy still blinded");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nMana Cost: " + spellCostWhite(40) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nMana Cost: " + spellCostWhite(40) + "");
 		}
 		//BLACK MAGICSKS
 		if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
@@ -323,10 +323,10 @@ public class CombatMagic extends BaseCombatContent {
 		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
 			outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
-			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nFatigue Cost: " + spellCostBlack(20) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: " + spellCostBlack(30) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nMana Cost: " + spellCostBlack(20) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: " + spellCostBlack(30) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
 		}
 		addButton(10, "Support", magicMenu2, null, null, null, "Cast one of support spells.");
 		if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(11, "Grey Spells", magicMenu3, null, null, null, "Cast one of Grey Magic spells.");
@@ -405,9 +405,9 @@ public class CombatMagic extends BaseCombatContent {
 			/*	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	1st spell (non-fire or non-ice based) goes here
 			 if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	2nd spell (non-fire or non-ice based) goes here
 			 if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
-			 */	if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
+			 */	if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(6, "	fire single target spell goes here
-			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(11, "	ice single target spell goes here
 		}
 		addButton(14, "Back", magicMenu);
@@ -415,14 +415,13 @@ public class CombatMagic extends BaseCombatContent {
 
 
 	public function spellArouse():void {
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(20)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(20,6);
+		useMana(20,6);
 		statScreenRefresh();
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -502,14 +501,13 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellHeal():void {
 		clearOutput();
-		if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.mana < spellCostWhite(30)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30, 8);
+		useMana(30, 8);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -791,14 +789,13 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellIceSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40,6);
+		useMana(40,6);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -869,14 +866,13 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellDarknessShard():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40,6);
+		useMana(40,6);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -948,14 +944,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(200)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(200,1);
+		useMana(200,1);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1028,14 +1023,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(200)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(200,1);
+		useMana(200,1);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1248,14 +1242,13 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellBlind():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(30)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30,5);
+		useMana(30,5);
 		var successrate:int = 60;
 		successrate -= (player.inte * 0.4);
 		if (successrate > 20) successrate = 20;
@@ -1465,15 +1458,14 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellLightningBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
 			clearOutput();
-			outputText("You are too tired to cast this spell.");
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40,5);
+		useMana(40,5);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;

@@ -24,7 +24,8 @@ import flash.display.MovieClip;
 			//this.model = model;
 
 			this.bg = addBitmapDataSprite({
-				x:0,y:0,
+				x:0, y:0,
+				width:350,height:239,stretch: true,
 				bitmapClass: tooltipBg
 			});
 			this.ln = addBitmapDataSprite({
