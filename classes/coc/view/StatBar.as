@@ -119,9 +119,9 @@ public class StatBar extends Block {
 			}
 		});
 		_valueLabel = addTextField({
-			x                : 0, y: myHeight-33,
+			x                : 0, y: myHeight-30,
 			width            : barWidth,
-			height           : 33,
+			height           : 30,
 			defaultTextFormat: {
 				font : 'Georgia',
 				size : 22,

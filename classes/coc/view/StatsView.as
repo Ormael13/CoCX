@@ -101,8 +101,8 @@ public class StatsView extends Block {
 		addElement(intBar = new StatBar({statName: "Intelligence:"}));
 		addElement(wisBar = new StatBar({statName: "Wisdom:"}));
 		addElement(libBar = new StatBar({statName: "Libido:"}));
-		addElement(senBar = new StatBar({statName: "Sensitivity:"}));
-		addElement(corBar = new StatBar({statName: "Corruption:"}));
+		addElement(senBar = new StatBar({statName: "Sensitivity:", maxValue: 100}));
+		addElement(corBar = new StatBar({statName: "Corruption:", maxValue: 100}));
 		combatStatsText = addTextField({
 			text: 'Combat stats',
 			defaultTextFormat: LABEL_FORMAT
@@ -285,6 +285,8 @@ public class StatsView extends Block {
 		wisBar.value          = player.wis;
 		libBar.maxValue       = maxes.lib;
 		libBar.value          = player.lib;
+		senBar.value          = player.sens;
+		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
 		wrathBar.maxValue 	  = player.maxWrath();
