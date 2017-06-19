@@ -696,7 +696,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (game.player.demonScore() >= 6) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.minoScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.phoenixScore() >= 5) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.salamanderScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.sharkScore() >= 9 && game.player.vaginas.length > 0 && game.player.cocks.length > 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -894,8 +894,11 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
+			if (findPerk(PerkLib.Berzerker) >= 0) max += 100;
+			if (findPerk(PerkLib.Lustzerker) >= 0) max += 100;
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
-			if (max > 999) max = 999;//obecnie max to 390
+			if (max > 999) max = 999;//obecnie max to 790
 			return max;
 		}
 		

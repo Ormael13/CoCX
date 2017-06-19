@@ -1140,12 +1140,19 @@ use namespace kGAMECLASS;
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
-			if (minoScore() >= 4)
-				race = "minotaur";
+			if (minotaurScore() >= 4)
+				if (minotaurScore() >= 9) race = "minotaur";
+				else race = "minotaur";
 			if (cowScore() >= 4)
 			{
-				race = "cow-";
-				race += mf("morph", "girl");
+				if (cowScore() >= 9) {
+					race = "cow-";
+					race += mf("morph", "girl");
+				}
+				else {
+					race = "half cow-";
+					race += mf("morph", "girl");
+				}
 			}
 			if (beeScore() >= 5) {
 				if (beeScore() >= 9) {
@@ -1544,7 +1551,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
 				chimeraCounter++;
-			if (minoScore() >= 4)
+			if (minotaurScore() >= 4)
 				chimeraCounter++;
 			if (cowScore() >= 4)
 				chimeraCounter++;
@@ -1635,11 +1642,11 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
 				grandchimeraCounter++;
-			if (minoScore() >= 4)
+*/			if (minotaurScore() >= 9)
 				grandchimeraCounter++;
-			if (cowScore() >= 4)
+			if (cowScore() >= 9)
 				grandchimeraCounter++;
-*/			if (beeScore() >= 9)
+			if (beeScore() >= 9)
 				grandchimeraCounter++;
 //			if (goblinScore() >= 4)
 //				grandchimeraCounter++;
@@ -1833,7 +1840,7 @@ use namespace kGAMECLASS;
 		}
 
 		//Determine minotaur rating
-		public function minoScore():Number {
+		public function minotaurScore():Number {
 			Begin("Player","racialScore","minotaur");
 			var minoCounter:Number = 0;
 			if (faceType == 3)
@@ -1844,60 +1851,66 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			if (hornType == 2)
 				minoCounter++;
-			if (lowerBody == 1 && minoCounter > 0)
+			if (lowerBody == 1)
 				minoCounter++;
-			if (tallness > 80 && minoCounter > 0)
-				minoCounter++;
-			if (cocks.length > 0 && minoCounter > 0)
-			{
-				if (horseCocks() > 0)
+			if (minoCounter > 4) {
+				if (cumQ() > 500) {
+					if (cumQ() > 1000) {
+						minoCounter++;
+					}
 					minoCounter++;
+				}
+				if (hasFur())
+					minoCounter++;
+				if (tallness > 80 && minoCounter > 4)
+					minoCounter++;
+				if (cocks.length > 0 && horseCocks() > 0)
+					minoCounter++;
+				if (vaginas.length > 0)
+					minoCounter--;
 			}
-			if (vaginas.length > 0)
-				minoCounter--;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				minoCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 4)
 				minoCounter += 1;
 			End("Player","racialScore");
 			return minoCounter;
 		}
 
-		public function get minotaurScore():Number
-		{
-			return this.minoScore();
-		}
-
 		//Determine cow rating
 		public function cowScore():Number {
 			Begin("Player","racialScore","cow");
-			var minoCounter:Number = 0;
+			var cowCounter:Number = 0;
 			if (faceType == 0)
-				minoCounter++;
-			if (faceType == 3)
-				minoCounter--;
+				cowCounter++;
 			if (earType == 3)
-				minoCounter++;
+				cowCounter++;
 			if (tailType == 4)
-				minoCounter++;
+				cowCounter++;
 			if (hornType == 2)
-				minoCounter++;
-			if (lowerBody == 1 && minoCounter > 0)
-				minoCounter++;
-			if (tallness >= 73 && minoCounter > 2)
-				minoCounter++;
-			if (vaginas.length > 0 && minoCounter > 2)
-				minoCounter++;
-			if (biggestTitSize() > 4 && minoCounter > 2)
-				minoCounter++;
-			if (biggestLactation() > 2 && minoCounter > 2)
-				minoCounter++;
+				cowCounter++;
+			if (lowerBody == 1)
+				cowCounter++;
+			if (cowCounter > 4) {
+				if (biggestTitSize() > 4)
+					cowCounter++;
+				if (biggestLactation() > 2)
+					cowCounter++;
+				if (hasPartialCoat(SKIN_COAT_FUR))
+					cowCounter++;
+				if (tallness >= 73)
+					cowCounter++;
+				if (vaginas.length > 0)
+					cowCounter++;
+				if (cocks.length > 0)
+					cowCounter--;
+			}
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
-				minoCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 3)
-				minoCounter += 1;
+				cowCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cowCounter >= 4)
+				cowCounter += 1;
 			End("Player","racialScore");
-			return minoCounter;//dodać punkt do wyniku jak ma futro?
+			return cowCounter;
 		}
 
 		public function sandTrapScore():int {
@@ -2010,7 +2023,6 @@ use namespace kGAMECLASS;
 				coonCounter++;
 			if (tailType == 16)
 				coonCounter++;
-
 			if (faceType == 15)
 				coonCounter++;
 			if (faceType == 16)
@@ -2018,7 +2030,6 @@ use namespace kGAMECLASS;
 			//Fur only counts if some canine features are present
 			if (hasFur() && coonCounter > 0)
 				coonCounter++;
-
 			if (tallness < 55 && coonCounter > 0)
 				coonCounter++;
 			if (tallness < 45 && coonCounter > 0)
@@ -2803,7 +2814,7 @@ use namespace kGAMECLASS;
 				salamanderCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				salamanderCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && salamanderCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && salamanderCounter >= 4)
 				salamanderCounter += 1;
 			
 			End("Player","racialScore");
@@ -4080,15 +4091,30 @@ use namespace kGAMECLASS;
 			}
 			End("Player","getAllMaxStats.perks");
 			Begin("Player","getAllMaxStats.racial");
-			//Alter max stats depending on race (+10-20 za 4 pkt, +30-40 za 5 pkt i +50-60 za 6 pkt)
-			if (minoScore() >= 4) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxInt -= (10 * (1 + newGamePlusMod));
+			//Alter max stats depending on race (+15 za pkt)
+			if (minotaurScore() >= 4) {
+				if (minotaurScore() >= 9) {
+					maxStr += (120 * (1 + newGamePlusMod));
+					maxTou += (35 * (1 + newGamePlusMod));
+					maxInt -= (20 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (60 * (1 + newGamePlusMod));
+					maxTou += (20 * (1 + newGamePlusMod));
+					maxInt -= (20 * (1 + newGamePlusMod));
+				}
 			}//+20/10-20
 			if (cowScore() >= 4) {
-				maxStr += (15 * (1 + newGamePlusMod));
-				maxTou += (5 * (1 + newGamePlusMod));
+				if (cowScore() >= 9) {
+					maxStr += (120 * (1 + newGamePlusMod));
+					maxTou += (35 * (1 + newGamePlusMod));
+					maxSpe -= (20 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (60 * (1 + newGamePlusMod));
+					maxTou += (20 * (1 + newGamePlusMod));
+					maxSpe -= (20 * (1 + newGamePlusMod));
+				}
 			}//+20/10-20
 			if (lizardScore() >= 4) {
 				if (lizardScore() >= 8) {

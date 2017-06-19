@@ -293,6 +293,17 @@
 				if (this.level >= 2) temp += 25;
 				if (this.level >= 4) temp += 25;
 			}
+			if (findPerk(PerkLib.SoulApprentice) >= 0) {
+				if (this.level >= 6) temp += 30;
+				if (this.level >= 8) temp += 30;
+				if (this.level >= 10) temp += 30;
+			}
+			if (findPerk(PerkLib.SoulPersonage) >= 0) {
+				if (this.level >= 12) temp += 40;
+				if (this.level >= 14) temp += 40;
+				if (this.level >= 16) temp += 40;
+			}
+			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
@@ -311,6 +322,9 @@
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;
+			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
+			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
 			return temp;
 		}
 		

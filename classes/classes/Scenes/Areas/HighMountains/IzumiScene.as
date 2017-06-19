@@ -228,10 +228,8 @@ package classes.Scenes.Areas.HighMountains
 			if (player.tallness < 108)
 			{
 				outputText("You can still hear the humming, but at first, there doesn’t seem to be anyone around.  You creep closer to the tent, until suddenly, a huge shadow at the front of the tent shifts.  You freeze, straining your eyes through the darkness, as you suddenly realize that’s not a shadow at all - it’s an enormous figure!  You must have gasped, as without warning the humming stops.\n\n");
-
 				outputText("“<i>Hm?</i>” the shadow grunts, then speaks.  “<i>Oh?  Now how did you find your way in here, I wonder?</i>”  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath and a small light flares up briefly in the darkness, then the shadow speaks again.  “<i>Well, whatever. It’s been a while since I had company, ");
-
-				if (player.minoScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
+				if (player.minotaurScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
 				else if (player.dogScore() > 3) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
 				else if (player.goblinScore() > 3) outputText("plus you don't seem to be as insufferable as the rest of those little green whores who trollop around these parts, hunting their next lay.  ");
 				else if (player.demonScore() > 3) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
@@ -240,7 +238,6 @@ package classes.Scenes.Areas.HighMountains
 				else outputText("plus you don’t look like the troglodytes who usually wander around these parts.  ");
 				outputText("Sit down, sit down!</i>”\n\n");
 			}
-
 			outputText("Cautiously, you edge towards the lip of the fire, and");
 			if (player.tallness >= 108)
 			{
@@ -261,16 +258,13 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			outputText("  The second factor, of course, would be the enormous curved horn of red, rock-like bone that juts proudly from her forehead.  Still, they’re no less inhuman than some of the other creatures you’ve encountered since arriving....\n\n");
-
 			outputText("“<i>Hmm?</i>”  She looks blankly at you.  The sudden realisation that you’ve been staring at her horn for an uncomfortably long time hits you.  “<i>What?  Is there something on my face?</i>”  Blushing, you open your mouth to answer, but as you breathe in, a rush of coarse smoke down your throat");
 			if (player.tou < 60) outputText(" causes you to cough and splutter.\n\n");
 			else outputText(" momentarily steals your voice, having been ill-prepared for the sudden burn.\n\n");
-			
 			outputText("The strange woman blinks at you in confusion for a moment, then her face cracks into a grin.  “<i>Oh, right, I forgot people like you tend to be pretty fragile.  Hold on");
 			if (player.tou < 60) outputText(", kid. Let");
 			else outputText(", let");
 			outputText(" me get some air in here for you...</i>”  She launches herself to her feet with surprising speed and breezes past you.\n\n");
-			
 			menu();
 			addButton(0, "Next", enterFirstTimePartII);
 		}
@@ -285,43 +279,30 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" the smoke, you turn to see her, only barely through the gloom, at the boulder blocking entry to the cave.");
 			if (player.str <= 75) outputText("  To your amazement, the boulder begins to move, and as more light - along with a much-needed rush of fresh air - floods into the smoky cavern, you see she’s actually rolling it aside with her <i> bare hands </i>.  Even given her great size, this woman’s strength must be immense!\n\n");
 			else outputText("  The boulder begins to move, and as more light - along with a welcome rush of fresh air - floods into the smoky cavern, you see she’s rolling it aside with nothing more than her bare hands with graceful, if unnerving, ease.\n\n");
-			
 			outputText("Finally, the boulder is pushed far enough that about half of the cave mouth is now open to the air. It’s still dark, but at least now you are able to see well enough to make out actual details as the woman strides casually back to you to retake her seat.  She smiles again, her features broad and honest, framed by an enormous chaotic mass of shaggy golden hair, looking for all the world like the mane of some great lion.\n\n");
-			
 			// Catch describing her in detail to short players
 			if (player.tallness < 108) outputText("She wears a silken kimono, embroidered with stars, dragons and flowers, which you can’t help but notice is of a truly scandalous cut – your eye is inevitably drawn to her enormous breasts, bulging dangerously against the fabric as though straining to escape.  If she were human-sized and remained in proportion, they would probably be around a DD, but at her size, you honestly have no idea.\n\n");
-			
 			outputText("She sits, right knee raised so she can rest her arm on it, her left foot tucked behind the right.  As she does so, her kimono slides aside,");
 			if (player.cor <= 33) outputText(" exposing an uncomfortable amount of creamy-white thigh flesh.");
 			else if (player.cor > 33 && player.cor < 66) outputText(" exposing a tantalising view of creamy-white thigh flesh.");
 			else outputText(" exposing a delicious view of her thigh, the creamy-white flesh almost screaming out for your caresses.");
 			outputText("  If she notices, then she doesn’t seem to care.\n\n");
-			
 			outputText("“<i>Better, right?</i>” she asks, and you nod.  “<i>Sorry, I didn’t realize the smoke was getting to you at first.  It’s been a while since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc(false) +"?</i>”  Whoever she is, she seems friendly enough");
 			if (player.tallness <= 96) outputText(" - if a little... imposing -");
 			else outputText(",");
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
-			
 			outputText("“<i>Oh, so you’re the heroic type, yeah?  So, I guess it’s my turn now, huh?</i>” She sighs and closes her eyes, reclining and crossing her legs.  You can’t help but notice the way her kimono slithers around her legs, mere inches from becoming truly indecent, nor the way her breasts threaten to burst free of their confinement as she stretches.\n\n");
-			
 			outputText("“<i>Ah, but where to begin?  My clan calls me ‘Izumi, <b>The Font Of All Strength’</b>.</i>”  She snorts in amusement at your reaction to her name.  “<i>I know, it’s a little pompous, right?  Just use Izumi, I always do.  Either way, I’m a traveller from another world.");
-
 			if (player.humanScore() > 3)
 			{
 				outputText("  I’ve met humans before a few times.  Back home, my people like to play games with them to see how they’ll react; show up, scare the locals, steal a sheep and run off giggling to yourself, that kind of thing.  Sometimes one of them is actually brave enough to come after us.  Sometimes we even slap ‘em on the back, give ‘em the sheep and then drink them under the table.</i>” \n\n");
-			
 				outputText("She takes a long, powerful drag on her pipe, her lips locked tight around the mouthpiece.  “<i>It was fun for a while, but bothering goatherds for the next thousand years wasn’t my scene, frankly, so I left.  Bailed.  Disappeared.");
 			}
-
 			outputText("  I didn’t come here to fight demons or any of that nonsense, though.  I’m just looking for something <b>fun</b> to do, you know?  Something to keep my interest for a while.</i>”  She opens her eyes again, two enormous amber irises staring thoughtfully down at you.  For some reason, you find something very uncomfortable about her gaze....");
 			if (player.str <= 75 || player.tallness < 96) outputText(" You can’t help but feel like a sheep yourself - one who’s just noticed the wolf is staring it down.\n\n");
-			
 			outputText("“<i>My mistake coming here, though.  There’s no conversationalists, no challenges, nothing fun. The only other conversations I’ve had since coming here have all gone more or less the same way, you know?  ‘Harharhar, I shall turn you into my slave!  How dare you pick me up, I shall destroy you!  Why are we heading towards that cliff!’  and so on.</i>”\n\n");
-			
 			outputText("Izumi seems singularly unperturbed by the sex-mad nature of this world, an attitude you find oddly refreshing.  There’s something about her; she seems to exude an aura of steady, unconcerned confidence from every movement, dripping from each word she speaks.  It’s a difficult thought to articulate, but the enormous woman’s lazy smile and relaxed attitude seem... infectious.\n\n");
-			
 			outputText("You talk animatedly with Izumi some more over the next hour or so, inquiring about the horn on her forehead, what life is like where she comes from, how she came to be here and a dozen other topics.  She explains that all of her race, the Oni, have horns that reflect their power and strength.  For her part, she asks a myriad questions about your home.  When you ask about the pipe she’s smoking, she surprises you by wordlessly handing it to you.\n\n");
-
 			menu();
 			addButton(0, "Smoke", smokeThePipe);
 			addButton(1, "NoSmoke", dontSmokeThePipe);

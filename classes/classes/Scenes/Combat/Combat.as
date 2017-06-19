@@ -678,23 +678,23 @@ public function basemeleeattacks():void {
 			}
 			var mutlimeleeattacksCost:Number = 0;
 			//multiple melee attacks costs
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) mutlimeleeattacksCost += 385;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) mutlimeleeattacksCost += 325;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) mutlimeleeattacksCost += 270;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) mutlimeleeattacksCost += 220;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) mutlimeleeattacksCost += 170;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) mutlimeleeattacksCost += 135;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleeattacksCost += 100;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleeattacksCost += 70;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleeattacksCost += 45;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 25;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 10;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) mutlimeleeattacksCost += 77;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) mutlimeleeattacksCost += 65;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) mutlimeleeattacksCost += 54;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) mutlimeleeattacksCost += 44;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) mutlimeleeattacksCost += 35;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) mutlimeleeattacksCost += 27;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleeattacksCost += 20;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleeattacksCost += 14;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleeattacksCost += 9;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 5;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 2;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-				if (player.fatigue + mutlimeleeattacksCost <= player.maxFatigue()) {
-					fatigue(mutlimeleeattacksCost);
+				if (player.wrath >= mutlimeleeattacksCost) {
+					player.wrath -= mutlimeleeattacksCost;
 				}
 				else {
-					outputText("You're too fatigued to attack more than once in this turn!\n\n");
+					outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
 					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 				}
 			}
@@ -717,14 +717,14 @@ public function basemeleeattacks():void {
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			var mutlimeleelargeattacksCost:Number = 0;
 			//multiple melee large attacks costs
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleelargeattacksCost += 50;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleelargeattacksCost += 20;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleelargeattacksCost += 10;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleelargeattacksCost += 4;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-				if (player.fatigue + mutlimeleelargeattacksCost <= player.maxFatigue()) {
-					fatigue(mutlimeleelargeattacksCost);
+				if (player.wrath >= mutlimeleelargeattacksCost) {
+					player.wrath -= mutlimeleelargeattacksCost;
 				}
 				else {
-					outputText("You're too fatigued to attack more than once in this turn!\n\n");
+					outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
 					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 				}
 			}
@@ -751,11 +751,11 @@ public function basemeleeattacks():void {
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			var mutlimeleefistattacksCost:Number = 0;
 			//multiple melee large attacks costs
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 50;
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 20;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 50;//10
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 20;//4
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
 				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
-					fatigue(mutlimeleefistattacksCost);
+					fatigue(mutlimeleefistattacksCost);//soulforce useage instead of fatigue or wrath?
 				}
 				else {
 					outputText("You're too fatigued to attack more than once in this turn!\n\n");
@@ -3899,34 +3899,30 @@ public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 5;
-	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedmana += 1;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedmana += 1;
-	*/	kGAMECLASS.ManaChange(gainedmana, false);
+	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
+		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-	/*	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedmana += 2;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedmana += 2;
-	*/	kGAMECLASS.ManaChange(gainedmana, false);
+	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
+		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 }
-
+/*
+public function wrathregeneration(combat:Boolean = true):void {
+	var gainedwrath:Number = 0;
+	if (combat) {
+	//	if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedwrath += 5;
+	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedwrath += 1;
+		kGAMECLASS.ManaChange(gainedwrath, false);
+	}
+	else {
+	//	if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedwrath += 10;
+	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedwrath += 2;
+		kGAMECLASS.ManaChange(gainedwrath, false);
+	}
+}
+*/
 public function maximumRegeneration():Number {
 	var maxRegen:Number = 2;
 	if (player.newGamePlusMod() >= 1) maxRegen += 1;

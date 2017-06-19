@@ -444,7 +444,7 @@ package classes.Scenes.Areas
 			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
-			dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());
+			dynStats("lus", 5 + player.lib / 20 + player.minotaurScore() + player.cowScore());
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
