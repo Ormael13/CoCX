@@ -225,6 +225,46 @@ public function ManaChange(changeNum:Number, display:Boolean):Number
 	return player.mana - before;
 }
 
+public function WrathChange(changeNum:Number, display:Boolean):Number
+{
+	var before:Number = player.wrath;
+	if(changeNum == 0) return 0;
+	if(changeNum > 0) {
+		if(player.wrath + int(changeNum) > maxWrath()) {
+		//	if(player.HP >= maxHP()) {
+		//	if (display) HPChangeNotify(changeNum);
+		//		return player.HP - before;
+		//	}
+		//	if (display) HPChangeNotify(changeNum);
+			player.wrath = maxWrath();
+		}
+		else
+		{
+		//	if (display) HPChangeNotify(changeNum);
+			player.wrath += int(changeNum);
+		//	mainView.statsView.showStatUp( 'hp' );
+			// hpUp.visible = true;
+		}
+	}
+	//Negative Wrath
+/*	else
+	{
+		if(player.HP + changeNum <= 0) {
+			if (display) HPChangeNotify(changeNum);
+			player.HP = 0;
+			mainView.statsView.showStatDown( 'hp' );
+		}
+		else {
+			if (display) HPChangeNotify(changeNum);
+			player.HP += changeNum;
+			mainView.statsView.showStatDown( 'hp' );
+		}
+	}
+	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+*/	statScreenRefresh();
+	return player.wrath - before;
+}
+
 public function clone(source:Object):* {
 	var copier:ByteArray = new ByteArray();
 	copier.writeObject(source);

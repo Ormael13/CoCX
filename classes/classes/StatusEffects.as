@@ -36,6 +36,7 @@ package classes
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");
 		public static const Contraceptives:StatusEffectType                 = mk("Contraceptives");
+		public static const CumCannonCooldown:StatusEffectType           	= mk("Cum Cannon Cooldown");
 		public static const CuntStretched:StatusEffectType                  = mk("CuntStretched");
 		public static const DefenseCanopy:StatusEffectType                  = mk("Defense: Canopy");
 		public static const DeluxeOnaholeUsed:StatusEffectType              = mk("deluxe onahole used");
@@ -132,6 +133,7 @@ package classes
 		public static const MetRathazul:StatusEffectType                    = mk("metRathazul");
 		public static const MetWorms:StatusEffectType                       = mk("metWorms");
 		public static const MetWhitney:StatusEffectType                     = mk("Met Whitney");
+		public static const MilkBlastCooldown:StatusEffectType           	= mk("Milk Blast Cooldown");
 		public static const Milked:StatusEffectType                         = mk("Milked");
 		public static const MinoPlusCowgirl:StatusEffectType                = mk("Mino + Cowgirl");
 		public static const Naga:StatusEffectType                           = mk("Naga");

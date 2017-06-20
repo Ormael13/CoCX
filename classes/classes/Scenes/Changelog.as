@@ -54,21 +54,21 @@ package classes.Scenes
 			outputText("-New tier 5 speed lvl-up perk: Unlock Body (2nd stage). Req. Unlock: Body perk and 150+ spe. Effect: +5 fatigue per lvl-up (grant bonus points to respective stat bar retroactively)\n");
 			outputText("-New tier 5 wisdom lvl-up perk: Unlock Mind (2nd stage). Req. Unlock: Mind perk and 150+ wis. Effect: +5 soulforce per lvl-up (grant bonus points to respective stat bar retroactively)\n");
 			outputText("-New resource: Wrath. Generated in a few ways. Basic one is...been hit and loosing hp (10 hp lost = 1 wrath point gained).\n");
-			outputText("-Some of perks now adds small bonuses to max wrath. Job: Warrior and all perk for multi attacks for Job: Dervish +10, Job: Dervish, Job: Barbarian and both multi attack perks for Job: Barbarian +20.\n");
+			outputText("-Some of perks now adds small bonuses to max wrath. Job: Warrior and all perk for multi attacks for Job: Dervish +10, Job: Dervish, Job: Barbarian and both multi attack perks for Job: Barbarian +20, Berzerker or Lustzerker +100 and Prestige Job: Berserker +200.\n");
 			outputText("-(((line for desc usage of wrath)))\n");
+			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen form too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

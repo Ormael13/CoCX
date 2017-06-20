@@ -145,6 +145,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 		combat.regeneration(false);
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) combat.soulforceregeneration(false);
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) combat.manaregeneration(false);
+		if (player.findPerk(PerkLib.Berzerker) >= 0 || player.findPerk(PerkLib.Lustzerker) >= 0) combat.wrathregeneration(false);
 		//Inform all time aware classes that a new hour has arrived
 		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
 			item   = _timeAwareClassList[tac];

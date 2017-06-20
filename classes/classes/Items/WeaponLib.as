@@ -17,6 +17,7 @@ package classes.Items
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.");
+		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();

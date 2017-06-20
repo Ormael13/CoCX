@@ -2740,7 +2740,7 @@ public function meleeattackdamage():void {
 }
 
 public function WrathWeaponsProc():void {
-	if (player.isLowGradeWraithWeapon()) {
+	if (player.isLowGradeWrathWeapon()) {
 		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 10) player.wrath -= 10;
 		else {
 			takeDamage(100);
@@ -3908,21 +3908,26 @@ public function manaregeneration(combat:Boolean = true):void {
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 }
-/*
+
 public function wrathregeneration(combat:Boolean = true):void {
 	var gainedwrath:Number = 0;
 	if (combat) {
-	//	if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedwrath += 5;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedwrath += 1;
-		kGAMECLASS.ManaChange(gainedwrath, false);
+		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 2;
+		if (player.hasStatusEffect(StatusEffects.Berzerking) >= 0) gainedwrath += 3;
+		if (player.hasStatusEffect(StatusEffects.Lustzerking) >= 0) gainedwrath += 3;
+		if (player.hasStatusEffect(StatusEffects.Rage) >= 0) gainedwrath += 3;
+		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
-	//	if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedwrath += 10;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedwrath += 2;
-		kGAMECLASS.ManaChange(gainedwrath, false);
+		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
+		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 }
-*/
+
 public function maximumRegeneration():Number {
 	var maxRegen:Number = 2;
 	if (player.newGamePlusMod() >= 1) maxRegen += 1;

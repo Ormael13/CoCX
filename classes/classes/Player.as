@@ -1785,15 +1785,15 @@ use namespace kGAMECLASS;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0)
-				internalChimeraRatingCounter--;
+				internalChimeraRatingCounter -= 2;
 			if (findPerk(PerkLib.ChimericalBodyBasicStage) >= 0)
-				internalChimeraRatingCounter--;
+				internalChimeraRatingCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
-				internalChimeraRatingCounter -= 2;
-			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
-				internalChimeraRatingCounter -= 2;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 4;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				internalChimeraRatingCounter -= 5;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				internalChimeraRatingCounter -= 6;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}
@@ -1843,15 +1843,17 @@ use namespace kGAMECLASS;
 		public function minotaurScore():Number {
 			Begin("Player","racialScore","minotaur");
 			var minoCounter:Number = 0;
-			if (faceType == 3)
+			if (faceType == 0 || faceType == 3)
 				minoCounter++;
 			if (earType == 3)
 				minoCounter++;
 			if (tailType == 4)
 				minoCounter++;
 			if (hornType == 2)
-				minoCounter++;
+				minoCounter += 2;
 			if (lowerBody == 1)
+				minoCounter++;
+			if (cor >= 20)
 				minoCounter++;
 			if (minoCounter > 4) {
 				if (cumQ() > 500) {
@@ -1860,9 +1862,9 @@ use namespace kGAMECLASS;
 					}
 					minoCounter++;
 				}
-				if (hasFur())
+				if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
 					minoCounter++;
-				if (tallness > 80 && minoCounter > 4)
+				if (tallness >= 81)
 					minoCounter++;
 				if (cocks.length > 0 && horseCocks() > 0)
 					minoCounter++;
@@ -1881,22 +1883,24 @@ use namespace kGAMECLASS;
 		public function cowScore():Number {
 			Begin("Player","racialScore","cow");
 			var cowCounter:Number = 0;
-			if (faceType == 0)
+			if (faceType == 0 || faceType == 3)
 				cowCounter++;
 			if (earType == 3)
 				cowCounter++;
 			if (tailType == 4)
 				cowCounter++;
 			if (hornType == 2)
-				cowCounter++;
+				cowCounter += 2;
 			if (lowerBody == 1)
+				cowCounter++;
+			if (cor >= 20)
 				cowCounter++;
 			if (cowCounter > 4) {
 				if (biggestTitSize() > 4)
 					cowCounter++;
 				if (biggestLactation() > 2)
 					cowCounter++;
-				if (hasPartialCoat(SKIN_COAT_FUR))
+				if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
 					cowCounter++;
 				if (tallness >= 73)
 					cowCounter++;
@@ -4095,25 +4099,33 @@ use namespace kGAMECLASS;
 			if (minotaurScore() >= 4) {
 				if (minotaurScore() >= 9) {
 					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (35 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
+					maxTou += (30 * (1 + newGamePlusMod));
+					maxSpe -= (20 * (1 + newGamePlusMod));
+					maxInt -= (40 * (1 + newGamePlusMod));
+					maxLib += (45 * (1 + newGamePlusMod));
 				}
 				else {
 					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
+					maxTou += (10 * (1 + newGamePlusMod));
+					maxSpe -= (10 * (1 + newGamePlusMod));
 					maxInt -= (20 * (1 + newGamePlusMod));
+					maxLib += (20 * (1 + newGamePlusMod));
 				}
 			}//+20/10-20
 			if (cowScore() >= 4) {
 				if (cowScore() >= 9) {
 					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (35 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
+					maxTou += (30 * (1 + newGamePlusMod));
+					maxSpe -= (40 * (1 + newGamePlusMod));
+					maxInt -= (20 * (1 + newGamePlusMod));
+					maxLib += (45 * (1 + newGamePlusMod));
 				}
 				else {
 					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
+					maxTou += (10 * (1 + newGamePlusMod));
 					maxSpe -= (20 * (1 + newGamePlusMod));
+					maxInt -= (10 * (1 + newGamePlusMod));
+					maxLib += (20 * (1 + newGamePlusMod));
 				}
 			}//+20/10-20
 			if (lizardScore() >= 4) {
@@ -5024,6 +5036,12 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				removeStatusEffect(StatusEffects.CooldownCompellingAria);
+			}
+			if(hasStatusEffect(StatusEffects.MilkBlastCooldown)) {
+				removeStatusEffect(StatusEffects.MilkBlastCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.CumCannonCooldown)) {
+				removeStatusEffect(StatusEffects.CumCannonCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);

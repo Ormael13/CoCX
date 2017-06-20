@@ -2145,15 +2145,15 @@ import classes.Perks.*;
 		ChimericalBodyBasicStage.requirePerk(ChimericalBodyInitialStage)
 								.requireLevel(12)
 								.requireCustomFunction(function (player:Player):Boolean {
-				return player.internalChimeraScore() >= 2;
-			}, "Two racial perks");
+				return player.internalChimeraScore() >= 3;
+			}, "Three racial perks");
 		Whirlwind.requireLevel(12)
 				 .requirePerk(JobBarbarian);
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
 		//Tier 3
 	//	if (requireMinLevel(18)) {
-	//		if (player.internalChimeraScore() >= 4 && requirePerk(ChimericalBodyBasicStage)) {
+	//		if (player.internalChimeraScore() >= 6 && requirePerk(ChimericalBodyBasicStage)) {
 	//			ChimericalBodyAdvancedStage;
 	//		}
 	//	}
@@ -2171,12 +2171,12 @@ import classes.Perks.*;
 					 .requireInt(75)
 					 .requireWis(75)
 					 .requireLib(45);
-		//		if(player.internalChimeraScore() >= 8 && requirePerk(ChimericalBodyAdvancedStage)) {
+		//		if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
 		//			ChimericalBodyPerfectStage;
 		//		}
 				//Tier 5
 		//	if (requireMinLevel(30)) {
-		//		if (player.internalChimeraScore() >= 16 && requirePerk(ChimericalBodyPerfectStage)) {
+		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
 		//		}
 /*		JobMunchkin.requirePerk(JobMonk)

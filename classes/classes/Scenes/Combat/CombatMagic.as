@@ -21,30 +21,30 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.fatigue + spellCost(30) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana < spellCostWhite(30) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
 			spellChargeWeapon(true);
-			fatigue(30,1);
+			useMana(30,5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana < spellCostWhite(40) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 			spellChargeArmor(true);
-			fatigue(40,1);
+			useMana(40,5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(50) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana < spellCostBlack(50) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
-			fatigue(50,1);
+			useMana(50,6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana < spellCostBlack(40) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
-			fatigue(40,1);
+			useMana(40,6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
@@ -347,7 +347,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
-					addButton(0, "Charge W.", spellChargeWeapon, null, null, null, "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nFatigue Cost: " + spellCostWhite(30) + "", "Charge Weapon");
+					addButton(0, "Charge W.", spellChargeWeapon, null, null, null, "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) + "", "Charge Weapon");
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
@@ -355,7 +355,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
-					addButton(1, "Charge A.", spellChargeArmor, null, null, null, "The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nFatigue Cost: " + spellCostWhite(40) + "", "Charge Armor");
+					addButton(1, "Charge A.", spellChargeArmor, null, null, null, "The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) + "", "Charge Armor");
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");
@@ -363,7 +363,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				if (!player.hasStatusEffect(StatusEffects.Blizzard))
-					addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nFatigue Cost: " + spellCostWhite(50) + "");
+					addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nMana Cost: " + spellCostWhite(50) + "");
 				else {
 					outputText("<b>Blizzard is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(4, "Blizzard", "Active");
@@ -377,7 +377,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				if (!player.hasStatusEffect(StatusEffects.Might))
-					addButton(5, "Might", spellMight, null, null, null, "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nFatigue Cost: " + spellCostBlack(50) + "");
+					addButton(5, "Might", spellMight, null, null, null, "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) + "");
 				else {
 					outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 					addButtonDisabled(5, "Might", "Active");
@@ -385,7 +385,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				if (!player.hasStatusEffect(StatusEffects.Blink))
-					addButton(6, "Blink", spellBlink, null, null, null, "The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+					addButton(6, "Blink", spellBlink, null, null, null, "The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) + "");
 				else {
 					outputText("<b>You are already under the effects of Blink and cannot cast it again.</b>\n\n");
 					addButtonDisabled(6, "Blink", "Active");
@@ -415,7 +415,7 @@ public class CombatMagic extends BaseCombatContent {
 
 
 	public function spellArouse():void {
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(20)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(20)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
@@ -634,14 +634,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(50)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50,6);
+		useMana(50,6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -742,14 +741,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
-			outputText("You are too tired to cast this spell.");
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40,6);
+		useMana(40,6);
 		var tempSpe:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -789,7 +787,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellIceSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
@@ -866,7 +864,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellDarknessShard():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
@@ -944,7 +942,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(200)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCost(200)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
@@ -1023,7 +1021,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(200)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCost(200)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
@@ -1144,15 +1142,14 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(30)) {
 			clearOutput();
-			outputText("You are too tired to cast this spell.");
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30, 5);
+		useMana(30, 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1215,15 +1212,14 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
 			clearOutput();
-			outputText("You are too tired to cast this spell.");
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40, 5);
+		useMana(40, 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1534,15 +1530,14 @@ public class CombatMagic extends BaseCombatContent {
 //(35) Blizzard
 	public function spellBlizzard():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(50)) {
 			clearOutput();
-			outputText("You are too tired to cast this spell.");
+			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50,5);
+		useMana(50,5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();

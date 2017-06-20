@@ -133,6 +133,14 @@ public class PhysicalSpecials extends BaseCombatContent{
 				outputText("<b>You need more time before you can shoot ink again.</b>\n\n");
 			}
 		}
+		if (player.vaginas.length > 0 && player.cowScore() >= 9) {
+			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) addButtonDisabled(button++, "Milk Blast", "You can't use it more than once during fight.");
+			else addButton(button++, "Milk Blast", milkBlask, null, null, null, "Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range. \n\nLust Cost: 100");
+		}
+		if (player.cocks.length > 0 && player.cowScore() >= 9) {
+			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) addButtonDisabled(button++, "Milk Blast", "You can't use it more than once during fight.");
+			else addButton(button++, "Cum Cannon", cumCannon, null, null, null, "Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range. \n\nLust Cost: 100");
+		}
 		if (player.canFly()) {
 			addButton(button++, "Take Flight", takeFlight, null, null, null, "Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 		}
@@ -391,7 +399,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			doNext(combatMenu);
 			return;
 		}
-		doNext(combatMenu);
+//		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
 		if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
@@ -411,6 +419,56 @@ public class PhysicalSpecials extends BaseCombatContent{
 		statScreenRefresh();
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
+	}
+	
+	public function milkBlask():void {
+		clearOutput();
+		if(player.lust < 100) {
+			clearOutput();
+			outputText("You are not horny enough to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.lust -= 100;
+		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
+		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing " + monster.a + monster.short + " with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
+		var damage:Number = 0;
+		damage += player.str;
+		damage += strenghtscalingbonus() * 0.5;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText(" ");
+		var MilkLustDmg:Number = 100;
+		MilkLustDmg += player.lib;
+		monster.teased(MilkLustDmg);
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function cumCannon():void {
+		clearOutput();
+		if(player.lust < 100) {
+			clearOutput();
+			outputText("You are not horny enough to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.lust -= 100;
+		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
+		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting " + monster.a + monster.short + " away and knocking it prone. ");
+		var damage:Number = 0;
+		damage += player.str;
+		damage += strenghtscalingbonus() * 0.5;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText(" ");
+		var CumLustDmg:Number = 100;
+		CumLustDmg += player.lib;
+		monster.teased(CumLustDmg);
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		outputText("\n\n");
+		enemyAI();
 	}
 
 	public function takeFlight():void {

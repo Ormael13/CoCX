@@ -2066,10 +2066,10 @@ package classes
 			return false;
 		}
 
-		//Wraith Weapons
-		public function isLowGradeWraithWeapon():Boolean
+		//Wrath Weapons
+		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO)
 				return true;
 			return false;
 		}
