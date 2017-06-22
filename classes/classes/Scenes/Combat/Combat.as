@@ -3733,6 +3733,15 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownWingBuffet,1,-1);
 		}
 	}
+	//Kick
+	if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+		if (player.statusEffectv1(StatusEffects.CooldownKick) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownKick);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownKick,1,-1);
+		}
+	}
 	//Freezing Breath Fenrir
 	if (player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
 		if (player.statusEffectv1(StatusEffects.CooldownFreezingBreath) <= 0) {

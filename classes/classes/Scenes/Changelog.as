@@ -56,7 +56,7 @@ package classes.Scenes
 			outputText("-New resource: Wrath. Generated in a few ways. Basic one is...been hit and loosing hp (10 hp lost = 1 wrath point gained).\n");
 			outputText("-Some of perks now adds small bonuses to max wrath. Job: Warrior and all perk for multi attacks for Job: Dervish +10, Job: Dervish, Job: Barbarian and both multi attack perks for Job: Barbarian +20, Berzerker or Lustzerker +100 and Prestige Job: Berserker +200.\n");
 			outputText("-(((line for desc usage of wrath)))\n");
-			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen form too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
+			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen from too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu

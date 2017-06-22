@@ -5043,6 +5043,9 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.CumCannonCooldown)) {
 				removeStatusEffect(StatusEffects.CumCannonCooldown);
 			}
+			if(hasStatusEffect(StatusEffects.CooldownKick)) {
+				removeStatusEffect(StatusEffects.CooldownKick);
+			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
 				if (weapon == WeaponLib.FISTS) {

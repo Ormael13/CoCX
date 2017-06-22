@@ -455,6 +455,7 @@ package classes
 		public static const CooldownFreezingBreathYeti:StatusEffectType = mk("Cooldown Freezing Breath (Y)");
 		public static const CooldownIllusion:StatusEffectType           = mk2("Cooldown Illusion");
 		public static const CooldownInkSpray:StatusEffectType           = mk("Cooldown Ink Spray");
+		public static const CooldownKick:StatusEffectType          		= mk("Cooldown Kick");
 		public static const CooldownPhoenixFireBreath:StatusEffectType  = mk("Cooldown Phoenix Fire Breath");
 		public static const CooldownStoneClaw:StatusEffectType          = mk("Cooldown Stone Claw");
 		public static const CooldownTailSlam:StatusEffectType           = mk("Cooldown Tail Slam");

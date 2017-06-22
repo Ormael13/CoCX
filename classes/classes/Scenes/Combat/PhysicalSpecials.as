@@ -64,8 +64,13 @@ public class PhysicalSpecials extends BaseCombatContent{
 			addButton(button++, "Engulf", gooEngulf, null, null, null, "Attempt to engulf a foe with your body.");
 		}
 		//Kick attackuuuu
-		else if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-			addButton(button++, "Kick", kick, null, null, null, "Attempt to kick an enemy using your powerful lower body.");
+		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownKick)) {
+				addButton(button++, "Kick", kick, null, null, null, "Attempt to kick an enemy using your powerful lower body.");
+			}
+			else if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+				outputText("<b>You need more time before you can perform Kick again.</b>\n\n");
+			}
 		}
 		//Gore if mino horns or unicorn/alicorn horn
 		if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
@@ -99,7 +104,6 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_RACCOON) addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
 		if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 		if (player.tailType == TAIL_TYPE_ORCA) {
-
 			if (!player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 				addButton(button++, "Tail Smack", tailSmackAttack, null, null, null, "Smack your powerful tail at your opponent face.</b>");
 			}
@@ -1794,14 +1798,15 @@ public class PhysicalSpecials extends BaseCombatContent{
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(15,2);
+		fatigue(25,2);
+		player.createStatusEffect(StatusEffects.CooldownKick,5,0,0,0);
 		//Variant start messages!
 		if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 			//(tail)
@@ -1854,7 +1859,6 @@ public class PhysicalSpecials extends BaseCombatContent{
 			enemyAI();
 			return;
 		}
-		var damage:Number;
 		//Determine if dodged!
 		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			//Akbal dodges special education
@@ -1870,7 +1874,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		//Determine damage
 		//Base:
-		damage = player.str;
+		var damage:Number = unarmedAttack();
+		damage += strenghtscalingbonus() * 0.5;
+		damage += speedscalingbonus() * 0.5;
 		//Leg bonus
 		//Bunny - 20, 1 hoof = 30, 2 hooves = 40, Kangaroo - 50
 		if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
@@ -1888,7 +1894,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		damage *= monster.damagePercent() / 100;
 		//(None yet!)
 		if(damage > 0) damage = doDamage(damage);
-
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		//BLOCKED
 		if(damage <= 0) {
 			damage = 0;

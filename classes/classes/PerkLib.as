@@ -3,8 +3,8 @@
  */
 package classes
 {
-import classes.GlobalFlags.kGAMECLASS;
-import classes.Perks.*;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Perks.*;
 	import classes.GlobalFlags.*;
 	import classes.Creature;
 
