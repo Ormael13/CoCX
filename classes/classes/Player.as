@@ -812,20 +812,31 @@ use namespace kGAMECLASS;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				//Wrath
-				var gainedWrath:Number = 0;
-				gainedWrath += damage / 10;
-				gainedWrath = Math.round(gainedWrath);
-				wrath += gainedWrath;
-				if (wrath > maxWrath()) wrath = maxWrath();
-				//game.HPChange(-damage, display);
-				HP -= damage;
-				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+				if (hasStatusEffect(StatusEffects.ManaShield) && damage >= mana) {
+					mana -= damage;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('mana');
+					game.dynStats("lus", 0); //Force display arrow.
 				}
-				game.mainView.statsView.showStatDown('hp');
-				game.dynStats("lus", 0); //Force display arrow.
+				else {
+					//Wrath
+					var gainedWrath:Number = 0;
+					gainedWrath += damage / 10;
+					gainedWrath = Math.round(gainedWrath);
+					wrath += gainedWrath;
+					if (wrath > maxWrath()) wrath = maxWrath();
+					//game.HPChange(-damage, display);
+					HP -= damage;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('hp');
+					game.dynStats("lus", 0); //Force display arrow.
+				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					game.dynStats("lus", int(damage / 2));
 				}
@@ -4997,6 +5008,9 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				removeStatusEffect(StatusEffects.VioletPupilTransformation);
+			}
+			if(hasStatusEffect(StatusEffects.ManaShield)) {
+				removeStatusEffect(StatusEffects.ManaShield);
 			}
 			if(hasStatusEffect(StatusEffects.AlraunePollen)) {
 				removeStatusEffect(StatusEffects.AlraunePollen);

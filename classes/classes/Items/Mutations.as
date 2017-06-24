@@ -3001,6 +3001,11 @@
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
 				player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
 			}
+			//Smart enough for mana shield and doesnt have it
+			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+			}
 		}
 
 		public function whiteSpellbook(player:Player):void

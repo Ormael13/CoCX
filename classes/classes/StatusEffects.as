@@ -102,6 +102,7 @@ package classes
 		public static const KnowsIceSpike:StatusEffectType                  = mk("Knows Ice Spike");
 		public static const KnowsLightningBolt:StatusEffectType             = mk("Knows Lightning Bolt");
 		public static const KnowsManyBirds:StatusEffectType                 = mk("Knows Many Birds");
+		public static const KnowsManaShield:StatusEffectType                = mk("Knows Mana Shield");
 		public static const KnowsMight:StatusEffectType                     = mk("Knows Might");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
 		public static const KnowsTripleThrust:StatusEffectType              = mk("Knows Triple Thrust");
@@ -405,6 +406,7 @@ package classes
 		public static const GooArmorBind:CombatStatusEffect              = mk2("GooArmorBind");
 		public static const GooArmorSilence:CombatStatusEffect           = mk2("GooArmorSilence");
 		public static const GooBind:CombatStatusEffect                   = mk2("GooBind");
+		public static const GoreBleed:CombatStatusEffect            	 = mk2("Gore Bleed");
 		public static const HarpyBind:CombatStatusEffect                 = mk2("HarpyBind");
 		public static const HolliConstrict:CombatStatusEffect            = mk2("Holli Constrict");
 		public static const ImmolationDoT:CombatStatusEffect             = mk2("Immolation DoT");
@@ -417,6 +419,7 @@ package classes
 		public static const LustStones:CombatStatusEffect                = mk2("lust stones");
 		public static const lustvenom:CombatStatusEffect                 = mk2("lust venom");
 		public static const Lustzerking:CombatStatusEffect               = mk2("Lustzerking");
+		public static const ManaShield:CombatStatusEffect 				 = mk2("Mana Shield");
 		public static const MedusaVenom:CombatStatusEffect               = mk2("Medusa Venom");
 		public static const Might:CombatStatusEffect                     = mk2("Might");
 		public static const MonsterAttacksDisabled:CombatStatusEffect    = mk2("Monster Attacks Disabled");

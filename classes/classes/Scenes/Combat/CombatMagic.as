@@ -402,13 +402,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.lust < 50 || player.lust > (player.maxLust() - 50))
 			outputText("You can't use any grey magics.\n\n");
 		else {
-			/*	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	1st spell (non-fire or non-ice based) goes here
-			 if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	2nd spell (non-fire or non-ice based) goes here
-			 if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
-			 */	if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
-			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(6, "	fire single target spell goes here
+		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(0, "	1st spell (non-fire or non-ice based) goes here
+			if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+				if (!player.hasStatusEffect(StatusEffects.ManaShield)) addButton(1, "Mana Shield", ManaShield, null, null, null, "Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\nMana Cost: 1 mana point per 1 point of damage blocked");
+				else addButton(1, "Deactiv MS", DeactivateManaShield, null, null, null, "Deactivate Mana Shield.\n");
+			}
+		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
+			if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
+		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(6, "	fire single target spell goes here
 			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
-			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(11, "	ice single target spell goes here
+		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(11, "	ice single target spell goes here
 		}
 		addButton(14, "Back", magicMenu);
 	}
@@ -1092,6 +1095,20 @@ public class CombatMagic extends BaseCombatContent {
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function ManaShield():void {
+		clearOutput();
+		outputText("Deciding you need additional protection during current fight you spend moment to concentrate and form barrier made of mana around you.  It will block attacks as long you would have enough mana.\n");
+		player.createStatusEffect(StatusEffects.ManaShield,0,0,0,0);
+		enemyAI();
+	}
+
+	public function DeactivateManaShield():void {
+		clearOutput();
+		outputText("Deciding you not need for now to keep youe mana shield you concentrate and deactivating it.");
+		player.removeStatusEffect(StatusEffects.ManaShield);
+		enemyAI();
 	}
 
 	/**

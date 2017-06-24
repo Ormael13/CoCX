@@ -1184,39 +1184,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			outputText("\n");
 			enemyAI();
 		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 1) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 2) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 3) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 4) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 5) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 6) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 7) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 8) {
-			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
-			mantisMultipleAttacks();
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 9) {
+		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] >= 1) {
 			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
 			mantisMultipleAttacks();
 		}
@@ -1237,13 +1205,13 @@ public class PhysicalSpecials extends BaseCombatContent{
 			enemyAI();
 			return;
 		}
-		if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(15,2);
+		fatigue(25,2);
 		var damage:Number = 0;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -1269,14 +1237,22 @@ public class PhysicalSpecials extends BaseCombatContent{
 			temp = 20;
 		}
 		//Account for monster speed - up to -50%.
-		temp -= monster.spe/2;
+		if (monster.spe <= 100) temp -= monster.spe / 2;
+		else temp -= 50;
 		//Account for player speed - up to +50%
-		temp += player.spe/2;
+		if (player.spe <= 100) temp += player.spe / 2;
+		else temp += 50;
 		//Hit & calculation
 		if(temp >= rand(100)) {
 			var horns:Number = player.horns;
 			if (player.horns > 40) player.horns = 40;
-			damage = int(player.str + horns * 2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
+			//Determine damage - str modified by enemy toughness!
+			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
+			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+			else {
+				monster.removeStatusEffect(StatusEffects.GoreBleed);
+				monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+			}
 			//normal
 			if(rand(4) > 0) {
 				outputText("You lower your head and charge, skewering " + monster.a + monster.short + " on ");
@@ -1295,15 +1271,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 			//Bonus damage for rut!
 			if(player.inRut && monster.cockTotal() > 0) {
 				outputText("The fury of your rut lent you strength, increasing the damage!  ");
-				damage += 5;
+				damage *= 1.1;
 			}
-			//Bonus per level damage
-			damage += player.level * 2;
 			//Reduced by armor
 			damage *= monster.damagePercent() / 100;
 			if(damage < 0) damage = 5;
-			//CAP 'DAT SHIT
-			if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
+			//Deal damage and update based on perks
 			if(damage > 0) {
 				if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 				if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
@@ -1754,7 +1727,6 @@ public class PhysicalSpecials extends BaseCombatContent{
 			monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
 			monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 		}
-
 		//Deal damage and update based on perks
 		if(damage > 0) {
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
@@ -1764,7 +1736,6 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			damage = doDamage(damage);
 		}
-
 		if(damage <= 0) {
 			damage = 0;
 			outputText("Your bite is deflected or blocked by " + monster.a + monster.short + ". ");
@@ -1795,17 +1766,18 @@ public class PhysicalSpecials extends BaseCombatContent{
 			else doNext(endLustVictory);
 		}
 	}
+	
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(20) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(25,2);
+		fatigue(20,2);
 		player.createStatusEffect(StatusEffects.CooldownKick,5,0,0,0);
 		//Variant start messages!
 		if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {

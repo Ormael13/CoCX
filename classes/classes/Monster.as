@@ -1504,6 +1504,35 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
 			}
+			if(hasStatusEffect(StatusEffects.GoreBleed)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.GoreBleed,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
+					outputText("The ");
+					if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns wounds");
+					else outputText("horn wound");
+					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.GoreBleed);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store5:Number = (player.str + player.spe) * 2;
+					store5 = game.doDamage(store5);
+					if (plural) {
+						outputText(capitalA + short + " bleed profusely from the jagged ");
+						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horn");
+						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
+					}
+					else {
+						outputText(capitalA + short + " bleeds profusely from the jagged ");
+						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horn");
+						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
+					}
+				}
+			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
 					removeStatusEffect(StatusEffects.Timer);
