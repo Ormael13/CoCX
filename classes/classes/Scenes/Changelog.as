@@ -55,11 +55,20 @@ package classes.Scenes
 			outputText("-New tier 5 wisdom lvl-up perk: Unlock Mind (2nd stage). Req. Unlock: Mind perk and 150+ wis. Effect: +5 soulforce per lvl-up (grant bonus points to respective stat bar retroactively)\n");
 			outputText("-New resource: Wrath. Generated in a few ways. Basic one is...been hit and loosing hp (10 hp lost = 1 wrath point gained).\n");
 			outputText("-Some of perks now adds small bonuses to max wrath. Job: Warrior and all perk for multi attacks for Job: Dervish +10, Job: Dervish, Job: Barbarian and both multi attack perks for Job: Barbarian +20, Berzerker or Lustzerker +100 and Prestige Job: Berserker +200.\n");
-			outputText("-(((line for desc usage of wrath)))\n");
+			outputText("-Wrath is used when multiattacking with melee weapons (desc special case of fists attacks here) or to fuel req. for wrath by Wrath weapons (so they will not drain PC HP instead)\n");
 			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen from too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
+			outputText("-Big Fucking Sword is now counting not only as large weapon but also as low grade Wrath weapon (it mean each attack with it would drain 100 HP or 10 wrath points from PC)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -93,23 +102,23 @@ package classes.Scenes
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("<b>Version 0.8g:</b>\n\n");
 			outputText("\n");
-			outputText("\n");cel na 0.8d: dodać siren TF
-			outputText("\n");cel na 0.8d: archery expansion
-			outputText("\n");cel na 0.8d: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8d: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8d: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8d: pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8d: dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");cel na 0.8d: pododawać nieco związanych z walką perków
-			outputText("\n");cel na 0.8d: dodać nekomanta TF
-			outputText("\n");cel na 0.8d: dodać kitsune/salamander TF
+			outputText("\n");cel na 0.8f: dodać siren TF
+			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8f: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8f: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8f: pododawać nieco związanych z walką perków
+			outputText("\n");cel na 0.8f: dodać nekomanta TF
+			outputText("\n");cel na 0.8f: dodać kitsune/salamander TF
 			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
-			outputText("\n");cel na 0.8d: dodać yuki-onna TF
-			outputText("\n");cel na 0.8d: dodać yeti TF
+			outputText("\n");cel na 0.8f: dodać yuki-onna TF
+			outputText("\n");cel na 0.8f: pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8f: dodać Grey spells: ?were-beast spell?, ?some single target spell?
 			outputText("\n");
-			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

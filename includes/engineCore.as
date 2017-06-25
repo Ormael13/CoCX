@@ -1521,13 +1521,7 @@ public function dynStats(... args):void
 	if(player.sens < 10) player.sens = 10;
 	
 	//Add HP for toughness change.
-	HPChange(modTou*2, false);
-	//if (player.tou < 20) HPChange(modTou*2, false);
-	//else if (player.tou >= 20 && player.tou < 40) HPChange(modTou*3, false);
-	//else if (player.tou >= 40 && player.tou < 60) HPChange(modTou*4, false);
-	//else if (player.tou >= 60 && player.tou < 80) HPChange(modTou*5, false);
-	//else if (player.tou >= 80) HPChange(modTou * 6, false);
-	//else outputText("Something screw up -_-'");
+	if (modTou > 0) HPChange(modTou*2, false);
 	//Reduce hp if over max
 	if(player.HP > maxHP()) player.HP = maxHP();
 	
@@ -1544,6 +1538,10 @@ public function dynStats(... args):void
 	
 	//Reduce soulforce if over max
 	if(player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+	//Reduce wrath if over max
+	if(player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+	//Reduce mana if over max
+	if(player.mana > player.maxMana()) player.mana = player.maxMana();
 	
 	//Refresh the stat pane with updated values
 	//mainView.statsView.showUpDown();

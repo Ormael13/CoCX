@@ -888,7 +888,7 @@ private function askBrokenHolliToGuard():void {
 	outputText("Holli bows her head when you mention her guarding camp.  She asks, \"<i>Shall I keep watch for foes to drain or let them into camp for you to have the pleasure of dealing with, [name]?  <b>I've been ");
 	if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) outputText("keeping watch");
 	else outputText("sleeping, instead");
-	outputText(".</i>\"");
+	outputText(".</b></i>\"");
 	
 	//[Guard] [Don't Guard] [Back]
 	menu();
