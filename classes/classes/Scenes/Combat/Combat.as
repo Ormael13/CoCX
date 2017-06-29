@@ -751,11 +751,18 @@ public function basemeleeattacks():void {
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			var mutlimeleefistattacksCost:Number = 0;
 			//multiple melee large attacks costs
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 50;//10
-			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 20;//4
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 10;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 4;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
 				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
-					fatigue(mutlimeleefistattacksCost);//soulforce useage instead of fatigue or wrath?
+					if (player.soulforce < mutlimeleefistattacksCost * 5) {
+						outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
+						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+					}
+					else {
+						fatigue(mutlimeleefistattacksCost);
+						player.soulforce -= mutlimeleefistattacksCost * 5;
+					}
 				}
 				else {
 					outputText("You're too fatigued to attack more than once in this turn!\n\n");
@@ -2293,11 +2300,11 @@ public function attack():void {
 	damage += strenghtscalingbonus() * 0.25;
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 	if (damage < 10) damage = 10;
-	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) damage *= 0.95;
-	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) damage *= 0.9;
-	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) damage *= 0.85;
-	if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) damage *= 0.8;
-	if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) damage *= 0.75;
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) damage *= 0.95;
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 3) damage *= 0.9;
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 4) damage *= 0.85;
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 5) damage *= 0.8;
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 6) damage *= 0.75;
 	
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -2307,7 +2314,7 @@ public function attack():void {
 	else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 	//Bonus sand trap damage!
 	if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
-	//All special wepaon effects like...flames/ice
+	//All special weapon effects like...fire/ice
 	if (player.weapon == weapons.L_WHIP) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
@@ -4430,8 +4437,14 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 public function meleeANDrangeANDmanaSubMenu():void {
 	menu();
 	clearOutput();
-	if (player.findPerk(PerkLib.DoubleAttack) >= 0) addButton(0,"Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions);
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
+	if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+		outputText("\n<b>You can adjust your melee attack settings.</b>");
+		addButton(0,"Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions);
+	}
+	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) {
+		outputText("\n<b>You can adjust your range strike settings.</b>");
+		addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
+	}
 //	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
 	addButton(14, "Back", combatMenu, false);
 }

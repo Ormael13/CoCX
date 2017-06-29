@@ -2082,6 +2082,23 @@ package classes
 			return false;
 		}
 
+		//Weapons for Whirlwind
+		public function isWeaponForWhirlwind():Boolean
+		{
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
+			 || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD)
+				return true;
+			return false;
+		}
+
+		//Weapons for Whipping
+		public function isWeaponsForWhipping():Boolean
+		{
+			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
+				return true;
+			return false;
+		}
+
 		//Naked
 		public function isNaked():Boolean
 		{

@@ -140,6 +140,7 @@ package classes.Scenes.Explore {
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
+			if (player.hasPerk(PerkLib.GreyMage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -401,6 +402,28 @@ package classes.Scenes.Explore {
 			}
 		}
 		
+		private function pitchGreyBook():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 500 gem!</i>\"");
+			doYesNo(buyWhiteBook, bookMenu);
+		}
+		
+		private function buyGreyBook():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 500) {
+				outputText("\n\nGiacomo sighs, indicating you need 500 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
+				player.gems -= 500;
+				statScreenRefresh();
+				inventory.takeItem(consumables.G__BOOK, bookMenu);
+			}
+		}
+		
 		private function pitchBlackBook():void {
 			spriteSelect(23);
 			clearOutput();
@@ -416,7 +439,7 @@ package classes.Scenes.Explore {
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);

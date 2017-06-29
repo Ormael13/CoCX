@@ -155,8 +155,8 @@ public class PhysicalSpecials extends BaseCombatContent{
 			addButton(button++, "Sidewinder", archerSidewinder, null, null, null, "The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 		}
 		if (monster.plural) {
-			if (player.weapon == weapons.FLAIL || player.weapon == weapons.L_WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.WHIP || player.weapon == weapons.RIBBON || player.weapon == weapons.ERIBBON) addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
-			if (player.weapon == weapons.BFSWORD || player.weapon == weapons.CLAYMOR || player.weapon == weapons.URTAHLB || player.weapon == weapons.KIHAAXE || player.weapon == weapons.L__AXE || player.weapon == weapons.L_HAMMR || player.weapon == weapons.TRASAXE || player.weapon == weapons.WARHAMR || player.weapon == weapons.NODACHI || player.weapon == weapons.WGSWORD) addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+			if (player.isWeaponsForWhipping()) addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+			if (player.isWeaponForWhirlwind()) addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
 				addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 			}

@@ -4537,60 +4537,36 @@ use namespace kGAMECLASS;
 				}
 			}
 			if (humanScore() == 25) {
-				maxStr += (60 * (1 + newGamePlusMod));
-				maxTou += (60 * (1 + newGamePlusMod));
-				maxSpe += (60 * (1 + newGamePlusMod));
-				maxInt += (65 * (1 + newGamePlusMod));
-				maxWis += (65 * (1 + newGamePlusMod));
-				maxLib += (65 * (1 + newGamePlusMod));
-			}
-			if (humanScore() == 24) {
-				maxStr += (50 * (1 + newGamePlusMod));
-				maxTou += (50 * (1 + newGamePlusMod));
-				maxSpe += (50 * (1 + newGamePlusMod));
-				maxInt += (55 * (1 + newGamePlusMod));
-				maxWis += (55 * (1 + newGamePlusMod));
-				maxLib += (55 * (1 + newGamePlusMod));
-			}
-			if (humanScore() == 23) {
 				maxStr += (40 * (1 + newGamePlusMod));
 				maxTou += (40 * (1 + newGamePlusMod));
 				maxSpe += (40 * (1 + newGamePlusMod));
-				maxInt += (45 * (1 + newGamePlusMod));
-				maxWis += (45 * (1 + newGamePlusMod));
-				maxLib += (45 * (1 + newGamePlusMod));
+				maxInt += (40 * (1 + newGamePlusMod));
+				maxWis += (40 * (1 + newGamePlusMod));
+				maxLib += (40 * (1 + newGamePlusMod));
 			}
-			if (humanScore() == 22) {
+			if (humanScore() == 24) {
 				maxStr += (30 * (1 + newGamePlusMod));
 				maxTou += (30 * (1 + newGamePlusMod));
 				maxSpe += (30 * (1 + newGamePlusMod));
-				maxInt += (35 * (1 + newGamePlusMod));
-				maxWis += (35 * (1 + newGamePlusMod));
-				maxLib += (35 * (1 + newGamePlusMod));
+				maxInt += (30 * (1 + newGamePlusMod));
+				maxWis += (30 * (1 + newGamePlusMod));
+				maxLib += (30 * (1 + newGamePlusMod));
 			}
-			if (humanScore() == 21) {
+			if (humanScore() == 23) {
 				maxStr += (20 * (1 + newGamePlusMod));
 				maxTou += (20 * (1 + newGamePlusMod));
 				maxSpe += (20 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (25 * (1 + newGamePlusMod));
-				maxLib += (25 * (1 + newGamePlusMod));
+				maxInt += (20 * (1 + newGamePlusMod));
+				maxWis += (20 * (1 + newGamePlusMod));
+				maxLib += (20 * (1 + newGamePlusMod));
 			}
-			if (humanScore() == 20) {
+			if (humanScore() == 22) {
 				maxStr += (10 * (1 + newGamePlusMod));
 				maxTou += (10 * (1 + newGamePlusMod));
 				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (15 * (1 + newGamePlusMod));
-				maxWis += (15 * (1 + newGamePlusMod));
-				maxLib += (15 * (1 + newGamePlusMod));
-			}
-			if (humanScore() == 19) {
-		//		maxStr += (0 * (1 + newGamePlusMod));
-		//		maxTou += (0 * (1 + newGamePlusMod));
-		//		maxSpe += (0 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
+				maxInt += (10 * (1 + newGamePlusMod));
+				maxWis += (10 * (1 + newGamePlusMod));
+				maxLib += (10 * (1 + newGamePlusMod));
 			}
 			if (internalChimeraScore() >= 1) {
 				maxStr += (5 * internalChimeraScore() * (1 + newGamePlusMod));
@@ -4600,6 +4576,12 @@ use namespace kGAMECLASS;
 				maxWis += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 				maxLib += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 			}
+			if (maxStr < 25) maxStr = 25;
+			if (maxTou < 25) maxTou = 25;
+			if (maxSpe < 25) maxSpe = 25;
+			if (maxInt < 25) maxInt = 25;
+			if (maxWis < 25) maxWis = 25;
+			if (maxLib < 25) maxLib = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) > 0) {
@@ -4667,10 +4649,6 @@ use namespace kGAMECLASS;
 				maxWis += (10 * (1 + newGamePlusMod));
 				maxLib += (6 * (1 + newGamePlusMod));
 			}
-			if (findPerk(PerkLib.JobHunter) >= 0) {
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
-			}
 			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
@@ -4681,6 +4659,10 @@ use namespace kGAMECLASS;
 				maxLib += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobHunter) >= 0) {
+				maxSpe += (10 * (1 + newGamePlusMod));
+				maxInt += (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobMunchkin) >= 0) {

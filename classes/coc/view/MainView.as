@@ -326,21 +326,17 @@ public class MainView extends Block {
 	// Removes the need for some code in input.as and InitializeUI.as.
 	protected function disableMouseForMostTextFields():void {
 		var ci:int, t:TextField;
-
 		for (ci = 0; ci < this.numChildren; ++ci) {
 			t = this.getChildAt(ci) as TextField;
-
 			if (!t) {
 				continue;
 			}
-
 			switch (t) {
 				case this.mainText:
 				case this.nameBox:
 				case this.eventTestInput:
 					t.mouseEnabled = true;
 					break;
-
 				default:
 					t.mouseEnabled = false;
 					break;

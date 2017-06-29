@@ -58,8 +58,8 @@ package classes.Scenes
 			outputText("-Wrath is used when multiattacking with melee weapons (desc special case of fists attacks here) or to fuel req. for wrath by Wrath weapons (so they will not drain PC HP instead)\n");
 			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen from too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
 			outputText("-Big Fucking Sword is now counting not only as large weapon but also as low grade Wrath weapon (it mean each attack with it would drain 100 HP or 10 wrath points from PC)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Stat caps due to racial modificators can't go below 25. Insightful Resources perks adds only 3 instead of 5 to max soulforce for each point of wisdom\n");
+			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Books for 500 gems each.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

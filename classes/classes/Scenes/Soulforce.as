@@ -137,7 +137,7 @@ package classes.Scenes
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(1, "Self-sustain", SelfSustain, null, null, null, "Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(2, "Repres. Lust", RepresLust, null, null, null, "Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(4, "Adj. Corr.", CorruptionAndSoulforce, null, null, null, "Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce, null, null, null, "Convert some soulforce into fatigue or vice versa."); //używanie soulforce do zmniejszania fatigue w stosunku 1:1 a fatigue do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce, null, null, null, "Convert some soulforce into mana or vice versa."); //używanie soulforce do zmniejszania fatigue w stosunku 1:1 a fatigue do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			//addButton(5, "Upgrade", UpgradeItems, null, null, null, "."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", kGAMECLASS.metamorph.accessMetamorphMenu, null, null, null, "Use your soulforce to mold freely your body.")//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense, null, null, null, "Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
@@ -1475,33 +1475,33 @@ package classes.Scenes
 		}
 		public function ManaAndSoulforce():void {
 			clearOutput();
-			outputText("Use some of your soulforce to slowly conver it into fatigue or some fatigue in soulforce. The higher your cultivation is the more you could convert without hurting yourself.\n\n");
-			outputText("So what amount of your soulforce/fatigue do you want to convert?");
+			outputText("Use some of your soulforce to slowly conver it into mana or some mana in soulforce. The higher your cultivation is the more you could convert without hurting yourself.\n\n");
+			outputText("So what amount of your soulforce/mana do you want to convert?");
 			menu();
 		//	if (kGAMECLASS.inCombat) {
 		//		addButton(14, "Back", kGAMECLASS.combatMenu);
-		//	}
+		//	}You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed. - może do wykorzystania potem gdzieś?
 		//	else {
-				addButton(0, "100", Covert100Soulforce, null, null, null, "Convert 100 soulforce to 100 fatigue.");
-				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, "200", Covert200Soulforce, null, null, null, "Convert 200 soulforce to 200 fatigue.");
-				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(2, "500", Covert500Soulforce, null, null, null, "Convert 500 soulforce to 500 fatigue.");
-				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "1000", Covert1000Soulforce, null, null, null, "Convert 1000 soulforce to 1000 fatigue.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(4, "2000", Covert2000Soulforce, null, null, null, "Convert 2000 soulforce to 2000 fatigue.");
-				addButton(5, "100", Covert100Fatigue, null, null, null, "Convert 100 fatigue to 50 soulforce.");
-				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(6, "200", Covert200Fatigue, null, null, null, "Convert 200 fatigue to 100 soulforce.");
-				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(7, "500", Covert500Fatigue, null, null, null, "Convert 500 fatigue to 250 soulforce.");
-				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(8, "1000", Covert1000Fatigue, null, null, null, "Convert 1000 fatigue to 500 soulforce.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(9, "2000", Covert2000Fatigue, null, null, null, "Convert 2000 fatigue to 1000 soulforce.");
+				addButton(0, "100", Covert100Soulforce, null, null, null, "Convert 100 soulforce to 100 mana.");
+				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, "200", Covert200Soulforce, null, null, null, "Convert 200 soulforce to 200 mana.");
+				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(2, "500", Covert500Soulforce, null, null, null, "Convert 500 soulforce to 500 mana.");
+				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "1000", Covert1000Soulforce, null, null, null, "Convert 1000 soulforce to 1000 mana.");
+				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(4, "2000", Covert2000Soulforce, null, null, null, "Convert 2000 soulforce to 2000 mana.");
+				addButton(5, "100", Covert100Mana, null, null, null, "Convert 100 mana to 50 soulforce.");
+				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(6, "200", Covert200Mana, null, null, null, "Convert 200 mana to 100 soulforce.");
+				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(7, "500", Covert500Mana, null, null, null, "Convert 500 mana to 250 soulforce.");
+				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(8, "1000", Covert1000Mana, null, null, null, "Convert 1000 mana to 500 soulforce.");
+				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(9, "2000", Covert2000Mana, null, null, null, "Convert 2000 mana to 1000 soulforce.");
 				addButton(14, "Back", accessSoulforceMenu);
 		//	}
 		}
 		public function Covert100Soulforce():void {
 			clearOutput();
 			if (player.soulforce >= 100) {
-				outputText("You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed.");
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 100;
-				player.fatigue -= 100;
-				if (player.fatigue < 0) player.fatigue = 0;
+				player.mana += 100;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 				doNext(playerMenu);
@@ -1514,10 +1514,10 @@ package classes.Scenes
 		public function Covert200Soulforce():void {
 			clearOutput();
 			if (player.soulforce >= 200) {
-				outputText("You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed.");
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 200;
-				player.fatigue -= 200;
-				if (player.fatigue < 0) player.fatigue = 0;
+				player.mana += 200;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 				doNext(playerMenu);
@@ -1530,10 +1530,10 @@ package classes.Scenes
 		public function Covert500Soulforce():void {
 			clearOutput();
 			if (player.soulforce >= 500) {
-				outputText("You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed.");
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 500;
-				player.fatigue -= 500;
-				if (player.fatigue < 0) player.fatigue = 0;
+				player.mana += 500;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 				doNext(playerMenu);
@@ -1546,10 +1546,10 @@ package classes.Scenes
 		public function Covert1000Soulforce():void {
 			clearOutput();
 			if (player.soulforce >= 1000) {
-				outputText("You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed.");
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 1000;
-				player.fatigue -= 1000;
-				if (player.fatigue < 0) player.fatigue = 0;
+				player.mana += 1000;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 				doNext(playerMenu);
@@ -1562,10 +1562,10 @@ package classes.Scenes
 		public function Covert2000Soulforce():void {
 			clearOutput();
 			if (player.soulforce >= 2000) {
-				outputText("You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed.");
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 2000;
-				player.fatigue -= 2000;
-				if (player.fatigue < 0) player.fatigue = 0;
+				player.mana += 2000;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 				doNext(playerMenu);
@@ -1575,15 +1575,15 @@ package classes.Scenes
 				doNext(ManaAndSoulforce);
 			}
 		}
-		public function Covert100Fatigue():void {
+		public function Covert100Mana():void {
 			clearOutput();
-			if (player.fatigue >= player.maxFatigue() - 100) {
-				outputText("Your current fatigue is too high.");
+			if (player.mana < 100) {
+				outputText("Your current mana is too low.");
 				doNext(ManaAndSoulforce);
 			}
 			else {
-				outputText("You sit down and focus in recovering your spiritual power,  draining your physical stamina to replenish your soul force.");
-				player.fatigue += 100;
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 100;
 				player.soulforce += 50;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();
@@ -1591,15 +1591,15 @@ package classes.Scenes
 				doNext(playerMenu);
 			}
 		}
-		public function Covert200Fatigue():void {
+		public function Covert200Mana():void {
 			clearOutput();
-			if (player.fatigue >= player.maxFatigue() - 200) {
-				outputText("Your current fatigue is too high.");
+			if (player.mana < 200) {
+				outputText("Your current mana is too low.");
 				doNext(ManaAndSoulforce);
 			}
 			else {
-				outputText("You sit down and focus in recovering your spiritual power,  draining your physical stamina to replenish your soul force.");
-				player.fatigue += 200;
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 200;
 				player.soulforce += 100;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();
@@ -1607,15 +1607,15 @@ package classes.Scenes
 				doNext(playerMenu);
 			}
 		}
-		public function Covert500Fatigue():void {
+		public function Covert500Mana():void {
 			clearOutput();
-			if (player.fatigue >= player.maxFatigue() - 500) {
-				outputText("Your current fatigue is too high.");
+			if (player.mana < 500) {
+				outputText("Your current mana is too low.");
 				doNext(ManaAndSoulforce);
 			}
 			else {
-				outputText("You sit down and focus in recovering your spiritual power,  draining your physical stamina to replenish your soul force.");
-				player.fatigue += 500;
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana += 500;
 				player.soulforce += 250;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();
@@ -1623,15 +1623,15 @@ package classes.Scenes
 				doNext(playerMenu);
 			}
 		}
-		public function Covert1000Fatigue():void {
+		public function Covert1000Mana():void {
 			clearOutput();
-			if (player.fatigue >= player.maxFatigue() - 1000) {
-				outputText("Your current fatigue is too high.");
+			if (player.mana < 1000) {
+				outputText("Your current mana is too low.");
 				doNext(ManaAndSoulforce);
 			}
 			else {
-				outputText("You sit down and focus in recovering your spiritual power,  draining your physical stamina to replenish your soul force.");
-				player.fatigue += 1000;
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 1000;
 				player.soulforce += 500;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();
@@ -1639,15 +1639,15 @@ package classes.Scenes
 				doNext(playerMenu);
 			}
 		}
-		public function Covert2000Fatigue():void {
+		public function Covert2000Mana():void {
 			clearOutput();
-			if (player.fatigue >= player.maxFatigue() - 2000) {
-				outputText("Your current fatigue is too high.");
+			if (player.mana < 2000) {
+				outputText("Your current mana is too low.");
 				doNext(ManaAndSoulforce);
 			}
 			else {
-				outputText("You sit down and focus in recovering your spiritual power,  draining your physical stamina to replenish your soul force.");
-				player.fatigue += 2000;
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 2000;
 				player.soulforce += 1000;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();

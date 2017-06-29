@@ -73,17 +73,17 @@ public class MaraFruit extends Consumable{
 					player.orgasm();
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) {
-					outputText("After the last times, you thought that the sudden arousal weakened with each use of the fruit, with the last time having caused you almost no noticeable increase in it. Clearly, you were wrong, as the sudden spike of arousal obligingly points out to you.  ");
+					outputText("After the last few times, you thought that the sudden arousal weakened with each use of the fruit, with the last time having caused you almost no noticeable increase in it. Clearly, you were wrong, as the sudden spike of arousal obligingly points out to you.  ");
 					if (player.vaginas.length == 1) outputText("You cannot resist as your hands dive into your [vagina].  ");
 					if (player.vaginas.length > 1) outputText("You cannot resist plunging your hands inside your [vagina]s.  ");
 					outputText("Your orgasm comes mercifully quickly, accompanied by an impressive spray of your fluids.  Still high from the aphrodisiac effects of the fruit, you cannot help but be delighted at this new development.  <b>You are now a squirter</b>.");
 					player.orgasm();
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) {
-					outputText("You suddenly feel something trickling down your leg. The strong smell of fish slams into your poor unprepared nose, clueing you in as to the nature of the liquid. But just when are getting used to the idea of smelling like a fishing port, the smell begins to change to a far lighter and sweeter one, which you recognize as that of the fruit. Your [vagina] now constantly drools lubricant down your leg, filling the air with a pleasant scent that most would mistake for perfume.");
+					outputText("You suddenly feel something trickling down your leg. The strong smell of fish slams into your poor unprepared nose, clueing you in as to the nature of the liquid. But just when you are getting used to the idea of smelling like a fishing port, the smell begins to change to a far lighter and sweeter one, which you recognize as that of the fruit. Your [vagina] now constantly drools lubricant down your leg, filling the air with a pleasant scent that most would mistake for perfume.");
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) {
-					outputText("Once more, the fruit’s effects make themselves known, leaving you hornier and wetter than you began as, the later of which is likely to be permanent. At least this time you were already expecting it, so you weren’t forced to relieve yourself on the spot like the last time.");
+					outputText("Once more, the fruit’s effects make themselves known, leaving you hornier and wetter than you already were, the later of which is likely to be permanent. At least this time you were already expecting it, so you weren’t forced to relieve yourself on the spot like the last time.");
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) {
 					outputText("Suddenly your arousal spikes. You feel as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ");
