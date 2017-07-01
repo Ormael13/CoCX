@@ -490,7 +490,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8e";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>New UI, Mana and Wrath, Race rebalancing (part 5), Temple of the Divine (part 0)</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

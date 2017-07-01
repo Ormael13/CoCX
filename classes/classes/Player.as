@@ -1866,7 +1866,7 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			if (cor >= 20)
 				minoCounter++;
-			if (minoCounter > 4) {
+			if (minoCounter >= 4) {
 				if (cumQ() > 500) {
 					if (cumQ() > 1000) {
 						minoCounter++;
@@ -1882,6 +1882,8 @@ use namespace kGAMECLASS;
 				if (vaginas.length > 0)
 					minoCounter--;
 			}
+			if (cowScore() >= 4)
+				minoCounter -= 7;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				minoCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 4)
@@ -1906,7 +1908,7 @@ use namespace kGAMECLASS;
 				cowCounter++;
 			if (cor >= 20)
 				cowCounter++;
-			if (cowCounter > 4) {
+			if (cowCounter >= 4) {
 				if (biggestTitSize() > 4)
 					cowCounter++;
 				if (biggestLactation() > 2)
@@ -1920,6 +1922,8 @@ use namespace kGAMECLASS;
 				if (cocks.length > 0)
 					cowCounter--;
 			}
+			if (minotaurScore() >= 4)
+				cowCounter -= 7;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				cowCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cowCounter >= 4)
@@ -3115,6 +3119,8 @@ use namespace kGAMECLASS;
 				plantCounter++;
 			if (earType == 4)
 				plantCounter++;
+			if (earType == 6)
+				plantCounter--;
 			if ((hairType == 7 || hairType == 9) && hairColor == "green")
 				plantCounter++;
 			if (hasPlainSkinOnly() && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
@@ -3176,6 +3182,10 @@ use namespace kGAMECLASS;
 				yggdrasilCounter += 2;
 			if ((hairType == 4 || hairType == 7 || hairType == 9) && hairColor == "green")
 				yggdrasilCounter++;
+			if (earType == 6)
+				yggdrasilCounter++;
+			if (earType == 4)
+				yggdrasilCounter -= 2;
 			if (armType == 7 || armType == 18)
 				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both arms and claws tf
 			//claws?

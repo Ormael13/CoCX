@@ -437,8 +437,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing " + monster.a + monster.short + " with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
 		var damage:Number = 0;
-		damage += player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		damage += player.lactationQ();
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText(" ");
@@ -462,8 +461,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting " + monster.a + monster.short + " away and knocking it prone. ");
 		var damage:Number = 0;
-		damage += player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		damage += player.cumQ();
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText(" ");

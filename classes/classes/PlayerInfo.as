@@ -493,6 +493,9 @@ public class PlayerInfo extends BaseContent {
 		if (getGame().telAdre.rubi.rubiAffection() > 0)
 			interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(getGame().telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(getGame().telAdre.rubi.rubiCapacity()) + "%\n";
 
+		if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
+			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
+		
 		if (flags[kFLAGS.SHEILA_XP] != 0) {
 			interpersonStats += "<b>Sheila's Corruption:</b> " + getGame().sheilaScene.sheilaCorruption();
 			if (getGame().sheilaScene.sheilaCorruption() > 100)

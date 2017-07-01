@@ -60,14 +60,14 @@ package classes.Scenes
 			outputText("-Big Fucking Sword is now counting not only as large weapon but also as low grade Wrath weapon (it mean each attack with it would drain 100 HP or 10 wrath points from PC)\n");
 			outputText("-Stat caps due to racial modificators can't go below 25. Insightful Resources perks adds only 3 instead of 5 to max soulforce for each point of wisdom\n");
 			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Books for 500 gems each.\n");
-			outputText("-\n");
+			outputText("-New Grey Spell: Mana Shield. Req. 130+ int to learn and allow to use create protective barrier from mana that will be active till end of fight or when PC would disperse it. Any attack that is not strong enough to break it would be absorbed causing PC to loose mana equal to attack power. If it stronger then shield will not stop it causing it full power damage PC.\n");
+			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant socre by 1 point. Having elf ears would lower ygg score by 2 points.\n");
+			outputText("-New location possible to discover when exploring High Mountains: Temple of the Divine. It's still in much stub form but would eventualy be all options added to it. Did I meantione it's Liadri first huge project and it's connected to Gargoyle TF?\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

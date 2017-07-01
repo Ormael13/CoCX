@@ -368,6 +368,13 @@ package classes.Scenes.Areas.Forest
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
 				changes++;	
 			}
+			if (player.earType != EARS_LIZARD && player.tailType == TAIL_TYPE_YGGDRASIL && player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
+				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
+				if (player.hasFur() || player.hairLength > 0) outputText("discreet ");
+				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
+				player.earType = EARS_LIZARD;
+				changes++;
+			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		

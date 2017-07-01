@@ -67,12 +67,12 @@ package classes.Scenes.Areas
 				else etnaScene.repeatEnc();
 				return;
 			}
-	/*		//Temple of the Divine
+			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
 				templeofdivine.firstvisitintro();
 				return;
 			}
-	*/		//25% minotaur sons!
+			//25% minotaur sons!
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
 				spriteSelect(44);
 				minotaurMobScene.meetMinotaurSons();

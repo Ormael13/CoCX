@@ -19,37 +19,47 @@ package classes.Scenes.Areas.HighMountains
 		public function TempleOfTheDivine() 
 		{}
 		
+		public function sapphireAffection(changes:Number = 0):Number
+		{
+			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
+		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 6) flags[kFLAGS.SAPPHIRE_AFFECTION] = 6;
+			return flags[kFLAGS.SAPPHIRE_AFFECTION];
+		}
+		
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
 			clearOutput();
-			outputText("As you wander the mountains, you eventually climb to the very top. Weirdly enough, there, sitting on the tallest peak in Mareth, sits what appears to be a massive temple. You approach the huge doors of the building and open them wide. You can feel the cold chilling air entering the place. ");
-			outputText("There are ancient bloodstains on the stony floor, accompanied by vitrails depicting various divinities on each wall. At the end of the building that was once was a holy site, sits one depicting Marae. Under each vitrail is a somewhat damaged altar upon which the outdoor light shines faintly.");
+			outputText("As you wander the mountains, you eventually climb to the very top, something you never expected to do. Weirdly enough, sitting on a nearby peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
+			outputText("There are ancient bloodstains marking the stone floor and stained glass windows depicting various deities adorn each wall. At the end of the building, that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
 			outputText("\n\nAs you walk towards Marae’s Altar, a threatening voice echoes through the temple. \"<i>No one will defile this sacred place! I will slay you before you can cause any further damage!</i>\"");
-			outputText("\n\nYou realize that you were never, in fact, alone in the room, as a large and heavy object violently hits you from behind, projecting you onto the ground. As you go to stand up, something grabs you by the leg and lifts you upside down in the air with apparent ease. This gives you enough time to take a good look at what grabbed you. ");
-			outputText("It seems to be a 7 foot tall, stone-skinned gargoyle. She carries a huge spear and appears to be about to impale you on it. Knowing your death is near, you utter a swift prayer to whichever gods may be listening. This has a surprising effect on the gargoyle.");
-			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\" She, none too gently, sets you back on the ground, in order to thoroughly examine you.");
-			outputText("\n\nYou tell here that you ");
+			outputText("\n\nYou realize that you were never alone in the room, as a large and heavy object hits you from behind, sending you sprawling to the ground. As you try to stand up, something grabs you by the leg, lifting you upside down in the air with apparent ease. While uncomfortable, and most definitely a shock, this gives you enough time to take a good look at what, or more specifically who, grabbed you. ");
+			outputText("It seems to be a 7 foot tall, stone-skinned gargoyle. She carries a huge halberd and appears to be about to impale you on it. Although you wriggle, you find no weakness in her grip, you can’t escape from this one. Knowing your death is near, you utter a swift ");
+			if (player.cor > 66) outputText("and desperate ");
+			outputText("prayer to whichever gods may be listening. This has a surprising effect on the gargoyle, stilling her almost instantly.");
+			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
+			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well being, merely in order to thoroughly examine you. You tell her that you ");
 			if (kGAMECLASS.dungeons.checkFactoryClear()) {
 				if (player.humanScore() < 14) outputText("were");
 				else outputText("are");
-				outputText(" a human champion, sent by your village as tribute to the demons.");
+				outputText(" a human, a champion, sent by your village as tribute to the demons under the guise of being a hero.");
 			}
 			else {
 				if (player.humanScore() < 14) outputText("were");
 				else outputText("are");
-				outputText(" a human champion, sent by your village to defeat the demons. However just what is this place and who is she?");
+				outputText(" a human, a champion, sent by your village to defeat the demons. However just what is this place and who is she?");
 			}
-			outputText("\n\n\"<i>There haven't been many humans in Mareth since the demons took over, so it’s likely that you are the first make it here in a long time. If you seek salvation, I’m afraid the temple will not provide any, as the gods and their powers have long since left their altars. As for who I am, my name is Sapphire. I am the last guardian of this sacred ground and the last line of defense against the fiends that roam this land.</i>\" The name seems to be somewhat appropriate as her eyes glow with a faint, azure hue.");
-			outputText("\n\nThe gargoyle turns her back to you, taking flight towards one of the pillar of the room. \"<i>You are welcome to visit this place as often as you see fit. However, I will be watching you.</i>\"\n\n<b>You can now visit the Temple of the Divines!</b>");
+			outputText("\n\n\"<i>There haven't been many humans in Mareth, especially since the demons took over, so it’s likely that you are the first to make it here in a long time. If you seek salvation, I’m afraid the temple will not provide any, as the gods and their powers have long since left their altars. As for who I am, my name is Sapphire. I am the last guardian of this sacred ground, and the last line of defense against the fiends that desecrate this land.</i>\"");
+			outputText("\n\nHer name seems to be somewhat appropriate, her eyes glowing with a faint, azure hue. As you ponder these details the gargoyle turns her back to you, taking flight towards one of the pillars in the room.\n\n\"<i>You are welcome to visit this place as often as you see fit. However, I will be watching you.</i>\"\n\n<b>You can now visit the Temple of the Divines!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function repeatvisitintro():void {
 			clearOutput();
-			outputText("You decide to make a trip to the temple. As soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. She calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");			
-			outputText("\n\n\"<i>Well hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Perhaps you're here for something more... mutually agreeable, instead?");
+			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");			
+			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
 			outputText("</i>\"");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" She says, winking with a lusty smile.");
 			menu();
@@ -57,7 +67,8 @@ package classes.Scenes.Areas.HighMountains
 			addButtonDisabled(1, "???", "Cummin Sooooon!");
 			addButton(5, "Sapphire", sapphiremenu, null, null, null, "Cummin Sooooon!");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
+			addButtonDisabled(7, "???", "Cummin Sooooon!");
+		//	addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -69,7 +80,8 @@ package classes.Scenes.Areas.HighMountains
 			addButtonDisabled(1, "???", "Cummin Sooooon!");
 			addButton(5, "Sapphire", sapphiremenu, null, null, null, "Cummin Sooooon!");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
+			addButtonDisabled(7, "???", "Cummin Sooooon!");
+		//	addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -86,52 +98,62 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function sapphiremenu():void {
 			clearOutput();
-			outputText("You actually admit you were looking for her to which she casually sit next to you engaging discussion.\n\n");
+			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
-		//	addButton(0,"Back", templemainmenu);
+		//	addButton(0,"This place", templemainmenu);
 			addButton(1,"Her", TalkHer, null, null, null, "Cummin Sooooon!");
-		//	addButton(2,"Back", templemainmenu);
+		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex);
 			addButton(4,"Back", templemainmenu);
 		}
 		
 		public function TalkHer():void {
 			clearOutput();
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 5) {
-				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed on your previous discussion.\n\n");
-				outputText("\"<i>It hurts me to even mention them as this was the day the demon appeared. They poured into the cities below us like a tidal wave devouring souls and corrupting everything in their path. Eventually they began climbing the mountain and we knew they would be on our doorsteps within hours. To prevent them from destroying this holy ground we devised a plan. No mather what would happen the temple had to be protected and we would give up to our lives to do so. ");
-				outputText("As such one by one we sacrificed ourselves to a ritual in order to create a vigirl of everlasting guardians. I was the last one to be put on the altar and they finished the ritual it just in time as the demon started pouring in. Many desperate enchantment and prayers were put into each of us trying to create a random combinations that would correctly dispatch the demons. ");
-				outputText("The others gargoyles didn't had the protections to face the demons like I did and they were destroyed one by one swiftly. Amidst the chaos the altars were damaged as I kept killing more and more of them until, satisfied with their dirty work, the demons pulled back to prevent further casualties.</i>\"\n\n");
-				outputText("What of her? Why did the demon spare her?\n\n");
-				outputText("\"<i>Their work was done, the numerous altar in the church were no longer able to channel divine powers and the pontiff was captured alive and brought back inside the hell hole that is now Lethice's stronghold. I think they simply left because they had no interest into getting slaughtered by a being they could not corrupt or destroy. With everyone gone or dead it feels so lonely in this place now.</i>\"\n\n");
-				outputText("You thank her for her time and walk back to camp");
+				outputText("You're curious about her story and decide to ask her.\n\n");
+				outputText("\"<i>My story? Well that's nothing special. I have been guarding this place for years, even before the demons came. I was raised here in this temple. I have always had a fascination with gods, Marae in particular. It was only natural for me to become a priestess of her cult. In recent years, I mostly dealt with the occasional thieves and demons that somehow manage to break through the ward. Even then, only a very powerful opponent could manage that.</i>\"\n\n");
+				outputText("You ask her how she is able to contend with demons, especially the most dangerous ones.\n\n");
+				outputText("\"<i>I understand that my body looks like something more fitting for a whore than a chaste being. My sexual desire is next to zero. As far as I know, I’m as cold as the stone I'm made from. Therefore, demons have a very difficult time getting me to even start being aroused. As arousal and black magic is their main weapon, I’m pretty much the worst opponent they could encounter.</i>\"\n\n");
+				outputText("You thank her for her time and proceed to head back to your camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
+				sapphireAffection(2);
 				if (flags[kFLAGS.SAPPHIRE_TALKS] > 4) flags[kFLAGS.SAPPHIRE_TALKS] = 3;
 				doNext(camp.returnToCampUseOneHour);
 			}
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 1 || flags[kFLAGS.SAPPHIRE_TALKS] == 4) {
 				outputText("Didn't she say that she was raised in the temple? Last time you checked Gargoyles were magically constructed creatures that do not age or die. How could she have been raised in the first place?\n\n");
-				outputText("\"<i>This isn’t how I used to be, I was a mortal made of flesh and blood just like you Born in the former capital city which serves the role of the main demon base now. My mother was a priestess at the temple, and naturally I became one as well . My childhood was for the most part spent on learning the holy text and chanting in chorals. I don't think it was a waste, these lands used to be beautiful before the demon outbreak. At age 16 I was selected amongst many to work directly in the temple of the divine which was a great privilege. ");
-				outputText("I prayed, tended to the temple and worked under the pontiff for many years and would have continued to do so had they not come. I'm sorry, I don't feel like talking about it further for now, so please leave me be.</i>\"\n\n");
-				outputText("You excuse yourself and leave returning back to your camp.");
+				outputText("\"<i>This isn’t how I used to be. I was once of flesh and blood just like you. I was born in the former capital city which serves as the main demon base now. My mother was a priestess at the temple, so naturally I became one as well . My childhood was mostly spent learning holy texts and chanting in the chorus. I don't think it was a waste, these lands used to be beautiful before the demon outbreak. At 16, I was among many selected to work directly in the temple of the divine. It was a great privilege. ");
+				outputText("I prayed, tended to the temple, and worked under the abbot for many years as a nun. I would have continued to do so had the demons not come. In the end I couldn’t save anyone. I'm sorry, I don't feel like talking about this any further, at least for now. Please, leave me be.</i>\"\n\n");
+				outputText("You excuse yourself and leave, returning back to your camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
+				sapphireAffection(2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 0 || flags[kFLAGS.SAPPHIRE_TALKS] == 3) {
-				outputText("You're curious about her story and tell as such.\n\n");
-				outputText("\"<i>My story? Well that's nothing special I have been guarding this place for years and even before the demons came. For all I know I've been raised here in this temple. I’ve always had a fascination with gods or rather Marae and in some way it was natural for me to become a priestess of her cult. Nowaday I mostly deal with the occasional thieves and demons that somehow manage to break through the ward albeit only a very powerful opponent will ever be able to manage that.</i>\"\n\n");
-				outputText("You ask her how come is she even able to contend with demons especially the most dangerous ones.\n\n");
-				outputText("\"<i>While my body looks like something more fit on a whore then on a chaste being my sexual desire is next to the absolute zero and i'm as cold as the stone i'm made from. Therefore demons have a very difficult time getting me to even start being aroused. As arousal and black magic is the demon main weapon i'm pretty much the worst opponent they can contend with.</i>\"\n\n");
-				outputText("You thank her for her time and proceed to head back to your camp.");
+				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
+				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
+				outputText("As such one by one, we sacrificed ourselves in a ritual to create from us everlasting guardians. I was the last one to be put on the altar. They finished the ritual just as the demons started pouring in. Many desperate enchantments and prayers were put into the creation of each of us, hoping to create a combination by chance that would correctly dispatch the demons. The other gargoyles didn't receive the protections required to face the demons as I did, thus they were destroyed one by one. ");
+				outputText("Amidst the chaos, the altars were damaged extensively and rendered useless. As I kept killing more and more of them, they retreated. Satisfied with their dirty work, they just ran away, like the cowards they are, to prevent further casualties.</i>\"\n\n");
+				outputText("What of her? Why did the demons spare her?\n\n");
+				outputText("\"<i>Their work was done. The numerous altars in the church were no longer able to channel divine powers and the abbot was captured alive and brought inside the hell hole that is now Lethice's stronghold. I think they simply left because they had no interest in getting slaughtered by a being they could not corrupt or destroy. With everyone gone or dead, it feels so lonely in this place now.</i>\"\n\n");
+				outputText("You thank her for her time and walk back to camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
+				sapphireAffection(2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
+		/*
+		public function TalkSex():void {
+			clearOutput();
+			outputText("She said that she is sexually dead. That’s something very rare on Mareth, considering the number of lunatics who spend their day fornicating even in the most pure pockets of the world.\n\n");
+			outputText("\"<i>Don’t think of it that way, I never said I couldn't feel it, just that my desires are deadened. I don't actually feel the need at all, although ,like just anyone, I can have a good time. My body won't feel it unless I desire it. And since i've never been in love before...</i>\"\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		*/
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down the basement of the temple you find what looks like an old abandoned Atelier. Down there are two unfinished statue of what looks like a gargoyle. Either could be carved in any way you wish.");
+				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there are two unfinished statues of what looks like a gargoyle. Either could be carved in any way you wish.");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
 				doNext(templemainmenu);
 			}
