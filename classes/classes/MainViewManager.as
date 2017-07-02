@@ -66,6 +66,8 @@ public class MainViewManager extends BaseContent {
 		element.graphics.beginBitmapFill(bmp, null, false, false);
 		element.graphics.drawRect(0, 0, bmp.width, bmp.height);
 		element.graphics.endFill();
+		element.x = mainView.width - element.width;
+		element.y = mainView.height - element.height;
 	}
 	//------------
 	// REFRESH
