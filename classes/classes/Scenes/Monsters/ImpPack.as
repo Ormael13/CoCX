@@ -46,7 +46,7 @@ package classes.Scenes.Monsters
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.wingType = WING_TYPE_IMP;
 			this.skinTone = "green";
-			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a [cock] as long and thick as a man's arm, far oversized for their bodies."
+			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies."
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";

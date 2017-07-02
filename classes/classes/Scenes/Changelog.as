@@ -47,7 +47,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n");
 			outputText("<b>Version 0.8e:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-In 99% thanks to aimozg restless work mod have a brand new shiny UI. It adds Wisdom, Soulforce, Wrath, Mana bars and Spirit Stones counter to the side panel.\n");
+			outputText("-Thanks to aimozg restless work mod have a brand new shiny UI. It adds Wisdom, Soulforce, Wrath, Mana bars and Spirit Stones counter to the side panel.\n");
 			outputText("-Spells would now req. using Mana. Perks to rase it max and increase regeneration would now affect mana not fatigue.\n");
 			outputText("-All perks of effect rising minimum lust now are addictive so it's possible to have more than 100 min lust. Still min lust can't be higher than (current max Lust - 10).\n");
 			outputText("-New tier 5 strength lvl-up perk: Unlock Id (2nd stage). Req. Unlock: Id perk and 150+ str. Effect: +1 wrath per lvl-up (grant bonus points to respective stat bar retroactively)\n");
@@ -59,16 +59,16 @@ package classes.Scenes
 			outputText("-Chimerical Body perks are now slight more effective in supressing moment when negative HP regen from too many internal mutations kicks in. Instead of delaying it by 1 mutation each now it delay by 2 and 3 mutations.\n");
 			outputText("-Big Fucking Sword is now counting not only as large weapon but also as low grade Wrath weapon (it mean each attack with it would drain 100 HP or 10 wrath points from PC)\n");
 			outputText("-Stat caps due to racial modificators can't go below 25. Insightful Resources perks adds only 3 instead of 5 to max soulforce for each point of wisdom\n");
-			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Books for 500 gems each.\n");
+			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Book for 500 gems each.\n");
 			outputText("-New Grey Spell: Mana Shield. Req. 130+ int to learn and allow to use create protective barrier from mana that will be active till end of fight or when PC would disperse it. Any attack that is not strong enough to break it would be absorbed causing PC to loose mana equal to attack power. If it stronger then shield will not stop it causing it full power damage PC.\n");
 			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant socre by 1 point. Having elf ears would lower ygg score by 2 points.\n");
 			outputText("-New location possible to discover when exploring High Mountains: Temple of the Divine. It's still in much stub form but would eventualy be all options added to it. Did I meantione it's Liadri first huge project and it's connected to Gargoyle TF?\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Cow-morph and Minotaur races reworked with new half and full race bonuses and new special for each of those races: Milk Blast and Cum Cannon. Each of those specials usable once per fight and req. to use only 100 lust and having 9+ points in respective race score and having or pussy or cock.\n");
+			outputText("-New racial bonuses for cows and minotaurs are as follows: 4+ (half-cow/minotaur): +60 str, +10 tou, -20/10 spe, -10/20 int, +20 lib, +25 max lust; 9+ (cow/minotaur): +120 str, +30 tou, -40/20 spe, -20/40 int, +45 lib, +50 max lust.\n");
+			outputText("-Human score bonuses lowered to +40 to al stats at 25 pts, +30 at 24 pts, +20 at 23 pts and +10 at 22 pts.\n");
+			outputText("-Demon-morphs bonuses to max lust was changed form +75 at demon score 5+ to 50 at 5+ and 100 and 11+ points in demon score.\n");
+			outputText("-Brutal Blows now should only sheed 5 points of enemy armor per hit not like now that it was able sheed whole enemy armor in one hit.\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

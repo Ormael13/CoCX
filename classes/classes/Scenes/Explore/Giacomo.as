@@ -140,7 +140,7 @@ package classes.Scenes.Explore {
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
-			if (player.hasPerk(PerkLib.GreyMage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
+			if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}

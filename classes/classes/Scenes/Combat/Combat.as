@@ -2144,7 +2144,39 @@ public function inteligencescalingbonus():Number {
 		if (player.inte >= 1201) inteligencescalingvalue += ((player.inte * 6.75) + rand(player.inte * 7.25));
 		else inteligencescalingvalue += (player.inte/3 + rand(player.inte/2));
 		return inteligencescalingvalue;
-	}
+}
+public function libidoscalingbonus():Number {
+		var libidoscalingvalue:Number = 0;
+		if (player.lib >= 21 && player.lib < 41) libidoscalingvalue += (player.lib / 2 + rand((player.lib * 3) / 4));
+		if (player.lib >= 41 && player.lib < 61) libidoscalingvalue += ((player.lib * 2) / 3 + rand(player.lib));
+		if (player.lib >= 61 && player.lib < 81) libidoscalingvalue += ((player.lib * 5) / 6 + rand(player.lib * 1.25));
+		if (player.lib >= 81 && player.lib < 101) libidoscalingvalue += (player.lib + rand(player.lib * 1.5));
+		if (player.lib >= 101 && player.lib < 151) libidoscalingvalue += ((player.lib * 1.25) + rand(player.lib * 1.75));
+		if (player.lib >= 151 && player.lib < 201) libidoscalingvalue += ((player.lib * 1.5) + rand(player.lib * 2));
+		if (player.lib >= 201 && player.lib < 251) libidoscalingvalue += ((player.lib * 1.75) + rand(player.lib * 2.25));
+		if (player.lib >= 251 && player.lib < 301) libidoscalingvalue += ((player.lib * 2) + rand(player.lib * 2.5));
+		if (player.lib >= 301 && player.lib < 351) libidoscalingvalue += ((player.lib * 2.25) + rand(player.lib * 2.75));
+		if (player.lib >= 351 && player.lib < 401) libidoscalingvalue += ((player.lib * 2.5) + rand(player.lib * 3));
+		if (player.lib >= 401 && player.lib < 451) libidoscalingvalue += ((player.lib * 2.75) + rand(player.lib * 3.25));
+		if (player.lib >= 451 && player.lib < 501) libidoscalingvalue += ((player.lib * 3) + rand(player.lib * 3.5));
+		if (player.lib >= 501 && player.lib < 551) libidoscalingvalue += ((player.lib * 3.25) + rand(player.lib * 3.75));
+		if (player.lib >= 551 && player.lib < 601) libidoscalingvalue += ((player.lib * 3.5) + rand(player.lib * 4));
+		if (player.lib >= 601 && player.lib < 651) libidoscalingvalue += ((player.lib * 3.75) + rand(player.lib * 4.25));
+		if (player.lib >= 651 && player.lib < 701) libidoscalingvalue += ((player.lib * 4) + rand(player.lib * 4.5));
+		if (player.lib >= 701 && player.lib < 751) libidoscalingvalue += ((player.lib * 4.25) + rand(player.lib * 4.75));
+		if (player.lib >= 751 && player.lib < 801) libidoscalingvalue += ((player.lib * 4.5) + rand(player.lib * 5));
+		if (player.lib >= 801 && player.lib < 851) libidoscalingvalue += ((player.lib * 4.75) + rand(player.lib * 5.25));
+		if (player.lib >= 851 && player.lib < 901) libidoscalingvalue += ((player.lib * 5) + rand(player.lib * 5.5));
+		if (player.lib >= 901 && player.lib < 951) libidoscalingvalue += ((player.lib * 5.25) + rand(player.lib * 5.75));
+		if (player.lib >= 951 && player.lib < 1001) libidoscalingvalue += ((player.lib * 5.5) + rand(player.lib * 6));
+		if (player.lib >= 1001 && player.lib < 1051) libidoscalingvalue += ((player.lib * 5.75) + rand(player.lib * 6.25));
+		if (player.lib >= 1051 && player.lib < 1101) libidoscalingvalue += ((player.lib * 6) + rand(player.lib * 6.5));
+		if (player.lib >= 1101 && player.lib < 1151) libidoscalingvalue += ((player.lib * 6.25) + rand(player.lib * 6.75));
+		if (player.lib >= 1151 && player.lib < 1201) libidoscalingvalue += ((player.lib * 6.5) + rand(player.lib * 7));
+		if (player.lib >= 1201) libidoscalingvalue += ((player.lib * 6.75) + rand(player.lib * 7.25));
+		else libidoscalingvalue += (player.lib / 3 + rand(player.lib / 2));
+		return libidoscalingvalue;
+}
 
 //ATTACK
 public function attack():void {
@@ -2471,10 +2503,9 @@ public function attack():void {
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		}
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
-		if(player.weaponPerk != "Dual" && player.weaponPerk != "Dual Large" && monster.armorDef - 10 > 0) monster.armorDef -= 10;
-		if((player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && monster.armorDef - 20 > 0) monster.armorDef -= 20;
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
 		else monster.armorDef = 0;
 	}
 	//Damage cane.
@@ -4765,29 +4796,7 @@ public function GooTease():void {
 			}
 			outputText(" This feels very pleasurable to you but not as much as to your opponent who start to drool at your ministration.");
 			//NERF TEASE DAMAGE
-			if (player.lib >= 21 && player.lib < 41) damage += (player.lib / 2 + rand((player.lib * 3) / 4));
-			if (player.lib >= 41 && player.lib < 61) damage += ((player.lib * 2) / 3 + rand(player.lib));
-			if (player.lib >= 61 && player.lib < 81) damage += ((player.lib * 5) / 6 + rand(player.lib * 1.25));
-			if (player.lib >= 81 && player.lib < 101) damage += (player.lib + rand(player.lib * 1.5));
-			if (player.lib >= 101 && player.lib < 151) damage += ((player.lib * 1.25) + rand(player.lib * 1.75));
-			if (player.lib >= 151 && player.lib < 201) damage += ((player.lib * 1.5) + rand(player.lib * 2));
-			if (player.lib >= 201 && player.lib < 251) damage += ((player.lib * 1.75) + rand(player.lib * 2.25));
-			if (player.lib >= 251 && player.lib < 301) damage += ((player.lib * 2) + rand(player.lib * 2.5));
-			if (player.lib >= 301 && player.lib < 351) damage += ((player.lib * 2.25) + rand(player.lib * 2.75));
-			if (player.lib >= 351 && player.lib < 401) damage += ((player.lib * 2.5) + rand(player.lib * 3));
-			if (player.lib >= 401 && player.lib < 451) damage += ((player.lib * 2.75) + rand(player.lib * 3.25));
-			if (player.lib >= 451 && player.lib < 501) damage += ((player.lib * 3) + rand(player.lib * 3.5));
-			if (player.lib >= 501 && player.lib < 551) damage += ((player.lib * 3.25) + rand(player.lib * 3.75));
-			if (player.lib >= 551 && player.lib < 601) damage += ((player.lib * 3.5) + rand(player.lib * 4));
-			if (player.lib >= 601 && player.lib < 651) damage += ((player.lib * 3.75) + rand(player.lib * 4.25));
-			if (player.lib >= 651 && player.lib < 701) damage += ((player.lib * 4) + rand(player.lib * 4.5));
-			if (player.lib >= 701 && player.lib < 751) damage += ((player.lib * 4.25) + rand(player.lib * 4.75));
-			if (player.lib >= 751 && player.lib < 801) damage += ((player.lib * 4.5) + rand(player.lib * 5));
-			if (player.lib >= 801 && player.lib < 851) damage += ((player.lib * 4.75) + rand(player.lib * 5.25));
-			if (player.lib >= 851 && player.lib < 901) damage += ((player.lib * 5) + rand(player.lib * 5.5));
-			if (player.lib >= 901 && player.lib < 951) damage += ((player.lib * 5.25) + rand(player.lib * 5.75));
-			if (player.lib >= 951) damage += ((player.lib * 5.5) + rand(player.lib * 6));
-			else damage += (player.lib / 3 + rand(player.lib / 2));
+			damage += libidoscalingbonus();
 			damage *= 0.25;
 			damage = Math.round(damage);
 			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {

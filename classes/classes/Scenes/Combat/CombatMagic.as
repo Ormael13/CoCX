@@ -1099,14 +1099,14 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function ManaShield():void {
 		clearOutput();
-		outputText("Deciding you need additional protection during current fight you spend moment to concentrate and form barrier made of mana around you.  It will block attacks as long you would have enough mana.\n");
+		outputText("Deciding you need additional protection during current fight you spend moment to concentrate and form barrier made of mana around you.  It will block attacks as long you would have enough mana.\n\n");
 		player.createStatusEffect(StatusEffects.ManaShield,0,0,0,0);
 		enemyAI();
 	}
 
 	public function DeactivateManaShield():void {
 		clearOutput();
-		outputText("Deciding you not need for now to keep youe mana shield you concentrate and deactivating it.");
+		outputText("Deciding you not need for now to keep youe mana shield you concentrate and deactivating it.\n\n");
 		player.removeStatusEffect(StatusEffects.ManaShield);
 		enemyAI();
 	}

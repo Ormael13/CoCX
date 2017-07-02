@@ -812,7 +812,7 @@ use namespace kGAMECLASS;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && damage >= mana) {
+				if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
 					mana -= damage;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -1153,7 +1153,7 @@ use namespace kGAMECLASS;
 				race = "corrupted mutant";
 			if (minotaurScore() >= 4)
 				if (minotaurScore() >= 9) race = "minotaur";
-				else race = "minotaur";
+				else race = "half-minotaur";
 			if (cowScore() >= 4)
 			{
 				if (cowScore() >= 9) {
@@ -1845,7 +1845,6 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				demonCounter += 10;
-			
 			End("Player","racialScore");
 			return demonCounter;
 		}
@@ -1860,12 +1859,10 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			if (tailType == 4)
 				minoCounter++;
-			if (hornType == 2)
-				minoCounter += 2;
 			if (lowerBody == 1)
 				minoCounter++;
-			if (cor >= 20)
-				minoCounter++;
+			if (hornType == 2)
+				minoCounter += 2;
 			if (minoCounter >= 4) {
 				if (cumQ() > 500) {
 					if (cumQ() > 1000) {
@@ -1877,13 +1874,13 @@ use namespace kGAMECLASS;
 					minoCounter++;
 				if (tallness >= 81)
 					minoCounter++;
+				if (cor >= 20)
+					minoCounter++;
 				if (cocks.length > 0 && horseCocks() > 0)
 					minoCounter++;
 				if (vaginas.length > 0)
-					minoCounter--;
+					minoCounter -= 8;
 			}
-			if (cowScore() >= 4)
-				minoCounter -= 7;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				minoCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 4)
@@ -1902,12 +1899,10 @@ use namespace kGAMECLASS;
 				cowCounter++;
 			if (tailType == 4)
 				cowCounter++;
-			if (hornType == 2)
-				cowCounter += 2;
 			if (lowerBody == 1)
 				cowCounter++;
-			if (cor >= 20)
-				cowCounter++;
+			if (hornType == 2)
+				cowCounter += 2;
 			if (cowCounter >= 4) {
 				if (biggestTitSize() > 4)
 					cowCounter++;
@@ -1917,13 +1912,13 @@ use namespace kGAMECLASS;
 					cowCounter++;
 				if (tallness >= 73)
 					cowCounter++;
+				if (cor >= 20)
+					cowCounter++;
 				if (vaginas.length > 0)
 					cowCounter++;
 				if (cocks.length > 0)
-					cowCounter--;
+					cowCounter -= 8;
 			}
-			if (minotaurScore() >= 4)
-				cowCounter -= 7;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				cowCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cowCounter >= 4)

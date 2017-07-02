@@ -857,7 +857,8 @@ public class PlayerInfo extends BaseContent {
 	public function perkBuyMenu():void {
 		clearOutput();
 		var perkList:Array = buildPerkList();
-
+		hideMenus();
+		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		if (perkList.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");

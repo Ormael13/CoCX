@@ -154,7 +154,7 @@ package classes
 		
 		//Combat Stats
 		public var HP:Number = 0;
-		public var lust:Number = 0;		
+		public var lust:Number = 0;
 		
 		//Level Stats
 		public var XP:Number = 0;
