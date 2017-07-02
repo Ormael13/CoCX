@@ -57,6 +57,19 @@ package classes.internals
 			return x < min ? min : x > max ? max : x;
 		}
 		/**
+		 * Deleting obj[key] with default.
+		 *
+		 * If `key` in `obj`: return `obj[key]` and delete `obj[key]`
+		 * Otherwise return `defaultValue`
+		 */
+		public static function moveValue(obj:Object,key:String,defaultValue:*):* {
+			if (key in obj) {
+				defaultValue = obj[key];
+				delete obj[key];
+			}
+			return defaultValue;
+		}
+		/**
 		 * Performs a shallow copy of properties from `src` to `dest`, then from `srcRest` to `dest`
 		 * A `hasOwnProperties` check is performed.
 		 */

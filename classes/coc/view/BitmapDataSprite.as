@@ -2,10 +2,9 @@
  * Coded by aimozg on 04.06.2017.
  */
 package coc.view {
-import coc.view.UIUtils;
+import classes.internals.Utils;
 
 import flash.display.Bitmap;
-import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.geom.Matrix;
 
@@ -13,13 +12,19 @@ import flash.geom.Matrix;
 public class BitmapDataSprite extends Sprite {
 	public function BitmapDataSprite(options:Object = null) {
 		super();
+		options = Utils.extend({},options);
 		if (options) {
-			if ('stretch' in options) stretch = options.stretch;
-			if ('repeat' in options) repeat = options.stretch;
+			_fillColor = UIUtils.convertColor(Utils.moveValue(options,'fillColor',_fillColor));
+			_width = Utils.moveValue(options,'width',_width);
+			_height = Utils.moveValue(options,'height',_height);
+			if (_width || _height) setSize(_width,_height);
+			_stretch = Utils.moveValue(options,'stretch',_stretch);
+			_repeat = Utils.moveValue(options,'repeat',_repeat);
+			bitmapClass = Utils.moveValue(options,'bitmapClass',null);
+			bitmap = Utils.moveValue(options,'bitmap',_bitmap);
 			for (var key:String in options) {
 				if (options.hasOwnProperty(key)) {
 					var value:* = options[key];
-					if (key == "fillColor") value = UIUtils.convertColor(value);
 					if (key in this) {
 						this[key] = value;
 					} else {
@@ -46,6 +51,7 @@ public class BitmapDataSprite extends Sprite {
 		return _bitmap;
 	}
 	public function set bitmap(value:Bitmap):void {
+		if (_bitmap == value) return;
 		_bitmap = value;
 		if (value) {
 			if (_width == 0 || !stretch && !repeat) _width = value.width;
@@ -57,23 +63,28 @@ public class BitmapDataSprite extends Sprite {
 		return _fillColor;
 	}
 	public function set fillColor(value:uint):void {
+		if (_fillColor == value) return;
 		_fillColor = value;
 		redraw();
 	}
 	override public function set width(value:Number):void {
-		_width = value;
-		redraw();
-		super.width = value;
+		setSize(value,_height);
 	}
 	override public function set height(value:Number):void {
-		_height = value;
+		setSize(_width,value);
+	}
+	public function setSize(width:Number, height:Number):void {
+		_width = width;
+		_height = height;
 		redraw();
-		super.height = value;
+		super.width = width;
+		super.height = height;
 	}
 	public function get stretch():Boolean {
 		return _stretch;
 	}
 	public function set stretch(value:Boolean):void {
+		if (_stretch == value) return;
 		_stretch = value;
 		redraw();
 	}
@@ -81,6 +92,7 @@ public class BitmapDataSprite extends Sprite {
 		return _repeat;
 	}
 	public function set repeat(value:Boolean):void {
+		if (_repeat == value) return;
 		_repeat = value;
 		redraw();
 	}
