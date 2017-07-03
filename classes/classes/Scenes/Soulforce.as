@@ -141,7 +141,7 @@ package classes.Scenes
 			//addButton(5, "Upgrade", UpgradeItems, null, null, null, "."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", kGAMECLASS.metamorph.accessMetamorphMenu, null, null, null, "Use your soulforce to mold freely your body.")//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense, null, null, null, "Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-		//	addButton(10, "Cheats", SoulforceCheats, null, null, null, "Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats, null, null, null, "Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul tyrant i dual wield w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -296,7 +296,7 @@ package classes.Scenes
 			addButton(6, "Ascensus", AddTheStaffs, null, null, null, "Add set of items for Ascensus.");
 			addButton(7, "DualSwords", AddDualSwords, null, null, null, "Add 1 pair of Dual Swords for testing purposes.");
 			addButton(8, "DualLAxes", AddDualMinoAxes, null, null, null, "Add 1 pair of Large Axes for testing purposes.");
-			//addButton(9, "Kelt Bow", AddTheBowKelt, null, null, null, "Add 1 Tainted Bow.");
+			addButton(9, "Dual BFS", AddDualBigFuckingSwords, null, null, null, "Add 1 pair of Big Fucking Swords for testing purposes.");
 			//addButton(10, "BlunderR", AddTheBlunderbussRifle, null, null, null, "Add 1 Blunderbuss Rifle.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -770,6 +770,10 @@ package classes.Scenes
 		public function AddDualMinoAxes():void {
 			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
 			inventory.takeItem(weapons.DL_AXE_, EquipmentMenu);
+		}
+		public function AddDualBigFuckingSwords():void {
+			outputText("\n\n<b>(Gained 1 pair of Big Fucking Swords!)</b>\n\n");
+			inventory.takeItem(weapons.DBFSWO, EquipmentMenu);
 		}
 		public function AddWhiteBook():void {
 			outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");

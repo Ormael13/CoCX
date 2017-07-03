@@ -644,36 +644,36 @@ public function basemeleeattacks():void {
 	if (kGAMECLASS.urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
-	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
+	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
 			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
-				if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 12;
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 12;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
-				if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 10;
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 10;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
-				if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 8;
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 8;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
 				if (player.findPerk(PerkLib.TripleAttack) >= 0) {
-					if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+					if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
 				if (player.findPerk(PerkLib.DoubleAttack) >= 0) {
-					if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+					if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else {
-				if (player.hasStatusEffect(StatusEffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			var mutlimeleeattacksCost:Number = 0;
@@ -690,42 +690,78 @@ public function basemeleeattacks():void {
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 5;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 2;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-				if (player.wrath >= mutlimeleeattacksCost) {
-					player.wrath -= mutlimeleeattacksCost;
+				if (player.wrath < mutlimeleeattacksCost) {
+					if (player.weaponPerk == "Dual") {
+						outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
+						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+						player.HP -= 20;
+					}
+					else {
+						outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
+						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+					}
 				}
 				else {
-					outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
-					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+					player.wrath -= mutlimeleeattacksCost;
 				}
+				
 			}
 		}
 		else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
-	if (player.weaponPerk == "Large") {
+	if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
+				if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
+				if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
+				if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.TripleAttackLarge) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.findPerk(PerkLib.TripleAttackLarge) >= 0) {
+					if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.DoubleAttackLarge) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.findPerk(PerkLib.DoubleAttackLarge) >= 0) {
+					if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
-			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			else {
+				if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
 			var mutlimeleelargeattacksCost:Number = 0;
 			//multiple melee large attacks costs
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleelargeattacksCost += 40;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleelargeattacksCost += 28;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleelargeattacksCost += 18;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleelargeattacksCost += 10;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleelargeattacksCost += 4;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-				if (player.wrath >= mutlimeleelargeattacksCost) {
-					player.wrath -= mutlimeleelargeattacksCost;
+				if (player.wrath < mutlimeleelargeattacksCost) {
+					if (player.weaponPerk == "Dual Large") {
+						outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
+						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+						player.HP -= 40;
+					}
+					else {
+						outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
+						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+					}
 				}
 				else {
-					outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
-					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+					player.wrath -= mutlimeleelargeattacksCost;
 				}
 			}
 		}

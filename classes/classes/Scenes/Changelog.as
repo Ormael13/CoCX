@@ -45,8 +45,7 @@ package classes.Scenes
 			outputText("-Also when interacting with Holli or after beating minotaur Alraune PC's will have new scene added.\n");
 			outputText("-Izma can be given Bro Brew to turn into Izmael. Hopefully I didn't lost any part of Izmael during porting it from Revamp :D\n");
 			outputText("-Fixed bugs: Lethice new name in one of endings of Lethice Stronghold.\n\n");
-			outputText("<b>Version 0.8e:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("<b>Version 0.8e (New UI, Mana and Wrath, Race rebalancing (part 5), Temple of the Divine (part 0)):</b>\n\n");
 			outputText("-Thanks to aimozg restless work mod have a brand new shiny UI. It adds Wisdom, Soulforce, Wrath, Mana bars and Spirit Stones counter to the side panel.\n");
 			outputText("-Spells would now req. using Mana. Perks to rase it max and increase regeneration would now affect mana not fatigue.\n");
 			outputText("-All perks of effect rising minimum lust now are addictive so it's possible to have more than 100 min lust. Still min lust can't be higher than (current max Lust - 10).\n");
@@ -68,14 +67,19 @@ package classes.Scenes
 			outputText("-Human score bonuses lowered to +40 to al stats at 25 pts, +30 at 24 pts, +20 at 23 pts and +10 at 22 pts.\n");
 			outputText("-Demon-morphs bonuses to max lust was changed form +75 at demon score 5+ to 50 at 5+ and 100 and 11+ points in demon score.\n");
 			outputText("-Brutal Blows now should only sheed 5 points of enemy armor per hit not like now that it was able sheed whole enemy armor in one hit.\n");
-			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n");
+			outputText("<b>Version 0.8f:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
+			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
+			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
 			outputText("\n");
@@ -84,9 +88,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
-			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
-			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
@@ -99,8 +100,9 @@ package classes.Scenes
 			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
-			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("<b>Version 0.8g:</b>\n\n");
+			outputText("<b>Version 0.8h:</b>\n\n");
+			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("\n");
 			outputText("\n");cel na 0.8f: dodać siren TF
 			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)

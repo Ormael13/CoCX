@@ -1299,21 +1299,24 @@ package classes
 		WeaponGrandMastery.requirePerk(WeaponMastery)
 						  .requireStr(140)
 						  .requireLevel(24);
-	/*	DualWieldLarge.requirePerk(DualWield)
+		DualWieldLarge.requirePerk(DualWield)
 					  .requirePerk(TitanGrip)
 					  .requireStr(125)
 					  .requireLevel(24);
-	*/	TripleAttackLarge.requirePerk(DoubleAttackLarge)
+		TripleAttackLarge.requirePerk(DoubleAttackLarge)
 						 .requireStr(125)
 						 .requireSpe(100)
 						 .requireLevel(24);
 		//Tier 5 Strength Perks
-		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(150).requireMinSpe(100).requireMinLevel(30);
+		HiddenDualMomentum.requirePerk(HiddenMomentum)
+						  .requireStr(150)
+						  .requireSpe(100)
+						  .requireLevel(30);
 		UnlockId2ndStage.requirePerk(UnlockId)
 						.requireStr(150)
 						.requireLevel(30);
 		//Tier 6 Strength Perks
-		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireMinStr(175).requireMinSpe(100).requireMinLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
+		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
 		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
 		//Tier 7 Strength Perks
 		PrestigeJobBerserker.requirePrestigeJobSlot()
@@ -2118,7 +2121,7 @@ package classes
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
-		//	DualWield;
+		DualWield.requireLevel(6);
 		Survivalist.requireLevel(6)
 				   .requireHungerEnabled();
 		ResistanceII.requirePerk(ResistanceI)

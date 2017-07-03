@@ -489,8 +489,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8e";
-			version = ver + " (<b>New UI, Mana and Wrath, Race rebalancing (part 5), Temple of the Divine (part 0)</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8f";
+			version = ver + " (<b></b>)";//Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1)
 
 			//Indicates if building for mobile?
 			mobile = false;
