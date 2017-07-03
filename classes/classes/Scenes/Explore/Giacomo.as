@@ -406,7 +406,7 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 500 gem!</i>\"");
-			doYesNo(buyWhiteBook, bookMenu);
+			doYesNo(buyGreyBook, bookMenu);
 		}
 		
 		private function buyGreyBook():void {
