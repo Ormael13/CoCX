@@ -2191,7 +2191,7 @@ package classes
                 case GENDER_NONE:
                     return (tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65);
 				case GENDER_MALE:
-                    return (tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95);
+                    return (tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || tits == 0);
                 case GENDER_FEMALE:
                     return (tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45);
 				default: return false;

@@ -109,7 +109,7 @@ public class StatsView extends Block {
 		},{before:1});
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
-		//	barColor: '#00ff00',
+			barColor: '#008000',
 			bgColor : '#ff0000',
 			showMax : true
 		}));
