@@ -21,28 +21,28 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana < spellCostWhite(30) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(30) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
 			spellChargeWeapon(true);
 			useMana(30,5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana < spellCostWhite(40) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(40) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 			spellChargeArmor(true);
 			useMana(40,5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana < spellCostBlack(50) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(50) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
 			useMana(50,6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana < spellCostBlack(40) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(40) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
 			useMana(40,6);
 			flags[kFLAGS.SPELLS_CAST]++;

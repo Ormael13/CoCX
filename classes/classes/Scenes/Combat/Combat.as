@@ -3946,12 +3946,14 @@ public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 5;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 5;
+		gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
+		gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 }
