@@ -876,9 +876,12 @@ public function lustAttack():void {
 }
 
 private function wait():void {
-	//Gain fatigue if not fighting sand tarps
-	if (!monster.hasStatusEffect(StatusEffects.Level)) fatigue(-5);
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
+	//Gain fatigue if not fighting sand tarps
+	if (!monster.hasStatusEffect(StatusEffects.Level)) {
+		fatigue(-5);
+		manaregeneration();
+	}
 	if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneWait();
 	}
@@ -2672,6 +2675,7 @@ public function meleeattackdamage():void {
 			}
 			outputText("\n");
 			fatigueRecovery();
+			manaregeneration();
 			enemyAI();
 		}
 		else {
@@ -2944,7 +2948,7 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 			return;
 		}
 		//Mana restoration buffs!
-		if (mod < 0) {
+		if (mod > 0) {
 			mod *= manaRecoveryMultiplier();
 		}
 		player.mana = boundFloat(0, player.mana - mod, player.maxMana());
@@ -3982,12 +3986,15 @@ public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 5;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 1;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 5;
+	//	gainedmana *= manaRecoveryMultiplier();
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-	//	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedmana += 2;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
+	//	gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 }
@@ -4587,6 +4594,7 @@ public function ScyllaTease():void {
 	//(Otherwise)
 	else {
 		fatigueRecovery();
+		manaregeneration();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
@@ -4737,6 +4745,7 @@ public function GooTease():void {
 	//(Otherwise)
 	else {
 		fatigueRecovery();
+		manaregeneration();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
