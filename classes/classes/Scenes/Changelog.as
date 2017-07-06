@@ -68,11 +68,18 @@ package classes.Scenes
 			outputText("-Demon-morphs bonuses to max lust was changed form +75 at demon score 5+ to 50 at 5+ and 100 and 11+ points in demon score.\n");
 			outputText("-Brutal Blows now should only sheed 5 points of enemy armor per hit not like now that it was able sheed whole enemy armor in one hit.\n");
 			outputText("-Fixed bugs: Izma(el) covering Helia button in lovers menu\n\n");
+			outputText("<b>Version 0.8e2 (Bugfixing):</b>\n\n");
+			outputText("-Color of HP bar slight changed, Soulforce bar name shortened to SF\n");
+			outputText("-Fixed bugs: Not autocasting buff spells at the combat start, not triggering mana regeneration during combat and perks not affecting how much mana will be recovered..\n\n");
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
+			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable).\n");
+			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping).\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
+			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap.\n");
+			outputText("-Perk lvl req. was rised for some perks: Rage/Steel Impact/Elemental Arrows - 42 to 48, Cupid - 42 to 48\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n\n\n");/*ostatni punkt changelogu
@@ -82,6 +89,23 @@ package classes.Scenes
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -118,7 +142,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -212,8 +235,8 @@ package classes.Scenes
 			outputText("-New tier 4 wisdom lvl-up perk: Combo Master: Monk. Req. Combo perk, 125+ wis and 100+ str. Effects: Third attack per turn using fist (weapon).\n");
 			outputText("-New tier 4 soulforce lvl-up perk: Daoist: Warrior Stage. Req. Daoist: Apprentice Stage perk. Effects: +10 to recovered soulforce during meditation, +30% to soulskill power, +40 max soulforce (all gained each time PC gets one of these perks: Soul Sprite, Soul Exalt, Soul Overlord)\n");
 			outputText("-New tier 5 speed lvl-up perk: Multishot Req. Wild Quiver and 150+ speed. Addes toggle option for 6 arrows shoot in one attack.\n");
-			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
-			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/special will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each successful crit hit any existing Rage stacks are removed.\n");
+			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +200 to max wrath\n");
+			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/special will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each successful crit hit any existing Rage stacks are removed. Adds 200 to max wrath.\n");
 			outputText("-New tier 7 toughness lvl-up perk: Prestige Job: Sentinel Req. Job: Knight, Job: Warrior perks and 200+ tou Effect: +20 to max str and +60 to max tou (scalable with NG tiers), double base armor value for heavy armors.\n");
 			outputText("-New tier 7 toughness lvl-up perk: Steel Impact Req. Prestige Job: Sentinel perk Effect: add part of PC toughness to weapon and shield (Shield Bash special) damage similarly like Lightning Strikes.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");

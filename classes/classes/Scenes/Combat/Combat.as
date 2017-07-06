@@ -133,6 +133,10 @@ public class Combat extends BaseContent {
 		else if (player.weaponRangePerk == "Bow") return maxBowAttacks();
 		else return 1;
 	}
+	
+	public function PlayerHPRatio():Number{
+		return player.HP/player.maxHP();
+	}
 
 	public function endHpVictory():void
 {
@@ -2867,9 +2871,14 @@ public function isWieldingRangedWeapon():Boolean {
 
 //DEAL DAMAGE
 public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-	if(player.findPerk(PerkLib.Sadist) >= 0) {
+	if (player.findPerk(PerkLib.Sadist) >= 0) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+	}
+	if (player.findPerk(PerkLib.Anger) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		var bonusDamageFromMissingHP:Number = 1;
+		if (PlayerHPRatio() < 1) bonusDamageFromMissingHP += 1 - PlayerHPRatio();
+		damage *= bonusDamageFromMissingHP;
 	}
 	if (monster.HP - damage <= 0) {
 		/* No monsters use this perk, so it's been removed for now
@@ -3985,15 +3994,15 @@ public function soulforceregeneration(combat:Boolean = true):void {
 public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 5;
-	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 5;
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
 	//	gainedmana *= manaRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
+	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 20;
 	//	gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
@@ -4005,15 +4014,17 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 2;
-		if (player.hasStatusEffect(StatusEffects.Berzerking) >= 0) gainedwrath += 3;
-		if (player.hasStatusEffect(StatusEffects.Lustzerking) >= 0) gainedwrath += 3;
-		if (player.hasStatusEffect(StatusEffects.Rage) >= 0) gainedwrath += 3;
+		if (player.findPerk(PerkLib.Anger) >= 0) gainedwrath += 2;
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 3;
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
+		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.Anger) >= 0) gainedwrath += 1;
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 }
@@ -4092,6 +4103,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (monster.findPerk(PerkLib.JobSeducer) >= 0) monster.lib += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobSorcerer) >= 0) monster.inte += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobSoulCultivator) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
+	if (monster.findPerk(PerkLib.JobWarlord) >= 0) monster.tou += (20 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobWarrior) >= 0) monster.str += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
 		monster.spe += (40 * (1 + player.newGamePlusMod()));

@@ -2152,10 +2152,12 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
 				catCounter++;
-			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
-				catCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && catCounter >= 3)
 				catCounter += 1;
+			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				catCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				catCounter += 10;
 			
 			End("Player","racialScore");
 			return catCounter;
@@ -2368,6 +2370,8 @@ use namespace kGAMECLASS;
 		//		dragonCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && dragonCounter >= 4)
 				dragonCounter += 1;
+			if (findPerk(PerkLib.DraconicLungs) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				dragonCounter++;
 			
 			End("Player","racialScore");
 			return dragonCounter;
@@ -2492,6 +2496,8 @@ use namespace kGAMECLASS;
 				gorgonCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gorgonCounter >= 3)
 				gorgonCounter += 1;
+			if (findPerk(PerkLib.GorgonsEyes) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				gorgonCounter++;
 			
 			End("Player","racialScore");
 			return gorgonCounter;
@@ -2798,6 +2804,8 @@ use namespace kGAMECLASS;
 				mantisCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && mantisCounter >= 3)
 				mantisCounter += 1;
+			if (findPerk(PerkLib.MantislikeAgility) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				mantisCounter++;
 			End("Player","racialScore");
 			return mantisCounter;
 		}
@@ -2830,6 +2838,8 @@ use namespace kGAMECLASS;
 				salamanderCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && salamanderCounter >= 4)
 				salamanderCounter += 1;
+			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				salamanderCounter++;
 			
 			End("Player","racialScore");
 			return salamanderCounter;
@@ -3031,6 +3041,8 @@ use namespace kGAMECLASS;
 				scyllaCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && scyllaCounter >= 3)
 				scyllaCounter += 1;
+			if (findPerk(PerkLib.ScyllaInkGlands) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				scyllaCounter++;
 			
 			End("Player","racialScore");
 			return scyllaCounter;
@@ -3438,13 +3450,13 @@ use namespace kGAMECLASS;
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
-			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0 && manticoreCounter >= 5)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && manticoreCounter >= 3)
 				manticoreCounter += 1;
+			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				manticoreCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0 && manticoreCounter >= 6)
 				manticoreCounter += 1;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0 && manticoreCounter >= 7)
-				manticoreCounter += 1;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && manticoreCounter >= 3)
 				manticoreCounter += 1;
 			End("Player","racialScore");
 			return manticoreCounter;
@@ -4682,6 +4694,7 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWis += (5 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobWarlord) >= 0) maxTou += (20 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobWarrior) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
 				maxSpe += (40 * (1 + newGamePlusMod));

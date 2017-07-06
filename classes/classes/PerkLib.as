@@ -152,6 +152,9 @@ package classes
 		public static const Agility:PerkType = mk("Agility", "Agility",
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.");
+		public static const Anger:PerkType = mk("Anger", "Anger",
+				"For every 1% of missing HP you gain 1% bonus damage.",
+				"You choose the 'Anger' perk, increasing damage based on your missing HP.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You choose the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -556,6 +559,9 @@ package classes
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
 				"You've cultivated powers of your soul.",
 				"You choose the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!");
+		public static const JobWarlord:PerkType = mk("Job: Warlord", "Job: Warlord",
+				"You've trained in combat against group of enemies.",
+				"You choose 'Job: Warlord' perk, training yourself to became Warlord.");
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job: Warrior",
 				"You've trained in melee combat.",
 				"You choose 'Job: Warrior' perk, training yourself to became Warrior.");
@@ -1325,11 +1331,13 @@ package classes
 							.requireAnyPerk(Berzerker, Lustzerker)
 							.requireStr(200)
 							.requireLevel(42);
-		Rage.requirePerk(PrestigeJobBerserker)
-			.requireLevel(42);
 		//Tier 8 Strength Perks
-		//		Anger perk
+		Rage.requirePerk(PrestigeJobBerserker)
+			.requireLevel(48);
 		//Tier 9 Strength Perks
+		Anger.requirePerk(Rage)
+			 .requireLevel(54);
+		//Tier 10 Strength Perks
 		//		Too Angry to Die perk
 		//------------
 		// TOUGHNESS
@@ -1458,13 +1466,13 @@ package classes
 						   .requirePerk(JobWarrior)
 						   .requireTou(200)
 						   .requireLevel(42);
-		SteelImpact.requirePerk(PrestigeJobSentinel)
-				   .requireLevel(42);
 		//Tier 8 Toughness Perks
 		PeerlessEndurance.requireTou(270)
 						 .requireStr(180)
 						 .requirePerk(HalfStepToPeerlessEndurance)
 						 .requireLevel(48);
+		SteelImpact.requirePerk(PrestigeJobSentinel)
+				   .requireLevel(42);
 		//------------
 		// SPEED
 		//------------
@@ -1645,13 +1653,14 @@ package classes
 							   .requireSpe(200)
 							   .requireInt(150)
 							   .requireLevel(42);
-		ElementalArrows.requireLevel(42)
+		//Tier 8 Speed Perks
+		ElementalArrows.requireLevel(48)
 					   .requirePerk(PrestigeJobArcaneArcher)
 					   .requireCustomFunction(function(player: Player): Boolean {
 						   return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike)
 					   }, "Whitefire or Ice Spike spell");
-		//Tier 8 Speed Perks
-		Cupid.requireLevel(48)
+		//Tier 9 Speed Perks
+		Cupid.requireLevel(54)
 			 .requirePerk(PrestigeJobArcaneArcher)
 			 .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
 		//------------
@@ -2155,11 +2164,13 @@ package classes
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
 		//Tier 3
-	//	if (requireMinLevel(18)) {
-	//		if (player.internalChimeraScore() >= 6 && requirePerk(ChimericalBodyBasicStage)) {
-	//			ChimericalBodyAdvancedStage;
-	//		}
-	//	}
+		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
+								   .requireLevel(18)
+								   .requireCustomFunction(function (player:Player):Boolean {
+				return player.internalChimeraScore() >= 6;
+			}, "Six racial perks");
+		JobWarlord.requireAnyPerk(Whirlwind, Whipping)
+				  .requireLevel(18);
 		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)

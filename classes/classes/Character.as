@@ -896,12 +896,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
+			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
 			if (findPerk(PerkLib.Berzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
+			if (findPerk(PerkLib.Rage) >= 0) max += 200;
+			if (findPerk(PerkLib.Anger) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
-			if (max > 999) max = 999;//obecnie max to 790
+			if (max > 1299) max = 1299;//obecnie max to 1210
 			return max;
 		}
 		
@@ -926,7 +929,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
-			max += level * 5;
+			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
 			if (max > 19999) max = 19999;

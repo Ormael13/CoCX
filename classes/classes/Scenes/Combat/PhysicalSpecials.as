@@ -242,8 +242,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 			damage *= 1.75;
 		}
 		//add bonus for using aoe special
-		damage *= 5;
-		if (player.findPerk(PerkLib.Whirlwind) >= 0) damage *= 1.2;
+		if (player.findPerk(PerkLib.Whirlwind) >= 0 && player.findPerk(PerkLib.JobWarlord) >= 0) damage *= 7;
+		else if (player.findPerk(PerkLib.Whirlwind) >= 0) damage *= 6;
+		else damage *= 5;
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
@@ -769,8 +770,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 			damage *= 1.75;
 		}
 		//add bonus for using aoe special
-		damage *= 5;
-		if (player.findPerk(PerkLib.Whipping) >= 0) damage *= 1.2;
+		if (player.findPerk(PerkLib.Whipping) >= 0 && player.findPerk(PerkLib.JobWarlord) >= 0) damage *= 7;
+		else if (player.findPerk(PerkLib.Whipping) >= 0) damage *= 6;
+		else damage *= 5;
 		//flame whip
 		if (player.weapon == weapons.L_WHIP) {
 			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
