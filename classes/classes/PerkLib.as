@@ -239,10 +239,10 @@ package classes
 				"You choose the 'Channeling' perk, boosting the strength of your spellcasting and expanding your mana pool!");
 		public static const ChimericalBodyAdvancedStage:PerkType = mk("Chimerical Body: Advanced Stage", "Chimerical Body: Advanced Stage",
 				".",
-				"You choose the 'Chimerical Body: Advanced Stage' perk.  Coś coś!");	
+				"You choose the 'Chimerical Body: Advanced Stage' perk. Constant mutations rised your body adaptiveness to new level.");	
 		public static const ChimericalBodyBasicStage:PerkType = mk("Chimerical Body: Basic Stage", "Chimerical Body: Basic Stage",
 				"Your metabolic adaptation reached level possesed by most simplest and weakest chimeras.",
-				"You choose the 'Chimerical Body: Basic Stage' perk. Your body reach adaptation stage for most base chimeras.");	
+				"You choose the 'Chimerical Body: Basic Stage' perk. Your body reach adaptation stage for most base type of chimera.");	
 		public static const ChimericalBodyInitialStage:PerkType = mk("Chimerical Body: Initial Stage", "Chimerical Body: Initial Stage",
 				"Constant mutations resulted in your body developing the most basic resistance to increased stress put on your metabolism by that.",
 				"You choose the 'Chimerical Body: Initial Stage' perk. Constant mutations causing your body to forcefully adapt to increased metabolism needs.");	
@@ -1802,11 +1802,11 @@ package classes
 		TraditionalMageI.requireLevel(18)
 						.requirePerk(Archmage)
 						.requireInt(80);
-		TraditionalMageII.requireLevel(18)
+		TraditionalMageII.requireLevel(20)
 						 .requirePerk(TraditionalMageI)
 						 .requireInt(100)
 						 .requireNGPlus(1);
-		TraditionalMageIII.requireLevel(18)
+		TraditionalMageIII.requireLevel(22)
 						  .requirePerk(TraditionalMageII)
 						  .requireInt(120)
 						  .requireNGPlus(2);
@@ -1819,7 +1819,7 @@ package classes
 						 .requirePerk(TraditionalMageIII)
 						 .requireInt(140)
 						 .requireNGPlus(3);
-		TraditionalMageV.requireLevel(24)
+		TraditionalMageV.requireLevel(26)
 						.requirePerk(TraditionalMageIV)
 						.requireInt(160)
 						.requireNGPlus(4);

@@ -51,7 +51,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new ChameleonGirl();},
 			function ():Monster {return new CorruptedDrider();},
 			function ():Monster {return new CumWitch();},
-			function ():Monster {return new DemonPack();},
+			function ():Monster {return new DemonPackDesert();},
 			function ():Monster {return new FemaleSpiderMorph();},
 			function ():Monster {return new FetishCultist();},
 			function ():Monster {return new FetishZealot();},

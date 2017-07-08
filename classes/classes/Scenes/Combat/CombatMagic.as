@@ -61,7 +61,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
 		if (player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -82,7 +82,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
 		if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -103,7 +103,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
 		if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -150,6 +150,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
@@ -183,6 +184,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
@@ -216,6 +218,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}

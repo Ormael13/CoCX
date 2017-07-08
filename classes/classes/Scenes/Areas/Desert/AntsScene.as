@@ -221,7 +221,7 @@ package classes.Scenes.Areas.Desert
 			//►Introduction to Combat
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
-			startCombat(new DemonPack());
+			startCombat(new DemonPackDesert());
 			monster.createStatusEffect(StatusEffects.phyllafight, 0, 0, 0, 0);
 			doNext(playerMenu);
 		}

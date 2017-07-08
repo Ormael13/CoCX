@@ -36,6 +36,19 @@ package classes.Scenes.Areas
 			//if (rand(3) == 0) choice[choice.length] = 2; //Find Imp's Food ^^
 			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
+			//Ignis intro
+			if (kGAMECLASS.dungeons.checkFactoryClear() && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
+				outputText("As you walk through blight ridge, you come across a small valley. An unremarkable locale, except for the fact that the moment you step foot in the valley, demons emerge from the ridges surrounding and swarming you from their vantage points.\n\n");
+				outputText("\"<b>It’s an ambush!</b>\"\n\n");
+				outputText("You raise your [weapon], only to feel a weight crushing down on you, pinning you to the floor. The line of demons surrounding you laugh and taunt you, but make no effort to approach.  You struggle, but your ");
+				if (player.str > 50) outputText("considerable ");
+				outputText("strength is not enough to overcome this unseen force! The line of demons parts in unison as a robed incubus walks towards you.  The incubus leers at you from above, a globe of crackling darkness floating above his outstretched hand. \"<i>Gravity magic.  Isn’t it marvelous?</i>\" The incubus laughs darkly. ");
+				outputText("\"<i>Even Lethice’s court sorcerers don’t have this yet.  It hasn’t gone through enough...</i>\" He gestures towards you, speaking in a calm but superior tone, \"<i>...experimentation.  But i’m being rude!  You’re the so called ‘champion’ that destroyed the factory, are you not?  Heh...  Welcome to my territory.  My name is-</i>\"\n\n");
+				outputText("Something flashes at the corner of your eye, and as you twist your head to look for the source, the demon mage collapses and the force holding you dissipates. You stand and raise your [weapon], much to the surprise of the demons watching from the circle they form around you. You glance at the incubus mage, seeing an ugly purple welt forming on his forehead. ");
+				outputText("\"<i>Sorry to interrupt the party</i>\" comes a cheerful voice from behind you. You turn around to see a robed figure vaulting over the line of demons. The mysterious mage gestures, \"<i>You deal with your half, i’ll deal with mine!</i>\" You nod, turning to face the other demon mob.\n\n");
+				startCombat(new DemonPackBlightRidge());
+			}
+			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:

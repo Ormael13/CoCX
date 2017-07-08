@@ -11,6 +11,7 @@ package classes.Scenes.Places {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
 	//import classes.Scenes.Places.HeXinDao.*;
@@ -20,6 +21,7 @@ package classes.Scenes.Places {
 	public class HeXinDao extends BaseContent
 {
 	
+	public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
 	//public var vala:ValaScene = new ValaScene();
 	//public var TFmerch:MogaHen = new MogaHen();
 	
@@ -1449,10 +1451,12 @@ public function soularena():void {
 	outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, which only briefly glance at you the moment you pass by them. Inside after few a moment a tall slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
 	outputText("\n\n\"<i>Greeting to the Soul Arena. Don't pick up fights outside of the proper place or you will be thrown out. If you break any rule here you will be kicked out. Knowing this go pick the area where you want to train or maybe go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains you all that is needed and walk away.");
 	outputText("\n\nSo which one of the three possible sub areas you gonna visit this time?");
+	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) ("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes as he does so.");
 	menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosuku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
 	addButton(0, "Solo", soularenaSolo, null, null, null, "Go to the section of soul arena for 1 on 1 fights.");
 	addButton(1, "Group", soularenaGroup, null, null, null, "Go to the section of soul arena for group fights.");
 	addButton(2, "Challenge", soularenaChallenge, null, null, null, "Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
+	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
 	addButton(14, "Back", riverislandVillageStuff);
 	statScreenRefresh();
 }

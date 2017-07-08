@@ -4,7 +4,7 @@
 	import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class DemonPack extends Monster
+	public class DemonPackDesert extends Monster
 	{
 
 
@@ -85,7 +85,7 @@
 			applyTease(lustDelta);
 		}
 
-		public function DemonPack()
+		public function DemonPackDesert()
 		{
 			trace("DemonPack Constructor!");
 			this.a = "the ";

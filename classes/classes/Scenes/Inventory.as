@@ -119,7 +119,9 @@ package classes.Scenes
 						kGAMECLASS.anemoneScene.anemoneBarrelDescription();
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-						outputText("\nI'm 99,9% sure Liadri will think about what text should be shwed up here...\n");
+						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
+						if (flags[kFLAGS.ALRAUNE_GROWING] > 14) outputText(" Some have already grown to adulthood.");
+						outputText("\n");
 					}
 					addButton(13, "Misc.", miscitemsMenu);
 				}

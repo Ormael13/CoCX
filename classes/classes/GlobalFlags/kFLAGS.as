@@ -2530,8 +2530,8 @@ public static const ANZU_BLOWN_YOU_COUNTER:int                                  
 public static const ANZU_SUCKED_OFF_COUNTER:int                                   	= 2522;
 public static const ANZU_ANAL_PITCH_COUNTER:int                                   	= 2523;
 public static const ANZU_FED_COUNTER:int                                   			= 2524;
-public static const UNKNOWN_FLAG_NUMBER_02525:int                                   = 2525;
-public static const UNKNOWN_FLAG_NUMBER_02526:int                                   = 2526;
+public static const IGNIS_ARENA_SEER:int                                   			= 2525;
+public static const IGNIS_TALKS:int                                   				= 2526;
 public static const UNKNOWN_FLAG_NUMBER_02527:int                                   = 2527;
 public static const UNKNOWN_FLAG_NUMBER_02528:int                                   = 2528;
 public static const UNKNOWN_FLAG_NUMBER_02529:int                                   = 2529;

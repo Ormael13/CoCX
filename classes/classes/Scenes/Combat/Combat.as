@@ -5317,6 +5317,7 @@ public function soulskillMod():Number {
 	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
 	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
+	if (player.jewelryName == "seer’s hairpin") modss += .2;
 	return modss;
 }
 
@@ -5343,6 +5344,7 @@ public function soulskillCost():Number {
 	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) modssc -= .1;
 	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
 	if (player.jewelryName == "fox hairpin") modssc -= .2;
+	if (player.jewelryName == "seer’s hairpin") modssc -= .2;
 	if (modssc < 0.1) modssc = 0.1;
 	return modssc;
 }

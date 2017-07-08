@@ -747,9 +747,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.shieldName != "nothing")
 			outputText("  and [shield] as your shield");
 		outputText(".");
-		if (player.jewelryName != "nothing" && player.jewelryName != "fox hairpin")
+		if (player.jewelryName != "nothing" && player.jewelryName != "fox hairpin" && player.jewelryName != "seer’s hairpin")
 			outputText("  Girding one of your fingers is " + player.jewelryName + ".");
-		if (player.jewelryName == "fox hairpin")
+		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin")
 			outputText("  In your hair is " + player.jewelryName + ".");
 		if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  On your neck is Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
 		outputText("</b>");
