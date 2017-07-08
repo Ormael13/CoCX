@@ -22,8 +22,7 @@ package classes.Scenes.Areas.HighMountains
 		public function sapphireAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
-		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 6) flags[kFLAGS.SAPPHIRE_AFFECTION] = 6;
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
 		}
 		
@@ -102,8 +101,8 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
 		//	addButton(0,"This place", templemainmenu);
-			addButton(1,"Her", TalkHer, null, null, null, "Cummin Sooooon!");
-		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex);
+			addButton(1,"Her", TalkHer, null, null, null, "Fancy tooltip that Lia will surely make soon.");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex, null, null, null, "Another fancy tooltip that Lia will surely make soon.");
 			addButton(4,"Back", templemainmenu);
 		}
 		
@@ -123,7 +122,7 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 1 || flags[kFLAGS.SAPPHIRE_TALKS] == 4) {
 				outputText("Didn't she say that she was raised in the temple? Last time you checked Gargoyles were magically constructed creatures that do not age or die. How could she have been raised in the first place?\n\n");
 				outputText("\"<i>This isn’t how I used to be. I was once of flesh and blood just like you. I was born in the former capital city which serves as the main demon base now. My mother was a priestess at the temple, so naturally I became one as well . My childhood was mostly spent learning holy texts and chanting in the chorus. I don't think it was a waste, these lands used to be beautiful before the demon outbreak. At 16, I was among many selected to work directly in the temple of the divine. It was a great privilege. ");
-				outputText("I prayed, tended to the temple, and worked under the abbot for many years as a nun. I would have continued to do so had the demons not come. In the end I couldn’t save anyone. I'm sorry, I don't feel like talking about this any further, at least for now. Please, leave me be.</i>\"\n\n");
+				outputText("I prayed, tended to the temple, and worked under the abbot for many years as a nun. I would have continued to do so had the demons not come. In the end I couldn’t save anyone... I'm sorry, I don't feel like talking about this any further, at least for now. Please, leave me be.</i>\"\n\n");
 				outputText("You excuse yourself and leave, returning back to your camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
 				sapphireAffection(2);
@@ -142,14 +141,69 @@ package classes.Scenes.Areas.HighMountains
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		/*
+		
 		public function TalkSex():void {
 			clearOutput();
-			outputText("She said that she is sexually dead. That’s something very rare on Mareth, considering the number of lunatics who spend their day fornicating even in the most pure pockets of the world.\n\n");
-			outputText("\"<i>Don’t think of it that way, I never said I couldn't feel it, just that my desires are deadened. I don't actually feel the need at all, although ,like just anyone, I can have a good time. My body won't feel it unless I desire it. And since i've never been in love before...</i>\"\n\n");
+			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
+				outputText("Sapphire looks at you expectantly her tail agitated by the excitement of potential physical release.\n\n");
+				outputText("\"<i>Feeling antsy? How would you like us to do it then?");
+				if (player.isGargoyle()) outputText(" There’s even running water if we ever need... something slippery.");
+				outputText("</i>\"\n\n");
+				menu();
+				if (player.lust > 33) {
+					addButtonDisabled(0,"???", "Req. Gargoyle PC.");
+					addButtonDisabled(1,"???", "Req. Gargoyle PC and Onyx/Krystal.");
+					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation, null, null, null, "Lia will make fancy tooltip soon ^^");
+					addButtonDisabled(3,"FuckHer", "Lia will make fancy tooltip soon ^^");
+				}
+				addButton(4,"Back", sapphiremenu);
+			}
+			else {
+				outputText("She said that she is sexually dead. That’s something very rare on Mareth, considering the number of lunatics who spend their day fornicating even in the most pure pockets of the world.\n\n");
+				outputText("\"<i>Don’t think of it that way, I never said I couldn't feel it, just that my desires are deadened. I don't actually feel the need at all, although ,like just anyone, I can have a good time. My body won't feel it unless I desire it. And since i've never been in love before...</i>\"\n\n");
+				outputText("Oh, so she can actually enjoy sex? What about you? Would she like to empty many years of sexual frustration on you?\n\n");
+				outputText("\"<i>Look I haven’t played with myself in several years and unless you... wait what the hell are you doing!</i>\"\n\n");
+				outputText("While she is distracted, you surprise her with a hug and start kissing her. Weirdly enough Sapphire doesn't seem to hate it, actually she reacts quite favorably to it, only breaking the kiss several seconds later. Perhaps she just needs a reminder of how it can feel?\n\n");
+				outputText("\"<i>That... was not something I expected. I guess it's the result of many years living alone in this temple. I'm a person too, it’s just that I had forgotten how sweet it feels to indulge into a kiss let alone love. Maybe it's the fact that you’re the first living person to come here, listen to me and actually even care so much about my problems. Can we... can we continue further? I would like to...</i>\"\n\n");
+				outputText("You silence her, placing your finger to her stone lips, pulling her to the cold stone floor, and saying \"<i>Shhh it will be alright...</i>\" as you slowly lower your other hand down to the former priestess’ pussy. She coos as you slowly insert a finger inside and gently massage her.\n\n");
+				outputText("\"<i>Aaaah! It's been such a long time since I...I didn't get to enjoy.. such simple pleasures... please don’t stop!</i>\"\n\n");
+				outputText("You proceed to masturbate her for several minutes. Her stone body hugging you tightly all the while, as she proceeds to get you off in the same way. The both of you toy with each others body until finally you reach your peak and climax, soaking the ground and your gargoyle partner with your fluids.\n\n");
+				outputText("Sapphire would blush if she could however she’s frozen in a post orgasm rigor mortis, her expression seems to be as close to happiness as one can be. After a minute she recover mobility.\n\n");
+				outputText("\"<i>Thanks for letting me discover again what it is to be a woman. Please come back more often, it feels empty in the temple without you around.</i>\"\n\n");
+				outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
+				flags[kFLAGS.SAPPHIRE_SEX] = 1;
+				sapphireAffection(5);
+				doNext(camp.returnToCampUseOneHour);
+			}
+		}
+		
+		public function SapphireMutualMasturbation():void {
+			clearOutput();
+			outputText("Unable to decide on a position you decide to help the temple guardian blow some steam by fingering her. The both of you sit down next to each other and you open the games by kissing Sapphire.");
+			if (player.isGargoyle()) outputText(" While neither of you actually have Saliva the feeling of her stone rugged tongue against yours is quite good.");
+			else outputText(" Her mouth lacking fluids is a weird experience at first but once her tongue is slick with your saliva it starts to feel like anyone else’s, albeit her tongue is slightly longer.");
+			outputText("\n\n\"<i>I didn’t get to kiss anyone until you came so I never had any idea it felt this nice. Would you...</i>\"\n\n");
+			outputText("You cut her short by inserting your fingers in her stone cunt making her moan appreciatively from your ministration. You notice her tail moving toward your nethers as she rewards you by");
+			if (player.gender == 1 || player.gender == 3) outputText(" wrapping her long appendage around your [cock]");
+			if (player.gender == 3) outputText(" and with the rest of her length");
+			if (player.gender == 2 || player.gender == 3) outputText(" ramming her long prehensile but flattened macetail into your [cunt]");
+			outputText(", slowly masturbating you to satisfaction. Her tail is oddly quite good at");
+			if (player.gender == 2 || player.gender == 3) outputText(" hitting all of your spot");
+			if (player.gender == 3) outputText(" and");
+			if (player.gender == 1 || player.gender == 3) outputText(" teasing your pillar");
+			outputText(". You both work each other off for a moment until you finally orgasm locking into a strong hug. ");
+			if (player.isGargoyle()) outputText("The pleasure is so powerful your form petrify in rigor mortis for a few minute locking with that of Sapphire who also reached her peak.");
+			else outputText(" Not so surprisingly Sapphire has no fluids of her own but you give her plenty as your genitals splash her nethers. Sapphire own orgasm cause her to petrify and harden into rigor mortis.");
+			outputText(" It takes a few minute before ");
+			if (player.isGargoyle()) outputText("you both");
+			else outputText("she");
+			outputText(" unfreeze and break the embrace as she remove her stony tail from your private.\n\n");
+			outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
+			sapphireAffection(5);
+			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		*/
+		
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {

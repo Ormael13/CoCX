@@ -2099,6 +2099,14 @@ package classes
 			return false;
 		}
 
+		//Using Tome
+	/*	public function isUsingTome():Boolean
+		{
+			if (game.player.jewelry == game.jewelries)
+				return true;
+			return false;
+		}*/
+
 		//Naked
 		public function isNaked():Boolean
 		{

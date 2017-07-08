@@ -127,6 +127,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) mod += .1;
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 		if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .1;
+		if(player.findPerk(PerkLib.TraditionalMageI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -158,6 +163,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) mod += .1;
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 		if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .1;
+		if(player.findPerk(PerkLib.TraditionalMageI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Ambition) >= 0) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -186,6 +196,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) mod += .1;
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 		if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .1;
+		if(player.findPerk(PerkLib.TraditionalMageI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv2(PerkLib.Obsession);
 		}

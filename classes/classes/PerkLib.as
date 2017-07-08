@@ -893,6 +893,21 @@ package classes
 		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
 				".",
 				"You choose the 'Tracheal System (Evolved)' perk, continuous exposition to insectidal changes caused your tracheal system evolution into more complete form.");
+		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
+				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
+				"You choose the 'Traditional Mage I' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
+		public static const TraditionalMageII:PerkType = mk("Traditional Mage II", "Traditional Mage II",
+				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
+				"You choose the 'Traditional Mage II' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
+		public static const TraditionalMageIII:PerkType = mk("Traditional Mage III", "Traditional Mage III",
+				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
+				"You choose the 'Traditional Mage III' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
+		public static const TraditionalMageIV:PerkType = mk("Traditional Mage IV", "Traditional Mage IV",
+				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
+				"You choose the 'Traditional Mage IV' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
+		public static const TraditionalMageV:PerkType = mk("Traditional Mage V", "Traditional Mage V",
+				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
+				"You choose the 'Traditional Mage V' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
 		public static const Transference:PerkType = mk("Transference", "Transference",
 				"Your mastery of lust and desire allows you to transfer 15% of your current arousal to your opponent.",
 				"You choose the 'Transference' perk, granting ability to transfer your own arousal to your opponent.");
@@ -1774,7 +1789,6 @@ package classes
 		//Tier 3 Intelligence perks
 		GrandArchmage.requirePerk(Archmage)
 					 .requireInt(100).requireLevel(18);
-
 		// Battleflash: auto-use Blink
 		Battleflash.requireLevel(18)
 				   .requirePerk(Battlemage)
@@ -1785,11 +1799,30 @@ package classes
 				  .requirePerk(Spellsword)
 				  .requireInt(90)
 				  .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
+		TraditionalMageI.requireLevel(18)
+						.requirePerk(Archmage)
+						.requireInt(80);
+		TraditionalMageII.requireLevel(18)
+						 .requirePerk(TraditionalMageI)
+						 .requireInt(100)
+						 .requireNGPlus(1);
+		TraditionalMageIII.requireLevel(18)
+						  .requirePerk(TraditionalMageII)
+						  .requireInt(120)
+						  .requireNGPlus(2);
 		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
 				.requireInt(125)
 				.requireLevel(24);
+		TraditionalMageIV.requireLevel(24)
+						 .requirePerk(TraditionalMageIII)
+						 .requireInt(140)
+						 .requireNGPlus(3);
+		TraditionalMageV.requireLevel(24)
+						.requirePerk(TraditionalMageIV)
+						.requireInt(160)
+						.requireNGPlus(4);
 		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
