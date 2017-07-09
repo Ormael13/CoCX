@@ -305,8 +305,10 @@ public class Block extends Sprite {
 			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
 		}
 		UIUtils.setProperties(e, options, {
-			defaultTextFormat: UIUtils.convertTextFormat
+			defaultTextFormat: UIUtils.convertTextFormat,
+			background: UIUtils.convertColor
 		});
+		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
 		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
 			e.autoSize = TextFieldAutoSize.LEFT;
 		}

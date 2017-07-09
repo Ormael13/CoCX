@@ -238,6 +238,7 @@ public class MainView extends Block {
 			y                : TEXTZONE_Y,
 			width            : TEXTZONE_W - VSCROLLBAR_W,
 			height           : TEXTZONE_H,
+			mouseEnabled     : true,
 			defaultTextFormat: {
 				size: 20
 			}
@@ -253,26 +254,31 @@ public class MainView extends Block {
 			width: VSCROLLBAR_W
 		});
 		addElement(scrollBar);
-		removeElement(mainText);
-		addElement(mainText);
 		nameBox        = addTextField({
-			border : true,
-			type   : 'input',
-			visible: false,
-			width  : 160,
-			height : 25
+			border      : true,
+			background  : '#FFFFFF',
+			type        : 'input',
+			visible     : false,
+			width       : 160,
+			height      : 25,
+			defaultTextFormat: {
+				size: 16,
+				font: 'Arial'
+			}
 		});
 		eventTestInput = addTextField({
 			type             : 'input',
+			background       : '#FFFFFF',
 			border           : 'true',
 			visible          : false,
 			text             : 'Paste event text & codes here.',
 			x                : TEXTZONE_X,
 			y                : TEXTZONE_Y,
-			width            : TEXTZONE_W,
-			height           : TEXTZONE_H,
+			width            : TEXTZONE_W - VSCROLLBAR_W - GAP,
+			height           : TEXTZONE_H - GAP,
 			defaultTextFormat: {
-				size: 16
+				size: 16,
+				font: 'Arial'
 			}
 		});
 		addElement(sprite = new BitmapDataSprite({
@@ -298,8 +304,6 @@ public class MainView extends Block {
 		this.toolTipView = new ToolTipView(this/*, this.model*/);
 		this.toolTipView.hide();
 		this.addElement(this.toolTipView);
-		// disable interaction for any remaining TFs.
-		disableMouseForMostTextFields();
 
 		// hook!
 		hookBottomButtons();
@@ -340,25 +344,6 @@ public class MainView extends Block {
 	}
 
 	// Removes the need for some code in input.as and InitializeUI.as.
-	protected function disableMouseForMostTextFields():void {
-		var ci:int, t:TextField;
-		for (ci = 0; ci < this.numChildren; ++ci) {
-			t = this.getChildAt(ci) as TextField;
-			if (!t) {
-				continue;
-			}
-			switch (t) {
-				case this.mainText:
-				case this.nameBox:
-				case this.eventTestInput:
-					t.mouseEnabled = true;
-					break;
-				default:
-					t.mouseEnabled = false;
-					break;
-			}
-		}
-	}
 
 	// This creates the bottom buttons,
 	// positions them,
