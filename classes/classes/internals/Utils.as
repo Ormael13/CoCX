@@ -354,12 +354,48 @@ package classes.internals
 			return rslt;
 		}
 
-		private static var PF_NAME:Array  = [];
-		private static var PF_START:Array = [];
-		private static var PF_ARGS:Array = [];
-		private static var PF_COUNT:Object  = {};
-		private static var PF_TIME:Object  = {};
-		private static var PF_DEPTH:int   = 0;
+		private static var PF_NAME:Array      = []; // stack: classname+'.'+methodname
+		private static var PF_START:Array     = []; // stack: start time
+		private static var PF_ARGS:Array      = []; // stack: args
+		private static var PF_INTCOUNT:Array  = []; // stack: # of internal calls
+		private static var PF_COUNT:Object    = {}; // name => total # of name()
+		private static var PF_INTERNALS:Object= {}; // name => total # of something() inside name()
+		private static var PF_TIME:Object     = {}; // name => total execution time
+		private static var PF_DEPTH:int       = 0;
+		/*
+		That probably requires an explanation so here's an example:
+
+		foo() {
+		  baz();
+		  bar();
+		}
+		bar() {
+		  baz();
+		}
+		baz() { no tracked code }
+
+		foo.Begin    : PF_NAME = [foo]          , PF_INTCOUNT = [0]      , PF_DEPTH = 1
+		  baz.Begin  :               └push      ,       +1───────┘└push 0
+		               PF_NAME = [foo, baz]     , PF_INTCOUNT = [1, 0]   , PF_DEPTH = 2
+		  baz.End    :   check, pop─────┘                           ├──add to left
+		                                     PF_INTERNALS[baz]+=────┘
+		               PF_NAME = [foo]          , PF_INTCOUNT = [1]      , PF_DEPTH = 1
+		  bar.Begin  : PF_NAME = [foo, bar]     , PF_INTCOUNT = [1, 0]   , PF_DEPTH = 2
+		    baz.Begin:                    └push ,          +1───────┘└push 0
+		               PF_NAME = [foo, bar, baz], PF_INTCOUNT = [1, 1, 0], PF_DEPTH = 3
+		    baz.End  :        check, pop─────┘                         ├──add to left
+		                                        PF_INTERNALS[bar]+=────┘
+		               PF_NAME = [foo, bar]     , PF_INTCOUNT = [1, 2]   , PF_DEPTH = 2
+		  bar.End    :   check, pop─────┘                           ├──add to left
+		                                     PF_INTERNALS[bar]+=────┘
+		               PF_NAME = [foo]          , PF_INTCOUNT = [3]      , PF_DEPTH = 1
+		foo.End      : check, pop──┘                             ├──add to left
+		                                  PF_INTERNALS[foo]+=────┘
+		               PF_NAME = []             , PF_INTCOUNT = []       , PF_DEPTH = 0
+
+		PF_COUNT:      foo=1, bar=1, baz=2
+		PF_INTERNALS:  foo=3, bar=1, baz=0
+		 */
 		private static function shouldProfile(classname:String,methodName:String):Boolean {
 			return true;
 		}
@@ -367,6 +403,7 @@ package classes.internals
 			return dt > 100;
 		}
 		public static function LogProfilingReport():void {
+			var report:/*String*/Array = [];
 			for (var key:String in PF_COUNT) {
 				var s:String = "[PROFILE] ";
 				s+= key;
@@ -379,7 +416,15 @@ package classes.internals
 				if (pftime>0 && pfcount>0) {
 					s += ", avg time " + (pftime / pfcount).toFixed(1) + "ms";
 				}
-				trace(s);
+				var pfint:int = PF_INTERNALS[key];
+				if (pfint>0 && pfcount>0) {
+					s += ", avg " + (pfint/pfcount).toFixed(1) +" internal calls";
+				}
+				report.push(s);
+			}
+			report.sort();
+			for each (var line:String in report) {
+				trace(line);
 			}
 		}
 		public static function Begin(classname:String, methodName:String, ...rest:Array):void {
@@ -389,6 +434,8 @@ package classes.internals
 			PF_START[PF_DEPTH] = new Date().getTime();
 			PF_ARGS[PF_DEPTH] = rest;
 			PF_COUNT[methodName] = (PF_COUNT[methodName]|0)+1;
+			PF_INTCOUNT[PF_DEPTH] = 0;
+			if (PF_DEPTH>0) PF_INTCOUNT[PF_DEPTH-1] = PF_INTCOUNT[PF_DEPTH-1]+1;
 			PF_DEPTH++;
 		}
 		public static function End(classname:String, methodName:String):void {
@@ -410,6 +457,8 @@ package classes.internals
 			var dt:Number = t1 - PF_START[PF_DEPTH];
 			PF_TIME[methodName] = (PF_TIME[methodName]|0)+dt;
 			var pfcount:int   = PF_COUNT[methodName];
+			var pfintct:int   = PF_INTCOUNT[PF_DEPTH];
+			PF_INTERNALS[methodName] += pfintct;
 			var args:Array = PF_ARGS[PF_DEPTH];
 			if (shouldReportProfiling(classname,origMethodName,dt, pfcount)) {
 				var s:String = "[PROFILE] ";
@@ -426,6 +475,9 @@ package classes.internals
 						else s += pftime + "ms";
 						s += ", avg time " + (pftime / pfcount).toFixed(1) + "ms";
 					}
+				}
+				if (pfintct>0) {
+					s += ", "+pfintct+" internal calls";
 				}
 				trace(s);
 			}
