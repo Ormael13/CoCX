@@ -3,7 +3,8 @@ import flash.display.Bitmap;
 import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.DisplayObject;
-	import flash.text.TextField;
+import flash.events.MouseEvent;
+import flash.text.TextField;
 	import flash.text.TextFieldType;
 
 	//import coc.model.GameModel;
@@ -61,10 +62,11 @@ import flash.display.MovieClip;
 				this.y = by - 347;
 			}*/
 			//else {
-				bx = (bx >= 688 ? 680: bx);
-				this.x = bx - 13;
-				this.y = by - this.height;
-				if (this.y < 0) this.y = by + 40;
+			bx = (bx >= 688 ? 680: bx);
+			this.x = bx - 13;
+			var y:Number = by - this.height - 2;
+			if (y < 0) y = by + button.height + 6;
+			this.y = y;
 			//}
 
 			this.visible = true;
