@@ -37,7 +37,8 @@ package classes.Scenes.Areas
 			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
 			//Ignis intro
-			if (kGAMECLASS.dungeons.checkFactoryClear() && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
+				clearOutput();
 				outputText("As you walk through blight ridge, you come across a small valley. An unremarkable locale, except for the fact that the moment you step foot in the valley, demons emerge from the ridges surrounding and swarming you from their vantage points.\n\n");
 				outputText("\"<b>It’s an ambush!</b>\"\n\n");
 				outputText("You raise your [weapon], only to feel a weight crushing down on you, pinning you to the floor. The line of demons surrounding you laugh and taunt you, but make no effort to approach.  You struggle, but your ");
@@ -47,6 +48,7 @@ package classes.Scenes.Areas
 				outputText("Something flashes at the corner of your eye, and as you twist your head to look for the source, the demon mage collapses and the force holding you dissipates. You stand and raise your [weapon], much to the surprise of the demons watching from the circle they form around you. You glance at the incubus mage, seeing an ugly purple welt forming on his forehead. ");
 				outputText("\"<i>Sorry to interrupt the party</i>\" comes a cheerful voice from behind you. You turn around to see a robed figure vaulting over the line of demons. The mysterious mage gestures, \"<i>You deal with your half, i’ll deal with mine!</i>\" You nod, turning to face the other demon mob.\n\n");
 				startCombat(new DemonPackBlightRidge());
+				return;
 			}
 			
 			select = choice[rand(choice.length)];

@@ -1117,7 +1117,7 @@ package classes
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
-				"Allows you to fade into a ghost-like state and temporarily possess others.");
+				"Empower your racial venoms, Increasing their effect potencies.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",

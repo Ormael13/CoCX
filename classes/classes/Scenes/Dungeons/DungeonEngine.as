@@ -74,7 +74,10 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_01:int  	= 57;
 		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_02:int  	= 58;
 		private static const DUNGEON_HIDDEN_CAVE_TEDS_LAIR:int   	= 59;
-		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_03:int  	= 60;
+		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W:int  	= 60;
+		private static const DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE:int  	= 61;
+		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E:int  	= 62;
+		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N:int  	= 63;
 		
 		//Register dungeons
 		public var factory:Factory = new Factory;
@@ -157,7 +160,10 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_01) hiddencave.roomTunnel01();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_02) hiddencave.roomTunnel02();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_TEDS_LAIR) hiddencave.roomTedsLair();
-			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_03) hiddencave.roomTunnel03();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W) hiddencave.roomSmallCaveW();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE) hiddencave.roomMediumCave();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E) hiddencave.roomSmallCaveE();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N) hiddencave.roomSmallCaveN();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -166,14 +172,17 @@ package classes.Scenes.Dungeons
 		public function checkDeepCaveClear():Boolean {
 			return (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] > 0 && flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] > 0 && flags[kFLAGS.FREED_VALA] == 1 && player.hasKeyItem("Zetaz's Map") >= 0);
 		}
+		public function checkLethiceStrongholdClear():Boolean {
+			return (flags[kFLAGS.D3_MIRRORS_SHATTERED] > 0 && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] > 0 && flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0);
+		}
 		public function checkSandCaveClear():Boolean {
 			return ((flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] > 0 || flags[kFLAGS.MET_ESSY] == 0) && (flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 || flags[kFLAGS.SAND_WITCHES_COWED] > 0));
 		}
 		public function checkPhoenixTowerClear():Boolean {
 			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 && flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
 		}
-		public function checkLethiceStrongholdClear():Boolean {
-			return (flags[kFLAGS.D3_MIRRORS_SHATTERED] > 0 && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] > 0 && flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0);
+		public function checkHiddenCaveClear():Boolean {
+			return (flags[kFLAGS.HIDDEN_CAVE_BOSSES] > 1 && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 7);
 		}
 		
 		public function enterFactory():void {

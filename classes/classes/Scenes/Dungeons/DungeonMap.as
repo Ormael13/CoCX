@@ -607,31 +607,125 @@ package classes.Scenes.Dungeons {
 						rawOutputText("\n[ ]     [P]");
 					}
 					else if (kGAMECLASS.dungeonLoc == 56) {
-						rawOutputText(", Large Storage (E)");
+						rawOutputText(", Tunnel");
 						rawOutputText("\n[ ]—[ ]—[P]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
 					else if (kGAMECLASS.dungeonLoc == 57) {
-						rawOutputText(", Large Storage (E)");
+						rawOutputText(", Tunnel");
 						rawOutputText("\n[ ]—[P]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
 					else if (kGAMECLASS.dungeonLoc == 58) {
-						rawOutputText(", Large Storage (E)");
+						rawOutputText(", Tunnel");
 						rawOutputText("\n[P]—[ ]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
 					else if (kGAMECLASS.dungeonLoc == 59) {
-						rawOutputText(", Large Storage (E)");
+						rawOutputText(", Ted's Lair");
 						rawOutputText("\n[ ]—[ ]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[P]     [S]");
 					}
 				}
 				else if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) {
+					if (kGAMECLASS.dungeonLoc == 55) {
+						rawOutputText(", Stone Staircase Basement<");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [P]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 56) {
+						rawOutputText(", Tunnel");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[P]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 57) {
+						rawOutputText(", Tunnel");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[P]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 58) {
+						rawOutputText(", Tunnel");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[P]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 59) {
+						rawOutputText(", Ted's Lair");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[P]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 60) {
+						rawOutputText(", Small Cave (W)");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[P]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 61) {
+						rawOutputText(", Medium Cave");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[P]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 62) {
+						rawOutputText(", Small Cave (E)");
+						rawOutputText("\n    [ ]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[P]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+					else if (kGAMECLASS.dungeonLoc == 63) {
+						rawOutputText(", Small Cave (N)");
+						rawOutputText("\n    [P]    ");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n     |     ");
+						rawOutputText("\n[ ]—[ ]—[ ]");
+						rawOutputText("\n |       | ");
+						rawOutputText("\n[ ]     [S]");
+					}
+				}
+			}
+		}
+		/* - layout for future dungeon use
 					if (kGAMECLASS.dungeonLoc == 55) {
 						rawOutputText(", Stone Staircase Basement<");
 						rawOutputText("\n    [ ]             [ ]    ");
@@ -650,34 +744,7 @@ package classes.Scenes.Dungeons {
 						rawOutputText("\n     |       |             ");
 						rawOutputText("\n    [ ]     [P]            ");
 					}
-					else if (kGAMECLASS.dungeonLoc == 56) {
-						rawOutputText(", Large Storage (E)");
-						rawOutputText("\n[ ]—[ ]—[P]—[ ]—[ ]—[ ]");
-						rawOutputText("\n |       |       |     ");
-						rawOutputText("\n[ ]     [S]     [ ]    ");
-					}
-					else if (kGAMECLASS.dungeonLoc == 57) {
-						rawOutputText(", Large Storage (E)");
-						rawOutputText("\n[ ]—[P]—[ ]—[ ]—[ ]—[ ]");
-						rawOutputText("\n |       |       |     ");
-						rawOutputText("\n[ ]     [S]     [ ]    ");
-					}
-					else if (kGAMECLASS.dungeonLoc == 58) {
-						rawOutputText(", Large Storage (E)");
-						rawOutputText("\n[P]—[ ]—[ ]—[ ]—[ ]—[ ]");
-						rawOutputText("\n |       |       |     ");
-						rawOutputText("\n[ ]     [S]     [ ]    ");
-					}
-					else if (kGAMECLASS.dungeonLoc == 59) {
-						rawOutputText(", Large Storage (E)");
-						rawOutputText("\n[ ]—[ ]—[ ]—[ ]—[ ]—[ ]");
-						rawOutputText("\n |       |       |     ");
-						rawOutputText("\n[P]     [S]     [ ]    ");
-					}
-				}
-			}
-		}
-		
+		*/
 		public function chooseRoomToDisplayD3():void {
 			//Basilisk Cave
 			if (getGame().d3._currentRoom == "entrance") {

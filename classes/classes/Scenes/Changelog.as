@@ -73,6 +73,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Not autocasting buff spells at the combat start, not triggering mana regeneration during combat and perks not affecting how much mana will be recovered..\n\n");
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable).\n");
 			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping).\n");
@@ -82,7 +83,6 @@ package classes.Scenes
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap.\n");
 			outputText("-Perk lvl req. was rised for some perks: Rage/Steel Impact/Elemental Arrows - 42 to 48, Cupid - 42 to 48\n");
 		//	outputText("-New accesory: Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n\n\n");/*ostatni punkt changelogu

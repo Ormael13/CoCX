@@ -7,10 +7,50 @@ package classes.Scenes.Places.HeXinDao
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
+	import classes.Scenes.Places.HeXinDao.IgnisArenaSeerScene;
 
 	public class IgnisArenaSeer extends Monster
 	{
+		public var ignisfight:IgnisArenaSeerScene = new IgnisArenaSeerScene();
 		
+		public function IgnisCastsNuke():void {
+			outputText("Ignis raises his palm, a orb of fire appearing above it.  Then without warning, the fire radiates out with the force of an explosion! You are buffeted by wave after wave of flames, burning hotter than you could have ever imagined. ");
+			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) outputText("You try and cast makeshift defenses around yourself, with limited success. ");
+			outputText("You try and huddle down and take shelter from the infernal storm, but the fire is everywhere. Then, as suddenly as the flame came, they are gone.\n\n");
+			this.createStatusEffect(StatusEffects.IgnisCastedNuke, 0, 0, 0, 0);
+			var damage:Number = 15000;
+			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) damage -= 10000;
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				damage *= 0.2;
+			}
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			damage = Math.round(damage);
+			player.takeDamage(damage, true);
+		}
+		
+		override protected function performCombatAction():void
+		{
+			if (!this.hasStatusEffect(StatusEffects.IgnisCastedNuke)) IgnisCastsNuke();
+			else {
+				var choice:Number = rand(2);
+				if (choice == 0) eAttack();
+				if (choice == 1) eAttack();
+			}
+			combatRoundOver();
+		}
+		/*
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			ignisfight.PCisBeatenByIgnisATarena();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			ignisfight.PCbeatenIgnisATarena();
+		}
+		*/
 		public function IgnisArenaSeer() 
 		{
 			this.a = "";

@@ -7,6 +7,7 @@ package classes.Scenes.Places.HeXinDao
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.NPCs.NPCAwareContent;
+	import classes.Scenes.Places.HeXinDao.IgnisArenaSeer;
 
 	public class IgnisArenaSeerScene extends NPCAwareContent
 	{
@@ -24,6 +25,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("He gives a short wave in return, motioning for you to sit next to him.  As you approach, Ignis clears his bag off the bench, making room for you.");
 			menu();
 			addButton(0, "Appearance", ignisAppearance);
+			addButton(3, "Sparring", sparringWithIgnis);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -35,6 +37,27 @@ package classes.Scenes.Places.HeXinDao
 			addButton(14, "Back", mainIgnisMenu);
 		}
 		
+		public function sparringWithIgnis():void {
+			clearOutput();
+			outputText("Him, actually.  You say that you want to fight Ignis in the arena.  It could be fun.  Ignis gives you an appraising look.  \"<i>Possibly.  It probably would be fun, but we both know who saved who back at blight ridge.</i>\"  In your defense, you were ambushed by gravity magic.  <i>Gravity magic</i>  Ignis laughs,  \"<i>Well, if you think you can handle me, let's get started.</i>\"\n\n");
+			outputText("After gaining the okay from the arena’s manager, you and Ignis both walk out to the center of the arena.   You take positions facing opposite each other. You ready your [weapon], Ignis raises his staff.  <b>It’s a fight!</b>");
+			startCombat(new IgnisArenaSeer());
+		}
+		
+		public function PCbeatenIgnisATarena():void {
+			clearOutput();
+			if (flags[kFLAGS.IGNIS_ARENA_SEER] == 2) {
+				
+			}
+			
+			cleanupAfterCombat();
+		}
+		
+		public function PCisBeatenByIgnisATarena():void {
+			clearOutput();
+			
+			cleanupAfterCombat();
+		}
 	}
 
 }

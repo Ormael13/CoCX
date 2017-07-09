@@ -2481,7 +2481,7 @@ public static const HIDDEN_CAVE_TAKEN_GLDSEED:int                               
 public static const HIDDEN_CAVE_TAKEN_MARAFRU:int                                   = 2473;
 public static const HIDDEN_CAVE_TAKEN_SALAMFW:int                                   = 2474;
 public static const HIDDEN_CAVE_TAKEN_SOULPILLS:int                                 = 2475;
-public static const HIDDEN_CAVE_TAKEN_ITEMS:int                           	        = 2476;//worek z ruby, diamond, soulskill manual
+public static const HIDDEN_CAVE_TAKEN_ITEMS_1:int                           	    = 2476;
 public static const CUPID_ARROWS:int              				                    = 2477;
 public static const ENVENOMED_BOLTS:int                			                    = 2478;
 public static const MULTIPLE_ATTACKS_STYLE:int                                      = 2479;
@@ -2532,10 +2532,10 @@ public static const ANZU_ANAL_PITCH_COUNTER:int                                 
 public static const ANZU_FED_COUNTER:int                                   			= 2524;
 public static const IGNIS_ARENA_SEER:int                                   			= 2525;
 public static const IGNIS_TALKS:int                                   				= 2526;
-public static const UNKNOWN_FLAG_NUMBER_02527:int                                   = 2527;
-public static const UNKNOWN_FLAG_NUMBER_02528:int                                   = 2528;
-public static const UNKNOWN_FLAG_NUMBER_02529:int                                   = 2529;
-public static const UNKNOWN_FLAG_NUMBER_02530:int                                   = 2530;
+public static const HIDDEN_CAVE_BOSSES:int                                   		= 2527;
+public static const HIDDEN_CAVE_TAKEN_ITEMS_2:int                                   = 2528;
+public static const HIDDEN_CAVE_TAKEN_ITEMS_3:int                                   = 2529;
+public static const HIDDEN_CAVE_TAKEN_ITEMS_4:int                                   = 2530;
 public static const UNKNOWN_FLAG_NUMBER_02531:int                                   = 2531;
 public static const UNKNOWN_FLAG_NUMBER_02532:int                                   = 2532;
 public static const UNKNOWN_FLAG_NUMBER_02533:int                                   = 2533;

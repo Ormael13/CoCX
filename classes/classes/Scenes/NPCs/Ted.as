@@ -24,6 +24,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>I lost? No...I just feel gratious today to not show this mortal my dvine powers and should make a grand strategical retreat for now.</i>\"\n\n");
 			outputText("When you comming little closer to try understand what he muttering he suddenly standing up and crushing some sort of talisman laughing loud. \"<i>I need to attend to other maters so I letting you off the hook today. Repent on your sins and worship me properly when we meet again or this time my bam hammer won't be so forgving.</i>\"");
 			outputText(" And before you react he already vanished after brighting light blinded you for a moment.");
+			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 1;
 			player.orgasm();
 			cleanupAfterCombat();
 			return;
@@ -42,11 +43,11 @@ package classes.Scenes.NPCs
 			this.imageName = "mysterious dragon-boy";
 			this.long = "Before you stands a dragon-boy.  Though he stands only six and half feet tall, he is covered in lean muscle and moves with grace no lesser than most skilled balet dancers.  He wears armor made of green dragon scales and fight using an oversized hammer that got inscribed on it words 'bam' and 'hammer'. Thou to be truth to be said word 'bam' looks like it was orginaly word 'ban'.";
 			// this.plural = false;
-			this.createCock(5,1);
+			this.createCock(4,1);
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 1;
-			this.hoursSinceCum = 100;
+			this.hoursSinceCum = 50;
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;

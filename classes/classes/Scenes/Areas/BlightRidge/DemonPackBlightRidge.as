@@ -14,8 +14,7 @@ package classes.Scenes.Areas.BlightRidge
 		override protected function performCombatAction():void
 		{
 			//Demon pack has different AI
-			if (rand(2) == 0)
-				special1();
+			if (rand(2) == 0) special1();
 			else special2();
 		}
 		
@@ -31,12 +30,14 @@ package classes.Scenes.Areas.BlightRidge
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			clearOutput();
 			outputText("With the demons in front of you defeated, you turn to see that your mystery partner has finished his half as well.");
 			postIntroFight();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			clearOutput();
 			outputText("You fall, knowing what comes next. But in spite of your expectations, the demons suddenly collapse, one by one. This time you see what happens, flashes of crystal impacting their foreheads, knocking the demons out one by one.  You turn to see your savior.");
 			postIntroFight();
 		}
@@ -88,19 +89,19 @@ package classes.Scenes.Areas.BlightRidge
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(70, 70, 20, 15);
+			initStrTouSpeInte(110, 120, 50, 90);
 			initLibSensCor(70, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 62 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demonic skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 200;
+			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 500;
 			this.bonusLust = 200;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 15;
-			this.gems = rand(30)+20;
+			this.level = 30;
+			this.gems = rand(40)+70;
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,
@@ -112,12 +113,12 @@ package classes.Scenes.Areas.BlightRidge
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 980;
+			this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 5280;
 			checkMonster();
 		}
 		
