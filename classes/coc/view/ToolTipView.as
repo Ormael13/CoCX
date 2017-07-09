@@ -63,7 +63,7 @@ import flash.display.MovieClip;
 			//else {
 				bx = (bx >= 688 ? 680: bx);
 				this.x = bx - 13;
-				this.y = by - 232;
+				this.y = by - this.height;
 				if (this.y < 0) this.y = by + 40;
 			//}
 
