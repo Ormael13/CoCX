@@ -37,7 +37,7 @@ package classes.Scenes.Areas
 			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
 			//Ignis intro
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
+		/*	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
 				clearOutput();
 				outputText("As you walk through blight ridge, you come across a small valley. An unremarkable locale, except for the fact that the moment you step foot in the valley, demons emerge from the ridges surrounding and swarming you from their vantage points.\n\n");
 				outputText("\"<b>It’s an ambush!</b>\"\n\n");
@@ -50,7 +50,7 @@ package classes.Scenes.Areas
 				startCombat(new DemonPackBlightRidge());
 				return;
 			}
-			
+			*/
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:

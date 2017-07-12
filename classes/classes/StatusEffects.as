@@ -261,6 +261,7 @@ package classes
 		// @aimozg HA HA HA
 		public static const GiantBoulder:StatusEffectType       = mk("Giant Boulder");
 		public static const IgnisCastedNuke:StatusEffectType  	= mk("Ignis Casted Nuke");
+		public static const IgnisCounter:StatusEffectType  		= mk("Ignis Counter");
 		public static const Round:StatusEffectType              = mk("Round");
 		public static const round:StatusEffectType              = mk("round");
 		public static const RunDisabled:StatusEffectType        = mk("Run Disabled");

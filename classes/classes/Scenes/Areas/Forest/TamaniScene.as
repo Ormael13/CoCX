@@ -217,7 +217,7 @@ private function tamaniMaleRepeatEncounter():void {
 	spriteSelect(56);
 	clearOutput();
 	//(IF FUCKED - check to see if she's pregnant or has given birth) 
-	if (pregnancy.isPregnant || flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.mf("boy", "girl") + "?\"\n\n");
+	if (pregnancy.isPregnant || flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.mf("boy", "girl") + "?</i>\"\n\n");
 	//(ELSE) 
 	else outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani the goblin there, grinning with desire, \"<i>Ready to stuff me with cum?  I'm not taking no for an answer this time.</i>\"\n\n");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
@@ -239,7 +239,7 @@ private function tamaniMaleRepeatEncounter():void {
 
 private function tamaniStartFight():void {
 	clearOutput();
-	outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</b>\"");
+	outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</i>\"");
 	startCombat(new Tamani());
 }
 

@@ -13,8 +13,6 @@ package classes.Scenes.Areas.HighMountains
 	
 	public class TempleOfTheDivine extends BaseContent
 	{
-//		var race:String = "human";
-//		race = player.race();
 		
 		public function TempleOfTheDivine() 
 		{}
@@ -22,7 +20,8 @@ package classes.Scenes.Areas.HighMountains
 		public function sapphireAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
+		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 6) flags[kFLAGS.SAPPHIRE_AFFECTION] = 6;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
 		}
 		
@@ -102,7 +101,7 @@ package classes.Scenes.Areas.HighMountains
 			menu();
 		//	addButton(0,"This place", templemainmenu);
 			addButton(1,"Her", TalkHer, null, null, null, "Fancy tooltip that Lia will surely make soon.");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex, null, null, null, "Another fancy tooltip that Lia will surely make soon.");
+		//	if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex, null, null, null, "Another fancy tooltip that Lia will surely make soon.");
 			addButton(4,"Back", templemainmenu);
 		}
 		

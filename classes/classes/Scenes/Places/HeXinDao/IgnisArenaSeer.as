@@ -21,8 +21,8 @@ package classes.Scenes.Places.HeXinDao
 			var damage:Number = 15000;
 			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) damage -= 10000;
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-				damage *= 0.2;
+				player.removeStatusEffect(StatusEffects.Blizzard);
+				damage *= 0.5;
 			}
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -30,13 +30,57 @@ package classes.Scenes.Places.HeXinDao
 			player.takeDamage(damage, true);
 		}
 		
+		public function IgnisCastsFoxFire():void {
+			outputText("Holding out his palm, Ignis conjures a blaze of blue flames, dancing across his palm. He casts the flame towards you, the flames twisting mid air to foil your attempts to dodge them.  On contact, the azure fires burst like fireworks, covering the area around you with color and light. ");
+			var damage:int = (inte/3 + rand(inte/2));
+			if (inte >= 21 && inte < 41) damage += (inte / 2 + rand((inte * 3) / 4));
+			if (inte >= 41 && inte < 61) damage += ((inte * 2) / 3 + rand(inte));
+			if (inte >= 61 && inte < 81) damage += ((inte * 5) / 6 + rand(inte * 1.25));
+			if (inte >= 81 && inte < 101) damage += (inte + rand(inte * 1.5));
+			if (inte >= 101 && inte < 151) damage += ((inte * 1.25) + rand(inte * 1.75));
+			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
+			if (inte >= 201 && inte < 251) damage += ((inte * 1.75) + rand(inte * 2.25));
+			if (inte >= 251 && inte < 301) damage += ((inte * 2) + rand(inte * 2.5));
+			if (inte >= 301) damage += ((inte * 2.25) + rand(inte * 2.75));
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			damage = Math.round(damage);
+			player.takeDamage(damage, true);
+			outputText(" ");
+			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
+			lustDmg = Math.round(lustDmg);
+			game.dynStats("lus", lustDmg, "resisted", false);
+			if (!hasStatusEffect(StatusEffects.IgnisCounter)) createStatusEffect(StatusEffects.IgnisCounter, 1, 0, 0, 0);
+			else addStatusValue(StatusEffects.IgnisCounter, 1, 1);
+		}
+		
+		public function IgnisCastsComet():void {
+			outputText("Ignis raises a hand, focusing with intensity.  From above comes a crystalline meteor, which you barely manage to dodge.  The crystal shatters upon contact with the ground, sending a shower of splinters that you cannot avoid. ");
+			if (player.armorPerk == "Heavy" || player.armorPerk == "Ayo") outputText("Thankfully, your armor manages to absorb most of the impact. ");
+			var damage:int = (inte/3 + rand(inte/2));
+			if (inte >= 21 && inte < 41) damage += (inte / 2 + rand((inte * 3) / 4));
+			if (inte >= 41 && inte < 61) damage += ((inte * 2) / 3 + rand(inte));
+			if (inte >= 61 && inte < 81) damage += ((inte * 5) / 6 + rand(inte * 1.25));
+			if (inte >= 81 && inte < 101) damage += (inte + rand(inte * 1.5));
+			if (inte >= 101 && inte < 151) damage += ((inte * 1.25) + rand(inte * 1.75));
+			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
+			if (inte >= 201 && inte < 251) damage += ((inte * 1.75) + rand(inte * 2.25));
+			if (inte >= 251 && inte < 301) damage += ((inte * 2) + rand(inte * 2.5));
+			if (inte >= 301) damage += ((inte * 2.25) + rand(inte * 2.75));
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			if (player.armorPerk != "Heavy" || player.armorPerk != "Ayo") damage *= 2;
+			damage = Math.round(damage);
+			player.takeDamage(damage, true);
+			removeStatusEffect(StatusEffects.IgnisCounter);
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if (!this.hasStatusEffect(StatusEffects.IgnisCastedNuke)) IgnisCastsNuke();
 			else {
-				var choice:Number = rand(2);
-				if (choice == 0) eAttack();
-				if (choice == 1) eAttack();
+				if (this.statusEffectv1(StatusEffects.IgnisCounter) > 2) IgnisCastsComet();
+				else IgnisCastsFoxFire();
 			}
 			combatRoundOver();
 		}

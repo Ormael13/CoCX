@@ -727,6 +727,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.</b>");
 	menu();
 	addButton(0, "Next", playerMenu);
+	addButton(11, "Gender Set.", GenderForcedSetting);
 	addButton(10, "RacialScores", RacialScores);
 	flushOutputTextToGUI();
 }
@@ -2011,6 +2012,34 @@ public function RacialScores():void {
 	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);
+}
+
+public function GenderForcedSetting():void {
+	clearOutput();
+	outputText("This menu allows you to choose if the game will treat your character as a female or a male. Using the automatic option will let the game orginal system do the work instead of setting your sex in one or another way.");
+	menu();
+	addButton(0, "Next", playerMenu);
+	if (flags[kFLAGS.MALE_OR_FEMALE] == 0) addButtonDisabled(1, "Auto", "It's currently used setting option.");
+	else addButton(1, "Auto", GenderForcedSettingAuto);
+	if (flags[kFLAGS.MALE_OR_FEMALE] == 1) addButtonDisabled(2, "Male", "It's currently used setting option.");
+	else addButton(2, "Male", GenderForcedSettingMale);
+	if (flags[kFLAGS.MALE_OR_FEMALE] == 2) addButtonDisabled(3, "Female", "It's currently used setting option.");
+	else addButton(3, "Female", GenderForcedSettingFemale);
+}
+
+public function GenderForcedSettingAuto():void {
+	flags[kFLAGS.MALE_OR_FEMALE] = 0;
+	doNext(GenderForcedSetting);
+}
+
+public function GenderForcedSettingMale():void {
+	flags[kFLAGS.MALE_OR_FEMALE] = 1;
+	doNext(GenderForcedSetting);
+}
+
+public function GenderForcedSettingFemale():void {
+	flags[kFLAGS.MALE_OR_FEMALE] = 2;
+	doNext(GenderForcedSetting);
 }
 
 	public function sockDescript(index:int):void {

@@ -1320,19 +1320,20 @@ package classes
 		WeaponGrandMastery.requirePerk(WeaponMastery)
 						  .requireStr(140)
 						  .requireLevel(24);
-		DualWieldLarge.requirePerk(DualWield)
-					  .requirePerk(TitanGrip)
-					  .requireStr(125)
-					  .requireLevel(24);
+	//	DualWieldLarge.requirePerk(DualWield)
+	//				  .requirePerk(TitanGrip)
+	//				  .requireStr(125)
+	//				  .requireLevel(24);
 		TripleAttackLarge.requirePerk(DoubleAttackLarge)
 						 .requireStr(125)
 						 .requireSpe(100)
 						 .requireLevel(24);
 		//Tier 5 Strength Perks
-		HiddenDualMomentum.requirePerk(HiddenMomentum)
-						  .requireStr(150)
-						  .requireSpe(100)
-						  .requireLevel(30);
+	//	HiddenDualMomentum.requirePerk(HiddenMomentum)
+	//					  .requirePerk(DualWield)
+	//					  .requireStr(150)
+	//					  .requireSpe(100)
+	//					  .requireLevel(30);
 		UnlockId2ndStage.requirePerk(UnlockId)
 						.requireStr(150)
 						.requireLevel(30);
@@ -1350,8 +1351,8 @@ package classes
 		Rage.requirePerk(PrestigeJobBerserker)
 			.requireLevel(48);
 		//Tier 9 Strength Perks
-		Anger.requirePerk(Rage)
-			 .requireLevel(54);
+	//	Anger.requirePerk(Rage)
+	//		 .requireLevel(54);
 		//Tier 10 Strength Perks
 		//		Too Angry to Die perk
 		//------------
@@ -1799,7 +1800,7 @@ package classes
 				  .requirePerk(Spellsword)
 				  .requireInt(90)
 				  .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
-		TraditionalMageI.requireLevel(18)
+	/*	TraditionalMageI.requireLevel(18)
 						.requirePerk(Archmage)
 						.requireInt(80);
 		TraditionalMageII.requireLevel(20)
@@ -1810,12 +1811,12 @@ package classes
 						  .requirePerk(TraditionalMageII)
 						  .requireInt(120)
 						  .requireNGPlus(2);
-		//Tier 4 Intelligence perks
+	*/	//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
 				.requireInt(125)
 				.requireLevel(24);
-		TraditionalMageIV.requireLevel(24)
+	/*	TraditionalMageIV.requireLevel(24)
 						 .requirePerk(TraditionalMageIII)
 						 .requireInt(140)
 						 .requireNGPlus(3);
@@ -1823,7 +1824,7 @@ package classes
 						.requirePerk(TraditionalMageIV)
 						.requireInt(160)
 						.requireNGPlus(4);
-		//Tier 5 Intelligence perks
+	*/	//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
 					.requireLevel(30);
@@ -2163,7 +2164,7 @@ package classes
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
-		DualWield.requireLevel(6);
+	//	DualWield.requireLevel(6);
 		Survivalist.requireLevel(6)
 				   .requireHungerEnabled();
 		ResistanceII.requirePerk(ResistanceI)
@@ -2197,14 +2198,14 @@ package classes
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
 		//Tier 3
-		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
+	/*	ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)
 								   .requireCustomFunction(function (player:Player):Boolean {
 				return player.internalChimeraScore() >= 6;
 			}, "Six racial perks");
 		JobWarlord.requireAnyPerk(Whirlwind, Whipping)
 				  .requireLevel(18);
-		//Tier 4
+	*/	//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
 					 .requirePerk(JobRanger)

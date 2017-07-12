@@ -242,6 +242,32 @@ package classes.Scenes.Dungeons
 				doNext(playerMenu);
 				return;
 			}
+			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 2) {
+				outputText("\n\nThere is an opened crate with some sort of weapon inside.\n\n");
+				addButton(0, "Crate 1", takeEldritchRibbon);
+			}
+			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 1) {
+				outputText("\n\nThere is an opened crate with two items inside.\n\n");
+				addButton(0, "Crate 1", takeDiamond);
+			}
+			else {
+				outputText("\n\nThere is an unopened crate with something inside.\n\n");
+				addButton(0, "Crate 1", takeAmetist);
+			}
+		}
+		public function roomLStorageE():void {
+			kGAMECLASS.dungeonLoc = 54;
+			clearOutput();
+			outputText("<b><u>Large Storage (E)</u></b>\n");
+			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
+			dungeons.setDungeonButtons(null, null, roomLStorageW, null);
+			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 2) {
+				outputText("\n\nA few of golem figures preset in storage suddenly starting to move forming a small group encirling you.");
+				startCombat(new GuardianGolems(), true);
+				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 3;
+				doNext(playerMenu);
+				return;
+			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] < 5) {
 					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.");
@@ -281,32 +307,6 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("\n\nThere is an unopened crate with five bottles of Salamander firewater inside.");
 				addButton(3, "SalamFW", takeSalamFireWat);
-			}
-		}
-		public function roomLStorageE():void {
-			kGAMECLASS.dungeonLoc = 54;
-			clearOutput();
-			outputText("<b><u>Large Storage (E)</u></b>\n");
-			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
-			dungeons.setDungeonButtons(null, null, roomLStorageW, null);
-			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 2) {
-				outputText("\n\nA few of golem figures preset in storage suddenly starting to move forming a small group encirling you.");
-				startCombat(new GuardianGolems(), true);
-				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 3;
-				doNext(playerMenu);
-				return;
-			}
-			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 2) {
-				outputText("\n\nThere is an opened crate with some sort of weapon inside.\n\n");
-				addButton(0, "Crate 1", takeEldritchRibbon);
-			}
-			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 1) {
-				outputText("\n\nThere is an opened crate with two items inside.\n\n");
-				addButton(0, "Crate 1", takeDiamond);
-			}
-			else {
-				outputText("\n\nThere is an unopened crate with something inside.\n\n");
-				addButton(0, "Crate 1", takeAmetist);
 			}
 		}
 		public function roomSStaircaseB():void {
