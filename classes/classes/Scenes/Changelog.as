@@ -73,6 +73,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Not autocasting buff spells at the combat start, not triggering mana regeneration during combat and perks not affecting how much mana will be recovered..\n\n");
 			outputText("<b>Version 0.8e3:</b>\n\n");
 			outputText("-Perk lvl req. was rised for some perks: Rage/Steel Impact/Elemental Arrows - 42 to 48, Cupid - 42 to 48\n");
+			outputText("-In Appearance screen was added new option. In short it work similary like function in TiTS to allow player force game to make PC look for world as either male or female. It should be visible in all scenes where game need pick between calling PC master/mistress. On app screen even setting on female will not change fact been called male X race so not be fooled by fact that nothing changed.\n");
 			outputText("-Fixed bugs: Lack of scrollbar, small font when typing PC name, blinking tooltips when hovering over button edge, wrong/lacking closing tags for italic text in tamani and jojo scenes.\n\n");/*ostatni punkt changelogu
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -85,7 +86,6 @@ package classes.Scenes
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap.\n");
 		//	outputText("-New accesory: Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n\n\n");
 			outputText("-\n");

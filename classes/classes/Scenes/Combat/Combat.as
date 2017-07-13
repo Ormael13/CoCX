@@ -2524,7 +2524,6 @@ public function attack():void {
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		damage = doDamage(damage);
-		if(player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") damage = doDamage(damage);
 	}
 	if(damage <= 0) {
 		damage = 0;
