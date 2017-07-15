@@ -539,7 +539,9 @@ package classes {
 					player.hunger = 0; //Prevents negative
 				}
 				else {
-					kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+					if (prison.inPrison) {
+						kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+					}
 				}
 				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
 					player.modThickness(1, 1);

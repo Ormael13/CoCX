@@ -252,6 +252,12 @@ public class StatsView extends Block {
 				return xpBar;
 			case 'gems':
 				return gemsBar;
+			case 'will':
+				return willBar;
+			case 'esteem':
+				return esteemBar;
+			case 'obey':
+				return obeyBar;
 			case 'spiritstones':
 				return spiritstonesBar;
 		}
@@ -259,12 +265,14 @@ public class StatsView extends Block {
 	}
 	public function showStatUp(statName:String):void {
 		var stat:StatBar = statByName(statName);
-		stat.isUp        = true;
+		if (stat) stat.isUp        = true;
+		else trace("[ERROR] Cannot showStatUp "+statName);
 	}
 
 	public function showStatDown(statName:String):void {
 		var stat:StatBar = statByName(statName);
-		stat.isDown      = true;
+		if (stat) stat.isDown      = true;
+		else trace("[ERROR] Cannot showStatDown "+statName);
 	}
 	public function toggleHungerBar(show:Boolean):void {
 		hungerBar.visible = show;
