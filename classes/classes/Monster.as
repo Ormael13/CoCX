@@ -975,6 +975,7 @@
 			//Block with shield
 			if (combatBlock(true)) {
 				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+			//	if (game.player.findPerk(PerkLib.AscensionUnderdog) >= 0) game.combat.pspecials.shieldBash();
 				return true;
 			}
 			return false;

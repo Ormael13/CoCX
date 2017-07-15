@@ -2107,6 +2107,14 @@ package classes
 			return false;
 		}*/
 
+		//1H Weapons
+		public function isOneHandedWeapons():Boolean
+		{
+			if (game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large")
+				return true;
+			return false;
+		}
+
 		//Naked
 		public function isNaked():Boolean
 		{

@@ -2853,7 +2853,10 @@ public function combatCritical():Boolean {
 public function combatBlock(doFatigue:Boolean = false):Boolean {
 	//Set chance
 	var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
-	if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) blockChance += (player.tou - 50) / 5;
+	if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) {
+		if (player.tou < 100) blockChance += (player.tou - 50) / 5;
+		else blockChance += 10;
+	}
 	if (blockChance < 10) blockChance = 10;
 	//Fatigue limit
 	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);

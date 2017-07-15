@@ -71,26 +71,27 @@ package classes.Scenes
 			outputText("<b>Version 0.8e2 (Bugfixing):</b>\n\n");
 			outputText("-Color of HP bar slight changed, Soulforce bar name shortened to SF\n");
 			outputText("-Fixed bugs: Not autocasting buff spells at the combat start, not triggering mana regeneration during combat and perks not affecting how much mana will be recovered..\n\n");
-			outputText("<b>Version 0.8e3:</b>\n\n");
+			outputText("<b>Version 0.8e3 (More fixing):</b>\n\n");
 			outputText("-Perk lvl req. was rised for some perks: Rage/Steel Impact/Elemental Arrows - 42 to 48, Cupid - 42 to 48\n");
 			outputText("-In Appearance screen was added new option. In short it work similary like function in TiTS to allow player force game to make PC look for world as either male or female. It should be visible in all scenes where game need pick between calling PC master/mistress. On app screen even setting on female will not change fact been called male X race so not be fooled by fact that nothing changed.\n");
-			outputText("-Fixed bugs: Lack of scrollbar, small font when typing PC name, blinking tooltips when hovering over button edge, wrong/lacking closing tags for italic text in tamani and jojo scenes.\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Lack of scrollbar, small font when typing PC name, blinking tooltips when hovering over button edge, wrong/lacking closing tags for italic text in tamani and jojo scenes.\n\n");
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable).\n");
 			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping).\n");
+			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).\n");
 			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage, Effect. Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
-			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
+			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap.\n");
 		//	outputText("-New accesory: Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: \n\n\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly to giving max 10% more block chance.\n");
+			outputText("-Fixed bugs: \n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

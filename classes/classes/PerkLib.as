@@ -238,7 +238,7 @@ package classes
 						"]",
 				"You choose the 'Channeling' perk, boosting the strength of your spellcasting and expanding your mana pool!");
 		public static const ChimericalBodyAdvancedStage:PerkType = mk("Chimerical Body: Advanced Stage", "Chimerical Body: Advanced Stage",
-				".",
+				"You feel naturaly adept at using every new appendage you gain as if they were yours from birth.",
 				"You choose the 'Chimerical Body: Advanced Stage' perk. Constant mutations rised your body adaptiveness to new level.");	
 		public static const ChimericalBodyBasicStage:PerkType = mk("Chimerical Body: Basic Stage", "Chimerical Body: Basic Stage",
 				"Your metabolic adaptation reached level possesed by most simplest and weakest chimeras.",
@@ -692,6 +692,9 @@ package classes
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with non-large weapons per round.",
 				"You choose the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
+		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
+				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
+				"You choose the 'Power Sweep' perk.  This allows you to improve Whirlwind attack.");
 		public static const Precision:PerkType = mk("Precision", "Precision",
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
@@ -786,6 +789,9 @@ package classes
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
+	//	public static const ShieldMastery2:PerkType = mk("Shield Mastery", "Shield Mastery",
+	//			"When you block an attack riposte with a shield bash damaging your opponent.",
+	//			"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
 		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
@@ -1320,20 +1326,20 @@ package classes
 		WeaponGrandMastery.requirePerk(WeaponMastery)
 						  .requireStr(140)
 						  .requireLevel(24);
-	//	DualWieldLarge.requirePerk(DualWield)
-	//				  .requirePerk(TitanGrip)
-	//				  .requireStr(125)
-	//				  .requireLevel(24);
+		DualWieldLarge.requirePerk(DualWield)
+					  .requirePerk(TitanGrip)
+					  .requireStr(125)
+					  .requireLevel(24);
 		TripleAttackLarge.requirePerk(DoubleAttackLarge)
 						 .requireStr(125)
 						 .requireSpe(100)
 						 .requireLevel(24);
 		//Tier 5 Strength Perks
-	//	HiddenDualMomentum.requirePerk(HiddenMomentum)
-	//					  .requirePerk(DualWield)
-	//					  .requireStr(150)
-	//					  .requireSpe(100)
-	//					  .requireLevel(30);
+		HiddenDualMomentum.requirePerk(HiddenMomentum)
+						  .requirePerk(DualWield)
+						  .requireStr(150)
+						  .requireSpe(100)
+						  .requireLevel(30);
 		UnlockId2ndStage.requirePerk(UnlockId)
 						.requireStr(150)
 						.requireLevel(30);
@@ -1351,8 +1357,8 @@ package classes
 		Rage.requirePerk(PrestigeJobBerserker)
 			.requireLevel(48);
 		//Tier 9 Strength Perks
-	//	Anger.requirePerk(Rage)
-	//		 .requireLevel(54);
+		Anger.requirePerk(Rage)
+			 .requireLevel(54);
 		//Tier 10 Strength Perks
 		//		Too Angry to Die perk
 		//------------
@@ -1800,7 +1806,7 @@ package classes
 				  .requirePerk(Spellsword)
 				  .requireInt(90)
 				  .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
-	/*	TraditionalMageI.requireLevel(18)
+		TraditionalMageI.requireLevel(18)
 						.requirePerk(Archmage)
 						.requireInt(80);
 		TraditionalMageII.requireLevel(20)
@@ -1811,12 +1817,12 @@ package classes
 						  .requirePerk(TraditionalMageII)
 						  .requireInt(120)
 						  .requireNGPlus(2);
-	*/	//Tier 4 Intelligence perks
+		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
 				.requireInt(125)
 				.requireLevel(24);
-	/*	TraditionalMageIV.requireLevel(24)
+		TraditionalMageIV.requireLevel(24)
 						 .requirePerk(TraditionalMageIII)
 						 .requireInt(140)
 						 .requireNGPlus(3);
@@ -1824,7 +1830,7 @@ package classes
 						.requirePerk(TraditionalMageIV)
 						.requireInt(160)
 						.requireNGPlus(4);
-	*/	//Tier 5 Intelligence perks
+		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
 					.requireLevel(30);
@@ -2164,7 +2170,7 @@ package classes
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
-	//	DualWield.requireLevel(6);
+		DualWield.requireLevel(6);
 		Survivalist.requireLevel(6)
 				   .requireHungerEnabled();
 		ResistanceII.requirePerk(ResistanceI)
@@ -2198,14 +2204,19 @@ package classes
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
 		//Tier 3
-	/*	ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
+		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)
 								   .requireCustomFunction(function (player:Player):Boolean {
 				return player.internalChimeraScore() >= 6;
 			}, "Six racial perks");
 		JobWarlord.requireAnyPerk(Whirlwind, Whipping)
 				  .requireLevel(18);
-	*/	//Tier 4
+		PowerSweep.requireLevel(18)
+				  .requireStr(60)
+				  .requireTou(60)
+				  .requirePerk(Whirlwind)
+				  .requirePerk(JobWarlord);
+		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
 					 .requirePerk(JobRanger)

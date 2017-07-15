@@ -1456,7 +1456,7 @@ public function soularena():void {
 	addButton(0, "Solo", soularenaSolo, null, null, null, "Go to the section of soul arena for 1 on 1 fights.");
 	addButton(1, "Group", soularenaGroup, null, null, null, "Go to the section of soul arena for group fights.");
 	addButton(2, "Challenge", soularenaChallenge, null, null, null, "Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
-//	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
+	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
 	addButton(14, "Back", riverislandVillageStuff);
 	statScreenRefresh();
 }
