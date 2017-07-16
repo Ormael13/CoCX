@@ -2539,7 +2539,7 @@ public static const HIDDEN_CAVE_TAKEN_ITEMS_4:int                               
 public static const UNKNOWN_FLAG_NUMBER_02531:int                                   = 2531;
 public static const UNKNOWN_FLAG_NUMBER_02532:int                                   = 2532;
 public static const MALE_OR_FEMALE:int                                   			= 2533;
-public static const UNKNOWN_FLAG_NUMBER_02534:int                                   = 2534;
+public static const D3_DEMONIC_SCYTHE:int                                   		= 2534;
 public static const UNKNOWN_FLAG_NUMBER_02535:int                                   = 2535;
 public static const UNKNOWN_FLAG_NUMBER_02536:int                                   = 2536;
 public static const UNKNOWN_FLAG_NUMBER_02537:int                                   = 2537;

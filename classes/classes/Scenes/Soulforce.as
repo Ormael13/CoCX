@@ -297,6 +297,8 @@ package classes.Scenes
 			addButton(7, "DualSwords", AddDualSwords, null, null, null, "Add 1 pair of Dual Swords for testing purposes.");
 			addButton(8, "DualLAxes", AddDualMinoAxes, null, null, null, "Add 1 pair of Large Axes for testing purposes.");
 			addButton(9, "Dual BFS", AddDualBigFuckingSwords, null, null, null, "Add 1 pair of Big Fucking Swords for testing purposes.");
+			addButton(10, "SeerHairpin", AddTheSeerHairpin, null, null, null, "Add 1 Seer's Hairpin.");
+			addButton(11, "D.Scythe", AddTheDemonicScythe, null, null, null, "Add 1 Demonic Scythe.");
 			//addButton(10, "BlunderR", AddTheBlunderbussRifle, null, null, null, "Add 1 Blunderbuss Rifle.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -424,6 +426,14 @@ package classes.Scenes
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
 			inventory.takeItem(weaponsrange.GTHRAXE, EquipmentMenu);
+		}
+		public function AddTheSeerHairpin():void {
+			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
+			inventory.takeItem(jewelries.SEERPIN, EquipmentMenu);
+		}
+		public function AddTheDemonicScythe():void {
+			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
+			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] < 1) {

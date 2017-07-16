@@ -11,13 +11,13 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Reduces fatigue cost of spells by " + params.value1 + "%.";
+			return "Reduces mana cost of spells by " + params.value1 + "%.";
 		}
 
 		public function WizardsEndurancePerk()
 		{
 			super("Wizard's Endurance", "Wizard's Endurance",
-					"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
+					"Your spellcasting equipment makes you use less mana for spell-casting!");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

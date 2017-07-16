@@ -279,6 +279,21 @@ package classes
 		public static const Cupid:PerkType = mk("Cupid", "Cupid",
 				"You arrows are charged with heavy black magic inflicting lust on those pierced by them.",
 				"You choose the 'Cupid' perk, allowing you to shoot arrows inflicting lust.");
+		public static const CycloneStage1:PerkType = mk("Cyclone (Stage 1)", "Cyclone (Stage 1)",
+				"Increasing crit chance for aoe like whirlwind by 10%.",
+				"You choose the 'Cyclone (Stage 1)' perk, increasing crit chance for aoe specials like whirlwind.");
+		public static const CycloneStage2:PerkType = mk("Cyclone (Stage 2)", "Cyclone (Stage 2)",
+				"Increasing crit chance for aoe like whirlwind by 15%.",
+				"You choose the 'Cyclone (Stage 2)' perk, increasing crit chance for aoe specials like whirlwind.");
+		public static const CycloneStage3:PerkType = mk("Cyclone (Stage 3)", "Cyclone (Stage 3)",
+				"Increasing crit chance for aoe like whirlwind by 20%.",
+				"You choose the 'Cyclone (Stage 3)' perk, increasing crit chance for aoe specials like whirlwind.");
+		public static const CycloneStage4:PerkType = mk("Cyclone (Stage 4)", "Cyclone (Stage 4)",
+				"Increasing crit chance for aoe like whirlwind by 20% and damage multipier by 50% of base value.",
+				"You choose the 'Cyclone (Stage 4)' perk, increasing crit chance and damage for aoe specials like whirlwind.");
+		public static const CycloneStage5:PerkType = mk("Cyclone (Stage 5)", "Cyclone (Stage 5)",
+				"Increasing crit chance for aoe like whirlwind by 25% and damage multipier by 150% of base value.",
+				"You choose the 'Cyclone (Stage 5)' perk, increasing crit chance and damage for aoe specials like whirlwind.");
 		public static const DancersVitalityI:PerkType = mk("Dancer's Vitality I", "Dancer's Vitality I",
 				"+1.5 extra fatigue per point of speed.",
 				"You choose the 'Dancer's Vitality I' perk, granting +1.5 extra maximum fatigue for each point of speed.");
@@ -713,6 +728,9 @@ package classes
 		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
 				"You choose 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.");
+		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
+				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
+				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
@@ -782,6 +800,13 @@ package classes
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
+		public static const ShieldGrandmastery:PerkType = mk("Shield Grandmastery", "Shield Grandmastery",
+				"[if(player.tou>=100)" +
+						"Increases block chance by up to 10% while using a shield (Toughness-based) and lowering by 50% fatigue cost." +
+						"|" +
+						"<b>You are not durable enough to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Shield Grandmastery' perk, lowering fatigue cost and increasing block chance as long as you're wielding a shield (Toughness-based).");
 		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
 				"[if(player.tou>=50)" +
 						"Increases block chance by up to 10% while using a shield (Toughness-based)." +
@@ -789,9 +814,9 @@ package classes
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
-	//	public static const ShieldMastery2:PerkType = mk("Shield Mastery", "Shield Mastery",
-	//			"When you block an attack riposte with a shield bash damaging your opponent.",
-	//			"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
+		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
+				"When you block an attack riposte with a shield bash damaging your opponent.",
+				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack.");
 		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
@@ -893,6 +918,9 @@ package classes
 		public static const ThunderousStrikes:PerkType = mk("Thunderous Strikes", "Thunderous Strikes",
 				"+20% 'Attack' damage while strength is at or above 80.",
 				"You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.");
+		public static const Tornado:PerkType = mk("Tornado", "Tornado",
+				"Increasing damage of aoe like whirlwind by 100% of base value.",
+				"You choose the 'Tornado' perk, increasing damage by aoe specials like whirlwind.");
 		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
 				"Your body posses rudimentary respiratory system of the insects.",
 				"You choose the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
@@ -1461,12 +1489,16 @@ package classes
 		//AyoArmorProficiency.requireMinTou(80).requirePerk(HeavyArmorProficiency);
 		HalfStepToAdvancedEndurance.requireTou(120)
 								   .requireStr(80)
+								   .requireLevel(18)
 								   .requirePerk(ImprovedEndurance);
 		//Tier 4 Toughness Perks
 		AdvancedEndurance.requireLevel(24)
 						 .requireTou(150)
 						 .requireStr(100)
 						 .requirePerk(HalfStepToAdvancedEndurance);
+		ShieldGrandmastery.requirePerk(ShieldMastery)
+						  .requireTou(100)
+						  .requireLevel(24);
 		//perk związany z ayotech armors na pewno tu umieścić coś podobnego do juggernaut pewnie a moze właśnie wersja juggernaut dla ayo tech armors może?
 		//Tier 5 Toughness Perks
 		HalfStepToSuperiorEndurance.requireTou(180)
@@ -1495,6 +1527,10 @@ package classes
 						 .requireLevel(48);
 		SteelImpact.requirePerk(PrestigeJobSentinel)
 				   .requireLevel(42);
+		//Tier 9 Toughness Perks
+		ShieldCombat.requirePerk(SteelImpact)
+					.requireLevel(48);
+		//Tier 10 Toughness Perks
 		//------------
 		// SPEED
 		//------------
@@ -1864,6 +1900,16 @@ package classes
 		UnlockMind2ndStage.requirePerk(UnlockMind)
 						  .requireWis(150)
 						  .requireLevel(30);
+		//Tier 6 Wisdom perks
+		
+		//Tier 7 Wisdom perks
+		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
+								.requirePerk(FleshBodyApprenticeStage)
+								.requirePerk(JobMonk)
+								.requireWis(200)
+								.requireLevel(42);
+		//Tier 8 Wisdom perks
+		//Tier 9 Wisdom perks
 		//------------
 		// LIBIDO
 		//------------
@@ -2187,7 +2233,6 @@ package classes
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
 					.requirePerk(Survivalist);
-
 		ResistanceIV.requireLevel(12)
 					.requirePerk(ResistanceIII)
 					.requireNGPlus(3);
@@ -2216,6 +2261,10 @@ package classes
 				  .requireTou(60)
 				  .requirePerk(Whirlwind)
 				  .requirePerk(JobWarlord);
+		CycloneStage1.requireLevel(18)
+					 .requireStr(50)
+					 .requireTou(50)
+					 .requirePerk(JobWarlord);
 		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
@@ -2230,10 +2279,18 @@ package classes
 					 .requireInt(75)
 					 .requireWis(75)
 					 .requireLib(45);
-		//		if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
-		//			ChimericalBodyPerfectStage;
-		//		}
-				//Tier 5
+	//	if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
+	//		ChimericalBodyPerfectStage;
+	//	}
+		Tornado.requireLevel(24)
+			   .requireStr(75)
+			   .requireTou(75)
+			   .requirePerk(JobWarlord);
+		CycloneStage2.requireLevel(24)
+					 .requireStr(70)
+					 .requireTou(70)
+					 .requirePerk(CycloneStage1);
+		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
@@ -2255,17 +2312,20 @@ package classes
 				   .requireLib(90); //requirePerk(JobEromancer)
 */		//(Still need some other related stuff added to make PC true Munchkin
 		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
+		CycloneStage3.requireLevel(30)
+					 .requireStr(90)
+					 .requireTou(90)
+					 .requirePerk(CycloneStage2);
 		//Tier 6
-		//if (requireMinLevel(36)) {
-		//if
-		//_add(new PerkClass(PerkLib.
-		//}
+		CycloneStage4.requireLevel(36)
+					 .requireStr(120)
+					 .requireTou(120)
+					 .requirePerk(CycloneStage3);
 		//Tier 7
-		//if (requireMinLevel(42)) {
-		//if
-		//_add(new PerkClass(PerkLib.
-		//}
-
+		CycloneStage5.requireLevel(42)
+					 .requireStr(160)
+					 .requireTou(160)
+					 .requirePerk(CycloneStage4);
 	}
 	try {
 		initDependencies();

@@ -240,20 +240,111 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (player.findPerk(PerkLib.CycloneStage1) >= 0) critChance += 10;
+		if (player.findPerk(PerkLib.CycloneStage2) >= 0) critChance += 15;
+		if (player.findPerk(PerkLib.CycloneStage3) >= 0) critChance += 20;
+		if (player.findPerk(PerkLib.CycloneStage4) >= 0) critChance += 20;
+		if (player.findPerk(PerkLib.CycloneStage5) >= 0) critChance += 25;
 		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
 		//add bonus for using aoe special
-		if (player.findPerk(PerkLib.Whirlwind) >= 0 && player.findPerk(PerkLib.JobWarlord) >= 0) damage *= 7;
-		else if (player.findPerk(PerkLib.Whirlwind) >= 0) damage *= 6;
-		else damage *= 5;
+		var bonusmultiplier:Number = 5;
+		if (player.findPerk(PerkLib.Whirlwind) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.JobWarlord) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.Tornado) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.CycloneStage4) >= 0) bonusmultiplier += 0.5;
+		if (player.findPerk(PerkLib.CycloneStage5) >= 0) bonusmultiplier += 1.5;
+		damage *= bonusmultiplier;
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		damage = doDamage(damage);
 		outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		if (crit == true) {
+			outputText(" <b>*Critical Hit!*</b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		enemyAI();
+	}
+
+	public function whipping():void {
+		if (player.weapon == weapons.L_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(50,2);
+		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many " + monster.a + monster.short + " as possible.  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			enemyAI();
+			return;
+		}
+		var damage:Number = 0;
+		damage += player.str;
+		if (player.findPerk(PerkLib.Whipping) >= 0) damage += strenghtscalingbonus() * 0.2;
+		if (damage < 10) damage = 10;
+		//weapon bonus
+		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
+		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
+		//other bonuses
+		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		//crit
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.CycloneStage1) >= 0) critChance += 10;
+		if (player.findPerk(PerkLib.CycloneStage2) >= 0) critChance += 15;
+		if (player.findPerk(PerkLib.CycloneStage3) >= 0) critChance += 20;
+		if (player.findPerk(PerkLib.CycloneStage4) >= 0) critChance += 20;
+		if (player.findPerk(PerkLib.CycloneStage5) >= 0) critChance += 25;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//add bonus for using aoe special
+		var bonusmultiplier:Number = 5;
+		if (player.findPerk(PerkLib.Whirlwind) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.JobWarlord) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.Tornado) >= 0) bonusmultiplier += 1;
+		if (player.findPerk(PerkLib.CycloneStage4) >= 0) bonusmultiplier += 0.5;
+		if (player.findPerk(PerkLib.CycloneStage5) >= 0) bonusmultiplier += 1.5;
+		damage *= bonusmultiplier;
+		//flame whip
+		if (player.weapon == weapons.L_WHIP) {
+			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
+			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
+			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+		}
+		//final touches
+		damage = Math.round(damage);
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -724,79 +815,6 @@ public class PhysicalSpecials extends BaseCombatContent{
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
-		checkAchievementDamage(damage);
-		outputText("\n\n");
-		enemyAI();
-	}
-
-	public function whipping():void {
-		if (player.weapon == weapons.L_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		clearOutput();
-		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
-			addButton(0, "Next", combatMenu, false);
-			return;
-		}
-		fatigue(50,2);
-		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many " + monster.a + monster.short + " as possible.  ");
-		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
-			enemyAI();
-			return;
-		}
-		var damage:Number = 0;
-		damage += player.str;
-		if (player.findPerk(PerkLib.Whipping) >= 0) damage += strenghtscalingbonus() * 0.2;
-		if (damage < 10) damage = 10;
-		//weapon bonus
-		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
-		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
-		//other bonuses
-		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
-		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
-		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
-		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
-		//crit
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
-			if (player.inte > 100) critChance += 10;
-		}
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-		if (rand(100) < critChance) {
-			crit = true;
-			damage *= 1.75;
-		}
-		//add bonus for using aoe special
-		if (player.findPerk(PerkLib.Whipping) >= 0 && player.findPerk(PerkLib.JobWarlord) >= 0) damage *= 7;
-		else if (player.findPerk(PerkLib.Whipping) >= 0) damage *= 6;
-		else damage *= 5;
-		//flame whip
-		if (player.weapon == weapons.L_WHIP) {
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
-		}
-		//final touches
-		damage = Math.round(damage);
-		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
-		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-		if (crit == true) {
-			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		enemyAI();

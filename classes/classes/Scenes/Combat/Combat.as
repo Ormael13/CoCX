@@ -612,6 +612,7 @@ public function stopChanneledSpecial():void {
 public function unarmedAttack():Number {
 	var unarmed:Number = 0;
 	if (player.findPerk(PerkLib.JobMonk) >= 0 && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
+	if (player.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0 && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.BodyCultivator) >= 0) unarmed += 2 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -2610,6 +2611,8 @@ public function attack():void {
 				}
 			}
 		}
+		//Selfcorrupting weapons
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
 		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
 			//10% chance
@@ -2857,11 +2860,18 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 		if (player.tou < 100) blockChance += (player.tou - 50) / 5;
 		else blockChance += 10;
 	}
+	if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) {
+		if (player.tou < 150) blockChance += (player.tou - 100) / 5;
+		else blockChance += 10;
+	}
 	if (blockChance < 10) blockChance = 10;
 	//Fatigue limit
 	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);
 	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
-		if (doFatigue) fatigue(10, 2);
+		if (doFatigue) {
+			if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) fatigue(5);
+			else fatigue(10);
+		}
 		return true;
 	}
 	else return false;
@@ -4107,7 +4117,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (monster.findPerk(PerkLib.JobSoulCultivator) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobWarlord) >= 0) monster.tou += (20 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobWarrior) >= 0) monster.str += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
+	if (monster.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
 		monster.spe += (40 * (1 + player.newGamePlusMod()));
 		monster.inte += (40 * (1 + player.newGamePlusMod()));
 	}
@@ -4121,6 +4131,10 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	}
 	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
 		monster.spe += (40 * (1 + player.newGamePlusMod()));
+		monster.wis += (40 * (1 + player.newGamePlusMod()));
+	}
+	if (monster.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
+		monster.str += (40 * (1 + player.newGamePlusMod()));
 		monster.wis += (40 * (1 + player.newGamePlusMod()));
 	}
 	if (monster.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {

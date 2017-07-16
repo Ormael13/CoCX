@@ -3496,6 +3496,8 @@ use namespace kGAMECLASS;
 				prestigeJobs--;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0)
 				prestigeJobs--;
+			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
+				prestigeJobs--;
 			if (findPerk(PerkLib.JobMunchkin) >= 0)
 				prestigeJobs++;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
@@ -4714,6 +4716,10 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
 				maxSpe += (40 * (1 + newGamePlusMod));
+				maxWis += (40 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
+				maxStr += (40 * (1 + newGamePlusMod));
 				maxWis += (40 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
