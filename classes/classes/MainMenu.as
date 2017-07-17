@@ -23,9 +23,7 @@ public class MainMenu extends BaseContent {
 			CoC_Settings.debugBuild = false;
 		}
 
-		if (mainView.aCb.parent != null) {
-			mainView.removeChild(mainView.aCb);
-		}
+		mainView.hideComboBox();
 		getGame().mainViewManager.registerShiftKeys();
 		mainView.eventTestInput.x = -10207.5;
 		mainView.eventTestInput.y = -1055.1;
