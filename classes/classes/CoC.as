@@ -616,9 +616,6 @@ the text from being too boring.
 
 			// ******************************************************************************************
 
-			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.perkCbChangeHandler);
-
 			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 
@@ -729,6 +726,17 @@ the text from being too boring.
 		mainView.mainText.defaultTextFormat = fmt;
 		mainView.setOutputText(currentText);
 	}
-
+	/**
+	 * Places combobox after the visible text.
+	 */
+	public function placeComboBoxAfterText():void {
+		flushOutputTextToGUI();
+		mainView.placeComboBox(mainView.mainText.x+10, mainView.mainText.y+mainView.mainText.textHeight+10);
+		outputText("\n\n\n");
+	}
+	public function showComboBox(items:Array,prompt:String,onChange:Function):void {
+		mainView.showComboBox(items,prompt,onChange);
+		placeComboBoxAfterText();
+	}
 }
 }

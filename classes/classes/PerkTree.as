@@ -63,9 +63,9 @@ public class PerkTree extends BaseContent {
 	/**
 	 * Returns Array of PerkType
 	 */
-	public static function availablePerks(player:Player):Array {
+	public static function availablePerks(player:Player):/*PerkType*/Array {
 		return obtainablePerks().filter(
-				function (perk:PerkType,idx:int,array:Array):Boolean {
+				function (perk:PerkType,idx:int,array:/*PerkType*/Array):Boolean {
 					return !player.hasPerk(perk) && perk.available(player);
 				});
 	}

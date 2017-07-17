@@ -2773,7 +2773,7 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.playerInfo.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || PerkTree.availablePerks(kGAMECLASS.player).length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
 			mainView.statsView.hideLevelUp();
 		}
 	}

@@ -38,7 +38,7 @@ import fl.controls.ComboBox;
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
 		
-		private var boxNames:ComboBox;
+//		private var boxNames:ComboBox;
 		
 		public function CharCreation() {}
 		
@@ -72,7 +72,7 @@ import fl.controls.ComboBox;
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
 			mainView.hideMenuButton( MainView.MENU_PERKS );
 			//Hide perk boxes
-			mainView.aCb.visible = false;
+			mainView.hideComboBox();
 			//If first PC, track status of EZ mode and other such nonsense.
 			var silly:Boolean = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 			var easy:Boolean = flags[kFLAGS.EASY_MODE_ENABLE_FLAG];
@@ -115,20 +115,11 @@ import fl.controls.ComboBox;
 			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
 			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );			
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
-			if (boxNames == null) {
-				boxNames = new ComboBox(); 
-				boxNames.dropdownWidth = 200; 
-				boxNames.width = 200; 
-				boxNames.scaleY = 1.1;
-				boxNames.prompt = "Pre-defined characters";
-				boxNames.x = mainView.nameBox.x + mainView.nameBox.width + 10;
-				boxNames.y = mainView.nameBox.y;
-				mainView.addChild(boxNames);
+
+			if (showSpecialNames) {
+				kGAMECLASS.showComboBox(preList,"Pre-defined characters",selectName);
+				mainView.placeComboBox(mainView.nameBox.x + mainView.nameBox.width + 10,mainView.nameBox.y);
 			}
-			boxNames.addEventListener(Event.CHANGE, selectName); 
-			boxNames.dataProvider = new DataProvider(preList);
-			if (showSpecialNames)
-				boxNames.visible = true;
 			
 			//Reset autosave
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
@@ -400,7 +391,7 @@ import fl.controls.ComboBox;
 				return;
 			}
 			clearOutput();
-			if (boxNames) boxNames.visible = false;
+			mainView.hideComboBox();
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.
@@ -458,20 +449,20 @@ import fl.controls.ComboBox;
 			}
 		}
 		
-		private function selectName(event:Event):void {
-			if (ComboBox(event.target).selectedItem.data[0].length > 16) // not a name
+		private function selectName(selectedItem:*):void {
+			if (selectedItem.data[0].length > 16) // not a name
 				return;
 			
 			clearOutput();
 			
-			outputText("<b>" + ComboBox(event.target).selectedItem.data[0] + ":</b> " + ComboBox(event.target).selectedItem.data[3]);
-			if(ComboBox(event.target).selectedItem.data[2])
+			outputText("<b>" + selectedItem.data[0] + ":</b> " + selectedItem.data[3]);
+			if(selectedItem.data[2])
 				outputText("\n\nThis character have pre-defined history.");
 			else
 				outputText("\n\nThis character have no pre-defined history.");
 				
 			flushOutputTextToGUI();	
-			mainView.nameBox.text = ComboBox(event.target).selectedItem.data[0];
+			mainView.nameBox.text = selectedItem.data[0];
 		}
 		
 		//Determines if has character creation bonuses
@@ -1954,7 +1945,7 @@ import fl.controls.ComboBox;
 			newGameGo();
 			clearOutput();
 			mainView.nameBox.visible = false;
-			boxNames.visible = false;
+			mainView.hideComboBox();
 			outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("\n\nYou soon noticing a circular green imprint at the palm of your left hand. When you trying to figure out it meaning something clicks in your mind. It's a strange artifact that fused with your body that allow storing many things inside. Artifact that fused with your body? You are unable to recall when did yo... Wait a second there are few almost fully faded away memory fragments of you been somewhere underwater fearlessly facing some huge monster with tentacles as it legs... Doing you utermost efforts no other memories even slightest fragments apprear in your mind. Resigned you try to concentrate on remembering how to use this thing but those memories are still too blurred. Maybe with time you remember all about this... 'thing'.")

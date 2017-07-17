@@ -17,6 +17,7 @@ import coc.view.UIUtils;
 import fl.controls.ComboBox;
 import fl.controls.ScrollBarDirection;
 import fl.controls.UIScrollBar;
+import fl.data.DataProvider;
 
 import flash.display.Sprite;
 import flash.events.Event;
@@ -145,6 +146,7 @@ public class MainView extends Block {
 	public var nameBox:TextField;
 	public var eventTestInput:TextField;
 	public var aCb:ComboBox;
+	private var comboboxHandler:Function;
 
 	public var toolTipView:ToolTipView;
 	public var statsView:StatsView;
@@ -326,19 +328,16 @@ public class MainView extends Block {
 //////// Initialization methods. /////////
 
 	protected function formatMiscItems():void {
-		// this.mainText = this.getChildByName("mainText");
-
-//		this.nameBox.maxChars = 54;
-
-		this.sideBarDecoration = getElementByName("statsBarMarker") as Sprite;
 
 		this.aCb               = new ComboBox();
 		this.aCb.dropdownWidth = 200;
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
+		this.aCb.rowCount = 15;
 		this.aCb.move(-1250, -1550);
-		this.aCb.prompt = "Choose a perk";
-		this.addChild(this.aCb);
+		this.aCb.addEventListener(Event.CHANGE, function (event:Event):void {
+			if (comboboxHandler) comboboxHandler(ComboBox(event.target).selectedItem);
+		});
 
 		this.hideSprite();
 	}
@@ -711,6 +710,27 @@ public class MainView extends Block {
 
 		this.scrollBar.scrollTarget = this.mainText;
 
+	}
+
+	public function hideComboBox():void {
+		stage.focus = null;
+		if (aCb.parent != null) {
+			removeElement(aCb);
+		}
+		comboboxHandler = null;
+	}
+
+	public function showComboBox(items:Array,propmt:String,onChange:Function):void {
+		aCb.dataProvider = new DataProvider(items);
+		aCb.prompt = propmt;
+		comboboxHandler = onChange;
+		if (aCb.parent == null) {
+			addElement(aCb);
+		}
+		aCb.visible = true;
+	}
+	public function placeComboBox(x:Number,y:Number):void {
+		aCb.move(x,y);
 	}
 }
 }
