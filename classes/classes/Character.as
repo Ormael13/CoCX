@@ -730,7 +730,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 2;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
 			if (max > 9999) max = 9999;
 			return max;
 		}
@@ -879,6 +879,7 @@ import classes.GlobalFlags.kFLAGS;
 				max *= multimax;
 			}
 			if (findPerk(PerkLib.UnlockMind2ndStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
 			max = Math.round(max);
 			if (max > 79999) max = 79999;
 			return max;
@@ -904,6 +905,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Rage) >= 0) max += 200;
 			if (findPerk(PerkLib.Anger) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
 			if (max > 1299) max = 1299;//obecnie max to 1210
 			return max;
 		}
@@ -930,8 +932,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
 			max += level * 10;
-			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
+			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
 			if (max > 19999) max = 19999;
 			return max;
 		}

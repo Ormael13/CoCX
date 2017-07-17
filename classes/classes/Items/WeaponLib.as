@@ -20,7 +20,7 @@ package classes.Items
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.");
 		public const DBFSWO :DualBFSword = new DualBFSword();
-		public const DEMSCYT:WeaponWithPerk = new WeaponWithPerk("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"Smth Smth Lia need to write still +  However, it might slowly warp the mind of wielder.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);
+		public const DEMSCYT:WeaponWithPerk = new WeaponWithPerk("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A mage catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();

@@ -24,7 +24,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("You struggle against the alraune vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
-			player.fatigue -= 50;
+			player.fatigue += 50;
 			doAI();
 		}
 		

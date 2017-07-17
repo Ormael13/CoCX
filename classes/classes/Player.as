@@ -1736,9 +1736,13 @@ use namespace kGAMECLASS;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
 				internalChimeraCounter++;
@@ -1773,9 +1777,13 @@ use namespace kGAMECLASS;
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
 				internalChimeraRatingCounter++;
@@ -2311,6 +2319,8 @@ use namespace kGAMECLASS;
 			//When character get Hoshi no tama
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
 				kitsuneCounter++;
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
+				kitsuneCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && kitsuneCounter >= 5)
 				kitsuneCounter += 1;
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
@@ -2365,6 +2375,8 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.DragonDarknessBreath) >= 0 && dragonCounter >= 4)
 				dragonCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				dragonCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
 				dragonCounter++;
 		//	if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 		//		dragonCounter += 10;
@@ -2533,6 +2545,8 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.DragonDarknessBreath) >= 0 && vouivreCounter >= 11)
 				vouivreCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				vouivreCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
 				vouivreCounter++;
 			
 			End("Player","racialScore");
@@ -4004,10 +4018,8 @@ use namespace kGAMECLASS;
 			min += perkv1(PerkLib.PentUp);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings. This effectively caps minimum lust at 80.
 			if (findPerk(PerkLib.ColdBlooded) >= 0) {
-				if (min >= 20) {
-					if (min <= 40) min -= (min - 20);
-					else min -= 20;
-				}
+				if (min >= 20) min -= 20;
+				else min = 0;
 				minCap -= 20;
 			}
 			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings. This effectively caps minimum lust at 90.
@@ -4648,8 +4660,16 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.DraconicLungs) >= 0) {
 				maxSpe += (5 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
+				maxTou += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 				maxSpe += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
+				maxSpe += (5 * (1 + newGamePlusMod));
+				maxWis += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {
 				maxStr += (5 * (1 + newGamePlusMod));

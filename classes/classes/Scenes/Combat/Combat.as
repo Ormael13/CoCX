@@ -384,29 +384,29 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 		//Standard menu before modifications.
 		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
-			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
+			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName +".  Damage done is determined by your strength and weapon.");
 		else if(!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
 			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
-			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
+			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName +".  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
 		if (player.weaponRangePerk == "Bow")
-			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined by your speed and weapon.");
+			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName +".  Damage done is determined by your speed and weapon.");
 		//Crossbow attack
 		if (player.weaponRangePerk == "Crossbow")
-			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined only by your weapon.");
+			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName +".  Damage done is determined only by your weapon.");
 		if (player.weaponRangePerk == "Throwing") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRange != weaponsrange.SHUNHAR) addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
-			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw [weaponrangename] at enemy.  Damage done is determined by your strength and weapon.");
+			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw " + player.weaponRangeName +" at enemy.  Damage done is determined by your strength and weapon.");
 		}
 		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0)
-				addButton(1, "Reload", reloadWeapon, null, null, null, "Your [weaponrangename] is out of ammo.  You'll have to reload it before attack.");
+				addButton(1, "Reload", reloadWeapon, null, null, null, "Your " + player.weaponRangeName +" is out of ammo.  You'll have to reload it before attack.");
 			else
-				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your [weaponrangename]!  Damage done is determined only by your weapon.");
+				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your " + player.weaponRangeName +"!  Damage done is determined only by your weapon.");
 		}
 		addButton(2, "Items", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (canUseMagic()) addButton(3, "Spells", magic.magicMenu, null, null, null, "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
@@ -2106,6 +2106,7 @@ public function fatigueRecovery():void {
 	if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fatiguecombatrecovery += 1;
+	if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fatiguecombatrecovery += 1;
 	fatigue(-(1 + fatiguecombatrecovery));
 }
 
@@ -5111,7 +5112,7 @@ public function runAway(callHook:Boolean = true):void {
 		if(player.spe > rand(monster.spe + escapeMod) || (player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50)) {
 			if(player.findPerk(PerkLib.Runner) >= 0) outputText("Using your skill at running, y");
 			else outputText("Y");
-			outputText("You easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
+			outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
 			outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
 			inCombat = false;
 			clearStatuses(false);

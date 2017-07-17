@@ -2341,22 +2341,22 @@
 		}
 
 		public function lowgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 20)");
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 25)");
 			player.soulforce += 25;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 		}
 		public function midgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 100)");
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 150)");
 			player.soulforce += 150;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 		}
 		public function highgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 500)");
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 900)");
 			player.soulforce += 900;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 		}
 		//public function superiorgradesoulforcerecoverypill(player:Player):void {
-			//outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 2500)");
+			//outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 5400)");
 			//player.soulforce += 5400;
 			//if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 		//}
@@ -2435,6 +2435,17 @@
 				player.soulforce += 100;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
+		}
+
+		public function verydilutedarcaneregenconcotion(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered mana: 40)");
+			player.mana += 40;
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+		}
+		public function dilutedarcaneregenconcotion(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered mana: 240)");
+			player.mana += 240;
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
 		}
 
 		public function useMarbleMilk(player:Player):void

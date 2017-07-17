@@ -25,11 +25,13 @@ package classes.Scenes
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it)\n");
-			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable).\n");
-			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping).\n");
-			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Lungs (Evolved). Req. Draconic Lungs perk and dragon score 10+. Effect: +5 to max speed and toughness (scalable) and increase power of dragon breath attacks 3x\n");
+			outputText("-New tier 2 misc lvl-up perk: Kitsune Thyroid Gland (Evolved). Req. Kitsune Thyroid Gland and perk for one of paths and kitsune score 6+. Effect: +5 to max speed and wisdom (scalable), increase by 1 fatigue recovery in combat, increase fire dgm, lust dmg of fox fire specials by 50%, 50% higher cost of all kitsune specials (bonuses to foxfire/cost inc are only added when PC have 9 tails)\n");
+			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable)\n");
+			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping)\n");
+			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist)\n");
 			outputText("-New tier 3 misc lvl-up perk: Cyclone (Stage 1). Req. Job: Warlord perk and 50+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 10%\n");
-			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage, Effect. Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage, Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
 			outputText("-New tier 4 misc lvl-up perk: Tornado. Req. Job: Warlord perk and 75+ in str and tou. Effect: Increase dmg multiplier for aoe specials like whirlwind by 100% (from 7x to 8x)\n");
 			outputText("-New tier 4 misc lvl-up perk: Cyclone (Stage 2). Req. Cyclone (Stage 1) perk and 70+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 15%\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
@@ -41,23 +43,21 @@ package classes.Scenes
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap\n");
 			outputText("-New tier 9 toughness lvl-up perk: Shield Combat. Req. perk Steel Impact. Effect: when PC block an attack riposte with a shield bash damaging it opponent\n");
+			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
+			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (2nd Stage). Req. Ascension: Unlocked Potential and be at second ascension. It costs 5 asc points and will give +2 to max lust/wrath and +6 to max soulforce at each lvl-up.\n");
 			outputText("-New accesory: Seer's Hairpin -  (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");//gained after beating Ignis for the first time
 			outputText("-New melee weapon: Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
-			outputText("-Fixed bugs: Blank screen when working on farm in Ignam\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
 			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -358,7 +358,7 @@ package classes.Scenes
 			outputText("-New tier 1 soulforce lvl-up perk: Flesh Body: Apprentice Stage. Req. Body Cultivator perk. Effects: +2 armor, +4 unarmed, +50 max HP (all scalable and gained each time PC gets one of these perks: Soul Apprentice, Soul Personage, Soul Warrior)\n");
 			outputText("-New tier 4 soulforce lvl-up perk: Flesh Body: Warrior Stage. Req. Flesh Body: Apprentice Stage perk. Effects: +3 armor, +6 unarmed, +75 max HP (all scalable and gained each time PC gets one of these perks: Soul Sprite, Soul Exalt)\n");
 			outputText("-New stat named unarmed listed on stats page. It adds to unarmed attacks with fists and some physical specials that involve using PC body to attack.\n");
-			outputText("-New rare ascension perk Ascension: Natural Metamorph. It costs 30 asc points and will give perks Genetic Memory and Metamorph at the start of each new game.\n");
+			outputText("-New rare ascension perk -> Ascension: Natural Metamorph. It costs 30 asc points and will give perks Genetic Memory and Metamorph at the start of each new game.\n");
 			outputText("-New perk for enemies: God type enemy. It gives them 5% of max HP regen per turn. So far only Marae has this perk.\n");
 			outputText("-Two new possible constructions to build in camp: Kitsune Shrine and Hot Springs bath. For shrine, PC must have a high enough kitsune rating (game must treat PC race as half-kitsune at least).\n");
 			outputText("-Each of the new camp constructions adds 2 ascension points. Completing Hot Spring allows PC to take a bath that will give a buff to recover fatigue slighty faster for 3 days. It’s also possible to trigger Peeping Tom scene if PC has a cock, this can end with all female camp members 'punishing' PC leading to a 24hr long inability to masturbate.\n");

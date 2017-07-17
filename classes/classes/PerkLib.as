@@ -71,6 +71,8 @@ package classes
 		// Ascension Rare perks
 		public static const AscensionHerosHeritage:PerkType = mk("Ascension: Hero's Heritage", "Ascension: Hero's Heritage",
 				"After reincarnation you ended in body of local hero descendant possesing much more firm body and resolve giving you a slight easier start of your quest in Mareth.");
+		public static const AscensionHerosLineage:PerkType = mk("Ascension: Hero's Lineage", "Ascension: Hero's Lineage",
+				"Body in which you ends up after next incarnation have much more thicker hero linage than before giving you even better start before venturing into Mareth. You would probably need it.");
 		public static const AscensionHybridTheory:PerkType = mk("Ascension: Hybrid Theory", "Ascension: Hybrid Theory",
 				"Allows you to reduce by one needed to accumulate mutations into non-human species to attain race specific enhancing effects.");
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
@@ -79,14 +81,14 @@ package classes
 				"You're underdog. Gains twice more exp for beating up enemies above your current level with doubled limit after which increase to gained exp stops.");
 				// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
-				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive gains at lvl-up).");
+				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive hp, fatigue, mana gains at lvl-up).");
+		public static const AscensionUnlockedPotential2ndStage:PerkType = mk("Ascension: Unlocked Potential (2nd Stage)", "Ascension: Unlocked Potential (2nd Stage)",
+				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive lust, wrath, soulforce gains at lvl-up).");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
-	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
-	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
-	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
 		
 		// History perks
@@ -360,6 +362,9 @@ package classes
 		public static const DraconicLungs:PerkType = mk("Draconic Lungs", "Draconic Lungs",
 				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
 				"You choose the 'Draconic Lungs' perk. Your lungs due to repeadly usage of dragon breath attacks turned into draconic lungs.");
+		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
+				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
+				"You choose the 'Draconic Lungs (Evolved)' perk. Continuous exposition to draconic changes caused your lungs evolution into more complete form.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
 				"Allows you to wield two weapons (excluding large ones, staffs, with special perks and range ones).",
 				"You choose the 'Dual Wield' perk, training skill of using two weapons with a few limitation.");
@@ -541,12 +546,18 @@ package classes
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
 				"You choose 'Job: Dervish' perk, training yourself to became Dervish.");
+		public static const JobElementalConjurer:PerkType = mk("Job: Enchanter", "Job: Enchanter",
+				"You've trained in summoning various types of elementals.",
+				"You choose 'Job: Elemental Conjurer' perk, training yourself to call elementals.");
 		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Job: Enchanter",
 				"You've trained in casting empowered buffs.",
 				"You choose 'Job: Enchanter' perk, training yourself to became Enchanter.");
 		public static const JobEromancer:PerkType = mk("Job: Eromancer", "Job: Eromancer",
 				"You've mastered the power of erotic magics.",
 				"You choose 'Job: Eromancer' perk, training yourself to became Eromancer.");
+		public static const JobGolemancer:PerkType = mk("Job: Golemancer", "Job: Golemancer",
+				"You've mastered the art of making golems.",
+				"You choose 'Job: Golemancer' perk, training yourself to became golems maker.");
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job: Guardian",
 				"You've trained in defensive combat.",
 				"You choose 'Job: Guardian' perk, training yourself to became Guardian.");
@@ -584,8 +595,11 @@ package classes
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed (req. 100+ tou).",
 				"You choose the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
-				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. IF PC posses both pure and corrupted Fox Fire allows to fuse them into one much stronger Fox Fire and if PC not have enough kitsune traits allows to use weakened base Fox Fire.",
+				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. (under construction)",
 				"You choose the 'Kitsune Thyroid Gland' perk. Some time after you grew ninth tail your enlightened entered on new level allowing you to form hoshi no tama inside your body.");
+		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
+				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. (under construction)",
+				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Some time after you grew ninth tail your enlightened entered on new level allowing you to form hoshi no tama inside your body.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +
@@ -926,7 +940,7 @@ package classes
 				"You choose the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
 		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
 				".",
-				"You choose the 'Tracheal System (Evolved)' perk, continuous exposition to insectidal changes caused your tracheal system evolution into more complete form.");
+				"You choose the 'Tracheal System (Evolved)' perk, continuous exposition to insectoidal changes caused your tracheal system evolution into more complete form.");
 		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
 				"You choose the 'Traditional Mage I' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
@@ -1881,6 +1895,7 @@ package classes
 		//------------
 		// WISDOM
 		//------------
+	//	JobElementalConjurer.requireWis(10);
 		//Tier 1 Wisdom perks
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
@@ -2066,6 +2081,8 @@ package classes
 		 _add(new PerkClass(PerkLib				job:corrupter czy jakoś tak - daje efekt iż wszyscy reaguja jakby pc miał 10/15/20/25 mniej corruption, nie wiem czy jeszcze jakiś efekt dodać
 		 }
 		 }*/
+		//Tier 3
+		//Tier 4
 		//------------
 		// SOULFORCE
 		//------------
@@ -2212,6 +2229,7 @@ package classes
 		 }
 		 */
 		Metamorph.requirePerk(GeneticMemory);
+		//JobArtificer
 
 		//Tier 1
 		ResistanceI.requireLevel(6);
@@ -2229,6 +2247,9 @@ package classes
 								  .requireCustomFunction(function (player:Player):Boolean {
 			return player.internalChimeraScore() >= 1;
 		}, "Any racial perk");
+		JobGolemancer.requireLevel(6)
+					 .requireInt(25)
+					 .requireWis(25);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -2248,6 +2269,13 @@ package classes
 				 .requirePerk(JobBarbarian);
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
+		DraconicLungsEvolved.requirePerk(DraconicLungs).requireCustomFunction(function (player:Player):Boolean {
+			return player.dragonScore() >= 10;
+		}, "Dragon race");
+		KitsuneThyroidGlandEvolved.requirePerk(KitsuneThyroidGland)
+								  .requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+			return player.kitsuneScore() >= 6;
+		}, "Kitsune race");
 		//Tier 3
 		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)
