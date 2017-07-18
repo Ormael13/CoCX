@@ -1200,6 +1200,23 @@ use namespace kGAMECLASS;
 					}
 				}
 			}
+			if (devilkinScore() >= 7)
+			{
+				if (devilkinScore() >= 10) {
+					if (devilkinScore() >= 14)  {
+						if (isTaur()) race = "greater devil-taur";
+						else race = "greater devil";
+					}
+					else {
+						if (isTaur()) race = "devilkin-taur";
+						else race = "devilkin";
+					}
+				}
+				else {
+					if (isTaur()) race = "half fiend-taur";
+					else race = "half fiend";
+				}
+			}
 			if (sharkScore() >= 4)
 			{
 				if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) {
@@ -1572,6 +1589,8 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (demonScore() >= 5)
 				chimeraCounter++;
+			if (devilkinScore() >= 7)
+				chimeraCounter++;
 			if (sharkScore() >= 4)
 				chimeraCounter++;
 			if (orcaScore() >= 6)
@@ -1662,6 +1681,8 @@ use namespace kGAMECLASS;
 //			if (goblinScore() >= 4)
 //				grandchimeraCounter++;
 			if (demonScore() >= 11)
+				grandchimeraCounter++;
+			if (devilkinScore() >= 10)
 				grandchimeraCounter++;
 			if (sharkScore() >= 8)
 				grandchimeraCounter++;
@@ -1855,6 +1876,18 @@ use namespace kGAMECLASS;
 				demonCounter += 10;
 			End("Player","racialScore");
 			return demonCounter;
+		}
+
+		//determine devil/infernal goat rating
+		public function devilkinScore():Number {
+			Begin("Player","racialScore","devil");
+			var devilkinCounter:Number = 0;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
+				devilkinCounter++;
+			if (tailType == TAIL_TYPE_GOAT || tailType == TAIL_TYPE_DEMONIC)
+				devilkinCounter++;
+			End("Player","racialScore");
+			return devilkinCounter;
 		}
 
 		//Determine minotaur rating
@@ -4401,6 +4434,25 @@ use namespace kGAMECLASS;
 					maxSpe += (15 * (1 + newGamePlusMod));
 					maxInt += (15 * (1 + newGamePlusMod));
 					maxLib += (45 * (1 + newGamePlusMod));
+				}
+			}//+60/50-60
+			if (devilkinScore() >= 7) {
+				if (devilkinScore() >= 14) {
+					maxSpe += (30 * (1 + newGamePlusMod));
+					maxInt += (35 * (1 + newGamePlusMod));
+					maxLib += (100 * (1 + newGamePlusMod));
+				}
+				else if (devilkinScore() >= 11 && devilkinScore() < 14) {
+					maxStr += (50 * (1 + newGamePlusMod));
+					maxSpe -= (20 * (1 + newGamePlusMod));
+					maxInt += (60 * (1 + newGamePlusMod));
+					maxLib += (75 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (35 * (1 + newGamePlusMod));
+					maxSpe -= (10 * (1 + newGamePlusMod));
+					maxInt += (40 * (1 + newGamePlusMod));
+					maxLib += (50 * (1 + newGamePlusMod));
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {

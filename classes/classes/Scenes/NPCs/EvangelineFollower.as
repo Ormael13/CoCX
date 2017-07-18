@@ -306,7 +306,7 @@ private function evangelineAlchemyMenu():void {
 	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
 	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based of Black Ink.");
 	//addButton(12, "", ).hint(".");
-	//addButton(13, "", ).hint(".");
+	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Aske her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -512,6 +512,29 @@ private function MakingWhiteInkPotion():void {
 	outputText("\n\nAfter a while, she hands you a vial of White Ink.  ");
 	inventory.takeItem(consumables.WHITEIN, evangelineAlchemyMenu);
 	cheatTime(1/6);
+}
+
+private function MakingInfernalWinePotion():void {
+	clearOutput();
+	if (player.gems < 480) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.SATYR_W, 1) && player.hasItem(consumables.SUCMILK, 1) && player.hasItem(consumables.INCUBID, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need bottle of Satyr Wine, bottle of Succubi milk and Incubi draft,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.SATYR_W, 1);
+	player.destroyItems(consumables.SUCMILK, 1);
+	player.destroyItems(consumables.INCUBID, 1);
+	player.gems -= 480;
+	statScreenRefresh();
+	outputText("You hand over one bottle of Satyr Wine, bottle of Succubi milk, Incubi draft and four hundred eighty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a bottle of infernal wine.  ");
+	inventory.takeItem(consumables.INFWINE, evangelineAlchemyMenu);
+	cheatTime(1/4);
 }
 
 private function LvLUp():void {

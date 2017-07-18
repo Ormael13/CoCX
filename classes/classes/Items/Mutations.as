@@ -6937,9 +6937,9 @@
 					player.lib = 50;
 					dynStats("lib", .1);
 				}
-				outputText("\n\n");
-				if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("<b>(Lost Perks - Bimbo Brains, Bimbo Body)\n");
-				else outputText("<b>(Lost Perk - Bimbo Body)\n");
+				outputText("\n\n<b>(Lost Perk - ");
+				if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("Bimbo Brains, ");
+				outputText("Bimbo Body)\n");
 				player.removePerk(PerkLib.BimboBrains);
 				player.removePerk(PerkLib.BimboBody);
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
@@ -10446,6 +10446,60 @@
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
+		
+		public function infernalWine(player:Player):void
+		{
+			player.slimeFeed();
+			//init variables
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+		//	var temp2:Number = 0;
+		//	var temp3:Number = 0;
+			//Randomly choose affects limit
+		//	if (rand(2) == 0) changeLimit++;
+		//	if (rand(3) == 0) changeLimit++;
+		//	if (rand(4) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			//clear screen
+			clearOutput();
+			outputText("You raise the disgusting black concoction to your mouth. The taste is better than its texture but leaves you with a strong aftertaste of sulfur.");
+			dynStats("cor", 3 + rand(3));
+			
+			//stat changes
+			
+			//sexual changes
+			
+			//physical changes
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
+				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
+				setLowerBody(LOWER_BODY_TYPE_CLOVEN_HOOFED);
+				player.legCount = 2;
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED && (player.tailType != TAIL_TYPE_GOAT && player.tailType != TAIL_TYPE_DEMONIC)) {
+				outputText("\n\n");
+				if (rand(2) == 0) {
+					outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
+					setTailType(TAIL_TYPE_GOAT);
+				}
+				else {
+					if (player.tailType != TAIL_TYPE_NONE) {
+						if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ");
+						else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ");
+						outputText("<b>Your tail is now demonic in appearance.</b>");
+					}
+					else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.");
+					setTailType(TAIL_TYPE_DEMONIC);
+				}
+				changes++;
+			}
+			
+			player.refillHunger(10);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		
 		public function prisonBread(player:Player):void {
 			prison.prisonItemBread(false);

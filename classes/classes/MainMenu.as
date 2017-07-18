@@ -2,6 +2,7 @@ package classes {
 
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
+import classes.Scenes.Changelog;
 
 import coc.view.MainView;
 
@@ -66,6 +67,7 @@ public class MainMenu extends BaseContent {
 			resume = playerMenu;
 
 		var achievements:Achievements = new Achievements();
+		var changelog:Changelog = new Changelog();
 
 		// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 		// that if you check if any images were found immediately when this screen is shown, you get 0
@@ -82,7 +84,7 @@ public class MainMenu extends BaseContent {
 
 		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
 		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
-		//addButton(7, "Changelog", debugPane).hint("View changelog.");
+		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It have many pages already.</i>");
 		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane).hint("View debug information.");
 	}
 

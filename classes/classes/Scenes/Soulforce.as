@@ -299,7 +299,7 @@ package classes.Scenes
 			addButton(9, "Dual BFS", AddDualBigFuckingSwords).hint("Add 1 pair of Big Fucking Swords for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-			//addButton(10, "BlunderR", AddTheBlunderbussRifle).hint("Add 1 Blunderbuss Rifle.");
+			addButton(12, "GuidedBow", AddTheGuidedBow).hint("Add 1 Guided Bow.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function NonEquipmentMenu():void {
@@ -421,9 +421,9 @@ package classes.Scenes
 			outputText("\n\n<b>(Gained 1 Yeti Cum!)</b>\n\n");
 			inventory.takeItem(consumables.YETICUM, EquipmentMenu);
 		}
-		public function AddTheBlunderbussRifle():void {
-			outputText("\n\n<b>(Gained 1 Blunderbuss Rifle!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BLUNDER, EquipmentMenu);
+		public function AddTheGuidedBow():void {
+			outputText("\n\n<b>(Gained 1 Guided Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWGUID, EquipmentMenu);
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
