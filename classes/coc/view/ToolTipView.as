@@ -36,9 +36,12 @@ import flash.text.TextField;
 			this.hd = addTextField({
 				x:15,y:15,
 				width:316,height:25.35,
-				multiline:true,wordWrap:false,
+				multiline:true,
+				wordWrap:false,
+				embedFonts:true,
 				defaultTextFormat:{
-					size: 18
+					size: 18,
+					font: CoCButton.ButtonLabelFontName
 				}
 			});
 			this.tf = addTextField({

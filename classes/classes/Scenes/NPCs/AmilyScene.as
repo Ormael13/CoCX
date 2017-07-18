@@ -2656,12 +2656,12 @@ package classes.Scenes.NPCs
 				if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !kGAMECLASS.urtaQuest.urtaBusy())
 				{
 					if (output) outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n");
-					addButton(5, "Date", dateNightFirstTime, null, null, null, "Take Amily on a date to Tel'Adre?");
+					addButton(5, "Date", dateNightFirstTime).hint("Take Amily on a date to Tel'Adre?");
 				}
-				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) addButton(6, "Lay Eggs", layEggsInAmily, null, null, null, "Unload your eggs into Amily's ass.");
+				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) addButton(6, "Lay Eggs", layEggsInAmily).hint("Unload your eggs into Amily's ass.");
 				if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
-					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle, null, null, null, "Request Amily to destroy any corrupted glades she can find.");
-					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle, null, null, null, "Request Amily to stop destroying the corrupted glades.");
+					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle).hint("Request Amily to destroy any corrupted glades she can find.");
+					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle).hint("Request Amily to stop destroying the corrupted glades.");
 				}
 				addButton(14, "Leave", camp.campLoversMenu);
 			}
@@ -2677,23 +2677,23 @@ package classes.Scenes.NPCs
 				addButton(14, "Leave", camp.campSlavesMenu);
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
-					addButton(5, "Farm Work", sendCorruptCuntToFarm, null, null, null, "Send Amily to the farm for work.");
+					addButton(5, "Farm Work", sendCorruptCuntToFarm).hint("Send Amily to the farm for work.");
 				}
 				
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
 				{
-					addButton(5, "Go Camp", backToCamp, null, null, null, "Send Amily back to your camp.");
+					addButton(5, "Go Camp", backToCamp).hint("Send Amily back to your camp.");
 					if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(6, "Harvest Milk", harvestMilk);
 					else addButton(6, "Stop Harvest", stopHarvestingMilk);
 					addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 				}
 			}
 			//Core tooltips
-			mainView.bottomButtons[0].toolTipText = "Examine Amily's appearance.";
-			mainView.bottomButtons[1].toolTipText = "Discuss with Amily about something";
-			mainView.bottomButtons[2].toolTipText = "Proposition Amily for some sexy-times.";
-			mainView.bottomButtons[3].toolTipText = "Give Amily something to give her clothes or possibly alter how she looks.";
-			mainView.bottomButtons[4].toolTipText = (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Give Amily something to remove her fur." : "Give Amily something to re-grow her fur.");
+			button(0).hint("Examine Amily's appearance.");
+			button(1).hint("Discuss with Amily about something");
+			button(2).hint("Proposition Amily for some sexy-times.");
+			button(3).hint("Give Amily something to give her clothes or possibly alter how she looks.");
+			button(4).hint((flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Give Amily something to remove her fur." : "Give Amily something to re-grow her fur."));
 		}
 
 		//Corrupt Amily Sex Options
@@ -2703,14 +2703,14 @@ package classes.Scenes.NPCs
 				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?");
 				menu();
 				if (player.hasCock()) {
-					addButton(0, "Anal", corruptAmilyBuckFutter, null, null, null, "Fuck Amily in the ass!");
-					addButton(1, "Get BJ", corruptAmilyOralSuckOff, null, null, null, "Have Amily suck you off.", "Get Blowjob");
-					addButton(5, "Vagina", corruptAmilysPussyGetsMotherfuckingFucked, null, null, null, "Fuck Amily the classic way by penetrating her vaginally.");
+					addButton(0, "Anal", corruptAmilyBuckFutter).hint("Fuck Amily in the ass!");
+					addButton(1, "Get BJ", corruptAmilyOralSuckOff).hint("Have Amily suck you off.", "Get Blowjob");
+					addButton(5, "Vagina", corruptAmilysPussyGetsMotherfuckingFucked).hint("Fuck Amily the classic way by penetrating her vaginally.");
 				}
 				if (player.hasVagina()) {
-					addButton(2, "Get Licked", corruptAmilyLickPussiesLikeAPro, null, null, null, "Have Amily lick your pussy.");
-					if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(3, "GetPen'ed", corruptAmilyCampBonesPCWithHerCock, null, null, null, "Have Amily put her cock to good use by penetrating you vaginally.", "Get Penetrated");
-					addButton(4, "Scissor", corruptAmilyScissorsLikeAPro, null, null, null, "Do some girly fun-times with Amily.");
+					addButton(2, "Get Licked", corruptAmilyLickPussiesLikeAPro).hint("Have Amily lick your pussy.");
+					if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(3, "GetPen'ed", corruptAmilyCampBonesPCWithHerCock).hint("Have Amily put her cock to good use by penetrating you vaginally.", "Get Penetrated");
+					addButton(4, "Scissor", corruptAmilyScissorsLikeAPro).hint("Do some girly fun-times with Amily.");
 				}
 				addButton(14, "Nevermind", amilyFollowerEncounter);
 			}
@@ -2909,18 +2909,18 @@ package classes.Scenes.NPCs
 				}
 			}
 			
-			addButton(0, "Take Charge", amilyTakesChargeSex, null, null, null, "Take charge and decide how you should have your way with Amily.");
-			addButton(1, "Amily Leads", letAmilyLead, null, null, null, "Let Amily choose how she's going to have sex with you.");
-			addButton(2, bText, babies, null, null, null, bTooltip);
-			if (flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !getGame().urtaQuest.urtaBusy()) addButton(3, "Urta", getGame().followerInteractions.amilyUrtaSex, null, null, null, "Take Amily for a visit to Urta in Tel'Adre for some threesome sexy times.");
-			if (flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) addButton(4, "Swim", amilySwimFuckIntro, null, null, null, "What's a better pleasure than to take Amily for a swim and do some fuck?");
+			addButton(0, "Take Charge", amilyTakesChargeSex).hint("Take charge and decide how you should have your way with Amily.");
+			addButton(1, "Amily Leads", letAmilyLead).hint("Let Amily choose how she's going to have sex with you.");
+			addButton(2, bText, babies).hint(bTooltip);
+			if (flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !getGame().urtaQuest.urtaBusy()) addButton(3, "Urta", getGame().followerInteractions.amilyUrtaSex).hint("Take Amily for a visit to Urta in Tel'Adre for some threesome sexy times.");
+			if (flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) addButton(4, "Swim", amilySwimFuckIntro).hint("What's a better pleasure than to take Amily for a swim and do some fuck?");
 			if (izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] > 0 && player.hasCock()) {
 				outputText("You could see if Amily and Izma are up for another round of Amily's fertility potion, though contraceptives won't matter at all once she takes that.\n");
-				addButton(5, "Izma3Some", drinkThePotion, null, null, null, "Get into a threesome with Amily and Izma. This will pretty much get them pregnant.");
+				addButton(5, "Izma3Some", drinkThePotion).hint("Get into a threesome with Amily and Izma. This will pretty much get them pregnant.");
 			}
 			if (flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT] > 0 && player.hasCock() && player.cockThatFits(61) >= 0 && player.lust >= 33) {
 				outputText("Amily might be up for playing nurse again.\n");
-				addButton(6, "Nurse RP", amilyNurseCheckup, null, null, null, "Have Amily roleplay as a nurse in a naughty way.");
+				addButton(6, "Nurse RP", amilyNurseCheckup).hint("Have Amily roleplay as a nurse in a naughty way.");
 			}
 			addButton(14, "Back", amilyFollowerEncounter);
 		}
@@ -2932,17 +2932,17 @@ package classes.Scenes.NPCs
 			outputText("You stride up to her and take her in your arms, kissing her deeply. She melts enthusiastically into your embrace, kissing you back just as hard, her tail winding around your [leg]. You lead her back to the nest she has made for herself and firmly but gently place her on her back there. She smiles up at you. \"<i>Ooh, taking charge, are we?</i>\" She trills with pleasure, tail waving to and fro with sincere excitement.\n\nWhat will you do?");
 			menu();
 			if (player.hasCock()) {
-				if (player.cockThatFits(61) >= 0) addButton(0, "Fuck", takeChargeAmilyFuck, null, null, null, "Penetrate Amily vaginally.");
-				if (player.cockThatFits(50) >= 0) addButton(1, "Buttfuck", fuckPureAmilysHeiny, null, null, null, "Take Amily from behind."); //ButtFuckButtFUCKBUTTFUCK
-				addButton(2, "Get Sucked", takeChargeAmilyGetSucked, null, null, null, "Have Amily suck you off.");
+				if (player.cockThatFits(61) >= 0) addButton(0, "Fuck", takeChargeAmilyFuck).hint("Penetrate Amily vaginally.");
+				if (player.cockThatFits(50) >= 0) addButton(1, "Buttfuck", fuckPureAmilysHeiny).hint("Take Amily from behind."); //ButtFuckButtFUCKBUTTFUCK
+				addButton(2, "Get Sucked", takeChargeAmilyGetSucked).hint("Have Amily suck you off.");
 			}
 			if (player.hasVagina()) {
-				addButton(3, "Scissor", takeChargeAmilyScissorMeTimbers, null, null, null, "Get into some girly fun-times by rubbing your girl-bits against Amily's.");
-				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(4, "Mount Her", takeChargeAmilyMountHer, null, null, null, "Ride Amily's cock until she cums!");
+				addButton(3, "Scissor", takeChargeAmilyScissorMeTimbers).hint("Get into some girly fun-times by rubbing your girl-bits against Amily's.");
+				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(4, "Mount Her", takeChargeAmilyMountHer).hint("Ride Amily's cock until she cums!");
 			}
-			if (flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0 || flags[kFLAGS.AMILY_LACTATION_RATE] >= 1) addButton(5, "Drink Milk", takeChargeAmilyMouseMilk, null, null, null, "Drink some of Amily's yummy mouse-milk.");
-			addButton(6, "Eat Out", takeChargeAmilyEatOut, null, null, null, "Get a taste of Amily's pussy.");
-			if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(7, "Catch Anal", pureAmilyPutsItInYourRectumDamnNearKilledEm, null, null, null, "Have Amily put her cock to a good use by taking you from behind.");
+			if (flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0 || flags[kFLAGS.AMILY_LACTATION_RATE] >= 1) addButton(5, "Drink Milk", takeChargeAmilyMouseMilk).hint("Drink some of Amily's yummy mouse-milk.");
+			addButton(6, "Eat Out", takeChargeAmilyEatOut).hint("Get a taste of Amily's pussy.");
+			if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(7, "Catch Anal", pureAmilyPutsItInYourRectumDamnNearKilledEm).hint("Have Amily put her cock to a good use by taking you from behind.");
 			addButton(14, "Nevermind", fuckTheMouseBitch);
 		}
 
@@ -7855,8 +7855,8 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.AMILY_ALLOWS_FERTILITY] = 1;
 			//[Norma] [Try The Potion]
 			menu();
-			addButton(0, "Normal", fuckTheMouseBitch, null, null, null, "Have Amily just go off the herbs normally.");
-			addButton(1, "Try Potion", drinkThePotion, null, null, null, "Try something new. You have a hunch that it might lead to inevitable impregnation.");
+			addButton(0, "Normal", fuckTheMouseBitch).hint("Have Amily just go off the herbs normally.");
+			addButton(1, "Try Potion", drinkThePotion).hint("Try something new. You have a hunch that it might lead to inevitable impregnation.");
 		}
 
 		//Try The Potion

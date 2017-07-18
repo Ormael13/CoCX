@@ -120,13 +120,13 @@ public function meetEvangeline():void {
 	outputText("Deciding to visit your camp transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
 	outputText("\"<i>Hi [name]!  Anything I can help you with?</i>\"");
 	menu();
-	addButton(0, "Appearance", evangelineAppearance, null, null, null, "Examine Evangeline's detailed appearance.");
-	addButton(1, "Talk", evangelineTalkMenu, null, null, null, "Ask Evangeline about something.");
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) addButton(2, "Sex", evangelineSexMenu, null, null, null, "Have some sex with the demonic chimera girl.");//godess
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) addButton(3, "Spar", evangelineSparMenu, null, null, null, "Get into a quick battle with Evangeline!");
-	addButton(4, "Alchemy", evangelineAlchemyMenu, null, null, null, "Ask Evangeline to make some transformation item.");
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp, null, null, null, "Give Evangeline some gems to cover her expenses on getting stronger.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments, null, null, null, "Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
+	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
+	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
+	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
+	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
+	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -156,12 +156,12 @@ private function evangelineTalkMenu():void {
 	clearOutput();
 	outputText("What would you like to discuss with Evangeline?");
 	menu();
-	addButton(0, "Your Eyes", TalkYourEyes, null, null, null, "Talk about her unusual eyes.");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 1) addButton(1, "Demons", TalkDemons, null, null, null, "Ask about demons in general.");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) addButton(2, "Past Life", TalkPastLife1, null, null, null, "Talk about her past before meeting you.");
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) addButton(3, "3", , null, null, null, "");her father? - na X affection score odblokowywane?
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 4) addButton(4, "4", , null, null, null, "");her soul? - jak sie PC dowie o byciu demonicą przez nią?
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 5) addButton(5, "5", , null, null, null, "");
+	addButton(0, "Your Eyes", TalkYourEyes).hint("Talk about her unusual eyes.");
+	if (flags[kFLAGS.EVANGELINE_TALKS] >= 1) addButton(1, "Demons", TalkDemons).hint("Ask about demons in general.");
+	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
+	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?
+	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
+	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 5) addButton(5, "5", ).hint("");
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -249,9 +249,9 @@ private function evangelineSexMenu():void {
 	clearOutput();
 	outputText("Placeholder text.");
 	menu();
-	//addButton(0, "", , null, null, null, "");
-	//addButton(1, "", , null, null, null, "");
-	//addButton(2, "", , null, null, null, "");
+	//addButton(0, "", ).hint("");
+	//addButton(1, "", ).hint("");
+	//addButton(2, "", ).hint("");
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -293,20 +293,20 @@ private function evangelineAlchemyMenu():void {
 	clearOutput();
 	outputText("\"<i>So you do want another transformational item made by me?</i>\" She asked after hearing what potion you want to purpose to her this time, at which you simply nod. Without wasting time she walks, with you closely behind, toward a entrance to a small cave right outside the camp's border, in which she keep her equipment.\n\n\"<i>So what you want this time for me to make?</i>\" Stopping at the edge of the entrance to lab Evangeline glance in your direction.");
 	menu();
-	addButton(0, "Gorgon Oil", MakingGorgonPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
-	addButton(1, "Vouivre Oil", MakingVouivrePotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
-	addButton(2, "Couatl Oil", MakingCouatlPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
-	addButton(3, "Centaurinum", MakingCentaurPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
-	addButton(4, "Unicornum", MakingUnicornumPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-	//addButton(5, "", , null, null, null, ".");kitsune/salamander TF//Hybryd race TF
-	addButton(6, "Nocello Liq", MakingNocelloLiqueur, null, null, null, "Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
-	//addButton(7, "", , null, null, null, ".");siren TF//Hybryd race TF
-	//addButton(8, "", , null, null, null, ".");manticore TF//Hybryd race TF
-	//addButton(9, "", , null, null, null, ".");
-	addButton(10, "Alicornum", MakingAlicornumPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
-	addButton(11, "Scylla Ink", MakingScyllaInkPotion, null, null, null, "Ask her to brew a special potion based of Black Ink.");
-	//addButton(12, "", , null, null, null, ".");
-	//addButton(13, "", , null, null, null, ".");
+	addButton(0, "Gorgon Oil", MakingGorgonPotion).hint("Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
+	addButton(1, "Vouivre Oil", MakingVouivrePotion).hint("Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
+	addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
+	addButton(3, "Centaurinum", MakingCentaurPotion).hint("Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
+	addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
+	//addButton(5, "", ).hint(".");kitsune/salamander TF//Hybryd race TF
+	addButton(6, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
+	//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
+	//addButton(8, "", ).hint(".");manticore TF//Hybryd race TF
+	//addButton(9, "", ).hint(".");
+	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
+	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based of Black Ink.");
+	//addButton(12, "", ).hint(".");
+	//addButton(13, "", ).hint(".");
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -465,8 +465,8 @@ private function MakingAlicornumPotion():void {
 private function MakingScyllaInkPotion():void {
 	outputText("\n\n\"<i>So the grey or white ink this time?</i>\"");
 	menu();
-	addButton(0, "Grey Ink", MakingGreyInkPotion, null, null, null, "Grey Ink for Herm Scylla form. \n\nCost: 10 Gems \nNeeds 1 vial of Black Ink and 1 sealed bottle of behemoth cum.");
-	addButton(1, "White Ink", MakingWhiteInkPotion, null, null, null, "White Ink for Male Scylla form. \n\nCost: 20 Gems \nNeeds 1 vial of Black Ink and 2 sealed bottles of behemoth cum.");
+	addButton(0, "Grey Ink", MakingGreyInkPotion).hint("Grey Ink for Herm Scylla form. \n\nCost: 10 Gems \nNeeds 1 vial of Black Ink and 1 sealed bottle of behemoth cum.");
+	addButton(1, "White Ink", MakingWhiteInkPotion).hint("White Ink for Male Scylla form. \n\nCost: 20 Gems \nNeeds 1 vial of Black Ink and 2 sealed bottles of behemoth cum.");
 	addButton(4, "Back", evangelineAlchemyMenu);
 }
 
@@ -519,26 +519,26 @@ private function LvLUp():void {
 	outputText("\"<i>So [name] how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
 	menu();
-	if (player.gems > 1) addButton(0, "1 gem", Give1Gem, null, null, null, "Give Evangeline 1 gem.");
-	if (player.gems > 10) addButton(1, "10 gems", Give10Gems, null, null, null, "Give Evangeline 10 gems.");
-	if (player.gems > 100) addButton(2, "100 gems", Give100Gems, null, null, null, "Give Evangeline 100 gems.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 60) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	if (player.level >= 2 && flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 108) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	if (player.level >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 206) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	if (player.level >= 4 && flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	if (player.level >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 640) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 150) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 11 && flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 12 && flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 14 && flags[kFLAGS.EVANGELINE_LVL_UP] == 12 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 15 && flags[kFLAGS.EVANGELINE_LVL_UP] == 13 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 17 && flags[kFLAGS.EVANGELINE_LVL_UP] == 14 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 18 && flags[kFLAGS.EVANGELINE_LVL_UP] == 15 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 20 && flags[kFLAGS.EVANGELINE_LVL_UP] == 16 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(13, "Experiments", Experiments, null, null, null, "Check on what experiments Evangeline can work on.");
+	if (player.gems > 1) addButton(0, "1 gem", Give1Gem).hint("Give Evangeline 1 gem.");
+	if (player.gems > 10) addButton(1, "10 gems", Give10Gems).hint("Give Evangeline 10 gems.");
+	if (player.gems > 100) addButton(2, "100 gems", Give100Gems).hint("Give Evangeline 100 gems.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 60) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (player.level >= 2 && flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 108) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (player.level >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 206) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (player.level >= 4 && flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (player.level >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 640) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 11 && flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 12 && flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 14 && flags[kFLAGS.EVANGELINE_LVL_UP] == 12 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 15 && flags[kFLAGS.EVANGELINE_LVL_UP] == 13 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 17 && flags[kFLAGS.EVANGELINE_LVL_UP] == 14 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 18 && flags[kFLAGS.EVANGELINE_LVL_UP] == 15 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 20 && flags[kFLAGS.EVANGELINE_LVL_UP] == 16 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(13, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");
 	addButton(14, "Back", meetEvangeline);//lvl-up 9: cow TF effects
 }//lvl-up 11: succubus TF effects (skrzydła 3 stopien zmiany, rogi jedna para i ogon, moze zmiana odcienia skóry na purpurowy, błekity, różowy lub czerwony)
 //koszt vitality tincture, scholar tea i sucubus milk to 6 gems (1 VT to +2 str i tou a 1 ST to +2 do jej statów)
@@ -658,7 +658,7 @@ private function Experiments():void {
 	outputText("Placeholder Text.");
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
 	menu();
-	addButton(13, "Give Gems", LvLUp, null, null, null, "Give Evangeline some gems to cover her experiments expenses.");
+	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }
 

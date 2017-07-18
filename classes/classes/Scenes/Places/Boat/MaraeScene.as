@@ -165,8 +165,8 @@ public function alraunezeMe():void {
 		outputText("<i>\"Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"");
 	}
 	menu();
-	addButton(0, "No", alraunezeMeNo, null, null, null, "");
-	addButton(1, "Yes", alraunezeMeYes, null, null, null, "");
+	addButton(0, "No", alraunezeMeNo).hint("");
+	addButton(1, "Yes", alraunezeMeYes).hint("");
 }
 
 private function alraunezeMeNo():void {
@@ -837,8 +837,8 @@ public function level3MaraeEncounter():void {
 	outputText("Once again, you approach the island where the corrupted goddess resides and set foot on the island. \"<i>Coming back for more?</i>\" Marae coos.");
 	outputText("\n\n(Do you fight Marae or stay with her and abandon your quests? Or you could leave if you want.)");
 	menu();
-	addButton(0, "Fight Her", promptFightMarae3, null, null, null, "Fight Marae the corrupted goddess!");
-	addButton(1, "Stay With Her", maraeBadEnd, null, null, null, "Stay with Marae and end your adventures?");
+	addButton(0, "Fight Her", promptFightMarae3).hint("Fight Marae the corrupted goddess!");
+	addButton(1, "Stay With Her", maraeBadEnd).hint("Stay with Marae and end your adventures?");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -888,7 +888,7 @@ public function encounterPureMaraeEndgame():void {
 	}
 	flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
 	menu();
-	addButton(0, "Bring it on!", initiateFightMarae, null, null, null, "Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
+	addButton(0, "Bring it on!", initiateFightMarae).hint("Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
 	addButton(1, "Not yet!", camp.returnToCampUseOneHour);
 }
 

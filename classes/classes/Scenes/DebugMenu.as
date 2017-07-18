@@ -48,15 +48,15 @@ import classes.BodyParts.SkinLayer;
 				clearOutput();
 				outputText("Welcome to the super secret debug menu!");
 				menu();
-				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
-				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
-				addButton(2, "Flag Editor", flagEditor, null, null, null, "Edit any flag. \n\nCaution: This might screw up your save!");
-				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
+				addButton(0, "Spawn Items", itemSpawnMenu).hint("Spawn any items of your choice, including items usually not obtainable through gameplay.");
+				addButton(1, "Change Stats", statChangeMenu).hint("Change your core stats.");
+				addButton(2, "Flag Editor", flagEditor).hint("Edit any flag. \n\nCaution: This might screw up your save!");
+				addButton(3, "Reset NPC", resetNPCMenu).hint("Choose a NPC to reset.");
 				//addButton(5, "Event Trigger", eventTriggerMenu);
-				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption).hint("Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
-				addButton(5, "DumpEffects", dumpEffectsMenu, null, null, null, "Display your status effects");
-				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
+				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
@@ -497,13 +497,13 @@ import classes.BodyParts.SkinLayer;
 			outputText("TEST STUFFZ");
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
-			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
-			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
+			addButton(2, "Be Manticore", getManticoreKit).hint("Gain everything needed to become a Manticore-morph.");
+			addButton(3, "Be Dragonne", getDragonneKit).hint("Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
-			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
+			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing).hint("Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
-			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
-			addButton(8, "BodyPartEditor", bodyPartEditorRoot,null,null,null, "Inspect and fine-tune the player body parts");
+			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
+			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		private function generateTagDemos(...tags:Array):String {

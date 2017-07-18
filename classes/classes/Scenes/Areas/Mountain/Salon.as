@@ -67,12 +67,12 @@ private function salonFavoritesPaymentMenu():void {
 private function salonPaymentMenu():void {
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	if (player.hasCock()) addButton(0, "Goblin Blow", goblinHairDresserFacefuck, null, null, null, "Let Lynnette suck you off.");
-	addButton(1, "Canine", gloryholeDoggie, null, null, null, "Suck that knotted cock.");
-	addButton(2, "Imp", gloryholeImp, null, null, null, "Suck that demonic cock. Judging from the constant bobbing, someone must have been trying hard to hover at the right height.");
-	addButton(3, "Minotaur", gloryholeMinotaur, null, null, null, "Suck that huge minotaur cock!");
-	addButton(4, "Incubus", gloryholeIncubus, null, null, null, "Suck that incubus cock. It gives off that pleasant spicy scent.");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	if (player.hasCock()) addButton(0, "Goblin Blow", goblinHairDresserFacefuck).hint("Let Lynnette suck you off.");
+	addButton(1, "Canine", gloryholeDoggie).hint("Suck that knotted cock.");
+	addButton(2, "Imp", gloryholeImp).hint("Suck that demonic cock. Judging from the constant bobbing, someone must have been trying hard to hover at the right height.");
+	addButton(3, "Minotaur", gloryholeMinotaur).hint("Suck that huge minotaur cock!");
+	addButton(4, "Incubus", gloryholeIncubus).hint("Suck that incubus cock. It gives off that pleasant spicy scent.");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum).hint("Buy a bottle of minotaur cum for 60 gems?");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -118,10 +118,10 @@ public function salonPurchaseMenu():void {
 	if (player.hairLength < player.tallness) addButton(3, "Lengthen", hairGrow);
 	if (player.hairLength > 0) addButton(4, "Remove Hair", removeHair);
 	addButton(5, "Buy Products", dyeMenu);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(6, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(6, "Buy MinoCum", buyMinoCum).hint("Buy a bottle of minotaur cum for 60 gems?");
 	addButton(7, "Beard Options", beardMenu);
-	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial, null, null, null, "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
-	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial, null, null, null, "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
+	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial).hint("This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
+	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial).hint("The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 

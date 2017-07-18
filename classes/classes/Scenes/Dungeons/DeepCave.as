@@ -517,9 +517,9 @@ package classes.Scenes.Dungeons
 			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n");
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
 			menu();
-			addButton(0, "Sexual", sexualInterrogation, null, null, null, "Chain the imp up and sexually interrogate him.");
-			addButton(1, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
-			addButton(2, "Safety", releaseZForInfo, null, null, null, "Release the imp after you get the information you need.");
+			addButton(0, "Sexual", sexualInterrogation).hint("Chain the imp up and sexually interrogate him.");
+			addButton(1, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(2, "Safety", releaseZForInfo).hint("Release the imp after you get the information you need.");
 			//addButton(3, "Rape", rapeZetaz);
 		}
 
@@ -588,9 +588,9 @@ package classes.Scenes.Dungeons
 			outputText("What do you do?");
 			//['Release' him] [Tighten Strap] [End Him]
 			menu();
-			addButton(0, "'Release'", sexualTortureReleaseZetaz, null, null, null, "Let the imp cum and release him from the bonds.");
-			addButton(1, "Tighten", sexualTortureTightenZetaz, null, null, null, "Tighten the straps.");
-			addButton(2, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(0, "'Release'", sexualTortureReleaseZetaz).hint("Let the imp cum and release him from the bonds.");
+			addButton(1, "Tighten", sexualTortureTightenZetaz).hint("Tighten the straps.");
+			addButton(2, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
 		}
 
 		//[Release Him]

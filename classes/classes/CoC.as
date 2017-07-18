@@ -465,6 +465,9 @@ the text from being too boring.
 			this.mainView.onLevelClick = playerInfo.levelUpGo;
 			this.mainView.onPerksClick = perkMenu.displayPerks;
 			this.mainView.onStatsClick = playerInfo.displayStats;
+			this.mainView.onBottomButtonClick = function(i:int):void {
+				textHistory.push("<br>["+button(i).labelText+"]<br>");
+			};
 
 			// Set up all the messy global stuff:
 			

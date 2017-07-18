@@ -332,12 +332,12 @@ public function etnaCampMenu():void
 	clearOutput();
 	outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her. \"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk with me? I must admit, my tail is itching, you already know how hungry I am.</i>\" She gives you a naughty expression that tells everything.");
 	menu();
-	addButton(0, "Appearance", etnaAppearance, null, null, null, "Examine Etna's detailed appearance.");
-	addButton(1, "Talk", etnaTalkMenu, null, null, null, "Ask Etna about something.");
-	addButton(2, "Sex", etnaSexMenu, null, null, null, "Have some sex with Etna");
+	addButton(0, "Appearance", etnaAppearance).hint("Examine Etna's detailed appearance.");
+	addButton(1, "Talk", etnaTalkMenu).hint("Ask Etna about something.");
+	addButton(2, "Sex", etnaSexMenu).hint("Have some sex with Etna");
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
-	else addButton(3, "Req. Venom", etnaDailyVenomVial, null, null, null, "Ask Etna for a vial of her venom.");
-	addButton(4, "Spar", etnaSparsWithPC, null, null, null, "Ask Etna for a mock battle with sex for the winner.");
+	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
+	addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 

@@ -33,40 +33,40 @@ public class PhysicalSpecials extends BaseCombatContent{
 		menu();
 		var button:int = 0;
 		if (player.hairType == 4) {
-			addButton(button++, "AnemoneSting", anemoneSting, null, null, null, "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
+			addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 		}
 		//Bitez
 		if (player.faceType == FACE_SHARK_TEETH) {
-			addButton(button++, "SharkBite", bite, null, null, null, "Attempt to bite your opponent with your shark-teeth.");
+			addButton(button++, "SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 		}
 		if (player.faceType == FACE_ORCA) {
-			addButton(button++, "OrcaBite", bite, null, null, null, "Bite in your opponent with your sharp teeths causing bleed.");
+			addButton(button++, "OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 		}
 		else if (player.faceType == FACE_SNAKE_FANGS) {
-			addButton(button++, "Bite", nagaBiteAttack, null, null, null, "Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			addButton(button++, "Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 		}
 		else if (player.faceType == FACE_SPIDER_FANGS) {
-			addButton(button++, "Bite", spiderBiteAttack, null, null, null, "Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			addButton(button++, "Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 		}
 		else if (player.faceType == FACE_WOLF) {
-			addButton(button++, "Frostbite", fenrirFrostbite, null, null, null, "You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
+			addButton(button++, "Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 		}
 		//Constrict
 		if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-			addButton(button++, "Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict, null, null, null, "Attempt to bind an enemy in your long snake-tail.");
+			addButton(button++, "Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 		}
 		//Grapple
 		if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
-			addButton(button++, "Grapple", scyllaGrapple, null, null, null, "Attempt to grapple a foe with your tentacles.");
+			addButton(button++, "Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 		}
 		//Engulf
 		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			addButton(button++, "Engulf", gooEngulf, null, null, null, "Attempt to engulf a foe with your body.");
+			addButton(button++, "Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Kick attackuuuu
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownKick)) {
-				addButton(button++, "Kick", kick, null, null, null, "Attempt to kick an enemy using your powerful lower body.");
+				addButton(button++, "Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
 				outputText("<b>You need more time before you can perform Kick again.</b>\n\n");
@@ -74,38 +74,38 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		//Gore if mino horns or unicorn/alicorn horn
 		if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
-			addButton(button++, "Gore", goreAttack, null, null, null, "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+			addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 		}
 		if (player.hornType == HORNS_UNICORN && player.horns >= 6) {
-			addButton(button++, "Gore", goreAttack, null, null, null, "Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
+			addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
 		}
 		//Upheaval - requires rhino horn
 		if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
-			addButton(button++, "Upheaval", upheavalAttack, null, null, null, "Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
+			addButton(button++, "Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
 		}
 		//Infest if infested
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-			addButton(button++, "Infest", kGAMECLASS.mountain.wormsScene.playerInfest, null, null, null, "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+			addButton(button++, "Infest", kGAMECLASS.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 		}
 		//Kiss supercedes bite.
 		if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
-			addButton(button++, "Kiss", kissAttack, null, null, null, "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
+			addButton(button++, "Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
 		}
 		if (player.armType == ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
 			if (monster.plural) {
-				addButton(button++, "Multi Slash", mantisMultiSlash, null, null, null, "Attempt to slash your foes with your wrists scythes! \n\nFatigue Cost: " + physicalCost(60) + "");
+				addButton(button++, "Multi Slash", mantisMultiSlash).hint("Attempt to slash your foes with your wrists scythes! \n\nFatigue Cost: " + physicalCost(60) + "");
 			}
-			else addButton(button++, "Multi Slash", mantisMultiSlash, null, null, null, "Attempt to slash your foe with your wrists scythes! \n\nFatigue Cost: " + physicalCost(24) + "");
+			else addButton(button++, "Multi Slash", mantisMultiSlash).hint("Attempt to slash your foe with your wrists scythes! \n\nFatigue Cost: " + physicalCost(24) + "");
 		}
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) addButton(button++, "Sting", playerStinger, null, null, null, "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SCORPION) addButton(button++, "Sting", playerStinger, null, null, null, "Attempt to use your venomous scorpion stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(button++, "Tail Spike", playerTailSpike, null, null, null, "Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) addButton(button++, "Web", PCWebAttack, null, null, null, "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_RACCOON) addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
-		if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) addButton(button++, "Sting", playerStinger).hint("Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.tailType == TAIL_TYPE_SCORPION) addButton(button++, "Sting", playerStinger).hint("Attempt to use your venomous scorpion stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(button++, "Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) addButton(button++, "Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_RACCOON) addButton(button++, "Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
+		if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 		if (player.tailType == TAIL_TYPE_ORCA) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				addButton(button++, "Tail Smack", tailSmackAttack, null, null, null, "Smack your powerful tail at your opponent face.</b>");
+				addButton(button++, "Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 				outputText("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
@@ -115,18 +115,18 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (!player.hasStatusEffect(StatusEffects.CooldownInkSpray) && !monster.hasStatusEffect(StatusEffects.Blind)) {
 				if (player.gender == 1) {
 					if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
-						addButton(button++, "Ink Spray", inkSpray, null, null, null, "Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
+						addButton(button++, "Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
 					}
 					else {
-						addButton(button++, "Ink Spray", inkSpray, null, null, null, "Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
+						addButton(button++, "Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
 					}
 				}
 				if (player.gender == 2 || player.gender == 3) {
 					if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
-						addButton(button++, "Ink Spray", inkSpray, null, null, null, "Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
+						addButton(button++, "Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
 					}
 					else {
-						addButton(button++, "Ink Spray", inkSpray, null, null, null, "Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
+						addButton(button++, "Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
 					}
 				}
 			}
@@ -139,41 +139,41 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		if (player.hasVagina() && player.cowScore() >= 9) {
 			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) addButtonDisabled(button++, "Milk Blast", "You can't use it more than once during fight.");
-			else addButton(button++, "Milk Blast", milkBlask, null, null, null, "Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			else addButton(button++, "Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
 		}
 		if (player.hasCock() && player.minotaurScore() >= 9) {
 			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) addButtonDisabled(button++, "Cum Cannon", "You can't use it more than once during fight.");
-			else addButton(button++, "Cum Cannon", cumCannon, null, null, null, "Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			else addButton(button++, "Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
 		}
 		if (player.canFly()) {
-			addButton(button++, "Take Flight", takeFlight, null, null, null, "Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			addButton(button++, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 		}
 		if (player.shield != ShieldLib.NOTHING) {
-			addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+			addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
-			addButton(button++, "Sidewinder", archerSidewinder, null, null, null, "The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
+			addButton(button++, "Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 		}
 		if (monster.plural) {
-			if (player.isWeaponsForWhipping()) addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
-			if ((player.isWeaponForWhirlwind() && player.findPerk(PerkLib.PowerSweep) < 0) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.findPerk(PerkLib.PowerSweep) >= 0)) addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+			if (player.isWeaponsForWhipping()) addButton(button++, "Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+			if ((player.isWeaponForWhirlwind() && player.findPerk(PerkLib.PowerSweep) < 0) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.findPerk(PerkLib.PowerSweep) >= 0)) addButton(button++, "Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
-				addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
+				addButton(button++, "Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 			}
 		}
 		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
-			if (!player.hasStatusEffect(StatusEffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen, null, null, null, "Release a cloud of your pollen in the air to arouse your foe.");
+			if (!player.hasStatusEffect(StatusEffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 			else if (player.hasStatusEffect(StatusEffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
-			if (!player.hasStatusEffect(StatusEffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle, null, null, null, "Use your vines to hinder your opponent.");
+			if (!player.hasStatusEffect(StatusEffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 			else if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) outputText("<b>You already entangle your opponent.</b>\n\n");
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 			if (monster.tallness > 120 || monster.findPerk(PerkLib.EnemyGigantType) > 0) outputText("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
-			else addButton(button++, "Strangulate", AlrauneStrangulate, null, null, null, "Strangle your opponent with your vines.");
+			else addButton(button++, "Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
 		}
 		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 			if (!player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				addButton(button++, "Stone Claw", StoneClawAttack, null, null, null, "Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
+				addButton(button++, "Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				outputText("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
@@ -181,7 +181,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		if (player.tailType == TAIL_TYPE_GARGOYLE) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				addButton(button++, "Tail Slam", TailSlamAttack, null, null, null, "Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
+				addButton(button++, "Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				outputText("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
@@ -189,7 +189,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				addButton(button++, "Wing Buffet", WingBuffetAttack, null, null, null, "Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
+				addButton(button++, "Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 				outputText("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");

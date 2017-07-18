@@ -46,11 +46,11 @@ public function valeriaFollower():void {
 	outputText("\n\n\"<i>Hey there, partner! Need anything while we're safe at camp?</i>\"");
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
 	menu();
-	addButton(0, "Appearance", valeriaAppearance, null, null, null, "Examine Valeria's appearance.");
-	addButton(1, "Spar", valeriaSpar, null, null, null, "Do a quick battle with Valeria!");
-	if (player.lust >= 33) addButton(2, "Sex", followersValeriaSex, null, null, null, "Initiate sexy time with the armor-goo.");
-	addButton(3, "Talk", talkWithValeria, null, null, null, "Discuss with Valeria.");
-	addButton(4, "Take", takeValeria, null, null, null, armors.GOOARMR.description);
+	addButton(0, "Appearance", valeriaAppearance).hint("Examine Valeria's appearance.");
+	addButton(1, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
+	if (player.lust >= 33) addButton(2, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
+	addButton(3, "Talk", talkWithValeria).hint("Discuss with Valeria.");
+	addButton(4, "Take", takeValeria).hint(armors.GOOARMR.description);
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -148,12 +148,12 @@ private function followersValeriaSex(display:Boolean = true):void {
 		dickText = "Lose Dick";
 	}*/
 	menu();
-	if (player.hasCock()) addButton(0, "PenetrateHer", penetrateValeria, null, null, null, "Fuck the goo girl with your penis!");
-	addButton(1, "Get Fucked", valeriaGetFucked, null, null, null, player.hasVagina() ? "Have her penetrate you vaginally.": "Have her penetrate you anally.");
-	addButton(2, "Gooflation", gooFlation, null, null, null, "Have her stuff your stomach through your ass!");
-	if (player.gender > 0) addButton(3, "GetDominated", valeriaSexDominated, null, null, null, "Submit to the armor-goo and have her take charge.");
-	if (flags[kFLAGS.VELARIA_FUTA] == 1) addButton(4, "Lose Dick", valeriaDickToggle, null, null, null, "Ask her to hide that gooey cock of hers.");
-	else addButton(4, "Grow Dick", valeriaDickToggle, null, null, null, "Ask her to grow a gooey cock.");
+	if (player.hasCock()) addButton(0, "PenetrateHer", penetrateValeria).hint("Fuck the goo girl with your penis!");
+	addButton(1, "Get Fucked", valeriaGetFucked).hint(player.hasVagina() ? "Have her penetrate you vaginally.": "Have her penetrate you anally.");
+	addButton(2, "Gooflation", gooFlation).hint("Have her stuff your stomach through your ass!");
+	if (player.gender > 0) addButton(3, "GetDominated", valeriaSexDominated).hint("Submit to the armor-goo and have her take charge.");
+	if (flags[kFLAGS.VELARIA_FUTA] == 1) addButton(4, "Lose Dick", valeriaDickToggle).hint("Ask her to hide that gooey cock of hers.");
+	else addButton(4, "Grow Dick", valeriaDickToggle).hint("Ask her to grow a gooey cock.");
 	//choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
 	addButton(14, "Back", valeriaFollower);
 }
@@ -431,9 +431,9 @@ private function talkWithValeria():void {
 	//How do you respond to that?
 	//(Display Options: [Flirt](PC has Gender) [Accept] [Gross])
 	menu();
-	if (player.gender > 0) addButton(0, "Flirt", flirtWithValeria, null, null, null, "Flirt with Valeria and initiate sex with her.");
-	addButton(1, "Accept", acceptValeriasNeeds, null, null, null, "Tell Valeria that you're okay with her special needs.");
-	addButton(2, "Gross", declineValeriasNeeds, null, null, null, "Decline Valeria's special needs.");
+	if (player.gender > 0) addButton(0, "Flirt", flirtWithValeria).hint("Flirt with Valeria and initiate sex with her.");
+	addButton(1, "Accept", acceptValeriasNeeds).hint("Tell Valeria that you're okay with her special needs.");
+	addButton(2, "Gross", declineValeriasNeeds).hint("Decline Valeria's special needs.");
 }
 
 //[Flirt]

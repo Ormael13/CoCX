@@ -768,7 +768,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("The throne room is intricately designed. Purple carpet with red highlights line the floor from the door to the throne. The throne appears to be carved in marble and dotted with lethicite. Along the way, there are beautifully carved marble columns and cum fountains. You blush just by looking at the fountains. ");
 				/*if (flags[kFLAGS.LETHICITE_ARMOR_TAKEN] <= 0 && player.newGamePlusMod() > 0) {
 					outputText("\n\nThere is still a suit of lethicite armor Lethice worn when you battled her, in good condition. You could take it if you like. ");
-					addButton(0, "Take Armor", lethice.takeLethiciteArmor, null, null, null, armors.LTHCARM.description);
+					addButton(0, "Take Armor", lethice.takeLethiciteArmor).hint(armors.LTHCARM.description);
 				}*/
 			}
 			return false;

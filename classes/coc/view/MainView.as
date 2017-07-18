@@ -152,6 +152,7 @@ public class MainView extends Block {
 	public var statsView:StatsView;
 	public var sideBarDecoration:Sprite;
 
+	private var _onBottomButtonClick:Function;//(index:int)=>void
 	public var bottomButtons:Array;
 	private var currentActiveButtons:Array;
 	private var allButtons:Array;
@@ -371,6 +372,11 @@ public class MainView extends Block {
 				x          : BOTTOM_X + BOTTOM_HGAP + c * (BOTTOM_HGAP * 2 + BTN_W),
 				y          : BOTTOM_Y + r * (GAP + BTN_H)
 			});
+			button.preCallback = (function(i:int):Function{
+				return function(b:CoCButton):void{
+					if (_onBottomButtonClick) _onBottomButtonClick(i);
+				};
+			})(bi);
 			this.bottomButtons.push(button);
 			this.addElement(button);
 		}
@@ -396,37 +402,32 @@ public class MainView extends Block {
 
 	//////// Internal(?) view update methods ////////
 
-	public function showBottomButton(index:int, label:String, callback:Function = null, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	public function showBottomButton(index:int, label:String, callback:Function = null, toolTipViewText:String = '', toolTipViewHeader:String = ''):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
-		if (!button) return;
+		if (!button) return null;
 		button.labelText     = label;
 		button.callback      = callback;
 		button.toolTipHeader = toolTipViewHeader;
 		button.toolTipText   = toolTipViewText;
 		button.visible       = true;
 		button.enabled       = true;
+		button.alpha         = 1; // failsafe to avoid possible problems with dirty hack
+		return button;
 	}
 
-	public function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	public function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
-		if (!button) return;
-		button.labelText     = label;
-		button.callback      = null;
-		button.toolTipHeader = toolTipViewHeader;
-		button.toolTipText   = toolTipViewText;
-		button.visible       = true;
-		button.enabled       = false;
+		if (!button) return null;
+		return button.showDisabled(label,toolTipViewText,toolTipViewHeader);
 	}
 
-	public function hideBottomButton(index:int):void {
+	public function hideBottomButton(index:int):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
-
 		// Should error.
-		if (!button) return;
-
-		button.visible = false;
+		if (!button) return null;
+		return button.hide();
 	}
 
 	public function hideCurrentBottomButtons():void {
@@ -618,6 +619,9 @@ public class MainView extends Block {
 		this.appearanceButton.callback = callback;
 	}
 
+	public function set onBottomButtonClick(value:Function):void {
+		_onBottomButtonClick = value;
+	}
 	public function showMenuButton(name:String):void {
 		var button:CoCButton = this.getMenuButtonByName(name);
 		button.visible       = true;

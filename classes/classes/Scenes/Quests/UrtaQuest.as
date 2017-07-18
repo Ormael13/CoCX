@@ -973,12 +973,12 @@ public function urtaSpecials():void {
 		return;
 	}
 	menu();
-	addButton(0, "Combo", urtaComboAttack, null, null, null, "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 40");
-	addButton(1, "Vault", urtaVaultAttack, null, null, null, "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes. \n\nFatigue cost: 30");
-	addButton(2, "Sidewinder", urtaSidewinder, null, null, null, "An attack that hits for reduced damage but has a high chance of stunning. \n\nFatigue cost: 15");
-	addButton(3, "Dirt Kick", urtaDirtKick, null, null, null, "Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
-	addButton(4, "Metabolize", urtaMetabolize, null, null, null, "Convert 10% of your maximum HP into fatigue.");
-	addButton(5, "SecondWind", urtaSecondWind, null, null, null, "Regain 50% of your HP, 150 fatigue, and reduce lust by 100 once per fight.", "Second Wind");
+	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 40");
+	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes. \n\nFatigue cost: 30");
+	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but has a high chance of stunning. \n\nFatigue cost: 15");
+	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
+	addButton(4, "Metabolize", urtaMetabolize).hint("Convert 10% of your maximum HP into fatigue.");
+	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 50% of your HP, 150 fatigue, and reduce lust by 100 once per fight.", "Second Wind");
 	addButton(14, "Back", combat.combatMenu, false);
 }
 
@@ -991,7 +991,7 @@ public function urtaMSpecials():void {
 	}
 	menu();
 	if (player.findPerk(PerkLib.Berzerker) >= 0) {
-		addButton(0, "Berserk", berzerk, null, null, null, "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
+		addButton(0, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 	}
 	addButton(14, "Back", combat.combatMenu, false);
 }
