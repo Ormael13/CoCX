@@ -2689,11 +2689,11 @@ package classes.Scenes.NPCs
 				}
 			}
 			//Core tooltips
-			mainView.bottomButtons[0].toolTipText = "Examine Amily's appearance.";
-			mainView.bottomButtons[1].toolTipText = "Discuss with Amily about something";
-			mainView.bottomButtons[2].toolTipText = "Proposition Amily for some sexy-times.";
-			mainView.bottomButtons[3].toolTipText = "Give Amily something to give her clothes or possibly alter how she looks.";
-			mainView.bottomButtons[4].toolTipText = (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Give Amily something to remove her fur." : "Give Amily something to re-grow her fur.");
+			button(0).hint("Examine Amily's appearance.");
+			button(1).hint("Discuss with Amily about something");
+			button(2).hint("Proposition Amily for some sexy-times.");
+			button(3).hint("Give Amily something to give her clothes or possibly alter how she looks.");
+			button(4).hint((flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Give Amily something to remove her fur." : "Give Amily something to re-grow her fur."));
 		}
 
 		//Corrupt Amily Sex Options

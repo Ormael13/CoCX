@@ -13,7 +13,8 @@ import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
-	import coc.view.MainView;
+import coc.view.CoCButton;
+import coc.view.MainView;
 	/**
 	 * Quick hacky method to wrap new content in a class-based structure
 	 * BaseContent acts as an access wrapper around CoC, enabling children of BaseContent to interact with
@@ -333,14 +334,18 @@ import classes.internals.Utils;
 			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
-		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		protected function button(pos:int):CoCButton
+		{
+			return kGAMECLASS.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void

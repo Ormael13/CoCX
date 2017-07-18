@@ -11,6 +11,8 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.internals.Utils;
+
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.text.Font;
@@ -32,7 +34,8 @@ public class CoCButton extends Block {
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
 				_enabled:Boolean = true,
-				_callback:Function;
+				_callback:Function = null,
+				_preCallback:Function = null;
 
 	public var toolTipHeader:String,
 			   toolTipText:String;
@@ -82,6 +85,8 @@ public class CoCButton extends Block {
 	}
 
 	public function click(event:MouseEvent = null):void {
+		if (this._preCallback != null)
+			this._preCallback(this);
 		if (this._callback != null)
 			this._callback();
 	}
@@ -120,6 +125,86 @@ public class CoCButton extends Block {
 
 	public function set callback(value:Function):void {
 		this._callback = value;
+	}
+
+	public function get preCallback():Function {
+		return _preCallback;
+	}
+	public function set preCallback(value:Function):void {
+		_preCallback = value;
+	}
+	//////////// Builder functions
+	/**
+	 * Setup (text, callback, tooltip) and show enabled button. Removes all previously set options
+	 * @return this
+	 */
+	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
+		this.labelText     = text;
+		this.callback      = callback;
+		this.toolTipHeader = toolTipHeader;
+		this.toolTipText   = toolTipText;
+		this.visible       = true;
+		this.enabled       = true;
+		this.alpha         = 1;
+		return this;
+	}
+	/**
+	 * Setup (text, tooltip, and show) disabled button. Removes all previously set options
+	 * @return this
+	 */
+	public function showDisabled(text:String,toolTipText:String="",toolTipHeader:String=""):CoCButton {
+		this.labelText     = text;
+		this.callback      = null;
+		this.toolTipHeader = toolTipHeader;
+		this.toolTipText   = toolTipText;
+		this.visible       = true;
+		this.enabled       = false;
+		this.alpha         = 1;
+		return this;
+	}
+	/**
+	 * Set text and tooltip. Don't change callback, enabled, visibility
+	 * @return this
+	 */
+	public function text(text:String,toolTipText:String = "",toolTipHeader:String=""):CoCButton {
+		this.labelText = text;
+		this.toolTipText = toolTipText;
+		this.toolTipHeader = toolTipHeader;
+		return this;
+	}
+	/**
+	 * Set tooltip only. Don't change text, callback, enabled, visibility
+	 * @return this
+	 */
+	public function hint(toolTipText:String = "",toolTipHeader:String=""):CoCButton {
+		this.toolTipText = toolTipText;
+		this.toolTipHeader = toolTipHeader;
+		return this;
+	}
+	/**
+	 * Disable, optionally change tooltip. Does not un-hide button.
+	 * @return this
+	 */
+	public function disable(toolTipText:String=null):CoCButton {
+		enabled = false;
+		if (toolTipText!==null) this.toolTipText = toolTipText;
+		return this;
+	}
+	/**
+	 * Set callback to fn(...args)
+	 * @return this
+	 */
+	public function call(fn:Function,...args:Array):CoCButton {
+		this.callback = Utils.curry.apply(null,args);
+		return this;
+	}
+	/**
+	 * Hide the button
+	 * @return this
+	 */
+	public function hide():CoCButton {
+		visible = false;
+		return this;
 	}
 }
 }
