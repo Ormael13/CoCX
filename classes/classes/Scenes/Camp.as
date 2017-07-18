@@ -2752,15 +2752,13 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 				hp += 20;
 				fatigue += 6;
 				mana += 12;
-				lust += 2;
 			}
-		/*	if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-				hp += 5;
-				fatigue += 2;
-				mana += 2;
+			if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
 				lust += 2;
+				wrath += 2;
+				soulforce += 6;
 			}
-		*/	if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
+			if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
 			if (player.findPerk(PerkLib.UnlockMind) >= 0) mana += 10;
 			if (player.findPerk(PerkLib.UnlockId) >= 0) lust += 1;
 			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) fatigue += 5;

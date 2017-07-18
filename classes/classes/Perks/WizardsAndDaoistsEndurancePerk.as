@@ -12,13 +12,13 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Reduces fatigue cost of spells by " + params.value1 + "% and soulforce cost of soulskills by " + params.value2 + "%.";
+			return "Reduces mana cost of spells by " + params.value1 + "% and soulforce cost of soulskills by " + params.value2 + "%.";
 		}
 
 		public function WizardsAndDaoistsEndurancePerk() 
 		{
 			super("Wizard's and Daoists's Endurance", "Wizard's and Daoists's Endurance",
-					"Your equipment makes it harder for spell-casting to fatigue you or souskills to drain your soulforce!");
+					"Your equipment makes it harder for spell-casting to drain your mana or souskills to drain your soulforce!");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

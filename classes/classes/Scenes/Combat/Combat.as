@@ -384,29 +384,29 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 		//Standard menu before modifications.
 		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
-			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
+			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName +".  Damage done is determined by your strength and weapon.");
 		else if(!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
 			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
-			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
+			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName +".  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
 		if (player.weaponRangePerk == "Bow")
-			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined by your speed and weapon.");
+			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName +".  Damage done is determined by your speed and weapon.");
 		//Crossbow attack
 		if (player.weaponRangePerk == "Crossbow")
-			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined only by your weapon.");
+			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName +".  Damage done is determined only by your weapon.");
 		if (player.weaponRangePerk == "Throwing") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRange != weaponsrange.SHUNHAR) addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
-			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw [weaponrangename] at enemy.  Damage done is determined by your strength and weapon.");
+			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw " + player.weaponRangeName +" at enemy.  Damage done is determined by your strength and weapon.");
 		}
 		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0)
-				addButton(1, "Reload", reloadWeapon, null, null, null, "Your [weaponrangename] is out of ammo.  You'll have to reload it before attack.");
+				addButton(1, "Reload", reloadWeapon, null, null, null, "Your " + player.weaponRangeName +" is out of ammo.  You'll have to reload it before attack.");
 			else
-				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your [weaponrangename]!  Damage done is determined only by your weapon.");
+				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your " + player.weaponRangeName +"!  Damage done is determined only by your weapon.");
 		}
 		addButton(2, "Items", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (canUseMagic()) addButton(3, "Spells", magic.magicMenu, null, null, null, "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
@@ -612,6 +612,7 @@ public function stopChanneledSpecial():void {
 public function unarmedAttack():Number {
 	var unarmed:Number = 0;
 	if (player.findPerk(PerkLib.JobMonk) >= 0 && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
+	if (player.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0 && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.BodyCultivator) >= 0) unarmed += 2 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -2105,6 +2106,7 @@ public function fatigueRecovery():void {
 	if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fatiguecombatrecovery += 1;
+	if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fatiguecombatrecovery += 1;
 	fatigue(-(1 + fatiguecombatrecovery));
 }
 
@@ -2610,6 +2612,8 @@ public function attack():void {
 				}
 			}
 		}
+		//Selfcorrupting weapons
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
 		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
 			//10% chance
@@ -2857,11 +2861,18 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 		if (player.tou < 100) blockChance += (player.tou - 50) / 5;
 		else blockChance += 10;
 	}
+	if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) {
+		if (player.tou < 150) blockChance += (player.tou - 100) / 5;
+		else blockChance += 10;
+	}
 	if (blockChance < 10) blockChance = 10;
 	//Fatigue limit
 	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);
 	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
-		if (doFatigue) fatigue(10, 2);
+		if (doFatigue) {
+			if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) fatigue(5);
+			else fatigue(10);
+		}
 		return true;
 	}
 	else return false;
@@ -4107,7 +4118,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (monster.findPerk(PerkLib.JobSoulCultivator) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobWarlord) >= 0) monster.tou += (20 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobWarrior) >= 0) monster.str += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
+	if (monster.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
 		monster.spe += (40 * (1 + player.newGamePlusMod()));
 		monster.inte += (40 * (1 + player.newGamePlusMod()));
 	}
@@ -4121,6 +4132,10 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	}
 	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
 		monster.spe += (40 * (1 + player.newGamePlusMod()));
+		monster.wis += (40 * (1 + player.newGamePlusMod()));
+	}
+	if (monster.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
+		monster.str += (40 * (1 + player.newGamePlusMod()));
 		monster.wis += (40 * (1 + player.newGamePlusMod()));
 	}
 	if (monster.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
@@ -5097,7 +5112,7 @@ public function runAway(callHook:Boolean = true):void {
 		if(player.spe > rand(monster.spe + escapeMod) || (player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50)) {
 			if(player.findPerk(PerkLib.Runner) >= 0) outputText("Using your skill at running, y");
 			else outputText("Y");
-			outputText("You easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
+			outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
 			outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
 			inCombat = false;
 			clearStatuses(false);

@@ -487,10 +487,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += 50 + rand(20);
 		damage += (player.level * 10);
 		damage = calcInfernoMod(damage);
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
@@ -630,10 +628,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
@@ -770,10 +766,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
@@ -875,10 +869,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
@@ -979,10 +971,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
@@ -1646,7 +1636,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) corruptedfoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) corruptedfoxfiredmgmulti += .25;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) corruptedfoxfiredmgmulti += .5;
 		dmg *= corruptedfoxfiredmgmulti;
 		if (monster.cor >= 66) dmg = Math.round(dmg * 1.0);
 		else if (monster.cor >= 50) dmg = Math.round(dmg * 1.1);
@@ -1706,6 +1696,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.5;
 		if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9)  lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1776,7 +1767,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) fusedfoxfiredmgmulti += .5;
 		//Hosohi No Tama and Fusion bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fusedfoxfiredmgmulti += .5;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fusedfoxfiredmgmulti += 1;
 		dmg *= fusedfoxfiredmgmulti;
 		//High damage to goes.
 		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
@@ -1829,6 +1820,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		lustDmg *= 0.5;
 		if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2.8;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1899,7 +1891,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) purefoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) purefoxfiredmgmulti += .25;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) purefoxfiredmgmulti += .5;
 		dmg *= purefoxfiredmgmulti;
 		if (monster.cor < 33) dmg = Math.round(dmg * 1.0);
 		else if (monster.cor < 50) dmg = Math.round(dmg * 1.1);
@@ -1958,6 +1950,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.125;
 		if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 0.5;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1980,6 +1973,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var modksc:Number = 1;
 		if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) modksc += 1;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) modksc += 2;
+		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) modksc += 0.5;
 		return modksc;
 	}
 

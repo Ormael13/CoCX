@@ -297,6 +297,8 @@ package classes.Scenes
 			addButton(7, "DualSwords", AddDualSwords, null, null, null, "Add 1 pair of Dual Swords for testing purposes.");
 			addButton(8, "DualLAxes", AddDualMinoAxes, null, null, null, "Add 1 pair of Large Axes for testing purposes.");
 			addButton(9, "Dual BFS", AddDualBigFuckingSwords, null, null, null, "Add 1 pair of Big Fucking Swords for testing purposes.");
+			addButton(10, "SeerHairpin", AddTheSeerHairpin, null, null, null, "Add 1 Seer's Hairpin.");
+			addButton(11, "D.Scythe", AddTheDemonicScythe, null, null, null, "Add 1 Demonic Scythe.");
 			//addButton(10, "BlunderR", AddTheBlunderbussRifle, null, null, null, "Add 1 Blunderbuss Rifle.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -309,6 +311,8 @@ package classes.Scenes
 			addButton(5, "Gorgon Oil", AddGorgonOil, null, null, null, "Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil, null, null, null, "Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil, null, null, null, "Add 1 vial of Couatl Oil.");
+			addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion, null, null, null, "Add 1 very diluted Arcane Regen Concotion.");
+			addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion, null, null, null, "Add 1 diluted Arcane Regen Concotion.");
 			//addButton(6, "ManticoreV", AddManticoreVenom, null, null, null, "Add 1 Manticore Venom. (1st iteration - still incomplete TF)");
 			addButton(10, "White B.", AddWhiteBook, null, null, null, "Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook, null, null, null, "Add 1 Black Book.");
@@ -381,6 +385,14 @@ package classes.Scenes
 			outputText("\n\n<b>(Gained 1 vial of Couatl Oil!)</b>\n\n");
 			inventory.takeItem(consumables.COUAOIL, NonEquipmentMenu);
 		}
+		public function AddVeryDilutedArcaneRegenConcotion():void {
+			outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");
+			inventory.takeItem(consumables.VDARCON, NonEquipmentMenu);
+		}
+		public function AddDilutedArcaneRegenConcotion():void {
+			outputText("\n\n<b>(Gained 1 diluted Arcane Regen Concotion!)</b>\n\n");
+			inventory.takeItem(consumables.D_ARCON, NonEquipmentMenu);
+		}
 		public function AddBehemothCum():void {
 			outputText("\n\n<b>(Gained 1 vial of Behemoth Cum!)</b>\n\n");
 			inventory.takeItem(consumables.BHMTCUM, NonEquipmentMenu);
@@ -424,6 +436,14 @@ package classes.Scenes
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
 			inventory.takeItem(weaponsrange.GTHRAXE, EquipmentMenu);
+		}
+		public function AddTheSeerHairpin():void {
+			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
+			inventory.takeItem(jewelries.SEERPIN, EquipmentMenu);
+		}
+		public function AddTheDemonicScythe():void {
+			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
+			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] < 1) {
