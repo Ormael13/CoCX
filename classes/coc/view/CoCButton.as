@@ -85,6 +85,7 @@ public class CoCButton extends Block {
 	}
 
 	public function click(event:MouseEvent = null):void {
+		if (!this.enabled) return;
 		if (this._preCallback != null)
 			this._preCallback(this);
 		if (this._callback != null)

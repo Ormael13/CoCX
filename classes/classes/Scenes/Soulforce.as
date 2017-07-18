@@ -297,22 +297,22 @@ package classes.Scenes
 			addButton(7, "DualSwords", AddDualSwords).hint("Add 1 pair of Dual Swords for testing purposes.");
 			addButton(8, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes for testing purposes.");
 			addButton(9, "Dual BFS", AddDualBigFuckingSwords).hint("Add 1 pair of Big Fucking Swords for testing purposes.");
-			addButton(10, "SeerHairpin", AddTheSeerHairpin, null, null, null, "Add 1 Seer's Hairpin.");
-			addButton(11, "D.Scythe", AddTheDemonicScythe, null, null, null, "Add 1 Demonic Scythe.");
+			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
+			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
 			//addButton(10, "BlunderR", AddTheBlunderbussRifle).hint("Add 1 Blunderbuss Rifle.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function NonEquipmentMenu():void {
 			menu();
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-			addButton(1, "Fish", AddFish).hint("Add 1 Fish.")
+			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
-			addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion, null, null, null, "Add 1 very diluted Arcane Regen Concotion.");
-			addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion, null, null, null, "Add 1 diluted Arcane Regen Concotion.");
+			addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+			addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			//addButton(6, "ManticoreV", AddManticoreVenom).hint("Add 1 Manticore Venom. (1st iteration - still incomplete TF)");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
