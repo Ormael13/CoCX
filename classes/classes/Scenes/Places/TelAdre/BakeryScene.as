@@ -83,13 +83,13 @@ private function checkBakeryMenu():void {
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 		outputText("Hard Biscuits - 5 gems (packed).\n");
 		outputText("Trail Mix - 20 gems (packed).\n");
-		addButton(5, "Hard Biscuits", buyHardBiscuits, null, null, null, consumables.H_BISCU.description);
-		addButton(6, "Trail Mix", buyTrailMix, null, null, null, consumables.TRAILMX.description);
+		addButton(5, "Hard Biscuits", buyHardBiscuits).hint(consumables.H_BISCU.description);
+		addButton(6, "Trail Mix", buyTrailMix).hint(consumables.TRAILMX.description);
 	}
 	//Hummus available once a week
 	if (model.time.days % 7 == 0) {
 		outputText("Hummus - 100 gems (Weekly special only!).\n");
-		addButton(7, "Hummus", buyHummus, null, null, null, consumables.HUMMUS_.description);
+		addButton(7, "Hummus", buyHummus).hint(consumables.HUMMUS_.description);
 	}
 	//Special Eclair
 	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {

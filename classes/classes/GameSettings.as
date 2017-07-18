@@ -137,19 +137,19 @@ public class GameSettings extends BaseContent {
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 
 		menu();
-		addButton(0, "Toggle Debug", toggleDebug, null, null, null, "Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-		if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, null, null, null, "Adjust the game difficulty to make it easier or harder.");
-		//addButton(1, "Easy Mode", toggleEasyModeFlag, null, null, null, "Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");
-		addButton(2, "Silly Toggle", toggleSillyFlag, null, null, null, "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
+		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
+		if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
+		//addButton(1, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");
+		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
 
-		addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
-		addButton(6, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
-		addButton(7, "Stat Pts", toggleStatGain,null,null,null,"Toggles stat gain mode");
-		if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-		if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
-		addButton(10, "Fetishes", fetishSubMenu, null, null, null, "Toggle some of the weird fetishes such as watersports and worms.");
+		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
+		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
+		addButton(7, "Stat Pts", toggleStatGain).hint("Toggles stat gain mode");
+		if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+		if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+		addButton(10, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
@@ -286,8 +286,8 @@ public class GameSettings extends BaseContent {
 
 	public function fetishSubMenu():void {
 		menu();
-		addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 		addButton(4, "Back", settingsScreenGameSettings);
 	}
@@ -417,14 +417,14 @@ public class GameSettings extends BaseContent {
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
 
 		menu();
-		addButton(0, "Side Bar Font", toggleFont, null, null, null, "Toggle between old and new font for side bar.");
-		addButton(1, "Main BG", menuMainBackground, null, null, null, "Choose a background for main game interface.");
-		addButton(2, "Text BG", menuTextBackground, null, null, null, "Choose a background for text.");
-		addButton(3, "Sprites", menuSpriteSelect, null, null, null, "Turn sprites on/off and change sprite style preference.");
+		addButton(0, "Side Bar Font", toggleFont).hint("Toggle between old and new font for side bar.");
+		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
+		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
+		addButton(3, "Sprites", menuSpriteSelect).hint("Turn sprites on/off and change sprite style preference.");
 
-		addButton(5, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
-		addButton(6, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
-		addButton(7, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+		addButton(5, "Toggle Images", toggleImages).hint("Enable or disable image pack.");
+		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
+		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {

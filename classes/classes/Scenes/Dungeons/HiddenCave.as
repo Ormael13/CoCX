@@ -364,7 +364,7 @@ package classes.Scenes.Dungeons
 			}
 			if (player.findPerk(PerkLib.SoulSense) >= 0) {
 				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
-				else addButton(0, "Pull Lever", pullTheLever, null, null, null, "Pull the lever. You suspect that it might open some secret doors.");
+				else addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret doors.");
 			}
 		}
 		public function roomSmallCaveW():void {

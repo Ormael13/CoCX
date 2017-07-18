@@ -70,9 +70,9 @@ public function encounterKiha():void {
 		outputText("What do you do?");
 		//[Fight] [Ask Why][Buy Passage][Leave]
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
-		addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Ask Why", askWhy).hint("Ask Kiha why she's trying to drive you off.");
+		addButton(2, "Buy Passage", offerToBuyPassageFromKiha).hint("Try to offer Kiha 200 gems to buy passage.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
@@ -88,13 +88,13 @@ public function encounterKiha():void {
 	else if(flags[kFLAGS.KIHA_TOLL] == 1 && rand(2) == 0) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>You again?  I've been thinking about what you said.  How about instead of beating you senseless, you pay me a tribute of 200 gems, and I'll let you pass through my territory unhindered.  Of course, if you stumble into my lair I might have to teach you a lesson.</i>\"  A greedy smile spreads across her dusky visage while her eyes burn with mischievous crimson light.  Wait a moment... wasn't this your idea?\n\n");
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute).hint("Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford to pay her!");
 			removeButton(1);
 		}
-		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea).hint("Tell Kiha the whole tribute thing was your idea.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
 	}
@@ -104,13 +104,13 @@ public function encounterKiha():void {
 		(flags[kFLAGS.KIHA_TOLL_DURATION] == 0 && rand(2) == 0))) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>If you want to explore my territory again, you'll need to pay the fee,</i>\" she flatly states.  This is absurd - she wants more gems already?  You'll go broke like this, AND it was your idea to begin with!  What do you do?");
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute).hint("Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford to pay her again!");
 			removeButton(1);
 		}
-		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea).hint("Tell Kiha the whole tribute thing was your idea.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
 	}
@@ -124,9 +124,9 @@ public function encounterKiha():void {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?");
 			//[Fight] [Ask Why][Buy Passage][Leave]
 			menu();
-			addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
-			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+			addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+			addButton(1, "Ask Why", askWhy).hint("Ask Kiha why she's trying to drive you off.");
+			addButton(2, "Buy Passage", offerToBuyPassageFromKiha).hint("Try to offer Kiha 200 gems to buy passage.");
 			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 			//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
@@ -246,10 +246,10 @@ internal function kihaVictoryIntroduction():void {
 	outputText("\n\nYou could forcibly masturbate her.");
 	//Fems
 	menu();
-	addButton(0, "Masturbate", tsundereMasturbationChristmasCarol, null, null, null, "Forcibly masturbate Kiha.");
+	addButton(0, "Masturbate", tsundereMasturbationChristmasCarol).hint("Forcibly masturbate Kiha.");
 	if (player.lust >= 33 && player.hasVagina()) { //Fems
 		outputText("\n\nYou could use her tail as a dildo.");
-		addButton(1, "Use Tail", kihaVictoryPomfTail, null, null, null, "Use her tail as a dildo.");
+		addButton(1, "Use Tail", kihaVictoryPomfTail).hint("Use her tail as a dildo.");
 	}
 	if(player.hasCock()) { //Vagina with optional double-dick!
 		if(player.cockThatFits(monster.vaginalCapacity()) != -1 && player.lust >= 33) {
@@ -257,15 +257,15 @@ internal function kihaVictoryIntroduction():void {
 			if(player.cockThatFits2(monster.vaginalCapacity()) != -1 && player.cockTotal() > 1)
 				outputText(" and ass");
 			outputText(".");
-			addButton(2, "FuckHerPussy", victoryDickKiha, null, null, null, "Penetrate Kiha vaginally.");
+			addButton(2, "FuckHerPussy", victoryDickKiha).hint("Penetrate Kiha vaginally.");
 		}
 	}
 	if(player.cockThatFits(monster.analCapacity()) >= 0 && player.lust >= 33) { //Buttfuck 20 or less
-		addButton(3, "FuckHerAss", analRapuzulaKiha, null, null, null, "Penetrate Kiha anally.");
+		addButton(3, "FuckHerAss", analRapuzulaKiha).hint("Penetrate Kiha anally.");
 	}
 	if(player.cor < 40 || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) { //Conversation Only - Emotional Rape! (40- Corruption!)
 		outputText("\n\nNow that she's a captive audience, you could always talk to her.");
-		addButton(4, "Talk", rapeKihaWithWORDS, null, null, null, "Talk with Kiha and try to make progress.");
+		addButton(4, "Talk", rapeKihaWithWORDS).hint("Talk with Kiha and try to make progress.");
 	}
 	addButton(14, "Leave", cleanupAfterCombat);
 }

@@ -441,12 +441,12 @@ package classes.Scenes.NPCs
 				outputText("\"<i>Do you need, like, anything else?</i>\" Joy asks. Her tail waggles excitedly.");
 			}
 			menu();
-			addButton(0, "Appearance", joysAppearance, null, null, null, "Examine Joy's appearance. She must be so sexy!");
-			addButton(1, "Talk", joyTalkMenu, null, null, null, "Talk to Joy and discuss about various topics.");
-			addButton(2, "Train", trainWithJoy, null, null, null, "Train with Joy and improve your overall strength");
-			addButton(3, "Meditate", meditateWithJoy, null, null, null, "Attempt to meditate with Joy to calm your lusts although you're sure that there's a chance this might backfire.");
-			addButton(4, "Sex", initiateSexWithJoy, null, null, null, "Joy is a sexy mouse, why not have some fun with her?");
-			addButton(5, "Give Item", giveItemsToJoy, null, null, null, "Give some items to Joy to alter her.");
+			addButton(0, "Appearance", joysAppearance).hint("Examine Joy's appearance. She must be so sexy!");
+			addButton(1, "Talk", joyTalkMenu).hint("Talk to Joy and discuss about various topics.");
+			addButton(2, "Train", trainWithJoy).hint("Train with Joy and improve your overall strength");
+			addButton(3, "Meditate", meditateWithJoy).hint("Attempt to meditate with Joy to calm your lusts although you're sure that there's a chance this might backfire.");
+			addButton(4, "Sex", initiateSexWithJoy).hint("Joy is a sexy mouse, why not have some fun with her?");
+			addButton(5, "Give Item", giveItemsToJoy).hint("Give some items to Joy to alter her.");
 			addButton(14, "Back", camp.campFollowers);
 		}
 		
@@ -1448,7 +1448,7 @@ package classes.Scenes.NPCs
 			if (player.hasCock()) {
 				//Vaginal penetration
 				if (player.cockThatFits(joyVagCapacity()) >= 0) {
-					addButton(0, "Vaginal Fuck", penetrateJoysPussy, null, null, null, "Penetrate Joy vaginally with your cock.");
+					addButton(0, "Vaginal Fuck", penetrateJoysPussy).hint("Penetrate Joy vaginally with your cock.");
 				}
 				else {
 					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her pussy.</b>");
@@ -1456,24 +1456,24 @@ package classes.Scenes.NPCs
 				}
 				//Anal penetration
 				if (player.cockThatFits(joyAnalCapacity()) >= 0) {
-					addButton(1, "Anal Fuck", fuckJoyInTheAss, null, null, null, "Take Joy from behind and make sure she gets it good!");
+					addButton(1, "Anal Fuck", fuckJoyInTheAss).hint("Take Joy from behind and make sure she gets it good!");
 				}
 				else {
 					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her ass.</b>");
 					else outputText("\n<b>None of your cocks can fit in her ass.</b>");
 				}
 				//Others
-				if (joyHasCock()) addButton(4, "Frottage", frotWithJoy, null, null, null, "Do some cock play with Joy.");
-				addButton(5, "Get Blown", haveJoySuckYouOff, null, null, null, "Have Joy suck your off and give her a taste of your cum.");
+				if (joyHasCock()) addButton(4, "Frottage", frotWithJoy).hint("Do some cock play with Joy.");
+				addButton(5, "Get Blown", haveJoySuckYouOff).hint("Have Joy suck your off and give her a taste of your cum.");
 			}
 			if (player.hasVagina()) {
-				addButton(6, "Get Licked", haveJoyLickYourGinas, null, null, null, "Have Joy lick your pussy.");
-				if (joyHasCock()) addButton(7, "Get Penetrated", haveJoyStuffYourPussy, null, null, null, "Have Joy penetrate you vaginally with her cock.");
+				addButton(6, "Get Licked", haveJoyLickYourGinas).hint("Have Joy lick your pussy.");
+				if (joyHasCock()) addButton(7, "Get Penetrated", haveJoyStuffYourPussy).hint("Have Joy penetrate you vaginally with her cock.");
 			}
-			addButton(2, "Lick Joy", lickJoysGina, null, null, null, "Get a taste of Joy's pussy but you're sure she has a lot of pussy juice in store for you!");
+			addButton(2, "Lick Joy", lickJoysGina).hint("Get a taste of Joy's pussy but you're sure she has a lot of pussy juice in store for you!");
 			if (joyHasCock()) {
-				addButton(3, "Blow Joy", suckJoysCock, null, null, null, "Suck Joy's cock and get some taste of her cum!");
-				addButton(8, "Get Anal", haveJoyStuffYourButthole, null, null, null, "Have Joy take you from behind and put her cock to a good use.");
+				addButton(3, "Blow Joy", suckJoysCock).hint("Suck Joy's cock and get some taste of her cum!");
+				addButton(8, "Get Anal", haveJoyStuffYourButthole).hint("Have Joy take you from behind and put her cock to a good use.");
 			}
 			addButton(14, "Back", genericMenu);
 		}

@@ -35,10 +35,10 @@ package classes.Scenes.Areas.Forest
 					outputText("Well, that's quite the proposal.\n\n");
 					if (flags[kFLAGS.YGGDRASIL_GENERAL] < 1) flags[kFLAGS.YGGDRASIL_GENERAL]++;
 					menu();
-					addButton(0, "What are you", WhatAreYou, null, null, null, "What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption, null, null, null, "What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch, null, null, null, "Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch, null, null, null, "Take a fallen branch of the world tree");
+					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
+					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
+					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
+					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
 						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
@@ -53,10 +53,10 @@ package classes.Scenes.Areas.Forest
 					else outputText("my child");
 					outputText(".  If you have questions, ask.  If you have any requests, i will do what i can to fulfil them.</i>\"\n\n");
 					menu();
-					addButton(0, "What are you", WhatAreYou, null, null, null, "What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption, null, null, null, "What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch, null, null, null, "Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch, null, null, null, "Take a fallen branch of the world tree");
+					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
+					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
+					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
+					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
 						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
@@ -73,10 +73,10 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("PLACEHOLDER TILL ZAVOS WIRTE TEXT FOR THIS MENU.\n\n");
 			menu();
-			addButton(0, "What are you", WhatAreYou, null, null, null, "What is Yggdrasil, exactly?");
-			addButton(1, "Purity & Corruption", PurityCorruption, null, null, null, "What side is Yggdrasil on, pure or corrupt?");
-			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch, null, null, null, "Can Yggdrasil provide any assistance for your quest?");
-			else addButton(2, "Take Branch", AidTakeBranch, null, null, null, "Take a fallen branch of the world tree");
+			addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
+			addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
+			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
+			else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 			else {
 				if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);

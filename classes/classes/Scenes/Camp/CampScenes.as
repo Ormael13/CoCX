@@ -54,10 +54,10 @@ private function AyaneGoBackToShrine():void {
 public function HotSpring():void {
 	//clearOutput();
 	menu();
-	if (!player.hasCock()) addButton(0, "Bath (F)", HaveAGirlBath, null, null, null, "Have a bath.");
+	if (!player.hasCock()) addButton(0, "Bath (F)", HaveAGirlBath).hint("Have a bath.");
 	if (player.hasCock()) {
-		addButton(1, "Bath (M)", HaveABoysBath, null, null, null, "Have at bath.");
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 5) addButton(2, "PeepingTom", PeepingTom2, null, null, null, "Peep at bath.");
+		addButton(1, "Bath (M)", HaveABoysBath).hint("Have at bath.");
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 5) addButton(2, "PeepingTom", PeepingTom2).hint("Peep at bath.");
 	}
 	addButton(14, "Back", playerMenu);
 } 

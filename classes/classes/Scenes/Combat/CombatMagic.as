@@ -326,14 +326,14 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				if (!monster.hasStatusEffect(StatusEffects.Blind))
-					addButton(0, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nMana Cost: " + spellCostWhite(30) + "");
+					addButton(0, "Blind", spellBlind).hint("Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nMana Cost: " + spellCostWhite(30) + "");
 				else {
 					outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 					addButtonDisabled(0, "Blind", "Enemy still blinded");
 				}
 			}
-			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nMana Cost: " + spellCostWhite(40) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nMana Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire).hint("Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nMana Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt).hint("Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nMana Cost: " + spellCostWhite(40) + "");
 		}
 		//BLACK MAGICSKS
 		if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
@@ -341,16 +341,16 @@ public class CombatMagic extends BaseCombatContent {
 		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
 			outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
-			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nMana Cost: " + spellCostBlack(20) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: " + spellCostBlack(30) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
-			if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse).hint("The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nMana Cost: " + spellCostBlack(20) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: " + spellCostBlack(30) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike).hint("Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard).hint("Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nMana Cost: " + spellCostBlack(40) + "");
 		}
-		addButton(10, "Support", magicMenu2, null, null, null, "Cast one of support spells.");
-		if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(11, "Grey Spells", magicMenu3, null, null, null, "Cast one of Grey Magic spells.");
+		addButton(10, "Support", magicMenu2).hint("Cast one of support spells.");
+		if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(11, "Grey Spells", magicMenu3).hint("Cast one of Grey Magic spells.");
 		// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
 		if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < (10 + player.corruptionTolerance())) {
-			addButton(12, "C.Palm", spellCleansingPalm, null, null, null, "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
+			addButton(12, "C.Palm", spellCleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
 		}
 		addButton(14, "Back", combatMenu, false);
 	}
@@ -365,7 +365,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
-					addButton(0, "Charge W.", spellChargeWeapon, null, null, null, "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) + "", "Charge Weapon");
+					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) + "", "Charge Weapon");
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
@@ -373,7 +373,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
-					addButton(1, "Charge A.", spellChargeArmor, null, null, null, "The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) + "", "Charge Armor");
+					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) + "", "Charge Armor");
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");
@@ -381,7 +381,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				if (!player.hasStatusEffect(StatusEffects.Blizzard))
-					addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nMana Cost: " + spellCostWhite(50) + "");
+					addButton(4, "Blizzard", spellBlizzard).hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nMana Cost: " + spellCostWhite(50) + "");
 				else {
 					outputText("<b>Blizzard is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(4, "Blizzard", "Active");
@@ -395,7 +395,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				if (!player.hasStatusEffect(StatusEffects.Might))
-					addButton(5, "Might", spellMight, null, null, null, "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) + "");
+					addButton(5, "Might", spellMight).hint("The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) + "");
 				else {
 					outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 					addButtonDisabled(5, "Might", "Active");
@@ -403,7 +403,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				if (!player.hasStatusEffect(StatusEffects.Blink))
-					addButton(6, "Blink", spellBlink, null, null, null, "The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) + "");
+					addButton(6, "Blink", spellBlink).hint("The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) + "");
 				else {
 					outputText("<b>You are already under the effects of Blink and cannot cast it again.</b>\n\n");
 					addButtonDisabled(6, "Blink", "Active");
@@ -422,13 +422,13 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(0, "	1st spell (non-fire or non-ice based) goes here
 			if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
-				if (!player.hasStatusEffect(StatusEffects.ManaShield)) addButton(1, "Mana Shield", ManaShield, null, null, null, "Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\nMana Cost: 1 mana point per 1 point of damage blocked");
-				else addButton(1, "Deactiv MS", DeactivateManaShield, null, null, null, "Deactivate Mana Shield.\n");
+				if (!player.hasStatusEffect(StatusEffects.ManaShield)) addButton(1, "Mana Shield", ManaShield).hint("Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\nMana Cost: 1 mana point per 1 point of damage blocked");
+				else addButton(1, "Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.\n");
 			}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
-			if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(6, "	fire single target spell goes here
-			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(11, "	ice single target spell goes here
 		}
 		addButton(14, "Back", magicMenu);

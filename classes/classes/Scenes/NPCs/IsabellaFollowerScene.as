@@ -204,20 +204,20 @@ public function callForFollowerIsabella():void {
 	}
 	
 	menu();
-	addButton(0, "Appearance", isabellasAppearance, null, null, null, "Examine Isabella's detailed appearance.");
-	addButton(1, "Talk", isabellaTalkMenu, null, null, null, "Ask Isabella about something.");
-	addButton(2, "Sex", campIzzySexMenu, null, null, null, "Have some sex with the cow-girl.");
-	addButton(3, "Spar", isabellaSparMenu, null, null, null, "Get into a quick battle with Isabella!");
-	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(4, "Accent Coach", isabellasAccentCoaching, null, null, null, "Teach Isabella to talk in normal accent.");
-	else addButton(4, "Accent Uncoach", isabellaAccentUncoaching, null, null, null, "Let Isabella talk the way she wants. This will pretty much throw away all the coaching progress you've made.");
-	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(5, "Get Milk", getMilk, null, null, null, "Get a bottle of Isabella's milk.");
+	addButton(0, "Appearance", isabellasAppearance).hint("Examine Isabella's detailed appearance.");
+	addButton(1, "Talk", isabellaTalkMenu).hint("Ask Isabella about something.");
+	addButton(2, "Sex", campIzzySexMenu).hint("Have some sex with the cow-girl.");
+	addButton(3, "Spar", isabellaSparMenu).hint("Get into a quick battle with Isabella!");
+	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(4, "Accent Coach", isabellasAccentCoaching).hint("Teach Isabella to talk in normal accent.");
+	else addButton(4, "Accent Uncoach", isabellaAccentUncoaching).hint("Let Isabella talk the way she wants. This will pretty much throw away all the coaching progress you've made.");
+	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(5, "Get Milk", getMilk).hint("Get a bottle of Isabella's milk.");
 	if (player.hasItem(consumables.PROBOVA) && player.gender > 0) {
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>");
-		addButton(6, "GiveProBova", isabellaBurps, null, null, null, "Give a bottle of Pro Bova to Isabella?", "Give Pro Bova");
+		addButton(6, "GiveProBova", isabellaBurps).hint("Give a bottle of Pro Bova to Isabella?", "Give Pro Bova");
 	}
 	if (player.hasItem(consumables.OVIELIX) && isabellaScene.pregnancy.isPregnant && flags[kFLAGS.ISABELLA_PREGNANCY_BOOSTED] == 0) {
 		outputText("\n\n<b>You can give Isabella a bottle of Ovi Elixir to take ten days off her pregnancy although it only works once per pregnancy.</b>");
-		addButton(7, "GiveOviElixir", isabellaTakesOviElixir, null, null, null, "Give a bottle of Ovi Elixir to Isabella? This will shorten her current pregnancy by ten days but you cannot do it again until she gives birth.", "Give Ovi Elixir");
+		addButton(7, "GiveOviElixir", isabellaTakesOviElixir).hint("Give a bottle of Ovi Elixir to Isabella? This will shorten her current pregnancy by ten days but you cannot do it again until she gives birth.", "Give Ovi Elixir");
 	}
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(10, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(10, "Go Camp", backToCamp);
@@ -1569,9 +1569,9 @@ private function isabellaTalkMenu():void {
 		}
 	}
 	menu();
-	addButton(0, "Just Talk", isabellaScene.talkWithIsabella, null, null, null, "Have a chat with Isabella to pass the time.");
-	if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] == -1) addButton(1, "Contraception", toggleIsabellaContraceptives, null, null, null, flags[kFLAGS.ISABELLA_POTENCY_STATE] == 1 ? "Tell Isabella to start using the contraceptive herbs. This should prevent Isabella from getting pregnancy although it does not cancel any existing pregnancies." : "Tell Isabella to stop using the contraceptive herbs. This will allow you to get her pregnant.");
-	if ((isabellaScene.totalIsabellaChildren() > 0 || isabellaScene.pregnancy.isPregnant) && flags[kFLAGS.ISABELLA_COWMOTHER] < 1) addButton(2, "Cowify", isabellaCowifyPrompt, null, null, null, "Ask Isabella if she can turn into something special.");
+	addButton(0, "Just Talk", isabellaScene.talkWithIsabella).hint("Have a chat with Isabella to pass the time.");
+	if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] == -1) addButton(1, "Contraception", toggleIsabellaContraceptives).hint(flags[kFLAGS.ISABELLA_POTENCY_STATE] == 1 ? "Tell Isabella to start using the contraceptive herbs. This should prevent Isabella from getting pregnancy although it does not cancel any existing pregnancies." : "Tell Isabella to stop using the contraceptive herbs. This will allow you to get her pregnant.");
+	if ((isabellaScene.totalIsabellaChildren() > 0 || isabellaScene.pregnancy.isPregnant) && flags[kFLAGS.ISABELLA_COWMOTHER] < 1) addButton(2, "Cowify", isabellaCowifyPrompt).hint("Ask Isabella if she can turn into something special.");
 	addButton(4, "Back", callForFollowerIsabella);
 }
 

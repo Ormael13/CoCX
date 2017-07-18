@@ -62,10 +62,10 @@ package classes.Scenes.Areas.HighMountains
 			menu();
 			addButtonDisabled(0, "???", "Cummin Sooooon!");
 			addButtonDisabled(1, "???", "Cummin Sooooon!");
-			addButton(5, "Sapphire", sapphiremenu, null, null, null, "Cummin Sooooon!");
+			addButton(5, "Sapphire", sapphiremenu).hint("Cummin Sooooon!");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
 			addButtonDisabled(7, "???", "Cummin Sooooon!");
-		//	addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
+		//	addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -75,10 +75,10 @@ package classes.Scenes.Areas.HighMountains
 			menu();
 			addButtonDisabled(0, "???", "Cummin Sooooon!");
 			addButtonDisabled(1, "???", "Cummin Sooooon!");
-			addButton(5, "Sapphire", sapphiremenu, null, null, null, "Cummin Sooooon!");
+			addButton(5, "Sapphire", sapphiremenu).hint("Cummin Sooooon!");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
 			addButtonDisabled(7, "???", "Cummin Sooooon!");
-		//	addButton(7, "Basement", templeBasement, null, null, null, "Cummin Sooooon!");
+		//	addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -99,8 +99,8 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
 		//	addButton(0,"This place", templemainmenu);
-			addButton(1,"Her", TalkHer, null, null, null, "Fancy tooltip that Lia will surely make soon.");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex, null, null, null, "Another fancy tooltip that Lia will surely make soon.");
+			addButton(1,"Her", TalkHer).hint("Fancy tooltip that Lia will surely make soon.");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex).hint("Another fancy tooltip that Lia will surely make soon.");
 			addButton(4,"Back", templemainmenu);
 		}
 		
@@ -151,7 +151,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.lust > 33) {
 					addButtonDisabled(0,"???", "Req. Gargoyle PC.");
 					addButtonDisabled(1,"???", "Req. Gargoyle PC and Onyx/Krystal.");
-					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation, null, null, null, "Lia will make fancy tooltip soon ^^");
+					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation).hint("Lia will make fancy tooltip soon ^^");
 					addButtonDisabled(3,"FuckHer", "Lia will make fancy tooltip soon ^^");
 				}
 				addButton(4,"Back", sapphiremenu);
@@ -212,7 +212,7 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
 				addButtonDisabled(0, "Statue", "Cummin Sooooon!");
-				addButton(1, "Strange Book", strangeBookOfGolems, null, null, null, "Cummin Sooooon!");
+				addButton(1, "Strange Book", strangeBookOfGolems).hint("Cummin Sooooon!");
 				addButtonDisabled(2, "Spare Statue", "Cummin Sooooon!");
 				addButton(4, "Back", templemainmenu);
 			}

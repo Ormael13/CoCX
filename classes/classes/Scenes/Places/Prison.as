@@ -1300,11 +1300,11 @@ package classes.Scenes.Places
 			mainView.statsView.hideLevelUp();
 			//Set menus
 			menu();
-			addButton(0, "Train", prisonTrainMenu, null, null, null, "Train to improve your body.");
-			addButton(1, "Study", prisonStudyMenu, null, null, null, "Study to improve your mind.");
-			addButton(2, "Restraints", prisonRestraintsMenu, null, null, null, "Try to break free from restraints if you have any.");
-			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) addButton(3, "Clean", prisonCaptorCleanRoom, null, null, null, "Clean the cell.");
-			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) addButton(4, "Escape", prisonEscapeMenu, null, null, null, "Make an escape attempt.");
+			addButton(0, "Train", prisonTrainMenu).hint("Train to improve your body.");
+			addButton(1, "Study", prisonStudyMenu).hint("Study to improve your mind.");
+			addButton(2, "Restraints", prisonRestraintsMenu).hint("Try to break free from restraints if you have any.");
+			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) addButton(3, "Clean", prisonCaptorCleanRoom).hint("Clean the cell.");
+			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) addButton(4, "Escape", prisonEscapeMenu).hint("Make an escape attempt.");
 			//addButton(5, "Trigger Billie", billieScene.prisonCaptorBilliePunishmentFuck);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
@@ -1320,28 +1320,28 @@ package classes.Scenes.Places
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
 				menu();
-				addButton(5, "Call Out", punishments.prisonCaptorPunishmentStockadesCallout, null, null, null, "Call for someone to get to you.");
-				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade.\n\n" + prisonWillCostDescript(10));
+				addButton(5, "Call Out", punishments.prisonCaptorPunishmentStockadesCallout).hint("Call for someone to get to you.");
+				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak).hint("Attempt to break the stockade.\n\n" + prisonWillCostDescript(10));
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
 				punishments.prisonCaptorPunishmentConfinementDescribeStatus();
 				menu();
-				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup, null, null, null, "Try to stand up while inside the box.");
-				addButton(6, "Rest Legs", punishments.prisonCaptorPunishmentConfinementRestlegs, null, null, null, "Try to rest your legs while inside the box.");
-				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak, null, null, null, "Attempt to break the box.\n\n" + prisonWillCostDescript(10));
+				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup).hint("Try to stand up while inside the box.");
+				addButton(6, "Rest Legs", punishments.prisonCaptorPunishmentConfinementRestlegs).hint("Try to rest your legs while inside the box.");
+				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak).hint("Attempt to break the box.\n\n" + prisonWillCostDescript(10));
 				if (player.lust >= 30) addButton(8, "Masturbate", punishments.prisonCaptorPunishmentConfinementMasturbate);
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 3) {
 				outputText("\n\n");
-				addButton(5, "Suck Dildo", punishments.prisonCaptorPunishmentBJTrainerSuck, null, null, null, "Suck on the dildo and try to fill the basin to get the key.");
+				addButton(5, "Suck Dildo", punishments.prisonCaptorPunishmentBJTrainerSuck).hint("Suck on the dildo and try to fill the basin to get the key.");
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
 				menu();
 				addButton(0, "Behave", trainingPet.prisonCaptorPetTrainingCrateBehave);
-				if (player.will >= prisonWillCost(10)) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave, null, null, null, prisonWillCostDescript(10));
+				if (player.will >= prisonWillCost(10)) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave).hint(prisonWillCostDescript(10));
 				addButton(2, "Call Out", trainingPet.prisonCaptorPetTrainingCrateCallOut);
 				addButton(3, "Leash", trainingPet.prisonCaptorPetTrainingCrateLeash);
-				//addButton(7, "Break Cage", trainingPet.prisonCaptorPetTrainingCrateBreak, null, null, null, "Attempt to break the cage?\n\n" + prisonWillCostDescript(10));
+				//addButton(7, "Break Cage", trainingPet.prisonCaptorPetTrainingCrateBreak).hint("Attempt to break the cage?\n\n" + prisonWillCostDescript(10));
 				if (player.lust >= 70) addButton(8, "Masturbate", trainingPet.prisonCaptorPetTrainingCrateMasturbate);
 			}
 			//Show wait/rest/sleep depending on conditions.
@@ -1364,11 +1364,11 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("You consider ways to use your time to improve your body.\n\n");
 			menu();
-			addButton(0, "Workout", doPrisonTrainWorkout, null, null, null, "Do some workout to improve your strength and toughness.");
-			addButton(1, "Cardio", doPrisonTrainCardio, null, null, null, "Do some exercise to improve your toughness and speed.");
-			if (flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] > 0) addButton(5, "Self-Control", prisonCaptorTrainSelfControl, null, null, null, "Improve your self-control.");
-			if (flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] > 0) addButton(6, "Anal Capacity", prisonCaptorTrainAnalCapcity, null, null, null, "Train to increase your anal capacity.");
-			if (flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] > 0) addButton(7, "Puppy Tricks", prisonCaptorTrainPuppyTricks, null, null, null, "Practice behaving like a dog.");
+			addButton(0, "Workout", doPrisonTrainWorkout).hint("Do some workout to improve your strength and toughness.");
+			addButton(1, "Cardio", doPrisonTrainCardio).hint("Do some exercise to improve your toughness and speed.");
+			if (flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] > 0) addButton(5, "Self-Control", prisonCaptorTrainSelfControl).hint("Improve your self-control.");
+			if (flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] > 0) addButton(6, "Anal Capacity", prisonCaptorTrainAnalCapcity).hint("Train to increase your anal capacity.");
+			if (flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] > 0) addButton(7, "Puppy Tricks", prisonCaptorTrainPuppyTricks).hint("Practice behaving like a dog.");
 			addButton(14, "Back", prisonRoom);
 		}
 		
@@ -1539,12 +1539,12 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("You consider ways to use your time to improve your mind.\n\n");
 			menu();
-			addButton(0, "Inner Peace", doPrisonStudyInnerpeace, null, null, null, "Calm your nerves and bring balance to your emotions to improve your self esteem.");
-			addButton(1, "Determination", doPrisonStudyDetermination, null, null, null, "Improve your determination and hone your intelligence.");
-			addButton(2, "Self Pity", doPrisonStudySelfpity, null, null, null, "Attempt to calm your nerves.");
-			addButton(3, "Discipline", doPrisonStudyDiscipline, null, null, null, "Attempt to improve your determination and increase your obedience.");
-			if (flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] > 0) addButton(5, "Manners", prisonCaptorStudyManners, null, null, null, "Improve your manners.");
-			if (flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] > 0) addButton(6, "Breathing", prisonCaptorStudyBreathing, null, null, null, "Work on holding your breath.");
+			addButton(0, "Inner Peace", doPrisonStudyInnerpeace).hint("Calm your nerves and bring balance to your emotions to improve your self esteem.");
+			addButton(1, "Determination", doPrisonStudyDetermination).hint("Improve your determination and hone your intelligence.");
+			addButton(2, "Self Pity", doPrisonStudySelfpity).hint("Attempt to calm your nerves.");
+			addButton(3, "Discipline", doPrisonStudyDiscipline).hint("Attempt to improve your determination and increase your obedience.");
+			if (flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] > 0) addButton(5, "Manners", prisonCaptorStudyManners).hint("Improve your manners.");
+			if (flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] > 0) addButton(6, "Breathing", prisonCaptorStudyBreathing).hint("Work on holding your breath.");
 			addButton(14, "Back", prisonRoom);
 		}
 		

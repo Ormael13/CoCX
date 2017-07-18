@@ -268,7 +268,7 @@ import classes.GlobalFlags.*;
 			//Harry Roswell
 			if (flags[kFLAGS.BLACK_COCK_MET_HARRY] == 0) {
 				outputText("You see the sign saying \"Keep Out\" leading to the back. You assume the cook is back there.\n\n");
-				addButton(2, "Sneak", meetHarryRoswell, null, null, null, "Sneak into the kitchen?");
+				addButton(2, "Sneak", meetHarryRoswell).hint("Sneak into the kitchen?");
 			}
 			else {
 				outputText("You see the sign saying \"Keep Out\" leading to the back portion of the tent. You know that Harry Roswell, the beefy rhino-morph cooking the food, is back there and doesn't mind you ignoring the sign.\n\n");
@@ -306,7 +306,7 @@ import classes.GlobalFlags.*;
 				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>\n\n");
 			}
 			menu();
-			addButton(0, "Song", listenToAnitaSong, null, null, null, "Listen to Anita's performance. This will cost you five gems.");
+			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
 			addButton(4, "Nevermind", nevermindToAnita);
@@ -384,7 +384,7 @@ import classes.GlobalFlags.*;
 				outputText("\n\nOnce the two of you are outside she leads you behind the bar where she uses her arms to push her perky tits together, looking up at you as she unbuttons her little cut-off shorts.");
 			}
 			menu();
-			if (player.canFly() && player.gender > 0) addButton(0, "Eagle Fuck", eagleFuckAnita, null, null, null, "Take a wild trip in the skies with Anita and fuck her!");
+			if (player.canFly() && player.gender > 0) addButton(0, "Eagle Fuck", eagleFuckAnita).hint("Take a wild trip in the skies with Anita and fuck her!");
 			else addButtonDisabled(0, "Eagle Fuck", (!player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that."));
 			if (player.hasCock()) addButton(1, "Vaginal", vaginalFuckAnita);
 			else addButtonDisabled(1, "Vaginal", "You'll need a penis for that.");
@@ -560,8 +560,8 @@ import classes.GlobalFlags.*;
 				outputText("\n\n<b>New codex entry unlocked: Satyrs!</b>\n\n");
 			}
 			menu();
-			addButton(0, "Stash", checkAndyStash, null, null, null, "Go out the back of the tent and check out Andy's stash?");
-			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr, null, null, null, "Proposition to have sex with the satyr.");
+			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
+			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr).hint("Proposition to have sex with the satyr.");
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to consider this.");
 			addButton(4, "Nevermind", nevermindToAndy);
 		}
@@ -649,7 +649,7 @@ import classes.GlobalFlags.*;
 			applyAndysSmokeEffect();
 			outputText("\n\nWhat do you want to do?");
 			menu();
-			addButton(0, "Grab It", grabAndysDongAfterSmoking, null, null, null, "That cock looks fun to play with!");
+			addButton(0, "Grab It", grabAndysDongAfterSmoking).hint("That cock looks fun to play with!");
 			addButton(1, "Do Nothing", doNothingAfterSmoking);
 		}
 		
@@ -741,11 +741,11 @@ import classes.GlobalFlags.*;
 			outputText("\n\nHe looks up at you expectantly and you have to admit you got a little horny listening to his stories and his past. What do you want him to do now?");
 			dynStats("lus", 20, "resisted", false);
 			menu();
-			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff, null, null, null, "Have Andy suck you off.");
+			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff).hint("Have Andy suck you off.");
 			else addButtonDisabled(0, "Suck my Cock", "You'll need a cock to have Andy do this.");
-			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut, null, null, null, "Have Andy lick your pussy.");
+			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut).hint("Have Andy lick your pussy.");
 			else addButtonDisabled(0, "Lick my Pussy", "You'll need a vagina to have Andy do this.");
-			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross, null, null, null, "Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
+			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross).hint("Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
 			addButton(4, "Do Nothing", declineAndyOral);
 		}
 		
@@ -884,9 +884,9 @@ import classes.GlobalFlags.*;
 				outputText("\n\nOnce the two of you sneak past the rhino cook and go out into the fenced in back portion of The Black Cock he pulls off his shirt, revealing his finely toned abs and pierced nipples.");
 			}
 			menu();
-			if (player.hasCock()) addButton(0, "Fuck Him", fuckAndyTheSatyr, null, null, null, "Take Andy from behind and put your cock to good use.");
+			if (player.hasCock()) addButton(0, "Fuck Him", fuckAndyTheSatyr).hint("Take Andy from behind and put your cock to good use.");
 			else addButtonDisabled(0, "Fuck Him", "You will need a penis for that.");
-			addButton(1, "Get Fucked", haveAndyFuckYouPrompt, null, null, null, "Get Andy to fuck you good!");
+			addButton(1, "Get Fucked", haveAndyFuckYouPrompt).hint("Get Andy to fuck you good!");
 		}
 		
 		private function fuckAndyTheSatyr():void {
@@ -1302,7 +1302,7 @@ import classes.GlobalFlags.*;
 			outputText("\n\n\"<i>Hey… yuuz gonna jus' stand there and watch or you wanta cum sit on this gud dick?</i>\" He slurs through a thick auburn beard, holding his dick in one hand and a beer in another. Without waiting for an answer two hands at either sides catch you by the wrists.");
 			menu();
 			if (player.lust >= 33) {
-				if (!player.isTaur()) addButton(0, "Let Them", letTheSatyrsHaveTheirWayWithYou, null, null, null, "Let the satyrs have their way with you. This is going to be rough and intense. " + (player.hasVagina() ? "\n\nNOTE: Contains rimjob! You have been warned." : ""));
+				if (!player.isTaur()) addButton(0, "Let Them", letTheSatyrsHaveTheirWayWithYou).hint("Let the satyrs have their way with you. This is going to be rough and intense. " + (player.hasVagina() ? "\n\nNOTE: Contains rimjob! You have been warned." : ""));
 				else addButtonDisabled(0, "Let Them", "You doubt you'll be able to participate into the orgy with your tauric body.");
 			}
 			else addButtonDisabled(0, "Let Them", "You aren't horny enough to consider that.");

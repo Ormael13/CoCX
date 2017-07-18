@@ -26,7 +26,7 @@ package classes.Scenes.Places.Ingnam
 			}
 			outputText("\n\nYou could help out the farmer with some work for gems.");
 			menu();
-			addButton(0, "Work", workAtFarm, null, null, null, "Work at the farm for gems.");
+			addButton(0, "Work", workAtFarm).hint("Work at the farm for gems.");
 			addButton(14, "Leave", kGAMECLASS.ingnam.menuIngnam);
 		}
 		

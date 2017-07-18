@@ -505,18 +505,18 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] = 1;
 			outputText("\n\n<b>New codex entry unlocked: Salamanders!</b>")
 		}
-		addButton(0,"Appearance",helSpawnScene.heliasAppearanceScreen, null, null, null, "Examine Helia's appearance.");
+		addButton(0,"Appearance",helSpawnScene.heliasAppearanceScreen).hint("Examine Helia's appearance.");
 		if (player.lust >= 33) {
-			addButton(1,"Sex",heliaRoughSex, null, null, null, "Initiate sex with Helia.");
-			addButton(2,"Threesomes",heliaThreesomes, null, null, null, "Invite someone for threesomes activity with Helia!");
+			addButton(1,"Sex",heliaRoughSex).hint("Initiate sex with Helia.");
+			addButton(2,"Threesomes",heliaThreesomes).hint("Invite someone for threesomes activity with Helia!");
 		}
-		addButton(4,"Talk",heliaOptions, null, null, null, "Discuss with Helia about various topics.");
-		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot, null, null, null, "Do some quick fight sessions!");
+		addButton(4,"Talk",heliaOptions).hint("Discuss with Helia about various topics.");
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!");
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
-		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel, null, null, null, "Box with Helia and train your strength and toughness.");
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.");
 		if (flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
 			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 &&
-					!helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",helSpawnScene.haveAKid, null, null, null, "Get Helia pregnant and start a family with her.");
+					!helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",helSpawnScene.haveAKid).hint("Get Helia pregnant and start a family with her.");
 		}
 		addButton(14,"Back",camp.campLoversMenu)
 	}
@@ -546,18 +546,18 @@ private function heliaOptions():void {
 		return;
 	}
 	menu();
-	addButton(0,"Discuss",talkToHel, null, null, null, "Talk to her about random topics.");
-	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail, null, null, null, "Cuddle with Helia and sleep with her.");
+	addButton(0,"Discuss",talkToHel).hint("Talk to her about random topics.");
+	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail).hint("Cuddle with Helia and sleep with her.");
 	else {
-		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia, null, null, null, "Stop sleeping with Helia, for now.", "No Sleep With");
-		addButton(2,"Hug",hugASmokeyTail, null, null, null, "Give that salamander bitch a hug. Bitches love hugs.");
+		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia).hint("Stop sleeping with Helia, for now.", "No Sleep With");
+		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.");
 	}
 	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE, 1)) addButton(3, "Anal Train", heliaGapeSceneChoices);
-	//addButton(4, "Futafication", talkAboutFuta, null, null, null, "See if she's in the mood to grow a new penis.");
-	addButton(5, "Bathe", takeABath, null, null, null, "Swim in stream with Helia.");
-	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid, null, null, null, "Spend some time with your salamander child.");
-	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle, null, null, null, "Request her to guard the camp every night.", "Guard Camp");
-	else addButton(8,"NoGuarding",helGuardToggle, null, null, null, "Request her to stop guarding the camp.", "No Guarding");
+	//addButton(4, "Futafication", talkAboutFuta).hint("See if she's in the mood to grow a new penis.");
+	addButton(5, "Bathe", takeABath).hint("Swim in stream with Helia.");
+	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid).hint("Spend some time with your salamander child.");
+	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle).hint("Request her to guard the camp every night.", "Guard Camp");
+	else addButton(8,"NoGuarding",helGuardToggle).hint("Request her to stop guarding the camp.", "No Guarding");
 	addButton(14,"Back",heliaFollowerMenu);
 }
 
@@ -996,39 +996,39 @@ private function heliaRoughSex(output:Boolean = true):void {
 		//85 vag capacity by base
 		if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 14)
 		{	
-			addButton(buttons,"FuckVag",helScene.beatUpHelAndStealHerWalletFromHerVagina, null, null, null, "Penetrate her vaginally.");
+			addButton(buttons,"FuckVag",helScene.beatUpHelAndStealHerWalletFromHerVagina).hint("Penetrate her vaginally.");
 			buttons++;
 		}
 		//85 ass capacity
 		if(player.cockThatFits(heliaAnalCapacity()) >= 0 && buttons < 14)
 		{
-			addButton(buttons,"Anal",helScene.fuckHelsAss, null, null, null, "Penetrate her anally.");
+			addButton(buttons,"Anal",helScene.fuckHelsAss).hint("Penetrate her anally.");
 			buttons++;
 		}
 		if(buttons < 14) {
-			addButton(buttons,"Get Blown",helScene.helBlowsYou, null, null, null, "Have her suck you off..");
+			addButton(buttons,"Get Blown",helScene.helBlowsYou).hint("Have her suck you off..");
 			buttons++;
 		}
 		if(player.cockThatFits(heliaCapacity()) >= 0 && player.cockThatFits2(heliaCapacity()) >= 0 && buttons < 14) 
 		{
-			addButton(buttons,"DoublePen",helScene.dpHel, null, null, null, "Fill both of her holes with your cocks.");
+			addButton(buttons,"DoublePen",helScene.dpHel).hint("Fill both of her holes with your cocks.");
 			buttons++;
 		}
 		if(buttons < 14) {
-			addButton(buttons,"Tail Wank",helScene.helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora, null, null, null, "Have her jerk you off using her tail.");
+			addButton(buttons,"Tail Wank",helScene.helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora).hint("Have her jerk you off using her tail.");
 			buttons++;
 		}
 	}
 	if(player.hasVagina() && player.lust >= 33 && buttons < 14) {
-		addButton(buttons,"GetLicked",helScene.getLickedByHel, null, null, null, "Have her lick your vagina.");
+		addButton(buttons,"GetLicked",helScene.getLickedByHel).hint("Have her lick your vagina.");
 		buttons++;
 	}
 	if(player.lust >= 33 && buttons < 14) {
-		addButton(buttons,"TailPeg",helScene.helTailPegging, null, null, null, "Have her peg your ass.");
+		addButton(buttons,"TailPeg",helScene.helTailPegging).hint("Have her peg your ass.");
 		buttons++;
 	}
 	//if (player.lust >= 33 && flags[kFLAGS.HELIA_FUTA] > 0) {
-	//	addButton(buttons, "Get Fucked", helScene.getFucked, null, null, null, "Have her penetrate you anally with her dick.");
+	//	addButton(buttons, "Get Fucked", helScene.getFucked).hint("Have her penetrate you anally with her dick.");
 	//	buttons++;
 	//}
 	//Morph-based: [Possession] [Mount Her] [Hanging 69] [Coil Her Up] [Tentafuck])

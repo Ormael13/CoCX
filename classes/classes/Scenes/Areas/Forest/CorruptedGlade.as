@@ -40,7 +40,7 @@ package classes.Scenes.Areas.Forest {
 				}
 				outputText("\n\nOf course, you could resolve to destroy the corrupted glade if you want to.");
 				doNext(camp.returnToCampUseOneHour);
-				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
+				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
 			}
 			else if (player.cor <= 66) { //intrigued reaction
 				outputText("  You explore the glade with equal parts caution and curiosity.  ");
@@ -56,15 +56,15 @@ package classes.Scenes.Areas.Forest {
 				}
 				dynStats("lus", 20 + player.lib / 5, "cor", .5);
 				doNext(camp.returnToCampUseOneHour);
-				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
+				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
 			}
 			else { //drink sap/lick flower reaction
 				outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.");
 				menu();
-				addButton(0, "Flowers", flowerFun, null, null, null, "These flowers look like pussies. Play with the flower.");
-				addButton(1, "Vines", tentacleFun, null, null, null, "These vines look like cocks at their tips. Play with the vines.");
-				addButton(2, "Trees", treeBoobFun, null, null, null, "The knots on the trees look a lot like breasts. Play with the trees and lick some sap.");
-				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
+				addButton(0, "Flowers", flowerFun).hint("These flowers look like pussies. Play with the flower.");
+				addButton(1, "Vines", tentacleFun).hint("These vines look like cocks at their tips. Play with the vines.");
+				addButton(2, "Trees", treeBoobFun).hint("The knots on the trees look a lot like breasts. Play with the trees and lick some sap.");
+				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
 				addButton(4, "Leave", camp.returnToCampUseOneHour);
 			}
 			//Wallow in decadence reaction - UNFINISHED

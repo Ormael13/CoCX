@@ -391,10 +391,10 @@ public function urtaBarApproach():void {
 			//[URTAZ PLACE] [Suck Off] [Eat Out] [Vixen & Cream]
 			//simpleChoices("Her Place",goBackToUrtasForLuvinz,"Suck Off",blowUrtaUnderTheTableLuv,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
 			menu();
-			addButton(0,"Her Place",goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
-			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
-			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
-			addButton(2, "Eat Out", eatUrtaOutNomNomPussy, null, null, null, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
+			addButton(0,"Her Place",goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
+			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation).hint("Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
+			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv).hint("Suck Urta's dick until she cums!");
+			addButton(2, "Eat Out", eatUrtaOutNomNomPussy).hint("Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
 			if (player.hasCock() && !player.isTaur()) addButton(3, "Vixen & Cream", vixenAndCreamPart1, false, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
 			addButton(14, "Leave", telAdre.barTelAdre);
 			return;
@@ -484,9 +484,9 @@ public function urtaBarApproach():void {
 	//[Under Table BJ] [Public Jerkoff onto your face] [Public Buttfucking (Receiver)] [Tender lovemaking @ Urtas] [Minotaur Cum-Addict Special?] [TABLE FUCK]
 	//simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"Leave",barTelAdre);
 	menu();
-	addButton(0,"Urta's Place",goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
-	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Hidden BJ",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
-	else addButton(1,"Hidden BJ",blowUrtaUnderTable, null, null, null, "Suck Urta's dick until she cums!");
+	addButton(0,"Urta's Place",goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
+	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Hidden BJ",slurpFawkesCocksForFunAndInflation).hint("Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
+	else addButton(1,"Hidden BJ",blowUrtaUnderTable).hint("Suck Urta's dick until she cums!");
 	addButton(4,"Leave",telAdre.barTelAdre);
 }
 
@@ -3131,13 +3131,13 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	//Appropriate sex scene options are given; Hidden Blowjob and Urta's Place for regular Urta and Urta's Place, Suck Off and Eat Out for lover mode Urta
 	menu()
 	if (!urtaLove()) {
-		addButton(0, "Urta's Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
-		addButton(1, "Hidden BJ", blowUrtaUnderTable, null, null, null, "Suck Urta's dick until she cums!");
+		addButton(0, "Urta's Place", goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
+		addButton(1, "Hidden BJ", blowUrtaUnderTable).hint("Suck Urta's dick until she cums!");
 	}
 	else {
-		addButton(0, "Her Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
-		addButton(1, "Suck Off", blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
-		addButton(2, "Eat Out", eatUrtaOutNomNomPussy, null, null, null, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
+		addButton(0, "Her Place", goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
+		addButton(1, "Suck Off", blowUrtaUnderTheTableLuv).hint("Suck Urta's dick until she cums!");
+		addButton(2, "Eat Out", eatUrtaOutNomNomPussy).hint("Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
 		if (player.hasCock() && !player.isTaur()) addButton(3, "Vixen & Cream", vixenAndCreamPart1, true, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
 		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) removeButton(1); //Disables button.
 		

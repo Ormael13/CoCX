@@ -73,17 +73,17 @@ public class MainMenu extends BaseContent {
 		// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 		menu();
-		if (resume != null) addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+		if (resume != null) addButton(0, "Resume", resume).hint("Get back to gameplay?");
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
-		addButton(1, "Settings", getGame().gameSettings.settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
-		addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
-		addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
+		addButton(1, "Settings", getGame().gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+		addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
+		addButton(3, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 
-		addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
-		addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
-		//addButton(7, "Changelog", debugPane, null, null, null, "View changelog.");
-		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane, null, null, null, "View debug information.");
+		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
+		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
+		//addButton(7, "Changelog", debugPane).hint("View changelog.");
+		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane).hint("View debug information.");
 	}
 
 	public function startupScreenBody():void {
