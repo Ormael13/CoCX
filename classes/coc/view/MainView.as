@@ -337,7 +337,7 @@ public class MainView extends Block {
 		this.aCb.rowCount = 15;
 		this.aCb.move(-1250, -1550);
 		this.aCb.addEventListener(Event.CHANGE, function (event:Event):void {
-			if (comboboxHandler) comboboxHandler(ComboBox(event.target).selectedItem);
+			if (comboboxHandler != null) comboboxHandler(ComboBox(event.target).selectedItem);
 		});
 
 		this.hideSprite();
@@ -374,7 +374,7 @@ public class MainView extends Block {
 			});
 			button.preCallback = (function(i:int):Function{
 				return function(b:CoCButton):void{
-					if (_onBottomButtonClick) _onBottomButtonClick(i);
+					if (_onBottomButtonClick != null) _onBottomButtonClick(i);
 				};
 			})(bi);
 			this.bottomButtons.push(button);
