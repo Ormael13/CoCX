@@ -2102,8 +2102,8 @@ package classes.Scenes.Dungeons
 		//*Encounter:
 
 		public function sandWitchMotherFriendlyMenu():void {
-			startCombat(new SandMother(),true);
-			getGame().inCombat = false;
+		//	startCombat(new SandMother(),true);
+		//	getGame().inCombat = false;
 			menu();
 			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",leaveAloneSendLackeysToggle).hint("You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
 			else addButton(0,"StartAttacking",leaveAloneSendLackeysToggle).hint("Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
@@ -2307,9 +2307,7 @@ package classes.Scenes.Dungeons
 		public function explainYourSelfToZeSandBitch():void {
 			clearOutput();
 			outputText("You explain that you came here through a portal from a place called Ingnam, sent as a champion to defend your land from the demons.  Recounting your travels and experiences here, you confidently explain your discovery of this coven, and your misconceptions about the sand witches.  They seemed as lust crazed as the rest of the lands, and you had assumed them to be in league with the demons you found so frequently.");
-			
 			outputText("\n\nThe Queen Witch listens with rapt attention to your tale, but when you finish, all she does is close her eyes, seemingly lost in thought.  You pause, awaiting her reply.  Seconds tick by, then merge into minutes.  You idly tap your [foot].  Will she ever get done mulling over your words?");
-			
 			outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 			//(No new PG.  Corrupt version)
 			if(player.cor > player.inte || kGAMECLASS.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || kGAMECLASS.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
@@ -2376,9 +2374,7 @@ package classes.Scenes.Dungeons
 			else if(player.cor < 66) outputText("beholden to no-one");
 			else outputText("unstoppable");
 			outputText(".  No demon's yoke holds me.</i>\"  You grab her by her shoulders with firm but gentle pressure to drill the point home, looking into her sky blue eyes as you make your proclamations of innocence.  The Queen Witch nods dumbly and visibly calms, though she remains shaken from the recent combat.  Hesitantly, she nods at you and smooths her robes, slowly reasserting her dominant, royal persona.");
-			
 			outputText("\n\n\"<i>Very well.  You are either not a demon agent or the most clever spy this side of Marae's Lake,</i>\" the regal enchantress admits, quietly fixing her hair.  \"<i>Either way, it seems I have no choice but to take you at your word until your actions prove otherwise.</i>\"  She finishes with her hair and idly folds her hands across her lap, which only serves to strain her silken robe tighter around her double-bust.");
-			
 			outputText("\n\n\"<i>Is there something you would like to discuss, or aid you would request?  It has been a great deal of time since I have had the pleasure of discourse with an outsider.</i>\"");
 			player.XP += 200;
 			mainView.statsView.showStatUp( 'xp' );
@@ -3012,23 +3008,15 @@ package classes.Scenes.Dungeons
 		public function sandWitchHistory():void {
 			clearOutput();
 			outputText("You inquire about the history of the sand witches, and how they came to be.  The Sand Mother gives you a benign smile and offers, \"<i>With pleasure.  It is so rare that I get to recount the story to one not of our order.</i>\"  She utters a few spidery words that seem to ring in your ears, and a luminous, floating illusion appears before her, all floating shapeless colors.  As she begins to talk, the blobs shift into the actors in her tale, allowing you to view the story as it happens.");
-			
 			outputText("\n\n\"<i>A little over a score of years in the past, Mareth was a different place.  The desert was a tiny fraction of its current size, and tribes of all sizes and descriptions were settled all over.  In some places, it would be difficult to walk anywhere without stumbling into some town, trading post, or village.  A small city of human mages had sprung up atop the mountain, the descendants of settlers from ages past.  From this stock, both Sand Witches and demons were born.</i>\"  The Sand Mother frowns as if she's swallowing a sour grape, clearly upset at sharing ancestry with such a repugnant foe.");
 			outputText("\n\nIntrigued, you ask exactly how the two human factions came into being, and why these women wound up with doubled chests.  The Sand Mother nods and continues, \"<i>A worthy question, to be sure.  Details of the great fall are hazy, of course, but my mother, the Great Mother and some of my older sisters lived through it.  I have yet to pry a detailed account from one of them.  I do know that the fall was hailed as a discovery of immortality and immense magical power all in one.  Within the span of a few hours, most had gleefully abandoned their souls in exchange for additional power and freedom from the tyranny of old age.  The Great Mother did not.</i>\"");
 			outputText("\n\nChuckling happily, the blue-eyed storyteller gleefully recounts, \"<i>She sent her daughters away when she saw how it changed her beloved, and she refrained from joining in on the debauchery, promising the newborn demons that she would join them once she was sure there were no drawbacks.  Back then, they were jubilant in their newfound power, and did not greatly care if a few fools took their time in coming to join them.  After all, they offered pleasure and power unending, who could resist?  My mother took advantage of this lapse to study their characteristics and magics, taking the knowledge with her when she fled.  She vanished into the trackless sands, with the wind to mask her family's passage through the dunes.  Once there, she changed her body using their black sorceries in order to provide for herself.  Her abilities molded the earth itself into a home, and the Sand Mother began to refine her craft, teaching her daughters all she knew.</i>\"");
-			
 			outputText("\n\nIntriguing.  So twenty years ago a mother and her daughters fled the newborn demons, and they've bred fast enough to be an army now?  It boggles the mind, and you say as much.");
-			
 			outputText("\n\n\"<i>Oh, I know, it sounds like a lot of inbreeding happened in a hurry, but that wasn't the case.  There were other dissidents that we sought out, though there weren't many of us.  They came to see things from Mother's perspective soon enough.  She can be... quite persuasive,</i>\" the regal witch says, her eyes taking on a far away cast.  She shivers and resumes, \"<i>In addition, portals had begun to open all over the world.  New people trickled in from most of them, and we saved those we could.  The first coven was bursting to capacity in two years time, and we were suitably diverse enough to begin breeding in earnest.</i>\"");
-			
 			outputText("\n\nA hand unconsciously dips to a smooth middle as the witch continues her tale, \"<i>A few of our number were chosen to become Cum Witches, the bearers of fertility for our tribe.  They learned magics of fertility and reproduction that allowed us to birth and mature with alarming rapidity.  The rest of us were to be vessels or gatherers, adding to our numbers by any means necessary.  Eventually, it was deemed wise that we split our numbers, and the second coven was born.  We spread like wildfire after that, breeding, hiding, and recruiting all that we could.  Of course, any demons we found were disposed of.</i>\"");
-			
 			outputText("\n\nWell, you suppose that kind of makes sense, but how did the witches resist corruption?");
-			
 			outputText("\n\nLaughing, the Sand Mother explains, \"<i>That one is easier than you would think.  The great bees of Mareth are highly resistant to corruption, to the point that their pure, undiluted honey actively combats it.  With proper treatment, the amber ambrosia can be distilled into a form that will not transform the imbiber but will still remove corruption from one's form.  We pursued a trading relationship with the bees, serving as incubators in exchange for honey.  It's a small indignity to suffer in exchange for maintaining sanity.  Sadly, our contacts with the fertile caste have gone silent, and we fear something may have happened to the hive.  We have enough ambrosia stockpiled for our own needs, but we must be careful how we ration it.</i>\"");
-			
 			outputText("\n\nNodding, you ask if they would be willing to distill any pure honey you would bring in for your uses.  The Sand Mother answers, \"<i>Of course.</i>\"  She inclines her head and finishes, \"<i>There is not much more to tell.  We grew, we spread, and there are many Sand Mothers now.  The demons took a coven or two, but our decentralized nature protected us.  We routinely wipe out patrols foolish enough to come hunting us, but that doesn't seem to stop them.  Was there something else you wanted, [name]?</i>\"");
-			
 			sandWitchMotherFriendlyMenu();
 		}
 
@@ -3037,20 +3025,15 @@ package classes.Scenes.Dungeons
 		public function currentStateOfInterwebs():void {
 			clearOutput();
 			outputText("You inquire as to the current state of the sand witches, and this coven in particular. The Queen Witch's brow creases in thought as she considers your request, tapping her chin and gazing into the intricate, swirling lights above.");
-			
 			outputText("\n\n\"<i>I suppose I would say that our situation is good, on the whole,</i>\" she admits, \"<i>We do not lack for nourishment, thanks to our magics.  Our caves shield us from the worst sandstorms and ensure we are never too cold or warm.  And until recently, we believed our dwellings to be well hidden and secure.</i>\"  The Sand Mother gives you a wry look and a knowing sigh.  \"<i>We both know we were wrong to think so.  Still, our defenses have not been breached by an agent of corruption yet, and this experience will give my sisters and I plenty to consider.  Better you broke down the front door than the Demon Queen's armies.</i>\"");
-			
 			outputText("\n\nGently adjusting herself on her throne, the sorceress recounts, \"<i>We are many, and the cum witch's magics only continue to swell our numbers.  Accelerated growth was one of the first things the great Mother pioneered, so it only takes a few years for a new witch to mature to adulthood and swell our numbers.  Goblins and imps outbreed us by a wide margin, but that's to be expected.</i>\"  A proud smile graces the Sand Mother's face as she brags, \"<i>Between the covens I know of, we should have the numbers to challenge the demons in a head-on assault in a year or two.</i>\"");
 			outputText("\n\nReally?  That is quite a mighty force indeed!");
 			outputText("\n\nThe dusky matriarch grins wolfishly as she says, \"<i>Really.  We have not been idle while corruption rises across the lands.  The Great Mother wisely set us upon this path, gathering us, moulding us, and grooming us for the time when we would resurface as saviors.  ");
 			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("All that remains is to ready those still maturing and wait on our allies to finish growing their numbers.  We shall be carried into the Demon Queen's fortress on the wings of phoenixes, to fight as glorious a battle as has ever been fought!");
 			else outputText("All that remains is for us to find new aerial allies or a method of easy, sustained flight.  The phoenixes were smashed apart by fiery demons, their lair raided and destroyed by an interloper.  If only things had been different... Calais was so close.");
 			outputText("</i>\"");
-			
 			outputText("\n\nYou raise the question of their suitability for battle with the demons.  After all, when you encounter sand witches, they don't seem overly deadly.");
-			
 			outputText("\n\n\"<i>Hah!  That's an understandable conclusion, but ultimately they aren't trying to kill you, they're trying to recruit you.  Do you realize how much control it takes to form a flawless sphere of stone and vibrate it inside someone without causing harm?  Forming a vortex of flesh-rending sand is child's play next to that.  Hurling boulders with peerless precision barely stretches our mental muscles.  Trust me, when it comes to battle magics, we can match the abilities of the demons,</i>\" she assures you with a knowing smile.");
-			
 			outputText("\n\n\"<i>So there you have it, [name].  We are mighty, we are somewhat secure, and if we can continue our plans, we may yet save Mareth.");
 			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0) outputText("  Of course, this is all contingent on us finding an ally that can breach the mountaintop citadel's walls.");
 			outputText("  Was there something else you needed to ask about?</i>\"");
@@ -3131,17 +3114,11 @@ package classes.Scenes.Dungeons
 			outputText("\n\nIt may be the most efficient way, but reducing someone in her charge to little more than a sex slave (even if it is a happy one) does not exactly make her compare favorably to the very demons she fights.");
 			outputText("\n\nRocking back in her throne, the chocolate-hued matriarch considers your words with a flabbergasted expression.  \"<i>I never thought of it that way,</i>\" she says, stroking her chin as she mulls it over.  \"<i>Would they even want to, that's the real question.  Our cum witch seems to take a perverse pride in her work.</i>\"");
 			outputText("\n\nWell, it wouldn't hurt to ask, right?");
-			
 			outputText("\n\nThe Sand Mother nods at that, visibly moved by your arguments.  She calls for her Cum Witch, who arrives in a hurry, soaked in sweat and her own cum.");
-			
 			outputText("\n\n\"<i>My lady, have you decided to bear a child of your own?</i>\" the ebony hermaphrodite questions.");
-			
 			outputText("\n\nSmiling serenely, the coven leader answers, \"<i>No, no my dear.  [name] here had an idea.  " + player.mf("He","She") + " suggested we add to your ranks, to give you more time to help the coven in ways besides reproduction.  Perhaps through magic, or even going out to patrol and recruit newcomers.  Would you have sisters to free up some of your time, or remain the only one to fill your sisters' wombs?</i>\"");
-			
 			outputText("\n\nGrinning devilishly the Cum Witch replies, \"<i>Oh, mother, that would be splendid.  With more cum witches, I would have time to further research the blessings that speed our youngs' growth.  Better still, I would get to teach my new sisters what it means to be a member of my order... first hand.</i>\"  She visibly quivers with excitement, a string of clear drool hanging from the tip of her visibly erect, pulsing erection.");
-			
 			outputText("\n\n\"<i>I see...  Well, I shall announce the trials at once, and before the day is out, you will have a few new sisters,</i>\" the Queen Witch proclaims, waving her hand to dismiss you both.");
-			
 			outputText("\n\n(<b>This coven now has numerous cum witches.  You can talk to the Sand Mother again and ask her to send them out in search of recruits if you want the chance to fight them in the future.</b>)");
 			flags[kFLAGS.MORE_CUM_WITCHES] = 1;
 			sandWitchMotherFriendlyMenu();
@@ -3153,17 +3130,13 @@ package classes.Scenes.Dungeons
 		public function askHowSandMothersAreChosen():void {
 			clearOutput();
 			outputText("You ask the Sand Mother how her people choose who will be a Sand Mother of a new coven.");
-			
 			outputText("\n\nThe statuesque woman smirks ruefully, \"<i>Politics, of course.</i>\"  Politics?  She sees the confused look on your face and explains, \"<i>It shouldn't surprise you.  You");
 			if(player.race() == "human") outputText("'re a human");
 			else outputText(" were a human");
 			outputText(".  Our people are notorious for forming gangs and cliques, groups focused around a leader's charisma.  It's only natural that has continued in Mareth.  It would not surprise me to learn that even the demons have their own factions and political malcontents, though I imagine they deal with them far more harshly than we.</i>\"");
-			
 			outputText("\n\nWaving her arm nonchalantly, the Sand Mother says, \"<i>When a coven grows a bit too big, the Sand Mother will announce the creation of a new coven.  Typically at this point, the more adventurous and ambitious witches will begin gathering the like-minded to their side, and they'll all try to curry favor with their Sand Mother in an attempt to secure the ascension of their chosen leader.</i>\"  She steeples her fingers before interlacing them.  \"<i>It doesn't always work out, even for the most popular groups.  Ultimately, it's up to the Great Mother or the Sand Mother's decision, and sometimes, she'll simply choose a favored daughter.</i>\"");
 			outputText("\n\nWouldn't that result in anger from a potentially powerful rival?  You voice your query.");
-			
 			outputText("\n\n\"<i>Oh, that's a certainty.  However, discontent is not something that can be allowed to fester.  A few months being lavished with a cum witch's attentions and birthing fresh young has a way of smoothing out political differences.  In some ways, we are like the ant-girls of this world.  We must work together for the greater good, or we will fall.  Everyone has a place,</i>\" she declares perhaps a bit too proudly.");
-			
 			outputText("\n\nRubbing your chin in thought, you thank her for the information and mull over their strange practices.  They've given up every most personal agency and freedoms in exchange for a stronger, more cohesive whole.  You aren't so sure it's a great idea, but you have no alternative to offer.");
 			//friendly menu
 			sandWitchMotherFriendlyMenu();

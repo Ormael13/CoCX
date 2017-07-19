@@ -1144,6 +1144,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your two arms covered with thick fur end with large, powerful yeti hands. You can use them to smash or punch things when you're angry.");
 		else if (player.armType == ARM_TYPE_ORCA)
 			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
+		else if (player.armType == ARM_TYPE_DEVIL)
+			outputText("  Your forearms are covered with fur and end with four finger paws like hands, but armed with claws. Despite their weird shape you have more then enough manual dexterity to draw even the most complex magical designs when spellcasting.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody == REAR_BODY_FENRIR_ICE_SPIKES) {
@@ -1335,6 +1337,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes have slitted pupils like that of a snake.");
 		else if(player.eyeType == EYES_DRAGON)
 			outputText("  Your eyes have slitted pupils like that of a dragon.");
+		else if(player.eyeType == EYES_DEVIL)
+			outputText("  Your eyes look fiendish with their black sclera and glowing ember pupils.");
 	}
 	public function describeHairAndEars():void {
 		//if bald
@@ -1391,6 +1395,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
 			else if(player.earType == EARS_SNAKE)
 				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
+			else if(player.earType == EARS_GOAT)
+				outputText("  A pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
 			//</mod>
 			if (player.gillType == GILLS_FISH)
 			{
@@ -1452,6 +1458,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  The [hair] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
 			else if(player.earType == EARS_SNAKE)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
+			else if(player.earType == EARS_GOAT)
+				outputText("  The [hair] on your head is parted by a pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
 			//</mod>
 			if(player.antennae == ANTENNAE_MANTIS)
 			{
@@ -1657,6 +1665,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.faceType == FACE_PLANT_DRAGON) {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
+		if (player.faceType == FACE_DEVIL_FANGS) {
+			outputText("  Your mouth is somewhat human save for your mouth filled with fiendish canines.  It's decorated by [skin coat].");
+		}
 		if (player.faceType == FACE_KANGAROO) {
 			outputText("  Your face is ");
 			if (!player.hasCoat()) {
@@ -1784,7 +1795,16 @@ public function RacialScores():void {
 	else if (player.demonScore() >= 5 && player.demonScore() < 11) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	else if (player.demonScore() >= 1 && player.demonScore() < 5) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>");
 	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
-	if (player.devilkinScore() >= 1 && player.devilkinScore() < 7) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
+	if (player.devilkinScore() >= 14) outputText("\n<font color=\"#0000a0\">Greater Devil: " + player.devilkinScore() + "</font>");
+	else if (player.devilkinScore() >= 10 && player.devilkinScore() < 14) {
+		outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
+		outputText(", +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
+	}
+	else if (player.devilkinScore() >= 7 && player.devilkinScore() < 10) {
+		outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
+		outputText(", +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
+	}
+	else if (player.devilkinScore() >= 1 && player.devilkinScore() < 7) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
 	else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");

@@ -755,7 +755,9 @@ import classes.BodyParts.SkinLayer;
 			[FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
 			[FACE_YETI_FANGS,"(27) YETI_FANGS"],
 			[FACE_ORCA,"(28) ORCA"],
-			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"]
+			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"],
+			[FACE_DRAGON_FANGS,"(30) DRAGON_FANGS"],
+			[FACE_DEVIL_FANGS,"(31) DEVIL_FANGS"],
 		];
 		private static const DECO_DESC_CONSTANTS:Array = [
 			[DECORATION_NONE,"(0) NONE"],
@@ -786,6 +788,7 @@ import classes.BodyParts.SkinLayer;
 			[EYES_REPTILIAN, "(8) REPTILIAN"],
 			[EYES_SNAKE, "(9) SNAKE"],
 			[EYES_DRAGON, "(10) DRAGON"],
+			[EYES_DEVIL, "(11) DEVIL"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[EARS_HUMAN, "(0) HUMAN"],
@@ -811,6 +814,7 @@ import classes.BodyParts.SkinLayer;
 			[EARS_YETI, "(20) YETI"],
 			[EARS_ORCA, "(21) ORCA"],
 			[EARS_SNAKE, "(22) SNAKE"],
+			[EARS_GOAT, "(23) GOAT"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[HORNS_NONE, "(0) NONE"],
@@ -962,6 +966,7 @@ import classes.BodyParts.SkinLayer;
 			[ARM_TYPE_YETI, "(16) YETI"],
 			[ARM_TYPE_ORCA, "(17) ORCA"],
 			[ARM_TYPE_PLANT2, "(18) PLANT2"],
+			[ARM_TYPE_DEVIL, "(19) DEVIL"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[CLAW_TYPE_NORMAL,"(0) NORMAL"],

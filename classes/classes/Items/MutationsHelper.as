@@ -93,6 +93,7 @@ package classes.Items {
 				case ARM_TYPE_FOX:
 				case ARM_TYPE_LION:
 				case ARM_TYPE_YETI:
+				case ARM_TYPE_DEVIL:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case ARM_TYPE_KITSUNE:
@@ -277,6 +278,7 @@ package classes.Items {
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
 		[ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
 		[ARM_TYPE_DRAGON, null],
+		[ARM_TYPE_DEVIL, null],
 		[ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[ARM_TYPE_GARGOYLE, null],
 		[ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
@@ -310,6 +312,7 @@ package classes.Items {
 		[EARS_ELFIN, StatusEffects.UnlockedElfinEars],
 		[EARS_FERRET, null],
 		[EARS_FOX, StatusEffects.UnlockedFoxEars],
+		[EARS_GOAT, null],
 		[EARS_HORSE, null],
 		[EARS_HUMAN, null],
 		[EARS_KANGAROO, null],
@@ -332,6 +335,7 @@ package classes.Items {
 		[EYES_BLACK_EYES_SAND_TRAP, null],
 		[EYES_CAT_SLITS, null],
 		[EYES_DRAGON, null],
+		[EYES_DEVIL, null],
 		[EYES_FENRIR, null],
 		[EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
 		[EYES_FOX, StatusEffects.UnlockedFoxEyes],
@@ -354,6 +358,8 @@ package classes.Items {
 		[FACE_DEER, null],
 		[FACE_DOG, null],
 		[FACE_DRAGON, null],
+		[FACE_DRAGON_FANGS, null],
+		[FACE_DEVIL_FANGS, null],
 		[FACE_ECHIDNA, null],
 		[FACE_FERRET, null],
 		[FACE_FERRET_MASK, null],

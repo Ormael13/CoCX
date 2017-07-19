@@ -24,61 +24,11 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("\n<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
 		menu();
 		var button:int = 0;
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) {
 			if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt).hint("Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else addButton(button++, "M.Bolt", magicbolt).hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
-		}
-		if(player.findPerk(PerkLib.Berzerker) >= 0) {
-			if (player.findPerk(PerkLib.ColdFury) >= 0) {
-				addButton(button++, "Berserk", berzerk).hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance!");
-			}
-			else addButton(button++, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
-		}
-		if (player.findPerk(PerkLib.Lustzerker) >= 0) {
-			addButton(button++, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
-		}
-		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
-			addButton(button++, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
-		}
-		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
-				addButton(button++, "FreezingBreath", fenrirFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
-			}
-			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
-		}
-		if (player.findPerk(PerkLib.FreezingBreathYeti) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
-				addButton(button++, "FreezingBreath", yetiFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
-			}
-			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
-		}
-		if (player.findPerk(PerkLib.FireLord) >= 0) {
-			addButton(button++,"Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
-		}
-		if (player.findPerk(PerkLib.Hellfire) >= 0) {
-			addButton(button++,"Hellfire",hellFire).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
-		}
-		if (player.findPerk(PerkLib.DragonFireBreath) >= 0) {
-			addButton(button++, "DragonFire", dragonfireBreath).hint("Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
-		}
-		if (player.findPerk(PerkLib.DragonIceBreath) >= 0) {
-			addButton(button++, "DragonIce", dragoniceBreath).hint("Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
-		}
-		if (player.findPerk(PerkLib.DragonLightningBreath) >= 0) {
-			addButton(button++, "DragonLightning", dragonlightningBreath).hint("Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
-		}
-		if (player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
-			addButton(button++, "DragonDarkness", dragondarknessBreath).hint("Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
-		}
-		if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
-				addButton(button++, "PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
-			}
-			else addButtonDisabled(button++, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
-
 		}
 		if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
@@ -90,9 +40,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.Incorporeality) >= 0) {
 			addButton(button++, "Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
-		}
-		if (player.findPerk(PerkLib.Whispered) >= 0) {
-			addButton(button++, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
 		}
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			addButton(button++, "F.FoxFire", fusedFoxFire).hint("Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(250) + "\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti() + "");
@@ -119,10 +66,10 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("<b>You need more time before you can use Illusion again.</b>\n\n");
 			}
 		}
-		/*	if (player.tailType == TAIL_TYPE_CAT && player.tailCount == 2) {
-		 addButton(button++, "FoxFire", foxFire).hint("Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
-		 }	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
-		 */	if (player.findPerk(PerkLib.DarkCharm) >= 0) {
+	/*	if (player.tailType == TAIL_TYPE_CAT && player.tailCount == 2) {
+			addButton(button++, "FoxFire", foxFire).hint("Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
+		}	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
+	*/	if (player.findPerk(PerkLib.DarkCharm) >= 0) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
 				addButton(button++, "Fascinate", Fascinate).hint("Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
 			}
@@ -137,18 +84,78 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Transference) >= 0) {
 			addButton(button++, "Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
 		}
+		addButton(11, "BreathAtk", specialsBreathAttacks);
+		addButton(12, "(De)Buffs", specialsBuffsDebuffs);
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) addButton(13, "Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) addButton(13, "Ice Prison", iceprisonSpell);
 		addButton(14, "Back", combatMenu, false);
 	}
 
-	internal function fireBreathMenu():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		outputText("Which of your special fire-breath attacks would you like to use?");
-		simpleChoices("Akbal's", fireballuuuuu, "Hellfire", hellFire, "Dragonfire", dragonfireBreath, "PhoenixFire", phoenixfireBreath, "Back", playerMenu);
+	private function specialsBuffsDebuffs():void {
+		menu();
+		if(player.findPerk(PerkLib.Berzerker) >= 0) {
+			if (player.findPerk(PerkLib.ColdFury) >= 0) {
+				addButton(0, "Berserk", berzerk).hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance!");
+			}
+			else addButton(0, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
+		}
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) {
+			if (player.findPerk(PerkLib.ColdLust) >= 0) {
+				addButton(1, "Lustserk", lustzerk).hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense!");
+			}
+			else addButton(1, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
+		}
+		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
+			addButton(2, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
+		}
+		if (player.findPerk(PerkLib.Whispered) >= 0) {
+			addButton(3, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+		}
+		addButton(14, "Back", msMenu);
 	}
+
+	private function specialsBreathAttacks():void {
+		menu();
+		if (player.findPerk(PerkLib.DragonFireBreath) >= 0) {
+			addButton(0, "DragonFire", dragonfireBreath).hint("Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
+		}
+		if (player.findPerk(PerkLib.DragonIceBreath) >= 0) {
+			addButton(1, "DragonIce", dragoniceBreath).hint("Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
+		}
+		if (player.findPerk(PerkLib.DragonLightningBreath) >= 0) {
+			addButton(2, "DragonLightning", dragonlightningBreath).hint("Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
+		}
+		if (player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
+			addButton(3, "DragonDarkness", dragondarknessBreath).hint("Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
+		}
+		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
+				addButton(5, "FreezingBreath", fenrirFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
+			}
+			else addButtonDisabled(5, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
+		}
+		if (player.findPerk(PerkLib.FreezingBreathYeti) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
+				addButton(6, "FreezingBreath", yetiFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
+			}
+			else addButtonDisabled(6, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
+		}
+		if (player.findPerk(PerkLib.FireLord) >= 0) {
+			addButton(7,"Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
+		}
+		if (player.findPerk(PerkLib.Hellfire) >= 0) {
+			addButton(8,"Hellfire",hellFire).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
+		}
+		if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
+				addButton(9, "PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
+			}
+			else addButtonDisabled(9, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
+		}
+		addButton(14, "Back", msMenu);
+	}
+
 //New Abilities and Items
 //[Abilities]
 //Whisper

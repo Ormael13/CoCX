@@ -2439,7 +2439,9 @@
 					[FACE_SALAMANDER_FANGS, "salamander"],
 					[FACE_YETI_FANGS, "yeti"],
 					[FACE_ORCA, "orca"],
-					[FACE_PLANT_DRAGON, "plant dragon"]
+					[FACE_PLANT_DRAGON, "plant dragon"],
+					[FACE_DRAGON_FANGS, "dragon fangs"],
+					[FACE_DEVIL_FANGS, "devil fangs"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2464,7 +2466,8 @@
 					[EYES_FOX, "fox"],
 					[EYES_REPTILIAN, "reptilian"],
 					[EYES_SNAKE, "snake"],
-					[EYES_DRAGON, "dragon"]
+					[EYES_DRAGON, "dragon"],
+					[EYES_DEVIL, "devil"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2491,7 +2494,8 @@
 					[EARS_LION, "lion"],
 					[EARS_YETI, "yeti"],
 					[EARS_ORCA, "orca"],
-					[EARS_SNAKE, "snake"]
+					[EARS_SNAKE, "snake"],
+					[EARS_GOAT, "goat"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2537,7 +2541,8 @@
 					[ARM_TYPE_DRAGON, "dragon"],
 					[ARM_TYPE_YETI, "yeti"],
 					[ARM_TYPE_ORCA, "orca"],
-					[ARM_TYPE_PLANT2, "tentacle-covered"]
+					[ARM_TYPE_PLANT2, "tentacle-covered"],
+					[ARM_TYPE_DEVIL, "devil"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(

@@ -1872,6 +1872,8 @@ use namespace kGAMECLASS;
 				demonCounter += 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				demonCounter++;
+			if (hornType == 6)
+				demonCounter -= 10;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				demonCounter += 10;
 			End("Player","racialScore");
@@ -1885,6 +1887,22 @@ use namespace kGAMECLASS;
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
 				devilkinCounter++;
 			if (tailType == TAIL_TYPE_GOAT || tailType == TAIL_TYPE_DEMONIC)
+				devilkinCounter++;
+			if (wingType == 6 || wingType == 7)
+				devilkinCounter += 4;
+			if (armType == 19)
+				devilkinCounter++;
+			if (hornType == 6 && horns > 0)
+				devilkinCounter++;
+			if (earType == 23)
+				devilkinCounter++;
+			if (faceType == 31)
+				devilkinCounter++;
+			if (eyeType == 11)
+				devilkinCounter++;
+			if (tallness < 48)
+				devilkinCounter++;
+			if (cor >= 60)
 				devilkinCounter++;
 			End("Player","racialScore");
 			return devilkinCounter;

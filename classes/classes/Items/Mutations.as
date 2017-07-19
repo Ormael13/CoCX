@@ -10453,12 +10453,10 @@
 			//init variables
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
-		//	var temp2:Number = 0;
-		//	var temp3:Number = 0;
 			//Randomly choose affects limit
-		//	if (rand(2) == 0) changeLimit++;
-		//	if (rand(3) == 0) changeLimit++;
-		//	if (rand(4) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
@@ -10468,16 +10466,22 @@
 			dynStats("cor", 3 + rand(3));
 			
 			//stat changes
+			//int change
 			
 			//sexual changes
+			//female
+			
+			//male
 			
 			//physical changes
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
+			//legs
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
 				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
 				setLowerBody(LOWER_BODY_TYPE_CLOVEN_HOOFED);
 				player.legCount = 2;
 				changes++;
 			}
+			//tail
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED && (player.tailType != TAIL_TYPE_GOAT && player.tailType != TAIL_TYPE_DEMONIC)) {
 				outputText("\n\n");
 				if (rand(2) == 0) {
@@ -10493,6 +10497,72 @@
 					else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.");
 					setTailType(TAIL_TYPE_DEMONIC);
 				}
+				changes++;
+			}
+			//wings
+			if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_BAT_LIKE_LARGE) && (player.tailType == TAIL_TYPE_GOAT && player.tailType == TAIL_TYPE_DEMONIC)) {
+				//grow smalls to large
+				if (player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
+					outputText("\n\n");
+					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
+					setWingType(WING_TYPE_BAT_LIKE_LARGE, "large, bat-like");
+				}
+				else if (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
+					outputText("\n\n");
+					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ");
+					if (player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
+						outputText("small ");
+						setWingType(WING_TYPE_BAT_LIKE_TINY, "tiny, bat-like");
+					}
+					else {
+						outputText("large ");
+						setWingType(WING_TYPE_BAT_LIKE_LARGE, "large, bat-like");
+					}
+					outputText("<b>bat-like demon-wings!</b>");
+				}
+				//No wings
+				else if (player.wingType == WING_TYPE_NONE) {
+					outputText("\n\n");
+					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have tiny demonic wings</b>.");
+					setWingType(WING_TYPE_BAT_LIKE_TINY, "tiny, bat-like");
+				}
+				changes++;
+			}
+			//arms
+			if (rand(3) == 0 && changes < changeLimit && player.armType != ARM_TYPE_DEVIL && (player.wingType == WING_TYPE_BAT_LIKE_TINY || player.wingType == WING_TYPE_BAT_LIKE_LARGE)) {
+				outputText("\n\nYour hands shapeshift as they cover in fur and morph into the clawed hands of some unknown beast. They retain their dexterity despite their weird shape and paw pads. At least this won't hinder spellcasting. <b>You now have bestial clawed hands!</b>");
+				setArmType(ARM_TYPE_DEVIL);
+				changes++;
+			}
+			//Horns
+			if (rand(3) == 0 && changes < changeLimit && player.hornType != HORNS_GOAT && player.armType == ARM_TYPE_DEVIL) {
+				if (player.hornType == HORNS_NONE) outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+				setHornType(HORNS_GOAT, 1);
+				changes++;
+			}
+			//Ears
+			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_GOAT && player.hornType == HORNS_GOAT) {
+				outputText("\n\nYour ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>");
+				setEarType(EARS_GOAT);
+				changes++;
+			}
+			//Fangs
+			if (rand(3) == 0 && changes < changeLimit && player.faceType != FACE_DEVIL_FANGS && player.earType == EARS_GOAT) {
+				outputText("\n\nYou feel your canines grow slightly longer to take on a sharp appearance like those of a beast. Perhaps not as long as you thought they would end up as but clearly they make your smile all the more fiendish. <b>You now have demonic fangs!</b>");
+				setFaceType(FACE_DEVIL_FANGS);
+				changes++;
+			}
+			//Eyes
+			if (rand(3) == 0 && changes < changeLimit && player.eyeType != EYES_DEVIL && player.faceType == FACE_DEVIL_FANGS) {
+				outputText("\n\nYour eyes feels like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance: the sclera is black and the pupils ember. Furthermore they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
+				setEyeType(EYES_DEVIL);
+				changes++;
+			}
+			//Shrinkage!
+			if (rand(2) == 0 && player.tallness > 42) {
+				outputText("\n\nYou see the ground grow closer. Upon examining yourself you discover you are shorter than before.");
+				player.tallness -= 1 + rand(3);
 				changes++;
 			}
 			

@@ -49,24 +49,24 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (2nd Stage). Req. Ascension: Unlocked Potential and be at second ascension. It costs 5 asc points and will give +2 to max lust/wrath and +6 to max soulforce at each lvl-up.\n");
 			outputText("-New accesory: Seer's Hairpin -  (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");//gained after beating Ignis for the first time
 			outputText("-New melee weapon: Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
+			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Changelog have been moved to Main game menu form Camp actions. No more need to load any game for merely checking what new I scre.... made in newest version ^^^\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
+			outputText("-M. Specials menu was slight rearranged. All breath type specials was moved to Breath Attack menu (9 in total specilas atm), specials that could buff PC or debuff enemy was put into (De)Buffs subgroup (Berserker, Lustzerker, Petrify, Whisper)\n");
+			outputText("-Changelog have been moved to Main game menu from Camp actions. No more need to load any game for merely checking what new I scre.... made in newest version ^^^\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Orca, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
-			outputText("-New stat point gain system - per day, not on level up. (Very early WIP). Enabled under Gameplay Settings\n");
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

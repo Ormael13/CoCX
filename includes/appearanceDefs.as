@@ -94,6 +94,7 @@ public static const FACE_YETI_FANGS:int                                		      	
 public static const FACE_ORCA:int                                		     	 	=   28;
 public static const FACE_PLANT_DRAGON:int                                		    =   29;
 public static const FACE_DRAGON_FANGS:int                                           =   30;
+public static const FACE_DEVIL_FANGS:int                                            =   31;
 
 // face.cheekDecoration etc
 public static const DECORATION_NONE:int                                             =    0;
@@ -120,6 +121,7 @@ public static const EYES_FOX:int                                                
 public static const EYES_REPTILIAN:int                                              =   8;
 public static const EYES_SNAKE:int                          	                    =   9;
 public static const EYES_DRAGON:int                          	                    =  10;
+public static const EYES_DEVIL:int                          	                    =  11;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -145,6 +147,7 @@ public static const EARS_LION:int													=  19;
 public static const EARS_YETI:int													=  20;
 public static const EARS_ORCA:int													=  21;
 public static const EARS_SNAKE:int													=  22;
+public static const EARS_GOAT:int													=  23;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -191,6 +194,7 @@ public static const ARM_TYPE_DRAGON:int												=  15;
 public static const ARM_TYPE_YETI:int												=  16;
 public static const ARM_TYPE_ORCA:int												=  17;
 public static const ARM_TYPE_PLANT2:int												=  18;
+public static const ARM_TYPE_DEVIL:int												=  19;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
