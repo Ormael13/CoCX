@@ -621,19 +621,19 @@ public function unarmedAttack():Number {
 	}
 	if (player.findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulSprite) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulScholar) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulElder) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
+	}
+	if (player.findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
 	}
 	if (player.findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulKing) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulKing) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
 	}
-//	if (player.findPerk(PerkLib.FleshBodyTyrantStage) >= 0) {
-//		if (player.findPerk(PerkLib.SA) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
-//		if (player.findPerk(PerkLib.SS) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
-//		if (player.findPerk(PerkLib.SS) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
-//	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) unarmed += 12 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) unarmed += 18 * (1 + player.newGamePlusMod());
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
@@ -5314,22 +5314,22 @@ public function soulskillMod():Number {
 	}
 	if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulSprite) >= 0) modss += .3;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) modss += .3;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) modss += .3;		// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulScholar) >= 0) modss += .3;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulElder) >= 0) modss += .3;		// && player.inte >= 25 (zmienić na wisdom)
+	}
+	if (player.findPerk(PerkLib.DaoistElderStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
 	}
 	if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulKing) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulKing) >= 0) modss += .5;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0) modss += .5;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0) modss += .5;
 	}
-//	if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) {
-//		if (player.findPerk(PerkLib.SA) >= 0) modss += .6;
-//		if (player.findPerk(PerkLib.SS) >= 0) modss += .6;
-//		if (player.findPerk(PerkLib.SS) >= 0) modss += .6;
-//	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modss += .3;
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modss += .4;
-//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modss += .6;
+//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modss += .5;
 	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
 	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
 	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
@@ -5344,11 +5344,14 @@ public function soulskillcostmulti():Number {
 	if (player.findPerk(PerkLib.SoulPersonage) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulWarrior) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulSprite) >= 0) multiss += 1;
+	if (player.findPerk(PerkLib.SoulScholar) >= 0) multiss += 1;
+	if (player.findPerk(PerkLib.SoulElder) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulExalt) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulOverlord) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulTyrant) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulKing) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulEmperor) >= 0) multiss += 1;
+	if (player.findPerk(PerkLib.SoulAncestor) >= 0) multiss += 1;
 	if (player.level >= 24 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
 	if (player.level >= 42 && player.wis >= 140) multiss += 1;//początek zdolności latania
 	if (player.level >= 60 && player.wis >= 200) multiss += 1;//początek czegoś tam 1
