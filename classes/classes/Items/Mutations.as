@@ -10506,7 +10506,7 @@
 				changes++;
 			}
 			//wings
-			if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_BAT_LIKE_LARGE) && (player.tailType == TAIL_TYPE_GOAT && player.tailType == TAIL_TYPE_DEMONIC)) {
+			if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_BAT_LIKE_LARGE) && (player.tailType == TAIL_TYPE_GOAT || player.tailType == TAIL_TYPE_DEMONIC)) {
 				//grow smalls to large
 				if (player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
 					outputText("\n\n");

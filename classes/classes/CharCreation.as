@@ -159,7 +159,6 @@ import fl.controls.ComboBox;
 				
 				player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 			}
-			player.HP = player.maxHP();
 			player.hairLength = 5;
 			player.skin.restore();
 			player.faceType = FACE_HUMAN;
@@ -204,18 +203,18 @@ import fl.controls.ComboBox;
 			player.exploredDesert = 0;
 			player.exploredMountain = 0;
 			player.exploredLake = 0;
+			//Inventory clear
+			player.itemSlot1.unlocked = true;
+			player.itemSlot1.emptySlot();
+			player.itemSlot2.unlocked = true;
+			player.itemSlot2.emptySlot();
+			player.itemSlot3.unlocked = true;
+			player.itemSlot3.emptySlot();
+			player.itemSlot4.unlocked = false;
+			player.itemSlot4.emptySlot();
+			player.itemSlot5.unlocked = false;
+			player.itemSlot5.emptySlot();
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				//Inventory clear
-				player.itemSlot1.unlocked = true;
-				player.itemSlot1.emptySlot();
-				player.itemSlot2.unlocked = true;
-				player.itemSlot2.emptySlot();
-				player.itemSlot3.unlocked = true;
-				player.itemSlot3.emptySlot();
-				player.itemSlot4.unlocked = false;
-				player.itemSlot4.emptySlot();
-				player.itemSlot5.unlocked = false;
-				player.itemSlot5.emptySlot();
 				//PIERCINGS
 				player.nipplesPierced = 0;
 				player.nipplesPShort = "";
@@ -247,14 +246,6 @@ import fl.controls.ComboBox;
 			kGAMECLASS.inCombat = false;
 			kGAMECLASS.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				//Clothes clear
-				player.setArmor(armors.C_CLOTH);
-				player.setWeapon(WeaponLib.FISTS);
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
-				//Clear old camp slots
-				inventory.clearStorage();
-				inventory.clearGearStorage();
-				inventory.clearPearlStorage();
 				//Initialize gearStorage
 				inventory.initializeGearStorage();
 				inventory.initializePearlStorage();
@@ -301,9 +292,17 @@ import fl.controls.ComboBox;
 				if (player.nippleLength > 1) player.nippleLength = 1;
 				while (player.biggestTitSize() > 14) player.shrinkTits(true);
 				//Sorry but you can't come, Valeria!
-				if (!(oldPlayer.armor is GooArmor))
-				player.setArmor(armors.C_CLOTH);
+			//	if (!(oldPlayer.armor is GooArmor))
+			//	player.setArmor(armors.C_CLOTH);
 			}
+			//Clothes clear
+			player.setArmor(armors.C_CLOTH);
+			player.setWeapon(WeaponLib.FISTS);
+			player.setWeaponRange(WeaponRangeLib.NOTHING);
+			//Clear camp slots
+			inventory.clearStorage();
+			inventory.clearGearStorage();
+			inventory.clearPearlStorage();
 			
 			//Clear Statuses
 			var statusTemp:Array = [];
@@ -1529,6 +1528,7 @@ import fl.controls.ComboBox;
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day");
 			if (player.newGamePlusMod() > 0) outputText("s");
 			outputText(" prologue in Ingnam or just skip?");
+			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}
 

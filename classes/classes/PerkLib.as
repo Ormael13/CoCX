@@ -157,6 +157,21 @@ package classes
 		public static const Anger:PerkType = mk("Anger", "Anger",
 				"For every 1% of missing HP you gain 1% bonus damage.",
 				"You choose the 'Anger' perk, increasing damage based on your missing HP.");
+		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool I' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolII:PerkType = mk("Arcane Pool II", "Arcane Pool II",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool II' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolIII:PerkType = mk("Arcane Pool III", "Arcane Pool III",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool III' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolIV:PerkType = mk("Arcane Pool IV", "Arcane Pool IV",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool IV' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolV:PerkType = mk("Arcane Pool V", "Arcane Pool V",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool V' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You choose the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -552,7 +567,7 @@ package classes
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
 				"You choose 'Job: Dervish' perk, training yourself to became Dervish.");
-		public static const JobElementalConjurer:PerkType = mk("Job: Enchanter", "Job: Enchanter",
+		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
 				"You've trained in summoning various types of elementals.",
 				"You choose 'Job: Elemental Conjurer' perk, training yourself to call elementals.");
 		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Job: Enchanter",
@@ -2280,6 +2295,20 @@ package classes
 		JobGolemancer.requireLevel(6)
 					 .requireInt(25)
 					 .requireWis(25);
+		ArcanePoolI.requireLevel(6)
+				   .requireInt(30)
+				   .requireWis(30)
+				   .requireAnyPerk(JobElementalConjurer, JobGolemancer);
+		ArcanePoolII.requireLevel(8)
+					.requireInt(40)
+					.requireWis(40)
+					.requirePerk(ArcanePoolI)
+					.requireNGPlus(1);
+		ArcanePoolIII.requireLevel(10)
+					 .requireInt(50)
+					 .requireWis(50)
+					 .requirePerk(ArcanePoolII)
+					 .requireNGPlus(2);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -2306,6 +2335,16 @@ package classes
 								  .requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 			return player.kitsuneScore() >= 6;
 		}, "Kitsune race");
+		ArcanePoolIV.requireLevel(12)
+					.requireInt(60)
+					.requireWis(60)
+					.requirePerk(ArcanePoolIII)
+					.requireNGPlus(3);
+		ArcanePoolV.requireLevel(14)
+				   .requireInt(70)
+				   .requireWis(70)
+				   .requirePerk(ArcanePoolIV)
+				   .requireNGPlus(4);
 		//Tier 3
 		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)

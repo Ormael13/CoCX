@@ -4767,6 +4767,10 @@ use namespace kGAMECLASS;
 				maxInt += (5 * (1 + newGamePlusMod));
 				maxLib += (5 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.JobGolemancer) >= 0) {
+				maxInt += (5 * (1 + newGamePlusMod));
+				maxWis += (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobHunter) >= 0) {
 				maxSpe += (10 * (1 + newGamePlusMod));

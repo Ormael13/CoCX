@@ -95,6 +95,7 @@
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
 		public var bonusInte:Number = 0;
+		public var bonusWis:Number = 0;
 		public var bonusLib:Number = 0;
 		public var newgamebonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
@@ -336,7 +337,11 @@
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				temp += Math.round(this.inte * (1 + player.newGamePlusMod()));
+				temp += Math.round(this.wis * (1 + player.newGamePlusMod()));
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;

@@ -937,6 +937,26 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;

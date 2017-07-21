@@ -4102,6 +4102,10 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		monster.inte += (5 * (1 + player.newGamePlusMod()));
 		monster.lib += (5 * (1 + player.newGamePlusMod()));
 	}
+	if (monster.findPerk(PerkLib.JobGolemancer) >= 0) {
+		monster.inte += (5 * (1 + player.newGamePlusMod()));
+		monster.wis += (5 * (1 + player.newGamePlusMod()));
+	}
 	if (monster.findPerk(PerkLib.JobGuardian) >= 0) monster.tou += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobKnight) >= 0) monster.tou += (10 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobMonk) >= 0) monster.wis += (15 * (1 + player.newGamePlusMod()));
@@ -4110,6 +4114,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		monster.tou += (25 * (1 + player.newGamePlusMod()));
 		monster.spe += (25 * (1 + player.newGamePlusMod()));
 		monster.inte += (25 * (1 + player.newGamePlusMod()));
+		monster.wis += (25 * (1 + player.newGamePlusMod()));
 		monster.lib += (15 * (1 + player.newGamePlusMod()));
 	}
 	if (monster.findPerk(PerkLib.JobRanger) >= 0) monster.spe += (5 * (1 + player.newGamePlusMod()));
