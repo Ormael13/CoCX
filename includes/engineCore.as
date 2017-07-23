@@ -736,7 +736,7 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	btn.showDisabled(text,toolTipHeader,toolTipText);;
+	btn.showDisabled(text,toolTipText,toolTipHeader);;
 	flushOutputTextToGUI();
 	return btn;
 }
@@ -1490,6 +1490,11 @@ public function dynStats(... args):void
 	if(player.wis < 1) player.wis = 1;
 	if(player.lib > maxes.lib) player.lib = maxes.lib;
 	if(player.lib < 0) player.lib = 0;
+	if(player.sens > maxes.sens) player.sens = maxes.sens;
+	if(player.sens < 10 && player.devilkinScore() < 7) player.sens = 10;
+	if(player.sens < 20 && player.devilkinScore() >= 7 && player.devilkinScore() < 10) player.sens = 20;
+	if(player.sens < 35 && player.devilkinScore() >= 10 && player.devilkinScore() < 14) player.sens = 35;
+	if(player.sens < 65 && player.devilkinScore() >= 14) player.sens = 65;
 	//Minimum libido. Rewritten.
 	var minLib:Number = 0;
 	
@@ -1521,10 +1526,6 @@ public function dynStats(... args):void
 	{
 		player.lib = minLib;
 	}
-	
-	//Minimum sensitivity.
-	if(player.sens > 100) player.sens = 100;
-	if(player.sens < 10) player.sens = 10;
 	
 	//Add HP for toughness change.
 	if (modTou > 0) HPChange(modTou*2, false);

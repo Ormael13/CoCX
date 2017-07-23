@@ -297,10 +297,10 @@ package classes.Scenes
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(9, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
-			if (player.findPerk(PerkLib.SoulElder) < 0) addButton(10, "Rep.S.Perks", ReplacingSoulPerks).hint("Add Soul Scholar and/or Soul Elder perks plus adjusting stages of cultivation to accomodate for this change.");
+			if (player.findPerk(PerkLib.SoulElder) < 0 && player.findPerk(PerkLib.SoulExalt) >= 0) addButton(10, "Rep.S.Perks", ReplacingSoulPerks).hint("Add Soul Scholar and/or Soul Elder perks plus adjusting stages of cultivation to accomodate for this change.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
-			if (player.level < 149) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
-			if (player.level < 139) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
+			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
+			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function TribulationPerks():void {
@@ -1736,7 +1736,7 @@ package classes.Scenes
 			}
 			else {
 				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
-				player.mana += 500;
+				player.mana -= 500;
 				player.soulforce += 250;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();

@@ -2314,7 +2314,7 @@
 			outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
 			if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 			statScreenRefresh();
-			dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
+			dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
 			player.refillHunger(50);
 		}
 

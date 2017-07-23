@@ -51,10 +51,13 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (2nd Stage). Req. Ascension: Unlocked Potential and be at second ascension. It costs 5 asc points and will give +2 to max lust/wrath and +6 to max soulforce at each lvl-up.\n");
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");
 			outputText("-Changed 5th and 6th stage of soul cultivation: Soul Scholar replacing Soul Exalt // Soul Elder replacing Soul Overlord\n");
-			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step.\n");
+			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step. Also each perk above Job: Soul Cultivator will give +5 to max wisdom (non scalable).\n");
 			outputText("-New accesory: Seer's Hairpin -  (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");//gained after beating Ignis for the first time
 			outputText("-New melee weapon: Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
 			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
@@ -65,11 +68,8 @@ package classes.Scenes
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Orca, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");

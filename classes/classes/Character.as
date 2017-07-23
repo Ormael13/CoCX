@@ -696,8 +696,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (game.player.cowScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.demonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.devilkinScore() >= 7) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.devilkinScore() >= 10) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.devilkinScore() >= 10) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -785,7 +785,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 39999) max = 39999;
+			if (max > 29999) max = 29999;
 			return max;
 		}
 		
@@ -968,7 +968,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
-			if (max > 19999) max = 19999;
+			if (max > 22999) max = 22999;
 			return max;
 		}
 		

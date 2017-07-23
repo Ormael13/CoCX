@@ -152,7 +152,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(button++, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 		}
 		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
-			addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can also shatter leaving it unable to be reused in future!</b>");
+			if (monster.hasStatusEffect(StatusEffects.Flying) && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/1", "Your golem can't attack flying target. (Only golems made by expert golem maker can do this)");
+			else addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can also shatter leaving it unable to be reused in future!</b>");
 		}
 	/*	if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
 			3 golemy naraz - zadaje 3x dmg single target i 4x dmg group target
@@ -607,7 +608,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine if golem core is shattered or not picked due too overloaded bag for them!
 		var shatter:Boolean = false;
 		var shatterChance:int = 20;
-	//	if (player.findPerk(PerkLib.Tactician) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) shatterChance -= 5;
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
@@ -618,8 +621,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		damage += 300 + rand(121);
-	//	damage += toughnessscalingbonus() * 0.5;
-	//	damage = Math.round(damage);
+	//	if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) damage *= 1.2;
+		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
 		if (shatter == true) outputText(" <b>*Golem Core shattered!*</b>");

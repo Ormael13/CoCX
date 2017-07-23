@@ -294,6 +294,7 @@ public class StatsView extends Block {
 		wisBar.value          = player.wis;
 		libBar.maxValue       = maxes.lib;
 		libBar.value          = player.lib;
+		senBar.maxValue       = maxes.sens;
 		senBar.value          = player.sens;
 		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();

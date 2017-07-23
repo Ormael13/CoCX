@@ -85,6 +85,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
+		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
 
 		if (combatStats != "")
 			outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
@@ -750,6 +751,11 @@ public class PlayerInfo extends BaseContent {
 				if (m < n) n = m;
 				player.tempLib+=n;
 				break;
+		//	case "sen":
+		//		m = maxes.sens - int(player.sens + player.tempSens);
+		//		if (m < n) n = m;
+		//		player.tempSens+=n;
+		//		break;
 			default:
 				n=0; //Failsafe
 		}

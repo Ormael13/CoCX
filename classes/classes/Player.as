@@ -1208,13 +1208,13 @@ use namespace kGAMECLASS;
 						else race = "greater devil";
 					}
 					else {
-						if (isTaur()) race = "devilkin-taur";
-						else race = "devilkin";
+						if (isTaur()) race = "devil-taur";
+						else race = "devil";
 					}
 				}
 				else {
-					if (isTaur()) race = "half fiend-taur";
-					else race = "half fiend";
+					if (isTaur()) race = "half devil-taur";
+					else race = "half devil";
 				}
 			}
 			if (sharkScore() >= 4)
@@ -1892,7 +1892,7 @@ use namespace kGAMECLASS;
 				devilkinCounter += 4;
 			if (armType == 19)
 				devilkinCounter++;
-			if (hornType == 6 && horns > 0)
+			if (hornType == 6)
 				devilkinCounter++;
 			if (earType == 23)
 				devilkinCounter++;
@@ -4465,12 +4465,14 @@ use namespace kGAMECLASS;
 					maxSpe -= (20 * (1 + newGamePlusMod));
 					maxInt += (60 * (1 + newGamePlusMod));
 					maxLib += (75 * (1 + newGamePlusMod));
+					maxSen += (15 * (1 + newGamePlusMod));
 				}
 				else {
 					maxStr += (35 * (1 + newGamePlusMod));
 					maxSpe -= (10 * (1 + newGamePlusMod));
 					maxInt += (40 * (1 + newGamePlusMod));
 					maxLib += (50 * (1 + newGamePlusMod));
+					maxSen += (10 * (1 + newGamePlusMod));
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -4644,6 +4646,7 @@ use namespace kGAMECLASS;
 				maxInt += (40 * (1 + newGamePlusMod));
 				maxWis += (40 * (1 + newGamePlusMod));
 				maxLib += (40 * (1 + newGamePlusMod));
+				maxSen += (40 * (1 + newGamePlusMod));
 			}
 			if (humanScore() == 24) {
 				maxStr += (30 * (1 + newGamePlusMod));
@@ -4652,6 +4655,7 @@ use namespace kGAMECLASS;
 				maxInt += (30 * (1 + newGamePlusMod));
 				maxWis += (30 * (1 + newGamePlusMod));
 				maxLib += (30 * (1 + newGamePlusMod));
+				maxSen += (30 * (1 + newGamePlusMod));
 			}
 			if (humanScore() == 23) {
 				maxStr += (20 * (1 + newGamePlusMod));
@@ -4660,6 +4664,7 @@ use namespace kGAMECLASS;
 				maxInt += (20 * (1 + newGamePlusMod));
 				maxWis += (20 * (1 + newGamePlusMod));
 				maxLib += (20 * (1 + newGamePlusMod));
+				maxSen += (20 * (1 + newGamePlusMod));
 			}
 			if (humanScore() == 22) {
 				maxStr += (10 * (1 + newGamePlusMod));
@@ -4668,6 +4673,7 @@ use namespace kGAMECLASS;
 				maxInt += (10 * (1 + newGamePlusMod));
 				maxWis += (10 * (1 + newGamePlusMod));
 				maxLib += (10 * (1 + newGamePlusMod));
+				maxSen += (10 * (1 + newGamePlusMod));
 			}
 			if (internalChimeraScore() >= 1) {
 				maxStr += (5 * internalChimeraScore() * (1 + newGamePlusMod));
@@ -4676,6 +4682,7 @@ use namespace kGAMECLASS;
 				maxInt += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 				maxWis += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 				maxLib += (5 * internalChimeraScore() * (1 + newGamePlusMod));
+				maxSen += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 			}
 			if (maxStr < 25) maxStr = 25;
 			if (maxTou < 25) maxTou = 25;
@@ -4748,6 +4755,7 @@ use namespace kGAMECLASS;
 				maxInt += (5 * (1 + newGamePlusMod));
 				maxWis += (5 * (1 + newGamePlusMod));
 				maxLib += (5 * (1 + newGamePlusMod));
+				maxSen += (5 * (1 + newGamePlusMod));
 			}
 			//Perks
 			if (findPerk(PerkLib.JobAllRounder) >= 0) {
@@ -4757,11 +4765,13 @@ use namespace kGAMECLASS;
 				maxInt += (10 * (1 + newGamePlusMod));
 				maxWis += (10 * (1 + newGamePlusMod));
 				maxLib += (6 * (1 + newGamePlusMod));
+				maxSen += (6 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWis += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobEnchanter) >= 0) maxInt += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobEromancer) >= 0) {
 				maxInt += (5 * (1 + newGamePlusMod));
@@ -4785,6 +4795,7 @@ use namespace kGAMECLASS;
 				maxInt += (25 * (1 + newGamePlusMod));
 				maxWis += (25 * (1 + newGamePlusMod));
 				maxLib += (15 * (1 + newGamePlusMod));
+				maxSen += (15 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * (1 + newGamePlusMod));
@@ -4825,6 +4836,7 @@ use namespace kGAMECLASS;
 				maxInt += (10 * (1 + newGamePlusMod));
 				maxWis += (10 * (1 + newGamePlusMod));
 				maxLib += (10 * (1 + newGamePlusMod));
+				maxSen += (10 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
 				maxStr += (15 * (1 + newGamePlusMod));
@@ -4833,64 +4845,20 @@ use namespace kGAMECLASS;
 				maxInt += (15 * (1 + newGamePlusMod));
 				maxWis += (15 * (1 + newGamePlusMod));
 				maxLib += (15 * (1 + newGamePlusMod));
+				maxSen += (15 * (1 + newGamePlusMod));
 			}
-	/*		if (findPerk(PerkLib.SoulPersonage) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulWarrior) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulSprite) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulExalt) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulOverlord) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulTyrant) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulKing) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-			if (findPerk(PerkLib.SoulEmperor) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-				maxInt += 5;
-				maxLib += 3;
-			}
-	*/		if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulWarrior) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulSprite) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulScholar) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulElder) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulExalt) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulOverlord) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulTyrant) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * (1 + newGamePlusMod));
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
 			//Apply New Game+
@@ -4900,6 +4868,7 @@ use namespace kGAMECLASS;
 			maxInt += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxWis += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxLib += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxSen += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
 				maxStr += statusEffectv1(StatusEffects.Might);

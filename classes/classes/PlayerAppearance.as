@@ -1797,15 +1797,15 @@ public function RacialScores():void {
 	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
 	if (player.devilkinScore() >= 14) outputText("\n<font color=\"#0000a0\">Greater Devil: " + player.devilkinScore() + "</font>");
 	else if (player.devilkinScore() >= 10 && player.devilkinScore() < 14) {
-		outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
-		outputText(", +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
+		outputText("\n<font color=\"#0000a0\">Devil: " + player.devilkinScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
+		outputText(", +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Sens, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " min Sens, +" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
 	}
 	else if (player.devilkinScore() >= 7 && player.devilkinScore() < 10) {
-		outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
-		outputText(", +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
+		outputText("\n<font color=\"#0000a0\">Half devil: " + player.devilkinScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib");
+		outputText(", +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Sens, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " min Sens, +" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust</font>");
 	}
-	else if (player.devilkinScore() >= 1 && player.devilkinScore() < 7) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
-	else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
+	else if (player.devilkinScore() >= 1 && player.devilkinScore() < 7) outputText("\n<font color=\"#008000\">Half devil: " + player.devilkinScore() + "</font>");
+	else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half devil: 0</font>");
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>");
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
@@ -1858,10 +1858,10 @@ public function RacialScores():void {
 	if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Horse-morph: " + player.horseScore() + "</font>");
 	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Horse-morph: 0</font>");
-	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
-	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
-	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
-	else if (player.humanScore() == 22) outputText("\n<font color=\"#0000a0\">HUMANITY: 22 (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
+	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 22) outputText("\n<font color=\"#0000a0\">HUMANITY: 22 (+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
 	else if (player.humanScore() < 22) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 	if (player.internalChimeraScore() >= 1) {
 		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");

@@ -203,18 +203,18 @@ import fl.controls.ComboBox;
 			player.exploredDesert = 0;
 			player.exploredMountain = 0;
 			player.exploredLake = 0;
-			//Inventory clear
-			player.itemSlot1.unlocked = true;
-			player.itemSlot1.emptySlot();
-			player.itemSlot2.unlocked = true;
-			player.itemSlot2.emptySlot();
-			player.itemSlot3.unlocked = true;
-			player.itemSlot3.emptySlot();
-			player.itemSlot4.unlocked = false;
-			player.itemSlot4.emptySlot();
-			player.itemSlot5.unlocked = false;
-			player.itemSlot5.emptySlot();
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				//Inventory clear
+				player.itemSlot1.unlocked = true;
+				player.itemSlot1.emptySlot();
+				player.itemSlot2.unlocked = true;
+				player.itemSlot2.emptySlot();
+				player.itemSlot3.unlocked = true;
+				player.itemSlot3.emptySlot();
+				player.itemSlot4.unlocked = false;
+				player.itemSlot4.emptySlot();
+				player.itemSlot5.unlocked = false;
+				player.itemSlot5.emptySlot();
 				//PIERCINGS
 				player.nipplesPierced = 0;
 				player.nipplesPShort = "";
@@ -246,6 +246,14 @@ import fl.controls.ComboBox;
 			kGAMECLASS.inCombat = false;
 			kGAMECLASS.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				//Clothes clear
+				player.setArmor(armors.C_CLOTH);
+				player.setWeapon(WeaponLib.FISTS);
+				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				//Clear camp slots
+				inventory.clearStorage();
+				inventory.clearGearStorage();
+				inventory.clearPearlStorage();
 				//Initialize gearStorage
 				inventory.initializeGearStorage();
 				inventory.initializePearlStorage();
@@ -295,14 +303,6 @@ import fl.controls.ComboBox;
 			//	if (!(oldPlayer.armor is GooArmor))
 			//	player.setArmor(armors.C_CLOTH);
 			}
-			//Clothes clear
-			player.setArmor(armors.C_CLOTH);
-			player.setWeapon(WeaponLib.FISTS);
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			//Clear camp slots
-			inventory.clearStorage();
-			inventory.clearGearStorage();
-			inventory.clearPearlStorage();
 			
 			//Clear Statuses
 			var statusTemp:Array = [];
@@ -1646,11 +1646,11 @@ import fl.controls.ComboBox;
 			else addButtonDisabled(btn, "HeroHeritage", "You already bought this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHerosHeritage) >= 0) {
-				addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving additional 2 perk points and 10 stat points at the start of the game (scalling with current NG tier).\n\nCost: 5 points");
-				if (player.ascensionPerkPoints < 5) button(btn).disable("You not have enough ascension perk points!");
-				if (player.findPerk(PerkLib.AscensionHerosLineage) < 0) button(btn).disable("You already bought this perk.");
+				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosLineage) < 0) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving additional 2 perk points and 10 stat points at the start of the game (scalling with current NG tier).\n\nCost: 5 points");
+				else if (player.ascensionPerkPoints < 5) button(btn).disable("You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "HeroLineage", "You already bought this perk.");
 			}
-			else addButtonDisabled(1, "HeroLineage", "You need ascend more times to buy this perk.");
+			else addButtonDisabled(btn, "HeroLineage", "You need ascend more times to buy this perk.");
 			btn++;
 			if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work and/or other things like specific body part/perk).\n\nCost: 10 points");
 			else if (player.ascensionPerkPoints < 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
@@ -1664,27 +1664,33 @@ import fl.controls.ComboBox;
 			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionUnderdog) < 0) addButtonDisabled(btn, "Underdog", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing to have increase passive gains of max hp, fatigue, mana and lust at each lvl-up.\n\nCost: 5 point");
+			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing to have increase passive gains of max hp, fatigue and mana at each lvl-up.\n\nCost: 5 point");
 			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButtonDisabled(btn, "UnlockPotent", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "UnlockPotent", "You already bought this perk.");
-		//	button++;
-			//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(button, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(button, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(button, "HybridTheory", "You already bought this perk.");
-		//	button++;
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(button, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(button, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(button, "HybridTheory", "You already bought this perk.");
-		//	button++;
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(button, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(button, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(button, "HybridTheory", "You already bought this perk.");
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(button, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(button, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(button, "HybridTheory", "You already bought this perk.");
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(button, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(button, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(button, "HybridTheory", "You already bought this perk.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
+				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) < 0) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing to have increase passive gains of max wrath, lust and soulforce at each lvl-up.\n\nCost: 5 point");
+				else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "U.Potent2nd", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "U.Potent2nd", "You already bought this perk.");
+			}
+			else addButtonDisabled(btn, "HeroLineage", "You need ascend more times to buy this perk.");
+			btn++;
+		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
+		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
+		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
+		//	btn++;
+		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
+		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
+		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
+		//	btn++;
+		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
+		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
+		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
+		//	btn++;
+		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
+		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
+		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
+		//	btn++;
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function perkHerosHeritage():void {
@@ -1990,6 +1996,17 @@ import fl.controls.ComboBox;
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();
+			//Inventory clear
+			player.itemSlot1.unlocked = true;
+			player.itemSlot1.emptySlot();
+			player.itemSlot2.unlocked = true;
+			player.itemSlot2.emptySlot();
+			player.itemSlot3.unlocked = true;
+			player.itemSlot3.emptySlot();
+			player.itemSlot4.unlocked = false;
+			player.itemSlot4.emptySlot();
+			player.itemSlot5.unlocked = false;
+			player.itemSlot5.emptySlot();
 			doNext(removeLevelPerks);
 		}
 		

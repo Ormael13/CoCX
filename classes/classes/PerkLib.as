@@ -76,7 +76,7 @@ package classes
 		public static const AscensionHybridTheory:PerkType = mk("Ascension: Hybrid Theory", "Ascension: Hybrid Theory",
 				"Allows you to reduce by one needed to accumulate mutations into non-human species to attain race specific enhancing effects.");
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
-				"When others needs to work hard on unlocking their metamorph potential you never had to do it. Whatever the reason for that is... truth be told you try not to think about it, effraid of what it might mean for you. You do not want to care about it as long as it's nothing harmfull for you in the long run.");
+				"When others needs to work hard on unlocking their metamorph potential you never had to do it. Whatever the reason for that is... truth be told you try not to think about it, affraid of what it might mean for you. You do not want to care about it as long as it's nothing harmfull for you in the long run.");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're underdog. Gains twice more exp for beating up enemies above your current level with doubled limit after which increase to gained exp stops.");
 				// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
@@ -157,6 +157,12 @@ package classes
 		public static const Anger:PerkType = mk("Anger", "Anger",
 				"For every 1% of missing HP you gain 1% bonus damage.",
 				"You choose the 'Anger' perk, increasing damage based on your missing HP.");
+		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
+				"Your proficiency in making golems allows to lower by 5% chance of core shattering and storing more golems.",
+				"You choose 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const ApprenticeGolemMaker:PerkType = mk("Apprentice Golem Maker", "Apprentice Golem Maker",
+				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation and lower by 5% chance of core shattering.",
+				"You choose 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
 				"+1 extra mana per point of intelligence and wisdom.",
 				"You choose the 'Arcane Pool I' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
@@ -398,6 +404,9 @@ package classes
 		public static const Evade:PerkType = mk("Evade", "Evade",
 				"Increases chances of evading enemy attacks.",
 				"You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!");
+		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
+				"Your proficiency in making golems allows them to attack even flying enemies and lower by 5% chance of core shattering.",
+				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
 				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
 				"You choose the 'Fertility-' perk, making it harder to get pregnant.  It also decreases your cum volume by up to 30% (if appropriate)!");
@@ -435,6 +444,9 @@ package classes
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Grand Archmage' perk, increasing base spell strength by 40% and mana pool by 60.");
+		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
+				"Your proficiency in making golems allows to .",
+				"You choose 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=150)" +
 						"Increases base spell strength by 100%, mana pool by 150 and regain it 100% faster." +
@@ -621,6 +633,9 @@ package classes
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. (under construction)",
 				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Some time after you grew ninth tail your enlightened entered on new level allowing you to form hoshi no tama inside your body.");
+		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
+				"Your proficiency in making golems allows to .",
+				"You choose 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +
@@ -675,6 +690,9 @@ package classes
 		public static const Masochist:PerkType = mk("Masochist", "Masochist",
 				"Take 20% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
+		public static const MasterGolemMaker:PerkType = mk("Master Golem Maker", "Master Golem Maker",
+				"Your proficiency in making golems allows to .",
+				"You choose 'Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
@@ -2309,6 +2327,10 @@ package classes
 					 .requireWis(50)
 					 .requirePerk(ArcanePoolII)
 					 .requireNGPlus(2);
+		BeginnerGolemMaker.requireLevel(6)
+						  .requireInt(30)
+						  .requireWis(30)
+						  .requirePerk(JobGolemancer);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -2345,6 +2367,14 @@ package classes
 				   .requireWis(70)
 				   .requirePerk(ArcanePoolIV)
 				   .requireNGPlus(4);
+		ApprenticeGolemMaker.requireLevel(12)
+							.requireInt(50)
+							.requireWis(50)
+							.requirePerk(BeginnerGolemMaker);
+	//	.requireLevel(12)
+	//				.requireInt(40)
+	//				.requireWis(40)
+	//				.requirePerk();//enhancing golems dmg and higher costs
 		//Tier 3
 		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)
@@ -2362,6 +2392,14 @@ package classes
 					 .requireStr(50)
 					 .requireTou(50)
 					 .requirePerk(JobWarlord);
+		ExpertGolemMaker.requireLevel(18)
+						.requireInt(70)
+						.requireWis(70)
+						.requirePerk(ApprenticeGolemMaker);
+	//	.requireLevel(18)
+	//				.requireInt(40)
+	//				.requireWis(40)
+	//				.requirePerk();//another enhancing goem dmg and higher costs
 		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
@@ -2387,6 +2425,10 @@ package classes
 					 .requireStr(70)
 					 .requireTou(70)
 					 .requirePerk(CycloneStage1);
+	//	.requireLevel(24)
+	//				.requireInt(40)
+	//				.requireWis(40)
+	//				.requirePerk(JobGolemancer);//perk for making permanent golem
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
