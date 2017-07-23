@@ -12,6 +12,7 @@ public class PlayerAppearance extends BaseContent {
 		//Determine race type:
 
 		clearOutput();
+		mainViewManager.showPlayerDoll(debug);
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		describeRace();
 		describeGear();

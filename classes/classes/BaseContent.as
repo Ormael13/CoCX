@@ -866,10 +866,10 @@ import coc.view.MainView;
 		{
 			return kGAMECLASS.mainView;
 		}
-		
-		protected function set mainView(val:*):void
+
+		protected function get mainViewManager():MainViewManager
 		{
-			kGAMECLASS.mainView = val;
+			return kGAMECLASS.mainViewManager;
 		}
 		
 		protected function get model():GameModel
