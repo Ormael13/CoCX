@@ -2540,9 +2540,9 @@ public static const UNKNOWN_FLAG_NUMBER_02531:int                               
 public static const UNKNOWN_FLAG_NUMBER_02532:int                                   = 2532;
 public static const MALE_OR_FEMALE:int                                   			= 2533;
 public static const D3_DEMONIC_SCYTHE:int                                   		= 2534;
-public static const UNKNOWN_FLAG_NUMBER_02535:int                                   = 2535;
-public static const UNKNOWN_FLAG_NUMBER_02536:int                                   = 2536;
-public static const UNKNOWN_FLAG_NUMBER_02537:int                                   = 2537;
+public static const TEMPORAL_GOLEMS_BAG:int                                   		= 2535;
+public static const PERNAMENT_GOLEMS_BAG:int                                   		= 2536;
+public static const REUSABLE_GOLEM_CORES_BAG:int                                   	= 2537;
 public static const UNKNOWN_FLAG_NUMBER_02538:int                                   = 2538;
 public static const UNKNOWN_FLAG_NUMBER_02539:int                                   = 2539;
 public static const UNKNOWN_FLAG_NUMBER_02540:int                                   = 2540;

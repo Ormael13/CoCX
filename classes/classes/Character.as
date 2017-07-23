@@ -662,19 +662,19 @@ import classes.GlobalFlags.kFLAGS;
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulExalt) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulScholar) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulElder) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulTyrant) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulTyrant) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulKing) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulKing) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulEmperor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulAncestor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-	//		if (findPerk(PerkLib.FleshBodyTyrantStage) >= 0) {
-	//			if (findPerk(PerkLib.SA) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//			if (findPerk(PerkLib.SS) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//			if (findPerk(PerkLib.SS) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//		}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionHardiness) >= 0) max += perkv1(PerkLib.AscensionHardiness) * 100;
@@ -785,7 +785,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 49999) max = 49999;
+			if (max > 39999) max = 39999;
 			return max;
 		}
 		
@@ -823,6 +823,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 110;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 140;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 140;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 140;
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesII) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesIII) >= 0) max += Math.round(wis*3);
@@ -839,19 +848,19 @@ import classes.GlobalFlags.kFLAGS;
 			}
 			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) max += 40;
-				if (findPerk(PerkLib.SoulExalt) >= 0) max += 40;
-				if (findPerk(PerkLib.SoulOverlord) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulScholar) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulElder) >= 0) max += 40;
+			}
+			if (findPerk(PerkLib.DaoistElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) max += 50;
 			}
 			if (findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulTyrant) >= 0) max += 50;
-				if (findPerk(PerkLib.SoulKing) >= 0) max += 50;
-				if (findPerk(PerkLib.SoulEmperor) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulKing) >= 0) max += 60;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) max += 60;
+				if (findPerk(PerkLib.SoulAncestor) >= 0) max += 60;
 			}
-//			if (findPerk(PerkLib.DaoistTyrantStage) >= 0) {
-//				if (findPerk(PerkLib.SA) >= 0) max += 60;
-//				if (findPerk(PerkLib.SS) >= 0) max += 60;
-//				if (findPerk(PerkLib.SS) >= 0) max += 60;
-//			}
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+20
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//4105-5105 soulforce na razie przed liczeniem mnożnika jest
@@ -868,11 +877,14 @@ import classes.GlobalFlags.kFLAGS;
 					if (findPerk(PerkLib.SoulPersonage) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulWarrior) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulSprite) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulExalt) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulOverlord) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulScholar) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulElder) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulExalt) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulOverlord) >= 0) multimax += 0.2;
 					if (findPerk(PerkLib.SoulTyrant) >= 0) multimax += 0.2;
-					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.2;
-					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.25;
+					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.25;
+					if (findPerk(PerkLib.SoulAncestor) >= 0) multimax += 0.25;
 				}
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimax += 0.15;
@@ -925,6 +937,26 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
@@ -990,6 +1022,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 30;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 30;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
 			if (game.player.dragonScore() >= 20) max += 50;
 			if (game.player.dragonScore() >= 28) max += 50;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
@@ -998,7 +1039,7 @@ import classes.GlobalFlags.kFLAGS;
 			// (findPerk(PerkLib.IronStomach) >= 0) max += level;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
-			if (max > 1099) max = 1099;//obecnie max to 1045
+			if (max > 1409) max = 1409;//obecnie max to 1360
 			return max;
 		}
 

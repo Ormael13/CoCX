@@ -157,6 +157,21 @@ package classes
 		public static const Anger:PerkType = mk("Anger", "Anger",
 				"For every 1% of missing HP you gain 1% bonus damage.",
 				"You choose the 'Anger' perk, increasing damage based on your missing HP.");
+		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool I' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolII:PerkType = mk("Arcane Pool II", "Arcane Pool II",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool II' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolIII:PerkType = mk("Arcane Pool III", "Arcane Pool III",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool III' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolIV:PerkType = mk("Arcane Pool IV", "Arcane Pool IV",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool IV' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcanePoolV:PerkType = mk("Arcane Pool V", "Arcane Pool V",
+				"+1 extra mana per point of intelligence and wisdom.",
+				"You choose the 'Arcane Pool V' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You choose the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -320,11 +335,14 @@ package classes
 		public static const DaoistApprenticeStage:PerkType = mk("Daoist: Apprentice Stage", "Daoist: Apprentice Stage",
 				"Your reached first stage of Daoist path.",
 				"You choose the 'Daoist: Apprentice Stage' perk, progressing on your Daoist path.");
-		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
+		public static const DaoistElderStage:PerkType = mk("Daoist: Elder Stage", "Daoist: Elder Stage",
 				"Your reached third stage of Daoist path.",
-				"You choose the 'Daoist: Overlord Stage' perk, progressing on your Daoist path.");
-		public static const DaoistTyrantStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
+				"You choose the 'Daoist: Elder Stage' perk, progressing on your Daoist path.");
+		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
 				"Your reached fourth stage of Daoist path.",
+				"You choose the 'Daoist: Overlord Stage' perk, progressing on your Daoist path.");
+		public static const DaoistKingStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
+				"Your reached fifth stage of Daoist path.",
 				"You choose the 'Daoist: Tyrant Stage' perk, progressing on your Daoist path.");
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
 				"Your reached second stage of Daoist path.",
@@ -389,11 +407,14 @@ package classes
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating.",
 				"You choose the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body.");
-		public static const FleshBodyOverlordStage:PerkType = mk("Flesh Body: Overlord Stage", "Flesh Body: Overlord Stage",
+		public static const FleshBodyElderStage:PerkType = mk("Flesh Body: Elder Stage", "Flesh Body: Elder Stage",
 				"Your reached third stage of body cultivating.",
-				"You choose the 'Flesh Body: Overlord Stage' perk, working on cultivating power of your fleshy body.");
-		public static const FleshBodyTyrantStage:PerkType = mk("Flesh Body: Tyrant Stage", "Flesh Body: Tyrant Stage",
+				"You choose the 'Flesh Body: Elder Stage' perk, working on cultivating power of your fleshy body.");
+		public static const FleshBodyOverlordStage:PerkType = mk("Flesh Body: Overlord Stage", "Flesh Body: Overlord Stage",
 				"Your reached fourth stage of body cultivating.",
+				"You choose the 'Flesh Body: Overlord Stage' perk, working on cultivating power of your fleshy body.");
+		public static const FleshBodyKingStage:PerkType = mk("Flesh Body: Tyrant Stage", "Flesh Body: Tyrant Stage",
+				"Your reached fifth stage of body cultivating.",
 				"You choose the 'Flesh Body: Tyrant Stage' perk, working on cultivating power of your fleshy body.");
 		public static const FleshBodyWarriorStage:PerkType = mk("Flesh Body: Warrior Stage", "Flesh Body: Warrior Stage",
 				"Your reached second stage of body cultivating.",
@@ -546,7 +567,7 @@ package classes
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
 				"You choose 'Job: Dervish' perk, training yourself to became Dervish.");
-		public static const JobElementalConjurer:PerkType = mk("Job: Enchanter", "Job: Enchanter",
+		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
 				"You've trained in summoning various types of elementals.",
 				"You choose 'Job: Elemental Conjurer' perk, training yourself to call elementals.");
 		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Job: Enchanter",
@@ -837,30 +858,39 @@ package classes
 		public static const SluttySimplicity:PerkType = mk("Slutty Simplicity", "Slutty Simplicity",
 				"Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)",
 				"You choose the 'Slutty Simplicity' perk, granting increased tease effect when you are naked.");
+		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
+				"Allow reaching 12th stage of soul cultivation.",
+				"You choose the 'Soul Ancestor' perk, reaching 12th stage of soul cultivation!");
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"Allow reaching 1st stage of soul cultivation.",
 				"You choose the 'Soul Apprentice' perk, reaching 1st stage of soul cultivation!");
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
-				"Allow reaching 9th stage of soul cultivation.",
-				"You choose the 'Soul Emperor' perk, reaching 9th stage of soul cultivation!");
-		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
-				"Allow reaching 5th stage of soul cultivation.",
-				"You choose the 'Soul Exalt' perk, reaching 5th stage of soul cultivation!");
-		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
-				"Allow reaching 8th stage of soul cultivation.",
-				"You choose the 'Soul King' perk, reaching 8th stage of soul cultivation!");
-		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
+				"Allow reaching 11th stage of soul cultivation.",
+				"You choose the 'Soul Emperor' perk, reaching 11th stage of soul cultivation!");
+		public static const SoulElder:PerkType = mk("Soul Elder", "Soul Elder",
 				"Allow reaching 6th stage of soul cultivation.",
-				"You choose the 'Soul Overlord' perk, reaching 6th stage of soul cultivation!");
+				"You choose the 'Soul Elder' perk, reaching 6th stage of soul cultivation!");
+		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
+				"Allow reaching 7th stage of soul cultivation.",
+				"You choose the 'Soul Exalt' perk, reaching 7th stage of soul cultivation!");
+		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
+				"Allow reaching 10th stage of soul cultivation.",
+				"You choose the 'Soul King' perk, reaching 10th stage of soul cultivation!");
+		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
+				"Allow reaching 8th stage of soul cultivation.",
+				"You choose the 'Soul Overlord' perk, reaching 8th stage of soul cultivation!");
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"Allow reaching 2nd stage of soul cultivation.",
 				"You choose the 'Soul Personage' perk, reaching 2nd stage of soul cultivation!");
+		public static const SoulScholar:PerkType = mk("Soul Scholar", "Soul Scholar",
+				"Allow reaching 5th stage of soul cultivation.",
+				"You choose the 'Soul Scholar' perk, reaching 5th stage of soul cultivation!");
 		public static const SoulSprite:PerkType = mk("Soul Sprite", "Soul Sprite",
 				"Allow reaching 4th stage of soul cultivation.",
 				"You choose the 'Soul Sprite' perk, reaching 4th stage of soul cultivation!");
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"Allow reaching 7th stage of soul cultivation.",
-				"You choose the 'Soul Tyrant' perk, reaching 7th stage of soul cultivation!");
+				"Allow reaching 9th stage of soul cultivation.",
+				"You choose the 'Soul Tyrant' perk, reaching 9th stage of soul cultivation!");
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
 				"Allow reaching 3rd stage of soul cultivation.",
 				"You choose the 'Soul Warrior' perk, reaching 3rd stage of soul cultivation!");
@@ -1889,7 +1919,7 @@ package classes
 		//Tier 7 Intelligence perks
 		PrestigeJobSeer.requirePrestigeJobSlot()
 					   .requirePerk(GreyArchmage)
-					   .requirePerk(SoulOverlord)
+					   .requirePerk(SoulElder)
 					   .requireInt(200)
 					   .requireLevel(42);
 		//------------
@@ -2087,7 +2117,7 @@ package classes
 		// SOULFORCE
 		//------------
 		//Tier 0
-		JobSoulCultivator.requireLevel(1); // A hack to mark perk as player-available
+		JobSoulCultivator.requireWis(10);
 		Dantain.requirePerk(JobSoulCultivator)
 			   .requireMaxSoulforce(100);
 		BodyCultivator.requirePerk(JobSoulCultivator);
@@ -2140,30 +2170,45 @@ package classes
 		DaoistWarriorStage.requireLevel(24)
 						  .requirePerk(DaoistApprenticeStage);
 		//Tier 5
-		SoulExalt.requirePerk(SoulSprite)
-				 .requireWis(100)
-				 .requireLevel(30);
+		SoulScholar.requirePerk(SoulSprite)
+				   .requireWis(100)
+				   .requireLevel(30);
 		//Tier 6
-		SoulOverlord.requirePerk(SoulExalt)
-					.requireWis(120)
-					.requireLevel(36);
+		SoulElder.requirePerk(SoulScholar)
+				 .requireWis(120)
+				 .requireLevel(36);
 		//Tier 7
-/*		SoulTyrant.requireLevel(42)
-				  .requirePerk(SoulOverlord)
-				  .requireWis(140);// && requirePerk(GclassHeavenTribulationSurvivor)
-		FleshBodyOverlordStage.requireLevel(42)
-							  .requirePerk(FleshBodyWarriorStage);
-		DaoistOverlordStage.requireLevel(42)
-						   .requirePerk(DaoistWarriorStage);
-		//zablokować wszystkie trzy perki w momnencie robienia live version
+		SoulExalt.requirePerk(SoulElder)
+				 .requireWis(140)
+				 .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
+		FleshBodyElderStage.requireLevel(42)
+						   .requirePerk(FleshBodyWarriorStage);
+		DaoistElderStage.requireLevel(42)
+						.requirePerk(DaoistWarriorStage);
 		//Tier 8
-		SoulKing.requirePerk(SoulTyrant)
-				.requireWis(160)
-				.requireLevel(48);
+		SoulOverlord.requirePerk(SoulExalt)
+					.requireWis(160)
+					.requireLevel(48);
 		//Tier 9
+		SoulTyrant.requireLevel(54)
+				  .requirePerk(SoulOverlord)
+				  .requireWis(180);
+		//Tier 10
+/*		SoulKing.requirePerk(SoulTyrant)
+				.requireWis(200)
+				.requireLevel(60);
+		FleshBodyOverlordStage.requireLevel(60)
+							  .requirePerk(FleshBodyElderStage);
+		DaoistOverlordStage.requireLevel(60)
+						   .requirePerk(DaoistElderStage);
+		//Tier 11
 		SoulEmperor.requirePerk(SoulKing)
-				   .requireWis(180)
-				   .requireLevel(54);
+				   .requireWis(220)
+				   .requireLevel(66);
+		//Tier 12
+		SoulAncestor.requirePerk(SoulEmperor)
+					.requireWis(240)
+					.requireLevel(72);
 */		//------------
 		// MISCELLANEOUS
 		//------------
@@ -2250,6 +2295,20 @@ package classes
 		JobGolemancer.requireLevel(6)
 					 .requireInt(25)
 					 .requireWis(25);
+		ArcanePoolI.requireLevel(6)
+				   .requireInt(30)
+				   .requireWis(30)
+				   .requireAnyPerk(JobElementalConjurer, JobGolemancer);
+		ArcanePoolII.requireLevel(8)
+					.requireInt(40)
+					.requireWis(40)
+					.requirePerk(ArcanePoolI)
+					.requireNGPlus(1);
+		ArcanePoolIII.requireLevel(10)
+					 .requireInt(50)
+					 .requireWis(50)
+					 .requirePerk(ArcanePoolII)
+					 .requireNGPlus(2);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -2276,6 +2335,16 @@ package classes
 								  .requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 			return player.kitsuneScore() >= 6;
 		}, "Kitsune race");
+		ArcanePoolIV.requireLevel(12)
+					.requireInt(60)
+					.requireWis(60)
+					.requirePerk(ArcanePoolIII)
+					.requireNGPlus(3);
+		ArcanePoolV.requireLevel(14)
+				   .requireInt(70)
+				   .requireWis(70)
+				   .requirePerk(ArcanePoolIV)
+				   .requireNGPlus(4);
 		//Tier 3
 		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)

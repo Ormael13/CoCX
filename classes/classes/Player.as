@@ -357,19 +357,19 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) armorDef += 3 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulExalt) >= 0) armorDef += 3 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulOverlord) >= 0) armorDef += 3 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulScholar) >= 0) armorDef += 3 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulElder) >= 0) armorDef += 3 * (1 + newGamePlusMod);
+			}
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) armorDef += 4 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulOverlord) >= 0) armorDef += 4 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulTyrant) >= 0) armorDef += 4 * (1 + newGamePlusMod);
 			}
 			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulTyrant) >= 0) armorDef += 4 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulKing) >= 0) armorDef += 4 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulEmperor) >= 0) armorDef += 4 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulKing) >= 0) armorDef += 5 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulEmperor) >= 0) armorDef += 5 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulAncestor) >= 0) armorDef += 5 * (1 + newGamePlusMod);
 			}
-//			if (findPerk(PerkLib.FleshBodyTyrantStage) >= 0) {
-//				if (findPerk(PerkLib.SA) >= 0) armorDef += 5 * (1 + newGamePlusMod);
-//				if (findPerk(PerkLib.SS) >= 0) armorDef += 5 * (1 + newGamePlusMod);
-//				if (findPerk(PerkLib.SS) >= 0) armorDef += 5 * (1 + newGamePlusMod);
-//			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) armorDef += 6 * (1 + newGamePlusMod);
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorDef += 9 * (1 + newGamePlusMod);
 			//Agility boosts armor ratings!
@@ -4766,6 +4766,10 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.JobEromancer) >= 0) {
 				maxInt += (5 * (1 + newGamePlusMod));
 				maxLib += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.JobGolemancer) >= 0) {
+				maxInt += (5 * (1 + newGamePlusMod));
+				maxWis += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobHunter) >= 0) {

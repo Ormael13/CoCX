@@ -95,6 +95,7 @@
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
 		public var bonusInte:Number = 0;
+		public var bonusWis:Number = 0;
 		public var bonusLib:Number = 0;
 		public var newgamebonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
@@ -203,13 +204,13 @@
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulKing) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + player.newGamePlusMod()));
@@ -336,7 +337,11 @@
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				temp += Math.round(this.inte * (1 + player.newGamePlusMod()));
+				temp += Math.round(this.wis * (1 + player.newGamePlusMod()));
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;

@@ -78,20 +78,7 @@ package classes {
 			End("PlayerEvents","hourlyHunger");
 			//Evangeline went out for the items counter
 			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS]--;
-			//Soulforce natural regeneration
-		/*	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-				if (player.soulforce < player.maxSoulforce()) {
-					var naturalSoulforceRegeneration:Number = 0;
-					if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulApprentice) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulPersonage) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulWarrior) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulSprite) >= 0) naturalSoulforceRegeneration += 1;
-					player.soulforce += naturalSoulforceRegeneration;
-					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-				}
-			}
-		*/	//cumOmeter dropping down
+			//cumOmeter dropping down
 			if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 0) {
 				/*if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] == 1) */flags[kFLAGS.SEXUAL_FLUIDS_LEVEL]--;/*
 				else flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] -= 2;*/

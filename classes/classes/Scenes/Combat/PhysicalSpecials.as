@@ -13,10 +13,13 @@ import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Anemone;
 import classes.StatusEffects;
+import classes.Scenes.Camp.CampMakeWinions;
 
-public class PhysicalSpecials extends BaseCombatContent{
+public class PhysicalSpecials extends BaseCombatContent {
 
-	//------------
+	public var winionsMaker:CampMakeWinions = new CampMakeWinions();
+	
+//------------
 // P. SPECIALS
 //------------
 	public function psMenu():void {
@@ -148,7 +151,16 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.canFly()) {
 			addButton(button++, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
+			addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can also shatter leaving it unable to be reused in future!</b>");
+		}
+	/*	if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
+			3 golemy naraz - zadaje 3x dmg single target i 4x dmg group target
+		}
+		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
+			5 golemów naraz - zadaje 5x dmg single target i 7x dmg group target
+		}
+	*/	if (player.shield != ShieldLib.NOTHING) {
 			addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
@@ -586,6 +598,32 @@ public class PhysicalSpecials extends BaseCombatContent{
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 		}
 		monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
+		enemyAI();
+	}
+
+	public function sendTemporalGolem1():void {
+		clearOutput();
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG]--;
+		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var shatter:Boolean = false;
+		var shatterChance:int = 20;
+	//	if (player.findPerk(PerkLib.Tactician) >= 0) shatterChance -= 5;
+		if (rand(100) < shatterChance) {
+			shatter = true;
+		}
+		var overloadedGolemCoresBag:Boolean = false;
+		if (shatter == false) {
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+			else overloadedGolemCoresBag = true;
+		}
+		var damage:Number = 0;
+		damage += 300 + rand(121);
+	//	damage += toughnessscalingbonus() * 0.5;
+	//	damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		if (shatter == true) outputText(" <b>*Golem Core shattered!*</b>");
+		if (overloadedGolemCoresBag == true) outputText(" <b>*Golem Core was not picked due to lack of space to store them!*</b>");
 		enemyAI();
 	}
 
