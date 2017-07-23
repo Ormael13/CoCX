@@ -22,6 +22,7 @@ public class CharView extends Sprite {
 	/*[Embed(source="../../../res/model.xml", mimeType="application/octet-stream")]
 	private static const XML_MODEL_CLASS:Class;*/
 
+	private var loading:Boolean;
 	private var xml:XML;
 	private var bitmaps:Object = {}; // layer.@file -> BitmapData
 	private var composite:CompositeImage;
@@ -36,16 +37,24 @@ public class CharView extends Sprite {
 		clearAll();
 	}
 	public function reload():void {
-		clearAll();
-		var loader:URLLoader = new URLLoader();
-		var req:URLRequest   = new URLRequest('res/model.xml');
-		loader.addEventListener(Event.COMPLETE, function (e:Event):void {
-			init(XML(loader.data));
-		});
-		loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-			trace("XML file not found: " + e);
-		});
-		loader.load(req);
+		if (loading) return;
+		try {
+			loading = true;
+			clearAll();
+			var loader:URLLoader = new URLLoader();
+			var req:URLRequest   = new URLRequest('res/model.xml');
+			loader.addEventListener(Event.COMPLETE, function (e:Event):void {
+				init(XML(loader.data));
+			});
+			loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
+				trace("XML file not found: " + e);
+				loading =false;
+			});
+			loader.load(req);
+		} catch (e:Error) {
+			loading = false;
+			trace("[ERROR]\n"+e.getStackTrace());
+		}
 	}
 	private function clearAll():void {
 		this.xml           = null;
@@ -72,13 +81,14 @@ public class CharView extends Sprite {
 			loadSpritesheet(item);
 		}
 		ss_total = n;
-		if (pendingRedraw) redraw();
 		if (n == 0) loadLayers();
 		var g:Graphics = graphics;
 		g.clear();
 		g.beginFill(0, 0);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
+		loading = false;
+		if (pendingRedraw) redraw();
 	}
 	private function loadLayers():void {
 		file_loaded = 0;
@@ -97,8 +107,11 @@ public class CharView extends Sprite {
 		_character = value;
 	}
 	public function redraw():void {
+		if (!xml && !loading) {
+			reload();
+		}
+		pendingRedraw = true;
 		if (!xml || ss_loaded != ss_total || file_loaded != file_total || file_loaded == 0) {
-			pendingRedraw = true;
 			return;
 		}
 		pendingRedraw = false;

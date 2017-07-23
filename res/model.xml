@@ -329,9 +329,9 @@
                 <if test="tailCount gte 2">
                     <layer file="tail-fox2"/>
                 </if>
-                <if test="tailCount gte 3">
+                <!--<if test="tailCount gte 3">
                     <layer file="tail-fox3"/>
-                </if>
+                </if>-->
             </case>
             <default>
                 <layer file="tail-error"/>
