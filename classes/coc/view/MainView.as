@@ -168,6 +168,7 @@ public class MainView extends Block {
 	protected var callbacks:Object = {};
 	protected var options:Object;
 
+	public var charView:CharView;
 	public function MainView():void {
 		super();
 		addElement(blackBackground = new BitmapDataSprite({
@@ -304,6 +305,14 @@ public class MainView extends Block {
 		for each (button in [newGameButton, dataButton, statsButton, levelButton, perksButton, appearanceButton]) {
 			this.allButtons.push(button);
 		}
+		this.charView         = new CharView();
+		this.charView.name    = "charview";
+		this.charView.x       = TEXTZONE_X + TEXTZONE_W + GAP;
+		this.charView.y       = TEXTZONE_Y;
+		this.charView.visible = false;
+		this.charView.scaleX = 3;
+		this.charView.scaleY = 3;
+		addElement(this.charView);
 		this.toolTipView = new ToolTipView(this/*, this.model*/);
 		this.toolTipView.hide();
 		this.addElement(this.toolTipView);

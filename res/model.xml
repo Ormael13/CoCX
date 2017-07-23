@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE model [
+        <!ELEMENT model (palette|colorkeys|spritesheet|layers)*>
+        <!ATTLIST model
+                name CDATA #REQUIRED
+                dir CDATA #REQUIRED
+                width CDATA #REQUIRED
+                height CDATA #REQUIRED>
+        <!ELEMENT palette (property|common)*>
+        <!ELEMENT common (color)*>
+        <!ELEMENT property (color)*>
+        <!ATTLIST property
+                default CDATA #REQUIRED
+                name CDATA #REQUIRED
+                src CDATA #REQUIRED>
+        <!ELEMENT color (#PCDATA)>
+        <!ATTLIST color
+                name CDATA #REQUIRED>
+        <!ELEMENT colorkeys (key)*>
+        <!ELEMENT key (#PCDATA)>
+        <!ATTLIST key
+                base CDATA #REQUIRED
+                src CDATA #REQUIRED
+                transform CDATA #IMPLIED>
+        <!ELEMENT spritesheet (row)*>
+        <!ATTLIST spritesheet
+                file CDATA #REQUIRED
+                cellwidth CDATA #REQUIRED
+                cellheight CDATA #REQUIRED>
+        <!ELEMENT row (#PCDATA)>
+        <!ELEMENT layers (switch|if|layer)*>
+        <!ELEMENT switch (case|default)*>
+        <!ATTLIST switch
+                value CDATA #IMPLIED>
+        <!ELEMENT case (switch|if|layer)*>
+        <!ATTLIST case
+                test CDATA #IMPLIED
+                value CDATA #IMPLIED>
+        <!ELEMENT layer (#PCDATA)>
+        <!ATTLIST layer
+                file CDATA #REQUIRED>
+        <!ELEMENT default (switch|if|layer)*>
+        <!ELEMENT if (switch|if|layer)*>
+        <!ATTLIST if
+                test CDATA #REQUIRED>
+        ]>
+<model name="demo" dir="./res/" width="64" height="64">
+    <palette>
+        <common>
+            <color name="red">#ff0000</color>
+            <color name="orange">#dd8800</color>
+            <color name="yellow">#dddd00</color>
+            <color name="green">#00cc00</color>
+            <color name="aqua">#00cccc</color>
+            <color name="blue">#0000ff</color>
+            <color name="purple">#8800ff</color>
+            <color name="pink">#ff88cc</color>
+            <color name="white">#dddddd</color>
+            <color name="gray">#777777</color>
+            <color name="black">#333333</color>
+            <color name="brown">#664400</color>
+        </common>
+        <property name="hair" src="hairColor" default="#777777">
+            <color name="red">#bf7540</color>
+            <color name="auburn">#732d26</color>
+            <color name="blonde">#ebd69e</color>
+            <color name="flaxen">#a68059</color>
+            <color name="brown">#674f42</color>
+            <color name="black">#373839</color>
+            <color name="gray">#75726c</color>
+            <color name="white">#aeaba3</color>
+            <color name="raven">#101728</color>
+            <color name="snowy">#dddfe4</color>
+
+            <color name="iridescent gray">#999999</color>
+            <color name="sandy blonde">#ebd69e</color>
+        </property>
+        <property name="coat" src="skin.coat.color" default="#777777">
+            <color name="albino">#f2e8e3</color>
+        </property>
+        <property name="skin" src="skinTone" default="#ffa000">
+            <color name="pale">#f2e8e3</color>
+            <color name="light">#feebd7</color>
+            <color name="fair">#eeccaa</color>
+            <color name="olive">#eee2aa</color>
+            <color name="bronze">#dcba74</color>
+            <color name="mahogany">#8f583d</color>
+            <color name="russet">#603020</color>
+            <color name="dark">#4d2619</color>
+            <color name="ebony">#29293d</color>
+
+            <color name="albino">#f2e8e3</color>
+            <color name="milky white">#f0e1e4</color>
+            <color name="leaf green">#4db34d</color>
+        </property>
+        <!-- Not yet in game
+        <property name="iris" src="eyeColor" default="#0000ff">
+            <color name="blue">#68a9ca</color>
+            <color name="aqua">#a0c5c5</color>
+            <color name="green">#4e7e4e</color>
+            <color name="amber">#ca9168</color>
+            <color name="hazel">#ad7852</color>
+            <color name="brown">#7e624e</color>
+            <color name="dark">#564b43</color>
+            <color name="red">#b34d4d</color>
+            <color name="pink">#d8c0d8</color>
+            <color name="purple">#7f619e</color>
+            <color name="steel">#808080</color>
+            <color name="gray">#999999</color>
+            <color name="silver">#b3b3b3</color>
+            <color name="golden">#bd9442</color>
+            <color name="crystal">#e3e8e8</color>
+            <color name="ruby">#e25050</color>
+            <color name="topaz">#dada58</color>
+            <color name="malachyte">#4db34d</color>
+            <color name="emerald">#58da58</color>
+            <color name="beryll">#68ca99</color>
+            <color name="sapphire">#5c70d6</color>
+            <color name="amethyst">#b288dd</color>
+        </property>
+        -->
+    </palette>
+    <colorkeys>
+        <key src="#FF88FF" base="hair" transform="lighten(25)"/>
+        <key src="#CC00CC" base="hair"/>
+        <key src="#990099" base="hair" transform="darken(25)"/>
+        <key src="#330033" base="hair" transform="darken(25)"/>
+        <key src="#88FF88" base="coat" transform="lighten(25)"/>
+        <key src="#00CC00" base="coat"/>
+        <key src="#009900" base="coat" transform="darken(25)"/>
+        <key src="#003300" base="coat" transform="darken(25)"/>
+        <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
+        <key src="#FACE8D" base="skin"/>
+        <key src="#BC9B6D" base="skin" transform="darken(25)"/>
+        <key src="#7C6647" base="skin" transform="darken(50)"/>
+        <key src="#1E1911" base="skin" transform="darken(75)"/>
+        <!--<key src="#F9A98E" base="nipples"/>-->
+        <!--<key src="#FFFFFF" base="sclera"/>-->
+        <key src="#0026FF" base="iris"/>
+    </colorkeys>
+    <spritesheet file="char1.png" cellwidth="64" cellheight="64">
+        <row>,,,,,,,,,,,,,,,</row>
+        <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
+        <row>hairf-error,hair0f,,,,,,,,,,,,,,</row>
+        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,,,,,,,,,,,,</row>
+        <row>ears-error,ears0,ears9,ears9f,,,,,,,,,,,,</row>
+        <row>face-error,face0,,,,,,,,,,,,,,</row>
+        <row>breasts-error,breasts0,breastsD,,,,,,,,,,,,,</row>
+        <row>armf-error,arm0f,,,,,,,,,,,,,,</row>
+        <row>torso-error,torso0,,,,,,,,,,,,,,</row>
+        <row>armb-error,arm0b,,,,,,,,,,,,,,</row>
+        <row>legs-error,legs0,,,,,,,,,,,,,,</row>
+        <row>hairb-error,,,,,,,,,,,,,,,</row>
+        <row>tail-error,tail-fox1,tail-fox2,,,,,,,,,,,,,</row>
+        <row>wings-error,,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <layers>
+        <!--
+
+        Syntax:
+
+        Type item = layer | if | switch
+
+        Element <layer filename=""/>
+            attribute [filename] - name relative to model[dir] or key in spritesheet rows
+
+        Element <if test=""> item* </if>
+            attribute [test] - evaluated as expression
+            children >item* - items to process if [test] evaluates to 'true'
+
+        Element <switch> case* default? </switch>
+            optional attribute [value] - evaluated as expression; allows using case[value]
+            children >case* - they are evaluated, if one passes test, its contents are processed
+                and case iteration stops
+            optional child >default? - processed if no cases passed the test
+
+        Element <case test=""|value=""> item* </case>
+            optional attribute [test] - evaluated as expression
+            optional attribute [value] - evaluated as expression
+            children >item* - if:
+                [test] is present and evaluates to 'true'
+                or:
+                [value] is present and evaluates to same as parent switch[value]
+                then items are processed
+
+        Element <default> item* </default>
+
+        -->
+        <switch value="hornType">
+            <case value="0"><!--HORNS_NONE--></case>
+            <case value="1"><!--HORNS_DEMON-->
+                <layer file="horns2S"/>
+            </case>
+            <case value="2"><!--HORNS_COW_MINOTAUR-->
+                <switch>
+                    <case test="horns lt 3"><!--Two tiny horn-like nubs...-->
+                        <layer file="horns2S"/>
+                    </case>
+                    <case test="horns lt 6"><!--Two moderately sized horns...-->
+                        <layer file="horns2S"/>
+                    </case>
+                    <case test="horns lt 3"><!--Two large horns...-->
+                        <layer file="horns2L"/>
+                    </case>
+                    <case test="horns lt 3"><!--Two very large and dangerous looking horns...-->
+                        <layer file="horns2L"/>
+                    </case>
+                    <default><!--Two huge horns...-->
+                        <layer file="horns2L"/>
+                    </default>
+                </switch>
+            </case>
+            <default>
+                <layer file="horns2L"/>
+                <layer file="horns-error"/>
+            </default>
+        </switch>
+
+        <!--Ears: case when they're above hair-->
+        <switch value="earType">
+            <case value="9"><!--EARS_FPX-->
+                <layer file="ears9f"/>
+            </case>
+        </switch>
+
+        <switch>
+            <case test="hairLength == 0"><!--bald--></case>
+            <case test="hairLength lt 6">
+                <layer file="hair0f"/>
+            </case>
+            <default>
+                <layer file="hair0f"/>
+                <layer file="hairf-error"/>
+            </default>
+        </switch>
+        <switch value="eyeType">
+            <case value="0">
+                <layer file="eyes2M"/><!--EYES_HUMAN-->
+            </case>
+            <case value="1">
+                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
+            </case>
+            <case value="2">
+                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
+            </case>
+            <default>
+                <layer file="eyes2M"/>
+                <layer file="eyes-error"/>
+            </default>
+        </switch>
+        <switch value="earType">
+            <case value="0"><!--EARS_HUMAN-->
+                <layer file="ears0"/>
+            </case>
+            <case value="9"><!--EARS_FOX-->
+                <layer file="ears9"/><!--also ears9f-->
+            </case>
+            <default>
+                <layer file="ears0"/>
+                <layer file="ears-error"/>
+            </default>
+        </switch>
+        <switch>
+            <case test="faceType == 0"><!--FACE_HUMAN-->
+                <layer file="face0"/>
+            </case>
+            <default>
+                <layer file="face0"/>
+                <layer file="face-error"/>
+            </default>
+        </switch>
+        <if test="breastRows.length gt 0">
+            <switch>
+                <case test="breastRows[0].breastRating lte 1">
+                    <layer file="breasts0"/>
+                </case>
+                <case test="breastRows[0].breastRating lte 10">
+                    <layer file="breastsD"/>
+                </case>
+                <default>
+                    <layer file="breastsD"/>
+                    <layer file="breasts-error"/>
+                </default>
+            </switch>
+        </if>
+        <switch value="armType">
+            <case value="0"><!--ARM_TYPE_HUMAN-->
+                <layer file="arm0f"/>
+            </case>
+            <default>
+                <layer file="arm0f"/>
+                <layer file="armf-error"/>
+            </default>
+        </switch>
+
+        <layer file="torso0"/>
+
+        <switch value="armType">
+            <case value="0"><!--ARM_TYPE_HUMAN-->
+                <layer file="arm0b"/>
+            </case>
+            <default>
+                <layer file="arm0b"/>
+                <layer file="armb-error"/>
+            </default>
+        </switch>
+        <switch value="lowerBody">
+            <case value="0"><!--LOWER_BODY_TYPE_HUMAN-->
+                <layer file="legs0"/>
+            </case>
+            <default>
+                <layer file="legs0"/>
+                <layer file="legs-error"/>
+            </default>
+        </switch>
+        <switch>
+            <case test="hairLength == 0"><!--bald--></case>
+            <case test="hairLength lt 6"><!--too short, only front hair--></case>
+            <default>
+                <layer file="hairb-error"/>
+            </default>
+        </switch>
+        <switch value="tailType">
+            <case value="0"><!--TAIL_TYPE_NONE--></case>
+            <case value="13"><!--TAIL_TYPE_FOX-->
+                <layer file="tail-fox1"/>
+                <if test="tailCount gte 2">
+                    <layer file="tail-fox2"/>
+                </if>
+                <!--<if test="tailCount gte 3">
+                    <layer file="tail-fox3"/>
+                </if>-->
+            </case>
+            <default>
+                <layer file="tail-error"/>
+            </default>
+        </switch>
+        <switch value="wingType">
+            <case value="0"><!--WING_TYPE_NONE--></case>
+            <default>
+                <layer file="wings-error"/>
+            </default>
+        </switch>
+    </layers>
+</model>

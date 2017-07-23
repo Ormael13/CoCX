@@ -82,6 +82,15 @@ public class MainViewManager extends BaseContent {
 		//Set theme!
 		setTheme();
 	}
+	public function showPlayerDoll(reload:Boolean=false):void {
+		if (reload) mainView.charView.reload(reload?"external":"any");
+		mainView.charView.setCharacter(player);
+		mainView.charView.redraw();
+		mainView.charView.visible = true;
+	}
+	public function hidePlayerDoll():void {
+		mainView.charView.visible = false;
+	}
 
 	//Show/hide stats bars.
 	public function tweenInStats():void {
