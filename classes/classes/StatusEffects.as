@@ -421,6 +421,7 @@ package classes
 		public static const LustStones:CombatStatusEffect                = mk2("lust stones");
 		public static const lustvenom:CombatStatusEffect                 = mk2("lust venom");
 		public static const Lustzerking:CombatStatusEffect               = mk2("Lustzerking");
+		public static const Maleficium:CombatStatusEffect                = mk2("Maleficium");
 		public static const ManaShield:CombatStatusEffect 				 = mk2("Mana Shield");
 		public static const MedusaVenom:CombatStatusEffect               = mk2("Medusa Venom");
 		public static const Might:CombatStatusEffect                     = mk2("Might");

@@ -152,6 +152,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shieldName == "mana bracer") mod += .5;
 		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
 	}
 	internal function spellModWhiteImpl():Number {

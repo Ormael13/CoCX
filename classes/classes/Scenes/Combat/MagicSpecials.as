@@ -2,6 +2,7 @@ package classes.Scenes.Combat {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
@@ -84,6 +85,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Transference) >= 0) {
 			addButton(button++, "Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
 		}
+		if (player.devilkinScore() >= 10) {
+			addButton(button++, "Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n\nMana Cost: " + spellCost(40));
+		}
 		addButton(11, "BreathAtk", specialsBreathAttacks);
 		addButton(12, "(De)Buffs", specialsBuffsDebuffs);
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
@@ -106,11 +110,14 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else addButton(1, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
 		}
+		if (player.devilkinScore() >= 10) {
+			addButton(2, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
+		}
 		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
-			addButton(2, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
+			addButton(5, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
 		}
 		if (player.findPerk(PerkLib.Whispered) >= 0) {
-			addButton(3, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+			addButton(6, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
 		}
 		addButton(14, "Back", msMenu);
 	}
@@ -1441,6 +1448,105 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
 		enemyAI();
+	}
+	
+	public function maleficium():void {
+		clearOutput();
+		if(player.hasStatusEffect(StatusEffects.Maleficium)) {
+			outputText("You already empowered with corrupt power!");
+			doNext(msMenu);
+			return;
+		}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		outputText("You laugh malevolently as your body fills with profane powers empowering your spells but making you blush with barely contained desire.\n\n");
+		player.createStatusEffect(StatusEffects.Maleficium,0,0,0,0);
+		enemyAI();
+	}
+	
+	public function infernalflare():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+			clearOutput();
+			outputText("Your mana is too low to cast this.");
+			doNext(msMenu);
+			return;
+		}
+		doNext(combatMenu);
+		useMana(40,1);
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
+		temp = 0;
+		temp += inteligencescalingbonus() * 0.8;
+	//	temp *= spellMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		if (monster.cor >= 66) temp = Math.round(temp * 1.0);
+		else if (monster.cor >= 50) temp = Math.round(temp * 1.1);
+		else if (monster.cor >= 25) temp = Math.round(temp * 1.2);
+		else if (monster.cor >= 10) temp = Math.round(temp * 1.3);
+		else temp = Math.round(temp * 1.4);
+		//High damage to goes.
+		temp = calcInfernoMod(temp);
+		if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
+		if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
+		if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
+		if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
+		temp = Math.round(temp);
+		outputText("for <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		outputText("\n\n");
+		checkAchievementDamage(temp);
+		flags[kFLAGS.SPELLS_CAST]++;
+	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//	spellPerkUnlock();
+		monster.HP -= temp;
+		statScreenRefresh();
+		if (monster.HP < 1)
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
 	}
 
 	public function petrify():void {

@@ -4948,6 +4948,9 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
 			}
+			if(hasStatusEffect(StatusEffects.Maleficium)) {
+				removeStatusEffect(StatusEffects.Maleficium);
+			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
 			}

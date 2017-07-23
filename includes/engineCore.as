@@ -1212,6 +1212,10 @@ public function lustPercent():Number {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
+	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
+		if(lust >= 50) lust = 100;
+		else lust += 50;
+	}
 	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MULTIPLICATIVE REDUCTIONS
