@@ -3,24 +3,16 @@
  */
 package coc.view {
 import coc.script.Eval;
-import coc.view.UIUtils;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Graphics;
-import flash.display.Loader;
-import flash.display.LoaderInfo;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.events.IOErrorEvent;
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import flash.net.URLLoader;
-import flash.net.URLRequest;
 
 public class CharView extends Sprite {
-	/*[Embed(source="../../../res/model.xml", mimeType="application/octet-stream")]
-	private static const XML_MODEL_CLASS:Class;*/
 
 	private var loading:Boolean;
 	private var xml:XML;
@@ -33,24 +25,27 @@ public class CharView extends Sprite {
 	private var _width:uint;
 	private var _height:uint;
 	private var pendingRedraw:Boolean;
+	private var loaderLocation:String;
 	public function CharView() {
 		clearAll();
 	}
-	public function reload():void {
+	/**
+	 * @param location "external", "internal", or "any"
+	 */
+	public function reload(location:String="any"):void {
+		loaderLocation = location;
 		if (loading) return;
 		try {
 			loading = true;
 			clearAll();
-			var loader:URLLoader = new URLLoader();
-			var req:URLRequest   = new URLRequest('res/model.xml');
-			loader.addEventListener(Event.COMPLETE, function (e:Event):void {
-				init(XML(loader.data));
-			});
-			loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-				trace("XML file not found: " + e);
-				loading =false;
-			});
-			loader.load(req);
+			CoCLoader.loadText("res/model.xml",function(success:Boolean,result:String,e:Event):void {
+				if (success) {
+					init(XML(result));
+				} else {
+					trace("XML file not found: " + e);
+					loading =false;
+				}
+			},loaderLocation);
 		} catch (e:Error) {
 			loading = false;
 			trace("[ERROR]\n"+e.getStackTrace());
@@ -174,13 +169,6 @@ public class CharView extends Sprite {
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
 	}
-	private function clear():void {
-		var g:Graphics = graphics;
-		g.clear();
-		g.beginFill(0, 0);
-		g.drawRect(0, 0, _width, _height);
-		g.endFill();
-	}
 	private function drawItem(x:XML):void {
 		var testval:*;
 		var layer:XML;
@@ -237,14 +225,11 @@ public class CharView extends Sprite {
 		const filename:String = ss.@file;
 		const cellwidth:int   = ss.@cellwidth;
 		const cellheight:int  = ss.@cellheight;
-		var req:URLRequest    = new URLRequest(xml.@dir + filename);
-		trace('loading spritesheet ' + req.url);
-		var loader:Loader = new Loader();
-		loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function (e:Event):void {
-			var li:LoaderInfo = (e.target as LoaderInfo);
-			var bmp:Bitmap    = li.content as Bitmap;
-			if (!bmp) {
-				trace("error: loaded " + li.url + " as " + li.contentType + " " + li.content);
+		var path:String = xml.@dir+filename;
+		trace('loading spritesheet ' + path);
+		CoCLoader.loadImage(path,function(success:Boolean,result:BitmapData,e:Event):void{
+			if (!success) {
+				trace("Spritesheet file not found: " + e);
 				ss_loaded++;
 				if (pendingRedraw) redraw();
 				return;
@@ -256,7 +241,7 @@ public class CharView extends Sprite {
 				for each (var f:String in files) {
 					if (f) {
 						var bd:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
-						bd.copyPixels(bmp.bitmapData, new Rectangle(x, y, cellwidth, cellheight), new Point(0, 0));
+						bd.copyPixels(result, new Rectangle(x, y, cellwidth, cellheight), new Point(0, 0));
 						bitmaps[f] = bd;
 					}
 					x += cellwidth;
@@ -265,13 +250,7 @@ public class CharView extends Sprite {
 			}
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers();
-		});
-		loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-			trace("Spritesheet file not found: " + e);
-			ss_loaded++;
-			if (pendingRedraw) redraw();
-		});
-		loader.load(req);
+		},loaderLocation);
 	}
 	private function loadBitmapsFrom(item:XML):void {
 		const filename:String = item.@file;
@@ -283,27 +262,19 @@ public class CharView extends Sprite {
 		}
 		bitmaps[filename] = new BitmapData(1, 1);
 		composite.addLayer(filename, bitmaps[filename], false);
-		var req:URLRequest = new URLRequest(xml.@dir + filename);
-		trace('loading layer ' + req.url);
-		var loader:Loader = new Loader();
-		loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function (e:Event):void {
-			var li:LoaderInfo = (e.target as LoaderInfo);
-			var bmp:Bitmap    = li.content as Bitmap;
-			if (!bmp) {
-				trace("error: loaded " + li.url + " as " + li.contentType + " " + li.content);
-				return;
+		var path:String = xml.@dir + filename;
+		trace('loading layer ' + path);
+		CoCLoader.loadImage(path,function(success:Boolean,bmp:BitmapData,e:Event):void {
+			if (!success) {
+				trace("Layer file not found: " + e);
+				file_loaded++;
+				if (pendingRedraw) redraw();
 			}
-			bitmaps[filename] = bmp.bitmapData;
+			bitmaps[filename] = bmp;
 			composite.replaceLayer(filename, bitmaps[filename]);
 			file_loaded++;
 			if (pendingRedraw) redraw();
 		});
-		loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-			trace("Layer file not found: " + e);
-			file_loaded++;
-			if (pendingRedraw) redraw();
-		});
-		loader.load(req);
 	}
 
 }
