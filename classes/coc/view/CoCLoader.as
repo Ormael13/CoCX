@@ -5,6 +5,7 @@ package coc.view {
 import flash.display.Bitmap;
 import flash.display.DisplayObject;
 import flash.display.Loader;
+import flash.display.LoaderInfo;
 import flash.events.ErrorEvent;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
@@ -37,65 +38,83 @@ public class CoCLoader {
 	 * @param path
 	 * @param callback Function (success:Boollean, result:*):*
 	 * where result is String or Error
-	 * @param location "external", "internal", "any"
+	 * @param location "external", "internal"
 	 */
-	public static function loadText(path:String, callback:Function, location:String = "any"):void {
+	public static function loadText(path:String, callback:Function, location:String = "external"):void {
 		if (path.indexOf("./") == 0) path = path.slice(2);
-		if (location == "any" || location == "internal") {
-			if (path in TEXT_BUNDLE) {
-				setTimeout(callback, 0, true, TEXT_BUNDLE[path], new Event("complete"));
-				return;
-			}
+		switch (location) {
+			case "internal":
+				if (path in TEXT_BUNDLE) {
+					setTimeout(callback, 0, true, TEXT_BUNDLE[path], new Event("complete"));
+				} else {
+					setTimeout(callback, 0, false, new ErrorEvent("error", false, false,
+							"Internal resource " + path + "not found"));
+				}
+				break;
+			case "external":
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, function (e:Event):void {
+					TEXT_BUNDLE[path] = loader.data;
+					callback(true, loader.data, e);
+				});
+				var req:URLRequest = new URLRequest(path);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
+					if (path in TEXT_BUNDLE) {
+						e.preventDefault();
+						callback(true, TEXT_BUNDLE[path], new Event("complete"));
+					} else {
+						callback(false, null, e);
+					}
+				});
+				loader.load(req);
+				break;
+			default:
+				throw new Error("Incorrect location " + location);
 		}
-		if (location == "any" || location == "external") {
-			var loader:URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE, function (e:Event):void {
-				TEXT_BUNDLE[path] = loader.data;
-				callback(true, loader.data, e);
-			});
-			var req:URLRequest = new URLRequest(path);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-				callback(false, null, e);
-			});
-			loader.load(req);
-			return;
-		}
-		setTimeout(callback, 0, false, new ErrorEvent("error", false, false,
-				"Internal resource " + path + "not found"));
+
 	}
 	/**
 	 * @param path
 	 * @param callback Function (success:Boollean, result:BitmapData, e:Event):*
-	 * @param location "external", "internal", "any"
+	 * @param location "external", "internal"
 	 */
-	public static function loadImage(path:String, callback:Function, location:String = "any"):void {
+	public static function loadImage(path:String, callback:Function, location:String = "external"):void {
 		if (path.indexOf("./") == 0) path = path.slice(2);
-		if (location == "any" || location == "internal") {
-			if (path in IMAGE_BUNDLE) {
-				setTimeout(callback, 0, true, IMAGE_BUNDLE[path], new Event("complete"));
-				return;
-			}
-		}
-		if (location == "any" || location == "external") {
-			var loader:Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function (e:Event):void {
-				var bmp:Bitmap = loader.contentLoaderInfo.content as Bitmap;
-				if (bmp) {
-					IMAGE_BUNDLE[path] = bmp.bitmapData;
-					callback(true, bmp.bitmapData, e);
+		switch (location) {
+			case "internal":
+				if (path in IMAGE_BUNDLE) {
+					setTimeout(callback, 0, true, IMAGE_BUNDLE[path], new Event("complete"));
 				} else {
-					callback(false, null, e);
+					setTimeout(callback, 0, false, new ErrorEvent("error", false, false,
+							"Internal resource " + path + "not found"));
 				}
-			});
-			var req:URLRequest = new URLRequest(path);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-				callback(false, null, e);
-			});
-			loader.load(req);
-			return;
+				break;
+			case "external":
+
+				var loader:Loader = new Loader();
+				var cli:LoaderInfo = loader.contentLoaderInfo;
+				cli.addEventListener(Event.COMPLETE, function (e:Event):void {
+					var bmp:Bitmap = cli.content as Bitmap;
+					if (bmp) {
+						IMAGE_BUNDLE[path] = bmp.bitmapData;
+						callback(true, bmp.bitmapData, e);
+					} else {
+						callback(false, null, e);
+					}
+				});
+				cli.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
+					if (path in IMAGE_BUNDLE) {
+						callback(true, IMAGE_BUNDLE[path], new Event("complete"));
+					} else {
+						callback(false, null, e);
+					}
+				});
+				loader.load(new URLRequest(path));
+				break;
+			default:
+				throw new Error("Incorrect location " + location);
 		}
-		setTimeout(callback, 0, false, new ErrorEvent("error", false, false,
-				"Internal resource " + path + "not found"));
+
 	}
 }
 }

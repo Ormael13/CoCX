@@ -525,6 +525,7 @@ import classes.BodyParts.SkinLayer;
 		}
 		private function dumpPlayerData():void {
 			clearOutput();
+			mainViewManager.showPlayerDoll(true);
 			var pa:PlayerAppearance = getGame().playerAppearance;
 			pa.describeRace();
 			pa.describeFaceShape();

@@ -30,14 +30,15 @@ public class CharView extends Sprite {
 		clearAll();
 	}
 	/**
-	 * @param location "external", "internal", or "any"
+	 * @param location "external" or "internal"
 	 */
-	public function reload(location:String="any"):void {
+	public function reload(location:String="external"):void {
 		loaderLocation = location;
 		if (loading) return;
 		try {
 			loading = true;
 			clearAll();
+			if (loaderLocation == "external") trace("loading XML res/model.xml");
 			CoCLoader.loadText("res/model.xml",function(success:Boolean,result:String,e:Event):void {
 				if (success) {
 					init(XML(result));
@@ -226,7 +227,7 @@ public class CharView extends Sprite {
 		const cellwidth:int   = ss.@cellwidth;
 		const cellheight:int  = ss.@cellheight;
 		var path:String = xml.@dir+filename;
-		trace('loading spritesheet ' + path);
+		if (loaderLocation == "external") trace('loading spritesheet ' + path);
 		CoCLoader.loadImage(path,function(success:Boolean,result:BitmapData,e:Event):void{
 			if (!success) {
 				trace("Spritesheet file not found: " + e);
@@ -263,12 +264,13 @@ public class CharView extends Sprite {
 		bitmaps[filename] = new BitmapData(1, 1);
 		composite.addLayer(filename, bitmaps[filename], false);
 		var path:String = xml.@dir + filename;
-		trace('loading layer ' + path);
+		if (loaderLocation == "external") trace('loading layer ' + path);
 		CoCLoader.loadImage(path,function(success:Boolean,bmp:BitmapData,e:Event):void {
 			if (!success) {
 				trace("Layer file not found: " + e);
 				file_loaded++;
 				if (pendingRedraw) redraw();
+				return;
 			}
 			bitmaps[filename] = bmp;
 			composite.replaceLayer(filename, bitmaps[filename]);

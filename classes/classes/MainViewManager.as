@@ -83,7 +83,7 @@ public class MainViewManager extends BaseContent {
 		setTheme();
 	}
 	public function showPlayerDoll(reload:Boolean=false):void {
-		if (reload) mainView.charView.reload(reload?"external":"any");
+		mainView.charView.reload(reload?"external":"internal");
 		mainView.charView.setCharacter(player);
 		mainView.charView.redraw();
 		mainView.charView.visible = true;

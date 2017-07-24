@@ -123,12 +123,12 @@
     <colorkeys>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
         <key src="#CC00CC" base="hair"/>
-        <key src="#990099" base="hair" transform="darken(25)"/>
-        <key src="#330033" base="hair" transform="darken(25)"/>
+        <key src="#880088" base="hair" transform="darken(25)"/>
+        <key src="#440044" base="hair" transform="darken(50)"/>
         <key src="#88FF88" base="coat" transform="lighten(25)"/>
         <key src="#00CC00" base="coat"/>
         <key src="#009900" base="coat" transform="darken(25)"/>
-        <key src="#003300" base="coat" transform="darken(25)"/>
+        <key src="#003300" base="coat" transform="darken(50)"/>
         <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
         <key src="#FACE8D" base="skin"/>
         <key src="#BC9B6D" base="skin" transform="darken(25)"/>
@@ -136,12 +136,12 @@
         <key src="#1E1911" base="skin" transform="darken(75)"/>
         <!--<key src="#F9A98E" base="nipples"/>-->
         <!--<key src="#FFFFFF" base="sclera"/>-->
-        <key src="#0026FF" base="iris"/>
+        <!--<key src="#0026FF" base="iris"/>-->
     </colorkeys>
     <spritesheet file="char1.png" cellwidth="64" cellheight="64">
         <row>,,,,,,,,,,,,,,,</row>
         <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
-        <row>hairf-error,hair0f,,,,,,,,,,,,,,</row>
+        <row>hairf-error,hair0f,hair6f,,,,,,,,,,,,,</row>
         <row>eyes-error,eyes2M,eyes4S,eyes2Lb,,,,,,,,,,,,</row>
         <row>ears-error,ears0,ears9,ears9f,,,,,,,,,,,,</row>
         <row>face-error,face0,,,,,,,,,,,,,,</row>
@@ -149,7 +149,7 @@
         <row>armf-error,arm0f,,,,,,,,,,,,,,</row>
         <row>torso-error,torso0,,,,,,,,,,,,,,</row>
         <row>armb-error,arm0b,,,,,,,,,,,,,,</row>
-        <row>legs-error,legs0,,,,,,,,,,,,,,</row>
+        <row>legs-error,legs0,legs3,,,,,,,,,,,,,</row>
         <row>hairb-error,,,,,,,,,,,,,,,</row>
         <row>tail-error,tail-fox1,tail-fox2,,,,,,,,,,,,,</row>
         <row>wings-error,,,,,,,,,,,,,,,</row>
@@ -225,16 +225,26 @@
             </case>
         </switch>
 
-        <switch>
-            <case test="hairLength == 0"><!--bald--></case>
-            <case test="hairLength lt 6">
-                <layer file="hair0f"/>
+        <switch value="hairType">
+            <case value="6"><!--HAIR_GORGON-->
+                <if test="hairLength > 0">
+                    <layer file="hair6f"/>
+                </if>
             </case>
             <default>
-                <layer file="hair0f"/>
-                <layer file="hairf-error"/>
+                <switch>
+                    <case test="hairLength == 0"><!--bald--></case>
+                    <case test="hairLength lt 6">
+                        <layer file="hair0f"/>
+                    </case>
+                    <default>
+                        <layer file="hair0f"/>
+                        <layer file="hairf-error"/>
+                    </default>
+                </switch>
             </default>
         </switch>
+
         <switch value="eyeType">
             <case value="0">
                 <layer file="eyes2M"/><!--EYES_HUMAN-->
@@ -295,6 +305,19 @@
             </default>
         </switch>
 
+        <switch value="lowerBody">
+            <case value="0"><!--LOWER_BODY_TYPE_HUMAN-->
+                <layer file="legs0"/>
+            </case>
+            <case value="3"><!--LOWER_BODY_TYPE_NAGA-->
+                <layer file="legs3"/>
+            </case>
+            <default>
+                <layer file="legs0"/>
+                <layer file="legs-error"/>
+            </default>
+        </switch>
+
         <layer file="torso0"/>
 
         <switch value="armType">
@@ -304,15 +327,6 @@
             <default>
                 <layer file="arm0b"/>
                 <layer file="armb-error"/>
-            </default>
-        </switch>
-        <switch value="lowerBody">
-            <case value="0"><!--LOWER_BODY_TYPE_HUMAN-->
-                <layer file="legs0"/>
-            </case>
-            <default>
-                <layer file="legs0"/>
-                <layer file="legs-error"/>
             </default>
         </switch>
         <switch>

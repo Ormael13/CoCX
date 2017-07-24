@@ -312,6 +312,7 @@ public class MainView extends Block {
 		this.charView.visible = false;
 		this.charView.scaleX = 3;
 		this.charView.scaleY = 3;
+		this.charView.reload("external");
 		addElement(this.charView);
 		this.toolTipView = new ToolTipView(this/*, this.model*/);
 		this.toolTipView.hide();
