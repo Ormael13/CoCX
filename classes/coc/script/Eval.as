@@ -22,46 +22,43 @@ public class Eval {
 		if (expr.match(RX_INT)) return int(expr);
 		return new Eval(thiz, expr).evalUntil("",false);
 	}
+	private function error(msg:String,tail:Boolean=true):Error {
+		return new Error("In expr: "+src+"\n"+msg+(tail?": "+expr:""));
+	}
 	private function evalPostExpr(x:*,skip:Boolean):* {
 		var m:Array;
 		var y:*,z:*;
 		while (true) {
 			eatWs();
 			if (eatStr('()')) {
-				if (!skip && !(x is Function)) throw new Error("In expr: "+src+"\n" +
-													  "Not a function before: "+expr);
+				if (!skip && !(x is Function)) throw error("Not a function before");
 				if (skip) continue;
 				x = (x as Function).apply();
 			} else if (eatStr('(')) {
-				if (!skip && !(x is Function)) throw new Error("In expr: "+src+"\n" +
-													  "Not a function before: "+expr);
+				if (!skip && !(x is Function)) throw error("Not a function before");
 				var args:Array = [];
 				while(true){
 					y = evalExpr(skip);
 					args.push(y);
 					if (eatStr(')')) break;
-					if (!eatStr(',')) throw new Error("In expr: "+src+"\n" +
-													  "Expected ')' or ',': "+expr);
+					if (!eatStr(',')) throw error("Expected ')' or ','");
 				}
 				if (skip) continue;
-				return (x as Function).apply(null,args);
+				x = (x as Function).apply(null,args);
 			} else if (eatStr('.')) {
 				m = eat(LA_ID);
-				if (!m) throw new Error("In expr: " + src + "\n" +
-										"Identifier expected: " + expr);
+				if (!m) throw error("Identifier expected");
 				if (skip) continue;
 				x = evalDot(x, m[0]);
 			} else if (eatStr('[')) {
 				y = evalUntil("]",skip);
 				eatWs();
-				if (!eatStr(']')) throw new Error("In expr: "+src+"\n" +
-												  "Expected ']': "+expr);
+				if (!eatStr(']')) throw error("Expected ']'");
 				if (skip) continue;
 				x    = evalDot(x, y);
 			} else if (eatStr('?')) {
 				y = evalUntil(':',skip || !x);
-				if (!eatStr(':')) throw new Error("In expr: "+src+"\n" +
-												  "Expected ':': "+expr);
+				if (!eatStr(':')) throw error("Expected ':'");
 				z = evalExpr(skip || x);
 				if (skip) continue;
 				x = x ? y : z;
@@ -98,8 +95,7 @@ public class Eval {
 			case '!==':
 				return x !== y;
 			default:
-				throw new Error("In expr: " + src + "\n" +
-								"Unregistered operator " + op);
+				throw error("Unregistered operator " + op,false);
 		}
 	}
 	private function evalExpr(skip:Boolean):* {
@@ -111,21 +107,26 @@ public class Eval {
 			eatStr(")");
 		} else if ((m = eat(LA_INT))) {
 			if (!skip) x = parseInt(m[0]);
+		} else if (eatStr("'")) {
+			m = eat(/^[^'\\]*/);
+			if (!eatStr("'")) throw error("Expected '\\''");
+			x = m[0];
+		} else if (eatStr('"')) {
+			m = eat(/^[^"\\]*/);
+			if (!eatStr('"')) throw error("Expected '\"'");
+			x = m[0];
 		} else if ((m = eat(LA_ID))) {
 			if (!skip) x = evalId(m[0]);
 		} else {
-			throw new Error("In expr: " + src+"\n" +
-							"Not a sub-expr: " + expr);
+			throw error("Not a sub-expr");
 		}
 		return evalPostExpr(x,skip);
 	}
 	private function evalUntil(until:String,skip:Boolean):* {
 		var x:* = evalExpr(skip);
 		if (expr == until || expr.charAt(0) == until) return x;
-		if (until) throw new Error("In expr: " + src+"\n" +
-								   "Operator or " + until + "expected: " + expr);
-		throw new Error("In expr: " + src+"\n" +
-						"Operator expected: " + expr);
+		if (until) throw error("Operator or " + until + "expected");
+		throw error("Operator expected");
 	}
 	private function eat(rex:RegExp):Array {
 		var m:Array = expr.match(rex);
