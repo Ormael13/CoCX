@@ -46,6 +46,7 @@
         ]>
 <model name="demo" dir="./res/" width="64" height="64">
     <palette>
+        <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
             <!--Basic 1-word-->
             <color name="albino">#f2e8e3</color>
