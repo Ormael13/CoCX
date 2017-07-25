@@ -5,9 +5,22 @@ package coc.script {
 import classes.internals.Utils;
 
 public class Eval {
+	// (condition,then,elze) => ()=>(condition()?then():elze())
+	public static function functionIf(condition:Function,then:Function,elze:Function):Function {
+		return function ():* {
+			return condition() ? then() : elze();
+		};
+	}
+
 	private var thiz:*;
 	private var expr:String;
 	private var src:String;
+	private var _call:Function;
+	public function call(thiz:Object):* {
+		this.thiz = thiz;
+		return _call();
+	}
+
 	public function Eval(thiz:*, expr:String) {
 		this.thiz = thiz;
 		this.src = expr;
@@ -22,10 +35,12 @@ public class Eval {
 		if (expr.match(RX_INT)) return int(expr);
 		return new Eval(thiz, expr).evalUntil("",'eval');
 	}
-	public static function compile(thiz:*, expr:String):Function {
-		return new Eval(thiz, expr).evalUntil("",'compile');
+	public static function compile(thiz:*, expr:String):Eval {
+		var e:Eval = new Eval(thiz, expr);
+		e._call = e.evalUntil("",'compile');
+		return e;
 	}
-	private function error(msg:String,tail:Boolean=true):Error {
+	private static function error(src:String, expr:String, msg:String, tail:Boolean = true):Error {
 		return new Error("In expr: "+src+"\n"+msg+(tail?": "+expr:""));
 	}
 	private function evalPostExpr(x:*,mode:String):* {
@@ -41,21 +56,21 @@ public class Eval {
 					y = evalExpr(mode);
 					args.push(y);
 					if (eatStr(')')) break;
-					if (!eatStr(',')) throw error("Expected ')' or ','");
+					if (!eatStr(',')) throw error(src,expr,"Expected ')' or ','");
 				}
 				x = wrapCall(mode,x,args);
 			} else if (eatStr('.')) {
 				m = eat(LA_ID);
-				if (!m) throw error("Identifier expected");
+				if (!m) throw error(src,expr,"Identifier expected");
 				x = wrapDot(mode, x, m[0]);
 			} else if (eatStr('[')) {
 				y = evalUntil("]",mode);
 				eatWs();
-				if (!eatStr(']')) throw error("Expected ']'");
+				if (!eatStr(']')) throw error(src,expr,"Expected ']'");
 				x    = wrapDot(mode, x, y);
 			} else if (eatStr('?')) {
 				y = evalUntil(':', mode == 'eval' && !x ? 'skip' : mode);
-				if (!eatStr(':')) throw error("Expected ':'");
+				if (!eatStr(':')) throw error(src,expr,"Expected ':'");
 				z = evalExpr(mode == 'eval' && x ? 'skip' : mode);
 				x = wrapIf(mode, x, y, z);
 			} else if ((m = eat(LA_OPERATOR))) {
@@ -100,7 +115,7 @@ public class Eval {
 			case '/':
 				return x / y;
 			default:
-				throw error("Unregistered operator " + op,false);
+				throw error(src, expr, "Unregistered operator " + op, false);
 		}
 	}
 	private function evalExpr(mode:String):* {
@@ -114,24 +129,24 @@ public class Eval {
 			x = wrapVal(mode,parseInt(m[0]));
 		} else if (eatStr("'")) {
 			m = eat(/^[^'\\]*/);
-			if (!eatStr("'")) throw error("Expected '\\''");
+			if (!eatStr("'")) throw error(src,expr,"Expected '\\''");
 			x = wrapVal(mode,m[0]);
 		} else if (eatStr('"')) {
 			m = eat(/^[^"\\]*/);
-			if (!eatStr('"')) throw error("Expected '\"'");
+			if (!eatStr('"')) throw error(src,expr,"Expected '\"'");
 			x = wrapVal(mode,m[0]);
 		} else if ((m = eat(LA_ID))) {
 			x = wrapId(mode,m[0]);
 		} else {
-			throw error("Not a sub-expr");
+			throw error(src,expr,"Not a sub-expr");
 		}
 		return evalPostExpr(x,mode);
 	}
 	private function evalUntil(until:String,mode:String):* {
 		var x:* = evalExpr(mode);
 		if (expr == until || expr.charAt(0) == until) return x;
-		if (until) throw error("Operator or " + until + "expected");
-		throw error("Operator expected");
+		if (until) throw error(src,expr,"Operator or " + until + "expected");
+		throw error(src,expr,"Operator expected");
 	}
 	private function eat(rex:RegExp):Array {
 		var m:Array = expr.match(rex);
@@ -182,7 +197,7 @@ public class Eval {
 	}
 	private function wrapCall(mode:String,fn:*,args:Array):* {
 		if (mode === 'eval') {
-			if (!(fn is Function)) throw error("Not a function before");
+			if (!(fn is Function)) throw error(src,expr,"Not a function");
 			return (fn as Function).apply(null, args);
 		}
 		if (mode === 'compile') return function ():* {
@@ -194,9 +209,7 @@ public class Eval {
 	}
 	private function wrapIf(mode:String,condition:*,then:*,elze:*):* {
 		if (mode === 'eval') return condition ? then : elze;
-		if (mode === 'compile') return function ():* {
-			return condition() ? then() : elze();
-		};
+		if (mode === 'compile') return functionIf(condition,then,elze);
 		return undefined;
 	}
 	private function wrapDot(mode:String,obj:*,index:*):* {

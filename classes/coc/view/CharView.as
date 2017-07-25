@@ -102,21 +102,12 @@ public class CharView extends Sprite {
 	public function setCharacter(value:Object):void {
 		_character = value;
 	}
-	public function redraw():void {
-		if (!xml && !loading) {
-			reload();
-		}
-		pendingRedraw = true;
-		if (!xml || ss_loaded != ss_total || file_loaded != file_total || file_loaded == 0) {
-			return;
-		}
-		pendingRedraw = false;
-
-		// Calcualte palette ( "hair" -> actual color }
+	// Calcualte palette ( "hair" -> actual color }
+	private function calcPalette(obj:*):Object {
 		var palette:Object = {};
 		for each (var prop:XML in xml.palette.property) {
 			var pn:String        = prop.@name;
-			var pv:String        = String(Eval.eval(_character, prop.@src));
+			var pv:String        = String(Eval.eval(obj, prop.@src));
 			var colorval:XMLList = prop.color.(@name == pv);
 			if (colorval.length() == 0) {
 				// Try default
@@ -128,8 +119,10 @@ public class CharView extends Sprite {
 			}
 			if (colorval.length() > 0) palette[pn] = Color.convertColor(colorval[0].toString());
 		}
-
-		// Calculate colors ( key color -> actual color }
+		return palette;
+	}
+	// Calculate colors ( key color -> actual color }
+	private function calcKeyColors(palette:Object):Object {
 		var keyColors:Object = {};
 		for each (var key:XML in xml.colorkeys.key) {
 			var src:uint  = Color.convertColor(key.@src.toString());
@@ -156,6 +149,17 @@ public class CharView extends Sprite {
 			}
 			keyColors[src] = base & 0x00ffffff;
 		}
+	}
+	public function redraw():void {
+		if (!xml && !loading) {
+			reload();
+		}
+		pendingRedraw = true;
+		if (!xml || ss_loaded != ss_total || file_loaded != file_total || file_loaded == 0) {
+			return;
+		}
+		pendingRedraw = false;
+
 
 		// Mark visible layers
 		composite.hideAll();
@@ -163,6 +167,8 @@ public class CharView extends Sprite {
 			drawItem(item);
 		}
 
+		var palette:Object = calcPalette(_character);
+		var keyColors:Object = calcKeyColors(palette);
 		var bd:BitmapData = composite.draw(keyColors);
 		var g:Graphics    = graphics;
 		g.clear();
