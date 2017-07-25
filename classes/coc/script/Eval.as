@@ -35,8 +35,8 @@ public class Eval {
 		if (expr.match(RX_INT)) return int(expr);
 		return new Eval(thiz, expr).evalUntil("",'eval');
 	}
-	public static function compile(thiz:*, expr:String):Eval {
-		var e:Eval = new Eval(thiz, expr);
+	public static function compile(expr:String):Eval {
+		var e:Eval = new Eval({}, expr);
 		e._call = e.evalUntil("",'compile');
 		return e;
 	}
