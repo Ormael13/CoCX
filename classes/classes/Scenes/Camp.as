@@ -1461,7 +1461,7 @@ private function campActions():void {
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: 30");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1478,13 +1478,13 @@ private function campBuildingSim():void {
 public function spellHealcamp():void {
 	//if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
 	clearOutput();
-	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + 30 > player.maxFatigue()) {
-		outputText("You are too tired to cast this spell.");
+	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.mana < 30) {
+		outputText("Your mana is too low to cast this spell.");
 		doNext(campActions);
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(30);
+	useMana(30);
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
 	//30% backfire!
 	var backfire:int = 30;

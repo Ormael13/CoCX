@@ -631,7 +631,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (MightBoost < 10) MightBoost = 10;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) MightBoost *= 1.2;
 			MightBoost *= spellModBlack();
-			if (debug) MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
+			MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
 			player.createStatusEffect(StatusEffects.Might,0,0,0,0);
 			temp = MightBoost;
@@ -746,7 +746,7 @@ public class CombatMagic extends BaseCombatContent {
 			BlinkBoost *= 1.2;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) BlinkBoost *= 1.25;
 			BlinkBoost *= spellModBlack();
-			if (debug) BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
+			BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
 			player.createStatusEffect(StatusEffects.Blink,0,0,0,0);
 			temp = BlinkBoost;
@@ -1179,7 +1179,7 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeWeaponBoost *= 1.5;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeWeaponBoost *= 1.2;
 		ChargeWeaponBoost *= spellModWhite();
-		if (debug) ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
+		ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
@@ -1250,7 +1250,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeArmorBoost *= 1.2;
 		ChargeArmorBoost *= spellModWhite();
-		if (debug) ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
+		ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);

@@ -384,10 +384,10 @@ package classes
 				"Allows you to perform two range attacks per round.",
 				"You choose the 'Double Strike' perk.  This allows you to make two range attacks.");
 		public static const DraconicLungs:PerkType = mk("Draconic Lungs", "Draconic Lungs",
-				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
+				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",
 				"You choose the 'Draconic Lungs' perk. Your lungs due to repeadly usage of dragon breath attacks turned into draconic lungs.");
 		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
-				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
+				"Draconic Lungs giving you slight increased speed/toughness and increased threefold power of the dragon breath attacks.",
 				"You choose the 'Draconic Lungs (Evolved)' perk. Continuous exposition to draconic changes caused your lungs evolution into more complete form.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
 				"Allows you to wield two weapons (excluding large ones, staffs, with special perks and range ones).",

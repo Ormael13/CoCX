@@ -487,31 +487,31 @@ package classes.Scenes.Dungeons
 		}
 		private function takeTSharkTooth():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]++
-			inventory.takeItem(consumables.TSTOOTH, roomLStorageW);
+			inventory.takeItem(consumables.TSTOOTH, roomLStorageE);
 		}
 		private function takeGoldenSeed():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]++
-			inventory.takeItem(consumables.GLDSEED, roomLStorageW);
+			inventory.takeItem(consumables.GLDSEED, roomLStorageE);
 		}
 		private function takeMaraFruit():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]++
-			inventory.takeItem(consumables.MARAFRU, roomLStorageW);
+			inventory.takeItem(consumables.MARAFRU, roomLStorageE);
 		}
 		private function takeSalamFireWat():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]++
-			inventory.takeItem(consumables.SALAMFW, roomLStorageW);
+			inventory.takeItem(consumables.SALAMFW, roomLStorageE);
 		}
 		private function takeAmetist():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 1;
-			inventory.takeItem(useables.AMETIST, roomLStorageE);
+			inventory.takeItem(useables.AMETIST, roomLStorageW);
 		}
 		private function takeDiamond():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 2;
-			inventory.takeItem(useables.DIAMOND, roomLStorageE);
+			inventory.takeItem(useables.DIAMOND, roomLStorageW);
 		}
 		private function takeEldritchRibbon():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 3;
-			inventory.takeItem(weapons.ERIBBON, roomLStorageE);
+			inventory.takeItem(weapons.ERIBBON, roomLStorageW);
 		}
 	}
 
