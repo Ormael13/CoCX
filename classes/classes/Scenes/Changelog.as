@@ -26,25 +26,34 @@ package classes.Scenes
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
+			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it)\n");
 			outputText("-New tier 2 misc lvl-up perk: Draconic Lungs (Evolved). Req. Draconic Lungs perk and dragon score 10+. Effect: +5 to max speed and toughness (scalable) and increase power of dragon breath attacks 3x\n");
 			outputText("-New tier 2 misc lvl-up perk: Kitsune Thyroid Gland (Evolved). Req. Kitsune Thyroid Gland and perk for one of paths and kitsune score 6+. Effect: +5 to max speed and wisdom (scalable), increase by 1 fatigue recovery in combat, increase fire dgm, lust dmg of fox fire specials by 50%, 50% higher cost of all kitsune specials (bonuses to foxfire/cost inc are only added when PC have 9 tails)\n");
+			outputText("-New tier 2 intelligence lvl-up perk: Improved Spirituality. Req. Half-step-to Improved Spirituality perk, 90+ int and 60+ wis. Effect: Increase max mana by 120\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Half-step-to Advanced Spirituality. Req. Improved Spirituality perk, 120+ int and 80+ wis. Effect: Increase max mana by 180\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable)\n");
 			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping)\n");
 			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist)\n");
 			outputText("-New tier 3 misc lvl-up perk: Cyclone (Stage 1). Req. Job: Warlord perk and 50+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 10%\n");
-			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage, Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage. Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
 			outputText("-New tier 4 misc lvl-up perk: Tornado. Req. Job: Warlord perk and 75+ in str and tou. Effect: Increase dmg multiplier for aoe specials like whirlwind by 100% (from 7x to 8x)\n");
 			outputText("-New tier 4 misc lvl-up perk: Cyclone (Stage 2). Req. Cyclone (Stage 1) perk and 70+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 15%\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
 			outputText("-New tier 4 toughness lvl-up perk: Shield Grandmastery. Req. perk Shield Mastery, 100+ tou. Effect: increase block chance up to 10% when PC tou is over and lowers fatigue costs of blocking by 50%\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Advanced Spirituality. Req. Half-step-to Advanced Spirituality perk, 150+ int and 100+ wis. Effect: Increase max mana by 300\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Half-step-to Superior Spirituality. Req. Advanced Spirituality perk, 180+ int and 120+ wis. Effect: Increase max mana by 480\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perks Hidden Momentum and Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200)\n");
 			outputText("-New tier 5 misc lvl-up perk: Cyclone (Stage 3). Req. Cyclone (Stage 2) perk and 90+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20%\n");
 			outputText("-New tier 6 misc lvl-up perk: Cyclone (Stage 4). Req. Cyclone (Stage 3) perk and 120+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20% and dmg multiplier for aoe specials like whirlwind by 50%\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Daoist: Elder Stage. Req. Daoist: Warrior Stage perk. Effects: +10 to recovered soulforce during meditation, +40% to soulskill power, +50 max soulforce (all gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Half-step-to Peerless Spirituality. Req. Superior Spirituality perk, 240+ int and 160+ wis. Effect: Increase max mana by 1050\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Peerless Spirituality. Req. Half-step-to Peerless Spirituality perk, 270+ int and 180+ wis. Effect: Increase max mana by 1500\n");
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 200 to max wrath cap\n");
 			outputText("-New tier 9 toughness lvl-up perk: Shield Combat. Req. perk Steel Impact. Effect: when PC block an attack riposte with a shield bash damaging it opponent\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
@@ -58,18 +67,21 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
 			outputText("-M. Specials menu was slight rearranged. All breath type specials was moved to Breath Attack menu (9 in total specilas atm), specials that could buff PC or debuff enemy was put into (De)Buffs subgroup (Berserker, Lustzerker, Petrify, Whisper)\n");
 			outputText("-Changelog have been moved to Main game menu from Camp actions. No more need to load any game for merely checking what new I scre.... made in newest version ^^^\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Orca, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
@@ -103,6 +115,14 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

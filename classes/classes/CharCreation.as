@@ -27,6 +27,7 @@ import fl.controls.ComboBox;
 		public const MAX_ENDURANCE_LEVEL:int = 20;				//90 AP
 		public const MAX_HARDINESS_LEVEL:int = 20;				//90 AP
 		public const MAX_SOULPURITY_LEVEL:int = 20;				//90 AP
+	//	public const MAX_SOULPURITY_LEVEL:int = 20;
 		public const MAX_MYSTICALITY_LEVEL:int = 20;			//90 AP
 		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;	//90 AP
 		public const MAX_WISDOM_LEVEL:int = 5;					//15 AP

@@ -336,6 +336,15 @@
 		{
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) temp += 180;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) temp += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) temp += 480;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 1050;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 1500;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {

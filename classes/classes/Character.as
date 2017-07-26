@@ -957,6 +957,15 @@ import classes.GlobalFlags.kFLAGS;
 				max += Math.round(inte);
 				max += Math.round(wis);
 			}
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 75;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 180;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 480;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 1050;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 1500;
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;

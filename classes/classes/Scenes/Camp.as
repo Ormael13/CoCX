@@ -3136,8 +3136,31 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 11;
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 19;
+		clearOutput();
+		outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC.");
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) {
+			player.removePerk(PerkLib.SoulExalt);
+			player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+		}
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+			player.removePerk(PerkLib.SoulOverlord);
+			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+		}
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
+		clearOutput();
+		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
+		eyesColorSelection();
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		clearOutput();
 		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
 		eyesColorSelection();
