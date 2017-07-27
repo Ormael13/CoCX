@@ -307,6 +307,26 @@
             </case>
         </switch>
 
+
+        <switch value="eyeType">
+            <case value="0">
+                <layer file="eyes2M"/><!--EYES_HUMAN-->
+            </case>
+            <case value="1">
+                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
+            </case>
+            <case value="2">
+                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
+            </case>
+            <case value="6">
+                <layer file="eyes6"/><!--EYES_MANTICORE-->
+            </case>
+            <default>
+                <layer file="eyes2M"/>
+                <layer file="eyes-error"/>
+            </default>
+        </switch>
+
         <switch value="hairType">
             <case value="6"><!--HAIR_GORGON-->
                 <if test="hairLength > 0">
@@ -327,24 +347,6 @@
             </default>
         </switch>
 
-        <switch value="eyeType">
-            <case value="0">
-                <layer file="eyes2M"/><!--EYES_HUMAN-->
-            </case>
-            <case value="1">
-                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
-            </case>
-            <case value="2">
-                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
-            </case>
-            <case value="6">
-                <layer file="eyes6"/><!--EYES_MANTICORE-->
-            </case>
-            <default>
-                <layer file="eyes2M"/>
-                <layer file="eyes-error"/>
-            </default>
-        </switch>
         <switch value="earType">
             <case value="0"><!--EARS_HUMAN-->
                 <layer file="ears0"/>
