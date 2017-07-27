@@ -224,17 +224,17 @@
         <row>,,,,,,,,,,,,,,,</row>
         <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
         <row>hairf-error,hair0f,hair6f,,,,,,,,,,,,,</row>
-        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,,,,,,,,,,,,</row>
+        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,eyes6,,,,,,,,,,,</row>
         <row>ears-error,ears0,ears9,ears9f,,,,,,,,,,,,</row>
         <row>face-error,face0,,,,,,,,,,,,,,</row>
         <row>breasts-error,breasts0,breastsD,,,,,,,,,,,,,</row>
-        <row>armf-error,arm0f,,,,,,,,,,,,,,</row>
+        <row>armf-error,arm0f,arm11f,,,,,,,,,,,,,</row>
         <row>torso-error,torso0,,,,,,,,,,,,,,</row>
         <row>armb-error,arm0b,,,,,,,,,,,,,,</row>
-        <row>legs-error,legs0,legs3,,,,,,,,,,,,,</row>
+        <row>legs-error,legs0,legs3,legs35fsit,,,,,,,,,,,,</row>
         <row>hairb-error,,,,,,,,,,,,,,,</row>
-        <row>tail-error,tail-fox1,tail-fox2,,,,,,,,,,,,,</row>
-        <row>wings-error,,,,,,,,,,,,,,,</row>
+        <row>tail-error,tail-fox1,tail-fox2,tail28,,,,,,,,,,,,</row>
+        <row>wings-error,wings-23,wings-23b,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
     </spritesheet>
@@ -307,6 +307,26 @@
             </case>
         </switch>
 
+
+        <switch value="eyeType">
+            <case value="0">
+                <layer file="eyes2M"/><!--EYES_HUMAN-->
+            </case>
+            <case value="1">
+                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
+            </case>
+            <case value="2">
+                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
+            </case>
+            <case value="6">
+                <layer file="eyes6"/><!--EYES_MANTICORE-->
+            </case>
+            <default>
+                <layer file="eyes2M"/>
+                <layer file="eyes-error"/>
+            </default>
+        </switch>
+
         <switch value="hairType">
             <case value="6"><!--HAIR_GORGON-->
                 <if test="hairLength > 0">
@@ -327,21 +347,6 @@
             </default>
         </switch>
 
-        <switch value="eyeType">
-            <case value="0">
-                <layer file="eyes2M"/><!--EYES_HUMAN-->
-            </case>
-            <case value="1">
-                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
-            </case>
-            <case value="2">
-                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
-            </case>
-            <default>
-                <layer file="eyes2M"/>
-                <layer file="eyes-error"/>
-            </default>
-        </switch>
         <switch value="earType">
             <case value="0"><!--EARS_HUMAN-->
                 <layer file="ears0"/>
@@ -381,6 +386,9 @@
             <case value="0"><!--ARM_TYPE_HUMAN-->
                 <layer file="arm0f"/>
             </case>
+            <case value="11"><!--ARM_TYPE_LION-->
+                <layer file="arm11f"/>
+            </case>
             <default>
                 <layer file="arm0f"/>
                 <layer file="armf-error"/>
@@ -394,6 +402,17 @@
             <case value="3"><!--LOWER_BODY_TYPE_NAGA-->
                 <layer file="legs3"/>
             </case>
+            <case value="35"><!--LOWER_BODY_TYPE_LION-->
+                <switch>
+                    <case test="armType==11">
+                        <layer file="legs35fsit"/>
+                    </case>
+                    <default>
+                        <layer file="legs0"/>
+                        <layer file="legs-error"/>
+                    </default>
+                </switch>
+            </case>
             <default>
                 <layer file="legs0"/>
                 <layer file="legs-error"/>
@@ -406,6 +425,7 @@
             <case value="0"><!--ARM_TYPE_HUMAN-->
                 <layer file="arm0b"/>
             </case>
+            <case value="11"><!--ARM_TYPE_LION--></case>
             <default>
                 <layer file="arm0b"/>
                 <layer file="armb-error"/>
@@ -416,6 +436,15 @@
             <case test="hairLength lt 6"><!--too short, only front hair--></case>
             <default>
                 <layer file="hairb-error"/>
+            </default>
+        </switch>
+        <switch value="wingType">
+            <case value="0"><!--WING_TYPE_NONE--></case>
+            <case value="23"><!--WING_TYPE_MANTICORE_LIKE_LARGE-->
+                <layer file="wings-23"/>
+            </case>
+            <default>
+                <layer file="wings-error"/>
             </default>
         </switch>
         <switch value="tailType">
@@ -429,15 +458,18 @@
                     <layer file="tail-fox3"/>
                 </if>-->
             </case>
+            <case value="28"><!--TAIL_TYPE_MANTICORE_PUSSYTAIL-->
+                <layer file="tail28"/>
+            </case>
             <default>
                 <layer file="tail-error"/>
             </default>
         </switch>
+        <!--Wings behind the tail-->
         <switch value="wingType">
-            <case value="0"><!--WING_TYPE_NONE--></case>
-            <default>
-                <layer file="wings-error"/>
-            </default>
+            <case value="23"><!--WING_TYPE_MANTICORE_LIKE_LARGE-->
+                <layer file="wings-23b"/>
+            </case>
         </switch>
     </layers>
 </model>
