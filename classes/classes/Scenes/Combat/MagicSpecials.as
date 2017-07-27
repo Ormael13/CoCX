@@ -625,14 +625,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -763,14 +763,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -866,14 +866,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -968,14 +968,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5

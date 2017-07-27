@@ -167,6 +167,10 @@ private function accessPage1EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.earType == EARS_FOX) addButtonDisabled(8, "Fox", "You already have fox ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.earType != EARS_FOX && player.soulforce < 100) addButtonDisabled(8, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType != EARS_DRAGON && player.soulforce >= 100) addButton(9, "Dragon", metamorphDragonEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType == EARS_DRAGON) addButtonDisabled(9, "Dragon", "You already have dragon ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType != EARS_DRAGON && player.soulforce < 100) addButtonDisabled(9, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage2EarsMenu():void {
@@ -393,11 +397,25 @@ private function accessPage1WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.wingType == WING_TYPE_FEATHERED_LARGE) addButtonDisabled(6, "Harpy", "You already have harpy wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.wingType != WING_TYPE_FEATHERED_LARGE && player.soulforce < 100) addButtonDisabled(6, "Harpy", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType != WING_TYPE_DRACONIC_SMALL && player.soulforce >= 100) addButton(7, "Dragon(S)", metamorphDragonWingsSmall);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType == WING_TYPE_DRACONIC_SMALL) addButtonDisabled(7, "Dragon(S)", "You already have small dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType != WING_TYPE_DRACONIC_SMALL && player.soulforce < 100) addButtonDisabled(7, "Dragon(S)", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType == WING_TYPE_DRACONIC_SMALL && player.soulforce >= 200) addButton(8, "Dragon(L)", metamorphDragonWingsLarge);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType == WING_TYPE_DRACONIC_LARGE) addButtonDisabled(8, "Dragon(L)", "You already have large dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType != WING_TYPE_DRACONIC_LARGE && player.soulforce < 200) addButtonDisabled(8, "Dragon(L)", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType != WING_TYPE_DRACONIC_SMALL) addButtonDisabled(8, "Dragon(L)", "You not have proper type of wings for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType == WING_TYPE_BAT_LIKE_LARGE && player.soulforce >= 300) addButton(10, "Demon(L2)", metamorphWingsDemonicLarge2);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType == WING_TYPE_BAT_LIKE_LARGE_2) addButtonDisabled(10, "Demon(L2)", "You already have two large pairs of bat wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType != WING_TYPE_BAT_LIKE_LARGE_2 && player.soulforce < 300) addButtonDisabled(10, "Demon(L2)", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType != WING_TYPE_BAT_LIKE_LARGE) addButtonDisabled(10, "Demon(L2)", "You not have proper type of wings for this metamorphosis.");
 	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType == WING_TYPE_DRACONIC_LARGE && player.soulforce >= 300) addButton(11, "Dragon(H)", metamorphDragonWingsHuge);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType == WING_TYPE_DRACONIC_HUGE) addButtonDisabled(11, "Dragon(H)", "You already have huge dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType != WING_TYPE_DRACONIC_HUGE && player.soulforce < 300) addButtonDisabled(11, "Dragon(H)", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType != WING_TYPE_DRACONIC_LARGE) addButtonDisabled(11, "Dragon(H)", "You not have proper type of wings for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType != WING_TYPE_FEATHERED_PHOENIX && player.soulforce >= 100) addButton(12, "Phoenix", metamorphPhoenixWings);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType == WING_TYPE_FEATHERED_PHOENIX) addButtonDisabled(12, "Phoenix", "You already have phoenix wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType != WING_TYPE_FEATHERED_PHOENIX && player.soulforce < 100) addButtonDisabled(12, "Phoenix", "You not have enough Soulforce for this metamorphosis.");
@@ -578,30 +596,6 @@ private function metamorphFur():void {
 	
 	doNext(accessMetamorphMenu);
 }
-private function metamorphDragon():void {
-	clearOutput();
-	player.soulforce -= 100;
-	
-	doNext(accessMetamorphMenu);
-}
-private function metamorphDragon():void {
-	clearOutput();
-	player.soulforce -= 100;
-	
-	doNext(accessMetamorphMenu);
-}
-private function metamorphDragon():void {
-	clearOutput();
-	player.soulforce -= 100;
-	
-	doNext(accessMetamorphMenu);
-}
-private function metamorphDragon():void {
-	clearOutput();
-	player.soulforce -= 100;
-	
-	doNext(accessMetamorphMenu);
-}
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -614,6 +608,38 @@ private function metamorphGoo():void {
 	
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphDragonWingsHuge():void {
+	clearOutput();
+	player.soulforce -= 300;
+	outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
+	player.wingType = WING_TYPE_DRACONIC_HUGE;
+	player.wingDesc = "large, majestic draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonWingsLarge():void {
+	clearOutput();
+	player.soulforce -= 200;
+	outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
+	player.wingType = WING_TYPE_DRACONIC_LARGE;
+	player.wingDesc = "large, draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonWingsSmall():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.wingType == WING_TYPE_NONE) outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
+	else outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
+	player.wingType = WING_TYPE_DRACONIC_SMALL;
+	player.wingDesc = "small, draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+	player.earType = EARS_DRAGON;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphGorgonEyes():void {
 	clearOutput();
 	player.soulforce -= 100;

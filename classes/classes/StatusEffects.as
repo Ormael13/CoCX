@@ -43,6 +43,10 @@ package classes
 		public static const DogWarning:StatusEffectType                     = mk("dog warning");
 		public static const DragonBreathBoost:StatusEffectType              = mk("Dragon Breath Boost");
 		public static const DragonBreathCooldown:StatusEffectType           = mk("Dragon Breath Cooldown");
+		public static const DragonDarknessBreathCooldown:StatusEffectType   = mk("Dragon Darkness Breath Cooldown");
+		public static const DragonFireBreathCooldown:StatusEffectType       = mk("Dragon Fire Breath Cooldown");
+		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
+		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");
 		public static const Dysfunction:StatusEffectType                    = mk("dysfunction");
 		public static const Edryn:StatusEffectType                          = mk("Edryn");
 		public static const Eggchest:StatusEffectType                       = mk("eggchest");
@@ -369,9 +373,13 @@ package classes
 		public static const UnlockedSnakeEars:StatusEffectType			 = mk("Unlocked Snake Ears");
 		public static const UnlockedGorgonHair:StatusEffectType			 = mk("Unlocked Gorgon Hair");
 		public static const UnlockedGorgonEyes:StatusEffectType			 = mk("Unlocked Gorgon Eyes");
+		public static const UnlockedDraconicEars:StatusEffectType		 = mk("Unlocked Draconic Ears");
+		public static const UnlockedDraconicWingsSmall:StatusEffectType	 = mk("Unlocked Draconic Wings Small");
+		public static const UnlockedDraconicWingsLarge:StatusEffectType	 = mk("Unlocked Draconic Wings Large");
+		public static const UnlockedDraconicWingsHuge:StatusEffectType	 = mk("Unlocked Draconic Wings Huge");
 	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
 	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
-	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
