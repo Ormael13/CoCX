@@ -1212,10 +1212,6 @@ public function lustPercent():Number {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
-	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
-		if(lust >= 50) lust = 100;
-		else lust += 50;
-	}
 	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MULTIPLICATIVE REDUCTIONS
@@ -1250,7 +1246,10 @@ public function lustPercent():Number {
 			lust *= sac.value2;
 		}
 	}
-	
+	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
+		if(lust >= 50) lust = 100;
+		else lust += 50;
+	}
 	lust = Math.round(lust);
 	if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
 	return lust;

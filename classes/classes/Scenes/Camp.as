@@ -1461,7 +1461,7 @@ private function campActions():void {
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: 30");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1478,13 +1478,13 @@ private function campBuildingSim():void {
 public function spellHealcamp():void {
 	//if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
 	clearOutput();
-	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + 30 > player.maxFatigue()) {
-		outputText("You are too tired to cast this spell.");
+	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.mana < 30) {
+		outputText("Your mana is too low to cast this spell.");
 		doNext(campActions);
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(30);
+	useMana(30);
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
 	//30% backfire!
 	var backfire:int = 30;
@@ -3136,8 +3136,31 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 11;
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 19;
+		clearOutput();
+		outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC.");
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) {
+			player.removePerk(PerkLib.SoulExalt);
+			player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+		}
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+			player.removePerk(PerkLib.SoulOverlord);
+			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+		}
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
+		clearOutput();
+		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
+		eyesColorSelection();
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		clearOutput();
 		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
 		eyesColorSelection();

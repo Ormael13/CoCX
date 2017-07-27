@@ -1492,7 +1492,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
 		temp = 0;
 		temp += inteligencescalingbonus() * 0.8;
-	//	temp *= spellMod();
+		temp *= spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

@@ -151,15 +151,15 @@ package classes
 		public static const AdvancedSelfControl:PerkType = mk("Advanced Self-Control", "Advanced Self-Control",
 				"Increases maximum lust by 100.",
 				"You choose the 'Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 100!");
+		public static const AdvancedSpirituality:PerkType = mk("Advanced Spirituality", "Advanced Spirituality",
+				"Increases maximum mana by 300.",
+				"You choose the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 300!");	
 		public static const Agility:PerkType = mk("Agility", "Agility",
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.");
 		public static const Anger:PerkType = mk("Anger", "Anger",
 				"For every 1% of missing HP you gain 1% bonus damage.",
 				"You choose the 'Anger' perk, increasing damage based on your missing HP.");
-		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
-				"Your proficiency in making golems allows to lower by 5% chance of core shattering and storing more golems.",
-				"You choose 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ApprenticeGolemMaker:PerkType = mk("Apprentice Golem Maker", "Apprentice Golem Maker",
 				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation and lower by 5% chance of core shattering.",
 				"You choose 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
@@ -215,6 +215,12 @@ package classes
 		public static const BasicSelfControl:PerkType = mk("Basic Self-Control", "Basic Self-Control",
 				"Increases maximum lust by 15.",
 				"You choose the 'Basic Self-Control' perk. Thanks to your basic mental conditioning, your maximum lust has been increased by 15!");
+		public static const BasicSpirituality:PerkType = mk("Basic Spirituality", "Basic Spirituality",
+				"Increases maximum mana by 45.",
+				"You choose the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 45!");	
+		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
+				"Your proficiency in making golems allows to lower by 5% chance of core shattering and storing more golems.",
+				"You choose 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Battleflash:PerkType = mk("Battleflash", "Battleflash",
 				"Start every battle with Blink enabled, if you meet Black Magic requirements before it starts.",
 				"You choose the 'Battleflash' perk. You start every battle with Blink effect, as long as your Lust is sufficient to cast it before battle.");
@@ -384,10 +390,10 @@ package classes
 				"Allows you to perform two range attacks per round.",
 				"You choose the 'Double Strike' perk.  This allows you to make two range attacks.");
 		public static const DraconicLungs:PerkType = mk("Draconic Lungs", "Draconic Lungs",
-				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
+				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",
 				"You choose the 'Draconic Lungs' perk. Your lungs due to repeadly usage of dragon breath attacks turned into draconic lungs.");
 		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
-				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",//increased threefold power of the dragon breath attacks
+				"Draconic Lungs giving you slight increased speed/toughness and increased threefold power of the dragon breath attacks.",
 				"You choose the 'Draconic Lungs (Evolved)' perk. Continuous exposition to draconic changes caused your lungs evolution into more complete form.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
 				"Allows you to wield two weapons (excluding large ones, staffs, with special perks and range ones).",
@@ -470,24 +476,36 @@ package classes
 		public static const HalfStepToAdvancedSelfControl:PerkType = mk("Half-step-to Advanced Self-Control", "Half-step-to Advanced Self-Control",
 				"Increases maximum lust by 60.",
 				"You choose the 'Half-step-to Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 60!");
+		public static const HalfStepToAdvancedSpirituality:PerkType = mk("Half-step-to Advanced Spirituality", "Half-step-to Advanced Spirituality",
+				"Increases maximum mana by 180.",
+				"You choose the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 180!");	
 		public static const HalfStepToImprovedEndurance:PerkType = mk("Half-step-to Improved Endurance", "Half-step-to Improved Endurance",
 				"Increases maximum fatigue by 50.",
 				"You choose the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!");
 		public static const HalfStepToImprovedSelfControl:PerkType = mk("Half-step-to Improved Self-Control", "Half-step-to Improved Self-Control",
 				"Increases maximum lust by 25.",
 				"You choose the 'Half-step-to Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 25!");
+		public static const HalfStepToImprovedSpirituality:PerkType = mk("Half-step-to Improved Spirituality", "Half-step-to Improved Spirituality",
+				"Increases maximum mana by 75.",
+				"You choose the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 75!");
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
 				"You choose the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
 		public static const HalfStepToPeerlessSelfControl:PerkType = mk("Half-step-to Peerless Self-Control", "Half-step-to Peerless Self-Control",
 				"Increases maximum lust by 350.",
 				"You choose the 'Half-step-to Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 350!");
+		public static const HalfStepToPeerlessSpirituality:PerkType = mk("Half-step-to Peerless Spirituality", "Half-step-to Peerless Spirituality",
+				"Increases maximum mana by 1050.",
+				"You choose the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1050!");
 		public static const HalfStepToSuperiorEndurance:PerkType = mk("Half-step-to Superior Endurance", "Half-step-to Superior Endurance",
 				"Increases maximum fatigue by 320.",
 				"You choose the 'Half-step-to Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 320!");
 		public static const HalfStepToSuperiorSelfControl:PerkType = mk("Half-step-to Superior Self-Control", "Half-step-to Superior Self-Control",
 				"Increases maximum lust by 160.",
 				"You choose the 'Half-step-to Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 160!");
+		public static const HalfStepToSuperiorSpirituality:PerkType = mk("Half-step-to Superior Spirituality", "Half-step-to Superior Spirituality",
+				"Increases maximum mana by 480.",
+				"You choose the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 320!");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
 				"You choose the 'Heroism' perk.  Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
@@ -513,6 +531,9 @@ package classes
 		public static const ImprovedSelfControl:PerkType = mk("Improved Self-Control", "Improved Self-Control",
 				"Increases maximum lust by 40.",
 				"You choose the 'Improved Self-Control' perk. Thanks to your mental conditioning, your maximum lust has been increased by 40!");
+		public static const ImprovedSpirituality:PerkType = mk("Improved Spirituality", "Improved Spirituality",
+				"Increases maximum mana by 80.",
+				"You choose the 'Improved Spirituality' perk. Thanks to your mystical conditioning, your maximum mana has been increased by 120!");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
@@ -757,6 +778,9 @@ package classes
 		public static const PeerlessSelfControl:PerkType = mk("Peerless Self-Control", "Peerless Self-Control",
 				"Increases maximum lust by 500.",
 				"You choose the 'Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 500!</b>");
+		public static const PeerlessSpirituality:PerkType = mk("Peerless Spirituality", "Peerless Spirituality",
+				"Increases maximum mana by 1500.",
+				"You choose the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1500!</b>");
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with non-large weapons per round.",
 				"You choose the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
@@ -937,6 +961,9 @@ package classes
 		public static const SuperiorSelfControl:PerkType = mk("Superior Self-Control", "Superior Self-Control",
 				"Increases maximum lust by 250.",
 				"You choose the 'Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 250!</b>");
+		public static const SuperiorSpirituality:PerkType = mk("Superior Spirituality", "Superior Spirituality",
+				"Increases maximum mana by 750.",
+				"You choose the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 750!</b>");
 		public static const Survivalist:PerkType = mk("Survivalist", "Survivalist",
 				"Slows hunger rate by 20%.",
 				"You choose the 'Survivalist' perk.  With this perk, your hunger rate is reduced by 20%.");
@@ -1803,6 +1830,8 @@ package classes
 					   .requireInt(65)
 					   .requireLevel(4)
 					   .requireNGPlus(2);
+		BasicSpirituality.requireWis(20)
+						 .requireInt(30);
 		//Tier 1 Intelligence Perks
 		Mage.requirePerk(Spellpower)
 			.requireInt(50)
@@ -1838,7 +1867,10 @@ package classes
 					   .requireInt(90)
 					   .requireLevel(10)
 					   .requireNGPlus(2);
-
+		HalfStepToImprovedSpirituality.requireWis(40)
+									  .requireInt(60)
+									  .requirePerk(BasicSpirituality)
+									  .requireLevel(6);
 		//Tier 2 Intelligence perks
 		Archmage.requirePerk(Mage)
 				.requireInt(75)
@@ -1891,6 +1923,10 @@ package classes
 					 .requireInt(130)
 					 .requireLevel(14)
 					 .requireNGPlus(4);
+		ImprovedSpirituality.requireWis(60)
+							.requireInt(90)
+							.requirePerk(HalfStepToImprovedSpirituality)
+							.requireLevel(12);
 		//Tier 3 Intelligence perks
 		GrandArchmage.requirePerk(Archmage)
 					 .requireInt(100).requireLevel(18);
@@ -1915,6 +1951,10 @@ package classes
 						  .requirePerk(TraditionalMageII)
 						  .requireInt(120)
 						  .requireNGPlus(2);
+		HalfStepToAdvancedSpirituality.requireWis(80)
+									  .requireInt(120)
+									  .requirePerk(ImprovedSpirituality)
+									  .requireLevel(18);
 		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
@@ -1928,18 +1968,39 @@ package classes
 						.requirePerk(TraditionalMageIV)
 						.requireInt(160)
 						.requireNGPlus(4);
+		AdvancedSpirituality.requireWis(100)
+							.requireInt(150)
+							.requirePerk(HalfStepToAdvancedSpirituality)
+							.requireLevel(24);
 		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
 					.requireLevel(30);
+		HalfStepToSuperiorSpirituality.requireWis(120)
+									  .requireInt(180)
+									  .requirePerk(AdvancedSpirituality)
+									  .requireLevel(30);
 		//Tier 6 Intelligence perks
 
+		SuperiorSpirituality.requireWis(140)
+							.requireInt(210)
+							.requirePerk(HalfStepToSuperiorSpirituality)
+							.requireLevel(36);
 		//Tier 7 Intelligence perks
 		PrestigeJobSeer.requirePrestigeJobSlot()
 					   .requirePerk(GreyArchmage)
 					   .requirePerk(SoulElder)
 					   .requireInt(200)
 					   .requireLevel(42);
+		HalfStepToPeerlessSpirituality.requireWis(160)
+									  .requireInt(240)
+									  .requirePerk(SuperiorSpirituality)
+									  .requireLevel(42);
+		//Tier 8 Intelligence perks
+		PeerlessSpirituality.requireWis(180)
+							.requireInt(270)
+							.requirePerk(HalfStepToPeerlessSpirituality)
+							.requireLevel(48);
 		//------------
 		// WISDOM
 		//------------
