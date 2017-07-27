@@ -3,6 +3,12 @@
  */
 package coc.view {
 import coc.script.Eval;
+import coc.view.charview.CaseBlock;
+import coc.view.charview.IfBlock;
+import coc.view.charview.LayerPart;
+import coc.view.charview.ModelPart;
+import coc.view.charview.PartList;
+import coc.view.charview.SwitchPart;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -26,30 +32,31 @@ public class CharView extends Sprite {
 	private var _height:uint;
 	private var pendingRedraw:Boolean;
 	private var loaderLocation:String;
+	private var parts:ModelPart;
 	public function CharView() {
 		clearAll();
 	}
 	/**
 	 * @param location "external" or "internal"
 	 */
-	public function reload(location:String="external"):void {
+	public function reload(location:String = "external"):void {
 		loaderLocation = location;
 		if (loading) return;
 		try {
 			loading = true;
 			clearAll();
 			if (loaderLocation == "external") trace("loading XML res/model.xml");
-			CoCLoader.loadText("res/model.xml",function(success:Boolean,result:String,e:Event):void {
+			CoCLoader.loadText("res/model.xml", function (success:Boolean, result:String, e:Event):void {
 				if (success) {
 					init(XML(result));
 				} else {
 					trace("XML file not found: " + e);
-					loading =false;
+					loading = false;
 				}
-			},loaderLocation);
+			}, loaderLocation);
 		} catch (e:Error) {
 			loading = false;
-			trace("[ERROR]\n"+e.getStackTrace());
+			trace("[ERROR]\n" + e.getStackTrace());
 		}
 	}
 	private function clearAll():void {
@@ -63,6 +70,7 @@ public class CharView extends Sprite {
 		this._width        = 1;
 		this._height       = 1;
 		this.pendingRedraw = false;
+		this.parts         = new PartList([]);
 	}
 	private function init(xml:XML):void {
 		this.xml  = xml;
@@ -71,8 +79,14 @@ public class CharView extends Sprite {
 		composite = new CompositeImage(_width, _height);
 		ss_loaded = 0;
 		ss_total  = -1;
+		var _parts:/*ModelPart*/Array = [];
+		var item:XML;
+		for each(item in xml.layers.*) {
+			_parts.push(loadPart(item));
+		}
+		this.parts = new PartList(_parts);
 		var n:int = 0;
-		for each(var item:XML in xml.spritesheet) {
+		for each(item in xml.spritesheet) {
 			n++;
 			loadSpritesheet(item);
 		}
@@ -149,6 +163,7 @@ public class CharView extends Sprite {
 			}
 			keyColors[src] = base & 0x00ffffff;
 		}
+		return keyColors;
 	}
 	public function redraw():void {
 		if (!xml && !loading) {
@@ -163,18 +178,51 @@ public class CharView extends Sprite {
 
 		// Mark visible layers
 		composite.hideAll();
-		for each(var item:XML in xml.layers.*) {
-			drawItem(item);
-		}
+		parts.display(_character);
 
-		var palette:Object = calcPalette(_character);
+		var palette:Object   = calcPalette(_character);
 		var keyColors:Object = calcKeyColors(palette);
-		var bd:BitmapData = composite.draw(keyColors);
-		var g:Graphics    = graphics;
+		var bd:BitmapData    = composite.draw(keyColors);
+		var g:Graphics       = graphics;
 		g.clear();
 		g.beginBitmapFill(bd);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
+	}
+	private function loadPart(x:XML):ModelPart {
+		var item:XML;
+		switch(x.localName()) {
+			case 'layer':
+				return new LayerPart(composite,x.@id || x.@file);
+			case 'if':
+				var thenBlock:/*ModelPart*/Array = [];
+				for each(item in x.*) {
+					thenBlock.push(loadPart(item));
+				}
+				return new IfBlock(x.@test.toString(),thenBlock);
+			case 'switch':
+				var hasval:Boolean = x.attribute("value").length() > 0;
+				var cases:/*CaseBlock*/Array = [];
+				for each(var xcase:XML in x.elements("case")) {
+					var caseItems:/*ModelPart*/Array = [];
+					for each(item in xcase.*) {
+						caseItems.push(loadPart(item));
+					}
+					var hasval2:Boolean = xcase.attribute("value").length() > 0;
+					var hastest:Boolean = xcase.attribute("test").length() > 0;
+					cases.push(new CaseBlock(
+							hastest ? xcase.@test.toString() : null,
+							hasval2 ? xcase.@value.toString() : null,
+							caseItems));
+				}
+				var defBlock:/*ModelPart*/Array = [];
+				for each (item in x.elements("default").*) {
+					defBlock.push(loadPart(item));
+				}
+				return new SwitchPart(hasval?x.@value.toString():null,cases,defBlock);
+			default:
+				throw new Error("Expected <layer>, <if>, or <switch>, got "+x.localName());
+		}
 	}
 	private function drawItem(x:XML):void {
 		var testval:*;
@@ -232,9 +280,9 @@ public class CharView extends Sprite {
 		const filename:String = ss.@file;
 		const cellwidth:int   = ss.@cellwidth;
 		const cellheight:int  = ss.@cellheight;
-		var path:String = xml.@dir+filename;
+		var path:String       = xml.@dir + filename;
 		if (loaderLocation == "external") trace('loading spritesheet ' + path);
-		CoCLoader.loadImage(path,function(success:Boolean,result:BitmapData,e:Event):void{
+		CoCLoader.loadImage(path, function (success:Boolean, result:BitmapData, e:Event):void {
 			if (!success) {
 				trace("Spritesheet file not found: " + e);
 				ss_loaded++;
@@ -257,7 +305,7 @@ public class CharView extends Sprite {
 			}
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers();
-		},loaderLocation);
+		}, loaderLocation);
 	}
 	private function loadBitmapsFrom(item:XML):void {
 		const filename:String = item.@file;
@@ -271,7 +319,7 @@ public class CharView extends Sprite {
 		composite.addLayer(filename, bitmaps[filename], false);
 		var path:String = xml.@dir + filename;
 		if (loaderLocation == "external") trace('loading layer ' + path);
-		CoCLoader.loadImage(path,function(success:Boolean,bmp:BitmapData,e:Event):void {
+		CoCLoader.loadImage(path, function (success:Boolean, bmp:BitmapData, e:Event):void {
 			if (!success) {
 				trace("Layer file not found: " + e);
 				file_loaded++;

@@ -37,7 +37,13 @@ public class Eval {
 	}
 	public static function compile(expr:String):Eval {
 		var e:Eval = new Eval({}, expr);
-		e._call = e.evalUntil("",'compile');
+		if (expr.match(RX_INT)) {
+			const i:int = int(expr);
+			e._call = function():int{return i;};
+		} else {
+			e._call = e.evalUntil("", 'compile');
+		}
+
 		return e;
 	}
 	private static function error(src:String, expr:String, msg:String, tail:Boolean = true):Error {
@@ -62,7 +68,7 @@ public class Eval {
 			} else if (eatStr('.')) {
 				m = eat(LA_ID);
 				if (!m) throw error(src,expr,"Identifier expected");
-				x = wrapDot(mode, x, m[0]);
+				x = wrapDot(mode, x, wrapVal(mode, m[0]));
 			} else if (eatStr('[')) {
 				y = evalUntil("]",mode);
 				eatWs();
