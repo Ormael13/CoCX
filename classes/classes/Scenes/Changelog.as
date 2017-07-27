@@ -24,7 +24,7 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8f:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, , Couatl\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
@@ -75,7 +75,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("\n");
 			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Orca, Goo, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl, Dragon, Cow, Minotaur
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Vouivre, Dragon, Cow, Minotaur, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
 			outputText("\n");
 			outputText("\n");
