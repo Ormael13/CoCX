@@ -6,7 +6,10 @@ import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewManager;
-	import flash.utils.describeType;
+
+import coc.view.Color;
+
+import flash.utils.describeType;
 	import flash.utils.*
 	
 	public class DebugMenu extends BaseContent
@@ -504,6 +507,7 @@ import classes.BodyParts.SkinLayer;
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
 			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
+			addButton(9, "Color Picker", colorPickerRoot).hint("HSL picker for skin/hair color");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		private function generateTagDemos(...tags:Array):String {
@@ -522,6 +526,97 @@ import classes.BodyParts.SkinLayer;
 			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
 			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
 			addButton(14, "Back", backFn);
+		}
+		private var oldColor:String = "";
+		private var pickerMode:String = "skin";
+		private function colorPickerRoot():void {
+			clearOutput();
+			mainViewManager.showPlayerDoll(false);
+			var c:String = pickerMode=='skin'?player.skin.base.color:player.hairColor;
+			var h:int,s:int,l:int;
+			if (c.charAt(0) != '$') {
+				oldColor           = c;
+				var hsl:Object         = Color.toHsl(mainView.charView.lookupColorValue(pickerMode, c));
+				c = '$hsl('+int(hsl.h)+','+int(hsl.s)+','+int(hsl.l)+')';
+				if (pickerMode == 'skin') player.skin.base.color = c;
+				else if (pickerMode == 'hair') player.hairColor = c;
+				h = hsl.h;
+				s = hsl.s;
+				l = hsl.l;
+			} else {
+				var m:/*String*/Array = c.match(/^\$hsl\((\d+),(\d+),(\d+)\)$/);
+				if (!m) styleHackMenu();
+				h=int(m[1]);
+				s=int(m[2]);
+				l=int(m[3]);
+			}
+			displayHeader("Color picker");
+			outputText('\nCurrent color:');
+			outputText("\n<b>H</b>ue: "+h+' / 360');
+			outputText("\n<b>S</b>aturation: "+s+' / 100');
+			outputText("\n<b>L</b>uminosity: "+l+' / 100');
+			outputText('\n\nCurrent mode: <b>'+pickerMode+' color</b>.');
+			outputText('\n\n<b>Missing colors:</b>');
+			outputText('\n<i>' +
+					   [
+						   'ashen', 'caramel', 'cerulean', 'chocolate', 'crimson', 'crystal', 'dusky',
+						   'emerald', 'golden', 'indigo', 'metallic', 'midnight', 'peach', 'sable',
+						   'sanguine', 'silky', 'silver', 'tan', 'tawny', 'turquoise', 'aphotic blue-black',
+						   'ashen grayish-blue', 'creamy-white', 'crimson platinum', 'dark blue',
+						   'dark gray', 'dark green', 'deep blue', 'deep red', 'ghostly pale',
+						   'glacial white', 'golden blonde', 'grayish-blue', 'light blonde', 'light blue',
+						   'light gray', 'light green', 'light grey', 'light purple', 'lime green',
+						   'mediterranean-toned', 'metallic golden', 'metallic silver', 'midnight black',
+						   'pale white', 'pale yellow', 'platinum blonde', 'platinum crimson',
+						   'purplish-black', 'quartz white', 'reddish-orange', 'rough gray', 'sandy brown',
+						   'shiny black', 'silver blonde', 'silver-white', 'snow white', 'yellowish-green'
+					   ].join('</i>, <i>') + '</i>.');
+			outputText('\n\n<b>Not verified:</b>');
+			outputText('\n<i>' +
+					   [
+						   'albino', 'aqua', 'auburn', 'black', 'blonde', 'blue', 'bronzed', 'brown',
+						   'dark', 'ebony', 'fair', 'gray', 'green', 'light', 'mahogany', 'olive',
+						   'orange', 'pink', 'purple', 'red', 'russet', 'white', 'yellow',
+						   'iridescent gray', 'leaf green', 'milky white', 'sandy blonde', 'red(hair)',
+						   'flaxen(hair)', 'brown(hair)', 'black(hair)', 'gray(hair)', 'white(hair)',
+						   'raven(hair)', 'snowy(hair)', 'pale(skin)'
+					   ].join('</i>, <i>') + '</i>.');
+			menu();
+			addButton(0,"Back",colorPickerExit);
+			addButton(5,"Skin",colorPickerSetMode,'skin');
+			button(5).enabled = pickerMode != 'skin';
+			addButton(10,"Hair",colorPickerSetMode,'hair');
+			button(10).enabled = pickerMode != 'hair';
+
+			addButton(1,"Sub 20 Hue",colorPickerSet,(h+360-20)%360,s,l);
+			addButton(2,"Sub 1 Hue",colorPickerSet,(h+360-1)%360,s,l);
+			addButton(3,"Add 1 Hue",colorPickerSet,(h+1)%360,s,l);
+			addButton(4,"Add 20 Hue",colorPickerSet,(h+20)%360,s,l);
+			addButton(6,"Sub 10 Sat",colorPickerSet,h,boundInt(0,s-10,100),l);
+			addButton(7,"Sub 1 Sat",colorPickerSet,h,boundInt(0,s-1,100),l);
+			addButton(8,"Add 1 Sat",colorPickerSet,h,boundInt(0,s+1,100),l);
+			addButton(9,"Add 10 Sat",colorPickerSet,h,boundInt(0,s+10,100),l);
+			addButton(11,"Sub 10 Lum ",colorPickerSet,h,s,boundInt(0,l-10,100));
+			addButton(12,"Sub 1 Lum ",colorPickerSet,h,s,boundInt(0,l-1,100));
+			addButton(13,"Add 1 Lum",colorPickerSet,h,s,boundInt(0,l+1,100));
+			addButton(14,"Add 10 Lum",colorPickerSet,h,s,boundInt(0,l+10,100));
+		}
+		private function colorPickerSetMode(mode:String):void {
+			if (pickerMode == 'skin') player.skin.base.color = oldColor;
+			else if (pickerMode == 'hair') player.hairColor = oldColor;
+			pickerMode = mode;
+			colorPickerRoot();
+		}
+		private function colorPickerSet(h:int,s:int,l:int):void {
+			var color:String = '$hsl(' + (h + 360) % 360 + ',' + s + ',' + l + ')';
+			if (pickerMode == 'skin') player.skin.base.color = color;
+			else if (pickerMode == 'hair') player.hairColor = color;
+			colorPickerRoot();
+		}
+		private function colorPickerExit():void {
+			if (pickerMode == 'skin') player.skin.base.color = oldColor;
+			else if (pickerMode == 'hair') player.hairColor = oldColor;
+			styleHackMenu();
 		}
 		private function dumpPlayerData():void {
 			clearOutput();

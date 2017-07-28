@@ -54,12 +54,14 @@ public class Color {
 			x = parseInt(a[1], 16);
 		} else if ((a = s.match(/^(?:0x|\$|#)([a-fA-F0-9]{3})$/))) {
 			var rgb12:uint = parseInt(a[1], 16);
-			x = ((rgb12 & 0xf00) << (5 - 2) |
-				 (rgb12 & 0xf00) << (4 - 2) |
-				 (rgb12 & 0x0f0) << (3 - 1) |
-				 (rgb12 & 0x0f0) << (2 - 1) |
-				 (rgb12 & 0x00f) << (1 - 0) |
-				 (rgb12 & 0x00f) << (0 - 0));
+			x              = ((rgb12 & 0xf00) << (5 - 2) |
+							  (rgb12 & 0xf00) << (4 - 2) |
+							  (rgb12 & 0x0f0) << (3 - 1) |
+							  (rgb12 & 0x0f0) << (2 - 1) |
+							  (rgb12 & 0x00f) << (1 - 0) |
+							  (rgb12 & 0x00f) << (0 - 0));
+		} else if ((a = s.match(/^hsl\((\d+),(\d+),(\d+)\)$/))) {
+			x = fromHsl({h:a[1],s:a[2],l:a[3]});
 		} else {
 			return INVALID_COLOR;
 		}
