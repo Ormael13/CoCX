@@ -533,11 +533,12 @@ import flash.utils.describeType;
 			clearOutput();
 			mainViewManager.showPlayerDoll(false);
 			var c:String = pickerMode=='skin'?player.skin.base.color:player.hairColor;
+			var hsl:Object;
 			var h:int,s:int,l:int;
 			if (c.charAt(0) != '$') {
-				oldColor           = c;
-				var hsl:Object         = Color.toHsl(mainView.charView.lookupColorValue(pickerMode, c));
-				c = '$hsl('+int(hsl.h)+','+int(hsl.s)+','+int(hsl.l)+')';
+				oldColor = c;
+				hsl = Color.toHsl(mainView.charView.lookupColorValue(pickerMode, c));
+				c        = '$hsl('+int(hsl.h)+','+int(hsl.s)+','+int(hsl.l)+')';
 				if (pickerMode == 'skin') player.skin.base.color = c;
 				else if (pickerMode == 'hair') player.hairColor = c;
 				h = hsl.h;
@@ -552,11 +553,29 @@ import flash.utils.describeType;
 			}
 			displayHeader("Color picker");
 			outputText('\nCurrent color:');
-			outputText("\n<b>H</b>ue: "+h+' / 360');
-			outputText("\n<b>S</b>aturation: "+s+' / 100');
-			outputText("\n<b>L</b>uminosity: "+l+' / 100');
+			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t<i>(0: red, 120: green, 240: blue)');
+			outputText("\n<b>S</b>aturation:\t\t"+s+' / 100\t(0: greyscale, 100: bright color)');
+			outputText("\n<b>L</b>uminosity:\t"+l+' / 100\t(0: black, 50: bright color, 100: white)');
 			outputText('\n\nCurrent mode: <b>'+pickerMode+' color</b>.');
-			outputText('\n\n<b>Missing colors:</b>');
+			var palette:/*String*/Array = [];
+			var maps:Object = mainView.charView.palette.lookupObjects;
+			for (var mapname:String in maps) {
+				var map:Object = maps[mapname];
+				var suffix:String = mapname == 'common' ? '' : (' ('+mapname+')');
+				for (var colorname:String in map) {
+					hsl = Color.toHsl(Color.convertColor(map[colorname]));
+					palette.push({
+						label:colorname+suffix+' ('+int(hsl.h)+', '+int(hsl.s)+', '+int(hsl.l)+')',
+						data:{name:colorname,h:hsl.h,s:hsl.s,l:hsl.l}});
+				}
+			}
+			palette.sortOn('label');
+
+			kGAMECLASS.showComboBox(palette,"Known colors",function(item:Object):void {
+				oldColor = item.data.name;
+				colorPickerSet(item.data.h,item.data.s,item.data.l);
+			});
+			outputText('<b>Missing colors:</b>');
 			outputText('\n<i>' +
 					   [
 						   'ashen', 'caramel', 'cerulean', 'chocolate', 'crimson', 'crystal', 'dusky',

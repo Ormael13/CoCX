@@ -108,16 +108,19 @@ public class CharView extends Sprite {
 		for each (var color:XML in xml.palette.common.color) {
 			commonLookups[color.@name.toString()] = color.text().toString();
 		}
+		_palette.addLookups("common",commonLookups);
 		for each (var prop:XML in xml.palette.property) {
 			var lookups:Object = {};
 			for each (color in prop.color) {
 				lookups[color.@name.toString()] = color.text().toString();
 			}
+			var propname:String = prop.@name.toString();
+			_palette.addLookups(propname,lookups);
 			_palette.addPaletteProperty(
-					prop.@name.toString(),
+					propname,
 					prop.@src.toString(),
 					Color.convertColor(prop.@default.toString()),
-					[lookups,commonLookups]);
+					[propname,"common"]);
 		}
 		for each (var key:XML in xml.colorkeys.key) {
 			var src:uint  = Color.convertColor(key.@src.toString());

@@ -176,8 +176,8 @@
             <color name="pale">#f2e8e3</color>
         </property>
         <!-- Not yet in game-->
-        <property name="iris" src="'blue'" default="#0000ff">
-            <!--Iris color overrides go here-->
+       <!-- <property name="iris" src="'blue'" default="#0000ff">
+            &lt;!&ndash;Iris color overrides go here&ndash;&gt;
             <color name="blue">#68a9ca</color>
             <color name="aqua">#a0c5c5</color>
             <color name="green">#4e7e4e</color>
@@ -200,7 +200,7 @@
             <color name="beryll">#68ca99</color>
             <color name="sapphire">#5c70d6</color>
             <color name="amethyst">#b288dd</color>
-        </property>
+        </property>-->
     </palette>
     <colorkeys>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
@@ -341,7 +341,7 @@
                     </case>
                     <default>
                         <layer file="hair0f"/>
-                        <layer file="hairf-error"/>
+                        <!--<layer file="hairf-error"/>-->
                     </default>
                 </switch>
             </default>
@@ -435,7 +435,7 @@
             <case test="hairLength == 0"><!--bald--></case>
             <case test="hairLength lt 6"><!--too short, only front hair--></case>
             <default>
-                <layer file="hairb-error"/>
+                <!--<layer file="hairb-error"/>-->
             </default>
         </switch>
         <switch value="wingType">
