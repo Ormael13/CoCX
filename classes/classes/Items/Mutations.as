@@ -7715,6 +7715,10 @@
 			outputText("You crack the shell easily and swallow the large yolk and the copious amounts of albumen - the yolk is blue, while the rest is crimson-tinted.  It tastes like... well, it tastes mostly of spiced mint, you think.");
 			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0) {
 				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 				else {
 					if (!player.hasStatusEffect(StatusEffects.DragonBreathBoost)) player.createStatusEffect(StatusEffects.DragonBreathBoost, 0, 0, 0, 0);
 				}

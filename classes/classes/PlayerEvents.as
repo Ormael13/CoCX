@@ -452,8 +452,12 @@ package classes {
 					else getGame().growHair(0.1);
 					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
 				}
-				//Clear dragon breath cooldown!
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				//Clear dragon breath cooldowns!
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 				//Reset Mara Fruit daily counter
 				if (flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] > 0) flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags

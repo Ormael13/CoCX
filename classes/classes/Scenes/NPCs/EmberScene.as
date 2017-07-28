@@ -1662,6 +1662,7 @@ package classes.Scenes.NPCs
 			}
 			//Gain Dragon Ears
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_DRAGON) {
+				
 				player.earType = EARS_DRAGON;
 				outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
 				changes++;
@@ -2097,8 +2098,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(25);
@@ -2160,8 +2165,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(50);
@@ -2234,8 +2243,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				outputText("  You tell your dragon that you're finished.  You're up and turning to leave when a looping tail around your waist stops you.");
@@ -4744,7 +4757,13 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+						if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
+					}
 					player.slimeFeed();
 					fatigue(-40);
 				}

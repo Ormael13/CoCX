@@ -43,6 +43,10 @@ package classes
 		public static const DogWarning:StatusEffectType                     = mk("dog warning");
 		public static const DragonBreathBoost:StatusEffectType              = mk("Dragon Breath Boost");
 		public static const DragonBreathCooldown:StatusEffectType           = mk("Dragon Breath Cooldown");
+		public static const DragonDarknessBreathCooldown:StatusEffectType   = mk("Dragon Darkness Breath Cooldown");
+		public static const DragonFireBreathCooldown:StatusEffectType       = mk("Dragon Fire Breath Cooldown");
+		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
+		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");
 		public static const Dysfunction:StatusEffectType                    = mk("dysfunction");
 		public static const Edryn:StatusEffectType                          = mk("Edryn");
 		public static const Eggchest:StatusEffectType                       = mk("eggchest");
@@ -283,14 +287,14 @@ package classes
 		public static const WhipReady:StatusEffectType          = mk("Whip Ready");
 		
 		//metamorph
-		public static const UnlockedFur:StatusEffectType    = mk("Unlocked Fur");//użyć fox fur lub inne skin tf scene text
-		public static const UnlockedScales:StatusEffectType = mk("Unlocked Scales");
-		public static const UnlockedChitin:StatusEffectType = mk("Unlocked Chitin");
+		public static const UnlockedFur:StatusEffectType				 = mk("Unlocked Fur");//użyć fox fur lub inne skin tf scene text
+		public static const UnlockedScales:StatusEffectType				 = mk("Unlocked Scales");
+		public static const UnlockedChitin:StatusEffectType				 = mk("Unlocked Chitin");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
-		public static const UnlockedTattoed:StatusEffectType   = mk("Unlocked Tattoed");
-		public static const UnlockedFishGills:StatusEffectType = mk("Unlocked Fish Gills");
+		public static const UnlockedTattoed:StatusEffectType			 = mk("Unlocked Tattoed");
+		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");
 		
 		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");
 		public static const UnlockedFoxArms:StatusEffectType             = mk("Unlocked Fox Arms");
@@ -354,10 +358,28 @@ package classes
 		public static const UnlockedSalamanderLegs:StatusEffectType 	 = mk("Unlocked Salamander Legs");
 		public static const UnlockedSalamanderArms:StatusEffectType 	 = mk("Unlocked Salamander Arms");
 		public static const UnlockedSalamanderFace:StatusEffectType 	 = mk("Unlocked Salamander Face");
-	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
-	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
-	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
-	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
+		public static const UnlockedPhoenixArms:StatusEffectType		 = mk("Unlocked Phoenix Arms");
+		public static const UnlockedPhoenixWings:StatusEffectType		 = mk("Unlocked Phoenix Wings");
+		public static const UnlockedOrcaLegs:StatusEffectType			 = mk("Unlocked Orca Legs");
+		public static const UnlockedOrcaArms:StatusEffectType			 = mk("Unlocked Orca Arms");
+		public static const UnlockedOrcaTail:StatusEffectType			 = mk("Unlocked Orca Tail");
+		public static const UnlockedOrcaEars:StatusEffectType			 = mk("Unlocked Orca Ears");
+		public static const UnlockedOrcaFace:StatusEffectType			 = mk("Unlocked Orca Face");
+		public static const UnlockedOrcaBlowhole:StatusEffectType		 = mk("Unlocked Orca Blowhole");
+		public static const UnlockedSnakeTongue:StatusEffectType		 = mk("Unlocked Snake Tongue");
+		public static const UnlockedSnakeFangs:StatusEffectType			 = mk("Unlocked Snake Fangs");
+		public static const UnlockedSnakeLowerBody:StatusEffectType		 = mk("Unlocked Snake Lower Body");
+		public static const UnlockedSnakeEyes:StatusEffectType			 = mk("Unlocked Snake Eyes");
+		public static const UnlockedSnakeEars:StatusEffectType			 = mk("Unlocked Snake Ears");
+		public static const UnlockedGorgonHair:StatusEffectType			 = mk("Unlocked Gorgon Hair");
+		public static const UnlockedGorgonEyes:StatusEffectType			 = mk("Unlocked Gorgon Eyes");
+		public static const UnlockedDraconicEars:StatusEffectType		 = mk("Unlocked Draconic Ears");
+		public static const UnlockedDraconicWingsSmall:StatusEffectType	 = mk("Unlocked Draconic Wings Small");
+		public static const UnlockedDraconicWingsLarge:StatusEffectType	 = mk("Unlocked Draconic Wings Large");
+		public static const UnlockedDraconicWingsHuge:StatusEffectType	 = mk("Unlocked Draconic Wings Huge");
+	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
+	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
+	//	public static const UnlockedDraconic:StatusEffectType = mk("Unlocked Draconic ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");

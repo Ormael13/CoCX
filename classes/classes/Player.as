@@ -5093,8 +5093,20 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
 			}
-			if(hasStatusEffect(StatusEffects.DragonBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+			if(hasStatusEffect(StatusEffects.DragonBreathCooldown) && findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
 				removeStatusEffect(StatusEffects.DragonBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.CooldownInkSpray)) {
 				removeStatusEffect(StatusEffects.CooldownInkSpray);
