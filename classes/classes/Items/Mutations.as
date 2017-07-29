@@ -4,6 +4,7 @@
 	import classes.BodyParts.Skin;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Consumables.EmberTF;
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Areas.Forest.KitsuneScene;
 
@@ -20,6 +21,8 @@
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
 //const EGGS_BOUGHT:int = 653;
 //const BIKINI_ARMOR_BONUS:int = 769;
+
+	public var emberTFchanges:EmberTF = new EmberTF();
 
 //ManUp Beer
 		public function manUpBeer(player:Player):void
@@ -10225,7 +10228,8 @@
 		
 		public function drakeHeart(player:Player):void {
 			outputText("You bring the flower up to your nose and smell it. It has exquisite smell. You suddenly have the strange desire to eat it. You pop the flower into your mouth and chew. It tastes like vanilla somehow. Before you know it, you're undergoing changes.");
-			kGAMECLASS.emberScene.emberTFs(true);
+			emberTFchanges.dragonTFeffects(true);
+		//	kGAMECLASS.emberScene.emberTFs(true);
 		}
 		
 		public function bladeGrass(player:Player):void

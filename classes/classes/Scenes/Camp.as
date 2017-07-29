@@ -157,6 +157,20 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	fixFlags();
+	if(player.hasStatusEffect(StatusEffects.Might)) {
+		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might),"tou", -player.statusEffectv2(StatusEffects.Might));
+		player.removeStatusEffect(StatusEffects.Might);
+	}
+	if(player.hasStatusEffect(StatusEffects.Blink)) {
+		kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+		player.removeStatusEffect(StatusEffects.Blink);
+	}
+	if(player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		player.removeStatusEffect(StatusEffects.ChargeWeapon);
+	}
+	if(player.hasStatusEffect(StatusEffects.ChargeArmor)) {
+		player.removeStatusEffect(StatusEffects.ChargeArmor);
+	}
 	if(!marbleScene.marbleFollower())
 	{
 		if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
@@ -827,7 +841,7 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(12, "Wait", doWait).hint("Wait for four hours.\n\nShift-click to wait until the night comes.");
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", rest).hint("Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
-	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
+//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
 
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {

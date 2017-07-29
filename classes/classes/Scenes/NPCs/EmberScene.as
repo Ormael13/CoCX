@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.*;
+	import classes.Items.Consumables.EmberTF;
 
 	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -58,6 +59,7 @@ package classes.Scenes.NPCs
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 		public var pregnancy:PregnancyStore;
+		public var dragonTFchanges:EmberTF = new EmberTF();
 
 		public function EmberScene()
 		{
@@ -1573,9 +1575,11 @@ package classes.Scenes.NPCs
 		}
 
 //TF messages (Z)
-		public function emberTFs(drakesHeart:Boolean = false):void
+//		public function emberTFs(drakesHeart:Boolean = false):void
+		public function emberTFs():void
 		{
-			var changes:int = 0;
+			dragonTFchanges.dragonTFeffects();
+/*			var changes:int = 0;
 			var changeLimit:int = 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
@@ -1761,7 +1765,7 @@ package classes.Scenes.NPCs
 				player.tailType = TAIL_TYPE_DRACONIC;
 				changes++
 			}
-			/*
+*/			/*
 			 //9999 - prolly not gonna do this!
 			 Tail Slam Attack Effects:
 			 Deals ⅓ normal damage, but pierces 30 defense (stacks with perks) and has a (strength / 2) chance of stunning the opponent that turn.
@@ -1773,7 +1777,7 @@ package classes.Scenes.NPCs
 			 Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
 			 */
 			//Grow Dragon Wings
-			if (player.wingType != WING_TYPE_DRACONIC_HUGE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+/*			if (player.wingType != WING_TYPE_DRACONIC_HUGE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
@@ -1880,7 +1884,7 @@ package classes.Scenes.NPCs
 				outputText("</b>.");
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
-		}
+*/		}
 
 //Get Egg (Ovilixer Ember) (Z)
 //Spying or watching Ember lay, increases lust by a small amount, while helping Ember lay, increases lust by a moderate amount.
