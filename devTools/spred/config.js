@@ -1,0 +1,1 @@
+window['spred_basedir'] = '../../';

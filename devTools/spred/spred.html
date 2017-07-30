@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sprite model editor</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/tether.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="tether.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	        crossorigin="anonymous"></script>
+	<script src="config.js"></script>
+	<script src="spred.js"></script>
+	<style type="text/css">
+		#main {
+			height:100vh;
+			display:flex;
+			flex-flow:column;
+		}
+		#main>.row {
+			margin: .5rem;
+		}
+		.canvas {
+			background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAG0lEQVQYV2M0Njb+v3v3bgbGd+/e/Xd1dWUAAEzpCGTyODpxAAAAAElFTkSuQmCC') repeat;
+			max-height: 576px;
+			max-width: 576px;
+			display: inline-block;
+			overflow: auto;
+			font-size:0;
+		}
+		#ViewList {
+			overflow: scroll;
+		}
+		#ViewList > * {
+			float: left;
+			margin: 0.25rem;
+		}
+		#ViewList > .card > .card-block {
+			padding: 0.5rem;
+		}
+		.LayerBadges {
+			max-width: 576px;
+		}
+		.LayerListItem {
+			display: flex;
+			align-items: center;
+		}
+		.LayerListItem.selected {
+			background: #bbddff;
+		}
+		#SelLayerCanvas {
+			width:100%;
+			overflow:hidden;
+		}
+		.ctrl {
+			width: 24px;
+			height: 24px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			border: 1px solid rgba(127,127,127,0.1);
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		button.badge {
+			border: none;
+		}
+		.ctrl:hover {
+			border: 1px solid rgba(127,127,127,0.5);
+		}
+		a.ctrl, a.ctrl:hover, a.ctrl:focus, a.ctrl:active {
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+<div class="container-fluid" id="main">
+	<div class="row" style="flex-shrink: 0;">
+		<div class="col">
+			<h3>CoC Sprite Editor</h3>
+			<button type="button" class="btn btn-secondary" onclick="spred.addCompositeView(spred.defaultLayerList)">
+				<span class="fa fa-plus"></span> Add view
+			</button>
+
+
+		</div>
+	</div>
+	<div class="row" style="flex-grow:1">
+		<div class="col col-lg-auto">
+			<h4>Controls</h4>
+			<h5>Left button</h5>
+			<div class="form-check">
+				<label for="lmba-nothing" class="form-check-label">
+					<input type="radio" id="lmba-nothing" name="lmb-action" value="nothing" checked>
+					Nothing
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="lmba-erase" class="form-check-label">
+					<input type="radio" id="lmba-erase" name="lmb-action" value="erase">
+					Erase
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="lmba-keycolor" class="form-check-label">
+					<input type="radio" id="lmba-keycolor" name="lmb-action" value="keycolor">
+					Key color...
+				</label>
+			</div>
+			<div style="padding-left:calc(1.25rem + 17px)">
+				<select id="lmb-color" class="form-control">
+					<option value="#FF88FF">hair lighten(25)</option>
+					<option value="#CC00CC">hair</option>
+				</select>
+			</div>
+			<!--<h5>RMB</h5>-->
+			<h4>Import</h4>
+			<input type="text" id="ClipboardGrabber" placeholder="Ctrl+V image or drop file" class="form-control">
+			<div class="form-check disabled">
+				<label for="clipboard-add" class="form-check-label">
+					<input type="radio" id="clipboard-add" name="clipboard-action" value="add" disabled>
+					Add layer
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="clipboard-replace" class="form-check-label">
+					<input type="radio" id="clipboard-replace" name="clipboard-action" value="replace" checked>
+					Replace selected layer
+				</label>
+			</div>
+			<div class="d-flex align-items-baseline">
+				<label for="ClipboardMask" class="form-label">Mask&nbsp;color</label>
+				<input class="form-control" type="text" id="ClipboardMask" placeholder="hex (e.g. #FFFFFF)">
+			</div>
+		</div>
+		<div class="col" id="ViewList">
+
+		</div>
+		<div class="col col-lg-auto d-flex flex-column" style="flex-basis:200px;">
+			<div class="d-flex flex-column">
+				<h4 class="card-title">Layers</h4>
+				<div id="LayerList" style="overflow-y:scroll;">
+
+				</div>
+			</div>
+			<div class="card-block">
+				<h4 class="card-title">Selected:</h4>
+				<h5 class="card-subtitle">
+					<button class="ctrl" type="button" onclick="spred.selLayerUp()">
+						<span class="fa fa-caret-up"></span>
+					</button>
+					<button class="ctrl" type="button" onclick="spred.selLayerDown()">
+						<span class="fa fa-caret-down"></span>
+					</button>
+					<span id="SelLayerName">(none)</span>
+				</h5>
+				<h5>Canvas: </h5>
+				<div>
+					<em class="text-muted">right-click &amp; copy/save</em>
+				</div>
+				<div id="SelLayerCanvas"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
