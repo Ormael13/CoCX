@@ -3745,6 +3745,62 @@ private function combatStatusesUpdate():void {
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
 	}
+	//Berzerker/Lustzerker/Dwarf Rage
+	if (player.hasStatusEffect(StatusEffects.Berzerking)) {
+		if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
+			player.removeStatusEffect(StatusEffects.Berzerking);
+			outputText("<b>Berserker effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Berzerking,1,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
+		if (player.statusEffectv1(StatusEffects.Lustzerking) <= 0) {
+			player.removeStatusEffect(StatusEffects.Lustzerking);
+			outputText("<b>Lustzerker effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Lustzerking,1,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
+		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
+			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.removeStatusEffect(StatusEffects.DwarfRage);
+			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.DwarfRage,3,-1);
+	}
+	//Spell buffs
+	if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeWeapon);
+			outputText("<b>Charged Weapon effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.ChargeWeapon,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
+		if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeArmor);
+			outputText("<b>Charged Armor effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.ChargeArmor,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Might)) {
+		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
+			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might),"tou", -player.statusEffectv2(StatusEffects.Might));
+			player.removeStatusEffect(StatusEffects.Might);
+		//	statScreenRefresh();
+			outputText("<b>Might effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Might,3,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Blink)) {
+		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
+			kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.removeStatusEffect(StatusEffects.Blink);
+		//	statScreenRefresh();
+			outputText("<b>Blink effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Blink,3,-1);
+	}
 	//Blizzard
 	if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 		//Remove blizzard if countdown to 0

@@ -2516,13 +2516,7 @@ use namespace kGAMECLASS;
 			if (earType == 22)
 				nagaCounter++;
 			if (gorgonScore() > 10 || vouivreScore() > 10 || couatlScore() > 10)
-				nagaCounter -= 6;
-		//	if (wingType != 0)
-		//		nagaCounter -= 6;
-		//	if (eyeType == 4)
-		//		nagaCounter -= 3;
-		//	if (hairType == 6)
-		//		nagaCounter -= 3;
+				nagaCounter -= 8;
 			
 			End("Player","racialScore");
 			return nagaCounter;
@@ -2577,7 +2571,7 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (armType == 0)
 				vouivreCounter++;
-			if (hasCoatOfType(SKIN_COAT_SCALES))
+			if (hasCoatOfType(SKIN_COAT_DRAGON_SCALES))
 				vouivreCounter++;
 			if (eyeType == 9)
 				vouivreCounter++;
@@ -4592,7 +4586,10 @@ use namespace kGAMECLASS;
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
 				maxStr += (10 * (1 + newGamePlusMod));
+				maxTou -= (10 * (1 + newGamePlusMod));
 				maxSpe += (35 * (1 + newGamePlusMod));
+				maxInt += (10 * (1 + newGamePlusMod));
+				maxWis -= (20 * (1 + newGamePlusMod));
 			}//+30/30-40
 			if (gorgonScore() >= 11) {
 				maxStr += (50 * (1 + newGamePlusMod));
@@ -4878,6 +4875,12 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.Blink)) {
 				maxSpe += statusEffectv1(StatusEffects.Blink);
 			}
+			//Dwarf Rage
+			if (hasStatusEffect(StatusEffects.DwarfRage)) {
+				maxStr += statusEffectv1(StatusEffects.DwarfRage);
+				maxTou += statusEffectv2(StatusEffects.DwarfRage);
+				maxSpe += statusEffectv2(StatusEffects.DwarfRage);
+			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
 				maxStr += statusEffectv1(StatusEffects.BeatOfWar);
@@ -4941,6 +4944,10 @@ use namespace kGAMECLASS;
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
 			if(hasStatusEffect(StatusEffects.Sealed)) {
 				removeStatusEffect(StatusEffects.Sealed);
+			}
+			if(hasStatusEffect(StatusEffects.DwarfRage)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
+				removeStatusEffect(StatusEffects.DwarfRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
 				removeStatusEffect(StatusEffects.Berzerking);

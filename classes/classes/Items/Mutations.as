@@ -4006,7 +4006,7 @@
 				changes++;
 			}
 			//Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (!player.hasFullCoatOfType(SKIN_COAT_SCALES) && ((type == 0 && player.eyeType == EYES_GORGON) || (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasFullCoatOfType(SKIN_COAT_SCALES) && ((type == 0 && player.eyeType == EYES_GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
 				//set new skinTone
 				if (rand(10) == 0) {
 					color = randomChoice("purple", "silver");
@@ -4022,7 +4022,33 @@
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny scales.</b>");
 				}
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
+					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
+				}
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
+				changes++;
+			}
+			if (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE && player.hasPartialCoat(SKIN_COAT_DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
+				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
+				outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
+					outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);
+				}
+				changes++;
+			}
+			if (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE && !player.hasDragonScales() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. ");
+				var color2:String;
+				if (rand(10) == 0) {
+					color2 = randomChoice("purple","silver");
+				} else {
+					color2 = randomChoice("red","green","white","blue","black");
+				}
+				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{color:color2},Skin.COVERAGE_LOW);
+				outputText("<b>Your body is now partially covered in " + color2 + " shield-shaped dragon scales.</b>");
 				changes++;
 			}
 			if (changes == 0) {
@@ -10229,7 +10255,6 @@
 		public function drakeHeart(player:Player):void {
 			outputText("You bring the flower up to your nose and smell it. It has exquisite smell. You suddenly have the strange desire to eat it. You pop the flower into your mouth and chew. It tastes like vanilla somehow. Before you know it, you're undergoing changes.");
 			emberTFchanges.dragonTFeffects(true);
-		//	kGAMECLASS.emberScene.emberTFs(true);
 		}
 		
 		public function bladeGrass(player:Player):void

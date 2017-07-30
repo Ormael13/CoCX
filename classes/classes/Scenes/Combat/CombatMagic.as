@@ -627,13 +627,14 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Agility) >= 0) MightBoost -= 10;
 			if (player.findPerk(PerkLib.LightningStrikes) >= 0) MightBoost -= 10;
 			if (player.findPerk(PerkLib.BodyCultivator) >= 0) MightBoost -= 5;
-			//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (MightBoost < 10) MightBoost = 10;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) MightBoost *= 1.2;
 			MightBoost *= spellModBlack();
 			MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
-			player.createStatusEffect(StatusEffects.Might,0,0,0,0);
+			var MightDuration:Number = 5;
+			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			temp = MightBoost;
 			tempStr = temp;
 			tempTou = temp;
@@ -741,14 +742,15 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Agility) >= 0) BlinkBoost -= 10;
 			if (player.findPerk(PerkLib.LightningStrikes) >= 0) BlinkBoost -= 10;
 			if (player.findPerk(PerkLib.BodyCultivator) >= 0) BlinkBoost -= 5;
-			//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (BlinkBoost < 10) BlinkBoost = 10;
 			BlinkBoost *= 1.2;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) BlinkBoost *= 1.25;
 			BlinkBoost *= spellModBlack();
 			BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
-			player.createStatusEffect(StatusEffects.Blink,0,0,0,0);
+			var BlinkDuration:Number = 5;
+			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
 			temp = BlinkBoost;
 			tempSpe = temp;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
@@ -1174,15 +1176,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Agility) >= 0) ChargeWeaponBoost -= 10;
 		if (player.findPerk(PerkLib.LightningStrikes) >= 0) ChargeWeaponBoost -= 10;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) ChargeWeaponBoost -= 5;
-//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+	//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeWeaponBoost < 10) ChargeWeaponBoost = 10;
 		ChargeWeaponBoost *= 1.5;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeWeaponBoost *= 1.2;
 		ChargeWeaponBoost *= spellModWhite();
 		ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
+		var ChargeWeaponDuration:Number = 5;
 		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
@@ -1202,7 +1205,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1246,14 +1249,15 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Agility) >= 0) ChargeArmorBoost -= 10;
 		if (player.findPerk(PerkLib.LightningStrikes) >= 0) ChargeArmorBoost -= 10;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) ChargeArmorBoost -= 5;
-//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+	//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeArmorBoost *= 1.2;
 		ChargeArmorBoost *= spellModWhite();
 		ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
+		var ChargeArmorDuration:Number = 5;
 		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
@@ -1273,7 +1277,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You utter words of power, summoning an electrical charge around your [armor].  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;

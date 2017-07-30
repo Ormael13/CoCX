@@ -24,7 +24,7 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8f:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl\n");
+			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl, Dragon\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
@@ -68,7 +68,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-Berserk and Lustzerker now req. 25 wrath to activate them. No zerking for too calm PC's ^^\n");
 			outputText("-Dragon Breath specials have now own cooldown counters so PC can use all 4 once in fignt not one of them.\n");
 			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
 			outputText("-M. Specials menu was slight rearranged. All breath type specials was moved to Breath Attack menu (9 in total specilas atm), specials that could buff PC or debuff enemy was put into (De)Buffs subgroup (Berserker, Lustzerker, Petrify, Whisper)\n");
@@ -82,7 +82,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Dragon, Cow, Minotaur, 
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
 			outputText("\n");
 			outputText("\n");
