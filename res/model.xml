@@ -5,7 +5,8 @@
                 name CDATA #REQUIRED
                 dir CDATA #REQUIRED
                 width CDATA #REQUIRED
-                height CDATA #REQUIRED>
+                height CDATA #REQUIRED
+                scale CDATA #REQUIRED>
         <!ELEMENT palette (property|common)*>
         <!ELEMENT common (color)*>
         <!ELEMENT property (color)*>
@@ -44,7 +45,7 @@
         <!ATTLIST if
                 test CDATA #REQUIRED>
         ]>
-<model name="demo" dir="./res/" width="64" height="64">
+<model name="demo" dir="./res/charview/" width="192" height="192" scale="1">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
@@ -220,7 +221,54 @@
         <!--<key src="#FFFFFF" base="sclera"/>-->
         <key src="#0026FF" base="iris"/>
     </colorkeys>
-    <spritesheet file="char1.png" cellwidth="64" cellheight="64">
+    <spritesheet file="arms.png" cellwidth="192" cellheight="192">
+        <row>armf-error,arm0f,arm11f,,,,,,,,,,,,,</row>
+        <row>armb-error,arm0b,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="breasts.png" cellwidth="192" cellheight="192">
+        <row>breasts-error,breasts0,breastsD,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="ears.png" cellwidth="192" cellheight="192">
+        <row>ears-error,ears0,ears9,,,,,,,,,,,,,</row>
+        <row>,,ears9f,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="eyes.png" cellwidth="192" cellheight="192">
+        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,eyes6,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="face.png" cellwidth="192" cellheight="192">
+        <row>face-error,face0,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="hair.png" cellwidth="192" cellheight="192">
+        <row>hairf-error,hair0f,hair6f,,,,,,,,,,,,,</row>
+        <row>hairb-error,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="horns.png" cellwidth="192" cellheight="192">
+        <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="legs.png" cellwidth="192" cellheight="192">
+        <row>legs-error,legs0,legs3,legs35fsit,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="tail.png" cellwidth="192" cellheight="192">
+        <row>tail-error,tail-fox1,tail-fox2,tail28,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="torso.png" cellwidth="192" cellheight="192">
+        <row>torso-error,torso0,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <spritesheet file="wings.png" cellwidth="192" cellheight="192">
+        <row>wings-error,wings-23,,,,,,,,,,,,,,</row>
+        <row>,wings-23b,,,,,,,,,,,,,,</row>
+    </spritesheet>
+    <!--<spritesheet file=".png" cellwidth="192" cellheight="192">
+        <row>,,,,,,,,,,,,,,,</row>
+    </spritesheet>-->
+    <!--<spritesheet file="char1.png" cellwidth="192" cellheight="192">
         <row>,,,,,,,,,,,,,,,</row>
         <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
         <row>hairf-error,hair0f,hair6f,,,,,,,,,,,,,</row>
@@ -237,7 +285,7 @@
         <row>wings-error,wings-23,wings-23b,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
+    </spritesheet>-->
     <layers>
         <!--
 

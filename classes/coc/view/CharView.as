@@ -28,6 +28,7 @@ public class CharView extends Sprite {
 	private var file_loaded:int;
 	private var _width:uint;
 	private var _height:uint;
+	private var scale:Number;
 	private var pendingRedraw:Boolean;
 	private var loaderLocation:String;
 	private var parts:ModelPart;
@@ -71,6 +72,7 @@ public class CharView extends Sprite {
 		this.file_loaded   = 0;
 		this._width        = 1;
 		this._height       = 1;
+		this.scale = 1;
 		this.pendingRedraw = false;
 		this.parts         = new PartList([]);
 	}
@@ -99,6 +101,9 @@ public class CharView extends Sprite {
 		g.beginFill(0, 0);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
+		scale = parseFloat(xml.@scale);
+		this.scaleX = scale;
+		this.scaleY = scale;
 		loading = false;
 		if (pendingRedraw) redraw();
 	}
@@ -149,7 +154,7 @@ public class CharView extends Sprite {
 		_character = value;
 	}
 	public function redraw():void {
-		if (file_loaded == 0 && ss_loaded == 0 && !loading) {
+		if (file_total == 0 && ss_total == 0 && !loading) {
 			reload();
 		}
 		pendingRedraw = true;
@@ -170,6 +175,8 @@ public class CharView extends Sprite {
 		g.beginBitmapFill(bd);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
+		this.scaleX = scale;
+		this.scaleY = scale;
 	}
 	private function loadPart(x:XML):ModelPart {
 		var item:XML;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sprite model editor</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	        crossorigin="anonymous"></script>
+	<script src="spred.js"></script>
+	<style type="text/css">
+		#main {
+			height:100vh;
+			display:flex;
+			flex-flow:column;
+			padding: 1em;
+		}
+		.canvas {
+			width: 100%;
+			height: 100%;
+			background: #cccccc;
+		}
+	</style>
+</head>
+<body>
+<div class="container-fluid" id="main">
+	<div class="row">
+		<div class="col">
+			<h4><em>Toolbar</em></h4>
+		</div>
+	</div>
+	<div class="row" style="flex-grow:1">
+		<div class="col col-lg-auto">
+			<h4><em>Tools</em></h4>
+		</div>
+		<div class="col">
+			<div class="canvas">
+				<canvas id="canvas0"></canvas>
+			</div>
+		</div>
+		<div class="col col-lg-auto">
+			<h4><em>Structure</em></h4>
+		</div>
+	</div>
+</div>
+</body>
+</html>
