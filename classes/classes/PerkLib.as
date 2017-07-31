@@ -1359,6 +1359,9 @@ package classes
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
+		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
+		//public static const :PerkType = mk("", "", "");
+		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
@@ -1482,7 +1485,6 @@ package classes
 		// TOUGHNESS
 		//------------
 		JobGuardian.requireTou(10);
-		//slot 2 - toughness perk 1
 		RefinedBodyI.requirePerk(JobGuardian)
 					.requireTou(25);
 		RefinedBodyII.requirePerk(RefinedBodyI)
@@ -1493,7 +1495,6 @@ package classes
 					  .requireTou(55)
 					  .requireLevel(4)
 					  .requireNGPlus(2);
-		//slot 2 - regeneration perk
 		Regeneration.requireTou(50);
 		Regeneration2.requirePerk(Regeneration)
 					 .requireTou(70)
@@ -1624,7 +1625,6 @@ package classes
 		// SPEED
 		//------------
 		JobRanger.requireSpe(10);
-		//slot 3 - run perk
 		Runner.requireSpe(25);
 		//slot 3 - speed perk
 		Evade.requirePerk(JobRanger)

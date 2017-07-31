@@ -66,9 +66,9 @@ package classes.Scenes
 			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Berserk and Lustzerker now req. 25 wrath to activate them. No zerking for too calm PC's ^^\n");
+			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
+			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
+			outputText("-Berserk and Lustzerker now req. 50 wrath to activate them and they last 10 rounds. No zerking for too calm PC's ^^\n");
 			outputText("-Dragon Breath specials have now own cooldown counters so PC can use all 4 once in fignt not one of them.\n");
 			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
 			outputText("-M. Specials menu was slight rearranged. All breath type specials was moved to Breath Attack menu (9 in total specilas atm), specials that could buff PC or debuff enemy was put into (De)Buffs subgroup (Berserker, Lustzerker, Petrify, Whisper)\n");

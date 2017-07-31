@@ -1985,18 +1985,36 @@ public function RacialScores():void {
 	if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
 	else if (player.satyrScore() >= 1 && player.satyrScore() < 4) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>");
 	else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>");/*
-	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Scorpion-morph: " + player.scorpionScore() + "</font>");
-	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Scorpion-morph: " + player.scorpionScore() + "</font>");
-	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Scorpion-morph: 0</font>");*/
+	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Half Scorpion-morph: " + player.scorpionScore() + "</font>");
+	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Half Scorpion-morph: " + player.scorpionScore() + "</font>");
+	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scorpion-morph: 0</font>");*/
 	outputText("\nScorpion-morph: " + player.scorpionScore());
-	if (player.scyllaScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ");
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
-		else outputText("(+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
-		outputText("max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	if (player.scyllaScore() >= 12) {
+		outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " ");
+		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (160 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.isScylla()) outputText("(+" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (130 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("(+" + (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
 	}
-	else if (player.scyllaScore() >= 1 && player.scyllaScore() < 5) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>");
-	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>");
+	else if (player.scyllaScore() >= 7 && player.scyllaScore() < 12) {
+		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ");
+		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (105 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.isScylla()) outputText("(+" + (95 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("(+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	}
+	else if (player.scyllaScore() >= 4 && player.scyllaScore() < 7) {
+		outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " ");
+		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.isScylla()) outputText("(+" + (95 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		else outputText("(+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ");
+		outputText("max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>");
+	}
+	else if (player.scyllaScore() >= 1 && player.scyllaScore() < 4) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
+	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
 	if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib)</font>");
 	else if (player.sharkScore() >= 4 && player.sharkScore() < 8) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");

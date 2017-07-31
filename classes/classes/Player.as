@@ -1372,9 +1372,11 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "phoenix-taur";
 				else race = "phoenix";
 			}
-			if (scyllaScore() >= 5)
+			if (scyllaScore() >= 4)
 			{
-				race = "scylla";
+				if (scyllaScore() >= 12) race = "kraken";
+				else if (scyllaScore() >= 7) race = "scylla";
+				else race = "half scylla";
 			}
 			if (plantScore() >= 4)
 			{
@@ -1615,7 +1617,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (phoenixScore() >= 10)
 				chimeraCounter++;
-			if (scyllaScore() >= 5)
+			if (scyllaScore() >= 4)
 				chimeraCounter++;
 			if (plantScore() >= 6)
 				chimeraCounter++;
@@ -1714,8 +1716,8 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (phoenixScore() >= 10)
 				grandchimeraCounter++;
-//			if (scyllaScore() >= 5)
-//				grandchimeraCounter++;
+			if (scyllaScore() >= 7)
+				grandchimeraCounter++;
 //			if (plantScore() >= 6)
 //				grandchimeraCounter++;
 			if (alrauneScore() >= 10)
@@ -3090,15 +3092,19 @@ use namespace kGAMECLASS;
 				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
+		//	if (hasPlainSkinOnly() && skinAdj == "rubberlike slippery")
+		//		scyllaCounter += 2;
 			if (isScylla())
 				scyllaCounter += 2;
+			if (tallness > 96)
+				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
 				scyllaCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				scyllaCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && scyllaCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && scyllaCounter >= 4)
 				scyllaCounter += 1;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				scyllaCounter++;
@@ -4522,9 +4528,19 @@ use namespace kGAMECLASS;
 				maxSpe += (70 * (1 + newGamePlusMod));
 				maxLib += (40 * (1 + newGamePlusMod));
 			}//+30/30-40
-			if (scyllaScore() >= 5) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
+			if (scyllaScore() >= 4) {
+				if (scyllaScore() >= 12) {
+					maxStr += (120 * (1 + newGamePlusMod));
+					maxInt += (60 * (1 + newGamePlusMod));
+				}
+				else if (scyllaScore() >= 7 && scyllaScore() < 12) {
+					maxStr += (65 * (1 + newGamePlusMod));
+					maxInt += (40 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (40 * (1 + newGamePlusMod));
+					maxInt += (20 * (1 + newGamePlusMod));
+				}
 			}//+30/30-40
 			if (plantScore() >= 4) {
 				if (plantScore() >= 7) {
@@ -4687,6 +4703,7 @@ use namespace kGAMECLASS;
 			if (maxInt < 25) maxInt = 25;
 			if (maxWis < 25) maxWis = 25;
 			if (maxLib < 25) maxLib = 25;
+			if (maxSen < 25) maxSen = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) > 0) {
@@ -4844,6 +4861,7 @@ use namespace kGAMECLASS;
 				maxLib += (15 * (1 + newGamePlusMod));
 				maxSen += (15 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.SoulApprentice) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulWarrior) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulSprite) >= 0) maxWis += 5;

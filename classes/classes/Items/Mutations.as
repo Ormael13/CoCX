@@ -9525,6 +9525,7 @@
 			//0 == black ink (female scylla TF)
 			//1 == grey ink (herm scylla TF)
 			//2 == white ink (male scylla TF)
+			//3 == abyssal ink (kraken TF)
 			player.slimeFeed();
 			//init variables
 			var changes:Number = 0;
@@ -9855,7 +9856,7 @@
 				changes++;
 			}
 			//Face
-			if (player.hasPlainSkinOnly() && player.skinTone == "slippery" && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
+			if (player.hasPlainSkinOnly() && player.skinAdj == "slippery" && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
 				humanizeFace();
 				changes++;
 			}
@@ -9916,6 +9917,12 @@
 				}
 				changes++;
 			}
+			//Skin part 2
+		//	if (player.hasPlainSkinOnly() && player.skinAdj == "slippery" && player.skinAdj != "rubberlike slippery" && changes < changeLimit && rand(4) == 0) {
+		//		outputText("\n\nYour body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. You now have rubber like skin same as a scylla or a kraken.");
+		//		player.skinAdj = "rubberlike slippery";
+		//		changes++;
+		//	}
 			//FAILSAFE CHANGE
 			if (changes == 0) outputText("\n\nRemarkably, the black ink has no effect.  Should you really be surprised at black ink NOT doing anything?");
 			player.refillHunger(5);
