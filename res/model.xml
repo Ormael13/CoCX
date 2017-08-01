@@ -1,51 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE model [
-        <!ELEMENT model (palette|colorkeys|spritesheet|layers)*>
-        <!ATTLIST model
-                name CDATA #REQUIRED
-                dir CDATA #REQUIRED
-                width CDATA #REQUIRED
-                height CDATA #REQUIRED
-                scale CDATA #REQUIRED>
-        <!ELEMENT palette (property|common)*>
-        <!ELEMENT common (color)*>
-        <!ELEMENT property (color)*>
-        <!ATTLIST property
-                default CDATA #REQUIRED
-                name CDATA #REQUIRED
-                src CDATA #REQUIRED>
-        <!ELEMENT color (#PCDATA)>
-        <!ATTLIST color
-                name CDATA #REQUIRED>
-        <!ELEMENT colorkeys (key)*>
-        <!ELEMENT key (#PCDATA)>
-        <!ATTLIST key
-                base CDATA #REQUIRED
-                src CDATA #REQUIRED
-                transform CDATA #IMPLIED>
-        <!ELEMENT spritesheet (row)*>
-        <!ATTLIST spritesheet
-                file CDATA #REQUIRED
-                cellwidth CDATA #REQUIRED
-                cellheight CDATA #REQUIRED>
-        <!ELEMENT row (#PCDATA)>
-        <!ELEMENT layers (switch|if|layer)*>
-        <!ELEMENT switch (case|default)*>
-        <!ATTLIST switch
-                value CDATA #IMPLIED>
-        <!ELEMENT case (switch|if|layer)*>
-        <!ATTLIST case
-                test CDATA #IMPLIED
-                value CDATA #IMPLIED
-                values CDATA #IMPLIED>
-        <!ELEMENT layer (#PCDATA)>
-        <!ATTLIST layer
-                file CDATA #REQUIRED>
-        <!ELEMENT default (switch|if|layer)*>
-        <!ELEMENT if (switch|if|layer)*>
-        <!ATTLIST if
-                test CDATA #REQUIRED>
-        ]>
+<!DOCTYPE model >
 <model name="demo" dir="./res/" width="192" height="192" scale="1">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
@@ -181,31 +135,31 @@
             <color name="pale">#f2e8e3</color>
         </property>
         <!-- Not yet in game-->
-       <!-- <property name="iris" src="'blue'" default="#0000ff">
-            &lt;!&ndash;Iris color overrides go here&ndash;&gt;
-            <color name="blue">#68a9ca</color>
-            <color name="aqua">#a0c5c5</color>
-            <color name="green">#4e7e4e</color>
-            <color name="amber">#ca9168</color>
-            <color name="hazel">#ad7852</color>
-            <color name="brown">#7e624e</color>
-            <color name="dark">#564b43</color>
-            <color name="red">#b34d4d</color>
-            <color name="pink">#d8c0d8</color>
-            <color name="purple">#7f619e</color>
-            <color name="steel">#808080</color>
-            <color name="gray">#999999</color>
-            <color name="silver">#b3b3b3</color>
-            <color name="golden">#bd9442</color>
-            <color name="crystal">#e3e8e8</color>
-            <color name="ruby">#e25050</color>
-            <color name="topaz">#dada58</color>
-            <color name="malachyte">#4db34d</color>
-            <color name="emerald">#58da58</color>
-            <color name="beryll">#68ca99</color>
-            <color name="sapphire">#5c70d6</color>
-            <color name="amethyst">#b288dd</color>
-        </property>-->
+        <!-- <property name="iris" src="'blue'" default="#0000ff">
+             &lt;!&ndash;Iris color overrides go here&ndash;&gt;
+             <color name="blue">#68a9ca</color>
+             <color name="aqua">#a0c5c5</color>
+             <color name="green">#4e7e4e</color>
+             <color name="amber">#ca9168</color>
+             <color name="hazel">#ad7852</color>
+             <color name="brown">#7e624e</color>
+             <color name="dark">#564b43</color>
+             <color name="red">#b34d4d</color>
+             <color name="pink">#d8c0d8</color>
+             <color name="purple">#7f619e</color>
+             <color name="steel">#808080</color>
+             <color name="gray">#999999</color>
+             <color name="silver">#b3b3b3</color>
+             <color name="golden">#bd9442</color>
+             <color name="crystal">#e3e8e8</color>
+             <color name="ruby">#e25050</color>
+             <color name="topaz">#dada58</color>
+             <color name="malachyte">#4db34d</color>
+             <color name="emerald">#58da58</color>
+             <color name="beryll">#68ca99</color>
+             <color name="sapphire">#5c70d6</color>
+             <color name="amethyst">#b288dd</color>
+         </property>-->
     </palette>
     <colorkeys>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
@@ -229,56 +183,9 @@
         <!--<key src="#FFFFFF" base="sclera"/>-->
         <key src="#0026FF" base="iris"/>
     </colorkeys>
-   <!-- <spritesheet file="arms.png" cellwidth="192" cellheight="192">
-        <row>armf-error,arm0f,arm11f,,,,,,,,,,,,,</row>
-        <row>armb-error,arm0b,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="breasts.png" cellwidth="192" cellheight="192">
-        <row>breasts-error,breasts0,breastsD,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="ears.png" cellwidth="192" cellheight="192">
-        <row>ears-error,ears0,ears9,,,,,,,,,,,,,</row>
-        <row>,,ears9f,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="eyes.png" cellwidth="192" cellheight="192">
-        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,eyes6,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="face.png" cellwidth="192" cellheight="192">
-        <row>face-error,face0,,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="hair.png" cellwidth="192" cellheight="192">
-        <row>hairf-error,hair0f,hair6f,,,,,,,,,,,,,</row>
-        <row>hairb-error,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="horns.png" cellwidth="192" cellheight="192">
-        <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="legs.png" cellwidth="192" cellheight="192">
-        <row>legs-error,legs0,legs3,legs35fsit,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="tail.png" cellwidth="192" cellheight="192">
-        <row>tail-error,tail-fox1,tail-fox2,tail28,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="torso.png" cellwidth="192" cellheight="192">
-        <row>torso-error,torso0,,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritesheet file="wings.png" cellwidth="192" cellheight="192">
-        <row>wings-error,wings-23,,,,,,,,,,,,,,</row>
-        <row>,wings-23b,,,,,,,,,,,,,,</row>
-    </spritesheet>-->
-    <!--<spritesheet file=".png" cellwidth="192" cellheight="192">
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>-->
     <spritesheet file="char1.png" cellwidth="192" cellheight="192">
         <row>_help,_placeholder,,,,,,,,,,,,,,</row>
-        <row>horns-error,horns2S,horns2L,,,,,,,,,,,,,</row>
+        <row>horns-error,horns2Sold,horns2Lold,,,,,,,,,,,,,</row>
         <row>hairf-error,hair0f-old,hair6f,hair0f,,,,,,,,,,,,</row>
         <row>eyes-error,eyes2M,eyes4S,eyes2Lb,eyes6,eyes-orca,eyes-cat,,,,,,,,,</row>
         <row>ears-error,ears0,ears9,ears9f,ears21f,ears-wolf,ears-cat,ears-fur,,,,,,,,</row>
@@ -288,12 +195,18 @@
         <row>torso-error,torso0,torso-orca,torso-fur,,,,,,,,,,,,</row>
         <row>armb-error,arm0b,fins-orca,armb-fur,,,,,,,,,,,,</row>
         <row>legs-error,legs0,legs3,legs35fsit,legs37,legs-kraken,legs26,legs-furpaws,,,,,,,,</row>
-        <row>hairb-error,,,,,,,,,,,,,,,</row>
+        <row>hairb-error,hair0b,,,,,,,,,,,,,,</row>
         <row>tail-error,tail-fox1,tail-fox2,tail28,tail37,tail-cat,tail-cat2,,,,,,,,,</row>
         <row>wings-error,wings-23,wings-23b,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
         <row>,,,,,,,,,,,,,,,</row>
     </spritesheet>
+    <spritemap file="char2.png">
+        <cell x="1" y="1" w="56" h="20" name="horns2S"/>
+        <cell x="1" y="23" w="56" h="38" name="horns2L"/>
+        <cell x="1" y="63" w="59" h="20" name="horns11bg"/>
+        <cell x="1" y="85" w="59" h="20" name="horns11fg"/>
+    </spritemap>
     <layers>
         <!--
 
@@ -334,24 +247,24 @@
             <case value="2"><!--HORNS_COW_MINOTAUR-->
                 <switch>
                     <case test="horns lt 3"><!--Two tiny horn-like nubs...-->
-                        <layer file="horns2S"/>
+                        <layer file="horns2S" dx="68" dy="20"/>
                     </case>
                     <case test="horns lt 6"><!--Two moderately sized horns...-->
-                        <layer file="horns2S"/>
+                        <layer file="horns2S" dx="68" dy="20"/>
                     </case>
                     <case test="horns lt 3"><!--Two large horns...-->
-                        <layer file="horns2L"/>
+                        <layer file="horns2L" dx="68" dy="5"/>
                     </case>
                     <case test="horns lt 3"><!--Two very large and dangerous looking horns...-->
-                        <layer file="horns2L"/>
+                        <layer file="horns2L" dx="68" dy="5"/>
                     </case>
                     <default><!--Two huge horns...-->
-                        <layer file="horns2L"/>
+                        <layer file="horns2L" dx="68" dy="5"/>
                     </default>
                 </switch>
             </case>
             <default>
-                <layer file="horns2L"/>
+                <layer file="horns2L" dx="68" dy="5"/>
                 <layer file="horns-error"/>
             </default>
         </switch>
@@ -567,7 +480,9 @@
         </switch>
         <switch>
             <case test="hairLength == 0"><!--bald--></case>
-            <case test="hairLength lt 6"><!--too short, only front hair--></case>
+            <case test="hairLength lt 6">
+                <layer file="hair0b"/>
+            </case>
             <default>
                 <!--<layer file="hairb-error"/>-->
             </default>

@@ -10,10 +10,21 @@ internal class CompositeLayer {
 	private var dst:BitmapData;
 	private var keyColors:Object;// uint color24 -> uint color24
 	private var dirty:Boolean = true;
+	public var dx:int;
+	public var dy:int;
 
-	public function CompositeLayer(name:String, src:BitmapData) {
+	public function get width():int {
+		return src.width;
+	}
+	public function get height():int {
+		return src.height;
+	}
+
+	public function CompositeLayer(name:String, src:BitmapData, dx:int, dy:int) {
 		this._name     = name;
 		this.src       = src;
+		this.dx = dx;
+		this.dy = dy;
 		this.dst       = new BitmapData(src.width, src.height,true,0);
 		this.keyColors = {};
 		this.dst.draw(src);
