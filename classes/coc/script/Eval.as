@@ -33,7 +33,7 @@ public class Eval {
 	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|lte?|gte?|[-+*\/%])/;
 	public static function eval(thiz:*, expr:String):* {
 		if (expr.match(RX_INT)) return int(expr);
-		return new Eval(thiz, expr).evalUntil("",'eval');
+		return new Eval(thiz, expr).evalUntil("")();
 	}
 	public static function compile(expr:String):Eval {
 		var e:Eval = new Eval({}, expr);
@@ -41,7 +41,7 @@ public class Eval {
 			const i:int = int(expr);
 			e._call = function():int{return i;};
 		} else {
-			e._call = e.evalUntil("", 'compile');
+			e._call = e.evalUntil("");
 		}
 
 		return e;
@@ -49,39 +49,39 @@ public class Eval {
 	private static function error(src:String, expr:String, msg:String, tail:Boolean = true):Error {
 		return new Error("In expr: "+src+"\n"+msg+(tail?": "+expr:""));
 	}
-	private function evalPostExpr(x:*,mode:String):* {
+	private function evalPostExpr(x:Function):Function {
 		var m:Array;
-		var y:*,z:*;
+		var y:Function,z:Function;
 		while (true) {
 			eatWs();
 			if (eatStr('()')) {
-				x = wrapCall(mode,x,[]);
+				x = wrapCall(x,[]);
 			} else if (eatStr('(')) {
-				var args:Array = [];
+				var args:/*Function*/Array = [];
 				while(true){
-					y = evalExpr(mode);
+					y = evalExpr();
 					args.push(y);
 					if (eatStr(')')) break;
 					if (!eatStr(',')) throw error(src,expr,"Expected ')' or ','");
 				}
-				x = wrapCall(mode,x,args);
+				x = wrapCall(x,args);
 			} else if (eatStr('.')) {
 				m = eat(LA_ID);
 				if (!m) throw error(src,expr,"Identifier expected");
-				x = wrapDot(mode, x, wrapVal(mode, m[0]));
+				x = wrapDot(x, wrapVal(m[0]));
 			} else if (eatStr('[')) {
-				y = evalUntil("]",mode);
+				y = evalUntil("]");
 				eatWs();
 				if (!eatStr(']')) throw error(src,expr,"Expected ']'");
-				x    = wrapDot(mode, x, y);
+				x    = wrapDot(x, y);
 			} else if (eatStr('?')) {
-				y = evalUntil(':', mode == 'eval' && !x ? 'skip' : mode);
+				y = evalUntil(':');
 				if (!eatStr(':')) throw error(src,expr,"Expected ':'");
-				z = evalExpr(mode == 'eval' && x ? 'skip' : mode);
-				x = wrapIf(mode, x, y, z);
+				z = evalExpr();
+				x = wrapIf(x, y, z);
 			} else if ((m = eat(LA_OPERATOR))) {
-				y = evalExpr(mode);
-				x = wrapOp(mode,x,m[0],y);
+				y = evalExpr();
+				x = wrapOp(x,m[0],y);
 			} else break;
 		}
 		return x;
@@ -124,32 +124,44 @@ public class Eval {
 				throw error(src, expr, "Unregistered operator " + op, false);
 		}
 	}
-	private function evalExpr(mode:String):* {
-		var m:Array;
-		var x:*;
+	private function evalExpr():Function {
+		var m:/*String*/Array;
+		var x:Function;
 		eatWs();
 		if (eatStr('(')) {
-			x = evalUntil(")",mode);
+			x = evalUntil(")");
 			eatStr(")");
+		} else if (eatStr('[')) {
+			var f:/*Function*/Array;
+			if (eatStr(']')) {
+				f = [];
+			} else {
+				f = [evalExpr()];
+				while (eatStr(',')) {
+					f.push(evalExpr());
+				}
+				if (!eatStr("]")) throw error(src,expr,"Expected ',' or ']'");
+			}
+			x = wrapArray(f);
 		} else if ((m = eat(LA_INT))) {
-			x = wrapVal(mode,parseInt(m[0]));
+			x = wrapVal(parseInt(m[0]));
 		} else if (eatStr("'")) {
 			m = eat(/^[^'\\]*/);
 			if (!eatStr("'")) throw error(src,expr,"Expected '\\''");
-			x = wrapVal(mode,m[0]);
+			x = wrapVal(m[0]);
 		} else if (eatStr('"')) {
 			m = eat(/^[^"\\]*/);
 			if (!eatStr('"')) throw error(src,expr,"Expected '\"'");
-			x = wrapVal(mode,m[0]);
+			x = wrapVal(m[0]);
 		} else if ((m = eat(LA_ID))) {
-			x = wrapId(mode,m[0]);
+			x = wrapId(m[0]);
 		} else {
 			throw error(src,expr,"Not a sub-expr");
 		}
-		return evalPostExpr(x,mode);
+		return evalPostExpr(x);
 	}
-	private function evalUntil(until:String,mode:String):* {
-		var x:* = evalExpr(mode);
+	private function evalUntil(until:String):* {
+		var x:* = evalExpr();
 		if (expr == until || expr.charAt(0) == until) return x;
 		if (until) throw error(src,expr,"Operator or " + until + "expected");
 		throw error(src,expr,"Operator expected");
@@ -184,10 +196,8 @@ public class Eval {
 				return undefined;
 		}
 	}
-	private function wrapId(mode:String,id:String):* {
-		if (mode == 'eval') return evalId(id);
-		if (mode == 'compile') return function():*{ return evalId(id); };
-		return undefined;
+	private function wrapId(id:String):Function {
+		return function():*{ return evalId(id); };
 	}
 	private function evalDot(obj:Object,key:String):* {
 		var y:* = obj[key];
@@ -197,40 +207,35 @@ public class Eval {
 		return y;
 	}
 
-	private function wrapVal(mode:String,x:*):* {
-		if (mode == 'eval') return x;
-		if (mode == 'compile') return function ():* { return x; };
+	private function wrapVal(x:*):Function {
+		return function ():* { return x; };
 	}
-	private function wrapCall(mode:String,fn:*,args:Array):* {
-		if (mode === 'eval') {
-			if (!(fn is Function)) throw error(src,expr,"Not a function");
-			return (fn as Function).apply(null, args);
-		}
-		if (mode === 'compile') return function ():* {
+	private function wrapCall(fn:Function,args:/*Function*/Array):Function {
+		return function ():* {
 			var a:Array = [];
 			for (var i:int = 0, n:int = args.length; i < n; i++) a[i] = args[i]();
 			return (fn() as Function).apply(null, a);
 		};
-		return undefined;
 	}
-	private function wrapIf(mode:String,condition:*,then:*,elze:*):* {
-		if (mode === 'eval') return condition ? then : elze;
-		if (mode === 'compile') return functionIf(condition,then,elze);
-		return undefined;
+	private function wrapIf(condition:Function,then:Function,elze:Function):Function {
+		return functionIf(condition,then,elze);
 	}
-	private function wrapDot(mode:String,obj:*,index:*):* {
-		if (mode == 'eval') return evalDot(obj,index);
-		if (mode == 'compile') return function():* {
+	private function wrapDot(obj:Function,index:Function):Function {
+		return function():* {
 			return evalDot(obj(),index());
 		};
-		return undefined;
 	}
-	private function wrapOp(mode:String,x:*,op:String,y:*):* {
-		if (mode == 'eval') return calculate(x,op,y);
-		if (mode == 'compile') return function():* {
+	private function wrapOp(x:Function,op:String,y:Function):Function {
+		return function():* {
 			return calculate(x(),op,y());
 		};
-		return undefined;
+	}
+	private function wrapArray(array:/*Function*/Array):Function {
+		return function():Array {
+			return array.map(function (el:Function,id:int,arr:Array):* {
+				return el();
+			})
+		};
 	}
 }
 }

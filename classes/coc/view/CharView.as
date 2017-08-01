@@ -197,11 +197,13 @@ public class CharView extends Sprite {
 					for each(item in xcase.*) {
 						caseItems.push(loadPart(item));
 					}
-					var hasval2:Boolean = xcase.attribute("value").length() > 0;
+					var hasval2:Boolean = hasval && xcase.attribute("value").length() > 0;
+					var hasval3:Boolean = hasval && xcase.attribute("values").length() > 0;
 					var hastest:Boolean = xcase.attribute("test").length() > 0;
 					cases.push(new CaseBlock(
 							hastest ? xcase.@test.toString() : null,
-							hasval2 ? xcase.@value.toString() : null,
+							hasval3 ? '[' + xcase.@values.toString() + ']' :
+									hasval2 ? '[' + xcase.@value.toString() + ']' : null,
 							caseItems));
 				}
 				var defBlock:/*ModelPart*/Array = [];

@@ -10,6 +10,16 @@ type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | Image
 namespace spred {
 	const basedir = window['spred_basedir'] || '../../';
 	
+	export function RGBA(i: tinycolorInstance): number {
+		let rgb = i.toRgb();
+		return (
+				   ((rgb.a * 0xff) & 0xff) << 24
+				   | (rgb.b & 0xff) << 16
+				   | (rgb.g & 0xff) << 8
+				   | (rgb.r & 0xff)
+			   ) >>> 0;
+	}
+	
 	/*
 	function mkimg(colors: string[][]): HTMLCanvasElement {
 		const hex     = {a: 10, b: 11, c: 12, d: 13, e: 14, f: 15, A: 10, B: 11, C: 12, D: 13, E: 14, F: 15};
@@ -59,11 +69,16 @@ namespace spred {
 		return canvas;
 	}
 	
+	export function paletteOptions(palette: Dict<string>): JQuery[] {
+		return Object.keys(palette).map(name => $new('option', name).attr('value', palette[name]));
+	}
+	
 	export class Composite {
 		public ui: JQuery;
 		
-		private readonly _layers: string[] = [];
+		private readonly _layers: string[]     = [];
 		public readonly canvas: HTMLCanvasElement;
+		public readonly colormap: Dict<string> = {};
 		
 		public get layers(): string[] {
 			return this.model.layerNames.filter(ln => this._layers.indexOf(ln) >= 0);
@@ -82,9 +97,31 @@ namespace spred {
 			ctx2d.imageSmoothingEnabled = false;
 			let z                       = this.zoom;
 			ctx2d.clearRect(x * z, y * z, w * z, h * z);
+			let p0   = new Promise<CanvasRenderingContext2D>((resolve, reject) => {
+				resolve(ctx2d);
+			});
+			let cmap = [] as [number, number][];
+			for (let ck of this.model.colorkeys) {
+				if (!(ck.base in this.colormap)) continue;
+				let base = tinycolor(this.colormap[ck.base]);
+				if (ck.transform) for (let tf of ck.transform.split(',')) {
+					let m = tf.match(/^([a-z]+)\((\d+)\)$/);
+					if (m && m[1] in base) base = (base[m[1]] as Function).apply(base, [+m[2]]) as tinycolorInstance;
+				}
+				cmap.push([RGBA(tinycolor(ck.src)), RGBA(base)]);
+			}
 			for (let a = this.model.layerNames, i = a.length - 1; i >= 0; i--) {
 				let lname = a[i];
-				if (this._layers.indexOf(lname) >= 0) ctx2d.drawImage(this.model.layers[lname].canvas, x, y, w, h, x * z, y * z, w * z, h * z);
+				if (this._layers.indexOf(lname) >= 0) {
+					let idata = this.model.layers[lname].ctx2d.getImageData(x, y, w, h);
+					idata     = colormap(idata, cmap);
+					p0.then(ctx2d => {
+						return createImageBitmap(idata).then(bmp => {
+							ctx2d.drawImage(bmp, 0, 0, w, h, x * z, y * z, w * z, h * z);
+							return ctx2d;
+						})
+					});
+				}
 			}
 		}
 		
@@ -128,7 +165,7 @@ namespace spred {
 		public readonly canvas: HTMLCanvasElement;
 		public readonly ctx2d: CanvasRenderingContext2D;
 		
-		updateUI(){
+		updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
 			c2d.drawImage(this.canvas, 0, 0, 32, 32);
 		}
@@ -147,8 +184,8 @@ namespace spred {
 		}
 	}
 	
-	function url2img(src:string):Promise<HTMLImageElement> {
-		return new Promise<HTMLImageElement>((resolve,reject)=>{
+	function url2img(src: string): Promise<HTMLImageElement> {
+		return new Promise<HTMLImageElement>((resolve, reject) => {
 			let img    = document.createElement('img');
 			img.onload = (e) => {
 				resolve(img);
@@ -185,7 +222,7 @@ namespace spred {
 					}
 				});
 				url2img(modeldir + x.attr('file')
-				).then(img=>{
+				).then(img => {
 					Object.keys(positions)
 						  .forEach(key => {
 							  this.sprites[key] = new Layer(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1]);
@@ -211,7 +248,8 @@ namespace spred {
 		public spritesheets: Spritesheet[];
 		public layers: Dict<Layer>   = {};
 		public layerNames: string[]  = [];
-		public palettes: { [index: string]: any };
+		public palettes: Dict<Dict<string>>;
+		public colorProps: string[]  = [];
 		public readonly whenLoaded: Promise<Model>;
 		public colorkeys: ColorKey[] = [];
 		
@@ -243,16 +281,25 @@ namespace spred {
 			};
 			
 			xmodel.find('colorkeys>key').each((i, e) => {
-				this.colorkeys[e.getAttribute('src')] = {
+				this.colorkeys.push({
 					src      : e.getAttribute('src'),
 					base     : e.getAttribute('base'),
 					transform: e.getAttribute('transform') || ''
-				};
+				});
 			});
 			
 			//noinspection CssInvalidHtmlTagReference
 			xmodel.find('palette>common>color').each((i, e) => {
 				this.palettes.common[e.getAttribute('name')] = e.textContent;
+				
+			});
+			xmodel.find('property').each((i, e) => {
+				let cpname = e.getAttribute('name');
+				this.colorProps.push(cpname);
+				let p = this.palettes[cpname] = {};
+				$(e).find('color').each((ci, ce) => {
+					p[ce.getAttribute('name')] = ce.textContent;
+				})
 			});
 			
 			xmodel.find('spritesheet').each((i, x) => {
@@ -321,12 +368,45 @@ namespace spred {
 						})
 					),
 					$new('div', $new('.canvas', composite.canvas)),
-					$new('label',
-						$new('span.fa.fa-caret-down'), 'Layers'
-					).click(e => {
-						composite.ui.find('.LayerBadges').toggleClass('collapse');
-					}),
-					$new('.LayerBadges.collapse')
+					$new('div',
+						$new('label',
+							$new('span.fa.fa-caret-down'), 'Layers'
+						).click(e => {
+							composite.ui.find('.LayerBadges').toggleClass('collapse');
+						}),
+						$new('.LayerBadges.collapse')
+					),
+					$new('div',
+						$new('label',
+							$new('span.fa.fa-caret-down'), 'Colors'
+						).click(e => {
+							composite.ui.find('.Colors').toggleClass('collapse');
+						}),
+						$new('.Colors.collapse',
+							...g_model.colorProps.map(cpname =>
+								$new('.row.control-group',
+									$new('label.control-label.col-4',cpname),
+									$new('select.form-control.col-8', ...
+										[
+											$new('option', '--none--'
+											).attr('selected', 'true')
+										].concat(
+											paletteOptions(g_model.palettes['cpname'] || {}),
+											paletteOptions(g_model.palettes['common']),
+										)
+									).change(e => {
+										let s = e.target as HTMLSelectElement;
+										if (s.value) {
+											composite.colormap[cpname] = s.value;
+										} else {
+											delete composite.colormap[cpname];
+										}
+										composite.redraw();
+									})
+								)
+							)
+						)
+					)
 					/*$new('textarea.col.form-control'
 					).val(layers.join(', ')
 					).on('input change', e => {
@@ -434,13 +514,13 @@ namespace spred {
 		if (i >= 0 && i < g_model.layerNames.length - 1) swapLayers(i, i + 1);
 	}
 	
-	export function colormap(src:ImageData,map:[number,number][]):ImageData {
-		let dst = new ImageData(src.width,src.height);
+	export function colormap(src: ImageData, map: [number, number][]): ImageData {
+		let dst  = new ImageData(src.width, src.height);
 		let sarr = new Uint32Array(src.data.buffer);
 		let darr = new Uint32Array(dst.data.buffer);
-		for (let i=0,n=darr.length;i<n;i++) {
+		for (let i = 0, n = darr.length; i < n; i++) {
 			darr[i] = sarr[i];
-			for (let j=0,m=map.length;j<m;j++) {
+			for (let j = 0, m = map.length; j < m; j++) {
 				if (sarr[i] === map[j][0]) {
 					darr[i] = map[j][1];
 					break;
@@ -450,29 +530,22 @@ namespace spred {
 		return dst;
 	}
 	
-	function grabData(blob:Blob) {
-		let mask = $('#ClipboardMask').val();
-		let i32mask = 0;
-		if (mask && mask.charAt(0) == '#' && mask.length==7) {
-			i32mask = +('0x'+mask.slice(1))|0;
-			//noinspection JSBitwiseOperatorUsage
-			if (!(i32mask & 0xff000000)) {
-				i32mask = (i32mask | 0xff000000)>>>0;
-			}
-		}
+	function grabData(blob: Blob) {
+		let mask    = $('#ClipboardMask').val();
+		let i32mask = mask ? RGBA(tinycolor(mask)) : 0;
 		url2img(URL.createObjectURL(blob)
-		).then(img=>{
+		).then(img => {
 			switch ($("input[name=clipboard-action]:checked").val()) {
 				case 'replace':
 					let layer = getSelLayer();
 					if (!layer) return;
-					layer.ctx2d.clearRect(0,0,layer.width,layer.height);
-					layer.ctx2d.drawImage(img,0,0);
-					if (i32mask!=0) {
-						let data = layer.ctx2d.getImageData(0,0,layer.width,layer.height);
-						data = colormap(data,[[i32mask,0]]);
-						layer.ctx2d.clearRect(0,0,layer.width,layer.height);
-						layer.ctx2d.putImageData(data,0,0);
+					layer.ctx2d.clearRect(0, 0, layer.width, layer.height);
+					layer.ctx2d.drawImage(img, 0, 0);
+					if (i32mask != 0) {
+						let data = layer.ctx2d.getImageData(0, 0, layer.width, layer.height);
+						data     = colormap(data, [[i32mask, 0]]);
+						layer.ctx2d.clearRect(0, 0, layer.width, layer.height);
+						layer.ctx2d.putImageData(data, 0, 0);
 					}
 					layer.updateUI();
 					redrawAll();
@@ -490,34 +563,43 @@ namespace spred {
 			g_model.whenLoaded.then((model) => {
 				console.log("Model = ", model);
 				for (let ln of model.layerNames) {
-					let layer          = model.layers[ln];
+					let layer = model.layers[ln];
+					if (!layer) {
+						console.warn("Non-existing layer " + ln + " refered");
+						continue;
+					}
 					layer.ui = $new('div.LayerListItem',
-						$new('label', ln
-						).click(e => selLayer(ln)),
-						
+						$new('label', ln),
 						newCanvas(32, 32)
-					);
+					).click(e => selLayer(ln));
 					layer.updateUI();
 				}
 				$('#SelLayerCanvas')
-					.css('min-width',model.width+'px')
-					.css('min-height',model.height+'px');
+					.css('min-width', model.width + 'px')
+					.css('min-height', model.height + 'px');
+				$('#lmb-color').html('').append(
+					model.colorkeys.map(ck =>
+						$new('option', ck.base + (ck.transform ? ' ' + ck.transform : '')
+						).attr('value', ck.src)
+					)
+				);
 				showLayerList(model);
+				selLayer(model.layerNames[0]);
 				addCompositeView(defaultLayerList, 3);
 				addCompositeView(defaultLayerList, 2);
 				addCompositeView(defaultLayerList, 1);
 				addCompositeView(defaultLayerList, 1);
-				$('#ClipboardGrabber').on('paste',e=>{
+				$('#ClipboardGrabber').on('paste', e => {
 					e.stopPropagation();
 					e.preventDefault();
 					let cd = (e.originalEvent as ClipboardEvent).clipboardData;
-					for (let i = 0,n=cd.items.length; i<n;i++) {
+					for (let i = 0, n = cd.items.length; i < n; i++) {
 						let item = cd.items[i];
-						if (item.type.indexOf('image/')==0) {
+						if (item.type.indexOf('image/') == 0) {
 							grabData(item.getAsFile());
 							return;
 						} else {
-							console.log('skip '+item.kind+' '+item.type);
+							console.log('skip ' + item.kind + ' ' + item.type);
 						}
 					}
 					alert("Please paste 1 image data or file");
