@@ -50,7 +50,6 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/bin" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/classes" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/devTools/spred" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/assets" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />

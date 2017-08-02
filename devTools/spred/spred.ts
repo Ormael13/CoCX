@@ -113,11 +113,29 @@ namespace spred {
 			for (let a = this.model.layerNames, i = a.length - 1; i >= 0; i--) {
 				let lname = a[i];
 				if (this._layers.indexOf(lname) >= 0) {
-					let idata = this.model.layers[lname].ctx2d.getImageData(x, y, w, h);
+					let layer = this.model.layers[lname];
+					let idata = layer.ctx2d.getImageData(x, y, w, h);
 					idata     = colormap(idata, cmap);
 					p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
-							ctx2d.drawImage(bmp, 0, 0, w, h, x * z, y * z, w * z, h * z);
+							let sx = x, sy = y;
+							let sw = w;
+							let sh = h;
+							let dx = layer.dx;
+							let dy = layer.dy;
+							if (dx < 0) {
+								sx -= dx;
+								dx = 0;
+							}
+							if (dy < 0) {
+								sy -= dy;
+								dy = 0;
+							}
+							if (dx + sw > this.model.width) sw = this.model.width - dx;
+							if (dy + sh > this.model.height) sh = this.model.height - dy;
+							if (sx + sw > layer.width) sw = layer.width - sx;
+							if (sy + sh > layer.height) sh = layer.height - sy;
+							ctx2d.drawImage(bmp, sx, sy, sw, sh, dx * z, dy * z, sw * z, sh * z);
 							return ctx2d;
 						})
 					});
@@ -175,7 +193,9 @@ namespace spred {
 					public readonly height: number,
 					src: TDrawable,
 					srcX: number,
-					srcY: number) {
+					srcY: number,
+					public dx: number,
+					public dy: number) {
 			this.canvas        = document.createElement('canvas');
 			this.canvas.width  = width;
 			this.canvas.height = height;
@@ -213,24 +233,51 @@ namespace spred {
 			this.cellheight = +x.attr('cellheight');
 			this.sprites    = {};
 			
-			this.whenLoaded = new Promise<Spritesheet>((resolve, reject) => {
-				let positions = {} as Dict<[number, number]>;
-				x.children("row").each((i, row) => {
-					let names = row.textContent.split(',');
-					for (let j = 0; j < names.length; j++) {
-						if (names[j]) positions[names[j]] = [this.cellwidth * j, this.cellheight * i];
-					}
-				});
+			this.whenLoaded =
 				url2img(modeldir + x.attr('file')
 				).then(img => {
+					let positions = {} as Dict<[number, number]>;
+					x.children("row").each((i, row) => {
+						let names = row.textContent.split(',');
+						for (let j = 0; j < names.length; j++) {
+							if (names[j]) positions[names[j]] = [this.cellwidth * j, this.cellheight * i];
+						}
+					});
 					Object.keys(positions)
 						  .forEach(key => {
-							  this.sprites[key] = new Layer(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1]);
+							  this.sprites[key] = new Layer(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1], 0, 0);
 						  });
 					this.img = img;
-					resolve(this);
+					return this;
 				});
-			});
+		}
+	}
+	
+	export class Spritemap {
+		public img: HTMLImageElement;
+		public sprites: Dict<Layer> = {};
+		
+		public isLoaded(): boolean {
+			return this.img != null;
+		}
+		
+		public readonly whenLoaded: Promise<Spritemap>;
+		
+		constructor(modeldir: string, src: Element) {
+			let x           = $(src);
+			this.sprites    = {};
+			this.whenLoaded =
+				url2img(modeldir + x.attr('file')
+				).then(img => {
+					x.children("cell").each((i, cell) => {
+						let name           = cell.getAttribute('name');
+						this.sprites[name] = new Layer(
+							name, +cell.getAttribute('w'), +cell.getAttribute('h'),
+							img, +cell.getAttribute('x'), +cell.getAttribute('y'),
+							+(cell.getAttribute('dx') || '0'), +(cell.getAttribute('dy') || '0'));
+					});
+					return this;
+				});
 		}
 	}
 	
@@ -246,6 +293,7 @@ namespace spred {
 		public width: number;
 		public height: number;
 		public spritesheets: Spritesheet[];
+		public spritemaps: Spritemap[];
 		public layers: Dict<Layer>   = {};
 		public layerNames: string[]  = [];
 		public palettes: Dict<Dict<string>>;
@@ -266,7 +314,8 @@ namespace spred {
 		}
 		
 		public isLoaded(): boolean {
-			return this.spritesheets.every(s => s.isLoaded());
+			return this.spritesheets.every(s => s.isLoaded())
+				   && this.spritemaps.every(s => s.isLoaded());
 		}
 		
 		constructor(src: XMLDocument) {
@@ -276,6 +325,7 @@ namespace spred {
 			this.width        = parseInt(xmodel.attr('width'));
 			this.height       = parseInt(xmodel.attr('height'));
 			this.spritesheets = [];
+			this.spritemaps = [];
 			this.palettes     = {
 				common: {}
 			};
@@ -307,16 +357,27 @@ namespace spred {
 				this.spritesheets.push(spritesheet);
 			});
 			
+			xmodel.find('spritemap').each((i, x) => {
+				let spritemap = new Spritemap(this.dir, x);
+				this.spritemaps.push(spritemap);
+			});
+			
 			xmodel.find('layer').each((i, x) => {
 				let ln = x.getAttribute('file');
 				if (this.layerNames.indexOf(ln) < 0) this.layerNames.push(ln);
 			});
 			this.whenLoaded =
-				Promise.all(this.spritesheets.map(p => p.whenLoaded)
+				Promise.all(this.spritesheets.map(p => p.whenLoaded as Promise<any>)
+					.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
 				).then(() => {
 					for (let ss of this.spritesheets) {
 						for (let sname in ss.sprites) {
 							this.layers[sname] = ss.sprites[sname];
+						}
+					}
+					for (let sm of this.spritemaps) {
+						for (let sname in sm.sprites) {
+							this.layers[sname] = sm.sprites[sname];
 						}
 					}
 					return this;
@@ -385,7 +446,7 @@ namespace spred {
 						$new('.Colors.collapse',
 							...g_model.colorProps.map(cpname =>
 								$new('.row.control-group',
-									$new('label.control-label.col-4',cpname),
+									$new('label.control-label.col-4', cpname),
 									$new('select.form-control.col-8', ...
 										[
 											$new('option', '--none--'
@@ -488,7 +549,10 @@ namespace spred {
 	
 	function showLayerList(model: Model) {
 		let list = $('#LayerList');
-		for (let ln of model.layerNames) model.layers[ln].ui.detach().appendTo(list);
+		for (let ln of model.layerNames) {
+			let layer = model.layers[ln];
+			if (layer) layer.ui.detach().appendTo(list);
+		}
 	}
 	
 	export function getSelLayer(): Layer {
@@ -500,8 +564,10 @@ namespace spred {
 		$('#SelLayerName').html(name);
 		$('.LayerListItem').removeClass('selected');
 		let l = getSelLayer();
-		if (l) l.ui.addClass('selected');
-		$('#SelLayerCanvas').html('').append(l.canvas);
+		if (l) {
+			l.ui.addClass('selected');
+			$('#SelLayerCanvas').html('').append(l.canvas);
+		}
 	}
 	
 	export function selLayerUp() {
