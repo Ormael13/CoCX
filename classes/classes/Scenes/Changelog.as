@@ -38,16 +38,19 @@ package classes.Scenes
 			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist)\n");
 			outputText("-New tier 3 misc lvl-up perk: Cyclone (Stage 1). Req. Job: Warlord perk and 50+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 10%\n");
 			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage. Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 4 intelligence lvl-up perk (multi-rank): Long(er) Lasting Buffs I-V. Req. for rank 1: lvl 24+, 120+ int, perk Job: Enchanter. Effect: Increase buff spells duration by 1 turn.\n");
 			outputText("-New tier 4 misc lvl-up perk: Tornado. Req. Job: Warlord perk and 75+ in str and tou. Effect: Increase dmg multiplier for aoe specials like whirlwind by 100% (from 7x to 8x)\n");
 			outputText("-New tier 4 misc lvl-up perk: Cyclone (Stage 2). Req. Cyclone (Stage 1) perk and 70+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 15%\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
 			outputText("-New tier 4 toughness lvl-up perk: Shield Grandmastery. Req. perk Shield Mastery, 100+ tou. Effect: increase block chance up to 10% when PC tou is over and lowers fatigue costs of blocking by 50%\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Advanced Spirituality. Req. Half-step-to Advanced Spirituality perk, 150+ int and 100+ wis. Effect: Increase max mana by 300\n");
 			outputText("-New tier 5 intelligence lvl-up perk: Half-step-to Superior Spirituality. Req. Advanced Spirituality perk, 180+ int and 120+ wis. Effect: Increase max mana by 480\n");
+			outputText("-New tier 5 intelligence lvl-up perk: (Ever)Lasting Buffs. Req. Job: Enchanter perk and 160+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perks Hidden Momentum and Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200)\n");
 			outputText("-New tier 5 misc lvl-up perk: Cyclone (Stage 3). Req. Cyclone (Stage 2) perk and 90+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20%\n");
 			outputText("-New tier 6 misc lvl-up perk: Cyclone (Stage 4). Req. Cyclone (Stage 3) perk and 120+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20% and dmg multiplier for aoe specials like whirlwind by 50%\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
+			outputText("-New tier 6 intelligence lvl-up perk: (Eternaly) Lasting Buffs. Req. (Ever)Lasting Buffs perk and 190+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
@@ -77,9 +80,6 @@ package classes.Scenes
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 

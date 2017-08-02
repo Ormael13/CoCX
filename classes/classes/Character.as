@@ -979,7 +979,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
-			if (max > 22999) max = 22999;
+			if (max > 29999) max = 29999;
 			return max;
 		}
 		

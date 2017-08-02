@@ -21,30 +21,30 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(30) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
 			spellChargeWeapon(true);
-			useMana(30,5);
+			useMana((30 * spellChargeWeaponCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(40) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 			spellChargeArmor(true);
-			useMana(40,5);
+			useMana((40 * spellChargeArmorCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(50) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
-			useMana(50,6);
+			useMana((50 * spellMightCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(40) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
-			useMana(40,6);
+			useMana((40 * spellBlinkCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
@@ -223,6 +223,34 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
+	
+	public function spellMightCostMultiplier():Number {
+		var spellMightMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellMightMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellMightMultiplier *= 2;
+		return spellMightMultiplier;
+	}
+
+	public function spellBlinkCostMultiplier():Number {
+		var spellBlinkMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellBlinkMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellBlinkMultiplier *= 2;
+		return spellBlinkMultiplier;
+	}
+
+	public function spellChargeWeaponCostMultiplier():Number {
+		var spellChargeWeaponMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellChargeWeaponMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellChargeWeaponMultiplier *= 2;
+		return spellChargeWeaponMultiplier;
+	}
+
+	public function spellChargeArmorCostMultiplier():Number {
+		var spellChargeArmorMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellChargeArmorMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellChargeArmorMultiplier *= 2;
+		return spellChargeArmorMultiplier;
+	}
 
 	public function getWhiteMagicLustCap():Number {
 		var whiteLustCap:int = player.maxLust() * 0.75;
@@ -366,7 +394,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
-					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) + "", "Charge Weapon");
+					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
@@ -374,7 +402,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
-					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) + "", "Charge Armor");
+					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");
@@ -396,7 +424,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				if (!player.hasStatusEffect(StatusEffects.Might))
-					addButton(5, "Might", spellMight).hint("The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) + "");
+					addButton(5, "Might", spellMight).hint("The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) * spellMightCostMultiplier() + "");
 				else {
 					outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 					addButtonDisabled(5, "Might", "Active");
@@ -404,7 +432,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				if (!player.hasStatusEffect(StatusEffects.Blink))
-					addButton(6, "Blink", spellBlink).hint("The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) + "");
+					addButton(6, "Blink", spellBlink).hint("The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) * spellBlinkCostMultiplier() + "");
 				else {
 					outputText("<b>You are already under the effects of Blink and cannot cast it again.</b>\n\n");
 					addButtonDisabled(6, "Blink", "Active");
@@ -634,6 +662,13 @@ public class CombatMagic extends BaseCombatContent {
 			MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
 			var MightDuration:Number = 5;
+			if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) MightDuration += 5;
+			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
 			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			temp = MightBoost;
 			tempStr = temp;
@@ -659,13 +694,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(50)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(50,6);
+		useMana((50 * spellMightCostMultiplier()),6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -750,6 +785,13 @@ public class CombatMagic extends BaseCombatContent {
 			BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
 			var BlinkDuration:Number = 5;
+			if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) BlinkDuration += 5;
+			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) BlinkDuration += 5;
 			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
 			temp = BlinkBoost;
 			tempSpe = temp;
@@ -768,13 +810,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(40,6);
+		useMana((40 * spellBlinkCostMultiplier()),6);
 		var tempSpe:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -1184,20 +1226,27 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		var ChargeWeaponDuration:Number = 5;
+		if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeWeaponDuration += 5;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeWeaponDuration += 5;
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(30)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(30, 5);
+		useMana((30 * spellChargeWeaponCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1256,20 +1305,27 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		var ChargeArmorDuration:Number = 5;
+		if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeArmorDuration += 5;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeArmorDuration += 5;
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(40, 5);
+		useMana((40 * spellChargeArmorCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();

@@ -2254,6 +2254,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) return true;
+	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 	return false;
 }
 
@@ -3162,6 +3163,7 @@ private function promptSaveUpdate():void {
 			player.removePerk(PerkLib.SoulOverlord);
 			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 		}
+		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) flags[kFLAGS.AYANE_FOLLOWER] = 0;
 		doNext(doCamp);
 		return;
 	}

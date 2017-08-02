@@ -407,9 +407,15 @@ package classes
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
+		public static const EternalyLastingBuffs:PerkType = mk("(Eternaly) Lasting Buffs", "(Eternaly) Lasting Buffs",
+				"Buff spells last another 5 turns longer at another 2x increase of their costs.",
+				"You choose the '(Eternaly) Lasting Buffs' perk. Your mastery over buffs reached (eternaly) lasting level.");
 		public static const Evade:PerkType = mk("Evade", "Evade",
 				"Increases chances of evading enemy attacks.",
 				"You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!");
+		public static const EverLastingBuffs:PerkType = mk("(Ever)Lasting Buffs", "(Ever)Lasting Buffs",
+				"Buff spells last 5 turns longer at the double of normal costs.",
+				"You choose the '(Ever)Lasting Buffs' perk. Your mastery over buffs reached (ever)lasting level.");
 		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
 				"Your proficiency in making golems allows them to attack even flying enemies and lower by 5% chance of core shattering.",
 				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
@@ -505,7 +511,7 @@ package classes
 				"You choose the 'Half-step-to Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 160!");
 		public static const HalfStepToSuperiorSpirituality:PerkType = mk("Half-step-to Superior Spirituality", "Half-step-to Superior Spirituality",
 				"Increases maximum mana by 480.",
-				"You choose the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 320!");
+				"You choose the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 480!");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
 				"You choose the 'Heroism' perk.  Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
@@ -667,6 +673,21 @@ package classes
 		public static const LizanMarrow:PerkType = mk("Lizan Marrow", "Lizan Marrow",
 				"Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
 				"You choose the 'Lizan Marrow' perk. Constant regenerating your body caused pernamently change to your body marrow.");
+		public static const LongerLastingBuffsI:PerkType = mk("Long(er) Lasting Buffs I", "Long(er) Lasting Buffs I",
+				"Buff spells last 1 turn longer.",
+				"You choose the 'Long(er) Lasting Buffs I' perk. Constant use of buffs allowed you to optimize them a little bit.");
+		public static const LongerLastingBuffsII:PerkType = mk("Long(er) Lasting Buffs II", "Long(er) Lasting Buffs II",
+				"Buff spells last 1 turn longer.",
+				"You choose the 'Long(er) Lasting Buffs II' perk. Constant use of buffs allowed you to optimize them a little bit.");
+		public static const LongerLastingBuffsIII:PerkType = mk("Long(er) Lasting Buffs III", "Long(er) Lasting Buffs III",
+				"Buff spells last 1 turn longer.",
+				"You choose the 'Long(er) Lasting Buffs III' perk. Constant use of buffs allowed you to optimize them a little bit.");
+		public static const LongerLastingBuffsIV:PerkType = mk("Long(er) Lasting Buffs IV", "Long(er) Lasting Buffs IV",
+				"Buff spells last 1 turn longer.",
+				"You choose the 'Long(er) Lasting Buffs IV' perk. Constant use of buffs allowed you to optimize them a little bit.");
+		public static const LongerLastingBuffsV:PerkType = mk("Long(er) Lasting Buffs V", "Long(er) Lasting Buffs V",
+				"Buff spells last 1 turn longer.",
+				"You choose the 'Long(er) Lasting Buffs V' perk. Constant use of buffs allowed you to optimize them a little bit.");
 		public static const LungingAttacks:PerkType = mk("Lunging Attacks", "Lunging Attacks",
 				"[if(player.spe>=75)" +
 						"Grants 50% armor penetration for standard attacks." +
@@ -1463,6 +1484,7 @@ package classes
 		UnlockId2ndStage.requirePerk(UnlockId)
 						.requireStr(150)
 						.requireLevel(30);
+		
 		//Tier 6 Strength Perks
 		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
 		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
@@ -1972,6 +1994,17 @@ package classes
 							.requireInt(150)
 							.requirePerk(HalfStepToAdvancedSpirituality)
 							.requireLevel(24);
+		LongerLastingBuffsI.requirePerk(JobEnchanter)
+						   .requireInt(120)
+						   .requireLevel(24);
+		LongerLastingBuffsII.requirePerk(LongerLastingBuffsI)
+							.requireInt(140)
+							.requireLevel(26)
+							.requireNGPlus(1);
+		LongerLastingBuffsIII.requirePerk(LongerLastingBuffsII)
+							 .requireInt(160)
+							 .requireLevel(28)
+							 .requireNGPlus(2);
 		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
@@ -1980,8 +2013,21 @@ package classes
 									  .requireInt(180)
 									  .requirePerk(AdvancedSpirituality)
 									  .requireLevel(30);
+		LongerLastingBuffsIV.requirePerk(LongerLastingBuffsIII)
+							.requireInt(180)
+							.requireLevel(30)
+							.requireNGPlus(3);
+		LongerLastingBuffsV.requirePerk(LongerLastingBuffsIV)
+						   .requireInt(200)
+						   .requireLevel(32)
+						   .requireNGPlus(4);
+		EverLastingBuffs.requirePerk(JobEnchanter)
+						.requireInt(160)
+						.requireLevel(30);
 		//Tier 6 Intelligence perks
-
+		EternalyLastingBuffs.requirePerk(EverLastingBuffs)
+							.requireInt(190)
+							.requireLevel(36);
 		SuperiorSpirituality.requireWis(140)
 							.requireInt(210)
 							.requirePerk(HalfStepToSuperiorSpirituality)

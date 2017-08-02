@@ -187,7 +187,7 @@ package classes.Scenes
 			addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
 			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(9, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			addButton(10, "<<< 10 >>>", kGAMECLASS.doNothing);
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
 			addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
 			addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
 			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
@@ -302,6 +302,11 @@ package classes.Scenes
 			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function AyaneWrongSettingUpFollowerFlagFix():void {
+			flags[kFLAGS.AYANE_FOLLOWER] = 0;
+			outputText("\n\n<b>Ayane trigger for showing up with join offer should be fixed with this.</b>");
+			doNext(SoulforceCheats);
 		}
 		public function TribulationPerks():void {
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {
