@@ -26,6 +26,7 @@ package classes.Scenes
 			outputText("<b>Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl, Dragon\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Job: Elemental Conjurer. Req. 10+ wis. Effect: Allow to summon 4 basic type of elementals for helping PC in fight, +5 to max wisdom (scalable)\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it)\n");
@@ -69,6 +70,7 @@ package classes.Scenes
 			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
 			outputText("-Berserk and Lustzerker now req. 50 wrath to activate them and they last 10 rounds. No zerking for too calm PC's ^^\n");
@@ -84,8 +86,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -2050,7 +2050,7 @@ package classes
 		//------------
 		// WISDOM
 		//------------
-	//	JobElementalConjurer.requireWis(10);
+		JobElementalConjurer.requireWis(10);
 		//Tier 1 Wisdom perks
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)

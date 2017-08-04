@@ -86,6 +86,54 @@ package classes.Scenes.Camp
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
 		
+		public function maxSizeOfElementalsArmy():Number {
+			var maxSizeOfElementalsArmyCounter:Number = 0;
+			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) maxSizeOfElementalsArmyCounter += 1;
+			return maxSizeOfElementalsArmyCounter;
+		}
+		
+		public function accessSummonElementalsMainMenu():void {
+			clearOutput();
+			menu();
+			outputText("Which one elemental would you like to summon?\n");// or promote to higher rank
+			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n");
+			outputText("<b>Currently summoned elementals:</b> \n");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) outputText("<i>Air</i>\n");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) outputText("<i>Earth</i>\n");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) outputText("<i>Fire</i>\n");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) outputText("<i>Water</i>\n");
+			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) {
+			//	if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalEarth);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
+			//	if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalEarth);
+			//	if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalEarth);
+			}
+			addButton(14, "Back", playerMenu);
+		}
+		
+		public function summonElementalEarth():void {
+			clearOutput();
+			if (player.mana < 100) {
+				outputText("Your mana is too low to summon earth elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + 50 > player.maxFatigue()) {
+				outputText("You're too tired to summon earth elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= 100;
+			fatigue(50);
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
+			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.SummonedElementalsEarth, 1, 1, 0, 0);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		
 	}
 
 }

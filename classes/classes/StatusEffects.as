@@ -161,10 +161,15 @@ package classes
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
+		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");
+		public static const SummonedElementalsAir:StatusEffectType          = mk("Summoned Elementals Air");
+		public static const SummonedElementalsEarth:StatusEffectType        = mk("Summoned Elementals Earth");
+		public static const SummonedElementalsFire:StatusEffectType         = mk("Summoned Elementals Fire");
+		public static const SummonedElementalsWater:StatusEffectType        = mk("Summoned Elementals Water");
 		public static const TakenGroPlus:StatusEffectType                   = mk("TakenGro+");
 		public static const TakenLactaid:StatusEffectType                   = mk("TakenLactaid");
-		public static const Tamani:StatusEffectType                         = mk("Tamani");									//Used only for compatibility with old save files, otherwise no longer in use
-		public static const TamaniFemaleEncounter:StatusEffectType          = mk("Tamani Female Encounter");	//Used only for compatibility with old save files, otherwise no longer in use
+		public static const Tamani:StatusEffectType                         = mk("Tamani");//Used only for compatibility with old save files, otherwise no longer in use
+		public static const TamaniFemaleEncounter:StatusEffectType          = mk("Tamani Female Encounter");//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TelAdre:StatusEffectType                        = mk("Tel'Adre");
 		public static const TentacleBadEndCounter:StatusEffectType          = mk("TentacleBadEndCounter");
 		public static const TentacleJojo:StatusEffectType                   = mk("Tentacle Jojo");

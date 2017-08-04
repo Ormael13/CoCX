@@ -28,23 +28,27 @@ public class PerkMenu extends BaseContent {
 		menu();
 		var button:int = 0;
 		addButton(button++, "Next", playerMenu);
-		if(player.perkPoints > 0) {
+		if (player.perkPoints > 0) {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
 			addButton(button++, "Perk Up", kGAMECLASS.playerInfo.perkBuyMenu);
 		}
-		if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
-			addButton(button++,"Melee Opt",doubleAttackOptions);
+			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
-		if(player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.findPerk(PerkLib.EnvenomedBolt) >= 0) {
+		if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.findPerk(PerkLib.EnvenomedBolt) >= 0) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
-			addButton(button++,"Range Opt",doubleStrikeOptions);
+			addButton(6, "Range Opt",doubleStrikeOptions);
 		}
-		if(player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0) {
 			outputText("\n<b>You can adjust your spell autocast settings.</b>");
-			addButton(button++,"Spells Opt",spellautocastOptions);
+			addButton(7, "Spells Opt",spellautocastOptions);
+		}
+		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+			addButton(8, "Elementals",summonsbehaviourOptions);
 		}
 		addButton(9, "Database", perkDatabase);
 		addButton(10, "Number of", kGAMECLASS.doNothing);
@@ -327,6 +331,43 @@ public class PerkMenu extends BaseContent {
 	public function autoChargeWeapon():void {
 		flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] = 0;
 		spellautocastOptions();
+	}
+	
+	public function summonsbehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your summoned elementals will behave during each fight.");
+		outputText("\n<b>Elementals behavious:</b> ");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) outputText("Elemental will attack enemy on it own alongside PC.");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
+		else outputText("Not participating");
+		outputText("\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b> ");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
+
+		var e:MouseEvent;
+		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
+		else addButton(14, "Back", displayPerks);
+	}
+
+	public function elementalNotAttacking():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+		summonsbehaviourOptions();
+	}
+	public function elementalAttackReplacingPCmeleeAttack():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+		summonsbehaviourOptions();
+	}
+	public function elementalAttackingAlongsidePC():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 3;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalEarth():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 2;
+		summonsbehaviourOptions();
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {

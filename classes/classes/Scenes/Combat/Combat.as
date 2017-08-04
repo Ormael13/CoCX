@@ -383,9 +383,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	var attacks:Function = normalAttack;
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 		//Standard menu before modifications.
-		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) addButton(0, "E.Attack", baseelementalattacks).hint( "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
+		else if (!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
 			addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
-		else if(!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
+		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
@@ -452,7 +453,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			}
 		}
 		else addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(12,"M/R/S Options",meleeANDrangeANDmanaSubMenu);
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
 		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
 		addButton(14, "Run", runAway).hint("Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 	}
@@ -814,6 +815,57 @@ public function basemeleeattacks():void {
 		else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
 	attack();
+}
+
+public function baseelementalattacks():void {
+	clearOutput();
+	var damageelemental:Number = 0;
+	damageelemental += inteligencescalingbonus() * 0.25;//30*0.25=7.5
+	damageelemental += wisdomscalingbonus() * 0.5;//83.33*0.5=41.66
+	if (damageelemental < 10) damageelemental = 10;
+//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
+//		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
+//	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && damageelemental > 50) damageelemental = 50;
+	}
+//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+//		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
+//	}
+//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
+//		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1  && damageelemental > 50) damageelemental = 50;
+//	}
+//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
+//		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1  && damageelemental > 50) damageelemental = 50;
+//	}
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+//	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+//		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+//		if (player.inte > 100) critChance += 10;
+//	}
+	if (rand(100) < critChance) {
+		crit = true;
+		damageelemental *= 1.75;
+	}
+	damageelemental *= (monster.damagePercent(false, true) / 100);
+	damageelemental = Math.round(damageelemental);
+	outputText("Your elemental hit " + monster.a + monster.short + "! ");
+	if (crit == true) {
+		outputText("<b>Critical! </b>");
+	}
+	outputText("<b>(<font color=\"#800000\">" + damageelemental + "</font>)</b>\n\n");
+	damageelemental = doDamage(damageelemental);
+	if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
+		fatigueRecovery();
+		manaregeneration();
+		enemyAI();
+	}
+	else {
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
+	}
 }
 
 public function packAttack():void {
@@ -4609,7 +4661,7 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 	return false;
 }
 
-public function meleeANDrangeANDmanaSubMenu():void {
+public function combatOptionsSubMenu():void {
 	menu();
 	clearOutput();
 	if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
@@ -4621,6 +4673,10 @@ public function meleeANDrangeANDmanaSubMenu():void {
 		addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
 	}
 //	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
+	if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+		outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+		addButton(3,"Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions);
+	}
 	addButton(14, "Back", combatMenu, false);
 }
 

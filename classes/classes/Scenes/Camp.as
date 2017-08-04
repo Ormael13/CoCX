@@ -1470,7 +1470,7 @@ private function campActions():void {
 	addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your levels, items, and gems carried over. The game will also get harder.");
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
-	addButton(6, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some Winions.");
+	addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
@@ -1486,6 +1486,13 @@ private function campBuildingSim():void {
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(1, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) addButton(3, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabin for your camp.");
+	addButton(14, "Back", campActions);
+}
+
+private function campWinionsArmySim():void {
+	menu();
+	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
+	addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 	addButton(14, "Back", campActions);
 }
 
