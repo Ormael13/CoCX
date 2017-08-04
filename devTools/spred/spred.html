@@ -81,13 +81,25 @@
 <body>
 <div class="container-fluid" id="main">
 	<div class="row" style="flex-shrink: 0;">
-		<div class="col">
+		<div class="col-12">
 			<h3>CoC Sprite Editor</h3>
 			<button type="button" class="btn btn-secondary" onclick="spred.addCompositeView(spred.defaultLayerList)">
 				<span class="fa fa-plus"></span> Add view
 			</button>
-
-
+		</div>
+	</div>
+	<div class="row" id="Loading" style="display: none;flex-shrink:0;">
+		<div class="col-12 card card-warning">
+			<div class="card-block ">
+				<h4 class="card-title">Loading...</h4>
+			</div>
+			<div class="card-block">
+				<h5>Unable to load data!</h5>
+				<p>
+					Please select manually the <code>res/model.xml</code> file:
+					<input type="file" id="ManualFile">
+				</p>
+			</div>
 		</div>
 	</div>
 	<div class="row" style="flex-grow:1">
@@ -151,12 +163,12 @@
 			<div class="card-block">
 				<h4 class="card-title">Selected:</h4>
 				<h5 class="card-subtitle">
-					<button class="ctrl" type="button" onclick="spred.selLayerUp()">
+					<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">
 						<span class="fa fa-caret-up"></span>
 					</button>
 					<button class="ctrl" type="button" onclick="spred.selLayerDown()">
 						<span class="fa fa-caret-down"></span>
-					</button>
+					</button>-->
 					<span id="SelLayerName">(none)</span>
 				</h5>
 				<h5>Canvas: </h5>

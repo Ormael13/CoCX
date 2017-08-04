@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE model >
-<model name="demo" dir="./res/" width="192" height="192" scale="1">
+<model name="demo" dir="./res/charview" width="192" height="192" scale="1">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
@@ -183,29 +182,89 @@
         <!--<key src="#FFFFFF" base="sclera"/>-->
         <key src="#0026FF" base="iris"/>
     </colorkeys>
-    <spritesheet file="char1.png" cellwidth="192" cellheight="192">
-        <row>_help,_placeholder,,,,,,,,,,,,,,</row>
-        <row>horns-error,horns2Sold,horns2Lold,,,,,,,,,,,,,</row>
-        <row>hairf-error,hair0f-old,hair6f,hair0f,,,,,,,,,,,,</row>
-        <row>eyes-error,eyes2M,eyes4S,eyes2Lb,eyes6,eyes-orca,eyes-cat,,,,,,,,,</row>
-        <row>ears-error,ears0,ears9,ears9f,ears21f,ears-wolf,ears-cat,ears-fur,,,,,,,,</row>
-        <row>face-error,face0,face28,face-fur,,,,,,,,,,,,</row>
-        <row>breasts-error,breasts0,breastsD,breastsDfur,,,,,,,,,,,,</row>
-        <row>armf-error,arm0f,arm11f,arm17f,,,,,,,,,,,,</row>
-        <row>torso-error,torso0,torso-orca,torso-fur,,,,,,,,,,,,</row>
-        <row>armb-error,arm0b,fins-orca,armb-fur,,,,,,,,,,,,</row>
-        <row>legs-error,legs0,legs3,legs35fsit,legs37,legs-kraken,legs26,legs-furpaws,,,,,,,,</row>
-        <row>hairb-error,hair0b,,,,,,,,,,,,,,</row>
-        <row>tail-error,tail-fox1,tail-fox2,tail28,tail37,tail-cat,tail-cat2,,,,,,,,,</row>
-        <row>wings-error,wings-23,wings-23b,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-        <row>,,,,,,,,,,,,,,,</row>
-    </spritesheet>
-    <spritemap file="char2.png">
-        <cell x="1" y="1" w="56" h="20" name="horns2S" dx="68" dy="20"/>
-        <cell x="1" y="23" w="56" h="38" name="horns2L" dx="68" dy="5"/>
-        <cell x="1" y="63" w="59" h="20" name="horns11bg"/>
-        <cell x="1" y="85" w="59" h="20" name="horns11fg"/>
+    <!--<spritesheet file="char1.png" cellwidth="192" cellheight="192">
+        <row>name1,name2,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,breastsDfur,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+    </spritesheet>-->
+    <spritemap file="basic.png">
+        <cell rect="1,1,38,44" name="face-human"/>
+        <cell rect="1,47,38,44" name="face-fur"/>
+        
+        <cell rect="42,2,32,11" name="eyes-human" dx="74" dy="38"/>
+
+        <cell rect="78,2,8,11" name="ears-human"/>
+        <cell rect="88,2,8,11" name="ears-fur"/>
+
+        <cell rect="99,2,59,54" name="hair0f"/>
+        <cell rect="99,58,59,54" name="hair0b"/>
+
+        <cell rect="161,2,23,11" name="breasts0"/>
+        <cell rect="161,15,38,22" name="breastsD"/>
+
+        <cell rect="202,2,50,62" name="torso-human"/>
+        <cell rect="202,66,50,62" name="torso-fur"/>
+
+        <cell rect="255,2,73,51" name="arms-human"/>
+        <cell rect="255,55,73,51" name="arms-fur"/>
+
+        <cell rect="331,2,50,62" name="legs-human"/>
+        <cell rect="331,66,50,62" name="legs-furpaws"/>
+    </spritemap>
+    <spritemap file="beasts.png">
+        <cell rect="1,1,32,11" name="eyes-cat" dx="74" dy="38"/>
+        <cell rect="1,40,32,11" name="eyes-spider" dx="74" dy="38"/>
+        <cell rect="1,53,32,11" name="eyes-sandtrap" dx="74" dy="38"/>
+
+        <cell rect="36,1,56,47" name="tail-fox1"/>
+        <cell rect="36,50,50,53" name="tail-fox2"/>
+
+        <cell rect="95,1,48,51" name="tail-cat1"/>
+        <cell rect="95,54,48,51" name="tail-cat2"/>
+
+        <cell rect="146,1,47,29" name="ears-fox_fg"/>
+        <cell rect="146,32,47,29" name="ears-fox_bg"/>
+        <cell rect="146,64,62,35" name="ears-wolf"/>
+        <cell rect="146,102,56,23" name="ears-cat"/>
+
+        <cell rect="211,1,56,20" name="horns2S" dx="68" dy="20"/>
+        <cell rect="211,23,56,38" name="horns2L" dx="68" dy="5"/>
+
+        <cell rect="314,2,84,59" name="hair-gorgon"/>
+
+        <cell rect="12,201,128,92" name="legs-naga"/>
+        <cell rect="146,213,117,116" name="legs-kraken"/>
+        <cell rect="266,172,118,158" name="legs-scylla"/>
+    </spritemap>
+    <spritemap file="manticore.png">
+        <cell rect="2,2,32,11" name="eyes-manticore" dx="74" dy="38"/>
+        <cell rect="2,16,47,71" name="arms-manticore"/>
+        <cell rect="2,90,59,44" name="legs-manticore_sit"/>
+        <cell rect="2,137,104,77" name="tail-manticore"/>
+        <cell rect="118,9,53,119" name="wing-mantibig_bg"/>
+        <cell rect="174,9,53,119" name="wing-mantibig_fg"/>
+    </spritemap>
+    <spritemap file="orca.png">
+        <cell rect="2,2,105,43" name="ears-orca"/>
+        <cell rect="2,48,28,12" name="eyes-orca" dx="74" dy="38"/>
+        <cell rect="27,63,45,45" name="face-orca"/>
+        <cell rect="4,113,73,53" name="arms-orca"/>
+        <cell rect="101,67,52,62" name="torso-orca"/>
+        <cell rect="85,132,66,122" name="tail-orca"/>
+        <cell rect="124,20,72,26" name="fins-orca"/>
+        <cell rect="166,58,54,66" name="legs-orca"/>
+    </spritemap>
+
+    <spritemap file="charview/alraune.png">
+        <cell rect="1,1,59,20" name="horns-orchid_bg"/>
+        <cell rect="1,23,59,20" name="horns-orchid_fg"/>
     </spritemap>
     <layers>
         <!--
@@ -230,8 +289,12 @@
         Element <case test=""|value=""> item* </case>
             optional attribute [test] - evaluated as expression
             optional attribute [value] - evaluated as expression
+            optional attribute [values] - evaluated as commaa-separated expressions
             children >item* - if:
                 [test] is present and evaluates to 'true'
+                or:
+                [values] is present and any of it evaluates to same as parent
+                switch[value]
                 or:
                 [value] is present and evaluates to same as parent switch[value]
                 then items are processed
@@ -247,25 +310,27 @@
             <case value="2"><!--HORNS_COW_MINOTAUR-->
                 <switch>
                     <case test="horns lt 3"><!--Two tiny horn-like nubs...-->
-                        <layer file="horns2S" dx="68" dy="20"/>
+                        <layer file="horns2S"/>
                     </case>
                     <case test="horns lt 6"><!--Two moderately sized horns...-->
-                        <layer file="horns2S" dx="68" dy="20"/>
+                        <layer file="horns2S"/>
                     </case>
                     <case test="horns lt 3"><!--Two large horns...-->
-                        <layer file="horns2L" dx="68" dy="5"/>
+                        <layer file="horns2L"/>
                     </case>
                     <case test="horns lt 3"><!--Two very large and dangerous looking horns...-->
-                        <layer file="horns2L" dx="68" dy="5"/>
+                        <layer file="horns2L"/>
                     </case>
                     <default><!--Two huge horns...-->
-                        <layer file="horns2L" dx="68" dy="5"/>
+                        <layer file="horns2L"/>
                     </default>
                 </switch>
             </case>
+            <case value="11">
+                <layer file="horns-orchid_fg"/>
+            </case>
             <default>
                 <layer file="horns2L" dx="68" dy="5"/>
-                <layer file="horns-error"/>
             </default>
         </switch>
 
@@ -278,7 +343,7 @@
                 <layer file="ears-cat"/>
             </case>
             <case value="9"><!--EARS_FOX-->
-                <layer file="ears9f"/>
+                <layer file="ears-fox_fg"/>
             </case>
             <case value="18"><!--EARS_WOLF-->
                 <layer file="ears-wolf"/>
@@ -287,40 +352,39 @@
                 <layer file="ears-fur"/>
             </case>
             <case value="21"><!--EARS_ORCA-->
-                <layer file="ears21f"/>
+                <layer file="ears-orca"/>
             </case>
         </switch>
 
 
         <switch value="eyeType">
             <case value="0">
-                <layer file="eyes2M"/><!--EYES_HUMAN-->
+                <layer file="eyes-human"/><!--EYES_HUMAN-->
             </case>
             <case value="1">
-                <layer file="eyes4S"/><!--EYES_FOUR_SPIDER_EYES-->
+                <layer file="eyes-spider"/><!--EYES_FOUR_SPIDER_EYES-->
             </case>
             <case value="2">
-                <layer file="eyes2Lb"/><!--EYES_BLACK_EYES_SAND_TRAP-->
+                <layer file="eyes-sandtrap"/><!--EYES_BLACK_EYES_SAND_TRAP-->
             </case>
             <case value="3">
                 <layer file="eyes-cat"/><!--EYES_CAT_SLITS-->
             </case>
             <case value="6">
-                <layer file="eyes6"/><!--EYES_MANTICORE-->
+                <layer file="eyes-manticore"/><!--EYES_MANTICORE-->
             </case>
             <case value="'never'">
                 <layer file="eyes-orca"/>
             </case>
             <default>
-                <layer file="eyes2M"/>
-                <layer file="eyes-error"/>
+                <layer file="eyes-human"/>
             </default>
         </switch>
 
         <switch value="hairType">
             <case value="6"><!--HAIR_GORGON-->
                 <if test="hairLength > 0">
-                    <layer file="hair6f"/>
+                    <layer file="hair-gorgon"/>
                 </if>
             </case>
             <default>
@@ -331,42 +395,45 @@
                     </case>
                     <default>
                         <layer file="hair0f-old"/>
-                        <!--<layer file="hairf-error"/>-->
                     </default>
                 </switch>
             </default>
         </switch>
 
+        <switch value="hornType">
+            <case value="11">
+                <layer file="horns-orchid_bg"/>
+            </case>
+        </switch>
+
         <switch value="earType">
             <case value="0"><!--EARS_HUMAN-->
-                <layer file="ears0"/>
+                <layer file="ears-human"/>
             </case>
             <case value="2"><!--EARS_DOG--><!--<layer file="ears-wolf"/>--></case>
             <case value="5"><!--EARS_CAT--><!--<layer file="ears-cat"/>--></case>
             <case value="9"><!--EARS_FOX-->
-                <layer file="ears9"/><!--also ears9f-->
+                <layer file="ears-fox_bg"/><!--also ears-fox_fg-->
             </case>
             <case value="18"><!--EARS_WOLF--><!--<layer file="ears-wolf"/>--></case>
             <case value="20"><!--EARS_YETI--><!--<layer file="ears-fur"/>--></case>
-            <case value="21"><!--EARS_ORCA--><!--<layer file="ears21f"/>--></case>
+            <case value="21"><!--EARS_ORCA--><!--<layer file="ears-orca"/>--></case>
             <default>
-                <layer file="ears0"/>
-                <layer file="ears-error"/>
+                <layer file="ears-human"/>
             </default>
         </switch>
         <switch value="faceType">
             <case value="0"><!--FACE_HUMAN-->
-                <layer file="face0"/>
+                <layer file="face-human"/>
             </case>
             <case values="2,6,24"><!--FACE_DOG,FACE_CAT,FACE_BWOLF-->
                 <layer file="face-fur"/>
             </case>
             <case value="28"><!--FACE_ORCA-->
-                <layer file="face28"/>
+                <layer file="face-orca"/>
             </case>
             <default>
-                <layer file="face0"/>
-                <layer file="face-error"/>
+                <layer file="face-human"/>
             </default>
         </switch>
         <if test="breastRows.length gt 0">
@@ -386,59 +453,55 @@
                 </case>
                 <default>
                     <layer file="breastsD"/>
-                    <layer file="breasts-error"/>
                 </default>
             </switch>
         </if>
         <switch value="armType">
             <case value="0"><!--ARM_TYPE_HUMAN-->
-                <layer file="arm0f"/>
+                <layer file="arms-human"/>
             </case>
             <case value="11"><!--ARM_TYPE_LION-->
-                <layer file="arm11f"/>
+                <layer file="arms-manticore"/>
             </case>
             <case value="17"><!--ARM_TYPE_ORCA-->
-                <layer file="arm17f"/>
+                <layer file="arms-orca"/>
             </case>
             <default>
-                <layer file="arm0f"/>
-                <layer file="armf-error"/>
+                <layer file="arms-human"/>
             </default>
         </switch>
 
         <switch value="lowerBody">
             <case value="0"><!--LOWER_BODY_TYPE_HUMAN-->
-                <layer file="legs0"/>
+                <layer file="legs-human"/>
             </case>
             <case values="2,9,33"><!--DOG,CAT,WOLF-->
                 <layer file="legs-furpaws"/>
             </case>
             <case value="3"><!--LOWER_BODY_TYPE_NAGA-->
-                <layer file="legs3"/>
+                <layer file="legs-naga"/>
             </case>
             <case value="35"><!--LOWER_BODY_TYPE_LION-->
                 <switch>
                     <case test="armType==11">
-                        <layer file="legs35fsit"/>
+                        <layer file="legs-manticore_sit"/>
                     </case>
                     <default>
-                        <layer file="legs0"/>
-                        <layer file="legs-error"/>
+                        <layer file="legs-human"/>
                     </default>
                 </switch>
             </case>
             <case value="26"><!--LOWER_BODY_TYPE_SCYLLA-->
-                <layer file="legs26"/>
+                <layer file="legs-scylla"/>
             </case>
             <case value="37"><!--LOWER_BODY_TYPE_ORCA-->
-                <layer file="legs37"/>
+                <layer file="legs-orca"/>
             </case>
             <case value="'never'">
                 <layer file="legs-kraken"/>
             </case>
             <default>
-                <layer file="legs0"/>
-                <layer file="legs-error"/>
+                <layer file="legs-human"/>
             </default>
         </switch>
 
@@ -450,33 +513,15 @@
                 <layer file="torso-orca"/>
             </case>
             <default>
-                <layer file="torso0"/>
+                <layer file="torso-human"/>
             </default>
         </switch>
 
 
         <switch value="armType">
-            <case value="0"><!--ARM_TYPE_HUMAN-->
-                <switch>
-                    <case test="hasFullCoatOfType([1])">
-                        <layer file="armb-fur"/>
-                    </case>
-                    <default>
-                        <layer file="arm0b"/>
-                    </default>
-                </switch>
-            </case>
-            <case value="10"><!--WOLF-->
-                <layer file="armb-fur"/>
-            </case>
-            <case value="11"><!--ARM_TYPE_LION--></case>
             <case value="'never'">
                 <layer file="fins-orca"/>
             </case>
-            <default>
-                <layer file="arm0b"/>
-                <layer file="armb-error"/>
-            </default>
         </switch>
         <switch>
             <case test="hairLength == 0"><!--bald--></case>
@@ -484,16 +529,14 @@
                 <layer file="hair0b"/>
             </case>
             <default>
-                <!--<layer file="hairb-error"/>-->
             </default>
         </switch>
         <switch value="wingType">
             <case value="0"><!--WING_TYPE_NONE--></case>
             <case value="23"><!--WING_TYPE_MANTICORE_LIKE_LARGE-->
-                <layer file="wings-23"/>
+                <layer file="wings-mantibig_fg"/>
             </case>
             <default>
-                <layer file="wings-error"/>
             </default>
         </switch>
         <switch value="tailType">
@@ -524,19 +567,18 @@
                 </if>-->
             </case>
             <case value="28"><!--TAIL_TYPE_MANTICORE_PUSSYTAIL-->
-                <layer file="tail28"/>
+                <layer file="tail-manticore"/>
             </case>
             <case value="37"><!--TAIL_TYPE_ORCA-->
-                <layer file="tail37"/>
+                <layer file="tail-orca"/>
             </case>
             <default>
-                <layer file="tail-error"/>
             </default>
         </switch>
         <!--Wings behind the tail-->
         <switch value="wingType">
             <case value="23"><!--WING_TYPE_MANTICORE_LIKE_LARGE-->
-                <layer file="wings-23b"/>
+                <layer file="wings-mantibig_bg"/>
             </case>
         </switch>
     </layers>

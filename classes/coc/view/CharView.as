@@ -231,11 +231,13 @@ public class CharView extends Sprite {
 				return;
 			}
 			for each (var cell:XML in sm.cell) {
-				var x:int         = cell.@x;
-				var y:int         = cell.@y;
-				var w:int         = cell.@w;
-				var h:int         = cell.@h;
+				var rect:/*String*/Array = cell.@rect.toString().match(/^(\d+),(\d+),(\d+),(\d)+$/);
+				var x:int         = rect?int(rect[1]):cell.@x;
+				var y:int         = rect?int(rect[2]):cell.@y;
+				var w:int         = rect?int(rect[3]):cell.@w;
+				var h:int         = rect?int(rect[4]):cell.@h;
 				var f:String      = cell.@name;
+				// TODO dx dy
 				var bd:BitmapData = new BitmapData(w, h, true, 0);
 				bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
 				bitmaps[f] = bd;

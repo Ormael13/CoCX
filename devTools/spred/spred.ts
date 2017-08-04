@@ -73,20 +73,30 @@ namespace spred {
 		return Object.keys(palette).map(name => $new('option', name).attr('value', palette[name]));
 	}
 	
+	export class Layer {
+		constructor(
+			public name:string,
+			public readonly sprite:Sprite,
+			public dx:number,
+			public dy:number
+		) {
+		
+		}
+	}
+	
 	export class Composite {
 		public ui: JQuery;
 		
-		private readonly _layers: string[]     = [];
+		private _layers: Dict<boolean> = {};
 		public readonly canvas: HTMLCanvasElement;
 		public readonly colormap: Dict<string> = {};
 		
-		public get layers(): string[] {
-			return this.model.layerNames.filter(ln => this._layers.indexOf(ln) >= 0);
+		public get layerNames(): string[] {
+			return this.model.layers.filter(l => this._layers[l.name]).map(l=>l.name);
 		}
 		
-		public set layers(value: string[]) {
-			this._layers.splice(0, this._layers.length);
-			this._layers.push(...value.filter(l => l in this.model.layers));
+		public set layerNames(value: string[]) {
+			this._layers = value.reduce((r,e)=>{r[e]=true; return r},{} as Dict<boolean>);
 		}
 		
 		public redraw(x: number = 0,
@@ -110,19 +120,19 @@ namespace spred {
 				}
 				cmap.push([RGBA(tinycolor(ck.src)), RGBA(base)]);
 			}
-			for (let a = this.model.layerNames, i = a.length - 1; i >= 0; i--) {
-				let lname = a[i];
-				if (this._layers.indexOf(lname) >= 0) {
-					let layer = this.model.layers[lname];
-					let idata = layer.ctx2d.getImageData(x, y, w, h);
+			for (let a = this.model.layers, i = a.length - 1; i >= 0; i--) {
+				let layer = a[i];
+				if (this._layers[layer.name]) {
+					let sprite = this.model.sprites[layer.name];
+					let idata = sprite.ctx2d.getImageData(x, y, w, h);
 					idata     = colormap(idata, cmap);
 					p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
 							let sx = x, sy = y;
 							let sw = w;
 							let sh = h;
-							let dx = layer.dx;
-							let dy = layer.dy;
+							let dx = layer.dx+sprite.dx;
+							let dy = layer.dy+sprite.dy;
 							if (dx < 0) {
 								sx -= dx;
 								dx = 0;
@@ -133,8 +143,8 @@ namespace spred {
 							}
 							if (dx + sw > this.model.width) sw = this.model.width - dx;
 							if (dy + sh > this.model.height) sh = this.model.height - dy;
-							if (sx + sw > layer.width) sw = layer.width - sx;
-							if (sy + sh > layer.height) sh = layer.height - sy;
+							if (sx + sw > sprite.width) sw = sprite.width - sx;
+							if (sy + sh > sprite.height) sh = sprite.height - sy;
 							ctx2d.drawImage(bmp, sx, sy, sw, sh, dx * z, dy * z, sw * z, sh * z);
 							return ctx2d;
 						})
@@ -144,17 +154,15 @@ namespace spred {
 		}
 		
 		public hideAll(name: string) {
-			this._layers.splice(0, this._layers.length);
+			this._layers = {};
 		}
 		
 		public isVisible(layerName: string) {
-			return this._layers.indexOf(layerName) >= 0;
+			return this._layers[layerName];
 		}
 		
-		public setVisible(layerName: string, visibility: Boolean) {
-			let i = this._layers.indexOf(layerName);
-			if (visibility && i == -1) this._layers.push(layerName);
-			else if (!visibility && i >= 0) this._layers.splice(i, 1);
+		public setVisible(layerName: string, visibility: boolean) {
+			this._layers[layerName] = visibility;
 		}
 		
 		public get zoom(): number {
@@ -173,19 +181,20 @@ namespace spred {
 					zoom: number           = 1) {
 			this.canvas = newCanvas(model.width * zoom, model.height * zoom);
 			this.canvas.setAttribute('focusable', 'true');
-			this.layers = visibleNames.slice(0);
+			this.layerNames = visibleNames.slice(0);
 			this.redraw();
 		}
 	}
 	
-	export class Layer {
+	export class Sprite {
 		public ui: JQuery;
 		public readonly canvas: HTMLCanvasElement;
 		public readonly ctx2d: CanvasRenderingContext2D;
 		
 		updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
-			c2d.drawImage(this.canvas, 0, 0, 32, 32);
+			let cw=this.width,ch = this.height;
+			c2d.drawImage(this.canvas, 0, 0, cw>ch?32:32*ch/cw, cw>ch?32*ch/cw:32);
 		}
 		
 		constructor(public readonly name: string,
@@ -206,6 +215,11 @@ namespace spred {
 	
 	function url2img(src: string): Promise<HTMLImageElement> {
 		return new Promise<HTMLImageElement>((resolve, reject) => {
+			let i2 = $('img[src="'+ src+ '"]');
+			if (i2[0]) {
+				resolve(i2[0] as HTMLImageElement);
+				return
+			}
 			let img    = document.createElement('img');
 			img.onload = (e) => {
 				resolve(img);
@@ -219,7 +233,7 @@ namespace spred {
 		public cellheight: number;
 		public rows: string[][];
 		public img: HTMLImageElement;
-		public sprites: Dict<Layer> = {};
+		public sprites: Dict<Sprite> = {};
 		
 		public isLoaded(): boolean {
 			return this.img != null;
@@ -245,7 +259,7 @@ namespace spred {
 					});
 					Object.keys(positions)
 						  .forEach(key => {
-							  this.sprites[key] = new Layer(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1], 0, 0);
+							  this.sprites[key] = new Sprite(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1], 0, 0);
 						  });
 					this.img = img;
 					return this;
@@ -255,7 +269,7 @@ namespace spred {
 	
 	export class Spritemap {
 		public img: HTMLImageElement;
-		public sprites: Dict<Layer> = {};
+		public sprites: Dict<Sprite> = {};
 		
 		public isLoaded(): boolean {
 			return this.img != null;
@@ -271,9 +285,18 @@ namespace spred {
 				).then(img => {
 					x.children("cell").each((i, cell) => {
 						let name           = cell.getAttribute('name');
-						this.sprites[name] = new Layer(
-							name, +cell.getAttribute('w'), +cell.getAttribute('h'),
-							img, +cell.getAttribute('x'), +cell.getAttribute('y'),
+						let rect = (cell.getAttribute('rect')||'').match(/^(\d+),(\d+),(\d+),(\d)+$/);
+						let x,y,w,h;
+						if (rect) {
+							[x,y,w,h] = [+rect[1],+rect[2],+rect[3],+rect[4]];
+						} else {
+							x = +cell.getAttribute('x');
+							y = +cell.getAttribute('y');
+							w = +cell.getAttribute('w');
+							h = +cell.getAttribute('h');
+						}
+						this.sprites[name] = new Sprite(
+							name, w, h, img, x, y,
 							+(cell.getAttribute('dx') || '0'), +(cell.getAttribute('dy') || '0'));
 					});
 					return this;
@@ -294,15 +317,15 @@ namespace spred {
 		public height: number;
 		public spritesheets: Spritesheet[];
 		public spritemaps: Spritemap[];
-		public layers: Dict<Layer>   = {};
-		public layerNames: string[]  = [];
+		public sprites: Dict<Sprite> = {};
+		public layers: Layer[]  = [];
 		public palettes: Dict<Dict<string>>;
 		public colorProps: string[]  = [];
 		public readonly whenLoaded: Promise<Model>;
 		public colorkeys: ColorKey[] = [];
 		
 		public putPixel(x: number, y: number, color: string) {
-			let l = getSelLayer();
+			let l = getSelSprite();
 			if (!l) return;
 			let ctx = l.ctx2d;
 			if (!color) {
@@ -325,7 +348,7 @@ namespace spred {
 			this.width        = parseInt(xmodel.attr('width'));
 			this.height       = parseInt(xmodel.attr('height'));
 			this.spritesheets = [];
-			this.spritemaps = [];
+			this.spritemaps   = [];
 			this.palettes     = {
 				common: {}
 			};
@@ -362,24 +385,26 @@ namespace spred {
 				this.spritemaps.push(spritemap);
 			});
 			
-			xmodel.find('layer').each((i, x) => {
-				let ln = x.getAttribute('file');
-				if (this.layerNames.indexOf(ln) < 0) this.layerNames.push(ln);
-			});
 			this.whenLoaded =
 				Promise.all(this.spritesheets.map(p => p.whenLoaded as Promise<any>)
-					.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
+								.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
 				).then(() => {
 					for (let ss of this.spritesheets) {
 						for (let sname in ss.sprites) {
-							this.layers[sname] = ss.sprites[sname];
+							this.sprites[sname] = ss.sprites[sname];
 						}
 					}
 					for (let sm of this.spritemaps) {
 						for (let sname in sm.sprites) {
-							this.layers[sname] = sm.sprites[sname];
+							this.sprites[sname] = sm.sprites[sname];
 						}
 					}
+					xmodel.find('layer').each((i, x) => {
+						let ln = x.getAttribute('file');
+						let ldx = +(x.getAttribute('dx')||'0');
+						let ldy = +(x.getAttribute('dy')||'0');
+						this.layers.push(new Layer(ln,this.sprites[ln],ldx,ldy));
+					});
 					return this;
 				});
 		}
@@ -387,22 +412,22 @@ namespace spred {
 	
 	export let g_model: Model;
 	export let g_composites: Composite[] = [];
-	export let g_sellayer: string        = '';
+	export let g_selsprite: string        = '';
 	export let defaultLayerList          = [
-		'eyes2M', 'hair0f', 'ears0', 'face0',
+		'eyes-human', 'hair0f', 'ears0', 'face0',
 		'breasts0', 'arm0f', 'legs0', 'torso0', 'arm0b'
 	];
 	
 	export function updateCompositeLayers(composite: Composite) {
 		let j = composite.ui.find('.LayerBadges').html('');
-		for (let ln of composite.model.layerNames) {
+		for (let l of composite.model.layers) {
 			let b = $new('button.badge' +
-						 (composite.isVisible(ln) ? '.badge-primary' : '.badge-default'),
-				ln);
+						 (composite.isVisible(l.name) ? '.badge-primary' : '.badge-default'),
+				l.name);
 			b.click(() => {
 				b.toggleClass('badge-primary');
 				b.toggleClass('badge-default');
-				composite.setVisible(ln, !composite.isVisible(ln));
+				composite.setVisible(l.name, !composite.isVisible(l.name));
 				composite.redraw();
 			});
 			j.append(b, ' ');
@@ -540,38 +565,38 @@ namespace spred {
 	}
 	
 	export function swapLayers(a: number, b: number) {
-		let l0                = g_model.layerNames[a];
-		g_model.layerNames[a] = g_model.layerNames[b];
-		g_model.layerNames[b] = l0;
-		showLayerList(g_model);
+		let l0                = g_model.layers[a];
+		g_model.layers[a] = g_model.layers[b];
+		g_model.layers[b] = l0;
+		showSpriteList(g_model);
 		redrawAll();
 	}
 	
-	function showLayerList(model: Model) {
+	function showSpriteList(model: Model) {
 		let list = $('#LayerList');
-		for (let ln of model.layerNames) {
-			let layer = model.layers[ln];
-			if (layer) layer.ui.detach().appendTo(list);
+		for (let sn in model.sprites) {
+			let sprite = model.sprites[sn];
+			if (sprite) sprite.ui.detach().appendTo(list);
 		}
 	}
 	
-	export function getSelLayer(): Layer {
-		return g_model.layers[g_sellayer];
+	export function getSelSprite(): Sprite {
+		return g_model.sprites[g_selsprite];
 	}
 	
-	export function selLayer(name: string) {
-		g_sellayer = name;
+	export function selSprite(name: string) {
+		g_selsprite = name;
 		$('#SelLayerName').html(name);
 		$('.LayerListItem').removeClass('selected');
-		let l = getSelLayer();
+		let l = getSelSprite();
 		if (l) {
 			l.ui.addClass('selected');
 			$('#SelLayerCanvas').html('').append(l.canvas);
 		}
 	}
-	
+	/*
 	export function selLayerUp() {
-		let i = g_model.layerNames.indexOf(g_sellayer);
+		let i = g_model.layers.findIndex(layer=>layer.name==g_sellayer);
 		if (i > 0) swapLayers(i, i - 1);
 	}
 	
@@ -579,7 +604,7 @@ namespace spred {
 		let i = g_model.layerNames.indexOf(g_sellayer);
 		if (i >= 0 && i < g_model.layerNames.length - 1) swapLayers(i, i + 1);
 	}
-	
+	*/
 	export function colormap(src: ImageData, map: [number, number][]): ImageData {
 		let dst  = new ImageData(src.width, src.height);
 		let sarr = new Uint32Array(src.data.buffer);
@@ -603,7 +628,7 @@ namespace spred {
 		).then(img => {
 			switch ($("input[name=clipboard-action]:checked").val()) {
 				case 'replace':
-					let layer = getSelLayer();
+					let layer = getSelSprite();
 					if (!layer) return;
 					layer.ctx2d.clearRect(0, 0, layer.width, layer.height);
 					layer.ctx2d.drawImage(img, 0, 0);
@@ -620,57 +645,76 @@ namespace spred {
 		});
 	}
 	
+	export function loadModel(data: XMLDocument) {
+		g_model = new Model(data);
+		g_model.whenLoaded.then((model) => {
+			console.log("Model = ", model);
+			for (let ln in model.sprites) {
+				let sprite = model.sprites[ln];
+				if (!sprite) {
+					console.warn("Non-existing sprite " + ln + " refered");
+					continue;
+				}
+				sprite.ui = $new('div.LayerListItem',
+					$new('label', ln),
+					newCanvas(32, 32)
+				).click(e => selSprite(ln));
+				sprite.updateUI();
+			}
+			$('#SelLayerCanvas')
+				.css('min-width', model.width + 'px')
+				.css('min-height', model.height + 'px');
+			$('#lmb-color').html('').append(
+				model.colorkeys.map(ck =>
+					$new('option', ck.base + (ck.transform ? ' ' + ck.transform : '')
+					).attr('value', ck.src)
+				)
+			);
+			showSpriteList(model);
+			selSprite(Object.keys(model.sprites)[0]);
+			addCompositeView(defaultLayerList, 3);
+			addCompositeView(defaultLayerList, 2);
+			addCompositeView(defaultLayerList, 1);
+			addCompositeView(defaultLayerList, 1);
+			$('#ClipboardGrabber').on('paste', e => {
+				e.stopPropagation();
+				e.preventDefault();
+				let cd = (e.originalEvent as ClipboardEvent).clipboardData;
+				for (let i = 0, n = cd.items.length; i < n; i++) {
+					let item = cd.items[i];
+					if (item.type.indexOf('image/') == 0) {
+						grabData(item.getAsFile());
+						return;
+					} else {
+						console.log('skip ' + item.kind + ' ' + item.type);
+					}
+				}
+				alert("Please paste 1 image data or file");
+			});
+		});
+	}
+	
 	$(() => {
 		
 		$.ajax(basedir + 'res/model.xml', {
 			dataType: 'xml',
-		}).then((data: XMLDocument) => {
-			g_model = new Model(data);
-			g_model.whenLoaded.then((model) => {
-				console.log("Model = ", model);
-				for (let ln of model.layerNames) {
-					let layer = model.layers[ln];
-					if (!layer) {
-						console.warn("Non-existing layer " + ln + " refered");
-						continue;
+		}).then(loadModel
+		).fail(err=>{
+			console.log(err);
+			$('#Loading').show();
+			$('#ManualFile').change(e=>{
+				let filesArray = (e.target as HTMLInputElement).files;
+				for (let i=0;i<filesArray.length;i++) {
+					let file = filesArray[i];
+					if (file.name.indexOf('.xml')>=0) {
+						let fr = new FileReader();
+						fr.onload = ()=>loadModel($.parseXML(fr.result));
+						fr.readAsText(file);
+						$('#Loading').hide();
+						return;
 					}
-					layer.ui = $new('div.LayerListItem',
-						$new('label', ln),
-						newCanvas(32, 32)
-					).click(e => selLayer(ln));
-					layer.updateUI();
 				}
-				$('#SelLayerCanvas')
-					.css('min-width', model.width + 'px')
-					.css('min-height', model.height + 'px');
-				$('#lmb-color').html('').append(
-					model.colorkeys.map(ck =>
-						$new('option', ck.base + (ck.transform ? ' ' + ck.transform : '')
-						).attr('value', ck.src)
-					)
-				);
-				showLayerList(model);
-				selLayer(model.layerNames[0]);
-				addCompositeView(defaultLayerList, 3);
-				addCompositeView(defaultLayerList, 2);
-				addCompositeView(defaultLayerList, 1);
-				addCompositeView(defaultLayerList, 1);
-				$('#ClipboardGrabber').on('paste', e => {
-					e.stopPropagation();
-					e.preventDefault();
-					let cd = (e.originalEvent as ClipboardEvent).clipboardData;
-					for (let i = 0, n = cd.items.length; i < n; i++) {
-						let item = cd.items[i];
-						if (item.type.indexOf('image/') == 0) {
-							grabData(item.getAsFile());
-							return;
-						} else {
-							console.log('skip ' + item.kind + ' ' + item.type);
-						}
-					}
-					alert("Please paste 1 image data or file");
-				});
-			})
+			});
 		});
 	});
 }
