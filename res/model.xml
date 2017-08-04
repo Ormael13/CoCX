@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<model name="demo" dir="./res/charview" width="192" height="192" scale="1">
+<model name="demo" dir="./res/charview/" width="192" height="192" scale="1">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
@@ -195,7 +195,7 @@
         <row>,,,,,,,,,,,,,,</row>
     </spritesheet>-->
     <spritemap file="basic.png">
-        <cell rect="1,1,38,44" name="face-human"/>
+        <cell rect="1,1,38,44" name="face-human" dx="74" dy="23"/>
         <cell rect="1,47,38,44" name="face-fur"/>
         
         <cell rect="42,2,32,11" name="eyes-human" dx="74" dy="38"/>
@@ -226,7 +226,7 @@
         <cell rect="36,1,56,47" name="tail-fox1"/>
         <cell rect="36,50,50,53" name="tail-fox2"/>
 
-        <cell rect="95,1,48,51" name="tail-cat1"/>
+        <cell rect="95,1,48,51" name="tail-cat"/>
         <cell rect="95,54,48,51" name="tail-cat2"/>
 
         <cell rect="146,1,47,29" name="ears-fox_fg"/>
@@ -248,8 +248,8 @@
         <cell rect="2,16,47,71" name="arms-manticore"/>
         <cell rect="2,90,59,44" name="legs-manticore_sit"/>
         <cell rect="2,137,104,77" name="tail-manticore"/>
-        <cell rect="118,9,53,119" name="wing-mantibig_bg"/>
-        <cell rect="174,9,53,119" name="wing-mantibig_fg"/>
+        <cell rect="118,9,53,119" name="wings-mantibig_bg"/>
+        <cell rect="174,9,53,119" name="wings-mantibig_fg"/>
     </spritemap>
     <spritemap file="orca.png">
         <cell rect="2,2,105,43" name="ears-orca"/>
@@ -262,7 +262,7 @@
         <cell rect="166,58,54,66" name="legs-orca"/>
     </spritemap>
 
-    <spritemap file="charview/alraune.png">
+    <spritemap file="alraune.png">
         <cell rect="1,1,59,20" name="horns-orchid_bg"/>
         <cell rect="1,23,59,20" name="horns-orchid_fg"/>
     </spritemap>
@@ -330,7 +330,7 @@
                 <layer file="horns-orchid_fg"/>
             </case>
             <default>
-                <layer file="horns2L" dx="68" dy="5"/>
+                <layer file="horns2L"/>
             </default>
         </switch>
 
@@ -394,7 +394,7 @@
                         <layer file="hair0f"/>
                     </case>
                     <default>
-                        <layer file="hair0f-old"/>
+                        <layer file="hair0f"/>
                     </default>
                 </switch>
             </default>

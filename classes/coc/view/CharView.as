@@ -231,7 +231,7 @@ public class CharView extends Sprite {
 				return;
 			}
 			for each (var cell:XML in sm.cell) {
-				var rect:/*String*/Array = cell.@rect.toString().match(/^(\d+),(\d+),(\d+),(\d)+$/);
+				var rect:/*String*/Array = cell.@rect.toString().match(/^(\d+),(\d+),(\d+),(\d+)$/);
 				var x:int         = rect?int(rect[1]):cell.@x;
 				var y:int         = rect?int(rect[2]):cell.@y;
 				var w:int         = rect?int(rect[3]):cell.@w;

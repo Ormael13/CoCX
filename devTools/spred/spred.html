@@ -107,8 +107,14 @@
 			<h4>Controls</h4>
 			<h5>Left button</h5>
 			<div class="form-check">
+				<label for="lmba-drag" class="form-check-label">
+					<input type="radio" name="lmb-action" id="lmba-drag" value="drag" checked>
+					Drag
+				</label>
+			</div>
+			<div class="form-check">
 				<label for="lmba-nothing" class="form-check-label">
-					<input type="radio" id="lmba-nothing" name="lmb-action" value="nothing" checked>
+					<input type="radio" id="lmba-nothing" name="lmb-action" value="nothing">
 					Nothing
 				</label>
 			</div>
@@ -162,15 +168,29 @@
 			</div>
 			<div class="card-block">
 				<h4 class="card-title">Selected:</h4>
-				<h5 class="card-subtitle">
+				<h5 class="card-subtitle" id="SelLayerName">
+				</h5>
+				<div>
+					<button class="ctrl" type="button" onclick="spred.selLayerMove(-1,0)">
+						<span class="fa fa-caret-left"></span>
+					</button>
+					<button class="ctrl" type="button" onclick="spred.selLayerMove(1,0)">
+						<span class="fa fa-caret-right"></span>
+					</button>
+					<button class="ctrl" type="button" onclick="spred.selLayerMove(0,-1)">
+						<span class="fa fa-caret-up"></span>
+					</button>
+					<button class="ctrl" type="button" onclick="spred.selLayerMove(0,1)">
+						<span class="fa fa-caret-down"></span>
+					</button>
 					<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">
 						<span class="fa fa-caret-up"></span>
 					</button>
 					<button class="ctrl" type="button" onclick="spred.selLayerDown()">
 						<span class="fa fa-caret-down"></span>
 					</button>-->
-					<span id="SelLayerName">(none)</span>
-				</h5>
+				</div>
+				<h6 class="text-muted" id="SelLayerPos"></h6>
 				<h5>Canvas: </h5>
 				<div>
 					<em class="text-muted">right-click &amp; copy/save</em>
