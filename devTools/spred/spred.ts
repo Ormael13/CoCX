@@ -19,6 +19,9 @@ namespace spred {
 				   | (rgb.r & 0xff)
 			   ) >>> 0;
 	}
+	export function randint(n:number):number {
+		return Math.floor(Math.random() * n);
+	}
 	
 	/*
 	function mkimg(colors: string[][]): HTMLCanvasElement {
@@ -270,6 +273,7 @@ namespace spred {
 							  this.sprites[key] = new Sprite(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1], 0, 0);
 						  });
 					this.img = img;
+					console.log('Loaded spritesheet '+img.src);
 					return this;
 				});
 		}
@@ -307,6 +311,7 @@ namespace spred {
 							name, w, h, img, x, y,
 							+(cell.getAttribute('dx') || '0'), +(cell.getAttribute('dy') || '0'));
 					});
+					console.log('Loaded spritemap '+img.src);
 					return this;
 				});
 		}
@@ -397,6 +402,7 @@ namespace spred {
 				Promise.all(this.spritesheets.map(p => p.whenLoaded as Promise<any>)
 								.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
 				).then(() => {
+					console.log('Loaded model');
 					for (let ss of this.spritesheets) {
 						for (let sname in ss.sprites) {
 							this.sprites[sname] = ss.sprites[sname];
@@ -437,10 +443,26 @@ namespace spred {
 	export let g_composites: Composite[] = [];
 	export let g_selsprite: string        = '';
 	export let g_sellayer: Layer        = null;
-	export let defaultLayerList          = [
-		'eyes-human', 'hair0f', 'ears0', 'face0',
-		'breasts0', 'arm0f', 'legs0', 'torso0', 'arm0b'
+	export let g_layergen: (string|string[])[][] = [
+		['face-human','face-human','face-fur','face-orca'],
+		['eyes-human','eyes-cat','eyes-spider','eyes-sandtrap','eyes-manticore','eyes-orca'],
+		[['hair0f','hair0b'],['hair0f','hair0b'],[],'hair-gorgon'],
+		['ears-human','ears-fur',['ears-fox_fg','ears-fox_bg'],'ears-wolf','ears-cat','ears-orca'],
+		[[],[],[],'horns2S','horns2L'],
+		['breasts0','breastsD'],
+		['arms-human','arms-fur','arms-manticore',['arms-orca','fins-orca']],
+		['legs-human','legs-furpaws','legs-naga','legs-kraken','legs-scylla','legs-manticore_sit','legs-orca'],
+		['torso-human','torso-human','torso-fur','torso-orca'],
+		[[],'tail-cat','tail-cat2','tail-fox1',['tail-fox1','tail-fox2'],'tail-manticore','tail-orca'],
+		[[],[],[],['wings-mantibig_bg','wings-mantibig_fg']]
 	];
+	
+	export function defaultLayerList():string[] {
+		return g_layergen.map(opt=>opt[randint(opt.length)]
+		).map(s=>(typeof s == 'string' ? [s] : s) as string[]
+		).reduce((r,e)=>r.concat(e),[]
+		).filter(s=>s);
+	}
 	
 	export function updateCompositeLayers(composite: Composite) {
 		let j = composite.ui.find('.LayerBadges').html('');
@@ -453,6 +475,7 @@ namespace spred {
 				b.toggleClass('badge-default');
 				composite.setVisible(l.name, !composite.isVisible(l.name));
 				composite.redraw();
+				selLayer(l);
 			});
 			j.append(b, ' ');
 		}
@@ -460,6 +483,11 @@ namespace spred {
 	
 	export function addCompositeView(layers: string[], zoom: number = 1): Composite {
 		let composite = new Composite(g_model, layers, zoom);
+		for (let ln of layers) {
+			if (g_model.layers.every(l=>l.name!=ln)) {
+				console.warn("Non-existing layer "+ln);
+			}
+		}
 		$('#ViewList').append(
 			composite.ui = $new('.card.card-secondary.d-inline-flex',
 				$new('.card-block',
@@ -475,23 +503,19 @@ namespace spred {
 						$new('button.ctrl', $new('span.fa.fa-search-minus')
 						).click(() => {
 							composite.zoom--;
-						})
-					),
-					$new('div', $new('.canvas', composite.canvas)),
-					$new('div',
-						$new('label',
-							$new('span.fa.fa-caret-down'), 'Layers'
+						}),
+						$new('button.ctrl',$new('span.fa.fa-reorder')
 						).click(e => {
 							composite.ui.find('.LayerBadges').toggleClass('collapse');
 						}),
-						$new('.LayerBadges.collapse')
-					),
-					$new('div',
-						$new('label',
-							$new('span.fa.fa-caret-down'), 'Colors'
+						$new('button.ctrl',$new('span.fa.fa-paint-brush')
 						).click(e => {
 							composite.ui.find('.Colors').toggleClass('collapse');
-						}),
+						})
+					),
+					$new('div', $new('.canvas', composite.canvas)),
+					$new('.LayerBadges.collapse'),
+					$new('div',
 						$new('.Colors.collapse',
 							...g_model.colorProps.map(cpname =>
 								$new('.row.control-group',
@@ -717,7 +741,6 @@ namespace spred {
 	export function loadModel(data: XMLDocument) {
 		g_model = new Model(data);
 		g_model.whenLoaded.then((model) => {
-			console.log("Model = ", model);
 			for (let ln in model.sprites) {
 				let sprite = model.sprites[ln];
 				sprite.ui = $new('div.LayerListItem',
@@ -746,10 +769,10 @@ namespace spred {
 			}
 			showLayerList(model);
 			selLayer(model.layers[0]);
-			addCompositeView(defaultLayerList, 3);
-			addCompositeView(defaultLayerList, 2);
-			addCompositeView(defaultLayerList, 1);
-			addCompositeView(defaultLayerList, 1);
+			addCompositeView(defaultLayerList(), 3);
+			addCompositeView(defaultLayerList(), 2);
+			addCompositeView(defaultLayerList(), 1);
+			addCompositeView(defaultLayerList(), 1);
 			$('#ClipboardGrabber').on('paste', e => {
 				e.stopPropagation();
 				e.preventDefault();

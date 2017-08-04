@@ -200,23 +200,23 @@
         
         <cell rect="42,2,32,11" name="eyes-human" dx="74" dy="38"/>
 
-        <cell rect="78,2,8,11" name="ears-human"/>
+        <cell rect="78,2,8,11" name="ears-human" dx="107" dy="41"/>
         <cell rect="88,2,8,11" name="ears-fur"/>
 
-        <cell rect="99,2,59,54" name="hair0f"/>
-        <cell rect="99,58,59,54" name="hair0b"/>
+        <cell rect="99,2,59,54" name="hair0f" dx="68" dy="13"/>
+        <cell rect="99,58,59,54" name="hair0b" dx="68" dy="13"/>
 
-        <cell rect="161,2,23,11" name="breasts0"/>
+        <cell rect="161,2,23,11" name="breasts0" dx="81" dy="74"/>
         <cell rect="161,15,38,22" name="breastsD"/>
 
-        <cell rect="202,2,50,62" name="torso-human"/>
+        <cell rect="202,2,50,62" name="torso-human" dx="69" dy="65"/>
         <cell rect="202,66,50,62" name="torso-fur"/>
 
-        <cell rect="255,2,73,51" name="arms-human"/>
+        <cell rect="255,2,73,51" name="arms-human" dx="54" dy="64"/>
         <cell rect="255,55,73,51" name="arms-fur"/>
 
-        <cell rect="331,2,50,62" name="legs-human"/>
-        <cell rect="331,66,50,62" name="legs-furpaws"/>
+        <cell rect="331,2,50,62" name="legs-human" dx="69" dy="101"/>
+        <cell rect="331,66,50,62" name="legs-furpaws" dx="69" dy="101"/>
     </spritemap>
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes-cat" dx="74" dy="38"/>
@@ -226,7 +226,7 @@
         <cell rect="36,1,56,47" name="tail-fox1"/>
         <cell rect="36,50,50,53" name="tail-fox2"/>
 
-        <cell rect="95,1,48,51" name="tail-cat"/>
+        <cell rect="95,1,48,51" name="tail-cat" dx="96" dy="67"/>
         <cell rect="95,54,48,51" name="tail-cat2"/>
 
         <cell rect="146,1,47,29" name="ears-fox_fg"/>
@@ -248,8 +248,8 @@
         <cell rect="2,16,47,71" name="arms-manticore"/>
         <cell rect="2,90,59,44" name="legs-manticore_sit"/>
         <cell rect="2,137,104,77" name="tail-manticore"/>
-        <cell rect="118,9,53,119" name="wings-mantibig_bg"/>
-        <cell rect="174,9,53,119" name="wings-mantibig_fg"/>
+        <cell rect="118,9,53,119" name="wings-mantibig_bg" dx="27" dy="17"/>
+        <cell rect="174,9,53,119" name="wings-mantibig_fg" dx="105" dy="17"/>
     </spritemap>
     <spritemap file="orca.png">
         <cell rect="2,2,105,43" name="ears-orca"/>
@@ -465,6 +465,9 @@
             </case>
             <case value="17"><!--ARM_TYPE_ORCA-->
                 <layer file="arms-orca"/>
+            </case>
+            <case value="'never'">
+                <layer file="arms-fur"/>
             </case>
             <default>
                 <layer file="arms-human"/>
