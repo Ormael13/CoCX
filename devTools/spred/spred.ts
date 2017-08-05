@@ -24,7 +24,9 @@ namespace spred {
 	export function randint(n: number): number {
 		return Math.floor(Math.random() * n);
 	}
-	
+	export function randel<T>(arr:T[]):T {
+		return arr[randint(arr.length)];
+	}
 	
 	namespace FileAsker {
 		let fileReaders = {} as Dict<(data: File) => any>;
@@ -54,7 +56,7 @@ namespace spred {
 		}
 		
 		export function askFile(url: string, handler: (File) => any) {
-			let fileinput = $new('input').attr('type', 'file').attr('multiple','true').change(checkFiles);
+			let fileinput = $new('input').attr('type', 'file').attr('multiple', 'true').change(checkFiles);
 			let dropzone  = $new('p',
 				'Please select manually the ',
 				$new('code', url),
@@ -290,8 +292,8 @@ namespace spred {
 					public readonly width: number,
 					public readonly height: number,
 					src: TDrawable,
-					srcX: number,
-					srcY: number,
+					public readonly srcX: number,
+					public readonly srcY: number,
 					public dx: number,
 					public dy: number) {
 			this.canvas        = document.createElement('canvas');
@@ -355,6 +357,15 @@ namespace spred {
 	export class Spritemap {
 		public img: HTMLImageElement;
 		public sprites: Dict<Sprite> = {};
+		public file: string;
+		
+		public serialize(): string {
+			return `<spritemap file="${this.file}">\n` +
+				   Object.keys(this.sprites).map(sn => {
+					   let s = this.sprites[sn];
+					   return `\t<cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`
+				   }).join('\n') + `\n</spritemap>`;
+		}
 		
 		public isLoaded(): boolean {
 			return this.img != null;
@@ -365,8 +376,9 @@ namespace spred {
 		constructor(modeldir: string, src: Element) {
 			let x           = $(src);
 			this.sprites    = {};
+			this.file       = x.attr('file');
 			this.whenLoaded =
-				loadFile(modeldir + x.attr('file'), 'img'
+				loadFile(modeldir + this.file, 'img'
 				).then(img => {
 					x.children("cell").each((i, cell) => {
 						let name = cell.getAttribute('name');
@@ -531,10 +543,10 @@ namespace spred {
 	];
 	
 	export function defaultLayerList(): string[] {
-		return g_layergen.map(opt => opt[randint(opt.length)]
-		).map(s => (typeof s == 'string' ? [s] : s) as string[]
-		).reduce((r, e) => r.concat(e), []
-		).filter(s => s);
+		return g_layergen.map(randel)
+						 .map(s => (typeof s == 'string' ? [s] : s) as string[])
+						 .reduce((r, e) => r.concat(e), [])
+						 .filter(s => s);
 	}
 	
 	export function updateCompositeLayers(composite: Composite) {
@@ -561,6 +573,13 @@ namespace spred {
 				console.warn("Non-existing layer " + ln);
 			}
 		}
+		let commonPalette = g_model.palettes['common'];
+		for (let cpname of g_model.colorProps) {
+			let cpPal = g_model.palettes[cpname] || {};
+			let cname    = randel(Object.keys(commonPalette).concat(Object.keys(cpPal)));
+			composite.colormap[cpname] = cpPal[cname]||commonPalette[cname];
+		}
+		composite.redraw();
 		$('#ViewList').append(
 			composite.ui = $new('.card.card-secondary.d-inline-flex',
 				$new('.card-block',
@@ -593,14 +612,16 @@ namespace spred {
 							...g_model.colorProps.map(cpname =>
 								$new('.row.control-group',
 									$new('label.control-label.col-4', cpname),
-									$new('select.form-control.col-8', ...
-										[
-											$new('option', '--none--'
-											).attr('selected', 'true')
-										].concat(
-											paletteOptions(g_model.palettes['cpname'] || {}),
-											paletteOptions(g_model.palettes['common']),
-										)
+									$new('select.form-control.col-8',
+										$new('option', '--none--')
+											.attr('selected', 'true')
+											.attr('value', ''),
+										$new('optgroup',
+											...paletteOptions(g_model.palettes[cpname] || {}))
+											.attr('label', cpname + ' special'),
+										$new('optgroup',
+											...paletteOptions(commonPalette))
+											.attr('label', 'Common')
 									).change(e => {
 										let s = e.target as HTMLSelectElement;
 										if (s.value) {
@@ -609,7 +630,7 @@ namespace spred {
 											delete composite.colormap[cpname];
 										}
 										composite.redraw();
-									})
+									}).val(composite.colormap[cpname])
 								)
 							)
 						)
@@ -766,8 +787,8 @@ namespace spred {
 	export function selLayerMove(dx: number, dy: number) {
 		let layer = g_sellayer;
 		if (layer) {
-			layer.dx += dx;
-			layer.dy += dy;
+			layer.sprite.dx += dx;
+			layer.sprite.dy += dy;
 			redrawAll();
 			$('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
 								   ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
@@ -865,6 +886,34 @@ namespace spred {
 				alert("Please paste 1 image data or file");
 			});
 		});
+	}
+	
+	export function saveSpritemaps() {
+		$('#Loading').after(
+			$new('.row',
+				$new('.col-12.card.card-success',
+					$new('.card-block',
+						$new('button.ctrl.text-danger.pull-left', $new('span.fa.fa-close')
+						).click((e) => {
+							$(e.target).parents('.row').remove();
+						}),
+						$new('button.ctrl.text-info.pull-left', $new('span.fa.fa-copy')
+						).click((e) => {
+							let ta = $(e.target).parents('.row').find('textarea');
+							ta.focus().select();
+							document.execCommand('copy');
+							ta.val('Contents copied to clipboard!');
+						}),
+						$new('textarea.form-control').val(
+							g_model.spritemaps.map(s => s.serialize()).join('\n')
+						)
+					)
+				)
+			).css('flex-shrink', '0')
+		);
+		/*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>*/
 	}
 	
 	$(() => {
