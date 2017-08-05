@@ -342,8 +342,17 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
 		else outputText("Not participating");
 		outputText("\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b> ");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) outputText("Air");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) outputText("Fire");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) outputText("Water");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) outputText("Ice");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) outputText("Lightning");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) outputText("Darkness");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) addButton(0, "Air", attackingElementalAir);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 3) addButton(2, "Fire", attackingElementalFire);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 4) addButton(3, "Water", attackingElementalWater);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
 	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
@@ -365,8 +374,32 @@ public class PerkMenu extends BaseContent {
 		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 3;
 		summonsbehaviourOptions();
 	}
+	public function attackingElementalAir():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 1;
+		summonsbehaviourOptions();
+	}
 	public function attackingElementalEarth():void {
 		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 2;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalFire():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 3;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalWater():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 4;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalIce():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 5;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalLightning():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 6;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalDarkness():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 7;
 		summonsbehaviourOptions();
 	}
 

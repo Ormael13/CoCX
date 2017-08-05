@@ -166,6 +166,9 @@ package classes
 		public static const SummonedElementalsEarth:StatusEffectType        = mk("Summoned Elementals Earth");
 		public static const SummonedElementalsFire:StatusEffectType         = mk("Summoned Elementals Fire");
 		public static const SummonedElementalsWater:StatusEffectType        = mk("Summoned Elementals Water");
+		public static const SummonedElementalsIce:StatusEffectType        	= mk("Summoned Elementals Ice");
+		public static const SummonedElementalsLightning:StatusEffectType    = mk("Summoned Elementals Lightning");
+		public static const SummonedElementalsDarkness:StatusEffectType     = mk("Summoned Elementals Darkness");
 		public static const TakenGroPlus:StatusEffectType                   = mk("TakenGro+");
 		public static const TakenLactaid:StatusEffectType                   = mk("TakenLactaid");
 		public static const Tamani:StatusEffectType                         = mk("Tamani");//Used only for compatibility with old save files, otherwise no longer in use

@@ -819,37 +819,75 @@ public function basemeleeattacks():void {
 
 public function baseelementalattacks():void {
 	clearOutput();
+	var manacostofelementalattacking:Number = 0;
+	if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsEarth) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsFire) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsWater) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsIce) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsLightning) > 1 || player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) > 1) {
+		manacostofelementalattacking += 1;
+		manacostofelementalattacking += player.inte / 25;
+		manacostofelementalattacking += player.wis / 25;
+		manacostofelementalattacking = Math.round(manacostofelementalattacking);
+		if ((player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 || player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+	}
+	if (player.mana < manacostofelementalattacking) {
+		outputText("Your mana is too low to fuel your elemental attack!\n\n");
+		doNext(combatMenu);
+		return;
+	}
+	else {
+		if (manacostofelementalattacking > 0) player.mana -= manacostofelementalattacking;
+		elementalattacks();
+	}
+}
+public function elementalattacks():void {
 	var damageelemental:Number = 0;
-	damageelemental += inteligencescalingbonus() * 0.25;//30*0.25=7.5
-	damageelemental += wisdomscalingbonus() * 0.5;//83.33*0.5=41.66
+	damageelemental += inteligencescalingbonus() * 0.25;//83.33*0.25=20.84
+	damageelemental += wisdomscalingbonus() * 0.5;//250*0.5=125
 	if (damageelemental < 10) damageelemental = 10;
-//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
-//		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
-//	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && damageelemental > 150) damageelemental = 150;
+	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && damageelemental > 150) damageelemental = 150;
 	}
-//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
-//		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
-//	}
-//	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
-//		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1  && damageelemental > 50) damageelemental = 50;
-//	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && damageelemental > 150) damageelemental = 150;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1  && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2  && damageelemental > 150) damageelemental = 150;
+	}
 //	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
-//		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1  && damageelemental > 50) damageelemental = 50;
+//		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1  && damageelemental > 50) damageelemental = 50;
 //	}
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
-//	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-//		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
-//		if (player.inte > 100) critChance += 10;
-//	}
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+		if (player.inte > 100) critChance += 10;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) critChance += 10;
 	if (rand(100) < critChance) {
 		crit = true;
-		damageelemental *= 1.75;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) damageelemental *= 1.75;
+		else damageelemental *= 1.5;
 	}
-	damageelemental *= (monster.damagePercent(false, true) / 100);
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) damageelemental *= 1.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damageelemental *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damageelemental *= 0.2;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 0.2;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 0.5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damageelemental *= 2;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damageelemental *= 5;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) damageelemental *= (monster.damagePercent(false, true) / 100);
 	damageelemental = Math.round(damageelemental);
 	outputText("Your elemental hit " + monster.a + monster.short + "! ");
 	if (crit == true) {
@@ -2457,10 +2495,10 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
 	}
 	if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
 	//Determine if critical hit!
 	var crit:Boolean = false;

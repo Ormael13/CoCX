@@ -404,6 +404,24 @@ package classes
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
+		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
+				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",// Rise by 1 maximum limit of controled elementals.
+				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
+		public static const ElementalConjurerResolve:PerkType = mk("Elemental Conjurer Resolve", "Elemental Conjurer Resolve",
+				"Your mental attributes are at the cost of weakening physical ones.",// Increase by 1 maximum amount of elementals that conjuer can safely command.
+				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse mental perfection at the cost of physical weakening.");
+		public static const ElementalContractRank1:PerkType = mk("Elemental Contract Rank 1", "Elemental Contract Rank 1",
+				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
+				"You choose 'Elemental Contract Rank 1' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank2:PerkType = mk("Elemental Contract Rank 2", "Elemental Contract Rank 2",
+				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 2.",
+				"You choose 'Elemental Contract Rank 2' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank3:PerkType = mk("Elemental Contract Rank 3", "Elemental Contract Rank 3",
+				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 3.",
+				"You choose 'Elemental Contract Rank 3' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
+				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
+				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elemnts that aren't classified as one of four traditional.");
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
@@ -2051,7 +2069,17 @@ package classes
 		// WISDOM
 		//------------
 		JobElementalConjurer.requireWis(10);
+		ElementalConjurerResolve.requirePerk(JobElementalConjurer)
+								.requireWis(20);
+		ElementalContractRank1.requirePerk(ElementalConjurerResolve)
+							  .requireWis(25);
+		ElementsOfMarethBasics.requirePerk(ElementalContractRank1)
+							  .requireWis(30);
 		//Tier 1 Wisdom perks
+		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+								   .requireWis(40)
+								   .requireLevel(6);
+		//ElementalContractRank2.requirePerk(ElementalConjurerDedication).requirePerk(ElementalContractRank1).requireWis(50).requireLevel(6);
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
 			   .requireLevel(12);
@@ -2059,8 +2087,9 @@ package classes
 			 .requireWis(75)
 			 .requireStr(50)
 			 .requireLevel(12);
+		//ElementalContractRank3.requirePerk(ElementalConjurerDedication).requirePerk(ElementalContractRank2).requireWis(75).requireLevel(12);
 		//Tier 3 Wisdom perks
-
+		
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)

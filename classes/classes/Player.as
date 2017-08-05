@@ -4843,6 +4843,20 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
+				maxStr -= (20 * (1 + newGamePlusMod));
+				maxTou -= (20 * (1 + newGamePlusMod));
+				maxSpe -= (20 * (1 + newGamePlusMod));
+				maxInt += (25 * (1 + newGamePlusMod));
+				maxWis += (50 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
+				maxStr -= (40 * (1 + newGamePlusMod));
+				maxTou -= (40 * (1 + newGamePlusMod));
+				maxSpe -= (40 * (1 + newGamePlusMod));
+				maxInt += (50 * (1 + newGamePlusMod));
+				maxWis += (100 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
 				maxStr += (10 * (1 + newGamePlusMod));
 				maxTou += (10 * (1 + newGamePlusMod));
