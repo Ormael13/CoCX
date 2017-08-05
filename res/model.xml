@@ -129,6 +129,9 @@
         <property name="scales" src="scalesColor" default="#ffffff">
             <!--Scales overrides go here-->
         </property>
+        <property name="chitin" src="chitinColor" default="#ffffff">
+            <!--Chitin overrides go here-->
+        </property>
         <property name="skin" src="skinTone" default="#ffffff">
             <!--Skin color overrides go here-->
             <color name="pale">#f2e8e3</color>
@@ -170,9 +173,13 @@
         <key src="#009900" base="fur" transform="darken(25)"/>
         <key src="#003300" base="fur" transform="darken(50)"/>
         <key src="#8888FF" base="scales" transform="lighten(25)"/>
-        <key src="#0000CC" base="scales"/>
-        <key src="#000099" base="scales" transform="darken(25)"/>
+        <key src="#4444FF" base="scales"/>
+        <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
+        <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
+        <key src="#44CCFF" base="chitin"/>
+        <key src="#0099CC" base="chitin" transform="darken(25)"/>
+        <key src="#006666" base="chitin" transform="darken(50)"/>
         <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
         <key src="#FACE8D" base="skin"/>
         <key src="#BC9B6D" base="skin" transform="darken(25)"/>
@@ -180,7 +187,7 @@
         <key src="#1E1911" base="skin" transform="darken(75)"/>
         <!--<key src="#F9A98E" base="nipples"/>-->
         <!--<key src="#FFFFFF" base="sclera"/>-->
-        <key src="#0026FF" base="iris"/>
+        <!--<key src="#0026FF" base="iris"/>-->
     </colorkeys>
     <!--<spritesheet file="char1.png" cellwidth="192" cellheight="192">
         <row>name1,name2,,,,,,,,,,,,,</row>
