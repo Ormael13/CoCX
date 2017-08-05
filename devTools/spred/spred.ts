@@ -9,6 +9,7 @@ type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | Image
 
 namespace spred {
 	const basedir = window['spred_basedir'] || '../../';
+	const canAjax = location.protocol != 'file:';
 	
 	export function RGBA(i: tinycolorInstance): number {
 		let rgb = i.toRgb();
@@ -19,8 +20,84 @@ namespace spred {
 				   | (rgb.r & 0xff)
 			   ) >>> 0;
 	}
-	export function randint(n:number):number {
+	
+	export function randint(n: number): number {
 		return Math.floor(Math.random() * n);
+	}
+	
+	
+	namespace FileAsker {
+		let fileReaders = {} as Dict<(data: File) => any>;
+		
+		export function filename(f: string): string {
+			let j = f.lastIndexOf('/');
+			if (j >= 0) return f.substring(j + 1);
+			return f;
+		}
+		
+		export function wantFile(f: string) {
+			return filename(f) in fileReaders;
+		}
+		
+		function checkFiles(e: Event) {
+			let filesArray = (e.target as HTMLInputElement).files;
+			for (let i = 0; i < filesArray.length; i++) {
+				let file    = filesArray[i];
+				let name    = filename(file.name);
+				let handler = fileReaders[name];
+				if (handler) {
+					delete fileReaders[name];
+					handler(file);
+				}
+			}
+			
+		}
+		
+		export function askFile(url: string, handler: (File) => any) {
+			let fileinput = $new('input').attr('type', 'file').attr('multiple','true').change(checkFiles);
+			let dropzone  = $new('p',
+				'Please select manually the ',
+				$new('code', url),
+				' file:',
+				fileinput);
+			$('#LoadingList').append(dropzone);
+			$('#Loading').show();
+			fileReaders[filename(url)] = (file) => {
+				dropzone.remove();
+				$('#Loading').toggle($('#LoadingList>*').length > 0);
+				handler(file);
+			}
+		}
+	}
+	
+	
+	export function loadFile(url: string, format: 'xml'): Promise<XMLDocument>;
+	export function loadFile(url: string, format: 'text'): Promise<string>;
+	export function loadFile(url: string, format: 'img'): Promise<HTMLImageElement>;
+	export function loadFile(url: string, format: string): Promise<any> {
+		
+		return new Promise<any>((resolve, reject) => {
+			if (!canAjax) {
+				FileAsker.askFile(url, file => {
+					if (format == 'img') {
+						url2img(URL.createObjectURL(file)).then(resolve);
+					} else {
+						let fr    = new FileReader();
+						fr.onload = () => {
+							if (format == 'xml') {
+								resolve($.parseXML(fr.result));
+							} else {
+								resolve(fr.result);
+							}
+							return;
+						};
+						fr.readAsText(file);
+					}
+				});
+			} else if (format != 'img') {
+				$.ajax(url, {dataType: format}).then(resolve).fail(reject);
+			} else url2img(url).then(resolve);
+		});
 	}
 	
 	/*
@@ -77,37 +154,38 @@ namespace spred {
 	}
 	
 	export class Layer {
-		public ui:JQuery;
+		public ui: JQuery;
 		
-		constructor(
-			public name:string,
-			public readonly sprite:Sprite,
-			public dx:number,
-			public dy:number
-		) {
-		
+		constructor(public name: string,
+					public readonly sprite: Sprite,
+					public dx: number,
+					public dy: number) {
+			
 		}
 		
 		public updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
-			let cw=this.sprite.width,ch = this.sprite.height;
-			c2d.drawImage(this.sprite.canvas, 0, 0, cw>ch?32:32*ch/cw, cw>ch?32*ch/cw:32);
+			let cw  = this.sprite.width, ch = this.sprite.height;
+			c2d.drawImage(this.sprite.canvas, 0, 0, cw > ch ? 32 : 32 * ch / cw, cw > ch ? 32 * ch / cw : 32);
 		}
 	}
 	
 	export class Composite {
 		public ui: JQuery;
 		
-		private _layers: Dict<boolean> = {};
+		private _layers: Dict<boolean>         = {};
 		public readonly canvas: HTMLCanvasElement;
 		public readonly colormap: Dict<string> = {};
 		
 		public get layerNames(): string[] {
-			return this.model.layers.filter(l => this._layers[l.name]).map(l=>l.name);
+			return this.model.layers.filter(l => this._layers[l.name]).map(l => l.name);
 		}
 		
 		public set layerNames(value: string[]) {
-			this._layers = value.reduce((r,e)=>{r[e]=true; return r},{} as Dict<boolean>);
+			this._layers = value.reduce((r, e) => {
+				r[e] = true;
+				return r
+			}, {} as Dict<boolean>);
 		}
 		
 		public redraw(x: number = 0,
@@ -135,15 +213,15 @@ namespace spred {
 				let layer = a[i];
 				if (this._layers[layer.name]) {
 					let sprite = this.model.sprites[layer.name];
-					let idata = sprite.ctx2d.getImageData(x, y, w, h);
-					idata     = colormap(idata, cmap);
+					let idata  = sprite.ctx2d.getImageData(x, y, w, h);
+					idata      = colormap(idata, cmap);
 					p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
 							let sx = x, sy = y;
 							let sw = w;
 							let sh = h;
-							let dx = layer.dx+sprite.dx;
-							let dy = layer.dy+sprite.dy;
+							let dx = layer.dx + sprite.dx;
+							let dy = layer.dy + sprite.dy;
 							if (dx < 0) {
 								sx -= dx;
 								dx = 0;
@@ -204,8 +282,8 @@ namespace spred {
 		
 		updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
-			let cw=this.width,ch = this.height;
-			c2d.drawImage(this.canvas, 0, 0, cw>ch?32:32*ch/cw, cw>ch?32*ch/cw:32);
+			let cw  = this.width, ch = this.height;
+			c2d.drawImage(this.canvas, 0, 0, cw > ch ? 32 : 32 * ch / cw, cw > ch ? 32 * ch / cw : 32);
 		}
 		
 		constructor(public readonly name: string,
@@ -226,11 +304,6 @@ namespace spred {
 	
 	function url2img(src: string): Promise<HTMLImageElement> {
 		return new Promise<HTMLImageElement>((resolve, reject) => {
-			let i2 = $('img[src="'+ src+ '"]');
-			if (i2[0]) {
-				resolve(i2[0] as HTMLImageElement);
-				return
-			}
 			let img    = document.createElement('img');
 			img.onload = (e) => {
 				resolve(img);
@@ -259,7 +332,7 @@ namespace spred {
 			this.sprites    = {};
 			
 			this.whenLoaded =
-				url2img(modeldir + x.attr('file')
+				loadFile(modeldir + x.attr('file'), 'img'
 				).then(img => {
 					let positions = {} as Dict<[number, number]>;
 					x.children("row").each((i, row) => {
@@ -273,7 +346,7 @@ namespace spred {
 							  this.sprites[key] = new Sprite(key, this.cellheight, this.cellwidth, img, positions[key][0], positions[key][1], 0, 0);
 						  });
 					this.img = img;
-					console.log('Loaded spritesheet '+img.src);
+					console.log('Loaded spritesheet ' + img.src);
 					return this;
 				});
 		}
@@ -293,14 +366,14 @@ namespace spred {
 			let x           = $(src);
 			this.sprites    = {};
 			this.whenLoaded =
-				url2img(modeldir + x.attr('file')
+				loadFile(modeldir + x.attr('file'), 'img'
 				).then(img => {
 					x.children("cell").each((i, cell) => {
-						let name           = cell.getAttribute('name');
-						let rect = (cell.getAttribute('rect')||'').match(/^(\d+),(\d+),(\d+),(\d+)$/);
-						let x,y,w,h;
+						let name = cell.getAttribute('name');
+						let rect = (cell.getAttribute('rect') || '').match(/^(\d+),(\d+),(\d+),(\d+)$/);
+						let x, y, w, h;
 						if (rect) {
-							[x,y,w,h] = [+rect[1],+rect[2],+rect[3],+rect[4]];
+							[x, y, w, h] = [+rect[1], +rect[2], +rect[3], +rect[4]];
 						} else {
 							x = +cell.getAttribute('x');
 							y = +cell.getAttribute('y');
@@ -311,7 +384,7 @@ namespace spred {
 							name, w, h, img, x, y,
 							+(cell.getAttribute('dx') || '0'), +(cell.getAttribute('dy') || '0'));
 					});
-					console.log('Loaded spritemap '+img.src);
+					console.log('Loaded spritemap ' + img.src);
 					return this;
 				});
 		}
@@ -331,7 +404,7 @@ namespace spred {
 		public spritesheets: Spritesheet[];
 		public spritemaps: Spritemap[];
 		public sprites: Dict<Sprite> = {};
-		public layers: Layer[]  = [];
+		public layers: Layer[]       = [];
 		public palettes: Dict<Dict<string>>;
 		public colorProps: string[]  = [];
 		public readonly whenLoaded: Promise<Model>;
@@ -415,21 +488,21 @@ namespace spred {
 					}
 					xmodel.find('layer').each((i, x) => {
 						let ln     = x.getAttribute('file');
-						let ldx    = +(x.getAttribute('dx')||'0');
-						let ldy    = +(x.getAttribute('dy')||'0');
+						let ldx    = +(x.getAttribute('dx') || '0');
+						let ldy    = +(x.getAttribute('dy') || '0');
 						let sprite = this.sprites[ln];
 						let lid: string;
 						if (x.id) {
 							lid = '#' + x.id;
-						} else if (ldx||ldy) {
-							lid = ln+'@'+ldx+','+ldy;
+						} else if (ldx || ldy) {
+							lid = ln + '@' + ldx + ',' + ldy;
 						} else {
 							lid = ln;
 						}
 						if (!sprite) {
-							console.warn("Layer "+lid+" refered non-existing sprite "+ln);
+							console.warn("Layer " + lid + " refered non-existing sprite " + ln);
 						} else {
-							if (this.layers.every(l=>l.name!=lid)) {
+							if (this.layers.every(l => l.name != lid)) {
 								this.layers.push(new Layer(lid, sprite, ldx, ldy));
 							}
 						}
@@ -440,28 +513,28 @@ namespace spred {
 	}
 	
 	export let g_model: Model;
-	export let g_composites: Composite[] = [];
-	export let g_selsprite: string        = '';
-	export let g_sellayer: Layer        = null;
-	export let g_layergen: (string|string[])[][] = [
-		['face-human','face-human','face-fur','face-orca'],
-		['eyes-human','eyes-cat','eyes-spider','eyes-sandtrap','eyes-manticore','eyes-orca'],
-		[['hair0f','hair0b'],['hair0f','hair0b'],[],'hair-gorgon'],
-		['ears-human','ears-fur',['ears-fox_fg','ears-fox_bg'],'ears-wolf','ears-cat','ears-orca'],
-		[[],[],[],'horns2S','horns2L'],
-		['breasts0','breastsD'],
-		['arms-human','arms-fur','arms-manticore',['arms-orca','fins-orca']],
-		['legs-human','legs-furpaws','legs-naga','legs-kraken','legs-scylla','legs-manticore_sit','legs-orca'],
-		['torso-human','torso-human','torso-fur','torso-orca'],
-		[[],'tail-cat','tail-cat2','tail-fox1',['tail-fox1','tail-fox2'],'tail-manticore','tail-orca'],
-		[[],[],[],['wings-mantibig_bg','wings-mantibig_fg']]
+	export let g_composites: Composite[]           = [];
+	export let g_selsprite: string                 = '';
+	export let g_sellayer: Layer                   = null;
+	export let g_layergen: (string | string[])[][] = [
+		['face-human', 'face-human', 'face-fur', 'face-orca'],
+		['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
+		[['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], 'hair-gorgon'],
+		['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
+		[[], [], [], 'horns2S', 'horns2L'],
+		['breasts0', 'breastsD'],
+		['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca']],
+		['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca'],
+		['torso-human', 'torso-human', 'torso-fur', 'torso-orca'],
+		[[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca'],
+		[[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg']]
 	];
 	
-	export function defaultLayerList():string[] {
-		return g_layergen.map(opt=>opt[randint(opt.length)]
-		).map(s=>(typeof s == 'string' ? [s] : s) as string[]
-		).reduce((r,e)=>r.concat(e),[]
-		).filter(s=>s);
+	export function defaultLayerList(): string[] {
+		return g_layergen.map(opt => opt[randint(opt.length)]
+		).map(s => (typeof s == 'string' ? [s] : s) as string[]
+		).reduce((r, e) => r.concat(e), []
+		).filter(s => s);
 	}
 	
 	export function updateCompositeLayers(composite: Composite) {
@@ -484,8 +557,8 @@ namespace spred {
 	export function addCompositeView(layers: string[], zoom: number = 1): Composite {
 		let composite = new Composite(g_model, layers, zoom);
 		for (let ln of layers) {
-			if (g_model.layers.every(l=>l.name!=ln)) {
-				console.warn("Non-existing layer "+ln);
+			if (g_model.layers.every(l => l.name != ln)) {
+				console.warn("Non-existing layer " + ln);
 			}
 		}
 		$('#ViewList').append(
@@ -504,11 +577,11 @@ namespace spred {
 						).click(() => {
 							composite.zoom--;
 						}),
-						$new('button.ctrl',$new('span.fa.fa-reorder')
+						$new('button.ctrl', $new('span.fa.fa-reorder')
 						).click(e => {
 							composite.ui.find('.LayerBadges').toggleClass('collapse');
 						}),
-						$new('button.ctrl',$new('span.fa.fa-paint-brush')
+						$new('button.ctrl', $new('span.fa.fa-paint-brush')
 						).click(e => {
 							composite.ui.find('.Colors').toggleClass('collapse');
 						})
@@ -551,7 +624,7 @@ namespace spred {
 			)
 		);
 		let drawing       = false;
-		let dragging = false;
+		let dragging      = false;
 		let dirty         = false;
 		let x0            = g_model.width, y0 = g_model.height, x1 = -1, y1 = -1;
 		let color: string = null;
@@ -582,8 +655,8 @@ namespace spred {
 					break;
 				case 'drag':
 					dragging = true;
-					x0 = e.offsetX;
-					y0 = e.offsetY;
+					x0       = e.offsetX;
+					y0       = e.offsetY;
 					return;
 			}
 			drawing = true;
@@ -592,16 +665,16 @@ namespace spred {
 			if (drawing) {
 				putPixel(e.offsetX, e.offsetY);
 			} else if (dragging) {
-				let dx = ((e.offsetX-x0)/composite.zoom)|0;
-				let dy = ((e.offsetY-y0)/composite.zoom)|0;
+				let dx = ((e.offsetX - x0) / composite.zoom) | 0;
+				let dy = ((e.offsetY - y0) / composite.zoom) | 0;
 				if (dx || dy) {
-					selLayerMove(dx,dy);
+					selLayerMove(dx, dy);
 					x0 = e.offsetX;
 					y0 = e.offsetY;
 				}
 			}
 		}).on('mouseup mouseout', e => {
-			drawing = false;
+			drawing  = false;
 			dragging = false;
 			if (dirty) {
 				redrawAll(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
@@ -630,7 +703,7 @@ namespace spred {
 	}
 	
 	export function swapLayers(a: number, b: number) {
-		let l0                = g_model.layers[a];
+		let l0            = g_model.layers[a];
 		g_model.layers[a] = g_model.layers[b];
 		g_model.layers[b] = l0;
 		showSpriteList(g_model);
@@ -646,6 +719,7 @@ namespace spred {
 		}
 		*/
 	}
+	
 	function showLayerList(model: Model) {
 		let list = $('#LayerList');
 		for (let layer of model.layers) {
@@ -668,15 +742,16 @@ namespace spred {
 		}*/
 	}
 	
-	export function selLayer(layer:Layer) {
+	export function selLayer(layer: Layer) {
 		g_sellayer = layer;
 		$('#SelLayerName').html(layer.name);
-		$('#SelLayerPos').html('(dx = '+(layer.dx+layer.sprite.dx)+
-							   ', dy = '+(layer.dy+layer.sprite.dy)+')');
+		$('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
+							   ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
 		$('.LayerListItem').removeClass('selected');
 		layer.ui.addClass('selected');
 		$('#SelLayerCanvas').html('').append(layer.sprite.canvas);
 	}
+	
 	/*
 	export function selLayerUp() {
 		let i = g_model.layers.findIndex(layer=>layer.name==g_sellayer);
@@ -688,16 +763,17 @@ namespace spred {
 		if (i >= 0 && i < g_model.layerNames.length - 1) swapLayers(i, i + 1);
 	}
 	*/
-	export function selLayerMove(dx:number,dy:number) {
+	export function selLayerMove(dx: number, dy: number) {
 		let layer = g_sellayer;
 		if (layer) {
 			layer.dx += dx;
 			layer.dy += dy;
 			redrawAll();
-			$('#SelLayerPos').html('(dx = '+(layer.dx+layer.sprite.dx)+
-								   ', dy = '+(layer.dy+layer.sprite.dy)+')');
+			$('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
+								   ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
 		}
 	}
+	
 	export function colormap(src: ImageData, map: [number, number][]): ImageData {
 		let dst  = new ImageData(src.width, src.height);
 		let sarr = new Uint32Array(src.data.buffer);
@@ -743,7 +819,7 @@ namespace spred {
 		g_model.whenLoaded.then((model) => {
 			for (let ln in model.sprites) {
 				let sprite = model.sprites[ln];
-				sprite.ui = $new('div.LayerListItem',
+				sprite.ui  = $new('div.LayerListItem',
 					$new('label', ln),
 					newCanvas(32, 32)
 				).click(e => selSprite(ln));
@@ -762,9 +838,9 @@ namespace spred {
 			);
 			for (let layer of model.layers) {
 				layer.ui = $new('div.LayerListItem',
-					$new('label',layer.name),
-					newCanvas(32,32)
-				).click(e=>selLayer(layer));
+					$new('label', layer.name),
+					newCanvas(32, 32)
+				).click(e => selLayer(layer));
 				layer.updateUI();
 			}
 			showLayerList(model);
@@ -793,25 +869,6 @@ namespace spred {
 	
 	$(() => {
 		
-		$.ajax(basedir + 'res/model.xml', {
-			dataType: 'xml',
-		}).then(loadModel
-		).fail(err=>{
-			console.log(err);
-			$('#Loading').show();
-			$('#ManualFile').change(e=>{
-				let filesArray = (e.target as HTMLInputElement).files;
-				for (let i=0;i<filesArray.length;i++) {
-					let file = filesArray[i];
-					if (file.name.indexOf('.xml')>=0) {
-						let fr = new FileReader();
-						fr.onload = ()=>loadModel($.parseXML(fr.result));
-						fr.readAsText(file);
-						$('#Loading').hide();
-						return;
-					}
-				}
-			});
-		});
+		loadFile(basedir + 'res/model.xml', 'xml').then(loadModel);
 	});
 }

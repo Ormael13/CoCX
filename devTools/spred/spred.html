@@ -88,17 +88,15 @@
 			</button>
 		</div>
 	</div>
-	<div class="row" id="Loading" style="display: none;flex-shrink:0;">
+	<div class="row" id="Loading" style="flex-shrink:0;display:none">
 		<div class="col-12 card card-warning">
-			<div class="card-block ">
-				<h4 class="card-title">Loading...</h4>
-			</div>
 			<div class="card-block">
-				<h5>Unable to load data!</h5>
-				<p>
-					Please select manually the <code>res/model.xml</code> file:
-					<input type="file" id="ManualFile">
-				</p>
+				<h5 class="card-header">Filesystem inaccessible</h5>
+
+				<div id="LoadingList"></div>
+				<h6>
+					<span class="text-muted small">(Tip: you can upload multiple files at once)</span>
+				</h6>
 			</div>
 		</div>
 	</div>
