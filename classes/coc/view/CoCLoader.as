@@ -30,39 +30,24 @@ public class CoCLoader {
 //	[Embed(source="../../../res/char1.png", mimeType="image/png")]
 //	public static var BUNDLE_RES_CHAR1_PNG:Class;
 //	IMAGE_BUNDLE["res/char1.png"] = ldbmp(BUNDLE_RES_CHAR1_PNG);
-	[Embed(source="../../../res/charview/arms.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_ARMS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/arms.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ARMS_PNG);
-	[Embed(source="../../../res/charview/breasts.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_BREASTS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/breasts.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BREASTS_PNG);
-	[Embed(source="../../../res/charview/ears.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_EARS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/ears.png"] = ldbmp(BUNDLE_RES_CHARVIEW_EARS_PNG);
-	[Embed(source="../../../res/charview/eyes.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_EYES_PNG:Class;
-	IMAGE_BUNDLE["res/charview/eyes.png"] = ldbmp(BUNDLE_RES_CHARVIEW_EYES_PNG);
-	[Embed(source="../../../res/charview/face.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_FACE_PNG:Class;
-	IMAGE_BUNDLE["res/charview/face.png"] = ldbmp(BUNDLE_RES_CHARVIEW_FACE_PNG);
-	[Embed(source="../../../res/charview/hair.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_HAIR_PNG:Class;
-	IMAGE_BUNDLE["res/charview/hair.png"] = ldbmp(BUNDLE_RES_CHARVIEW_HAIR_PNG);
-	[Embed(source="../../../res/charview/horns.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_HORNS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/horns.png"] = ldbmp(BUNDLE_RES_CHARVIEW_HORNS_PNG);
-	[Embed(source="../../../res/charview/legs.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_LEGS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/legs.png"] = ldbmp(BUNDLE_RES_CHARVIEW_LEGS_PNG);
-	[Embed(source="../../../res/charview/tail.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_TAIL_PNG:Class;
-	IMAGE_BUNDLE["res/charview/tail.png"] = ldbmp(BUNDLE_RES_CHARVIEW_TAIL_PNG);
-	[Embed(source="../../../res/charview/torso.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_TORSO_PNG:Class;
-	IMAGE_BUNDLE["res/charview/torso.png"] = ldbmp(BUNDLE_RES_CHARVIEW_TORSO_PNG);
-	[Embed(source="../../../res/charview/wings.png", mimeType="image/png")]
-	public static var BUNDLE_RES_CHARVIEW_WINGS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/wings.png"] = ldbmp(BUNDLE_RES_CHARVIEW_WINGS_PNG);
+	[Embed(source="../../../res/charview/alraune.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_ALRAUNE_PNG:Class;
+	IMAGE_BUNDLE["res/charview/alraune.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ALRAUNE_PNG);
+	[Embed(source="../../../res/charview/basic.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_BASIC_PNG:Class;
+	IMAGE_BUNDLE["res/charview/basic.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BASIC_PNG);
+	[Embed(source="../../../res/charview/beasts.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_BEASTS_PNG:Class;
+	IMAGE_BUNDLE["res/charview/beasts.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BEASTS_PNG);
+	[Embed(source="../../../res/charview/hinezumi.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_HINEZUMI_PNG:Class;
+	IMAGE_BUNDLE["res/charview/hinezumi.png"] = ldbmp(BUNDLE_RES_CHARVIEW_HINEZUMI_PNG);
+	[Embed(source="../../../res/charview/manticore.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_MANTICORE_PNG:Class;
+	IMAGE_BUNDLE["res/charview/manticore.png"] = ldbmp(BUNDLE_RES_CHARVIEW_MANTICORE_PNG);
+	[Embed(source="../../../res/charview/orca.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_ORCA_PNG:Class;
+	IMAGE_BUNDLE["res/charview/orca.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ORCA_PNG);
 
 	private static function ldbmp(c:Class):BitmapData {
 		return c ? ((new c() as Bitmap).bitmapData) : null;

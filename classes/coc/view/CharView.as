@@ -3,6 +3,7 @@
  */
 package coc.view {
 import coc.view.charview.CaseBlock;
+import coc.view.charview.CharViewSprite;
 import coc.view.charview.IfBlock;
 import coc.view.charview.LayerPart;
 import coc.view.charview.ModelPart;
@@ -20,7 +21,7 @@ import flash.geom.Rectangle;
 public class CharView extends Sprite {
 
 	private var loading:Boolean;
-	private var bitmaps:Object = {}; // layer.@file -> BitmapData
+	private var sprites:Object = {}; // spritesheet/spritemap -> CharViewSprite
 	private var composite:CompositeImage;
 	private var ss_total:int;
 	private var ss_loaded:int;
@@ -64,7 +65,7 @@ public class CharView extends Sprite {
 		}
 	}
 	private function clearAll():void {
-		this.bitmaps       = {};
+		this.sprites       = {};
 		this.composite     = null;
 		this.ss_total      = 0;
 		this.ss_loaded     = 0;
@@ -237,10 +238,11 @@ public class CharView extends Sprite {
 				var w:int         = rect?int(rect[3]):cell.@w;
 				var h:int         = rect?int(rect[4]):cell.@h;
 				var f:String      = cell.@name;
-				// TODO dx dy
+				var dx:int = cell.@dx;
+				var dy:int = cell.@dy;
 				var bd:BitmapData = new BitmapData(w, h, true, 0);
 				bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
-				bitmaps[f] = bd;
+				sprites[f] = new CharViewSprite(bd,dx,dy);
 			}
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers(xml);
@@ -267,7 +269,7 @@ public class CharView extends Sprite {
 					if (f) {
 						var bd:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
 						bd.copyPixels(result, new Rectangle(x, y, cellwidth, cellheight), new Point(0, 0));
-						bitmaps[f] = bd;
+						sprites[f] = new CharViewSprite(bd,0,0);
 					}
 					x += cellwidth;
 				}
@@ -281,14 +283,15 @@ public class CharView extends Sprite {
 		const filename:String = item.@file;
 		const dx:int          = item.@dx || 0;
 		const dy:int          = item.@dy || 0;
-		if (filename in bitmaps) {
+		if (filename in sprites) {
 			file_loaded++;
-			composite.addLayer(filename, bitmaps[filename], dx, dy, false);
+			var sprite:CharViewSprite = sprites[filename];
+			composite.addLayer(filename, sprite.bmp, dx+sprite.dx, dy+sprite.dy, false);
 			if (pendingRedraw) redraw();
 			return;
 		}
-		bitmaps[filename] = new BitmapData(1, 1);
-		composite.addLayer(filename, bitmaps[filename], dx, dy, false);
+		sprites[filename] = new CharViewSprite(new BitmapData(1, 1),0,0);
+		composite.addLayer(filename, sprites[filename].bmp, dx, dy, false);
 		var path:String = xml.@dir + filename;
 		if (loaderLocation == "external") trace('loading layer ' + path);
 		CoCLoader.loadImage(path, function (success:Boolean, bmp:BitmapData, e:Event):void {
@@ -298,8 +301,8 @@ public class CharView extends Sprite {
 				if (pendingRedraw) redraw();
 				return;
 			}
-			bitmaps[filename] = bmp;
-			composite.replaceLayer(filename, bitmaps[filename], dx, dy);
+			sprites[filename] = new CharViewSprite(bmp,0,0);
+			composite.replaceLayer(filename, sprites[filename].bmp, dx, dy);
 			file_loaded++;
 			if (pendingRedraw) redraw();
 		});

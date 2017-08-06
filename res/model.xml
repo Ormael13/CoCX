@@ -405,14 +405,14 @@
             <case value="0"><!--EARS_HUMAN-->
                 <layer file="ears-human"/>
             </case>
-            <case value="2"><!--EARS_DOG--><!--<layer file="ears-wolf"/>--></case>
-            <case value="5"><!--EARS_CAT--><!--<layer file="ears-cat"/>--></case>
+            <case value="2"><!--EARS_DOG--><!--fg--></case>
+            <case value="5"><!--EARS_CAT--><!--fg--></case>
             <case value="9"><!--EARS_FOX-->
                 <layer file="ears-fox_bg"/><!--also ears-fox_fg-->
             </case>
-            <case value="18"><!--EARS_WOLF--><!--<layer file="ears-wolf"/>--></case>
-            <case value="20"><!--EARS_YETI--><!--<layer file="ears-fur"/>--></case>
-            <case value="21"><!--EARS_ORCA--><!--<layer file="ears-orca"/>--></case>
+            <case value="18"><!--EARS_WOLF--><!--fg--></case>
+            <case value="20"><!--EARS_YETI--><!--fg--></case>
+            <case value="21"><!--EARS_ORCA--><!--fg--></case>
             <default>
                 <layer file="ears-human"/>
             </default>
@@ -567,7 +567,7 @@
             <case value="28"><!--TAIL_TYPE_MANTICORE_PUSSYTAIL-->
                 <layer file="tail-manticore"/>
             </case>
-            <case value="37"><!--TAIL_TYPE_ORCA-->
+            <case value="31"><!--TAIL_TYPE_ORCA-->
                 <layer file="tail-orca"/>
             </case>
             <default>
