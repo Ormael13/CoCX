@@ -205,6 +205,9 @@
     <spritemap file="alraune.png">
         <cell rect="1,1,59,20" name="horns-orchid_bg" dx="62" dy="13"/>
         <cell rect="1,23,59,20" name="horns-orchid_fg" dx="68" dy="16"/>
+        <cell rect="63,1,73,51" name="arms-alraune" dx="58" dy="63"/>
+        <cell rect="2,55,128,104" name="legs-alraune" dx="27" dy="89"/>
+        <cell rect="2,161,149,124" name="legs-liliraune" dx="-3" dy="52"/>
     </spritemap>
     <spritemap file="basic.png">
         <cell rect="1,1,38,44" name="face-human" dx="74" dy="23"/>
@@ -216,6 +219,7 @@
         <cell rect="99,58,59,54" name="hair0b" dx="68" dy="13"/>
         <cell rect="161,2,23,11" name="breasts0" dx="83" dy="74"/>
         <cell rect="161,15,38,22" name="breastsD" dx="77" dy="68"/>
+        <cell rect="161,39,38,22" name="breastsDfur" dx="77" dy="68"/>
         <cell rect="202,2,50,62" name="torso-human" dx="71" dy="65"/>
         <cell rect="202,66,50,62" name="torso-fur" dx="71" dy="65"/>
         <cell rect="255,2,73,51" name="arms-human" dx="56" dy="64"/>
@@ -226,7 +230,6 @@
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes-cat" dx="74" dy="38"/>
         <cell rect="1,14,32,11" name="eyes-spider" dx="74" dy="38"/>
-        <cell rect="1,27,32,11" name="eyes-sandtrap" dx="74" dy="39"/>
         <cell rect="36,1,56,47" name="tail-fox1" dx="41" dy="92"/>
         <cell rect="36,50,50,53" name="tail-fox2" dx="95" dy="86"/>
         <cell rect="95,1,48,51" name="tail-cat" dx="96" dy="67"/>
@@ -237,10 +240,28 @@
         <cell rect="146,102,56,23" name="ears-cat" dx="65" dy="13"/>
         <cell rect="211,1,56,20" name="horns2S" dx="68" dy="20"/>
         <cell rect="211,23,56,38" name="horns2L" dx="68" dy="5"/>
-        <cell rect="314,2,84,59" name="hair-gorgon" dx="50" dy="19"/>
-        <cell rect="12,201,128,92" name="legs-naga" dx="38" dy="83"/>
-        <cell rect="146,213,117,116" name="legs-kraken" dx="41" dy="86"/>
-        <cell rect="266,172,118,158" name="legs-scylla" dx="40" dy="45"/>
+        <cell rect="24,132,175,118" name="legs-drider" dx="43" dy="55"/>
+        <cell rect="241,106,143,107" name="legs-centaur" dx="63" dy="91"/>
+        <cell rect="146,272,117,117" name="legs-kraken" dx="41" dy="86"/>
+        <cell rect="266,231,118,158" name="legs-scylla" dx="40" dy="45"/>
+    </spritemap>
+    <spritemap file="chitin.png">
+        <cell rect="23,4,55,50" name="legs-bee" dx="68" dy="115"/>
+        <cell rect="19,57,59,45" name="tail-bee_abdomen" dx="99" dy="81"/>
+        <cell rect="33,106,43,25" name="antennae-bee" dx="66" dy="5"/>
+        <cell rect="27,135,44,45" name="face-bee" dx="72" dy="23"/>
+        <cell rect="23,184,55,69" name="torso-bee" dx="68" dy="58"/>
+        <cell rect="12,256,71,54" name="arms-bee" dx="57" dy="59"/>
+        <cell rect="87,258,72,51" name="arms-bee2" dx="60" dy="61"/>
+        <cell rect="29,317,48,23" name="breastsDbee" dx="74" dy="68"/>
+        <cell rect="4,344,89,54" name="wings-bee" dx="51" dy="68"/>
+        <cell rect="312,19,32,11" name="eyes-sandtrap" dx="75" dy="38"/>
+        <cell rect="304,42,45,27" name="breastsDchitin" dx="73" dy="64"/>
+        <cell rect="305,72,53,50" name="legs-chitin" dx="69" dy="115"/>
+        <cell rect="303,130,51,53" name="face-chitin" dx="68" dy="18"/>
+        <cell rect="278,194,92,58" name="arms-chitin" dx="44" dy="56"/>
+        <cell rect="294,255,70,66" name="torso-chitin" dx="61" dy="64"/>
+        <cell rect="281,325,94,59" name="arms-chitin2" dx="45" dy="60"/>
     </spritemap>
     <spritemap file="manticore.png">
         <cell rect="2,2,32,11" name="eyes-manticore" dx="74" dy="38"/>
@@ -259,6 +280,19 @@
         <cell rect="85,132,66,122" name="tail-orca" dx="110" dy="38"/>
         <cell rect="124,20,72,26" name="fins-orca" dx="65" dy="66"/>
         <cell rect="166,58,54,66" name="legs-orca" dx="69" dy="99"/>
+    </spritemap>
+    <spritemap file="scales.png">
+        <cell rect="8,32,53,119" name="wings-scales_left" dx="32" dy="20"/>
+        <cell rect="64,32,53,119" name="wings-scales_right" dx="104" dy="20"/>
+        <cell rect="13,161,46,55" name="face-scales" dx="71" dy="17"/>
+        <cell rect="64,176,48,39" name="breastsDscales" dx="75" dy="59"/>
+        <cell rect="142,155,58,51" name="legs-scales" dx="65" dy="115"/>
+        <cell rect="142,29,59,71" name="torso-scales" dx="66" dy="59"/>
+        <cell rect="275,32,83,60" name="arms-scales" dx="53" dy="57"/>
+        <cell rect="248,103,110,64" name="tail-reptile" dx="40" dy="99"/>
+        <cell rect="314,246,84,61" name="hair-gorgon" dx="50" dy="19"/>
+        <cell rect="314,309,84,61" name="hair-gorgon_bg" dx="50" dy="19"/>
+        <cell rect="12,226,130,108" name="legs-naga" dx="38" dy="83"/>
     </spritemap>
 
     <layers>
@@ -297,6 +331,13 @@
         Element <default> item* </default>
 
         -->
+        <switch value="antennae">
+            <case value="0"><!--ANTENNAE_NONE--></case>
+            <case value="2"><!--ANTENNAE_BEE-->
+                <layer file="antennae-bee"/>
+            </case>
+        </switch>
+
         <switch value="hornType">
             <case value="0"><!--HORNS_NONE--></case>
             <case value="1"><!--HORNS_DEMON-->
@@ -427,6 +468,11 @@
             <case value="28"><!--FACE_ORCA-->
                 <layer file="face-orca"/>
             </case>
+            <case value="'never'">
+                <layer file="face-bee"/>
+                <layer file="face-chitin"/>
+                <layer file="face-scales"/>
+            </case>
             <default>
                 <layer file="face-human"/>
             </default>
@@ -440,6 +486,11 @@
                     <switch>
                         <case test="hasFullCoatOfType([1])">
                             <layer file="breastsDfur"/>
+                        </case>
+                        <case value="'never'">
+                            <layer file="breastsDchitin"/>
+                            <layer file="breastsDbee"/>
+                            <layer file="breastsDscales"/>
                         </case>
                         <default>
                             <layer file="breastsD"/>
@@ -463,6 +514,12 @@
             </case>
             <case value="'never'">
                 <layer file="arms-fur"/>
+                <layer file="arms-scales"/>
+                <layer file="arms-bee"/>
+                <layer file="arms-bee2"/>
+                <layer file="arms-chitin"/>
+                <layer file="arms-chitin2"/>
+                <layer file="arms-alraune"/>
             </case>
             <default>
                 <layer file="arms-human"/>
@@ -497,6 +554,13 @@
             </case>
             <case value="'never'">
                 <layer file="legs-kraken"/>
+                <layer file="legs-chitin"/>
+                <layer file="legs-drider"/>
+                <layer file="legs-centaur"/>
+                <layer file="legs-bee"/>
+                <layer file="legs-scales"/>
+                <layer file="legs-alraune"/>
+                <layer file="legs-liliraune"/>
             </case>
             <default>
                 <layer file="legs-human"/>
@@ -510,6 +574,11 @@
             <case test="skinColor == 'black and white'">
                 <layer file="torso-orca"/>
             </case>
+            <case test="'never'">
+                <layer file="torso-bee"/>
+                <layer file="torso-chitin"/>
+                <layer file="torso-scales"/>
+            </case>
             <default>
                 <layer file="torso-human"/>
             </default>
@@ -521,18 +590,32 @@
                 <layer file="fins-orca"/>
             </case>
         </switch>
-        <switch>
-            <case test="hairLength == 0"><!--bald--></case>
-            <case test="hairLength lt 6">
-                <layer file="hair0b"/>
+        <switch value="hairType">
+            <case value="6"><!--HAIR_GORGON-->
+                <if test="hairLength > 0">
+                    <layer file="hair-gorgon_bg"/>
+                </if>
             </case>
             <default>
+                <switch>
+                    <case test="hairLength == 0"><!--bald--></case>
+                    <case test="hairLength lt 6">
+                        <layer file="hair0b"/>
+                    </case>
+                    <default>
+                    </default>
+                </switch>
             </default>
         </switch>
         <switch value="wingType">
             <case value="0"><!--WING_TYPE_NONE--></case>
             <case value="23"><!--WING_TYPE_MANTICORE_LIKE_LARGE-->
                 <layer file="wings-mantibig_fg"/>
+            </case>
+            <case value="'never'">
+                <layer file="wings-bee"/>
+                <layer file="wings-scales_left"/>
+                <layer file="wings-scales_right"/>
             </case>
             <default>
             </default>
@@ -569,6 +652,10 @@
             </case>
             <case value="31"><!--TAIL_TYPE_ORCA-->
                 <layer file="tail-orca"/>
+            </case>
+            <case value="'never'">
+                <layer file="tail-bee_abdomen"/>
+                <layer file="tail-reptile"/>
             </case>
             <default>
             </default>

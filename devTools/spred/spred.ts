@@ -8,8 +8,26 @@ type Dict<T> = { [index: string]: T };
 type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 
 namespace spred {
-	const basedir = window['spred_basedir'] || '../../';
-	const canAjax = location.protocol != 'file:';
+	export const basedir = window['spred_basedir'] || '../../';
+	export const canAjax = location.protocol != 'file:';
+	export let g_model: Model;
+	export let g_composites: Composite[]           = [];
+	export let g_selsprite: string                 = '';
+	export let g_sellayer: Layer                   = null;
+	export let g_layergen: (string | string[])[][] = [
+		['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
+		['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
+		[['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon','hair-gorgon_bg']],
+		['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
+		[[], [], [], 'horns2S', 'horns2L', ['horns-orchid_bg','horns-orchid_fg']],
+		['breasts0', 'breastsD' ,'breastsDfur', 'breastsDbee','breastsDchitin','breastsDscales'],
+		['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca'], 'arms-alraune', 'arms-scales', 'arms-bee', 'arms-bee2' ,'arms-chitin', 'arms-chitin2'],
+		['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca', 'legs-drider', 'legs-centaur', 'legs-chitin', 'legs-bee', 'legs-bee', 'legs-scales', 'legs-alraune', 'legs-liliraune'],
+		['torso-human', 'torso-human', 'torso-fur', 'torso-orca', 'torso-bee', 'torso-chitin', 'torso-scales'],
+		[[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca', 'tail-bee_abdomen', 'tail-reptile'],
+		[[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg'], ['wings-bee'], ['wings-scales_left','wings-scales_right']],
+		[[], [], [], ['antennae-bee']]
+	];
 	
 	export function RGBA(i: tinycolorInstance): number {
 		let rgb = i.toRgb();
@@ -197,7 +215,8 @@ namespace spred {
 			let ctx2d                   = this.canvas.getContext('2d');
 			ctx2d.imageSmoothingEnabled = false;
 			let z                       = this.zoom;
-			ctx2d.clearRect(x * z, y * z, w * z, h * z);
+			let [xz,yz,wz,hz] = [x*z,y*z,w*z,h*z];
+			ctx2d.clearRect(xz, yz, wz, hz);
 			let p0   = new Promise<CanvasRenderingContext2D>((resolve, reject) => {
 				resolve(ctx2d);
 			});
@@ -216,8 +235,7 @@ namespace spred {
 				if (this._layers[layer.name]) {
 					let sprite = this.model.sprites[layer.name];
 					let idata  = sprite.ctx2d.getImageData(x, y, w, h);
-					idata      = colormap(idata, cmap);
-					p0.then(ctx2d => {
+					p0 = p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
 							let sx = x, sy = y;
 							let sw = w;
@@ -242,6 +260,11 @@ namespace spred {
 					});
 				}
 			}
+			p0.then(ctx2d => {
+				let data      = colormap(ctx2d.getImageData(xz,yz,wz,hz), cmap);
+				ctx2d.putImageData(data,0,0);
+				return ctx2d;
+			})
 		}
 		
 		public hideAll(name: string) {
@@ -523,24 +546,6 @@ namespace spred {
 				});
 		}
 	}
-	
-	export let g_model: Model;
-	export let g_composites: Composite[]           = [];
-	export let g_selsprite: string                 = '';
-	export let g_sellayer: Layer                   = null;
-	export let g_layergen: (string | string[])[][] = [
-		['face-human', 'face-human', 'face-fur', 'face-orca'],
-		['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
-		[['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], 'hair-gorgon'],
-		['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
-		[[], [], [], 'horns2S', 'horns2L'],
-		['breasts0', 'breastsD'],
-		['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca']],
-		['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca'],
-		['torso-human', 'torso-human', 'torso-fur', 'torso-orca'],
-		[[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca'],
-		[[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg']]
-	];
 	
 	export function defaultLayerList(): string[] {
 		return g_layergen.map(randel)

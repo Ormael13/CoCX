@@ -5,8 +5,25 @@
 ///<reference path="typings/jquery.d.ts"/>
 var spred;
 (function (spred) {
-    const basedir = window['spred_basedir'] || '../../';
-    const canAjax = location.protocol != 'file:';
+    spred.basedir = window['spred_basedir'] || '../../';
+    spred.canAjax = location.protocol != 'file:';
+    spred.g_composites = [];
+    spred.g_selsprite = '';
+    spred.g_sellayer = null;
+    spred.g_layergen = [
+        ['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
+        ['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
+        [['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon', 'hair-gorgon_bg']],
+        ['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
+        [[], [], [], 'horns2S', 'horns2L', ['horns-orchid_bg', 'horns-orchid_fg']],
+        ['breasts0', 'breastsD', 'breastsDfur', 'breastsDbee', 'breastsDchitin', 'breastsDscales'],
+        ['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca'], 'arms-alraune', 'arms-scales', 'arms-bee', 'arms-bee2', 'arms-chitin', 'arms-chitin2'],
+        ['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca', 'legs-drider', 'legs-centaur', 'legs-chitin', 'legs-bee', 'legs-bee', 'legs-scales', 'legs-alraune', 'legs-liliraune'],
+        ['torso-human', 'torso-human', 'torso-fur', 'torso-orca', 'torso-bee', 'torso-chitin', 'torso-scales'],
+        [[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca', 'tail-bee_abdomen', 'tail-reptile'],
+        [[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg'], ['wings-bee'], ['wings-scales_left', 'wings-scales_right']],
+        [[], [], [], ['antennae-bee']]
+    ];
     function RGBA(i) {
         let rgb = i.toRgb();
         return (((rgb.a * 0xff) & 0xff) << 24
@@ -64,7 +81,7 @@ var spred;
     })(FileAsker || (FileAsker = {}));
     function loadFile(url, format) {
         return new Promise((resolve, reject) => {
-            if (!canAjax) {
+            if (!spred.canAjax) {
                 FileAsker.askFile(url, file => {
                     if (format == 'img') {
                         url2img(URL.createObjectURL(file)).then(resolve);
@@ -182,7 +199,8 @@ var spred;
             let ctx2d = this.canvas.getContext('2d');
             ctx2d.imageSmoothingEnabled = false;
             let z = this.zoom;
-            ctx2d.clearRect(x * z, y * z, w * z, h * z);
+            let [xz, yz, wz, hz] = [x * z, y * z, w * z, h * z];
+            ctx2d.clearRect(xz, yz, wz, hz);
             let p0 = new Promise((resolve, reject) => {
                 resolve(ctx2d);
             });
@@ -204,8 +222,7 @@ var spred;
                 if (this._layers[layer.name]) {
                     let sprite = this.model.sprites[layer.name];
                     let idata = sprite.ctx2d.getImageData(x, y, w, h);
-                    idata = colormap(idata, cmap);
-                    p0.then(ctx2d => {
+                    p0 = p0.then(ctx2d => {
                         return createImageBitmap(idata).then(bmp => {
                             let sx = x, sy = y;
                             let sw = w;
@@ -234,6 +251,11 @@ var spred;
                     });
                 }
             }
+            p0.then(ctx2d => {
+                let data = colormap(ctx2d.getImageData(xz, yz, wz, hz), cmap);
+                ctx2d.putImageData(data, 0, 0);
+                return ctx2d;
+            });
         }
         hideAll(name) {
             this._layers = {};
@@ -364,7 +386,7 @@ var spred;
             this.colorkeys = [];
             let xmodel = $(src).children('model');
             this.name = xmodel.attr('name');
-            this.dir = basedir + xmodel.attr('dir');
+            this.dir = spred.basedir + xmodel.attr('dir');
             this.width = parseInt(xmodel.attr('width'));
             this.height = parseInt(xmodel.attr('height'));
             this.spritesheets = [];
@@ -459,22 +481,6 @@ var spred;
         }
     }
     spred.Model = Model;
-    spred.g_composites = [];
-    spred.g_selsprite = '';
-    spred.g_sellayer = null;
-    spred.g_layergen = [
-        ['face-human', 'face-human', 'face-fur', 'face-orca'],
-        ['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
-        [['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], 'hair-gorgon'],
-        ['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
-        [[], [], [], 'horns2S', 'horns2L'],
-        ['breasts0', 'breastsD'],
-        ['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca']],
-        ['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca'],
-        ['torso-human', 'torso-human', 'torso-fur', 'torso-orca'],
-        [[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca'],
-        [[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg']]
-    ];
     function defaultLayerList() {
         return spred.g_layergen.map(randel)
             .map(s => (typeof s == 'string' ? [s] : s))
@@ -790,6 +796,6 @@ var spred;
     }
     spred.saveSpritemaps = saveSpritemaps;
     $(() => {
-        loadFile(basedir + 'res/model.xml', 'xml').then(loadModel);
+        loadFile(spred.basedir + 'res/model.xml', 'xml').then(loadModel);
     });
 })(spred || (spred = {}));
