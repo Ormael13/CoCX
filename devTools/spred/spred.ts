@@ -871,7 +871,7 @@ namespace spred {
 			}
 			showLayerList(model);
 			selLayer(model.layers[0]);
-			addCompositeView(defaultLayerList(), 3);
+			addCompositeView(defaultLayerList(), 2);
 			addCompositeView(defaultLayerList(), 2);
 			addCompositeView(defaultLayerList(), 1);
 			addCompositeView(defaultLayerList(), 1);
