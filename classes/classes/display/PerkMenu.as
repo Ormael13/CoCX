@@ -336,12 +336,12 @@ public class PerkMenu extends BaseContent {
 	public function summonsbehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your summoned elementals will behave during each fight.");
-		outputText("\n<b>Elementals behavious:</b> ");
+		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
+		outputText("\n<b>Elementals behavious:</b>\n");
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) outputText("Elemental will attack enemy on it own alongside PC.");
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
 		else outputText("Not participating");
-		outputText("\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b> ");
+		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) outputText("Air");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) outputText("Fire");
@@ -353,6 +353,9 @@ public class PerkMenu extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 3) addButton(2, "Fire", attackingElementalFire);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 4) addButton(3, "Water", attackingElementalWater);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 5) addButton(5, "Ice", attackingElementalIce);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 6) addButton(6, "Lightning", attackingElementalLightning);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 7) addButton(7, "Darkness", attackingElementalDarkness);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
 	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji

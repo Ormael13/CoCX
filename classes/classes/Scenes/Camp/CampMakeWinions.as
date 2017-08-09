@@ -99,54 +99,70 @@ package classes.Scenes.Camp
 		public function accessSummonElementalsMainMenu():void {
 			clearOutput();
 			menu();
-			outputText("Which one elemental would you like to summon or promote to higher rank?\n");
-			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n");
+			outputText("Which one elemental would you like to summon or promote to higher rank?\n\n");
+			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n\n");
 			outputText("<b>Currently summoned elementals:</b><i>");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 				outputText("\nAir");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
 				outputText("\nEarth");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
 				outputText("\nFire");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
 				outputText("\nWater");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 				outputText("\nIce");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
 				outputText("\nLightning");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) outputText(" (Rank 4)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
 				outputText("\nDarkness");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) outputText(" (Rank 4)");
 			}
 			outputText("</i>");
 			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
 			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) addButton(1, "RankUp(1)", rankUpSubmenu1st);
-			//if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) addButton(2, "RankUp(2)", );
-			//addButton(3, "RankUp(3)", );
+			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) addButton(2, "RankUp(2)", rankUpSubmenu2nd);
+			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) addButton(3, "RankUp(3)", rankUpSubmenu3rd);
 			//addButton(4, "RankUp(4)", );
 			addButton(14, "Back", playerMenu);
 		}
@@ -156,9 +172,11 @@ package classes.Scenes.Camp
 			if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 			if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
 			if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
-		//	if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(5, "Ice", summonElementalEarth);
-		//	if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(6, "Lightning", summonElementalEarth);
-		//	if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(7, "Darkness", summonElementalEarth);
+			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) {
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(5, "Ice", summonElementalIce);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(6, "Lightning", summonElementalLightning);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(7, "Darkness", summonElementalDarkness);
+			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu1st():void {
@@ -167,9 +185,42 @@ package classes.Scenes.Camp
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1) addButton(1, "Earth", rankUpElementalEarth);
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1) addButton(2, "Fire", rankUpElementalFire);
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1) addButton(3, "Water", rankUpElementalWater);
-		//	if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) addButton(5, "Ice", summonElementalEarth);
-		//	if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) addButton(6, "Lightning", summonElementalEarth);
-		//	if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) addButton(7, "Darkness", summonElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu2nd():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu3rd():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu4th():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) addButton(7, "Darkness", rankUpElementalDarkness);
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		
@@ -261,21 +312,87 @@ package classes.Scenes.Camp
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
 		}
-		
-		private function rankUpElementalAir():void {
+		private function summonElementalIce():void {
 			clearOutput();
 			if (player.mana < 100) {
-				outputText("Your mana is too low to rank up air elemental.");
+				outputText("Your mana is too low to summon ice elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
 			else if (player.fatigue + 50 > player.maxFatigue()) {
-				outputText("You're too tired to rank up air elemental.");
+				outputText("You're too tired to summon ice elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
 			player.mana -= 100;
 			fatigue(50);
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
+			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.SummonedElementalsIce, 1, 1, 0, 0);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		private function summonElementalLightning():void {
+			clearOutput();
+			if (player.mana < 100) {
+				outputText("Your mana is too low to summon lightning elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + 50 > player.maxFatigue()) {
+				outputText("You're too tired to summon lightning elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= 100;
+			fatigue(50);
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
+			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.SummonedElementalsLightning, 1, 1, 0, 0);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		private function summonElementalDarkness():void {
+			clearOutput();
+			if (player.mana < 100) {
+				outputText("Your mana is too low to summon darkness elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + 50 > player.maxFatigue()) {
+				outputText("You're too tired to summon darkness elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= 100;
+			fatigue(50);
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
+			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.SummonedElementalsDarkness, 1, 1, 0, 0);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		
+		private function rankUpElementalAir():void {
+			clearOutput();
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir))) {
+				outputText("Your mana is too low to rank up air elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsAir)) > player.maxFatigue()) {
+				outputText("You're too tired to rank up air elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			statScreenRefresh();
 			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
@@ -284,18 +401,18 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
-			if (player.mana < 100) {
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth))) {
 				outputText("Your mana is too low to rank up earth elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			else if (player.fatigue + 50 > player.maxFatigue()) {
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth)) > player.maxFatigue()) {
 				outputText("You're too tired to rank up earth elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			player.mana -= 100;
-			fatigue(50);
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			statScreenRefresh();
 			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			player.addStatusValue(StatusEffects.SummonedElementalsEarth, 2, 1);
@@ -304,18 +421,18 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
-			if (player.mana < 100) {
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire))) {
 				outputText("Your mana is too low to rank up fire elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			else if (player.fatigue + 50 > player.maxFatigue()) {
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsFire)) > player.maxFatigue()) {
 				outputText("You're too tired to rank up fire elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			player.mana -= 100;
-			fatigue(50);
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			statScreenRefresh();
 			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			player.addStatusValue(StatusEffects.SummonedElementalsFire, 2, 1);
@@ -324,21 +441,81 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
-			if (player.mana < 100) {
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater))) {
 				outputText("Your mana is too low to rank up water elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			else if (player.fatigue + 50 > player.maxFatigue()) {
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsWater)) > player.maxFatigue()) {
 				outputText("You're too tired to rank up water elemental.");
 				doNext(accessSummonElementalsMainMenu);
 				return;
 			}
-			player.mana -= 100;
-			fatigue(50);
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			statScreenRefresh();
 			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			player.addStatusValue(StatusEffects.SummonedElementalsWater, 2, 1);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		private function rankUpElementalIce():void {
+			clearOutput();
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce))) {
+				outputText("Your mana is too low to rank up ice elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsIce)) > player.maxFatigue()) {
+				outputText("You're too tired to rank up ice elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			player.addStatusValue(StatusEffects.SummonedElementalsIce, 2, 1);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		private function rankUpElementalLightning():void {
+			clearOutput();
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning))) {
+				outputText("Your mana is too low to rank up lightning elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning)) > player.maxFatigue()) {
+				outputText("You're too tired to rank up lightning elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			player.addStatusValue(StatusEffects.SummonedElementalsLightning, 2, 1);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime(1/2);
+		}
+		private function rankUpElementalDarkness():void {
+			clearOutput();
+			if (player.mana < (100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness))) {
+				outputText("Your mana is too low to rank up darkness elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			else if (player.fatigue + (50 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness)) > player.maxFatigue()) {
+				outputText("You're too tired to rank up darkness elemental.");
+				doNext(accessSummonElementalsMainMenu);
+				return;
+			}
+			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			statScreenRefresh();
+			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			player.addStatusValue(StatusEffects.SummonedElementalsDarkness, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
 		}

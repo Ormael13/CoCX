@@ -57,11 +57,12 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellCostImpl(mod:Number):Number {
 		//Addiditive mods
 		var costPercent:Number = 100;
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -78,11 +79,12 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		var costPercent:Number = 100;
 		if (player.findPerk(PerkLib.Ambition) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -99,11 +101,12 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		var costPercent:Number = 100;
 		if (player.findPerk(PerkLib.Obsession) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -148,9 +151,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
@@ -183,9 +186,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
@@ -217,9 +220,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
@@ -1070,7 +1073,9 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
 		if (monster.plural == true) temp *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) outputText(" (" + temp + ") ");
+		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1079,6 +1084,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) temp *= 2;
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1149,7 +1155,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
 		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) outputText(" (" + temp + ") ");
+		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your fire storm lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1158,6 +1166,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) temp *= 2;
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1610,10 +1619,10 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 //	temp = calcGlacialMod(temp);
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 0.2;
 //	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia

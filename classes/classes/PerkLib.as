@@ -302,6 +302,9 @@ package classes
 		public static const ComboMaster:PerkType = mk("Combo Master", "Combo Master",
 				"Gain another extra attack with fist (weapon).",
 				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
+		public static const Convergence:PerkType = mk("Convergence", "Convergence",
+				"Grey magic area of effect spells strike twice against single targets.",
+				"You choose the 'Convergence' perk, gaining chance to attack single targets twice with grey aoe spells.");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -411,14 +414,17 @@ package classes
 				"Your mental attributes are at the cost of weakening physical ones.",// Increase by 1 maximum amount of elementals that conjuer can safely command.
 				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse mental perfection at the cost of physical weakening.");
 		public static const ElementalContractRank1:PerkType = mk("Elemental Contract Rank 1", "Elemental Contract Rank 1",
-				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
 				"You choose 'Elemental Contract Rank 1' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank2:PerkType = mk("Elemental Contract Rank 2", "Elemental Contract Rank 2",
-				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 2.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 2.",
 				"You choose 'Elemental Contract Rank 2' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank3:PerkType = mk("Elemental Contract Rank 3", "Elemental Contract Rank 3",
-				"As the Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 3.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 3.",
 				"You choose 'Elemental Contract Rank 3' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank4:PerkType = mk("Elemental Contract Rank 4", "Elemental Contract Rank 4",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 4.",
+				"You choose 'Elemental Contract Rank 4' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elemnts that aren't classified as one of four traditional.");
@@ -1180,6 +1186,7 @@ package classes
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of fatigue!",null,true);
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();
+		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
@@ -2043,6 +2050,9 @@ package classes
 						.requireInt(160)
 						.requireLevel(30);
 		//Tier 6 Intelligence perks
+		Convergence.requirePerk(GreyArchmage)
+				   .requireInt(175)
+				   .requireLevel(36);
 		EternalyLastingBuffs.requirePerk(EverLastingBuffs)
 							.requireInt(190)
 							.requireLevel(36);
@@ -2079,7 +2089,10 @@ package classes
 		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
 								   .requireWis(40)
 								   .requireLevel(6);
-		//ElementalContractRank2.requirePerk(ElementalConjurerDedication).requirePerk(ElementalContractRank1).requireWis(50).requireLevel(6);
+		ElementalContractRank2.requirePerk(ElementalConjurerDedication)
+							  .requirePerk(ElementalContractRank1)
+							  .requireWis(50)
+							  .requireLevel(6);
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
 			   .requireLevel(12);
@@ -2087,9 +2100,13 @@ package classes
 			 .requireWis(75)
 			 .requireStr(50)
 			 .requireLevel(12);
-		//ElementalContractRank3.requirePerk(ElementalConjurerDedication).requirePerk(ElementalContractRank2).requireWis(75).requireLevel(12);
+		ElementalContractRank3.requirePerk(ElementalContractRank2)
+							  .requireWis(75)
+							  .requireLevel(12);
 		//Tier 3 Wisdom perks
-		
+		ElementalContractRank4.requirePerk(ElementalContractRank3)
+							  .requireWis(100)
+							  .requireLevel(18);
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)

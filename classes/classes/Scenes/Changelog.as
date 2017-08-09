@@ -71,6 +71,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
 			outputText("-Berserk and Lustzerker now req. 50 wrath to activate them and they last 10 rounds. No zerking for too calm PC's ^^\n");
@@ -84,8 +86,13 @@ package classes.Scenes
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -121,6 +128,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

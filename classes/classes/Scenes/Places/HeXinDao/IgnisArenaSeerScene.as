@@ -44,18 +44,21 @@ package classes.Scenes.Places.HeXinDao
 			startCombat(new IgnisArenaSeer());
 		}
 		
-		public function PCbeatenIgnisATarena():void {
-			clearOutput();
+		public function PCbeatenIgnisAtArena():void {
+			outputText("\"<i>[Champion], you’re a pretty good at this.  Hell, you would need to be to survive my little trick at the beginning!</i>\" He holds out his hand, you shake in a gesture of sportsmanship. ");
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] == 2) {
-				
+				outputText("As you pull your hand away, you notice that Ignis passed you something during the handshake. It looks like...  Some sort of ornate hair pin? It’s made of silver, with an ornate eye of silver wire and lens of crystal at the tip. Ignis winks conspiratorially at you.  \"<i>That's a seer’s pin. It’s a decoration and a tool, from the old times.  Look through the lens at the tip, and you can see past most illusions and deceptive magics. It’s aura can also boost your magic and soulpower.</i>\"  ");
+				flags[kFLAGS.IGNIS_ARENA_SEER]++;
 			}
-			
+			outputText("Ignis gives you a tired grin. \"<i>Well, i’m going to head back to my house and rest for a while.  I’ll be back around here later if you want to do this again.</i>\"");
 			cleanupAfterCombat();
 		}
 		
-		public function PCisBeatenByIgnisATarena():void {
+		public function PCisBeatenByIgnisAtArena():void {
 			clearOutput();
-			
+			outputText("You fall back, covered in burns and barely conscious.  You barely manage to concede the fight before you black out...");
+			outputText("\n\n\n...\n\n\n");
+			outputText("When you come to, you’re lying in a hospital in one of the arena’s back rooms.  Looking over yourself, you realized that all your burns and other injuries have been healed.  As you stand up though, you realize that your purse is a bit lighter… Ignis probably took the liberty of paying the healers for you. Going through a quick stretch, everything seems to feel normal. In fact, everything feels great! Thanking the presiding healer, you decide to head back to your camp.");
 			cleanupAfterCombat();
 		}
 	}
