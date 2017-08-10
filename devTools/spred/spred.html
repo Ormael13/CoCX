@@ -90,7 +90,7 @@
 	<div class="row" style="flex-shrink: 0;">
 		<div class="col-12">
 			<h3>CoC Sprite Editor</h3>
-			<button type="button" class="btn btn-secondary" onclick="spred.addCompositeView(spred.defaultLayerList())">
+			<button type="button" class="btn btn-secondary" onclick="spred.addCompositeView(spred.defaultPartList())">
 				<span class="fa fa-plus"></span> Add view
 			</button>
 			<button class="btn btn-secondary" onclick="spred.saveSpritemaps()">
@@ -179,16 +179,16 @@
 				<h5 class="card-subtitle" id="SelLayerName">
 				</h5>
 				<div>
-					<button class="ctrl" type="button" onclick="spred.selLayerMove(-1,0)">
+					<button class="ctrl" type="button" onclick="spred.selPartMove(-1,0)">
 						<span class="fa fa-caret-left"></span>
 					</button>
-					<button class="ctrl" type="button" onclick="spred.selLayerMove(1,0)">
+					<button class="ctrl" type="button" onclick="spred.selPartMove(1,0)">
 						<span class="fa fa-caret-right"></span>
 					</button>
-					<button class="ctrl" type="button" onclick="spred.selLayerMove(0,-1)">
+					<button class="ctrl" type="button" onclick="spred.selPartMove(0,-1)">
 						<span class="fa fa-caret-up"></span>
 					</button>
-					<button class="ctrl" type="button" onclick="spred.selLayerMove(0,1)">
+					<button class="ctrl" type="button" onclick="spred.selPartMove(0,1)">
 						<span class="fa fa-caret-down"></span>
 					</button>
 					<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">

@@ -9,8 +9,8 @@ var spred;
     spred.canAjax = location.protocol != 'file:';
     spred.g_composites = [];
     spred.g_selsprite = '';
-    spred.g_sellayer = null;
-    spred.g_layergen = [
+    spred.g_selpart = null;
+    spred.g_gen = [
         ['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
         ['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
         [['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon', 'hair-gorgon_bg']],
@@ -40,7 +40,7 @@ var spred;
         return arr[randint(arr.length)];
     }
     spred.randel = randel;
-    let FileAsker;
+    var FileAsker;
     (function (FileAsker) {
         let fileReaders = {};
         function filename(f) {
@@ -147,7 +147,10 @@ var spred;
             d.type = 'button';
         if (tagName == 'a')
             d.href = 'javascript:void(0)';
-        return $(d).append(content);
+        let j = $(d);
+        for (let c of content)
+            j.append(c);
+        return j;
     }
     spred.$new = $new;
     function newCanvas(width, height, code = () => { }) {
@@ -162,12 +165,26 @@ var spred;
         return Object.keys(palette).map(name => $new('option', name).attr('value', palette[name]));
     }
     spred.paletteOptions = paletteOptions;
-    class Layer {
-        constructor(name, sprite, dx, dy) {
+    class StructLayer {
+        constructor(name) {
             this.name = name;
-            this.sprite = sprite;
+            this.parts = [];
+        }
+        findPart(partName) {
+            let fullname = this.name + '/' + partName;
+            return this.parts.find(part => part.name == fullname);
+        }
+    }
+    spred.StructLayer = StructLayer;
+    class Part {
+        constructor(name, spriteref, dx, dy) {
+            this.name = name;
+            this.spriteref = spriteref;
             this.dx = dx;
             this.dy = dy;
+        }
+        get sprite() {
+            return this.spriteref();
         }
         updateUI() {
             let c2d = this.ui.find('canvas')[0].getContext('2d');
@@ -175,22 +192,22 @@ var spred;
             c2d.drawImage(this.sprite.canvas, 0, 0, cw > ch ? 32 : 32 * ch / cw, cw > ch ? 32 * ch / cw : 32);
         }
     }
-    spred.Layer = Layer;
+    spred.Part = Part;
     class Composite {
         constructor(model, visibleNames = [], zoom = 1) {
             this.model = model;
-            this._layers = {};
+            this._parts = {};
             this.colormap = {};
             this.canvas = newCanvas(model.width * zoom, model.height * zoom);
             this.canvas.setAttribute('focusable', 'true');
-            this.layerNames = visibleNames.slice(0);
+            this.partNames = visibleNames.slice(0);
             this.redraw();
         }
-        get layerNames() {
-            return this.model.layers.filter(l => this._layers[l.name]).map(l => l.name);
+        get partNames() {
+            return this.model.allParts().filter(p => p.name in this._parts).map(p => p.name);
         }
-        set layerNames(value) {
-            this._layers = value.reduce((r, e) => {
+        set partNames(value) {
+            this._parts = value.reduce((r, e) => {
                 r[e] = true;
                 return r;
             }, {});
@@ -217,18 +234,18 @@ var spred;
                     }
                 cmap.push([RGBA(tinycolor(ck.src)), RGBA(base)]);
             }
-            for (let a = this.model.layers, i = a.length - 1; i >= 0; i--) {
-                let layer = a[i];
-                if (this._layers[layer.name]) {
-                    let sprite = this.model.sprites[layer.name];
+            for (let a = this.model.allParts(), i = a.length - 1; i >= 0; i--) {
+                let part = a[i];
+                if (this._parts[part.name]) {
+                    let sprite = this.model.sprite(part.name);
                     let idata = sprite.ctx2d.getImageData(x, y, w, h);
                     p0 = p0.then(ctx2d => {
                         return createImageBitmap(idata).then(bmp => {
                             let sx = x, sy = y;
                             let sw = w;
                             let sh = h;
-                            let dx = layer.dx + sprite.dx;
-                            let dy = layer.dy + sprite.dy;
+                            let dx = part.dx + sprite.dx;
+                            let dy = part.dy + sprite.dy;
                             if (dx < 0) {
                                 sx -= dx;
                                 dx = 0;
@@ -258,13 +275,13 @@ var spred;
             });
         }
         hideAll(name) {
-            this._layers = {};
+            this._parts = {};
         }
-        isVisible(layerName) {
-            return this._layers[layerName];
+        isVisible(partName) {
+            return this._parts[partName];
         }
-        setVisible(layerName, visibility) {
-            this._layers[layerName] = visibility;
+        setVisible(partName, visibility) {
+            this._parts[partName] = visibility;
         }
         get zoom() {
             return this.canvas.width / this.model.width;
@@ -378,12 +395,74 @@ var spred;
         }
     }
     spred.Spritemap = Spritemap;
+    class LogicStmt {
+        static parseBlock(x) {
+            return x.children().toArray().map(x => LogicStmt.parse(x));
+        }
+        static parse(x) {
+            switch (x.tagName.toLowerCase()) {
+                case 'switch':
+                    let lswitch = new LogicSwitch(x.getAttribute("value"));
+                    $(x).children('case').each((i, x2) => {
+                        let lcase = new LogicCase(x2.getAttribute('value'), x2.getAttribute('test'));
+                        lcase.body = LogicStmt.parseBlock($(x2));
+                        lswitch.cases.push(lcase);
+                    });
+                    lswitch.default = LogicStmt.parseBlock($(x).children('default'));
+                    return lswitch;
+                case 'show':
+                    return new LogicShow(x.getAttribute('part'));
+                case 'if':
+                    let lif = new LogicIf(x.getAttribute("test"));
+                    lif.then = LogicStmt.parseBlock($(x));
+                    return lif;
+                default:
+                    console.warn('Unsupported logic element ' + x.tagName);
+                    return null;
+            }
+        }
+    }
+    spred.LogicStmt = LogicStmt;
+    class LogicCase {
+        constructor(valueExpr, testExpr) {
+            this.valueExpr = valueExpr;
+            this.testExpr = testExpr;
+            this.body = [];
+        }
+    }
+    spred.LogicCase = LogicCase;
+    class LogicSwitch extends LogicStmt {
+        constructor(valueExpr) {
+            super();
+            this.valueExpr = valueExpr;
+            this.cases = [];
+            this.default = [];
+        }
+    }
+    spred.LogicSwitch = LogicSwitch;
+    class LogicShow extends LogicStmt {
+        constructor(partExpr) {
+            super();
+            this.partExpr = partExpr;
+        }
+    }
+    spred.LogicShow = LogicShow;
+    class LogicIf extends LogicStmt {
+        constructor(testExpr) {
+            super();
+            this.testExpr = testExpr;
+            this.then = [];
+        }
+    }
+    spred.LogicIf = LogicIf;
     class Model {
         constructor(src) {
             this.sprites = {};
+            // private parts: Part[]         = [];
             this.layers = [];
             this.colorProps = [];
             this.colorkeys = [];
+            this.logic = [];
             let xmodel = $(src).children('model');
             this.name = xmodel.attr('name');
             this.dir = spred.basedir + xmodel.attr('dir');
@@ -421,46 +500,52 @@ var spred;
                 let spritemap = new Spritemap(this.dir, x);
                 this.spritemaps.push(spritemap);
             });
+            this.logic.push(...LogicStmt.parseBlock(xmodel.find('logic')));
             this.whenLoaded =
                 Promise.all(this.spritesheets.map(p => p.whenLoaded)
                     .concat(this.spritemaps.map(p => p.whenLoaded))).then(() => {
                     console.log('Loaded model');
+                    xmodel.find('layers>layer').each((i, x) => {
+                        this.layers.push(new StructLayer(x.getAttribute('name')));
+                    });
                     for (let ss of this.spritesheets) {
                         for (let sname in ss.sprites) {
-                            this.sprites[sname] = ss.sprites[sname];
+                            this.addSprite(ss.sprites[sname]);
                         }
                     }
                     for (let sm of this.spritemaps) {
                         for (let sname in sm.sprites) {
-                            this.sprites[sname] = sm.sprites[sname];
+                            this.addSprite(sm.sprites[sname]);
                         }
                     }
-                    xmodel.find('layer').each((i, x) => {
-                        let ln = x.getAttribute('file');
-                        let ldx = +(x.getAttribute('dx') || '0');
-                        let ldy = +(x.getAttribute('dy') || '0');
+                    /*
+                    xmodel.find('show').each((i, x) => {
+                        let ln     = x.getAttribute('part');
+                        let ldx    = +(x.getAttribute('dx') || '0');
+                        let ldy    = +(x.getAttribute('dy') || '0');
                         let sprite = this.sprites[ln];
-                        let lid;
+                        let lid: string;
                         if (x.id) {
                             lid = '#' + x.id;
-                        }
-                        else if (ldx || ldy) {
+                        } else if (ldx || ldy) {
                             lid = ln + '@' + ldx + ',' + ldy;
-                        }
-                        else {
+                        } else {
                             lid = ln;
                         }
                         if (!sprite) {
-                            console.warn("Layer " + lid + " refered non-existing sprite " + ln);
-                        }
-                        else {
-                            if (this.layers.every(l => l.name != lid)) {
-                                this.layers.push(new Layer(lid, sprite, ldx, ldy));
+                            console.warn("Part " + lid + " refered non-existing sprite " + ln);
+                        } else {
+                            if (this.parts.every(l => l.name != lid)) {
+                                this.parts.push(new Part(lid, sprite, ldx, ldy));
                             }
                         }
                     });
+                    */
                     return this;
                 });
+        }
+        allParts() {
+            return [].concat(...this.layers.map(l => l.parts));
         }
         putPixel(x, y, color) {
             let l = getSelSprite();
@@ -479,38 +564,46 @@ var spred;
             return this.spritesheets.every(s => s.isLoaded())
                 && this.spritemaps.every(s => s.isLoaded());
         }
+        sprite(name) {
+            return this.sprites[name];
+        }
+        addSprite(s) {
+            this.sprites[s.name] = s;
+            let ln = s.name.split('/')[0];
+            let layer = this.layers.find(l => l.name == ln);
+            if (!layer) {
+                console.warn("Layer not found for sprite " + s.name);
+                return;
+            }
+            layer.parts.push(new Part(s.name, () => this.sprite(s.name), 0, 0));
+        }
     }
     spred.Model = Model;
-    function defaultLayerList() {
-        return spred.g_layergen.map(randel)
-            .map(s => (typeof s == 'string' ? [s] : s))
-            .reduce((r, e) => r.concat(e), [])
-            .filter(s => s);
+    function defaultPartList() {
+        return spred.g_model.layers.map(l => randel([''].concat(l.parts.map(p => p.name)))).filter(s => s);
+        /*return g_gen.map(randel)
+                    .map(s => (typeof s == 'string' ? [s] : s) as string[])
+                    .reduce((r, e) => r.concat(e), [])
+                    .filter(s => s);*/
     }
-    spred.defaultLayerList = defaultLayerList;
-    function updateCompositeLayers(composite) {
-        let j = composite.ui.find('.LayerBadges').html('');
-        for (let l of composite.model.layers) {
-            let b = $new('button.badge' +
-                (composite.isVisible(l.name) ? '.badge-primary' : '.badge-default'), l.name);
-            b.click(() => {
-                b.toggleClass('badge-primary');
-                b.toggleClass('badge-default');
-                composite.setVisible(l.name, !composite.isVisible(l.name));
-                composite.redraw();
-                selLayer(l);
-            });
-            j.append(b, ' ');
-        }
+    spred.defaultPartList = defaultPartList;
+    function updateCompositeParts(composite) {
+        composite.ui.find('.LayerBadges').html('').append(composite.model.layers.map(layer => $new('div', $new('label', $new('strong', layer.name + ': '), layer.parts.map(p => $new('button.badge' +
+            (composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'), p.name).click((e) => {
+            $(e.target).toggleClass('badge-primary').toggleClass('badge-default');
+            composite.setVisible(p.name, !composite.isVisible(p.name));
+            composite.redraw();
+            selPart(p);
+        }))))));
     }
-    spred.updateCompositeLayers = updateCompositeLayers;
-    function addCompositeView(layers, zoom = 1) {
-        let composite = new Composite(spred.g_model, layers, zoom);
-        for (let ln of layers) {
-            if (spred.g_model.layers.every(l => l.name != ln)) {
-                console.warn("Non-existing layer " + ln);
+    spred.updateCompositeParts = updateCompositeParts;
+    function addCompositeView(parts, zoom = 1) {
+        let composite = new Composite(spred.g_model, parts, zoom);
+        /*for (let ln of parts) {
+            if (g_model.parts.every(l => l.name != ln)) {
+                console.warn("Non-existing part " + ln);
             }
-        }
+        }*/
         let commonPalette = spred.g_model.palettes['common'];
         for (let cpname of spred.g_model.colorProps) {
             let cpPal = spred.g_model.palettes[cpname] || {};
@@ -543,9 +636,9 @@ var spred;
             composite.redraw();
         }).val(composite.colormap[cpname])))))
         /*$new('textarea.col.form-control'
-        ).val(layers.join(', ')
+        ).val(parts.join(', ')
         ).on('input change', e => {
-            composite.layers = (e.target as HTMLTextAreaElement).value.split(/, *!/);
+            composite.parts = (e.target as HTMLTextAreaElement).value.split(/, *!/);
             composite.redraw();
         })*/
         )));
@@ -597,7 +690,7 @@ var spred;
                 let dx = ((e.offsetX - x0) / composite.zoom) | 0;
                 let dy = ((e.offsetY - y0) / composite.zoom) | 0;
                 if (dx || dy) {
-                    selLayerMove(dx, dy);
+                    selPartMove(dx, dy);
                     x0 = e.offsetX;
                     y0 = e.offsetY;
                 }
@@ -611,7 +704,7 @@ var spred;
             }
         });
         spred.g_composites.push(composite);
-        updateCompositeLayers(composite);
+        updateCompositeParts(composite);
         return composite;
     }
     spred.addCompositeView = addCompositeView;
@@ -629,31 +722,32 @@ var spred;
         }
     }
     spred.redrawAll = redrawAll;
-    function swapLayers(a, b) {
-        let l0 = spred.g_model.layers[a];
-        spred.g_model.layers[a] = spred.g_model.layers[b];
-        spred.g_model.layers[b] = l0;
-        showSpriteList(spred.g_model);
+    /*
+    export function swapLayers(a: number, b: number) {
+        let l0           = g_model.parts[a];
+        g_model.parts[a] = g_model.parts[b];
+        g_model.parts[b] = l0;
+        showSpriteList(g_model);
         redrawAll();
     }
-    spred.swapLayers = swapLayers;
-    function showSpriteList(model) {
-        /*
+    */
+    /*
+    function showSpriteList(model: Model) {
+
         let list = $('#LayerList');
         for (let sn in model.sprites) {
             let sprite = model.sprites[sn];
             if (sprite) sprite.ui.detach().appendTo(list);
         }
-        */
+
     }
+    */
     function showLayerList(model) {
-        let list = $('#LayerList');
-        for (let layer of model.layers) {
-            layer.ui.detach().appendTo(list);
-        }
+        let lbs = model.layers.map(layer => $new('div', $new('h5', layer.name), layer.parts.map(p => p.ui.detach())));
+        $('#LayerList').html('').append(lbs);
     }
     function getSelSprite() {
-        return spred.g_model.sprites[spred.g_selsprite];
+        return spred.g_model.sprite(spred.g_selsprite);
     }
     spred.getSelSprite = getSelSprite;
     function selSprite(name) {
@@ -667,38 +761,38 @@ var spred;
         }*/
     }
     spred.selSprite = selSprite;
-    function selLayer(layer) {
-        spred.g_sellayer = layer;
-        $('#SelLayerName').html(layer.name);
-        $('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
-            ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
+    function selPart(part) {
+        spred.g_selpart = part;
+        $('#SelLayerName').html(part.name);
+        $('#SelLayerPos').html('(dx = ' + (part.dx + part.sprite.dx) +
+            ', dy = ' + (part.dy + part.sprite.dy) + ')');
         $('.LayerListItem').removeClass('selected');
-        layer.ui.addClass('selected');
-        $('#SelLayerCanvas').html('').append(layer.sprite.canvas);
+        part.ui.addClass('selected');
+        $('#SelLayerCanvas').html('').append(part.sprite.canvas);
     }
-    spred.selLayer = selLayer;
+    spred.selPart = selPart;
     /*
     export function selLayerUp() {
-        let i = g_model.layers.findIndex(layer=>layer.name==g_sellayer);
+        let i = g_model.layers.findIndex(layer=>layer.name==g_selpart);
         if (i > 0) swapLayers(i, i - 1);
     }
     
     export function selLayerDown() {
-        let i = g_model.layerNames.indexOf(g_sellayer);
-        if (i >= 0 && i < g_model.layerNames.length - 1) swapLayers(i, i + 1);
+        let i = g_model.partNames.indexOf(g_selpart);
+        if (i >= 0 && i < g_model.partNames.length - 1) swapLayers(i, i + 1);
     }
     */
-    function selLayerMove(dx, dy) {
-        let layer = spred.g_sellayer;
-        if (layer) {
-            layer.sprite.dx += dx;
-            layer.sprite.dy += dy;
+    function selPartMove(dx, dy) {
+        let part = spred.g_selpart;
+        if (part) {
+            part.sprite.dx += dx;
+            part.sprite.dy += dy;
             redrawAll();
-            $('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
-                ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
+            $('#SelLayerPos').html('(dx = ' + (part.dx + part.sprite.dx) +
+                ', dy = ' + (part.dy + part.sprite.dy) + ')');
         }
     }
-    spred.selLayerMove = selLayerMove;
+    spred.selPartMove = selPartMove;
     function colormap(src, map) {
         let dst = new ImageData(src.width, src.height);
         let sarr = new Uint32Array(src.data.buffer);
@@ -749,19 +843,18 @@ var spred;
             $('#SelLayerCanvas')
                 .css('min-width', model.width + 'px')
                 .css('min-height', model.height + 'px');
-            showSpriteList(model);
             selSprite(Object.keys(model.sprites)[0]);
             $('#lmb-color').html('').append(model.colorkeys.map(ck => $new('option', ck.base + (ck.transform ? ' ' + ck.transform : '')).attr('value', ck.src)));
-            for (let layer of model.layers) {
-                layer.ui = $new('div.LayerListItem', $new('label', layer.name), newCanvas(32, 32)).click(e => selLayer(layer));
-                layer.updateUI();
+            for (let part of model.allParts()) {
+                part.ui = $new('div.LayerListItem', $new('label', part.name), newCanvas(32, 32)).click(e => selPart(part));
+                part.updateUI();
             }
             showLayerList(model);
-            selLayer(model.layers[0]);
-            addCompositeView(defaultLayerList(), 2);
-            addCompositeView(defaultLayerList(), 2);
-            addCompositeView(defaultLayerList(), 1);
-            addCompositeView(defaultLayerList(), 1);
+            selPart(model.layers[0].parts[0]);
+            addCompositeView(defaultPartList(), 2);
+            addCompositeView(defaultPartList(), 2);
+            addCompositeView(defaultPartList(), 1);
+            addCompositeView(defaultPartList(), 1);
             $('#ClipboardGrabber').on('paste', e => {
                 e.stopPropagation();
                 e.preventDefault();

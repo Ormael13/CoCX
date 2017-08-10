@@ -8,13 +8,13 @@ type Dict<T> = { [index: string]: T };
 type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 
 namespace spred {
-	export const basedir = window['spred_basedir'] || '../../';
-	export const canAjax = location.protocol != 'file:';
+	export const basedir                      = window['spred_basedir'] || '../../';
+	export const canAjax                      = location.protocol != 'file:';
 	export let g_model: Model;
-	export let g_composites: Composite[]           = [];
-	export let g_selsprite: string                 = '';
-	export let g_sellayer: Layer                   = null;
-	export let g_layergen: (string | string[])[][] = [
+	export let g_composites: Composite[]      = [];
+	export let g_selsprite: string            = '';
+	export let g_selpart: Part                = null;
+	export let g_gen: (string | string[])[][] = [
 		['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
 		['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
 		[['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon','hair-gorgon_bg']],
@@ -150,14 +150,16 @@ namespace spred {
 	}
 	*/
 	
-	export function $new(selector: string = 'div', ...content: (string | JQuery | Element)[]): JQuery {
+	export function $new(selector: string = 'div', ...content: (string | JQuery | Element | JQuery[] | Element[])[]): JQuery {
 		let ss      = selector.split(/\./);
 		let tagName = ss[0] || 'div';
 		let d       = document.createElement(tagName);
 		d.className = ss.slice(1).join(' ');
 		if (tagName == 'button') (d as HTMLButtonElement).type = 'button';
 		if (tagName == 'a') (d as HTMLAnchorElement).href = 'javascript:void(0)';
-		return $(d).append(content);
+		let j = $(d);
+		for (let c of content) j.append(c);
+		return j;
 	}
 	
 	export function newCanvas(width: number, height: number,
@@ -172,12 +174,25 @@ namespace spred {
 	export function paletteOptions(palette: Dict<string>): JQuery[] {
 		return Object.keys(palette).map(name => $new('option', name).attr('value', palette[name]));
 	}
-	
-	export class Layer {
+
+	export class StructLayer {
+		public readonly parts:Part[] = [];
+		public findPart(partName:String):Part {
+			let fullname = this.name+'/'+partName;
+			return this.parts.find(part=>part.name==fullname);
+		}
+		constructor(public name:string){
+		}
+	}
+
+	export class Part {
 		public ui: JQuery;
+		public get sprite(): Sprite {
+			return this.spriteref();
+		}
 		
 		constructor(public name: string,
-					public readonly sprite: Sprite,
+					public readonly spriteref: SpriteRef,
 					public dx: number,
 					public dy: number) {
 			
@@ -193,16 +208,16 @@ namespace spred {
 	export class Composite {
 		public ui: JQuery;
 		
-		private _layers: Dict<boolean>         = {};
+		private _parts: Dict<boolean>         = {};
 		public readonly canvas: HTMLCanvasElement;
 		public readonly colormap: Dict<string> = {};
-		
-		public get layerNames(): string[] {
-			return this.model.layers.filter(l => this._layers[l.name]).map(l => l.name);
+
+		public get partNames(): string[] {
+			return this.model.allParts().filter(p=>p.name in this._parts).map(p=>p.name);
 		}
 		
-		public set layerNames(value: string[]) {
-			this._layers = value.reduce((r, e) => {
+		public set partNames(value: string[]) {
+			this._parts = value.reduce((r, e) => {
 				r[e] = true;
 				return r
 			}, {} as Dict<boolean>);
@@ -230,18 +245,18 @@ namespace spred {
 				}
 				cmap.push([RGBA(tinycolor(ck.src)), RGBA(base)]);
 			}
-			for (let a = this.model.layers, i = a.length - 1; i >= 0; i--) {
-				let layer = a[i];
-				if (this._layers[layer.name]) {
-					let sprite = this.model.sprites[layer.name];
+			for (let a = this.model.allParts(), i = a.length - 1; i >= 0; i--) {
+				let part = a[i];
+				if (this._parts[part.name]) {
+					let sprite = this.model.sprite(part.name);
 					let idata  = sprite.ctx2d.getImageData(x, y, w, h);
 					p0 = p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
 							let sx = x, sy = y;
 							let sw = w;
 							let sh = h;
-							let dx = layer.dx + sprite.dx;
-							let dy = layer.dy + sprite.dy;
+							let dx = part.dx + sprite.dx;
+							let dy = part.dy + sprite.dy;
 							if (dx < 0) {
 								sx -= dx;
 								dx = 0;
@@ -268,15 +283,15 @@ namespace spred {
 		}
 		
 		public hideAll(name: string) {
-			this._layers = {};
+			this._parts = {};
 		}
 		
-		public isVisible(layerName: string) {
-			return this._layers[layerName];
+		public isVisible(partName: string) {
+			return this._parts[partName];
 		}
 		
-		public setVisible(layerName: string, visibility: boolean) {
-			this._layers[layerName] = visibility;
+		public setVisible(partName: string, visibility: boolean) {
+			this._parts[partName] = visibility;
 		}
 		
 		public get zoom(): number {
@@ -295,11 +310,12 @@ namespace spred {
 					zoom: number           = 1) {
 			this.canvas = newCanvas(model.width * zoom, model.height * zoom);
 			this.canvas.setAttribute('focusable', 'true');
-			this.layerNames = visibleNames.slice(0);
+			this.partNames = visibleNames.slice(0);
 			this.redraw();
 		}
 	}
-	
+
+	type SpriteRef = ()=>Sprite;
 	export class Sprite {
 		public ui: JQuery;
 		public readonly canvas: HTMLCanvasElement;
@@ -430,6 +446,59 @@ namespace spred {
 		base: string;
 		transform: string;
 	}
+
+	export abstract class LogicStmt {
+
+		static parseBlock(x:JQuery):LogicStmt[] {
+			return x.children().toArray().map(x=>LogicStmt.parse(x))
+		}
+		static parse(x: Element):LogicStmt {
+			switch(x.tagName.toLowerCase()) {
+				case 'switch':
+					let lswitch = new LogicSwitch(x.getAttribute("value"));
+					$(x).children('case').each((i,x2)=>{
+						let lcase = new LogicCase(x2.getAttribute('value'),x2.getAttribute('test'));
+						lcase.body = LogicStmt.parseBlock($(x2));
+						lswitch.cases.push(lcase);
+					});
+					lswitch.default = LogicStmt.parseBlock($(x).children('default'));
+					return lswitch;
+				case 'show':
+					return new LogicShow(x.getAttribute('part'));
+				case 'if':
+					let lif = new LogicIf(x.getAttribute("test"));
+					lif.then = LogicStmt.parseBlock($(x));
+					return lif;
+				default:
+					console.warn('Unsupported logic element '+x.tagName);
+					return null;
+			}
+		}
+	}
+	export class LogicCase {
+		public body:LogicStmt[] = [];
+		constructor(public valueExpr:string,public testExpr:string) {
+
+		}
+	}
+	export class LogicSwitch extends LogicStmt{
+		public cases:LogicCase[] = [];
+		public default:LogicStmt[] = [];
+		constructor(public valueExpr:string) {
+			super();
+		}
+	}
+	export class LogicShow extends LogicStmt {
+		constructor(public partExpr:string){
+			super();
+		}
+	}
+	export class LogicIf extends LogicStmt {
+		public then:LogicStmt[] = [];
+		constructor(public testExpr:string){
+			super();
+		}
+	}
 	
 	export class Model {
 		public name: string;
@@ -439,11 +508,17 @@ namespace spred {
 		public spritesheets: Spritesheet[];
 		public spritemaps: Spritemap[];
 		public sprites: Dict<Sprite> = {};
-		public layers: Layer[]       = [];
+		// private parts: Part[]         = [];
+		public layers: StructLayer[] = [];
 		public palettes: Dict<Dict<string>>;
 		public colorProps: string[]  = [];
 		public readonly whenLoaded: Promise<Model>;
 		public colorkeys: ColorKey[] = [];
+		public logic:LogicStmt[] = [];
+
+		public allParts():Part[] {
+			return [].concat(...this.layers.map(l=>l.parts));
+		}
 		
 		public putPixel(x: number, y: number, color: string) {
 			let l = getSelSprite();
@@ -461,7 +536,22 @@ namespace spred {
 			return this.spritesheets.every(s => s.isLoaded())
 				   && this.spritemaps.every(s => s.isLoaded());
 		}
-		
+
+		public sprite(name:string):Sprite {
+			return this.sprites[name];
+		}
+
+		public addSprite(s:Sprite) {
+			this.sprites[s.name] = s;
+			let ln = s.name.split('/')[0];
+			let layer = this.layers.find(l=>l.name==ln);
+			if (!layer) {
+				console.warn("Layer not found for sprite "+s.name);
+				return
+			}
+			layer.parts.push(new Part(s.name,()=>this.sprite(s.name),0,0));
+		}
+
 		constructor(src: XMLDocument) {
 			let xmodel        = $(src).children('model');
 			this.name         = xmodel.attr('name');
@@ -505,24 +595,29 @@ namespace spred {
 				let spritemap = new Spritemap(this.dir, x);
 				this.spritemaps.push(spritemap);
 			});
+			this.logic.push(...LogicStmt.parseBlock(xmodel.find('logic')));
 			
 			this.whenLoaded =
 				Promise.all(this.spritesheets.map(p => p.whenLoaded as Promise<any>)
 								.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
 				).then(() => {
 					console.log('Loaded model');
+					xmodel.find('layers>layer').each((i,x)=>{
+						this.layers.push(new StructLayer(x.getAttribute('name')));
+					});
 					for (let ss of this.spritesheets) {
 						for (let sname in ss.sprites) {
-							this.sprites[sname] = ss.sprites[sname];
+							this.addSprite(ss.sprites[sname]);
 						}
 					}
 					for (let sm of this.spritemaps) {
 						for (let sname in sm.sprites) {
-							this.sprites[sname] = sm.sprites[sname];
+							this.addSprite(sm.sprites[sname]);
 						}
 					}
-					xmodel.find('layer').each((i, x) => {
-						let ln     = x.getAttribute('file');
+					/*
+					xmodel.find('show').each((i, x) => {
+						let ln     = x.getAttribute('part');
 						let ldx    = +(x.getAttribute('dx') || '0');
 						let ldy    = +(x.getAttribute('dy') || '0');
 						let sprite = this.sprites[ln];
@@ -535,49 +630,57 @@ namespace spred {
 							lid = ln;
 						}
 						if (!sprite) {
-							console.warn("Layer " + lid + " refered non-existing sprite " + ln);
+							console.warn("Part " + lid + " refered non-existing sprite " + ln);
 						} else {
-							if (this.layers.every(l => l.name != lid)) {
-								this.layers.push(new Layer(lid, sprite, ldx, ldy));
+							if (this.parts.every(l => l.name != lid)) {
+								this.parts.push(new Part(lid, sprite, ldx, ldy));
 							}
 						}
 					});
+					*/
 					return this;
 				});
 		}
 	}
 	
-	export function defaultLayerList(): string[] {
-		return g_layergen.map(randel)
-						 .map(s => (typeof s == 'string' ? [s] : s) as string[])
-						 .reduce((r, e) => r.concat(e), [])
-						 .filter(s => s);
+	export function defaultPartList(): string[] {
+		return g_model.layers.map(l=>randel([''].concat(l.parts.map(p=>p.name)))).filter(s=>s);
+		/*return g_gen.map(randel)
+		            .map(s => (typeof s == 'string' ? [s] : s) as string[])
+		            .reduce((r, e) => r.concat(e), [])
+		            .filter(s => s);*/
+	}
+
+	export function updateCompositeParts(composite: Composite) {
+		composite.ui.find('.LayerBadges').html('').append(
+			composite.model.layers.map(layer =>
+				$new('div',
+					$new('label',
+						$new('strong',layer.name+': '),
+						layer.parts.map(p =>
+							$new('button.badge' +
+								(composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'),
+								p.name
+							).click((e) => {
+								$(e.target).toggleClass('badge-primary').toggleClass('badge-default');
+								composite.setVisible(p.name, !composite.isVisible(p.name));
+								composite.redraw();
+								selPart(p);
+							})
+						)
+					)
+				)
+			)
+		);
 	}
 	
-	export function updateCompositeLayers(composite: Composite) {
-		let j = composite.ui.find('.LayerBadges').html('');
-		for (let l of composite.model.layers) {
-			let b = $new('button.badge' +
-						 (composite.isVisible(l.name) ? '.badge-primary' : '.badge-default'),
-				l.name);
-			b.click(() => {
-				b.toggleClass('badge-primary');
-				b.toggleClass('badge-default');
-				composite.setVisible(l.name, !composite.isVisible(l.name));
-				composite.redraw();
-				selLayer(l);
-			});
-			j.append(b, ' ');
-		}
-	}
-	
-	export function addCompositeView(layers: string[], zoom: number = 1): Composite {
-		let composite = new Composite(g_model, layers, zoom);
-		for (let ln of layers) {
-			if (g_model.layers.every(l => l.name != ln)) {
-				console.warn("Non-existing layer " + ln);
+	export function addCompositeView(parts: string[], zoom: number = 1): Composite {
+		let composite = new Composite(g_model, parts, zoom);
+		/*for (let ln of parts) {
+			if (g_model.parts.every(l => l.name != ln)) {
+				console.warn("Non-existing part " + ln);
 			}
-		}
+		}*/
 		let commonPalette = g_model.palettes['common'];
 		for (let cpname of g_model.colorProps) {
 			let cpPal = g_model.palettes[cpname] || {};
@@ -641,9 +744,9 @@ namespace spred {
 						)
 					)
 					/*$new('textarea.col.form-control'
-					).val(layers.join(', ')
+					).val(parts.join(', ')
 					).on('input change', e => {
-						composite.layers = (e.target as HTMLTextAreaElement).value.split(/, *!/);
+						composite.parts = (e.target as HTMLTextAreaElement).value.split(/, *!/);
 						composite.redraw();
 					})*/
 				)
@@ -694,7 +797,7 @@ namespace spred {
 				let dx = ((e.offsetX - x0) / composite.zoom) | 0;
 				let dy = ((e.offsetY - y0) / composite.zoom) | 0;
 				if (dx || dy) {
-					selLayerMove(dx, dy);
+					selPartMove(dx, dy);
 					x0 = e.offsetX;
 					y0 = e.offsetY;
 				}
@@ -708,7 +811,7 @@ namespace spred {
 			}
 		});
 		g_composites.push(composite);
-		updateCompositeLayers(composite);
+		updateCompositeParts(composite);
 		return composite;
 	}
 	
@@ -727,34 +830,37 @@ namespace spred {
 			obj.redraw(x, y, w, h);
 		}
 	}
-	
+	/*
 	export function swapLayers(a: number, b: number) {
-		let l0            = g_model.layers[a];
-		g_model.layers[a] = g_model.layers[b];
-		g_model.layers[b] = l0;
+		let l0           = g_model.parts[a];
+		g_model.parts[a] = g_model.parts[b];
+		g_model.parts[b] = l0;
 		showSpriteList(g_model);
 		redrawAll();
 	}
-	
+	*/
+	/*
 	function showSpriteList(model: Model) {
-		/*
+
 		let list = $('#LayerList');
 		for (let sn in model.sprites) {
 			let sprite = model.sprites[sn];
 			if (sprite) sprite.ui.detach().appendTo(list);
 		}
-		*/
+
 	}
-	
+	*/
 	function showLayerList(model: Model) {
-		let list = $('#LayerList');
-		for (let layer of model.layers) {
-			layer.ui.detach().appendTo(list);
-		}
+		let lbs = model.layers.map(layer=>
+			$new('div',
+				$new('h5',layer.name),
+				layer.parts.map(p=>p.ui.detach()))
+		);
+		$('#LayerList').html('').append(lbs);
 	}
 	
 	export function getSelSprite(): Sprite {
-		return g_model.sprites[g_selsprite];
+		return g_model.sprite(g_selsprite);
 	}
 	
 	export function selSprite(name: string) {
@@ -768,35 +874,35 @@ namespace spred {
 		}*/
 	}
 	
-	export function selLayer(layer: Layer) {
-		g_sellayer = layer;
-		$('#SelLayerName').html(layer.name);
-		$('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
-							   ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
+	export function selPart(part: Part) {
+		g_selpart = part;
+		$('#SelLayerName').html(part.name);
+		$('#SelLayerPos').html('(dx = ' + (part.dx + part.sprite.dx) +
+							   ', dy = ' + (part.dy + part.sprite.dy) + ')');
 		$('.LayerListItem').removeClass('selected');
-		layer.ui.addClass('selected');
-		$('#SelLayerCanvas').html('').append(layer.sprite.canvas);
+		part.ui.addClass('selected');
+		$('#SelLayerCanvas').html('').append(part.sprite.canvas);
 	}
 	
 	/*
 	export function selLayerUp() {
-		let i = g_model.layers.findIndex(layer=>layer.name==g_sellayer);
+		let i = g_model.layers.findIndex(layer=>layer.name==g_selpart);
 		if (i > 0) swapLayers(i, i - 1);
 	}
 	
 	export function selLayerDown() {
-		let i = g_model.layerNames.indexOf(g_sellayer);
-		if (i >= 0 && i < g_model.layerNames.length - 1) swapLayers(i, i + 1);
+		let i = g_model.partNames.indexOf(g_selpart);
+		if (i >= 0 && i < g_model.partNames.length - 1) swapLayers(i, i + 1);
 	}
 	*/
-	export function selLayerMove(dx: number, dy: number) {
-		let layer = g_sellayer;
-		if (layer) {
-			layer.sprite.dx += dx;
-			layer.sprite.dy += dy;
+	export function selPartMove(dx: number, dy: number) {
+		let part = g_selpart;
+		if (part) {
+			part.sprite.dx += dx;
+			part.sprite.dy += dy;
 			redrawAll();
-			$('#SelLayerPos').html('(dx = ' + (layer.dx + layer.sprite.dx) +
-								   ', dy = ' + (layer.dy + layer.sprite.dy) + ')');
+			$('#SelLayerPos').html('(dx = ' + (part.dx + part.sprite.dx) +
+								   ', dy = ' + (part.dy + part.sprite.dy) + ')');
 		}
 	}
 	
@@ -854,7 +960,6 @@ namespace spred {
 			$('#SelLayerCanvas')
 				.css('min-width', model.width + 'px')
 				.css('min-height', model.height + 'px');
-			showSpriteList(model);
 			selSprite(Object.keys(model.sprites)[0]);
 			$('#lmb-color').html('').append(
 				model.colorkeys.map(ck =>
@@ -862,19 +967,19 @@ namespace spred {
 					).attr('value', ck.src)
 				)
 			);
-			for (let layer of model.layers) {
-				layer.ui = $new('div.LayerListItem',
-					$new('label', layer.name),
+			for (let part of model.allParts()) {
+				part.ui = $new('div.LayerListItem',
+					$new('label', part.name),
 					newCanvas(32, 32)
-				).click(e => selLayer(layer));
-				layer.updateUI();
+				).click(e => selPart(part));
+				part.updateUI();
 			}
 			showLayerList(model);
-			selLayer(model.layers[0]);
-			addCompositeView(defaultLayerList(), 2);
-			addCompositeView(defaultLayerList(), 2);
-			addCompositeView(defaultLayerList(), 1);
-			addCompositeView(defaultLayerList(), 1);
+			selPart(model.layers[0].parts[0]);
+			addCompositeView(defaultPartList(), 2);
+			addCompositeView(defaultPartList(), 2);
+			addCompositeView(defaultPartList(), 1);
+			addCompositeView(defaultPartList(), 1);
 			$('#ClipboardGrabber').on('paste', e => {
 				e.stopPropagation();
 				e.preventDefault();
