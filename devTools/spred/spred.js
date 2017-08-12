@@ -1,8 +1,48 @@
 /*
+ * Created by aimozg on 10.08.2017.
+ * Confidential until published on GitHub
+ */
+///<reference path="typings/jquery.d.ts"/>
+function RGBA(i) {
+    let rgb = i.toRgb();
+    return (((rgb.a * 0xff) & 0xff) << 24
+        | (rgb.b & 0xff) << 16
+        | (rgb.g & 0xff) << 8
+        | (rgb.r & 0xff)) >>> 0;
+}
+function randint(n) {
+    return Math.floor(Math.random() * n);
+}
+function randel(arr) {
+    return arr[randint(arr.length)];
+}
+function $new(selector = 'div', ...content) {
+    let ss = selector.split(/\./);
+    let tagName = ss[0] || 'div';
+    let d = document.createElement(tagName);
+    d.className = ss.slice(1).join(' ');
+    if (tagName == 'button')
+        d.type = 'button';
+    if (tagName == 'a')
+        d.href = 'javascript:void(0)';
+    let j = $(d);
+    for (let c of content)
+        j.append(c);
+    return j;
+}
+function obj2kvpairs(o) {
+    let rslt = [];
+    for (let i = 0, a = Object.keys(o), n = a.length; i < n; i++) {
+        rslt[i] = [a[i], o[a[i]]];
+    }
+    return rslt;
+}
+/*
  * Created by aimozg on 27.07.2017.
  * Confidential until published on GitHub
  */
 ///<reference path="typings/jquery.d.ts"/>
+///<reference path="utils.ts"/>
 var spred;
 (function (spred) {
     spred.basedir = window['spred_basedir'] || '../../';
@@ -10,37 +50,24 @@ var spred;
     spred.g_composites = [];
     spred.g_selsprite = '';
     spred.g_selpart = null;
-    spred.g_gen = [
-        ['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
-        ['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
-        [['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon', 'hair-gorgon_bg']],
-        ['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
-        [[], [], [], 'horns2S', 'horns2L', ['horns-orchid_bg', 'horns-orchid_fg']],
-        ['breasts0', 'breastsD', 'breastsDfur', 'breastsDbee', 'breastsDchitin', 'breastsDscales'],
-        ['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca'], 'arms-alraune', 'arms-scales', 'arms-bee', 'arms-bee2', 'arms-chitin', 'arms-chitin2'],
-        ['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca', 'legs-drider', 'legs-centaur', 'legs-chitin', 'legs-bee', 'legs-bee', 'legs-scales', 'legs-alraune', 'legs-liliraune'],
-        ['torso-human', 'torso-human', 'torso-fur', 'torso-orca', 'torso-bee', 'torso-chitin', 'torso-scales'],
-        [[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca', 'tail-bee_abdomen', 'tail-reptile'],
-        [[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg'], ['wings-bee'], ['wings-scales_left', 'wings-scales_right']],
-        [[], [], [], ['antennae-bee']]
-    ];
-    function RGBA(i) {
-        let rgb = i.toRgb();
-        return (((rgb.a * 0xff) & 0xff) << 24
-            | (rgb.b & 0xff) << 16
-            | (rgb.g & 0xff) << 8
-            | (rgb.r & 0xff)) >>> 0;
+    spred.rng_skippables = {
+        'tail': 1, 'wings': 1, 'antennae': 1, 'horns': 1, 'hair': 1, 'neck': 1
+    };
+    spred.rng_symmetrical = {
+        'wings_bg': 'wings',
+        'horns_bg': 'horns',
+        'hair_bg': 'hair',
+        'ears_bg': 'ears',
+        'arms_bg': 'arms'
+    };
+    function defaultPartList() {
+        let o = {};
+        for (let l of spred.g_model.logic) {
+        }
+        return Object.keys(o).map(k => o[k]);
     }
-    spred.RGBA = RGBA;
-    function randint(n) {
-        return Math.floor(Math.random() * n);
-    }
-    spred.randint = randint;
-    function randel(arr) {
-        return arr[randint(arr.length)];
-    }
-    spred.randel = randel;
-    var FileAsker;
+    spred.defaultPartList = defaultPartList;
+    let FileAsker;
     (function (FileAsker) {
         let fileReaders = {};
         function filename(f) {
@@ -138,21 +165,6 @@ var spred;
         return canvas;
     }
     */
-    function $new(selector = 'div', ...content) {
-        let ss = selector.split(/\./);
-        let tagName = ss[0] || 'div';
-        let d = document.createElement(tagName);
-        d.className = ss.slice(1).join(' ');
-        if (tagName == 'button')
-            d.type = 'button';
-        if (tagName == 'a')
-            d.href = 'javascript:void(0)';
-        let j = $(d);
-        for (let c of content)
-            j.append(c);
-        return j;
-    }
-    spred.$new = $new;
     function newCanvas(width, height, code = () => { }) {
         let canvas = document.createElement('canvas');
         canvas.width = width;
@@ -239,6 +251,7 @@ var spred;
                 if (this._parts[part.name]) {
                     let sprite = this.model.sprite(part.name);
                     let idata = sprite.ctx2d.getImageData(x, y, w, h);
+                    idata = colormap(idata, cmap);
                     p0 = p0.then(ctx2d => {
                         return createImageBitmap(idata).then(bmp => {
                             let sx = x, sy = y;
@@ -268,11 +281,11 @@ var spred;
                     });
                 }
             }
-            p0.then(ctx2d => {
-                let data = colormap(ctx2d.getImageData(xz, yz, wz, hz), cmap);
-                ctx2d.putImageData(data, 0, 0);
+            /*p0.then(ctx2d => {
+                let data      = colormap(ctx2d.getImageData(xz,yz,wz,hz), cmap);
+                ctx2d.putImageData(data,0,0);
                 return ctx2d;
-            });
+            })*/
         }
         hideAll(name) {
             this._parts = {};
@@ -384,11 +397,11 @@ var spred;
                 });
         }
         serialize() {
-            return `<spritemap file="${this.file}">\n` +
+            return `    <spritemap file="${this.file}">\n` +
                 Object.keys(this.sprites).map(sn => {
                     let s = this.sprites[sn];
-                    return `\t<cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`;
-                }).join('\n') + `\n</spritemap>`;
+                    return `        <cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`;
+                }).join('\n') + `\n    </spritemap>`;
         }
         isLoaded() {
             return this.img != null;
@@ -579,17 +592,9 @@ var spred;
         }
     }
     spred.Model = Model;
-    function defaultPartList() {
-        return spred.g_model.layers.map(l => randel([''].concat(l.parts.map(p => p.name)))).filter(s => s);
-        /*return g_gen.map(randel)
-                    .map(s => (typeof s == 'string' ? [s] : s) as string[])
-                    .reduce((r, e) => r.concat(e), [])
-                    .filter(s => s);*/
-    }
-    spred.defaultPartList = defaultPartList;
     function updateCompositeParts(composite) {
         composite.ui.find('.LayerBadges').html('').append(composite.model.layers.map(layer => $new('div', $new('label', $new('strong', layer.name + ': '), layer.parts.map(p => $new('button.badge' +
-            (composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'), p.name).click((e) => {
+            (composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'), p.name.substring(layer.name.length + 1)).click((e) => {
             $(e.target).toggleClass('badge-primary').toggleClass('badge-default');
             composite.setVisible(p.name, !composite.isVisible(p.name));
             composite.redraw();
@@ -852,7 +857,7 @@ var spred;
             showLayerList(model);
             selPart(model.layers[0].parts[0]);
             addCompositeView(defaultPartList(), 2);
-            addCompositeView(defaultPartList(), 2);
+            addCompositeView(defaultPartList(), 1);
             addCompositeView(defaultPartList(), 1);
             addCompositeView(defaultPartList(), 1);
             $('#ClipboardGrabber').on('paste', e => {

@@ -3,8 +3,8 @@
  * Confidential until published on GitHub
  */
 ///<reference path="typings/jquery.d.ts"/>
+///<reference path="utils.ts"/>
 
-type Dict<T> = { [index: string]: T };
 type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 
 namespace spred {
@@ -14,37 +14,26 @@ namespace spred {
 	export let g_composites: Composite[]      = [];
 	export let g_selsprite: string            = '';
 	export let g_selpart: Part                = null;
-	export let g_gen: (string | string[])[][] = [
-		['face-human', 'face-human', 'face-fur', 'face-orca', 'face-bee', 'face-chitin', 'face-scales'],
-		['eyes-human', 'eyes-cat', 'eyes-spider', 'eyes-sandtrap', 'eyes-manticore', 'eyes-orca'],
-		[['hair0f', 'hair0b'], ['hair0f', 'hair0b'], [], ['hair-gorgon','hair-gorgon_bg']],
-		['ears-human', 'ears-fur', ['ears-fox_fg', 'ears-fox_bg'], 'ears-wolf', 'ears-cat', 'ears-orca'],
-		[[], [], [], 'horns2S', 'horns2L', ['horns-orchid_bg','horns-orchid_fg']],
-		['breasts0', 'breastsD' ,'breastsDfur', 'breastsDbee','breastsDchitin','breastsDscales'],
-		['arms-human', 'arms-fur', 'arms-manticore', ['arms-orca', 'fins-orca'], 'arms-alraune', 'arms-scales', 'arms-bee', 'arms-bee2' ,'arms-chitin', 'arms-chitin2'],
-		['legs-human', 'legs-furpaws', 'legs-naga', 'legs-kraken', 'legs-scylla', 'legs-manticore_sit', 'legs-orca', 'legs-drider', 'legs-centaur', 'legs-chitin', 'legs-bee', 'legs-bee', 'legs-scales', 'legs-alraune', 'legs-liliraune'],
-		['torso-human', 'torso-human', 'torso-fur', 'torso-orca', 'torso-bee', 'torso-chitin', 'torso-scales'],
-		[[], 'tail-cat', 'tail-cat2', 'tail-fox1', ['tail-fox1', 'tail-fox2'], 'tail-manticore', 'tail-orca', 'tail-bee_abdomen', 'tail-reptile'],
-		[[], [], [], ['wings-mantibig_bg', 'wings-mantibig_fg'], ['wings-bee'], ['wings-scales_left','wings-scales_right']],
-		[[], [], [], ['antennae-bee']]
-	];
+	export let rng_skippables = {
+		'tail':1, 'wings':1, 'antennae':1, 'horns':1, 'hair':1, 'neck':1
+	};
+	export let rng_symmetrical = {
+		'wings_bg': 'wings',
+		'horns_bg': 'horns',
+		'hair_bg' : 'hair',
+		'ears_bg' : 'ears',
+		'arms_bg' : 'arms'
+	};
 	
-	export function RGBA(i: tinycolorInstance): number {
-		let rgb = i.toRgb();
-		return (
-				   ((rgb.a * 0xff) & 0xff) << 24
-				   | (rgb.b & 0xff) << 16
-				   | (rgb.g & 0xff) << 8
-				   | (rgb.r & 0xff)
-			   ) >>> 0;
+	export function defaultPartList(): string[] {
+		let o:Dict<string> = {};
+		for (let l of g_model.logic) {
+		
+		}
+		return Object.keys(o).map(k=>o[k]);
 	}
 	
-	export function randint(n: number): number {
-		return Math.floor(Math.random() * n);
-	}
-	export function randel<T>(arr:T[]):T {
-		return arr[randint(arr.length)];
-	}
+
 	
 	namespace FileAsker {
 		let fileReaders = {} as Dict<(data: File) => any>;
@@ -150,18 +139,6 @@ namespace spred {
 	}
 	*/
 	
-	export function $new(selector: string = 'div', ...content: (string | JQuery | Element | JQuery[] | Element[])[]): JQuery {
-		let ss      = selector.split(/\./);
-		let tagName = ss[0] || 'div';
-		let d       = document.createElement(tagName);
-		d.className = ss.slice(1).join(' ');
-		if (tagName == 'button') (d as HTMLButtonElement).type = 'button';
-		if (tagName == 'a') (d as HTMLAnchorElement).href = 'javascript:void(0)';
-		let j = $(d);
-		for (let c of content) j.append(c);
-		return j;
-	}
-	
 	export function newCanvas(width: number, height: number,
 							  code: (ctx2d: CanvasRenderingContext2D) => any = () => {}): HTMLCanvasElement {
 		let canvas    = document.createElement('canvas');
@@ -250,6 +227,7 @@ namespace spred {
 				if (this._parts[part.name]) {
 					let sprite = this.model.sprite(part.name);
 					let idata  = sprite.ctx2d.getImageData(x, y, w, h);
+					idata = colormap(idata,cmap);
 					p0 = p0.then(ctx2d => {
 						return createImageBitmap(idata).then(bmp => {
 							let sx = x, sy = y;
@@ -275,11 +253,11 @@ namespace spred {
 					});
 				}
 			}
-			p0.then(ctx2d => {
+			/*p0.then(ctx2d => {
 				let data      = colormap(ctx2d.getImageData(xz,yz,wz,hz), cmap);
 				ctx2d.putImageData(data,0,0);
 				return ctx2d;
-			})
+			})*/
 		}
 		
 		public hideAll(name: string) {
@@ -399,11 +377,11 @@ namespace spred {
 		public file: string;
 		
 		public serialize(): string {
-			return `<spritemap file="${this.file}">\n` +
+			return `    <spritemap file="${this.file}">\n` +
 				   Object.keys(this.sprites).map(sn => {
 					   let s = this.sprites[sn];
-					   return `\t<cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`
-				   }).join('\n') + `\n</spritemap>`;
+					   return `        <cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`
+				   }).join('\n') + `\n    </spritemap>`;
 		}
 		
 		public isLoaded(): boolean {
@@ -642,14 +620,6 @@ namespace spred {
 				});
 		}
 	}
-	
-	export function defaultPartList(): string[] {
-		return g_model.layers.map(l=>randel([''].concat(l.parts.map(p=>p.name)))).filter(s=>s);
-		/*return g_gen.map(randel)
-		            .map(s => (typeof s == 'string' ? [s] : s) as string[])
-		            .reduce((r, e) => r.concat(e), [])
-		            .filter(s => s);*/
-	}
 
 	export function updateCompositeParts(composite: Composite) {
 		composite.ui.find('.LayerBadges').html('').append(
@@ -660,7 +630,7 @@ namespace spred {
 						layer.parts.map(p =>
 							$new('button.badge' +
 								(composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'),
-								p.name
+								p.name.substring(layer.name.length+1)
 							).click((e) => {
 								$(e.target).toggleClass('badge-primary').toggleClass('badge-default');
 								composite.setVisible(p.name, !composite.isVisible(p.name));
@@ -977,7 +947,7 @@ namespace spred {
 			showLayerList(model);
 			selPart(model.layers[0].parts[0]);
 			addCompositeView(defaultPartList(), 2);
-			addCompositeView(defaultPartList(), 2);
+			addCompositeView(defaultPartList(), 1);
 			addCompositeView(defaultPartList(), 1);
 			addCompositeView(defaultPartList(), 1);
 			$('#ClipboardGrabber').on('paste', e => {

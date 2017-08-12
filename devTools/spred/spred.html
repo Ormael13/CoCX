@@ -42,8 +42,13 @@
 		#ViewList > .card > .card-block {
 			padding: 0.5rem;
 		}
-		.LayerBadges {
+		.LayerBadges:not(.collapse) {
 			max-width: 576px;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.LayerBadges > * {
+			margin:0 .5rem;
 		}
 		.LayerListItem {
 			display: flex;
