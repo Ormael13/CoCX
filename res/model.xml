@@ -298,8 +298,8 @@
         <cell rect="184,142,53,42" name="breasts/Dorca" dx="70" dy="61"/>
     </spritemap>
     <spritemap file="scales.png">
-        <cell rect="8,32,53,119" name="wings_bg/scales" dx="32" dy="20"/>
-        <cell rect="64,32,53,119" name="wings/scales" dx="104" dy="20"/>
+        <cell rect="8,32,53,119" name="wings/scales_left" dx="32" dy="20"/>
+        <cell rect="64,32,53,119" name="wings/scales_right" dx="104" dy="20"/>
         <cell rect="13,161,46,55" name="face/scales" dx="71" dy="17"/>
         <cell rect="64,176,48,39" name="breasts/Dscales" dx="72" dy="61"/>
         <cell rect="142,155,58,51" name="legs/scales" dx="65" dy="115"/>
@@ -502,8 +502,14 @@
             </case>
             <case value="'never'">
                 <show part="face/bee"/>
+            </case>
+            <case value="'never'">
                 <show part="face/chitin"/>
+            </case>
+            <case value="'never'">
                 <show part="face/scales"/>
+            </case>
+            <case value="'never'">
                 <show part="face/human_fang"/>
             </case>
             <default>
@@ -523,7 +529,11 @@
                         </case>
                         <case value="'never'">
                             <show part="breasts/Dchitin"/>
+                        </case>
+                        <case value="'never'">
                             <show part="breasts/Dbee"/>
+                        </case>
+                        <case value="'never'">
                             <show part="breasts/Dscales"/>
                         </case>
                         <default>
@@ -540,26 +550,49 @@
         <switch value="armType">
             <case value="0"><!--ARM_TYPE_HUMAN-->
                 <show part="arms/human"/>
+                <show part="arms_bg/human"/>
             </case>
             <case value="11"><!--ARM_TYPE_LION-->
                 <show part="neck/manticore"/>
                 <show part="arms/manticore"/>
             </case>
             <case value="17"><!--ARM_TYPE_ORCA-->
+                <show part="arms_bg/orca"/>
                 <show part="arms/orca"/>
                 <show part="arms/fins-orca"/>
+                <show part="arms_bg/fins-orca"/>
             </case>
             <case value="'never'">
                 <show part="arms/fur"/>
+                <show part="arms_bg/fur"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/scales"/>
+                <show part="arms_bg/scales"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/bee"/>
+                <show part="arms_bg/bee"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/bee2"/>
+                <show part="arms_bg/bee2"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/chitin"/>
+                <show part="arms_bg/chitin"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/chitin2"/>
+                <show part="arms_bg/chitin2"/>
+            </case>
+            <case value="'never'">
                 <show part="arms/alraune"/>
+                <show part="arms_bg/alraune"/>
             </case>
             <default>
                 <show part="arms/human"/>
+                <show part="arms_bg/human"/>
             </default>
         </switch>
 
@@ -591,12 +624,26 @@
             </case>
             <case value="'never'">
                 <show part="legs/kraken"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/chitin"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/drider"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/centaur"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/bee"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/scales"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/alraune"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/liliraune"/>
             </case>
             <default>
@@ -613,7 +660,11 @@
             </case>
             <case test="'never'">
                 <show part="torso/bee"/>
+            </case>
+            <case value="'never'">
                 <show part="torso/chitin"/>
+            </case>
+            <case value="'never'">
                 <show part="torso/scales"/>
             </case>
             <default>
@@ -629,6 +680,8 @@
             </case>
             <case value="'never'">
                 <show part="wings/bee"/>
+            </case>
+            <case value="'never'">
                 <show part="wings/scales_left"/>
                 <show part="wings/scales_right"/>
             </case>
@@ -671,6 +724,8 @@
             </case>
             <case value="'never'">
                 <show part="tail/bee_abdomen"/>
+            </case>
+            <case value="'never'">
                 <show part="tail/reptile"/>
             </case>
             <default>

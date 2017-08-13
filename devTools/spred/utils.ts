@@ -3,6 +3,8 @@
  * Confidential until published on GitHub
  */
 ///<reference path="typings/jquery.d.ts"/>
+type TDrawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
+
 function RGBA(i: tinycolorInstance): number {
 	let rgb = i.toRgb();
 	return (
@@ -16,9 +18,11 @@ function RGBA(i: tinycolorInstance): number {
 function randint(n: number): number {
 	return Math.floor(Math.random() * n);
 }
-function randel<T>(arr:T[]):T {
+
+function randel<T>(arr: T[]): T {
 	return arr[randint(arr.length)];
 }
+
 function $new(selector: string = 'div', ...content: (string | JQuery | Element | JQuery[] | Element[])[]): JQuery {
 	let ss      = selector.split(/\./);
 	let tagName = ss[0] || 'div';
@@ -30,12 +34,13 @@ function $new(selector: string = 'div', ...content: (string | JQuery | Element |
 	for (let c of content) j.append(c);
 	return j;
 }
+
 type Dict<T> = { [index: string]: T };
 
-function obj2kvpairs<T>(o:Dict<T>):[string,T][] {
-	let rslt:[string,T][] = [];
-	for (let i=0,a=Object.keys(o),n=a.length;i<n;i++) {
-		rslt[i] = [a[i],o[a[i]]];
+function obj2kvpairs<T>(o: Dict<T>): [string, T][] {
+	let rslt: [string, T][] = [];
+	for (let i = 0, a = Object.keys(o), n = a.length; i < n; i++) {
+		rslt[i] = [a[i], o[a[i]]];
 	}
 	return rslt;
 }
@@ -54,4 +59,27 @@ function colormap(src: ImageData, map: [number, number][]): ImageData {
 		}
 	}
 	return dst;
+}
+
+/*
+ * Takes a rect starting from (srcdx, srcdy) of size (srcw x srch) from src
+ * Scales it `scale` times.
+ * Puts in onto dst starting from (dstdx, dstdy), with a dst bounds limited at (dstw x dsth)
+ */
+function drawImage(src: TDrawable, srcdx: number, srcdy: number, srcw: number, srch: number,
+				   dst: CanvasRenderingContext2D, dstdx: number, dstdy: number, dstw: number, dsth: number,
+				   scale: number) {
+	let sx = srcdx, sy = srcdy, sw = srcw, sh = srch;
+	let dx = dstdx, dy = dstdy;
+	if (dx < 0) {
+		sx -= dx;
+		dx = 0;
+	}
+	if (dy < 0) {
+		sy -= dy;
+		dy = 0;
+	}
+	if (dx + sw > dstw) sw = dstw - dx;
+	if (dy + sh > dsth) sh = dsth - dy;
+	dst.drawImage(src, sx, sy, sw, sh, dx * scale, dy * scale, sw * scale, sh * scale);
 }

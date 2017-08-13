@@ -1,8 +1,3 @@
-/*
- * Created by aimozg on 10.08.2017.
- * Confidential until published on GitHub
- */
-///<reference path="typings/jquery.d.ts"/>
 function RGBA(i) {
     let rgb = i.toRgb();
     return (((rgb.a * 0xff) & 0xff) << 24
@@ -53,6 +48,28 @@ function colormap(src, map) {
     return dst;
 }
 /*
+ * Takes a rect starting from (srcdx, srcdy) of size (srcw x srch) from src
+ * Scales it `scale` times.
+ * Puts in onto dst starting from (dstdx, dstdy), with a dst bounds limited at (dstw x dsth)
+ */
+function drawImage(src, srcdx, srcdy, srcw, srch, dst, dstdx, dstdy, dstw, dsth, scale) {
+    let sx = srcdx, sy = srcdy, sw = srcw, sh = srch;
+    let dx = dstdx, dy = dstdy;
+    if (dx < 0) {
+        sx -= dx;
+        dx = 0;
+    }
+    if (dy < 0) {
+        sy -= dy;
+        dy = 0;
+    }
+    if (dx + sw > dstw)
+        sw = dstw - dx;
+    if (dy + sh > dsth)
+        sh = dsth - dy;
+    dst.drawImage(src, sx, sy, sw, sh, dx * scale, dy * scale, sw * scale, sh * scale);
+}
+/*
  * Created by aimozg on 27.07.2017.
  * Confidential until published on GitHub
  */
@@ -76,10 +93,27 @@ var spred;
         'arms_bg': 'arms'
     };
     function defaultPartList() {
-        let o = {};
-        for (let l of spred.g_model.logic) {
+        let o = [];
+        let q = spred.g_model.logic.slice();
+        while (q.length > 0) {
+            let l = q.pop();
+            if (l instanceof LogicIf) {
+                if (randint(2) != 0)
+                    q.push(...l.then);
+            }
+            else if (l instanceof LogicShow) {
+                //o[l.partExpr.split('/')[0]] = l.partExpr;
+                o.push(l.partExpr);
+            }
+            else if (l instanceof LogicSwitch) {
+                let i = randint(l.cases.length + 1) - 1;
+                if (i < 0)
+                    q.push(...l.default);
+                else
+                    q.push(...l.cases[i].body);
+            }
         }
-        return Object.keys(o).map(k => o[k]);
+        return o;
     }
     spred.defaultPartList = defaultPartList;
     let FileAsker;
@@ -224,6 +258,7 @@ var spred;
         constructor(model, visibleNames = [], zoom = 1) {
             this.model = model;
             this._parts = {};
+            this._cache = {};
             this.colormap = {};
             this.canvas = newCanvas(model.width * zoom, model.height * zoom);
             this.canvas.setAttribute('focusable', 'true');
@@ -238,6 +273,9 @@ var spred;
                 r[e] = true;
                 return r;
             }, {});
+        }
+        clearCache() {
+            this._cache = {};
         }
         redraw(x = 0, y = 0, w = this.model.width, h = this.model.height) {
             let ctx2d = this.canvas.getContext('2d');
@@ -264,35 +302,21 @@ var spred;
             for (let a = this.model.allParts(), i = a.length - 1; i >= 0; i--) {
                 let part = a[i];
                 if (this._parts[part.name]) {
-                    let sprite = this.model.sprite(part.name);
-                    let idata = sprite.ctx2d.getImageData(x, y, w, h);
-                    idata = colormap(idata, cmap);
                     p0 = p0.then(ctx2d => {
-                        return createImageBitmap(idata).then(bmp => {
-                            let sx = x, sy = y;
-                            let sw = w;
-                            let sh = h;
-                            let dx = part.dx + sprite.dx;
-                            let dy = part.dy + sprite.dy;
-                            if (dx < 0) {
-                                sx -= dx;
-                                dx = 0;
-                            }
-                            if (dy < 0) {
-                                sy -= dy;
-                                dy = 0;
-                            }
-                            if (dx + sw > this.model.width)
-                                sw = this.model.width - dx;
-                            if (dy + sh > this.model.height)
-                                sh = this.model.height - dy;
-                            if (sx + sw > sprite.width)
-                                sw = sprite.width - sx;
-                            if (sy + sh > sprite.height)
-                                sh = sprite.height - sy;
-                            ctx2d.drawImage(bmp, sx, sy, sw, sh, dx * z, dy * z, sw * z, sh * z);
+                        let sprite = this.model.sprite(part.name);
+                        if (part.name in this._cache) {
+                            drawImage(this._cache[part.name], x, y, w, h, ctx2d, part.dx + sprite.dx, part.dy + sprite.dy, this.model.width, this.model.height, z);
                             return ctx2d;
-                        });
+                        }
+                        else {
+                            let idata = sprite.ctx2d.getImageData(x, y, w, h);
+                            idata = colormap(idata, cmap);
+                            return createImageBitmap(idata).then(bmp => {
+                                this._cache[part.name] = bmp;
+                                drawImage(bmp, x, y, w, h, ctx2d, part.dx + sprite.dx, part.dy + sprite.dy, this.model.width, this.model.height, z);
+                                return ctx2d;
+                            });
+                        }
                     });
                 }
             }
@@ -653,6 +677,7 @@ var spred;
             else {
                 delete composite.colormap[cpname];
             }
+            composite.clearCache();
             composite.redraw();
         }).val(composite.colormap[cpname])))))
         /*$new('textarea.col.form-control'
@@ -672,6 +697,7 @@ var spred;
             let y = (cy / composite.zoom) | 0;
             dirty = true;
             spred.g_model.putPixel(x, y, color);
+            composite.clearCache();
             composite.redraw(x, y, 1, 1);
             if (x < x0)
                 x0 = x;
@@ -719,6 +745,9 @@ var spred;
             drawing = false;
             dragging = false;
             if (dirty) {
+                for (let obj of spred.g_composites) {
+                    obj.clearCache();
+                }
                 redrawAll(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
                 dirty = false;
             }
