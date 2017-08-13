@@ -37,6 +37,21 @@ function obj2kvpairs(o) {
     }
     return rslt;
 }
+function colormap(src, map) {
+    let dst = new ImageData(src.width, src.height);
+    let sarr = new Uint32Array(src.data.buffer);
+    let darr = new Uint32Array(dst.data.buffer);
+    for (let i = 0, n = darr.length; i < n; i++) {
+        darr[i] = sarr[i];
+        for (let j = 0, m = map.length; j < m; j++) {
+            if (sarr[i] === map[j][0]) {
+                darr[i] = map[j][1];
+                break;
+            }
+        }
+    }
+    return dst;
+}
 /*
  * Created by aimozg on 27.07.2017.
  * Confidential until published on GitHub
@@ -798,22 +813,6 @@ var spred;
         }
     }
     spred.selPartMove = selPartMove;
-    function colormap(src, map) {
-        let dst = new ImageData(src.width, src.height);
-        let sarr = new Uint32Array(src.data.buffer);
-        let darr = new Uint32Array(dst.data.buffer);
-        for (let i = 0, n = darr.length; i < n; i++) {
-            darr[i] = sarr[i];
-            for (let j = 0, m = map.length; j < m; j++) {
-                if (sarr[i] === map[j][0]) {
-                    darr[i] = map[j][1];
-                    break;
-                }
-            }
-        }
-        return dst;
-    }
-    spred.colormap = colormap;
     function grabData(blob) {
         let mask = $('#ClipboardMask').val();
         let i32mask = mask ? RGBA(tinycolor(mask)) : 0;

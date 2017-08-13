@@ -876,22 +876,6 @@ namespace spred {
 		}
 	}
 	
-	export function colormap(src: ImageData, map: [number, number][]): ImageData {
-		let dst  = new ImageData(src.width, src.height);
-		let sarr = new Uint32Array(src.data.buffer);
-		let darr = new Uint32Array(dst.data.buffer);
-		for (let i = 0, n = darr.length; i < n; i++) {
-			darr[i] = sarr[i];
-			for (let j = 0, m = map.length; j < m; j++) {
-				if (sarr[i] === map[j][0]) {
-					darr[i] = map[j][1];
-					break;
-				}
-			}
-		}
-		return dst;
-	}
-	
 	function grabData(blob: Blob) {
 		let mask    = $('#ClipboardMask').val();
 		let i32mask = mask ? RGBA(tinycolor(mask)) : 0;
