@@ -829,6 +829,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -836,6 +839,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -843,6 +849,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -850,6 +859,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -857,6 +869,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -864,6 +879,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
@@ -871,6 +889,9 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
 	}
 	if (player.mana < manacostofelementalattacking) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
@@ -884,8 +905,8 @@ public function baseelementalattacks():void {
 }
 public function intwisscaling():Number {
 	var intwisscalingvar:Number = 0;
-	intwisscalingvar += inteligencescalingbonus() * 0.25;//450*0.25=112.5
-	intwisscalingvar += wisdomscalingbonus() * 0.5;//700*0.5=350
+	intwisscalingvar += inteligencescalingbonus() * 0.25;
+	intwisscalingvar += wisdomscalingbonus() * 0.5;//1750*0.5=875
 	return intwisscalingvar;
 }
 public function elementalattacks():void {
@@ -896,92 +917,78 @@ public function elementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && damageelemental > 50) damageelemental = 50;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2 && damageelemental > 150) damageelemental = 150;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 600) damageelemental = 600;
-		}
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) {
-			damageelemental += intwisscaling();
-			if (damageelemental > 1150) damageelemental = 1150;
-		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
 	if (player.findPerk(PerkLib.ElementalConjurerResolve) >= 0) damageelemental *= (1 + (0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 	if (player.findPerk(PerkLib.ElementalConjurerDedication) >= 0) damageelemental *= (1 + (0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -3217,6 +3224,7 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
 		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
 		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityVI) >= 0) multi += 0.1;
 		if (player.alicornScore() >= 6) multi += 0.1;
 		if (player.kitsuneScore() >= 5) {
 			if (player.kitsuneScore() >= 10) multi += 1;
@@ -3308,6 +3316,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringIV) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringV) >= 0) multi += 0.05;
+		if (player.findPerk(PerkLib.NaturesSpringVI) >= 0) multi += 0.05;
 		return multi;
 	}
 //ENEMYAI!
@@ -4011,7 +4020,9 @@ private function combatStatusesUpdate():void {
 	}
 	if (player.hasStatusEffect(StatusEffects.Might)) {
 		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might),"tou", -player.statusEffectv2(StatusEffects.Might));
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+			else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
 			player.removeStatusEffect(StatusEffects.Might);
 		//	statScreenRefresh();
 			outputText("<b>Might effect wore off!</b>\n\n");
@@ -4215,6 +4226,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 0.5;
 			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 0.5;
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 0.5;
+			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 0.5;
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
@@ -4238,6 +4250,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 1;
 			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 1;
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 1;
+			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 1;
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
@@ -4333,6 +4346,7 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 2) maxRegen += 1;
 	if (player.newGamePlusMod() >= 3) maxRegen += 1;
 	if (player.newGamePlusMod() >= 4) maxRegen += 1;
+	if (player.newGamePlusMod() >= 5) maxRegen += 1;
 	if (player.findPerk(PerkLib.LizanRegeneration) >= 0) maxRegen += 1.5;
 	if (player.findPerk(PerkLib.LizanMarrow) >= 0) maxRegen += 0.5;
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 1;

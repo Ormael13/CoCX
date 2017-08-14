@@ -42,7 +42,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",doubleStrikeOptions);
 		}
-		if (player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0 || player.findPerk(PerkLib.FortressOfIntellect) >= 0) {
 			outputText("\n<b>You can adjust your spell autocast settings.</b>");
 			addButton(7, "Spells Opt",spellautocastOptions);
 		}
@@ -295,6 +295,8 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.Battlemage) >= 0 && flags[kFLAGS.AUTO_CAST_MIGHT] != 1) addButton(7, "Manual", manualMight);
 		if (flags[kFLAGS.AUTO_CAST_BLINK] != 0) addButton(3, "Autocast", autoBlink);
 		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", manualBlink);
+		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0 && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleOnFortressOfIntelect);
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleOffFortressOfIntelect);
 
 		var e:MouseEvent;
 		addButton(14, "Back", displayPerks);
@@ -330,6 +332,14 @@ public class PerkMenu extends BaseContent {
 	}
 	public function autoChargeWeapon():void {
 		flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] = 0;
+		spellautocastOptions();
+	}
+	public function toggleOnFortressOfIntelect():void {
+		player.createStatusEffect(StatusEffects.FortressOfIntellect,0,0,0,0);
+		spellautocastOptions();
+	}
+	public function toggleOffFortressOfIntelect():void {
+		player.removeStatusEffect(StatusEffects.FortressOfIntellect);
 		spellautocastOptions();
 	}
 	

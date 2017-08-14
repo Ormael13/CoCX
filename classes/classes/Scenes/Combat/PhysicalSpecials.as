@@ -153,15 +153,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
 			if (monster.hasStatusEffect(StatusEffects.Flying) && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/1", "Your golem can't attack flying target. (Only golems made by expert golem maker can do this)");
-			else addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can also shatter leaving it unable to be reused in future!</b>");
+			else addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can shatter leaving it unable to be reused in future!</b>");
 		}
-	/*	if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
-			3 golemy naraz - zadaje 3x dmg single target i 4x dmg group target
+		if (monster.plural) {
+			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
+				if (monster.hasStatusEffect(StatusEffects.Flying) && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/3", "Your golems can't attack flying target. (Only golems made by expert golem maker can do this)");
+				else addButton(button++, "Send T.Gol/3", sendTemporalGolem3).hint("Send three golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+			}
+			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
+				if (monster.hasStatusEffect(StatusEffects.Flying) && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/5", "Your golems can't attack flying target. (Only golems made by expert golem maker can do this)");
+				else addButton(button++, "Send T.Gol/5", sendTemporalGolem5).hint("Send five golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+			}
 		}
-		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
-			5 golemów naraz - zadaje 5x dmg single target i 7x dmg group target
-		}
-	*/	if (player.shield != ShieldLib.NOTHING) {
+		if (player.shield != ShieldLib.NOTHING) {
 			addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
@@ -621,12 +625,111 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		damage += 300 + rand(121);
-	//	if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) damage *= 1.2;
+		if (player.findPerk(PerkLib.ChargedCore) >= 0) {
+			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) {
+				damage += 200 + rand(81);
+				damage *= 1.4;
+			}
+			else {
+				damage += 100 + rand(41);
+				damage *= 1.2;
+			}
+		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
 		if (shatter == true) outputText(" <b>*Golem Core shattered!*</b>");
-		if (overloadedGolemCoresBag == true) outputText(" <b>*Golem Core was not picked due to lack of space to store them!*</b>");
+		if (overloadedGolemCoresBag == true) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
+		enemyAI();
+	}
+	public function sendTemporalGolem3():void {
+		clearOutput();
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 3;
+		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var shatter:Boolean = false;
+		var shatterChance:int = 20;
+		if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) shatterChance -= 5;
+		if (rand(100) < shatterChance) {
+			shatter = true;
+		}
+		var overloadedGolemCoresBag:Boolean = false;
+		if (shatter == false) {
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 3;
+			else overloadedGolemCoresBag = true;
+		}
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (shatter == false && overloadedGolemCoresBag == false) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 3) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		var damage:Number = 0;
+		damage += 300 + rand(121);
+		if (player.findPerk(PerkLib.ChargedCore) < 0) damage *= 3;
+		if (player.findPerk(PerkLib.ChargedCore) >= 0) {
+			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) {
+				damage += 200 + rand(81);
+				damage *= 5;
+			}
+			else {
+				damage += 100 + rand(41);
+				damage *= 4;
+			}
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		if (shatter == true) outputText(" <b>*Golem Cores shattered!*</b>");
+		if (overloadedGolemCoresBag == true) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag == true) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		enemyAI();
+	}
+	public function sendTemporalGolem5():void {
+		clearOutput();
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 5;
+		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var shatter:Boolean = false;
+		var shatterChance:int = 20;
+		if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) shatterChance -= 5;
+		if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) shatterChance -= 5;
+		if (rand(100) < shatterChance) {
+			shatter = true;
+		}
+		var overloadedGolemCoresBag:Boolean = false;
+		if (shatter == false) {
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+			else overloadedGolemCoresBag = true;
+		}
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (shatter == false && overloadedGolemCoresBag == false) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 5) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		var damage:Number = 0;
+		damage += 300 + rand(121);
+		if (player.findPerk(PerkLib.ChargedCore) < 0) damage *= 5;
+		if (player.findPerk(PerkLib.ChargedCore) >= 0) {
+			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) {
+				damage += 200 + rand(81);
+				damage *= 10;
+			}
+			else {
+				damage += 100 + rand(41);
+				damage *= 7.5;
+			}
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		if (shatter == true) outputText(" <b>*Golem Cores shattered!*</b>");
+		if (overloadedGolemCoresBag == true) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag == true) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		enemyAI();
 	}
 
@@ -704,6 +807,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.IronFistsIII) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.IronFistsIV) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
+		if (player.findPerk(PerkLib.IronFistsVI) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
@@ -768,6 +872,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.IronFistsIII) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.IronFistsIV) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
+		if (player.findPerk(PerkLib.IronFistsVI) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));

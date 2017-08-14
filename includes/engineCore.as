@@ -1206,6 +1206,7 @@ public function lustPercent():Number {
 	if(player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
+	if(player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	if(lust < minLustCap) lust = minLustCap;
 	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {

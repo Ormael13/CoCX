@@ -135,6 +135,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -173,6 +174,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Ambition) >= 0) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -207,6 +209,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv2(PerkLib.Obsession);
 		}
@@ -670,23 +673,28 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) MightDuration += 1;
 			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) MightDuration += 1;
 			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) MightDuration += 1;
 			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) MightDuration += 5;
 			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
 			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			temp = MightBoost;
-			tempStr = temp;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = 25 * spellModBlack() * (1 + player.newGamePlusMod());
+			else tempStr = temp;
 			tempTou = temp;
 			//if(player.str + temp > 100) tempStr = 100 - player.str;
 			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
-			player.changeStatusValue(StatusEffects.Might,1,tempStr);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
+			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
 			player.changeStatusValue(StatusEffects.Might,2,tempTou);
-			mainView.statsView.showStatUp('str');
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) mainView.statsView.showStatUp('int');
+			else mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.str += player.statusEffectv1(StatusEffects.Might);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.inte += player.statusEffectv1(StatusEffects.Might);
+			else player.str += player.statusEffectv1(StatusEffects.Might);
 			player.tou += player.statusEffectv2(StatusEffects.Might);
 			statScreenRefresh();
 		};
@@ -706,6 +714,7 @@ public class CombatMagic extends BaseCombatContent {
 		useMana((50 * spellMightCostMultiplier()),6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
+		var tempInt:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -793,6 +802,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) BlinkDuration += 1;
 			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) BlinkDuration += 1;
 			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) BlinkDuration += 1;
 			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) BlinkDuration += 5;
 			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) BlinkDuration += 5;
 			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
@@ -1240,6 +1250,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeWeaponDuration += 1;
 		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeWeaponDuration += 1;
 		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) ChargeWeaponDuration += 1;
 		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeWeaponDuration += 5;
 		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeWeaponDuration += 5;
 		if (silent) {
@@ -1319,6 +1330,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeArmorDuration += 1;
 		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeArmorDuration += 1;
 		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) ChargeArmorDuration += 1;
 		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeArmorDuration += 5;
 		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeArmorDuration += 5;
 		if (silent) {

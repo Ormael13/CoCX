@@ -18,8 +18,8 @@ package classes.Scenes.Places.HeXinDao
 			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) outputText("You try and cast makeshift defenses around yourself, with limited success. ");
 			outputText("You try and huddle down and take shelter from the infernal storm, but the fire is everywhere. Then, as suddenly as the flame came, they are gone.\n\n");
 			this.createStatusEffect(StatusEffects.IgnisCastedNuke, 0, 0, 0, 0);
-			var damage:Number = 15000;
-			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) damage -= 10000;
+			var damage:Number = 5000;
+			damage += 2000 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.removeStatusEffect(StatusEffects.Blizzard);
 				damage *= 0.5;
@@ -27,6 +27,8 @@ package classes.Scenes.Places.HeXinDao
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
+			if (player.findPerk(PerkLib.SoulSprite) > 0) player.takeDamage(damage, true);
+			if (player.findPerk(PerkLib.Archmage) > 0) player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
 		}
 		

@@ -460,6 +460,9 @@ use namespace kGAMECLASS;
 				}
 				if(findPerk(PerkLib.IronFistsV) >= 0 && str >= 110) {
 					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
+					attack += 10;
 				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
 				if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
 					attack += (5 * (1 + newGamePlusMod));
@@ -3703,9 +3706,9 @@ use namespace kGAMECLASS;
 		
 		public function newGamePlusMod():int {
 			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 4.
+			//Constrains value between 0 and 5.
 			if (temp < 0) temp = 0;
-			if (temp > 4) temp = 4;
+			if (temp > 5) temp = 5;
 			return temp;
 		}
 		
@@ -4900,7 +4903,8 @@ use namespace kGAMECLASS;
 			maxSen += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
-				maxStr += statusEffectv1(StatusEffects.Might);
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) maxInt += statusEffectv1(StatusEffects.Might);
+				else maxStr += statusEffectv1(StatusEffects.Might);
 				maxTou += statusEffectv2(StatusEffects.Might);
 			}
 			//Blink
@@ -5090,7 +5094,9 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.ChanneledAttack);
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might),"tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -statusEffectv1(StatusEffects.Might));
+				else kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might));
+				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.Might));
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {

@@ -158,7 +158,9 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	fixFlags();
 	if(player.hasStatusEffect(StatusEffects.Might)) {
-		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might),"tou", -player.statusEffectv2(StatusEffects.Might));
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+		else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+		kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
 		player.removeStatusEffect(StatusEffects.Might);
 	}
 	if(player.hasStatusEffect(StatusEffects.Blink)) {

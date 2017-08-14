@@ -64,6 +64,7 @@ package classes
 		public static const FeedingEuphoria:StatusEffectType                = mk("Manticore's Metabolism"); //v1: Hours; v2: Speed
 		public static const Fertilized:StatusEffectType                     = mk("Fertilized");
 		public static const FetishOn:StatusEffectType                       = mk("fetishON");
+		public static const FortressOfIntellect:StatusEffectType            = mk("Fortress of Intellect");
 		public static const FoundFactory:StatusEffectType                   = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType                   = mk("FuckedMarble");
 		public static const Fullness:StatusEffectType                       = mk("Fullness"); //Alternative to hunger

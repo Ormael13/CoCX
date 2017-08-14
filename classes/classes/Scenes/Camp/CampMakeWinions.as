@@ -19,7 +19,15 @@ package classes.Scenes.Camp
 		public function maxTemporalGolemsBagSize():Number {
 			var maxTemporalGolemsBagSizeCounter:Number = 0;
 			if (player.findPerk(PerkLib.JobGolemancer) >= 0) maxTemporalGolemsBagSizeCounter += 3;
-			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.BiggerGolemBag1) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BiggerGolemBag2) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BiggerGolemBag3) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BiggerGolemBag4) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BiggerGolemBag5) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.BiggerGolemBag6) >= 0) maxTemporalGolemsBagSizeCounter += 2;
 			return maxTemporalGolemsBagSizeCounter;
 		}
 		public function maxPernamentGolemsBagSize():Number {
@@ -30,12 +38,15 @@ package classes.Scenes.Camp
 			var maxReusableGolemCoresBagSizeCounter:Number = 0;
 			if (maxTemporalGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxTemporalGolemsBagSize();
 			if (maxPernamentGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentGolemsBagSize();
+			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxReusableGolemCoresBagSizeCounter += 2;
 			maxReusableGolemCoresBagSizeCounter *= 2;
 			return maxReusableGolemCoresBagSizeCounter;
 		}
 		public function temporalGolemMakingCost():Number {
 			var tempGolemCost:Number = 50;
 			if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) tempGolemCost -= 10;
+			if (player.findPerk(PerkLib.ChargedCore) >= 0) tempGolemCost += 20;
+			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) tempGolemCost += 20;
 			return tempGolemCost;
 		}
 		
@@ -92,6 +103,7 @@ package classes.Scenes.Camp
 			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) maxSizeOfElementalsArmyCounter += 1;
+			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) maxSizeOfElementalsArmyCounter += 2;
 			return maxSizeOfElementalsArmyCounter;
 		}
@@ -109,6 +121,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
 				outputText("\nEarth");
@@ -117,6 +132,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
 				outputText("\nFire");
@@ -125,6 +143,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
 				outputText("\nWater");
@@ -133,6 +154,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 				outputText("\nIce");
@@ -141,6 +165,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
 				outputText("\nLightning");
@@ -149,6 +176,9 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) outputText(" (Rank 7)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
 				outputText("\nDarkness");
@@ -157,13 +187,19 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) outputText(" (Rank 2)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) outputText(" (Rank 3)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) outputText(" (Rank 7)");
 			}
 			outputText("</i>");
 			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
 			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) addButton(1, "RankUp(1)", rankUpSubmenu1st);
 			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) addButton(2, "RankUp(2)", rankUpSubmenu2nd);
 			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) addButton(3, "RankUp(3)", rankUpSubmenu3rd);
-			//addButton(4, "RankUp(4)", );
+			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) addButton(4, "RankUp(4)", rankUpSubmenu4th);
+			if (player.findPerk(PerkLib.ElementalContractRank5) >= 0) addButton(5, "RankUp(5)", rankUpSubmenu5th);
+			if (player.findPerk(PerkLib.ElementalContractRank6) >= 0) addButton(6, "RankUp(6)", rankUpSubmenu6th);
+			if (player.findPerk(PerkLib.ElementalContractRank7) >= 0) addButton(7, "RankUp(7)", rankUpSubmenu7th);
 			addButton(14, "Back", playerMenu);
 		}
 		private function summoningElementalsSubmenu():void {
@@ -221,6 +257,39 @@ package classes.Scenes.Camp
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) addButton(5, "Ice", rankUpElementalIce);
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) addButton(6, "Lightning", rankUpElementalLightning);
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu5th():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu6th():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) addButton(7, "Darkness", rankUpElementalDarkness);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu7th():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) addButton(1, "Earth", rankUpElementalEarth);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) addButton(2, "Fire", rankUpElementalFire);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) addButton(3, "Water", rankUpElementalWater);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) addButton(5, "Ice", rankUpElementalIce);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) addButton(6, "Lightning", rankUpElementalLightning);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) addButton(7, "Darkness", rankUpElementalDarkness);
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		
