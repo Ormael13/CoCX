@@ -173,42 +173,69 @@
 
 		</div>
 		<div class="col col-lg-auto d-flex flex-column" style="flex-basis:200px;">
-			<div class="d-flex flex-column">
-				<h4 class="card-title">Layers</h4>
-				<div id="LayerList" style="overflow-y:scroll;">
-
+			<div class="d-flex flex-column" id="Palettes">
+				<h4>Palette</h4>
+				<h5>Common</h5>
+				<div class="PaletteItem">
+					<label>fair <span style="width:1em;display:inline-block;background:#eeccaa;"></span></label>
+					<div class="-collapse">
+						<div class="row flex-nowrap">
+							<label class="col-4">Hue:</label>
+							<span class="col-1" style="display:inline-block;background:hsl(270,65%,80%)">&nbsp;</span>
+							<input class="col-6" type="range" min="0" max="360" value="30">
+							<span class="col-1" style="display:inline-block;background:hsl(150,65%,80%)">&nbsp;</span>
+						</div>
+						<div class="row flex-nowrap">
+							<label class="col-4">Sat:</label>
+							<span class="col-1" style="display:inline-block;background:hsl(30,10%,80%)">&nbsp;</span>
+							<input class="col-6" type="range" min="0" max="100" value="65">
+							<span class="col-1" style="display:inline-block;background:hsl(30,90%,80%)">&nbsp;</span>
+						</div>
+						<div class="row flex-nowrap">
+							<label>Bright:</label>
+							<span class="col-1" style="display:inline-block;background:hsl(30,65%,10%)">&nbsp;</span>
+							<input class="col-6" type="range" min="0" max="100" value="80">
+							<span class="col-1" style="display:inline-block;background:hsl(30,65%,90%)">&nbsp;</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="card-block">
-				<h4 class="card-title">Selected:</h4>
-				<h5 class="card-subtitle" id="SelLayerName">
-				</h5>
-				<div>
-					<button class="ctrl" type="button" onclick="spred.selPartMove(-1,0)">
-						<span class="fa fa-caret-left"></span>
-					</button>
-					<button class="ctrl" type="button" onclick="spred.selPartMove(1,0)">
-						<span class="fa fa-caret-right"></span>
-					</button>
-					<button class="ctrl" type="button" onclick="spred.selPartMove(0,-1)">
-						<span class="fa fa-caret-up"></span>
-					</button>
-					<button class="ctrl" type="button" onclick="spred.selPartMove(0,1)">
-						<span class="fa fa-caret-down"></span>
-					</button>
-					<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">
-						<span class="fa fa-caret-up"></span>
-					</button>
-					<button class="ctrl" type="button" onclick="spred.selLayerDown()">
-						<span class="fa fa-caret-down"></span>
-					</button>-->
+			<div class="d-flex flex-column" style="display:none !important;">
+				<h4>Layers</h4>
+				<div id="LayerList" style="overflow-y:scroll;flex-shrink:1">
+
 				</div>
-				<h6 class="text-muted" id="SelLayerPos"></h6>
-				<h5>Canvas: </h5>
-				<div>
-					<em class="text-muted">right-click &amp; copy/save</em>
+				<div style="flex-shrink:0;flex-grow:0;">
+					<h4>Selected:</h4>
+					<h5 id="SelLayerName">
+					</h5>
+					<div>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(-1,0)">
+							<span class="fa fa-caret-left"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(1,0)">
+							<span class="fa fa-caret-right"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(0,-1)">
+							<span class="fa fa-caret-up"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(0,1)">
+							<span class="fa fa-caret-down"></span>
+						</button>
+						<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">
+							<span class="fa fa-caret-up"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selLayerDown()">
+							<span class="fa fa-caret-down"></span>
+						</button>-->
+					</div>
+					<h6 class="text-muted" id="SelLayerPos"></h6>
+					<h5>Canvas: </h5>
+					<div>
+						<em class="text-muted">right-click &amp; copy/save</em>
+					</div>
+					<div id="SelLayerCanvas"></div>
 				</div>
-				<div id="SelLayerCanvas"></div>
 			</div>
 		</div>
 	</div>

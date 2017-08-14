@@ -941,10 +941,10 @@ namespace spred {
 			}
 			showLayerList(model);
 			selPart(model.layers[0].parts[0]);
-			addCompositeView(defaultPartList(), 2);
+			/*addCompositeView(defaultPartList(), 2);
 			addCompositeView(defaultPartList(), 1);
 			addCompositeView(defaultPartList(), 1);
-			addCompositeView(defaultPartList(), 1);
+			addCompositeView(defaultPartList(), 1);*/
 			$('#ClipboardGrabber').on('paste', e => {
 				e.stopPropagation();
 				e.preventDefault();

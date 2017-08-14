@@ -86,7 +86,7 @@ public class CharView extends Sprite {
 		var _parts:/*ModelPart*/Array = [];
 		loadPalette(xml);
 		var item:XML;
-		for each(item in xml.layers.*) {
+		for each(item in xml.logic.*) {
 			_parts.push(loadPart(item));
 		}
 		this.parts = new PartList(_parts);
@@ -148,8 +148,13 @@ public class CharView extends Sprite {
 		var n:int   = 0;
 		file_total  = -1;
 		for each(item in xml.layers..layer) {
-			n++;
-			loadBitmapsFrom(xml, item);
+			var lpfx:String = item.@name+"/";
+			for (var sname:String in sprites) {
+				if (sname.indexOf(lpfx)==0) {
+					var sprite:CharViewSprite = sprites[sname];
+					composite.addLayer(sname, sprite.bmp, sprite.dx, sprite.dy, false);
+				}
+			}
 		}
 		file_total = n;
 		if (pendingRedraw) redraw();
@@ -163,7 +168,7 @@ public class CharView extends Sprite {
 			reload();
 		}
 		pendingRedraw = true;
-		if (ss_loaded != ss_total || file_loaded != file_total || file_loaded == 0) {
+		if (ss_loaded != ss_total || file_loaded != file_total || (ss_total + file_total) == 0) {
 			return;
 		}
 		pendingRedraw = false;
@@ -186,8 +191,10 @@ public class CharView extends Sprite {
 	private function loadPart(x:XML):ModelPart {
 		var item:XML;
 		switch (x.localName()) {
-			case 'layer':
-				return new LayerPart(composite, x.@id || x.@file);
+			case 'show':
+				return new LayerPart(composite, x.@part, true);
+			case 'hide':
+				return new LayerPart(composite, x.@part, false);
 			case 'if':
 				var thenBlock:/*ModelPart*/Array = [];
 				for each(item in x.*) {
@@ -278,34 +285,6 @@ public class CharView extends Sprite {
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers(xml);
 		}, loaderLocation);
-	}
-	private function loadBitmapsFrom(xml:XML, item:XML):void {
-		const filename:String = item.@file;
-		const dx:int          = item.@dx || 0;
-		const dy:int          = item.@dy || 0;
-		if (filename in sprites) {
-			file_loaded++;
-			var sprite:CharViewSprite = sprites[filename];
-			composite.addLayer(filename, sprite.bmp, dx+sprite.dx, dy+sprite.dy, false);
-			if (pendingRedraw) redraw();
-			return;
-		}
-		sprites[filename] = new CharViewSprite(new BitmapData(1, 1),0,0);
-		composite.addLayer(filename, sprites[filename].bmp, dx, dy, false);
-		var path:String = xml.@dir + filename;
-		if (loaderLocation == "external") trace('loading layer ' + path);
-		CoCLoader.loadImage(path, function (success:Boolean, bmp:BitmapData, e:Event):void {
-			if (!success) {
-				trace("Layer file not found: " + e);
-				file_loaded++;
-				if (pendingRedraw) redraw();
-				return;
-			}
-			sprites[filename] = new CharViewSprite(bmp,0,0);
-			composite.replaceLayer(filename, sprites[filename].bmp, dx, dy);
-			file_loaded++;
-			if (pendingRedraw) redraw();
-		});
 	}
 
 }
