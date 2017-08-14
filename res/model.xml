@@ -3,10 +3,9 @@
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
-            <!--Basic 1-word-->
             <color name="albino">#f2e8e3</color>
             <color name="aqua">#00cccc</color>
-            <color name="ashen">#f000f0</color>
+            <color name="ashen">#a1adbf</color>
             <color name="auburn">#732d26</color>
             <color name="black">#333333</color>
             <color name="blond">#ebd69e</color>
@@ -14,24 +13,24 @@
             <color name="blue">#0000ff</color>
             <color name="bronzed">#dcba74</color>
             <color name="brown">#664400</color>
-            <color name="caramel">#f000f0</color>
-            <color name="cerulean">#f000f0</color>
-            <color name="chocolate">#f000f0</color>
-            <color name="crimson">#f000f0</color>
+            <color name="caramel">#c08430</color>
+            <color name="cerulean">#59cae3</color>
+            <color name="chocolate">#83581b</color>
+            <color name="crimson">#f50400</color>
             <color name="crystal">#f000f0</color>
             <color name="dark">#4d2619</color>
             <color name="dusky">#f000f0</color>
             <color name="ebony">#29293d</color>
-            <color name="emerald">#f000f0</color>
+            <color name="emerald">#3caa6f</color>
             <color name="fair">#eeccaa</color>
-            <color name="golden">#f000f0</color>
+            <color name="golden">#bb7c35</color>
             <color name="gray">#777777</color>
             <color name="green">#00cc00</color>
-            <color name="indigo">#f000f0</color>
+            <color name="indigo">#0013bd</color>
             <color name="light">#feebd7</color>
             <color name="mahogany">#8f583d</color>
             <color name="metallic">#f000f0</color>
-            <color name="midnight">#f000f0</color>
+            <color name="midnight">#14161f</color>
             <color name="olive">#eee2aa</color>
             <color name="orange">#dd8800</color>
             <color name="peach">#f000f0</color>
@@ -39,81 +38,61 @@
             <color name="purple">#8800ff</color>
             <color name="red">#ff0000</color>
             <color name="russet">#603020</color>
-            <color name="sable">#f000f0</color>
-            <color name="sanguine">#f000f0</color>
+            <color name="sable">#d6caa9</color>
+            <color name="sanguine">#9a2323</color>
             <color name="silky">#f000f0</color>
-            <color name="silver">#f000f0</color>
-            <color name="tan">#f000f0</color>
+            <color name="silver">#d8e0e9</color>
+            <color name="tan">#cc8f61</color>
             <color name="tawny">#f000f0</color>
-            <color name="turquoise">#f000f0</color>
+            <color name="turquoise">#3ee5e2</color>
             <color name="white">#dddddd</color>
             <color name="yellow">#dddd00</color>
-        </common>
-        <common>
-            <!--2-word shades-->
-            <color name="aphotic blue-black">#f000f0</color>
-            <color name="ashen grayish-blue">#f000f0</color>
-            <color name="creamy-white">// #f000f0</color>
-            <color name="crimson platinum">#f000f0</color>
-            <color name="dark blue">#f000f0</color>
-            <color name="dark gray">#f000f0</color>
-            <color name="dark green">#f000f0</color>
-            <color name="deep blue">#f000f0</color>
-            <color name="deep red">#f000f0</color>
-            <color name="ghostly pale">#f000f0</color>
-            <color name="glacial white">#f000f0</color>
-            <color name="golden blonde">#f000f0</color>
-            <color name="grayish-blue">#f000f0</color>
+            <color name="aphotic blue-black">#00106b</color>
+            <color name="ashen grayish-blue">#b6c6ce</color>
+            <color name="creamy-white">#f2ebde</color>
+            <color name="crimson platinum">#d56c6c</color>
+            <color name="dark blue">#1e2e6b</color>
+            <color name="dark gray">#534f59</color>
+            <color name="dark green">#264319</color>
+            <color name="deep blue">#2a2aa7</color>
+            <color name="deep red">#9f2d2d</color>
+            <color name="ghostly pale">#e3deed</color>
+            <color name="glacial white">#dee5f2</color>
+            <color name="golden blonde">#f4cf66</color>
+            <color name="grayish-blue">#b0c9e3</color>
             <color name="iridescent gray">#999999</color>
             <color name="leaf green">#4db34d</color>
-            <color name="light blonde">#f000f0</color>
-            <color name="light blue">#f000f0</color>
+            <color name="light blonde">#ffe78f</color>
+            <color name="light blue">#75aaeb</color>
             <color name="light gray">#f000f0</color>
-            <color name="light green">#f000f0</color>
-            <color name="light grey">#f000f0</color>
-            <color name="light purple">#f000f0</color>
-            <color name="lime green">#f000f0</color>
+            <color name="light green">#89ff85</color>
+            <color name="light grey">#c4d1d9</color>
+            <color name="light purple">#d8bfe8</color>
+            <color name="lime green">#00f010</color>
             <color name="mediterranean-toned">#f000f0</color>
-            <color name="metallic golden">#f000f0</color>
-            <color name="metallic silver">#f000f0</color>
-            <color name="midnight black">#f000f0</color>
+            <color name="metallic golden">#ddc469</color>
+            <color name="metallic silver">#cfedfc</color>
+            <color name="midnight black">#000000</color>
             <color name="milky white">#f0e1e4</color>
-            <color name="pale white">#f000f0</color>
-            <color name="pale yellow">#f000f0</color>
-            <color name="platinum blonde">#f000f0</color>
+            <color name="pale white">#ffeac7</color>
+            <color name="pale yellow">#fffd8f</color>
+            <color name="platinum blonde">#f7f3e8</color>
             <color name="platinum crimson">#f000f0</color>
-            <color name="platinum-blonde">#f000f0</color>
-            <color name="purplish-black">#f000f0</color>
-            <color name="quartz white">#f000f0</color>
-            <color name="reddish-orange">#f000f0</color>
-            <color name="rough gray">#f000f0</color>
+            <color name="platinum-blonde">#ffe5c7</color>
+            <color name="purplish-black">#794474</color>
+            <color name="quartz white">#ffffff</color>
+            <color name="reddish-orange">#e6613d</color>
+            <color name="rough gray">#525252</color>
             <color name="sandy blonde">#ebd69e</color>
-            <color name="sandy brown">#f000f0</color>
-            <color name="sandy-blonde">#ebd69e</color>
-            <color name="shiny black">#f000f0</color>
-            <color name="silver blonde">#f000f0</color>
-            <color name="silver-white">#f000f0</color>
-            <color name="snow white">#f000f0</color>
-            <color name="yellowish-green">#f000f0</color>
-        </common>
-        <common>
-            <!--Multi-color with pattern (Requires more complex engine)-->
-            <!--<color name="black and orange">#f000f0</color>-->
-            <!--<color name="black and white">#f000f0</color>-->
-            <!--<color name="black and white spotted">#f000f0</color>-->
-            <!--<color name="black and yellow">#f000f0</color>-->
-            <!--<color name="brown and white">#f000f0</color>-->
-            <!--<color name="gray and white">#f000f0</color>-->
-            <!--<color name="orange and white">#f000f0</color>-->
-            <!--<color name="pink and black">#f000f0</color>-->
-            <!--<color name="rainbow">#f000f0</color>-->
-            <!--<color name="seven-colored">#f000f0</color>-->
-            <!--<color name="spotted">#f000f0</color>-->
-            <!--<color name="striped orange">#f000f0</color>-->
-            <!--<color name="white and black">#f000f0</color>-->
+            <color name="sandy brown">#796635</color>
+            <color name="sandy-blonde">#cba952</color>
+            <color name="shiny black">#1c262c</color>
+            <color name="silver blonde">#fcfaf8</color>
+            <color name="silver-white">#eff3f6</color>
+            <color name="snow white">#f9f9fa</color>
+            <color name="yellowish-green">#b4f000</color>
         </common>
         <property name="hair" src="hairColor" default="#ffffff">
-            <!--Hair color overrides go here-->
             <color name="red">#bf7540</color>
             <color name="flaxen">#a68059</color>
             <color name="brown">#674f42</color>
@@ -124,16 +103,12 @@
             <color name="snowy">#dddfe4</color>
         </property>
         <property name="fur" src="furColor" default="#ffffff">
-            <!--Fur overrides go here-->
         </property>
         <property name="scales" src="scalesColor" default="#ffffff">
-            <!--Scales overrides go here-->
         </property>
         <property name="chitin" src="chitinColor" default="#ffffff">
-            <!--Chitin overrides go here-->
         </property>
         <property name="skin" src="skinTone" default="#ffffff">
-            <!--Skin color overrides go here-->
             <color name="pale">#f2e8e3</color>
         </property>
         <!-- Not yet in game-->
@@ -205,10 +180,10 @@
     <spritemap file="alraune.png">
         <cell rect="1,1,59,20" name="horns_bg/orchid" dx="67" dy="12"/>
         <cell rect="1,23,59,20" name="horns/orchid" dx="68" dy="16"/>
-        <cell rect="63,1,37,51" name="arms_bg/alraune" dx="56" dy="64"/>
+        <cell rect="63,1,37,51" name="arms_bg/alraune" dx="54" dy="64"/>
         <cell rect="101,1,35,51" name="arms/alraune" dx="94" dy="64"/>
-        <cell rect="2,55,128,104" name="legs/alraune" dx="31" dy="82"/>
-        <cell rect="2,161,149,124" name="legs/liliraune" dx="-3" dy="58"/>
+        <cell rect="2,55,128,104" name="legs_bg/alraune" dx="31" dy="82"/>
+        <cell rect="2,161,149,124" name="legs_bg/liliraune" dx="-3" dy="58"/>
     </spritemap>
     <spritemap file="basic.png">
         <cell rect="1,1,38,44" name="face/human" dx="74" dy="23"/>
@@ -226,14 +201,14 @@
         <cell rect="202,66,50,62" name="torso/fur" dx="71" dy="65"/>
         <cell rect="255,2,35,51" name="arms_bg/human" dx="56" dy="63"/>
         <cell rect="291,2,37,51" name="arms/human" dx="94" dy="63"/>
-        <cell rect="255,55,35,51" name="arms_bg/fur" dx="56" dy="64"/>
-        <cell rect="291,55,37,51" name="arms/fur" dx="94" dy="64"/>
+        <cell rect="255,55,35,51" name="arms_bg/fur" dx="55" dy="64"/>
+        <cell rect="291,55,37,51" name="arms/fur" dx="93" dy="64"/>
         <cell rect="331,2,50,62" name="legs/human" dx="71" dy="101"/>
         <cell rect="331,66,50,62" name="legs/furpaws" dx="71" dy="101"/>
     </spritemap>
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes/cat" dx="74" dy="38"/>
-        <cell rect="1,14,32,11" name="eyes/spider" dx="74" dy="38"/>
+        <cell rect="1,14,32,29" name="eyes/spider" dx="74" dy="34"/>
         <cell rect="36,1,56,47" name="tail/fox1" dx="41" dy="92"/>
         <cell rect="36,50,50,53" name="tail/fox2" dx="95" dy="86"/>
         <cell rect="95,1,48,51" name="tail/cat" dx="96" dy="67"/>
@@ -241,16 +216,16 @@
         <cell rect="146,1,47,29" name="ears_bg/fox" dx="71" dy="10"/>
         <cell rect="146,32,47,29" name="ears/fox" dx="71" dy="10"/>
         <cell rect="146,64,62,35" name="ears/wolf" dx="62" dy="4"/>
-        <cell rect="146,102,56,23" name="ears/cat" dx="65" dy="13"/>
+        <cell rect="146,102,56,23" name="ears/cat" dx="66" dy="10"/>
         <cell rect="211,1,56,20" name="horns/2small" dx="68" dy="20"/>
         <cell rect="211,23,56,38" name="horns/2large" dx="68" dy="5"/>
-        <cell rect="24,132,175,118" name="legs/drider" dx="44" dy="52"/>
-        <cell rect="241,106,143,107" name="legs/centaur" dx="66" dy="94"/>
+        <cell rect="24,132,175,118" name="legs_bg/drider" dx="46" dy="49"/>
+        <cell rect="241,106,143,107" name="legs_bg/centaur" dx="66" dy="94"/>
         <cell rect="146,272,117,117" name="legs/kraken" dx="37" dy="92"/>
         <cell rect="266,231,118,158" name="legs/scylla" dx="36" dy="51"/>
         <cell rect="77,271,49,61" name="breasts/kraken" dx="70" dy="62"/>
-        <cell rect="50,335,92,62" name="horns/kraken" dx="44" dy="-23"/>
-        <cell rect="1,272,35,56" name="arms_bg/kraken" dx="55" dy="63"/>
+        <cell rect="50,335,92,62" name="horns_bg/kraken" dx="48" dy="0"/>
+        <cell rect="1,272,35,56" name="arms_bg/kraken" dx="53" dy="63"/>
         <cell rect="38,272,36,56" name="arms/kraken" dx="92" dy="63"/>
     </spritemap>
     <spritemap file="chitin.png">
@@ -259,52 +234,58 @@
         <cell rect="33,106,43,25" name="antennae/bee" dx="66" dy="5"/>
         <cell rect="27,135,44,45" name="face/bee" dx="72" dy="23"/>
         <cell rect="23,184,55,69" name="torso/bee" dx="68" dy="58"/>
-        <cell rect="12,256,38,54" name="arms_bg/bee" dx="57" dy="59"/>
-        <cell rect="51,256,32,54" name="arms/bee" dx="96" dy="59"/>
-        <cell rect="87,258,37,51" name="arms_bg/bee2" dx="60" dy="61"/>
-        <cell rect="125,258,34,51" name="arms/bee2" dx="98" dy="61"/>
+        <cell rect="12,256,32,54" name="arms_bg/bee" dx="52" dy="60"/>
+        <cell rect="51,256,32,54" name="arms/bee" dx="96" dy="60"/>
+        <cell rect="87,258,32,51" name="arms_bg/bee2" dx="55" dy="62"/>
+        <cell rect="125,258,34,51" name="arms/bee2" dx="98" dy="62"/>
         <cell rect="29,317,48,23" name="breasts/Dbee" dx="71" dy="70"/>
         <cell rect="4,344,89,54" name="wings/bee" dx="51" dy="68"/>
         <cell rect="312,19,32,11" name="eyes/sandtrap" dx="75" dy="38"/>
+        <cell rect="163,201,54,49" name="legs/Spider" dx="69" dy="115"/>
+        <cell rect="165,259,30,50" name="arms_bg/Spider" dx="57" dy="63"/>
+        <cell rect="202,259,33,50" name="arms/Spider" dx="93" dy="64"/>
+        <cell rect="87,199,30,51" name="arms_bg/Spider2" dx="56" dy="62"/>
+        <cell rect="125,199,33,51" name="arms/Spider2" dx="93" dy="63"/>
+        <cell rect="99,313,45,51" name="face/Spider" dx="69" dy="19"/>
         <cell rect="304,42,45,27" name="breasts/Dchitin" dx="70" dy="66"/>
         <cell rect="305,72,53,50" name="legs/chitin" dx="69" dy="115"/>
         <cell rect="303,130,51,53" name="face/chitin" dx="68" dy="18"/>
-        <cell rect="278,194,48,58" name="arms_bg/chitin" dx="44" dy="56"/>
-        <cell rect="327,194,43,58" name="arms/chitin" dx="93" dy="56"/>
+        <cell rect="278,194,48,58" name="arms_bg/chitin" dx="45" dy="56"/>
+        <cell rect="327,194,43,58" name="arms/chitin" dx="93" dy="57"/>
         <cell rect="294,255,70,66" name="torso/chitin" dx="61" dy="65"/>
-        <cell rect="281,325,49,59" name="arms_bg/chitin2" dx="45" dy="60"/>
-        <cell rect="331,325,44,59" name="arms/chitin2" dx="95" dy="60"/>
+        <cell rect="281,325,49,59" name="arms_bg/chitin2" dx="42" dy="61"/>
+        <cell rect="331,325,44,59" name="arms/chitin2" dx="95" dy="61"/>
     </spritemap>
     <spritemap file="manticore.png">
         <cell rect="2,2,32,11" name="eyes/manticore" dx="74" dy="38"/>
-        <cell rect="51,10,59,78" name="arms/manticore" dx="68" dy="66"/>
-        <cell rect="2,90,59,44" name="legs/manticore_sit" dx="65" dy="98"/>
-        <cell rect="2,137,104,77" name="tail/manticore" dx="44" dy="38"/>
-        <cell rect="118,9,53,119" name="wings_bg/mantibig" dx="32" dy="20"/>
-        <cell rect="174,9,53,119" name="wings/mantibig" dx="104" dy="20"/>
-        <cell rect="117,140,54,31" name="neck/manticore" dx="69" dy="51"/>
+        <cell rect="51,10,59,78" name="arms/manticore" dx="71" dy="65"/>
+        <cell rect="2,90,59,44" name="legs/manticore_sit" dx="64" dy="98"/>
+        <cell rect="2,137,104,77" name="tail/manticore" dx="37" dy="44"/>
+        <cell rect="118,9,53,119" name="wings_bg/mantibig" dx="25" dy="32"/>
+        <cell rect="174,9,53,119" name="wings/mantibig" dx="110" dy="31"/>
+        <cell rect="117,140,54,31" name="neck/manticore" dx="68" dy="50"/>
     </spritemap>
     <spritemap file="orca.png">
-        <cell rect="1,2,105,43" name="ears/orca" dx="50" dy="47"/>
-        <cell rect="1,48,28,12" name="eyes/orca" dx="77" dy="39"/>
+        <cell rect="1,2,105,43" name="ears/orca" dx="49" dy="47"/>
+        <cell rect="1,48,28,12" name="eyes/orca" dx="76" dy="39"/>
         <cell rect="26,63,43,45" name="face/orca" dx="71" dy="22"/>
-        <cell rect="3,113,35,53" name="arms_bg/orca" dx="56" dy="63"/>
-        <cell rect="39,113,36,53" name="arms/orca" dx="93" dy="63"/>
+        <cell rect="3,113,35,53" name="arms_bg/orca" dx="57" dy="63"/>
+        <cell rect="39,113,36,53" name="arms/orca" dx="92" dy="63"/>
         <cell rect="100,67,49,62" name="torso/orca" dx="69" dy="64"/>
         <cell rect="86,132,62,122" name="tail/orca" dx="110" dy="38"/>
-        <cell rect="123,20,35,26" name="arms_bg/fins-orca" dx="67" dy="67"/>
-        <cell rect="159,20,34,26" name="arms/fins-orca" dx="96" dy="72"/>
+        <cell rect="123,20,35,26" name="arms_bg/fins-orca" dx="68" dy="67"/>
+        <cell rect="159,20,34,26" name="arms/fins-orca" dx="95" dy="72"/>
         <cell rect="165,58,50,66" name="legs/orca" dx="69" dy="99"/>
         <cell rect="184,142,53,42" name="breasts/Dorca" dx="70" dy="61"/>
     </spritemap>
     <spritemap file="scales.png">
-        <cell rect="8,32,53,119" name="wings/scales_left" dx="32" dy="20"/>
+        <cell rect="8,32,53,119" name="wings_bg/scales_left" dx="32" dy="20"/>
         <cell rect="64,32,53,119" name="wings/scales_right" dx="104" dy="20"/>
         <cell rect="13,161,46,55" name="face/scales" dx="71" dy="17"/>
         <cell rect="64,176,48,39" name="breasts/Dscales" dx="72" dy="61"/>
         <cell rect="142,155,58,51" name="legs/scales" dx="65" dy="115"/>
         <cell rect="142,29,59,71" name="torso/scales" dx="66" dy="59"/>
-        <cell rect="275,32,40,60" name="arms_bg/scales" dx="50" dy="57"/>
+        <cell rect="275,32,40,60" name="arms_bg/scales" dx="49" dy="57"/>
         <cell rect="316,32,42,60" name="arms/scales" dx="91" dy="57"/>
         <cell rect="248,103,110,64" name="tail/reptile" dx="40" dy="99"/>
         <cell rect="314,246,84,61" name="hair/gorgon" dx="50" dy="19"/>
@@ -318,20 +299,21 @@
         <layer name="ears"/>
         <layer name="eyes"/>
         <layer name="hair"/>
-        <layer name="horns_bg"/>
         <layer name="ears_bg"/>
         
         <layer name="face"/>
-        
+
+        <layer name="horns_bg"/>
         <layer name="breasts"/>
         <layer name="neck"/>
         <layer name="arms"/>
+        <layer name="arms_bg"/>
         <layer name="legs"/>
+        <layer name="wings"/>
+        <layer name="legs_bg"/>
         
         <layer name="torso"/>
-
-        <layer name="wings"/>
-        <layer name="arms_bg"/>
+        
         <layer name="hair_bg"/>
         <layer name="tail"/>
         <layer name="wings_bg"/>
