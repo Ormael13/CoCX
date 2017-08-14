@@ -883,6 +883,47 @@ var spred;
                 part.updateUI();
             }
             showLayerList(model);
+            let pals = $('#Palettes');
+            for (let pn in model.palettes) {
+                let pal = model.palettes[pn];
+                pals.append($new('h5', pn));
+                pals.append(Object.keys(pal).map(cn => {
+                    let sref = $new('span', '\xA0').css('width', '1em').css('display', 'inline-block');
+                    /*let sha = $new('span','\xA0');
+                    let shb = $new('span','\xA0');*/
+                    let ssa = $new('span', '\xA0');
+                    let ssb = $new('span', '\xA0');
+                    let sla = $new('span', '\xA0');
+                    let slb = $new('span', '\xA0');
+                    function setcolor(color) {
+                        let hsl = color.toHsl();
+                        sref.css('background-color', color.toHslString());
+                        /*sha.css('background-color',tinycolor({
+                            h:(hsl.h+240)%360,s:hsl.s,l:hsl.l}).toHslString());
+                        shb.css('background-color',tinycolor({
+                            h:(hsl.h+120)%360,s:hsl.s,l:hsl.l}).toHslString());*/
+                        ssa.css('background-color', tinycolor({ h: hsl.h, s: 0.1, l: hsl.l }).toHslString());
+                        ssb.css('background-color', tinycolor({ h: hsl.h, s: 0.9, l: hsl.l }).toHslString());
+                        sla.css('background-color', tinycolor({ h: hsl.h, s: hsl.s, l: 0.1 }).toHslString());
+                        slb.css('background-color', tinycolor({ h: hsl.h, s: hsl.s, l: 0.9 }).toHslString());
+                    }
+                    let hsl = tinycolor(pal[cn]).toHsl();
+                    let hinput = $('<input type="range" min="0" max="360">').val(hsl.h);
+                    let sinput = $('<input type="range" min="0" max="100">').val((hsl.s * 100) | 0);
+                    let linput = $('<input type="range" min="0" max="100">').val((hsl.l * 100) | 0);
+                    function updcolor() {
+                        setcolor(tinycolor({
+                            h: +hinput.val(),
+                            s: (+sinput.val()) / 100,
+                            l: (+linput.val()) / 100
+                        }));
+                    }
+                    setcolor(tinycolor(pal[cn]));
+                    return $new('div.PaletteItem', $new('label', cn + ' ', sref), $new('div', $new('.-paliprop', $new('label.-palilab', 'Hue:'), 
+                    /*sha.addClass('.-palibox'),*/
+                    $new('div', hinput.addClass('-palilong').on('input change', updcolor))), $new('.-paliprop', $new('label.-palilab', 'Sat:'), ssa.addClass('-palibox'), $new('div', sinput.addClass('-palishort').on('input change', updcolor)), ssb.addClass('-palibox')), $new('.-paliprop', $new('label.-palilab', 'Light:'), sla.addClass('-palibox'), $new('div', linput.addClass('-palishort').on('input change', updcolor)), slb.addClass('-palibox'))));
+                }));
+            }
             selPart(model.layers[0].parts[0]);
             /*addCompositeView(defaultPartList(), 2);
             addCompositeView(defaultPartList(), 1);
