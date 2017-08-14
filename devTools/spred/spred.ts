@@ -7,57 +7,68 @@
 
 
 namespace spred {
-	export const basedir                      = window['spred_basedir'] || '../../';
-	export const canAjax                      = location.protocol != 'file:';
+	export const basedir                 = window['spred_basedir'] || '../../';
+	export const canAjax                 = location.protocol != 'file:';
 	export let g_model: Model;
-	export let g_composites: Composite[]      = [];
-	export let g_selsprite: string            = '';
-	export let g_selpart: Part                = null;
-	export let rng_skippables = {
-		'tail':1, 'wings':1, 'antennae':1, 'horns':1, 'hair':1, 'neck':1
+	export let g_composites: Composite[] = [];
+	export let g_selsprite: string       = '';
+	export let g_selpart: Part           = null;
+	export let rng_skippables            = {
+		'tail': 1, 'wings': 1, 'antennae': 1, 'horns': 1, 'hair': 1, 'neck': 1
 	};
-	export let rng_symmetrical = {
+	export let rng_symmetrical           = {
 		'wings_bg': 'wings',
 		'horns_bg': 'horns',
 		'hair_bg' : 'hair',
 		'ears_bg' : 'ears',
 		'arms_bg' : 'arms'
 	};
-
+	
+	export function tfcolor(tc: tinycolorInstance, name: string, value: number): tinycolorInstance {
+		let hsl = tc.clone().toHsl();
+		switch (name) {
+			case 'lighten':
+				if (value == 0) return tc;
+				return tinycolor({h: hsl.h, s: hsl.s, l: (1.0 - hsl.l) * 100 / value});
+			case 'darken':
+				return tinycolor({h: hsl.h, s: hsl.s, l: hsl.l * (100 - value) / 100});
+		}
+		return tc;
+	}
+	
 	export function defaultPartList(): string[] {
-		let o:string[] = [];
-		let q = g_model.logic.slice();
-		while(q.length>0) {
+		let o: string[] = [];
+		let q           = g_model.logic.slice();
+		while (q.length > 0) {
 			let l = q.pop();
 			if (l instanceof LogicIf) {
-				if (randint(2)!=0) q.push(...l.then);
+				if (randint(2) != 0) q.push(...l.then);
 			} else if (l instanceof LogicShow) {
 				//o[l.partExpr.split('/')[0]] = l.partExpr;
 				o.push(l.partExpr);
 			} else if (l instanceof LogicSwitch) {
-				let i = randint(l.cases.length+1)-1;
-				if (i<0) q.push(...l.default);
+				let i = randint(l.cases.length + 1) - 1;
+				if (i < 0) q.push(...l.default);
 				else q.push(...l.cases[i].body);
 			}
 		}
 		return o;
 	}
-
-
-
+	
+	
 	namespace FileAsker {
 		let fileReaders = {} as Dict<(data: File) => any>;
-
+		
 		export function filename(f: string): string {
 			let j = f.lastIndexOf('/');
 			if (j >= 0) return f.substring(j + 1);
 			return f;
 		}
-
+		
 		export function wantFile(f: string) {
 			return filename(f) in fileReaders;
 		}
-
+		
 		function checkFiles(e: Event) {
 			let filesArray = (e.target as HTMLInputElement).files;
 			for (let i = 0; i < filesArray.length; i++) {
@@ -69,9 +80,9 @@ namespace spred {
 					handler(file);
 				}
 			}
-
+			
 		}
-
+		
 		export function askFile(url: string, handler: (File) => any) {
 			let fileinput = $new('input').attr('type', 'file').attr('multiple', 'true').change(checkFiles);
 			let dropzone  = $new('p',
@@ -88,13 +99,13 @@ namespace spred {
 			}
 		}
 	}
-
-
+	
+	
 	export function loadFile(url: string, format: 'xml'): Promise<XMLDocument>;
 	export function loadFile(url: string, format: 'text'): Promise<string>;
 	export function loadFile(url: string, format: 'img'): Promise<HTMLImageElement>;
 	export function loadFile(url: string, format: string): Promise<any> {
-
+		
 		return new Promise<any>((resolve, reject) => {
 			if (!canAjax) {
 				FileAsker.askFile(url, file => {
@@ -118,7 +129,7 @@ namespace spred {
 			} else url2img(url).then(resolve);
 		});
 	}
-
+	
 	/*
 	function mkimg(colors: string[][]): HTMLCanvasElement {
 		const hex     = {a: 10, b: 11, c: 12, d: 13, e: 14, f: 15, A: 10, B: 11, C: 12, D: 13, E: 14, F: 15};
@@ -148,7 +159,7 @@ namespace spred {
 		return canvas;
 	}
 	*/
-
+	
 	export function newCanvas(width: number, height: number,
 							  code: (ctx2d: CanvasRenderingContext2D) => any = () => {}): HTMLCanvasElement {
 		let canvas    = document.createElement('canvas');
@@ -157,64 +168,67 @@ namespace spred {
 		code(canvas.getContext('2d'));
 		return canvas;
 	}
-
+	
 	export function paletteOptions(palette: Dict<string>): JQuery[] {
-		return Object.keys(palette).map(name => $new('option', name).attr('value', palette[name]));
+		return Object.keys(palette).map(name => $new('option', name).attr('value', /*palette[name]*/name));
 	}
-
+	
 	export class StructLayer {
-		public readonly parts:Part[] = [];
-		public findPart(partName:String):Part {
-			let fullname = this.name+'/'+partName;
-			return this.parts.find(part=>part.name==fullname);
+		public readonly parts: Part[] = [];
+		
+		public findPart(partName: String): Part {
+			let fullname = this.name + '/' + partName;
+			return this.parts.find(part => part.name == fullname);
 		}
-		constructor(public name:string){
+		
+		constructor(public name: string) {
 		}
 	}
-
+	
 	export class Part {
 		public ui: JQuery;
+		
 		public get sprite(): Sprite {
 			return this.spriteref();
 		}
-
+		
 		constructor(public name: string,
 					public readonly spriteref: SpriteRef,
 					public dx: number,
 					public dy: number) {
-
+			
 		}
-
+		
 		public updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
 			let cw  = this.sprite.width, ch = this.sprite.height;
 			c2d.drawImage(this.sprite.canvas, 0, 0, cw > ch ? 32 : 32 * ch / cw, cw > ch ? 32 * ch / cw : 32);
 		}
 	}
-
+	
 	export class Composite {
 		public ui: JQuery;
-
-		private _parts: Dict<boolean>         = {};
-		private _cache: Dict<ImageBitmap>     = {};
+		
+		private _parts: Dict<boolean>          = {};
+		private _cache: Dict<ImageBitmap>      = {};
 		public readonly canvas: HTMLCanvasElement;
 		public readonly colormap: Dict<string> = {};
-
+		
 		public get partNames(): string[] {
-			return this.model.allParts().filter(p=>p.name in this._parts).map(p=>p.name);
+			return this.model.allParts().filter(p => p.name in this._parts).map(p => p.name);
 		}
-
+		
 		public set partNames(value: string[]) {
 			this._parts = value.reduce((r, e) => {
 				r[e] = true;
 				return r
 			}, {} as Dict<boolean>);
 		}
-
-		public clearCache():void {
+		
+		public clearCache(): void {
 			this._cache = {};
 		}
-
+		
 		public redraw(x: number = 0,
 					  y: number = 0,
 					  w: number = this.model.width,
@@ -222,18 +236,22 @@ namespace spred {
 			let ctx2d                   = this.canvas.getContext('2d');
 			ctx2d.imageSmoothingEnabled = false;
 			let z                       = this.zoom;
-			let [xz,yz,wz,hz] = [x*z,y*z,w*z,h*z];
+			let [xz, yz, wz, hz]        = [x * z, y * z, w * z, h * z];
 			ctx2d.clearRect(xz, yz, wz, hz);
-			let p0   = new Promise<CanvasRenderingContext2D>((resolve, reject) => {
+			let p0            = new Promise<CanvasRenderingContext2D>((resolve, reject) => {
 				resolve(ctx2d);
 			});
-			let cmap = [] as [number, number][];
+			let cmap          = [] as [number, number][];
+			let commonPalette = g_model.palettes['common'];
 			for (let ck of this.model.colorkeys) {
 				if (!(ck.base in this.colormap)) continue;
-				let base = tinycolor(this.colormap[ck.base]);
+				let cpPal = g_model.palettes[ck.base] || {};
+				let cname = this.colormap[ck.base];
+				let base  = tinycolor(cpPal[cname] || commonPalette[cname]);
 				if (ck.transform) for (let tf of ck.transform.split(',')) {
 					let m = tf.match(/^([a-z]+)\((\d+)\)$/);
-					if (m && m[1] in base) base = (base[m[1]] as Function).apply(base, [+m[2]]) as tinycolorInstance;
+					if (m) base = tfcolor(base, m[1], +m[2]);
+					
 				}
 				cmap.push([RGBA(tinycolor(ck.src)), RGBA(base)]);
 			}
@@ -247,8 +265,8 @@ namespace spred {
 								ctx2d, part.dx + sprite.dx, part.dy + sprite.dy, this.model.width, this.model.height, z);
 							return ctx2d;
 						} else {
-							let idata  = sprite.ctx2d.getImageData(x, y, w, h);
-							idata      = colormap(idata, cmap);
+							let idata = sprite.ctx2d.getImageData(x, y, w, h);
+							idata     = colormap(idata, cmap);
 							return createImageBitmap(idata).then(bmp => {
 								this._cache[part.name] = bmp;
 								drawImage(bmp, x, y, w, h,
@@ -265,30 +283,30 @@ namespace spred {
 				return ctx2d;
 			})*/
 		}
-
+		
 		public hideAll(name: string) {
 			this._parts = {};
 		}
-
+		
 		public isVisible(partName: string) {
 			return this._parts[partName];
 		}
-
+		
 		public setVisible(partName: string, visibility: boolean) {
 			this._parts[partName] = visibility;
 		}
-
+		
 		public get zoom(): number {
 			return this.canvas.width / this.model.width;
 		}
-
+		
 		public set zoom(value: number) {
 			value              = Math.max(1, value | 0);
 			this.canvas.width  = this.model.width * value;
 			this.canvas.height = this.model.height * value;
 			this.redraw();
 		}
-
+		
 		constructor(public readonly model: Model,
 					visibleNames: string[] = [],
 					zoom: number           = 1) {
@@ -298,19 +316,20 @@ namespace spred {
 			this.redraw();
 		}
 	}
-
-	type SpriteRef = ()=>Sprite;
+	
+	type SpriteRef = () => Sprite;
+	
 	export class Sprite {
 		public ui: JQuery;
 		public readonly canvas: HTMLCanvasElement;
 		public readonly ctx2d: CanvasRenderingContext2D;
-
+		
 		updateUI() {
 			let c2d = (this.ui.find('canvas')[0] as HTMLCanvasElement).getContext('2d');
 			let cw  = this.width, ch = this.height;
 			c2d.drawImage(this.canvas, 0, 0, cw > ch ? 32 : 32 * ch / cw, cw > ch ? 32 * ch / cw : 32);
 		}
-
+		
 		constructor(public readonly name: string,
 					public readonly width: number,
 					public readonly height: number,
@@ -326,7 +345,7 @@ namespace spred {
 			this.ctx2d.drawImage(src, srcX, srcY, width, height, 0, 0, width, height);
 		}
 	}
-
+	
 	function url2img(src: string): Promise<HTMLImageElement> {
 		return new Promise<HTMLImageElement>((resolve, reject) => {
 			let img    = document.createElement('img');
@@ -336,26 +355,26 @@ namespace spred {
 			img.src    = src;
 		});
 	}
-
+	
 	export class Spritesheet {
 		public cellwidth: number;
 		public cellheight: number;
 		public rows: string[][];
 		public img: HTMLImageElement;
 		public sprites: Dict<Sprite> = {};
-
+		
 		public isLoaded(): boolean {
 			return this.img != null;
 		}
-
+		
 		public readonly whenLoaded: Promise<Spritesheet>;
-
+		
 		constructor(modeldir: string, src: Element) {
 			let x           = $(src);
 			this.cellwidth  = +x.attr('cellwidth');
 			this.cellheight = +x.attr('cellheight');
 			this.sprites    = {};
-
+			
 			this.whenLoaded =
 				loadFile(modeldir + x.attr('file'), 'img'
 				).then(img => {
@@ -376,12 +395,12 @@ namespace spred {
 				});
 		}
 	}
-
+	
 	export class Spritemap {
 		public img: HTMLImageElement;
 		public sprites: Dict<Sprite> = {};
 		public file: string;
-
+		
 		public serialize(): string {
 			return `    <spritemap file="${this.file}">\n` +
 				   Object.keys(this.sprites).map(sn => {
@@ -389,13 +408,13 @@ namespace spred {
 					   return `        <cell rect="${s.srcX},${s.srcY},${s.width},${s.height}" name="${s.name}" dx="${s.dx}" dy="${s.dy}"/>`
 				   }).join('\n') + `\n    </spritemap>`;
 		}
-
+		
 		public isLoaded(): boolean {
 			return this.img != null;
 		}
-
+		
 		public readonly whenLoaded: Promise<Spritemap>;
-
+		
 		constructor(modeldir: string, src: Element) {
 			let x           = $(src);
 			this.sprites    = {};
@@ -424,24 +443,25 @@ namespace spred {
 				});
 		}
 	}
-
+	
 	interface ColorKey {
 		src: string;
 		base: string;
 		transform: string;
 	}
-
+	
 	export abstract class LogicStmt {
-
-		static parseBlock(x:JQuery):LogicStmt[] {
-			return x.children().toArray().map(x=>LogicStmt.parse(x))
+		
+		static parseBlock(x: JQuery): LogicStmt[] {
+			return x.children().toArray().map(x => LogicStmt.parse(x))
 		}
-		static parse(x: Element):LogicStmt {
-			switch(x.tagName.toLowerCase()) {
+		
+		static parse(x: Element): LogicStmt {
+			switch (x.tagName.toLowerCase()) {
 				case 'switch':
 					let lswitch = new LogicSwitch(x.getAttribute("value"));
-					$(x).children('case').each((i,x2)=>{
-						let lcase = new LogicCase(x2.getAttribute('value'),x2.getAttribute('test'));
+					$(x).children('case').each((i, x2) => {
+						let lcase  = new LogicCase(x2.getAttribute('value'), x2.getAttribute('test'));
 						lcase.body = LogicStmt.parseBlock($(x2));
 						lswitch.cases.push(lcase);
 					});
@@ -450,40 +470,53 @@ namespace spred {
 				case 'show':
 					return new LogicShow(x.getAttribute('part'));
 				case 'if':
-					let lif = new LogicIf(x.getAttribute("test"));
+					let lif  = new LogicIf(x.getAttribute("test"));
 					lif.then = LogicStmt.parseBlock($(x));
 					return lif;
 				default:
-					console.warn('Unsupported logic element '+x.tagName);
+					console.warn('Unsupported logic element ' + x.tagName);
 					return null;
 			}
 		}
 	}
+	
 	export class LogicCase {
-		public body:LogicStmt[] = [];
-		constructor(public valueExpr:string,public testExpr:string) {
-
+		public body: LogicStmt[] = [];
+		
+		constructor(public valueExpr: string, public testExpr: string) {
+		
 		}
 	}
-	export class LogicSwitch extends LogicStmt{
-		public cases:LogicCase[] = [];
-		public default:LogicStmt[] = [];
-		constructor(public valueExpr:string) {
+	
+	export class LogicSwitch extends LogicStmt {
+		public cases: LogicCase[]   = [];
+		public default: LogicStmt[] = [];
+		
+		constructor(public valueExpr: string) {
 			super();
 		}
 	}
+	
 	export class LogicShow extends LogicStmt {
-		constructor(public partExpr:string){
+		constructor(public partExpr: string) {
 			super();
 		}
 	}
+	
 	export class LogicIf extends LogicStmt {
-		public then:LogicStmt[] = [];
-		constructor(public testExpr:string){
+		public then: LogicStmt[] = [];
+		
+		constructor(public testExpr: string) {
 			super();
 		}
 	}
-
+	
+	export interface ColorProp {
+		name: string;
+		src: string;
+		def: string;
+	}
+	
 	export class Model {
 		public name: string;
 		public dir: string;
@@ -491,19 +524,19 @@ namespace spred {
 		public height: number;
 		public spritesheets: Spritesheet[];
 		public spritemaps: Spritemap[];
-		public sprites: Dict<Sprite> = {};
+		public sprites: Dict<Sprite>   = {};
 		// private parts: Part[]         = [];
-		public layers: StructLayer[] = [];
+		public layers: StructLayer[]   = [];
 		public palettes: Dict<Dict<string>>;
-		public colorProps: string[]  = [];
+		public colorProps: ColorProp[] = [];
 		public readonly whenLoaded: Promise<Model>;
-		public colorkeys: ColorKey[] = [];
-		public logic:LogicStmt[] = [];
-
-		public allParts():Part[] {
-			return [].concat(...this.layers.map(l=>l.parts));
+		public colorkeys: ColorKey[]   = [];
+		public logic: LogicStmt[]      = [];
+		
+		public allParts(): Part[] {
+			return [].concat(...this.layers.map(l => l.parts));
 		}
-
+		
 		public putPixel(x: number, y: number, color: string) {
 			let l = getSelSprite();
 			if (!l) return;
@@ -515,27 +548,27 @@ namespace spred {
 				ctx.fillRect(x, y, 1, 1);
 			}
 		}
-
+		
 		public isLoaded(): boolean {
 			return this.spritesheets.every(s => s.isLoaded())
 				   && this.spritemaps.every(s => s.isLoaded());
 		}
-
-		public sprite(name:string):Sprite {
+		
+		public sprite(name: string): Sprite {
 			return this.sprites[name];
 		}
-
-		public addSprite(s:Sprite) {
+		
+		public addSprite(s: Sprite) {
 			this.sprites[s.name] = s;
-			let ln = s.name.split('/')[0];
-			let layer = this.layers.find(l=>l.name==ln);
+			let ln               = s.name.split('/')[0];
+			let layer            = this.layers.find(l => l.name == ln);
 			if (!layer) {
-				console.warn("Layer not found for sprite "+s.name);
+				console.warn("Layer not found for sprite " + s.name);
 				return
 			}
-			layer.parts.push(new Part(s.name,()=>this.sprite(s.name),0,0));
+			layer.parts.push(new Part(s.name, () => this.sprite(s.name), 0, 0));
 		}
-
+		
 		constructor(src: XMLDocument) {
 			let xmodel        = $(src).children('model');
 			this.name         = xmodel.attr('name');
@@ -547,7 +580,7 @@ namespace spred {
 			this.palettes     = {
 				common: {}
 			};
-
+			
 			xmodel.find('colorkeys>key').each((i, e) => {
 				this.colorkeys.push({
 					src      : e.getAttribute('src'),
@@ -555,38 +588,42 @@ namespace spred {
 					transform: e.getAttribute('transform') || ''
 				});
 			});
-
+			
 			//noinspection CssInvalidHtmlTagReference
 			xmodel.find('palette>common>color').each((i, e) => {
 				this.palettes.common[e.getAttribute('name')] = e.textContent;
-
+				
 			});
 			xmodel.find('property').each((i, e) => {
 				let cpname = e.getAttribute('name');
-				this.colorProps.push(cpname);
+				this.colorProps.push({
+					name: cpname,
+					src : e.getAttribute('src'),
+					def : e.getAttribute('default')
+				});
 				let p = this.palettes[cpname] = {};
 				$(e).find('color').each((ci, ce) => {
 					p[ce.getAttribute('name')] = ce.textContent;
 				})
 			});
-
+			
 			xmodel.find('spritesheet').each((i, x) => {
 				let spritesheet = new Spritesheet(this.dir, x);
 				this.spritesheets.push(spritesheet);
 			});
-
+			
 			xmodel.find('spritemap').each((i, x) => {
 				let spritemap = new Spritemap(this.dir, x);
 				this.spritemaps.push(spritemap);
 			});
 			this.logic.push(...LogicStmt.parseBlock(xmodel.find('logic')));
-
+			
 			this.whenLoaded =
 				Promise.all(this.spritesheets.map(p => p.whenLoaded as Promise<any>)
 								.concat(this.spritemaps.map(p => p.whenLoaded as Promise<any>))
 				).then(() => {
 					console.log('Loaded model');
-					xmodel.find('layers>layer').each((i,x)=>{
+					xmodel.find('layers>layer').each((i, x) => {
 						this.layers.push(new StructLayer(x.getAttribute('name')));
 					});
 					for (let ss of this.spritesheets) {
@@ -626,17 +663,17 @@ namespace spred {
 				});
 		}
 	}
-
+	
 	export function updateCompositeParts(composite: Composite) {
 		composite.ui.find('.LayerBadges').html('').append(
 			composite.model.layers.map(layer =>
 				$new('div',
 					$new('label',
-						$new('strong',layer.name+': '),
+						$new('strong', layer.name + ': '),
 						layer.parts.map(p =>
 							$new('button.badge' +
-								(composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'),
-								p.name.substring(layer.name.length+1)
+								 (composite.isVisible(p.name) ? '.badge-primary' : '.badge-default'),
+								p.name.substring(layer.name.length + 1)
 							).click((e) => {
 								$(e.target).toggleClass('badge-primary').toggleClass('badge-default');
 								composite.setVisible(p.name, !composite.isVisible(p.name));
@@ -649,7 +686,7 @@ namespace spred {
 			)
 		);
 	}
-
+	
 	export function addCompositeView(parts: string[], zoom: number = 1): Composite {
 		let composite = new Composite(g_model, parts, zoom);
 		/*for (let ln of parts) {
@@ -658,10 +695,11 @@ namespace spred {
 			}
 		}*/
 		let commonPalette = g_model.palettes['common'];
-		for (let cpname of g_model.colorProps) {
-			let cpPal = g_model.palettes[cpname] || {};
-			let cname    = randel(Object.keys(commonPalette).concat(Object.keys(cpPal)));
-			composite.colormap[cpname] = cpPal[cname]||commonPalette[cname];
+		for (let cp of g_model.colorProps) {
+			let cpname                 = cp.name;
+			let cpPal                  = g_model.palettes[cpname] || {};
+			let cname                  = randel(Object.keys(commonPalette).concat(Object.keys(cpPal)));
+			composite.colormap[cpname] = cname;
 		}
 		composite.redraw();
 		$('#ViewList').append(
@@ -693,29 +731,29 @@ namespace spred {
 					$new('.LayerBadges.collapse'),
 					$new('div',
 						$new('.Colors.collapse',
-							...g_model.colorProps.map(cpname =>
+							...g_model.colorProps.map(cp =>
 								$new('.row.control-group',
-									$new('label.control-label.col-4', cpname),
+									$new('label.control-label.col-4', cp.name),
 									$new('select.form-control.col-8',
 										$new('option', '--none--')
 											.attr('selected', 'true')
 											.attr('value', ''),
 										$new('optgroup',
-											...paletteOptions(g_model.palettes[cpname] || {}))
-											.attr('label', cpname + ' special'),
+											...paletteOptions(g_model.palettes[cp.name] || {}))
+											.attr('label', cp.name + ' special'),
 										$new('optgroup',
 											...paletteOptions(commonPalette))
 											.attr('label', 'Common')
 									).change(e => {
 										let s = e.target as HTMLSelectElement;
 										if (s.value) {
-											composite.colormap[cpname] = s.value;
+											composite.colormap[cp.name] = s.value;
 										} else {
-											delete composite.colormap[cpname];
+											delete composite.colormap[cp.name];
 										}
 										composite.clearCache();
 										composite.redraw();
-									}).val(composite.colormap[cpname])
+									}).val(composite.colormap[cp.name])
 								)
 							)
 						)
@@ -734,7 +772,7 @@ namespace spred {
 		let dirty         = false;
 		let x0            = g_model.width, y0 = g_model.height, x1 = -1, y1 = -1;
 		let color: string = null;
-
+		
 		function putPixel(cx: number, cy: number) {
 			let x = (cx / composite.zoom) | 0;
 			let y = (cy / composite.zoom) | 0;
@@ -747,7 +785,7 @@ namespace spred {
 			if (y < y0) y0 = y;
 			if (y > y1) y1 = y;
 		}
-
+		
 		$(composite.canvas).mousedown(e => {
 			let action    = $('[name=lmb-action]:checked').val();
 			let keycolors = $('#lmb-color');
@@ -795,14 +833,14 @@ namespace spred {
 		updateCompositeParts(composite);
 		return composite;
 	}
-
+	
 	export function removeCompositeView(composite: Composite) {
 		let i = g_composites.indexOf(composite);
 		if (i < 0) return;
 		g_composites.splice(i, 1);
 		composite.ui.remove();
 	}
-
+	
 	export function redrawAll(x: number = 0,
 							  y: number = 0,
 							  w: number = g_model.width,
@@ -811,6 +849,21 @@ namespace spred {
 			obj.redraw(x, y, w, h);
 		}
 	}
+	
+	export function g_update_color(pname: string, cname: string) {
+		for (let obj of g_composites) {
+			for (let kn in obj.colormap) {
+				if (pname != 'common' && pname != kn) continue;
+				let kv = obj.colormap[kn];
+				if (kv == cname) {
+					obj.clearCache();
+					obj.redraw();
+					break;
+				}
+			}
+		}
+	}
+	
 	/*
 	export function swapLayers(a: number, b: number) {
 		let l0           = g_model.parts[a];
@@ -820,6 +873,7 @@ namespace spred {
 		redrawAll();
 	}
 	*/
+	
 	/*
 	function showSpriteList(model: Model) {
 
@@ -832,18 +886,18 @@ namespace spred {
 	}
 	*/
 	function showLayerList(model: Model) {
-		let lbs = model.layers.map(layer=>
+		let lbs = model.layers.map(layer =>
 			$new('div',
-				$new('h5',layer.name),
-				layer.parts.map(p=>p.ui.detach()))
+				$new('h5', layer.name),
+				layer.parts.map(p => p.ui.detach()))
 		);
 		$('#LayerList').html('').append(lbs);
 	}
-
+	
 	export function getSelSprite(): Sprite {
 		return g_model.sprite(g_selsprite);
 	}
-
+	
 	export function selSprite(name: string) {
 		g_selsprite = name;
 		/*$('#SelLayerName').html(name);
@@ -854,7 +908,7 @@ namespace spred {
 			$('#SelLayerCanvas').html('').append(l.canvas);
 		}*/
 	}
-
+	
 	export function selPart(part: Part) {
 		g_selpart = part;
 		$('#SelLayerName').html(part.name);
@@ -864,7 +918,7 @@ namespace spred {
 		part.ui.addClass('selected');
 		$('#SelLayerCanvas').html('').append(part.sprite.canvas);
 	}
-
+	
 	/*
 	export function selLayerUp() {
 		let i = g_model.layers.findIndex(layer=>layer.name==g_selpart);
@@ -886,7 +940,7 @@ namespace spred {
 								   ', dy = ' + (part.dy + part.sprite.dy) + ')');
 		}
 	}
-
+	
 	function grabData(blob: Blob) {
 		let mask    = $('#ClipboardMask').val();
 		let i32mask = mask ? RGBA(tinycolor(mask)) : 0;
@@ -910,7 +964,7 @@ namespace spred {
 			}
 		});
 	}
-
+	
 	export function loadModel(data: XMLDocument) {
 		g_model = new Model(data);
 		g_model.whenLoaded.then((model) => {
@@ -943,75 +997,96 @@ namespace spred {
 			let pals = $('#Palettes');
 			for (let pn in model.palettes) {
 				let pal = model.palettes[pn];
-				pals.append($new('h5',pn));
-				pals.append(Object.keys(pal).map(cn=>{
-					let sref = $new('span','\xA0').css('width','1em').css('display','inline-block');
-					/*let sha = $new('span','\xA0');
-					let shb = $new('span','\xA0');*/
-					let ssa = $new('span','\xA0');
-					let ssb = $new('span','\xA0');
-					let sla = $new('span','\xA0');
-					let slb = $new('span','\xA0');
-					function setcolor(color:tinycolorInstance){
-						let hsl = color.toHsl();
-						sref.css('background-color',color.toHslString());
-						/*sha.css('background-color',tinycolor({
-							h:(hsl.h+240)%360,s:hsl.s,l:hsl.l}).toHslString());
-						shb.css('background-color',tinycolor({
-							h:(hsl.h+120)%360,s:hsl.s,l:hsl.l}).toHslString());*/
-						ssa.css('background-color',tinycolor({h:hsl.h,s:0.1,l:hsl.l}).toHslString());
-						ssb.css('background-color',tinycolor({h:hsl.h,s:0.9,l:hsl.l}).toHslString());
-						sla.css('background-color',tinycolor({h:hsl.h,s:hsl.s,l:0.1}).toHslString());
-						slb.css('background-color',tinycolor({h:hsl.h,s:hsl.s,l:0.9}).toHslString());
-					}
-					let hsl = tinycolor(pal[cn]).toHsl();
-					let hinput = $('<input type="range" min="0" max="360">').val(hsl.h);
-					let sinput = $('<input type="range" min="0" max="100">').val((hsl.s*100)|0);
-					let linput = $('<input type="range" min="0" max="100">').val((hsl.l*100)|0);
-					function updcolor(){
-						setcolor(tinycolor({
-							h:+hinput.val(),
-							s:(+sinput.val())/100,
-							l:(+linput.val())/100
-						}));
-					}
-					setcolor(tinycolor(pal[cn]));
-					return $new('div.PaletteItem',
-						$new('label',cn+' ',sref),
-						$new('div',
-							$new('.-paliprop',
-								$new('label.-palilab','Hue:'),
-								/*sha.addClass('.-palibox'),*/
-								$new('div',
-									hinput.addClass('-palilong').on('input change',updcolor)
-								),
-								/*shb.addClass('.-palibox')*/
-							),
-							$new('.-paliprop',
-								$new('label.-palilab','Sat:'),
-								ssa.addClass('-palibox'),
-								$new('div',
-									sinput.addClass('-palishort').on('input change',updcolor),
-								),
-								ssb.addClass('-palibox')
-							),
-							$new('.-paliprop',
-								$new('label.-palilab','Light:'),
-								sla.addClass('-palibox'),
-								$new('div',
-									linput.addClass('-palishort').on('input change',updcolor),
-								),
-								slb.addClass('-palibox')
-							)
-						)
-					);
-				}));
+				pals.append(
+					$new('div',
+						$new('h5', pn),
+						Object.keys(pal).map(cn => {
+							let sref = $new('span', '\xA0');
+							let shl  = $new('label.-palilab', 'H=XXX');
+							/*let sha = $new('span','\xA0');
+							let shb = $new('span','\xA0');*/
+							let ssl = $new('label.-palilab', 'S=XXX%');
+							let ssa = $new('span', '\xA0');
+							let ssb = $new('span', '\xA0');
+							let sll = $new('label.-palilab', 'S=XXX%');
+							let sla = $new('span', '\xA0');
+							let slb = $new('span', '\xA0');
+							
+							function setcolor(color: tinycolorInstance) {
+								let hsl = color.toHsl();
+								sref.css('background-color', color.toHslString()).css('color', color.isDark() ? '#ffffff' : '#000000');
+								sref.text(color.toHexString());
+								shl.text('H=' + (hsl.h | 0));
+								/*sha.css('background-color',tinycolor({
+									h:(hsl.h+240)%360,s:hsl.s,l:hsl.l}).toHslString());
+								shb.css('background-color',tinycolor({
+									h:(hsl.h+120)%360,s:hsl.s,l:hsl.l}).toHslString());*/
+								ssl.text('S=' + ((hsl.s * 100) | 0) + '%');
+								ssa.css('background-color', tinycolor({h: hsl.h, s: 0.1, l: hsl.l}).toHslString());
+								ssb.css('background-color', tinycolor({h: hsl.h, s: 0.9, l: hsl.l}).toHslString());
+								sll.text('L=' + ((hsl.l * 100) | 0) + '%');
+								sla.css('background-color', tinycolor({h: hsl.h, s: hsl.s, l: 0.1}).toHslString());
+								slb.css('background-color', tinycolor({h: hsl.h, s: hsl.s, l: 0.9}).toHslString());
+								pal[cn] = color.toHexString();
+								g_update_color(pn, cn);
+							}
+							
+							let hsl    = tinycolor(pal[cn]).toHsl();
+							let hinput = $('<input type="range" min="0" max="360">').val(hsl.h | 0);
+							let sinput = $('<input type="range" min="0" max="100">').val((hsl.s * 100) | 0);
+							let linput = $('<input type="range" min="0" max="100">').val((hsl.l * 100) | 0);
+							
+							function updcolor() {
+								setcolor(tinycolor({
+									h: +hinput.val(),
+									s: (+sinput.val()) / 100,
+									l: (+linput.val()) / 100
+								}));
+							}
+							
+							setcolor(tinycolor(pal[cn]));
+							return $new('div.PaletteItem',
+								$new('h6', cn + ' ', sref),
+								$new('div.-details',
+									$new('.-paliprop',
+										shl,
+										/*sha.addClass('.-palibox'),*/
+										hinput.addClass('.-palilong').on('input change', updcolor),
+										/*shb.addClass('.-palibox')*/
+									),
+									$new('.-paliprop',
+										ssl,
+										ssa.addClass('-palibox'),
+										$new('div',
+											sinput.addClass('-palishort').on('input change', updcolor),
+										),
+										ssb.addClass('-palibox')
+									),
+									$new('.-paliprop',
+										sll,
+										sla.addClass('-palibox'),
+										$new('div',
+											linput.addClass('-palishort').on('input change', updcolor),
+										),
+										slb.addClass('-palibox')
+									)
+								)
+							).click((e) => {
+								let p = $(e.target).parents().addBack().filter('.PaletteItem');
+								if (!p.hasClass('selected')) {
+									$('.PaletteItem.selected').removeClass('selected');
+									p.addClass('selected');
+								}
+							});
+						})
+					)
+				);
 			}
 			selPart(model.layers[0].parts[0]);
-			/*addCompositeView(defaultPartList(), 2);
+			addCompositeView(defaultPartList(), 2);
 			addCompositeView(defaultPartList(), 1);
 			addCompositeView(defaultPartList(), 1);
-			addCompositeView(defaultPartList(), 1);*/
+			addCompositeView(defaultPartList(), 1);
 			$('#ClipboardGrabber').on('paste', e => {
 				e.stopPropagation();
 				e.preventDefault();
@@ -1029,8 +1104,8 @@ namespace spred {
 			});
 		});
 	}
-
-	export function saveSpritemaps() {
+	
+	function saveSomething(content: string) {
 		$('#Loading').after(
 			$new('.row',
 				$new('.col-12.card.card-success',
@@ -1046,20 +1121,40 @@ namespace spred {
 							document.execCommand('copy');
 							ta.val('Contents copied to clipboard!');
 						}),
-						$new('textarea.form-control').val(
-							g_model.spritemaps.map(s => s.serialize()).join('\n')
-						)
+						$new('textarea.form-control').val(content)
 					)
 				)
 			).css('flex-shrink', '0')
 		);
+	}
+	
+	export function savePalettes() {
+		saveSomething(
+			''
+			+ '        <common>'
+			+ Object.keys(g_model.palettes['common']).map(cname =>
+				`\r\n            <color name="${cname}">${g_model.palettes.common[cname]}</color>`
+			).join('')
+			+ '\r\n        </common>'
+			+ g_model.colorProps.map(cp =>
+			`\r\n        <property name="${cp.name}" src="${cp.src}" default="${cp.def}">`
+			+ Object.keys(g_model.palettes[cp.name]).map(cname =>
+				`\r\n            <color name="${cname}">${g_model.palettes[cp.name][cname]}</color>`
+			).join('')
+			+ '\r\n        </property>'
+			).join('')
+		);
+	}
+
+	export function saveSpritemaps() {
+		saveSomething(g_model.spritemaps.map(s => s.serialize()).join('\n'));
 		/*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>*/
 	}
-
+	
 	$(() => {
-
+		
 		loadFile(basedir + 'res/model.xml', 'xml').then(loadModel);
 	});
 }
