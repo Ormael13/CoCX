@@ -296,7 +296,7 @@
     <spritemap file="scales.png">
         <cell rect="1,1,38,44" name="head/scales" dx="74" dy="23"/>
         <cell rect="1,48,38,44" name="head/scales2" dx="74" dy="23"/>
-        <cell rect="1,48,38,44" name="face/reptile" dx="74" dy="23"/>
+        <cell rect="1,95,38,44" name="face/reptile" dx="74" dy="23"/>
         <cell rect="42,1,50,62" name="torso/scales" dx="71" dy="65"/>
         <cell rect="42,66,50,62" name="torso/scales2" dx="71" dy="65"/>
         <cell rect="95,1,38,22" name="breasts/Dscales" dx="74" dy="70"/>
