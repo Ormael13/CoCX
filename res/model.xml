@@ -111,6 +111,8 @@
         </property>
         <property name="chitin" src="chitinColor" default="#ffffff">
         </property>
+        <property name="chitin2" src="chitinColor2||chitinColor" default="#ffffff">
+        </property>
         <property name="skin" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
@@ -161,6 +163,10 @@
         <key src="#44CCFF" base="chitin"/>
         <key src="#0099CC" base="chitin" transform="darken(25)"/>
         <key src="#006666" base="chitin" transform="darken(50)"/>
+        <key src="#AACCDD" base="chitin2" transform="lighten(25)"/>
+        <key src="#77AACC" base="chitin2"/>
+        <key src="#4477AA" base="chitin2" transform="darken(25)"/>
+        <key src="#114477" base="chitin2" transform="darken(50)"/>
         <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
         <key src="#FACE8D" base="skin"/>
         <key src="#BC9B6D" base="skin" transform="darken(25)"/>
@@ -222,7 +228,7 @@
     </spritemap>
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes/cat" dx="74" dy="38"/>
-        <cell rect="1,14,32,29" name="eyes/spider" dx="74" dy="34"/>
+        <cell rect="1,14,32,21" name="eyes/spider" dx="74" dy="34"/>
         <cell rect="36,1,56,47" name="tail/fox1" dx="41" dy="92"/>
         <cell rect="36,50,50,53" name="tail/fox2" dx="95" dy="86"/>
         <cell rect="95,1,48,51" name="tail/cat" dx="96" dy="67"/>
@@ -243,33 +249,34 @@
         <cell rect="38,272,36,56" name="arms/kraken" dx="92" dy="63"/>
     </spritemap>
     <spritemap file="chitin.png">
-        <cell rect="23,4,55,50" name="legs/bee" dx="68" dy="115"/>
-        <cell rect="19,57,59,45" name="tail/bee_abdomen" dx="99" dy="81"/>
-        <cell rect="33,106,43,25" name="antennae/bee" dx="66" dy="5"/>
-        <cell rect="1,135,38,44" name="head/bee" dx="74" dy="23"/>
-        <cell rect="42,135,38,44" name="head/chitin" dx="74" dy="23"/>
-        <cell rect="83,135,38,44" name="face/insect" dx="74" dy="23"/>
-        <cell rect="124,135,38,44" name="face/Spider" dx="74" dy="23"/>
-        <cell rect="23,184,55,69" name="torso/bee" dx="68" dy="58"/>
-        <cell rect="12,256,32,54" name="arms_bg/bee" dx="52" dy="60"/>
-        <cell rect="51,256,32,54" name="arms/bee" dx="96" dy="60"/>
-        <cell rect="87,258,32,51" name="arms_bg/bee2" dx="55" dy="62"/>
-        <cell rect="125,258,34,51" name="arms/bee2" dx="98" dy="62"/>
-        <cell rect="29,317,48,23" name="breasts/Dbee" dx="71" dy="70"/>
+        <cell rect="1,23,38,22" name="breasts/Dchitin" dx="74" dy="70"/>
+        <cell rect="40,1,38,44" name="head/chitin" dx="74" dy="23"/>
+        <cell rect="79,1,38,44" name="face/spider" dx="74" dy="23"/>
+        <cell rect="1,46,35,51" name="arms_bg/chitin" dx="56" dy="63"/>
+        <cell rect="37,46,50,62" name="torso/chitin" dx="71" dy="65"/>
+        <cell rect="88,46,37,51" name="arms/chitin" dx="94" dy="63"/>
+        <cell rect="37,109,50,62" name="legs/chitin" dx="71" dy="101"/>
+        <cell rect="1,98,35,51" name="arms_bg/chitin_p" dx="56" dy="63"/>
+        <cell rect="88,98,37,51" name="arms/chitin_p" dx="94" dy="63"/>
+        <cell rect="1,150,35,51" name="arms_bg/chitin2" dx="56" dy="63"/>
+        <cell rect="88,150,37,51" name="arms/chitin2" dx="94" dy="63"/>
+        <cell rect="1,202,35,51" name="arms_bg/chitin2_p" dx="56" dy="63"/>
+        <cell rect="88,202,37,51" name="arms/chitin2_p" dx="94" dy="63"/>
+        <cell rect="37,172,50,62" name="legs/chitin2" dx="71" dy="101"/>
+
+        <cell rect="165,1,38,44" name="head/bee" dx="74" dy="23"/>
+        <cell rect="132,11,32,11" name="eyes/sandtrap" dx="75" dy="38"/>
+        <cell rect="126,23,38,22" name="breasts/Dbee" dx="74" dy="70"/>
+        <cell rect="165,1,38,44" name="head/bee" dx="74" dy="23"/>
+        <cell rect="204,1,38,44" name="face/insect" dx="74" dy="23"/>
+        <cell rect="126,46,35,51" name="arms_bg/bee" dx="56" dy="63"/>
+        <cell rect="162,46,50,62" name="torso/bee" dx="71" dy="65"/>
+        <cell rect="213,46,37,51" name="arms/bee" dx="94" dy="63"/>
+        <cell rect="162,109,50,62" name="legs/bee" dx="71" dy="101"/>
+
+        <cell rect="214,191,59,45" name="tail/bee_abdomen" dx="99" dy="81"/>
+        <cell rect="164,199,43,25" name="antennae/bee" dx="66" dy="5"/>
         <cell rect="4,344,89,54" name="wings/bee" dx="51" dy="68"/>
-        <cell rect="312,19,32,11" name="eyes/sandtrap" dx="75" dy="38"/>
-        <cell rect="163,201,54,49" name="legs/Spider" dx="69" dy="115"/>
-        <cell rect="165,259,30,50" name="arms_bg/Spider" dx="57" dy="63"/>
-        <cell rect="202,259,33,50" name="arms/Spider" dx="93" dy="64"/>
-        <cell rect="87,199,30,51" name="arms_bg/Spider2" dx="56" dy="62"/>
-        <cell rect="125,199,33,51" name="arms/Spider2" dx="93" dy="63"/>
-        <cell rect="304,42,45,27" name="breasts/Dchitin" dx="70" dy="66"/>
-        <cell rect="305,72,53,50" name="legs/chitin" dx="69" dy="115"/>
-        <cell rect="278,194,48,58" name="arms_bg/chitin" dx="45" dy="56"/>
-        <cell rect="327,194,43,58" name="arms/chitin" dx="93" dy="57"/>
-        <cell rect="294,255,70,66" name="torso/chitin" dx="61" dy="65"/>
-        <cell rect="281,325,49,59" name="arms_bg/chitin2" dx="42" dy="61"/>
-        <cell rect="331,325,44,59" name="arms/chitin2" dx="95" dy="61"/>
     </spritemap>
     <spritemap file="manticore.png">
         <cell rect="2,2,32,11" name="eyes/manticore" dx="74" dy="38"/>
@@ -294,21 +301,23 @@
         <cell rect="165,58,50,62" name="legs/orca" dx="71" dy="101"/>
     </spritemap>
     <spritemap file="scales.png">
-        <cell rect="1,1,38,44" name="head/scales" dx="74" dy="23"/>
-        <cell rect="1,48,38,44" name="head/scales2" dx="74" dy="23"/>
-        <cell rect="1,95,38,44" name="face/reptile" dx="74" dy="23"/>
-        <cell rect="42,1,50,62" name="torso/scales" dx="71" dy="65"/>
-        <cell rect="42,66,50,62" name="torso/scales2" dx="71" dy="65"/>
-        <cell rect="95,1,38,22" name="breasts/Dscales" dx="74" dy="70"/>
-        <cell rect="95,26,38,22" name="breasts/Dscales2" dx="74" dy="70"/>
-        <cell rect="136,1,50,62" name="legs/scales" dx="71" dy="101"/>
-        <cell rect="136,66,50,62" name="legs/scales2" dx="71" dy="101"/>
-        <cell rect="189,1,35,51" name="arms_bg/scales" dx="56" dy="63"/>
-        <cell rect="225,1,37,51" name="arms/scales" dx="94" dy="63"/>
-        <cell rect="189,55,35,51" name="arms_bg/scales2" dx="56" dy="63"/>
-        <cell rect="225,55,37,51" name="arms/scales2" dx="94" dy="63"/>
-        <cell rect="265,1,84,61" name="hair/gorgon" dx="50" dy="19"/>
-        <cell rect="265,64,84,61" name="hair_bg/gorgon" dx="50" dy="19"/>
+        <cell rect="1,23,38,22" name="breasts/Dscales_p" dx="74" dy="70"/>
+        <cell rect="40,1,38,44" name="head/scales_p" dx="74" dy="23"/>
+        <cell rect="1,46,35,51" name="arms_bg/scales_p" dx="56" dy="63"/>
+        <cell rect="37,46,50,62" name="torso/scales_p" dx="71" dy="65"/>
+        <cell rect="88,46,37,51" name="arms/scales_p" dx="94" dy="63"/>
+        <cell rect="37,109,50,62" name="legs/scales_p" dx="71" dy="101"/>
+
+        <cell rect="131,23,38,22" name="breasts/Dscales" dx="74" dy="70"/>
+        <cell rect="170,1,38,44" name="head/scales" dx="74" dy="23"/>
+        <cell rect="209,1,38,44" name="face/reptile" dx="74" dy="23"/>
+        <cell rect="131,46,35,51" name="arms_bg/scales" dx="56" dy="63"/>
+        <cell rect="167,46,50,62" name="torso/scales" dx="71" dy="65"/>
+        <cell rect="218,46,37,51" name="arms/scales" dx="94" dy="63"/>
+        <cell rect="167,109,50,62" name="legs/scales" dx="71" dy="101"/>
+
+        <cell rect="315,1,84,61" name="hair/gorgon" dx="50" dy="19"/>
+        <cell rect="315,64,84,61" name="hair_bg/gorgon" dx="50" dy="19"/>
         <cell rect="12,226,130,108" name="legs/naga" dx="32" dy="93"/>
         <cell rect="145,226,110,64" name="tail/reptile" dx="40" dy="99"/>
         <cell rect="258,226,53,119" name="wings_bg/scales_left" dx="32" dy="20"/>
@@ -506,7 +515,7 @@
                 <show part="head/scales"/>
             </case>
             <case value="'plain'">
-                <show part="head/scales2"/>
+                <show part="head/scales_p"/>
             </case>
             <case value="'plain'">
                 <show part="head/chitin"/>
@@ -568,7 +577,7 @@
                             <show part="breasts/Dscales"/>
                         </case>
                         <case value="'never'">
-                            <show part="breasts/Dscales2"/>
+                            <show part="breasts/Dscales_p"/>
                         </case>
                         <default>
                             <show part="breasts/D"/>
@@ -605,8 +614,8 @@
                 <show part="arms_bg/scales"/>
             </case>
             <case value="'never'">
-                <show part="arms/scales2"/>
-                <show part="arms_bg/scales2"/>
+                <show part="arms/scales_p"/>
+                <show part="arms_bg/scales_p"/>
             </case>
             <case value="'never'">
                 <show part="arms/bee"/>
@@ -682,7 +691,7 @@
                 <show part="legs/scales"/>
             </case>
             <case value="'never'">
-                <show part="legs/scales2"/>
+                <show part="legs/scales_p"/>
             </case>
             <case value="'never'">
                 <show part="legs_bg/alraune"/>
@@ -712,7 +721,7 @@
                 <show part="torso/scales"/>
             </case>
             <case value="'never'">
-                <show part="torso/scales2"/>
+                <show part="torso/scales_p"/>
             </case>
             <default>
                 <show part="torso/human"/>

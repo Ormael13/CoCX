@@ -1025,11 +1025,11 @@ var spred;
             addCompositeView([
                 'hair/gorgon', 'hair_bg/gorgon',
                 'eyes/cat',
-                'head/scales2', 'face/human_fang',
-                'breasts/Dscales2',
-                'arms_bg/scales2', 'arms/scales2',
+                'head/scales_p', 'face/human_fang',
+                'breasts/Dscales_p',
+                'arms_bg/scales_p', 'arms/scales_p',
                 'legs/naga',
-                'torso/scales2'
+                'torso/scales_p'
             ]);
             addCompositeView([
                 'horns/2large',
@@ -1042,6 +1042,26 @@ var spred;
                 'tail/reptile',
                 'wings/scales_right',
                 'wings_bg/scales_left',
+            ]);
+            addCompositeView([
+                'antennae/bee',
+                'eyes/sandtrap',
+                'head/bee', 'face/insect',
+                'breasts/Dbee',
+                'arms/bee', 'arms_bg/bee',
+                'legs/bee',
+                'torso/bee',
+                'tail/bee_abdomen',
+                'wings/bee'
+            ]);
+            addCompositeView([
+                'horns/2large',
+                'eyes/spider',
+                'head/chitin', 'face/spider',
+                'breasts/Dchitin',
+                'arms/chitin2', 'arms_bg/chitin2',
+                'legs_bg/drider',
+                'torso/chitin'
             ]);
             $('#ClipboardGrabber').on('paste', e => {
                 e.stopPropagation();
