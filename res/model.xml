@@ -6,6 +6,7 @@
             <color name="albino">#f2e8e3</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#a1adbf</color>
+            <color name="ashen2">#cbc0b3</color>
             <color name="auburn">#732d26</color>
             <color name="black">#333333</color>
             <color name="blond">#ebd69e</color>
@@ -14,7 +15,9 @@
             <color name="bronzed">#dcba74</color>
             <color name="brown">#664400</color>
             <color name="caramel">#c08430</color>
+            <color name="caramel2">#a86b29</color>
             <color name="cerulean">#59cae3</color>
+            <color name="cerulean2">#2950bc</color>
             <color name="chocolate">#83581b</color>
             <color name="crimson">#f50400</color>
             <color name="crystal">#f000f0</color>
@@ -111,6 +114,9 @@
         <property name="skin" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
+        <property name="skin2" src="skinTone2||skinTone" default="#ffffff">
+            <color name="pale">#f2e8e3</color>
+        </property>
         <!-- Not yet in game-->
         <!-- <property name="iris" src="'blue'" default="#0000ff">
              &lt;!&ndash;Iris color overrides go here&ndash;&gt;
@@ -139,27 +145,32 @@
          </property>-->
     </palette>
     <colorkeys>
-        <key src="#FF88FF" base="hair"/>
-        <key src="#CC00CC" base="hair" transform="darken(20)"/>
-        <key src="#880088" base="hair" transform="darken(40)"/>
-        <key src="#440044" base="hair" transform="darken(60)"/>
-        <key src="#88FF88" base="fur"/>
-        <key src="#00CC00" base="fur" transform="darken(20)"/>
-        <key src="#009900" base="fur" transform="darken(40)"/>
-        <key src="#003300" base="fur" transform="darken(60)"/>
-        <key src="#8888FF" base="scales"/>
-        <key src="#4444FF" base="scales" transform="darken(20)"/>
-        <key src="#0000CC" base="scales" transform="darken(40)"/>
-        <key src="#000033" base="scales" transform="darken(60)"/>
-        <key src="#88FFFF" base="chitin"/>
-        <key src="#44CCFF" base="chitin" transform="darken(20)"/>
-        <key src="#0099CC" base="chitin" transform="darken(40)"/>
-        <key src="#006666" base="chitin" transform="darken(60)"/>
-        <key src="#FFE9CC" base="skin"/>
-        <key src="#FACE8D" base="skin" transform="darken(20)"/>
-        <key src="#BC9B6D" base="skin" transform="darken(40)"/>
-        <key src="#7C6647" base="skin" transform="darken(60)"/>
-        <key src="#1E1911" base="skin" transform="darken(80)"/>
+        <key src="#FF88FF" base="hair" transform="lighten(25)"/>
+        <key src="#CC00CC" base="hair"/>
+        <key src="#880088" base="hair" transform="darken(25)"/>
+        <key src="#440044" base="hair" transform="darken(50)"/>
+        <key src="#88FF88" base="fur" transform="lighten(25)"/>
+        <key src="#00CC00" base="fur"/>
+        <key src="#009900" base="fur" transform="darken(25)"/>
+        <key src="#003300" base="fur" transform="darken(50)"/>
+        <key src="#8888FF" base="scales" transform="lighten(25)"/>
+        <key src="#4444FF" base="scales"/>
+        <key src="#0000CC" base="scales" transform="darken(25)"/>
+        <key src="#000033" base="scales" transform="darken(50)"/>
+        <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
+        <key src="#44CCFF" base="chitin"/>
+        <key src="#0099CC" base="chitin" transform="darken(25)"/>
+        <key src="#006666" base="chitin" transform="darken(50)"/>
+        <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
+        <key src="#FACE8D" base="skin"/>
+        <key src="#BC9B6D" base="skin" transform="darken(25)"/>
+        <key src="#7C6647" base="skin" transform="darken(50)"/>
+        <key src="#1C0F0F" base="skin" transform="darken(75)"/>
+        <key src="#FFCCCC" base="skin2" transform="lighten(25)"/>
+        <key src="#FF9999" base="skin2"/>
+        <key src="#BB7777" base="skin2" transform="darken(25)"/>
+        <key src="#884444" base="skin2" transform="darken(50)"/>
+        <key src="#221111" base="skin2" transform="darken(75)"/>
         <!--<key src="#F9A98E" base="nipples"/>-->
         <!--<key src="#FFFFFF" base="sclera"/>-->
         <!--<key src="#0026FF" base="iris"/>-->
@@ -205,6 +216,7 @@
         <cell rect="291,55,37,51" name="arms/fur" dx="93" dy="64"/>
         <cell rect="331,2,50,62" name="legs/human" dx="71" dy="101"/>
         <cell rect="331,66,50,62" name="legs/furpaws" dx="71" dy="101"/>
+        <cell rect="168,141,119,68" name="tail/demon" dx="67" dy="89"/>
     </spritemap>
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes/cat" dx="74" dy="38"/>
@@ -268,25 +280,30 @@
     <spritemap file="orca.png">
         <cell rect="1,2,105,43" name="ears/orca" dx="49" dy="47"/>
         <cell rect="1,48,28,12" name="eyes/orca" dx="76" dy="39"/>
-        <cell rect="26,63,43,45" name="face/orca" dx="71" dy="22"/>
-        <cell rect="3,113,35,53" name="arms_bg/orca" dx="57" dy="63"/>
-        <cell rect="39,113,36,53" name="arms/orca" dx="92" dy="63"/>
-        <cell rect="100,67,49,62" name="torso/orca" dx="69" dy="64"/>
+        <cell rect="26,63,43,45" name="face/orca" dx="70" dy="22"/>
+        <cell rect="3,113,35,51" name="arms_bg/orca" dx="56" dy="63"/>
+        <cell rect="39,113,37,51" name="arms/orca" dx="94" dy="63"/>
+        <cell rect="98,66,50,62" name="torso/orca" dx="71" dy="65"/>
         <cell rect="86,132,62,122" name="tail/orca" dx="110" dy="38"/>
         <cell rect="123,20,35,26" name="arms_bg/fins-orca" dx="68" dy="67"/>
         <cell rect="159,20,34,26" name="arms/fins-orca" dx="95" dy="72"/>
-        <cell rect="165,58,50,66" name="legs/orca" dx="69" dy="99"/>
-        <cell rect="184,142,53,42" name="breasts/Dorca" dx="70" dy="61"/>
+        <cell rect="165,58,50,62" name="legs/orca" dx="71" dy="101"/>
     </spritemap>
     <spritemap file="scales.png">
         <cell rect="8,32,53,119" name="wings_bg/scales_left" dx="32" dy="20"/>
         <cell rect="64,32,53,119" name="wings/scales_right" dx="104" dy="20"/>
         <cell rect="13,161,46,55" name="face/scales" dx="71" dy="17"/>
+        <cell rect="235,293,38,44" name="face/scales2" dx="74" dy="23"/>
         <cell rect="64,176,48,39" name="breasts/Dscales" dx="72" dy="61"/>
+        <cell rect="234,265,38,22" name="breasts/Dscales2" dx="74" dy="70"/>
         <cell rect="142,155,58,51" name="legs/scales" dx="65" dy="115"/>
+        <cell rect="159,217,50,62" name="legs/scales2" dx="71" dy="101"/>
         <cell rect="142,29,59,71" name="torso/scales" dx="66" dy="59"/>
+        <cell rect="207,32,50,62" name="torso/scales2" dx="71" dy="65"/>
         <cell rect="275,32,40,60" name="arms_bg/scales" dx="49" dy="57"/>
         <cell rect="316,32,42,60" name="arms/scales" dx="91" dy="57"/>
+        <cell rect="255,173,35,51" name="arms_bg/scales2" dx="56" dy="63"/>
+        <cell rect="291,173,37,51" name="arms/scales2" dx="94" dy="63"/>
         <cell rect="248,103,110,64" name="tail/reptile" dx="40" dy="99"/>
         <cell rect="314,246,84,61" name="hair/gorgon" dx="50" dy="19"/>
         <cell rect="314,309,84,61" name="hair_bg/gorgon" dx="50" dy="19"/>
@@ -300,7 +317,7 @@
         <layer name="eyes"/>
         <layer name="hair"/>
         <layer name="ears_bg"/>
-        
+
         <layer name="face"/>
 
         <layer name="horns_bg"/>
@@ -311,9 +328,9 @@
         <layer name="legs"/>
         <layer name="wings"/>
         <layer name="legs_bg"/>
-        
+
         <layer name="torso"/>
-        
+
         <layer name="hair_bg"/>
         <layer name="tail"/>
         <layer name="wings_bg"/>
@@ -492,6 +509,9 @@
                 <show part="face/scales"/>
             </case>
             <case value="'never'">
+                <show part="face/scales2"/>
+            </case>
+            <case value="'never'">
                 <show part="face/human_fang"/>
             </case>
             <default>
@@ -517,6 +537,9 @@
                         </case>
                         <case value="'never'">
                             <show part="breasts/Dscales"/>
+                        </case>
+                        <case value="'never'">
+                            <show part="breasts/Dscales2"/>
                         </case>
                         <default>
                             <show part="breasts/D"/>
@@ -551,6 +574,10 @@
             <case value="'never'">
                 <show part="arms/scales"/>
                 <show part="arms_bg/scales"/>
+            </case>
+            <case value="'never'">
+                <show part="arms/scales2"/>
+                <show part="arms_bg/scales2"/>
             </case>
             <case value="'never'">
                 <show part="arms/bee"/>
@@ -623,6 +650,9 @@
                 <show part="legs/scales"/>
             </case>
             <case value="'never'">
+                <show part="legs/scales2"/>
+            </case>
+            <case value="'never'">
                 <show part="legs/alraune"/>
             </case>
             <case value="'never'">
@@ -648,6 +678,9 @@
             </case>
             <case value="'never'">
                 <show part="torso/scales"/>
+            </case>
+            <case value="'never'">
+                <show part="torso/scales2"/>
             </case>
             <default>
                 <show part="torso/human"/>
@@ -706,6 +739,9 @@
             </case>
             <case value="'never'">
                 <show part="tail/bee_abdomen"/>
+            </case>
+            <case value="'never'">
+                <show part="tail/demon"/>
             </case>
             <case value="'never'">
                 <show part="tail/reptile"/>

@@ -5,6 +5,9 @@ function RGBA(i) {
         | (rgb.g & 0xff) << 8
         | (rgb.r & 0xff)) >>> 0;
 }
+function bound(min, x, max = Infinity) {
+    return min < x ? x < max ? x : max : min;
+}
 function randint(n) {
     return Math.floor(Math.random() * n);
 }
@@ -96,9 +99,9 @@ var spred;
         let hsl = tc.clone().toHsl();
         switch (name) {
             case 'lighten':
-                if (value == 0)
-                    return tc;
-                return tinycolor({ h: hsl.h, s: hsl.s, l: (1.0 - hsl.l) * 100 / value });
+                let l2a = hsl.l + (1.0 - hsl.l) * value / 100;
+                let l2b = bound(0, hsl.l + value / 100, 1);
+                return tinycolor({ h: hsl.h, s: hsl.s, l: Math.max(l2a, l2b) });
             case 'darken':
                 return tinycolor({ h: hsl.h, s: hsl.s, l: hsl.l * (100 - value) / 100 });
         }
@@ -975,10 +978,71 @@ var spred;
                 })));
             }
             selPart(model.layers[0].parts[0]);
-            addCompositeView(defaultPartList(), 2);
-            addCompositeView(defaultPartList(), 1);
-            addCompositeView(defaultPartList(), 1);
-            addCompositeView(defaultPartList(), 1);
+            addCompositeView([
+                'ears_bg/human',
+                'eyes/human',
+                'hair/0', 'hair_bg/0',
+                'face/human',
+                'breasts/D',
+                'arms/human', 'arms_bg/human',
+                'legs/human',
+                'torso/human'
+            ]);
+            addCompositeView([
+                'ears/orca',
+                'eyes/orca',
+                'hair/0', 'hair_bg/0',
+                'face/orca',
+                'breasts/D',
+                'arms/orca', 'arms_bg/orca', 'arms/fins-orca', 'arms_bg/fins-orca',
+                'legs/orca',
+                'torso/orca',
+                'tail/orca'
+            ]);
+            addCompositeView([
+                'ears/cat',
+                'eyes/cat',
+                'hair/0', 'hair_bg/0',
+                'face/fur',
+                'breasts/Dfur',
+                'arms/fur', 'arms_bg/fur',
+                'legs/furpaws',
+                'torso/fur',
+                'tail/cat1', 'tail/cat2'
+            ]);
+            addCompositeView([
+                'ears/human',
+                'eyes/manticore',
+                'hair/0', 'hair_bg/0',
+                'face/human', 'neck/manticore',
+                'breasts/D',
+                'arms/manticore',
+                'legs/manticore_sit',
+                'torso/human',
+                'tail/manticore',
+                'wings/mantibig', 'wings_bg/mantibig'
+            ]);
+            addCompositeView([
+                'hair/gorgon', 'hair_bg/gorgon',
+                'eyes/cat',
+                'face/scales2',
+                'breasts/Dscales2',
+                'arms_bg/scales2', 'arms/scales2',
+                'legs/naga',
+                'torso/scales2'
+            ]);
+            addCompositeView([
+                'horns/2large',
+                'eyes/cat',
+                'face/scales',
+                'breasts/Dscales',
+                'arms/scales', 'arms_bg/scales',
+                'legs/scales',
+                'torso/scales',
+                'tail/reptile',
+                'wings/scales_right',
+                'wings_bg/scales_left',
+            ]);
             $('#ClipboardGrabber').on('paste', e => {
                 e.stopPropagation();
                 e.preventDefault();

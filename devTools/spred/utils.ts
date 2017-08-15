@@ -15,6 +15,10 @@ function RGBA(i: tinycolorInstance): number {
 		   ) >>> 0;
 }
 
+function bound(min:number,x:number,max:number=Infinity):number {
+	return min < x ? x < max ? x : max : min;
+}
+
 function randint(n: number): number {
 	return Math.floor(Math.random() * n);
 }
