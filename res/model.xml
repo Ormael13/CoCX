@@ -201,7 +201,7 @@
         <cell rect="1,47,38,44" name="head/fur" dx="74" dy="23"/>
         <cell rect="41,47,38,44" name="face/human" dx="74" dy="23"/>
         <cell rect="41,93,38,44" name="face/fur" dx="74" dy="23"/>
-        <cell rect="51,13938,44" name="face/human_fang" dx="74" dy="23"/>
+        <cell rect="41,139,38,44" name="face/human_fang" dx="74" dy="23"/>
         <cell rect="42,2,32,11" name="eyes/human" dx="74" dy="38"/>
         <cell rect="78,2,8,11" name="ears_bg/human" dx="107" dy="41"/>
         <cell rect="88,2,8,11" name="ears/fur" dx="107" dy="41"/>
