@@ -1813,27 +1813,27 @@ use namespace kGAMECLASS;
 		public function demonScore():Number {
 			Begin("Player","racialScore","demon");
 			var demonCounter:Number = 0;
-			if (hornType == 1 && horns > 0)
+			if (hornType == HORNS_DEMON && horns > 0)
 				demonCounter++;
-			if (cor >= 50 && hornType == 1 && horns > 4)
+			if (hornType == HORNS_DEMON && horns > 4)
 				demonCounter++;
-			if (tailType == 3)
+			if (tailType == TAIL_TYPE_DEMONIC)
 				demonCounter++;
-			if (wingType == 6)
+			if (wingType == WING_TYPE_BAT_LIKE_TINY)
 				demonCounter++;
-			if (wingType == 7)
+			if (wingType == WING_TYPE_BAT_LIKE_LARGE)
 				demonCounter += 2;
-			if (wingType == 13)
+			if (wingType == WING_TYPE_IMP_LARGE)
 				demonCounter += 4;
-			if (tongueType == 2)
+			if (tongueType == TONGUE_DEMONIC)
 				demonCounter++;
 			if (cor >= 50 && hasPlainSkinOnly() && skinTone != "slippery")
 				demonCounter++;
-			if (cor >= 50 && faceType == 0)
+			if (cor >= 50 && faceType == FACE_HUMAN)
 				demonCounter++;
-			if (cor >= 50 && armType == 0)
+			if (cor >= 50 && armType == ARM_TYPE_HUMAN)
 				demonCounter++;
-			if (lowerBody == 5 || lowerBody == 6)
+			if (lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS)
 				demonCounter++;
 			if (demonCocks() > 0)
 				demonCounter++;
@@ -3482,6 +3482,8 @@ use namespace kGAMECLASS;
 			End("Player","racialScore");
 			return gargoyleCounter;
 		}
+
+		//TODO: elderSlime, succubus pussy, arachne, wasp, lactabovine/slut, 
 		
 		public function maxPrestigeJobs():Number
 		{
