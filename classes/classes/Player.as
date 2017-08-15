@@ -993,12 +993,12 @@ use namespace kGAMECLASS;
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
 					race = "cat-taur";
-					if (faceType == 0)
+					if (faceType == FACE_HUMAN)
 						race = "sphinx-morph"; // no way to be fully feral anyway
 				}
 				else {
 					race = "cat-morph";
-					if (faceType == 0)
+					if (faceType == FACE_HUMAN)
 						race = "cat-" + mf("boy", "girl");
 				}
 			}
@@ -1019,7 +1019,7 @@ use namespace kGAMECLASS;
 					if (isTaur()) race = "ancient dragon-taur";
 					else {
 						race = "ancient dragon";
-						if (faceType == 0)
+						if (faceType == FACE_HUMAN)
 							race = "ancient dragon-" + mf("man", "girl");
 					}
 				}
@@ -1027,7 +1027,7 @@ use namespace kGAMECLASS;
 					if (isTaur()) race = " elder dragon-taur";
 					else {
 						race = "elder dragon";
-						if (faceType == 0)
+						if (faceType == FACE_HUMAN)
 							race = "elder dragon-" + mf("man", "girl");
 					}
 				}
@@ -1035,7 +1035,7 @@ use namespace kGAMECLASS;
 					if (isTaur()) race = "dragon-taur";
 					else {
 						race = "dragon";
-						if (faceType == 0)
+						if (faceType == FACE_HUMAN)
 							race = "dragon-" + mf("man", "girl");
 					}
 				}
@@ -1043,7 +1043,7 @@ use namespace kGAMECLASS;
 					if (isTaur()) race = "half-dragon-taur";
 					else {
 						race = "half-dragon";
-						if (faceType == 0)
+						if (faceType == FACE_HUMAN)
 							race = "half-dragon-" + mf("man", "girl");
 					}
 				}
@@ -1060,7 +1060,7 @@ use namespace kGAMECLASS;
 					race = "dog-taur";
 				else {
 					race = "dog-morph";
-					if (faceType == 0)
+					if (faceType == FACE_HUMAN)
 						race = "dog-" + mf("man", "girl");
 				}
 			}
@@ -1382,7 +1382,7 @@ use namespace kGAMECLASS;
 			if (pigScore() >= 4) 
 			{
 				race = "pig-morph";
-				if (faceType == 0)
+				if (faceType == FACE_HUMAN)
 					race = "pig-" + mf("boy", "girl");
 				if (faceType == 20)
 					race = "boar-morph";
@@ -1394,19 +1394,19 @@ use namespace kGAMECLASS;
 			if (rhinoScore() >= 4)
 			{
 				race = "rhino-morph";
-				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+				if (faceType == FACE_HUMAN) race = "rhino-" + mf("man", "girl");
 			}
 			if (echidnaScore() >= 4)
 			{
 				race = "echidna";
-				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
+				if (faceType == FACE_HUMAN) race = "echidna-" + mf("boy", "girl");
 			}
 			if (deerScore() >= 4)
 			{
 				if (isTaur()) race = "deer-taur";
 				else {
 					race = "deer-morph";
-					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+					if (faceType == FACE_HUMAN) race = "deer-" + mf("morph", "girl");
 				}
 			}
 			//Special, bizarre races
@@ -1415,7 +1415,7 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "dragonne-taur";
 				else {
 					race  = "dragonne";
-					if (faceType == 0)
+					if (faceType == FACE_HUMAN)
 						race = "dragonne-" + mf("man", "girl");
 				}
 			}
@@ -1481,9 +1481,9 @@ use namespace kGAMECLASS;
 			var humanCounter:Number = 0;
 			if (hasPlainSkinOnly() && skinTone != "slippery")
 				humanCounter++;
-			if (faceType == 0)
+			if (faceType == FACE_HUMAN)
 				humanCounter++;
-			if (eyeType == 0)
+			if (eyeType == EYES_HUMAN)
 				humanCounter++;
 			if (earType == 0)
 				humanCounter++;
@@ -1815,7 +1815,7 @@ use namespace kGAMECLASS;
 			var demonCounter:Number = 0;
 			if (hornType == HORNS_DEMON && horns > 0)
 				demonCounter++;
-			if (hornType == HORNS_DEMON && horns > 4)
+			if (cor >= 50 && hornType == HORNS_DEMON && horns > 4)
 				demonCounter++;
 			if (tailType == TAIL_TYPE_DEMONIC)
 				demonCounter++;
@@ -1853,7 +1853,7 @@ use namespace kGAMECLASS;
 		public function minotaurScore():Number {
 			Begin("Player","racialScore","minotaur");
 			var minoCounter:Number = 0;
-			if (faceType == 0 || faceType == 3)
+			if (faceType == FACE_HUMAN || faceType == 3)
 				minoCounter++;
 			if (earType == 3)
 				minoCounter++;
@@ -1893,7 +1893,7 @@ use namespace kGAMECLASS;
 		public function cowScore():Number {
 			Begin("Player","racialScore","cow");
 			var cowCounter:Number = 0;
-			if (faceType == 0 || faceType == 3)
+			if (faceType == FACE_HUMAN || faceType == 3)
 				cowCounter++;
 			if (earType == 3)
 				cowCounter++;
@@ -1957,7 +1957,7 @@ use namespace kGAMECLASS;
 			if (antennae == 2)
 			{
 				beeCounter++;
-				if (faceType == 0)
+				if (faceType == FACE_HUMAN)
 					beeCounter++;
 			}
 			if (armType == 4)
@@ -2385,7 +2385,7 @@ use namespace kGAMECLASS;
 			if (skinTone == "pale yellow" || skinTone == "grayish-blue" || skinTone == "green" || skinTone == "dark green") {	
 				if (tallness < 48 && goblinCounter > 0)
 					goblinCounter++;
-				if (faceType == 0)
+				if (faceType == FACE_HUMAN)
 					goblinCounter++;
 				if (hasVagina())
 					goblinCounter++;
@@ -2411,7 +2411,7 @@ use namespace kGAMECLASS;
 				gooCounter++;
 			if (hasGooSkin() && skinAdj == "slimy") {
 				gooCounter++;
-				if (faceType == 0)
+				if (faceType == FACE_HUMAN)
 					gooCounter++;
 				if (armType == 0)
 					gooCounter++;
@@ -2617,7 +2617,7 @@ use namespace kGAMECLASS;
 				harpy++;
 			if (lowerBody == 25)
 				harpy--;
-			if (harpy >= 2 && faceType == 0)
+			if (harpy >= 2 && faceType == FACE_HUMAN)
 				harpy++;
 			if (faceType == 4)
 				harpy--;
@@ -2675,7 +2675,7 @@ use namespace kGAMECLASS;
 				sharkCounter++;
 			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
-			if (eyeType == 0 && hairType == 0 && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
+			if (eyeType == EYES_HUMAN && hairType == 0 && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
 			if (vaginas.length > 0 && cocks.length > 0)
 				sharkCounter++;
@@ -2710,7 +2710,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (wingType == 0)
 				orcaCounter += 2;
-			if (eyeType == 0)
+			if (eyeType == EYES_HUMAN)
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
@@ -2781,7 +2781,7 @@ use namespace kGAMECLASS;
 			if (antennae == 1)
 			{
 				mantisCounter++;
-				if (faceType == 0)
+				if (faceType == FACE_HUMAN)
 					mantisCounter++;
 			}
 			if (armType == 3)
@@ -2851,7 +2851,7 @@ use namespace kGAMECLASS;
 			var yetiCounter:Number = 0;
 			if (skinTone == "dark")
 				yetiCounter++;
-			if (eyeType == 0)
+			if (eyeType == EYES_HUMAN)
 				yetiCounter++;
 			if (lowerBody == 36)
 				yetiCounter++;
@@ -2894,7 +2894,7 @@ use namespace kGAMECLASS;
 					centaurCounter++;
 				if (earType == 0 && (lowerBody == 1 || lowerBody == 21))
 					centaurCounter++;
-				if (faceType == 0 && (lowerBody == 1 || lowerBody == 21))
+				if (faceType == FACE_HUMAN && (lowerBody == 1 || lowerBody == 21))
 					centaurCounter++;
 			}
 			if (antennae != 0)
@@ -2990,7 +2990,7 @@ use namespace kGAMECLASS;
 			if (hairType == 1) {
 				if (hairType == 1)
 					phoenixCounter++;
-				if (faceType == 0 && phoenixCounter > 2)
+				if (faceType == FACE_HUMAN && phoenixCounter > 2)
 					phoenixCounter++;
 				if (earType == 0 && phoenixCounter > 2)
 					phoenixCounter++;
@@ -3023,7 +3023,7 @@ use namespace kGAMECLASS;
 		public function scyllaScore():Number {
 			Begin("Player","racialScore","scylla");
 			var scyllaCounter:Number = 0;
-			if (faceType == 0)
+			if (faceType == FACE_HUMAN)
 				scyllaCounter++;
 			if (faceType != 0)
 				scyllaCounter--;
@@ -3118,7 +3118,7 @@ use namespace kGAMECLASS;
 		public function plantScore():Number {
 			Begin("Player","racialScore","plant");
 			var plantCounter:Number = 0;
-			if (faceType == 0)
+			if (faceType == FACE_HUMAN)
 				plantCounter++;
 			if (faceType == 29)
 				plantCounter--;
@@ -3159,9 +3159,9 @@ use namespace kGAMECLASS;
 		public function alrauneScore():Number {
 			Begin("Player","racialScore","alraune");
 			var alrauneCounter:Number = 0;
-			if (faceType == 0)
+			if (faceType == FACE_HUMAN)
 				alrauneCounter++;
-			if (eyeType == 0)
+			if (eyeType == EYES_HUMAN)
 				alrauneCounter++;
 			if (earType == 4)
 				alrauneCounter++;
@@ -3267,7 +3267,7 @@ use namespace kGAMECLASS;
 				sirenCounter++;
 			if (gillType == 2) 
 				sirenCounter++;
-			if (eyeType == 0)
+			if (eyeType == EYES_HUMAN)
 				sirenCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				sirenCounter += 10;
@@ -3483,7 +3483,8 @@ use namespace kGAMECLASS;
 			return gargoyleCounter;
 		}
 
-		//TODO: elderSlime, succubus pussy, arachne, wasp, lactabovine/slut, 
+		//TODO: elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
+
 		
 		public function maxPrestigeJobs():Number
 		{
