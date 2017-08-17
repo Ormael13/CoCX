@@ -29,8 +29,8 @@ namespace spred {
 		switch (name) {
 			case 'lighten':
 				let l2a = hsl.l + (1.0 - hsl.l) * value / 100;
-				let l2b = bound(0,hsl.l + value/100,1);
-				return tinycolor({h: hsl.h, s: hsl.s, l: Math.max(l2a,l2b)});
+				let l2b = bound(0, hsl.l + value / 100, 1);
+				return tinycolor({h: hsl.h, s: hsl.s, l: Math.max(l2a, l2b)});
 			case 'darken':
 				return tinycolor({h: hsl.h, s: hsl.s, l: hsl.l * (100 - value) / 100});
 		}
@@ -263,15 +263,23 @@ namespace spred {
 						let sprite = this.model.sprite(part.name);
 						if (part.name in this._cache) {
 							drawImage(this._cache[part.name], x, y, w, h,
-								ctx2d, part.dx + sprite.dx, part.dy + sprite.dy, this.model.width, this.model.height, z);
+								ctx2d,
+								part.dx + sprite.dx - this.model.originX,
+								part.dy + sprite.dy - this.model.originY,
+								this.model.width, this.model.height, z);
 							return ctx2d;
 						} else {
 							let idata = sprite.ctx2d.getImageData(x, y, w, h);
 							idata     = colormap(idata, cmap);
 							return createImageBitmap(idata).then(bmp => {
-								this._cache[part.name] = bmp;
+								if (x == 0 && y == 0 && w == this.model.width && h == this.model.height) {
+									this._cache[part.name] = bmp;
+								}
 								drawImage(bmp, x, y, w, h,
-									ctx2d, part.dx + sprite.dx, part.dy + sprite.dy, this.model.width, this.model.height, z);
+									ctx2d,
+									part.dx + sprite.dx - this.model.originX,
+									part.dy + sprite.dy - this.model.originY,
+									this.model.width, this.model.height, z);
 								return ctx2d;
 							});
 						}
@@ -521,6 +529,8 @@ namespace spred {
 	export class Model {
 		public name: string;
 		public dir: string;
+		public originX: number;
+		public originY: number;
 		public width: number;
 		public height: number;
 		public spritesheets: Spritesheet[];
@@ -574,6 +584,8 @@ namespace spred {
 			let xmodel        = $(src).children('model');
 			this.name         = xmodel.attr('name');
 			this.dir          = basedir + xmodel.attr('dir');
+			this.originX      = parseInt(xmodel.attr('originX') || '0');
+			this.originY      = parseInt(xmodel.attr('originY') || '0');
 			this.width        = parseInt(xmodel.attr('width'));
 			this.height       = parseInt(xmodel.attr('height'));
 			this.spritesheets = [];
@@ -977,9 +989,7 @@ namespace spred {
 				).click(e => selSprite(ln));
 				sprite.updateUI();
 			}
-			$('#SelLayerCanvas')
-				.css('min-width', model.width + 'px')
-				.css('min-height', model.height + 'px');
+			$('#SelLayerCanvas').css('min-width', model.width + 'px');
 			selSprite(Object.keys(model.sprites)[0]);
 			$('#lmb-color').html('').append(
 				model.colorkeys.map(ck =>
@@ -1087,20 +1097,32 @@ namespace spred {
 			addCompositeView([
 				'ears_bg/human',
 				'eyes/human',
-				'hair/0','hair_bg/0',
-				'head/human','face/human',
+				'hair/0', 'hair_bg/0',
+				'head/human', 'face/human',
 				'breasts/D',
-				'arms/human','arms_bg/human',
+				'arms/human', 'arms_bg/human',
 				'legs/human',
 				'torso/human'
 			]);
 			addCompositeView([
+				'ears_bg/elfin', 'ears/elfin',
+				'eyes/human',
+				'hair/feather', 'hair_bg/feather',
+				'head/human', 'face/human_fang',
+				'breasts/D',
+				'arms/harpy', 'arms_bg/harpy',
+				'legs/harpy',
+				'torso/human',
+				'wings/feather_large',
+				'tail/harpy'
+			]);
+			addCompositeView([
 				'ears/orca',
 				'eyes/orca',
-				'hair/0','hair_bg/0',
-				'head/orca','face/orca',
+				'hair/0', 'hair_bg/0',
+				'head/orca', 'face/orca',
 				'breasts/D',
-				'arms/orca','arms_bg/orca','arms/fins-orca','arms_bg/fins-orca',
+				'arms/orca', 'arms_bg/orca', 'arms/fins-orca', 'arms_bg/fins-orca',
 				'legs/orca',
 				'torso/orca',
 				'tail/orca'
@@ -1108,53 +1130,53 @@ namespace spred {
 			addCompositeView([
 				'ears/cat',
 				'eyes/cat',
-				'hair/0','hair_bg/0',
-				'head/fur','face/fur',
+				'hair/0', 'hair_bg/0',
+				'head/fur', 'face/fur',
 				'breasts/Dfur',
-				'arms/fur','arms_bg/fur',
+				'arms/fur', 'arms_bg/fur',
 				'legs/furpaws',
 				'torso/fur',
-				'tail/cat1','tail/cat2'
+				'tail/cat1', 'tail/cat2'
 			]);
 			addCompositeView([
 				'ears/human',
 				'eyes/manticore',
-				'hair/0','hair_bg/0',
-				'head/human','face/human','neck/manticore',
+				'hair/0', 'hair_bg/0',
+				'head/human', 'face/human', 'neck/manticore',
 				'breasts/D',
 				'arms/manticore',
 				'legs/manticore_sit',
 				'torso/human',
 				'tail/manticore',
-				'wings/mantibig','wings_bg/mantibig'
+				'wings/mantibig', 'wings_bg/mantibig'
 			]);
 			addCompositeView([
-				'hair/gorgon','hair_bg/gorgon',
+				'hair/gorgon', 'hair_bg/gorgon',
 				'eyes/cat',
-				'head/scales_p','face/human_fang',
+				'head/scales_p', 'face/human_fang',
 				'breasts/Dscales_p',
-				'arms_bg/scales_p','arms/scales_p',
+				'arms_bg/scales_p', 'arms/scales_p',
 				'legs/naga',
 				'torso/scales_p'
 			]);
 			addCompositeView([
 				'horns/2large',
 				'eyes/cat',
-				'head/scales','face/reptile',
+				'head/scales', 'face/reptile',
 				'breasts/Dscales',
-				'arms/scales','arms_bg/scales',
+				'arms/scales', 'arms_bg/scales',
 				'legs/scales',
 				'torso/scales',
-				'tail/reptile',
+				'tail/reptile','tail_fg/reptile_fire',
 				'wings/scales_right',
 				'wings_bg/scales_left',
 			]);
 			addCompositeView([
 				'antennae/bee',
 				'eyes/sandtrap',
-				'head/bee','face/insect',
+				'head/bee', 'face/insect',
 				'breasts/Dbee',
-				'arms/bee','arms_bg/bee',
+				'arms/bee', 'arms_bg/bee',
 				'legs/bee',
 				'torso/bee',
 				'tail/bee_abdomen',
@@ -1163,11 +1185,20 @@ namespace spred {
 			addCompositeView([
 				'horns/2large',
 				'eyes/spider',
-				'head/chitin','face/spider',
+				'head/chitin', 'face/spider',
 				'breasts/Dchitin',
-				'arms/chitin2','arms_bg/chitin2',
+				'arms/chitin2', 'arms_bg/chitin2',
 				'legs_bg/drider',
 				'torso/chitin'
+			]);
+			addCompositeView([
+				'ears_bg/mouse', 'ears/mouse',
+				'eyes/cat',
+				'head/fur', 'face/mouse',
+				'breasts/Dfur_nn',
+				'arms/mouse_fire', 'arms_bg/mouse_fire',
+				'legs/mouse_fire',
+				'torso/fur', 'tail/mouse_fire'
 			]);
 			$('#ClipboardGrabber').on('paste', e => {
 				e.stopPropagation();
@@ -1227,7 +1258,7 @@ namespace spred {
 			).join('')
 		);
 	}
-
+	
 	export function saveSpritemaps() {
 		saveSomething(g_model.spritemaps.map(s => s.serialize()).join('\n'));
 		/*<button type="button" class="close" data-dismiss="alert" aria-label="Close">

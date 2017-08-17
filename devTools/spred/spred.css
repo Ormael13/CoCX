@@ -10,8 +10,6 @@
 
 .canvas {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAG0lEQVQYV2M0Njb+v3v3bgbGd+/e/Xd1dWUAAEzpCGTyODpxAAAAAElFTkSuQmCC') repeat;
-    max-height: 576px;
-    max-width: 576px;
     display: inline-block;
     overflow: auto;
     font-size: 0;
@@ -31,7 +29,6 @@
 }
 
 .LayerBadges:not(.collapse) {
-    max-width: 576px;
     display: flex;
     flex-wrap: wrap;
 }
