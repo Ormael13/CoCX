@@ -38,7 +38,7 @@
         <!ELEMENT layer (#PCDATA)>
         <!ATTLIST layer
                 name CDATA #REQUIRED>
-        <!ELEMENT logic (switch|if)*>
+        <!ELEMENT logic (show|switch|if|hide)*>
         <!ELEMENT switch (case|default)*>
         <!ATTLIST switch
                 value CDATA #IMPLIED>
@@ -50,8 +50,8 @@
         <!ELEMENT show (#PCDATA)>
         <!ATTLIST show
                 part CDATA #REQUIRED>
-        <!ELEMENT default (show|switch)*>
-        <!ELEMENT if (show|switch)*>
+        <!ELEMENT default (show|switch|if|hide)*>
+        <!ELEMENT if (show|switch|if|hide)*>
         <!ATTLIST if
                 test CDATA #REQUIRED>
         <!ELEMENT hide (#PCDATA)>
@@ -153,6 +153,22 @@
             <color name="silver-white">#eff3f6</color>
             <color name="snow white">#f9f9fa</color>
             <color name="yellowish-green">#b4f000</color>
+        </common>
+        <common>
+            <!--Multi-color with pattern (Requires more complex engine)-->
+            <!--<color name="black and orange">#000000</color>-->
+            <!--<color name="black and white">#000000</color>-->
+            <!--<color name="black and white spotted">#000000</color>-->
+            <color name="black and yellow">#yellow</color>
+            <!--<color name="brown and white">#000000</color>-->
+            <!--<color name="gray and white">#000000</color>-->
+            <!--<color name="orange and white">#000000</color>-->
+            <!--<color name="pink and black">#000000</color>-->
+            <!--<color name="rainbow">#000000</color>-->
+            <!--<color name="seven-colored">#000000</color>-->
+            <!--<color name="spotted">#000000</color>-->
+            <!--<color name="striped orange">#000000</color>-->
+            <color name="white and black">#eff3f6</color>
         </common>
         <property name="hair" src="hairColor" default="#ffffff">
             <color name="red">#bf7540</color>
@@ -647,6 +663,13 @@
                         <show part="arms/human"/>
                         <show part="arms_bg/human"/>
                         <show part="legs/human"/>
+
+                        <if test="skin.base.color=='white and black'">
+                            <hide part="head/*"/>
+                            <hide part="torso/*"/>
+                            <show part="head/orca"/>
+                            <show part="torso/orca"/>
+                        </if>
                     </case>
                     <case value="1"><!--FUR-->
                         <show part="head/fur"/>
@@ -669,6 +692,12 @@
                     <case value="5"><!--CHITIN-->
                         <show part="head/chitin"/>
                         <show part="torso/chitin"/>
+                        <if test="skin.coat.color=='black and yellow'">
+                            <hide part="head/chitin"/>
+                            <hide part="torso/chitin"/>
+                            <show part="head/bee"/>
+                            <show part="torso/bee"/>
+                        </if>
                         <show part="arms/human"/>
                         <show part="arms_bg/human"/>
                         <show part="legs/chitin"/>
@@ -711,14 +740,6 @@
                         <show part="legs/human"/>
                     </default>
                 </switch>
-            </case>
-            <case value="'never'">
-                <show part="head/bee"/><!--TODO-->
-                <show part="torso/bee"/>
-            </case>
-            <case value="'never'">
-                <show part="head/orca"/><!--TODO-->
-                <show part="torso/orca"/>
             </case>
             <default>
                 <show part="head/human"/>
@@ -788,9 +809,10 @@
                         </case>
                         <case value="hasFullCoatOfType([5])"><!--CHITIN-->
                             <show part="breasts/Dchitin"/>
-                        </case>
-                        <case value="'never'">
-                            <show part="breasts/Dbee"/><!--TODO-->
+                            <if test="skin.coat.color=='black and yellow'">
+                                <hide part="breasts/*"/>
+                                <show part="breasts/Dbee"/><!--TODO-->
+                            </if>
                         </case>
                         <case value="hasFullCoatOfType([2,9,14])"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
                             <show part="breasts/Dscales"/>
@@ -903,12 +925,6 @@
                 <show part="arms/kraken"/>
                 <show part="arms_bg/kraken"/>
             </case>
-            <case value="'never'"><!--TODO-->
-                <hide part="arms/*"/>
-                <hide part="arms_bg/*"/>
-                <show part="arms/bee"/>
-                <show part="arms_bg/bee"/>
-            </case>
             <default>
             </default>
         </switch>
@@ -988,7 +1004,7 @@
                 </switch>
             </case>
             <!--<case value="36">TODO YETI</case>-->
-            <case value="37"><!--LOWER_BODY_TYPE_ORCA-->
+            <case value="37"><!--ORCA-->
                 <hide part="legs/*"/>
                 <show part="legs/orca"/>
             </case>
