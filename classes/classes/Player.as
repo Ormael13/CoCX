@@ -460,6 +460,9 @@ use namespace kGAMECLASS;
 				}
 				if(findPerk(PerkLib.IronFistsV) >= 0 && str >= 110) {
 					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
+					attack += 10;
 				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
 				if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
 					attack += (5 * (1 + newGamePlusMod));
@@ -1372,9 +1375,11 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "phoenix-taur";
 				else race = "phoenix";
 			}
-			if (scyllaScore() >= 5)
+			if (scyllaScore() >= 4)
 			{
-				race = "scylla";
+				if (scyllaScore() >= 12) race = "kraken";
+				else if (scyllaScore() >= 7) race = "scylla";
+				else race = "half scylla";
 			}
 			if (plantScore() >= 4)
 			{
@@ -1615,7 +1620,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (phoenixScore() >= 10)
 				chimeraCounter++;
-			if (scyllaScore() >= 5)
+			if (scyllaScore() >= 4)
 				chimeraCounter++;
 			if (plantScore() >= 6)
 				chimeraCounter++;
@@ -1714,8 +1719,8 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (phoenixScore() >= 10)
 				grandchimeraCounter++;
-//			if (scyllaScore() >= 5)
-//				grandchimeraCounter++;
+			if (scyllaScore() >= 7)
+				grandchimeraCounter++;
 //			if (plantScore() >= 6)
 //				grandchimeraCounter++;
 			if (alrauneScore() >= 10)
@@ -2516,13 +2521,7 @@ use namespace kGAMECLASS;
 			if (earType == 22)
 				nagaCounter++;
 			if (gorgonScore() > 10 || vouivreScore() > 10 || couatlScore() > 10)
-				nagaCounter -= 6;
-		//	if (wingType != 0)
-		//		nagaCounter -= 6;
-		//	if (eyeType == 4)
-		//		nagaCounter -= 3;
-		//	if (hairType == 6)
-		//		nagaCounter -= 3;
+				nagaCounter -= 8;
 			
 			End("Player","racialScore");
 			return nagaCounter;
@@ -2577,7 +2576,7 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (armType == 0)
 				vouivreCounter++;
-			if (hasCoatOfType(SKIN_COAT_SCALES))
+			if (hasCoatOfType(SKIN_COAT_DRAGON_SCALES))
 				vouivreCounter++;
 			if (eyeType == 9)
 				vouivreCounter++;
@@ -3096,15 +3095,19 @@ use namespace kGAMECLASS;
 				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
+		//	if (hasPlainSkinOnly() && skinAdj == "rubberlike slippery")
+		//		scyllaCounter += 2;
 			if (isScylla())
 				scyllaCounter += 2;
+			if (tallness > 96)
+				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
 				scyllaCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				scyllaCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && scyllaCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && scyllaCounter >= 4)
 				scyllaCounter += 1;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				scyllaCounter++;
@@ -3703,9 +3706,9 @@ use namespace kGAMECLASS;
 		
 		public function newGamePlusMod():int {
 			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 4.
+			//Constrains value between 0 and 5.
 			if (temp < 0) temp = 0;
-			if (temp > 4) temp = 4;
+			if (temp > 5) temp = 5;
 			return temp;
 		}
 		
@@ -4528,9 +4531,19 @@ use namespace kGAMECLASS;
 				maxSpe += (70 * (1 + newGamePlusMod));
 				maxLib += (40 * (1 + newGamePlusMod));
 			}//+30/30-40
-			if (scyllaScore() >= 5) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
+			if (scyllaScore() >= 4) {
+				if (scyllaScore() >= 12) {
+					maxStr += (120 * (1 + newGamePlusMod));
+					maxInt += (60 * (1 + newGamePlusMod));
+				}
+				else if (scyllaScore() >= 7 && scyllaScore() < 12) {
+					maxStr += (65 * (1 + newGamePlusMod));
+					maxInt += (40 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (40 * (1 + newGamePlusMod));
+					maxInt += (20 * (1 + newGamePlusMod));
+				}
 			}//+30/30-40
 			if (plantScore() >= 4) {
 				if (plantScore() >= 7) {
@@ -4592,7 +4605,10 @@ use namespace kGAMECLASS;
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
 				maxStr += (10 * (1 + newGamePlusMod));
+				maxTou -= (10 * (1 + newGamePlusMod));
 				maxSpe += (35 * (1 + newGamePlusMod));
+				maxInt += (10 * (1 + newGamePlusMod));
+				maxWis -= (20 * (1 + newGamePlusMod));
 			}//+30/30-40
 			if (gorgonScore() >= 11) {
 				maxStr += (50 * (1 + newGamePlusMod));
@@ -4690,6 +4706,7 @@ use namespace kGAMECLASS;
 			if (maxInt < 25) maxInt = 25;
 			if (maxWis < 25) maxWis = 25;
 			if (maxLib < 25) maxLib = 25;
+			if (maxSen < 25) maxSen = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) > 0) {
@@ -4829,6 +4846,20 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
+				maxStr -= (20 * (1 + newGamePlusMod));
+				maxTou -= (20 * (1 + newGamePlusMod));
+				maxSpe -= (20 * (1 + newGamePlusMod));
+				maxInt += (25 * (1 + newGamePlusMod));
+				maxWis += (50 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
+				maxStr -= (40 * (1 + newGamePlusMod));
+				maxTou -= (40 * (1 + newGamePlusMod));
+				maxSpe -= (40 * (1 + newGamePlusMod));
+				maxInt += (50 * (1 + newGamePlusMod));
+				maxWis += (100 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
 				maxStr += (10 * (1 + newGamePlusMod));
 				maxTou += (10 * (1 + newGamePlusMod));
@@ -4847,6 +4878,7 @@ use namespace kGAMECLASS;
 				maxLib += (15 * (1 + newGamePlusMod));
 				maxSen += (15 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.SoulApprentice) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulWarrior) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulSprite) >= 0) maxWis += 5;
@@ -4871,12 +4903,19 @@ use namespace kGAMECLASS;
 			maxSen += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
-				maxStr += statusEffectv1(StatusEffects.Might);
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) maxInt += statusEffectv1(StatusEffects.Might);
+				else maxStr += statusEffectv1(StatusEffects.Might);
 				maxTou += statusEffectv2(StatusEffects.Might);
 			}
 			//Blink
 			if (hasStatusEffect(StatusEffects.Blink)) {
 				maxSpe += statusEffectv1(StatusEffects.Blink);
+			}
+			//Dwarf Rage
+			if (hasStatusEffect(StatusEffects.DwarfRage)) {
+				maxStr += statusEffectv1(StatusEffects.DwarfRage);
+				maxTou += statusEffectv2(StatusEffects.DwarfRage);
+				maxSpe += statusEffectv2(StatusEffects.DwarfRage);
 			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
@@ -4941,6 +4980,10 @@ use namespace kGAMECLASS;
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
 			if(hasStatusEffect(StatusEffects.Sealed)) {
 				removeStatusEffect(StatusEffects.Sealed);
+			}
+			if(hasStatusEffect(StatusEffects.DwarfRage)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
+				removeStatusEffect(StatusEffects.DwarfRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
 				removeStatusEffect(StatusEffects.Berzerking);
@@ -5051,7 +5094,9 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.ChanneledAttack);
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might),"tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -statusEffectv1(StatusEffects.Might));
+				else kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might));
+				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.Might));
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {

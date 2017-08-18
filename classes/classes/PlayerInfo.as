@@ -929,7 +929,7 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(perk.ptype, perk.value1, perk.value2, perk.value3, perk.value4);
 		if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
 		if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
-		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV) {
+		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV || perk.ptype == PerkLib.TankVI) {
 			HPChange(player.tou, false);
 			statScreenRefresh();
 		}

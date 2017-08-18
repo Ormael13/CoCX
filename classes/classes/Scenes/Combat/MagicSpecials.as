@@ -98,20 +98,23 @@ public class MagicSpecials extends BaseCombatContent {
 
 	private function specialsBuffsDebuffs():void {
 		menu();
-		if(player.findPerk(PerkLib.Berzerker) >= 0) {
+		if (player.findPerk(PerkLib.JobWarrior) >= 0) {
+			addButton(0, "DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: 50");
+		}
+		if (player.findPerk(PerkLib.Berzerker) >= 0) {
 			if (player.findPerk(PerkLib.ColdFury) >= 0) {
-				addButton(0, "Berserk", berzerk).hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance!");
+				addButton(1, "Berserk", berzerk).hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance! \n\nWrath Cost: 50");
 			}
-			else addButton(0, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
+			else addButton(1, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero! \n\nWrath Cost: 50");
 		}
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) {
 			if (player.findPerk(PerkLib.ColdLust) >= 0) {
-				addButton(1, "Lustserk", lustzerk).hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense!");
+				addButton(2, "Lustserk", lustzerk).hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense! \n\nWrath Cost: 50");
 			}
-			else addButton(1, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
+			else addButton(2, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero! \n\nWrath Cost: 50");
 		}
 		if (player.devilkinScore() >= 10) {
-			addButton(2, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
+			addButton(3, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 		}
 		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 			addButton(5, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
@@ -1420,33 +1423,91 @@ public class MagicSpecials extends BaseCombatContent {
 //				monster.teased(monster.lustVuln * (5 + player.cor / 10));
 //			}
 	}
+	
+	public function dwarfrage():void {
+		clearOutput();
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if(player.hasStatusEffect(StatusEffects.DwarfRage)) {
+			outputText("You already raging!");
+			doNext(msMenu);
+			return;
+		}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.wrath -= 50;
+		var temp:Number = 0;
+		var tempStr:Number = 0;
+		var tempTouSpe:Number = 0;
+		var dwarfrageDuration:Number = 10;
+		var DwarfRageBoost:Number = 10;
+		if (player.findPerk(PerkLib.JobBarbarian) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.JobBrawler) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.Berzerker) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) DwarfRageBoost += 5;
+	//	DwarfRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
+		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
+		player.createStatusEffect(StatusEffects.DwarfRage, 0, 0, dwarfrageDuration, 0);
+		temp = DwarfRageBoost;
+		tempStr = temp * 2;
+		tempTouSpe = temp;
+		player.changeStatusValue(StatusEffects.DwarfRage,1,tempStr);
+		player.changeStatusValue(StatusEffects.DwarfRage,2,tempTouSpe);
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('tou');
+		mainView.statsView.showStatUp('spe');
+		player.str += player.statusEffectv1(StatusEffects.DwarfRage);
+		player.tou += player.statusEffectv2(StatusEffects.DwarfRage);
+		player.spe += player.statusEffectv2(StatusEffects.DwarfRage);
+		statScreenRefresh();
+		enemyAI();
+	}
 
 	public function berzerk():void {
 		clearOutput();
-		if(player.hasStatusEffect(StatusEffects.Berzerking)) {
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 			outputText("You're already pretty goddamn mad!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.wrath -= 50;
+		var berzerkDuration:Number = 10;
 		if (player.findPerk(PerkLib.ColdFury) >= 0) {
 			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
 		}
 		else outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
-		player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
+		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 		enemyAI();
 	}
 
 	public function lustzerk():void {
 		clearOutput();
-		if(player.hasStatusEffect(StatusEffects.Lustzerking)) {
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			outputText("You're already pretty goddamn mad & lustfull!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
-		player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
+		player.wrath -= 50;
+		var lustzerkDuration:Number = 10;
+		if (player.findPerk(PerkLib.ColdLust) >= 0) {
+			outputText("You roar and unleash your lustful fury in order to destroy your foe!\n\n");
+		}
+		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
+		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 		enemyAI();
 	}
 	

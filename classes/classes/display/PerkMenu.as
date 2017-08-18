@@ -28,23 +28,27 @@ public class PerkMenu extends BaseContent {
 		menu();
 		var button:int = 0;
 		addButton(button++, "Next", playerMenu);
-		if(player.perkPoints > 0) {
+		if (player.perkPoints > 0) {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
 			addButton(button++, "Perk Up", kGAMECLASS.playerInfo.perkBuyMenu);
 		}
-		if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
-			addButton(button++,"Melee Opt",doubleAttackOptions);
+			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
-		if(player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.findPerk(PerkLib.EnvenomedBolt) >= 0) {
+		if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.findPerk(PerkLib.EnvenomedBolt) >= 0) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
-			addButton(button++,"Range Opt",doubleStrikeOptions);
+			addButton(6, "Range Opt",doubleStrikeOptions);
 		}
-		if(player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 || player.findPerk(PerkLib.Spellarmor) >= 0 || player.findPerk(PerkLib.Battleflash) >= 0 || player.findPerk(PerkLib.Battlemage) >= 0 || player.findPerk(PerkLib.FortressOfIntellect) >= 0) {
 			outputText("\n<b>You can adjust your spell autocast settings.</b>");
-			addButton(button++,"Spells Opt",spellautocastOptions);
+			addButton(7, "Spells Opt",spellautocastOptions);
+		}
+		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+			addButton(8, "Elementals",summonsbehaviourOptions);
 		}
 		addButton(9, "Database", perkDatabase);
 		addButton(10, "Number of", kGAMECLASS.doNothing);
@@ -291,6 +295,8 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.Battlemage) >= 0 && flags[kFLAGS.AUTO_CAST_MIGHT] != 1) addButton(7, "Manual", manualMight);
 		if (flags[kFLAGS.AUTO_CAST_BLINK] != 0) addButton(3, "Autocast", autoBlink);
 		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", manualBlink);
+		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0 && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleOnFortressOfIntelect);
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleOffFortressOfIntelect);
 
 		var e:MouseEvent;
 		addButton(14, "Back", displayPerks);
@@ -327,6 +333,87 @@ public class PerkMenu extends BaseContent {
 	public function autoChargeWeapon():void {
 		flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] = 0;
 		spellautocastOptions();
+	}
+	public function toggleOnFortressOfIntelect():void {
+		player.createStatusEffect(StatusEffects.FortressOfIntellect,0,0,0,0);
+		spellautocastOptions();
+	}
+	public function toggleOffFortressOfIntelect():void {
+		player.removeStatusEffect(StatusEffects.FortressOfIntellect);
+		spellautocastOptions();
+	}
+	
+	public function summonsbehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
+		outputText("\n<b>Elementals behavious:</b>\n");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) outputText("Elemental will attack enemy on it own alongside PC.");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
+		else outputText("Not participating");
+		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) outputText("Air");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) outputText("Fire");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) outputText("Water");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) outputText("Ice");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) outputText("Lightning");
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) outputText("Darkness");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) addButton(0, "Air", attackingElementalAir);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 3) addButton(2, "Fire", attackingElementalFire);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 4) addButton(3, "Water", attackingElementalWater);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 5) addButton(5, "Ice", attackingElementalIce);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 6) addButton(6, "Lightning", attackingElementalLightning);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 7) addButton(7, "Darkness", attackingElementalDarkness);
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
+
+		var e:MouseEvent;
+		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
+		else addButton(14, "Back", displayPerks);
+	}
+
+	public function elementalNotAttacking():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+		summonsbehaviourOptions();
+	}
+	public function elementalAttackReplacingPCmeleeAttack():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+		summonsbehaviourOptions();
+	}
+	public function elementalAttackingAlongsidePC():void {
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 3;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalAir():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 1;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalEarth():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 2;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalFire():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 3;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalWater():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 4;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalIce():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 5;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalLightning():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 6;
+		summonsbehaviourOptions();
+	}
+	public function attackingElementalDarkness():void {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 7;
+		summonsbehaviourOptions();
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {

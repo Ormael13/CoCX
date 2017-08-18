@@ -157,6 +157,22 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	fixFlags();
+	if(player.hasStatusEffect(StatusEffects.Might)) {
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+		else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+		kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+		player.removeStatusEffect(StatusEffects.Might);
+	}
+	if(player.hasStatusEffect(StatusEffects.Blink)) {
+		kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+		player.removeStatusEffect(StatusEffects.Blink);
+	}
+	if(player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		player.removeStatusEffect(StatusEffects.ChargeWeapon);
+	}
+	if(player.hasStatusEffect(StatusEffects.ChargeArmor)) {
+		player.removeStatusEffect(StatusEffects.ChargeArmor);
+	}
 	if(!marbleScene.marbleFollower())
 	{
 		if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
@@ -827,7 +843,7 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(12, "Wait", doWait).hint("Wait for four hours.\n\nShift-click to wait until the night comes.");
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", rest).hint("Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
-	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
+//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
 
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
@@ -1456,7 +1472,7 @@ private function campActions():void {
 	addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your levels, items, and gems carried over. The game will also get harder.");
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
-	addButton(6, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some Winions.");
+	addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
@@ -1472,6 +1488,13 @@ private function campBuildingSim():void {
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(1, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) addButton(3, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabin for your camp.");
+	addButton(14, "Back", campActions);
+}
+
+private function campWinionsArmySim():void {
+	menu();
+	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
+	addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 	addButton(14, "Back", campActions);
 }
 
@@ -2240,6 +2263,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) return true;
+	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 	return false;
 }
 
@@ -3148,6 +3172,7 @@ private function promptSaveUpdate():void {
 			player.removePerk(PerkLib.SoulOverlord);
 			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 		}
+		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) flags[kFLAGS.AYANE_FOLLOWER] = 0;
 		doNext(doCamp);
 		return;
 	}

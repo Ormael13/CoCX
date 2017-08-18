@@ -383,9 +383,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	var attacks:Function = normalAttack;
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 		//Standard menu before modifications.
-		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) addButton(0, "E.Attack", baseelementalattacks).hint( "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
+		else if (!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
 			addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
-		else if(!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
+		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
@@ -452,7 +453,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			}
 		}
 		else addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(12,"M/R/S Options",meleeANDrangeANDmanaSubMenu);
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
 		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
 		addButton(14, "Run", runAway).hint("Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 	}
@@ -814,6 +815,238 @@ public function basemeleeattacks():void {
 		else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
 	attack();
+}
+
+public function baseelementalattacks():void {
+	clearOutput();
+	var manacostofelementalattacking:Number = 1;
+	manacostofelementalattacking += player.inte / 25;
+	manacostofelementalattacking += player.wis / 25;
+	manacostofelementalattacking = Math.round(manacostofelementalattacking);
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+	}
+	if (player.mana < manacostofelementalattacking) {
+		outputText("Your mana is too low to fuel your elemental attack!\n\n");
+		doNext(combatMenu);
+		return;
+	}
+	else {
+		if (manacostofelementalattacking > 0) player.mana -= manacostofelementalattacking;
+		elementalattacks();
+	}
+}
+public function intwisscaling():Number {
+	var intwisscalingvar:Number = 0;
+	intwisscalingvar += inteligencescalingbonus() * 0.25;
+	intwisscalingvar += wisdomscalingbonus() * 0.5;//1750*0.5=875
+	return intwisscalingvar;
+}
+public function elementalattacks():void {
+	var damageelemental:Number = 0;
+	damageelemental += intwisscaling();
+	if (damageelemental < 10) damageelemental = 10;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (player.findPerk(PerkLib.ElementalConjurerResolve) >= 0) damageelemental *= (1 + (0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+	if (player.findPerk(PerkLib.ElementalConjurerDedication) >= 0) damageelemental *= (1 + (0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+		if (player.inte > 100) critChance += 10;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) critChance += 10;
+	if (rand(100) < critChance) {
+		crit = true;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) damageelemental *= 1.75;
+		else damageelemental *= 1.5;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) damageelemental *= 1.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damageelemental *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damageelemental *= 0.2;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 0.2;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 0.5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damageelemental *= 2;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damageelemental *= 5;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 0.2;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) damageelemental *= (monster.damagePercent(false, true) / 100);
+	damageelemental = Math.round(damageelemental);
+	outputText("Your elemental hit " + monster.a + monster.short + "! ");
+	if (crit == true) {
+		outputText("<b>Critical! </b>");
+	}
+	outputText("<b>(<font color=\"#800000\">" + damageelemental + "</font>)</b>\n\n");
+	damageelemental = doDamage(damageelemental);
+	if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
+		fatigueRecovery();
+		manaregeneration();
+		enemyAI();
+	}
+	else {
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
+	}
 }
 
 public function packAttack():void {
@@ -2405,10 +2638,10 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
 	}
 	if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
 	//Determine if critical hit!
 	var crit:Boolean = false;
@@ -2991,6 +3224,7 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
 		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
 		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ManaAffinityVI) >= 0) multi += 0.1;
 		if (player.alicornScore() >= 6) multi += 0.1;
 		if (player.kitsuneScore() >= 5) {
 			if (player.kitsuneScore() >= 10) multi += 1;
@@ -3082,6 +3316,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringIV) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringV) >= 0) multi += 0.05;
+		if (player.findPerk(PerkLib.NaturesSpringVI) >= 0) multi += 0.05;
 		return multi;
 	}
 //ENEMYAI!
@@ -3745,6 +3980,64 @@ private function combatStatusesUpdate():void {
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
 	}
+	//Berzerker/Lustzerker/Dwarf Rage
+	if (player.hasStatusEffect(StatusEffects.Berzerking)) {
+		if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
+			player.removeStatusEffect(StatusEffects.Berzerking);
+			outputText("<b>Berserker effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Berzerking,1,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
+		if (player.statusEffectv1(StatusEffects.Lustzerking) <= 0) {
+			player.removeStatusEffect(StatusEffects.Lustzerking);
+			outputText("<b>Lustzerker effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Lustzerking,1,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
+		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
+			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.removeStatusEffect(StatusEffects.DwarfRage);
+			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.DwarfRage,3,-1);
+	}
+	//Spell buffs
+	if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeWeapon);
+			outputText("<b>Charged Weapon effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.ChargeWeapon,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
+		if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeArmor);
+			outputText("<b>Charged Armor effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.ChargeArmor,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Might)) {
+		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+			else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+			player.removeStatusEffect(StatusEffects.Might);
+		//	statScreenRefresh();
+			outputText("<b>Might effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Might,3,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Blink)) {
+		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
+			kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.removeStatusEffect(StatusEffects.Blink);
+		//	statScreenRefresh();
+			outputText("<b>Blink effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Blink,3,-1);
+	}
 	//Blizzard
 	if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 		//Remove blizzard if countdown to 0
@@ -3933,6 +4226,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 0.5;
 			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 0.5;
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 0.5;
+			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 0.5;
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
@@ -3956,6 +4250,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 1;
 			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 1;
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 1;
+			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 1;
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
@@ -3986,6 +4281,8 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 1;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 1;
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
 		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
@@ -4000,6 +4297,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 2;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 2;
 		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
 }
@@ -4048,6 +4346,7 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 2) maxRegen += 1;
 	if (player.newGamePlusMod() >= 3) maxRegen += 1;
 	if (player.newGamePlusMod() >= 4) maxRegen += 1;
+	if (player.newGamePlusMod() >= 5) maxRegen += 1;
 	if (player.findPerk(PerkLib.LizanRegeneration) >= 0) maxRegen += 1.5;
 	if (player.findPerk(PerkLib.LizanMarrow) >= 0) maxRegen += 0.5;
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 1;
@@ -4553,7 +4852,7 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 	return false;
 }
 
-public function meleeANDrangeANDmanaSubMenu():void {
+public function combatOptionsSubMenu():void {
 	menu();
 	clearOutput();
 	if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
@@ -4565,6 +4864,10 @@ public function meleeANDrangeANDmanaSubMenu():void {
 		addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
 	}
 //	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
+	if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+		outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+		addButton(3,"Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions);
+	}
 	addButton(14, "Back", combatMenu, false);
 }
 
@@ -5349,8 +5652,8 @@ public function soulskillMod():Number {
 	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
 	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
 	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	if (player.findPerk(PerkLib.SeersInsight) >= 0) modss += player.perkv1(PerkLib.SeersInsight);
 	if (player.shieldName == "spirit focus") modss += .2;
-	if (player.jewelryName == "seer’s hairpin") modss += .2;
 	return modss;
 }
 
@@ -5379,8 +5682,8 @@ public function soulskillCost():Number {
 	var modssc:Number = 1;
 	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) modssc -= .1;
 	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
+	if (player.findPerk(PerkLib.SeersInsight) >= 0) modssc -= player.perkv1(PerkLib.SeersInsight);
 	if (player.jewelryName == "fox hairpin") modssc -= .2;
-	if (player.jewelryName == "seer’s hairpin") modssc -= .2;
 	if (modssc < 0.1) modssc = 0.1;
 	return modssc;
 }

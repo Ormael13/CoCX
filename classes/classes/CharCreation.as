@@ -23,15 +23,15 @@ import fl.controls.ComboBox;
 		
 		public const MAX_TOLERANCE_LEVEL:int = 10;				//40 AP
 		public const MAX_MORALSHIFTER_LEVEL:int = 10;			//40 AP
-		public const MAX_DESIRES_LEVEL:int = 20;				//90 AP
-		public const MAX_ENDURANCE_LEVEL:int = 20;				//90 AP
-		public const MAX_HARDINESS_LEVEL:int = 20;				//90 AP
-		public const MAX_SOULPURITY_LEVEL:int = 20;				//90 AP
+		public const MAX_DESIRES_LEVEL:int = 25;				//90 AP
+		public const MAX_ENDURANCE_LEVEL:int = 25;				//90 AP
+		public const MAX_HARDINESS_LEVEL:int = 25;				//90 AP
+		public const MAX_SOULPURITY_LEVEL:int = 25;				//90 AP
 	//	public const MAX_SOULPURITY_LEVEL:int = 20;
 		public const MAX_MYSTICALITY_LEVEL:int = 20;			//90 AP
 		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;	//90 AP
 		public const MAX_WISDOM_LEVEL:int = 5;					//15 AP
-		public const MAX_TRANSHUMANISM_LEVEL:int = 20;			//90 AP
+		public const MAX_TRANSHUMANISM_LEVEL:int = 25;			//90 AP
 		public const MAX_FORTUNE_LEVEL:int = -1;				//No maximum level.(845)
 		public const MAX_VIRILITY_LEVEL:int = 10;				//40 AP
 		public const MAX_FERTILITY_LEVEL:int = 10;				//40 AP
@@ -1609,17 +1609,17 @@ import fl.controls.ComboBox;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) maxRank += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxRank += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxRank += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxRank += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxRank += 5;
 			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5) maxRank += 5;
 			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) maxRank += 5;
 			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7) maxRank += 5;
 			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 8) maxRank += 5;
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
-			if (player.perkv1(perk) >= 20) outputText(" <b>(Maximum)</b>");
+			if (player.perkv1(perk) >= 25) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
 			if (cost > 5) cost = 5;
-			if (player.perkv1(perk) < 20) outputText("\nCost for next level: " + cost);
+			if (player.perkv1(perk) < 25) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();

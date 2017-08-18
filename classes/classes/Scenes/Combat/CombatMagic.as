@@ -21,30 +21,30 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(30) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
 			spellChargeWeapon(true);
-			useMana(30,5);
+			useMana((30 * spellChargeWeaponCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= spellCostWhite(40) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 			spellChargeArmor(true);
-			useMana(40,5);
+			useMana((40 * spellChargeArmorCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(50) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
-			useMana(50,6);
+			useMana((50 * spellMightCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= spellCostBlack(40) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
-			useMana(40,6);
+			useMana((40 * spellBlinkCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
@@ -57,11 +57,12 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellCostImpl(mod:Number):Number {
 		//Addiditive mods
 		var costPercent:Number = 100;
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -78,11 +79,12 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		var costPercent:Number = 100;
 		if (player.findPerk(PerkLib.Ambition) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -99,11 +101,12 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		var costPercent:Number = 100;
 		if (player.findPerk(PerkLib.Obsession) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin") costPercent -= 20;
+		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
 		//Limiting it and multiplicative mods
 		if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -132,6 +135,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -148,9 +152,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
@@ -170,6 +174,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Ambition) >= 0) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -183,9 +188,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
@@ -204,6 +209,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv2(PerkLib.Obsession);
 		}
@@ -217,11 +223,39 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.findPerk(PerkLib.SeersInsight) >= 0) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
-		if (player.jewelryName == "seer’s hairpin") mod += .2;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
+	}
+	
+	public function spellMightCostMultiplier():Number {
+		var spellMightMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellMightMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellMightMultiplier *= 2;
+		return spellMightMultiplier;
+	}
+
+	public function spellBlinkCostMultiplier():Number {
+		var spellBlinkMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellBlinkMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellBlinkMultiplier *= 2;
+		return spellBlinkMultiplier;
+	}
+
+	public function spellChargeWeaponCostMultiplier():Number {
+		var spellChargeWeaponMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellChargeWeaponMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellChargeWeaponMultiplier *= 2;
+		return spellChargeWeaponMultiplier;
+	}
+
+	public function spellChargeArmorCostMultiplier():Number {
+		var spellChargeArmorMultiplier:Number = 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) spellChargeArmorMultiplier *= 2;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) spellChargeArmorMultiplier *= 2;
+		return spellChargeArmorMultiplier;
 	}
 
 	public function getWhiteMagicLustCap():Number {
@@ -366,7 +400,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
-					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) + "", "Charge Weapon");
+					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
@@ -374,7 +408,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
-					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) + "", "Charge Armor");
+					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");
@@ -396,7 +430,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				if (!player.hasStatusEffect(StatusEffects.Might))
-					addButton(5, "Might", spellMight).hint("The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) + "");
+					addButton(5, "Might", spellMight).hint("The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(50) * spellMightCostMultiplier() + "");
 				else {
 					outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 					addButtonDisabled(5, "Might", "Active");
@@ -404,7 +438,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				if (!player.hasStatusEffect(StatusEffects.Blink))
-					addButton(6, "Blink", spellBlink).hint("The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) + "");
+					addButton(6, "Blink", spellBlink).hint("The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nMana Cost: " + spellCostBlack(40) * spellBlinkCostMultiplier() + "");
 				else {
 					outputText("<b>You are already under the effects of Blink and cannot cast it again.</b>\n\n");
 					addButtonDisabled(6, "Blink", "Active");
@@ -627,27 +661,40 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Agility) >= 0) MightBoost -= 10;
 			if (player.findPerk(PerkLib.LightningStrikes) >= 0) MightBoost -= 10;
 			if (player.findPerk(PerkLib.BodyCultivator) >= 0) MightBoost -= 5;
-			//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (MightBoost < 10) MightBoost = 10;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) MightBoost *= 1.2;
 			MightBoost *= spellModBlack();
 			MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
-			player.createStatusEffect(StatusEffects.Might,0,0,0,0);
+			var MightDuration:Number = 5;
+			if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) MightDuration += 1;
+			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) MightDuration += 5;
+			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
+			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			temp = MightBoost;
-			tempStr = temp;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = 25 * spellModBlack() * (1 + player.newGamePlusMod());
+			else tempStr = temp;
 			tempTou = temp;
 			//if(player.str + temp > 100) tempStr = 100 - player.str;
 			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
-			player.changeStatusValue(StatusEffects.Might,1,tempStr);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
+			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
 			player.changeStatusValue(StatusEffects.Might,2,tempTou);
-			mainView.statsView.showStatUp('str');
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) mainView.statsView.showStatUp('int');
+			else mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.str += player.statusEffectv1(StatusEffects.Might);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.inte += player.statusEffectv1(StatusEffects.Might);
+			else player.str += player.statusEffectv1(StatusEffects.Might);
 			player.tou += player.statusEffectv2(StatusEffects.Might);
 			statScreenRefresh();
 		};
@@ -658,15 +705,16 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(50)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(50,6);
+		useMana((50 * spellMightCostMultiplier()),6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
+		var tempInt:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -741,14 +789,23 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Agility) >= 0) BlinkBoost -= 10;
 			if (player.findPerk(PerkLib.LightningStrikes) >= 0) BlinkBoost -= 10;
 			if (player.findPerk(PerkLib.BodyCultivator) >= 0) BlinkBoost -= 5;
-			//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (BlinkBoost < 10) BlinkBoost = 10;
 			BlinkBoost *= 1.2;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0) BlinkBoost *= 1.25;
 			BlinkBoost *= spellModBlack();
 			BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
-			player.createStatusEffect(StatusEffects.Blink,0,0,0,0);
+			var BlinkDuration:Number = 5;
+			if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) BlinkDuration += 1;
+			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) BlinkDuration += 5;
+			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) BlinkDuration += 5;
+			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
 			temp = BlinkBoost;
 			tempSpe = temp;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
@@ -766,13 +823,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(40,6);
+		useMana((40 * spellBlinkCostMultiplier()),6);
 		var tempSpe:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -1026,7 +1083,9 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
 		if (monster.plural == true) temp *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) outputText(" (" + temp + ") ");
+		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1035,6 +1094,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) temp *= 2;
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1105,7 +1165,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
 		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) outputText(" (" + temp + ") ");
+		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your fire storm lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1114,6 +1176,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster.findPerk(PerkLib.EnemyGroupType) < 0 && player.findPerk(PerkLib.Convergence) >= 0) temp *= 2;
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1174,27 +1237,36 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Agility) >= 0) ChargeWeaponBoost -= 10;
 		if (player.findPerk(PerkLib.LightningStrikes) >= 0) ChargeWeaponBoost -= 10;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) ChargeWeaponBoost -= 5;
-//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+	//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeWeaponBoost < 10) ChargeWeaponBoost = 10;
 		ChargeWeaponBoost *= 1.5;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeWeaponBoost *= 1.2;
 		ChargeWeaponBoost *= spellModWhite();
 		ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
+		var ChargeWeaponDuration:Number = 5;
+		if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) ChargeWeaponDuration += 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeWeaponDuration += 5;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeWeaponDuration += 5;
 		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(30)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(30, 5);
+		useMana((30 * spellChargeWeaponCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1202,7 +1274,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1246,26 +1318,35 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Agility) >= 0) ChargeArmorBoost -= 10;
 		if (player.findPerk(PerkLib.LightningStrikes) >= 0) ChargeArmorBoost -= 10;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) ChargeArmorBoost -= 5;
-//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+	//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeArmorBoost *= 1.2;
 		ChargeArmorBoost *= spellModWhite();
 		ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
+		var ChargeArmorDuration:Number = 5;
+		if (player.findPerk(PerkLib.LongerLastingBuffsI) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsII) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIII) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsIV) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsV) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) ChargeArmorDuration += 1;
+		if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) ChargeArmorDuration += 5;
+		if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) ChargeArmorDuration += 5;
 		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
 			statScreenRefresh();
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
 		doNext(combatMenu);
-		useMana(40, 5);
+		useMana((40 * spellChargeArmorCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1273,7 +1354,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You utter words of power, summoning an electrical charge around your [armor].  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1550,10 +1631,10 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 //	temp = calcGlacialMod(temp);
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 0.2;
 //	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia

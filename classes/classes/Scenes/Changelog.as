@@ -24,32 +24,47 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8f:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl\n");
+			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl, Dragon\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Job: Elemental Conjurer. Req. 10+ wis. Effect: Allow to summon 4 basic type of elementals for helping PC in fight, +5 to max wisdom (scalable)\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elemental Conjurer Resolve. Req. Job: Elemental Conjurer and 20+ wis. Effect: +50 max Wis, +25 max Int, -20 max Str/Tou/Spe (scalable), +10% of elementals attacks dmg\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elemental Contract Rank 1. Req. perk Elemental Conjurer Resolve and 25+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 1\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elements of Mareth: Basics. Req. perk Elemental Contract Rank 1 and 30+ wis. Effect: Increase limit of summoned elementals by 2 and unlock summoning of ice, lightning and darkness elementals\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Elemental Conjurer Dedication. Req. Elemental Conjurer Resolve and 40+ wis. Effect: +100 max Wis, +50 max Int, -40 max Str/Tou/Spe (scalable), +20% of elementals attacks dmg\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Elemental Contract Rank 2. Req. perks Elemental Conjurer Dedication, Elemental Contract Rank 1 and 50+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 2\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it)\n");
 			outputText("-New tier 2 misc lvl-up perk: Draconic Lungs (Evolved). Req. Draconic Lungs perk and dragon score 10+. Effect: +5 to max speed and toughness (scalable) and increase power of dragon breath attacks 3x\n");
 			outputText("-New tier 2 misc lvl-up perk: Kitsune Thyroid Gland (Evolved). Req. Kitsune Thyroid Gland and perk for one of paths and kitsune score 6+. Effect: +5 to max speed and wisdom (scalable), increase by 1 fatigue recovery in combat, increase fire dgm, lust dmg of fox fire specials by 50%, 50% higher cost of all kitsune specials (bonuses to foxfire/cost inc are only added when PC have 9 tails)\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Elemental Contract Rank 3. Req. perk Elemental Contract Rank 2 and 75+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 3\n");
 			outputText("-New tier 2 intelligence lvl-up perk: Improved Spirituality. Req. Half-step-to Improved Spirituality perk, 90+ int and 60+ wis. Effect: Increase max mana by 120\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Half-step-to Advanced Spirituality. Req. Improved Spirituality perk, 120+ int and 80+ wis. Effect: Increase max mana by 180\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable)\n");
 			outputText("-New tier 3 misc lvl-up perk: Job: Warlord. Req. Whirlwind or Whipping perk. Effect: +20 to max Tou (scalable), +20 to max wrath, dmg mutiplier for whipping or whirlwing will increase from 6x to 7x (need to have already bought perk whirlwind or whipping)\n");
 			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist)\n");
 			outputText("-New tier 3 misc lvl-up perk: Cyclone (Stage 1). Req. Job: Warlord perk and 50+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 10%\n");
-			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-V. Req. for rank 1: lvl 18+, 80+ int, perk Archmage. Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-VI. Req. for rank 1: lvl 18+, 80+ int, perk Archmage. Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Elemental Contract Rank 4. Req. perk Elemental Contract Rank 3 and 100+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 4\n");
+			outputText("-New tier 4 intelligence lvl-up perk (multi-rank): Long(er) Lasting Buffs I-VI. Req. for rank 1: lvl 24+, 120+ int, perk Job: Enchanter. Effect: Increase buff spells duration by 1 turn.\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Elemental Contract Rank 5. Req. perk Elemental Contract Rank 4 and 125+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 5\n");
 			outputText("-New tier 4 misc lvl-up perk: Tornado. Req. Job: Warlord perk and 75+ in str and tou. Effect: Increase dmg multiplier for aoe specials like whirlwind by 100% (from 7x to 8x)\n");
 			outputText("-New tier 4 misc lvl-up perk: Cyclone (Stage 2). Req. Cyclone (Stage 1) perk and 70+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 15%\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
 			outputText("-New tier 4 toughness lvl-up perk: Shield Grandmastery. Req. perk Shield Mastery, 100+ tou. Effect: increase block chance up to 10% when PC tou is over and lowers fatigue costs of blocking by 50%\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Advanced Spirituality. Req. Half-step-to Advanced Spirituality perk, 150+ int and 100+ wis. Effect: Increase max mana by 300\n");
 			outputText("-New tier 5 intelligence lvl-up perk: Half-step-to Superior Spirituality. Req. Advanced Spirituality perk, 180+ int and 120+ wis. Effect: Increase max mana by 480\n");
+			outputText("-New tier 5 intelligence lvl-up perk: (Ever)Lasting Buffs. Req. Job: Enchanter perk and 160+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Elemental Contract Rank 6. Req. perk Elemental Contract Rank 5 and 150+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 6\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perks Hidden Momentum and Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200)\n");
 			outputText("-New tier 5 misc lvl-up perk: Cyclone (Stage 3). Req. Cyclone (Stage 2) perk and 90+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20%\n");
 			outputText("-New tier 6 misc lvl-up perk: Cyclone (Stage 4). Req. Cyclone (Stage 3) perk and 120+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20% and dmg multiplier for aoe specials like whirlwind by 50%\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Convergence. Req. Grey Archmage and 175+ int. Effect: Grey AoE spells hits twice single targets\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
-			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
+			outputText("-New tier 6 intelligence lvl-up perk: (Eternaly) Lasting Buffs. Req. (Ever)Lasting Buffs perk and 190+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Elemental Contract Rank 7. Req. perk Elemental Contract Rank 6 and 175+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 7\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
+			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Daoist: Elder Stage. Req. Daoist: Warrior Stage perk. Effects: +10 to recovered soulforce during meditation, +40% to soulskill power, +50 max soulforce (all gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Half-step-to Peerless Spirituality. Req. Superior Spirituality perk, 240+ int and 160+ wis. Effect: Increase max mana by 1050\n");
@@ -58,6 +73,7 @@ package classes.Scenes
 			outputText("-New tier 9 toughness lvl-up perk: Shield Combat. Req. perk Steel Impact. Effect: when PC block an attack riposte with a shield bash damaging it opponent\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (2nd Stage). Req. Ascension: Unlocked Potential and be at second ascension. It costs 5 asc points and will give +2 to max lust/wrath and +6 to max soulforce at each lvl-up.\n");
+			outputText("-Added to all multi rank lvl-up perks 6th rank req. PC be in NG5+.\n");
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");
 			outputText("-Changed 5th and 6th stage of soul cultivation: Soul Scholar replacing Soul Exalt // Soul Elder replacing Soul Overlord\n");
 			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step. Also each perk above Job: Soul Cultivator will give +5 to max wisdom (non scalable).\n");
@@ -65,6 +81,10 @@ package classes.Scenes
 			outputText("-New melee weapon: Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
 			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
+			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
+			outputText("-Berserk and Lustzerker now req. 50 wrath to activate them and they last 10 rounds. No zerking for too calm PC's ^^\n");
 			outputText("-Dragon Breath specials have now own cooldown counters so PC can use all 4 once in fignt not one of them.\n");
 			outputText("-New stat point gain system - per day, not on level up. Enabled under Gameplay Settings\n");
 			outputText("-M. Specials menu was slight rearranged. All breath type specials was moved to Breath Attack menu (9 in total specilas atm), specials that could buff PC or debuff enemy was put into (De)Buffs subgroup (Berserker, Lustzerker, Petrify, Whisper)\n");
@@ -72,11 +92,16 @@ package classes.Scenes
 			outputText("-New version of text for one of soulskills replacing orginal ones when silly mode is active.\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
-			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("\n");
 			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Dragon, Cow, Minotaur, 
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -115,9 +140,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

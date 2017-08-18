@@ -2269,6 +2269,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\"<i>Oh, so you are interested in becoming one of the blessed children of Taoth? I guess that can be arranged, it’s not like you are the first person to try, and I see you have already begun the conversion on your own initiative. Still, if you truly wish to reach enlightenment and become one of us, simply taking transformatives won’t suffice. You must also commit yourself to him truly. I can help you with that. Anytime you wish to further your transformation, visit the shrine. I will be there for you and perhaps, if you're lucky enough, the trickster god will see you worthy of his blessings.</i>\" Having finished talking she vanishes, leaving you alone in the woods.\n\n");
 					outputText("<b>You can now visit the forest shrine at will.</b>");
 					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED]++;
+					flags[kFLAGS.AYANE_FOLLOWER] = 0;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
@@ -2284,7 +2285,7 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.\n\n");
-				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 1) outputText("Ayane is meditating on a rock next to the shrine.\n\n");
+				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) outputText("Ayane is meditating on a rock next to the shrine.\n\n");
 				if (rand(3) == 0) outputText("A few kitsunes seem to be here to meditate today.\n\n");
 				outputText("");
 			}
