@@ -991,6 +991,18 @@ var spred;
                 'torso/human'
             ]);
             addCompositeView([
+                'ears_bg/human',
+                'eyes/devil',
+                'horns/devil', 'horns_bg/devil',
+                'hair/0', 'hair_bg/0',
+                'head/human', 'face/shark',
+                'breasts/D',
+                'arms/devil', 'arms_bg/devil',
+                'legs/devil',
+                'torso/human',
+                'tail/goat'
+            ]);
+            addCompositeView([
                 'ears_bg/elfin', 'ears/elfin',
                 'eyes/human',
                 'hair/feather', 'hair_bg/feather',
@@ -1042,6 +1054,7 @@ var spred;
                 'head/scales_p', 'face/human_fang',
                 'breasts/Dscales_p',
                 'arms_bg/scales_p', 'arms/scales_p',
+                'ears_bg/Naga', 'ears/Naga',
                 'legs/naga',
                 'torso/scales_p'
             ]);
