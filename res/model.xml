@@ -7,8 +7,8 @@
                 width CDATA #REQUIRED
                 height CDATA #REQUIRED
                 scale CDATA #REQUIRED
-                originX CDATA #REQUIRED
-                originY CDATA #REQUIRED>
+                originX CDATA #IMPLIED
+                originY CDATA #IMPLIED>
         <!ELEMENT palette (common|property)*>
         <!ELEMENT common (color)*>
         <!ELEMENT color (#PCDATA)>
@@ -30,8 +30,8 @@
                 file CDATA #REQUIRED>
         <!ELEMENT cell (#PCDATA)>
         <!ATTLIST cell
-                dx CDATA #REQUIRED
-                dy CDATA #REQUIRED
+                dx CDATA #IMPLIED
+                dy CDATA #IMPLIED
                 name CDATA #REQUIRED
                 rect CDATA #REQUIRED>
         <!ELEMENT layers (layer)*>

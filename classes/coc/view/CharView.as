@@ -27,6 +27,8 @@ public class CharView extends Sprite {
 	private var ss_loaded:int;
 	private var file_total:int;
 	private var file_loaded:int;
+	private var _originX:int;
+	private var _originY:int;
 	private var _width:uint;
 	private var _height:uint;
 	private var scale:Number;
@@ -78,11 +80,14 @@ public class CharView extends Sprite {
 		this.parts         = new PartList([]);
 	}
 	private function init(xml:XML):void {
-		_width                        = xml.@width;
-		_height                       = xml.@height;
-		composite                     = new CompositeImage(_width, _height);
-		ss_loaded                     = 0;
-		ss_total                      = -1;
+		_width    = xml.@width;
+		_height   = xml.@height;
+		_originX  = xml.@originX || 0;
+		_originY  = xml.@originY || 0;
+		composite = new CompositeImage(_width, _height);
+		ss_loaded = 0;
+		ss_total  = -1;
+		/**/
 		var _parts:/*ModelPart*/Array = [];
 		loadPalette(xml);
 		var item:XML;
@@ -148,11 +153,12 @@ public class CharView extends Sprite {
 		var n:int   = 0;
 		file_total  = -1;
 		for each(item in xml.layers..layer) {
-			var lpfx:String = item.@name+"/";
+			var lpfx:String = item.@name + "/";
 			for (var sname:String in sprites) {
-				if (sname.indexOf(lpfx)==0) {
+				if (sname.indexOf(lpfx) == 0) {
 					var sprite:CharViewSprite = sprites[sname];
-					composite.addLayer(sname, sprite.bmp, sprite.dx, sprite.dy, false);
+					composite.addLayer(sname, sprite.bmp,
+							sprite.dx - _originX, sprite.dy - _originY, false);
 				}
 			}
 		}
@@ -240,16 +246,16 @@ public class CharView extends Sprite {
 			}
 			for each (var cell:XML in sm.cell) {
 				var rect:/*String*/Array = cell.@rect.toString().match(/^(\d+),(\d+),(\d+),(\d+)$/);
-				var x:int         = rect?int(rect[1]):cell.@x;
-				var y:int         = rect?int(rect[2]):cell.@y;
-				var w:int         = rect?int(rect[3]):cell.@w;
-				var h:int         = rect?int(rect[4]):cell.@h;
-				var f:String      = cell.@name;
-				var dx:int = cell.@dx;
-				var dy:int = cell.@dy;
-				var bd:BitmapData = new BitmapData(w, h, true, 0);
+				var x:int                = rect ? int(rect[1]) : cell.@x;
+				var y:int                = rect ? int(rect[2]) : cell.@y;
+				var w:int                = rect ? int(rect[3]) : cell.@w;
+				var h:int                = rect ? int(rect[4]) : cell.@h;
+				var f:String             = cell.@name;
+				var dx:int               = cell.@dx;
+				var dy:int               = cell.@dy;
+				var bd:BitmapData        = new BitmapData(w, h, true, 0);
 				bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
-				sprites[f] = new CharViewSprite(bd,dx,dy);
+				sprites[f] = new CharViewSprite(bd, dx, dy);
 			}
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers(xml);
@@ -276,7 +282,7 @@ public class CharView extends Sprite {
 					if (f) {
 						var bd:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
 						bd.copyPixels(result, new Rectangle(x, y, cellwidth, cellheight), new Point(0, 0));
-						sprites[f] = new CharViewSprite(bd,0,0);
+						sprites[f] = new CharViewSprite(bd, 0, 0);
 					}
 					x += cellwidth;
 				}
