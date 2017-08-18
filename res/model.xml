@@ -164,18 +164,18 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
-        <property name="fur" src="furColor" default="#ffffff">
+        <property name="fur" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="scales" src="scalesColor" default="#ffffff">
+        <property name="scales" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="chitin" src="chitinColor" default="#ffffff">
+        <property name="chitin" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="chitin2" src="chitinColor2||chitinColor" default="#ffffff">
+        <property name="chitin2" src="skin.coat.color" default="#ffffff">
         </property>
         <property name="skin" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skinTone2||skinTone" default="#ffffff">
+        <property name="skin2" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <!-- Not yet in game-->
@@ -291,6 +291,8 @@
         <cell rect="440,30,75,88" name="hair_bg/feather" dx="61" dy="-13"/>
         <cell rect="364,4,19,22" name="ears_bg/elfin" dx="61" dy="36"/>
         <cell rect="384,4,29,22" name="ears/elfin" dx="108" dy="34"/>
+        <cell rect="415,4,19,22" name="ears_bg/goat" dx="61" dy="36"/>
+        <cell rect="435,4,29,22" name="ears/goat" dx="108" dy="34"/>
         <cell rect="284,273,35,51" name="arms_bg/harpy" dx="56" dy="63"/>
         <cell rect="320,273,37,51" name="arms/harpy" dx="94" dy="63"/>
         <cell rect="358,273,65,51" name="tail/harpy" dx="76" dy="107"/>
@@ -532,6 +534,9 @@
             <case value="0"><!--HUMAN-->
                 <show part="ears_bg/human"/>
             </case>
+            <case values="1,3,8,11,13,14,15,16,17,23"><!--TODO HORSE,COW,KANGAROO,RACOON,FERRET,PIG,RHINO,ECHIDNA,DEER-->
+                <show part="ears/goat"/>
+            </case>
             <case values="2"><!--DOG,WOLF-->
                 <show part="ears/wolf"/>
             </case>
@@ -543,6 +548,9 @@
                 <show part="ears/cat"/>
             </case>
             <case values="6,10"><!--LIZARD,DRAGON,SNAKE--></case>
+            <case values="7"><!--TODO BUNNY-->
+                <show part="ears/wolf"/>
+            </case>
             <case value="9"><!--FOX-->
                 <show part="ears/fox"/>
                 <show part="ears_bg/fox"/>
@@ -550,6 +558,9 @@
             <case values="11"><!--MOUSE-->
                 <show part="ears/mouse"/>
                 <show part="ears_bg/mouse"/>
+            </case>
+            <case values="19"><!--TODO LION-->
+                <show part="ears/cat"/>
             </case>
             <case value="20"><!--YETI-->
                 <show part="ears/fur"/>
@@ -561,8 +572,8 @@
                 <show part="ears/Naga"/>
                 <show part="ears_bg/Naga"/>
             </case>
-            <case values="1,3,7,8,11,13,14,15,16,17,19,23"><!--TODO HORSE,COW,BUNNY,KANGAROO,RACOON,FERRET,PIG,RHINO,ECHIDNA,DEER,LION,GOAT-->
-                <show part="ears/wolf"/>
+            <case values="23"><!--GOAT-->
+                <show part="ears/goat"/>
             </case>
             <default>
                 <show part="ears_bg/human"/>
@@ -585,7 +596,7 @@
             <case value="6">
                 <show part="eyes/manticore"/><!--MANTICORE-->
             </case>
-            <case values="4,5,7,8,9,10,11">
+            <case values="4,5,7,8,9,10">
                 <show part="eyes/cat"/><!--TODO GORGON,FENRIR,FOX,REPTILIAN,SNAKE,DRAGON-->
             </case>
             <case value="6">
@@ -730,14 +741,17 @@
             <case value="4"><!--SHARK_TEETH-->
                 <show part="face/shark"/>
             </case>
-            <case values="5,7,12"><!--SHARK_TEETH,LIZARD,DRAGON-->
+            <case values="5"><!--SNAKE_FANGS-->
+                <show part="face/human_fang"/>
+            </case>
+            <case values="7,12"><!--LIZARD,DRAGON-->
                 <show part="face/reptile"/>
             </case>
             <case values="8,15"><!--BUNNY,BUCKTEETH-->
                 <show part="face/mouse"/>
             </case>
             <case value="10"><!--SPIDER_FANGS-->
-                <show part="face/Spider"/>
+                <show part="face/spider"/>
             </case>
             <case value="13"><!--TODO RACOON_MASK-->
                 <show part="face/human"/>

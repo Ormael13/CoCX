@@ -39,6 +39,9 @@ public class CoCLoader {
 	[Embed(source="../../../res/charview/beasts.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_BEASTS_PNG:Class;
 	IMAGE_BUNDLE["res/charview/beasts.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BEASTS_PNG);
+	[Embed(source="../../../res/charview/chitin.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_CHITIN_PNG:Class;
+	IMAGE_BUNDLE["res/charview/chitin.png"] = ldbmp(BUNDLE_RES_CHARVIEW_CHITIN_PNG);
 	[Embed(source="../../../res/charview/hinezumi.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_HINEZUMI_PNG:Class;
 	IMAGE_BUNDLE["res/charview/hinezumi.png"] = ldbmp(BUNDLE_RES_CHARVIEW_HINEZUMI_PNG);
@@ -48,6 +51,9 @@ public class CoCLoader {
 	[Embed(source="../../../res/charview/orca.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_ORCA_PNG:Class;
 	IMAGE_BUNDLE["res/charview/orca.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ORCA_PNG);
+	[Embed(source="../../../res/charview/scales.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_SCALES_PNG:Class;
+	IMAGE_BUNDLE["res/charview/scales.png"] = ldbmp(BUNDLE_RES_CHARVIEW_SCALES_PNG);
 
 	private static function ldbmp(c:Class):BitmapData {
 		return c ? ((new c() as Bitmap).bitmapData) : null;
@@ -84,7 +90,16 @@ public class CoCLoader {
 						callback(false, null, e);
 					}
 				});
-				loader.load(req);
+				try {
+					loader.load(req);
+				} catch (e:Error) {
+					if (path in TEXT_BUNDLE) {
+						callback(true, TEXT_BUNDLE[path], new Event("complete"));
+					} else {
+						callback(false, null, new ErrorEvent("error",false,false,e.message));
+					}
+
+				}
 				break;
 			default:
 				throw new Error("Incorrect location " + location);
@@ -127,7 +142,15 @@ public class CoCLoader {
 						callback(false, null, e);
 					}
 				});
-				loader.load(new URLRequest(path));
+				try {
+					loader.load(new URLRequest(path));
+				} catch (e:Error) {
+					if (path in IMAGE_BUNDLE) {
+						callback(true, IMAGE_BUNDLE[path], new Event("complete"));
+					} else {
+						callback(false, null, new ErrorEvent("error",false,false,e.message));
+					}
+				}
 				break;
 			default:
 				throw new Error("Incorrect location " + location);
