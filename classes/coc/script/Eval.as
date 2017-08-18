@@ -30,7 +30,7 @@ public class Eval {
 	private static const RX_INT:RegExp = /^-?(0x)?\d+$/;
 	private static const LA_INT:RegExp = /^-?(0x)?\d+/;
 	private static const LA_ID:RegExp = /^[a-zA-Z_$][a-zA-Z_$0-9]*/;
-	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|lte?|gte?|[-+*\/%])/;
+	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|\|\||&&|or|and|lte?|gte?|[-+*\/%])/;
 	public static function eval(thiz:*, expr:String):* {
 		if (expr.match(RX_INT)) return int(expr);
 		return new Eval(thiz, expr).evalUntil("")();
@@ -120,6 +120,12 @@ public class Eval {
 				return x * y;
 			case '/':
 				return x / y;
+			case '||':
+			case 'or':
+				return x || y;
+			case '&&':
+			case 'and':
+				return x && y;
 			default:
 				throw error(src, expr, "Unregistered operator " + op, false);
 		}

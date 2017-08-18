@@ -19,7 +19,7 @@ public class CaseBlock extends ModelPart {
 			if (values && values.indexOf(checkValue) >= 0) return true;
 		}
 		if (testExpr!=null) return testExpr.call(character);
-		return null
+		return false
 	}
 
 	override public function display(character:Object):void {
