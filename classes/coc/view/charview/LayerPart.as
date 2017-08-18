@@ -9,15 +9,25 @@ public class LayerPart extends ModelPart {
 	private var name:String;
 	private var image:CompositeImage;
 	private var visible:Boolean;
+	private var _prefix:Boolean;
 
 	public function LayerPart(image:CompositeImage,name:String,visible:Boolean) {
 		this.image = image;
-		this.name = name;
 		this.visible = visible;
+		this.name = name;
+		var pp:Array = name.match(/([^\/]+\/)\*/);
+		if (pp) {
+			this._prefix = true;
+			this.name = pp[1];
+		}
 	}
 
 	override public function display(character:Object):void {
-		image.setVisibility(name,visible);
+		if (_prefix) {
+			image.setMultiVisibility(name,visible);
+		} else {
+			image.setVisibility(name, visible);
+		}
 	}
 }
 }

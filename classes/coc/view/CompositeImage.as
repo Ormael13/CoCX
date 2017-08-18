@@ -44,10 +44,13 @@ public class CompositeImage {
 			}
 		}
 	}
-	public function setVisibility(name:String, visible:Boolean):void {
-		if (name in visibility && visibility[name] != visible) {
-			visibility[name] = visible;
+	public function setMultiVisibility(prefix:String, visible:Boolean):void {
+		for (var key:String in visibility) {
+			if (key.indexOf(prefix)==0) visibility[key] = visible;
 		}
+	}
+	public function setVisibility(name:String, visible:Boolean):void {
+		visibility[name] = visible;
 	}
 	public function hideAll():void {
 		for each (var layer:CompositeLayer in list) {
