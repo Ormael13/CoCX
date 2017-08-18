@@ -224,7 +224,7 @@
         <cell rect="301,1,59,54" name="hair/0" dx="68" dy="13"/>
         <cell rect="301,57,59,54" name="hair_bg/0" dx="68" dy="13"/>
         <cell rect="1,181,23,11" name="breasts/0" dx="83" dy="74"/>
-        <cell rect="50,181,23,11" name="breasts/B" dx="83" dy="74"/>
+        <cell rect="50,181,23,11" name="breasts/B" dx="82" dy="76"/>
         <cell rect="1,213,119,68" name="tail/demon" dx="67" dy="89"/>
         <cell rect="204,196,76,104" name="legs/harpy" dx="55" dy="101"/>
         <cell rect="283,129,181,137" name="wings/feather_large" dx="7" dy="16"/>
