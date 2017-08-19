@@ -521,10 +521,10 @@
                     <case test="horns lt 6"><!--Two moderately sized horns...-->
                         <show part="horns/2small"/>
                     </case>
-                    <case test="horns lt 3"><!--Two large horns...-->
+                    <case test="horns lt 12"><!--Two large horns...-->
                         <show part="horns/2large"/>
                     </case>
-                    <case test="horns lt 3"><!--Two very large and dangerous looking horns...-->
+                    <case test="horns lt 20"><!--Two very large and dangerous looking horns...-->
                         <show part="horns/2large"/>
                     </case>
                     <default><!--Two huge horns...-->
@@ -550,10 +550,10 @@
             <case value="0"><!--HUMAN-->
                 <show part="ears_bg/human"/>
             </case>
-            <case values="1,3,8,11,13,14,15,16,17,23"><!--TODO HORSE,COW,KANGAROO,RACOON,FERRET,PIG,RHINO,ECHIDNA,DEER-->
+            <case values="1,3,8,11,13,14,15,16,17"><!--TODO HORSE,COW,KANGAROO,RACOON,FERRET,PIG,RHINO,ECHIDNA,DEER-->
                 <show part="ears/goat"/>
             </case>
-            <case values="2"><!--DOG,WOLF-->
+            <case values="2,18"><!--DOG,WOLF-->
                 <show part="ears/wolf"/>
             </case>
             <case value="4"><!--ELFIN-->
@@ -681,8 +681,8 @@
                     <case values="2,9,14"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
                         <show part="head/scales"/>
                         <show part="torso/scales"/>
-                        <show part="arms/human"/>
-                        <show part="arms_bg/human"/>
+                        <show part="arms/scales"/>
+                        <show part="arms_bg/scales"/>
                         <show part="legs/scales"/>
                     </case>
                     <!--<case value="3">TODO GOO</case>-->

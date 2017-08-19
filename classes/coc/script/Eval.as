@@ -18,7 +18,11 @@ public class Eval {
 	private var _call:Function;
 	public function call(thiz:Object):* {
 		this.thiz = thiz;
-		return _call();
+		try {
+			return _call();
+		} catch (e:Error){
+			error(src,"",e.message,false);
+		}
 	}
 
 	public function Eval(thiz:*, expr:String) {
@@ -206,6 +210,7 @@ public class Eval {
 		return function():*{ return evalId(id); };
 	}
 	private function evalDot(obj:Object,key:String):* {
+		if (!(key in obj)) return undefined;
 		var y:* = obj[key];
 		if (y is Function) {
 			y = Utils.bindThis(y,obj);
