@@ -35,6 +35,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		menu();
 		var button:int = 0;
+		if (player.findPerk(PerkLib.JobWarrior) >= 0) {
+			addButton(button++, "PowerAttack", powerAttackMenu).hint("Hit your opponent with single wrath-enhanced attack.");
+		}
 		if (player.hairType == 4) {
 			addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 		}
@@ -214,6 +217,296 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		addButton(14, "Back", combatMenu, false);
 	}
+	
+	public function powerAttackMenu():void {
+		menu();
+		addButton(0, "2x", powerAttack2x);
+		if (player.level >= 6) addButton(1, "3x", powerAttack3x);
+		else addButtonDisabled(1, "???");
+		if (player.level >= 12) addButton(2, "4x", powerAttack4x);
+		else addButtonDisabled(2, "???");
+		if (player.level >= 18) addButton(3, "6x", powerAttack6x);
+		else addButtonDisabled(3, "???");
+		if (player.level >= 24) addButton(4, "8x", powerAttack8x);
+		else addButtonDisabled(4, "???");
+		if (player.level >= 30) addButton(5, "10x", powerAttack10x);
+		else addButtonDisabled(5, "???");
+		addButton(14, "Back", psMenu);
+	}
+	public function powerAttack2x():void {
+		clearOutput();
+		if(player.wrath < 5) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 5;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 2;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerAttack3x():void {
+		clearOutput();
+		if(player.wrath < 10) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 10;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 3;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerAttack4x():void {
+		clearOutput();
+		if(player.wrath < 20) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 20;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 4;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerAttack6x():void {
+		clearOutput();
+		if(player.wrath < 50) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 50;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 6;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerAttack8x():void {
+		clearOutput();
+		if(player.wrath < 100) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 100;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 8;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerAttack10x():void {
+		clearOutput();
+		if(player.wrath < 200) {
+			clearOutput();
+			outputText("You are too calm to use this special.");
+			doNext(combatMenu);
+			return;
+		}
+		player.wrath -= 200;
+		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 10;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function powerfistspoweeeeer():Number {
+		var powerfistspowervalue:Number = 0;
+		powerfistspowervalue += player.str;
+		powerfistspowervalue += strenghtscalingbonus() * 0.25;
+		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) powerfistspowervalue *= 1.2;
+		if (powerfistspowervalue < 10) powerfistspowervalue = 10;
+		if (player.weaponAttack < 51) powerfistspowervalue *= (1 + (player.weaponAttack * 0.03));
+		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) powerfistspowervalue *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) powerfistspowervalue *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) powerfistspowervalue *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+		else powerfistspowervalue *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.weapon == weapons.L_WHIP) {
+			if (monster.findPerk(PerkLib.IceNature) >= 0) powerfistspowervalue *= 5;
+			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) powerfistspowervalue *= 2;
+			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) powerfistspowervalue *= 0.5;
+			if (monster.findPerk(PerkLib.FireNature) >= 0) powerfistspowervalue *= 0.2;
+		}
+		if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.IceNature) >= 0) powerfistspowervalue *= 5;
+			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) powerfistspowervalue *= 2;
+			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) powerfistspowervalue *= 0.5;
+			if (monster.findPerk(PerkLib.FireNature) >= 0) powerfistspowervalue *= 0.2;
+		}
+		if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.IceNature) >= 0) powerfistspowervalue *= 0.2;
+			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) powerfistspowervalue *= 0.5;
+			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) powerfistspowervalue *= 2;
+			if (monster.findPerk(PerkLib.FireNature) >= 0) powerfistspowervalue *= 5;
+		}
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) powerfistspowervalue *= 1.1;
+		if (player.findPerk(PerkLib.JobWarrior) >= 0) powerfistspowervalue *= 1.05;
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) powerfistspowervalue *= 2;
+		return powerfistspowervalue;
+	}
 
 	public function whirlwind():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -250,6 +543,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
 		}
+		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
+			if (player.findPerk(PerkLib.MakeItDouble) >= 0) damage *= 2;
+			else damage *= 1.25;
+		}
+		if (player.findPerk(PerkLib.GiantsReach) >= 0 && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large")) damage *= 1.25;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -325,6 +623,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
+			if (player.findPerk(PerkLib.MakeItDouble) >= 0) damage *= 2;
+			else damage *= 1.25;
+		}
+		if (player.findPerk(PerkLib.GiantsReach) >= 0 && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large")) damage *= 1.25;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -453,6 +756,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSlapAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You are too tired to perform tail slap attack.");
+			doNext(combatMenu);
+			return;
+		}
 		fatigue(40,2);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
@@ -486,6 +795,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSmackAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You are too tired to perform tail smack attack.");
+			doNext(combatMenu);
+			return;
+		}
 		fatigue(40,1);
 		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss

@@ -382,6 +382,9 @@ use namespace kGAMECLASS;
 					speedBonus += Math.round(spe / 25);
 				}
 			}
+			if (findPerk(PerkLib.ArmorMaster) >= 0) {
+				if (armorPerk == "Heavy") speedBonus += Math.round(spe / 50);
+			}
 			armorDef += speedBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
 			//Acupuncture effect
@@ -4785,6 +4788,7 @@ use namespace kGAMECLASS;
 				maxSen += (6 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * (1 + newGamePlusMod));
@@ -4916,6 +4920,11 @@ use namespace kGAMECLASS;
 				maxStr += statusEffectv1(StatusEffects.DwarfRage);
 				maxTou += statusEffectv2(StatusEffects.DwarfRage);
 				maxSpe += statusEffectv2(StatusEffects.DwarfRage);
+			}
+			//Trance Transformation
+			if (hasStatusEffect(StatusEffects.TranceTransformation)) {
+				maxStr += statusEffectv1(StatusEffects.TranceTransformation);
+				maxTou += statusEffectv1(StatusEffects.TranceTransformation);
 			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
@@ -5122,6 +5131,11 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
+			}
+			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
+				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
+				removeStatusEffect(StatusEffects.TranceTransformation);
 			}
 			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				removeStatusEffect(StatusEffects.VioletPupilTransformation);

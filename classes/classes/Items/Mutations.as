@@ -2450,13 +2450,13 @@
 		}
 
 		public function verydilutedarcaneregenconcotion(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered mana: 40)");
+			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 40)");
 			player.mana += 40;
 			if (player.mana > player.maxMana()) player.mana = player.maxMana();
 			statScreenRefresh();
 		}
 		public function dilutedarcaneregenconcotion(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered mana: 240)");
+			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 240)");
 			player.mana += 240;
 			if (player.mana > player.maxMana()) player.mana = player.maxMana();
 			statScreenRefresh();
@@ -2983,6 +2983,7 @@
 			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
 				player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for darkness shard and doesnt have it
 			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
@@ -3025,6 +3026,7 @@
 			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
 				player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for mana shield and doesnt have it
 			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
@@ -3081,6 +3083,7 @@
 			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for lightning bolt and doesnt have it
 			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
@@ -10504,6 +10507,9 @@
 			//init variables
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
+			//Temporary storage
+			var temp2:Number = 0;
+			var temp3:Number = 0;
 			//Randomly choose affects limit
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -10516,14 +10522,118 @@
 			outputText("You raise the disgusting black concoction to your mouth. The taste is better than its texture but leaves you with a strong aftertaste of sulfur.");
 			dynStats("cor", 3 + rand(3));
 			
-			//stat changes
 			//int change
-			
+			if (player.inte < 100 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nArcane knowledge floods into your mind. You already imagine tons of new sinister ways to use this knowledge.");
+				dynStats("int", 1);
+				changes++;
+			}
 			//sexual changes
 			//female
-			
+			if (player.gender > 1) {
+				if (player.biggestTitSize() <= 4 && changes < changeLimit && rand(3) == 0) {
+					if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+					else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
+					player.growTits(1 + rand(3), 1, false, 3);
+					changes++;
+					dynStats("sen", .5);
+				}
+				if (player.breastRows.length == 0) {
+					outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 1;
+					outputText("\n");
+				}
+			}
 			//male
-			
+			if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
+				if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
+					if (player.cocks.length == 1) {
+						var temp:int = 0;
+						temp3 = 0;
+						if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
+							outputText("\n\nYour [cock] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
+							temp = player.addHorseCock();
+							temp2 = player.increaseCock(temp, rand(4) + 4);
+							temp3 = 1;
+							dynStats("lib", 5, "sen", 4, "lus", 35);
+						}
+						if (player.cocks[0].cockType == CockTypesEnum.DOG) {
+							temp = player.addHorseCock();
+							outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+							temp2 = player.increaseCock(temp, rand(4) + 4);
+							temp3 = 1;
+							dynStats("lib", 5, "sen", 4, "lus", 35);
+						}
+						if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
+							temp = player.addHorseCock();
+							outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+							temp2 = player.increaseCock(temp, rand(4) + 4);
+							temp3 = 1;
+							dynStats("lib", 5, "sen", 4, "lus", 35);
+						}
+						if (player.cocks[0].cockType.Index > 4) {
+							outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+							temp = player.addHorseCock();
+							temp2 = player.increaseCock(temp, rand(4) + 4);
+							temp3 = 1;
+							dynStats("lib", 5, "sen", 4, "lus", 35);
+						}
+						if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
+					}
+					else {
+						dynStats("lib", 5, "sen", 4, "lus", 35);
+						temp = player.addHorseCock();
+						outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(temp) + " darkening to a mottled brown and black pattern.");
+						if (temp == -1) {
+							CoC_Settings.error("");
+							clearOutput();
+							outputText("FUKKKK ERROR NO COCK XFORMED");
+						}
+						if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
+						else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + cockDescript(temp) + "'s root, tightening and pulling your " + cockDescript(temp) + " inside its depths.");
+						temp2 = player.increaseCock(temp, rand(4) + 4);
+						outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
+						outputText("  <b>You now have a horse-cock.</b>");
+					}
+					if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+					changes++;
+				}
+				else {
+					if (player.cocks.length == 1) {
+						temp2 = player.increaseCock(0, rand(3) + 1);
+						temp = 0;
+						dynStats("sen", 1, "lus", 10);
+					}
+					else {
+						//Find smallest cock
+						//Temp2 = smallness size
+						//temp = current smallest
+						temp3 = player.cocks.length;
+						temp = 0;
+						while (temp3 > 0) {
+							temp3--;
+							//If current cock is smaller than saved, switch values.
+							if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+								temp2 = player.cocks[temp3].cockLength;
+								temp = temp3;
+							}
+						}
+						//Grow smallest cock!
+						//temp2 changes to growth amount
+						temp2 = player.increaseCock(temp, rand(4) + 1);
+						dynStats("sen", 1, "lus", 10);
+					}
+					outputText("\n\n");
+					if (temp2 > 2) outputText("Your " + cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+					if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
+					if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + cockDescript(temp) + " pushes a bit further out of your sheath.");
+					changes++;
+				}
+			}
 			//physical changes
 			//legs
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {

@@ -45,6 +45,7 @@ package classes.Scenes
 			outputText("-New tier 3 misc lvl-up perk: Power Sweep. Req. Whirlwind, Job: Warlord perks and 60+ in str and tou. Effect: Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist)\n");
 			outputText("-New tier 3 misc lvl-up perk: Cyclone (Stage 1). Req. Job: Warlord perk and 50+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 10%\n");
 			outputText("-New tier 3 intelligence lvl-up perk (multi-rank): Traditional Mage I-VI. Req. for rank 1: lvl 18+, 80+ int, perk Archmage. Effect: Increase spell effect multiplier by 100% while using a staff and either a tome or no ranged weapon\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Fortress of Intellect. Req. perk Archmage, knowing spell Might and 100+ int. Effect: allow to toggle between Might spell boosting str+tou or int+tou\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Elemental Contract Rank 4. Req. perk Elemental Contract Rank 3 and 100+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 4\n");
 			outputText("-New tier 4 intelligence lvl-up perk (multi-rank): Long(er) Lasting Buffs I-VI. Req. for rank 1: lvl 24+, 120+ int, perk Job: Enchanter. Effect: Increase buff spells duration by 1 turn.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Elemental Contract Rank 5. Req. perk Elemental Contract Rank 4 and 125+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 5\n");
@@ -77,9 +78,32 @@ package classes.Scenes
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");
 			outputText("-Changed 5th and 6th stage of soul cultivation: Soul Scholar replacing Soul Exalt // Soul Elder replacing Soul Overlord\n");
 			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step. Also each perk above Job: Soul Cultivator will give +5 to max wisdom (non scalable).\n");
-			outputText("-New accesory: Seer's Hairpin -  (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");//gained after beating Ignis for the first time
+			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems. Using it will turn PC into Devilkin/Devil. Half fiend/Devilkin (scalable): +35/50 to max str, -10/20 to max Spe, +40/60 to max Int, +50/75 to max Lib, +10/15 to min and max sensibility.\n");
+			outputText("-New Body part: Devil Arms Req. Tiny or Large bat wings.\n");
+			outputText("-New Body part: Goat Ears Req. Goat Horns\n");
+			outputText("-New Body part: Devil Fangs Req. Goat Ears\n");
+			outputText("-New Body part: Devil Eyes Req. Devil Fangs\n");
+			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemeis weak to fire or pure enemies.\n");
+			outputText("-New magical special: Maleficium Req. 10+ pts in Devil score. Rise spellpower by 100% and lower by 50% lust resistance. Using this special cost 50 lust and it last for 10 turns.\n");
+			outputText("-New accesory: Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");
 			outputText("-New melee weapon: Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
-			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems\n");
+			outputText("-New melee weapon: Lance - buyable in Tel'Adre weapon shop (480 gems, 6-12 atk). Now both Spear and Lance have scaling on bae atk depending on speed.\n");
+			outputText("-New type of melee weapons: Dual weapons. Dual Swords (800 gems and 10 atk), Dual BF Sword (4000 gems and 5-50 atk), Dual Huge Warhammer (2400 gems and 7-15 atk), pair of Whips (400 gems and 2 atk), pair of Succubi Whips (800 gems and 10 atk). All beside last one are buyable at Tel'Adre weapon shop and req. coresponding Dual Wield perks to be equipable. ");
+			outputText("Pair of Succubi Whips can be or bought from Sean's shop or found as drop from beating Vapula horrde in Owca Pit.\n");
+			outputText("-New items for range weapon slot: Tomes. Inquisitor’s Tome can be found as 3rd option at Inquisitor Tomb and Sage’s Sketchbook can be bought in Sean shop. Inquisitor’s Tome allow using HP instead of Mana if it too low for spellcasting, Sage’s Sketchbook increase spell power by 60% (stacing with wizard focus perk effects).\n");
+			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack unlock each 6 lvl's.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("-New tier 3 toughness lvl-up perk: DefenceStance\n");
+			outputText("-New tier 4 toughness lvl-up perk: MasteredDefenceStance\n");
+			outputText("-New tier 5 toughness lvl-up perk: PerfectDefenceStance\n");
+			outputText("-New tier 3 speed lvl-up perk: Impale\n");
+			outputText("-New tier 4 misc lvl-up perk: Giant's Reach. Req. Job: Warlord and 100+ in str and tou. Effect: whirlwing/whipping special dmg increased by 25% when using Large or Dual Large weapons\n");
+			outputText("-New tier 1 strength lvl-up perk: ThirstForBlood\n");
+			outputText("-New tier 2 libido lvl-up perk: Job: Courtesan Req. Job: Seducer, Heroism perks and 50+ libido. Effect: +20 to max lust, +20% to tease damage against boss enemies, +15 max Libido (scalable)\n");
+			outputText("-New tier 2 libido lvl-up perk: Dazzling display Req. \n");
+			outputText("-New tier 3 libido lvl-up perk: Arouse the audience Req. \n");
+			outputText("-New tier 4 libido lvl-up perk: Critical performance Req. \n");
+			outputText("-New tier 6 speed lvl-up perk: Natural jouster (Master grade)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
@@ -95,8 +119,10 @@ package classes.Scenes
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -140,9 +166,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

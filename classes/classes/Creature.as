@@ -2092,7 +2092,7 @@ package classes
 		public function isWeaponForWhirlwind():Boolean
 		{
 			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
-			 || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD)
+			 || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
 				return true;
 			return false;
 		}
@@ -2100,18 +2100,34 @@ package classes
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
+			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
 				return true;
 			return false;
 		}
 
 		//Using Tome
-	/*	public function isUsingTome():Boolean
+		public function isUsingTome():Boolean
 		{
-			if (game.player.jewelry == game.jewelries)
+			if (game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook")
 				return true;
 			return false;
-		}*/
+		}
+
+		//Natural Jouster perks req check
+		public function isMeetingNaturalJousterReq():Boolean
+		{
+			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+			 || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
+				return true;
+			return false;
+		}
+		public function isMeetingNaturalJousterMasterGradeReq():Boolean
+		{
+			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+			 || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
+				return true;
+			return false;
+		}
 
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
@@ -3156,7 +3172,7 @@ package classes
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
-				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.LANCE || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
@@ -3195,7 +3211,14 @@ package classes
 			}
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
-				mult *= 0.5;//potem doda sie efekty perkow zwiekszajace redukcje obrazen
+				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
+					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
+						else mult *= 0.25;
+					}
+					else mult *= 0.4;
+				}
+				else mult *= 0.5;
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
@@ -3204,8 +3227,9 @@ package classes
 			}
 			//Round things off.
 			mult = Math.round(mult);
-			//Caps damage reduction at 95%.		(when using defend with upgrading it perks would allow temporaly reach 99% xD)
-			if (mult < 5) mult = 5;
+			//Caps damage reduction at 95/99%.
+			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
 			return mult;
 		}
 

@@ -1358,30 +1358,46 @@ public function soulequipmentmerchant():void {
 	outputText("\n\n\"<i>Greeting dear customer.  Look around and if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
 	outputText("\n\n\<b>Spirit Stones: </b>" + flags[kFLAGS.SPIRIT_STONES] + "\n");
 	menu();
-	addButton(0, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
-	addButton(1, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
-	addButton(2, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
-	addButton(3, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
+	addButton(1, "Shelf 1", soulequipmentshelf1);
+	addButton(2, "Shelf 2", soulequipmentshelf2);
+//	addButton(3, "Shelf 3", soulequipmentshelf3);//armors
 	addButton(4, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
-	addButton(5, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
-	addButton(6, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
-	addButton(7, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
 	//addButton(9, weapons.ERIBBON.shortName, weaponBuy, weapons.ERIBBON);//czy bedzie tu jako do sprzedaży czy jako nagroda za quest lub drop z mobka/bossa?
-	//if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(7, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
 	//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
 	//addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
+	//addButton(12, "Talk", ).hint("Tak with .");
+	addButton(9, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG);
+	addButton(14, "Back", riverislandVillageStuff);
+	statScreenRefresh();
+}
+public function soulequipmentshelf1():void {
+	menu();
+	addButton(0, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+	addButton(1, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
+	addButton(5, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
+	addButton(6, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
+	addButton(7, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
+	addButton(8, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
+	addButton(10, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+	addButton(11, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
+	addButton(14, "Back", soulequipmentmerchant);
+}
+public function soulequipmentshelf2():void {
+	menu();
+	addButton(0, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
+	addButton(1, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
+	addButton(2, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(3, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
+	addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
+	addButton(14, "Back", soulequipmentmerchant);
+}
+public function soulequipmentshelf3():void {
+	menu();
+	//if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(7, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
 	//addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
 	//addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
 	//addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
-	//addButton(12, "Talk", ).hint("Tak with .");
-	addButton(8, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
-	addButton(9, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG);
-	addButton(10, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
-	addButton(11, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
-	addButton(12, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
-	addButton(13, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
-	addButton(14, "Back", riverislandVillageStuff);
-	statScreenRefresh();
+	addButton(14, "Back", soulequipmentmerchant);
 }
 
 private function weaponBuy(itype:ItemType):void {

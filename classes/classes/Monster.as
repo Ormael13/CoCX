@@ -250,6 +250,7 @@
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
@@ -1494,15 +1495,16 @@
 				//Countdown to heal
 				addStatusValue(StatusEffects.IzmaBleed,1,-1);
 				//Heal wounds
-				if(statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
+				if (statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
 				else {
-					var store:Number = eMaxHP() * (4 + rand(7))/100;
+					var store:Number = eMaxHP() * (4 + rand(7)) / 100;
+					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
 					store = game.doDamage(store);
-					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}

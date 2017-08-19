@@ -17,6 +17,5 @@ package classes.Items.Weapons
 			if (game.player.str >= 40) boost += 8;
 			return (7 + boost); 
 		}
-		
 	}
 }

@@ -16,7 +16,6 @@ package classes.Items.Weapons
 			var boost:int = 0;
 			if (game.player.str >= 80) boost += 8;
 			return (7 + boost); 
-		}
-		
+		}	
 	}
 }

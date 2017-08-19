@@ -17,15 +17,15 @@ package classes.Items
 		public function UseableLib() {}
 		
 		//MATERIALS
-		public const AMETIST:SimpleUseable = new SimpleUseable("Ametist", "smth Ametist", "a smth Ametist", 1000, 
-			"A smth Ametist.",
-			"You look over the smth Ametist.  Need some better desc I suppose.");
+		public const AMETIST:SimpleUseable = new SimpleUseable("Ametist", "Flawless Ametist", "a Flawless Ametist", 1000, 
+			"A Flawless Ametist.",
+			"You look over the flawless ametyst. Likely worth a lot of gems.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
-		public const DIAMOND:SimpleUseable = new SimpleUseable("Diamond", "smth Diamond", "a smth Diamond", 1000, 
-			"A smth Diamond.",
-			"You look over the smth Diamond.  Need some better desc I suppose.");
+		public const DIAMOND:SimpleUseable = new SimpleUseable("Diamond", "Perfect Diamond", "a Perfect Diamond", 1000, 
+			"A Perfect Diamond.",
+			"You look over the perfect diamond. Likely worth a lot of gems.");
 		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 50,
 			"This tough substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.");

@@ -355,17 +355,17 @@ package classes.Scenes.Dungeons
 			outputText("On the left is a small tatami used for meditations.");
 			dungeons.setDungeonButtons(roomTunnel02, null, null, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
-				outputText("\n\n\"<i>Did you come to worship me mortal?</i>\" A dommering voice reaching your ears moment you enter the room. Stunned you stopped to look around.");
-				outputText("\n\n\"<i>So you not my worshiper YET... but you will bend to power of BAM HAMMER!!!</i>\"");
+				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Suprised you stopped to look around to find it source.");
+				outputText("\n\n\"<i>So you not my worshiper YET... but my <b>BAM HAMMER</b> will make sure you will be!!!</i>\"");
 				startCombat(new Ted(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 5;
 				doNext(playerMenu);
 				return;
 			}
-			if (player.findPerk(PerkLib.SoulSense) >= 0) {
-				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
-				else addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret doors.");
-			}
+		//	if (player.findPerk(PerkLib.SoulSense) >= 0) {
+		//		if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
+		//		else addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret doors.");
+		//	}
 		}
 		public function roomSmallCaveW():void {
 			kGAMECLASS.dungeonLoc = 60;

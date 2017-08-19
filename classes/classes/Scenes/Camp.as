@@ -3173,6 +3173,7 @@ private function promptSaveUpdate():void {
 			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 		}
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) flags[kFLAGS.AYANE_FOLLOWER] = 0;
+		if (flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] > 0) flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
 		doNext(doCamp);
 		return;
 	}
@@ -3400,6 +3401,10 @@ private function updateAchievements():void {
 	}
 	if (kGAMECLASS.dungeons.checkLethiceStrongholdClear()) {
 		awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);
+		dungeonsCleared++;
+	}
+	if (kGAMECLASS.dungeons.checkHiddenCaveClear()) {
+		awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
 		dungeonsCleared++;
 	}
 	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);

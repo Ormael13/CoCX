@@ -390,7 +390,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
-			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
+			if (player.weapon != weapons.SPEAR || player.weapon != weapons.LANCE) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
 			else addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
@@ -443,7 +443,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
 			if (player.findPerk(PerkLib.GreyMage) >= 0) whitefireLustCap = (player.maxLust() - 45);
 			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
-			gotEnergy = player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue();
+			gotEnergy = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
 			{
 				if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy)
@@ -558,9 +558,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
 			if (player.findPerk(PerkLib.GreyMage) >= 0) whitefireLustCap = (player.maxLust() - 45);
 			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
-		
-			var gotEnergy:Boolean = player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue();
-		
+			var gotEnergy:Boolean = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
 			if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy)
 			{
 				addButton(1, "Dispell", (monster as Lethice).dispellRapetacles);
@@ -1041,6 +1039,7 @@ public function elementalattacks():void {
 	if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
 		fatigueRecovery();
 		manaregeneration();
+		soulforceregeneration();
 		enemyAI();
 	}
 	else {
@@ -1119,6 +1118,7 @@ private function wait():void {
 	if (!monster.hasStatusEffect(StatusEffects.Level)) {
 		fatigue(-5);
 		manaregeneration();
+		soulforceregeneration();
 	}
 	if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneWait();
@@ -2316,7 +2316,12 @@ public function fantasize():void {
 public function defendpose():void {
 	clearOutput();
 	outputText("You decide not to take any offensive action this round preparing for " + monster.a + monster.short + " attack assuming defensive pose.\n\n");
-	player.createStatusEffect(StatusEffects.Defend,0,0,0,0);
+	player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
+	if (player.findPerk(PerkLib.DefenceStance) >= 0) {
+		fatigueRecovery();
+		manaregeneration();
+		soulforceregeneration();
+	}
 	enemyAI();
 }
 public function surrender():void {
@@ -2340,6 +2345,8 @@ public function fatigueRecovery():void {
 	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fatiguecombatrecovery += 1;
 	if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fatiguecombatrecovery += 1;
+	if (player.findPerk(PerkLib.MasteredDefenceStance) >= 0) fatiguecombatrecovery += 1;
+	if (player.findPerk(PerkLib.PerfectDefenceStance) >= 0) fatiguecombatrecovery += 1;
 	fatigue(-(1 + fatiguecombatrecovery));
 }
 
@@ -2656,7 +2663,8 @@ public function attack():void {
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
-		damage *= 1.75;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && player.weaponName == "deadly spear") damage *= 2.5;
+		else damage *= 1.75;
 	}
 	//Apply AND DONE!
 	damage *= (monster.damagePercent(false, true) / 100);
@@ -2775,10 +2783,6 @@ public function attack():void {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		if(player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
-			clearOutput();
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		}
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
@@ -2817,11 +2821,11 @@ public function attack():void {
 			var whipCorSelf:Number = 0;
 			var whipLustSelf:Number = 0;
 			var hasArcaneLash:Boolean = player.hasPerk(PerkLib.ArcaneLash);
-			if (player.weapon == weapons.WHIP && rand(2) == 0) {
+			if ((player.weapon == weapons.WHIP || player.weapon == weapons.PWHIP) && rand(2) == 0) {
 				whipLustDmg = (5 + player.cor / 12) * (hasArcaneLash ? 1.4 : 1); // 5-13.3 (7-18.7 w/perk)
 				whipCorSelf = 0;
 				whipLustSelf = 0;
-			} else if (player.weapon == weapons.SUCWHIP) {
+			} else if (player.weapon == weapons.SUCWHIP || player.weapon == weapons.PSWHIP) {
 				whipLustDmg = (20 + player.cor / 15) * (hasArcaneLash ? 1.8 : 1); // 20-26.7 (36-48 w/perk)
 				whipCorSelf = 0.3;
 				whipLustSelf = (rand(2) == 0)?0:1; // 50% +1
@@ -2848,7 +2852,7 @@ public function attack():void {
 		//Selfcorrupting weapons
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
-		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
+		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
 			//10% chance
 			if(rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
@@ -2916,6 +2920,7 @@ public function meleeattackdamage():void {
 			outputText("\n");
 			fatigueRecovery();
 			manaregeneration();
+			soulforceregeneration();
 			enemyAI();
 		}
 		else {
@@ -3341,6 +3346,7 @@ public function enemyAIImpl():void {
 			HPChange(temp,false);
 		//}
 	}
+	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
 }
 public function finishCombat():void
 {
@@ -3743,10 +3749,26 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
 			else outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
 		}
-		monster.lust += monster.lustVuln * (2 + rand(4));
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusEffect(StatusEffects.AlraunePollen)) {
-		monster.lust += monster.lustVuln * (2 + rand(4));
+	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
+		if(monster.lust < (monster.eMaxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.\n\n");
+		else if(monster.lust < (monster.eMaxLust() * 0.6)) {
+			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
+			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
+		}
+		else if(monster.lust < (monster.eMaxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.eMaxLust() * 0.85)) {
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
+			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
+		}
+		else {
+			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
+		}
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
@@ -3980,7 +4002,7 @@ private function combatStatusesUpdate():void {
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
 	}
-	//Berzerker/Lustzerker/Dwarf Rage
+	//Berzerker/Lustzerker/Dwarf Rage/Maleficium
 	if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 		if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
 			player.removeStatusEffect(StatusEffects.Berzerking);
@@ -4002,6 +4024,13 @@ private function combatStatusesUpdate():void {
 			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
 		}
 		else player.addStatusValue(StatusEffects.DwarfRage,3,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.Maleficium)) {
+		if (player.statusEffectv3(StatusEffects.Maleficium) <= 0) {
+			player.removeStatusEffect(StatusEffects.Maleficium);
+			outputText("<b>Maleficium effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.Maleficium,1,-1);
 	}
 	//Spell buffs
 	if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -4059,6 +4088,18 @@ private function combatStatusesUpdate():void {
 		else {
 			outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
 		}
+	}
+	//Trance Transformation
+	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {
+		if (player.soulforce < 50) {
+			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			kGAMECLASS.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			player.removeStatusEffect(StatusEffects.TranceTransformation);
+			outputText("<b>The flow of power through you suddenly stops, as you no longer have the soul energy to sustain it.  You drop roughly to the floor, the crystal coating your [skin] cracking and fading to nothing.</b>\n\n");
+		}
+	//	else {
+	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
+	//	}
 	}
 	//Ezekiel Curse
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
@@ -4282,6 +4323,8 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 1;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedsoulforce += 1;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedsoulforce += 1;
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
 		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
@@ -4307,6 +4350,8 @@ public function manaregeneration(combat:Boolean = true):void {
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
 	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 5;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 5;
 	//	gainedmana *= manaRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
 		kGAMECLASS.ManaChange(gainedmana, false);
@@ -4400,6 +4445,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		monster.sens += (6 * (1 + player.newGamePlusMod()));
 	}
 	if (monster.findPerk(PerkLib.JobBrawler) >= 0) monster.str += (10 * (1 + player.newGamePlusMod()));
+	if (monster.findPerk(PerkLib.JobCourtesan) >= 0) monster.lib += (15 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobDefender) >= 0) monster.tou += (15 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobElementalConjurer) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobEnchanter) >= 0) monster.inte += (15 * (1 + player.newGamePlusMod()));
@@ -4943,6 +4989,7 @@ public function ScyllaTease():void {
 	else {
 		fatigueRecovery();
 		manaregeneration();
+		soulforceregeneration();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
@@ -5050,7 +5097,20 @@ public function ScyllaTease():void {
 			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				damage *= 1.15;
 			}
+			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			monster.teased(monster.lustVuln * damage);
+			if (crit == true) outputText(" <b>Critical!</b>");
 			teaseXP(1);
 		}
 		//Nuttin honey
@@ -5094,6 +5154,7 @@ public function GooTease():void {
 	else {
 		fatigueRecovery();
 		manaregeneration();
+		soulforceregeneration();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
@@ -5195,7 +5256,20 @@ public function GooTease():void {
 			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				damage *= 1.15;
 			}
+			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			monster.teased(monster.lustVuln * damage);
+			if (crit == true) outputText(" <b>Critical!</b>");
 			teaseXP(1);
 		}
 		//Nuttin honey

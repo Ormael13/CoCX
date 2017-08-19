@@ -42,6 +42,10 @@ package classes.Items
 				PerkLib.Accuracy1,5,0,0,0);
 		public const WARDBOW:Wardensbow = new Wardensbow();
 		
+		//Tomes
+		public const I_TOME_:InquisitorsTome = new InquisitorsTome();
+		public const SSKETCH:SagesSketchbook = new SagesSketchbook();
+		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
 			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);

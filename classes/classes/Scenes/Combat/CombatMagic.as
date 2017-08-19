@@ -35,14 +35,14 @@ public class CombatMagic extends BaseCombatContent {
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && ((player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
 			useMana((50 * spellMightCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && ((player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
 			useMana((40 * spellBlinkCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -130,12 +130,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) mod += .1;
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 		if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .1;
-		if(player.findPerk(PerkLib.TraditionalMageI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.findPerk(PerkLib.TraditionalMageII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageI) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageII) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIII) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageIV) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageV) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.findPerk(PerkLib.TraditionalMageVI) >= 0 && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
 		if(player.findPerk(PerkLib.Obsession) >= 0) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -147,6 +147,9 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
 			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.findPerk(PerkLib.SagesKnowledge) >= 0) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -184,6 +187,9 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
 			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
 		}
+		if(player.findPerk(PerkLib.SagesKnowledge) >= 0) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
 		if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
@@ -192,6 +198,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
 	}
 	internal function spellModBlackImpl():Number {
@@ -219,6 +226,9 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
 			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
 		}
+		if(player.findPerk(PerkLib.SagesKnowledge) >= 0) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
 		if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
@@ -227,6 +237,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") mod += .2;
 		if (player.shieldName == "mana bracer") mod += .5;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
 	}
 	
@@ -371,10 +382,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt).hint("Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nMana Cost: " + spellCostWhite(40) + "");
 		}
 		//BLACK MAGICSKS
-		if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
-			outputText("You aren't turned on enough to use any black magics.\n\n");
-		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
-			outputText("You aren't turned on enough to use any black magics.\n\n");
+		if ((player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0) || (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)) outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse).hint("The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nMana Cost: " + spellCostBlack(20) + "");
 			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: " + spellCostBlack(30) + "");
@@ -423,10 +431,7 @@ public class CombatMagic extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
-			outputText("You aren't turned on enough to use any black magics.\n\n");
-		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
-			outputText("You aren't turned on enough to use any black magics.\n\n");
+		if ((player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0) || (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)) outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				if (!player.hasStatusEffect(StatusEffects.Might))
@@ -471,13 +476,19 @@ public class CombatMagic extends BaseCombatContent {
 
 
 	public function spellArouse():void {
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(20)) {
+		if (player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostBlack(20)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(20) && player.HP < spellCostBlack(20)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(20,6);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(20)) player.HP -= spellCostBlack(20);
+		else useMana(20,6);
 		statScreenRefresh();
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -546,7 +557,20 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
+		//Determine if critical tease!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChance += player.lib / 5;
+			if (player.lib > 100) critChance += 20;
+		}
+		if (rand(100) < critChance) {
+			crit = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
+		if (crit == true) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		doNext(playerMenu);
@@ -678,9 +702,14 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
 			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			temp = MightBoost;
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = 25 * spellModBlack() * (1 + player.newGamePlusMod());
-			else tempStr = temp;
 			tempTou = temp;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				var MightIntBoost:Number = 0;
+				MightIntBoost += 25 * spellModBlack() * (1 + player.newGamePlusMod());
+				temp = MightIntBoost;
+				tempInt = temp;
+			}
+			else tempStr = temp;
 			//if(player.str + temp > 100) tempStr = 100 - player.str;
 			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
@@ -705,13 +734,19 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (spellCostBlack(50) * spellMightCostMultiplier()) && player.HP < (spellCostBlack(50) * spellMightCostMultiplier())) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu2);
+			return;
+		}
 		doNext(combatMenu);
-		useMana((50 * spellMightCostMultiplier()),6);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (50 * spellMightCostMultiplier())) player.HP -= (50 * spellMightCostMultiplier());
+		else useMana((50 * spellMightCostMultiplier()),6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
 		var tempInt:Number = 0;
@@ -823,13 +858,19 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier()) && player.HP < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu2);
+			return;
+		}
 		doNext(combatMenu);
-		useMana((40 * spellBlinkCostMultiplier()),6);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (40 * spellBlinkCostMultiplier())) player.HP -= (40 * spellBlinkCostMultiplier());
+		else useMana((40 * spellBlinkCostMultiplier()),6);
 		var tempSpe:Number = 0;
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
@@ -870,13 +911,19 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellIceSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostBlack(40)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(40,6);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+		else useMana(40,6);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -948,13 +995,19 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellDarknessShard():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostBlack(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostBlack(40)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(40,6);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+		else useMana(40,6);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1027,13 +1080,19 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCost(200)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCost(200)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCost(200) && player.HP < spellCost(200)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu3);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(200,1);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCost(200)) player.HP -= spellCost(200);
+		else useMana(200,1);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1110,13 +1169,19 @@ public class CombatMagic extends BaseCombatContent {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCost(200)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCost(200)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu3);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCost(200) && player.HP < spellCost(200)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu3);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(200,1);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCost(200)) player.HP -= spellCost(200);
+		else useMana(200,1);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1259,14 +1324,20 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && player.HP < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu2);
+			return;
+		}
 		doNext(combatMenu);
-		useMana((30 * spellChargeWeaponCostMultiplier()), 5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (30 * spellChargeWeaponCostMultiplier())) player.HP -= (30 * spellChargeWeaponCostMultiplier());
+		else useMana((30 * spellChargeWeaponCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1339,14 +1410,20 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && player.HP < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu2);
+			return;
+		}
 		doNext(combatMenu);
-		useMana((40 * spellChargeArmorCostMultiplier()), 5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < (40 * spellChargeArmorCostMultiplier())) player.HP -= (40 * spellChargeArmorCostMultiplier());
+		else useMana((40 * spellChargeArmorCostMultiplier()), 5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -1366,13 +1443,19 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellBlind():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(30)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostWhite(30)) {
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(30) && player.HP < spellCostWhite(30)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(30,5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(30)) player.HP -= spellCostWhite(30);
+		else useMana(30,5);
 		var successrate:int = 60;
 		successrate -= (player.inte * 0.4);
 		if (successrate > 20) successrate = 20;
@@ -1468,14 +1551,20 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellWhitefire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostWhite(40)) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(40,5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+		else useMana(40,5);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1584,14 +1673,20 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellLightningBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostWhite(40)) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(40,5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+		else useMana(40,5);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1661,14 +1756,20 @@ public class CombatMagic extends BaseCombatContent {
 //(35) Blizzard
 	public function spellBlizzard():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(50)) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.findPerk(PerkLib.LastResort) < 0 && player.mana < spellCostWhite(50)) {
 			clearOutput();
 			outputText("Your mana is too low to cast this spell.");
 			doNext(magicMenu2);
 			return;
 		}
+		if(player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(50) && player.HP < spellCostWhite(50)) {
+			outputText("Your hp is too low to cast this spell.");
+			doNext(magicMenu2);
+			return;
+		}
 		doNext(combatMenu);
-		useMana(50,5);
+		if (player.findPerk(PerkLib.LastResort) >= 0 && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(50);
+		else useMana(50,5);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();

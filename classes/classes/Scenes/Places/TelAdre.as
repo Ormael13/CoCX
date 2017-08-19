@@ -1659,14 +1659,18 @@ public function weaponShop():void {
 	menu();
 	addButton(0, weapons.CLAYMOR.shortName, weaponBuy, weapons.CLAYMOR);
 	addButton(1, weapons.WARHAMR.shortName, weaponBuy, weapons.WARHAMR);
-	addButton(2, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
-	addButton(3, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
-	addButton(4, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
-	addButton(5, weapons.DAGGER.shortName, weaponBuy, weapons.DAGGER);
-	addButton(6, weapons.SCIMITR.shortName, weaponBuy, weapons.SCIMITR);
-	addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);
-	addButton(8, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
-	addButton(9, weapons.BFSWORD.shortName, weaponBuy, weapons.BFSWORD);
+	addButton(2, weapons.D_WHAM_.shortName, weaponBuy, weapons.D_WHAM_);
+	addButton(3, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
+	//addButton(4, weapons.LANCE.shortName, weaponBuy, weapons.LANCE);
+	addButton(4, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
+	addButton(5, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
+	addButton(6, weapons.DAGGER.shortName, weaponBuy, weapons.DAGGER);
+	addButton(7, weapons.SCIMITR.shortName, weaponBuy, weapons.SCIMITR);
+	addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);
+	addButton(9, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
+	addButton(10, weapons.BFSWORD.shortName, weaponBuy, weapons.BFSWORD);
+	addButton(11, weapons.DBFSWO.shortName, weaponBuy, weapons.DBFSWO);
+	addButton(12, weapons.DSWORD_.shortName, weaponBuy, weapons.DSWORD_);
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
 		addButton(13, "ScarBlade", forgeScarredBlade);
 	}
