@@ -386,7 +386,7 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 
 		outputText("Char Viewer: ");
-		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 0) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
+		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 1) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
 		else outputText("<font color=\"#800000\"><b>OFF</b></font>\n Player visualiser is disabled.");
 		outputText("\n\n");
 
@@ -467,8 +467,10 @@ public class GameSettings extends BaseContent {
 	}
 
 	public function toggleCharViewer():void {
-		if (flags[kFLAGS.CHARVIEWER_ENABLED] < 1) flags[kFLAGS.CHARVIEWER_ENABLED] = 1;
-		else flags[kFLAGS.CHARVIEWER_ENABLED] = 0;
+		if (flags[kFLAGS.CHARVIEWER_ENABLED] < 1) {
+			flags[kFLAGS.CHARVIEWER_ENABLED] = 1;
+			mainView.charView.reload();
+		} else flags[kFLAGS.CHARVIEWER_ENABLED] = 0;
 		settingsScreenInterfaceSettings();
 	}
 
