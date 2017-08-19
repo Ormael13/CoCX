@@ -15,6 +15,10 @@ import flash.text.TextFormat;
 public class GameSettings extends BaseContent {
 
 	public function GameSettings() {}
+
+	public function get charviewEnabled():Boolean {
+		return flags[kFLAGS.CHARVIEWER_ENABLED];
+	}
 	public function settingsScreenMain():void {
 		getGame().saves.savePermObject(false);
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
@@ -381,6 +385,11 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
+		outputText("Char Viewer: ");
+		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 0) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
+		else outputText("<font color=\"#800000\"><b>OFF</b></font>\n Player visualiser is disabled.");
+		outputText("\n\n");
+
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
 			outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
 		}
@@ -425,6 +434,7 @@ public class GameSettings extends BaseContent {
 		addButton(5, "Toggle Images", toggleImages).hint("Enable or disable image pack.");
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -454,6 +464,12 @@ public class GameSettings extends BaseContent {
 		addButton(2, "New", toggleSpritesFlag, false, 0, null, "Use the 16-bit sprites in current versions of CoC.");
 
 		addButton(14, "Back", settingsScreenInterfaceSettings);
+	}
+
+	public function toggleCharViewer():void {
+		if (flags[kFLAGS.CHARVIEWER_ENABLED] < 1) flags[kFLAGS.CHARVIEWER_ENABLED] = 1;
+		else flags[kFLAGS.CHARVIEWER_ENABLED] = 0;
+		settingsScreenInterfaceSettings();
 	}
 
 	public function toggleInterface():void {

@@ -6,13 +6,13 @@ import classes.GlobalFlags.kGAMECLASS;
 public class PlayerAppearance extends BaseContent {
 
 	public function appearance():void {
+		if (getGame().gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
 		//Temp vars
 		var temp:Number  = 0;
 		var rando:Number = 0;
 		//Determine race type:
 
 		clearOutput();
-		mainViewManager.showPlayerDoll(debug);
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		describeRace();
 		describeGear();

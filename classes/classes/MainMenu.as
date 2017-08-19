@@ -31,6 +31,7 @@ public class MainMenu extends BaseContent {
 		hideStats();
 		getGame().mainViewManager.startUpButtons();
 		kGAMECLASS.saves.loadPermObject();
+		if (getGame().gameSettings.charviewEnabled) mainView.charView.reload();
 		getGame().mainViewManager.setTheme();
 		//Reset newgame buttons
 		mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", getGame().charCreation.newGameFromScratch);
