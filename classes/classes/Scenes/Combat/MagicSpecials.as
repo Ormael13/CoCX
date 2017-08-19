@@ -436,7 +436,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmgF *= 1.5;
-			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 5;
+			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) {
+				if (player.findPerk(PerkLib.ArouseTheAudience) >= 0) lustDmgF *= 7.5;
+				else lustDmgF *= 5;
+			}
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);

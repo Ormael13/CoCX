@@ -1423,7 +1423,19 @@ public function naggaTease():void {
 				damage *= 1.15;
 			}
 			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			monster.teased(monster.lustVuln * damage);
+			if (crit == true) outputText(" <b>Critical!</b>");
 			kGAMECLASS.combat.teaseXP(1);
 		}
 		//Nuttin honey

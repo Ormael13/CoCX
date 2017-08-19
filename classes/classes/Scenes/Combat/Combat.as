@@ -390,7 +390,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
-			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
+			if (player.weapon != weapons.SPEAR || player.weapon != weapons.LANCE) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
 			else addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
@@ -2663,7 +2663,7 @@ public function attack():void {
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.GaeBolg) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && player.weaponName == "deadly spear") damage *= 2.5;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && player.weaponName == "deadly spear") damage *= 2.5;
 		else damage *= 1.75;
 	}
 	//Apply AND DONE!
@@ -3749,10 +3749,26 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
 			else outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
 		}
-		monster.lust += monster.lustVuln * (2 + rand(4));
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusEffect(StatusEffects.AlraunePollen)) {
-		monster.lust += monster.lustVuln * (2 + rand(4));
+	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
+		if(monster.lust < (monster.eMaxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.\n\n");
+		else if(monster.lust < (monster.eMaxLust() * 0.6)) {
+			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
+			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
+		}
+		else if(monster.lust < (monster.eMaxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.eMaxLust() * 0.85)) {
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
+			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
+		}
+		else {
+			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
+		}
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
@@ -5082,7 +5098,19 @@ public function ScyllaTease():void {
 				damage *= 1.15;
 			}
 			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			monster.teased(monster.lustVuln * damage);
+			if (crit == true) outputText(" <b>Critical!</b>");
 			teaseXP(1);
 		}
 		//Nuttin honey
@@ -5229,7 +5257,19 @@ public function GooTease():void {
 				damage *= 1.15;
 			}
 			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			monster.teased(monster.lustVuln * damage);
+			if (crit == true) outputText(" <b>Critical!</b>");
 			teaseXP(1);
 		}
 		//Nuttin honey

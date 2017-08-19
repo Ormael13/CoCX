@@ -60,8 +60,16 @@ package classes.Scenes.NPCs
 				damage = player.takeDamage(damage, true);
 			}
 			statScreenRefresh();
+		}//poniżej ataki jakie bedzie używać w dodatku do 2 powyżej w czasie spotkań po Hidden Cave
+		private function tedSpecialAttack1():void {
+			var damage:Number = 0;
+			statScreenRefresh();
 		}
-		private function tedSpecialAttackThree():void {
+		private function tedSpecialAttack2():void {
+			var damage:Number = 0;
+			statScreenRefresh();
+		}
+		private function tedSpecialAttack3():void {
 			var damage:Number = 0;
 			statScreenRefresh();
 		}

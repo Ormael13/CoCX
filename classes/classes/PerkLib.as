@@ -212,6 +212,9 @@ package classes
 		public static const ArmorMaster:PerkType = mk("Armor Master", "Armor Master",
 				"Boosts armor points by a portion of your speed on heavy armors.",
 				"You choose the 'Armor Master' perk, increasing the effectiveness of Heavy armors by a portion of your speed.");
+		public static const ArouseTheAudience:PerkType = mk("Arouse the audience", "Arouse the audience",
+				"Increase the damage of non periodic tease against groups by 50% and periodic by 20%.",
+				"You choose the 'Arouse the audience' perk, increasing the damage of tease against groups.");
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
@@ -338,6 +341,9 @@ package classes
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
+		public static const CriticalPerformance:PerkType = mk("Critical performance", "Critical performance",
+				"Allows your non periodic tease damage to critically hit based on your libido, maximum 20%.",
+				"You choose the 'Critical performance' perk, allowing your non periodic tease damage to critically hit based on your libido.");
 		public static const Cupid:PerkType = mk("Cupid", "Cupid",
 				"You arrows are charged with heavy black magic inflicting lust on those pierced by them.",
 				"You choose the 'Cupid' perk, allowing you to shoot arrows inflicting lust.");
@@ -521,9 +527,6 @@ package classes
 		public static const FortressOfIntellect:PerkType = mk("Fortress of Intellect", "Fortress of Intellect",
 				"Might increases intelligence instead of strength (toggleable).",
 				"You choose the 'Fortress of Intellect' perk. You can now change Might to boost intelligence instead of strength.");
-		public static const GaeBolg:PerkType = mk("Gae Bolg", "Gae Bolg",
-				"Damage bonus of spears and lances critical hits is doubled as long speed is high enough.",
-				"You've chosen the 'Gae Bolg' perk. Your spear and lance critical hit attacks bonus damages are doubled.");
 		public static const GiantsReach:PerkType = mk("Giant's Reach", "Giant's Reach",
 				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of Aoe attacks.",
 				"You choose 'Giant's Reach' perk. Increase range of attacks with large weapons in fights against group enemies.");
@@ -615,6 +618,9 @@ package classes
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
 						"]",
 				"You choose the 'Immovable Object' perk, granting 10% physical damage reduction.</b>");
+		public static const Impale:PerkType = mk("Impale", "Impale",
+				"Damage bonus of spears and lances critical hits is doubled as long speed is high enough.",
+				"You've chosen the 'Impale' perk. Your spear and lance critical hit attacks bonus damages are doubled.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
 				"You choose the 'Improved Endurance' perk. Thanks to your physical conditioning, your maximum fatigue has been increased by 80!");
@@ -877,8 +883,11 @@ package classes
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
 				"You choose the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
 		public static const Naturaljouster:PerkType = mk("Natural jouster", "Natural jouster",
-				"Increase attack power of spears when you attack once each turn and have taur/drider lower body or twice higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 120+ for others).",
-				"You've chosen the 'Natural jouster' perk. As long you will have taur or drider lower body and attack once per turn your spear attack power will be three time higher.");
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
+				"You've chosen the 'Natural jouster' perk. As long you will have taur or drider lower body and attack once per turn your spear/lance attack power will be three time higher.");
+		public static const NaturaljousterMastergrade:PerkType = mk("Natural jouster (Master grade)", "Natural jouster (Master grade)",
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
+				"You've chosen the 'Natural jouster (Master grade)' perk. As long you will have taur or drider lower body and attack once per turn your spear/lance attack power will be five time higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
@@ -1980,9 +1989,9 @@ package classes
 						 .requireSpe(140)
 						 .requireLevel(22)
 						 .requireNGPlus(5);
-		GaeBolg.requirePerk(Naturaljouster)
-			   .requireSpe(100)
-			   .requireLevel(18);
+		Impale.requirePerk(Naturaljouster)
+			  .requireSpe(100)
+			  .requireLevel(18);
 		//Tier 4 Speed Perks
 		WildQuiver.requirePerk(Manyshot)
 				  .requireSpe(125)
@@ -2001,6 +2010,9 @@ package classes
 						  .requireSpe(150)
 						  .requireLevel(30);
 		//Tier 6 Speed Perks
+		NaturaljousterMastergrade.requirePerk(Naturaljouster)
+								 .requireSpe(180)
+								 .requireLevel(36);
 		//Tier 7 Speed Perks
 /*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
 							 .requirePerk(SoulOverlord)
@@ -2435,10 +2447,16 @@ package classes
 				.requirePerk(ImprovedSelfControl)
 				.requireLib(75)
 				.requireLevel(18);
+		ArouseTheAudience.requirePerk(JobCourtesan)
+						 .requireLib(75)
+						 .requireLevel(18);
 		//Tier 4 Libido Perks
 		AdvancedSelfControl.requireLib(100)
 						   .requireInt(150)
 						   .requirePerk(HalfStepToAdvancedSelfControl)
+						   .requireLevel(24);
+		CriticalPerformance.requirePerk(JobCourtesan)
+						   .requireLib(100)
 						   .requireLevel(24);
 		//Tier 5 Libido Perks
 		HalfStepToSuperiorSelfControl.requireLib(120)

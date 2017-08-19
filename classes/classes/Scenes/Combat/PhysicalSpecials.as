@@ -756,6 +756,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSlapAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You are too tired to perform tail slap attack.");
+			doNext(combatMenu);
+			return;
+		}
 		fatigue(40,2);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
@@ -789,6 +795,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSmackAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You are too tired to perform tail smack attack.");
+			doNext(combatMenu);
+			return;
+		}
 		fatigue(40,1);
 		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss

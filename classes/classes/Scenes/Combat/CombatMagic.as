@@ -557,7 +557,20 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
+		//Determine if critical tease!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChance += player.lib / 5;
+			if (player.lib > 100) critChance += 20;
+		}
+		if (rand(100) < critChance) {
+			crit = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
+		if (crit == true) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		doNext(playerMenu);
