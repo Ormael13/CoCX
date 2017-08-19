@@ -248,6 +248,7 @@ the text from being too boring.
 		public var sophieBimbo:SophieBimbo = new SophieBimbo();
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
+		public var tedScene:TedScenes = new TedScenes();
 		public var urta:Urta = new Urta();
 		public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
 		public var urtaPregs:UrtaPregs = new UrtaPregs();

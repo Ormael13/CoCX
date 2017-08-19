@@ -13,29 +13,82 @@ package classes.Scenes.NPCs
 	
 	public class Ted extends Monster
 	{
+		private function tedSpecialAttackOne():void {
+			var damage:Number = 0;
+			if(hasStatusEffect(StatusEffects.Blind)) {
+				outputText("Dragon-boy makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");
+			}
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");
+				combatRoundOver();
+				return;
+			}
+			damage = int((str + 60 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			damage /= 2;
+			if(damage <= 0) {
+				damage = 0;
+				outputText("You easily deflect and block the damage from dragon boy wide swing.");//Ted's
+			}
+			outputText("Dragon boy easily hits you with a wide, difficult to avoid swing.  ");
+			if(damage > 0) player.takeDamage(damage, true);
+			statScreenRefresh();
+		}
+		private function tedSpecialAttackTwo():void {
+			var damage:Number = 0;
+			if(hasStatusEffect(StatusEffects.Blind)) {
+				outputText("Dragon-boy unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
+				combatRoundOver();
+				return;
+			}
+			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
+				outputText("You manage to roll out of the way of a massive overhand swing.");
+				combatRoundOver();
+				return;
+			}
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
+				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");
+				combatRoundOver();
+				return;
+			}
+			damage = int((str + 30 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			if(damage <= 0) {
+				damage = 0;
+				outputText("You somehow manage to deflect and block dragon-boy massive overhead swing.");//Ted's
+			}
+			if(damage > 0) {
+				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");
+				damage = player.takeDamage(damage, true);
+			}
+			statScreenRefresh();
+		}
+		private function tedSpecialAttackThree():void {
+			var damage:Number = 0;
+			statScreenRefresh();
+		}
 		
-		
-		override public function defeated(hpVictory:Boolean):void//jak PC wygra
+		override protected function performCombatAction():void
 		{
-			outputText("\n\nA dragon-boy fall on his knees ");
+			var choice1:Number = rand(3);
+			if (choice1 == 0) eAttack();
+			if (choice1 == 1) tedSpecialAttackOne();
+			if (choice1 == 2) tedSpecialAttackTwo();
+			combatRoundOver();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			clearOutput();
+			outputText("A dragon-boy fall on his knees ");
 			if (this.HP < 1)outputText("beaten up");
 			else outputText("too horny to fight back");
-			outputText(". All of sudden he starting to muttering.\n\n");
-			outputText("\"<i>I lost? No...I just feel gratious today to not show this mortal my dvine powers and should make a grand strategical retreat for now.</i>\"\n\n");
-			outputText("When you comming little closer to try understand what he muttering he suddenly standing up and crushing some sort of talisman laughing loud. \"<i>I need to attend to other maters so I letting you off the hook today. Repent on your sins and worship me properly when we meet again or this time my bam hammer won't be so forgving.</i>\"");
-			outputText(" And before you react he already vanished after brighting light blinded you for a moment.");
-			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 1;
-			player.orgasm();
-			cleanupAfterCombat();
-			return;
+			game.tedScene.defeatedTed();
 		}
-	/*	
-		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void//jak PC przegra - jakiś fajny bad end zrobić ^^
+		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) etnaScene.etnaRapeYandere();
-			etnaScene.etnaRapesPlayer();
+			game.tedScene.lostToTed();
 		}
-	*/	
+		
 		public function Ted() 
 		{
 			this.a = "the ";

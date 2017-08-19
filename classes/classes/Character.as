@@ -732,6 +732,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 500;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
+			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 20;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) max += 10;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

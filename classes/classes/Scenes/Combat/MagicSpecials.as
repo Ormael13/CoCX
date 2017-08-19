@@ -1519,8 +1519,10 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.lust += 50;
+		var maleficiumDuration:Number = 10;
 		outputText("You laugh malevolently as your body fills with profane powers empowering your spells but making you blush with barely contained desire.\n\n");
-		player.createStatusEffect(StatusEffects.Maleficium,0,0,0,0);
+		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
 		enemyAI();
 	}
 	

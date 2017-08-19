@@ -287,6 +287,11 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.AUTO_CAST_BLINK] == 1) outputText("Manual");
 			else outputText("Autocast");
 		}
+		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0) {
+			outputText("\n<b>Fortress of Intellect:</b> ");
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) outputText("On");
+			else outputText("Off");
+		}
 		if (flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 0) addButton(0, "Autocast", autoChargeWeapon);
 		if (player.findPerk(PerkLib.Spellsword) >= 0 && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 1) addButton(5, "Manual", manualChargeWeapon);
 		if (flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] != 0) addButton(1, "Autocast", autoChargeArmor);

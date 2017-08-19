@@ -308,7 +308,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on an air elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsAir, 1, 1, 0, 0);
@@ -330,7 +331,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on an earth elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsEarth, 1, 1, 0, 0);
@@ -352,7 +354,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on a fire elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsFire, 1, 1, 0, 0);
@@ -374,7 +377,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on a water elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsWater, 1, 1, 0, 0);
@@ -396,7 +400,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on an ice elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsIce, 1, 1, 0, 0);
@@ -418,7 +423,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on a lightning elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsLightning, 1, 1, 0, 0);
@@ -440,7 +446,8 @@ package classes.Scenes.Camp
 			player.mana -= 100;
 			fatigue(50);
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You call on a darkness elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
+			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsDarkness, 1, 1, 0, 0);
@@ -463,7 +470,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -483,7 +490,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsEarth, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -503,7 +510,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsFire, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -523,7 +530,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsWater, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -543,7 +550,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsIce, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -563,7 +570,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsLightning, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
@@ -583,7 +590,7 @@ package classes.Scenes.Camp
 			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 			statScreenRefresh();
-			outputText("(PLACEHOLDER TEXT SO PLEASE NOT REPORT IS AS BUG) You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
 			player.addStatusValue(StatusEffects.SummonedElementalsDarkness, 2, 1);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);

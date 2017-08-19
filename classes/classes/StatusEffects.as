@@ -482,6 +482,7 @@ package classes
 		public static const TentacleBind:CombatStatusEffect              = mk2("TentacleBind");
 		public static const ThroatPunch:CombatStatusEffect               = mk2("Throat Punch");
 		public static const Titsmother:CombatStatusEffect                = mk2("Titsmother");
+		public static const TranceTransformation:CombatStatusEffect		 = mk2("Trance Transformation");
 		public static const TwuWuv:CombatStatusEffect                    = mk2("Twu Wuv");
 		public static const UBERWEB:CombatStatusEffect                   = mk2("UBERWEB");
 		public static const UnderwaterCombatBoost:CombatStatusEffect     = mk2("UnderwaterCombatBoost");

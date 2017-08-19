@@ -209,6 +209,9 @@ package classes
 		public static const ArcaneLash:PerkType = mk("Arcane Lash", "Arcane Lash",
 				"Your whip act as a catalyst for your lust inducing spells as well as for magic weapon.",
 				"You choose the 'Arcane Lash' perk, causing you to increase effects of lust inducing spells and weapon when using whip.");
+		public static const ArmorMaster:PerkType = mk("Armor Master", "Armor Master",
+				"Boosts armor points by a portion of your speed on heavy armors.",
+				"You choose the 'Armor Master' perk, increasing the effectiveness of Heavy armors by a portion of your speed.");
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
@@ -392,12 +395,18 @@ package classes
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
 				"Your reached second stage of Daoist path.",
 				"You choose the 'Daoist: Warrior Stage' perk, progressing on your Daoist path.");
+		public static const DazzlingDisplay:PerkType = mk("Dazzling display", "Dazzling display",
+				"Teasing can stun enemy for one round or increase lust damage for grapple-type teases.",
+				"You choose 'Dazzling display' perk, allowing to increse tease dmg a little bit or even stun enemy for short moment.");
 		public static const DeadlyAim:PerkType = mk("Deadly Aim", "Deadly Aim",
 				"Arrows/Bolts ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red).",
 				"You choose the 'Deadly Aim' perk, causing arrows/bolts to ignore the damage reductions of opponent.");
 		public static const DeadlyThrow:PerkType = mk("Deadly Throw", "Deadly Throw",
 				"You learned how to use throwing weapon with better efficiency adding your speed to the damage.",
 				"You choose the 'Deadly Throw' perk, adding your speed to throwing weapon damage.");
+		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
+				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
+				"You choose 'Defence Stance' perk, training to master you defence pose.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
@@ -512,6 +521,12 @@ package classes
 		public static const FortressOfIntellect:PerkType = mk("Fortress of Intellect", "Fortress of Intellect",
 				"Might increases intelligence instead of strength (toggleable).",
 				"You choose the 'Fortress of Intellect' perk. You can now change Might to boost intelligence instead of strength.");
+		public static const GaeBolg:PerkType = mk("Gae Bolg", "Gae Bolg",
+				"Damage bonus of spears and lances critical hits is doubled as long speed is high enough.",
+				"You've chosen the 'Gae Bolg' perk. Your spear and lance critical hit attacks bonus damages are doubled.");
+		public static const GiantsReach:PerkType = mk("Giant's Reach", "Giant's Reach",
+				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of Aoe attacks.",
+				"You choose 'Giant's Reach' perk. Increase range of attacks with large weapons in fights against group enemies.");
 		public static const GlacialStorm:PerkType = mk("Glacial Storm", "Glacial Storm",
 				"Cumulative 20% damage increase for every subsequent ice spell without interruption.",
 				"You choose the 'Glacial Storm' perk. Cumulative 20% damage increase for every subsequent ice spell without interruption.");
@@ -673,11 +688,14 @@ package classes
 				"You've combined all basic jobs training effects into an all-round fighting style.",
 				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs.");
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
-				"You've trained in combat using large weapons.",
+				"You've trained in using large weapons in fights.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Brawler' perk, training yourself to became Brawler.");
+		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job: Courtesan",
+				"You've mastered all various uses of tease.",
+				"You choose 'Job: Courtesan' perk, training yourself to became Courtesan.");
 		public static const JobDefender:PerkType = mk("Job: Defender", "Job: Defender",
 				"You've trained in withstanding even the heaviest attacks head on.",
 				"You choose 'Job: Defender' perk, training yourself to became Defender.");
@@ -786,6 +804,9 @@ package classes
 		public static const HiddenDualMomentum:PerkType = mk("Hidden Dual Momentum", "Hidden Dual Momentum",
 				"You've trained in using your speed to enhance power of your dual large weapons swings.",
 				"You choose 'Hidden Dual Momentum' perk, allowing to use your speed to enhance power of your attacks with dual large weapons.");
+		public static const MakeItDouble:PerkType = mk("Make it Double", "Make it Double",
+				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
+				"You choose the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
 				"Raises max mana by 35 and regain it 10% faster.",
 				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting it recovery rate.");
@@ -816,6 +837,9 @@ package classes
 		public static const Masochist:PerkType = mk("Masochist", "Masochist",
 				"Take 20% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
+		public static const MasteredDefenceStance:PerkType = mk("Mastered Defence Stance", "Mastered Defence Stance",
+				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
+				"You choose 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
 		public static const MasterGolemMaker:PerkType = mk("Master Golem Maker", "Master Golem Maker",
 				"Your proficiency in making golems allows to .",
 				"You choose 'Master Golem Maker' perk, increasing your proficiency in making golems.");
@@ -895,6 +919,9 @@ package classes
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with non-large weapons per round.",
 				"You choose the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
+		public static const PerfectDefenceStance:PerkType = mk("Perfect Defence Stance", "Perfect Defence Stance",
+				"Defend move now massively reduce incoming damage and allow for improved fatigue/mana/soulforce recovery.",
+				"You choose 'Perfect Defence Stance' perk, perfecting your defence pose beyond mastery level.");
 		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
 				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
 				"You choose the 'Power Sweep' perk.  This allows you to improve Whirlwind attack.");
@@ -1125,12 +1152,15 @@ package classes
 		public static const TankVI:PerkType = mk("Tank VI", "Tank VI",
 				"+3 extra HP per point of toughness.",
 				"You choose the 'Tank VI' perk, granting +3 extra maximum HP for each point of toughness.");
-		public static const TitanGrip:PerkType = mk("Titan Grip", "Titan Grip",
-				"Gain an ability to wield large weapons in one hand.",
-				"You choose the 'Titan Grip' perk, gaining an ability to wield large weapons in one hand.");
+		public static const ThirstForBlood:PerkType = mk("Thirst for blood", "Thirst for blood",
+				"Weapon and effect that causes bleed damage have this damage increased by 50%.",
+				"You choose the 'Thirst for blood' perk, increasing damage done by bleed effects.");
 		public static const ThunderousStrikes:PerkType = mk("Thunderous Strikes", "Thunderous Strikes",
 				"+20% 'Attack' damage while strength is at or above 80.",
 				"You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.");
+		public static const TitanGrip:PerkType = mk("Titan Grip", "Titan Grip",
+				"Gain an ability to wield large weapons in one hand.",
+				"You choose the 'Titan Grip' perk, gaining an ability to wield large weapons in one hand.");
 		public static const Tornado:PerkType = mk("Tornado", "Tornado",
 				"Increasing damage of aoe like whirlwind by 100% of base value.",
 				"You choose the 'Tornado' perk, increasing damage by aoe specials like whirlwind.");
@@ -1158,6 +1188,9 @@ package classes
 		public static const TraditionalMageVI:PerkType = mk("Traditional Mage VI", "Traditional Mage VI",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
 				"You choose the 'Traditional Mage VI' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
+		public static const Trance:PerkType = mk("Trance", "Trance",
+				"Unlocked ability to enter a state in which PC assumes a crystalline form, enhancing physical and mental abilities at constant cost of soulforce.",
+				"You choose the 'Trance' perk, which unlock 'Trance' special. It enhancing physical and mental abilities at constant cost of soulforce.");
 		public static const Transference:PerkType = mk("Transference", "Transference",
 				"Your mastery of lust and desire allows you to transfer 15% of your current arousal to your opponent.",
 				"You choose the 'Transference' perk, granting ability to transfer your own arousal to your opponent.");
@@ -1266,7 +1299,9 @@ package classes
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
-				"Spellcasting now consumes health instead of fatigue!",null,true);
+				"Spellcasting now consumes health instead of mana!",null,true);
+		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",
+				"When mana is too low to cast a spell, automatically cast from hp instead.",null,true);
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
@@ -1284,6 +1319,7 @@ package classes
 		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
+		public static const SagesKnowledge:SagesKnowledgePerk = new SagesKnowledgePerk();
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
@@ -1534,6 +1570,9 @@ package classes
 		Parry.requireLevel(6)
 			 .requireStr(50)
 			 .requireSpe(50);
+		ThirstForBlood.requireLevel(6)
+					  .requireStr(75)
+					  .requirePerk(JobWarrior);
 		//Tier 2 Strength Perks
 		IronFistsIV.requireNGPlus(3)
 				   .requireLevel(12)
@@ -1686,6 +1725,9 @@ package classes
 								   .requireStr(40)
 								   .requirePerk(BasicEndurance)
 								   .requireLevel(6);
+		ArmorMaster.requirePerk(JobKnight)
+				   .requireTou(50)
+				   .requireLevel(6);
 		//Tier 2 Toughness Perks
 		JobDefender.requirePerk(JobGuardian)
 				   .requireTou(75)
@@ -1726,6 +1768,9 @@ package classes
 								   .requireStr(80)
 								   .requireLevel(18)
 								   .requirePerk(ImprovedEndurance);
+		DefenceStance.requirePerk(JobDefender)
+					 .requireTou(80)
+					 .requireLevel(18);
 		//Tier 4 Toughness Perks
 		AdvancedEndurance.requireLevel(24)
 						 .requireTou(150)
@@ -1735,11 +1780,17 @@ package classes
 						  .requireTou(100)
 						  .requireLevel(24);
 		//perk związany z ayotech armors na pewno tu umieścić coś podobnego do juggernaut pewnie a moze właśnie wersja juggernaut dla ayo tech armors może?
+		MasteredDefenceStance.requirePerk(DefenceStance)
+							 .requireTou(120)
+							 .requireLevel(24);
 		//Tier 5 Toughness Perks
 		HalfStepToSuperiorEndurance.requireTou(180)
 								   .requireStr(120)
 								   .requirePerk(AdvancedEndurance)
 								   .requireLevel(30);
+		PerfectDefenceStance.requirePerk(MasteredDefenceStance)
+							.requireTou(160)
+							.requireLevel(30);
 		//Tier 6 Toughness Perks
 		SuperiorEndurance.requireTou(210)
 						 .requireStr(140)
@@ -1818,8 +1869,10 @@ package classes
 				  .requirePerk(Evade)
 				  .requirePerk(Agility)
 				  .requireLevel(6);
-		LightningStrikes.requireSpe(60);
-		Naturaljouster.requireSpe(60);
+		LightningStrikes.requireSpe(60)
+						.requireLevel(6);
+		Naturaljouster.requireSpe(60)
+					  .requireLevel(6);
 		VitalShot.requireSpe(60)
 				 .requirePerk(JobRanger)
 				 .requirePerk(Tactician)
@@ -1924,9 +1977,12 @@ package classes
 						.requireLevel(20)
 						.requireNGPlus(4);
 		DancersVitalityVI.requirePerk(DancersVitalityV)
-						.requireSpe(140)
-						.requireLevel(22)
-						.requireNGPlus(5);
+						 .requireSpe(140)
+						 .requireLevel(22)
+						 .requireNGPlus(5);
+		GaeBolg.requirePerk(Naturaljouster)
+			   .requireSpe(100)
+			   .requireLevel(18);
 		//Tier 4 Speed Perks
 		WildQuiver.requirePerk(Manyshot)
 				  .requireSpe(125)
@@ -2120,7 +2176,8 @@ package classes
 									  .requireInt(120)
 									  .requirePerk(ImprovedSpirituality)
 									  .requireLevel(18);
-		FortressOfIntellect.requirePerk(Archmage)
+		FortressOfIntellect.requireStatusEffect(StatusEffects.KnowsMight, "Might spell")
+						   .requirePerk(Archmage)
 						   .requireInt(100)
 						   .requireLevel(18);
 		//Tier 4 Intelligence perks
@@ -2204,6 +2261,9 @@ package classes
 							.requireInt(270)
 							.requirePerk(HalfStepToPeerlessSpirituality)
 							.requireLevel(48);
+		Trance.requirePerk(PrestigeJobSeer)
+			  .requireInt(240)
+			  .requireLevel(48);
 		//------------
 		// WISDOM
 		//------------
@@ -2347,6 +2407,13 @@ package classes
 					.requireLevel(12)
 					.requireLib(50)
 					.requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
+		JobCourtesan.requirePerk(JobSeducer)
+					.requirePerk(Heroism)
+					.requireLib(50)
+					.requireLevel(12);
+		DazzlingDisplay.requirePerk(JobCourtesan)
+					   .requireLib(50)
+					   .requireLevel(12);
 		//Tier 3 Libido Perks
 		DemonicDesireIV.requirePerk(DemonicDesireIII)
 					   .requireLib(135)
@@ -2740,6 +2807,10 @@ package classes
 						.requireWis(90)
 						.requirePerk(ExpertGolemMaker)
 						.requirePerk(ChargedCore);
+		MakeItDouble.requireLevel(18)
+					.requireStr(50)
+					.requireTou(50)
+					.requirePerk(JobWarlord);
 		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
@@ -2769,6 +2840,10 @@ package classes
 	//				.requireInt(40)
 	//				.requireWis(40)
 	//				.requirePerk(JobGolemancer);//perk for making permanent golem
+		GiantsReach.requireLevel(24)
+				   .requireStr(100)
+				   .requireTou(100)
+				   .requirePerk(JobWarlord);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {

@@ -22,7 +22,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("You notice that the kitsune has changed out of his traveling gear. He is wearing a loosely fitting men’s kimono, the grey cloth complementing his white fur. His staff lays to the side,should he need to defend himself at a moment’s notice. ");
 				flags[kFLAGS.IGNIS_ARENA_SEER]++;
 			}
-			outputText("He gives a short wave in return, motioning for you to sit next to him.  As you approach, Ignis clears his bag off the bench, making room for you.");
+			outputText("He gives a short wave in return, motioning for you to sit next to him.  As you approach, Ignis clears his bag off the bench, making room for you.  \"<i>Hello, [name], what brings you to the arena today?</i>\"");
 			menu();
 			addButton(0, "Appearance", ignisAppearance);
 			addButton(1, "Talk", ignisTalks);

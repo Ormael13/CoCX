@@ -89,6 +89,10 @@ package classes.Scenes.NPCs
 			if (this.spe >= 851) damage += ((this.spe - 850) * 0.2);
 			if (this.spe >= 901) damage += ((this.spe - 900) * 0.2);
 			if (this.spe >= 951) damage += ((this.spe - 950) * 0.2);
+			if (this.spe >= 1001) damage += ((this.spe - 1000) * 0.2);
+			if (this.spe >= 1051) damage += ((this.spe - 1050) * 0.2);
+			if (this.spe >= 1101) damage += ((this.spe - 1100) * 0.2);
+			if (this.spe >= 1151) damage += ((this.spe - 1150) * 0.2);
 			if (this.spe < 10) damage = 10;
 			damage = player.reduceDamage(damage);
 			if (damage < 10) damage = 10;

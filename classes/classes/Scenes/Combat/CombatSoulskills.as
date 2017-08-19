@@ -3,9 +3,11 @@
  */
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
+import classes.Scenes.API.FnHelpers;
 import classes.StatusEffects;
 
 public class CombatSoulskills extends BaseCombatContent {
@@ -41,7 +43,11 @@ public class CombatSoulskills extends BaseCombatContent {
 				else if (player.unicornScore() >= 5) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25)) + " HP</b> per turn.");
 				else addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
 			}
-			else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.\n");
+			else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
+		}
+		if (player.findPerk(PerkLib.Trance) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) addButton(11, "Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+			else addButton(11, "DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
 		}
 		if (player.weapon == weapons.WGSWORD) {
 			addButton(12, "Beat of War", BeatOfWar).hint("Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
@@ -62,7 +68,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
@@ -129,7 +135,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to sweep it towards " + monster.a + monster.short + ".  ");
@@ -251,7 +257,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents " + monster.a + monster.short + ".  ");
@@ -300,18 +306,88 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 100) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
 		player.createStatusEffect(StatusEffects.VioletPupilTransformation,0,0,0,0);
 		enemyAI();
 	}
-
 	public function DeactivateVioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you not need for now to constantly using Violet Pupil Transformation you concentrate and deactivating it.");
 		player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
+		enemyAI();
+	}
+	
+	private static const TranceABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
+	public function TranceTransformation():void {
+		clearOutput();
+		if (player.soulforce < 100) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var doEffect:Function = function():* {
+			var TranceBoost:Number = 10;
+			if (player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) TranceBoost += 5;
+			if (player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) TranceBoost += 5;
+			if (player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) TranceBoost += 10;
+			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.inte >= 50) TranceBoost += 10;
+			if (player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) TranceBoost += 10;
+			if (player.findPerk(PerkLib.Archmage) >= 0 && player.inte >= 75) TranceBoost += 15;
+			if (player.findPerk(PerkLib.GrandArchmage) >= 0 && player.inte >= 100) TranceBoost += 20;
+			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 25;
+			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 150) TranceBoost += 30;
+			if (player.findPerk(PerkLib.JobEnchanter) >= 0 && player.inte >= 50) TranceBoost += 5;
+			if (player.findPerk(PerkLib.Battleflash) >= 0 && player.inte >= 50) TranceBoost += 15;
+			if (player.findPerk(PerkLib.JobBarbarian) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.JobBrawler) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.JobDervish) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.IronFistsI) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.JobMonk) >= 0) TranceBoost -= 15;
+			if (player.findPerk(PerkLib.Berzerker) >= 0) TranceBoost -= 15;
+			if (player.findPerk(PerkLib.Lustzerker) >= 0) TranceBoost -= 15;
+			if (player.findPerk(PerkLib.WeaponMastery) >= 0) TranceBoost -= 15;
+			if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0) TranceBoost -= 25;
+			if (player.findPerk(PerkLib.HeavyArmorProficiency) >= 0) TranceBoost -= 15;
+			if (player.findPerk(PerkLib.AyoArmorProficiency) >= 0) TranceBoost -= 20;
+			if (player.findPerk(PerkLib.Agility) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.LightningStrikes) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.BodyCultivator) >= 0) TranceBoost -= 5;
+		//	TranceBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+			if (TranceBoost < 10) TranceBoost = 10;
+		//	if (player.findPerk(PerkLib.JobEnchanter) >= 0) TranceBoost *= 1.2;
+		//	TranceBoost *= spellModBlack();
+			TranceBoost = FnHelpers.FN.logScale(TranceBoost,TranceABC,10);
+			TranceBoost = Math.round(TranceBoost);
+			temp = TranceBoost;
+			tempStrTou = temp;
+			player.createStatusEffect(StatusEffects.TranceTransformation, 0, 0, 0, 0);
+			player.changeStatusValue(StatusEffects.TranceTransformation, 1, tempStrTou);
+			mainView.statsView.showStatUp('str');
+			// strUp.visible = true;
+			// strDown.visible = false;
+			mainView.statsView.showStatUp('tou');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			player.str += player.statusEffectv1(StatusEffects.TranceTransformation);
+			player.tou += player.statusEffectv1(StatusEffects.TranceTransformation);
+			statScreenRefresh();
+		}
+		var tempStrTou:Number = 0;
+		var tempSpe:Number = 0;
+		var tempInt:Number = 0;
+		outputText("You focus the power of your mind and soul, letting the mystic energy fill you. Your [skin] begins to crystalize as the power within you takes form. The power whirls within you like a hurricane, the force of it lifting you off your feet. This power...  You will use it to reach victory!\n");
+		doEffect.call();
+		enemyAI();
+	}
+	public function DeactivateTranceTransformation():void {
+		clearOutput();
+		outputText("You disrupt the flow of power within you, softly falling to the ground as the crystal sheathing your [skin] dissipates into nothingness.");
+		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
+		kGAMECLASS.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
+		player.removeStatusEffect(StatusEffects.TranceTransformation);
 		enemyAI();
 	}
 
@@ -319,7 +395,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		var tempStr:Number = 0;
@@ -342,7 +418,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n\n");
@@ -353,7 +429,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 150) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n\n");
@@ -364,7 +440,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 200) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(soulforceSpecials);
 			return;
 		}
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");

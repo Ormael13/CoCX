@@ -1,8 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
+	import classes.BodyParts.Skin;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.ChainedDrop;
 
 	public class Kiha extends Monster

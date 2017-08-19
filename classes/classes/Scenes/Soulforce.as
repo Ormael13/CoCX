@@ -384,7 +384,7 @@ package classes.Scenes
 			menu();
 			addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
-			addButton(2, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
+		//	addButton(2, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 			addButton(4, "E. Ribbon", AddEldritchRibbon).hint("Add 1 Eldritch Ribbon.");
@@ -396,6 +396,7 @@ package classes.Scenes
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
 			addButton(12, "GuidedBow", AddTheGuidedBow).hint("Add 1 Guided Bow.");
+			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function NonEquipmentMenu():void {
@@ -540,6 +541,10 @@ package classes.Scenes
 		public function AddTheDemonicScythe():void {
 			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
 			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
+		}
+		public function AddTheInquisitorsTome():void {
+			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.I_TOME_, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] < 1) {

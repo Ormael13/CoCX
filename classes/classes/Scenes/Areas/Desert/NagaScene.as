@@ -1419,9 +1419,10 @@ public function naggaTease():void {
 		if(rand(100) <= chance) {
 			//NERF TEASE DAMAGE
 			damage *= .9;
-			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				damage *= 1.15;
 			}
+			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
 			monster.teased(monster.lustVuln * damage);
 			kGAMECLASS.combat.teaseXP(1);
 		}

@@ -1,7 +1,3 @@
-/**
- * ...
- * @author Ormael
- */
 package classes.Items.Weapons
 {
 	import classes.GlobalFlags.kFLAGS;
@@ -25,5 +21,4 @@ package classes.Items.Weapons
 			return (8 + boost);
 		}
 	}
-
 }
