@@ -9532,7 +9532,9 @@
 			//0 == black ink (female scylla TF)
 			//1 == grey ink (herm scylla TF)
 			//2 == white ink (male scylla TF)
-			//3 == abyssal ink (kraken TF)
+			//3 == abyssal black ink (female kraken TF)
+			//4 == abyssal grey ink (herm kraken TF)
+			//5 == abyssal white ink (male kraken TF)
 			player.slimeFeed();
 			//init variables
 			var changes:Number = 0;

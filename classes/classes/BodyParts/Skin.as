@@ -246,6 +246,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasMagicalTattoo():Boolean {
 		return base.adj == "sexy tattooed";
 	}
+	public function hasBattleTattoo():Boolean {
+		return base.adj == "covered with various intricate battle tattoos";
+	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
 		base.restore(keepTone);
@@ -318,6 +321,10 @@ public class Skin extends SaveableBodyPart {
 			SKIN_BASE_PLAIN, COVERAGE_LOW, SKIN_COAT_STONE],
 		[SKIN_TYPE_PARTIAL_AQUA_SCALES,
 			SKIN_BASE_PLAIN, COVERAGE_LOW, SKIN_COAT_AQUA_SCALES],
+		[SKIN_TYPE_AQUA_RUBBER_LIKE,
+			SKIN_BASE_PLAIN, COVERAGE_NONE, 0],
+		[SKIN_TYPE_TATTOED_ONI,
+			SKIN_BASE_PLAIN, COVERAGE_NONE, 0],
 	]);
 	private static const TYPE_TO_BASE:Object               = TYPE_TO_BASE_COVERAGE_COAT[0];
 	private static const TYPE_TO_COVERAGE:Object           = TYPE_TO_BASE_COVERAGE_COAT[1];
@@ -328,6 +335,8 @@ public class Skin extends SaveableBodyPart {
 		base.type = TYPE_TO_BASE[value];
 		coat.type = TYPE_TO_COAT[value];
 		if (value == SKIN_TYPE_TATTOED) base.adj = "sexy tattooed";
+		if (value == SKIN_TYPE_AQUA_RUBBER_LIKE) base.adj = "slippery rubber-like";
+		if (value == SKIN_TYPE_TATTOED_ONI) base.adj = "covered with various intricate battle tattoos";
 	}
 	override protected function loadFromOldSave(savedata:Object):void {
 		//Convert from old skinDesc to new skinAdj + skinDesc!
@@ -362,7 +371,7 @@ public class Skin extends SaveableBodyPart {
 		if (chitinColor === "no") chitinColor = "";
 		if (scalesColor === "no") scalesColor = "";
 		//noinspection JSDeprecatedSymbols
-		if (InCollection(type, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_TATTOED, SKIN_TYPE_STONE, SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_PARTIAL_DRAGON_SCALES)) {
+		if (InCollection(type, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_TATTOED, SKIN_TYPE_STONE, SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_PARTIAL_DRAGON_SCALES, SKIN_TYPE_AQUA_RUBBER_LIKE, SKIN_TYPE_TATTOED_ONI)) {
 			coverage   = COVERAGE_NONE;
 			base.type  = type;
 			base.color = (type == SKIN_TYPE_SCALES && scalesColor) ? scalesColor : tone;

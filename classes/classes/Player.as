@@ -403,7 +403,7 @@ use namespace kGAMECLASS;
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if(hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -486,7 +486,7 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
+			if(hasStatusEffect(StatusEffects.ChargeWeapon) && weaponName != "fists") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
 			attack = Math.round(attack);
 			return attack;
 		}
@@ -1948,14 +1948,10 @@ use namespace kGAMECLASS;
 			if (lowerBody == 1)
 				minoCounter++;
 			if (hornType == 2)
-				minoCounter += 2;
+				minoCounter++;
 			if (minoCounter >= 4) {
-				if (cumQ() > 500) {
-					if (cumQ() > 1000) {
-						minoCounter++;
-					}
+				if (cumQ() > 500)
 					minoCounter++;
-				}
 				if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
 					minoCounter++;
 				if (tallness >= 81)
@@ -1988,11 +1984,9 @@ use namespace kGAMECLASS;
 			if (lowerBody == 1)
 				cowCounter++;
 			if (hornType == 2)
-				cowCounter += 2;
+				cowCounter++;
 			if (cowCounter >= 4) {
 				if (biggestTitSize() > 4)
-					cowCounter++;
-				if (biggestLactation() > 2)
 					cowCounter++;
 				if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
 					cowCounter++;
@@ -2809,6 +2803,10 @@ use namespace kGAMECLASS;
 		public function oniScore():Number {
 			Begin("Player","racialScore","orca");
 			var oniCounter:Number = 0;
+			if (earType == EARS_ONI)
+				oniCounter++;
+			if (faceType == FACE_ONI_TEETH)
+				oniCounter++;
 			if (armType == ARM_TYPE_ONI)
 				oniCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ONI)
@@ -2819,9 +2817,7 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (tone >= 75)
 				oniCounter++;
-			if (hasVagina() && biggestTitSize() >= 19)
-				oniCounter++;
-			if (cocks.length > 18)
+			if ((hasVagina() && biggestTitSize() >= 19) || (cocks.length > 18))
 				oniCounter++;
 			if (tallness >= 120)
 				oniCounter++;
@@ -4240,9 +4236,9 @@ use namespace kGAMECLASS;
 			Begin("Player","getAllMaxStats.racial");
 			//Alter max stats depending on race (+15 za pkt)
 			if (minotaurScore() >= 4) {
-				if (minotaurScore() >= 9) {
+				if (minotaurScore() >= 10) {
 					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
+					maxTou += (45 * (1 + newGamePlusMod));
 					maxSpe -= (20 * (1 + newGamePlusMod));
 					maxInt -= (40 * (1 + newGamePlusMod));
 					maxLib += (45 * (1 + newGamePlusMod));
@@ -4256,9 +4252,9 @@ use namespace kGAMECLASS;
 				}
 			}//+20/10-20
 			if (cowScore() >= 4) {
-				if (cowScore() >= 9) {
+				if (cowScore() >= 10) {
 					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
+					maxTou += (45 * (1 + newGamePlusMod));
 					maxSpe -= (40 * (1 + newGamePlusMod));
 					maxInt -= (20 * (1 + newGamePlusMod));
 					maxLib += (45 * (1 + newGamePlusMod));

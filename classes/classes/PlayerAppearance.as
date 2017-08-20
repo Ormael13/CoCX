@@ -1402,6 +1402,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
 			else if(player.earType == EARS_GOAT)
 				outputText("  A pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
+			else if(player.earType == EARS_ONI)
+				outputText("  A pair of pointed elf-like oni ears stick out from your skull.");
 			//</mod>
 			if (player.gillType == GILLS_FISH)
 			{
@@ -1465,6 +1467,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
 			else if(player.earType == EARS_GOAT)
 				outputText("  The [hair] on your head is parted by a pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
+			else if(player.earType == EARS_ONI)
+				outputText("  The [hair] on your head is parted by a pair of pointed elf-like oni ears.");
 			//</mod>
 			if(player.antennae == ANTENNAE_MANTIS)
 			{
@@ -1673,6 +1677,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.faceType == FACE_DEVIL_FANGS) {
 			outputText("  Your mouth is somewhat human save for your mouth filled with fiendish canines.  It's decorated by [skin coat].");
 		}
+		if (player.faceType == FACE_ONI_TEETH) {
+			outputText("  Your mouth is mostly human save for your two large ogre like canines.  It's decorated by [skin coat].");
+		}
 		if (player.faceType == FACE_KANGAROO) {
 			outputText("  Your face is ");
 			if (!player.hasCoat()) {
@@ -1784,7 +1791,7 @@ public function RacialScores():void {
 	else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 	else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
 	if (player.cowScore() >= 9) {
-		outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int");
+		outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int");
 		outputText(", -" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	}
 	else if (player.cowScore() >= 4 && player.cowScore() < 9) {
@@ -1910,7 +1917,7 @@ public function RacialScores():void {
 	else if (player.manticoreScore() >= 1 && player.manticoreScore() < 5) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
 	else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
 	if (player.minotaurScore() >= 9) {
-		outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+" + (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int");
+		outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+" + (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int");
 		outputText(", -" + (45 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lust)</font>");
 	}
 	else if (player.minotaurScore() >= 4 && player.minotaurScore() < 9) {

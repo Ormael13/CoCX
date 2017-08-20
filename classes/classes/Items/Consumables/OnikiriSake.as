@@ -104,7 +104,7 @@ public class OnikiriSake extends Consumable {
 			mutations.humanizeLowerBody();
 		}
 		//Arms
-		if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_ONI) && player.lowerBody == LOWER_BODY_TYPE_ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.armType != ARM_TYPE_ONI && player.armType != ARM_TYPE_GARGOYLE && player.lowerBody == LOWER_BODY_TYPE_ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.armType != ARM_TYPE_HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 			outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
@@ -114,13 +114,30 @@ public class OnikiriSake extends Consumable {
 		//Horn
 		
 		//Eyes
-		
-		//Eyes
-		
+		/*if (player.faceType == FACE_MANTICORE && player.eyeType != EYES_MANTICORE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nWhile you do see way better in the dark, these red pupils are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
+			mutations.setEyeType(EYES_MANTICORE);
+			changes++;
+		}*/
+		//Ears
+		if (player.armType == ARM_TYPE_ONI && player.earType == EARS_HUMAN && player.earType != EARS_ONI && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
+			mutations.setEarType(EARS_ONI);
+			changes++;
+		}
+		if (player.armType == ARM_TYPE_ONI && player.earType != EARS_HUMAN && player.earType != EARS_ONI && changes < changeLimit && rand(3) == 0) {
+			mutations.humanizeEars();
+			changes++;
+		}
 		//Face
-		
+		if (player.earType == EARS_ONI && player.faceType != FACE_MANTICORE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nY");
+			if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+			outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");
+			mutations.setFaceType(FACE_ONI_TEETH);
+			changes++;
+		}
 		//Skin
-		//najpierw PC dostaje tattoed skin a potem zmiana coloru
 		if (player.skinTone != "red" && player.skinTone != "reddish orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 			var color:String;
 			color = randomChoice("purple","reddish orange","red","blue");
@@ -131,6 +148,18 @@ public class OnikiriSake extends Consumable {
 			else outputText(player.skinDesc);
 			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
 		}
+//		mutationStep(player.skin.base.type == SKIN_TYPE_PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
+//			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
+		//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
+		//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
+		//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
+		//	}
+//			player.skin.base.adj = "covered with various intricate battle tattoos";
+//		});
+		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+			mutations.humanizeSkin();
+		}
+		//Taller
 		if (changes < changeLimit && rand(3) == 0 && player.tallness < 132) {
 			temp = rand(5) + 3;
 			if (player.tallness > 117) temp = Math.floor(temp / 2);
@@ -142,6 +171,11 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		if (rand(4) == 0) outputText(player.modTone(85, 3));
+		//FAILSAFE CHANGE
+		if (changes == 0) {
+			outputText("\n\nRemarkably, the sake has no effect aside making you feel little more drunk.  Maybe next time?");
+			player.refillHunger(10);
+		}
 		player.refillHunger(10);
 		return false;
 	}

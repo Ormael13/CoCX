@@ -2378,6 +2378,8 @@
 			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", "",true],
 			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", "",true],
 			[SKIN_TYPE_MOSS, "moss", "moss", "",false],
+			[SKIN_TYPE_AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin","",false],
+			[SKIN_TYPE_TATTOED_ONI, "TATTOED_ONI", "tattooed skin","",false],
 			[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "",true],
 			[SKIN_TYPE_PARTIAL_STONE, "partial stone", "partial stone", "",false],
 			[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", "",true],
@@ -2467,7 +2469,8 @@
 					[EYES_REPTILIAN, "reptilian"],
 					[EYES_SNAKE, "snake"],
 					[EYES_DRAGON, "dragon"],
-					[EYES_DEVIL, "devil"]
+					[EYES_DEVIL, "devil"],
+					[EYES_ONI, "devil"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2495,7 +2498,8 @@
 					[EARS_YETI, "yeti"],
 					[EARS_ORCA, "orca"],
 					[EARS_SNAKE, "snake"],
-					[EARS_GOAT, "goat"]
+					[EARS_GOAT, "goat"],
+					[EARS_ONI, "goat"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(

@@ -97,6 +97,7 @@ package classes.Items {
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case ARM_TYPE_KITSUNE:
+				case ARM_TYPE_ONI:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
 					break;
 				case ARM_TYPE_SHARK:
@@ -320,6 +321,7 @@ package classes.Items {
 		[EARS_LION, null],
 		[EARS_LIZARD, StatusEffects.UnlockedLizardEars],
 		[EARS_MOUSE, null],
+		[EARS_ONI, null],
 		[EARS_ORCA, StatusEffects.UnlockedOrcaEars],
 		[EARS_PIG, null],
 		[EARS_RACCOON, null],
@@ -343,6 +345,7 @@ package classes.Items {
 		[EYES_GORGON, StatusEffects.UnlockedGorgonEyes],
 		[EYES_HUMAN, null],
 		[EYES_MANTICORE, null],
+		[EYES_ONI, null],
 		[EYES_REPTILIAN, StatusEffects.UnlockedLizardEyes],
 		[EYES_SNAKE, StatusEffects.UnlockedSnakeEyes],
 	]);
@@ -371,6 +374,7 @@ package classes.Items {
 		[FACE_LIZARD, StatusEffects.UnlockedLizardFace],
 		[FACE_MANTICORE, null],
 		[FACE_MOUSE, null],
+		[FACE_ONI_TEETH, null],
 		[FACE_ORCA, StatusEffects.UnlockedOrcaFace],
 		[FACE_PIG, null],
 		[FACE_PLANT_DRAGON, null],

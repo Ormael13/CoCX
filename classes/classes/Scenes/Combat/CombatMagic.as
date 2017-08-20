@@ -21,14 +21,14 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && player.weaponName != "fists") {
 			spellChargeWeapon(true);
 			useMana((30 * spellChargeWeaponCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && !player.isNaked()) {
 			spellChargeArmor(true);
 			useMana((40 * spellChargeArmorCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -407,16 +407,24 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You are far too aroused to focus on white magic.\n\n");
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
-					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
+				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon) && player.weaponName != "fists")
+					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
+				else if (player.weaponName == "fists") {
+					outputText("<b>Charge weapon can't be casted on your own fists.</b>\n\n");
+					addButtonDisabled(0, "Charge W.", "Lacking weapon to charge.");
+				}
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
-					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
+				if (!player.hasStatusEffect(StatusEffects.ChargeArmor) && !player.isNaked())
+					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
+				else if (player.isNaked()) {
+					outputText("<b>Charge armor can't be casted without wearing any armor or even underwear.</b>\n\n");
+					addButtonDisabled(1, "Charge A.", "Lacking any armor/underwear to charge.");
+				}
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");

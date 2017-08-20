@@ -386,15 +386,14 @@ package classes.Scenes
 			menu();
 			addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
-		//	addButton(2, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 			addButton(4, "E. Ribbon", AddEldritchRibbon).hint("Add 1 Eldritch Ribbon.");
 			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
-			addButton(7, "DualSwords", AddDualSwords).hint("Add 1 pair of Dual Swords for testing purposes.");
-			addButton(8, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes for testing purposes.");
-			addButton(9, "Dual BFS", AddDualBigFuckingSwords).hint("Add 1 pair of Big Fucking Swords for testing purposes.");
+			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
+			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
 			addButton(12, "GuidedBow", AddTheGuidedBow).hint("Add 1 Guided Bow.");
@@ -886,17 +885,13 @@ package classes.Scenes
 			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
 			inventory.takeItem(armors.LAYOARM, EquipmentMenu);
 		}
-		public function AddDualSwords():void {
-			outputText("\n\n<b>(Gained 1 pair of Dual Swords!)</b>\n\n");
-			inventory.takeItem(weapons.DSWORD_, EquipmentMenu);
+		public function AddNineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
+			inventory.takeItem(weapons.NTWHIP, EquipmentMenu);
 		}
 		public function AddDualMinoAxes():void {
 			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
 			inventory.takeItem(weapons.DL_AXE_, EquipmentMenu);
-		}
-		public function AddDualBigFuckingSwords():void {
-			outputText("\n\n<b>(Gained 1 pair of Big Fucking Swords!)</b>\n\n");
-			inventory.takeItem(weapons.DBFSWO, EquipmentMenu);
 		}
 		public function AddWhiteBook():void {
 			outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");

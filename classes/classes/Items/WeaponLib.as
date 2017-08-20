@@ -42,6 +42,7 @@ package classes.Items
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
 		public const MACE   :Weapon = new Weapon("Mace   ","Mace","mace","a mace","smash",9,360,"This is a mace, designed to be able to crush against various defenses.");
+		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Weapon = new Weapon("Nodachi","Nodachi","nodachi","a nodachi","keen cut",17,680,"A curved over 1,7 m long bladed weapon that cuts through flesh with the greatest of ease.", "Large");
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.");

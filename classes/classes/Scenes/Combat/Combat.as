@@ -2821,7 +2821,7 @@ public function attack():void {
 			var whipCorSelf:Number = 0;
 			var whipLustSelf:Number = 0;
 			var hasArcaneLash:Boolean = player.hasPerk(PerkLib.ArcaneLash);
-			if ((player.weapon == weapons.WHIP || player.weapon == weapons.PWHIP) && rand(2) == 0) {
+			if ((player.weapon == weapons.WHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.NTWHIP) && rand(2) == 0) {
 				whipLustDmg = (5 + player.cor / 12) * (hasArcaneLash ? 1.4 : 1); // 5-13.3 (7-18.7 w/perk)
 				whipCorSelf = 0;
 				whipLustSelf = 0;
