@@ -1699,11 +1699,25 @@ private function swimInStreamFap():void {
 private function swimInStreamFinish():void {
 	clearOutput();
 	//Blown up factory? Corruption gains.
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && player.cor < 50) 
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) 
 	{
 		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n");
 		dynStats("cor", 0.5);
-		dynStats("lust", 15, "resisted", true);
+		if (player.cor < 25) dynStats("lust", 30, "resisted", true);
+		if (player.cor >= 25 && player.cor < 50) dynStats("lust", 20, "resisted", true);
+		if (player.cor >= 50) dynStats("lust", 10, "resisted", true);
+	}
+	else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
+		outputText("You feel a bit cleaner after swimming in the waters. \n\n");
+		if (player.cor < 33) dynStats("lust", -30, "resisted", false);
+		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -20, "resisted", false);
+		if (player.cor >= 66) dynStats("lust", -10, "resisted", false);
+	}
+	else {
+		outputText("You feel a little bit cleaner after swimming in the waters. \n\n");
+		if (player.cor < 33) dynStats("lust", -15, "resisted", false);
+		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -10, "resisted", false);
+		if (player.cor >= 66) dynStats("lust", -5, "resisted", false);
 	}
 	outputText("Eventually, you swim back to the riverbank and dry yourself off");
 	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName);

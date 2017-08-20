@@ -144,8 +144,14 @@ package classes.Scenes.Areas
 			}
 			if (chooser == 3) 
 			{
-				this.izumiScenes.encounter();
-				return;
+				if (flags[kFLAGS.SOUL_SENSE_IZUMI] < 3) {
+					this.izumiScenes.encounter();
+					return;
+				}
+				else {
+					basiliskScene.basiliskGreeting();
+					return;
+				}
 			}
 		}
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING

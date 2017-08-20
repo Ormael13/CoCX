@@ -1361,7 +1361,6 @@ public function soulequipmentmerchant():void {
 	addButton(1, "Shelf 1", soulequipmentshelf1);
 	addButton(2, "Shelf 2", soulequipmentshelf2);
 //	addButton(3, "Shelf 3", soulequipmentshelf3);//armors
-	addButton(4, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
 	//addButton(9, weapons.ERIBBON.shortName, weaponBuy, weapons.ERIBBON);//czy bedzie tu jako do sprzedaży czy jako nagroda za quest lub drop z mobka/bossa?
 	//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
 	//addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
@@ -1386,17 +1385,21 @@ public function soulequipmentshelf2():void {
 	menu();
 	addButton(0, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
 	addButton(1, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
-	addButton(2, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(2, weapons.OTETSU.shortName, weaponBuy, weapons.OTETSU);
 	addButton(3, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
 	addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
+	addButton(5, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
+	addButton(6, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
+	addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
 	addButton(14, "Back", soulequipmentmerchant);
 }
 public function soulequipmentshelf3():void {
 	menu();
-	//if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(7, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
-	//addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
-	//addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
-	//addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+	//if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
+	//addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
+	//addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
+	//addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
 	addButton(14, "Back", soulequipmentmerchant);
 }
 

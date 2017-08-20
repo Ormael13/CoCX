@@ -102,8 +102,8 @@ public function encounterTamanisDaughters():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
 	clearOutput();
-	if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 4) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
-	if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 4) {
+	if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
+	if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 2) {
 		flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
 		outputText("\n\n<b>You have meet them enough times to be able to find them in the future when using soul sense. (Removes Tamani Daughters from forest explore encounters pool!)</b>\n\n");
 	}

@@ -1377,7 +1377,6 @@
 								dynStats("sen", 3, "lus", 10);
 							}
 						}
-
 					}
 					//If already has max doggie breasts!
 					else if (rand(2) == 0) {

@@ -989,6 +989,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webbing between your toes that assists you in swimming.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip.");
+		else if (player.lowerBody == LOWER_BODY_TYPE_ONI)
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered with a set of warlike tattoo and your feet end with sharp black nails.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1147,6 +1149,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
 		else if (player.armType == ARM_TYPE_DEVIL)
 			outputText("  Your forearms are covered with fur and end with four finger paws like hands, but armed with claws. Despite their weird shape you have more then enough manual dexterity to draw even the most complex magical designs when spellcasting.");
+		else if (player.armType == ARM_TYPE_ONI)
+			outputText("  Your arms are mostly human, although covered in warlike tattoos. You have human hands with sharp black nails.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody == REAR_BODY_FENRIR_ICE_SPIKES) {
@@ -1948,6 +1952,10 @@ public function RacialScores():void {
 	}
 	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
+	if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis)</font>");
+	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis)</font>");
+	else if (player.oniScore() >= 1 && player.oniScore() < 6) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
+	else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
 	if (player.orcaScore() >= 12) outputText("\n<font color=\"#0000a0\">Orca-morph: " + player.orcaScore() + " (+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
 	else if (player.orcaScore() >= 6 && player.orcaScore() < 12) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe)</font>");
 	else if (player.orcaScore() >= 1 && player.orcaScore() < 6) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");

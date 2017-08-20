@@ -286,6 +286,13 @@ package classes
 		public static const CarefulButRecklessAimAndShooting:PerkType = mk("Careful but Reckless Aim and Shooting", "Careful but Reckless Aim and Shooting",
 				"Increase accuracy by 30% at cost of loosing 15 Tou.",
 				"You choose the 'Careful but Reckless Aim and Shooting' perk, improving your accuracy by 30% at the cost of lowering by 15 your toughness.");
+		public static const CatchTheBlade:PerkType = mk("Catch the blade", "Catch the blade",
+				"[if(player.spe>=50)" +
+						"Increases deflect chance by up to 15% while using only fists/fist weapons. (Speed-based)." +
+						"|" +
+						"<b>You are not fast enough to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Catch the blade' perk, giving you a chance to deflect blow with your fists. (Speed-based).");
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
 				"Your transformed joins allows you to move more swiftly and with greater nimbleness.",
 				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
@@ -913,7 +920,7 @@ package classes
 				"[if(player.spe>=50)" +
 						"Increases deflect chance by up to 10% while wielding a weapon. (Speed-based)." +
 						"|" +
-						"<b>You are not durable enough to gain benefit from this perk.</b>" +
+						"<b>You are not fast enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Parry' perk, giving you a chance to deflect blow with your weapon. (Speed-based).");
 		public static const PeerlessEndurance:PerkType = mk("Peerless Endurance", "Peerless Endurance",
@@ -1031,6 +1038,12 @@ package classes
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
+		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
+				"When you block an attack riposte with a shield bash damaging your opponent.",
+				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack.");
+		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
+				"When you wearing a shield add quarter of block value to your armor (at least 1).",
+				"You choose the 'Shield Expertise' perk, allowing to increase you armor when using shield.");
 		public static const ShieldGrandmastery:PerkType = mk("Shield Grandmastery", "Shield Grandmastery",
 				"[if(player.tou>=100)" +
 						"Increases block chance by up to 10% while using a shield (Toughness-based) and lowering by 50% fatigue cost." +
@@ -1038,6 +1051,9 @@ package classes
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Shield Grandmastery' perk, lowering fatigue cost and increasing block chance as long as you're wielding a shield (Toughness-based).");
+		public static const ShieldHarmony:PerkType = mk("Shield Harmony", "Shield Harmony",
+				"When you using shield and isn't stunned gain 10% phys damage reduction.",
+				"You choose the 'Shield Harmony' perk, allowing to reduce recived phys damage when using shield.");
 		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
 				"[if(player.tou>=50)" +
 						"Increases block chance by up to 10% while using a shield (Toughness-based)." +
@@ -1045,9 +1061,6 @@ package classes
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
-		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash damaging your opponent.",
-				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack.");
 		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
@@ -1768,6 +1781,9 @@ package classes
 						 .requireStr(60)
 						 .requirePerk(HalfStepToImprovedEndurance)
 						 .requireLevel(12);
+		ShieldExpertise.requirePerk(JobKnight)
+					   .requireTou(70)
+					   .requireLevel(12);
 		//Tier 3 Toughness Perks
 		Juggernaut.requireTou(100)
 				  .requirePerk(HeavyArmorProficiency)
@@ -1778,6 +1794,9 @@ package classes
 								   .requireLevel(18)
 								   .requirePerk(ImprovedEndurance);
 		DefenceStance.requirePerk(JobDefender)
+					 .requireTou(80)
+					 .requireLevel(18);
+		ShieldHarmony.requirePerk(ShieldExpertise)
 					 .requireTou(80)
 					 .requireLevel(18);
 		//Tier 4 Toughness Perks
@@ -2308,6 +2327,10 @@ package classes
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
 							  .requireLevel(18);
+		CatchTheBlade.requirePerk(JobMonk)
+					 .requireWis(80)
+					 .requireSpe(100)
+					 .requireLevel(18);
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)

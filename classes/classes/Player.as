@@ -387,6 +387,10 @@ use namespace kGAMECLASS;
 			}
 			armorDef += speedBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
+			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
+				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
+				else armorDef += 1;
+			}
 			//Acupuncture effect
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
@@ -1403,6 +1407,17 @@ use namespace kGAMECLASS;
 			{
 				race = "Yggdrasil";
 			}
+			if (oniScore() >= 6)
+			{
+				if (oniScore() >= 12) {
+					if (isTaur()) race = "oni-taur";
+					else race = "oni";
+				}
+				else {
+					if (isTaur()) race = "half oni-taur";
+					else race = "half oni";
+				}
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -1603,6 +1618,8 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (orcaScore() >= 6)
 				chimeraCounter++;
+			if (oniScore() >= 6)
+				chimeraCounter++;
 			if (bunnyScore() >= 4)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
@@ -1695,6 +1712,8 @@ use namespace kGAMECLASS;
 			if (sharkScore() >= 8)
 				grandchimeraCounter++;
 			if (orcaScore() >= 12)
+				grandchimeraCounter++;
+			if (oniScore() >= 12)
 				grandchimeraCounter++;
 //			if (bunnyScore() >= 4)
 //				grandchimeraCounter++;
@@ -2784,6 +2803,31 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return orcaCounter;
+		}
+
+		//Oni score
+		public function oniScore():Number {
+			Begin("Player","racialScore","orca");
+			var oniCounter:Number = 0;
+			if (armType == ARM_TYPE_ONI)
+				oniCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_ONI)
+				oniCounter++;
+			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
+				oniCounter++;
+			if (tailType == 0)
+				oniCounter++;
+			if (tone >= 75)
+				oniCounter++;
+			if (hasVagina() && biggestTitSize() >= 19)
+				oniCounter++;
+			if (cocks.length > 18)
+				oniCounter++;
+			if (tallness >= 120)
+				oniCounter++;
+			
+			End("Player","racialScore");
+			return oniCounter;
 		}
 
 		//Determine Mutant Rating
@@ -4446,6 +4490,20 @@ use namespace kGAMECLASS;
 					maxStr += (35 * (1 + newGamePlusMod));
 					maxTou += (20 * (1 + newGamePlusMod));
 					maxSpe += (35 * (1 + newGamePlusMod));
+				}
+			}//+10/10-20
+			if (oniScore() >= 6) {
+				if (oniScore() >= 12) {
+					maxStr += (100 * (1 + newGamePlusMod));
+					maxTou += (60 * (1 + newGamePlusMod));
+					maxInt -= (20 * (1 + newGamePlusMod));
+					maxWis += (40 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr += (50 * (1 + newGamePlusMod));
+					maxTou += (30 * (1 + newGamePlusMod));
+					maxInt -= (10 * (1 + newGamePlusMod));
+					maxWis += (20 * (1 + newGamePlusMod));
 				}
 			}//+10/10-20
 			if (demonScore() >= 5) {

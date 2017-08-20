@@ -2663,7 +2663,7 @@ public function attack():void {
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && player.weaponName == "deadly spear") damage *= 2.5;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance")) damage *= 2.5;
 		else damage *= 1.75;
 	}
 	//Apply AND DONE!
@@ -2852,7 +2852,7 @@ public function attack():void {
 		//Selfcorrupting weapons
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
-		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
+		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
 			//10% chance
 			if(rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
@@ -3079,7 +3079,13 @@ public function combatMiss():Boolean {
 	return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;
 }
 public function combatParry():Boolean {
-	return player.findPerk(PerkLib.Parry) >= 0 && player.spe >= 50 && player.str >= 50 && rand(100) < ((player.spe - 50) / 5) && player.weapon != WeaponLib.FISTS;
+	var parryChance:int = 0;
+	if (player.findPerk(PerkLib.Parry) >= 0 && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
+		if (player.spe <= 100) parryChance += (player.spe - 50) / 5;
+		else parryChance += 10;
+	}
+	if (player.findPerk(PerkLib.CatchTheBlade) >= 0 && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 15;
+	return rand(100) <= parryChance;
 //	trace("Parried!");
 }
 public function combatCritical():Boolean {

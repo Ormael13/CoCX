@@ -16,6 +16,7 @@ package classes.Scenes
 	import classes.Scenes.Areas.Forest.TamanisDaughters;
 	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 	import classes.Scenes.Areas.Forest.WorldTree;
+	import classes.Scenes.Areas.HighMountains.IzumiScene;
 	import classes.Scenes.NPCs.Sonya;
 	import classes.Scenes.NPCs.RyuBiDragon;
 	import classes.Scenes.Areas.Forest.Alraune;
@@ -26,6 +27,7 @@ package classes.Scenes
 	{
 		public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 		public var tamaniScene:TamaniScene = new TamaniScene();
+		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var wolrdtreeScene:WorldTree = new WorldTree();
 		
 		
@@ -404,13 +406,13 @@ package classes.Scenes
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
+			addButton(3, "OnikiriSake", AddOnikiriSake).hint("Add 1 Onikiri Sake. (1st iteration - still incomplete TF)");
 			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
 			addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
-			//addButton(6, "ManticoreV", AddManticoreVenom).hint("Add 1 Manticore Venom. (1st iteration - still incomplete TF)");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
 			addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
@@ -462,9 +464,9 @@ package classes.Scenes
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, NonEquipmentMenu);
 		}
-		public function AddManticoreVenom():void {
-			outputText("\n\n<b>(Gained 1 vial of Manticore Venom!)</b>\n\n");
-			inventory.takeItem(consumables.MANTICV, SoulforceCheats);
+		public function AddOnikiriSake():void {
+			outputText("\n\n<b>(Gained 1 bottle of Onikiri Sake!)</b>\n\n");
+			inventory.takeItem(consumables.ONISAKE, SoulforceCheats);
 		}
 		public function AddBladeGrass():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
@@ -1968,9 +1970,10 @@ package classes.Scenes
 			outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 			outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 			menu();
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 5) addButton(0, "Tamani", TamaniEnc);
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 5) addButton(1, "Tamani D.", TamaniDaughtersEnc);
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 5) addButton(2, "KitsuMansion", KitsuneMansion);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 3) addButton(0, "Tamani", TamaniEnc);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
+			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 3) addButton(2, "KitsuMansion", KitsuneMansion);
+			if (flags[kFLAGS.SOUL_SENSE_IZUMI] == 3) addButton(3, "Izumi", IzumiEnc);
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] == 1) addButton(10, "WorldTree", findWorldTree);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -2001,6 +2004,17 @@ package classes.Scenes
 				player.soulforce -= 90;
 				statScreenRefresh();
 				kGAMECLASS.kitsuneScene.enterTheTrickster();
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		public function IzumiEnc():void {
+			if (player.soulforce >= 300) {
+				player.soulforce -= 300;
+				statScreenRefresh();
+				izumiScenes.encounter();
 			}
 			else {
 				outputText("Your current soulforce is too low.");

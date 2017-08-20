@@ -195,6 +195,7 @@ public static const ARM_TYPE_YETI:int												=  16;
 public static const ARM_TYPE_ORCA:int												=  17;
 public static const ARM_TYPE_PLANT2:int												=  18;
 public static const ARM_TYPE_DEVIL:int												=  19;
+public static const ARM_TYPE_ONI:int												=  20;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -306,6 +307,7 @@ public static const LOWER_BODY_TYPE_LION:int										=  35;
 public static const LOWER_BODY_TYPE_YETI:int										=  36;
 public static const LOWER_BODY_TYPE_ORCA:int										=  37;
 public static const LOWER_BODY_TYPE_YGG_ROOT_CLAWS:int								=  38;
+public static const LOWER_BODY_TYPE_ONI:int											=  39;
 
 // rearBody
 public static const REAR_BODY_NONE:int                                              =   0;
