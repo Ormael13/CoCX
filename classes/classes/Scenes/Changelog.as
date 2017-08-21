@@ -38,6 +38,8 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Draconic Lungs (Evolved). Req. Draconic Lungs perk and dragon score 10+. Effect: +5 to max speed and toughness (scalable) and increase power of dragon breath attacks 3x\n");
 			outputText("-New tier 2 misc lvl-up perk: Kitsune Thyroid Gland (Evolved). Req. Kitsune Thyroid Gland and perk for one of paths and kitsune score 6+. Effect: +5 to max speed and wisdom (scalable), increase by 1 fatigue recovery in combat, increase fire dgm, lust dmg of fox fire specials by 50%, 50% higher cost of all kitsune specials (bonuses to foxfire/cost inc are only added when PC have 9 tails)\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Contract Rank 3. Req. perk Elemental Contract Rank 2 and 75+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 3\n");
+			outputText("-New tier 2 libido lvl-up perk: Job: Courtesan Req. Job: Seducer, Heroism perks and 50+ libido. Effect: +20 to max lust, +20% to tease damage against boss enemies, +15 max Libido (scalable)\n");
+			outputText("-New tier 2 libido lvl-up perk: Dazzling display Req. Job: Courtesan perk and 50+ lib. Effect: 15% chance to stun enemy for one turn when using Tease, 10% chance for Naga/Scylla/Kraken/Goo gripple deal 20% more lust damage\n");
 			outputText("-New tier 2 intelligence lvl-up perk: Improved Spirituality. Req. Half-step-to Improved Spirituality perk, 90+ int and 60+ wis. Effect: Increase max mana by 120\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Half-step-to Advanced Spirituality. Req. Improved Spirituality perk, 120+ int and 80+ wis. Effect: Increase max mana by 180\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable)\n");
@@ -65,6 +67,7 @@ package classes.Scenes
 			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
 			outputText("-New tier 6 intelligence lvl-up perk: (Eternaly) Lasting Buffs. Req. (Ever)Lasting Buffs perk and 190+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
 			outputText("-New tier 6 wisdom lvl-up perk: Elemental Contract Rank 7. Req. perk Elemental Contract Rank 6 and 175+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 7\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Contract Rank 8. Req. perk Elemental Contract Rank 7 and 200+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to elder rank\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
@@ -92,17 +95,15 @@ package classes.Scenes
 			outputText("-New items for range weapon slot: Tomes. Inquisitor’s Tome can be found as 3rd option at Inquisitor Tomb and Sage’s Sketchbook can be bought in Sean shop. Inquisitor’s Tome allow using HP instead of Mana if it too low for spellcasting, Sage’s Sketchbook increase spell power by 60% (stacing with wizard focus perk effects).\n");
 			outputText("-New melee weapon (by Liadri): Oni Tetsubo - buyable in river village shop (3600 gems, Large type, 45 base atk). It's can stun like Huge Warhammer and is Wrath Weapon.\n");
 			outputText("-New melee weapon (by Liadri): Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
-			outputText("-New melee weapon: Lance - buyable in He'Xin'Dao weapon shop (480 gems, 6-12 atk). Now both Spear and Lance have scaling of base atk depending on speed.\n");
+			outputText("-New melee weapons: Lance - buyable in He'Xin'Dao weapon shop (480 gems, 6-12 atk) and Trident (by Liadri) - buyable at Pinchou’s waterwear and tools’ at Beach (480 gems, 6-12 atk). Now both Spear and Lance have scaling of base atk depending on speed.\n");
 			outputText("-Spear and Whip was moved to weapon shop in He'Xin'Dao from Tel'Adre weapon shop\n");
-			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack unlock each 6 lvl's.\n");
+			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack (above 2x) unlock each 6 lvl's startng from lvl 6.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-New tier 3 toughness lvl-up perk: DefenceStance\n");
-			outputText("-New tier 4 toughness lvl-up perk: MasteredDefenceStance\n");
-			outputText("-New tier 5 toughness lvl-up perk: PerfectDefenceStance\n");
-			outputText("-New tier 3 speed lvl-up perk: Impale\n");
+			outputText("-New tier 3 toughness lvl-up perk: Defence Stance Req. Job: Defender perk and 80+ tou. Effect: Defend move giving 60% phys dmg reduction and allow recovery of fatigue, mana, soulforce\n");
+			outputText("-New tier 4 toughness lvl-up perk: Mastered Defence Stance Req. Defence Stance perk and 120+ tou. Effect: Defend move giving 75% phys dmg reduction and allow increased (bonus to normal recovery in ()) recovery of fatigue (+1), mana (+5), soulforce (+1)\n");
+			outputText("-New tier 5 toughness lvl-up perk: Perfect Defence Stance Req. Mastered Defence Stance perk and 160+ tou. Effect: Defend move giving 95% phys dmg reduction, max phys dmg reduction cap is rised when using this move from 95% to 99% and allow increased (bonus to normal recovery in ()) recovery of fatigue (+2), mana (+10), soulforce (+2)\n");
+			outputText("-New tier 3 speed lvl-up perk: Impale Req. Natural jouster perk and 100+ spe. Effect: Double bonus dmg from crit attacks with Spear or Lance (75% -> 150%) as ong PC attack only once per turn with those weapons. It also affect crits fro Power Attacks using spears/lances.\n");
 			outputText("-New tier 1 strength lvl-up perk: ThirstForBlood\n");
-			outputText("-New tier 2 libido lvl-up perk: Job: Courtesan Req. Job: Seducer, Heroism perks and 50+ libido. Effect: +20 to max lust, +20% to tease damage against boss enemies, +15 max Libido (scalable)\n");
-			outputText("-New tier 2 libido lvl-up perk: Dazzling display Req. \n");
 			outputText("-New tier 3 libido lvl-up perk: Arouse the audience Req. \n");
 			outputText("-New tier 4 libido lvl-up perk: Critical performance Req. \n");
 			outputText("-New tier 6 speed lvl-up perk: Natural jouster (Master grade) Req. \n");
@@ -110,6 +111,8 @@ package classes.Scenes
 			outputText("-New tier 2 toughness lvl-up perk: ShieldExpertise\n");
 			outputText("-New tier 3 toughness lvl-up perk: ShieldHarmony\n");
 			outputText("-New tier   lvl-up perk: \n");
+			outputText("-New tier   lvl-up perk: \n");
+			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
@@ -123,9 +126,6 @@ package classes.Scenes
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

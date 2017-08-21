@@ -489,6 +489,9 @@ package classes
 		public static const ElementalContractRank7:PerkType = mk("Elemental Contract Rank 7", "Elemental Contract Rank 7",
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 7.",
 				"You choose 'Elemental Contract Rank 7' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank8:PerkType = mk("Elemental Contract Rank 8", "Elemental Contract Rank 8",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to elder rank.",
+				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elemnts that aren't classified as one of four traditional.");
@@ -2356,6 +2359,9 @@ package classes
 								.requirePerk(JobMonk)
 								.requireWis(200)
 								.requireLevel(42);
+		ElementalContractRank8.requirePerk(ElementalContractRank7)
+							  .requireWis(200)
+							  .requireLevel(42);
 		//Tier 8 Wisdom perks
 		//Tier 9 Wisdom perks
 		//------------

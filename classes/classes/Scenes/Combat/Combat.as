@@ -2663,7 +2663,7 @@ public function attack():void {
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance")) damage *= 2.5;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
 		else damage *= 1.75;
 	}
 	//Apply AND DONE!
@@ -4380,6 +4380,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
+		//oni rampage status effect boost - Lia want it be BIG number *sic* -_-''
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
