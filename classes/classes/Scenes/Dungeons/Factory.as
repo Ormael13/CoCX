@@ -924,6 +924,17 @@ package classes.Scenes.Dungeons
 			addButton(6, "More Lust", postOmnibusBoon, true, null, null, "Be always ready for sex.\n\nDo you think it is really good idea?");
 			addButton(8, "No (Let go)", letGoOmnibus, null, null, null, "Refuse the offer and let the demon go.");
 			addButton(9, "No (Kill Her)", killOmnibus, null, null, null, "Refuse the offer and kill the demon instead.");
+			if(player.inte + player.wis + player.cor > 100) addButton(10, "Valuable", demonicLethicite, null, null, null, "Ask if the demon has anything valuable she can give you, like lethicite.\n\nWho knows what might happen?");
+		}
+
+		private function demonicLethicite():void {
+			spriteSelect(16);
+			clearOutput();
+			outputText("The demon pouts at you. <i>Fiiiiine. All I've got on me is some processed lethicite. You'll need my help to absorb it.</i> The demoness reaches into her incredible skimpy chest band and pulls out a vial she had somehow managed to conceal there.\n\nShe unscrews the top, and then holds it before her and blows across it. A cloud of sparkling purplish black powder burst from the vial, flying right at you!");
+			outputText("\n\nYou stumble back in surprise, as the demoness makes a quick arcane gesture. The cloud glows, and then flies at your face, flowing into your mouth and nose before you can react.\n\n Your vision flashes purple, and a burning heat seems to spread through both your body and soul.\n\nThe heat in your body quickly turns into arousal, but the heat in your soul mostly dissapears- though what remains is making it feel like your soul is aroused! You realize that <b>your sex drive is increasing your soulforce, and you feel more demonic!</b>\n(Perk Gained - Demonic Lethicite - Soulforce increased and you are permanently slightly demonic!)");
+			player.dynStats("lus",player.maxLust)
+			player.createPerk(PerkLib.DemonicLethicite,0,0,0,0);
+			postOmnibusBoon();
 		}
 		
 		private function chooseBreasts():void {

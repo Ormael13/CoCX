@@ -1845,6 +1845,8 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				demonCounter += 10;
+			if (hasPerk(PerkLib.DemonicLethicite))
+				demonCounter+=1;
 			End("Player","racialScore");
 			return demonCounter;
 		}
@@ -3979,6 +3981,52 @@ use namespace kGAMECLASS;
 					}
 				}
 			}
+		}
+
+		public function getAllMinStats() {
+			var minStr:int = 1;
+			var minTou:int = 1;
+			var minSpe:int = 1;
+			var minInt:int = 1;
+			var minWis:int = 1;
+			var minLib:int = 0;
+			var minSen:int = 10;
+			var minCor:int = 0;
+			var newGamePlusMod:int = this.newGamePlusMod();
+			//Minimum Libido
+			if (player.gender > 0) minLib = 15;
+			else minLib = 10;
+	
+			if (player.armorName == "lusty maiden's armor") {
+				if (minLib < 50) minLib = 50;
+			}
+			if (minLib < (minLust() * 2 / 3))
+			{
+				minLib = (minLust() * 2 / 3);
+			}
+			if (player.jewelryEffectId == JewelryLib.PURITY)
+			{
+				minLib -= player.jewelryEffectMagnitude;
+			}
+			if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
+				minLib -= 2;
+			}
+			if (player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) {
+				minLib -= 2;
+			}
+			//Minimum Corruption
+			if(player.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
+
+			return {
+				str:minStr,
+				tou:minTou,
+				spe:minSpe,
+				inte:minInt,
+				wis:minWis,
+				lib:minLib,
+				sens:minSen,
+				cor:minCor
+			};
 		}
 
 		//Determine minimum lust
