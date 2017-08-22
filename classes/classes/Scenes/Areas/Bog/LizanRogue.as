@@ -7,6 +7,8 @@ package classes.Scenes.Areas.Bog
 	
 	public class LizanRogue extends Monster
 	{
+		private static constant STAT_DROP_FLAT:int = 5;
+		private static constant STAT_DROP_MULT:int = 2;
 		//1 - str
 		//2 - tou
 		//3 - spe
@@ -16,17 +18,18 @@ package classes.Scenes.Areas.Bog
 				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  You move just in time to avoid the tiny dart.");
 			}
 			else {
+				var statdrop:int = STAT_DROP_FLAT+STAT_DROP_MULT*player.newGamePlusMod();
 				outputText("The lizan flings himself back.  In the air he puts his blowgun to his lips and fires a single dart into your neck.  As you pull it out your limbs begin to feel like wet noodles, it appears you’ve been poisoned.");
-				game.dynStats("str", -5, "spe", -5);
-				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 5, 0, 5, 0);
+				game.dynStats("str", -statdrop, "spe", -statdrop);
+				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, statdrop, 0, statdrop, 0);
 				else {
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, statdrop);
 				}
 				if (player.cor > 50) {
-					game.dynStats("str", -5, "spe", -5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);
+					game.dynStats("str", -statdrop, "spe", -statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, statdrop);
 				}
 			}
 			combatRoundOver();
@@ -37,17 +40,18 @@ package classes.Scenes.Areas.Bog
 				outputText("The lizan Rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using a blowgun to fire a single dart at you.  You somehow manage to dodge it.");
 			}
 			else {
+				var statdrop:int = STAT_DROP_FLAT+STAT_DROP_MULT*player.newGamePlusMod();
 				outputText("The lizan rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using his blowgun to fire a single stinging dart into your neck.  You pull out the dart and your skin begins to feel hypersensitive, you’re going to have trouble defending yourself");
-				game.dynStats("tou", -5, "sens", 5);
-				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 0, 5, 0, 5);
+				game.dynStats("tou", -statdrop, "sens", statdrop);
+				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 0, statdrop, 0, statdrop);
 				else {
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, statdrop);
 				}
 				if (player.cor > 50) {
-					game.dynStats("tou", -5, "sens", 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);
+					game.dynStats("tou", -statdrop, "sens", statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, statdrop);
+					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, statdrop);
 				}
 			}
 			combatRoundOver();
@@ -59,7 +63,7 @@ package classes.Scenes.Areas.Bog
 			}
 			else {
 				outputText("The lizan zips to the side and as you move to follow you feel something sharp cut across your body. He must have thrown something. ");
-				var damage:int = 40 + rand(60);
+				var damage:int = this.spe/3 + rand(60);
 				player.takeDamage(damage, true);
 			}
 			combatRoundOver();

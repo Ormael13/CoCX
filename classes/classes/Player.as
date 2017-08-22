@@ -5165,12 +5165,6 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.LizanBlowpipe);
 			}
 			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
-			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
-			{
-				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
-				kGAMECLASS.mainView.statsView.showStatUp('spe');
-				removeStatusEffect(StatusEffects.GardenerSapSpeed);
-			}
 			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
 			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.KnockedBack);
 			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
