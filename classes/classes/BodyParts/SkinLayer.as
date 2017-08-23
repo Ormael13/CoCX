@@ -7,10 +7,18 @@ import classes.Creature;
 
 public class SkinLayer extends BodyPart {
 	public var color:String  = "albino";
+	public var pattern:int   = PATTERN_NONE;
 	private var _desc:String = "";
 	private var _adj:String  = "";
+	private var _color2:String = "";
 	private var skin:Skin; // Reference to parent
 
+	public function get color2():String {
+		return _color2 || color;
+	}
+	public function set color2(value:String):void {
+		_color2 = value == color ? "" : value;
+	}
 	public function defaultDesc():String {
 		return Appearance.DEFAULT_SKIN_DESCS[type] || "skin";
 	}
@@ -58,7 +66,7 @@ public class SkinLayer extends BodyPart {
 		desc = "skin";
 	}
 	public function SkinLayer(skin:Skin) {
-		super(skin.creature, ["adj", "desc", "color"]);
+		super(skin.creature, ["adj", "desc", "color", "color2"]);
 		this.skin = skin;
 	}
 	public function describe(noAdj:Boolean = false, noColor:Boolean = false):String {

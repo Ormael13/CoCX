@@ -168,9 +168,6 @@
 			"full.type": skinDescriptionFn("full", true, true)
 		};
 		public var faceLookups:Object = {
-			"deco": function(thisPtr:*,aspect:*):*{
-				return kGAMECLASS.player.facePart.describeDeco();
-			},
 			"full": function(thisPtr:*,aspect:*):*{
 				return kGAMECLASS.player.facePart.describe(false,true);
 			}
