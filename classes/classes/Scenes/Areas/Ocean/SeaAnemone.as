@@ -10,6 +10,8 @@ package classes.Scenes.Areas.Ocean
 
 	public class SeaAnemone extends Monster
 	{
+		private static constant STAT_DOWN_FLAT:int = 4;
+		private static constant STAT_DOWN_MULT:int = 4;
 	
 		override public function eAttack():void
 		{
@@ -19,12 +21,12 @@ package classes.Scenes.Areas.Ocean
 
 		override public function eOneAttack():int
 		{
-			applyVenom(rand(4 + player.sens / 20) + 1);
+			applyVenom(rand(STAT_DOWN_FLAT + STAT_DOWN_MULT*player.newGamePlusMod() + player.sens / 20) + 1);
 			return 1;
 		}
 
 		//Apply the effects of AnemoneVenom()
-		public function applyVenom(str:Number = 1):void
+		public function applyVenom(amt:Number = 1):void
 		{
 			//First application
 			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
@@ -32,8 +34,8 @@ package classes.Scenes.Areas.Ocean
 			game.dynStats("lus", (4 * str));
 
 			//Loop through applying 1 point of venom at a time.
-			while (str > 0) {
-				str--;
+			while (amt > 0) {
+				amt--;
 				//Str bottommed out, convert to lust
 				if (player.str < 4) game.dynStats("lus", 4);
 				//Lose a point of str.
@@ -41,7 +43,7 @@ package classes.Scenes.Areas.Ocean
 					showStatDown("str");
 					// strDown.visible = true;
 					// strUp.visible = false;
-					player.str--;
+					player.str-=2;
 					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 2);
 				}
 				//Spe bottomed out, convert to lust
@@ -51,7 +53,7 @@ package classes.Scenes.Areas.Ocean
 					showStatDown("spe");
 					// speDown.visible = true;
 					// speUp.visible = false;
-					player.spe--;
+					player.spe-=2;
 					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 2);
 				}
 			}
