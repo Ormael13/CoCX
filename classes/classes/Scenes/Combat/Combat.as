@@ -2475,6 +2475,11 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
+	if(player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
+		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+		enemyAI();
+		return;
+	}
 	if(flags[kFLAGS.PC_FETISH] >= 3 && !kGAMECLASS.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attack impossible!  Maybe you could try something else?\n\n");
 		enemyAI();
@@ -3507,6 +3512,14 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.Sealed,1,-1);
 			if(player.statusEffectv1(StatusEffects.Sealed) <= 0) player.removeStatusEffect(StatusEffects.Sealed);
 			else outputText("<b>One of your combat abilities is currently sealed by magic!</b>\n\n");
+		}
+	}
+	if(player.hasStatusEffect(StatusEffects.Sealed2)) {
+		//Countdown and remove as necessary
+		if(player.statusEffectv1(StatusEffects.Sealed2) > 0) {
+			player.addStatusValue(StatusEffects.Sealed2,1,-1);
+			if(player.statusEffectv1(StatusEffects.Sealed2) <= 0) player.removeStatusEffect(StatusEffects.Sealed2);
+			else outputText("<b>One of your combat abilities is currently disabled as aftereffect of recent enemy attack!</b>\n\n");
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.WhipSilence))

@@ -462,6 +462,12 @@ package classes
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
+		public static const ElementalBondFlesh:PerkType = mk("Elemental Bond: Flesh", "Elemental Bond: Flesh",
+				"You gains bonus to max HP depending on amount of summoned elementals and their ranks.",
+				"You choose the 'Elemental Bond: Flesh' perk, allowing you to form bond with summoned elementals to share recived damage.");
+		public static const ElementalBondUrges:PerkType = mk("Elemental Bond: Urges", "Elemental Bond: Urges",
+				"You gains bonus to max Lust depending on amount of summoned elementals and their ranks.",
+				"You choose the 'Elemental Bond: Urges' perk, allowing you to form bond with summoned elementals to share recived lust damage.");
 		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
 				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",// Rise by 1 maximum limit of controled elementals.
 				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
@@ -2316,6 +2322,9 @@ package classes
 							  .requirePerk(ElementalContractRank1)
 							  .requireWis(50)
 							  .requireLevel(6);
+		ElementalBondFlesh.requirePerk(ElementalContractRank1)
+						  .requireWis(50)
+						  .requireLevel(6);
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
 			   .requireLevel(12);
@@ -2326,10 +2335,13 @@ package classes
 		ElementalContractRank3.requirePerk(ElementalContractRank2)
 							  .requireWis(75)
 							  .requireLevel(12);
+		ElementalBondUrges.requirePerk(ElementalContractRank2)
+						  .requireWis(75)
+						  .requireLevel(12);
 		//Tier 3 Wisdom perks
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
-							  .requireLevel(18);
+							  .requireLevel(18);ElementalBondFlesh
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)

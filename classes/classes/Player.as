@@ -5044,6 +5044,9 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.Sealed)) {
 				removeStatusEffect(StatusEffects.Sealed);
 			}
+			if(hasStatusEffect(StatusEffects.Sealed2)) {
+				removeStatusEffect(StatusEffects.Sealed2);
+			}
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);

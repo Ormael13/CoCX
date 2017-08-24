@@ -472,6 +472,7 @@ package classes
 		public static const ResonanceVolley:CombatStatusEffect           = mk2("Resonance Volley");
 		public static const Sandstorm:CombatStatusEffect                 = mk2("sandstorm");
 		public static const Sealed:CombatStatusEffect                    = mk2("Sealed");
+		public static const Sealed2:CombatStatusEffect                   = mk2("Sealed2");
 		public static const SharkBiteBleed:CombatStatusEffect            = mk2("Shark Bite Bleed");
 		public static const SheilaOil:CombatStatusEffect                 = mk2("Sheila Oil");
 		public static const Shielding:CombatStatusEffect                 = mk2("Sheilding");

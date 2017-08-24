@@ -110,11 +110,12 @@ package classes.Scenes
 			outputText("-New tier 3 wisdom lvl-up perk: CatchTheBlade\n");
 			outputText("-New tier 2 toughness lvl-up perk: ShieldExpertise\n");
 			outputText("-New tier 3 toughness lvl-up perk: ShieldHarmony\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Elemental Bond: Flesh\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Elemental Bond: Urges\n");
 			outputText("-New tier   lvl-up perk: \n");
-			outputText("-New tier   lvl-up perk: \n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
 			outputText("-Berserk and Lustzerker now req. 50 wrath to activate them and they last 10 rounds. No zerking for too calm PC's ^^\n");
@@ -126,7 +127,6 @@ package classes.Scenes
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("\n");

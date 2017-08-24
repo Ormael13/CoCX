@@ -107,8 +107,8 @@ public final class ConsumableLib extends BaseContent
 		public const W__BOOK:SimpleConsumable = mk("W. Book", "W. Book", "a small book with a pristine white cover", 40, "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.", m.whiteSpellbook);
 
 		//MANA POTIONS
-		public const VDARCON:SimpleConsumable = mk("VDARCON", "V.D.ARC", "a very diluted Arcane Regen Concotion", 8, "This low-grade recovery pill could help you recover some of the spent soulforce.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.verydilutedarcaneregenconcotion);
-		public const D_ARCON:SimpleConsumable = mk("D_ARCON", "Dil.ARC", "a diluted Arcane Regen Concotion", 48, "This mid-grade recovery pill could help you recover some of the spent soulforce.  It won't be much but still a few more time more than after using low-grade one version of this pill.", m.dilutedarcaneregenconcotion);
+		public const VDARCON:SimpleConsumable = mk("VDARCON", "V.D.ARC", "a very diluted Arcane Regen Concotion", 8, "This very diluted concotion could help you recover some of the spent mana.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.verydilutedarcaneregenconcotion);
+		public const D_ARCON:SimpleConsumable = mk("D_ARCON", "Dil.ARC", "a diluted Arcane Regen Concotion", 48, "This diluted concotion could help you recover some of the spent mana.  It won't be much but still a few more time more than after using very diluted concotion.", m.dilutedarcaneregenconcotion);
 
 		//MAGIC STORAGE
 		public const BAGOCOS:SimpleConsumable = mk("BagOCos", "BagOfCosmos", "a Bag of Cosmos", 1200, "It's small bag used by Soul Cultivtors covered with a complex symbols making it object that allow to store many more things that the size of itself would indicate.", m.bagofcosmos);
