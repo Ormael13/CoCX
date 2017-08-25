@@ -66,10 +66,18 @@ package classes.Scenes.Areas
 						},
 						call: sandWitchPregnancyEvent
 					}, {
-						name: "teladre",
+						name: "teladreDiscover",
 						when: function ():Boolean
 						{
-							return ((player.exploredDesert == 5 && !player.hasStatusEffect(StatusEffects.TelAdre) || player.statusEffectv1(StatusEffects.TelAdre) == 0))
+							return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 5);
+						},
+						chance: 2,
+						call: game.telAdre.discoverTelAdre
+					}, {
+						name: "teladreEncounter",
+						when: function ():Boolean
+						{
+							return player.statusEffectv1(StatusEffects.TelAdre) == 0;
 						},
 						chance: 0.5,
 						call: game.telAdre.discoverTelAdre
@@ -197,7 +205,6 @@ package classes.Scenes.Areas
 			outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n");
 			outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n");
 			flags[kFLAGS.FOUND_WIZARD_STAFF]++;
-			inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
 			inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
 		}
 
