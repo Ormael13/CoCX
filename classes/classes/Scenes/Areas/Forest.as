@@ -12,6 +12,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.Monsters.DarkElfScene;
 
 	use namespace kGAMECLASS;
 
@@ -29,6 +30,7 @@ package classes.Scenes.Areas
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
 		public function Forest() { }
@@ -102,7 +104,7 @@ package classes.Scenes.Areas
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
 								   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
-								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 4;
+								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
 						name  : "Jojo",
@@ -230,7 +232,7 @@ package classes.Scenes.Areas
 			}, {
 				name: "kitsune",
 				when: function():Boolean {
-					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4;
+					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 3;
 				},
 				call: kitsuneScene.enterTheTrickster
 			},/*{ // [INTERMOD:8chan]
@@ -254,7 +256,7 @@ package classes.Scenes.Areas
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
 						   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
-						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 4;
+						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 				}
 			}, {
 				name: "faerie",
@@ -305,6 +307,9 @@ package classes.Scenes.Areas
 				name: "alraune",
 				call: alrauneEncounterFn,
 				when: Encounters.fn.ifLevelMin(3)
+			}, {
+				name  : "dark_elf_scout",
+				call  : darkelfScene.introDarkELfScout
 			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,

@@ -40,7 +40,5 @@ package classes.Items.Weapons
 			while (game.player.findPerk(PerkLib.BladeWarden) >= 0) game.player.removePerk(PerkLib.BladeWarden);
 			return super.playerRemove();
 		}
-		
 	}
-
 }

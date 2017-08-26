@@ -95,9 +95,9 @@ public function meet2Kindra():void {
 	outputText("You find Kindra hunting for food in the vicinity. She notice you're there grumble about an escaped target then address you.\n\n");
 	outputText("\"<i>What is it you wanted exactly [name]?</i>\"\n\n");
 	menu();
-	addButton(0, "Appearance", kindraAppearance, null, null, null, "Examine Kindra's detailed appearance.");
-	addButton(1, "Fight", fight2Kindra, null, null, null, "Fight her");
-	if (player.statusEffectv1(StatusEffects.Kindra) < 150) addButton(2, "Training", trainingArcheryWithKindra, null, null, null, "Train your archery skills with her.");
+	addButton(0, "Appearance", kindraAppearance).hint("Examine Kindra's detailed appearance.");
+	addButton(1, "Fight", fight2Kindra).hint("Fight her");
+	if (player.statusEffectv1(StatusEffects.Kindra) < 150) addButton(2, "Training", trainingArcheryWithKindra).hint("Train your archery skills with her.");
 	else addButtonDisabled(2, "Training", "You finished advanced archery training.");
 	addButton(14, "Back", camp.campFollowers);
 }

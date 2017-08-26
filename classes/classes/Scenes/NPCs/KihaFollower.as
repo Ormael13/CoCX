@@ -375,9 +375,9 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	}
 	//(Display Options: [Talk] [Spar] [Hug] [Leave]
 	menu();
-	if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha, null, null, null, "Talk to Kiha. She might not like it but you might make some progress.");
-	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+	if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha).hint("Talk to Kiha. She might not like it but you might make some progress.");
+	addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 	//simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
 }
@@ -660,9 +660,9 @@ private function kihaAdmitsSheLikesYourWang():void {
 		outputText("[pg]Do you hug her, and potentially take things to the next level, or would you rather do something else?");
 	}
 	menu();
-	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-	addButton(3, "LovinHug", lovinHugKiha, null, null, null, "Give the dragoness a hug and take things to a whole new level!");
+	addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+	addButton(3, "LovinHug", lovinHugKiha).hint("Give the dragoness a hug and take things to a whole new level!");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 	//simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
 }
@@ -839,18 +839,18 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			leave = camp.campLoversMenu;
 			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
-			addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
-			addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-			addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-			addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
-			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+			addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
+			addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
+			addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+			addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
+			addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
-				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle, null, null, null, "Request Kiha to destroy any corrupted glades she can find.");
-				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle, null, null, null, "Request Kiha to stop destroying the corrupted glades.");
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle).hint("Request Kiha to destroy any corrupted glades she can find.");
+				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle).hint("Request Kiha to stop destroying the corrupted glades.");
 			}
-			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
-			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
-			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt, null, null, null, "Give Kiha something to wear to conceal her nether regions?");
+			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha).hint("Request her to stop guarding.");
+			else addButton(8,"Guard Camp",guardMyCampKiha).hint("Request her to guard your camp.");
+			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt).hint("Give Kiha something to wear to conceal her nether regions?");
 			addButton(14,"Leave", leave);
 			return;
 		}
@@ -870,12 +870,12 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
 	menu();
-	addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
-	addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-	addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
-	addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(5, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
+	addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
+	addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+	addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
+	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(5, "InviteCamp", campo).hint("Invite Kiha to your camp.");
 	addButton(14, "Leave", leave);
 }
 
@@ -919,8 +919,8 @@ private function hangOutWithKiha():void {
 		outputText("[pg]You give the stringy, yet juicy, meat a few experimental chews before giving your answer:");
 		//[It's Good] [Blech]
 		menu();
-		addButton(0, "It's Good", itsGood, null, null, null, "The meat is delicious. Tell Kiha that the meat is great.");
-		addButton(1, "Blech", blechKihaYourCooking, null, null, null, "The meat is disgusting! Throw it out and hunt some boars.");
+		addButton(0, "It's Good", itsGood).hint("The meat is delicious. Tell Kiha that the meat is great.");
+		addButton(1, "Blech", blechKihaYourCooking).hint("The meat is disgusting! Throw it out and hunt some boars.");
 		return;
 	}
 	//Hang Out 3

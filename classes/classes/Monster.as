@@ -95,6 +95,7 @@
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
 		public var bonusInte:Number = 0;
+		public var bonusWis:Number = 0;
 		public var bonusLib:Number = 0;
 		public var newgamebonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
@@ -203,13 +204,13 @@
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulKing) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + player.newGamePlusMod()));
@@ -249,6 +250,7 @@
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
@@ -335,8 +337,21 @@
 		{
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) temp += 180;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) temp += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) temp += 480;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 1050;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 1500;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				temp += Math.round(this.inte * (1 + player.newGamePlusMod()));
+				temp += Math.round(this.wis * (1 + player.newGamePlusMod()));
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
@@ -360,7 +375,7 @@
 		 */
 		public function eBaseDamage():Number {
 			var damage:Number = 0;
-			//base dmg from str
+			damage += str;
 			if (str >= 21) damage += ((str - 20) * 0.25);
 			if (str >= 41) damage += ((str - 40) * 0.25);
 			if (str >= 61) damage += ((str - 60) * 0.25);
@@ -383,6 +398,11 @@
 			if (str >= 851) damage += ((str - 850) * 0.25);
 			if (str >= 901) damage += ((str - 900) * 0.25);
 			if (str >= 951) damage += ((str - 950) * 0.25);
+			if (str >= 1001) damage += ((str - 1000) * 0.25);
+			if (str >= 1051) damage += ((str - 1050) * 0.25);
+			if (str >= 1101) damage += ((str - 1100) * 0.25);
+			if (str >= 1151) damage += ((str - 1150) * 0.25);
+			if (str >= 1201) damage += ((str - 1200) * 0.25);
 			if (str < 10) damage = 10;
 			//weapon bonus
 			if (weaponAttack < 51) damage *= (1 + (weaponAttack * 0.03));
@@ -390,6 +410,117 @@
 			else if (weaponAttack >= 101 && weaponAttack < 151) damage *= (3.75 + ((weaponAttack - 100) * 0.02));
 			else if (weaponAttack >= 151 && weaponAttack < 201) damage *= (4.75 + ((weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((weaponAttack - 200) * 0.01));
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseStrengthDamage():Number {
+			var damage:Number = 0;
+			damage += str;
+			if (str >= 21) damage += (str - 20);
+			if (str >= 41) damage += (str - 40);
+			if (str >= 61) damage += (str - 60);
+			if (str >= 81) damage += (str - 80);
+			if (str >= 101) damage += (str - 100);
+			if (str >= 151) damage += (str - 150);
+			if (str >= 201) damage += (str - 200);
+			if (str >= 251) damage += (str - 250);
+			if (str >= 301) damage += (str - 300);
+			if (str >= 351) damage += (str - 350);
+			if (str >= 401) damage += (str - 400);
+			if (str >= 451) damage += (str - 450);
+			if (str >= 501) damage += (str - 500);
+			if (str >= 551) damage += (str - 550);
+			if (str >= 601) damage += (str - 600);
+			if (str >= 651) damage += (str - 650);
+			if (str >= 701) damage += (str - 700);
+			if (str >= 751) damage += (str - 750);
+			if (str >= 801) damage += (str - 800);
+			if (str >= 851) damage += (str - 850);
+			if (str >= 901) damage += (str - 900);
+			if (str >= 951) damage += (str - 950);
+			if (str >= 1001) damage += (str - 1000);
+			if (str >= 1051) damage += (str - 1050);
+			if (str >= 1101) damage += (str - 1100);
+			if (str >= 1151) damage += (str - 1150);
+			if (str >= 1201) damage += (str - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseToughnessDamage():Number {
+			var damage:Number = 0;
+			damage += tou;
+			if (tou >= 21) damage += (tou - 20);
+			if (tou >= 41) damage += (tou - 40);
+			if (tou >= 61) damage += (tou - 60);
+			if (tou >= 81) damage += (tou - 80);
+			if (tou >= 101) damage += (tou - 100);
+			if (tou >= 151) damage += (tou - 150);
+			if (tou >= 201) damage += (tou - 200);
+			if (tou >= 251) damage += (tou - 250);
+			if (tou >= 301) damage += (tou - 300);
+			if (tou >= 351) damage += (tou - 350);
+			if (tou >= 401) damage += (tou - 400);
+			if (tou >= 451) damage += (tou - 450);
+			if (tou >= 501) damage += (tou - 500);
+			if (tou >= 551) damage += (tou - 550);
+			if (tou >= 601) damage += (tou - 600);
+			if (tou >= 651) damage += (tou - 650);
+			if (tou >= 701) damage += (tou - 700);
+			if (tou >= 751) damage += (tou - 750);
+			if (tou >= 801) damage += (tou - 800);
+			if (tou >= 851) damage += (tou - 850);
+			if (tou >= 901) damage += (tou - 900);
+			if (tou >= 951) damage += (tou - 950);
+			if (tou >= 1001) damage += (tou - 1000);
+			if (tou >= 1051) damage += (tou - 1050);
+			if (tou >= 1101) damage += (tou - 1100);
+			if (tou >= 1151) damage += (tou - 1150);
+			if (tou >= 1201) damage += (tou - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseSpeedDamage():Number {
+			var damage:Number = 0;
+			damage += spe;
+			if (spe >= 21) damage += (spe - 20);
+			if (spe >= 41) damage += (spe - 40);
+			if (spe >= 61) damage += (spe - 60);
+			if (spe >= 81) damage += (spe - 80);
+			if (spe >= 101) damage += (spe - 100);
+			if (spe >= 151) damage += (spe - 150);
+			if (spe >= 201) damage += (spe - 200);
+			if (spe >= 251) damage += (spe - 250);
+			if (spe >= 301) damage += (spe - 300);
+			if (spe >= 351) damage += (spe - 350);
+			if (spe >= 401) damage += (spe - 400);
+			if (spe >= 451) damage += (spe - 450);
+			if (spe >= 501) damage += (spe - 500);
+			if (spe >= 551) damage += (spe - 550);
+			if (spe >= 601) damage += (spe - 600);
+			if (spe >= 651) damage += (spe - 650);
+			if (spe >= 701) damage += (spe - 700);
+			if (spe >= 751) damage += (spe - 750);
+			if (spe >= 801) damage += (spe - 800);
+			if (spe >= 851) damage += (spe - 850);
+			if (spe >= 901) damage += (spe - 900);
+			if (spe >= 951) damage += (spe - 950);
+			if (spe >= 1001) damage += (spe - 1000);
+			if (spe >= 1051) damage += (spe - 1050);
+			if (spe >= 1101) damage += (spe - 1100);
+			if (spe >= 1151) damage += (spe - 1150);
+			if (spe >= 1201) damage += (spe - 1200);
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -975,6 +1106,7 @@
 			//Block with shield
 			if (combatBlock(true)) {
 				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) game.combat.pspecials.shieldBash();
 				return true;
 			}
 			return false;
@@ -1479,15 +1611,16 @@
 				//Countdown to heal
 				addStatusValue(StatusEffects.IzmaBleed,1,-1);
 				//Heal wounds
-				if(statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
+				if (statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
 				else {
-					var store:Number = eMaxHP() * (4 + rand(7))/100;
+					var store:Number = eMaxHP() * (4 + rand(7)) / 100;
+					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
 					store = game.doDamage(store);
-					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}

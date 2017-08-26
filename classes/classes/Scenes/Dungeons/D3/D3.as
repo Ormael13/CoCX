@@ -2,6 +2,8 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.BaseContent;
 	import classes.Items.Consumables.SimpleConsumable;
+	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
 	import classes.room;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -414,11 +416,9 @@ package classes.Scenes.Dungeons.D3
 				{
 					flags[kFLAGS.D3_ENTERED_MAGPIEHALL] = 1;
 					outputText("You creep through the archway. The sound of movement and bustle is closer here; it seems to be coming from directly below you. Ahead is the screen, a large window made from tinted glass. Cautiously you peer through it. You have entered a vast hall, near the very top of it; this seems to be some sort of observation booth set high in the stone wall. It’s designed in the grand, classical tradition, fluted balustrades flanking the walls, each decorated at the top by a carved magpie in flight. Below is - well. You blink, trying to take it all in.");
-
 					outputText("\n\nMany feet below the hall swarms with activity: tall, thin, grey-green reptiles sliding sinuously around each other and the long tables that run the length of the room. There must be hundreds, no, at least a thousand basilisks down there, carrying, analyzing, sorting the vast amount of junk the tables are heaped with.");
 					if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that " + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " once worked in."); 
 					outputText("  You get the fright of your life when you think you see a number of depthless pools of grey revolve up to meet yours- but they don’t freeze you, you note as you reflexively turn away. The tinted glass must carry some sort of anti-petrifying charm, and further it must be reflective on the other side, because no one below seems to realize you’re standing there. Relaxing a bit, you continue to absorb the massive room. At the end furthest away from you two huge piles have been created- one of eggs, a massed assortment of every color and size imaginable, and one of pure junk, presumably everything the basilisks have found whilst scavenging and considered worth keeping. The detritus of a dozen collapsed civilizations must be down there, collected for the demons’ perusal by their scaly custodians. Directly below you, you can see archways like the one you just passed under, through which the basilisks ebb and flow.");
-
 					outputText("\n\nYour heartbeat quickens as you consider. There is a grid gantry running from where you are right around the room to the other side, where you can see a matching observation booth, presumably containing another exit. But it’s quite a distance, there are stairs leading down to the ground level, and outside the protective glass you would surely be spotted and apprehended");
 					if (player.canFly()) outputText(", even if you tried to fly it"); 
 					outputText(". Wouldn’t you? You can’t outrun the gaze of a thousand basilisks... could you?"); 
@@ -440,7 +440,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("You are back in the southern end of the Magpie Hall.  Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
-			if (eggsAvailable() > 0)
+			if (eggsAvailable() >= 0 && flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
 			{
 				addButton(2, "Eggs", goToEggPile);
 			}
@@ -475,7 +475,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("You head down the stairs into the hall proper to inspect the ramble hoard of eggs the basilisks collected. They’re mostly unfertilised harpy ovum, but you quickly pick out a number of differently coloured transformative eggs stolen from Gods know who.");
-			
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) outputText(" When searching you even finds something that looks like scythe. WHere does it come frome among all those eggs?");
 			menu();
 			
 			var flagNum:int = flags[kFLAGS.D3_EGGS_AVAILABLE];
@@ -486,6 +486,7 @@ package classes.Scenes.Dungeons.D3
 			if (!(flagNum & PINK)) addButton(3, "Pink", takeEgg, PINK);
 			if (!(flagNum & BROWN)) addButton(4, "Brown", takeEgg, BROWN);
 			if (!(flagNum & PURPLE)) addButton(5, "Purple", takeEgg, PURPLE);
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) addButton(6, "Scythe", takeScythe);
 			
 			addButton(14, "Back", resumeFromFight);
 		}
@@ -509,6 +510,17 @@ package classes.Scenes.Dungeons.D3
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
 			inventory.takeItem(item, playerMenu); //playerMenu is equivalent to doNext(1)
+		}
+		
+		private function takeScythe():void
+		{
+			var item:Weapon;
+			
+			clearOutput();
+			item = weapons.DEMSCYT;
+			outputText("You pluck out " + item.longName + " ");			
+			flags[kFLAGS.D3_DEMONIC_SCYTHE] = 1;
+			inventory.takeItem(item, playerMenu);
 		}
 		
 		private function fallbackFromMagpieHallS():void
@@ -539,7 +551,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("You are back in the northern end of the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
-			if (eggsAvailable() > 0)
+			if (eggsAvailable() >= 0 && flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
 			{
 				addButton(2, "Eggs", goToEggPile);
 			}
@@ -756,7 +768,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("The throne room is intricately designed. Purple carpet with red highlights line the floor from the door to the throne. The throne appears to be carved in marble and dotted with lethicite. Along the way, there are beautifully carved marble columns and cum fountains. You blush just by looking at the fountains. ");
 				/*if (flags[kFLAGS.LETHICITE_ARMOR_TAKEN] <= 0 && player.newGamePlusMod() > 0) {
 					outputText("\n\nThere is still a suit of lethicite armor Lethice worn when you battled her, in good condition. You could take it if you like. ");
-					addButton(0, "Take Armor", lethice.takeLethiciteArmor, null, null, null, armors.LTHCARM.description);
+					addButton(0, "Take Armor", lethice.takeLethiciteArmor).hint(armors.LTHCARM.description);
 				}*/
 			}
 			return false;

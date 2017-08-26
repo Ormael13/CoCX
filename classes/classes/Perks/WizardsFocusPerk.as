@@ -17,7 +17,7 @@ package classes.Perks
 		public function WizardsFocusPerk()
 		{
 			super("Wizard's Focus", "Wizard's Focus",
-					"Your wizard's weapon grants you additional focus, reducing the use of fatigue for spells.");
+					"Your wizard's weapon grants you additional focus, increasing your spells power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

@@ -12,7 +12,6 @@ package classes.Scenes.Areas.Beach
 	{
 		override protected function performCombatAction():void
 		{
-			//Demon pack has different AI
 			if (rand(2) == 0)
 				special1();
 			else special2();
@@ -31,7 +30,7 @@ package classes.Scenes.Areas.Beach
 		public function DemonPackBeach() 
 		{
 			this.a = "the ";
-			this.short = "demon pirates";
+			this.short = "beach demons";
 			this.imageName = "demonmob";
 			this.long= "The group is composed of roughly fifty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a shark head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small crew carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders and eye path over his left eye.  You spot an odd patch that reads, \"<i>42nd East Sea Company: Vaginal Clearance</i>\" on his shoulder.";
 			this.plural = true;
@@ -54,19 +53,19 @@ package classes.Scenes.Areas.Beach
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(70, 70, 20, 15);
-			initLibSensCor(70, 70, 100);
+			initStrTouSpeInte(110, 150, 40, 20);
+			initLibSensCor(100, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 44 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demonic skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 200;
 			this.bonusLust = 200;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 15;
-			this.gems = rand(30)+20;
+			this.level = 30;
+			this.gems = rand(60)+20;
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,
@@ -78,12 +77,12 @@ package classes.Scenes.Areas.Beach
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 980;
+			this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 4240;
 			checkMonster();
 		}
 		

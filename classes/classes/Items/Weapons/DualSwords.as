@@ -18,8 +18,6 @@ package classes.Items.Weapons
 			if (game.player.findPerk(PerkLib.DualWield) >= 0) return true;
 			outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
-		}
-		
+		}	
 	}
-
 }

@@ -2,6 +2,7 @@ package classes.Scenes.Combat {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
@@ -24,131 +25,147 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("\n<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
 		menu();
 		var button:int = 0;
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) {
-			if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
-			else addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
-		}
-		if(player.findPerk(PerkLib.Berzerker) >= 0) {
-			if (player.findPerk(PerkLib.ColdFury) >= 0) {
-				addButton(button++, "Berserk", berzerk, null, null, null, "Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance!");
-			}
-			else addButton(button++, "Berserk", berzerk, null, null, null, "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
-		}
-		if (player.findPerk(PerkLib.Lustzerker) >= 0) {
-			addButton(button++, "Lustserk", lustzerk, null, null, null, "Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
-		}
-		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
-			addButton(button++, "Petrify", petrify, null, null, null, "Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
-		}
-		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
-				addButton(button++, "FreezingBreath", fenrirFreezingBreath, null, null, null, "Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
-			}
-			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
-		}
-		if (player.findPerk(PerkLib.FreezingBreathYeti) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
-				addButton(button++, "FreezingBreath", yetiFreezingBreath, null, null, null, "Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
-			}
-			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
-		}
-		if (player.findPerk(PerkLib.FireLord) >= 0) {
-			addButton(button++,"Fire Breath",fireballuuuuu, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
-		}
-		if (player.findPerk(PerkLib.Hellfire) >= 0) {
-			addButton(button++,"Hellfire",hellFire, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
-		}
-		if (player.findPerk(PerkLib.DragonFireBreath) >= 0) {
-			addButton(button++, "DragonFire", dragonfireBreath, null, null, null, "Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
-		}
-		if (player.findPerk(PerkLib.DragonIceBreath) >= 0) {
-			addButton(button++, "DragonIce", dragoniceBreath, null, null, null, "Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
-		}
-		if (player.findPerk(PerkLib.DragonLightningBreath) >= 0) {
-			addButton(button++, "DragonLightning", dragonlightningBreath, null, null, null, "Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
-		}
-		if (player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
-			addButton(button++, "DragonDarkness", dragondarknessBreath, null, null, null, "Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
-		}
-		if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
-				addButton(button++, "PhoenixFire", phoenixfireBreath, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
-			}
-			else addButtonDisabled(button++, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
-
+			if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt).hint("Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			else addButton(button++, "M.Bolt", magicbolt).hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 		}
 		if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-				addButton(button++, "Compelling Aria", singCompellingAria, null, null, null, "Sing for a moment.");
+				addButton(button++, "Compelling Aria", singCompellingAria).hint("Sing for a moment.");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				outputText("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
 			}
 		}
 		if (player.findPerk(PerkLib.Incorporeality) >= 0) {
-			addButton(button++, "Possess", possess, null, null, null, "Attempt to temporarily possess a foe and force them to raise their own lusts.");
-		}
-		if (player.findPerk(PerkLib.Whispered) >= 0) {
-			addButton(button++, "Whisper", superWhisperAttack, null, null, null, "Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+			addButton(button++, "Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
 		}
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
-			addButton(button++, "F.FoxFire", fusedFoxFire, null, null, null, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(250) + "\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti() + "");
+			addButton(button++, "F.FoxFire", fusedFoxFire).hint("Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(250) + "\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti() + "");
 		}
 		if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
-			addButton(button++, "C.FoxFire", corruptedFoxFire, null, null, null, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
+			addButton(button++, "C.FoxFire", corruptedFoxFire).hint("Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if (!player.hasStatusEffect(StatusEffects.CooldownTerror)) {
-				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
-				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
-				else addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror).hint("Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror).hint("Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else addButton(button++, "Terror", kitsuneTerror).hint("Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				outputText("<b>You need more time before you can use Terror again.</b>\n\n");
 			}
 		}
 		if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
-			addButton(button++, "P.FoxFire", pureFoxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
+			addButton(button++, "P.FoxFire", pureFoxFire).hint("Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if (!player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
-				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
-				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
-				else addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion).hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion).hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else addButton(button++, "Illusion", kitsuneIllusion).hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				outputText("<b>You need more time before you can use Illusion again.</b>\n\n");
 			}
 		}
-		/*	if (player.tailType == TAIL_TYPE_CAT && player.tailCount == 2) {
-		 addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
-		 }	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
-		 */	if (player.findPerk(PerkLib.DarkCharm) >= 0) {
+	/*	if (player.tailType == TAIL_TYPE_CAT && player.tailCount == 2) {
+			addButton(button++, "FoxFire", foxFire).hint("Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
+		}	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
+	*/	if (player.findPerk(PerkLib.DarkCharm) >= 0) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
-				addButton(button++, "Fascinate", Fascinate, null, null, null, "Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
+				addButton(button++, "Fascinate", Fascinate).hint("Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
 				outputText("<b>You need more time before you can use Fascinate again.</b>\n\n");
 			}
 			if (player.findPerk(PerkLib.BlackHeart) >= 0) {
-				addButton(button++, "Lust Strike", LustStrike, null, null, null, "Use arcane gestures to flare up enemy lust. The higher your libido, intelligence and horny you're at the moment the higher enemy lust will rise. \n\nFatigue Cost: " + spellCost(50));
+				addButton(button++, "Lust Strike", LustStrike).hint("Use arcane gestures to flare up enemy lust. The higher your libido, intelligence and horny you're at the moment the higher enemy lust will rise. \n\nFatigue Cost: " + spellCost(50));
 			}
-			else addButton(button++, "Lust Strike", LustStrike, null, null, null, "Use arcane gestures to flare up enemy lust. The higher your libido and horny you're at the moment the higher enemy lust will rise. \n\nFatigue Cost: " + spellCost(50));
+			else addButton(button++, "Lust Strike", LustStrike).hint("Use arcane gestures to flare up enemy lust. The higher your libido and horny you're at the moment the higher enemy lust will rise. \n\nFatigue Cost: " + spellCost(50));
 		}
 		if (player.findPerk(PerkLib.Transference) >= 0) {
-			addButton(button++, "Transfer", lustTransfer, null, null, null, "Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
+			addButton(button++, "Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
 		}
+		if (player.devilkinScore() >= 10) {
+			addButton(button++, "Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n\nMana Cost: " + spellCost(40));
+		}
+		addButton(11, "BreathAtk", specialsBreathAttacks);
+		addButton(12, "(De)Buffs", specialsBuffsDebuffs);
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) addButton(13, "Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) addButton(13, "Ice Prison", iceprisonSpell);
 		addButton(14, "Back", combatMenu, false);
 	}
 
-	internal function fireBreathMenu():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		outputText("Which of your special fire-breath attacks would you like to use?");
-		simpleChoices("Akbal's", fireballuuuuu, "Hellfire", hellFire, "Dragonfire", dragonfireBreath, "PhoenixFire", phoenixfireBreath, "Back", playerMenu);
+	private function specialsBuffsDebuffs():void {
+		menu();
+		if (player.findPerk(PerkLib.JobWarrior) >= 0) {
+			addButton(0, "DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: 50");
+		}
+		if (player.findPerk(PerkLib.Berzerker) >= 0) {
+			if (player.findPerk(PerkLib.ColdFury) >= 0) {
+				addButton(1, "Berserk", berzerk).hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance! \n\nWrath Cost: 50");
+			}
+			else addButton(1, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero! \n\nWrath Cost: 50");
+		}
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) {
+			if (player.findPerk(PerkLib.ColdLust) >= 0) {
+				addButton(2, "Lustserk", lustzerk).hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense! \n\nWrath Cost: 50");
+			}
+			else addButton(2, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero! \n\nWrath Cost: 50");
+		}
+		if (player.devilkinScore() >= 10) {
+			addButton(3, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
+		}
+		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
+			addButton(5, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
+		}
+		if (player.findPerk(PerkLib.Whispered) >= 0) {
+			addButton(6, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+		}
+		addButton(14, "Back", msMenu);
 	}
+
+	private function specialsBreathAttacks():void {
+		menu();
+		if (player.findPerk(PerkLib.DragonFireBreath) >= 0) {
+			addButton(0, "DragonFire", dragonfireBreath).hint("Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
+		}
+		if (player.findPerk(PerkLib.DragonIceBreath) >= 0) {
+			addButton(1, "DragonIce", dragoniceBreath).hint("Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
+		}
+		if (player.findPerk(PerkLib.DragonLightningBreath) >= 0) {
+			addButton(2, "DragonLightning", dragonlightningBreath).hint("Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
+		}
+		if (player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
+			addButton(3, "DragonDarkness", dragondarknessBreath).hint("Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
+		}
+		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
+				addButton(5, "FreezingBreath", fenrirFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
+			}
+			else addButtonDisabled(5, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
+		}
+		if (player.findPerk(PerkLib.FreezingBreathYeti) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
+				addButton(6, "FreezingBreath", yetiFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
+			}
+			else addButtonDisabled(6, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
+		}
+		if (player.findPerk(PerkLib.FireLord) >= 0) {
+			addButton(7,"Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
+		}
+		if (player.findPerk(PerkLib.Hellfire) >= 0) {
+			addButton(8,"Hellfire",hellFire).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
+		}
+		if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
+				addButton(9, "PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
+			}
+			else addButtonDisabled(9, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
+		}
+		addButton(14, "Back", msMenu);
+	}
+
 //New Abilities and Items
 //[Abilities]
 //Whisper
@@ -419,7 +436,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmgF *= 1.5;
-			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 5;
+			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) {
+				if (player.findPerk(PerkLib.ArouseTheAudience) >= 0) lustDmgF *= 7.5;
+				else lustDmgF *= 5;
+			}
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -487,10 +507,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += 50 + rand(20);
 		damage += (player.level * 10);
 		damage = calcInfernoMod(damage);
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
@@ -613,14 +631,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -630,10 +648,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
@@ -753,14 +769,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -770,10 +786,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
@@ -858,14 +872,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -875,10 +889,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
@@ -962,14 +974,14 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
@@ -979,10 +991,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
-		 damage *= 3;
-		 }
-		 */	if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) damage *= 3;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
@@ -1416,34 +1426,193 @@ public class MagicSpecials extends BaseCombatContent {
 //				monster.teased(monster.lustVuln * (5 + player.cor / 10));
 //			}
 	}
+	
+	public function dwarfrage():void {
+		clearOutput();
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if(player.hasStatusEffect(StatusEffects.DwarfRage)) {
+			outputText("You already raging!");
+			doNext(msMenu);
+			return;
+		}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.wrath -= 50;
+		var temp:Number = 0;
+		var tempStr:Number = 0;
+		var tempTouSpe:Number = 0;
+		var dwarfrageDuration:Number = 10;
+		var DwarfRageBoost:Number = 10;
+		if (player.findPerk(PerkLib.JobBarbarian) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.JobBrawler) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.Berzerker) >= 0) DwarfRageBoost += 5;
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) DwarfRageBoost += 5;
+	//	DwarfRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
+		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
+		player.createStatusEffect(StatusEffects.DwarfRage, 0, 0, dwarfrageDuration, 0);
+		temp = DwarfRageBoost;
+		tempStr = temp * 2;
+		tempTouSpe = temp;
+		player.changeStatusValue(StatusEffects.DwarfRage,1,tempStr);
+		player.changeStatusValue(StatusEffects.DwarfRage,2,tempTouSpe);
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('tou');
+		mainView.statsView.showStatUp('spe');
+		player.str += player.statusEffectv1(StatusEffects.DwarfRage);
+		player.tou += player.statusEffectv2(StatusEffects.DwarfRage);
+		player.spe += player.statusEffectv2(StatusEffects.DwarfRage);
+		statScreenRefresh();
+		enemyAI();
+	}
 
 	public function berzerk():void {
 		clearOutput();
-		if(player.hasStatusEffect(StatusEffects.Berzerking)) {
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 			outputText("You're already pretty goddamn mad!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.wrath -= 50;
+		var berzerkDuration:Number = 10;
 		if (player.findPerk(PerkLib.ColdFury) >= 0) {
 			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
 		}
 		else outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
-		player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
+		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 		enemyAI();
 	}
 
 	public function lustzerk():void {
 		clearOutput();
-		if(player.hasStatusEffect(StatusEffects.Lustzerking)) {
+		if (player.wrath < 50) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			outputText("You're already pretty goddamn mad & lustfull!");
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
-		player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
+		player.wrath -= 50;
+		var lustzerkDuration:Number = 10;
+		if (player.findPerk(PerkLib.ColdLust) >= 0) {
+			outputText("You roar and unleash your lustful fury in order to destroy your foe!\n\n");
+		}
+		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
+		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 		enemyAI();
+	}
+	
+	public function maleficium():void {
+		clearOutput();
+		if(player.hasStatusEffect(StatusEffects.Maleficium)) {
+			outputText("You already empowered with corrupt power!");
+			doNext(msMenu);
+			return;
+		}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.lust += 50;
+		var maleficiumDuration:Number = 10;
+		outputText("You laugh malevolently as your body fills with profane powers empowering your spells but making you blush with barely contained desire.\n\n");
+		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
+		enemyAI();
+	}
+	
+	public function infernalflare():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.mana < spellCostWhite(40)) {
+			clearOutput();
+			outputText("Your mana is too low to cast this.");
+			doNext(msMenu);
+			return;
+		}
+		doNext(combatMenu);
+		useMana(40,1);
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
+		temp = 0;
+		temp += inteligencescalingbonus() * 0.8;
+		temp *= spellMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		if (monster.cor >= 66) temp = Math.round(temp * 1.0);
+		else if (monster.cor >= 50) temp = Math.round(temp * 1.1);
+		else if (monster.cor >= 25) temp = Math.round(temp * 1.2);
+		else if (monster.cor >= 10) temp = Math.round(temp * 1.3);
+		else temp = Math.round(temp * 1.4);
+		//High damage to goes.
+		temp = calcInfernoMod(temp);
+		if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
+		if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
+		if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 0.2;
+		if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 2;
+		temp = Math.round(temp);
+		outputText("for <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		outputText("\n\n");
+		checkAchievementDamage(temp);
+		flags[kFLAGS.SPELLS_CAST]++;
+	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//	spellPerkUnlock();
+		monster.HP -= temp;
+		statScreenRefresh();
+		if (monster.HP < 1)
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
 	}
 
 	public function petrify():void {
@@ -1646,7 +1815,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) corruptedfoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) corruptedfoxfiredmgmulti += .25;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) corruptedfoxfiredmgmulti += .5;
 		dmg *= corruptedfoxfiredmgmulti;
 		if (monster.cor >= 66) dmg = Math.round(dmg * 1.0);
 		else if (monster.cor >= 50) dmg = Math.round(dmg * 1.1);
@@ -1706,6 +1875,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.5;
 		if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9)  lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1776,7 +1946,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) fusedfoxfiredmgmulti += .5;
 		//Hosohi No Tama and Fusion bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fusedfoxfiredmgmulti += .5;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fusedfoxfiredmgmulti += 1;
 		dmg *= fusedfoxfiredmgmulti;
 		//High damage to goes.
 		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
@@ -1829,6 +1999,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		lustDmg *= 0.5;
 		if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2.8;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1899,7 +2070,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) purefoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus dmg
-//	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) purefoxfiredmgmulti += .25;	//make it evolved ver bonus
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) purefoxfiredmgmulti += .5;
 		dmg *= purefoxfiredmgmulti;
 		if (monster.cor < 33) dmg = Math.round(dmg * 1.0);
 		else if (monster.cor < 50) dmg = Math.round(dmg * 1.1);
@@ -1958,6 +2129,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.125;
 		if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 0.5;
 		if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
@@ -1980,6 +2152,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var modksc:Number = 1;
 		if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) modksc += 1;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) modksc += 2;
+		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) modksc += 0.5;
 		return modksc;
 	}
 

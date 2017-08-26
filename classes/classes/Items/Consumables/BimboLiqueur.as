@@ -52,7 +52,7 @@ package classes.Items.Consumables
 				outputText("\n\n<b>(Perks Lost: Bro Body");
 				if (game.player.findPerk(PerkLib.BroBrains) >= 0) outputText(", Bro Brains");
 				outputText(")\n");
-				outputText("(Perks Gained: Futa Form, Futa Faculties)\n");
+				outputText("(Perks Gained: Futa Form, Futa Faculties)</b>\n");
 				game.player.removePerk(PerkLib.BroBody);
 				game.player.removePerk(PerkLib.BroBrains);
 				game.player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
@@ -168,11 +168,11 @@ package classes.Items.Consumables
 					outputText("\n\n");
 				}
 				if (game.player.findPerk(PerkLib.BimboBody) < 0) {
-					outputText("<b>(Bimbo Body - Perk Gained!)\n");
+					outputText("<b>(Bimbo Body - Perk Gained!)</b>\n");
 					game.player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 				}
 				if (game.player.findPerk(PerkLib.BimboBrains) < 0) {
-					outputText("(Bimbo Brains - Perk Gained!)\n");//int to 20.  max int 50)
+					outputText("<b>(Bimbo Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 					if (game.player.inte > 21) {
 						var boost:Number = game.player.inte / 5;

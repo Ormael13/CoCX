@@ -1,7 +1,3 @@
-/**
- * ...
- * @author Ormael
- * */
 package classes.Items.Weapons
 {
 	import classes.PerkLib;

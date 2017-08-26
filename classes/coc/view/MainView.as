@@ -17,6 +17,7 @@ import coc.view.UIUtils;
 import fl.controls.ComboBox;
 import fl.controls.ScrollBarDirection;
 import fl.controls.UIScrollBar;
+import fl.data.DataProvider;
 
 import flash.display.Sprite;
 import flash.events.Event;
@@ -145,11 +146,13 @@ public class MainView extends Block {
 	public var nameBox:TextField;
 	public var eventTestInput:TextField;
 	public var aCb:ComboBox;
+	private var comboboxHandler:Function;
 
 	public var toolTipView:ToolTipView;
 	public var statsView:StatsView;
 	public var sideBarDecoration:Sprite;
 
+	private var _onBottomButtonClick:Function;//(index:int)=>void
 	public var bottomButtons:Array;
 	private var currentActiveButtons:Array;
 	private var allButtons:Array;
@@ -165,6 +168,7 @@ public class MainView extends Block {
 	protected var callbacks:Object = {};
 	protected var options:Object;
 
+	public var charView:CharView;
 	public function MainView():void {
 		super();
 		addElement(blackBackground = new BitmapDataSprite({
@@ -312,6 +316,12 @@ public class MainView extends Block {
 		this.height = SCREEN_H;
 		this.scaleX = 1;
 		this.scaleY = 1;
+		charView         = new CharView();
+		charView.name    = "charview";
+		this.charView.x       = TEXTZONE_X + TEXTZONE_W + GAP;
+		this.charView.y       = TEXTZONE_Y;
+		charView.visible = false;
+		addElement(charView);
 	}
 
 	/*override public function get width():Number {
@@ -326,19 +336,16 @@ public class MainView extends Block {
 //////// Initialization methods. /////////
 
 	protected function formatMiscItems():void {
-		// this.mainText = this.getChildByName("mainText");
-
-//		this.nameBox.maxChars = 54;
-
-		this.sideBarDecoration = getElementByName("statsBarMarker") as Sprite;
 
 		this.aCb               = new ComboBox();
 		this.aCb.dropdownWidth = 200;
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
+		this.aCb.rowCount = 15;
 		this.aCb.move(-1250, -1550);
-		this.aCb.prompt = "Choose a perk";
-		this.addChild(this.aCb);
+		this.aCb.addEventListener(Event.CHANGE, function (event:Event):void {
+			if (comboboxHandler != null) comboboxHandler(ComboBox(event.target).selectedItem);
+		});
 
 		this.hideSprite();
 	}
@@ -372,6 +379,11 @@ public class MainView extends Block {
 				x          : BOTTOM_X + BOTTOM_HGAP + c * (BOTTOM_HGAP * 2 + BTN_W),
 				y          : BOTTOM_Y + r * (GAP + BTN_H)
 			});
+			button.preCallback = (function(i:int):Function{
+				return function(b:CoCButton):void{
+					if (_onBottomButtonClick != null) _onBottomButtonClick(i);
+				};
+			})(bi);
 			this.bottomButtons.push(button);
 			this.addElement(button);
 		}
@@ -397,37 +409,32 @@ public class MainView extends Block {
 
 	//////// Internal(?) view update methods ////////
 
-	public function showBottomButton(index:int, label:String, callback:Function = null, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	public function showBottomButton(index:int, label:String, callback:Function = null, toolTipViewText:String = '', toolTipViewHeader:String = ''):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
-		if (!button) return;
+		if (!button) return null;
 		button.labelText     = label;
 		button.callback      = callback;
 		button.toolTipHeader = toolTipViewHeader;
 		button.toolTipText   = toolTipViewText;
 		button.visible       = true;
 		button.enabled       = true;
+		button.alpha         = 1; // failsafe to avoid possible problems with dirty hack
+		return button;
 	}
 
-	public function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	public function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
-		if (!button) return;
-		button.labelText     = label;
-		button.callback      = null;
-		button.toolTipHeader = toolTipViewHeader;
-		button.toolTipText   = toolTipViewText;
-		button.visible       = true;
-		button.enabled       = false;
+		if (!button) return null;
+		return button.showDisabled(label,toolTipViewText,toolTipViewHeader);
 	}
 
-	public function hideBottomButton(index:int):void {
+	public function hideBottomButton(index:int):CoCButton {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
-
 		// Should error.
-		if (!button) return;
-
-		button.visible = false;
+		if (!button) return null;
+		return button.hide();
 	}
 
 	public function hideCurrentBottomButtons():void {
@@ -619,6 +626,9 @@ public class MainView extends Block {
 		this.appearanceButton.callback = callback;
 	}
 
+	public function set onBottomButtonClick(value:Function):void {
+		_onBottomButtonClick = value;
+	}
 	public function showMenuButton(name:String):void {
 		var button:CoCButton = this.getMenuButtonByName(name);
 		button.visible       = true;
@@ -711,6 +721,27 @@ public class MainView extends Block {
 
 		this.scrollBar.scrollTarget = this.mainText;
 
+	}
+
+	public function hideComboBox():void {
+		stage.focus = null;
+		if (aCb.parent != null) {
+			removeElement(aCb);
+		}
+		comboboxHandler = null;
+	}
+
+	public function showComboBox(items:Array,propmt:String,onChange:Function):void {
+		aCb.dataProvider = new DataProvider(items);
+		aCb.prompt = propmt;
+		comboboxHandler = onChange;
+		if (aCb.parent == null) {
+			addElement(aCb);
+		}
+		aCb.visible = true;
+	}
+	public function placeComboBox(x:Number,y:Number):void {
+		aCb.move(x,y);
 	}
 }
 }

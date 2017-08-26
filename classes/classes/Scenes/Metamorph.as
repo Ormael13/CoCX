@@ -22,7 +22,7 @@ public function accessMetamorphMenu():void {
 	clearOutput();
 	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n\n");
 	outputText("<b>Race added to Metamorph:\n");
-	outputText("Bee, Demon, Fox, Harpy, Kitsune, Lizard, Salamander, Shark, Spider (+Drider)</b>");
+	outputText("Bee, Couatl, Demon, Dragon, Fox, Gorgon, Harpy, Kitsune, Lizard, Naga, Orca, Phoenix, Salamander, Shark, Spider (+Drider)</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
@@ -37,16 +37,16 @@ private function accessPage1MetamorphMenu():void {
 	addButton(1, "Hair", accessHairMenu);
 	addButton(2, "Face(1)", accessPage1FaceMenu);
 	addButton(3, "Face(2)", accessPage2FaceMenu);
-	addButton(4, "Tongue", accessTongueMenu);
-	addButton(5, "Eyes", accessEyesMenu);
-	addButton(6, "Ears(1)", accessPage1EarsMenu);
-//	addButton(7, "Ears(2)", accessPage2EarsMenu);
-	addButton(8, "Horns", accessHornsMenu);
-	addButton(9, "Antennae", accessAntennaeMenu);
-	addButton(10, "Gills", accessGillsMenu);
-	addButton(11, "Arms(1)", accessPage1ArmsMenu);
-//	addButton(12, "Arms(2)", accessPage2ArmsMenu);
-//	addButton(13, "Back", accessMetamorphMenu);
+	addButton(4, "Face(3)", accessPage3FaceMenu);
+	addButton(5, "Tongue", accessTongueMenu);
+	addButton(6, "Eyes", accessEyesMenu);
+	addButton(7, "Ears(1)", accessPage1EarsMenu);
+	addButton(8, "Ears(2)", accessPage2EarsMenu);
+	addButton(9, "Horns", accessHornsMenu);
+	addButton(10, "Antennae", accessAntennaeMenu);
+	addButton(11, "Gills", accessGillsMenu);
+	addButton(12, "Arms(1)", accessPage1ArmsMenu);
+	addButton(13, "Arms(2)", accessPage2ArmsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessSkinMenu():void {
@@ -63,14 +63,22 @@ private function accessSkinMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && player.hasCoatOfType(SKIN_COAT_CHITIN)) addButtonDisabled(3, "Chitin", "You already have chitin.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.soulforce < 100) addButtonDisabled(3, "Chitin", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType != SKIN_TYPE_DRAGON_SCALES && player.soulforce >= 150) addButton(8, "D.Scales", metamorphDragonScales);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType == SKIN_TYPE_DRAGON_SCALES) addButtonDisabled(8, "D.Scales", "You already have dragon scales.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType != SKIN_TYPE_DRAGON_SCALES && player.soulforce < 150) addButtonDisabled(8, "D.Scales", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessHairMenu():void {
 	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != 1 && player.soulforce >= 100) addButton(0, "Harpy", metamorphHarpyHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType == 1) addButtonDisabled(0, "Harpy", "You already have harpy hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != 1 && player.soulforce < 100) addButtonDisabled(0, "Harpy", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != HAIR_FEATHER && player.soulforce >= 100) addButton(0, "Harpy", metamorphHarpyHair);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType == HAIR_FEATHER) addButtonDisabled(0, "Harpy", "You already have harpy hair.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != HAIR_FEATHER && player.soulforce < 100) addButtonDisabled(0, "Harpy", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType != HAIR_GORGON && player.soulforce >= 100) addButton(5, "Gorgon", metamorphGorgonHair);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType == HAIR_GORGON) addButtonDisabled(5, "Gorgon", "You already have snake hair.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType != HAIR_GORGON && player.soulforce < 100) addButtonDisabled(5, "Gorgon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1FaceMenu():void {
@@ -79,6 +87,10 @@ private function accessPage1FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth) && player.faceType == FACE_SHARK_TEETH) addButtonDisabled(3, "Shark", "You already have shark teeth.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth) && player.faceType != FACE_SHARK_TEETH && player.soulforce < 100) addButtonDisabled(3, "Shark", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs) && player.faceType != FACE_SNAKE_FANGS && player.soulforce >= 100) addButton(4, "Snake", metamorphSnakeFangs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs) && player.faceType == FACE_SNAKE_FANGS) addButtonDisabled(4, "Snake", "You already have snake fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs) && player.faceType != FACE_SNAKE_FANGS && player.soulforce < 100) addButtonDisabled(4, "Snake", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace) && player.faceType != FACE_LIZARD && player.soulforce >= 100) addButton(7, "Lizard", metamorphLizardFace);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace) && player.faceType == FACE_LIZARD) addButtonDisabled(7, "Lizard", "You already have lizard face.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace) && player.faceType != FACE_LIZARD && player.soulforce < 100) addButtonDisabled(7, "Lizard", "You not have enough Soulforce for this metamorphosis.");
@@ -91,6 +103,10 @@ private function accessPage1FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxFace) && player.faceType == FACE_FOX) addButtonDisabled(11, "Fox", "You already have fox face.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxFace) && player.faceType != FACE_FOX && player.soulforce < 100) addButtonDisabled(11, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace) && player.faceType != FACE_DRAGON && player.soulforce >= 100) addButton(12, "Dragon", metamorphDragonFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace) && player.faceType == FACE_DRAGON) addButtonDisabled(12, "Dragon", "You already have dragon face.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace) && player.faceType != FACE_DRAGON && player.soulforce < 100) addButtonDisabled(12, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage2FaceMenu():void {
@@ -99,14 +115,34 @@ private function accessPage2FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType == FACE_SALAMANDER_FANGS) addButtonDisabled(11, "Salamander", "You already have salamander fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType != FACE_SALAMANDER_FANGS && player.soulforce < 100) addButtonDisabled(11, "Salamander", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace) && player.faceType != FACE_ORCA && player.soulforce >= 100) addButton(13, "Orca", metamorphOrcaFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace) && player.faceType == FACE_ORCA) addButtonDisabled(13, "Orca", "You already have orca face.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace) && player.faceType != FACE_ORCA && player.soulforce < 100) addButtonDisabled(13, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage3FaceMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs) && player.faceType != FACE_DRAGON_FANGS && player.soulforce >= 100) addButton(1, "Dragon(F)", metamorphDragonFangs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs) && player.faceType == FACE_DRAGON_FANGS) addButtonDisabled(1, "Dragon(F)", "You already have dragon fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs) && player.faceType != FACE_DRAGON_FANGS && player.soulforce < 100) addButtonDisabled(1, "Dragon(F)", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongueType != TONUGE_SNAKE && player.soulforce >= 100) addButton(0, "Snake", metamorphSnakeTongue);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongueType == TONUGE_SNAKE) addButtonDisabled(0, "Snake", "You already have snake tonuge.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongueType != TONUGE_SNAKE && player.soulforce < 100) addButtonDisabled(0, "Snake", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongueType != TONUGE_DEMONIC && player.soulforce >= 100) addButton(1, "Demon", metamorphTonugeDemonic);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongueType == TONUGE_DEMONIC) addButtonDisabled(1, "Demon", "You already have demon tonuge.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongueType != TONUGE_DEMONIC && player.soulforce < 100) addButtonDisabled(1, "Demon", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongueType != TONUGE_DRACONIC && player.soulforce >= 100) addButton(2, "Dragon", metamorphDragonTonuge);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongueType == TONUGE_DRACONIC) addButtonDisabled(2, "Dragon", "You already have dragon tonuge.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongueType != TONUGE_DRACONIC && player.soulforce < 100) addButtonDisabled(2, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessEyesMenu():void {
@@ -115,6 +151,10 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyeType == EYES_FOUR_SPIDER_EYES) addButtonDisabled(0, "Spider", "You already have spider four eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyeType != EYES_FOUR_SPIDER_EYES && player.soulforce < 100) addButtonDisabled(0, "Spider", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyeType != EYES_GORGON && player.soulforce >= 100) addButton(3, "Gorgon", metamorphGorgonEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyeType == EYES_GORGON) addButtonDisabled(3, "Gorgon", "You already have gorgon eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyeType != EYES_GORGON && player.soulforce < 100) addButtonDisabled(3, "Gorgon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyeType != EYES_FOX && player.soulforce >= 100) addButton(6, "Fox", metamorphEyesFox);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyeType == EYES_FOX) addButtonDisabled(6, "Fox", "You already have fox eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyeType != EYES_FOX && player.soulforce < 100) addButtonDisabled(6, "Fox", "You not have enough Soulforce for this metamorphosis.");
@@ -123,6 +163,14 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.eyeType == EYES_REPTILIAN) addButtonDisabled(7, "Lizard", "You already have lizard eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.eyeType != EYES_REPTILIAN && player.soulforce < 100) addButtonDisabled(7, "Lizard", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyeType != EYES_SNAKE && player.soulforce >= 100) addButton(8, "Snake", metamorphSnakeEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyeType == EYES_SNAKE) addButtonDisabled(8, "Snake", "You already have snake eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyeType != EYES_SNAKE && player.soulforce < 100) addButtonDisabled(8, "Snake", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyeType != EYES_DRAGON && player.soulforce >= 100) addButton(9, "Dragon", metamorphDragonEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyeType == EYES_DRAGON) addButtonDisabled(9, "Dragon", "You already have snake eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyeType != EYES_DRAGON && player.soulforce < 100) addButtonDisabled(9, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
@@ -139,10 +187,22 @@ private function accessPage1EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.earType == EARS_FOX) addButtonDisabled(8, "Fox", "You already have fox ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.earType != EARS_FOX && player.soulforce < 100) addButtonDisabled(8, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType != EARS_DRAGON && player.soulforce >= 100) addButton(9, "Dragon", metamorphDragonEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType == EARS_DRAGON) addButtonDisabled(9, "Dragon", "You already have dragon ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.earType != EARS_DRAGON && player.soulforce < 100) addButtonDisabled(9, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage2EarsMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.earType != EARS_ORCA && player.soulforce >= 100) addButton(7, "Orca", metamorphOrcaEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.earType == EARS_ORCA) addButtonDisabled(7, "Orca", "You already have orca ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.earType != EARS_ORCA && player.soulforce < 100) addButtonDisabled(7, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.earType != EARS_SNAKE && player.soulforce >= 100) addButton(8, "Snake", metamorphSnakeEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.earType == EARS_SNAKE) addButtonDisabled(8, "Snake", "You already have snake ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.earType != EARS_SNAKE && player.soulforce < 100) addButtonDisabled(8, "Snake", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessHornsMenu():void {
@@ -196,6 +256,10 @@ private function accessPage1ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.armType == ARM_TYPE_SALAMANDER) addButtonDisabled(4, "Salamander", "You already have salamander arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.armType != ARM_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(4, "Salamander", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.armType != ARM_TYPE_PHOENIX && player.soulforce >= 100) addButton(5, "Phoenix", metamorphPhoenixArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.armType == ARM_TYPE_PHOENIX) addButtonDisabled(5, "Phoenix", "You already have phoenix arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.armType != ARM_TYPE_PHOENIX && player.soulforce < 100) addButtonDisabled(5, "Phoenix", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.armType != ARM_TYPE_SHARK && player.soulforce >= 100) addButton(7, "Shark", metamorphSharkArms);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.armType == ARM_TYPE_SHARK) addButtonDisabled(7, "Shark", "You already have shark arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.armType != ARM_TYPE_SHARK && player.soulforce < 100) addButtonDisabled(7, "Shark", "You not have enough Soulforce for this metamorphosis.");
@@ -216,6 +280,14 @@ private function accessPage1ArmsMenu():void {
 }
 private function accessPage2ArmsMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.armType != ARM_TYPE_DRAGON && player.soulforce >= 100) addButton(0, "Dragon", metamorphDragonArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.armType == ARM_TYPE_DRAGON) addButtonDisabled(0, "Dragon", "You already have dragon arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.armType != ARM_TYPE_DRAGON && player.soulforce < 100) addButtonDisabled(0, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.armType != ARM_TYPE_ORCA && player.soulforce >= 100) addButton(2, "Orca", metamorphOrcaArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.armType == ARM_TYPE_ORCA) addButtonDisabled(2, "Orca", "You already have orca arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.armType != ARM_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(2, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 
@@ -228,7 +300,7 @@ private function accessPage2MetamorphMenu():void {
 //	addButton(4, "Wings(2)", accessPage2WingsMenu);
 	addButton(5, "Legs(1)", accessPage1LegsMenu);
 	addButton(6, "Legs(2)", accessPage2LegsMenu);
-//	addButton(7, "Legs(3)", accessPage3LegsMenu);
+	addButton(7, "Legs(3)", accessPage3LegsMenu);
 	addButton(8, "Rear B.", accessRearBodyMenu);
 //	addButton(9, "Back", accessMetamorphMenu);
 //	addButton(10, "Back", accessMetamorphMenu);
@@ -311,6 +383,10 @@ private function accessPage2TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.soulforce < 900) addButtonDisabled(7, "Fox 9th", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 8) addButtonDisabled(7, "Fox 9th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != TAIL_TYPE_DRACONIC && player.soulforce >= 100) addButton(8, "Dragon", metamorphDragonTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType == TAIL_TYPE_DRACONIC) addButtonDisabled(13, "Dragon", "You already have dragon tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != TAIL_TYPE_DRACONIC && player.soulforce < 100) addButtonDisabled(13, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage3TailMenu():void {
@@ -319,6 +395,10 @@ private function accessPage3TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType == TAIL_TYPE_SALAMANDER) addButtonDisabled(5, "Salamander", "You already have salamander tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != TAIL_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(5, "Salamander", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce >= 100) addButton(5, "Orca", metamorphOrcaTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType == TAIL_TYPE_ORCA) addButtonDisabled(5, "Orca", "You already have orca tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(5, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
@@ -345,11 +425,29 @@ private function accessPage1WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.wingType == WING_TYPE_FEATHERED_LARGE) addButtonDisabled(6, "Harpy", "You already have harpy wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.wingType != WING_TYPE_FEATHERED_LARGE && player.soulforce < 100) addButtonDisabled(6, "Harpy", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType != WING_TYPE_DRACONIC_SMALL && player.soulforce >= 100) addButton(7, "Dragon(S)", metamorphDragonWingsSmall);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType == WING_TYPE_DRACONIC_SMALL) addButtonDisabled(7, "Dragon(S)", "You already have small dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.wingType != WING_TYPE_DRACONIC_SMALL && player.soulforce < 100) addButtonDisabled(7, "Dragon(S)", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType == WING_TYPE_DRACONIC_SMALL && player.soulforce >= 200) addButton(8, "Dragon(L)", metamorphDragonWingsLarge);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType == WING_TYPE_DRACONIC_LARGE) addButtonDisabled(8, "Dragon(L)", "You already have large dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType != WING_TYPE_DRACONIC_LARGE && player.soulforce < 200) addButtonDisabled(8, "Dragon(L)", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.wingType != WING_TYPE_DRACONIC_SMALL) addButtonDisabled(8, "Dragon(L)", "You not have proper type of wings for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType == WING_TYPE_BAT_LIKE_LARGE && player.soulforce >= 300) addButton(10, "Demon(L2)", metamorphWingsDemonicLarge2);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType == WING_TYPE_BAT_LIKE_LARGE_2) addButtonDisabled(10, "Demon(L2)", "You already have two large pairs of bat wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType != WING_TYPE_BAT_LIKE_LARGE_2 && player.soulforce < 300) addButtonDisabled(10, "Demon(L2)", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.wingType != WING_TYPE_BAT_LIKE_LARGE) addButtonDisabled(10, "Demon(L2)", "You not have proper type of wings for this metamorphosis.");
 	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType == WING_TYPE_DRACONIC_LARGE && player.soulforce >= 300) addButton(11, "Dragon(H)", metamorphDragonWingsHuge);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType == WING_TYPE_DRACONIC_HUGE) addButtonDisabled(11, "Dragon(H)", "You already have huge dragon wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType != WING_TYPE_DRACONIC_HUGE && player.soulforce < 300) addButtonDisabled(11, "Dragon(H)", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.wingType != WING_TYPE_DRACONIC_LARGE) addButtonDisabled(11, "Dragon(H)", "You not have proper type of wings for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType != WING_TYPE_FEATHERED_PHOENIX && player.soulforce >= 100) addButton(12, "Phoenix", metamorphPhoenixWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType == WING_TYPE_FEATHERED_PHOENIX) addButtonDisabled(12, "Phoenix", "You already have phoenix wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.wingType != WING_TYPE_FEATHERED_PHOENIX && player.soulforce < 100) addButtonDisabled(12, "Phoenix", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage2WingsMenu():void {
@@ -358,6 +456,10 @@ private function accessPage2WingsMenu():void {
 }
 private function accessPage1LegsMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody) && player.lowerBody != LOWER_BODY_TYPE_NAGA && player.soulforce >= 100) addButton(2, "Snake", metamorphSnakeLowerBody);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody) && player.lowerBody == LOWER_BODY_TYPE_NAGA) addButtonDisabled(2, "Snake", "You already have snake lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody) && player.lowerBody != LOWER_BODY_TYPE_NAGA && player.soulforce < 100) addButtonDisabled(2, "Snake", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels) && player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS && (player.gender == 2 || player.gender == 3) && player.soulforce >= 100) addButton(3, "Demon(F)", metamorphLegsDemonicHighHeels);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels) && player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS && (player.gender == 2 || player.gender == 3)) addButtonDisabled(3, "Demon(F)", "You already have demon high heels lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels) && player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS && (player.gender == 2 || player.gender == 3) && player.soulforce < 100) addButtonDisabled(3, "Demon(F)", "You not have enough Soulforce for this metamorphosis.");
@@ -396,6 +498,10 @@ private function accessPage2LegsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.lowerBody == LOWER_BODY_TYPE_FOX) addButtonDisabled(1, "Fox", "You already have fox lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.lowerBody != LOWER_BODY_TYPE_FOX && player.soulforce < 100) addButtonDisabled(1, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs) && player.lowerBody != LOWER_BODY_TYPE_DRAGON && player.soulforce >= 100) addButton(2, "Dragon", metamorphDragonLegs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs) && player.lowerBody == LOWER_BODY_TYPE_DRAGON) addButtonDisabled(2, "Dragon", "You already have dragon lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs) && player.lowerBody != LOWER_BODY_TYPE_DRAGON && player.soulforce < 100) addButtonDisabled(2, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody != LOWER_BODY_TYPE_SALAMANDER && player.soulforce >= 100) addButton(6, "Salamander", metamorphSalamanderLegs);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER) addButtonDisabled(6, "Salamander", "You already have salamander lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.lowerBody != LOWER_BODY_TYPE_SALAMANDER && player.soulforce < 100) addButtonDisabled(6, "Salamander", "You not have enough Soulforce for this metamorphosis.");
@@ -408,6 +514,10 @@ private function accessPage2LegsMenu():void {
 }
 private function accessPage3LegsMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.soulforce >= 100) addButton(2, "Orca", metamorphOrcaLegs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.lowerBody == LOWER_BODY_TYPE_ORCA) addButtonDisabled(2, "Orca", "You already have orca lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(2, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessRearBodyMenu():void {
@@ -416,6 +526,10 @@ private function accessRearBodyMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkFin) && player.rearBody == REAR_BODY_SHARK_FIN) addButtonDisabled(5, "Shark", "You already have shark back fin.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkFin) && player.rearBody != REAR_BODY_SHARK_FIN && player.soulforce < 100) addButtonDisabled(5, "Shark", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody != REAR_BODY_ORCA_BLOWHOLE && player.soulforce >= 100) addButton(6, "Orca", metamorphOrcaBlowhole);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody == REAR_BODY_ORCA_BLOWHOLE) addButtonDisabled(6, "Orca", "You already have orca blowhole.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody != REAR_BODY_ORCA_BLOWHOLE && player.soulforce < 100) addButtonDisabled(6, "Shark", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }/*
 private function accessHairMenu():void {
@@ -526,6 +640,230 @@ private function metamorphGoo():void {
 	
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphDragonTail():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
+	else outputText("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes.  <b>You now have a dragon tail.</b>");
+	player.tailType = TAIL_TYPE_DRACONIC;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+	player.armType = ARM_TYPE_DRAGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonLegs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) outputText("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
+	else if (player.isNaga()) outputText("\n\nYou fall on your face to the ground, hissing and screeching in pain - it feels like someone has grabbed the tip of your tail, pulled it viciously straight, and is now splitting it up the middle with a knife!  Paralyzed from the waist down, you claw desperately at the earth to try and alleviate the pain, and can only think to thank your lucky stars when it fades away.  Looking down where your tail was, though the scales remain, you realize you've become a biped again, your new feet sporting bestial claws on their toes.  <b>You now have dragon feet.</b>");
+	else if (player.isGoo()) outputText("\n\nA strange tingling sensation fills you, and you watch as your gooey blob of a body begins to ripple and shudder; you try to make it stop, but you can't control it.  Before your eyes, it shapes itself into the appearance of legs, the colored slime growing denser and thicker, the surface membrane texturing itself to look like scales.  Before you've quite realized what's happened, the slime has set like water freezing, leaving you with humanoid legs once again, though tipped with claws and very reptilian in appearance.  <b>You now have dragon feet.</b>");
+	else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou bellow in pain as your legs break and reform and your hooves seem to suddenly explode, the bones within twisting themselves into monstrous three-toed appendages, more like those of some terrible lizard-thing than anything else. <b>You now have dragon feet.</b>");
+	else if (player.isTaur()) outputText("\n\nYou cry out as spasms of pain suddenly rip through your quadrupedal body, bringing you crashing onto the ground.  Words cannot define the agony as muscles and bones twist and shift and collapse violently.  When it's all over, you stagger upright, finding yourself standing on two legs again.  Though covered in scales and with the paws of some monster lizard instead of feet, they otherwise look like your old human legs.  <b>You now have dragon feet.</b>");
+	else if (player.isScylla()) {
+		outputText("\n\nSomething weird happens in your tentacles as your limbs coil into two pillars of flesh and fuse together, your ");
+		if (player.gender == 1) outputText("[vagina]");
+		if (player.gender == 3) outputText(" and ");
+		if (player.cocks.length > 0) outputText("[cock]");
+		outputText(" moving back up between your leg to where it used to be. Bones starts to form in your limb and, before you know it, you are staring at a pair of normal human legs. The changes does not end there however.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>\n\n");
+	}
+	else if (player.isAlraune()) outputText("\n\nYour petals all withers and fall off as your pitch and flower turn to dust leaving you with normal human legs. The changes does not stop there however.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
+	else outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
+	player.lowerBody = LOWER_BODY_TYPE_DRAGON;
+	player.legCount = 2;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonFangs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face. But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
+	player.faceType = FACE_DRAGON_FANGS;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
+	player.faceType = FACE_DRAGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonTonuge():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
+	player.tongueType = TONUGE_DRACONIC;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
+	player.eyeType = EYES_DRAGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonWingsHuge():void {
+	clearOutput();
+	player.soulforce -= 300;
+	outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
+	player.wingType = WING_TYPE_DRACONIC_HUGE;
+	player.wingDesc = "large, majestic draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonWingsLarge():void {
+	clearOutput();
+	player.soulforce -= 200;
+	outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
+	player.wingType = WING_TYPE_DRACONIC_LARGE;
+	player.wingDesc = "large, draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonWingsSmall():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.wingType == WING_TYPE_NONE) outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
+	else outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
+	player.wingType = WING_TYPE_DRACONIC_SMALL;
+	player.wingDesc = "small, draconic";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphDragonEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+	player.earType = EARS_DRAGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphGorgonEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>.");
+	player.eyeType = EYES_GORGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphGorgonHair():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.hairLength == 0) outputText("\n\nAt first nothing happening. Then you start to feel tingling at your head scalp.  You run your fingers over head you feel small numbs fast growning up forming something akin to dull spikes.  After brief pause those nubs starts to slowly grown and covered gradualy with....sclaes?");
+	else {
+		outputText("\n\nYou run your fingers through your [hair] while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your hair.  They're completely changing becoming more thick and slowly covered with delicate....scales?");
+		if (player.hairLength < 6) outputText("  Additionaly they seems to lenghten.");
+	}
+	outputText(" What even more worrisome seems at the ends of each strands form something that is similar to very small snake head.  Taking one of your hair 'strands' confirm your suspicions.  Your hair turned into bunch of tiny snakes similary to those possesed normaly by gorgons.  <b>Your hair turned into thin snakes replacing your current hair!</b>");
+	if (player.hairLength < 6) player.hairLength = 6;
+	player.hairType = HAIR_GORGON;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSnakeEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+	player.earType = EARS_SNAKE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSnakeEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+	player.eyeType = EYES_SNAKE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSnakeLowerBody():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+	else {
+		outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
+		outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
+		outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+	}
+	outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
+	if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
+	outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.");
+	player.lowerBody = LOWER_BODY_TYPE_NAGA;
+	player.legCount = 1;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSnakeFangs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>");
+	if (player.faceType != FACE_HUMAN && player.faceType != FACE_SHARK_TEETH && player.faceType != FACE_BUNNY && player.faceType != FACE_SPIDER_FANGS) outputText("  As the change progresses, your [face] reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
+	player.faceType = FACE_SNAKE_FANGS;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphSnakeTongue():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.tongueType == TONUGE_HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
+	else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
+	player.tongueType = TONUGE_SNAKE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaBlowhole():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\n");
+	if (player.rearBody > REAR_BODY_NONE) outputText("Your wings fold into themselves, merging together with your back.  ");
+	outputText("Pain rushes just behind your shoulder blades as a hole opens up, air rushing in. The hole is burning making you groan in pain as air flows in and out. Eventually you get accustomed to breathing from your back like whales do, but it sure was a weird experience.");
+	if (silly()) outputText("  Well it doesn't matter because now you can break the world record of the longest breath holding by sitting on the ocean floor for more than 90 minutes.");
+	player.rearBody = REAR_BODY_ORCA_BLOWHOLE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour nose starts to tingle, getting bigger and rounder as your facial features take on a bombed shape. Your nasal hole disappears entirely as you feel your mouth change, your dentition turning into pointed teeth fit for an orca. You go look at your reflection in the water to be sure, and discover your face is now similar in shape to that of a killer whale. Um… you could use a fish or two, you are getting pretty hungry. <b>Taking a bite out of fresh fish would be great with your new orca face.</b>");
+	player.faceType = FACE_ORCA;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>");
+	player.earType = EARS_ORCA;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaTail():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. ");
+	outputText("With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. <b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
+	player.tailType = TAIL_TYPE_ORCA;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>");
+	player.armType = ARM_TYPE_ORCA;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOrcaLegs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
+	outputText("\n\nYour toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>");
+	player.lowerBody = LOWER_BODY_TYPE_ORCA;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPhoenixWings():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>");
+	player.wingType = WING_TYPE_FEATHERED_PHOENIX;
+	player.wingDesc = "large crimson feathered";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPhoenixArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nA crimson colored avian plumage starts to sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
+	player.armType = ARM_TYPE_PHOENIX;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphSalamanderFace():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -563,8 +901,7 @@ private function metamorphSalamanderTail():void {
 private function metamorphSharkFin():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\n");
-	outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
+	outputText("\n\nYou groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
 	player.rearBody = REAR_BODY_SHARK_FIN;
 	doNext(accessMetamorphMenu);
 }
@@ -677,13 +1014,13 @@ private function metamorphHarpyHair():void {
 	clearOutput();
 	player.soulforce -= 100;
 	outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
-	player.hairType = 1;
+	player.hairType = HAIR_FEATHER;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphHarpyArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
+	outputText("\n\nAn avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
 	player.armType = ARM_TYPE_HARPY;
 	doNext(accessMetamorphMenu);
 }
@@ -1064,6 +1401,20 @@ private function metamorphFishGills():void {
 	
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphDragonScales():void {
+	clearOutput();
+	player.soulforce -= 150;
+	outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". They are smooth and look nearly as tough as iron. ");
+	var color:String;
+	if (rand(10) == 0) {
+		color = randomChoice("purple","silver");
+	} else {
+		color = randomChoice("red","green","white","blue","black");
+	}
+	outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
+	player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{color:color});
+	doNext(accessMetamorphMenu);
+}
 private function metamorphChitin():void {
 	clearOutput();
 	player.soulforce -= 100;

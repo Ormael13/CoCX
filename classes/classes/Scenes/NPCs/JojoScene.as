@@ -2307,7 +2307,7 @@ public function lowCorruptionIntro():void
 	menu();
 	addButton(0, "Meditate", meditateInForest); // OH GOD NO SEND HELP
 	addButton(1, "Leave", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(4, "Rape", jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
+	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(4, "Rape", jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
 }
 
 public function highCorruptionJojoEncounter():void {
@@ -2321,7 +2321,7 @@ public function highCorruptionJojoEncounter():void {
 	menu();
 	addButton(0, "Accept", getGame().jojoScene.meditateInForest);
 	addButton(1, "Decline", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", getGame().jojoScene.jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
+	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
 }
 
 //Repeat encounter
@@ -2334,8 +2334,8 @@ public function repeatJojoEncounter():void {
 		//Choices time!
 		menu();
 		addButton(0, "Meditate", getGame().jojoScene.meditateInForest);
-		addButton(1, "Purge", getGame().jojoScene.wormRemoval, null, null, null, "Request him to purge the worms from your body.");
-		if (player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0 && player.lust >= 33) addButton(2, "Rape", getGame().jojoScene.jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
+		addButton(1, "Purge", getGame().jojoScene.wormRemoval).hint("Request him to purge the worms from your body.");
+		if (player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0 && player.lust >= 33) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 		addButton(4, "Leave", camp.returnToCampUseOneHour);
 		return;
 	}
@@ -2344,7 +2344,7 @@ public function repeatJojoEncounter():void {
 	//Choices time!
 	menu();
 	doYesNo(getGame().jojoScene.meditateInForest, camp.returnToCampUseOneHour);
-	if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0) addButton(2, "Rape", getGame().jojoScene.jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
+	if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 }
 
 public function corruptJojoEncounter():void {
@@ -2493,14 +2493,14 @@ private function jojoCampMenu():void {
 	}
 	else jojoDefense += "Off";
 	menu();
-	addButton(0, "Appearance", jojoAppearance, null, null, null, "Examine Jojo's appearance.");
-	addButton(1, "Talk", talkMenu, null, null, null, "Discuss with him about topics.");
-	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift, null, null, null, "Join him in a training session.");
+	addButton(0, "Appearance", jojoAppearance).hint("Examine Jojo's appearance.");
+	addButton(1, "Talk", talkMenu).hint("Discuss with him about topics.");
+	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift).hint("Join him in a training session.");
 	addButton(3, "Meditate", jojoFollowerMeditate);
-	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.hasStatusEffect(StatusEffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
-	if (player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
-	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
+	addButton(4, jojoDefense, jojoDefenseToggle).hint((player.hasStatusEffect(StatusEffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
+	if (player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Purge", wormRemoval).hint("Request him to purge the worms from your body.");
+	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
+	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu).hint("Initiate sexy time with the mouse-morph.");
 	addButton(14, "Leave", camp.campFollowers);
 }
 
@@ -2526,23 +2526,23 @@ public function talkMenu():void
 {
 	jojoSprite();
 	menu();
-	addButton(0, "Village", jojoTalkVillage, null, null, null, "Ask him about the village he was raised in.");
-	addButton(1, "Monks", jojoTalkJoiningTheMonks, null, null, null, "Ask him about how and why he became a monk.");
-	addButton(2, "MonksFall", jojoTalkFallOfTheMonks, null, null, null, "Ask him about the demise of the monks.");
-	addButton(3, "Forest", jojoTalkForestConvo, null, null, null, "Ask him about how he ended up in the forest.");
-	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory, null, null, null, "Tell him about how you've shut down the factory.");
-	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
-	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
-	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1, null, null, null, "Ask him if he can exorcise the demonic parasite infesting Minerva.");
+	addButton(0, "Village", jojoTalkVillage).hint("Ask him about the village he was raised in.");
+	addButton(1, "Monks", jojoTalkJoiningTheMonks).hint("Ask him about how and why he became a monk.");
+	addButton(2, "MonksFall", jojoTalkFallOfTheMonks).hint("Ask him about the demise of the monks.");
+	addButton(3, "Forest", jojoTalkForestConvo).hint("Ask him about how he ended up in the forest.");
+	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin).hint("Tell him about Ingnam and your history.");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory).hint("Tell him about how you've shut down the factory.");
+	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave).hint("Tell him about your encounter in the Sand Cave in the desert.");
+	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift).hint("Ask him if he's willing to train you.");
+	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
 	//Sex button
 	if (player.cor <= 10 && player.lust >= 33) {
-		addButton(9, "Sex?", offerSexFirstTime, null, null, null, "Ask him if he's willing to have sex with you.");
+		addButton(9, "Sex?", offerSexFirstTime).hint("Ask him if he's willing to have sex with you.");
 		if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] < 4) addButtonDisabled(9, "Sex?", "You should socialize with Jojo a bit more.");
 		//if (player.hasStatusEffect(StatusEffects.EverRapedJojo)) addButtonDisabled(9, "Sex?". "You've raped Jojo in the past, now you can't ask him out.");
 	}
 	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusEffectv1(StatusEffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
-	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
+	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection).hint("You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	if (monk <= -3) removeButton(9);
 	addButton(14, "Back", jojoCamp);
 }
@@ -3126,10 +3126,10 @@ private function pureJojoSexMenu():void {
 		outputText("\n<b>Cum Production:</b> " + jojoCumQ() + "mL");
 	}
 	menu();
-	if (player.hasCock() && player.cockThatFits(capacity) >= 0) addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut, null, null, null, "Fuck the monk mouse-morph's butt.");
-	addButton(1, "Anal Catch", getAnallyFuckedByMouseYouSlut, null, null, null, "Have Jojo penetrate you anally.");
-	if (player.hasVagina()) addButton(2, "Vaginal Catch", getVagFuckedByMouse, null, null, null, "Have Jojo penetrate you vaginally.");
-	addButton(3, "Blow Him", suckJojosCock, null, null, null, "Suck Jojo's cock and get a taste of mouse cum!");
+	if (player.hasCock() && player.cockThatFits(capacity) >= 0) addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut).hint("Fuck the monk mouse-morph's butt.");
+	addButton(1, "Anal Catch", getAnallyFuckedByMouseYouSlut).hint("Have Jojo penetrate you anally.");
+	if (player.hasVagina()) addButton(2, "Vaginal Catch", getVagFuckedByMouse).hint("Have Jojo penetrate you vaginally.");
+	addButton(3, "Blow Him", suckJojosCock).hint("Suck Jojo's cock and get a taste of mouse cum!");
 	addButton(14, "Nevermind", jojoCampMenu);
 }
 

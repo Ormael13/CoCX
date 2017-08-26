@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.HighMountains.*;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.Monsters.DarkElfScene;
 
 	use namespace kGAMECLASS;
 
@@ -22,6 +23,7 @@ package classes.Scenes.Areas
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
+		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function HighMountains()
 		{
@@ -38,7 +40,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			
-			var chooser:Number = rand(4);
+			var chooser:Number = rand(5);
 			//Boosts mino and hellhound rates!
 			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
 				chooser = 1;
@@ -144,7 +146,18 @@ package classes.Scenes.Areas
 			}
 			if (chooser == 3) 
 			{
-				this.izumiScenes.encounter();
+				if (flags[kFLAGS.SOUL_SENSE_IZUMI] < 3) {
+					this.izumiScenes.encounter();
+					return;
+				}
+				else {
+					basiliskScene.basiliskGreeting();
+					return;
+				}
+			}
+			//Dark Elf Scout
+			if (chooser == 4) {
+				darkelfScene.introDarkELfSlaver();
 				return;
 			}
 		}

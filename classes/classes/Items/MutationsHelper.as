@@ -93,9 +93,12 @@ package classes.Items {
 				case ARM_TYPE_FOX:
 				case ARM_TYPE_LION:
 				case ARM_TYPE_YETI:
+				case ARM_TYPE_DEVIL:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
+				case ARM_TYPE_ELF:
 				case ARM_TYPE_KITSUNE:
+				case ARM_TYPE_ONI:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
 					break;
 				case ARM_TYPE_SHARK:
@@ -276,7 +279,9 @@ package classes.Items {
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
 		[ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
-		[ARM_TYPE_DRAGON, null],
+		[ARM_TYPE_DRAGON, StatusEffects.UnlockedDraconicArms],
+		[ARM_TYPE_DEVIL, null],
+		[ARM_TYPE_ELF, null],
 		[ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[ARM_TYPE_GARGOYLE, null],
 		[ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
@@ -285,8 +290,9 @@ package classes.Items {
 		[ARM_TYPE_LION, null],
 		[ARM_TYPE_LIZARD, StatusEffects.UnlockedLizardArms],
 		[ARM_TYPE_MANTIS, null],
-		[ARM_TYPE_ORCA, null],
-		[ARM_TYPE_PHOENIX, null],
+		[ARM_TYPE_ONI, null],
+		[ARM_TYPE_ORCA, StatusEffects.UnlockedOrcaArms],
+		[ARM_TYPE_PHOENIX, StatusEffects.UnlockedPhoenixArms],
 		[ARM_TYPE_PLANT, null],
 		[ARM_TYPE_PLANT2, null],
 		[ARM_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderArms],
@@ -305,22 +311,25 @@ package classes.Items {
 		[EARS_COW, null],
 		[EARS_DEER, null],
 		[EARS_DOG, null],
-		[EARS_DRAGON, null],
+		[EARS_DRAGON, StatusEffects.UnlockedDraconicEars],
 		[EARS_ECHIDNA, null],
 		[EARS_ELFIN, StatusEffects.UnlockedElfinEars],
+		[EARS_ELVEN, null],
 		[EARS_FERRET, null],
 		[EARS_FOX, StatusEffects.UnlockedFoxEars],
+		[EARS_GOAT, null],
 		[EARS_HORSE, null],
 		[EARS_HUMAN, null],
 		[EARS_KANGAROO, null],
 		[EARS_LION, null],
 		[EARS_LIZARD, StatusEffects.UnlockedLizardEars],
 		[EARS_MOUSE, null],
-		[EARS_ORCA, null],
+		[EARS_ONI, null],
+		[EARS_ORCA, StatusEffects.UnlockedOrcaEars],
 		[EARS_PIG, null],
 		[EARS_RACCOON, null],
 		[EARS_RHINO, null],
-		[EARS_SNAKE, null],
+		[EARS_SNAKE, StatusEffects.UnlockedSnakeEars],
 		[EARS_WOLF, null],
 		[EARS_YETI, null],
 	]);
@@ -331,15 +340,18 @@ package classes.Items {
 	private const METAMORPH_EYES:Object = createMapFromPairs([
 		[EYES_BLACK_EYES_SAND_TRAP, null],
 		[EYES_CAT_SLITS, null],
-		[EYES_DRAGON, null],
+		[EYES_DRAGON, StatusEffects.UnlockedDraconicEyes],
+		[EYES_DEVIL, null],
+		[EYES_ELF, null],
 		[EYES_FENRIR, null],
 		[EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
 		[EYES_FOX, StatusEffects.UnlockedFoxEyes],
-		[EYES_GORGON, null],
+		[EYES_GORGON, StatusEffects.UnlockedGorgonEyes],
 		[EYES_HUMAN, null],
 		[EYES_MANTICORE, null],
+		[EYES_ONI, null],
 		[EYES_REPTILIAN, StatusEffects.UnlockedLizardEyes],
-		[EYES_SNAKE, null],
+		[EYES_SNAKE, StatusEffects.UnlockedSnakeEyes],
 	]);
 
 	public function setFaceType(faceType:int):Boolean {
@@ -353,7 +365,9 @@ package classes.Items {
 		[FACE_COW_MINOTAUR, null],
 		[FACE_DEER, null],
 		[FACE_DOG, null],
-		[FACE_DRAGON, null],
+		[FACE_DRAGON, StatusEffects.UnlockedDraconicFace],
+		[FACE_DRAGON_FANGS, StatusEffects.UnlockedDraconicFangs],
+		[FACE_DEVIL_FANGS, null],
 		[FACE_ECHIDNA, null],
 		[FACE_FERRET, null],
 		[FACE_FERRET_MASK, null],
@@ -364,7 +378,8 @@ package classes.Items {
 		[FACE_LIZARD, StatusEffects.UnlockedLizardFace],
 		[FACE_MANTICORE, null],
 		[FACE_MOUSE, null],
-		[FACE_ORCA, null],
+		[FACE_ONI_TEETH, null],
+		[FACE_ORCA, StatusEffects.UnlockedOrcaFace],
 		[FACE_PIG, null],
 		[FACE_PLANT_DRAGON, null],
 		[FACE_RACCOON, null],
@@ -372,7 +387,7 @@ package classes.Items {
 		[FACE_RHINO, null],
 		[FACE_SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
 		[FACE_SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
-		[FACE_SNAKE_FANGS, null],
+		[FACE_SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
 		[FACE_SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
 		[FACE_WOLF, null],
 		[FACE_YETI_FANGS, null],
@@ -397,11 +412,12 @@ package classes.Items {
 		[HAIR_FLUFFY, null],
 		[HAIR_GHOST, null],
 		[HAIR_GOO, null],
-		[HAIR_GORGON, null],
+		[HAIR_GORGON, StatusEffects.UnlockedGorgonHair],
 		[HAIR_GRASS, null],
 		[HAIR_LEAF, null],
 		[HAIR_NORMAL, null],
 		[HAIR_QUILL, null],
+		[HAIR_SILKEN, null],
 	]);
 
 	/**
@@ -442,9 +458,10 @@ package classes.Items {
 		[LOWER_BODY_TYPE_DEMONIC_CLAWS, StatusEffects.UnlockedDemonClawedLegs],
 		[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, StatusEffects.UnlockedDemonHighHeels],
 		[LOWER_BODY_TYPE_DOG, null],
-		[LOWER_BODY_TYPE_DRAGON, null],
+		[LOWER_BODY_TYPE_DRAGON, StatusEffects.UnlockedDraconicLegs],
 		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusEffects.UnlockedDriderLegs],
 		[LOWER_BODY_TYPE_ECHIDNA, null],
+		[LOWER_BODY_TYPE_ELF, null],
 		[LOWER_BODY_TYPE_FERRET, null],
 		[LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
 		[LOWER_BODY_TYPE_GARGOYLE, null],
@@ -456,8 +473,9 @@ package classes.Items {
 		[LOWER_BODY_TYPE_LION, null],
 		[LOWER_BODY_TYPE_LIZARD, StatusEffects.UnlockedLizardLegs],
 		[LOWER_BODY_TYPE_MANTIS, null],
-		[LOWER_BODY_TYPE_NAGA, null],
-		[LOWER_BODY_TYPE_ORCA, null],
+		[LOWER_BODY_TYPE_NAGA, StatusEffects.UnlockedSnakeLowerBody],
+		[LOWER_BODY_TYPE_ONI, null],
+		[LOWER_BODY_TYPE_ORCA, StatusEffects.UnlockedOrcaLegs],
 		[LOWER_BODY_TYPE_PLANT_FLOWER, null],
 		[LOWER_BODY_TYPE_PLANT_HIGH_HEELS, null],
 		[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, null],
@@ -481,7 +499,7 @@ package classes.Items {
 		[REAR_BODY_FENRIR_ICE_SPIKES, null],
 		[REAR_BODY_LION_MANE, null],
 		[REAR_BODY_NONE, null],
-		[REAR_BODY_ORCA_BLOWHOLE, null],
+		[REAR_BODY_ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
 		[REAR_BODY_SHARK_FIN, StatusEffects.UnlockedSharkFin],
 	]);
 
@@ -493,10 +511,10 @@ package classes.Items {
 	private const METAMORPH_TONGUES:Object = createMapFromPairs([
 		[TONUGE_CAT, [null, "Cat Tongue"]],
 		[TONUGE_DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
-		[TONUGE_DRACONIC, [null, "Draconic Tongue"]],
+		[TONUGE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
 		[TONUGE_ECHIDNA, [null, "Echidna Tongue"]],
 		[TONUGE_HUMAN, [null, "Human Tongue"]],
-		[TONUGE_SNAKE, [null, "Snake Tongue"]],
+		[TONUGE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 
 	/**
@@ -522,7 +540,7 @@ package classes.Items {
 		[TAIL_TYPE_DEER, null],
 		[TAIL_TYPE_DEMONIC, StatusEffects.UnlockedDemonTail],
 		[TAIL_TYPE_DOG, null],
-		[TAIL_TYPE_DRACONIC, null],
+		[TAIL_TYPE_DRACONIC, StatusEffects.UnlockedDraconicTail],
 		[TAIL_TYPE_ECHIDNA, null],
 		[TAIL_TYPE_FERRET, null],
 		[TAIL_TYPE_FOX, StatusEffects.UnlockedFoxTail],
@@ -537,7 +555,7 @@ package classes.Items {
 		[TAIL_TYPE_MANTIS_ABDOMEN, null],
 		[TAIL_TYPE_MOUSE, null],
 		[TAIL_TYPE_NONE, null],
-		[TAIL_TYPE_ORCA, null],
+		[TAIL_TYPE_ORCA, StatusEffects.UnlockedOrcaTail],
 		[TAIL_TYPE_PIG, null],
 		[TAIL_TYPE_RABBIT, null],
 		[TAIL_TYPE_RACCOON, null],
@@ -569,12 +587,12 @@ package classes.Items {
 		[WING_TYPE_BAT_LIKE_TINY, StatusEffects.UnlockedDemonTinyBatWings],
 		[WING_TYPE_BEE_LIKE_LARGE, StatusEffects.UnlockedBeeWingsLarge],
 		[WING_TYPE_BEE_LIKE_SMALL, StatusEffects.UnlockedBeeWingsSmall],
-		[WING_TYPE_DRACONIC_HUGE, null],
-		[WING_TYPE_DRACONIC_LARGE, null],
-		[WING_TYPE_DRACONIC_SMALL, null],
+		[WING_TYPE_DRACONIC_HUGE, StatusEffects.UnlockedDraconicWingsHuge],
+		[WING_TYPE_DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
+		[WING_TYPE_DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
 		[WING_TYPE_FEATHERED_ALICORN, null],
 		[WING_TYPE_FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
-		[WING_TYPE_FEATHERED_PHOENIX, null],
+		[WING_TYPE_FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
 		[WING_TYPE_GARGOYLE_LIKE_LARGE, null],
 		[WING_TYPE_GIANT_DRAGONFLY, null],
 		[WING_TYPE_HARPY, null],

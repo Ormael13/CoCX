@@ -24,7 +24,5 @@ package classes.Items.Weapons
 			game.sheilaScene.rebellingScarredBlade(true);
 			return false;
 		}
-		
 	}
-
 }

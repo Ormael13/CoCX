@@ -15,7 +15,5 @@ package classes.Items.Weapons
 		override public function useText():void {
 			outputText("You equip the lightweight cane, wondering about the effectiveness of such a small stick. With the cane in your hand, though, you feel intensely focused, and you doubt anything could distract you from your goals. ");
 		}
-		
 	}
-
 }

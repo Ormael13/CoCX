@@ -17,7 +17,7 @@ package classes.Perks
 		public function WizardsAndDaoistsFocusPerk() 
 		{
 			super("Wizard's and Daoists's Focus", "Wizard's and Daoists's Focus",
-					"Your equipment grants you additional focus, reducing the use of fatigue for spells and soulforce for soulskills.");
+					"Your equipment grants you additional focus, increasing your spells and soulskills power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

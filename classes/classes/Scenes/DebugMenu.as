@@ -6,7 +6,10 @@ import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewManager;
-	import flash.utils.describeType;
+
+import coc.view.Color;
+
+import flash.utils.describeType;
 	import flash.utils.*
 	
 	public class DebugMenu extends BaseContent
@@ -48,15 +51,15 @@ import classes.BodyParts.SkinLayer;
 				clearOutput();
 				outputText("Welcome to the super secret debug menu!");
 				menu();
-				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
-				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
-				addButton(2, "Flag Editor", flagEditor, null, null, null, "Edit any flag. \n\nCaution: This might screw up your save!");
-				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
+				addButton(0, "Spawn Items", itemSpawnMenu).hint("Spawn any items of your choice, including items usually not obtainable through gameplay.");
+				addButton(1, "Change Stats", statChangeMenu).hint("Change your core stats.");
+				addButton(2, "Flag Editor", flagEditor).hint("Edit any flag. \n\nCaution: This might screw up your save!");
+				addButton(3, "Reset NPC", resetNPCMenu).hint("Choose a NPC to reset.");
 				//addButton(5, "Event Trigger", eventTriggerMenu);
-				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption).hint("Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
-				addButton(5, "DumpEffects", dumpEffectsMenu, null, null, null, "Display your status effects");
-				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
+				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
@@ -497,13 +500,14 @@ import classes.BodyParts.SkinLayer;
 			outputText("TEST STUFFZ");
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
-			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
-			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
+			addButton(2, "Be Manticore", getManticoreKit).hint("Gain everything needed to become a Manticore-morph.");
+			addButton(3, "Be Dragonne", getDragonneKit).hint("Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
-			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
+			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing).hint("Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
-			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
-			addButton(8, "BodyPartEditor", bodyPartEditorRoot,null,null,null, "Inspect and fine-tune the player body parts");
+			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
+			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
+			addButton(9, "Color Picker", colorPickerRoot).hint("HSL picker for skin/hair color");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		private function generateTagDemos(...tags:Array):String {
@@ -523,8 +527,119 @@ import classes.BodyParts.SkinLayer;
 			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
 			addButton(14, "Back", backFn);
 		}
+		private var oldColor:String = "";
+		private var pickerMode:String = "skin";
+		private function colorPickerRoot():void {
+			clearOutput();
+			mainViewManager.showPlayerDoll(false);
+			var c:String = pickerMode=='skin'?player.skin.base.color:player.hairColor;
+			var hsl:Object;
+			var h:int,s:int,l:int;
+			if (c.charAt(0) != '$') {
+				oldColor = c;
+				hsl = Color.toHsl(mainView.charView.lookupColorValue(pickerMode, c));
+				c        = '$hsl('+int(hsl.h)+','+int(hsl.s)+','+int(hsl.l)+')';
+				if (pickerMode == 'skin') player.skin.base.color = c;
+				else if (pickerMode == 'hair') player.hairColor = c;
+				h = hsl.h;
+				s = hsl.s;
+				l = hsl.l;
+			} else {
+				var m:/*String*/Array = c.match(/^\$hsl\((\d+),(\d+),(\d+)\)$/);
+				if (!m) styleHackMenu();
+				h=int(m[1]);
+				s=int(m[2]);
+				l=int(m[3]);
+			}
+			displayHeader("Color picker");
+			outputText('\nCurrent color:');
+			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t<i>(0: red, 120: green, 240: blue)');
+			outputText("\n<b>S</b>aturation:\t\t"+s+' / 100\t(0: greyscale, 100: bright color)');
+			outputText("\n<b>L</b>uminosity:\t"+l+' / 100\t(0: black, 50: bright color, 100: white)');
+			outputText('\n\nCurrent mode: <b>'+pickerMode+' color</b>.');
+			var palette:/*String*/Array = [];
+			var maps:Object = mainView.charView.palette.lookupObjects;
+			for (var mapname:String in maps) {
+				var map:Object = maps[mapname];
+				var suffix:String = mapname == 'common' ? '' : (' ('+mapname+')');
+				for (var colorname:String in map) {
+					hsl = Color.toHsl(Color.convertColor(map[colorname]));
+					palette.push({
+						label:colorname+suffix+' ('+int(hsl.h)+', '+int(hsl.s)+', '+int(hsl.l)+')',
+						data:{name:colorname,h:hsl.h,s:hsl.s,l:hsl.l}});
+				}
+			}
+			palette.sortOn('label');
+
+			kGAMECLASS.showComboBox(palette,"Known colors",function(item:Object):void {
+				oldColor = item.data.name;
+				colorPickerSet(item.data.h,item.data.s,item.data.l);
+			});
+			outputText('<b>Missing colors:</b>');
+			outputText('\n<i>' +
+					   [
+						   'ashen', 'caramel', 'cerulean', 'chocolate', 'crimson', 'crystal', 'dusky',
+						   'emerald', 'golden', 'indigo', 'metallic', 'midnight', 'peach', 'sable',
+						   'sanguine', 'silky', 'silver', 'tan', 'tawny', 'turquoise', 'aphotic blue-black',
+						   'ashen grayish-blue', 'creamy-white', 'crimson platinum', 'dark blue',
+						   'dark gray', 'dark green', 'deep blue', 'deep red', 'ghostly pale',
+						   'glacial white', 'golden blonde', 'grayish-blue', 'light blonde', 'light blue',
+						   'light gray', 'light green', 'light grey', 'light purple', 'lime green',
+						   'mediterranean-toned', 'metallic golden', 'metallic silver', 'midnight black',
+						   'pale white', 'pale yellow', 'platinum blonde', 'platinum crimson',
+						   'purplish-black', 'quartz white', 'reddish-orange', 'rough gray', 'sandy brown',
+						   'shiny black', 'silver blonde', 'silver-white', 'snow white', 'yellowish-green'
+					   ].join('</i>, <i>') + '</i>.');
+			outputText('\n\n<b>Not verified:</b>');
+			outputText('\n<i>' +
+					   [
+						   'albino', 'aqua', 'auburn', 'black', 'blonde', 'blue', 'bronzed', 'brown',
+						   'dark', 'ebony', 'fair', 'gray', 'green', 'light', 'mahogany', 'olive',
+						   'orange', 'pink', 'purple', 'red', 'russet', 'white', 'yellow',
+						   'iridescent gray', 'leaf green', 'milky white', 'sandy blonde', 'red(hair)',
+						   'flaxen(hair)', 'brown(hair)', 'black(hair)', 'gray(hair)', 'white(hair)',
+						   'raven(hair)', 'snowy(hair)', 'pale(skin)'
+					   ].join('</i>, <i>') + '</i>.');
+			menu();
+			addButton(0,"Back",colorPickerExit);
+			addButton(5,"Skin",colorPickerSetMode,'skin');
+			button(5).enabled = pickerMode != 'skin';
+			addButton(10,"Hair",colorPickerSetMode,'hair');
+			button(10).enabled = pickerMode != 'hair';
+
+			addButton(1,"Sub 20 Hue",colorPickerSet,(h+360-20)%360,s,l);
+			addButton(2,"Sub 1 Hue",colorPickerSet,(h+360-1)%360,s,l);
+			addButton(3,"Add 1 Hue",colorPickerSet,(h+1)%360,s,l);
+			addButton(4,"Add 20 Hue",colorPickerSet,(h+20)%360,s,l);
+			addButton(6,"Sub 10 Sat",colorPickerSet,h,boundInt(0,s-10,100),l);
+			addButton(7,"Sub 1 Sat",colorPickerSet,h,boundInt(0,s-1,100),l);
+			addButton(8,"Add 1 Sat",colorPickerSet,h,boundInt(0,s+1,100),l);
+			addButton(9,"Add 10 Sat",colorPickerSet,h,boundInt(0,s+10,100),l);
+			addButton(11,"Sub 10 Lum ",colorPickerSet,h,s,boundInt(0,l-10,100));
+			addButton(12,"Sub 1 Lum ",colorPickerSet,h,s,boundInt(0,l-1,100));
+			addButton(13,"Add 1 Lum",colorPickerSet,h,s,boundInt(0,l+1,100));
+			addButton(14,"Add 10 Lum",colorPickerSet,h,s,boundInt(0,l+10,100));
+		}
+		private function colorPickerSetMode(mode:String):void {
+			if (pickerMode == 'skin') player.skin.base.color = oldColor;
+			else if (pickerMode == 'hair') player.hairColor = oldColor;
+			pickerMode = mode;
+			colorPickerRoot();
+		}
+		private function colorPickerSet(h:int,s:int,l:int):void {
+			var color:String = '$hsl(' + (h + 360) % 360 + ',' + s + ',' + l + ')';
+			if (pickerMode == 'skin') player.skin.base.color = color;
+			else if (pickerMode == 'hair') player.hairColor = color;
+			colorPickerRoot();
+		}
+		private function colorPickerExit():void {
+			if (pickerMode == 'skin') player.skin.base.color = oldColor;
+			else if (pickerMode == 'hair') player.hairColor = oldColor;
+			styleHackMenu();
+		}
 		private function dumpPlayerData():void {
 			clearOutput();
+			mainViewManager.showPlayerDoll(true);
 			var pa:PlayerAppearance = getGame().playerAppearance;
 			pa.describeRace();
 			pa.describeFaceShape();
@@ -755,7 +870,9 @@ import classes.BodyParts.SkinLayer;
 			[FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
 			[FACE_YETI_FANGS,"(27) YETI_FANGS"],
 			[FACE_ORCA,"(28) ORCA"],
-			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"]
+			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"],
+			[FACE_DRAGON_FANGS,"(30) DRAGON_FANGS"],
+			[FACE_DEVIL_FANGS,"(31) DEVIL_FANGS"],
 		];
 		private static const DECO_DESC_CONSTANTS:Array = [
 			[DECORATION_NONE,"(0) NONE"],
@@ -786,6 +903,7 @@ import classes.BodyParts.SkinLayer;
 			[EYES_REPTILIAN, "(8) REPTILIAN"],
 			[EYES_SNAKE, "(9) SNAKE"],
 			[EYES_DRAGON, "(10) DRAGON"],
+			[EYES_DEVIL, "(11) DEVIL"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[EARS_HUMAN, "(0) HUMAN"],
@@ -811,6 +929,7 @@ import classes.BodyParts.SkinLayer;
 			[EARS_YETI, "(20) YETI"],
 			[EARS_ORCA, "(21) ORCA"],
 			[EARS_SNAKE, "(22) SNAKE"],
+			[EARS_GOAT, "(23) GOAT"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[HORNS_NONE, "(0) NONE"],
@@ -962,6 +1081,7 @@ import classes.BodyParts.SkinLayer;
 			[ARM_TYPE_YETI, "(16) YETI"],
 			[ARM_TYPE_ORCA, "(17) ORCA"],
 			[ARM_TYPE_PLANT2, "(18) PLANT2"],
+			[ARM_TYPE_DEVIL, "(19) DEVIL"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[CLAW_TYPE_NORMAL,"(0) NORMAL"],

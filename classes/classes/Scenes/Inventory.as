@@ -174,7 +174,7 @@ package classes.Scenes
 					if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden, null, null, null, "Visit your plant offspring");
+					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
 				}
 				addButton(14, "Back", inventoryMenu);
 		}
@@ -192,25 +192,25 @@ package classes.Scenes
 			hideMenus();
 			spriteSelect(-1);
 			menu();
-			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5, null, null, null, "Store item in Sky Poison Pearl (central section).");
-			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5, null, null, null, "Take item from Sky Poison Pearl (central section).");
-			if (player.level >= 6) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1, null, null, null, "Take item from Sky Poison Pearl (east section).");
-			if (player.level >= 12) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2, null, null, null, "Take item from Sky Poison Pearl (south section).");
-			if (player.level >= 18) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3, null, null, null, "Take item from Sky Poison Pearl (west section).");
-			if (player.level >= 24) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4, null, null, null, "Take item from Sky Poison Pearl (north section).");
-			if (player.level >= 30) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6, null, null, null, "Take item from Sky Poison Pearl (above section).");
-			if (player.level >= 36) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7, null, null, null, "Take item from Sky Poison Pearl (below section).");
-			if (player.level >= 6) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1, null, null, null, "Store item in Sky Poison Pearl (east section).");
+			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (central section).");
+			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (central section).");
+			if (player.level >= 6) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
+			if (player.level >= 12) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
+			if (player.level >= 18) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
+			if (player.level >= 24) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
+			if (player.level >= 30) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
+			if (player.level >= 36) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
+			if (player.level >= 6) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
 			else addButtonDisabled(1, "Pearl Store 2", "Req. LvL 6+ to unlock this.");
-			if (player.level >= 12) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2, null, null, null, "Store item in Sky Poison Pearl (south section).");
+			if (player.level >= 12) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).");
 			else addButtonDisabled(2, "Pearl Store 3", "Req. LvL 12+ to unlock this.");
-			if (player.level >= 18) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3, null, null, null, "Store item in Sky Poison Pearl (west section).");
+			if (player.level >= 18) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).");
 			else addButtonDisabled(3, "Pearl Store 4", "Req. LvL 18+ to unlock this.");
-			if (player.level >= 24) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4, null, null, null, "Store item in Sky Poison Pearl (north section).");
+			if (player.level >= 24) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).");
 			else addButtonDisabled(4, "Pearl Store 5", "Req. LvL 24+ to unlock this.");
-			if (player.level >= 30) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6, null, null, null, "Store item in Sky Poison Pearl (above section).");
+			if (player.level >= 30) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).");
 			else addButtonDisabled(10, "Pearl Store 6", "Req. LvL 30+ to unlock this.");
-			if (player.level >= 36) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7, null, null, null, "Store item in Sky Poison Pearl (below section).");
+			if (player.level >= 36) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).");
 			else addButtonDisabled(12, "Pearl Store 7", "Req. LvL 36+ to unlock this.");
 			addButton(14, "Back", inventoryMenu);
 		}
@@ -306,37 +306,37 @@ package classes.Scenes
 			}
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
-				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1, null, null, null, "Put item in 1st Warehouse.");
-				if (warehouse1Description()) addButton(1, "Warehouse T1", pickItemToTakeFromWarehouse1, null, null, null, "Take item from 1st Warehouse.");
+				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");
+				if (warehouse1Description()) addButton(1, "Warehouse T1", pickItemToTakeFromWarehouse1).hint("Take item from 1st Warehouse.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 6) {
-				addButton(2, "Warehouse P2", pickItemToPlaceInWarehouse2, null, null, null, "Put item in 2nd Warehouse.");
-				if (warehouse2Description()) addButton(3, "Warehouse T2", pickItemToTakeFromWarehouse2, null, null, null, "Take item from 2nd Warehouse.");
+				addButton(2, "Warehouse P2", pickItemToPlaceInWarehouse2).hint("Put item in 2nd Warehouse.");
+				if (warehouse2Description()) addButton(3, "Warehouse T2", pickItemToTakeFromWarehouse2).hint("Take item from 2nd Warehouse.");
 			}
 			//Granary
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4) {
-				addButton(5, "Granary Put", pickItemToPlaceInGranary, null, null, null, "Put food in Granary.");
-				if (granaryDescription()) addButton(6, "Granary Take", pickItemToTakeFromGranary, null, null, null, "Take food from Granary.");
+				addButton(5, "Granary Put", pickItemToPlaceInGranary).hint("Put food in Granary.");
+				if (granaryDescription()) addButton(6, "Granary Take", pickItemToTakeFromGranary).hint("Take food from Granary.");
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
 				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
-				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack2, null, null, null, "Put weapon on the rack.");
-				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack2, null, null, null, "Take weapon from the rack.");
+				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack2).hint("Put weapon on the rack.");
+				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack2).hint("Take weapon from the rack.");
 				outputText("\n\n");
 			}
 			//Armor Rack
 			if(player.hasKeyItem("Equipment Rack - Armor") >= 0) {
 				outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
-				addButton(10, "A.Rack Put", pickItemToPlaceInArmorRack2, null, null, null, "Put armor on the rack.");
-				if (armorRackDescription()) addButton(11, "A.Rack Take", pickItemToTakeFromArmorRack2, null, null, null, "Take armor from the rack.");
+				addButton(10, "A.Rack Put", pickItemToPlaceInArmorRack2).hint("Put armor on the rack.");
+				if (armorRackDescription()) addButton(11, "A.Rack Take", pickItemToTakeFromArmorRack2).hint("Take armor from the rack.");
 				outputText("\n\n");
 			}
 			//Shield Rack
 			if(player.hasKeyItem("Equipment Rack - Shields") >= 0) {
 				outputText("There's a shield rack set up here, set up to hold up to nine various shields.");
-				addButton(12, "S.Rack Put", pickItemToPlaceInShieldRack2, null, null, null, "Put shield on the rack.");
-				if (shieldRackDescription()) addButton(13, "S.Rack Take", pickItemToTakeFromShieldRack2, null, null, null, "Take shield from the rack.");
+				addButton(12, "S.Rack Put", pickItemToPlaceInShieldRack2).hint("Put shield on the rack.");
+				if (shieldRackDescription()) addButton(13, "S.Rack Take", pickItemToTakeFromShieldRack2).hint("Take shield from the rack.");
 				outputText("\n\n");
 			}
 			addButton(14, "Back", playerMenu);
@@ -791,47 +791,47 @@ package classes.Scenes
 			menu();
 			if (player.weapon != WeaponLib.FISTS)
 			{
-				addButton(0, "Weapon (M)", unequipWeapon, null, null, null, player.weapon.description, capitalizeFirstLetter(player.weapon.name));
+				addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
 			}
 			if (player.weaponRange != WeaponRangeLib.NOTHING)
 			{
-				addButton(1, "Weapon (R)", unequipWeaponRange, null, null, null, player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
+				addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
 			}
 			if (player.shield != ShieldLib.NOTHING)
 			{
-				addButton(2, "Shield", unequipShield, null, null, null, player.shield.description, capitalizeFirstLetter(player.shield.name));
+				addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 			}
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(3, "Accessory", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(3, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			if (player.armor != ArmorLib.NOTHING)
 			{
-				addButton(5, "Armour", unequipArmor, null, null, null, player.armor.description, capitalizeFirstLetter(player.armor.name));
+				addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 			}
 			if (player.upperGarment != UndergarmentLib.NOTHING)
 			{
-				addButton(6, "Upperwear", unequipUpperwear, null, null, null, player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
+				addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 			}
 			if (player.lowerGarment != UndergarmentLib.NOTHING)
 			{
-				addButton(7, "Lowerwear", unequipLowerwear, null, null, null, player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
+				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
 			}/*			
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(10, "Necklace", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(10, "Necklace", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(11, "Ring 1", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(11, "Ring 1", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(12, "Ring 2", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(12, "Ring 2", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(2, "Accessory", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(2, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			zrobić sloty:
 			na broń dystansową

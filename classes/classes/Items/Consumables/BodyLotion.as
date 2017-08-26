@@ -84,7 +84,7 @@ package classes.Items.Consumables
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinTone == _adj) {
+			if (game.player.skinAdj == _adj) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. Once you’ve finished you feel reinvigorated. ");
 				game.HPChange(10, true);
 			}

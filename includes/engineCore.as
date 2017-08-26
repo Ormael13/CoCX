@@ -1,6 +1,8 @@
 ﻿import classes.*;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 import flash.display.BitmapData;
 import flash.text.TextFormat;
 // // import flash.events.MouseEvent;
@@ -374,7 +376,7 @@ public function buttonIsVisible(index:int):Boolean {
 		return undefined;
 	}
 	else {
-		return mainView.bottomButtons[index].visible;
+		return button(index).visible;
 	}
 };
 
@@ -414,7 +416,7 @@ public function getButtonText(index:int):String {
 		return '';
 	}
 	else {
-		return mainView.bottomButtons[index].labelText;
+		return button(index).labelText;
 	}
 }
 
@@ -692,8 +694,11 @@ public function createCallBackFunction2(func:Function,...args):Function
  * @param	toolTipText The text that will appear on tooltip when the mouse goes over the button.
  * @param	toolTipHeader The text that will appear on the tooltip header. If not specified, it defaults to button text.
  */
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void {
-	if (func1==null) return;
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
+	var btn:CoCButton = button(pos);
+	if (func1==null) {
+		return btn.hide();
+	}
 	var callback:Function;
 /*
 	Let the mainView decide if index is valid
@@ -706,40 +711,42 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
 			trace("Button removed due to SFW mode.");
-			return;
+			return btn.hide();
 		}
 	}
 	callback = createCallBackFunction(func1, arg1, arg2, arg3);
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
-	mainView.showBottomButton(pos, text,
-			function():void {
-				textHistory.push("<br>["+text+"]<br>");
-				callback();
-			}, toolTipText, toolTipHeader);
+	btn.show(text,callback, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
+	return btn;
 }
 
-public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void {
+public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
+	var btn:CoCButton = button(pos);
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
 			trace("Button removed due to SFW mode.");
-			return;
+			return btn.hide();
 		}
 	}
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	mainView.showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
+	btn.showDisabled(text,toolTipText,toolTipHeader);;
 	flushOutputTextToGUI();
+	return btn;
+}
+
+public function button(pos:int):CoCButton {
+	return mainView.bottomButtons[pos];
 }
 
 public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
-	mainView.showBottomButton(index, mainView.bottomButtons[index].labelText, mainView.bottomButtons[index].callback, toolTipText, toolTipHeader);
+	button(index).hint(toolTipText,toolTipHeader);
 }
 
 public function hasButton(arg:*):Boolean {
@@ -760,7 +767,7 @@ public function removeButton(arg:*):void {
 	}
 	if(arg is Number) {
 		if(arg < 0 || arg > 14) return;
-		buttonToRemove = Math.round(arg);
+		buttonToRemove = int(arg);
 	}
 	mainView.hideBottomButton( buttonToRemove );
 }
@@ -771,7 +778,6 @@ public function removeButton(arg:*):void {
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
 	for (var i:int = 0; i <= 14; i++) {
 		mainView.hideBottomButton(i);
-		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
 	}
 	flushOutputTextToGUI();
 }
@@ -1200,6 +1206,7 @@ public function lustPercent():Number {
 	if(player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
+	if(player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	if(lust < minLustCap) lust = minLustCap;
 	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
@@ -1240,7 +1247,10 @@ public function lustPercent():Number {
 			lust *= sac.value2;
 		}
 	}
-	
+	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
+		if(lust >= 50) lust = 100;
+		else lust += 50;
+	}
 	lust = Math.round(lust);
 	if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
 	return lust;
@@ -1451,6 +1461,22 @@ public function dynStats(... args):void
 	if(player.findPerk(PerkLib.Smart) >= 0 && modInte >= 0) player.inte+=modInte*player.perk(player.findPerk(PerkLib.Smart)).value1;
 	if(player.findPerk(PerkLib.Lusty) >= 0 && modLib >= 0) player.lib+=modLib*player.perk(player.findPerk(PerkLib.Lusty)).value1;
 	if (player.findPerk(PerkLib.Sensitive) >= 0 && modSens >= 0) player.sens += modSens * player.perk(player.findPerk(PerkLib.Sensitive)).value1;
+
+	// Uma's Str Cap from Perks (Moved to max stats)
+	/*if (player.findPerk(PerkLib.ChiReflowSpeed) >= 0)
+	{
+		if (player.str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
+		{
+			player.str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
+		}
+	}
+	if (player.findPerk(PerkLib.ChiReflowDefense) >= 0)
+	{
+		if (player.spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
+		{
+			player.spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
+		}
+	}*/
 	
 	//Keep stats in bounds
 	var maxes:Object = player.getAllMaxStats();

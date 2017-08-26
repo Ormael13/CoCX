@@ -85,6 +85,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
+		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
 
 		if (combatStats != "")
 			outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
@@ -750,6 +751,11 @@ public class PlayerInfo extends BaseContent {
 				if (m < n) n = m;
 				player.tempLib+=n;
 				break;
+		//	case "sen":
+		//		m = maxes.sens - int(player.sens + player.tempSens);
+		//		if (m < n) n = m;
+		//		player.tempSens+=n;
+		//		break;
 			default:
 				n=0; //Failsafe
 		}
@@ -856,10 +862,10 @@ public class PlayerInfo extends BaseContent {
 
 	public function perkBuyMenu():void {
 		clearOutput();
-		var perkList:Array = buildPerkList();
+		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		if (perkList.length == 0) {
+		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
 			outputText(".");
@@ -868,19 +874,17 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (getGame().testingBlockExiting) {
 			menu();
-			addButton(0, "Next", perkSelect, perkList[rand(perkList.length)].perk);
-		}
-		else {
-			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.");
-			if (player.perkPoints>1) outputText("\n\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
-			mainView.aCb.move(mainView.mainText.x+10, mainView.mainText.y+48);
-			mainView.aCb.rowCount = 15;
-
-			if (mainView.aCb.parent == null) {
-				mainView.addChild(mainView.aCb);
-				mainView.aCb.visible = true;
+			addButton(0, "Next", perkSelect, perks[rand(perks.length)]);
+		} else {
+			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n");
+			var perkList:Array = [];
+			for each(var perk:PerkType in perks) {
+				var p:PerkClass = new PerkClass(perk,
+						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
+				perkList.push({label: p.perkName, perk: p});
 			}
-
+			getGame().showComboBox(perkList,"Choose a perk",perkCbChangeHandler);
+			if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
@@ -888,52 +892,33 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	private function perkSelect(selected:PerkClass):void {
-		getGame().stage.focus = null;
-		if (mainView.aCb.parent != null) {
-			mainView.removeChild(mainView.aCb);
-			applyPerk(selected);
-		}
+		mainView.hideComboBox();
+		applyPerk(selected);
 	}
 
 	private function perkSkip():void {
-		getGame().stage.focus = null;
-		if (mainView.aCb.parent != null) {
-			mainView.removeChild(mainView.aCb);
-			playerMenu();
-		}
+		mainView.hideComboBox();
+		playerMenu();
 	}
 
-	public function perkCbChangeHandler(event:Event):void {
+	public function perkCbChangeHandler(selectedItem:*):void {
 		//Store perk name for later addition
 		clearOutput();
-		var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
-		mainView.aCb.move(mainView.mainText.x+10, mainView.mainText.y+24);
-		outputText("You have selected the following perk:\n\n\n");
+		var selected:PerkClass = selectedItem.perk;
+		outputText("You have selected the following perk:\n");
 		outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
+		getGame().placeComboBoxAfterText();
 		var unlocks:Array = getGame().perkTree.listUnlocks(selected.ptype);
 		if (unlocks.length > 0) {
-			outputText("\n\n<b>Unlocks:</b> <ul>");
+			outputText("<b>Unlocks:</b> <ul>");
 			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");
 		}
-		outputText("\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
 		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
-	}
-
-	public function buildPerkList():Array {
-		var player:Player  = getGame().player;
-		var perks:Array    = PerkTree.availablePerks(player);
-		var perkList:Array = [];
-		for each(var perk:PerkType in perks) {
-			var p:PerkClass = new PerkClass(perk,
-					perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4)
-			perkList.push({label: p.perkName, perk: p});
-		}
-		mainView.aCb.dataProvider = new DataProvider(perkList);
-		return perkList;
 	}
 
 	public function applyPerk(perk:PerkClass):void {
@@ -944,7 +929,7 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(perk.ptype, perk.value1, perk.value2, perk.value3, perk.value4);
 		if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
 		if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
-		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV) {
+		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV || perk.ptype == PerkLib.TankVI) {
 			HPChange(player.tou, false);
 			statScreenRefresh();
 		}

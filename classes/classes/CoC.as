@@ -113,6 +113,9 @@ the text from being too boring.
 	import flash.utils.ByteArray;
 	import flash.system.Capabilities;
 	import flash.display.Sprite;
+	import mx.logging.targets.TraceTarget;
+	import mx.logging.Log;
+	import mx.logging.LogEventLevel;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -126,6 +129,15 @@ the text from being too boring.
 
 	public class CoC extends MovieClip 
 	{
+		{
+			/*
+			 * This is a static initializer block, used as an ugly hack to setup
+			 * logging before any of the class variables are initialized.
+			 * This is done because they could log messages during construction.
+			 */
+
+			 CoC.setUpLogging();
+		}
 
 		// Include the functions. ALL THE FUNCTIONS
 
@@ -248,6 +260,7 @@ the text from being too boring.
 		public var sophieBimbo:SophieBimbo = new SophieBimbo();
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
+		public var tedScene:TedScenes = new TedScenes();
 		public var urta:Urta = new Urta();
 		public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
 		public var urtaPregs:UrtaPregs = new UrtaPregs();
@@ -429,6 +442,28 @@ the text from being too boring.
 			return plains.bunnyGirl.isItEaster();
 		}
 
+		private static var traceTarget:TraceTarget;
+
+		private static function setUpLogging():void {
+			traceTarget = new TraceTarget();
+
+			traceTarget.level = LogEventLevel.WARN;
+
+			CONFIG::debug
+			{
+				traceTarget.level = LogEventLevel.DEBUG;
+			}
+
+			//Add date, time, category, and log level to the output
+			traceTarget.includeDate = true;
+			traceTarget.includeTime = true;
+			traceTarget.includeCategory = true;
+			traceTarget.includeLevel = true;
+
+			// let the logging begin!
+			Log.addTarget(traceTarget);
+		}
+
 		public function CoC()
 		{
 			// Cheatmode.
@@ -465,6 +500,9 @@ the text from being too boring.
 			this.mainView.onLevelClick = playerInfo.levelUpGo;
 			this.mainView.onPerksClick = perkMenu.displayPerks;
 			this.mainView.onStatsClick = playerInfo.displayStats;
+			this.mainView.onBottomButtonClick = function(i:int):void {
+				textHistory.push("<br>["+button(i).labelText+"]<br>");
+			};
 
 			// Set up all the messy global stuff:
 			
@@ -489,8 +527,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8e3";//f
-			version = ver + " (<b>More fixing</b>)";//Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1)
+			ver = "1.0.2_mod_Xianxia_0.8f";
+			version = ver + " (<b>Perk-o-calipse 2 and Soul ()</b>)";//Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1)
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -616,9 +654,6 @@ the text from being too boring.
 
 			// ******************************************************************************************
 
-			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.perkCbChangeHandler);
-
 			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 
@@ -729,6 +764,17 @@ the text from being too boring.
 		mainView.mainText.defaultTextFormat = fmt;
 		mainView.setOutputText(currentText);
 	}
-
+	/**
+	 * Places combobox after the visible text.
+	 */
+	public function placeComboBoxAfterText():void {
+		flushOutputTextToGUI();
+		mainView.placeComboBox(mainView.mainText.x+10, mainView.mainText.y+mainView.mainText.textHeight+10);
+		outputText("\n\n\n");
+	}
+	public function showComboBox(items:Array,prompt:String,onChange:Function):void {
+		mainView.showComboBox(items,prompt,onChange);
+		placeComboBoxAfterText();
+	}
 }
 }

@@ -640,18 +640,31 @@ import classes.GlobalFlags.kFLAGS;
 			if (game.player.horseScore() >= 4) max += (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.scyllaScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyII) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyIII) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyIV) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyV) >= 0) max += 50;
+			if (findPerk(PerkLib.RefinedBodyVI) >= 0) max += 50;
 			if (findPerk(PerkLib.TankI) >= 0) max += Math.round(tou*3);
  			if (findPerk(PerkLib.TankII) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -662,19 +675,19 @@ import classes.GlobalFlags.kFLAGS;
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulExalt) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulScholar) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulElder) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulTyrant) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulTyrant) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulKing) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulKing) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulEmperor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (findPerk(PerkLib.SoulAncestor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-	//		if (findPerk(PerkLib.FleshBodyTyrantStage) >= 0) {
-	//			if (findPerk(PerkLib.SA) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//			if (findPerk(PerkLib.SS) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//			if (findPerk(PerkLib.SS) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-	//		}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionHardiness) >= 0) max += perkv1(PerkLib.AscensionHardiness) * 100;
@@ -696,6 +709,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (game.player.cowScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.demonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.devilkinScore() >= 10) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -708,11 +723,13 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.InhumanDesireIII) >= 0) max += 20;
 			if (findPerk(PerkLib.InhumanDesireIV) >= 0) max += 20;
 			if (findPerk(PerkLib.InhumanDesireV) >= 0) max += 20;
+			if (findPerk(PerkLib.InhumanDesireVI) >= 0) max += 20;
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.DemonicDesireII) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.DemonicDesireIII) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.DemonicDesireIV) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.DemonicDesireV) >= 0) max += Math.round(lib);
+			if (findPerk(PerkLib.DemonicDesireVI) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.BasicSelfControl) >= 0) max += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) max += 25;
 			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) max += 40;
@@ -722,15 +739,25 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) max += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) max += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 500;
+			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+			}
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
+			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 20;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) max += 10;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 2;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
 			if (max > 9999) max = 9999;
 			return max;
 		}
@@ -751,16 +778,19 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.ArchersStaminaIII) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ArchersStaminaIV) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ArchersStaminaV) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.ArchersStaminaVI) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.DancersVitalityI) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityII) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityIII) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityIV) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.DancersVitalityV) >= 0) max += Math.round(spe*1.5);
+			if (findPerk(PerkLib.DancersVitalityVI) >= 0) max += Math.round(spe*1.5);
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringII) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringIII) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringIV) >= 0) max += 20;
 			if (findPerk(PerkLib.NaturesSpringV) >= 0) max += 20;
+			if (findPerk(PerkLib.NaturesSpringVI) >= 0) max += 20;
 			if (findPerk(PerkLib.BasicEndurance) >= 0) max += 30;
 			if (findPerk(PerkLib.HalfStepToImprovedEndurance) >= 0) max += 50;
 			if (findPerk(PerkLib.ImprovedEndurance) >= 0) max += 80;
@@ -783,7 +813,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 49999) max = 49999;
+			if (max > 29999) max = 29999;
 			return max;
 		}
 		
@@ -822,11 +852,21 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 110;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 120;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 130;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 140;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 140;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 140;
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesII) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesIII) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesIV) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.InsightfulResourcesV) >= 0) max += Math.round(wis*3);
+			if (findPerk(PerkLib.InsightfulResourcesVI) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 1000;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 500;
 			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
@@ -838,19 +878,19 @@ import classes.GlobalFlags.kFLAGS;
 			}
 			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) max += 40;
-				if (findPerk(PerkLib.SoulExalt) >= 0) max += 40;
-				if (findPerk(PerkLib.SoulOverlord) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulScholar) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulElder) >= 0) max += 40;
+			}
+			if (findPerk(PerkLib.DaoistElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) max += 50;
 			}
 			if (findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulTyrant) >= 0) max += 50;
-				if (findPerk(PerkLib.SoulKing) >= 0) max += 50;
-				if (findPerk(PerkLib.SoulEmperor) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulKing) >= 0) max += 60;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) max += 60;
+				if (findPerk(PerkLib.SoulAncestor) >= 0) max += 60;
 			}
-//			if (findPerk(PerkLib.DaoistTyrantStage) >= 0) {
-//				if (findPerk(PerkLib.SA) >= 0) max += 60;
-//				if (findPerk(PerkLib.SS) >= 0) max += 60;
-//				if (findPerk(PerkLib.SS) >= 0) max += 60;
-//			}
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+20
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//4105-5105 soulforce na razie przed liczeniem mnożnika jest
@@ -867,11 +907,14 @@ import classes.GlobalFlags.kFLAGS;
 					if (findPerk(PerkLib.SoulPersonage) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulWarrior) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulSprite) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulExalt) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulOverlord) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulScholar) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulElder) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulExalt) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulOverlord) >= 0) multimax += 0.2;
 					if (findPerk(PerkLib.SoulTyrant) >= 0) multimax += 0.2;
-					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.2;
-					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.25;
+					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.25;
+					if (findPerk(PerkLib.SoulAncestor) >= 0) multimax += 0.25;
 				}
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimax += 0.15;
@@ -880,6 +923,7 @@ import classes.GlobalFlags.kFLAGS;
 				max *= multimax;
 			}
 			if (findPerk(PerkLib.UnlockMind2ndStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
 			max = Math.round(max);
 			if (max > 79999) max = 79999;
 			return max;
@@ -905,6 +949,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Rage) >= 0) max += 200;
 			if (findPerk(PerkLib.Anger) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
 			if (max > 1299) max = 1299;//obecnie max to 1210
 			return max;
 		}
@@ -917,11 +962,46 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityIV) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityV) >= 0) max += 35;
+			if (findPerk(PerkLib.ManaAffinityVI) >= 0) max += 35;
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
 			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.MindOverBodyVI) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIII) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolIV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolV) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.ArcanePoolVI) >= 0) {
+				max += Math.round(inte);
+				max += Math.round(wis);
+			}
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 75;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 180;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 480;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 1050;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 1500;
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
@@ -931,9 +1011,9 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
 			max += level * 10;
-			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 19999) max = 19999;
+			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
+			if (max > 29999) max = 29999;
 			return max;
 		}
 		
@@ -987,6 +1067,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 30;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 30;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
 			if (game.player.dragonScore() >= 20) max += 50;
 			if (game.player.dragonScore() >= 28) max += 50;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
@@ -995,7 +1084,7 @@ import classes.GlobalFlags.kFLAGS;
 			// (findPerk(PerkLib.IronStomach) >= 0) max += level;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
-			if (max > 1099) max = 1099;//obecnie max to 1045
+			if (max > 1409) max = 1409;//obecnie max to 1360
 			return max;
 		}
 

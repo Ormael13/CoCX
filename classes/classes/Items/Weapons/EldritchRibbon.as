@@ -14,7 +14,5 @@ package classes.Items.Weapons
 		{
 			super("ERibbon", "ERibbon", "eldritch ribbon", "an eldritch ribbon", "whip-like slash", 5, 400, "A long ribbon made of fine silk that despite its seemingly fragile appearance can deal noticeable damage to several enemies at once.  It is inscribed with arcane runes, allowing it to facilitate spellcasting.", "Wizard's Focus", PerkLib.WizardsFocus, 0.4, 0, 0, 0);
 		}
-		
 	}
-
 }

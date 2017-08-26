@@ -30,6 +30,8 @@ public static const SKIN_TYPE_MOSS:int												=	15;
 public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;
 public static const SKIN_TYPE_PARTIAL_STONE:int										=	17;//niedokończone
 public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończone
+public static const SKIN_TYPE_AQUA_RUBBER_LIKE:int									=	19;//niedokończone
+public static const SKIN_TYPE_TATTOED_ONI:int										=	20;
 
 public static const SKIN_BASE_PLAIN:int                                             =    SKIN_TYPE_PLAIN;
 public static const SKIN_BASE_GOO:int                                               =    SKIN_TYPE_GOO;
@@ -55,6 +57,7 @@ public static const HAIR_GORGON:int												   =	 6;
 public static const HAIR_LEAF:int												   =	 7;
 public static const HAIR_FLUFFY:int												   =	 8;
 public static const HAIR_GRASS:int												   =	 9;
+public static const HAIR_SILKEN:int												   =	10;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;
@@ -94,6 +97,8 @@ public static const FACE_YETI_FANGS:int                                		      	
 public static const FACE_ORCA:int                                		     	 	=   28;
 public static const FACE_PLANT_DRAGON:int                                		    =   29;
 public static const FACE_DRAGON_FANGS:int                                           =   30;
+public static const FACE_DEVIL_FANGS:int                                            =   31;
+public static const FACE_ONI_TEETH:int	                                            =   32;
 
 // face.cheekDecoration etc
 public static const DECORATION_NONE:int                                             =    0;
@@ -120,6 +125,9 @@ public static const EYES_FOX:int                                                
 public static const EYES_REPTILIAN:int                                              =   8;
 public static const EYES_SNAKE:int                          	                    =   9;
 public static const EYES_DRAGON:int                          	                    =  10;
+public static const EYES_DEVIL:int                          	                    =  11;
+public static const EYES_ONI:int	                          	                    =  12;
+public static const EYES_ELF:int	                          	                    =  13;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -145,6 +153,9 @@ public static const EARS_LION:int													=  19;
 public static const EARS_YETI:int													=  20;
 public static const EARS_ORCA:int													=  21;
 public static const EARS_SNAKE:int													=  22;
+public static const EARS_GOAT:int													=  23;
+public static const EARS_ONI:int													=  24;
+public static const EARS_ELVEN:int                                                  =  25;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -191,6 +202,9 @@ public static const ARM_TYPE_DRAGON:int												=  15;
 public static const ARM_TYPE_YETI:int												=  16;
 public static const ARM_TYPE_ORCA:int												=  17;
 public static const ARM_TYPE_PLANT2:int												=  18;
+public static const ARM_TYPE_DEVIL:int												=  19;
+public static const ARM_TYPE_ONI:int												=  20;
+public static const ARM_TYPE_ELF:int												=  21;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -302,6 +316,8 @@ public static const LOWER_BODY_TYPE_LION:int										=  35;
 public static const LOWER_BODY_TYPE_YETI:int										=  36;
 public static const LOWER_BODY_TYPE_ORCA:int										=  37;
 public static const LOWER_BODY_TYPE_YGG_ROOT_CLAWS:int								=  38;
+public static const LOWER_BODY_TYPE_ONI:int											=  39;
+public static const LOWER_BODY_TYPE_ELF:int											=  40;
 
 // rearBody
 public static const REAR_BODY_NONE:int                                              =   0;

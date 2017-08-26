@@ -127,7 +127,7 @@ package classes.Scenes.Dungeons
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(6, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(10, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
 					outputText("  Luckily, you do!");
 				}
 			}
@@ -137,6 +137,8 @@ package classes.Scenes.Dungeons
 			addButton(3, consumables.AGILI_E.shortName, buyItem, 3);
 			addButton(4, consumables.VIXEN_T.shortName, buyItem, 4);
 			addButton(5, weapons.SUCWHIP.shortName, buyItem, 5);
+			addButton(6, weapons.PSWHIP.shortName, buyItem, 6);
+			addButton(7, weaponsrange.SSKETCH.shortName, buyItem, 7);
 			addButton(14, "Leave", roomEntrance);
 		}		
 		
@@ -149,6 +151,8 @@ package classes.Scenes.Dungeons
 			if (item == 3) incubusBuy(consumables.AGILI_E);
 			if (item == 4) incubusBuy(consumables.VIXEN_T);
 			if (item == 5) incubusBuy(weapons.SUCWHIP);
+			if (item == 6) incubusBuy(weapons.PSWHIP);
+			if (item == 7) incubusBuy(weaponsrange.SSKETCH);
 		}
 
 		public function incubusBuy(itype:ItemType):void {
@@ -517,9 +521,9 @@ package classes.Scenes.Dungeons
 			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n");
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
 			menu();
-			addButton(0, "Sexual", sexualInterrogation, null, null, null, "Chain the imp up and sexually interrogate him.");
-			addButton(1, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
-			addButton(2, "Safety", releaseZForInfo, null, null, null, "Release the imp after you get the information you need.");
+			addButton(0, "Sexual", sexualInterrogation).hint("Chain the imp up and sexually interrogate him.");
+			addButton(1, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(2, "Safety", releaseZForInfo).hint("Release the imp after you get the information you need.");
 			//addButton(3, "Rape", rapeZetaz);
 		}
 
@@ -588,9 +592,9 @@ package classes.Scenes.Dungeons
 			outputText("What do you do?");
 			//['Release' him] [Tighten Strap] [End Him]
 			menu();
-			addButton(0, "'Release'", sexualTortureReleaseZetaz, null, null, null, "Let the imp cum and release him from the bonds.");
-			addButton(1, "Tighten", sexualTortureTightenZetaz, null, null, null, "Tighten the straps.");
-			addButton(2, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(0, "'Release'", sexualTortureReleaseZetaz).hint("Let the imp cum and release him from the bonds.");
+			addButton(1, "Tighten", sexualTortureTightenZetaz).hint("Tighten the straps.");
+			addButton(2, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
 		}
 
 		//[Release Him]

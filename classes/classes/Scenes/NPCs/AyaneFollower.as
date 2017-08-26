@@ -18,10 +18,10 @@ public function ayaneCampMenu():void
 	clearOutput();
 	outputText("\"<i>Anything I can do for you " + player.mf("lord", "lady") + " [name]?</i>\"");
 	menu();
-	addButton(0, "Appearance", ayaneAppearance, null, null, null, "Examine Ayane detailed appearance.");
-	addButton(1, "Talk", ayaneTalkMenu, null, null, null, "Ask Ayane about something.");
-	addButton(2, "Shop", ayaneShop, null, null, null, "Check Ayane shop.");
-	addButton(3, "Sex", ayaneSexMenu, null, null, null, "Have some sex with Ayane.");
+	addButton(0, "Appearance", ayaneAppearance).hint("Examine Ayane detailed appearance.");
+	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
+	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
+	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
 	addButton(14, "Back", camp.campFollowers);
 }
 

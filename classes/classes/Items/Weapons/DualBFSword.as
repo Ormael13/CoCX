@@ -5,6 +5,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class DualBFSword extends Weapon {
@@ -19,6 +20,12 @@ package classes.Items.Weapons
 			if (game.player.str >= 100) boost += 15;
 			if (game.player.str >= 50) boost += 10;
 			return (5 + boost); 
+		}
+		
+		override public function canUse():Boolean {
+			if (game.player.findPerk(PerkLib.DualWieldLarge) >= 0) return true;
+			outputText("You aren't skilled enough to handle this pair of weapons!  ");
+			return false;
 		}
 	}
 }

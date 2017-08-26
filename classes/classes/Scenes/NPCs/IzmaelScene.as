@@ -52,15 +52,15 @@ package classes.Scenes.NPCs
 		//------------
 		public function izmaelMenu():void {
 			menu();
-			addButton(0, "Appearance", izmaelAppearance, null, null, null, "Examine Izmael's appearance.");
-			addButton(1, "Books", getGame().izmaScene.IzmaCampBooks, null, null, null, "Ask Izmael if you can borrow his books.");
+			addButton(0, "Appearance", izmaelAppearance).hint("Examine Izmael's appearance.");
+			addButton(1, "Books", getGame().izmaScene.IzmaCampBooks).hint("Ask Izmael if you can borrow his books.");
 			if (getGame().izmaScene.totalIzmaChildren() > 0) addButton(2, "Children", getGame().izmaScene.izmaKidsPlaytime);
-			if (player.lust >= 33) addButton(3, "Sex", izmaelSexMenu, null, null, null, "Do some romp with the tigershark!");
+			if (player.lust >= 33) addButton(3, "Sex", izmaelSexMenu).hint("Do some romp with the tigershark!");
 			else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
-			addButton(4, "Talk", izmaelTalk, null, null, null, "Talk to Izmael about some stuff.");
+			addButton(4, "Talk", izmaelTalk).hint("Talk to Izmael about some stuff.");
 			addButton(5, "Tooth", getGame().izmaScene.gatASharkTooth);
-			addButton(6, "Toggle Herb", toggleIzmaelVirility, null, null, null, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
-			if (player.hasItem(consumables.BIMBOLQ) && player.hasItem(consumables.DEBIMBO)) addButton(7, "Turn Back", revertIzmaelPrompt, null, null, null, "Turn Izmael back to Izma? This is an irreversible process and you then won't be able to remove her dick afterwards.");
+			addButton(6, "Toggle Herb", toggleIzmaelVirility).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
+			if (player.hasItem(consumables.BIMBOLQ) && player.hasItem(consumables.DEBIMBO)) addButton(7, "Turn Back", revertIzmaelPrompt).hint("Turn Izmael back to Izma? This is an irreversible process and you then won't be able to remove her dick afterwards.");
 			else addButtonDisabled(7, "Turn Back", "You need 1 Bimbo Liqueur and 1 Debimbo to turn Izmael back into Izma.");
 			addButton(14, "Back", camp.campLoversMenu);
 		}
@@ -141,14 +141,14 @@ package classes.Scenes.NPCs
 		//------------
 		private function izmaelSexMenu():void {
 			menu();
-			if (player.hasCock()) addButton(0, "Buttfuck", buttfuckIzmael, null, null, null, "Fuck Izmael in the butt for some sexy gay times!");
+			if (player.hasCock()) addButton(0, "Buttfuck", buttfuckIzmael).hint("Fuck Izmael in the butt for some sexy gay times!");
 			else addButtonDisabled(0, "Buttfuck", "You need a cock to do this!");
-			if (player.hasVagina()) addButton(1, "Frenzy", frenzyTimeWithIzmael, null, null, null, "Get into a frenzy with Izmael and have him fill you vaginally.");
+			if (player.hasVagina()) addButton(1, "Frenzy", frenzyTimeWithIzmael).hint("Get into a frenzy with Izmael and have him fill you vaginally.");
 			else addButtonDisabled(1, "Frenzy", "You need a pussy to do this!");
-			addButton(2, "Bath Time", bathtimeWithIzmael, null, null, null, "Bathe with Izmael. You suspect that it will lead to some sexy times.");
-			if (player.femininity >= 50) addButton(3, "Entrap", entrapIzmael, null, null, null, "Seduce Izmael with your " + (player.femininity < 60 ? "androgynous" : "feminine") + " features. This will lead to being reamed in the ass.");
+			addButton(2, "Bath Time", bathtimeWithIzmael).hint("Bathe with Izmael. You suspect that it will lead to some sexy times.");
+			if (player.femininity >= 50) addButton(3, "Entrap", entrapIzmael).hint("Seduce Izmael with your " + (player.femininity < 60 ? "androgynous" : "feminine") + " features. This will lead to being reamed in the ass.");
 			else addButtonDisabled(3, "Entrap", "Maybe if you're made a bit more feminine...");
-			if (player.hasCock() && camp.vapulaSlave()) addButton(4, "Vapula 3some", threesomeIzmaelVapula, null, null, null, "Do a threesome with Izmael and your succubus slave Vapula.", "Vapula Threesome");
+			if (player.hasCock() && camp.vapulaSlave()) addButton(4, "Vapula 3some", threesomeIzmaelVapula).hint("Do a threesome with Izmael and your succubus slave Vapula.", "Vapula Threesome");
 			else if (!camp.vapulaSlave()) addButtonDisabled(4, "???", "Perhaps you should find a succubus who's willing to be your slave.");
 			else addButtonDisabled(4, "Vapula 3some", "You will need a cock to perform this wondrous threesome with Izmael and Vapula.", "Vapula Threesome");
 			addButton(14, "Back", izmaelMenu);
