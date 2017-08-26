@@ -4151,7 +4151,7 @@ use namespace kGAMECLASS;
 			}
 		}
 
-		public function getAllMinStats() {
+		public function getAllMinStats():Object {
 			var minStr:int = 1;
 			var minTou:int = 1;
 			var minSpe:int = 1;

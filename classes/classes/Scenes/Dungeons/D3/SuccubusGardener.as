@@ -389,7 +389,7 @@
 			
 			outputText("\n\nYour foe giggles, favoring you with a blown kiss. Her nipples are obviously a little harder, but then again, so are yours.");
 			game.dynStats("lus+", 3 + rand(3));
-			lust+=3 + rand(3));
+			lust+=3 + rand(3);
 
 		}
 		

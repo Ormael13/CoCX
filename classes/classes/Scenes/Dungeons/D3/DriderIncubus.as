@@ -52,8 +52,8 @@ package classes.Scenes.Dungeons.D3
 			this.checkMonster();
 		}
 
-		private static constant VENOM_SPEED_DRAIN_FLAT:int = 30;
-		private static constant VENOM_SPEED_DRAIN_MULT:int = 10;
+		private static const VENOM_SPEED_DRAIN_FLAT:int = 30;
+		private static const VENOM_SPEED_DRAIN_MULT:int = 10;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{

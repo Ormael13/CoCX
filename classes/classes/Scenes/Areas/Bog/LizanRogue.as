@@ -7,8 +7,8 @@ package classes.Scenes.Areas.Bog
 	
 	public class LizanRogue extends Monster
 	{
-		private static constant STAT_DROP_FLAT:int = 5;
-		private static constant STAT_DROP_MULT:int = 2;
+		private static const STAT_DROP_FLAT:int = 5;
+		private static const STAT_DROP_MULT:int = 2;
 		//1 - str
 		//2 - tou
 		//3 - spe

@@ -6,8 +6,8 @@ package classes.Scenes.NPCs
 
 	public class Anemone extends Monster
 	{
-		private static constant STAT_DOWN_FLAT:int = 4;
-		private static constant STAT_DOWN_MULT:int = 4;
+		private static const STAT_DOWN_FLAT:int = 4;
+		private static const STAT_DOWN_MULT:int = 4;
 
 		override public function eAttack():void
 		{
