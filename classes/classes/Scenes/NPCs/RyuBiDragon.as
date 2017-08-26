@@ -193,7 +193,7 @@ package classes.Scenes.NPCs
 			this.gems = 5 + rand(3);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.faceType = FACE_DRAGON;
-			this.tongueType = TONUGE_DRACONIC;
+			this.tongueType = TONGUE_DRACONIC;
 			this.earType = EARS_DRAGON;
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;

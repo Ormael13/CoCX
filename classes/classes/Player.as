@@ -1904,7 +1904,7 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			if (wingType == WING_TYPE_BAT_LIKE_LARGE)
 				demonCounter += 2;
-			if (wingType == WING_TYPE_IMP_LARGE)
+			if (wingType == WING_TYPE_BAT_LIKE_LARGE_2)
 				demonCounter += 4;
 			if (tongueType == TONGUE_DEMONIC)
 				demonCounter++;
@@ -2236,7 +2236,7 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (earType == EARS_CAT)
 				catCounter++;
-			if (tongueType == TONUGE_CAT)
+			if (tongueType == TONGUE_CAT)
 				catCounter++;
 			if (tailType == TAIL_TYPE_CAT)
 				catCounter++;
@@ -2555,7 +2555,7 @@ use namespace kGAMECLASS;
 			var nagaCounter:Number = 0;
 			if (isNaga())
 				nagaCounter += 2;
-			if (tongueType == TONUGE_SNAKE)
+			if (tongueType == TONGUE_SNAKE)
 				nagaCounter++;
 			if (faceType == FACE_SNAKE_FANGS)
 				nagaCounter++;
@@ -2579,7 +2579,7 @@ use namespace kGAMECLASS;
 			var gorgonCounter:Number = 0;
 			if (isNaga())
 				gorgonCounter += 2;
-			if (tongueType == TONUGE_SNAKE)
+			if (tongueType == TONGUE_SNAKE)
 				gorgonCounter++;
 			if (faceType == FACE_SNAKE_FANGS)
 				gorgonCounter++;
@@ -2617,7 +2617,7 @@ use namespace kGAMECLASS;
 			var vouivreCounter:Number = 0;
 			if (isNaga())
 				vouivreCounter += 2;
-			if (tongueType == TONUGE_SNAKE)
+			if (tongueType == TONGUE_SNAKE)
 				vouivreCounter++;
 			if (faceType == FACE_SNAKE_FANGS)
 				vouivreCounter++;
@@ -2655,7 +2655,7 @@ use namespace kGAMECLASS;
 			var couatlCounter:Number = 0;
 			if (isNaga())
 				couatlCounter += 2;
-			if (tongueType == TONUGE_SNAKE)
+			if (tongueType == TONGUE_SNAKE)
 				couatlCounter++;
 			if (faceType == FACE_SNAKE_FANGS)
 				couatlCounter++;
@@ -3215,7 +3215,7 @@ use namespace kGAMECLASS;
 			End("Player","racialScore");
 			return scyllaCounter;
 		}//potem tentacle dick lub scylla vag też bedą sie liczyć do wyniku)
-		/*
+		
 		//Determine Kitshoo Rating
 		public function kitshooScore():Number {
 			Begin("Player","racialScore","kitshoo");
@@ -3280,7 +3280,7 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return kitshooCounter;
-		}*/
+		}
 		
 		//plant score
 		public function plantScore():Number {
@@ -3521,7 +3521,7 @@ use namespace kGAMECLASS;
 				echidnaCounter++;
 			if (faceType == FACE_ECHIDNA)
 				echidnaCounter++;
-			if (tongueType == TONUGE_ECHIDNA)
+			if (tongueType == TONGUE_ECHIDNA)
 				echidnaCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ECHIDNA)
 				echidnaCounter++;
@@ -3568,7 +3568,7 @@ use namespace kGAMECLASS;
 				dragonneCounter++;
 			if (tailType == TAIL_TYPE_CAT)
 				dragonneCounter++;
-			if (tongueType == TONUGE_DRACONIC)
+			if (tongueType == TONGUE_DRACONIC)
 				dragonneCounter++;
 			if (wingType == WING_TYPE_DRACONIC_LARGE)
 				dragonneCounter += 2;
