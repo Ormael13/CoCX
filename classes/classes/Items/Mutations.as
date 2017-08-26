@@ -7988,7 +7988,6 @@
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			var changed:Boolean = mutationStep(player.skin.hasFur()
-					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
@@ -8019,6 +8018,7 @@
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
+				player.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
 				player.skin.base.adj = "sexy tattooed";
 
 			});
@@ -10202,7 +10202,7 @@
 				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>");
-				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",color:"white and black"});
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",pattern:PATTERN_ORCA_UNDERBODY,color:"white",color2:"black"});
 				changes++;
 			}
 			//legs

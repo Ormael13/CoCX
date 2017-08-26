@@ -66,7 +66,7 @@ public class SkinLayer extends BodyPart {
 		desc = "skin";
 	}
 	public function SkinLayer(skin:Skin) {
-		super(skin.creature, ["adj", "desc", "color", "color2"]);
+		super(skin.creature, ["adj", "desc", "color", "color2", "pattern"]);
 		this.skin = skin;
 	}
 	public function describe(noAdj:Boolean = false, noColor:Boolean = false):String {
@@ -77,6 +77,19 @@ public class SkinLayer extends BodyPart {
 
 	override public function descriptionFull():String {
 		return describe();
+	}
+
+	override public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		super.loadFromObject(o, ignoreErrors);
+		if (_adj == "sexy tattooed") {
+			pattern = PATTERN_MAGICAL_TATTOO;
+		} else if (_adj == "covered with various intricate battle tattoos") {
+			pattern = PATTERN_BATTLE_TATTOO;
+		} else if (color == "white and black") {
+			color = "white";
+			color2 = "black";
+			pattern = PATTERN_ORCA_UNDERBODY;
+		}
 	}
 }
 }

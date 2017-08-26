@@ -164,18 +164,24 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
+        <property name="hair2" src="hairColor" default="#ffffff">
+        </property>
         <property name="fur" src="skin.coat.color" default="#ffffff">
+        </property>
+        <property name="fur2" src="skin.coat.color2" default="#ffffff">
         </property>
         <property name="scales" src="skin.coat.color" default="#ffffff">
         </property>
+        <property name="scales2" src="skin.coat.color2" default="#ffffff">
+        </property>
         <property name="chitin" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="chitin2" src="skin.coat.color" default="#ffffff">
+        <property name="chitin2" src="skin.coat.color2" default="#ffffff">
         </property>
-        <property name="skin" src="skinTone" default="#ffffff">
+        <property name="skin" src="skin.base.color" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skinTone" default="#ffffff">
+        <property name="skin2" src="skin.base.color2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <common>
@@ -183,7 +189,7 @@
             <!--<color name="black and orange">#000000</color>-->
             <!--<color name="black and white">#000000</color>-->
             <!--<color name="black and white spotted">#000000</color>-->
-            <color name="black and yellow">#yellow</color>
+            <!--<color name="black and yellow">#yellow</color>-->
             <!--<color name="brown and white">#000000</color>-->
             <!--<color name="gray and white">#000000</color>-->
             <!--<color name="orange and white">#000000</color>-->
@@ -192,7 +198,7 @@
             <!--<color name="seven-colored">#000000</color>-->
             <!--<color name="spotted">#000000</color>-->
             <!--<color name="striped orange">#000000</color>-->
-            <color name="white and black">#eff3f6</color>
+            <!--<color name="white and black">#eff3f6</color>-->
         </common>
         <!-- Not yet in game-->
         <!-- <property name="iris" src="'blue'" default="#0000ff">
@@ -226,14 +232,26 @@
         <key src="#CC00CC" base="hair"/>
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
+        <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
+        <key src="#CCCC00" base="hair2"/>
+        <key src="#999900" base="hair2" transform="darken(25)"/>
+        <key src="#333300" base="hair2" transform="darken(50)"/>
         <key src="#88FF88" base="fur" transform="lighten(25)"/>
         <key src="#00CC00" base="fur"/>
         <key src="#009900" base="fur" transform="darken(25)"/>
         <key src="#003300" base="fur" transform="darken(50)"/>
+        <key src="#AA88FF" base="fur2" transform="lighten(25)"/>
+        <key src="#6633CC" base="fur2"/>
+        <key src="#442288" base="fur2" transform="darken(25)"/>
+        <key src="#220044" base="fur2" transform="darken(50)"/>
         <key src="#8888FF" base="scales" transform="lighten(25)"/>
         <key src="#4444FF" base="scales"/>
         <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
+        <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
+        <key src="#66CC66" base="scales2"/>
+        <key src="#448844" base="scales2" transform="darken(25)"/>
+        <key src="#223322" base="scales2" transform="darken(50)"/>
         <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
         <key src="#44CCFF" base="chitin"/>
         <key src="#0099CC" base="chitin" transform="darken(25)"/>
@@ -676,7 +694,7 @@
                         <show part="arms_bg/human"/>
                         <show part="legs/human"/>
 
-                        <if test="skin.base.color=='white and black'">
+                        <if test="skin.base.pattern==2"><!--PATTERN_ORCA_UNDERBODY-->
                             <hide part="head/*"/>
                             <hide part="torso/*"/>
                             <show part="head/orca"/>

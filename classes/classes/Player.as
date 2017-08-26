@@ -2361,7 +2361,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter += 4;
 			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailCount < 2))
 				kitsuneCounter -= 7;
-			if (skin.base.adj == "sexy tattooed" || hasFur())
+			if (skin.base.pattern == PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
 		//	if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
@@ -2786,7 +2786,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "glossy")
 				orcaCounter++;
-			if (skinTone == "white and black")
+			if (skin.base.pattern == PATTERN_ORCA_UNDERBODY)
 				orcaCounter++;
 			if (wingType == 0)
 				orcaCounter += 2;
