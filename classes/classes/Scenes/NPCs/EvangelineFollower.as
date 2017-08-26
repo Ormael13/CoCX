@@ -38,10 +38,11 @@ public function enterTheEvangeline():void
 {
 	clearOutput();
 	flags[kFLAGS.EVANGELINE_AFFECTION] = 1;
+	outputText("You head out to explore the area when a scream surprises you.\n\n");
 	outputText("\"<i>H-help!!</i>\"\n\n");
-	outputText("You turn around only for a woman to suddenly flings herself into your arms.  She looks like she's has been roughed up a bit - her simple peasant's robes have been torn and frayed, and her forehead is streaked with dirt, as if she was dragged through the dirt.\n\n");
-	outputText("\"<i>Th-thank gods!  Please, you must help me!</i>\"  she cries, darting behind you as if to hide.  \"<i>I was wandering over wasteland trying to find a safe place to hide, and, and...  the wretched, terrible little things attacked me!</i>\"\n\n");
-	outputText("On top of everything, you're worried that this happened a bit too soon after you left your camp, and you’re about to question her, but your interrupted as an imp flies out of the sky, growling and clawing at you menacingly.  If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp.  At the moment you were about to charge the enemy you felt a strange wetness on your neck’s nape...or so you thought you felt it.");
+	outputText("You turn around only for a woman to suddenly flings herself into your arms. She looks like she’s has been roughed up a bit - her simple peasant’s robes have been torn and frayed, and her forehead is streaked with dirt, as if she was dragged through it.\n\n");
+	outputText("\"<i>Th-thank gods! Please, you must help me!</i>\" she cries, darting behind you as if to hide. \"<i>I was wandering over wasteland trying to find a safe place to hide, and, and... the wretched, terrible little things attacked me!</i>\"\n\n");
+	outputText("On top of everything, you’re worried that this happened a bit too soon after you left your camp, and you’re about to question her, but you're interrupted as an imp flies out of the sky, growling and clawing at you menacingly. If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp. At the moment you were about to charge the enemy you felt a strange wetness on your neck’s nape...or so you thought you felt it.");
 	if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
@@ -54,12 +55,12 @@ public function enterTheEvangeline():void
 public function winEvangelineImpFight():void
 {
 	clearOutput();
-	outputText("\"<i>Is it safe now?</i>\" Right after you showed that imp who is the champion here, the woman who was standing still while watching you fight from the side asks if it is safe. After you assure her that it is, she relaxes. After a moment you start asking her about what happened.\n\n");
-	outputText("\"<i>I had gone out to find some supplies when I met this creature,</i>\" she says, still casting glance to her sides, \"<i>And then not thinking much, I started to run toward my hiding place hoping I'd be faster than my pursuer. But he was quite persistent and chased me almost the whole way back. I was so scared he would find that place and then call for his friends. But at the moment I was about to risk it and hide there before you showed up.</i>\"\n\n");
-	outputText("As she talks you realize something, did she mention her hiding place is near here, near your camp? Isn’t that dangerous? Someone you don’t know practically admitted that she is living very close to the portal that you said you would defend. What if she is a demon? Wishing to make things clear you wait till she’s finished talking and ask her directly where she lives. First she seems to be surprised, before then becoming confusion, and then after that maybe even a slight hint of fear before finally answering.\n\n");
-	outputText("\"<i>It's just moment away from your...</i>\" she cast glance over your shoulder \"<i>...camp. Still I could move it somewhere else, maybe to that desert city or to a different place. But...moving all my stuff would take a lot of time. Especially all my alchemical equipment that those little red devils didn't find or smash.</i>\"\n\n");
-	outputText("Alchemical equipment? Looking at her you wouldn't have guessed she was an alchemist. You asks her about this, and she seems to brighten up and start talking happily about various experiments she made in the past for no discernible reason. And just when you start to ponder about how to interrupt her she suddenly ceases talking, but only for a short moment.\n\n");
-	outputText("\"<i>I know you do not know me and probably don’t trust me, but could you let me live near your camp? I could help you in case you somehow...transform too much or in some way you didn't want to return to your previous form. Or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seems to see a gleam in her eye, \"<i>so what do you think? By the way my name's Evangeline.</i>\"");
+	outputText("\"<i>Is it safe now?</i>\" Right after you showed that imp who is the champion here, the woman who was standing still while watching you fight from the side asks if it’s safe. After you assure her that it is, she relaxes. After a moment you start asking her about what happened.\n\n");
+	outputText("\"<i>I had gone out to find some supplies when I met this creature,</i>\" she says, still casting glances to her sides, \"<i>And then not thinking much, I started to run towards my hiding place hoping I’d be faster than my pursuer, but he was quite persistent and chased me almost the whole way back. I was so scared he would find that place and then call for his friends. But at the moment I was about to risk it and hide there, you showed up.</i>\"\n\n");
+	outputText("As she talks you realize something, did she mention her hiding place is near here? Isn’t that dangerous? Someone you don’t know practically admitted that she is living very close to the portal that you said you would defend. What if she is a demon? Wishing to make things clear you wait till she’s finished talking and ask her directly where she lives. First she seems to be surprised, then becomes confused, and then after that a slight hint of fear before finally answering.\n\n");
+	outputText("\"<i>It’s just moment away from your...</i>\" she casts a glance over your shoulder \"<i>...camp. Still I could move it somewhere else, maybe to that desert city or to a different place. But...moving all my stuff would take a lot of time. Especially all my alchemical equipment that those little red devils didn’t find or smash.</i>\"\n\n");
+	outputText("Alchemical equipment? Looking at her you wouldn’t have guessed she was an alchemist. You ask her about this and she seems to brighten up and starts talking happily about various experiments she made in the past for no discernible reason. And just when you start to ponder about how to interrupt her she suddenly ceases talking, but only for a short moment.\n\n");
+	outputText("\"<i>I know you don’t know me and probably don’t trust me, but could you let me live near your camp? I could help you in case you somehow...transform too much or in some way you don't want to return to your previous form, or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seem to see a gleam in her eye, \"<i>so what do you think? By the way my name’s Evangeline.</i>\"");
 	cleanupAfterCombat();
 	menu();
 	addButton(0, "Move In", Tak);
@@ -69,13 +70,13 @@ public function winEvangelineImpFight():void
 public function Tak():void
 {
 	clearOutput();
-	outputText("She may be a suspicious person, but you could say the same about everyone else you’ve met in this realm so far. And after looking at her more closely and how she is now not looking around nervously anymore, you notice that she has got these weird looking eyes, like two cat-like slits crossing in the middle to form a X over the middle of her pupil. If you don’t take this into account she could pass for a normal human. Out of curiosity, you casually ask her about her eyes, since normal people don’t have such eyes like this.\n\n");
-	outputText("\"<i>My eyes..? ohh that,</i>\" the mention of her eyes seem to make her nervous again, \"<i>you could say it's the effect of me living in this tainted realm. Some get some 'extras' when born and I just merely gained these weird eyes. Although they have not bestowed me with night vision like those of the cat-morphs.</i>\"\n\n");
-	outputText("After that you two start to talk for some time about various things. It turns out she's one of the few remaining humans that have not been taken prisoner or have been already turned into demons. After a longer time spent chatting with Evangeline, you change subject to the one of her hideout. Since you decided to give her a chance it won't be good if she still stay quite far away from the camp perimeter. So you mention that she can move within your camp borders.\n\n");
-	outputText("\"<i>Thank you so much. I will go to my old cave and take my essentials.</i>\" After this Evangeline walk toward a group of large stones, and by moving one of them reveals a cave entrance hidden behind it. Shortly after disappearing your new camp member comes out carrying a bedroll and a small chest. Then despite your protests she picks the spot almost at the edge of the camp as her own.\n\n");
-	outputText("\"<i>I didn't bring any alchemical reagents with me, so if you will need something made I will still need to venture to my old place. But do not worry, that rocks will mask the entrance well... well unless some very powerful demon come by chance here,</i>\" she chuckles and seeing your concerned face quickly reassure that chances for a strong demon to casually wander by are slim.\n\n");
-	outputText("Before leaving she stop as if having forgot something and head to you.\n\n");
-	outputText("\"<i>I’m sorry there's something important near your camp I must keep watch on so I had to curse you to make sure you would let me in. I removed the curse now so you should be all right. Have this fruit as an apology it should be very useful to you.</i>\"\n\n");
+	outputText("She may be a suspicious person, but you could say the same about everyone else you’ve met in this realm so far. And after looking at her more closely and how she is now not looking around nervously anymore, you notice that she has got these weird looking eyes, like two cat-like slits crossing in the middle to form a X over the middle of her pupil. If you don’t take this into account she passes for a normal human. Out of curiosity, you casually ask her about her eyes, since normal people don’t have such eyes like this.\n\n");
+	outputText("\"<i>My eyes..? ohh that.</i>\" The mention of her eyes seem to make her nervous again. \"<i>You could say it’s the effect of me living in this tainted realm. Some get some 'extras' when born and I just merely gained these weird eyes. Although they have not bestowed me with night vision like for those cat-morphs.</i>\"\n\n");
+	outputText("After that you two start to talk for some time about various things. It turns out she’s one of the few remaining humans that have not been taken prisoner or have been already turned into demons. After a long time spent chatting with Evangeline, you change subject to the one of her hideouts. Since you decided to give her a chance it won’t be good if she still stays quite far away from the camp perimeter. So you mention that she can move within your camp borders.\n\n");
+	outputText("\"<i>Thank you so much. I will go to my old cave and take my essentials.</i>\" After this Evangeline walks toward a group of large stones, and by moving one of them reveals a cave entrance hidden behind it. Shortly after disappearing your new camp member comes out carrying a bedroll and a small chest. Then despite your protests she picks the spot almost at the edge of the camp as her own.\n\n");
+	outputText("\"<i>I didn’t bring any alchemical reagents with me, so if you will need something made I will still need to venture to my old place. But do not worry, those rocks will mask the entrance well... unless some very powerful demon comes here by chance.</i>\" she chuckles and seeing your concerned face quickly reassures that chances for a strong demon to casually wander by are slim.\n\n");
+	outputText("Before leaving she stops as if having forgot something and heads to you.\n\n");
+	outputText("\"<i>I’m sorry there’s something important near your camp I must keep watch on so I had to curse you to make sure you would let me in. I removed the curse now so you should be all right. Have this fruit as an apology it should be very useful to you.</i>\"\n\n");
 	outputText("With all her things organized she heads out of your camp right away out to 'look for more stuff' for alchemical experiments.\n\n");
 	outputText("(<b>Evangeline has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.EVANGELINE_AFFECTION] = 3;
@@ -91,9 +92,9 @@ public function Tak():void
 public function Nie():void
 {
 	clearOutput();
-	outputText("You don’t know her just as she pointed it out. So without veiling anything you say she need to move her hideout somewhere else.\n\n");
-	outputText("\"<i>So that’s how it is? I just wanted to be nice and friendly but you just outright reject my offer,</i>\" she sigh, before slowly turning around. While starting to walk away you still hear her utter few last words. \"<i>Having someone who can help you keep transformation under control would be useful whoever you are. I will soon move out but in case you find some 'unexpected' troubles I will linger around this area for a little bit. Until we meet again stranger.</i>\"\n\n");
-	outputText("After rejecting Evangeline offer of joining camp you feel satisfied. She could have been just another demoness that was trying to lure you away from your quest. But...those last words somehow were odd. Unexpected troubles? <b>As she leaves, your neck starts burning with latent pain. You check your reflection in a puddle and notice a weird symbol where she touched you... did she actualy curse you?</b>\n\n");
+	outputText("You don’t know her just as she pointed it out. So without veiling anything you say she needs to move her hideout somewhere else.\n\n");
+	outputText("\"<i>So that’s how it is? I just wanted to be nice and friendly but you just outright reject my offer.</i>\" She sighs, before slowly turning around. While starting to walk away you still hear her utter few last words. \"<i>Having someone who can help you keep transformations under control would be useful whoever you are. I will soon move out but in case you find some 'unexpected' troubles I will linger around this area for a little bit. Until we meet again stranger.</i>\"\n\n");
+	outputText("After rejecting Evangeline’s offer of joining camp you feel satisfied. She could have been just another demoness that was trying to lure you away from your quest. But...those last words somehow were odd. Unexpected troubles? <b>As she leaves, your neck starts burning with latent pain. You check your reflection in a puddle and notice a weird symbol where she touched you... did she actually curse you?</b>\n\n");
 	flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -101,8 +102,8 @@ public function Nie():void
 public function alternativEvangelineRecruit():void
 {
 	clearOutput();
-	outputText("Just after leaving the camp you notice a familiar figure strolling casually nearby. It's Evangeline, which after seeing you stop to let you close the distance between you two.\n\n");
-	outputText("\"<i>We meet again. Did you gave a second thoughts to my proposition? Or do you still think having the help of someone knowing much on transformations and other negative or positive ailments of the body isn't worth the risk?</i>\" She this time seems less bent on convincing you. And recalling your past days situation it only work on her favor. Would you let her stay under your watchful eye in camp or still decline?\n\n");
+	outputText("Just after leaving the camp you notice a familiar figure strolling casually nearby. It’s Evangeline, which after seeing you stops to let you close the distance between you two.\n\n");
+	outputText("\"<i>We meet again [name]. Did you give second thoughts to my proposition? Or do you still think having the help of someone knowing a lot about transformations and other negative ailments or positive health of the body isn’t worth the risk?</i>\" This time she seems less bent on convincing you, and recalling your past days situation it only works in her favor. Will you let her stay under your watchful eye in camp or still decline?\n\n");
 	menu();
 	addButton(0, "Stay", Tak);
 	addButton(1, "No", Nie2);
@@ -111,14 +112,14 @@ public function alternativEvangelineRecruit():void
 public function Nie2():void
 {
 	clearOutput();
-	outputText("After moment of hesitation you once again decline her offer. Saying something about doing pretty well so far you leave her be. Still your next hour is wasted on wandering around without any actual purpose.\n\n");
+	outputText("After moment of hesitation you once again decline her offer. Saying something about doing pretty well so far, you leave her be. Still your next hour is wasted on wandering around without any actual purpose.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 	
 public function meetEvangeline():void {
 	clearOutput()
-	outputText("Deciding to visit your camp transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
-	outputText("\"<i>Hi [name]!  Anything I can help you with?</i>\"");
+	outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
+	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
@@ -136,19 +137,19 @@ private function evangelineAppearance():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("eight feet");
 	else outputText("seven and a half feet");
 	outputText(" tall.\n\n");
-	outputText("Oddly despite living in Mareth she look like a human aside of her eyes that have an uncanny pupils, which after narrowing looks like two cat slits that forms X shape over her golden eyes. Her ");
+	outputText("Oddly despite living in Mareth she looks like a human aside from her eyes that have uncanny pupils, which after narrowing looks like two cat slits that forms an X shape over her golden eyes. Her ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum "); 
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("platinum blonde "); 
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("platinum blonde hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
-	else outputText("hair are short that along with breasts not bigger than A cup, almost non-existent butt and boyish hips cause her to looks quite tomboyish.\n\n");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
+	else outputText("hair short along with breasts not bigger than A cup, almost non-existent butt and boyish hips cause her to look quite tomboyish.\n\n");
 	//outputText(".\n\n");
 	outputText("She's wearing ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("a skimpy chain bikini that barely qualifies as armor. The chain is made from links much finer and lighter than normal, so fine that it feels almost silken under fingertips. A simple seal in the g-string-like undergarment states, \"Virgins only.\"");
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
-	else outputText("a simple peasant's robes that are torn and frayed in a few places.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glow.");
+	else outputText("a simple peasant’s robe that’s torn and frayed in a few places.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
 	doNext(meetEvangeline);
 }
 
@@ -181,11 +182,11 @@ private function TalkYourEyes():void {
 
 private function TalkDemons():void {
 	clearOutput();
-	outputText("This time you chat with her about demons in general, like what types of them she’s seen so far or some details about them. Knowing that you would spend some time in this realm, maybe even the rest of your life, anyone who could help you in your quest would be very useful and she seems like she may know something.\n\n");
-	outputText("It turns out Evangeline indeed knows quite a bit about demons. Most of what she knows you already figured out on your own or could have guessed ");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) outputText("but one or two thing are still new to you.");
-	else outputText("but a few thing are things you’re hearing for the first time.");
-	outputText(" Large parts of your conversation is spent on discussing the structure of chain of command amongst demons. Feeling satisfied after learning something new you thanks her after you finish talking.");
+	outputText("This time you chat with her about demons in general, like what types of them she’s seen so far or some details about them. Knowing that you’re gonna spend some time in this realm, maybe even the rest of your life, anyone who could help you in your quest would be very useful and she seems like she may know something.\n\n");
+	outputText("It turns out Evangeline knows quite a bit about demons. Most of what she knows you already figured out on your own or could have guessed ");
+	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) outputText("but one or two thing are still new to you");
+	else outputText("but a few things you’re hearing for the first time");
+	outputText(". Large parts of your conversation is spent on discussing the structure of chain of command amongst demons. Feeling satisfied after learning something new you thank her after you finish talking.");
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 1) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
@@ -194,15 +195,15 @@ private function TalkDemons():void {
 
 private function TalkPastLife1():void {
 	clearOutput();
-	outputText("This time you asks Evangeline about the time you both met. What she’s been doing or how she managed to avoid demons. For a really long moment she remain silent.\n\n");
-	outputText("\"<i>I'm not any champion like you. I have just been living day after day, escaping to the hideouts I made when any of the demons noticed me.</i>\" Once again there is some hint of sadness in her voice, \"<i>but they were quite persistent in searching for me, always finding each hideout quite fast. With time I haven't even got a chance to eat much, so I was getting weaker and weaker till one day I would probably be too weak to escape them.</i>\"\n\n");
-	outputText("So she was running away from them but that makes you curious to what was the reason she was chased for. She never mentioned about demons being so 'organized' and overcoming their typical 'fuck everything' attitude.\n\n");
-	outputText("\"<i>Well there is some reason for that,</i>\" Evangeline casts her gaze down, \"<i>even demons can go wild for some 'things' like lethicite or other things that could make them stronger in any way.</i>\"\n\n");
-	outputText("So it looks like she may have have something that caused all those demons to pursue her for so long. Probably something that is as valuable as this ‘lethicite’.\n\n");
-	outputText("\"<i>Yes you could say that. But I hid it before and only by catching me would they know where it's hidden. Luckily for me they won't get me now when you're here, right champion?</i>\" She gives you one of those rare smiles in which you nod to. Sadly further attempts to find out what she hide ");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) outputText("once again fails.");
-	else outputText("turns out to be futile.");
-	outputText(" She talks about many things and some may or may not be lies, about this 'treasure' and how you only know it's well hidden and the demons will never find it without her pointing to the place.");
+	outputText("This time you ask Evangeline about the time you both met. What she’s been doing or how she managed to avoid demons. For a really long moment she remained silent.\n\n");
+	outputText("\"<i>I’m not a champion like you. I have just been living day after day, escaping to the hideouts I made when any of the demons noticed me.</i>\"\n\nOnce again there’s a hint of sadness in her voice.\n\n\"<i>But they were quite persistent in searching for me, always finding each hideout quite fast. With time I wouldn’t get a chance to eat much, so I would get weaker and weaker till one day I would probably be too weak to escape them.</i>\"\n\n");
+	outputText("So she was running away from them but that makes you curious to what was the reason she was chased for. She never mentioned anything about demons being so 'organized' and overcoming their typical 'fuck everything' attitude.\n\n");
+	outputText("\"<i>Well there’s some reason for that.</i>\"\n\nEvangeline casts her gaze down as she continues.\n\n\"<i>Even demons can go wild for some 'things' like lethicite or other things that could make them stronger in any way.</i>\"\n\n");
+	outputText("So it looks like she may have had something that caused all those demons to pursue her for so long. Probably something that is as valuable as this ‘lethicite’.\n\n");
+	outputText("\"<i>Yes you could say that. But I hid it before and only by catching me would they know where it’s hidden. Luckily for me they won’t get me now when you’re here, right champion?</i>\" She gives you one of those rare smiles in which you nod to. Sadly further attempts to find out what she hid ");
+	if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) outputText("once again fails");
+	else outputText("turns out to be futile");
+	outputText(". She talks about many things and some may or may not be lies, about this 'treasure' and how you only know it’s well hidden and the demons will never find it without her pointing to the place.");
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 2) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
@@ -304,8 +305,8 @@ private function evangelineAlchemyMenu():void {
 	//addButton(8, "", ).hint(".");manticore TF//Hybryd race TF
 	//addButton(9, "", ).hint(".");
 	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
-	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based of Black Ink.");
-	//addButton(12, "", ).hint(".");
+	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based on Black Ink.");
+	//addButton(12, "Abyssal Ink", ).hint("Ask her to brew a special potion based on Black Abbysal Ink.");
 	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Aske her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
 	addButton(14, "Back", meetEvangeline);
 }

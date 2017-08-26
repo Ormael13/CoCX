@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.Places.Boat{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 
 	public class SharkGirlScene extends AbstractBoatContent{
 
@@ -70,7 +72,30 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	spriteSelect(70);
 }
 
-
+public function oceanSharkGirlEncounter():void {
+	clearOutput();
+	spriteSelect(70);
+	outputText("Your boat is grabbed from the side and violently rocked throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing on you at high speed until its shape becomes clear jaw wide with a toothy grin.\n\n");
+	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+	}
+	outputText("You are under attack by a shark girl!");
+	startCombat(new UnderwaterSharkGirl());
+	//spriteSelect(70);
+}
+public function oceanTigersharkGirlEncounter():void {
+	clearOutput();
+	spriteSelect(32);
+	outputText("Your boat is grabbed from the side and violently rocked throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing on you at high speed until its shape becomes clear jaw wide with a toothy grin.\n\n");
+	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+	}
+	outputText("You are under attack by a tiger shark girl!");
+	startCombat(new UnderwaterTigersharkGirl());
+	//spriteSelect(32);
+}
 
 //Victory Sex. Herms should get a choice between the two scenes:
 internal function sharkWinChoices():void {

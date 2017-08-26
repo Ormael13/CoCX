@@ -29,30 +29,30 @@ package classes.Scenes.Areas.Ocean
 			//First application
 			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
-			game.dynStats("lus", (4 * str));
+			game.dynStats("lus", (6 * str));
 
 			//Loop through applying 1 point of venom at a time.
 			while (str > 0) {
 				str--;
 				//Str bottommed out, convert to lust
-				if (player.str < 4) game.dynStats("lus", 4);
+				if (player.str < 6) game.dynStats("lus", 6);
 				//Lose a point of str.
 				else {
 					showStatDown("str");
 					// strDown.visible = true;
 					// strUp.visible = false;
-					player.str--;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 2);
+					player.str -= 3;
+					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 3);
 				}
 				//Spe bottomed out, convert to lust
-				if (player.spe < 4) game.dynStats("lus", 4);
+				if (player.spe < 6) game.dynStats("lus", 4);
 				//Lose a point of spe.
 				else {
 					showStatDown("spe");
 					// speDown.visible = true;
 					// speUp.visible = false;
-					player.spe--;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 2);
+					player.spe -= 3;
+					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 3);
 				}
 			}
 			game.statScreenRefresh();
@@ -100,27 +100,27 @@ package classes.Scenes.Areas.Ocean
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
 			this.hairType = HAIR_ANEMONE;
-			initStrTouSpeInte(135, 100, 85, 95);
-			initLibSensCor(120, 70, 50);
+			initStrTouSpeInte(200, 160, 127, 140);
+			initLibSensCor(150, 70, 50);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
-			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 46 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "clammy skin";
-			this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 300;
+			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 30;
-			this.gems = rand(40) + 60;
+			this.level = 50;
+			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
-			this.str += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6360;
+			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 38 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 13980;
 			checkMonster();
 		}
 		
