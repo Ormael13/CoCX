@@ -2547,7 +2547,8 @@
 					[ARM_TYPE_ORCA, "orca"],
 					[ARM_TYPE_PLANT2, "tentacle-covered"],
 					[ARM_TYPE_DEVIL, "devil"],
-					[ARM_TYPE_ONI, "oni"]
+					[ARM_TYPE_ONI, "oni"],
+					[ARM_TYPE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2679,7 +2680,8 @@
 					[LOWER_BODY_TYPE_YETI, "yeti"],
 					[LOWER_BODY_TYPE_ORCA, "orca"],
 					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
-					[LOWER_BODY_TYPE_ONI, "oni"]
+					[LOWER_BODY_TYPE_ONI, "oni"],
+					[LOWER_BODY_TYPE_ELF, "elf"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

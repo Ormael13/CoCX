@@ -36,7 +36,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		menu();
 		var button:int = 0;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) {
-			addButton(button++, "PowerAttack", powerAttackMenu).hint("Hit your opponent with single wrath-enhanced attack.");
+			addButton(button++, "PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
 		}
 		if (player.hairType == 4) {
 			addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
@@ -242,7 +242,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 5;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 2;
@@ -262,7 +262,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -283,7 +283,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 10;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 3;
@@ -303,7 +303,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -324,7 +324,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 20;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 4;
@@ -344,7 +344,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -365,7 +365,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 50;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 6;
@@ -385,7 +385,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -406,7 +406,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 100;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 8;
@@ -426,7 +426,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -447,7 +447,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		player.wrath -= 200;
-		outputText("Attack text I couldn't think about atm. Probably some writer will be so kind to help me here. ");
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
 		damage *= 10;
@@ -467,7 +467,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -882,7 +882,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			MilkLustDmg += combat.libidoscalingbonus() * 0.2;
 			monster.teased(MilkLustDmg);
 		}
-		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -910,7 +910,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			CumLustDmg += combat.libidoscalingbonus() * 0.2;
 			monster.teased(CumLustDmg);
 		}
-		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -1221,8 +1221,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = doDamage(damage);
 		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
 		monster.armorDef == 0;
-		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-		outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! The attack is so devastating your target is stunned by the crushing blow!");
+		outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		if (monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText(" The attack is so devastating your target is stunned by the crushing blow!");
+			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+		}
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1281,7 +1284,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
-		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		enemyAI();

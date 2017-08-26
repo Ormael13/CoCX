@@ -15,9 +15,27 @@ package classes.Scenes.Monsters
 		
 		public function introDarkELfScout():void {
 			clearOutput();
-			outputText("As you explore the deepwood an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
+			outputText("As you explore the area an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
 			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
-			startCombat(new DarkElf);
+			startCombat(new DarkElfScout);
+		}
+		public function introDarkELfSlaver():void {
+			clearOutput();
+			outputText("As you explore the area an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
+			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
+			startCombat(new DarkElfSlaver);
+		}
+		public function introDarkELfRanger():void {
+			clearOutput();
+			outputText("As you explore the area an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
+			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
+			startCombat(new DarkElfRanger);
+		}
+		public function introDarkELfSniper():void {
+			clearOutput();
+			outputText("As you explore the area an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
+			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
+			startCombat(new DarkElfSniper);
 		}
 		
 		public function lostToDarkElf():void {

@@ -2801,7 +2801,7 @@ use namespace kGAMECLASS;
 
 		//Oni score
 		public function oniScore():Number {
-			Begin("Player","racialScore","orca");
+			Begin("Player","racialScore","oni");
 			var oniCounter:Number = 0;
 			if (earType == EARS_ONI)
 				oniCounter++;
@@ -2824,6 +2824,19 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return oniCounter;
+		}
+		
+		//Elf score
+		public function elfScore():Number {
+			Begin("Player","racialScore","elf");
+			var elfCounter:Number = 0;
+			if (armType == ARM_TYPE_ELF)
+				elfCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_ELF)
+				elfCounter++;
+			
+			End("Player","racialScore");
+			return elfCounter;
 		}
 
 		//Determine Mutant Rating

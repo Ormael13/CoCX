@@ -3737,6 +3737,7 @@ private function combatStatusesUpdate():void {
 		flags[kFLAGS.BASILISK_RESISTANCE_TRACKER]++;
 	}
 	if(player.hasStatusEffect(StatusEffects.IzmaBleed)) {
+		player.addStatusValue(StatusEffects.IzmaBleed,1,-1);
 		if(player.statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
 			player.removeStatusEffect(StatusEffects.IzmaBleed);
 			outputText("<b>You sigh with relief; your bleeding has slowed considerably.</b>\n\n");

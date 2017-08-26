@@ -96,6 +96,7 @@ package classes.Items {
 				case ARM_TYPE_DEVIL:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
+				case ARM_TYPE_ELF:
 				case ARM_TYPE_KITSUNE:
 				case ARM_TYPE_ONI:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
@@ -280,6 +281,7 @@ package classes.Items {
 		[ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
 		[ARM_TYPE_DRAGON, StatusEffects.UnlockedDraconicArms],
 		[ARM_TYPE_DEVIL, null],
+		[ARM_TYPE_ELF, null],
 		[ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[ARM_TYPE_GARGOYLE, null],
 		[ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
@@ -456,6 +458,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_DRAGON, StatusEffects.UnlockedDraconicLegs],
 		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusEffects.UnlockedDriderLegs],
 		[LOWER_BODY_TYPE_ECHIDNA, null],
+		[LOWER_BODY_TYPE_ELF, null],
 		[LOWER_BODY_TYPE_FERRET, null],
 		[LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
 		[LOWER_BODY_TYPE_GARGOYLE, null],

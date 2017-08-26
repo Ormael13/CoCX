@@ -20,7 +20,10 @@ package classes.Scenes
 	import classes.Scenes.NPCs.Sonya;
 	import classes.Scenes.NPCs.RyuBiDragon;
 	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.Scenes.Monsters.DarkElf;
+	import classes.Scenes.Monsters.DarkElfScout;
+	import classes.Scenes.Monsters.DarkElfSlaver;
+	import classes.Scenes.Monsters.DarkElfRanger;
+	import classes.Scenes.Monsters.DarkElfSniper;
 	
 	use namespace kGAMECLASS;
 	
@@ -435,7 +438,10 @@ package classes.Scenes
 			addButton(2, "SonyaFight", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBiFight", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
-			addButton(5, "DEScout", FightDarkElfScout).hint("Test fight with Dark Elf Scout.");
+			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
+			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
+			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
+			addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(14, "Back", SoulforceCheats);
@@ -953,7 +959,22 @@ package classes.Scenes
 		public function FightDarkElfScout():void {
 			clearOutput();
 			outputText("Entering battle with Dark Elf Scout! Enjoy ^^");
-			startCombat(new DarkElf());
+			startCombat(new DarkElfScout());
+		}
+		public function FightDarkElfSlaver():void {
+			clearOutput();
+			outputText("Entering battle with Dark Elf Slaver! Enjoy ^^");
+			startCombat(new DarkElfSlaver());
+		}
+		public function FightDarkElfRanger():void {
+			clearOutput();
+			outputText("Entering battle with Dark Elf Ranger! Enjoy ^^");
+			startCombat(new DarkElfRanger());
+		}
+		public function FightDarkElfSniper():void {
+			clearOutput();
+			outputText("Entering battle with Dark Elf Sniper! Enjoy ^^");
+			startCombat(new DarkElfSniper());
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");
