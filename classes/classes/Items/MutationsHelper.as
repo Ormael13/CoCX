@@ -314,6 +314,7 @@ package classes.Items {
 		[EARS_DRAGON, StatusEffects.UnlockedDraconicEars],
 		[EARS_ECHIDNA, null],
 		[EARS_ELFIN, StatusEffects.UnlockedElfinEars],
+		[EARS_ELVEN, null],
 		[EARS_FERRET, null],
 		[EARS_FOX, StatusEffects.UnlockedFoxEars],
 		[EARS_GOAT, null],
@@ -341,6 +342,7 @@ package classes.Items {
 		[EYES_CAT_SLITS, null],
 		[EYES_DRAGON, StatusEffects.UnlockedDraconicEyes],
 		[EYES_DEVIL, null],
+		[EYES_ELF, null],
 		[EYES_FENRIR, null],
 		[EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
 		[EYES_FOX, StatusEffects.UnlockedFoxEyes],
@@ -415,6 +417,7 @@ package classes.Items {
 		[HAIR_LEAF, null],
 		[HAIR_NORMAL, null],
 		[HAIR_QUILL, null],
+		[HAIR_SILKEN, null],
 	]);
 
 	/**

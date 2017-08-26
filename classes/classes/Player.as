@@ -1321,11 +1321,19 @@ use namespace kGAMECLASS;
 					race = "scorpion-morph";
 				}
 			}
-			if (mantisScore() >= 5)
+			if (mantisScore() >= 6)
 			{
-				if (isTaur()) race = "mantis-taur";
+				if (mantisScore() >= 12) {
+					if (isTaur()) race = "mantis-taur";
+					else {
+						race = "mantis-morph";
+					}
+				}
 				else {
-					race = "mantis-morph";
+					if (isTaur()) race = "half mantis-taur";
+					else {
+						race = "half mantis-morph";
+					}
 				}
 			}
 			if (salamanderScore() >= 4)
@@ -1416,6 +1424,17 @@ use namespace kGAMECLASS;
 				else {
 					if (isTaur()) race = "half oni-taur";
 					else race = "half oni";
+				}
+			}
+			if (elfScore() >= 5)
+			{
+				if (oniScore() >= 11) {
+					if (isTaur()) race = "elf-taur";
+					else race = "elf";
+				}
+				else {
+					if (isTaur()) race = "half elf-taur";
+					else race = "half elf";
 				}
 			}
 			//<mod>
@@ -1527,6 +1546,8 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			if (earType == 0)
 				humanCounter++;
+			if (earType == EARS_ELVEN)
+				humanCounter -= 7;
 			if (tongueType == 0)
 				humanCounter++;
 			if (gillType == 0)
@@ -1620,6 +1641,8 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (oniScore() >= 6)
 				chimeraCounter++;
+			if (elfScore() >= 5)
+				chimeraCounter++;
 			if (bunnyScore() >= 4)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
@@ -1632,7 +1655,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (scorpionScore() >= 4)
 				chimeraCounter++;
-			if (mantisScore() >= 5)
+			if (mantisScore() >= 6)
 				chimeraCounter++;
 			if (salamanderScore() >= 4)
 				chimeraCounter++;
@@ -1715,6 +1738,8 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (oniScore() >= 12)
 				grandchimeraCounter++;
+			if (elfScore() >= 11)
+				grandchimeraCounter++;
 //			if (bunnyScore() >= 4)
 //				grandchimeraCounter++;
 			if (harpyScore() >= 8)
@@ -1727,9 +1752,9 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (scorpionScore() >= 4)
 				grandchimeraCounter++;
-			if (mantisScore() >= 5)
+*/			if (mantisScore() >= 12)
 				grandchimeraCounter++;
-*/			if (salamanderScore() >= 7)
+			if (salamanderScore() >= 7)
 				grandchimeraCounter++;
 			if (nagaScore() >= 8)
 				grandchimeraCounter++;
@@ -1804,10 +1829,10 @@ use namespace kGAMECLASS;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.TrachealSystem) >= 0)
 				internalChimeraCounter++;
-		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		internalChimeraCounter++;
-		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		internalChimeraCounter++;
+			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				internalChimeraCounter++;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		internalChimeraCounter++;
 			
@@ -1845,10 +1870,10 @@ use namespace kGAMECLASS;
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.TrachealSystem) >= 0)
 				internalChimeraRatingCounter++;
-		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		internalChimeraRatingCounter++;
-		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				internalChimeraRatingCounter++;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0)
@@ -2056,8 +2081,10 @@ use namespace kGAMECLASS;
 				beeCounter += 2;
 			if (beeCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				beeCounter++;
-		//	if (beeCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		beeCounter++;
+			if (beeCounter > 4 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				beeCounter++;
+			if (beeCounter > 8 && findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				beeCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				beeCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && beeCounter >= 3)
@@ -2301,8 +2328,10 @@ use namespace kGAMECLASS;
 				spiderCounter++;
 			if (spiderCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				spiderCounter++;
-		//	if (spiderCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		spiderCounter++;
+			if (spiderCounter > 4 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				spiderCounter++;
+			if (spiderCounter > 8 && findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				spiderCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				spiderCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && spiderCounter >= 3)
@@ -2830,9 +2859,15 @@ use namespace kGAMECLASS;
 		public function elfScore():Number {
 			Begin("Player","racialScore","elf");
 			var elfCounter:Number = 0;
+			if (earType == EARS_ELVEN)
+				elfCounter++;
+			if (eyeType == EYES_ELF)
+				elfCounter++;
 			if (armType == ARM_TYPE_ELF)
 				elfCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ELF)
+				elfCounter++;
+			if (hairType == 10)
 				elfCounter++;
 			
 			End("Player","racialScore");
@@ -2885,8 +2920,10 @@ use namespace kGAMECLASS;
 				scorpionCounter++;
 			if (scorpionCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				scorpionCounter++;
-		//	if (scorpionCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		scorpionCounter++;
+			if (scorpionCounter > 4 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				scorpionCounter++;
+			if (scorpionCounter > 8 && findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				scorpionCounter++;
 			
 			End("Player","racialScore");
 			return scorpionCounter;
@@ -2916,8 +2953,10 @@ use namespace kGAMECLASS;
 				mantisCounter += 2;
 			if (mantisCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				mantisCounter++;
-		//	if (mantisCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		mantisCounter++;
+			if (mantisCounter > 4 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				mantisCounter++;
+			if (mantisCounter > 8 && findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				mantisCounter++;
 			if (findPerk(PerkLib.MantislikeAgility) >= 0)
 				mantisCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
@@ -2929,6 +2968,10 @@ use namespace kGAMECLASS;
 			End("Player","racialScore");
 			return mantisCounter;
 		}
+		
+		//Thunder Mantis score
+		//4 eyes - adj spider 4 eyes desc
+		//var. of arms, legs, wings, tail, ears
 		
 		//Salamander score
 		public function salamanderScore():Number {
@@ -4515,6 +4558,21 @@ use namespace kGAMECLASS;
 					maxWis += (20 * (1 + newGamePlusMod));
 				}
 			}//+10/10-20
+			if (elfScore() >= 5) {
+				if (elfScore() >= 12) {
+					maxStr += (100 * (1 + newGamePlusMod));
+					maxTou += (60 * (1 + newGamePlusMod));
+					maxInt -= (20 * (1 + newGamePlusMod));
+					maxWis += (40 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr -= (10 * (1 + newGamePlusMod));
+					maxTou -= (10 * (1 + newGamePlusMod));
+					maxSpe += (40 * (1 + newGamePlusMod));
+					maxInt += (40 * (1 + newGamePlusMod));
+					maxWis += (30 * (1 + newGamePlusMod));
+				}
+			}//+10/10-20
 			if (demonScore() >= 5) {
 				if (demonScore() >= 11) {
 					maxSpe += (30 * (1 + newGamePlusMod));
@@ -4570,10 +4628,19 @@ use namespace kGAMECLASS;
 					maxLib += (25 * (1 + newGamePlusMod));
 				}
 			}//+60/50-60
-			if (mantisScore() >= 5) {
-				maxStr -= (25 * (1 + newGamePlusMod));
-				maxSpe += (50 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
+			if (mantisScore() >= 6) {
+				if (mantisScore() >= 12) {
+					maxStr -= (40 * (1 + newGamePlusMod));
+					maxTou += (60 * (1 + newGamePlusMod));
+					maxSpe += (140 * (1 + newGamePlusMod));
+					maxInt += (20 * (1 + newGamePlusMod));
+				}
+				else {
+					maxStr -= (20 * (1 + newGamePlusMod));
+					maxTou += (30 * (1 + newGamePlusMod));
+					maxSpe += (70 * (1 + newGamePlusMod));
+					maxInt += (10 * (1 + newGamePlusMod));
+				}
 			}//+35/30-40
 			if (salamanderScore() >= 4) {
 				if (salamanderScore() >= 7) {
@@ -4816,8 +4883,13 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.MantislikeAgility) > 0) {
 				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (15 * (1 + newGamePlusMod));
-				if (hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
+				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
+				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.MantislikeAgilityEvolved) > 0) {
+				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
+				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
 				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
 				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			}

@@ -115,6 +115,8 @@ package classes.Scenes
 			outputText("-New tier   lvl-up perk: \n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
@@ -126,9 +128,12 @@ package classes.Scenes
 			outputText("-New version of text for one of soulskills replacing orginal ones when silly mode is active.\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
-			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -156,6 +161,7 @@ package classes.Scenes
 			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
+			outputText("<b>Version 0.8f2:</b>\n\n");
 			outputText("<b>Version 0.8g:</b>\n\n");
 			outputText("<b>Version 0.8h:</b>\n\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
@@ -164,7 +170,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
 			outputText("\n");cel na 0.8f: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
 			outputText("\n");cel na 0.8f: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8f: pododawać nieco związanych z walką perków
 			outputText("\n");cel na 0.8f: dodać nekomanta TF
 			outputText("\n");cel na 0.8f: dodać kitsune/salamander TF
 			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
@@ -174,6 +179,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

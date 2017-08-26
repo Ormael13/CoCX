@@ -57,6 +57,7 @@ public static const HAIR_GORGON:int												   =	 6;
 public static const HAIR_LEAF:int												   =	 7;
 public static const HAIR_FLUFFY:int												   =	 8;
 public static const HAIR_GRASS:int												   =	 9;
+public static const HAIR_SILKEN:int												   =	10;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;
@@ -126,6 +127,7 @@ public static const EYES_SNAKE:int                          	                   
 public static const EYES_DRAGON:int                          	                    =  10;
 public static const EYES_DEVIL:int                          	                    =  11;
 public static const EYES_ONI:int	                          	                    =  12;
+public static const EYES_ELF:int	                          	                    =  13;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -153,6 +155,7 @@ public static const EARS_ORCA:int													=  21;
 public static const EARS_SNAKE:int													=  22;
 public static const EARS_GOAT:int													=  23;
 public static const EARS_ONI:int													=  24;
+public static const EARS_ELVEN:int                                                  =  25;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;

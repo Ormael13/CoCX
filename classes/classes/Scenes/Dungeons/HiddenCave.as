@@ -73,7 +73,7 @@ package classes.Scenes.Dungeons
 		}
 		public function defeatedByBossGolems():void {
 			clearOutput();
-			outputText("As you fall defeated to the ground the constructs continue to smash or slash you to death with their tails. By the time they are done there will be nothing left of you but a bloodstain on the stone floor...and sme of walls and maybe a little bit on cave roof too. Wait how did part of you get there?.\n\n");
+			outputText("As you fall defeated, with barely any time to collapse to the ground as the constructs continue to smash or slash you to death with their tails. By the time they are done with you there will be nothing left but a bloodstain on the stone floor...and some of you on the walls and maybe a little bit on cave roof too. Wait how did part of you get there?\n\n");
 			//[GAME OVER]
 			getGame().gameOver();
 			removeButton(1);
