@@ -1924,7 +1924,7 @@ use namespace kGAMECLASS;
 				demonCounter += 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				demonCounter++;
-			if (hornType == HORNS_GOAT)
+			if (hornType == 6)
 				demonCounter -= 10;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				demonCounter += 10;
@@ -1942,17 +1942,17 @@ use namespace kGAMECLASS;
 				devilkinCounter++;
 			if (tailType == TAIL_TYPE_GOAT || tailType == TAIL_TYPE_DEMONIC)
 				devilkinCounter++;
-			if (wingType == WING_TYPE_BAT_LIKE_TINY || wingType == WING_TYPE_BAT_LIKE_LARGE)
+			if (wingType == 6 || wingType == 7)
 				devilkinCounter += 4;
-			if (armType == ARM_TYPE_DEVIL)
+			if (armType == 19)
 				devilkinCounter++;
-			if (hornType == HORNS_GOAT)
+			if (hornType == 6)
 				devilkinCounter++;
-			if (earType == EARS_GOAT)
+			if (earType == 23)
 				devilkinCounter++;
-			if (faceType == FACE_DEVIL_FANGS)
+			if (faceType == 31)
 				devilkinCounter++;
-			if (eyeType == EYES_DEVIL)
+			if (eyeType == 11)
 				devilkinCounter++;
 			if (tallness < 48)
 				devilkinCounter++;
@@ -1974,8 +1974,13 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
 				minoCounter++;
+<<<<<<< HEAD
 			if (hornType == HORNS_COW_MINOTAUR)
+				minoCounter += 2;
+=======
+			if (hornType == 2)
 				minoCounter++;
+>>>>>>> upstream/master-wip
 			if (minoCounter >= 4) {
 				if (cumQ() > 500)
 					minoCounter++;
@@ -2010,8 +2015,13 @@ use namespace kGAMECLASS;
 				cowCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
 				cowCounter++;
+<<<<<<< HEAD
 			if (hornType == HORNS_COW_MINOTAUR)
+				cowCounter += 2;
+=======
+			if (hornType == 2)
 				cowCounter++;
+>>>>>>> upstream/master-wip
 			if (cowCounter >= 4) {
 				if (biggestTitSize() > 4)
 					cowCounter++;
@@ -2713,7 +2723,7 @@ use namespace kGAMECLASS;
 			Begin("Player","racialScore","harpy");
 			var harpy:Number = 0;
 			if (armType == ARM_TYPE_HARPY)
-				harpy++;
+				harpy += 2;
 			if (hairType == HAIR_FEATHER)
 				harpy++;
 			if (wingType == WING_TYPE_FEATHERED_LARGE)
@@ -2842,7 +2852,7 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
 				oniCounter++;
-			if (tailType == TAIL_TYPE_NONE)
+			if (tailType == 0)
 				oniCounter++;
 			if (tone >= 75)
 				oniCounter++;
@@ -2867,7 +2877,7 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ELF)
 				elfCounter++;
-			if (hairType == HAIR_SILKEN)
+			if (hairType == 10)
 				elfCounter++;
 			
 			End("Player","racialScore");
@@ -3651,7 +3661,7 @@ use namespace kGAMECLASS;
 			return gargoyleCounter;
 		}
 
-		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
+		//TODO: elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
 
 		
 		public function maxPrestigeJobs():Number
@@ -4184,11 +4194,6 @@ use namespace kGAMECLASS;
 			}
 			//Minimum Corruption
 			if(player.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
-
-			//Minimum Sensitivity
-			if(player.devilkinScore() >= 7) minSen += 10;
-			if(player.devilkinScore() >= 10) minSen += 15;
-			if(player.devilkinScore() >= 14) minSen += 30;
 
 			return {
 				str:minStr,
