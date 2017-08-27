@@ -100,7 +100,7 @@ package classes.Scenes.Dungeons.D3
 				dropHpAndLust();
 			}
 			
-			if (rand(this.eMaLust()) > lust + 10)
+			if (rand(this.eMaxLust()) > lust + 10)
 			{
 				spearStrike();
 				outputText("\n\n");
