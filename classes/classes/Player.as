@@ -2447,7 +2447,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (tailType == TAIL_TYPE_DRACONIC)
 				dragonCounter++;
-			if (tongueType == 3)
+			if (tongueType == TONGUE_DRACONIC)
 				dragonCounter++;
 			if (wingType == WING_TYPE_DRACONIC_SMALL)
 				dragonCounter++;
@@ -4162,33 +4162,33 @@ use namespace kGAMECLASS;
 			var minCor:int = 0;
 			var newGamePlusMod:int = this.newGamePlusMod();
 			//Minimum Libido
-			if (player.gender > 0) minLib = 15;
+			if (this.gender > 0) minLib = 15;
 			else minLib = 10;
 	
-			if (player.armorName == "lusty maiden's armor") {
+			if (this.armorName == "lusty maiden's armor") {
 				if (minLib < 50) minLib = 50;
 			}
 			if (minLib < (minLust() * 2 / 3))
 			{
 				minLib = (minLust() * 2 / 3);
 			}
-			if (player.jewelryEffectId == JewelryLib.PURITY)
+			if (this.jewelryEffectId == JewelryLib.PURITY)
 			{
-				minLib -= player.jewelryEffectMagnitude;
+				minLib -= this.jewelryEffectMagnitude;
 			}
-			if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
+			if (this.findPerk(PerkLib.PurityBlessing) >= 0) {
 				minLib -= 2;
 			}
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) {
+			if (this.findPerk(PerkLib.HistoryReligious) >= 0 || this.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				minLib -= 2;
 			}
 			//Minimum Corruption
-			if(player.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
+			if(this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 
 			//Minimum Sensitivity
-			if(player.devilkinScore() >= 7) minSen += 10;
-			if(player.devilkinScore() >= 10) minSen += 15;
-			if(player.devilkinScore() >= 14) minSen += 30;
+			if(this.devilkinScore() >= 7) minSen += 10;
+			if(this.devilkinScore() >= 10) minSen += 15;
+			if(this.devilkinScore() >= 14) minSen += 30;
 
 			return {
 				str:minStr,

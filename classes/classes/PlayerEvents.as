@@ -786,7 +786,7 @@ package classes {
 				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
 			}
 			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) {
-				outputText("\n<b>Without your tails, the balance is disturbed and you loosing insigns in third path.</b>\n");
+				outputText("\n<b>Without your tails, the balance is disturbed and you loose your insights into the third path.</b>\n");
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}

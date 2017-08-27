@@ -317,6 +317,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 		outputText("</b>.");
 	}
+	if (changes == 0) outputText("\n\nRemarkably, " + (drakesHeart ? "the flower" : "Ember's blood") + " has no effect.  Maybe next time?");
 	flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 }
 	
