@@ -7,6 +7,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Mountain.*;
+	import classes.Scenes.Monsters.DarkElfScene;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
@@ -23,6 +24,7 @@ package classes.Scenes.Areas
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function Mountain()
 		{
@@ -31,7 +33,7 @@ package classes.Scenes.Areas
 		public function exploreMountain():void
 		{
 			player.exploredMountain++;
-			var chooser:Number = rand(4);
+			var chooser:Number = rand(5);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -92,7 +94,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 4;
+			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 5;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
 				trace("Dungeon start!")
 				kGAMECLASS.dungeons.enterFactory();
@@ -272,8 +274,13 @@ package classes.Scenes.Areas
 				}
 				hellHoundScene.hellhoundEncounter();
 			}
-			//Hairdresser
+			//Dark Elf Scout
 			if (chooser == 4) {
+				darkelfScene.introDarkELfScout();
+				return;
+			}
+			//Hairdresser
+			if (chooser == 5) {
 				salon.hairDresser();
 			}
 		}

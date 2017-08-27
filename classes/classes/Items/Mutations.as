@@ -7205,6 +7205,62 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
+		public function elfears(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			if (rand(2) == 0) changeLimit++;
+			//if (rand(3) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
+			//Stats
+			//Sexual
+			//Physical
+			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
+					outputText("Something shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
+					setLowerBody(LOWER_BODY_TYPE_ELF);
+				}
+				else humanizeLowerBody();
+				changes++;	
+			}
+			if (player.lowerBody == LOWER_BODY_TYPE_ELF && player.armType != ARM_TYPE_ELF && changes < changeLimit && rand(3) == 0) {
+				if (player.armType == ARM_TYPE_HUMAN) {
+					outputText("Something in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
+					setArmType(ARM_TYPE_ELF);
+				}
+				else humanizeArms();
+				changes++;	
+			}
+			if (player.armType == ARM_TYPE_ELF && player.earType != EARS_ELVEN && changes < changeLimit && rand(3) == 0) {
+				if (player.earType == EARS_HUMAN) {
+					outputText("Sounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
+					setEarType(EARS_ELVEN);
+				}
+				else humanizeEars();
+				changes++;
+			}
+			if (player.earType == EARS_ELVEN && player.eyeType != EYES_ELF && changes < changeLimit && rand(3) == 0) {
+				if (player.eyeType == EYES_HUMAN) {
+					outputText("You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new pupils are like those of an elf’s with a vertical slit that reflects lights.</b>");
+					setEyeType(EYES_ELF);
+				}
+				else humanizeEyes();
+				changes++;
+			}
+			//elven senses
+			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
+				outputText("Something changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
+				setHairType(HAIR_SILKEN);
+				changes++;
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		public function isabellaMilk(player:Player):void
 		{
 			player.slimeFeed();

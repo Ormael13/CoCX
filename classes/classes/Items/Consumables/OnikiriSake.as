@@ -157,9 +157,9 @@ public class OnikiriSake extends Consumable {
 //			player.skin.base.pattern = PATTERN_BATTLE_TATTOO;
 //			player.skin.base.adj = "tattooed";
 //		});
-		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-			mutations.humanizeSkin();
-		}
+//		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+//			mutations.humanizeSkin();
+//		}
 		//Taller
 		if (changes < changeLimit && rand(3) == 0 && player.tallness < 132) {
 			temp = rand(5) + 3;

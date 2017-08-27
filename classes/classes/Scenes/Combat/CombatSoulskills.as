@@ -515,10 +515,12 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n");
 	 enemyAI();
 	 return;
-	 }
 	 if (monster.plural) {
-	 if (player.findPerk(PerkLib.MantislikeAgility) < 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 5;
-	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 9;
+	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
+	 if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
+	 }
+	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
 	 }
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
 	 mantisMultipleAttacks();

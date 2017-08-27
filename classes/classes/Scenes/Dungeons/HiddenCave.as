@@ -64,13 +64,25 @@ package classes.Scenes.Dungeons
 			getGame().gameOver();
 			removeButton(1);
 		}
-		
 		public function defeatedByGuardianGolems():void {
 			clearOutput();
 			outputText("As you fall defeated to the ground the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
 			getGame().gameOver();
 			removeButton(1);
+		}
+		public function defeatedByBossGolems():void {
+			clearOutput();
+			outputText("As you fall defeated, with barely any time to collapse to the ground as the constructs continue to smash or slash you to death with their tails. By the time they are done with you there will be nothing left but a bloodstain on the stone floor...and some of you on the walls and maybe a little bit on cave roof too. Wait how did part of you get there?\n\n");
+			//[GAME OVER]
+			getGame().gameOver();
+			removeButton(1);
+		}
+		public function defeatedBossGolems():void {
+			clearOutput();
+			outputText("For now PLACEHOLDER text.\n\n");
+			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
+			cleanupAfterCombat();
 		}
 		
 		//Rooms
@@ -362,10 +374,10 @@ package classes.Scenes.Dungeons
 				doNext(playerMenu);
 				return;
 			}
-		//	if (player.findPerk(PerkLib.SoulSense) >= 0) {
-		//		if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
-		//		else addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret doors.");
-		//	}
+			if (player.findPerk(PerkLib.SoulSense) >= 0) {
+				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
+				else addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret doors.");
+			}
 		}
 		public function roomSmallCaveW():void {
 			kGAMECLASS.dungeonLoc = 60;
@@ -399,13 +411,17 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 61;
 			clearOutput();
 			outputText("<b><u>Medium Cave</u></b>\n");
-			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
+			outputText("This medium sized cave is decorated with many silent statues. You somehow have the impression that they are watching you or maybe watching... ");
+			/*if(flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) outputText("empty space in the middle with some resin remains.");
+			else */outputText("something embeded in half translucent resin in the middle.");
 			dungeons.setDungeonButtons(roomSmallCaveN, roomTunnel01, roomSmallCaveW, roomSmallCaveE);//north(6), south(11), west(10), east(12), up(5), down(7)
-	/*		if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 8) {
+			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 8 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] == 5 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] == 5 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] == 5) {
+				outputText("\n\nA few of unusualy shaped golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
+				startCombat(new BossGolems(), true);
 				doNext(playerMenu);
 				return;
 			}
-	*/	}
+		}
 		public function roomSmallCaveE():void {
 			kGAMECLASS.dungeonLoc = 62;
 			clearOutput();

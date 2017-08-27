@@ -656,6 +656,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -730,6 +739,15 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) max += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) max += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 500;
+			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+			}
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
 			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 20;

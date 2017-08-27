@@ -149,8 +149,8 @@ import classes.GlobalFlags.*;
 			}
 			//Horns
 			if (changes < changeLimit && player.horns > 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && Utils.rand(3) == 0) {
-				mutations.setHornType(HORNS_NONE);
 				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
+				mutations.setHornType(HORNS_NONE);
 				changes++;
 			}
 			// Chitin

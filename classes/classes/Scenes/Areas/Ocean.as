@@ -11,12 +11,15 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Ocean.*;
 	import classes.Scenes.NPCs.CeaniScene;
+	import classes.Scenes.Places.Boat.SharkGirlScene;
 	
 	use namespace kGAMECLASS;
 	
 	public class Ocean extends BaseContent
 	{
 		public var ceaniScene:CeaniScene = new CeaniScene();
+		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
+		public var scyllaScene:ScyllaScene = new ScyllaScene();
 		
 		public function Ocean() 
 		{
@@ -30,9 +33,10 @@ package classes.Scenes.Areas
 			
 			//Build choice list!
 			choice[choice.length] = 0;	//SeaAnemone
-			//choice[choice.length] = 1;	//Scylla?
-			//choice[choice.length] = 2;	//Shark girl
-			if (rand(4) == 0) choice[choice.length] = 1;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
+			choice[choice.length] = 1;	//Scylla
+			choice[choice.length] = 2;	//Shark girl
+			choice[choice.length] = 3;	//Tiger Shark girl
+			if (rand(4) == 0) choice[choice.length] = 4;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
 			
 			//Ceani
 			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
@@ -46,13 +50,16 @@ package classes.Scenes.Areas
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					kGAMECLASS.anemoneScene.mortalAnemoneeeeee();
 					break;
-			/*	case 1:
-					kGAMECLASS.exploration.genericImpEncounters2();
+				case 1:
+					scyllaScene.oceanScyllaEncounter();
 					break;
 				case 2:
-					kGAMECLASS.exploration.genericDemonsEncounters1();
+					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
-			*/	default:
+				case 3:
+					sharkGirlScene.oceanTigersharkGirlEncounter();
+					break;
+				default:
 					clearOutput();
 					outputText("You row for over an hour, until your arms practically burn with exhaustion from all the rowing.\n\n");
 					if (rand(2) == 0) {

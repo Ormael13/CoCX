@@ -89,6 +89,7 @@
 				else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 				else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
 				else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
+				else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 				description += "mane";
 				return description;
 			}
@@ -108,6 +109,7 @@
 			else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 			else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
+			else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 			description += "hair";
 
 			return description;
@@ -2399,7 +2401,8 @@
 					[HAIR_GORGON, "snake-like"],
 					[HAIR_LEAF, "leaf"],
 					[HAIR_FLUFFY, "fluffy"],
-					[HAIR_GRASS, "grass"]
+					[HAIR_GRASS, "grass"],
+					[HAIR_SILKEN, "silk-like"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2470,7 +2473,8 @@
 					[EYES_SNAKE, "snake"],
 					[EYES_DRAGON, "dragon"],
 					[EYES_DEVIL, "devil"],
-					[EYES_ONI, "devil"]
+					[EYES_ONI, "oni"],
+					[EYES_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2499,7 +2503,8 @@
 					[EARS_ORCA, "orca"],
 					[EARS_SNAKE, "snake"],
 					[EARS_GOAT, "goat"],
-					[EARS_ONI, "goat"]
+					[EARS_ONI, "oni"],
+					[EARS_ELVEN, "elven"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2547,7 +2552,8 @@
 					[ARM_TYPE_ORCA, "orca"],
 					[ARM_TYPE_PLANT2, "tentacle-covered"],
 					[ARM_TYPE_DEVIL, "devil"],
-					[ARM_TYPE_ONI, "oni"]
+					[ARM_TYPE_ONI, "oni"],
+					[ARM_TYPE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2679,7 +2685,8 @@
 					[LOWER_BODY_TYPE_YETI, "yeti"],
 					[LOWER_BODY_TYPE_ORCA, "orca"],
 					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
-					[LOWER_BODY_TYPE_ONI, "oni"]
+					[LOWER_BODY_TYPE_ONI, "oni"],
+					[LOWER_BODY_TYPE_ELF, "elf"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

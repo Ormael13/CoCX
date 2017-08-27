@@ -462,6 +462,12 @@ package classes
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
+		public static const ElementalBondFlesh:PerkType = mk("Elemental Bond: Flesh", "Elemental Bond: Flesh",
+				"You gains bonus to max HP depending on amount of summoned elementals and their ranks.",
+				"You choose the 'Elemental Bond: Flesh' perk, allowing you to form bond with summoned elementals to share recived damage.");
+		public static const ElementalBondUrges:PerkType = mk("Elemental Bond: Urges", "Elemental Bond: Urges",
+				"You gains bonus to max Lust depending on amount of summoned elementals and their ranks.",
+				"You choose the 'Elemental Bond: Urges' perk, allowing you to form bond with summoned elementals to share recived lust damage.");
 		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
 				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",// Rise by 1 maximum limit of controled elementals.
 				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
@@ -847,6 +853,9 @@ package classes
 		public static const MantislikeAgility:PerkType = mk("Mantis-like Agility", "Mantis-like Agility",
 				"Your altered musculature allows to increase your natural agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase could be even greater...",
 				"You choose the 'Mantis-like Agility' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
+		public static const MantislikeAgilityEvolved:PerkType = mk("Mantis-like Agility (Evolved)", "Mantis-like Agility (Evolved)",
+				"Your altered musculature providing you with even higher increase to agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase would be even bigger.",
+				"You choose the 'Mantis-like Agility (Evolved)' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
 		public static const Manyshot:PerkType = mk("Manyshot", "Manyshot",
 				"You always shoot two arrows instead of one on your first strike.",
 				"You choose the 'Manyshot' perk, to always shoot two arrows instead of one on your first strike.");
@@ -1192,8 +1201,11 @@ package classes
 		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
 				"Your body posses rudimentary respiratory system of the insects.",
 				"You choose the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
+		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
+				"Your body posses fully developed respiratory system of the insects.",
+				"You choose the 'Tracheal System (Final Form)' perk, continued exposition to insectoidal changes caused your tracheal system evolution into it final form.");
 		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
-				".",
+				"Your body posses half developed respiratory system of the insects.",
 				"You choose the 'Tracheal System (Evolved)' perk, continuous exposition to insectoidal changes caused your tracheal system evolution into more complete form.");
 		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
@@ -2316,6 +2328,9 @@ package classes
 							  .requirePerk(ElementalContractRank1)
 							  .requireWis(50)
 							  .requireLevel(6);
+		ElementalBondFlesh.requirePerk(ElementalContractRank1)
+						  .requireWis(50)
+						  .requireLevel(6);
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
 			   .requireLevel(12);
@@ -2326,10 +2341,13 @@ package classes
 		ElementalContractRank3.requirePerk(ElementalContractRank2)
 							  .requireWis(75)
 							  .requireLevel(12);
+		ElementalBondUrges.requirePerk(ElementalContractRank2)
+						  .requireWis(75)
+						  .requireLevel(12);
 		//Tier 3 Wisdom perks
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
-							  .requireLevel(18);
+							  .requireLevel(18);ElementalBondFlesh
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)
@@ -2672,7 +2690,7 @@ package classes
 			return player.manticoreScore() >= 10 && player.tailType == Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL
 		}, "Manticore race and tail");
 		MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-			return player.mantisScore() >= 5
+			return player.mantisScore() >= 6
 		}, "Mantis race");
 		SalamanderAdrenalGlands.requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 			return player.salamanderScore() >= 4
@@ -2681,12 +2699,9 @@ package classes
 			return player.scyllaScore() >= 5
 		}, "Scylla race");
 		TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-			return player.beeScore() >= 4 || player.mantisScore() >= 5 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
+			return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
 		}, "Any insect race");
 		/*
-		 if (player.beeScore() >= 8 && player.mantisScore() >= 8 && player.scorpionScore() >= 8 && player.spiderScore() >= 8 && ) {
-		 TrachealSystemEvolved.requirePerk(TrachealSystem);
-		 }
 		 if (player.() >=  && ) {
 		 _add(new PerkClass(PerkLib.));
 		 }
@@ -2726,6 +2741,9 @@ package classes
 								  .requireCustomFunction(function (player:Player):Boolean {
 			return player.internalChimeraScore() >= 1;
 		}, "Any racial perk");
+		TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+			return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8;
+		}, "Any insect race");
 		JobGolemancer.requireLevel(6)
 					 .requireInt(25)
 					 .requireWis(25);
@@ -2783,10 +2801,11 @@ package classes
 				 .requirePerk(JobBarbarian);
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
-		DraconicLungsEvolved.requirePerk(DraconicLungs).requireCustomFunction(function (player:Player):Boolean {
+		DraconicLungsEvolved.requireLevel(12).requirePerk(DraconicLungs).requireCustomFunction(function (player:Player):Boolean {
 			return player.dragonScore() >= 10;
 		}, "Dragon race");
-		KitsuneThyroidGlandEvolved.requirePerk(KitsuneThyroidGland)
+		KitsuneThyroidGlandEvolved.requireLevel(12)
+								  .requirePerk(KitsuneThyroidGland)
 								  .requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 			return player.kitsuneScore() >= 6;
 		}, "Kitsune race");

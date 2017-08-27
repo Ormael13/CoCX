@@ -12,6 +12,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.Monsters.DarkElfScene;
 
 	use namespace kGAMECLASS;
 
@@ -29,6 +30,7 @@ package classes.Scenes.Areas
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
 		public function Forest() { }
@@ -305,6 +307,9 @@ package classes.Scenes.Areas
 				name: "alraune",
 				call: alrauneEncounterFn,
 				when: Encounters.fn.ifLevelMin(3)
+			}, {
+				name  : "dark_elf_scout",
+				call  : darkelfScene.introDarkELfScout
 			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,
