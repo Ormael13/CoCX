@@ -9,7 +9,7 @@ package classes.Scenes.Areas.Forest
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Useable;
 	import classes.Scenes.Monsters.Imp;
-
+	import classes.Scenes.NPCs.AyaneFollower;
 	public class KitsuneScene extends BaseContent
 	{
 		public function KitsuneScene()
@@ -2257,6 +2257,7 @@ package classes.Scenes.Areas.Forest
 		 Before you can say anything, she disappears below the water, leaving you alone with the trickling sound of the fountain.  With a shrug, you place the mystically enhanced teardrop-shaped jewel into your pouch." );
 		 */
 
+
 //[The Shrine of the Ninetails]
 //Discovery
 		public function kitsuneShrine():void
@@ -2297,87 +2298,14 @@ package classes.Scenes.Areas.Forest
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
 			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < 10 && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
-			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", ayaneAtShrine);
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", getGame().ayaneFollower.ayaneShop);
 			if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
 			}
 			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
-
-//[Ayane Shop at Shrine]
-		private function ayaneAtShrine():void
-		{
-			clearOutput();
-			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");
-			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");
-			menu();
-			addButton(0, armors.WKIMONO.shortName, sellItem,armors.WKIMONO);
-			addButton(1, armors.RKIMONO.shortName, sellItem,armors.RKIMONO);
-			addButton(2, armors.BKIMONO.shortName, sellItem,armors.BKIMONO);
-			addButton(3, armors.PKIMONO.shortName, sellItem,armors.PKIMONO);
-			addButton(4, armors.ARCBANG.shortName, sellItem,armors.ARCBANG);
-			addButton(5, shields.SPI_FOC.shortName, sellItem,shields.SPI_FOC);
-			addButton(6, jewelries.FOXHAIR.shortName, sellItem,jewelries.FOXHAIR);
-			addButton(7, consumables.FOXJEWL.shortName, sellItem,consumables.FOXJEWL);
-			addButton(10, consumables.AGILI_E.shortName, sellItem,consumables.AGILI_E,15);
-			addButton(11, consumables.SMART_T.shortName, sellItem,consumables.SMART_T);
-			addButton(12, consumables.VIXEN_T.shortName, sellItem,consumables.VIXEN_T);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
-		}
-		private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{
-			cost = (cost > 0)? cost:item.value;
-			if (buy){
-				if (player.gems < cost){
-					clearOutput();
-					outputText("\n\nAyane shakes her head, indicating you need " + String(cost - player.gems) + " more gems to purchase this item.");
-					doNext(ayaneAtShrine);
-				}
-				else {
-					outputText("\n\nAfter you give Ayane gems she hand over to you purchased item.\n\n");
-					player.gems -= cost;
-					inventory.takeItem(item, ayaneAtShrine);
-					statScreenRefresh();
-				}
-			}
-			else{
-				clearOutput();
-				menu();
-				switch(item){
-					case armors.WKIMONO:
-					case armors.RKIMONO:
-					case armors.BKIMONO:
-					case armors.PKIMONO:
-						outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-						break;
-					case armors.ARCBANG:
-						outputText("\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> gems is somewhat cheap for it.</i>\"");
-						break;
-					case shields.SPI_FOC:
-						outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
-						break;
-					case jewelries.FOXHAIR:
-						outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>" + cost.toString() + " gems</b>.</i>\"");
-						break;
-					case consumables.FOXJEWL:
-						outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
-						break;
-					case consumables.AGILI_E:
-						outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough it would be wise to actually work on your agility for a fast trick or a swift escape. I think <b>15 gems</b> is not too steep a price for the gift of speed.</i>\"");
-						break;
-					case consumables.SMART_T:
-						outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>" + cost.toString() + " gems</b> is not too steep a price for the gift of intelligence.</i>\"");
-						break;
-					case consumables.VIXEN_T:
-						outputText("\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>" + cost.toString() + " gems</b> is a good deal to learn how to truly be lascivious.</i>\"");
-						break;
-				}
-				outputText("\n\nDo you buy "+ item.longName+"?");
-				addButton(0, "Yes", sellItem, item, cost, true);
-				addButton(1, "No", ayaneAtShrine);
-			}
-		}
-
+		
 //[Read Books]
 		private function readKitsuneBooks():void
 		{
