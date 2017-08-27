@@ -322,7 +322,7 @@ package classes
 		public var eyeType:Number = EYES_HUMAN;
 
 		//TongueType
-		public var tongueType:Number = TONUGE_HUMAN;
+		public var tongueType:Number = TONGUE_HUMAN;
 
 		//ArmType
 		public var armType:Number = ARM_TYPE_HUMAN;
@@ -3147,7 +3147,7 @@ package classes
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == TONUGE_DEMONIC || tongueType == TONUGE_DRACONIC || tongueType == TONUGE_ECHIDNA;
+			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
 		}
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {

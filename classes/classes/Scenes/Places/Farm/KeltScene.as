@@ -937,7 +937,7 @@ private function fuckKeltsShitUp():void {
 	spriteSelect(35);
 	clearOutput();
 	//If naga folks
-	if (player.faceType == FACE_SNAKE_FANGS && player.tongueType == TONUGE_SNAKE && player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+	if (player.faceType == FACE_SNAKE_FANGS && player.tongueType == TONGUE_SNAKE && player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		outputText(images.showImage("kelt-farm-naga-subkelt"));
 		outputText("Feigning a coy smile, you lick your lips with your forked tongue and beckon Kelt towards you.  The foolish stud trots over to you saying \"<i>That's more like it, worm.  Maybe when I'm done with your mouth, I'll let you have my dick in your ass, too.</i>\"  His sheath ripples and swells as his thick member begins to slowly droop out from the folded skin, hanging towards the ground.  It continues growing as he comes closer and closer, until it finally begins to grow rigid and arc towards your face.  You feel a moment of self-doubt as you breathe in his wonderful scent - wouldn't it be better, safer to just give in?  No, says a cold, reptile voice in your head.  You are the predator here and he, arrogant prey, has stepped into your trap.  Make him pay.  Make him know where his place in the world is.\r\r");
 

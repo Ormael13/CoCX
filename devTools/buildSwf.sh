@@ -54,44 +54,44 @@ ${COMMON_OPTS} \
 -debug \
 -define+=CONFIG::AIR,false \
 -define+=CONFIG::STANDALONE,true \
--o ../binRepo/CoC-${COC_VERSION}.swf \
+-o ./swfRepo/CoC-${COC_VERSION}.swf \
 classes/classes/CoC.as
 
 # Build the Android package
 # swf-version=14 == AIR 3.1
 # swf-version=21 == AIR 3.8
 # swf-version=24 == AIR 13.0
-echo "Build AIR SWF ${SWF_NAME}"
-${FLEX_ROOT}/bin/mxmlc \
-${COMMON_OPTS} \
--define+=CONFIG::AIR,true \
--define+=CONFIG::STANDALONE,false \
--o tmp/CoC-${COC_VERSION}.swf \
-+configname=airmobile \
--swf-version=14 \
-classes/classes/CoC.as
+#echo "Build AIR SWF ${SWF_NAME}"
+#${FLEX_ROOT}/bin/mxmlc \
+#${COMMON_OPTS} \
+#-define+=CONFIG::AIR,true \
+#-define+=CONFIG::STANDALONE,false \
+#-o tmp/CoC-${COC_VERSION}.swf \
+#+configname=airmobile \
+#-swf-version=14 \
+#classes/classes/CoC.as
 
-echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
-/bin/sed -r \
-    -e "s@(<versionNumber>).*(<\/versionNumber>)@\1${COC_VERSION_APK}\2@" \
-    -e "s@(<content>).*(<\/content>)@\1${SWF_NAME}\2@" \
-    ./devTools/application.xml > ./tmp/application.xml
+#echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
+#/bin/sed -r \
+#    -e "s@(<versionNumber>).*(<\/versionNumber>)@\1${COC_VERSION_APK}\2@" \
+#    -e "s@(<content>).*(<\/content>)@\1${SWF_NAME}\2@" \
+#    ./devTools/application.xml > ./tmp/application.xml
 
-$ADT \
--package \
--target apk-debug \
--listen \
--storetype pkcs12 \
--keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
--storepass testpassword \
-../binRepo/CoC-${COC_VERSION}.apk \
-./tmp/application.xml \
--C tmp . \
--C ./devTools/icons .
+#$ADT \
+#-package \
+#-target apk-debug \
+#-listen \
+#-storetype pkcs12 \
+#-keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
+#-storepass testpassword \
+#../binRepo/CoC-${COC_VERSION}.apk \
+#./tmp/application.xml \
+#-C tmp . \
+#-C ./devTools/icons .
 
 rm -rf tmp
 
-echo Done. Building android package.
+#echo Done. Building android package.
 
 ## Fuck you Adobe. They no longer support air on linux. Assholes.
 ## If you uncomment the below, it *may* build a air iOS package.

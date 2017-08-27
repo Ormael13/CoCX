@@ -509,12 +509,12 @@ package classes.Items {
 	// Here we override flavour text because it is 'tonuge' in StatusEffect id
 	// but changing that would break the saves
 	private const METAMORPH_TONGUES:Object = createMapFromPairs([
-		[TONUGE_CAT, [null, "Cat Tongue"]],
-		[TONUGE_DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
-		[TONUGE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
-		[TONUGE_ECHIDNA, [null, "Echidna Tongue"]],
-		[TONUGE_HUMAN, [null, "Human Tongue"]],
-		[TONUGE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
+		[TONGUE_CAT, [null, "Cat Tongue"]],
+		[TONGUE_DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
+		[TONGUE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
+		[TONGUE_ECHIDNA, [null, "Echidna Tongue"]],
+		[TONGUE_HUMAN, [null, "Human Tongue"]],
+		[TONGUE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 
 	/**

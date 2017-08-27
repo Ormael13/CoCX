@@ -347,9 +347,9 @@ package classes.Scenes.Areas
 			outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 
 			outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-			if (player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
-			else if (player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
-			else if (player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+			if (player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
+			else if (player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
+			else if (player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
 			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 

@@ -1776,7 +1776,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)

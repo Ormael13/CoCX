@@ -116,7 +116,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");

@@ -1647,22 +1647,22 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou tell her that you do, though you can't resist commenting that she's moving a little faster than usual.  Ember looks at you through half-lidded eyes.  \"<i>And you're not moving fast enough.</i>\"  With a grin at her unusual good humor, you approach her and take up station between her thighs.  You ask if she wants your hands or your tongue to 'help' her this time.");
 				outputText("\n\n\"<i>J-just get started... before I change my mind about this...</i>\"");
 				outputText("\n\nWell, no point leaving her hanging around.  You let your tongue roll out");
-				if (player.tongueType > TONUGE_HUMAN) outputText(" and out... and out...");
+				if (player.tongueType > TONGUE_HUMAN) outputText(" and out... and out...");
 				outputText(" and then lean forward to give her a great, wet, sloppy lick, straight up the center of her pussy");
 				//(E.Herm:
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(" not stopping until you have slurped your way to the very tip of her cock");
 				outputText(", savoring the unmistakable taste of her intimate juices.");
 				outputText("\n\nEmber gasps and moans, leaning back to voice her pleasure to the skies; her legs quiver and her claws dig into the wood; her wings spread, beating gently to help her balance herself.  \"<i>D-don't stop...</i>\" she pleads.");
 				outputText("\n\nYou don't intend to, and continue to lick, playing your tongue as deeply into her depths as possible, ");
-				if (player.tongueType > TONUGE_HUMAN) outputText("which is quite far indeed, ");
+				if (player.tongueType > TONGUE_HUMAN) outputText("which is quite far indeed, ");
 				outputText("caressing and stroking and playing all the tricks you can possibly think of to orally pleasure your draconic lover.  From the amount of juices beginning to seep onto your lapping tongue");
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(" and dribbling down her painfully stiff dick");
 				outputText(", you think you're doing rather well.");
 				outputText("\n\nWhen your nose bumps into her little button of pleasure Ember nearly jumps; she closes her thighs around your head, smothering you on her dripping vagina.");
-				if (player.tongueType > TONUGE_HUMAN) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
+				if (player.tongueType > TONGUE_HUMAN) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
 				outputText("\n\n\"<i>It's coming!  Ah!  I'm coming!!</i>\" Ember screams, shaking with barely contained pleasure.  A flood of juices threaten to drown you, as Ember's legs hold you snug.");
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her cock throbs and pumps out long streams of cum to paint the ground around you two; marking it as your special place.");
-				if (player.tongueType > TONUGE_HUMAN) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
+				if (player.tongueType > TONGUE_HUMAN) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
 				else outputText("\n\nYou can feel the shell of Ember's egg pressing against your tongue, and you abandon your licking to start probing gently with your fingers.  Under your careful guidance, the egg slips freely from Ember's body into your grasp.");
 
 				outputText("\n\nEmber's legs finally relax enough to let you escape... but her body slowly leans over in your direction, until she finally gives and collapses on top of you. Luckily you manage to move the egg out of the way, saving it from the pile of pleasured dragon before both of you crash into a sprawled pile on the ground.  You shake your head and smile at Ember, teasing her about how easily she just melts into a pile of mush from a little pleasure.");
@@ -2317,7 +2317,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_GENDER] == 3 && (flags[kFLAGS.EMBER_ROUNDFACE] == 0 || flags[kFLAGS.EMBER_INTERNAL_DICK] > 0)) {
 				outputText("  Struck by perverse inspiration, you manage to wriggle your tongue under the base of " + emberMF("his", "her") + " cock and thrust it into " + emberMF("his", "her") + " genital slit.  You guide it as deep into the strangely pussy-like orifice as you can, tickling and caressing.");
 				//(DemonTongue:
-				if (player.tongueType > TONUGE_HUMAN) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his", "her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his", "her") + " body, except when " + emberMF("he", "she") + " reaches " + emberMF("his", "her") + " most aroused states...");
+				if (player.tongueType > TONGUE_HUMAN) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his", "her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his", "her") + " body, except when " + emberMF("he", "she") + " reaches " + emberMF("his", "her") + " most aroused states...");
 			}
 
 			outputText("\n\n\"<i>Ah!  M-more... touch me more...</i>\" Ember pleads, surrendering to pleasure at your hands.");
@@ -2668,7 +2668,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nEmber's enjoyment is very apparent, as each time you even breathe over her little pleasure bud, Ember bucks against you; her vaginal walls contract in hopes of gripping your tongue and pulling it deeper inside her, but your saliva combined with the ever-flowing dragon juice keeps it slick enough that Ember doesn't have a chance in heaven of holding your tongue back.  \"<i>Hmm... Ah!  A little more to the left...</i>\" Ember directs you.");
 
 			outputText("\n\nYour tongue bends with all of the ");
-			if (player.tongueType > TONUGE_HUMAN) outputText("inhuman ");
+			if (player.tongueType > TONGUE_HUMAN) outputText("inhuman ");
 			outputText("flexibility you can muster, wriggling into the dragon's depths and trying to caress and stroke every last one of her most intimate places.  At one point in your exploration of Ember's quivering depths, you discover a special spot, and every time you make contact with that little spongy spot Ember rewards you with a buck and renewed gush of fluids.");
 
 			outputText("\n\n\"<i>Ah!  If you keep doing this I'm going to- Oh!</i>\" Ember gasps, tongue lolling out as she loses herself in the pleasurable sensations you're oh-so-responsible for.  You continue to wriggle and undulate your tongue, stroking that special point with as much care as you can manage");
@@ -3027,7 +3027,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou strip down until you are unabashedly naked, drinking in the look of stunned rapturous lust that Ember is giving you.  Playing your fingers gently across your upper arms, you pout and ask if " + emberMF("he", "she") + "'s going to keep you waiting, enjoying your emotional control over the horny dragon.");
 
 			outputText("\n\nEmber flinches, " + emberMF("his", "her") + " trance broken.  \"<i>I... umm... fine!  Come here!</i>\"  Ember steps toward you.  You open your arms, ready to wrap " + emberMF("him", "her") + " in a hug, but instead find yourself swept off of your feet.  The dragon grins wickedly at you before suddenly plunging into a ferocious kiss, " + emberMF("his", "her") + " long tongue worming its way around ");
-			if (player.tongueType == TONUGE_HUMAN) outputText("yours ");
+			if (player.tongueType == TONGUE_HUMAN) outputText("yours ");
 			else outputText("your own inhumanly sinuous muscle ");
 			outputText("and slithering almost into your throat.  " + emberMF("He", "She") + " kisses you madly, even as " + emberMF("he", "she") + " sinks to " + emberMF("his", "her") + " knees and gently lays you out on the ground, clearly ready to start the sexing.");
 			if (player.hasCock()) outputText("  As if " + emberMF("his", "her") + " hands caressing your cock weren't evidence of that.");

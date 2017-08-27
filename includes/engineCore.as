@@ -1479,73 +1479,34 @@ public function dynStats(... args):void
 	}*/
 	
 	//Keep stats in bounds
-	if(player.cor < 0) player.cor = 0;
-	if(player.cor > 100) player.cor= 100;
 	var maxes:Object = player.getAllMaxStats();
+	var mins:Object = player.getAllMinStats();
 	if(player.str > maxes.str) player.str = maxes.str;
-	if(player.str < 1) player.str = 1;
+	if(player.str < mins.str) player.str = mins.str;
 	if(player.tou > maxes.tou) player.tou = maxes.tou;
-	if(player.tou < 1) player.tou = 1;
+	if(player.tou < mins.tou) player.tou = mins.tou;
 	if(player.spe > maxes.spe) player.spe = maxes.spe;
-	if(player.spe < 1) player.spe = 1;
+	if(player.spe < mins.spe) player.spe = mins.spe;
 	if(player.inte > maxes.inte) player.inte = maxes.inte;
-	if(player.inte < 1) player.inte = 1;
+	if(player.inte < mins.inte) player.inte = mins.inte;
 	if(player.wis > maxes.wis) player.wis = maxes.wis;
-	if(player.wis < 1) player.wis = 1;
+	if(player.wis < mins.wis) player.wis = mins.wis;
 	if(player.lib > maxes.lib) player.lib = maxes.lib;
-	if(player.lib < 0) player.lib = 0;
+	if(player.lib < mins.lib) player.lib = mins.lib;
 	if(player.sens > maxes.sens) player.sens = maxes.sens;
-	if(player.sens < 10 && player.devilkinScore() < 7) player.sens = 10;
-	if(player.sens < 20 && player.devilkinScore() >= 7 && player.devilkinScore() < 10) player.sens = 20;
-	if(player.sens < 35 && player.devilkinScore() >= 10 && player.devilkinScore() < 14) player.sens = 35;
-	if(player.sens < 65 && player.devilkinScore() >= 14) player.sens = 65;
-	//Minimum libido. Rewritten.
-	var minLib:Number = 0;
-	
-	if (player.gender > 0) minLib = 15;
-	else minLib = 10;
-	
-	if (player.armorName == "lusty maiden's armor") {
-		if (minLib < 50)
-		{
-			minLib = 50;
-		}
-	}
-	if (minLib < (minLust() * 2 / 3))
-	{
-		minLib = (minLust() * 2 / 3);
-	}
-	if (player.jewelryEffectId == JewelryLib.PURITY)
-	{
-		minLib -= player.jewelryEffectMagnitude;
-	}
-	if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
-		minLib -= 2;
-	}
-	if (player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) {
-		minLib -= 2;
-	}
-	//Applies minimum libido.
-	if (player.lib < minLib)
-	{
-		player.lib = minLib;
-	}
-	
+	if(player.sens < mins.sens) player.sens = mins.sens;
+	if(player.cor > maxes.cor) player.cor = maxes.cor;
+	if(player.cor < mins.cor) player.cor = mins.cor;
+
 	//Add HP for toughness change.
 	if (modTou > 0) HPChange(modTou*2, false);
 	//Reduce hp if over max
 	if(player.HP > maxHP()) player.HP = maxHP();
 	
-	//Combat bounds
-	if(player.lust > player.maxLust()) player.lust = player.maxLust();
-	//if(player.lust < player.lib) {
-	//        player.lust=player.lib;
-	//
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
 	//worms moved to minLust() in Player.as.
 	if(player.lust > player.maxLust()) player.lust = player.maxLust();
-	if(player.lust < 0) player.lust = 0;
 	
 	//Reduce soulforce if over max
 	if(player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -1572,8 +1533,7 @@ public function showUpDown():void { //Moved from StatsView.
 
 //	mainView.statsView.upDownsContainer.visible = true;
 
-//	allStats = ["str", "tou", "spe", "inte", "wis" "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
-	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
+	allStats = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
 
 	for each(statName in allStats) {
 		oldStatName = _oldStatNameFor(statName);

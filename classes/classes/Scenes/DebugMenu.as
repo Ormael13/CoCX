@@ -884,12 +884,12 @@ import flash.utils.describeType;
 			"", "", "mark", "burn", "scar"
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
-			[TONUGE_HUMAN, "(0) HUMAN"],
-			[TONUGE_SNAKE, "(1) SNAKE"],
-			[TONUGE_DEMONIC, "(2) DEMONIC"],
-			[TONUGE_DRACONIC, "(3) DRACONIC"],
-			[TONUGE_ECHIDNA, "(4) ECHIDNA"],
-			[TONUGE_CAT, "(5) CAT"],
+			[TONGUE_HUMAN, "(0) HUMAN"],
+			[TONGUE_SNAKE, "(1) SNAKE"],
+			[TONGUE_DEMONIC, "(2) DEMONIC"],
+			[TONGUE_DRACONIC, "(3) DRACONIC"],
+			[TONGUE_ECHIDNA, "(4) ECHIDNA"],
+			[TONGUE_CAT, "(5) CAT"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[EYES_HUMAN, "(0) HUMAN"],
@@ -1322,7 +1322,7 @@ import flash.utils.describeType;
 			//Draconic TF
 			player.skin.restore();
 			player.skin.growCoat(SKIN_COAT_SCALES);
-			player.tongueType = TONUGE_DRACONIC;
+			player.tongueType = TONGUE_DRACONIC;
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;
 			player.wingType = WING_TYPE_DRACONIC_LARGE;

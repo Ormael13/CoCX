@@ -21,3 +21,4 @@ node_modules
 /tmp
 CoC-AIR-app.xml
 CoC-AIR.airi
+.DS_Store
