@@ -51,6 +51,9 @@ package classes.Scenes.Dungeons.D3
 			this.newgamebonusHP = 12450;
 			this.checkMonster();
 		}
+
+		private static const VENOM_SPEED_DRAIN_FLAT:int = 30;
+		private static const VENOM_SPEED_DRAIN_MULT:int = 10;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -85,19 +88,19 @@ package classes.Scenes.Dungeons.D3
 		
 		override protected function performCombatAction():void
 		{
-			// Because fuck having arguments with status affects :^)
+			// Because fuck having arguments with status effects :^)
 			_combatRound++;
 			
-			if (this.lust < 65 && this.HP < 33)
+			if (this.lust < .65*this.eMaxLust() && this.HP < .33*this.eMaxHP())
 			{
 				gainHpAndLust();
 			}
-			else if (this.lust >= 65 && this.HP >= 33)
+			else if (this.lust >= .65*this.eMaxLust() && this.HP >= .33*this.eMaxHP())
 			{
 				dropHpAndLust();
 			}
 			
-			if (rand(100) > lust + 10)
+			if (rand(this.eMaLust()) > lust + 10)
 			{
 				spearStrike();
 				outputText("\n\n");
@@ -163,7 +166,7 @@ package classes.Scenes.Dungeons.D3
 			_hpGains++;
 			
 			outputText(" The demon gestures wildly, drawing a rune across his own chest. It flares, blood red and pulsing. Your foe’s wounds slowly edge close, fueled by magic. When the luminous symbol fades, the drider pants, his black skin flushing purple in places.");
-			if (this.lust > 65)
+			if (this.lust > .65*this.eMaxLust())
 			{
 				if (_goblinFree) outputText(" His dick is rigid and bouncing, so hard it looks like it could go off at any moment.");
 				else outputText(" His balls are tensing underneath the goblin, and he keeps moaning under his breath.");
@@ -226,7 +229,7 @@ package classes.Scenes.Dungeons.D3
 					player.createStatusEffect(StatusEffects.DriderIncubusVenom, 5, 0, 0, 0);
 				}					
 				
-				amount = 30;
+				amount = VENOM_SPEED_DRAIN_FLAT + VENOM_SPEED_DRAIN_MULT*player.newGamePlusMod();
 				
 				if (player.str - amount < 1)
 				{
@@ -271,7 +274,7 @@ package classes.Scenes.Dungeons.D3
 						player.createStatusEffect(StatusEffects.DriderIncubusVenom, 5, 0, 0, 0);
 					}					
 					
-					amount = 30;
+					amount = VENOM_SPEED_DRAIN_FLAT + VENOM_SPEED_DRAIN_MULT*player.newGamePlusMod();
 					
 					if (player.str - amount < 1)
 					{
@@ -408,7 +411,7 @@ package classes.Scenes.Dungeons.D3
 			game.dynStats("lus", (player.lib / 10 + player.cor / 10) + 15);
 			
 			outputText(". Your body rebels against you under the unholy influence");
-			if (player.lust < 100) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
+			if (player.lust < player.maxLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
 			else outputText(".");
 		}
 		

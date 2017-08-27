@@ -106,12 +106,12 @@ public static const DECORATION_GENERIC:int                                      
 public static const DECORATION_TATTOO:int                                           =    2;
 
 // tongueType
-public static const TONUGE_HUMAN:int                                                =   0;
-public static const TONUGE_SNAKE:int                                                =   1;
-public static const TONUGE_DEMONIC:int                                              =   2;
-public static const TONUGE_DRACONIC:int                                             =   3;
-public static const TONUGE_ECHIDNA:int                                              =   4;
-public static const TONUGE_CAT:int                               	                =   5;
+public static const TONGUE_HUMAN:int                                                =   0;
+public static const TONGUE_SNAKE:int                                                =   1;
+public static const TONGUE_DEMONIC:int                                              =   2;
+public static const TONGUE_DRACONIC:int                                             =   3;
+public static const TONGUE_ECHIDNA:int                                              =   4;
+public static const TONGUE_CAT:int                               	                =   5;
 
 // eyeType
 public static const EYES_HUMAN:int                                                  =   0;

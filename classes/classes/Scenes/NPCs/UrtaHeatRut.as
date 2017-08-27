@@ -139,7 +139,7 @@ private function notInterestedInUburDrunkUrtaRuts():void {
 	//[Medium lust increase] 
 
 	//[If the PC has a snake tongue]
-	if(player.tongueType == TONUGE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
+	if(player.tongueType == TONGUE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
 	//Rut: 
 	if(player.inRut && player.hasCock()) outputText("Your [cocks] hardens in your pants as you still force yourself to leave.");
 	//[Medium lust increase]

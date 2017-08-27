@@ -1387,7 +1387,7 @@ package classes.Scenes.Areas.Forest
 				outputText("(You could focus on your snakelike, 'naga' attributes.)\n");
 				naga = corruptNagaBitchesRapeABee;
 			}
-			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == TONUGE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
+			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
 				outputText("(You could play with her a bit and try to make her lay eggs into herself.)\n");
 				gentleman = beeGirlRapeForTheDistinguishedGentleman;
 			}
@@ -1754,7 +1754,7 @@ package classes.Scenes.Areas.Forest
 
 			//[random effects: roll for one
 			var choices:Array = [];
-			if (player.tongueType == TONUGE_SNAKE) choices[choices.length] = 0;
+			if (player.tongueType == TONGUE_SNAKE) choices[choices.length] = 0;
 			if (player.hasCock()) choices[choices.length] = 1;
 			if (player.hasVagina()) choices[choices.length] = 2;
 			if (player.biggestTitSize() >= 4) choices[choices.length] = 3;
