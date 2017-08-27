@@ -4,6 +4,7 @@
 package classes.Items.Consumables 
 {
 import classes.Appearance;
+import classes.BaseContent;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.Items.Consumable;
@@ -12,11 +13,11 @@ import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
 import classes.BodyParts.Skin;
 
-public class EmberTF extends Consumable
+public class EmberTF extends BaseContent
 {
 	
 	public function EmberTF() {
-		super("DrakHrt", "DrakeHeart", "a drake's heart's flower", 50, "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.");
+		super();
 	}
 
 public function dragonTFeffects(drakesHeart:Boolean = false):void {
@@ -40,7 +41,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 		//Randomly choose one of those locations
 		select = choices[rand(choices.length)];
-		outputText("\n\nYour " + game.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
+		outputText("\n\nYour " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
 		if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
 		else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
 		outputText("  <b>You now have a dragon penis.</b>");
@@ -60,7 +61,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 				//High quantity demon horns
 				if (player.hornType == HORNS_DEMON && player.horns > 4) {
 					outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
-					mutations.setHornType(HORNS_DRACONIC_X4_12_INCH_LONG, 12);
+					getGame().mutations.setHornType(HORNS_DRACONIC_X4_12_INCH_LONG, 12);
 				}
 				else {
 					outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
@@ -76,7 +77,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 			else {
 				//-If no horns, grow a pair
 				outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>");
-				mutations.setHornType(HORNS_DRACONIC_X2, 4);
+				getGame().mutations.setHornType(HORNS_DRACONIC_X2, 4);
 				changes++;
 			}
 		}
@@ -99,7 +100,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 				else {
 					//--Next horn growth adds second row and brings length up to 12\"
 					outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
-					mutations.setHornType(HORNS_DRACONIC_X4_12_INCH_LONG);
+					getGame().mutations.setHornType(HORNS_DRACONIC_X4_12_INCH_LONG);
 					changes++;
 				}
 			}
@@ -107,20 +108,20 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//Gain Dragon Ears
 	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_DRAGON) {
-		mutations.setEarType(EARS_DRAGON);
+		getGame().mutations.setEarType(EARS_DRAGON);
 		outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
 		changes++;
 	}
 	//Gain Dragon Eyes
 	if (player.earType == EARS_DRAGON && player.eyeType != EYES_DRAGON && rand(3) == 0 && changes < changeLimit) {
-		mutations.setEyeType(EYES_DRAGON);
+		getGame().mutations.setEyeType(EYES_DRAGON);
 		outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
 		changes++;
 	}
 	//Gain Dragon Tongue
 	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.tongueType != TONGUE_DRACONIC) {
 		outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-		mutations.setTongueType(TONGUE_DRACONIC);
+		getGame().mutations.setTongueType(TONGUE_DRACONIC);
 		changes++;
 		//Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
 	}
@@ -128,13 +129,13 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//Gain Dragon Head
 	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONGUE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON) {
 		outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
-		mutations.setFaceType(FACE_DRAGON);
+		getGame().mutations.setFaceType(FACE_DRAGON);
 		changes++;
 	}
 	//Gain Dragon Fangs
 	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONGUE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON_FANGS) {
 		outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face. But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
-		mutations.setFaceType(FACE_DRAGON_FANGS);
+		getGame().mutations.setFaceType(FACE_DRAGON_FANGS);
 		changes++;
 	}
 	//Gain Dragon Scales
@@ -184,7 +185,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		else if (player.isAlraune()) outputText("\n\nYour petals all withers and fall off as your pitch and flower turn to dust leaving you with normal human legs. The changes does not stop there however.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
 		//(If non-hoofed legs)
 		else outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
-		mutations.setLowerBody(LOWER_BODY_TYPE_DRAGON);
+		getGame().mutations.setLowerBody(LOWER_BODY_TYPE_DRAGON);
 		player.legCount = 2;
 		changes++;
 	}
@@ -195,16 +196,16 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
 	//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
 	//	}
-		mutations.setArmType(ARM_TYPE_DRAGON);
+		getGame().mutations.setArmType(ARM_TYPE_DRAGON);
 		changes++;
 	}
 	//Gain Dragon Tail
 	if (player.tailType != TAIL_TYPE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 		//(If no tail)
-		if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA sudden dull, throbbing pain in your " + game.buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
+		if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
 		//(If tail)
 		else outputText("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes.  <b>You now have a dragon tail.</b>");
-		mutations.setTailType(TAIL_TYPE_DRACONIC);
+		getGame().mutations.setTailType(TAIL_TYPE_DRACONIC);
 		changes++
 	}
 	/*
@@ -221,22 +222,22 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	if (player.wingType != WING_TYPE_DRACONIC_HUGE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 		if (player.wingType == WING_TYPE_NONE) {
 			outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-			mutations.setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
+			getGame().mutations.setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
 		}
 		//(If Small Dragon Wings Present)
 		else if (player.wingType == WING_TYPE_DRACONIC_SMALL) {
 			outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-			mutations.setWingType(WING_TYPE_DRACONIC_LARGE, "large, draconic");
+			getGame().mutations.setWingType(WING_TYPE_DRACONIC_LARGE, "large, draconic");
 		}
 		//even larger dragon wings ^^
 		else if (player.wingType == WING_TYPE_DRACONIC_LARGE) {
 			outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
-			mutations.setWingType(WING_TYPE_DRACONIC_HUGE, "large, majestic draconic");
+			getGame().mutations.setWingType(WING_TYPE_DRACONIC_HUGE, "large, majestic draconic");
 		}
 		//(If other wings present)
 		else {
 			outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-			mutations.setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
+			getGame().mutations.setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
 		}
 		changes++;
 	}
@@ -287,10 +288,10 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
 		outputText("\n\nA sudden swell of lust races through your ");
 		if (player.hasCock()) {
-			outputText(game.cockDescript(0));
+			outputText(cockDescript(0));
 			if (player.hasVagina()) outputText(" and ");
 		}
-		if (player.hasVagina()) outputText(game.vaginaDescript());
+		if (player.hasVagina()) outputText(vaginaDescript());
 		outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "Ember hadn't run you off") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : getGame().emberScene.emberMF("him", "her")) + "; ");
 		if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 			if (drakesHeart) {
@@ -302,7 +303,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 			}
 		}
 		if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 1)) {
-			outputText("taking that hard, spurting cock inside your own " + game.vaginaDescript(0));
+			outputText("taking that hard, spurting cock inside your own " + vaginaDescript(0));
 		}
 		outputText("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
 		if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
