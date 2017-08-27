@@ -48,9 +48,12 @@ public class SkinLayer extends BodyPart {
 		this.color = value;
 	}
 	override public function set type(value:int):void {
-		super.type = value;
-		_desc      = "";
-		if (!_adj) _adj = defaultAdj();
+		if (type != value) {
+			super.type = value;
+			_desc      = "";
+			pattern    = PATTERN_NONE;
+			if (!_adj) _adj = defaultAdj();
+		}
 	}
 	/**
 	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)

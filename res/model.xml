@@ -722,7 +722,7 @@
                     <case value="5"><!--CHITIN-->
                         <show part="head/chitin"/>
                         <show part="torso/chitin"/>
-                        <if test="skin.coat.color=='black and yellow'">
+                        <if test="skin.coat.pattern==3"><!--BEE_STRIPES-->
                             <hide part="head/chitin"/>
                             <hide part="torso/chitin"/>
                             <show part="head/bee"/>
@@ -839,9 +839,9 @@
                         </case>
                         <case value="hasFullCoatOfType([5])"><!--CHITIN-->
                             <show part="breasts/Dchitin"/>
-                            <if test="skin.coat.color=='black and yellow'">
+                            <if test="skin.coat.pattern==3"><!--BEE_STRIPES-->
                                 <hide part="breasts/*"/>
-                                <show part="breasts/Dbee"/><!--TODO-->
+                                <show part="breasts/Dbee"/>
                             </if>
                         </case>
                         <case value="hasFullCoatOfType([2,9,14])"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->

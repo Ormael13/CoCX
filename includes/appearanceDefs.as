@@ -53,6 +53,7 @@ public static const PATTERN_ORCA_UNDERBODY:int                                  
 public static const PATTERN_BEE_STRIPES:int                                        =     3;
 public static const PATTERN_TIGER_STRIPES:int                                      =     4;
 public static const PATTERN_BATTLE_TATTOO:int                                      =     5;
+public static const PATTERN_SPOTTED:int                                            =     6;
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;

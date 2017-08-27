@@ -55,6 +55,9 @@ public class Skin extends SaveableBodyPart {
 	public function get color():String {
 		return skinValue(base.color, coat.color);
 	}
+	public function get color2():String {
+		return skinValue(base.color2, coat.color2);
+	}
 	public function get desc():String {
 		return skinValue(base.desc, coat.desc);
 	}

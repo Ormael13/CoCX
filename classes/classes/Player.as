@@ -2032,7 +2032,7 @@ use namespace kGAMECLASS;
 			var beeCounter:Number = 0;
 			if (hairColor == "shiny black")
 				beeCounter++;
-			if (hairColor == "black and yellow")
+			if (hairColor == "black and yellow") // TODO if hairColor2 == yellow && hairColor == black
 				beeCounter += 2;
 			if (antennae == 2)
 			{
