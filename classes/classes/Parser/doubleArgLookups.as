@@ -125,7 +125,10 @@
 			"nocolor": skinDescriptionFn("skin", false, true),
 			"type": skinDescriptionFn("skin", true, true),
 			"color": function (thisPtr:*, aspect:*):* {
-				return kGAMECLASS.player.skin.tone;
+				return kGAMECLASS.player.skin.color;
+			},
+			"color2": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.color2;
 			},
 			"isare": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.isAre();
@@ -140,6 +143,9 @@
 			"base.type": skinDescriptionFn("base", true, true),
 			"base.color": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.base.color;
+			},
+			"base.color2": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.base.color2;
 			},
 			"base.vs": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.base.isAre("s", "");
@@ -161,6 +167,9 @@
 			"coat.color": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.coat.color;
 			},
+			"coat.color2": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.coat.color2;
+			},
 			"full": skinDescriptionFn("full", false, false),
 			"full.noadj": skinDescriptionFn("full", true, false),
 			"full.notone": skinDescriptionFn("full", false, true),
@@ -168,9 +177,6 @@
 			"full.type": skinDescriptionFn("full", true, true)
 		};
 		public var faceLookups:Object = {
-			"deco": function(thisPtr:*,aspect:*):*{
-				return kGAMECLASS.player.facePart.describeDeco();
-			},
 			"full": function(thisPtr:*,aspect:*):*{
 				return kGAMECLASS.player.facePart.describe(false,true);
 			}

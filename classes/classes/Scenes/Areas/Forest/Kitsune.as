@@ -225,6 +225,7 @@ package classes.Scenes.Areas.Forest
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
 			this.skinTone = "pale";
+			this.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(35, 55, 110, 105);

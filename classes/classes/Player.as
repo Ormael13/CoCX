@@ -2059,7 +2059,7 @@ use namespace kGAMECLASS;
 			var beeCounter:Number = 0;
 			if (hairColor == "shiny black")
 				beeCounter++;
-			if (hairColor == "black and yellow")
+			if (hairColor == "black and yellow") // TODO if hairColor2 == yellow && hairColor == black
 				beeCounter += 2;
 			if (antennae == ANTENNAE_BEE)
 			{
@@ -2392,7 +2392,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter += 4;
 			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailCount < 2))
 				kitsuneCounter -= 7;
-			if (skin.base.adj == "sexy tattooed" || hasFur())
+			if (skin.base.pattern == PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
 		//	if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
@@ -2815,7 +2815,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "glossy")
 				orcaCounter++;
-			if (skinTone == "white and black")
+			if (skin.base.pattern == PATTERN_ORCA_UNDERBODY)
 				orcaCounter++;
 			if (wingType == WING_TYPE_NONE)
 				orcaCounter += 2;

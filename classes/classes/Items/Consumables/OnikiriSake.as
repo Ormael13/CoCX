@@ -154,7 +154,8 @@ public class OnikiriSake extends Consumable {
 		//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 		//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 		//	}
-//			player.skin.base.adj = "covered with various intricate battle tattoos";
+//			player.skin.base.pattern = PATTERN_BATTLE_TATTOO;
+//			player.skin.base.adj = "tattooed";
 //		});
 //		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 //			mutations.humanizeSkin();
