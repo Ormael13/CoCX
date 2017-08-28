@@ -31,19 +31,19 @@ use namespace kGAMECLASS;
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Desert()
 		{
-			postInit(function():void {
-				story = ZoneStmt.wrap(desertEncounter,getGame().rootStory);
-			})
+			onGameInit(init);
 		}
 		private var story:Story;
 		
 		private var _desertEncounter:GroupEncounter = null;
-		public function get desertEncounter():GroupEncounter { // lateinit because it references getGame()
+		public function get desertEncounter():GroupEncounter {
+			return _desertEncounter;
+		}
+		private function init():void {
 			const game:CoC     = getGame();
 			const fn:FnHelpers = Encounters.fn;
-			if (_desertEncounter == null) _desertEncounter =
-					Encounters.group("desert",
-							//game.commonEncounters,
+			_desertEncounter = Encounters.group("desert",
+					//game.commonEncounters,
 					{
 						name: "naga",
 						call: nagaScene.nagaEncounter
@@ -159,7 +159,7 @@ use namespace kGAMECLASS;
 						chance: 0.2,
 						when  : game.helScene.helSexualAmbushCondition
 					});
-			return _desertEncounter;
+			story = ZoneStmt.wrap(_desertEncounter,game.rootStory);
 		}
 		//Explore desert
 		public function exploreDesert():void {

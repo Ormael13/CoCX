@@ -60,7 +60,7 @@ public class Compiler {
 		for each(item in x.*) {
 			switch (item.localName()) {
 				case 'else':
-					iff.elseBlock = compileChildren(x);
+					iff.elseBlock = compileChildren(item);
 					break;
 				case 'elseif':
 					iff.elseBlock = compileIf(item);
@@ -78,7 +78,15 @@ public class Compiler {
 		var zwitch:SwitchStmt = new SwitchStmt(sattrs['value']);
 		for each(var xcase:XML in x.elements("case")) {
 			var cattrs:Object = attrMap(xcase);
-			var caze:CaseStmt = new CaseStmt(cattrs['test'],hasval?cattrs['values']||cattrs['value']:null);
+			var caze:CaseStmt = new CaseStmt();
+			caze.testAttr = cattrs['test'];
+			caze.valueAttr = cattrs['value'];
+			caze.valuesAttr = cattrs['values'];
+			caze.ltAttr = cattrs['lt'];
+			caze.lteAttr = cattrs['lte'];
+			caze.gtAttr = cattrs['gt'];
+			caze.gteAttr = cattrs['gte'];
+			caze.neAttr = cattrs['ne'];
 			compileChildrenInto(xcase,caze.thenBlock.stmts);
 			zwitch.cases.push(caze);
 		}

@@ -20,11 +20,16 @@ public class IncludeStmt extends Statement{
 	public function IncludeStmt(story:Story,compiler:StoryCompiler,path:String) {
 		this.path = path;
 		CoCLoader.loadText(compiler.basedir+path,function(success:Boolean,content:*,event:Event):void {
+			if (!success || _loaded) return;
 			_loaded = true;
-			if (!success) return;
 			XML.ignoreWhitespace = false;
-			body = compiler.attach(story).compile(XML(content));
-			compiler.detach(story);
+			try {
+				body = compiler.attach(story).compile(XML(content));
+			} catch (e:Error) {
+				_loaded = false;
+				compiler.detach(story);
+				throw e;
+			}
 		});
 	}
 

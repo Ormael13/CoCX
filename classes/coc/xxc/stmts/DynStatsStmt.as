@@ -23,8 +23,12 @@ public class DynStatsStmt extends Statement{
 		var game:CoC = (context as StoryContext).game;
 		var arr:Array = [];
 		for (var name:String in args) {
-			arr.push(name);
-			arr.push((args[name] as Eval).vcall(context.scopes));
+			var value:* = (args[name] as Eval).vcall(context.scopes);
+			if (name == 'scale') {
+				arr.push('resisted',value,'noBimbo',!value);
+			} else {
+				arr.push(name,value);
+			}
 		}
 		game.dynStats.apply(game,arr);
 	}

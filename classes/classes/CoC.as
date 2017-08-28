@@ -794,7 +794,7 @@ the text from being too boring.
 		placeComboBoxAfterText();
 	}
 		private static var initQueue:/*Function*/Array      = [];
-		public static function postInit(f:Function):void {
+		public static function onGameInit(f:Function):void {
 			initQueue.push(f);
 		}
 		private static function execPostInit():void {

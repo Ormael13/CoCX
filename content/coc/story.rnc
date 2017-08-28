@@ -2,81 +2,87 @@ default namespace = "xxc-story"
 
 start = story | zone
 # core xlogic
-statement =
-    text | b | i | font | if | switch | xccstatement
+content =
+    text | b | i | font | if | switch | xcc-content
+expression = text
+array-content-expression = text
 if = element if {
-    attribute test { text },
-    statement*,
+    attribute test { expression },
+    content*,
     (elseif|else)?
 }
 elseif = element elseif {
-    attribute test { text },
-    statement*,
+    attribute test { expression },
+    content*,
     (elseif|else)?
 }
 else = element else {
-    statement*
+    content*
 }
 switch = element switch {
+    attribute value { expression }?,
     case*,
     Default?
 }
 case = element case {
-    attribute values { text }?,
-    attribute value { text }?,
-    attribute test { text }?,
-    statement*
+    attribute test { expression }?,
+    attribute value { expression }?,
+    attribute values { array-content-expression }?,
+    attribute lt { expression }?,
+    attribute gt { expression }?,
+    attribute ne { expression }?,
+    attribute lte { expression }?,
+    attribute gte { expression }?,
+    content*
 }
 Default = element default {
-    statement*
+    content*
 }
 # xxc statements
-b = element b { statement }
-i = element i { statement }
+b = element b { content }
+i = element i { content }
 font = element font {
     attribute color { text }?,
-    statement
+    content
 }
-xccstatement = display | dynStats | Text | String | lib | output
-namedBlock = attribute name { xsd:NCName }, statement*
-Text = element text {
-    namedBlock
-}
-String = element string {
-    namedBlock
-}
-lib = element lib {
-    namedBlock
-}
-story = element story {
-    namedBlock
-}
+xcc-content = Text | String
+    | lib | story | extend-story | zone | extend-zone
+    | display | dynStats | output | Include
+namedBlock = attribute name { text }?, content*
+Text = element text { namedBlock }
+String = element string { namedBlock }
+lib = element lib { namedBlock }
+story = element story { namedBlock }
+extend-story = element extend-story { namedBlock }
 zone = element zone {
     namedBlock,
     encounter*
 }
-output = element output { text }
 extend-zone = element extend-zone {
     namedBlock,
     encounter*
 }
 encounter = element encounter {
-    attribute name { xsd:NCName },
-    attribute chance { text }?,
-    attribute when { text }?,
-    statement*
+    attribute name { text },
+    attribute chance { expression }?,
+    attribute when { expression }?,
+    content*
 }
 display = element display {
     attribute ref { text }
 }
 dynStats = element dynStats {
-    attribute str { text }?,
-    attribute tou { text }?,
-    attribute spe { text }?,
-    attribute int { text }?,
-    attribute lib { text }?,
-    attribute sen { text }?,
-    attribute lus { text }?,
-    attribute cor { text }?,
-    attribute res { text }?
+    attribute str { expression }?,
+    attribute tou { expression }?,
+    attribute spe { expression }?,
+    attribute int { expression }?,
+    attribute lib { expression }?,
+    attribute sen { expression }?,
+    attribute lus { expression }?,
+    attribute cor { expression }?,
+    attribute scale { expression }?
+}
+output = element output { expression }
+Include = element include {
+    attribute path { text }
 }

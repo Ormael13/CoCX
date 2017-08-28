@@ -48,6 +48,7 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:case"/>
                 <xs:element minOccurs="0" ref="ns1:default"/>
             </xs:sequence>
+            <xs:attribute name="value"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="case">
@@ -55,6 +56,11 @@
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:statement"/>
             <xs:attribute name="values"/>
             <xs:attribute name="value"/>
+            <xs:attribute name="lt"/>
+            <xs:attribute name="gt"/>
+            <xs:attribute name="ne"/>
+            <xs:attribute name="lte"/>
+            <xs:attribute name="gte"/>
             <xs:attribute name="test"/>
         </xs:complexType>
     </xs:element>
@@ -83,13 +89,14 @@
     <xs:element name="xccstatement" abstract="true"/>
     <xs:complexType name="namedBlock" mixed="true">
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:statement"/>
-        <xs:attribute name="name" use="required" type="xs:NCName"/>
+        <xs:attribute name="name" use="required"/>
     </xs:complexType>
     <xs:element name="text" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
     <xs:element name="string" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
     <xs:element name="lib" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
-    <xs:element name="story" type="ns1:namedBlock"/>
-    <xs:element name="zone">
+    <xs:element name="story" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
+    <xs:element name="extend-story" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
+    <xs:element name="zone" substitutionGroup="ns1:xccstatement">
         <xs:complexType mixed="true">
             <xs:complexContent>
                 <xs:extension base="ns1:namedBlock">
@@ -100,8 +107,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
-    <xs:element name="output" substitutionGroup="ns1:xccstatement" type="xs:string"/>
-    <xs:element name="extend-zone">
+    <xs:element name="extend-zone" substitutionGroup="ns1:xccstatement">
         <xs:complexType mixed="true">
             <xs:complexContent>
                 <xs:extension base="ns1:namedBlock">
@@ -115,7 +121,7 @@
     <xs:element name="encounter">
         <xs:complexType mixed="true">
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:statement"/>
-            <xs:attribute name="name" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="required"/>
             <xs:attribute name="chance"/>
             <xs:attribute name="when"/>
         </xs:complexType>
@@ -136,6 +142,12 @@
             <xs:attribute name="lus"/>
             <xs:attribute name="cor"/>
             <xs:attribute name="res"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="output" substitutionGroup="ns1:xccstatement" type="xs:string"/>
+    <xs:element name="include" substitutionGroup="ns1:xccstatement">
+        <xs:complexType>
+            <xs:attribute name="path" use="required"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

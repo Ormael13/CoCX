@@ -933,8 +933,8 @@ import coc.xxc.StoryContext;
 		protected function darkTheme():Boolean {
 			return kGAMECLASS.mainViewManager.darkThemeImpl();
 		}
-		protected static function postInit(f:Function):void {
-			CoC.postInit(f);
+		protected static function onGameInit(f:Function):void {
+			CoC.onGameInit(f);
 		}
 		protected function get context():StoryContext {
 			return kGAMECLASS.context;

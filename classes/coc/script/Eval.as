@@ -40,7 +40,7 @@ public class Eval {
 	private static const LA_FLOAT:RegExp = /^[+\-]?(\d+(\.\d+)?|\.\d+)(e[+\-]?\d+)?/;
 	private static const LA_INT:RegExp = /^[+\-]?(0x)?\d+/;
 	private static const LA_ID:RegExp = /^[a-zA-Z_$][a-zA-Z_$0-9]*/;
-	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|\|\||&&|or|and|eq|neq?|lte?|gte?|[-+*\/%])/;
+	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|\|\||&&|or|and|eq|neq?|[lg](te|t|e)|[-+*\/%])/;
 	private static const OP_PRIORITIES:* = {
 		'||' : 10,
 		'or' : 10,
@@ -56,8 +56,10 @@ public class Eval {
 		'==' : 30,
 		'='  : 30,
 		'lt' : 30,
+		'le' : 30,
 		'lte': 30,
 		'gt' : 30,
+		'ge' : 30,
 		'gte': 30,
 		'neq': 30,
 		'ne' : 30,
@@ -140,12 +142,14 @@ public class Eval {
 				return x() > y();
 			case '>=':
 			case 'gte':
+			case 'ge':
 				return x() >= y();
 			case '<':
 			case 'lt':
 				return x() < y();
 			case '<=':
 			case 'lte':
+			case 'le':
 				return x() <= y();
 			case '=':
 			case '==':
@@ -251,6 +255,8 @@ public class Eval {
 			case 'String': return String;
 			case 'string': return String;
 			case 'Number': return Number;
+			case 'true': return true;
+			case 'false': return false;
 			default:
 				for each (var thiz:* in scopes) if (id in thiz) return thiz[id];
 				return undefined;
