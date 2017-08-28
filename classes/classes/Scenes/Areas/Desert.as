@@ -145,9 +145,6 @@ use namespace kGAMECLASS;
 						when  : fn.ifLevelMin(2),
 						call  : oasis.oasisEncounter
 					}, {
-						name: "walk",
-						call: walkingDesertStatBoost
-					}, {
 						name: "Etna",
 						chance: 0.2,
 						when: function ():Boolean
