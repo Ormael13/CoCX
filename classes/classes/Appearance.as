@@ -2451,12 +2451,12 @@
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
 				[
-					[TONUGE_HUMAN, "human"],
-					[TONUGE_SNAKE, "snake"],
-					[TONUGE_DEMONIC, "demonic"],
-					[TONUGE_DRACONIC, "draconic"],
-					[TONUGE_ECHIDNA, "echidna"],
-					[TONUGE_CAT, "cat"]
+					[TONGUE_HUMAN, "human"],
+					[TONGUE_SNAKE, "snake"],
+					[TONGUE_DEMONIC, "demonic"],
+					[TONGUE_DRACONIC, "draconic"],
+					[TONGUE_ECHIDNA, "echidna"],
+					[TONGUE_CAT, "cat"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(

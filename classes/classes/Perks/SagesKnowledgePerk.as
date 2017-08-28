@@ -17,7 +17,7 @@ package classes.Perks
 
 		public function SagesKnowledgePerk() 
 		{
-			super("Wizard's Focus", "Wizard's Focus",
+			super("Sage's Knowledge", "Sage's Knowledge",
 					"Your tome grants you additional focus, increasing your spells power.");
 		}
 		

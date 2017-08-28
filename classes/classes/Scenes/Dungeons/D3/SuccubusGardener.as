@@ -95,7 +95,7 @@
 				if (player.lust >= player.maxLust()) return;
 			}
 			
-			if (this.HPRatio() <= 0.6 && fatigue < 100)
+			if (this.HPRatio() <= 0.6 && fatigue < this.eMaxFatigue())
 			{
 				vineHeal();
 			}
@@ -179,9 +179,9 @@
 			this.HP = this.eMaxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
-			if (fatigue >= 100) { //Exhausted!
+			if (fatigue >= this.eMaxFatigue()) { //Exhausted!
 				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
-				fatigue = 100;
+				fatigue = this.eMaxFatigue();
 			}
 		}
 		
@@ -234,7 +234,7 @@
 				
 				player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-					player.takeDamage(75 + rand(15));
+					player.takeDamage(0.75*this.str + rand(15));
 				}
 				game.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
@@ -262,7 +262,7 @@
 	
 			player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(75 + rand(15));
+				player.takeDamage(.75*this.str + rand(15));
 			}
 			game.dynStats("lus+", 3 + rand(3));
 			combatRoundOver();
@@ -325,27 +325,27 @@
 			player.addStatusValue(StatusEffects.ShowerDotEffect, 1, -1);
 			
 				//Dot effect
-			if (player.lust < 50) outputText("The tentacles' sex-juices are still covering you - still slowly arousing you. You've got a good handle on it for now.\n\n");
-			else if (player.lust < 60) 
+			if (player.lust < .5*player.maxLust()) outputText("The tentacles' sex-juices are still covering you - still slowly arousing you. You've got a good handle on it for now.\n\n");
+			else if (player.lust < .6*player.maxLust()) 
 			{
 				outputText("You try to wipe some of the fragrant seed from your palm, but all you succeed in doing is smearing it into your [hips].");
 				if (player.cor < 50) outputText(" You're ashamed to admit");
 				else outputText(" You're a little irritated to admit"); 
 				outputText(" that it's starting to feel really good.\n\n");
 			}
-			else if (player.lust < 70)
+			else if (player.lust < .7*player.maxLust())
 			{
 				outputText("You groan at the warm slipperiness enveloping your [skinFurScales] as the tainted tentacles' fluids go to work on you. There's nothing you can do but try to endure it. If only it didn't feel so... hot to be drenched in. If you wind up losing, you hope she'll do this again....\n\n");
 			}
-			else if (player.lust < 80)
+			else if (player.lust < .8*player.maxLust())
 			{
 				outputText("You whimper as the insidious plant-sperm works on your vulnerable [skin.type], building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
 			}
-			else if (player.lust < 90)
+			else if (player.lust < .9*player.maxLust())
 			{
 				outputText("You shudder in place, stumbling dazedly as your ardor rises to a fever pitch. Soon, you're going to wind up too turned-on to resist, and when that happens, those tentacles are going to take you. The worst part? It's starting to sound really, really... really good to you. Not struggling, no tension... just giving in to what your body craves and loving it.\n\n");
 			}
-			else if (player.lust < 100)
+			else if (player.lust < 1.0*player.maxLust())
 			{
 				outputText("Ohhhh, you're close now. You can feel the need hammering inside of you, soaking in through your [skinFurScales] to stoke the fires between your [legs] into a blazing inferno, one you couldn't resist even if you wanted to. Then... then you'll be free to cum. You shake your head. Gotta hold it together");
 				if (player.hasCock())
@@ -388,6 +388,9 @@
 			outputText(" They're so soft and pillowy that you can't help but enjoy the feel of them on your skin, and you take a deep, contented breath before remembering where you are and struggling out of the creamy valley.");
 			
 			outputText("\n\nYour foe giggles, favoring you with a blown kiss. Her nipples are obviously a little harder, but then again, so are yours.");
+			game.dynStats("lus+", 3 + rand(3));
+			lust+=3 + rand(3);
+
 		}
 		
 		private function sapSpeed():void

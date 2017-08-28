@@ -3750,6 +3750,20 @@ private function combatStatusesUpdate():void {
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
 		}
 	}
+	if(player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+		player.addStatusValue(StatusEffects.Hemorrhage,1,-1);
+		if(player.statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+			player.removeStatusEffect(StatusEffects.Hemorrhage);
+			outputText("<b>You sigh with relief; your hemorrhage has slowed considerably.</b>\n\n");
+		}
+		//Hemorrhage effect:
+		else {
+			var hemorrhage:Number = 0;
+			hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
+			hemorrhage = takeDamage(hemorrhage);
+			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
+		}
+	}
 	if(player.hasStatusEffect(StatusEffects.AcidSlap)) {
 		var slap:Number = 3 + (player.maxHP() * 0.02);
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");

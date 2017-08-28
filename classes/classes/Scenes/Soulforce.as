@@ -1121,7 +1121,7 @@ package classes.Scenes
 			player.legCount = 2;
 			player.wingType = WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
 			player.tailRecharge = 0;
 			player.horns = 0;
@@ -1175,7 +1175,7 @@ package classes.Scenes
 			player.legCount = 2;
 			player.eyeType = EYES_HUMAN;
 			player.antennae = ANTENNAE_NONE;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.earType = EARS_HUMAN;
 			player.gillType = GILLS_NONE;
 			player.rearBody = REAR_BODY_NONE;
