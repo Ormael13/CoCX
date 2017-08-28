@@ -931,7 +931,9 @@ import coc.view.MainView;
 		protected function darkTheme():Boolean {
 			return kGAMECLASS.mainViewManager.darkThemeImpl();
 		}
-
+		protected static function postInit(f:Function):void {
+			CoC.postInit(f);
+		}
 	}
 
 }

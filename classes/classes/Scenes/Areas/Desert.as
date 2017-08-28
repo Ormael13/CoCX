@@ -9,12 +9,14 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.Areas.Desert.*;
+import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
 
 import coc.xlogic.Statement;
 import coc.xxc.Story;
+import coc.xxc.stmts.ZoneStmt;
 
 use namespace kGAMECLASS;
 
@@ -29,16 +31,19 @@ use namespace kGAMECLASS;
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Desert()
 		{
+			postInit(function():void {
+				story = ZoneStmt.wrap(desertEncounter,getGame().rootStory);
+			})
 		}
-		//Explore desert
+		private var story:Story;
 		
-		
-		private var _desertEncounter:Encounter = null;
-		public function get desertEncounter():Encounter { // lateinit because it references getGame()
+		private var _desertEncounter:GroupEncounter = null;
+		public function get desertEncounter():GroupEncounter { // lateinit because it references getGame()
 			const game:CoC     = getGame();
 			const fn:FnHelpers = Encounters.fn;
 			if (_desertEncounter == null) _desertEncounter =
-					Encounters.group( //game.commonEncounters, 
+					Encounters.group("desert",
+							//game.commonEncounters,
 					{
 						name: "naga",
 						call: nagaScene.nagaEncounter
@@ -163,22 +168,15 @@ use namespace kGAMECLASS;
 		public function exploreDesert():void {
 			player.exploredDesert++;
 			clearOutput();
-//			desertEncounter.execEncounter();
-			if (story == null) {
-				var xml:XML = XML(new DESERT_XML());
-				story = getGame().compiler.compile(xml) as Story;
-			}
+			doNext(camp.returnToCampUseOneHour); // default button
 			story.execute(getGame().context);
-			doNext(camp.returnToCampUseOneHour);
+			flushOutputTextToGUI();
 		}
-		[Embed(source="../../../../content/coc/desert.xml", mimeType="application/octet-stream")]
-		private static var DESERT_XML:Class;
 
 		public function sandWitchPregnancyEvent():void {
 			if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) sandWitchScene.sammitchBirthsDriders();
 			else sandWitchScene.witchBirfsSomeBees();
 		}
-		private var story:Story;
 
 		public function chestEncounter():void {
 			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  ");

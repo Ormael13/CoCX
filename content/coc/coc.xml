@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<story key="coc">
-    <includes>
-        <!--Areas-->
-        <include path="desert.xml"/>
-    </includes>
-</story>
+<extend-story key="/">
+    <!--Areas-->
+    <include path="desert.xml"/>
+</extend-story>

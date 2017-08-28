@@ -15,7 +15,10 @@ import classes.internals.RootCounters;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
+import coc.view.CoCLoader;
+
 import coc.xlogic.ExecContext;
+import coc.xxc.Story;
 
 import coc.xxc.StoryCompiler;
 import coc.xxc.StoryContext;
@@ -176,7 +179,7 @@ the text from being too boring.
 		
 		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
-		
+
 		// /
 		private var _perkLib:PerkLib                 = new PerkLib();// to init the static
 		private var _statusEffects:StatusEffects     = new StatusEffects();// to init the static
@@ -300,7 +303,8 @@ the text from being too boring.
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
 		public var gameSettings:GameSettings = new GameSettings();
-		public var compiler:StoryCompiler = new StoryCompiler();
+		public var rootStory:Story = new Story(null,"root",true);
+		public var compiler:StoryCompiler = new StoryCompiler("content/coc/").attach(rootStory);
 		public var context:StoryContext;
 
 		public var perkTree:PerkTree = new PerkTree();
@@ -685,9 +689,14 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-
+			execPostInit();
+			loadStory();
 			this.addFrameScript( 0, this.run );
 			//setTimeout(this.run,0);
+		}
+
+		private function loadStory():void {
+			compiler.includeFile("coc.xml");
 		}
 
 		public function run():void
@@ -784,5 +793,13 @@ the text from being too boring.
 		mainView.showComboBox(items,prompt,onChange);
 		placeComboBoxAfterText();
 	}
+		private static var initQueue:/*Function*/Array      = [];
+		public static function postInit(f:Function):void {
+			initQueue.push(f);
+		}
+		private static function execPostInit():void {
+			var f:Function;
+			while ((f = initQueue.shift())) f();
+		}
 }
 }

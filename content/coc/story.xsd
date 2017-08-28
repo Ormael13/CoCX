@@ -80,6 +80,17 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+    <xs:element name="extend-zone">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="ns1:namedBlock">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:encounter"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
     <xs:element name="encounter">
         <xs:complexType mixed="true">
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:statement"/>

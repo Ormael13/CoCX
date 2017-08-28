@@ -46,6 +46,10 @@ zone = element zone {
     namedBlock,
     encounter*
 }
+extend-zone = element extend-zone {
+    namedBlock,
+    encounter*
+}
 encounter = element encounter {
     attribute name { xsd:NCName },
     attribute chance { text }?,

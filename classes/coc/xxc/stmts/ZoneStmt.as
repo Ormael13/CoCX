@@ -18,7 +18,12 @@ public class ZoneStmt extends Story {
 		super(parent, key, false);
 		this.encounters = new GroupEncounter(key,[]);
 	}
-	public function add(content:Story,chance:String="1",when:String="true"):void {
+	public static function wrap(group:GroupEncounter,parent:Story,rename:String=""):ZoneStmt {
+		var zone:ZoneStmt = new ZoneStmt(parent,rename||group.encounterName());
+		zone.encounters = group;
+		return zone;
+	}
+	public function add(content:Story,chance:String=null,when:String=null):void {
 		var fchance:Eval = chance?Eval.compile(chance):null;
 		var fwhen:Eval = when?Eval.compile(when):null;
 		this.encounters.add({
@@ -27,10 +32,10 @@ public class ZoneStmt extends Story {
 				content.execute(lastContext);
 			},
 			chance:fchance?function():* {
-				fchance.call(lastContext.thiz);
+				return fchance.call(lastContext?lastContext.thiz:{});
 			}:undefined,
 			when:fwhen?function():* {
-				fwhen.call(lastContext.thiz);
+				return fwhen.call(lastContext?lastContext.thiz:{});
 			}:undefined
 		});
 	}

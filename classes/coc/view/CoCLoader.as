@@ -65,7 +65,7 @@ public class CoCLoader {
 	}
 	/**
 	 * @param path
-	 * @param callback Function (success:Boollean, result:*):*
+	 * @param callback Function (success:Boollean, result:*,event:Event):*
 	 * where result is String or Error
 	 * @param location "external", "internal"
 	 */
