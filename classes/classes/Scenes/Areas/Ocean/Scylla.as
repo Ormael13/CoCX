@@ -37,7 +37,7 @@ package classes.Scenes.Areas.Ocean
 			this.weaponAttack = 86 + (18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick skin";
 			this.armorDef = 52 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 3000;
+			this.bonusHP = 5000;
 			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = .2;

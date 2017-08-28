@@ -83,7 +83,7 @@ package classes.Scenes.Areas.Ocean
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 56;
+			this.level = 54;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).

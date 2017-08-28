@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Ocean
 			this.lust = 20;
 			this.lustVuln = .20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 62;
+			this.level = 58;
 			this.gems = rand(15) + 10;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).
@@ -101,7 +101,7 @@ package classes.Scenes.Areas.Ocean
 			this.spe += 82 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 44 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 23940;
+			this.newgamebonusHP = 20520;
 			checkMonster();
 		}
 		
