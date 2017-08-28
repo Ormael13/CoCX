@@ -31,9 +31,9 @@ public class CoCLoader {
 	public static var BUNDLE_RES_MODEL_XML:Class;
 	bundleText("res/model.xml",BUNDLE_RES_MODEL_XML);
 
-	[Embed(source="../../../content/coc/coc.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_COC_XML:Class;
-	bundleText("content/coc/coc.xml", BUNDLE_CONTENT_COC_COC_XML);
+	[Embed(source="../../../content/coc.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_XML:Class;
+	bundleText("content/coc.xml", BUNDLE_CONTENT_COC_XML);
 
 	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;

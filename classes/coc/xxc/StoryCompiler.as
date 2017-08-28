@@ -75,7 +75,10 @@ public class StoryCompiler extends Compiler {
 	public function includeFile(path:String):IncludeStmt {
 		var basedir:String = _basedir;
 		var l:int = path.lastIndexOf('/');
-		if (l>0) basedir += path.substring(0,l);
+		if (l>0) {
+			basedir += path.substring(0,l);
+			path = path.substring(l+1);
+		}
 		return new IncludeStmt(stack[0],clone(basedir),path);
 	}
 	protected function compileDisplay(x:XML):DisplayStmt {
