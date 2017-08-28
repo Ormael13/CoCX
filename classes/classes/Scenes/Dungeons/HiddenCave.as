@@ -262,7 +262,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nThere is an opened crate with two items inside.\n\n");
 				addButton(0, "Crate 1", takeDiamond);
 			}
-			else {
+			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 0) {
 				outputText("\n\nThere is an unopened crate with something inside.\n\n");
 				addButton(0, "Crate 1", takeAmetist);
 			}

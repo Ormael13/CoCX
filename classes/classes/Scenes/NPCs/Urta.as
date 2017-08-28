@@ -3916,7 +3916,7 @@ private function fillMeUpPleaseUrta():void {
 	outputText(images.showImage("urta-home-female-fucked"));
 	outputText("Lazily discarding the latex, you caress Urta's stocking-clad leg and coyly climb into bed.  She starts to reciprocate your affections, but you push her arm away, instructing, \"<i>Let me... let me have this.</i>\"");
 	outputText("\n\nGingerly holding the beast between her thighs, you take a moment to admire the texture, the forgiving sponginess of the stiffening flesh and its smooth surface, broken only by a collection of pulsating veins and a thick ring that splits the middle.  You squeeze the musky fur of her snatch and pull it down, revealing another inch or two of moist dick for you to tease; Urta shivers at your touches on her sensitive flesh.  Looking up to meet her gaze, you bend down with glacial slowness, eventually laying the flat of your ");
-	if(player.tongueType > TONUGE_HUMAN) outputText("prodigious ");
+	if(player.tongueType > TONGUE_HUMAN) outputText("prodigious ");
 	outputText("tongue upon her turgid mass.  Lewdly, you kiss the underside, worshipping it with your lips as you trail moist affection up the horse-cock's gradual arch.  You nibble on her medial ring when you find it, lashing it with your tongue as you stop to harass her nerves.  Then, without warning, you resume your upward travels, watching the fox whimper and shake as your tongue tantalizes her equine member.");
 	outputText("\n\nUrta's hips silently work, trembling slightly each time they start to lift up.  Of course, you force them down into stillness and return to lubricating the horse-like length before you.  Her tip flares a little as you near it, pulsing with pleasure at every idle oral affection you plant.  You stretch your jaw to fully encompass her tip, taking it into your mouth and looking up at the herm.  Her eyes are closed, her mouth open and panting.  Hanging to the side, Urta's tongue pulsates in time with her unrestrained panting.  You circle her urethra with your tongue and smile around the throbbing dick when a salty drop of pre-cum lands on your tongue.");
 	outputText("\n\nYou release Urta from your oral embrace, laying her rod back down on her soft fur with great care.  Whining, she tries to grab your head and pull you back in place, but you twist to the side and slap her searching hands away, sliding up her body to hold them above her head.  You pin them to the headboard, leering over your prize with ardor, your [vagina] heavy with lust and equally wet.");
@@ -4965,9 +4965,9 @@ private function getAPetReward():void {
 		outputText(", your pussy is as wet as it's ever been, constantly leaking juices that run down your legs, pooling on the floor.");
 	}
 	outputText("  You swirl your tongue around Urta's flare, paying homage to the horsecocked goddess.  Lapping at the slit for a moment, you slip your ");
-	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
-	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
-	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	if(player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
+	else if(player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
 	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue along the vixen's thick cumvein, which pulses lightly.  Urta groans and runs a hand through your " + hairDescript() + ", gripping it solidly.  You can't help as you're forced further onto the warm rod.");
 
@@ -4978,9 +4978,9 @@ private function getAPetReward():void {
 	outputText("\n\n\"<i>Mmm, by Marae that felt good...</i>\"  Urta stretches out for a moment and then quirks an eyebrow at you over her deflating member.  \"<i>Well, what are you waiting for?  There's your reward,</i>\" she nudges the dog bowl with a fishnet-clad, semen-splattered paw.  \"<i>Eat it all up, pet... you want to be a good puppy, don't you?</i>\"");
 
 	outputText("\n\nYou gulp loudly.  You do want to be a good pet, so you lower your head down to the bowl and extend your ");
-	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
-	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
-	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	if(player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
+	else if(player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
 	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue, lapping at the top layer and swallowing it down.  It's still warm, and quite salty with a bit of a sweet tang to it.  You quickly dive back into your 'reward', using your tongue as a spoon to consume every last drop in the bowl.  While you're busy doing that, Urta slides off the bed and takes up a position behind your body, ass high into the air, showing off all her goods.  The fox raises a paw, smearing some of her cum along your ");
 	if(player.hasCock()) outputText("shaft ");

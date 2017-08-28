@@ -119,21 +119,21 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		changes++;
 	}
 	//Gain Dragon Tongue
-	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.tongueType != TONUGE_DRACONIC) {
+	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.tongueType != TONGUE_DRACONIC) {
 		outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-		getGame().mutations.setTongueType(TONUGE_DRACONIC);
+		getGame().mutations.setTongueType(TONGUE_DRACONIC);
 		changes++;
 		//Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
 	}
 	//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 	//Gain Dragon Head
-	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONUGE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON) {
+	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONGUE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON) {
 		outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
 		getGame().mutations.setFaceType(FACE_DRAGON);
 		changes++;
 	}
 	//Gain Dragon Fangs
-	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONUGE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON_FANGS) {
+	if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONGUE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON_FANGS) {
 		outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face. But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
 		getGame().mutations.setFaceType(FACE_DRAGON_FANGS);
 		changes++;
@@ -318,6 +318,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 		outputText("</b>.");
 	}
+	if (changes == 0) outputText("\n\nRemarkably, " + (drakesHeart ? "the flower" : "Ember's blood") + " has no effect.  Maybe next time?");
 	flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 }
 	

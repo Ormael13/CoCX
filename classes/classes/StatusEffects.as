@@ -415,6 +415,7 @@ package classes
 		public static const Blind:CombatStatusEffect                     = mk2("Blind");
 		public static const Blink:CombatStatusEffect                     = mk2("Blink");
 		public static const Blizzard:CombatStatusEffect                  = mk2("Blizzard");
+		public static const Bloodlust:CombatStatusEffect                 = mk2("Bloodlust");
 		public static const Bound:CombatStatusEffect                     = mk2("Bound");
 		public static const BurnDoT:CombatStatusEffect                   = mk2("Burn DoT");
 		public static const CalledShot:CombatStatusEffect                = mk2("Called Shot");
@@ -446,6 +447,7 @@ package classes
 		public static const GooBind:CombatStatusEffect                   = mk2("GooBind");
 		public static const GoreBleed:CombatStatusEffect            	 = mk2("Gore Bleed");
 		public static const HarpyBind:CombatStatusEffect                 = mk2("HarpyBind");
+		public static const Hemorrhage:CombatStatusEffect                = mk2("Hemorrhage");
 		public static const HolliConstrict:CombatStatusEffect            = mk2("Holli Constrict");
 		public static const ImmolationDoT:CombatStatusEffect             = mk2("Immolation DoT");
 		public static const InfestAttempted:CombatStatusEffect           = mk2("infestAttempted");

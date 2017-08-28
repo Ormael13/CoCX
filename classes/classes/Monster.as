@@ -11,6 +11,8 @@
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.Areas.Forest.Alraune;
+	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
@@ -413,6 +415,8 @@
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			//other
+			if (hasStatusEffect(StatusEffects.Bloodlust)) damage *= (1 + (0.1 * statusEffectv2(StatusEffects.Bloodlust)));
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -967,6 +971,18 @@
 		}
 
 		public function eAttack():void {
+			if (game.player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (hasStatusEffect(StatusEffects.Bloodlust)) addStatusValue(StatusEffects.Bloodlust,1,10);
+				else createStatusEffect(StatusEffects.Bloodlust,10,0,0,0);
+			}
+			if (hasStatusEffect(StatusEffects.Bloodlust) && !game.player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (statusEffectv1(StatusEffects.Bloodlust) <= 10) {
+					removeStatusEffect(StatusEffects.Bloodlust);
+				}
+				else {
+					addStatusValue(StatusEffects.Bloodlust,1,-10);
+				}
+			}
 			var attacks:int = statusEffectv1(StatusEffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
@@ -1668,6 +1684,9 @@
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 				}
+			}
+			if (hasStatusEffect(StatusEffects.Bloodlust)) {
+				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flow through the water the shark girl grows increasingly vicious. ");
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)

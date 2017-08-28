@@ -136,9 +136,9 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Cat tounge
-		if (player.faceType == FACE_MANTICORE && player.tongueType != TONUGE_CAT && rand(3) == 0 && changes < changeLimit) {
+		if (player.faceType == FACE_MANTICORE && player.tongueType != TONGUE_CAT && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-			mutations.setTongueType(TONUGE_CAT);
+			mutations.setTongueType(TONGUE_CAT);
 			changes++;
 		}
 		//Venom Increase

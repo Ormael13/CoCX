@@ -1299,15 +1299,15 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeTongue():void {
 //Tongue
-		if (player.tongueType == TONUGE_SNAKE)
+		if (player.tongueType == TONGUE_SNAKE)
 			outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.");
-		else if (player.tongueType == TONUGE_DEMONIC)
+		else if (player.tongueType == TONGUE_DEMONIC)
 			outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongueType == TONUGE_DRACONIC)
+		else if (player.tongueType == TONGUE_DRACONIC)
 			outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
-		else if (player.tongueType == TONUGE_ECHIDNA)
+		else if (player.tongueType == TONGUE_ECHIDNA)
 			outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
-		else if (player.tongueType == TONUGE_CAT)
+		else if (player.tongueType == TONGUE_CAT)
 			outputText("  Your tongue is rough like that of a cat. You sometime groom yourself with it.");
 	}
 	public function describeBeard():void {

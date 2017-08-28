@@ -100,8 +100,8 @@ package classes.Scenes
 			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack (above 2x) unlock each 6 lvl's startng from lvl 6.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 3 toughness lvl-up perk: Defence Stance Req. Job: Defender perk and 80+ tou. Effect: Defend move giving 60% phys dmg reduction and allow recovery of fatigue, mana, soulforce\n");
-			outputText("-New tier 4 toughness lvl-up perk: Mastered Defence Stance Req. Defence Stance perk and 120+ tou. Effect: Defend move giving 75% phys dmg reduction and allow increased (bonus to normal recovery in ()) recovery of fatigue (+1), mana (+5), soulforce (+1)\n");
-			outputText("-New tier 5 toughness lvl-up perk: Perfect Defence Stance Req. Mastered Defence Stance perk and 160+ tou. Effect: Defend move giving 95% phys dmg reduction, max phys dmg reduction cap is rised when using this move from 95% to 99% and allow increased (bonus to normal recovery in ()) recovery of fatigue (+2), mana (+10), soulforce (+2)\n");
+			outputText("-New tier 4 toughness lvl-up perk: Mastered Defence Stance Req. Defence Stance perk and 120+ tou. Effect: Defend move giving 75% phys dmg reduction and allow increased (bonus to normal recovery in Defence Stance) recovery of fatigue (+1), mana (+5), soulforce (+1)\n");
+			outputText("-New tier 5 toughness lvl-up perk: Perfect Defence Stance Req. Mastered Defence Stance perk and 160+ tou. Effect: Defend move giving 95% phys dmg reduction, max phys dmg reduction cap is rised when using this move from 95% to 99% and allow increased (bonus to normal recovery in Defence Stance) recovery of fatigue (+2), mana (+10), soulforce (+2)\n");
 			outputText("-New tier 3 speed lvl-up perk: Impale Req. Natural jouster perk and 100+ spe. Effect: Double bonus dmg from crit attacks with Spear or Lance (75% -> 150%) as ong PC attack only once per turn with those weapons. It also affect crits fro Power Attacks using spears/lances.\n");
 			outputText("-New tier 1 strength lvl-up perk: ThirstForBlood\n");
 			outputText("-New tier 3 libido lvl-up perk: Arouse the audience Req. \n");
@@ -116,7 +116,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New Buff in M. Specials buffs subpage: Dwarf Rage. Req. 50 wrath, perk Job: Warrior and lasting 10 rounds. Boosting PC str, tou, spe.\n");
