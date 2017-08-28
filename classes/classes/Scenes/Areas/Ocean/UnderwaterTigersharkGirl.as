@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Ocean
 			this.a = "the ";
 			this.short = "shark-girl";
 			this.imageName = "izma";
-			this.long = "The tiger shark girl is menacingly circling you off waiting for the opportunity to viciously strike. These creatures clearly look way more deadly in the water then out of it!";
+			this.long = "The tiger shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
 			this.createCock(15,2.2);
 			this.balls = 4;

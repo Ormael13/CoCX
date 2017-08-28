@@ -5253,6 +5253,7 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
 			if(hasStatusEffect(StatusEffects.NagaBind)) removeStatusEffect(StatusEffects.NagaBind);
+			if(hasStatusEffect(StatusEffects.ScyllaBind)) removeStatusEffect(StatusEffects.ScyllaBind);
 			if(hasStatusEffect(StatusEffects.StoneLust)) {
 				removeStatusEffect(StatusEffects.StoneLust);
 			}

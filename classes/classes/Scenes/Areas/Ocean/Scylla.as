@@ -10,11 +10,67 @@ package classes.Scenes.Areas.Ocean
 
 	public class Scylla extends Monster
 	{
+		public function scyllaConstrict():void {
+			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
+			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0); 
+			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+				player.takeDamage(4+rand(6));
+			}
+		}
+		
+		public function scyllaInkSpray():void {
+			clearOutput();
+			outputText("The scylla stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
+			player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+		}
+		
+		public function scyllaTentacleSlap():void {
+			clearOutput();
+			var damage:Number = 0;
+			damage += eBaseStrengthDamage() * 2;
+			outputText("The scylla slaps you with her tentacles, dealing ");
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			outputText(" damage!");
+		}
+		public function scyllaTentacleSlap2():void {
+			clearOutput();
+			var damage:Number = 0;
+			damage += eBaseStrengthDamage() * 2;
+			outputText("The scylla slaps you with her tentacles, dealing ");
+			player.takeDamage(damage, true);
+			player.takeDamage(damage, true);
+			outputText(" damage!");
+		}
+		
+		override protected function performCombatAction():void {
+			var choice:Number = rand(6);
+			if (choice < 3) {
+				if (player.hasStatusEffect(StatusEffects.ScyllaBind)) scyllaTentacleSlap2();
+				else scyllaTentacleSlap();
+			}
+			if (choice == 3 || choice == 4) {
+				if (player.hasStatusEffect(StatusEffects.ScyllaBind)) scyllaTentacleSlap2();
+				else scyllaConstrict();
+			}
+			if (choice == 5) {
+				if (player.hasStatusEffect(StatusEffects.Blind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) {
+					if (player.hasStatusEffect(StatusEffects.ScyllaBind)) scyllaTentacleSlap2();
+					else scyllaTentacleSlap();
+				}
+				else scyllaInkSpray();
+			}
+			combatRoundOver();
+		}
 		
 		public function Scylla() 
 		{
-			this.a = "";
-			this.short = "Scylla";
+			this.a = "the ";
+			this.short = "scylla";
 			this.imageName = "scylla";
 			this.long = "You are currently fighting 10 feet tall scylla.";
 			// this.plural = false;

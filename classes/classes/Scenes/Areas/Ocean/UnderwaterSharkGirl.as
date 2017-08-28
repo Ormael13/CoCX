@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Ocean
 			this.a = "the ";
 			this.short = "shark-girl";
 			this.imageName = "sharkgirl";
-			this.long = "The shark/tiger shark girl is menacingly circling you off waiting for the opportunity to viciously strike. These creatures clearly look way more deadly in the water then out of it!";
+			this.long = "The shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 15, 0, 0, 0);

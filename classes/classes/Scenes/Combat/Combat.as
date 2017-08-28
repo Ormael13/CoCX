@@ -285,9 +285,16 @@ public function approachAfterKnockback1():void
 	outputText("At the same time, you open the magazine of your ");
 	if (player.weaponRangePerk == "Pistol") outputText("pistol");
 	if (player.weaponRangePerk == "Rifle") outputText("rifle");
-	outputText(" to reload the ammunition.  This takes up a turn.\n\n");
-	enemyAI();
-	return;
+	outputText(" to reload the ammunition.");
+	if (player.findPerk(PerkLib.RapidReload) < 0) {
+		outputText("  This takes up a turn.\n\n");
+		enemyAI();
+		return;
+	}
+	else {
+		outputText("\n\n");
+		doNext(combatMenu);
+	}
 }
 public function approachAfterKnockback2():void
 {
@@ -319,7 +326,8 @@ private function isPlayerSilenced():Boolean
 private function isPlayerBound():Boolean 
 {
 	var temp:Boolean = false;
-	if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.WolfHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) temp = true;
+	if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
+	 || player.hasStatusEffect(StatusEffects.WolfHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) temp = true;
 	if (player.hasStatusEffect(StatusEffects.HolliConstrict)) temp = true;
 	if (player.hasStatusEffect(StatusEffects.GooArmorBind)) temp = true;
 	if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -1180,6 +1188,13 @@ private function wait():void {
 		takeDamage(5 + rand(5));
 		combatRoundOver();
 	}
+	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
+		clearOutput();
+		outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
+		dynStats("lus", player.sens / 4 + 20);
+		takeDamage(100 + rand(40));
+		combatRoundOver();
+	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
@@ -1302,6 +1317,19 @@ private function struggle():void {
 			if (monster is Naga) takeDamage(7 + rand(5));
 			if (monster is Gorgon) takeDamage(17 + rand(15));
 			if (monster is CaiLin) takeDamage(10 + rand(8));
+		}
+		combatRoundOver();
+	}
+	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
+		clearOutput();
+		if (rand(3) == 0 || rand(120) < player.str / 1.5) {
+			outputText("You bite one of her tentacles and she screams in surprise, releasing you.");
+			player.removeStatusEffect(StatusEffects.ScyllaBind);
+		}
+		else {
+			outputText("The " + monster.short + "'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+			dynStats("lus", player.sens / 5 + 5);
+			takeDamage(100 + rand(80));
 		}
 		combatRoundOver();
 	}
@@ -2245,12 +2273,16 @@ public function reloadWeapon():void {
 	if (player.weaponRangeName == "blunderbuss rifle") outputText("rifle");
 	outputText(" to reload the ammunition.  If you too tired it would use up this turn action.\n\n");
 	if(player.fatigue + (10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]) > player.maxFatigue()) {
-		clearOutput();
-		outputText("You are too tired to act in this round after reloaing your weapon.");
-		enemyAI();
+		if (player.findPerk(PerkLib.RapidReload) < 0) {
+			clearOutput();
+			outputText("You are too tired to act in this round after reloaing your weapon.");
+			enemyAI();
+		}
+		else doNext(combatMenu);
 	}
 	else {
-		fatigue(10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
+		if (player.findPerk(PerkLib.RapidReload) < 0) fatigue(10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
+		else fatigue(5 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
 		doNext(combatMenu);
 	}
 }
@@ -3233,14 +3265,15 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 	}
 	public function manaRecoveryMultiplier():Number {
 		var multi:Number = 1;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
-		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 1;
-		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityVI) >= 0) multi += 0.1;
+		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
+		if (player.findPerk(PerkLib.GreyMage) >= 0) multi += 1;
+		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 3;
+		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.2;
+		if (player.findPerk(PerkLib.ManaAffinityVI) >= 0) multi += 0.2;
 		if (player.alicornScore() >= 6) multi += 0.1;
 		if (player.kitsuneScore() >= 5) {
 			if (player.kitsuneScore() >= 10) multi += 1;
@@ -3325,7 +3358,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	public function fatigueRecoveryMultiplier():Number {
 		var multi:Number = 1;
 		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
+		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
 		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
 		if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
@@ -3822,7 +3855,7 @@ private function combatStatusesUpdate():void {
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-	if(player.hasStatusEffect(StatusEffects.NagaBind) && flags[kFLAGS.PC_FETISH] >= 2) {
+if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("Coiled tightly by " + monster.a + monster.short + " and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
 		dynStats("lus", 5);
 	}
@@ -4345,36 +4378,40 @@ public function regeneration(combat:Boolean = true):void {
 public function soulforceregeneration(combat:Boolean = true):void {
 	var gainedsoulforce:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 1;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 1;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedsoulforce += 1;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedsoulforce += 1;
-		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
-		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
-	}
-	else {
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 4;
 		if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedsoulforce += 4;
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedsoulforce += 2;
+		if (player.findPerk(PerkLib.SoulScholar) >= 0) gainedsoulforce += 2;
+		if (player.findPerk(PerkLib.SoulElder) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 2;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedsoulforce += 2;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedsoulforce += 2;
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
+		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
+	}
+	else {
+		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 8;
+		if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedsoulforce += 8;
+		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulScholar) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulElder) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 4;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 4;
 		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
 }
@@ -4384,16 +4421,16 @@ public function manaregeneration(combat:Boolean = true):void {
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
 	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 5;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 5;
-	//	gainedmana *= manaRecoveryMultiplier();
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 10;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 10;
+		gainedmana *= manaRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
 	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 20;
-	//	gainedmana *= manaRecoveryMultiplier();
+		gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
 }

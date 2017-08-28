@@ -564,18 +564,18 @@ package classes
 				"You choose 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=150)" +
-						"Increases base spell strength by 100%, mana pool by 150 and regain it 100% faster." +
+						"Increases base spell strength by 100%, mana pool by 150 and regain it 300% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting it recovery.");
+				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting it recovery by large margin.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=125)" +
-						"Increases base spell strength by 70% and mana pool by 105, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
+						"Increases base spell strength by 70%, mana pool by 105, regain it 100% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Grey Mage' perk. Your base spell and mana pool are greatly increased, treshold for White Magic rised and for Black lowered.");
+				"You choose the 'Grey Mage' perk. Your base spell mana pool and recover are greatly increased, treshold for White Magic rised and for Black lowered.");
 		public static const HeavyArmorProficiency:PerkType = mk("Heavy Armor Proficiency", "Heavy Armor Proficiency",
 				"Wearing Heavy Armor's grants 10% damage reduction.",
 				"You choose the 'Heavy Armor Proficiency' perk.  Due to your specialization in wearing heavy armor's you gain a little bit of damage reduction.");
@@ -830,22 +830,22 @@ package classes
 				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
 				"You choose the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityVI:PerkType = mk("Mana Affinity VI", "Mana Affinity VI",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity VI' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
@@ -980,6 +980,9 @@ package classes
 		public static const Rage:PerkType = mk("Rage", "Rage",
 				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
 				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
+		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
+				"Reloading pistols or similar range weapons no longer using whole turn of action (or lowering by half reload cost).",
+				"You choose the 'Rapid Reload' perk, lowering time needed to reload with ammo range weapons like pistols.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
 				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
