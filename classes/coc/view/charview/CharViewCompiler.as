@@ -1,7 +1,8 @@
 /**
  * Coded by aimozg on 27.08.2017.
  */
-package coc.view {
+package coc.view.charview {
+import coc.view.*;
 import coc.view.charview.LayerPart;
 import coc.xlogic.Compiler;
 import coc.xlogic.Statement;

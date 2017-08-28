@@ -2,6 +2,8 @@
  * Coded by aimozg on 10.07.2017.
  */
 package coc.view {
+import coc.view.charview.CharViewCompiler;
+import coc.view.charview.CharViewContext;
 import coc.view.charview.CharViewSprite;
 import coc.view.charview.Palette;
 import coc.xlogic.Statement;
@@ -18,7 +20,7 @@ public class CharView extends Sprite {
 
 	private var loading:Boolean;
 	private var sprites:Object = {}; // spritesheet/spritemap -> CharViewSprite
-	internal var composite:CompositeImage;
+	public var composite:CompositeImage;
 	private var ss_total:int;
 	private var ss_loaded:int;
 	private var file_total:int;

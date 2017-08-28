@@ -15,10 +15,10 @@ public class IfStmt extends Statement {
 	}
 
 	override public function execute(context:ExecContext):void {
-		if (!expr.call(context.thiz)) {
-			if (elseBlock != null) context.execute(elseBlock);
-		} else {
+		if (expr.call(context.thiz)) {
 			context.executeAll(thenBlock);
+		} else if (elseBlock != null) {
+			context.execute(elseBlock);
 		}
 	}
 }

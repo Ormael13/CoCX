@@ -1,0 +1,68 @@
+default namespace = "xxc-story"
+
+start = story | zone
+# core xlogic
+statement =
+    text | if | switch | xccstatement
+if = element if {
+    attribute test { text },
+    statement*,
+    (elseif|else)?
+}
+elseif = element elseif {
+    attribute test { text },
+    statement*,
+    (elseif|else)?
+}
+else = element else {
+    statement*
+}
+switch = element switch {
+    case*,
+    defaultt?
+}
+case = element case {
+    attribute values { text }?,
+    attribute value { text }?,
+    attribute test { text }?,
+    statement*
+}
+defaultt = element default {
+    statement*
+}
+# xxc statements
+xccstatement = display | dynStats | scene | lib
+namedBlock = attribute key { xsd:NCName }, statement*
+scene = element scene {
+    namedBlock
+}
+lib = element lib {
+    namedBlock
+}
+story = element story {
+    namedBlock
+}
+zone = element zone {
+    namedBlock,
+    encounter*
+}
+encounter = element encounter {
+    attribute name { xsd:NCName },
+    attribute chance { text }?,
+    attribute when { text }?,
+    statement*
+}
+display = element display {
+    attribute ref { text }
+}
+dynStats = element dynStats {
+    attribute str { text }?,
+    attribute tou { text }?,
+    attribute spe { text }?,
+    attribute int { text }?,
+    attribute lib { text }?,
+    attribute sen { text }?,
+    attribute lus { text }?,
+    attribute cor { text }?,
+    attribute res { text }?
+}

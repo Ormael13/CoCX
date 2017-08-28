@@ -26,26 +26,30 @@ public class Compiler {
 		}
 	}
 	protected function compileText(x:XML):Statement{
-		throw new Error("Encountered text element");
+		throw new Error("Encountered text element "+x.toString().substr(0,20));
 	}
 	protected function unknownTag(tag:String,x:XML):Statement {
 		throw new Error("Unknown tag "+tag);
 	}
 	public function compileChildren(x:XML):StmtList {
-		var list:StmtList = new StmtList();
+		return new StmtList(compileChildrenInto(x,[]));
+	}
+	protected function compileChildrenInto(x:XML,stmts:/*Statement*/Array):/*Statement*/Array {
 		for each(var item:XML in x.children()) {
 			var e:Statement = compile(item);
-			if (e) list.stmts.push(e);
+			if (e) stmts.push(e);
 		}
-		return list;
+		return stmts;
 	}
 	public function compileXMLList(x:XMLList):StmtList {
-		var list:StmtList = new StmtList();
+		return new StmtList(compileXMLListInto(x,[]));
+	}
+	protected function compileXMLListInto(x:XMLList,stmts:/*Statement*/Array):/*Statement*/Array {
 		for each(var item:XML in x) {
 			var e:Statement = compile(item);
-			if (e) list.stmts.push(e);
+			if (e) stmts.push(e);
 		}
-		return list;
+		return stmts;
 	}
 	public function compileIf(x:XML):IfStmt {
 		var item:XML;
@@ -56,7 +60,7 @@ public class Compiler {
 					iff.elseBlock = compileChildren(x);
 					break;
 				case 'elseif':
-					iff.elseBlock = compileIf(x);
+					iff.elseBlock = compileIf(item);
 					break;
 				default:
 					var e:Statement = compile(item);
@@ -66,22 +70,24 @@ public class Compiler {
 		return iff;
 	}
 	public function compileSwitch(x:XML):SwitchStmt {
-		var hasval:Boolean           = x.attribute("value").length() > 0;
-		var item:XML;
-		var zwitch:SwitchStmt = new SwitchStmt(hasval ? x.@value.toString() : null);
+		var sattrs:Object = attrMap(x);
+		var hasval:Boolean           = 'value' in sattrs;
+		var zwitch:SwitchStmt = new SwitchStmt(sattrs['value']);
 		for each(var xcase:XML in x.elements("case")) {
-			var hasval2:Boolean   = hasval && xcase.attribute("value").length() > 0;
-			var hasval3:Boolean   = hasval && xcase.attribute("values").length() > 0;
-			var hastest:Boolean   = xcase.attribute("test").length() > 0;
-			var caze:CaseStmt = new CaseStmt(
-					hastest ? xcase.@test.toString() : null,
-					hasval3 ? xcase.@values.toString() :
-							hasval2 ? xcase.@value.toString()  : null);
-			caze.thenBlock = compileChildren(xcase);
+			var cattrs:Object = attrMap(xcase);
+			var caze:CaseStmt = new CaseStmt(cattrs['test'],hasval?cattrs['values']||cattrs['value']:null);
+			compileChildrenInto(xcase,caze.thenBlock.stmts);
 			zwitch.cases.push(caze);
 		}
-		zwitch.defaults = compileXMLList(x.elements("default").*);
+		compileXMLListInto(x.elements("default").*,zwitch.defaults.stmts);
 		return zwitch;
+	}
+	public static function attrMap(x:XML):Object {
+		var e:Object = {};
+		for each (var k:XML in x.attributes()) {
+			e[k.localName()] = k.toString();
+		}
+		return e;
 	}
 }
 }

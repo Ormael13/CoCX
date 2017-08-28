@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone key="desert" xmlns="xxc-story">
+    <encounter name="walk">
+        <lib key="ss">
+            <scene key="intro">You walk through the shifting sands for an hour, finding nothing. </scene>
+            <scene key="str">The effort of struggling with the uncertain footing has made you stronger. </scene>
+            <scene key="tou">The effort of struggling with the uncertain footing has made you tougher. </scene>
+        </lib>
+        <!-- logic -->
+        <display ref="ss/intro"/>
+        <if test="rand(2)==0">
+            <if test="rand(2)==0 and player.str lt 50">
+                <display ref="ss/str"/>
+                <dynStats str="0.5"/>
+                <elseif test="player.tou lt 50">
+                    <display ref="ss/tou"/>
+                    <dynStats tou="0.5"/>
+                </elseif>
+            </if>
+        </if>
+    </encounter>
+</zone>

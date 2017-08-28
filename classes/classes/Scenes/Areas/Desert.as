@@ -13,7 +13,10 @@ package classes.Scenes.Areas
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
 
-	use namespace kGAMECLASS;
+import coc.xlogic.Statement;
+import coc.xxc.Story;
+
+use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{
@@ -159,14 +162,23 @@ package classes.Scenes.Areas
 		//Explore desert
 		public function exploreDesert():void {
 			player.exploredDesert++;
-			desertEncounter.execEncounter();
+			clearOutput();
+//			desertEncounter.execEncounter();
+			if (story == null) {
+				var xml:XML = XML(new DESERT_XML());
+				story = getGame().compiler.compile(xml) as Story;
+			}
+			story.execute(getGame().context);
+			doNext(camp.returnToCampUseOneHour);
 		}
+		[Embed(source="../../../../content/coc/desert.xml", mimeType="application/octet-stream")]
+		private static var DESERT_XML:Class;
 
 		public function sandWitchPregnancyEvent():void {
 			if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) sandWitchScene.sammitchBirthsDriders();
 			else sandWitchScene.witchBirfsSomeBees();
 		}
-
+		private var story:Story;
 
 		public function chestEncounter():void {
 			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  ");
@@ -175,7 +187,6 @@ package classes.Scenes.Areas
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
 			outputText("<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
-			doNext(camp.returnToCampUseOneHour);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

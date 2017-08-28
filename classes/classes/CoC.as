@@ -15,6 +15,11 @@ import classes.internals.RootCounters;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
+import coc.xlogic.ExecContext;
+
+import coc.xxc.StoryCompiler;
+import coc.xxc.StoryContext;
+
 import flash.display.DisplayObjectContainer;
 
 import flash.utils.setTimeout;
@@ -295,6 +300,8 @@ the text from being too boring.
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
 		public var gameSettings:GameSettings = new GameSettings();
+		public var compiler:StoryCompiler = new StoryCompiler();
+		public var context:StoryContext;
 
 		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
@@ -468,6 +475,7 @@ the text from being too boring.
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
+			context = new StoryContext(this);
 			
 			useables = new UseableLib();
 			
