@@ -15,7 +15,9 @@ import classes.internals.Utils;
 	import coc.model.TimeModel;
 import coc.view.CoCButton;
 import coc.view.MainView;
-	/**
+import coc.xxc.StoryContext;
+
+/**
 	 * Quick hacky method to wrap new content in a class-based structure
 	 * BaseContent acts as an access wrapper around CoC, enabling children of BaseContent to interact with
 	 * function instances/properties of CoC in the same manner older content does with the minimal amount
@@ -933,6 +935,9 @@ import coc.view.MainView;
 		}
 		protected static function postInit(f:Function):void {
 			CoC.postInit(f);
+		}
+		protected function get context():StoryContext {
+			return kGAMECLASS.context;
 		}
 	}
 

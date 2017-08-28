@@ -14,10 +14,10 @@ public class CaseStmt extends Statement{
 	}
 	public function check(context:ExecContext,useValue:Boolean,checkValue:*):Boolean {
 		if (useValue) {
-			var values:Array = valuesExpr.call(context.thiz) as Array;
+			var values:Array = valuesExpr.vcall(context.scopes) as Array;
 			if (values && values.indexOf(checkValue) >= 0) return true;
 		}
-		if (testExpr!=null) return testExpr.call(context.thiz);
+		if (testExpr!=null) return testExpr.vcall(context.scopes);
 		return false
 	}
 

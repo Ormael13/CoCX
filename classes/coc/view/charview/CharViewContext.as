@@ -8,7 +8,7 @@ import coc.xlogic.ExecContext;
 public class CharViewContext extends ExecContext{
 	private var charview:CharView;
 	public function CharViewContext(charview:CharView,character:*) {
-		super(character);
+		super([character]);
 		this.charview = charview;
 	}
 }

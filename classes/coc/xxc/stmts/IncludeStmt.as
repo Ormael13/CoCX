@@ -22,6 +22,7 @@ public class IncludeStmt extends Statement{
 		CoCLoader.loadText(compiler.basedir+path,function(success:Boolean,content:*,event:Event):void {
 			_loaded = true;
 			if (!success) return;
+			XML.ignoreWhitespace = false;
 			body = compiler.attach(story).compile(XML(content));
 			compiler.detach(story);
 		});

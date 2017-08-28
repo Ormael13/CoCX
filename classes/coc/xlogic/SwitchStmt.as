@@ -15,7 +15,7 @@ public class SwitchStmt extends Statement{
 
 	override public function execute(context:ExecContext):void {
 		var hasValue:Boolean = valueExpr != null;
-		var value:*          = hasValue ? valueExpr.call(context.thiz) : null;
+		var value:*          = hasValue ? valueExpr.vcall(context.scopes) : null;
 		for each (var block:CaseStmt in cases) {
 			if (block.check(context, hasValue, value)) {
 				context.execute(block);

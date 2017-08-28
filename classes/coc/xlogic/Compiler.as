@@ -2,6 +2,8 @@
  * Coded by aimozg on 27.08.2017.
  */
 package coc.xlogic {
+import classes.internals.Utils;
+
 public class Compiler {
 	public function Compiler() {
 	}
@@ -10,6 +12,7 @@ public class Compiler {
 			case "element":
 				return compileTag(x.localName(),x);
 			case "text":
+				if (Utils.trimSides(x.toString()) == '') return null;
 				return compileText(x);
 			default:
 				return null;

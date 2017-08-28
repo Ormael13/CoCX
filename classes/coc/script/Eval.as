@@ -12,12 +12,15 @@ public class Eval {
 		};
 	}
 
-	private var thiz:*;
+	private var scopes:/*Object*/Array;
 	private var expr:String;
 	private var src:String;
 	private var _call:Function;
-	public function call(thiz:Object):* {
-		this.thiz = thiz;
+	public function call(...scopes:/*Object*/Array):* {
+		return vcall(scopes);
+	}
+	public function vcall(scopes:/*Object*/Array):* {
+		this.scopes = scopes;
 		try {
 			return _call();
 		} catch (e:Error){
@@ -26,7 +29,7 @@ public class Eval {
 	}
 
 	public function Eval(thiz:*, expr:String) {
-		this.thiz = thiz;
+		this.scopes = [thiz];
 		this.src = expr;
 		this.expr = expr;
 	}
@@ -249,7 +252,7 @@ public class Eval {
 			case 'string': return String;
 			case 'Number': return Number;
 			default:
-				if (id in thiz) return thiz[id];
+				for each (var thiz:* in scopes) if (id in thiz) return thiz[id];
 				return undefined;
 		}
 	}

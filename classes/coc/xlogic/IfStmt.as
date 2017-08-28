@@ -15,7 +15,7 @@ public class IfStmt extends Statement {
 	}
 
 	override public function execute(context:ExecContext):void {
-		if (expr.call(context.thiz)) {
+		if (expr.vcall(context.scopes)) {
 			context.executeAll(thenBlock);
 		} else if (elseBlock != null) {
 			context.execute(elseBlock);

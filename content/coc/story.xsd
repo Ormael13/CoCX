@@ -4,6 +4,9 @@
     <xs:group name="statement">
         <xs:sequence>
             <xs:choice minOccurs="0">
+                <xs:element ref="ns1:b"/>
+                <xs:element ref="ns1:i"/>
+                <xs:element ref="ns1:font"/>
                 <xs:element ref="ns1:if"/>
                 <xs:element ref="ns1:switch"/>
                 <xs:element ref="ns1:xccstatement"/>
@@ -61,12 +64,29 @@
         </xs:complexType>
     </xs:element>
     <!-- xxc statements -->
+    <xs:element name="b">
+        <xs:complexType mixed="true">
+            <xs:group ref="ns1:statement"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="i">
+        <xs:complexType mixed="true">
+            <xs:group ref="ns1:statement"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="font">
+        <xs:complexType mixed="true">
+            <xs:group ref="ns1:statement"/>
+            <xs:attribute name="color"/>
+        </xs:complexType>
+    </xs:element>
     <xs:element name="xccstatement" abstract="true"/>
     <xs:complexType name="namedBlock" mixed="true">
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:statement"/>
-        <xs:attribute name="key" use="required" type="xs:NCName"/>
+        <xs:attribute name="name" use="required" type="xs:NCName"/>
     </xs:complexType>
-    <xs:element name="scene" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
+    <xs:element name="text" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
+    <xs:element name="string" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
     <xs:element name="lib" substitutionGroup="ns1:xccstatement" type="ns1:namedBlock"/>
     <xs:element name="story" type="ns1:namedBlock"/>
     <xs:element name="zone">
@@ -80,6 +100,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+    <xs:element name="output" substitutionGroup="ns1:xccstatement" type="xs:string"/>
     <xs:element name="extend-zone">
         <xs:complexType mixed="true">
             <xs:complexContent>

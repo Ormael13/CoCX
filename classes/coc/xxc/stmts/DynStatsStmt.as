@@ -24,7 +24,7 @@ public class DynStatsStmt extends Statement{
 		var arr:Array = [];
 		for (var name:String in args) {
 			arr.push(name);
-			arr.push((args[name] as Eval).call(context.thiz));
+			arr.push((args[name] as Eval).vcall(context.scopes));
 		}
 		game.dynStats.apply(game,arr);
 	}

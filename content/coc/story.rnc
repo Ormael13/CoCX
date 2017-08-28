@@ -3,7 +3,7 @@ default namespace = "xxc-story"
 start = story | zone
 # core xlogic
 statement =
-    text | if | switch | xccstatement
+    text | b | i | font | if | switch | xccstatement
 if = element if {
     attribute test { text },
     statement*,
@@ -19,7 +19,7 @@ else = element else {
 }
 switch = element switch {
     case*,
-    defaultt?
+    Default?
 }
 case = element case {
     attribute values { text }?,
@@ -27,13 +27,22 @@ case = element case {
     attribute test { text }?,
     statement*
 }
-defaultt = element default {
+Default = element default {
     statement*
 }
 # xxc statements
-xccstatement = display | dynStats | scene | lib
-namedBlock = attribute key { xsd:NCName }, statement*
-scene = element scene {
+b = element b { statement }
+i = element i { statement }
+font = element font {
+    attribute color { text }?,
+    statement
+}
+xccstatement = display | dynStats | Text | String | lib | output
+namedBlock = attribute name { xsd:NCName }, statement*
+Text = element text {
+    namedBlock
+}
+String = element string {
     namedBlock
 }
 lib = element lib {
@@ -46,6 +55,7 @@ zone = element zone {
     namedBlock,
     encounter*
 }
+output = element output { text }
 extend-zone = element extend-zone {
     namedBlock,
     encounter*

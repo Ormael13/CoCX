@@ -4,6 +4,7 @@
 package coc.xxc {
 import coc.xlogic.Compiler;
 import coc.xlogic.Statement;
+import coc.xlogic.StmtList;
 import coc.xxc.stmts.*;
 
 public class StoryCompiler extends Compiler {
@@ -39,6 +40,13 @@ public class StoryCompiler extends Compiler {
 	}
 	override protected function unknownTag(tag:String, x:XML):Statement {
 		switch (tag) {
+			case "b":
+			case "i":
+				var list:StmtList = new StmtList();
+				list.stmts.push(new TextStmt("<"+tag+">",0));
+				compileChildrenInto(x,list.stmts);
+				list.stmts.push(new TextStmt("</"+tag+">",0));
+				return list;
 			case "display":
 				return compileDisplay(x);
 			case "dynStats":
@@ -47,9 +55,12 @@ public class StoryCompiler extends Compiler {
 				return compileEncounter(x);
 			case "include":
 				return includeFile(x.@path);
+			case "output":
+				return compileOutput(x);
 			case "lib":
-			case "scene":
+			case "text":
 			case "story":
+			case "string":
 				return compileStory(x, tag == "lib");
 			case "zone":
 				return compileZone(x);
@@ -80,12 +91,15 @@ public class StoryCompiler extends Compiler {
 	protected function compileEncounter(x:XML):Statement {
 		var zone:ZoneStmt = stack[0] as ZoneStmt;
 		if (!zone) throw new Error("<encounter> not in <zone>: "+x.toString().substr(0,20));
-		var encounter:Story = compileStory(x,false,x.@name);
+		var encounter:Story = compileStory(x);
 		zone.add(encounter,x.@chance,x.@when);
 		return null;
 	}
-	protected function compileStory(x:XML, isLib:Boolean = false,rename:String=""):Story {
-		var story:Story = new Story(stack[0], rename||x.@key, isLib);
+	protected function compileOutput(x:XML):OutputStmt {
+		return new OutputStmt(x.text().toString());
+	}
+	protected function compileStory(x:XML, isLib:Boolean = false):Story {
+		var story:Story = new Story(x.localName(),stack[0], x.@name, isLib);
 		compileStoryBody(story, x);
 		return story;
 	}
@@ -95,23 +109,32 @@ public class StoryCompiler extends Compiler {
 		stack.shift();
 	}
 	override protected function compileText(x:XML):Statement {
-		if (stack.length == 0) return super.compileText(x);
-		return new TextStmt(x.toString());
+		if (stack.length == 0 || stack[0].tagname == 'lib') return super.compileText(x);
+		var s:String = x.toString();
+		if (s.replace(/^\s+/g,'').replace(/\s+$/g,'') == '') return null;
+		var trimStyle:int;
+		if (stack[0].tagname == 'string') {
+			trimStyle = TextStmt.TRIMSTYLE_NONE;
+		} else {
+			trimStyle = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT;
+			if (x==x.parent().children()[0]) trimStyle |= TextStmt.TRIM_LEFT;
+		}
+		return new TextStmt(x.toString(), trimStyle);
 	}
 	protected function compileZone(x:XML):ZoneStmt {
-		var zone:ZoneStmt = new ZoneStmt(stack[0], x.@key);
+		var zone:ZoneStmt = new ZoneStmt(stack[0], x.@name);
 		compileStoryBody(zone,x);
 		return zone;
 	}
 	protected function extendStory(x:XML):Story {
-		var story:Story = stack[0].locate(x.@key);
-		if (!story) throw new Error("Unable to locate <extend-story> key="+x.@key);
+		var story:Story = stack[0].locate(x.@name);
+		if (!story) throw new Error("Unable to locate <extend-story> name="+x.@name);
 		compileStoryBody(story,x);
 		return story;
 	}
 	protected function extendZone(x:XML):ZoneStmt {
-		var zone:ZoneStmt = stack[0].locate(x.@key) as ZoneStmt;
-		if (!zone) throw new Error("Unable to locate <extend-zone> key="+x.@key);
+		var zone:ZoneStmt = stack[0].locate(x.@name) as ZoneStmt;
+		if (!zone) throw new Error("Unable to locate <extend-zone> name="+x.@name);
 		compileStoryBody(zone,x);
 		return zone;
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extend-story key="/">
+<extend-story name="/">
     <!--Areas-->
     <include path="desert.xml"/>
 </extend-story>

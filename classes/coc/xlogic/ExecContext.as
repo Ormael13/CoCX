@@ -3,15 +3,15 @@
  */
 package coc.xlogic {
 public class ExecContext {
-	public function ExecContext(_thiz:*) {
-		this._thiz = _thiz;
+	public function ExecContext(_thiz:Array) {
+		this._scopes = _thiz;
 	}
-	private var _thiz:* = {};
-	public function get thiz():* {
-		return _thiz;
+	private var _scopes:Array = [];
+	public function get scopes():Array {
+		return _scopes;
 	}
-	public function set thiz(value:*):void {
-		_thiz = value;
+	public function set scopes(value:Array):void {
+		_scopes = value;
 	}
 	public function execute(stmt:Statement):void {
 		stmt.execute(this);
@@ -23,6 +23,12 @@ public class ExecContext {
 	}
 	public function error(where:Statement,message:String):void {
 		throw new Error("In "+where+": "+message);
+	}
+	public function pushScope(scope:Object):void {
+		scopes.unshift(scope);
+	}
+	public function popScope():void {
+		scopes.shift();
 	}
 }
 }

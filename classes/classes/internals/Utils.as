@@ -357,6 +357,15 @@ package classes.internals
 			while (n-->0) rslt += s;
 			return rslt;
 		}
+		public static function trimLeft(s:String):String {
+			return s.replace(/^\s+/g,'');
+		}
+		public static function trimRight(s:String):String {
+			return s.replace(/\s+$/g,'');
+		}
+		public static function trimSides(s:String):String {
+			return trimLeft(trimRight(s));
+		}
 
 		private static var PF_NAME:Array      = []; // stack: classname+'.'+methodname
 		private static var PF_START:Array     = []; // stack: start time

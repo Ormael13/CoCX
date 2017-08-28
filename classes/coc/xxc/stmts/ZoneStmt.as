@@ -14,9 +14,9 @@ import coc.xxc.Story;
 public class ZoneStmt extends Story {
 	public var encounters:GroupEncounter;
 	private var lastContext:ExecContext;
-	public function ZoneStmt(parent:Story, key:String) {
-		super(parent, key, false);
-		this.encounters = new GroupEncounter(key,[]);
+	public function ZoneStmt(parent:Story, name:String) {
+		super('zone',parent, name, false);
+		this.encounters = new GroupEncounter(name,[]);
 	}
 	public static function wrap(group:GroupEncounter,parent:Story,rename:String=""):ZoneStmt {
 		var zone:ZoneStmt = new ZoneStmt(parent,rename||group.encounterName());
@@ -27,15 +27,15 @@ public class ZoneStmt extends Story {
 		var fchance:Eval = chance?Eval.compile(chance):null;
 		var fwhen:Eval = when?Eval.compile(when):null;
 		this.encounters.add({
-			name:content.key,
+			name:content.name,
 			call: function():void {
 				content.execute(lastContext);
 			},
 			chance:fchance?function():* {
-				return fchance.call(lastContext?lastContext.thiz:{});
+				return fchance.vcall(lastContext?lastContext.scopes:[]);
 			}:undefined,
 			when:fwhen?function():* {
-				return fwhen.call(lastContext?lastContext.thiz:{});
+				return fwhen.vcall(lastContext?lastContext.scopes:[]);
 			}:undefined
 		});
 	}

@@ -303,7 +303,7 @@ the text from being too boring.
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
 		public var gameSettings:GameSettings = new GameSettings();
-		public var rootStory:Story = new Story(null,"root",true);
+		public var rootStory:Story = new Story("story",null,"root",true);
 		public var compiler:StoryCompiler = new StoryCompiler("content/coc/").attach(rootStory);
 		public var context:StoryContext;
 
