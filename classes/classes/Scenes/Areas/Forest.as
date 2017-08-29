@@ -309,7 +309,8 @@ package classes.Scenes.Areas
 				when: Encounters.fn.ifLevelMin(3)
 			}, {
 				name  : "dark_elf_scout",
-				call  : darkelfScene.introDarkELfScout
+				call  : darkelfScene.introDarkELfScout,
+				chance: 0.8
 			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,

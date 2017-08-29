@@ -5330,6 +5330,9 @@ use namespace kGAMECLASS;
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
+			if(hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
+				removeStatusEffect(StatusEffects.UnderwaterOutOfAir);
+			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
 				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));

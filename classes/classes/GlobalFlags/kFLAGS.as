@@ -2360,7 +2360,7 @@ public static const UNLOCKED_MERIDIANS:int                      	               
 public static const GARGOYLE_BODY_MATERIAL:int                                      = 2352;
 public static const GARGOYLE_WINGS_TYPE:int     	                                = 2353;
 public static const GARGOYLE_QUEST:int                                 			    = 2354;//do sprawdzania jak daleko w quescie do uzyskania gargoyle body PC jest
-public static const GARGOYLE_02355:int                                   = 2355;
+public static const GARGOYLE_BODY_SCULPTING_PROGRESS:int                            = 2355;//jak bardzo ciało gargulca jest gotowe
 public static const GARGOYLE_02356:int                                   = 2356;
 public static const GARGOYLE_02357:int                                   = 2357;//na wszelki wypadek tyle flag zarezerwowanych
 public static const SOULFORCE_GAINED_FROM_CULTIVATING_2:int                         = 2358;

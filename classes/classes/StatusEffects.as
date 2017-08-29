@@ -68,6 +68,9 @@ package classes
 		public static const FoundFactory:StatusEffectType                   = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType                   = mk("FuckedMarble");
 		public static const Fullness:StatusEffectType                       = mk("Fullness"); //Alternative to hunger
+		public static const GargoyleTFSettingTracker1:StatusEffectType      = mk("Gargoyle TF Setting Tracker 1");
+		public static const GargoyleTFSettingTracker2:StatusEffectType      = mk("Gargoyle TF Setting Tracker 2");
+		public static const GargoyleTFSettingTracker3:StatusEffectType      = mk("Gargoyle TF Setting Tracker 3");
 		public static const Goojob:StatusEffectType                         = mk("GOOJOB");
 		public static const GooStuffed:StatusEffectType                     = mk("gooStuffed");
 		public static const Groundpound:StatusEffectType                    = mk("Groundpound");
@@ -490,6 +493,7 @@ package classes
 		public static const TwuWuv:CombatStatusEffect                    = mk2("Twu Wuv");
 		public static const UBERWEB:CombatStatusEffect                   = mk2("UBERWEB");
 		public static const UnderwaterCombatBoost:CombatStatusEffect     = mk2("UnderwaterCombatBoost");
+		public static const UnderwaterOutOfAir:CombatStatusEffect     	 = mk2("UnderwaterOutOfAir");
 		public static const VioletPupilTransformation:CombatStatusEffect = mk2("Violet Pupil Transformation");
 		public static const Web:CombatStatusEffect                       = mk2("Web");
 		public static const WebSilence:CombatStatusEffect                = mk2("Web-Silence");

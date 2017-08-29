@@ -1322,12 +1322,13 @@ private function struggle():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
+		outputText("You struggle to get free from the " + monster.short + " mighty tentacle. ");
 		if (rand(3) == 0 || rand(120) < player.str / 1.5) {
-			outputText("You bite one of her tentacles and she screams in surprise, releasing you.");
+			outputText("As force alone seems innefective, you bite one of her tentacles and she screams in surprise, releasing you.");
 			player.removeStatusEffect(StatusEffects.ScyllaBind);
 		}
 		else {
-			outputText("The " + monster.short + "'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+			outputText("Despite all of your struggle she manage to maintain her hold on you.");
 			dynStats("lus", player.sens / 5 + 5);
 			takeDamage(100 + rand(80));
 		}
@@ -3796,6 +3797,12 @@ private function combatStatusesUpdate():void {
 			hemorrhage = takeDamage(hemorrhage);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
 		}
+	}
+	if(player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
+		var deoxigen:Number = 0;
+		deoxigen += (player.maxHP() * 0.05);
+		deoxigen = takeDamage(deoxigen);
+		outputText("<b>You are running out of oxygen you need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.AcidSlap)) {
 		var slap:Number = 3 + (player.maxHP() * 0.02);

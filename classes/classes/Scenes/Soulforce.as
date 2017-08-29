@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Places.Boat;
 	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
@@ -933,8 +934,8 @@ package classes.Scenes
 		}
 		public function FightForPearl():void {
 			clearOutput();
-			outputText("Entering battle with Krakken Boss! Enjoy ^^");
-			startCombat(new Krakken());
+			outputText("Entering battle with Deep Sea Kraken Boss! Enjoy ^^");
+			startCombat(new Kraken());
 		}
 		public function FightMarae():void {
 			clearOutput();

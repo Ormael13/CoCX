@@ -157,7 +157,17 @@ package classes.Scenes.Areas
 			}
 			//Dark Elf Scout
 			if (chooser == 4) {
-				darkelfScene.introDarkELfSlaver();
+				if (rand(2) == 0) darkelfScene.introDarkELfSlaver();
+				else {
+					clearOutput();
+					outputText("A harpy wings out of the sky and attacks!");
+					if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
+					}
+					startCombat(new Harpy());
+					spriteSelect(26);
+				}
 				return;
 			}
 		}

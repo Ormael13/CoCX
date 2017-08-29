@@ -1175,7 +1175,18 @@ package classes.Scenes.Dungeons
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
 			}
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 2) addButton(0, "Drawer", ZetazsBedroomDrawer);
 		}
+		
+		public function ZetazsBedroomDrawer():void {
+			clearOutput();
+			outputText("Inside the drawer you find a book of advanced research notes on Lethicite, as well as soul containment inside of gems. Such research seems to imply that the creation of a soul gem requires both a large amount of concentrated pure water and ectoplasm obtained from the manifested imprint of a soul that has survived for decades or more to be combined and crystallized through some complicated alchemical process.");
+			outputText("\n\n<b>(Key Item Acquired: Soul Gem Research!)</b>");
+			player.createKeyItem("Soul Gem Research", 0, 0, 0, 0);
+			flags[kFLAGS.GARGOYLE_QUEST]++;
+			doNext(playerMenu);
+		}
+
 	}
 
 }
