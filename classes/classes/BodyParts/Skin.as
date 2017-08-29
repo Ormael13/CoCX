@@ -14,7 +14,7 @@ import classes.internals.Utils;
  * `(2) COVERAGE_MEDIUM` : coat layer exists, descriptions use mixed "[base] and [coat]", can explicitly check either
  * `(3) COVERAGE_HIGH` : coat layer exists and is used as a default layer when describing skin; base description appear only when explicitly called
  * `(4) COVERAGE_COMPLETE` : same as COVERAGE_HIGH; intended to be used when even face is fully coverred
- * tattoos should be moved to body part-level or character-level
+ * tattoos should be moved to body part-level as patterns
  *
  * @since December 27, 2016
  * @author Stadler76, aimozg
@@ -54,6 +54,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function get color():String {
 		return skinValue(base.color, coat.color);
+	}
+	public function get color2():String {
+		return skinValue(base.color2, coat.color2);
 	}
 	public function get desc():String {
 		return skinValue(base.desc, coat.desc);
@@ -244,10 +247,10 @@ public class Skin extends SaveableBodyPart {
 		return coverage < COVERAGE_COMPLETE && base.type == SKIN_BASE_PLAIN;
 	}
 	public function hasMagicalTattoo():Boolean {
-		return base.adj == "sexy tattooed";
+		return base.pattern == PATTERN_MAGICAL_TATTOO;
 	}
 	public function hasBattleTattoo():Boolean {
-		return base.adj == "covered with various intricate battle tattoos";
+		return base.pattern == PATTERN_BATTLE_TATTOO;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
@@ -334,9 +337,15 @@ public class Skin extends SaveableBodyPart {
 		coverage  = TYPE_TO_COVERAGE[value];
 		base.type = TYPE_TO_BASE[value];
 		coat.type = TYPE_TO_COAT[value];
-		if (value == SKIN_TYPE_TATTOED) base.adj = "sexy tattooed";
-		if (value == SKIN_TYPE_AQUA_RUBBER_LIKE) base.adj = "slippery rubber-like";
-		if (value == SKIN_TYPE_TATTOED_ONI) base.adj = "covered with various intricate battle tattoos";
+		if (value == SKIN_TYPE_TATTOED) {
+			base.pattern = PATTERN_MAGICAL_TATTOO;
+			base.adj = "sexy tattooed";
+		} else if (value == SKIN_TYPE_AQUA_RUBBER_LIKE) {
+			base.adj = "slippery rubber-like";
+		} else if (value == SKIN_TYPE_TATTOED_ONI) {
+			base.pattern = PATTERN_BATTLE_TATTOO;
+			base.adj = "tattooed";
+		}
 	}
 	override protected function loadFromOldSave(savedata:Object):void {
 		//Convert from old skinDesc to new skinAdj + skinDesc!

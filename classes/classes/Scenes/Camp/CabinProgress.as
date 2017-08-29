@@ -283,7 +283,7 @@ package classes.Scenes.Camp
 		//STAGE 8 - Build cabin part 1.
 		private function buildCabinPart1():void {
 			//No toolbox? Access denied!
-			if (!player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")<0)
 			{
 				outputText("You realize you don't have the toolbox to work on your cabin. You let out a sigh.");
 				doNext(playerMenu);
@@ -292,7 +292,7 @@ package classes.Scenes.Camp
 			//Got toolbox? Proceed!
 			outputText("Now that you have the carpenter's toolbox and your finished plans, you can work on building. Do you start work on framing your cabin? (Cost: 100 nails and 50 wood.)\n");
 			checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
 				{
@@ -340,7 +340,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start working on walls and roof? (Cost: 200 nails and 125 wood.)\n");
 			checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 125)
 				{
@@ -377,7 +377,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start work on installing door and window for your cabin? (Cost: 100 nails and 50 wood.)\n");
 			checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
 				{
@@ -414,7 +414,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding few stones here additionaly? 50 maybe?
 			checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
 				{

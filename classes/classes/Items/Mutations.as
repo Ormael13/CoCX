@@ -1560,12 +1560,19 @@
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && !player.isGargoyle()) {
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!");
 				else outputText("\n\nYour [skin base] itches intensely.  You gaze down as more and more hairs break forth from your [skin base], quickly transforming into a soft coat of fur.");
-				player.skin.growCoat(SKIN_COAT_FUR,{
-					color:randomChoice([
-						"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
-						"light gray", "silver", "white", "orange and white", "brown and white", "black and white"
-					])
-				});
+				if (rand(3)>0) {
+					player.skin.growCoat(SKIN_COAT_FUR, {
+						color: randomChoice([
+							"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
+							"light gray", "silver", "white"])
+					});
+				} else {
+					player.skin.growCoat(SKIN_COAT_FUR, {
+						color  : randomChoice(["orange", "brown", "black"]),
+						pattern: PATTERN_SPOTTED,
+						color2 : "white"
+					});
+				}
 				outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
 				changes++;
 			}
@@ -2854,8 +2861,13 @@
 			if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (player.skinDesc != "fur") outputText("\n\nYour [skin.type] itches intensely.  You scratch and scratch, but it doesn't bring any relief.  Fur erupts between your fingers, and you watch open-mouthed as it fills in over your whole body.  The fur is patterned in black and white, like that of a cow.  The color of it even spreads to your hair!  <b>You have cow fur!</b>");
 				else outputText("\n\nA ripple spreads through your fur as some patches darken and others lighten.  After a few moments you're left with a black and white spotted pattern that goes the whole way up to the hair on your head!  <b>You've got cow fur!</b>");
-				player.hairColor = "black and white spotted";
-				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor});
+				player.hairColor = "black";
+//				player.hairColor2 = "white"; // TODO 2-color hair
+				player.skin.growCoat(SKIN_COAT_FUR,{
+					color:"black",
+					color2:"white",
+					pattern:PATTERN_SPOTTED
+				});
 			}
 			//if enhanced to probova give a shitty cow face
 			else if (enhanced && player.faceType != FACE_COW_MINOTAUR && player.tailType != TAIL_TYPE_GARGOYLE) {
@@ -8044,7 +8056,6 @@
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			var changed:Boolean = mutationStep(player.skin.hasFur()
-					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
@@ -8075,6 +8086,7 @@
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
+				player.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
 				player.skin.base.adj = "sexy tattooed";
 
 			});
@@ -10258,7 +10270,7 @@
 				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>");
-				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",color:"white and black"});
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",pattern:PATTERN_ORCA_UNDERBODY,color:"white",color2:"black"});
 				changes++;
 			}
 			//legs

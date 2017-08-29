@@ -2719,32 +2719,6 @@
 					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
 				]
 		);
-		public static const DECORATION_TYPENAMES_:Array         = multipleMapsFromPairs(
-				[
-					[DECORATION_NONE, "nothing", ""],
-					[DECORATION_GENERIC, "generic", ""],
-					[DECORATION_TATTOO, "tattoo", ""]
-				]
-		);
-		public static const DEFAULT_DECORATION_TYPENAMES:Object = DECORATION_TYPENAMES_[0];
-		//public static const DEFAULT_DECORATION_NAMES:Object = DEFAULT_DECORATION_TYPENAMES_NAMES[1];
-
-		/**
-		 * A substitute text to fill after "on your <body part> you have ..."
-		 */
-		public static function describeDecoration(creature:Creature,decoType:int,decoAdj:String):String {
-			if (decoAdj && decoType != DECORATION_GENERIC) decoAdj += " ";
-			switch (decoType) {
-				case DECORATION_NONE:
-					return "nothing";
-				case DECORATION_TATTOO:
-					return decoAdj+"tattoo";
-				case DECORATION_GENERIC:
-					return decoAdj ? decoAdj : "<b>empty decoAdj bug</b>";
-				default:
-					return "<b>decoType bug "+decoType+"</b>"
-			}
-		}
 
 		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
 			[VAGINA_WETNESS_DRY, "dry"],

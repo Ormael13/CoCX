@@ -183,6 +183,15 @@ public class CoCButton extends Block {
 		return this;
 	}
 	/**
+	 * Disable if condition is true, optionally change tooltip. Does not un-hide button.
+	 * @return this
+	 */
+	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
+		enabled = !condition;
+		if (toolTipText!==null) this.toolTipText = condition?toolTipText:"";
+		return this;
+	}
+	/**
 	 * Disable, optionally change tooltip. Does not un-hide button.
 	 * @return this
 	 */

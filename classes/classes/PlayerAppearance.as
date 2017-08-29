@@ -537,43 +537,37 @@ public class PlayerAppearance extends BaseContent {
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
 			if(player.skinType != SKIN_TYPE_GOO)
-				outputText("Your [sack] clings tightly to your groin, holding " + ballsDescript() + " snugly against you.");
+				outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
 			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("Your [sack] clings tightly to your groin, dripping and holding " + ballsDescript() + " snugly against you.");
+				outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
 		}
-		else if(player.cockTotal() == 0)
-		{
-			if(player.skin.hasMagicalTattoo())
-				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
-			else if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
-			else if(player.hasFur())
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.");
-			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
-				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
-			else if(player.hasScales())
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
-			else if(player.skinType == SKIN_TYPE_STONE)
-				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
-			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.");
-		}
-		else
-		{
-			if(player.skin.hasMagicalTattoo())
-				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your [cocks].");
-			else if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your [cocks].");
-			else if(player.hasFur())
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your [cocks].");
-			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
-				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
-			else if(player.hasScales())
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
-			else if(player.skinType == SKIN_TYPE_STONE)
-				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your [cocks].");
-			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your [cocks].");
+		else {
+			var sdesc:String;
+			if (player.skin.hasMagicalTattoo()) {
+				sdesc = " covered by magical tattoo";
+			} else if (player.skin.hasBattleTattoo()) {
+				sdesc = " covered by battle tattoo";
+			} else {
+				sdesc = "";
+			}
+			var swingsWhere:String;
+			if (player.cockTotal() == 0) {
+				swingsWhere = " where a penis would normally grow.";
+			} else {
+				swingsWhere = " under your [cocks].";
+			}
+			if (player.hasPlainSkinOnly())
+				outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
+			else if (player.hasFur())
+				outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
+			else if (player.hasCoatOfType(SKIN_COAT_CHITIN))
+				outputText("A chitin [sack] hugs your [balls] tightly against your body.");
+			else if (player.hasScales())
+				outputText("A scaley [sack] hugs your [balls] tightly against your body.");
+			else if (player.skinType == SKIN_TYPE_STONE)
+				outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
+			else if (player.skinType == SKIN_TYPE_GOO)
+				outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
@@ -740,7 +734,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" covered with [skin coat]");
 		}
 		outputText(", arms, hands and fingers.");
-		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
+		if (player.skin.base.pattern == PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
 		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your [weapon] as a melee weapon");
@@ -1360,6 +1354,7 @@ public class PlayerAppearance extends BaseContent {
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+				else if(player.skin.hasBattleTattoo()) outputText(" covered with magical tattoo");
 				outputText(" where your hair should be.");
 			}
 			if(player.earType == EARS_HORSE)
@@ -1509,6 +1504,9 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Your face is human in shape and structure, with [skin]"+skinAndSomething);
 				if (player.skin.hasMagicalTattoo()) {
 					outputText(" covered with magical tattoo");
+					odd++;
+				} else if (player.skin.hasBattleTattoo()) {
+					outputText(" covered with battle tattoo");
 					odd++;
 				}
 				if (player.skin.isCoverLowMid()) {
@@ -1738,6 +1736,7 @@ public class PlayerAppearance extends BaseContent {
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+				else if (player.skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");

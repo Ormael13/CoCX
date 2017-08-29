@@ -154,22 +154,6 @@
             <color name="snow white">#f9f9fa</color>
             <color name="yellowish-green">#b4f000</color>
         </common>
-        <common>
-            <!--Multi-color with pattern (Requires more complex engine)-->
-            <!--<color name="black and orange">#000000</color>-->
-            <!--<color name="black and white">#000000</color>-->
-            <!--<color name="black and white spotted">#000000</color>-->
-            <color name="black and yellow">#yellow</color>
-            <!--<color name="brown and white">#000000</color>-->
-            <!--<color name="gray and white">#000000</color>-->
-            <!--<color name="orange and white">#000000</color>-->
-            <!--<color name="pink and black">#000000</color>-->
-            <!--<color name="rainbow">#000000</color>-->
-            <!--<color name="seven-colored">#000000</color>-->
-            <!--<color name="spotted">#000000</color>-->
-            <!--<color name="striped orange">#000000</color>-->
-            <color name="white and black">#eff3f6</color>
-        </common>
         <property name="hair" src="hairColor" default="#ffffff">
             <color name="red">#bf7540</color>
             <color name="flaxen">#a68059</color>
@@ -180,20 +164,42 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
+        <property name="hair2" src="hairColor" default="#ffffff">
+        </property>
         <property name="fur" src="skin.coat.color" default="#ffffff">
+        </property>
+        <property name="fur2" src="skin.coat.color2" default="#ffffff">
         </property>
         <property name="scales" src="skin.coat.color" default="#ffffff">
         </property>
+        <property name="scales2" src="skin.coat.color2" default="#ffffff">
+        </property>
         <property name="chitin" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="chitin2" src="skin.coat.color" default="#ffffff">
+        <property name="chitin2" src="skin.coat.color2" default="#ffffff">
         </property>
-        <property name="skin" src="skinTone" default="#ffffff">
+        <property name="skin" src="skin.base.color" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skinTone" default="#ffffff">
+        <property name="skin2" src="skin.base.color2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
+        <common>
+            <!--Multi-color with pattern (Requires more complex engine)-->
+            <!--<color name="black and orange">#000000</color>-->
+            <!--<color name="black and white">#000000</color>-->
+            <!--<color name="black and white spotted">#000000</color>-->
+            <!--<color name="black and yellow">#yellow</color>-->
+            <!--<color name="brown and white">#000000</color>-->
+            <!--<color name="gray and white">#000000</color>-->
+            <!--<color name="orange and white">#000000</color>-->
+            <!--<color name="pink and black">#000000</color>-->
+            <!--<color name="rainbow">#000000</color>-->
+            <!--<color name="seven-colored">#000000</color>-->
+            <!--<color name="spotted">#000000</color>-->
+            <!--<color name="striped orange">#000000</color>-->
+            <!--<color name="white and black">#eff3f6</color>-->
+        </common>
         <!-- Not yet in game-->
         <!-- <property name="iris" src="'blue'" default="#0000ff">
              &lt;!&ndash;Iris color overrides go here&ndash;&gt;
@@ -226,14 +232,26 @@
         <key src="#CC00CC" base="hair"/>
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
+        <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
+        <key src="#CCCC00" base="hair2"/>
+        <key src="#999900" base="hair2" transform="darken(25)"/>
+        <key src="#333300" base="hair2" transform="darken(50)"/>
         <key src="#88FF88" base="fur" transform="lighten(25)"/>
         <key src="#00CC00" base="fur"/>
         <key src="#009900" base="fur" transform="darken(25)"/>
         <key src="#003300" base="fur" transform="darken(50)"/>
+        <key src="#AA88FF" base="fur2" transform="lighten(25)"/>
+        <key src="#6633CC" base="fur2"/>
+        <key src="#442288" base="fur2" transform="darken(25)"/>
+        <key src="#220044" base="fur2" transform="darken(50)"/>
         <key src="#8888FF" base="scales" transform="lighten(25)"/>
         <key src="#4444FF" base="scales"/>
         <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
+        <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
+        <key src="#66CC66" base="scales2"/>
+        <key src="#448844" base="scales2" transform="darken(25)"/>
+        <key src="#223322" base="scales2" transform="darken(50)"/>
         <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
         <key src="#44CCFF" base="chitin"/>
         <key src="#0099CC" base="chitin" transform="darken(25)"/>
@@ -303,7 +321,7 @@
         <cell rect="1,213,119,68" name="tail/demon" dx="67" dy="89"/>
         <cell rect="204,196,76,104" name="legs/harpy" dx="55" dy="101"/>
         <cell rect="283,129,181,137" name="wings/feather_large" dx="7" dy="16"/>
-        <cell rect="364,30,75,88" name="hair/feather" dx="61" dy="-13"/>
+        <cell rect="364,30,75,88" name="hair/feather" dx="61" dy="-14"/>
         <cell rect="440,30,75,88" name="hair_bg/feather" dx="61" dy="-13"/>
         <cell rect="364,4,19,22" name="ears_bg/elfin" dx="61" dy="36"/>
         <cell rect="384,4,29,22" name="ears/elfin" dx="108" dy="34"/>
@@ -319,17 +337,12 @@
         <cell rect="471,193,45,38" name="horns_bg/devil" dx="53" dy="1"/>
         <cell rect="517,193,44,38" name="horns/devil" dx="90" dy="-1"/>
         <cell rect="470,129,43,58" name="tail/goat" dx="103" dy="90"/>
-
     </spritemap>
     <spritemap file="beasts.png">
         <cell rect="1,1,32,11" name="eyes/cat" dx="74" dy="38"/>
         <cell rect="1,14,32,21" name="eyes/spider" dx="76" dy="34"/>
-        <cell rect="36,1,56,47" name="tail/fox1" dx="41" dy="92"/>
-        <cell rect="36,50,50,53" name="tail/fox2" dx="95" dy="86"/>
         <cell rect="95,1,48,51" name="tail/cat" dx="96" dy="67"/>
         <cell rect="95,54,48,51" name="tail/cat2" dx="96" dy="67"/>
-        <cell rect="146,1,47,29" name="ears_bg/fox" dx="71" dy="10"/>
-        <cell rect="146,32,47,29" name="ears/fox" dx="71" dy="10"/>
         <cell rect="146,64,62,35" name="ears/wolf" dx="62" dy="4"/>
         <cell rect="146,102,56,23" name="ears/cat" dx="66" dy="10"/>
         <cell rect="211,1,56,20" name="horns/2small" dx="68" dy="20"/>
@@ -352,7 +365,7 @@
         <cell rect="88,46,37,51" name="arms/chitin" dx="94" dy="63"/>
         <cell rect="37,109,50,62" name="legs/chitin" dx="71" dy="101"/>
         <cell rect="1,98,35,51" name="arms_bg/chitin_p" dx="56" dy="63"/>
-        <cell rect="88,98,37,51" name="arms/chitin_p" dx="94" dy="63"/>
+        <cell rect="88,98,37,51" name="arms/chitin_p" dx="94" dy="64"/>
         <cell rect="1,150,35,51" name="arms_bg/chitin2" dx="56" dy="63"/>
         <cell rect="88,150,37,51" name="arms/chitin2" dx="94" dy="63"/>
         <cell rect="1,202,35,51" name="arms_bg/chitin2_p" dx="56" dy="63"/>
@@ -381,6 +394,21 @@
         <cell rect="158,1,28,26" name="ears/mouse" dx="97" dy="12"/>
         <cell rect="199,1,42,73" name="tail/mouse" dx="96" dy="111"/>
         <cell rect="199,75,42,73" name="tail/mouse_fire" dx="96" dy="111"/>
+    </spritemap>
+    <spritemap file="kitsune.png">
+        <cell rect="2,2,196,186" name="tail/fox9" dx="-4" dy="4"/>
+        <cell rect="201,2,196,186" name="tail/fox8" dx="-4" dy="4"/>
+        <cell rect="400,2,196,186" name="tail/fox7" dx="-4" dy="4"/>
+        <cell rect="2,191,196,186" name="tail/fox6" dx="-4" dy="4"/>
+        <cell rect="201,191,196,186" name="tail/fox5" dx="-4" dy="4"/>
+        <cell rect="400,191,196,186" name="tail/fox4" dx="-4" dy="4"/>
+        <cell rect="2,380,196,186" name="tail/fox3" dx="-4" dy="4"/>
+        <cell rect="201,380,196,186" name="tail/fox2" dx="0" dy="-10"/>
+        <cell rect="400,380,196,186" name="tail/fox1" dx="3" dy="-8"/>
+        <cell rect="201,572,59,61" name="ears/foxL" dx="42" dy="-10"/>
+        <cell rect="261,572,67,61" name="ears/foxR" dx="89" dy="-11"/>
+        <cell rect="201,634,59,61" name="ears_bg/foxL" dx="42" dy="-10"/>
+        <cell rect="261,634,67,61" name="ears_bg/foxR" dx="89" dy="-11"/>
     </spritemap>
     <spritemap file="manticore.png">
         <cell rect="2,2,32,11" name="eyes/manticore" dx="74" dy="38"/>
@@ -568,8 +596,10 @@
                 <show part="ears/wolf"/>
             </case>
             <case value="9"><!--FOX-->
-                <show part="ears/fox"/>
-                <show part="ears_bg/fox"/>
+                <show part="ears/foxL"/>
+                <show part="ears/foxR"/>
+                <show part="ears_bg/foxL"/>
+                <show part="ears_bg/foxR"/>
             </case>
             <case values="11"><!--MOUSE-->
                 <show part="ears/mouse"/>
@@ -664,7 +694,7 @@
                         <show part="arms_bg/human"/>
                         <show part="legs/human"/>
 
-                        <if test="skin.base.color=='white and black'">
+                        <if test="skin.base.pattern==2"><!--PATTERN_ORCA_UNDERBODY-->
                             <hide part="head/*"/>
                             <hide part="torso/*"/>
                             <show part="head/orca"/>
@@ -692,7 +722,7 @@
                     <case value="5"><!--CHITIN-->
                         <show part="head/chitin"/>
                         <show part="torso/chitin"/>
-                        <if test="skin.coat.color=='black and yellow'">
+                        <if test="skin.coat.pattern==3"><!--BEE_STRIPES-->
                             <hide part="head/chitin"/>
                             <hide part="torso/chitin"/>
                             <show part="head/bee"/>
@@ -809,9 +839,9 @@
                         </case>
                         <case value="hasFullCoatOfType([5])"><!--CHITIN-->
                             <show part="breasts/Dchitin"/>
-                            <if test="skin.coat.color=='black and yellow'">
+                            <if test="skin.coat.pattern==3"><!--BEE_STRIPES-->
                                 <hide part="breasts/*"/>
-                                <show part="breasts/Dbee"/><!--TODO-->
+                                <show part="breasts/Dbee"/>
                             </if>
                         </case>
                         <case value="hasFullCoatOfType([2,9,14])"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
@@ -1086,13 +1116,38 @@
                 <show part="tail/harpy"/>
             </case>
             <case value="13"><!--FOX-->
-                <show part="tail/fox1"/>
-                <if test="tailCount gte 2">
-                    <show part="tail/fox2"/>
-                </if>
-                <!--<if test="tailCount gte 3">
-                    <show part="tail-fox3"/>
-                </if>-->
+                <switch value="tailCount">
+                    <case value="1">
+                        <show part="tail/fox1"/>
+                    </case>
+                    <case value="2">
+                        <show part="tail/fox2"/>
+                    </case>
+                    <case value="3">
+                        <show part="tail/fox3"/>
+                    </case>
+                    <case value="4">
+                        <show part="tail/fox4"/>
+                    </case>
+                    <case value="5">
+                        <show part="tail/fox5"/>
+                    </case>
+                    <case value="6">
+                        <show part="tail/fox6"/>
+                    </case>
+                    <case value="7">
+                        <show part="tail/fox7"/>
+                    </case>
+                    <case value="8">
+                        <show part="tail/fox8"/>
+                    </case>
+                    <case value="9">
+                        <show part="tail/fox9"/>
+                    </case>
+                    <default>
+                        <show part="tail/fox9"/>
+                    </default>
+                </switch>
             </case>
             <case values="12,15,17"><!--TODO KANGAROO,RACCOON,FERRET-->
                 <show part="tail/cat"/>

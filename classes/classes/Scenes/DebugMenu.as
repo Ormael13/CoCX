@@ -676,22 +676,28 @@ import flash.utils.describeType;
 //			addButton(13, "Page2", bodyPartEditor2);
 			addButton(14, "Back", accessDebugMenu);
 		}
+		private var bpeSkinLayer:String = "Base";
 		private function bodyPartEditorSkin():void {
+			var editBase:Boolean = bpeSkinLayer == "Base";
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
 			addButton(0,"Skin Coverage",changeSkinCoverage);
-			addButton(1,"SkinBaseType",curry(changeLayerType,true));
-			addButton(2,"SkinBaseColor",curry(changeLayerColor,true));
-			addButton(3,"SkinBaseAdj",curry(changeLayerAdj,true));
-			addButton(4,"SkinBaseDesc",curry(changeLayerDesc,true));
-			addButton(6,"SkinCoatType",curry(changeLayerType,false));
-			addButton(7,"SkinCoatColor",curry(changeLayerColor,false));
-			addButton(8,"SkinCoatAdj",curry(changeLayerAdj,false));
-			addButton(9,"SkinCoatDesc",curry(changeLayerDesc,false));
+			addButton(1,bpeSkinLayer+ " Type",curry(changeLayerType,editBase));
+			addButton(2,bpeSkinLayer+ " Color",curry(changeLayerColor,editBase));
+			addButton(3,bpeSkinLayer+ " Adj",curry(changeLayerAdj,editBase));
+			addButton(4,bpeSkinLayer+ " Desc",curry(changeLayerDesc,editBase));
+			if (editBase) {
+				addButton(5, "Select Coat",changeCurrentLayer).disableIf(player.skin.coverage == Skin.COVERAGE_NONE);
+			} else {
+				addButton(5, "Select Base",changeCurrentLayer);
+			}
+			addButton(6,bpeSkinLayer+" Color2",curry(changeLayerColor2,editBase));
+			addButton(7,bpeSkinLayer+" Pattern",curry(changeLayerPattern,editBase));
 			addButton(10,"HairType",changeHairType);
 			addButton(11,"HairColor",changeHairColor);
 			addButton(12,"HairLength",changeHairLength);
+//			addButton(12,"HairStyle",);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const SKIN_BASE_TYPES:Array = [
@@ -709,10 +715,21 @@ import flash.utils.describeType;
 			[SKIN_COAT_DRAGON_SCALES,"(10) DRAGON_SCALES"],
 			[SKIN_COAT_MOSS,"(11) MOSS"]
 		];
+		private static const PATTERN_BASE_TYPES:Array = [
+			[PATTERN_NONE,"(0) NONE"],
+			[PATTERN_MAGICAL_TATTOO,"(1) MAGICAL_TATTOO"],
+			[PATTERN_ORCA_UNDERBODY,"(2) ORCA_UNDERBODY"],
+			[PATTERN_BATTLE_TATTOO,"(5) BATTLE_TATTOO"],
+		];
+		private static const PATTERN_COAT_TYPES:Array = [
+			[PATTERN_NONE,"(0) NONE"],
+			[PATTERN_BEE_STRIPES,"(3) BEE_STRIPES"],
+			[PATTERN_TIGER_STRIPES,"(4) TIGER_STRIPES"],
+		];
 		private static const SKIN_TONE_CONSTANTS:Array = [
 			"pale", "light", "dark", "green", "gray",
-			"blue", "black", "white", "dirty red", "blueish yellow",
-			"ghostly pale", "bubblegum pink",
+			"blue", "black", "white", "red", "yellow",
+			"dark blue", "pink",
 		];
 		private static const SKIN_ADJ_CONSTANTS:Array = [
 			"(none)", "tough", "smooth", "rough", "sexy",
@@ -764,14 +781,26 @@ import flash.utils.describeType;
 							"skin isare", "skin base.isare", "skin coat.isare",
 							"skin vs","skin base.vs", "skin coat.vs",
 							"skinfurscales", "skintone") + ".\n");
-			outputText(generateTagDemos("face","face deco","face full","player.facePart.isDecorated")+".\n");
 		}
-		private function changeLayerType(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+		private function changeCurrentLayer():void {
+			bpeSkinLayer = bpeSkinLayer == "Base" ? "Coat" : "Base";
+			bodyPartEditorSkin();
+		}
+		private function changeLayerType(page:int=0,setIdx:int=-1):void {
+			var editBase:Boolean = bpeSkinLayer == "Base";
 			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).type = setIdx;
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, curry(changeLayerType,editBase));
+			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, changeLayerType);
+		}
+		private function changeLayerPattern(page:int=0,setIdx:int=-1):void {
+			var editBase:Boolean = bpeSkinLayer == "Base";
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).pattern = setIdx;
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, editBase?PATTERN_BASE_TYPES:PATTERN_COAT_TYPES, changeLayerPattern);
 		}
 		private function changeLayerColor(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
@@ -779,6 +808,13 @@ import flash.utils.describeType;
 			dumpPlayerData();
 			tagDemosSkin();
 			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor,editBase));
+		}
+		private function changeLayerColor2(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color2 = SKIN_TONE_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor2,editBase));
 		}
 		private function changeLayerAdj(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
@@ -874,15 +910,6 @@ import flash.utils.describeType;
 			[FACE_DRAGON_FANGS,"(30) DRAGON_FANGS"],
 			[FACE_DEVIL_FANGS,"(31) DEVIL_FANGS"],
 		];
-		private static const DECO_DESC_CONSTANTS:Array = [
-			[DECORATION_NONE,"(0) NONE"],
-			[DECORATION_GENERIC,"(1) GENERIC"],
-			[DECORATION_TATTOO,"(2) TATTOO"],
-		];
-		private static const DECO_ADJ_CONSTANTS:Array = [
-			"(none)", "magic", "glowing", "sexy","",
-			"", "", "mark", "burn", "scar"
-		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[TONGUE_HUMAN, "(0) HUMAN"],
 			[TONGUE_SNAKE, "(1) SNAKE"],
@@ -976,19 +1003,6 @@ import flash.utils.describeType;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, FACE_TYPE_CONSTANTS, changeFaceType);
-		}
-		private function changeFaceDecoType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.facePart.decoType = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, DECO_DESC_CONSTANTS, changeFaceDecoType);
-		}
-		private function changeFaceDecoAdj(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.facePart.decoAdj = "";
-			if (setIdx>0) player.facePart.decoAdj = DECO_ADJ_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, DECO_ADJ_CONSTANTS, changeFaceDecoAdj);
 		}
 		private function changeTongueType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.tongueType = setIdx;

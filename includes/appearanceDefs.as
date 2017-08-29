@@ -46,6 +46,15 @@ public static const SKIN_COAT_DRAGON_SCALES:int                                 
 public static const SKIN_COAT_MOSS:int                                              =    SKIN_TYPE_MOSS;
 public static const SKIN_COAT_STONE:int                                             =    SKIN_TYPE_STONE;
 
+// skin.(base|coat).pattern
+public static const PATTERN_NONE:int                                               =     0;
+public static const PATTERN_MAGICAL_TATTOO:int                                     =     1;
+public static const PATTERN_ORCA_UNDERBODY:int                                     =     2;
+public static const PATTERN_BEE_STRIPES:int                                        =     3;
+public static const PATTERN_TIGER_STRIPES:int                                      =     4;
+public static const PATTERN_BATTLE_TATTOO:int                                      =     5;
+public static const PATTERN_SPOTTED:int                                            =     6;
+
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
 public static const HAIR_FEATHER:int                                               =     1;
@@ -99,11 +108,6 @@ public static const FACE_PLANT_DRAGON:int                                		    =
 public static const FACE_DRAGON_FANGS:int                                           =   30;
 public static const FACE_DEVIL_FANGS:int                                            =   31;
 public static const FACE_ONI_TEETH:int	                                            =   32;
-
-// face.cheekDecoration etc
-public static const DECORATION_NONE:int                                             =    0;
-public static const DECORATION_GENERIC:int                                          =    1;
-public static const DECORATION_TATTOO:int                                           =    2;
 
 // tongueType
 public static const TONGUE_HUMAN:int                                                =   0;

@@ -211,7 +211,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a bed? (Cost: 45 nails and 25 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 40) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 45 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25)
@@ -254,7 +254,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a nightstand? (Cost: 20 nails and 10 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
@@ -297,7 +297,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a dresser? (Cost: 50 nails and 30 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 30)
@@ -341,7 +341,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a table? (Cost: 20 nails and 15 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 15)
@@ -384,7 +384,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a chair? (Cost: 40 nails and 10 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 40 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
@@ -435,7 +435,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a bookshelf? (Cost: 75 nails and 25 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 75 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25)
@@ -481,7 +481,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a desk? (Cost: 60 nails and 20 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 60 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 20)
@@ -525,7 +525,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("Would you like to construct a chair? (Cost: 40 nails and 10 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
-			if (player.hasKeyItem("Carpenter's Toolbox"))
+			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
 					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 40 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
