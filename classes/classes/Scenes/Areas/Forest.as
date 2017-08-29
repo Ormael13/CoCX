@@ -368,9 +368,12 @@ use namespace kGAMECLASS;
 		public function exploreForest():void
 		{
 			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
 			//Increment forest exploration counter.
 			player.exploredForest++;
-			forestEncounter.execEncounter();
+			forestStory.execute(context);
+//			forestEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
