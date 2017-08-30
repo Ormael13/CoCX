@@ -276,8 +276,11 @@ package classes.Scenes.Areas
 			}
 			//Dark Elf Scout
 			if (chooser == 4) {
-				darkelfScene.introDarkELfScout();
-				return;
+				if (rand(2) == 0) {
+					darkelfScene.introDarkELfScout();
+					return;
+				}
+				hellHoundScene.hellhoundEncounter();
 			}
 			//Hairdresser
 			if (chooser == 5) {

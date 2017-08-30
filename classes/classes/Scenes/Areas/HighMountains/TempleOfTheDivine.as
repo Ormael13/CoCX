@@ -244,13 +244,41 @@ package classes.Scenes.Areas.HighMountains
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("!!! Androgen face desc !!!");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("Its face is yet to be finished");
 			outputText(" and its ");
-			//outputText("This statue looks like.");
-			outputText("hair is yet to be sculpted.");
-			//outputText("\n\n  \n\n");
-			outputText("\n\nThere's a block where its chest would be.\n\n");
-			//outputText("");
-			outputText("There's a block where its crotch would be.");
-			outputText("All details in its");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("bald head looks great.");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("short hair looks great.");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("moderately long hair looks great.");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("long hair looks great.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("hair is yet to be sculpted.");
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) > 0) {
+				outputText("\n\nStatue have ");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 1)outputText("flat chest");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 2)outputText("A-cup breasts");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 3)outputText("B-cup breasts");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 4)outputText("C-cup breasts");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 5)outputText("D-cup breasts");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 6)outputText("DD-cup breasts");
+				outputText(".\n\n");
+			}
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || !player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) outputText("There's a block where its crotch would be.");
+			else {
+				outputText("At statue crotch ");
+				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
+					outputText("there is ");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("4 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("4.5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 5) outputText("5.5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 6) outputText("6 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 7) outputText("6.5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 8) outputText("7 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 9) outputText("7.5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 10) outputText("8 inch");
+					outputText(" long cock.");
+				}
+				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("there is no cock.");
+			}
+			outputText("\n\nAll details in its");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText(" feathered");
 			outputText(" wings ");
@@ -260,18 +288,32 @@ package classes.Scenes.Areas.HighMountains
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("mace like");
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("axe like");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 0)outputText("unfinished");
-			outputText(" tail seems to be there right above a perfectly made ");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("feminine");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("masculine");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("androgynous");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1))outputText("missing text part for not yet picked body version");
+			outputText(" tail seems to be there right above its ");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
+				outputText("perfectly made ");
+				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("feminine");
+				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("masculine");
+				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("androgynous");
+			}
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1))outputText("unfinished");
 			outputText(" body.");
 			menu();
-			addButton(0, "Frame&Face", SculptFrameAndFace);
-			addButton(1, "Wings", SculptWings);
-			addButton(2, "Tail", SculptTail);
-			addButton(3, "Legs", SculptLegs);
-			addButton(4, "Arms", SculptArms);//progress flag at 6
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(0, "Frame&Face", SculptFrameAndFace);
+			else addButtonDisabled(0, "Frame&Face", "You already sculpted Frame and Face.");
+			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] < 1) addButton(1, "Wings", SculptWings);
+			else addButtonDisabled(1, "Wings", "You already sculpted Wings.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(2, "Tail", SculptTail);
+			else addButtonDisabled(2, "Tail", "You already sculpted Tail.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(3, "Legs", SculptLegs);
+			else addButtonDisabled(3, "Legs", "You already sculpted Legs.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(4, "Arms", SculptArms);
+			else addButtonDisabled(4, "Arms", "You already sculpted Arms.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(5, "Hair", SculptHair);
+			else addButtonDisabled(5, "Hair", "You already sculpted Hair.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(6, "Chest", SculptChest);
+			else addButtonDisabled(6, "Chest", "You already sculpted Chest.");//progress flag at 8/10
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(8, "Cock", SculptCock);
+			else addButtonDisabled(8, "Cock", "You already sculpted Cock Area.");//look at CharCreation.as line 958 for setitng thicknes based on picked length
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -368,6 +410,142 @@ package classes.Scenes.Areas.HighMountains
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 2);
 			SecondPartOfSculptingText();
 		}
+		
+		public function SculptHair():void {
+			menu();
+			addButton(0, "Bald", SculptBald).hint("Sculpt bald head.");
+			addButton(1, "Short", SculptShort).hint("Sculpt short hair on statue head.");
+			addButton(2, "Medium", SculptMedium).hint("Sculpt medium long hair on statue head.");
+			addButton(3, "Long", SculptLong).hint("Sculpt long hair on statue head.");
+			addButton(14, "Back", currentStateOfStatue);
+		}
+		public function SculptBald():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 1, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptShort():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 2, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptMedium():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 3);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 3, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptLong():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 4);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 4, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		
+		public function SculptChest():void {
+			menu();
+			addButton(0, "Flat", SculptBald).hint("Sculpt flat chest.");
+			addButton(1, "A-cup", SculptShort).hint("Sculpt A-cup breasts.");
+			addButton(2, "B-cup", SculptMedium).hint("Sculpt B-cup breasts.");
+			addButton(3, "C-cup", SculptLong).hint("Sculpt C-cup breasts.");
+			addButton(4, "D-cup", SculptMedium).hint("Sculpt D-cup breasts.");
+			addButton(5, "DD-cup", SculptLong).hint("Sculpt DD-cup breasts.");
+			addButton(14, "Back", currentStateOfStatue);
+		}
+		public function SculptFlat():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 1, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptACup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 2, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptBCup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 3);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 3, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCCup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 4);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 4, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptDCup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 5);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 5, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptDDCup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 6);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 6, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		
+		public function SculptCock():void {
+			menu();
+			addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
+			addButton(1, "4\"", SculptCock1).hint("Sculpt 4' cock.");
+			addButton(2, "4.5\"", SculptCock2).hint("Sculpt 4.5' cock.");
+			addButton(3, "5\"", SculptCock3).hint("Sculpt 5' cock.");
+			addButton(4, "5.5\"", SculptCock4).hint("Sculpt 5.5' cock.");
+			addButton(5, "6\"", SculptCock5).hint("Sculpt 6' cock.");
+			addButton(6, "6.5\"", SculptCock6).hint("Sculpt 6.5' cock.");
+			addButton(7, "7\"", SculptCock7).hint("Sculpt 7' cock.");
+			addButton(8, "7.5\"", SculptCock8).hint("Sculpt 7.5' cock.");
+			addButton(9, "8\"", SculptCock9).hint("Sculpt 8' cock.");
+			addButton(14, "Back", currentStateOfStatue);
+		}
+		public function SculptNoCock():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 1, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock1():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 2, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock2():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 3);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 3, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock3():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 4);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 4, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock4():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 5);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 5, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock5():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 6);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 6, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock6():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 7);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 7, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock7():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 8);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 8, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock8():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 9);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 9, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock9():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 10);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 10, 0);
+			SecondPartOfSculptingText();
+		}
+		
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
