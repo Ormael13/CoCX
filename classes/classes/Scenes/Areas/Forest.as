@@ -201,6 +201,13 @@ use namespace kGAMECLASS;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
+					},{
+						name: "celess-unicorn",
+						call: celessUnicornIntro,
+						when: function():Boolean{
+							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && player.level > 20;
+						},
+						chance: 100
 					});
 					/*
 					{
@@ -336,7 +343,43 @@ use namespace kGAMECLASS;
 		public function exploreDeepwoods():void {
 			deepwoodsEncounter.execEncounter();
 		}
-
+		public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			switch(stage){
+				case 0:
+					forestStory.display(context, "strings/celess-unicorn/intro");
+					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless() || true)?2:3);
+					if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
+					addButton(5, "NoWay", celessUnicornIntro, 1);
+					break;
+				case 1:
+					forestStory.display(context, "strings/celess-unicorn/noway");
+					doNext(camp.returnToCampUseOneHour);
+					break;
+				case 2:
+					if (player.bRows() == 0){
+						player.createBreastRow();
+					}
+					player.growTits(3, 1, false, 1);
+					forestStory.display(context, "strings/celess-unicorn/okay-male");
+					while (player.hasCock()){
+						player.removeCock(0, 1);
+					}
+					player.createVagina();
+					addButton(0, "Next", celessUnicornIntro, 3,true);
+					break;
+				case 3:
+					forestStory.display(context, "strings/celess-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
+					inventory.takeItem(shields.SACNCTL, camp.returnToCampUseOneHour);
+					break;
+				case 4:
+					forestStory.display(context, "strings/celess-unicorn/fuck-her");
+					inventory.takeItem(shields.SACNCTL, camp.returnToCampUseOneHour);
+					break;
+			}
+			flushOutputTextToGUI();
+		}
 		public function tripOnARoot():void {
 			forestStory.display(context, "strings/trip");
 			player.takeDamage(10);
@@ -370,7 +413,10 @@ use namespace kGAMECLASS;
 			clearOutput();
 			//Increment forest exploration counter.
 			player.exploredForest++;
-			forestEncounter.execEncounter();
+			doNext(camp.returnToCampUseOneHour);
+			forestStory.execute(context);
+			flushOutputTextToGUI();
+			//forestEncounter.execEncounter();
 		}
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]

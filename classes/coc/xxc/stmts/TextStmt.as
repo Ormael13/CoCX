@@ -25,10 +25,12 @@ public class TextStmt extends Statement {
 			content = Utils.trimRight(content);
 		}
 		if ((trimStyle & TRIM_UNINDENT) != 0) {
-			content = content.replace(/\n +/g,'\n');
+			content = content.replace(/\n[ \t]+/g,'\n');
 		}
 		if ((trimStyle & TRIM_SQUEEZE) != 0) {
-			content = content.replace(/([^\n]|^)\n([^\n]|$)/g,'$1 $2');
+			content = content.replace(/\n\n/g,'\\n\\n')
+							 .replace(/\\n\n/g,'\\n\\n')
+							 .replace(/\n/g,' ');
 		}
 		this.content = content;
 	}
