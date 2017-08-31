@@ -447,6 +447,13 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
+	// Celess birth scene
+	if (player.hasStatusEffect(StatusEffects.CampCelessTrigger)){
+		player.removeStatusEffect(StatusEffects.CampCelessTrigger);
+		celessScene.celessBirth();
+		hideMenus();
+		return;
+	}
 	//Exgartuan clearing
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
 		exgartuanCampUpdate();

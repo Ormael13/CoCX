@@ -205,7 +205,7 @@ use namespace kGAMECLASS;
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && player.level > 20;
+							return (/*player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant()*/ true);
 						},
 						chance: 100
 					});
@@ -371,6 +371,7 @@ use namespace kGAMECLASS;
 					break;
 				case 3:
 					forestStory.display(context, "strings/celess-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
+					player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 					inventory.takeItem(shields.SACNCTL, camp.returnToCampUseOneHour);
 					break;
 				case 4:

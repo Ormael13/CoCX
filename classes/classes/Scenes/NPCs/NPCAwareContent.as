@@ -52,6 +52,11 @@ package classes.Scenes.NPCs
 		{
 			return kGAMECLASS.arianScene.arianFollower();
 		}
+		// Celess
+		protected function get celessScene():CelessScene
+		{
+			return kGAMECLASS.celessScene;
+		}
 		// Ceraph
 		protected function get ceraphScene():CeraphScene
 		{

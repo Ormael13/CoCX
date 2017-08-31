@@ -30,6 +30,7 @@ package classes
 		public static const BurpChanged:StatusEffectType                    = mk("Burp Changed");
 		public static const ButtStretched:StatusEffectType                  = mk("ButtStretched");
 		public static const CampAnemoneTrigger:StatusEffectType             = mk("Camp Anemone Trigger");
+		public static const CampCelessTrigger:StatusEffectType				= mk("Camp Celess Trigger");
 		public static const CampMarble:StatusEffectType                     = mk("Camp Marble");
 		public static const CampRathazul:StatusEffectType                   = mk("Camp Rathazul");
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
