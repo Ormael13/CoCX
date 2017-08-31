@@ -8,8 +8,8 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Minimum libido increased by " + (params.value1) + ", minimum corruption increased by " + (params.value2) + ", cum production (if applicable) increased by "
-			+ (params.value3) + "mL, and milk production (if applicable) increased by " + (params.value4) + "mL.";
+			return "Minimum libido increased by " + int(params.value1) + ", minimum corruption increased by " + int(params.value2) + ", cum production (if applicable) increased by "
+			+ int(params.value3) + "mL, and milk production (if applicable) increased by " + int(params.value4) + "mL.";
 		}
 
 		public function ProductivityDrugsPerk()
