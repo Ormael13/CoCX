@@ -1753,6 +1753,8 @@ package classes
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if(findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
+			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
+				total += (perkv3(PerkLib.ProductivityDrugs));
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)

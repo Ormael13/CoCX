@@ -3692,6 +3692,8 @@ use namespace kGAMECLASS;
 			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
 			if (findPerk(PerkLib.MilkMaid) >= 0)
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
+			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
+				total += (perkv4(PerkLib.ProductivityDrugs));
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > int.MAX_VALUE)
@@ -4182,8 +4184,9 @@ use namespace kGAMECLASS;
 			if (this.findPerk(PerkLib.HistoryReligious) >= 0 || this.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				minLib -= 2;
 			}
-			//Minimum Corruption
+			//Factory Perks
 			if(this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
+			if(this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=this.perkv2(PerkLib.ProductivityDrugs);}
 
 			//Minimum Sensitivity
 			if(this.devilkinScore() >= 7) minSen += 10;
