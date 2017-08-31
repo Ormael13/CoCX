@@ -155,7 +155,7 @@ package classes.Scenes.Dungeons
 		private function doTensionRelease():void {
 			clearOutput();
 			//First time...
-			if(!player.hasStatusEffect(StatusEffects.TensionReleased)) {
+			if(!player.hasPerk(PerkLib.ProductivityDrugs)) {
 				outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ");
 				if(player.biggestTitSize() < 10) {
 					player.growTits(1, (2+rand(3)), true, 1);
@@ -163,12 +163,18 @@ package classes.Scenes.Dungeons
 				}
 				outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.");
 				player.orgasm();
-				dynStats("int", -2, "lib", 4, "cor", 4);
+				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 				player.slimeFeed();
 				player.createStatusEffect(StatusEffects.TensionReleased,0,0,0,0);
+
+				player.createPerk(PerkLib.ProductivityDrugs);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
+				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
+				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.lib/20);//milkproduction += CURRENT lib/20 (cum/milk ratio same as cumwitch blessing)
 			}
 			//Second/third times...
-			else {
+			else if (player.getAllMinStats().lib < player.getAllMaxStats().lib) {
 				//[[2nd time]] 
 				if(player.statusEffectv1(StatusEffects.TensionReleased) == 0) {
 					outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
@@ -214,10 +220,15 @@ package classes.Scenes.Dungeons
 					if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ");
 					outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your [armor].  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...");
 					player.orgasm();
-					dynStats("int", -2, "lib", 4, "cor", 4);
+					dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 					player.createStatusEffect(StatusEffects.TensionReleased,0,0,0,0);
 					player.addStatusValue(StatusEffects.TensionReleased,1,1);
 					player.slimeFeed();
+
+					player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
+					player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
+					player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib
+					player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.lib/20);//milkproduction += CURRENT lib/20 (cum/milk ratio same as cumwitch blessing)
 				}
 				//Third time, move on to bad end!
 				else {
