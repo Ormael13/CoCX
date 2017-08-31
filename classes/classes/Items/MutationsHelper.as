@@ -135,6 +135,7 @@ package classes.Items {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
 			}
+			outputText("You now have <b>human arms</b>!");
 			setArmType(ARM_TYPE_HUMAN);
 			changes++;
 		}
