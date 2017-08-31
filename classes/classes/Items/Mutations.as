@@ -4261,7 +4261,7 @@
 				outputText(player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
-			if (player.hasCoat() && player.skin.base.isAny(SKIN_BASE_PLAIN, SKIN_BASE_STONE) && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasCoat() && player.skin.base.isAny(SKIN_BASE_PLAIN, SKIN_BASE_STONE) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ");
 				if (player.hasScales()) outputText("are");
 				else outputText("is");
@@ -8908,7 +8908,7 @@
   					if (!player.hasItem(consumables.MINOCUM)) {
   						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
   					}
-  					else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
+  					else if (player.lust < player.maxLust() || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
   					//(mino cum in inventory and non-horse, 100 lust)
   					else {
   						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");

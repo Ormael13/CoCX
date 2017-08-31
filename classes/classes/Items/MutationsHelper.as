@@ -67,7 +67,7 @@ package classes.Items {
 		}
 
 		public function humanizeFace():void {
-			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
+			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, <b>human face</b>.");
 			player.faceType = FACE_HUMAN;
 			changes++;
 		}
@@ -135,6 +135,7 @@ package classes.Items {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
 			}
+			outputText("You now have <b>human arms</b>!");
 			setArmType(ARM_TYPE_HUMAN);
 			changes++;
 		}

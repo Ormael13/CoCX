@@ -31,7 +31,7 @@ package classes.Scenes.Areas.Ocean
 			//First application
 			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
-			game.dynStats("lus", (6 * str));
+			game.dynStats("lus", (6 * amt));
 
 			//Loop through applying 1 point of venom at a time.
 			while (amt > 0) {

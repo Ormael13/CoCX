@@ -1127,7 +1127,7 @@ package classes.Scenes.Areas.Forest
 
 						outputText("The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
 						outputText("When you awake, despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
-						dynStats("int", -.5, "lus=", 100);
+						dynStats("int", -.5, "lus", player.maxLust());
 					}
 					//[Female:
 					else if (player.gender == 2) {
@@ -1154,7 +1154,7 @@ package classes.Scenes.Areas.Forest
 							outputText("You awake in a puddle of femcum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
 							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
-						dynStats("int", -.5, "lus=", 100);
+						dynStats("int", -.5, "lus", player.maxLust());
 					}
 					//[Herm:
 					else if (player.gender == 3) {
@@ -1183,7 +1183,7 @@ package classes.Scenes.Areas.Forest
 							outputText("You awake in a puddle of various sexual fluids, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
 							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
-						dynStats("int", -.5, "lus=", 100);
+						dynStats("int", -.5, "lus", player.maxLust());
 					}
 					//[Genderless:
 					else {
@@ -1199,7 +1199,7 @@ package classes.Scenes.Areas.Forest
 
 						outputText("The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
 						outputText("You awake in a couple of hours and stagger to your hooves, wobbly walking away using trees to steady yourself.  Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
-						dynStats("int", -.5, "lus=", 100);
+						dynStats("int", -.5, "lus", player.maxLust());
 					}
 				}
 				//Lust:
@@ -1258,7 +1258,7 @@ package classes.Scenes.Areas.Forest
 						outputText("She pays no attention to that though, and busies herself with inserting her ovipositor inside it. The thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for you and you begin to shake violently, incapable of touching yourself and alleviating the dreadful pressure.\n\n");
 						outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to stroke where your genitals should be with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. The mix of sensations is enough to stop you from shaking, but the pressure doesn't go away and you pass out as she continues her task.\n\n");
 					}
-					dynStats("int", -.5, "lus=", 100);
+						dynStats("int", -.5, "lus", player.maxLust());
 					//Anal bee pregnancy!
 					player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				}
@@ -1308,7 +1308,7 @@ package classes.Scenes.Areas.Forest
 				//Fan-submitted - female funtimes with a bit o' end breathplay
 				if (player.gender == 2) {
 					clearOutput();
-					if (player.lust < 100) outputText("Barely conscious, you look up as the bee approaches.  ");
+					if (player.lust < player.maxLust()) outputText("Barely conscious, you look up as the bee approaches.  ");
 					else outputText("Overcome with desire, you look up as the bee approaches.  ");
 					outputText("You feel weary and weak as your body begins to betray you to the pheromones of your foe.  You try and struggle as she moves over you, holding your hands against the ground as her chest pushes into your face, blocking sunlight and air as you protest. Your [armor] are pulled from your body as the bee-girl moves on top of you.\n\n");
 					outputText("A sharp pain hits your stomach as the bee-girl's stinger penetrates your flesh. Before you can cry out, a sickening warmth floods from the wound, washing away the pain and oozing through your body. Your " + vaginaDescript(0) + " juices flow between your ");
