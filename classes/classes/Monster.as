@@ -1686,7 +1686,7 @@
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
-				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flow through the water the shark girl grows increasingly vicious. ");
+				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flows through the water the shark girl grows increasingly vicious. ");
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)

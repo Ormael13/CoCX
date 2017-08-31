@@ -78,7 +78,7 @@ package classes.Scenes.Areas.HighMountains
 			addButton(5, "Sapphire", sapphiremenu).hint("Cummin Sooooon!");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
 			addButtonDisabled(7, "???", "Cummin Sooooon!");
-		//	addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
+			addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -201,6 +201,14 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function templeBasement():void {
 			clearOutput();
+			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
+				outputText("You wander back into the Temple basement atelier.");
+				menu();
+				addButton(0, "Statue", currentStateOfStatue).hint("Cummin Sooooon!");
+				addButton(1, "Strange Book", strangeBookOfGolems).hint("Cummin Sooooon!");
+				addButtonDisabled(2, "Spare Statue", "Cummin Sooooon!");
+				addButton(4, "Back", templemainmenu);
+			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
 				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there are two unfinished statues of what looks like a gargoyle. Either could be carved in any way you wish.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
@@ -208,13 +216,6 @@ package classes.Scenes.Areas.HighMountains
 				menu();
 				addButton(0, "Marble", chooseToWorkOnMarbleStatue);
 				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
-			}
-			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
-				outputText("You wander back into the Temple basement atelier.");
-				addButton(0, "Statue", currentStateOfStatue).hint("Cummin Sooooon!");
-				addButton(1, "Strange Book", strangeBookOfGolems).hint("Cummin Sooooon!");
-				addButtonDisabled(2, "Spare Statue", "Cummin Sooooon!");
-				addButton(4, "Back", templemainmenu);
 			}
 		}
 		
@@ -236,13 +237,15 @@ package classes.Scenes.Areas.HighMountains
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 10) outputText("a finished Gargoyle");
-			else outputText("an incomplete gargoyle");
-			outputText(". This statue looks like ");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("It has a gorgeous female face");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("It has a handsome male face");
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 10) outputText("a finished");
+			else outputText("an incomplete");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText(" marble");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText(" alabaster");
+			outputText(" gargoyle. This statue looks like ");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("it has a gorgeous female face");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("it has a handsome male face");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("!!! Androgen face desc !!!");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("Its face is yet to be finished");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("its face is yet to be finished");
 			outputText(" and its ");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("bald head looks great.");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("short hair looks great.");
@@ -257,10 +260,11 @@ package classes.Scenes.Areas.HighMountains
 				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 4)outputText("C-cup breasts");
 				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 5)outputText("D-cup breasts");
 				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 6)outputText("DD-cup breasts");
+				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 7)outputText("big DD-cup breasts");
 				outputText(".\n\n");
 			}
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || !player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) outputText("There's a block where its crotch would be.");
+			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && !player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) outputText("There's a block where its crotch would be.");
 			else {
 				outputText("At statue crotch ");
 				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
@@ -274,6 +278,8 @@ package classes.Scenes.Areas.HighMountains
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 8) outputText("7 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 9) outputText("7.5 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 10) outputText("8 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 11) outputText("8.5 inch");
+					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 12) outputText("9 inch");
 					outputText(" long cock.");
 				}
 				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("there is no cock.");
@@ -282,9 +288,9 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText(" feathered");
 			outputText(" wings ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed, wings folded behind its back.");
-			else outputText("have yet to be done.");
-			outputText(" Its ");
+			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed, wings folded behind its back");
+			else outputText("have yet to be done");
+			outputText(". Its ");
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("mace like");
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("axe like");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 0)outputText("unfinished");
@@ -352,11 +358,11 @@ package classes.Scenes.Areas.HighMountains
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBatWings():void {
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2;
+			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
 			SecondPartOfSculptingText();
 		}
 		public function SculptFeatheredWings():void {
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1;
+			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
 			SecondPartOfSculptingText();
 		}
 		
@@ -442,12 +448,13 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function SculptChest():void {
 			menu();
-			addButton(0, "Flat", SculptBald).hint("Sculpt flat chest.");
-			addButton(1, "A-cup", SculptShort).hint("Sculpt A-cup breasts.");
-			addButton(2, "B-cup", SculptMedium).hint("Sculpt B-cup breasts.");
-			addButton(3, "C-cup", SculptLong).hint("Sculpt C-cup breasts.");
-			addButton(4, "D-cup", SculptMedium).hint("Sculpt D-cup breasts.");
-			addButton(5, "DD-cup", SculptLong).hint("Sculpt DD-cup breasts.");
+			addButton(0, "Flat", SculptFlat).hint("Sculpt flat chest.");
+			addButton(1, "A-cup", SculptACup).hint("Sculpt A-cup breasts.");
+			addButton(2, "B-cup", SculptBCup).hint("Sculpt B-cup breasts.");
+			addButton(3, "C-cup", SculptCCup).hint("Sculpt C-cup breasts.");
+			addButton(4, "D-cup", SculptDCup).hint("Sculpt D-cup breasts.");
+			addButton(5, "DD-cup", SculptDDCup).hint("Sculpt DD-cup breasts.");
+			addButton(6, "Big DD-cup", SculptBigDDCup).hint("Sculpt Big DD-cup breasts.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptFlat():void {
@@ -480,6 +487,11 @@ package classes.Scenes.Areas.HighMountains
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 6, 0, 0);
 			SecondPartOfSculptingText();
 		}
+		public function SculptBigDDCup():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 7);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 7, 0, 0);
+			SecondPartOfSculptingText();
+		}
 		
 		public function SculptCock():void {
 			menu();
@@ -493,6 +505,8 @@ package classes.Scenes.Areas.HighMountains
 			addButton(7, "7\"", SculptCock7).hint("Sculpt 7' cock.");
 			addButton(8, "7.5\"", SculptCock8).hint("Sculpt 7.5' cock.");
 			addButton(9, "8\"", SculptCock9).hint("Sculpt 8' cock.");
+			addButton(10, "8.5\"", SculptCock10).hint("Sculpt 8.5' cock.");
+			addButton(11, "9\"", SculptCock11).hint("Sculpt 9' cock.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptNoCock():void {
@@ -545,6 +559,16 @@ package classes.Scenes.Areas.HighMountains
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 10, 0);
 			SecondPartOfSculptingText();
 		}
+		public function SculptCock10():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 11);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 11, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptCock11():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 12);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 12, 0);
+			SecondPartOfSculptingText();
+		}
 		
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
@@ -554,6 +578,13 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		public function strangeBookOfGolems():void {
+			clearOutput();
+			outputText("This book seems to explain the process of crafting a Gargoyle in length. It seems to imply your friend up there may have been made out from the soul of a willing sacrifice or a long dead person. Will you read it?");
+			menu();
+			addButton(0, "Read", readStrangeBookOfGolems);
+			addButton(1, "Back", templeBasement);
+		}
+		public function readStrangeBookOfGolems():void {
 			clearOutput();
 			outputText("Golemancy is the art of creating an artificial being from the combination of a statue and a soul. While any soul can give life to a golem, for the purpose of giving it at least minimal intelligence and autonomy, it is recommended to use the soul of a living or deceased humanoid. The most suiting and moral soul for such a purpose is generally the soul of a person near death’s door or a willing sacrifice. ");
 			outputText("Most of the Gargoyle crafted in this way are infused with the soul of pious priests and nun willing to protect the church of Marae for all eternity. Golems knows no hunger or pain but can be destroyed thus freeing their soul back. To prevent such a thing most golem are given the ability to recover by eating raw stone in order to repair themselves magically. To create a golem start by sculpting a suitable vessel for the soul. ");

@@ -28,7 +28,7 @@ package classes.Scenes.Areas.Ocean
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
-			outputText("Your opponent take a turn and charge at you at high speed jaw open as she go in for the kill viciously biting you. You start to bleed in abundance the water around you turning red. ");
+			outputText("Your opponent take a turn and charge at you at high speed jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takeDamage(damage, true);

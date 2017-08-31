@@ -128,6 +128,10 @@ public function meetEvangeline():void {
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	if (player.hasKeyItem("Soul Gem Research") >= 0) {
+		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
+		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
+	}
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -677,6 +681,33 @@ private function JustDoIt():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function craftingSoulGem():void {
+	clearOutput();
+	outputText("\"<i>Wait, you want me to craft a soul gem!? What do you even intend to do with it? These things are used to capture and hold souls!</i>\"\n\n");
+	outputText("You remind her that it’s your business, telling her that in the end it will serve a greater purpose.\n\n");
+	if (player.hasItem(consumables.S_WATER, 5) && player.hasItem(consumables.ECTOPLS, 5) && player.gems >= 2000) {
+		player.destroyItems(consumables.S_WATER, 5);
+		player.destroyItems(consumables.ECTOPLS, 5);
+		player.gems -= 2000;
+		statScreenRefresh();
+		outputText("\"<i>I hope you know what you're doing. Hand me the recipe and materials, and I will get to work.</i>\"");
+		player.createStatusEffect(StatusEffects.SoulGemCrafting,120,0,0,0);
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else {
+		outputText("\"<i>Regardless, I can’t craft a soul gem without the proper materials. Gather me 5 Ectoplasm, 5 vials of Pure Spring Water, and 2000 gems for the miscellaneous reagents.</i>\"");
+		doNext(meetEvangeline);
+	}
+}
+private function recivingCraftedSoulGem():void {
+	clearOutput();
+	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
+	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
+	outputText("<b>Acquired Soul Gem<\b>");
+	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
+	inventory.takeItem(useables.SOULGEM, meetEvangeline);
+}
+
 private function Experiments():void {
 	clearOutput();
 	outputText("Placeholder Text.");
@@ -685,6 +716,5 @@ private function Experiments():void {
 	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }
-
 	}
 }

@@ -1322,9 +1322,9 @@ private function struggle():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
-		outputText("You struggle to get free from the " + monster.short + " mighty tentacle. ");
+		outputText("You struggle to get free from the " + monster.short + " mighty tentacles. ");
 		if (rand(3) == 0 || rand(120) < player.str / 1.5) {
-			outputText("As force alone seems innefective, you bite one of her tentacles and she screams in surprise, releasing you.");
+			outputText("As force alone seems ineffective, you bite one of her tentacles and she screams in surprise, releasing you.");
 			player.removeStatusEffect(StatusEffects.ScyllaBind);
 		}
 		else {
@@ -1734,6 +1734,16 @@ public function multiArrowsStrike():void {
 		}
 		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+			else {
+				if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+					if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+					else damage *= 3.5;
+				}
+				else damage *= 2;
+			}
+		}	
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			damage += player.inte * 0.2;
 			if (player.inte >= 50) damage += player.inte * 0.1;
@@ -2070,6 +2080,16 @@ public function throwWeapon():void {
 		}
 		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+			else {
+				if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+					if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+					else damage *= 3.5;
+				}
+				else damage *= 2;
+			}
+		}
 /*		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			damage += player.inte * 0.2;
 			if (player.inte >= 50) damage += player.inte * 0.1;
@@ -2207,6 +2227,16 @@ public function shootWeapon():void {
 		}
 		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+			else {
+				if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+					if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+					else damage *= 3.5;
+				}
+				else damage *= 2;
+			}
+		}
 /*		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			damage += player.inte * 0.2;
 			if (player.inte >= 50) damage += player.inte * 0.1;
@@ -2283,7 +2313,7 @@ public function reloadWeapon():void {
 	}
 	else {
 		if (player.findPerk(PerkLib.RapidReload) < 0) fatigue(10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
-		else fatigue(5 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
+		else fatigue(5 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);//czy całkiem usunąć koszt przeładowania?
 		doNext(combatMenu);
 	}
 }

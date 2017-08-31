@@ -163,6 +163,7 @@ package classes
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
+		public static const SoulGemCrafting:StatusEffectType                = mk("SoulGemCrafting");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
 		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");

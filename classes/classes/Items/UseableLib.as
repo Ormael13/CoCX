@@ -47,6 +47,9 @@ package classes.Items
 		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 1000, 
 			"A Divine Bark Plates.",
 			"You look over the Divine Bark Plates.  Need some better desc I suppose.");	
+		public const SOULGEM:SimpleUseable = new SimpleUseable("SoulGem", "Soul Gem", "a Soul Gem", 2500, 
+			"A Soul Gem.",
+			"You examine the purplish crystal. It must be soul gem. It's used to capture and hold souls.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
 			"A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat.",
 			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");

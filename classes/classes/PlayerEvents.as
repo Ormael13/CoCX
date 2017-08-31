@@ -1021,6 +1021,7 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.BathedInHotSpring, 1, -1);
 			}
+			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
