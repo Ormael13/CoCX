@@ -7222,7 +7222,7 @@
 			//Physical
 			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-					outputText("Something shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
+					outputText("\n\nSomething shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
 					setLowerBody(LOWER_BODY_TYPE_ELF);
 				}
 				else humanizeLowerBody();
@@ -7230,7 +7230,7 @@
 			}
 			if (player.lowerBody == LOWER_BODY_TYPE_ELF && player.armType != ARM_TYPE_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == ARM_TYPE_HUMAN) {
-					outputText("Something in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
+					outputText("\n\nSomething in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
 					setArmType(ARM_TYPE_ELF);
 				}
 				else humanizeArms();
@@ -7238,7 +7238,7 @@
 			}
 			if (player.armType == ARM_TYPE_ELF && player.earType != EARS_ELVEN && changes < changeLimit && rand(3) == 0) {
 				if (player.earType == EARS_HUMAN) {
-					outputText("Sounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
+					outputText("\n\nSounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
 					setEarType(EARS_ELVEN);
 				}
 				else humanizeEars();
@@ -7246,7 +7246,7 @@
 			}
 			if (player.earType == EARS_ELVEN && player.eyeType != EYES_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.eyeType == EYES_HUMAN) {
-					outputText("You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new pupils are like those of an elf’s with a vertical slit that reflects lights.</b>");
+					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new pupils are like those of an elf’s with a vertical slit that reflects lights.</b>");
 					setEyeType(EYES_ELF);
 				}
 				else humanizeEyes();
@@ -7254,7 +7254,7 @@
 			}
 			//elven senses
 			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
-				outputText("Something changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
+				outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
 				setHairType(HAIR_SILKEN);
 				changes++;
 			}

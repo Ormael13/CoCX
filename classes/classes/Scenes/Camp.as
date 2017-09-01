@@ -2886,7 +2886,7 @@ private function fixFlags():void {
 		player.removeStatusEffect(StatusEffects.FactorySuccubusDefeated);
 	}
 	if (player.hasStatusEffect(StatusEffects.FactoryIncubusDefeated)) {
-		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
+		flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] = 1;
 		player.removeStatusEffect(StatusEffects.FactoryIncubusDefeated);
 	}
 	if (player.hasStatusEffect(StatusEffects.FactoryOmnibusDefeated)) {
