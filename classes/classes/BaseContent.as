@@ -936,9 +936,6 @@ import coc.xxc.StoryContext;
 		protected static function onGameInit(f:Function):void {
 			CoC.onGameInit(f);
 		}
-		protected function get context():StoryContext {
-			return kGAMECLASS.context;
-		}
 	}
 
 }

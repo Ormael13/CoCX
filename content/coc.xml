@@ -109,10 +109,20 @@
                     You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your [armor] and leave the passed-out satyr behind as you go back to your camp.
                 </text>
             </lib>
+            <text name="deepwoods">
+                After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.
+
+                <b>Deepwoods exploration unlocked!</b>
+            </text>
         </lib>
     </extend-zone>
     <extend-zone name="deepwoods">
-
+        <lib name="strings">
+            <text name="walk">
+                You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.
+                <dynStats tou="0.5" int="1"/>
+            </text>
+        </lib>
     </extend-zone>
 
     <!-- Modding -->

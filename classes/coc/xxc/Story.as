@@ -32,16 +32,8 @@ public class Story extends StmtList{
 		if (isLib) return;
 		super.execute(context);
 	}
-	public function display(context:ExecContext,ref:String,locals:Object=null):void {
-		var obj:Story = locate(ref);
-		if (!obj) {
-			context.error(this,"Cannot dereference "+ref);
-			return;
-		}
-//		context.locals = locals || {};
-		if (locals) context.pushScope(locals);
-		context.execute(obj);
-		if (locals) context.popScope();
+	public function bind(context:ExecContext):BoundStory {
+		return new BoundStory(this,context);
 	}
 	public static function locateSplit(story:Story,ref:/*String*/Array):Story {
 		ref = ref.slice();

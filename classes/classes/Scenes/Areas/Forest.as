@@ -15,7 +15,7 @@ import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
-import coc.xxc.Story;
+import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
 
 use namespace kGAMECLASS;
@@ -56,8 +56,7 @@ use namespace kGAMECLASS;
 
 		private function deepwoodsWalkFn():void {
 			clearOutput();
-			outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.");
-			dynStats("tou", .5, "int", 1);
+			deepwoodsStory.display("strings/walk");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function tentacleBeastDeepwoodsEncounterFn():void {
@@ -81,8 +80,8 @@ use namespace kGAMECLASS;
 		public function get deepwoodsEncounter():GroupEncounter {
 			return _deepwoodsEncounter
 		}
-		private var forestStory:Story;
-		private var deepwoodsStory:Story;
+		private var forestStory:BoundStory;
+		private var deepwoodsStory:BoundStory;
 		private function init():void {
 			const game:CoC     = getGame();
 			const fn:FnHelpers = Encounters.fn;
@@ -100,7 +99,7 @@ use namespace kGAMECLASS;
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return (player.exploredForest >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
+							return (player.exploredForest >= 20) && !deepwoodsDiscovered();
 						},
 						chance: Encounters.ALWAYS
 					},  {
@@ -330,38 +329,38 @@ use namespace kGAMECLASS;
 			});
 			// what we do here: create a Story (ZoneStmt) and register it in game.rootStory
 			// so it will be accessible from external files
-			forestStory = ZoneStmt.wrap(_forestEncounter,game.rootStory);
-			deepwoodsStory = ZoneStmt.wrap(_deepwoodsEncounter,game.rootStory);
+			forestStory = ZoneStmt.wrap(_forestEncounter,game.rootStory).bind(game.context);
+			deepwoodsStory = ZoneStmt.wrap(_deepwoodsEncounter,game.rootStory).bind(game.context);
 		}
 		public function exploreDeepwoods():void {
-			deepwoodsEncounter.execEncounter();
+			deepwoodsStory.execute();
 		}
 
 		public function tripOnARoot():void {
-			forestStory.display(context, "strings/trip");
+			forestStory.display("strings/trip");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function findTruffle():void {
-			forestStory.display(context, "strings/truffle");
+			forestStory.display("strings/truffle");
 			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 		}
 		public function findHPill():void {
-			forestStory.display(context, "strings/hpill");
+			forestStory.display("strings/hpill");
 			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 		}
 		public function findChitin():void {
 			clearOutput();
-			forestStory.display(context, "strings/chitin");
+			forestStory.display("strings/chitin");
 			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 		}
 		public function forestWalkFn():void {
-			forestStory.display(context, "strings/walk");
+			forestStory.display("strings/walk");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function marbleVsImp():void {
 			clearOutput();
-			forestStory.display(context, "string/marble");
+			forestStory.display("string/marble");
 			//end event
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -371,7 +370,7 @@ use namespace kGAMECLASS;
 			doNext(camp.returnToCampUseOneHour);
 			//Increment forest exploration counter.
 			player.exploredForest++;
-			forestStory.execute(context);
+			forestStory.execute();
 //			forestEncounter.execEncounter();
 			flushOutputTextToGUI();
 		}
@@ -484,20 +483,20 @@ use namespace kGAMECLASS;
 		private function trappedSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			forestStory.display(context, "strings/glade-satyr/0-intro");
+			forestStory.display("strings/glade-satyr/0-intro");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
 				outputText("<b>New codex entry unlocked: Satyrs!</b>\n\n")
 			}
 			//(Player lacks a penis:
 			if(!player.hasCock()) {
-				forestStory.display(context, "strings/glade-satyr/1-nocock");
+				forestStory.display("strings/glade-satyr/1-nocock");
 				doNext(camp.returnToCampUseOneHour);
 			}
 			//Player returns to camp)
 			//(Player has penis:
 			else {
-				forestStory.display(context, "strings/glade-satyr/1-prompt");
+				forestStory.display("strings/glade-satyr/1-prompt");
 				//[Yes] [No]
 				simpleChoices("Ravage", rapeSatyr, "", null, "", null, "", null, "Leave", ignoreSatyr);
 			}
@@ -507,7 +506,7 @@ use namespace kGAMECLASS;
 		private function ignoreSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			forestStory.display(context, "strings/glade-satyr/2-leave");
+			forestStory.display("strings/glade-satyr/2-leave");
 			dynStats("lus", 5+player.lib/20);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -516,7 +515,7 @@ use namespace kGAMECLASS;
 			clearOutput();
 			spriteSelect(99);
 			var x:Number = player.biggestCockIndex();
-			forestStory.display(context, "strings/glade-satyr/2-ravage",{$x:x});
+			forestStory.display("strings/glade-satyr/2-ravage",{$x:x});
 			player.orgasm();
 			//[Again][Leave]
 			simpleChoices("Again", secondSatyrFuck, "", null, "", null, "", null, "Leave", dontRepeatFuckSatyr);
@@ -526,7 +525,7 @@ use namespace kGAMECLASS;
 		private function dontRepeatFuckSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			forestStory.display(context, "strings/glade-satyr/3-leave");
+			forestStory.display("strings/glade-satyr/3-leave");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//[=Again=]
@@ -534,7 +533,7 @@ use namespace kGAMECLASS;
 			var x:int = player.cockThatFits(monster.analCapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			forestStory.display(context, "strings/glade-satyr/3-again",{$x:x});
+			forestStory.display("strings/glade-satyr/3-again",{$x:x});
 			player.orgasm();
 			dynStats("lib", 1, "sen", -5);
 			doNext(camp.returnToCampUseOneHour);
@@ -583,7 +582,7 @@ use namespace kGAMECLASS;
 		public function discoverDeepwoods():void {
 			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 			clearOutput();
-			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>");
+			forestStory.display("strings/deepwoods");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function bigJunkChance():Number {
