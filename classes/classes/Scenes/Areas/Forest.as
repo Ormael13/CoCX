@@ -208,6 +208,13 @@ use namespace kGAMECLASS;
 							return (/*player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant()*/ true);
 						},
 						chance: 100
+					}, {
+						name: "celess-armor",
+						call: celessArmor,
+						when: function():Boolean{
+							return game.celessScene.isFollower && !game.celessScene.armorFound;
+						},
+						chance: 0.1
 					});
 					/*
 					{
@@ -380,6 +387,11 @@ use namespace kGAMECLASS;
 					break;
 			}
 			flushOutputTextToGUI();
+		}
+		public function celessArmor():void{
+			// TODO Actually write the scene
+			getGame().celessScene.findArmor();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function tripOnARoot():void {
 			forestStory.display(context, "strings/trip");

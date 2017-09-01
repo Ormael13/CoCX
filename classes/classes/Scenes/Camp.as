@@ -450,7 +450,7 @@ private function doCamp():void { //Only called by playerMenu
 	// Celess birth scene
 	if (player.hasStatusEffect(StatusEffects.CampCelessTrigger)){
 		player.removeStatusEffect(StatusEffects.CampCelessTrigger);
-		celessScene.celessBirth();
+		celessScene.birthScene();
 		hideMenus();
 		return;
 	}
