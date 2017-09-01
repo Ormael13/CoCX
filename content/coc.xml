@@ -114,4 +114,7 @@
     <extend-zone name="deepwoods">
 
     </extend-zone>
+
+    <!-- Modding -->
+    <include path="mod.xml" required="false"/>
 </extend-story>

@@ -696,7 +696,7 @@ the text from being too boring.
 		}
 
 		private function loadStory():void {
-			compiler.includeFile("coc.xml");
+			compiler.includeFile("coc.xml", true);
 		}
 
 		public function run():void

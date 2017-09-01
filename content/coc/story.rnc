@@ -84,5 +84,6 @@ dynStats = element dynStats {
 }
 output = element output { expression }
 Include = element include {
-    attribute path { text }
+    attribute path { text },
+    attribute required { "true" | "false" }?
 }

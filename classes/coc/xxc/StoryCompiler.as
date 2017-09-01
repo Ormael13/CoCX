@@ -54,32 +54,35 @@ public class StoryCompiler extends Compiler {
 			case "encounter":
 				return compileEncounter(x);
 			case "include":
-				return includeFile(x.@path);
+				return includeFile(x.@path, x.@required != "false");
 			case "output":
 				return compileOutput(x);
 			case "lib":
+				return compileStory(x, false);
 			case "text":
 			case "story":
 			case "string":
-				return compileStory(x, tag == "lib");
+				return compileStory(x, true);
 			case "zone":
-				return compileZone(x);
+				return compileStoryBody(new ZoneStmt(stack[0], x.@name), x) as ZoneStmt;
+			/*case "extend-encounter":
+				return extendEncounter(x);*/
 			case "extend-story":
-				return extendStory(x);
+				return compileStoryBody(locate(x.@name), x);
 			case "extend-zone":
-				return extendZone(x);
+				return compileStoryBody(locate(x.@name), x) as ZoneStmt;
 			default:
 				throw new Error("Unknown tag "+tag);
 		}
 	}
-	public function includeFile(path:String):IncludeStmt {
+	public function includeFile(path:String,required:Boolean):IncludeStmt {
 		var basedir:String = _basedir;
 		var l:int = path.lastIndexOf('/');
 		if (l>0) {
 			basedir += path.substring(0,l);
 			path = path.substring(l+1);
 		}
-		return new IncludeStmt(stack[0],clone(basedir),path);
+		return new IncludeStmt(stack[0],clone(basedir),path,required);
 	}
 	protected function compileDisplay(x:XML):DisplayStmt {
 		return new DisplayStmt(stack[0],x.@ref);
@@ -91,25 +94,27 @@ public class StoryCompiler extends Compiler {
 		for (var attr:String in attrs) d.setAttr(attr,attrs[attr]);
 		return d;
 	}
-	protected function compileEncounter(x:XML):Statement {
+	protected function peekZone():ZoneStmt {
 		var zone:ZoneStmt = stack[0] as ZoneStmt;
-		if (!zone) throw new Error("<encounter> not in <zone>: "+x.toString().substr(0,20));
+		if (!zone) throw new Error("Not a <zone> "+stack[0].toString().substr(0,20));
+		return zone;
+	}
+	protected function compileEncounter(x:XML):Statement {
 		var encounter:Story = compileStory(x);
-		zone.add(encounter,x.@chance,x.@when);
+		peekZone().add(encounter,x.@chance,x.@when);
 		return null;
 	}
 	protected function compileOutput(x:XML):OutputStmt {
 		return new OutputStmt(x.text().toString());
 	}
 	protected function compileStory(x:XML, isLib:Boolean = false):Story {
-		var story:Story = new Story(x.localName(),stack[0], x.@name, isLib);
-		compileStoryBody(story, x);
-		return story;
+		return compileStoryBody(new Story(x.localName(),stack[0], x.@name, isLib), x);
 	}
-	protected function compileStoryBody(story:Story, x:XML):void {
+	protected function compileStoryBody(story:Story, x:XML):Story {
 		stack.unshift(story);
 		compileChildrenInto(x, story.stmts);
 		stack.shift();
+		return story;
 	}
 	override protected function compileText(x:XML):Statement {
 		if (stack.length == 0 || stack[0].tagname == 'lib') return super.compileText(x);
@@ -124,22 +129,10 @@ public class StoryCompiler extends Compiler {
 		}
 		return new TextStmt(x.toString(), trimStyle);
 	}
-	protected function compileZone(x:XML):ZoneStmt {
-		var zone:ZoneStmt = new ZoneStmt(stack[0], x.@name);
-		compileStoryBody(zone,x);
-		return zone;
-	}
-	protected function extendStory(x:XML):Story {
-		var story:Story = stack[0].locate(x.@name);
-		if (!story) throw new Error("Unable to locate <extend-story> name="+x.@name);
-		compileStoryBody(story,x);
+	protected function locate(ref:String):Story {
+		var story:Story = stack[0].locate(ref);
+		if (!story) throw new Error("Unable to locate ref="+ref+" from "+stack[0].toString().substr(0,20));
 		return story;
-	}
-	protected function extendZone(x:XML):ZoneStmt {
-		var zone:ZoneStmt = stack[0].locate(x.@name) as ZoneStmt;
-		if (!zone) throw new Error("Unable to locate <extend-zone> name="+x.@name);
-		compileStoryBody(zone,x);
-		return zone;
 	}
 }
 }

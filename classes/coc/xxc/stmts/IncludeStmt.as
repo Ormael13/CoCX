@@ -17,10 +17,11 @@ public class IncludeStmt extends Statement{
 	public function get loaded():Boolean {
 		return _loaded;
 	}
-	public function IncludeStmt(story:Story,compiler:StoryCompiler,path:String) {
+	public function IncludeStmt(story:Story,compiler:StoryCompiler,path:String,required:Boolean=true) {
 		this.path = path;
 		CoCLoader.loadText(compiler.basedir+path,function(success:Boolean,content:*,event:Event):void {
-			if (!success || _loaded) return;
+			if (_loaded) return;
+			if (!success && required) throw new Error("Required scenario not found: "+path);
 			_loaded = true;
 			XML.ignoreWhitespace = false;
 			try {
@@ -28,7 +29,7 @@ public class IncludeStmt extends Statement{
 			} catch (e:Error) {
 				_loaded = false;
 				compiler.detach(story);
-				throw e;
+				if (required) throw e;
 			}
 		});
 	}
