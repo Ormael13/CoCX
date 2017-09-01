@@ -689,6 +689,7 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
+			new Story("lib",rootStory,"monsters",true);
 			execPostInit();
 			loadStory();
 			this.addFrameScript( 0, this.run );

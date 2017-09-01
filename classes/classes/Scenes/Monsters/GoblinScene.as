@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kGAMECLASS;
 
 import coc.xxc.BoundStory;
+import coc.xxc.Story;
 
 public class GoblinScene extends BaseContent
 	{
@@ -17,7 +18,7 @@ public class GoblinScene extends BaseContent
 		}
 		private var story:BoundStory;
 		private function init():void {
-			story = getGame().rootStory.locate("/monsters/goblin").bind(getGame().context);
+			story = new Story("story",getGame().rootStory.locate("monsters"),"goblin").bind(getGame().context);
 		}
 
 		/*Goblins

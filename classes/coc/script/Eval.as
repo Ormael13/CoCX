@@ -37,6 +37,7 @@ public class Eval {
 	private static const RX_FLOAT:RegExp = /^[+\-]?(\d+(\.\d+)?|\.\d+)(e[+\-]?\d+)?$/;
 	private static const RX_INT:RegExp = /^[+\-]?(0x)?\d+$/;
 
+	private static const LA_BLOCK_COMMENT:RegExp = /^\/\*([^*\/]|\*[^\/]|[^\*]\/)*\*+\//;
 	private static const LA_FLOAT:RegExp = /^[+\-]?(\d+(\.\d+)?|\.\d+)(e[+\-]?\d+)?/;
 	private static const LA_INT:RegExp = /^[+\-]?(0x)?\d+/;
 	private static const LA_ID:RegExp = /^[a-zA-Z_$][a-zA-Z_$0-9]*/;
@@ -243,7 +244,8 @@ public class Eval {
 		return false;
 	}
 	private function eatWs():void {
-		eat(/^\s+/);
+		//noinspection StatementWithEmptyBodyJS
+		while (eat(/^\s+/) || eat(LA_BLOCK_COMMENT));
 	}
 	private function evalId(id:String):* {
 		switch (id) {

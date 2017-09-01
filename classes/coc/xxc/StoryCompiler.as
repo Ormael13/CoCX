@@ -58,11 +58,11 @@ public class StoryCompiler extends Compiler {
 			case "output":
 				return compileOutput(x);
 			case "lib":
-				return compileStory(x, false);
+				return compileStory(x, true);
 			case "text":
 			case "story":
 			case "string":
-				return compileStory(x, true);
+				return compileStory(x, false);
 			case "zone":
 				return compileStoryBody(new ZoneStmt(stack[0], x.@name), x) as ZoneStmt;
 			/*case "extend-encounter":

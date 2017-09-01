@@ -125,6 +125,9 @@
         </lib>
     </extend-zone>
 
+    <!-- Monsters -->
+    <include path="coc/monsters/goblin.xml"/>
+
     <!-- Modding -->
     <include path="mod.xml" required="false"/>
 </extend-story>
