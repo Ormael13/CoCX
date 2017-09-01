@@ -48,6 +48,7 @@ font = element font {
 xcc-content = Text | String
     | lib | story | extend-story | zone | extend-zone
     | display | dynStats | output | Include
+    | var
 namedBlock = attribute name { text }?, content*
 Text = element text { namedBlock }
 String = element string { namedBlock }
@@ -86,4 +87,8 @@ output = element output { expression }
 Include = element include {
     attribute path { text },
     attribute required { "true" | "false" }?
+}
+var = element var {
+    attribute name { text },
+    attribute value { expression }
 }

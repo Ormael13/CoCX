@@ -20,7 +20,7 @@
                 It feels strong and flexible - maybe someone can make something of it.
             </text>
             <text name="walk">
-                <if test="player.cor lt 80">
+                <if test="player.cor &lt; 80">
                     You enjoy a peaceful walk in the woods, it gives you time to think.
                     <dynStats tou="0.5" int="1"/>
                     <else>
@@ -55,7 +55,7 @@
                     You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n
                 </text>
                 <text name="2-leave">
-                    You shake your head, <if test="player.cor lt 50">disgusted by the strange thoughts this place seems to put into your mind<else>not feeling inclined to rape some satyr butt right now</else></if>, and silently leave him to his pleasures.
+                    You shake your head, <if test="player.cor &lt; 50">disgusted by the strange thoughts this place seems to put into your mind<else>not feeling inclined to rape some satyr butt right now</else></if>, and silently leave him to his pleasures.
                 </text>
                 <text name="2-ravage">
                     <switch value="player.cor">
@@ -78,7 +78,7 @@
                     Eventually, his bleating and screaming start to annoy you, so you silence him by grabbing at his horns and shoving his head to the side, into one of the breast-like growths nearby.  The satyr unthinkingly latches onto the floral nipple and starts to suckle, quieting him as you hoped.  You're not sure why, but he starts to voluntarily buck back and forth between you and the flower; maybe he's getting into the spirit of things, or maybe the vegetal teat he's pulling on has introduced an aphrodisiac chemical after so many violent attempts to pull out of the kindred flower.
 
                     You resolve not to think about it right now and just enjoy pounding the satyr's ass.  With his bucking you're able to thrust even farther into his tight puckered cherry,
-                    <if test="player.cockArea(x) gte 100">stretching it all out of normal proportion and ruining it for whomever might happen to use it next.<else>stretching it to fit your [cock biggest] like a condom.</else></if>
+                    <if test="player.cockArea($x) &gt;= 100">stretching it all out of normal proportion and ruining it for whomever might happen to use it next.<else>stretching it to fit your [cock biggest] like a condom.</else></if>
                     Your groin throbs, <if test="player.balls>0">your balls churn, </if>and you grunt as you feel the first shots of cum flowing along [eachcock], only to pour out into <if test="player.cockTotal()>1"> and onto</if> the satyr's abused ass; you continue pounding him even as you climax, causing rivulets of cum to run down his cheeks and legs.
 
                     Still slurping obscenely on the fake breast, the satyr groans and murmurs; you're not sure how much of a role the sap he's swallowing or the cunt-flower on his cock is playing, but it looks like he's actually enjoying himself now.

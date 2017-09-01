@@ -158,4 +158,10 @@
             </xs:attribute>
         </xs:complexType>
     </xs:element>
+    <xs:element name="var" substitutionGroup="ns1:xcc-content">
+        <xs:complexType>
+            <xs:attribute name="name" use="required"/>
+            <xs:attribute name="value" use="required"/>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
