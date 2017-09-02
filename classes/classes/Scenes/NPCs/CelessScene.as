@@ -38,7 +38,13 @@ package classes.Scenes.NPCs
 			}
 		}
 		public function load(loadfrom:*):void{
-			if (loadfrom.celess != undefined){
+			if (loadfrom == undefined || loadfrom.celess == undefined){
+				_age = 0;
+				_corruption = 0;
+				_name = "Celess";
+				_armorFound = false;
+			}
+			else{
 				_age = loadfrom.celess.age;
 				_corruption = loadfrom.celess.corruption;
 				_name = loadfrom.celess.name;

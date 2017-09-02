@@ -2349,6 +2349,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (saveFile.data.world.x != undefined){
 				game.celessScene.load(saveFile.data.world.x);
 			}
+		} else{
+			game.celessScene.load(undefined);
 		}
 		
 		doNext(playerMenu);
