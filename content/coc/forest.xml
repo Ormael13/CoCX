@@ -284,22 +284,31 @@
 				<text name="fuck-her">
 					It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true">beside Edryn's of course</if>.
 					You ask the unicorn about it.
-
+					
 					<i>“Umph... I guess that can work too, but I'm only doing it because you are a virgin, unicorns don’t mate with anything else.”</i>
-
+					
 					That being all the encouragement you need, you position yourself behind her to insert your [cock] into her warm, gaping cunt.
 					She moans in delight as you push as much of your cock as you can inside, still looking for the perfect angle.
 					The unicorn taunts you all the while.
-
+					
 					<i>“Pah! You should be grateful I’m even allowing you! With the demonic plague, the unicorn population has been decreasing dramatically. 
 					As such, it’s  my responsibility to increase it, so you better not waste my virginity, you sinner.”</i>
-
+					
 					Sinner, eh? We'll see about sins later. Her pussy is quite large, so you have to work double time to make her feel anything at all.
 					You proceed to wildly fuck the unicorn’s hole with aggressive thrusts in order to, at the very least, make her moan.
 					You eventually reach your limit and flood her cunt with your cum, making her whine.
 					You check the results, but to your surprise not only nothing spills out of her cunt, but her hymen is actually still intact!
-
+					
 					<i>“I guess that will have to do… you can have the shield. Now get out of here, I have a pregnancy to manage.”\n\n</i>
+				</text>
+				<text name="armorScene">
+					You stumble upon the forest grove where the shield used to be.
+					The unicorn has long left but you spot a shine on the ground deeper in.
+					It looks like a set of untarnished silvery armor, likely an ancient treasure she left.
+					Upon unearthing the piece, you discover this full plate armor was clearly not made for a human but a centaur.
+					The breastplate is ornamented with what you assume is a holy symbol, namely a blossoming oak tree <if test="flags[kFLAGS.MET_MARAE] gt 0">obviously Marae’s</if>.
+					It has plated barding and a skirt fit for a horse  body, it even comes with matching horseshoes. 
+					While clearly made like a full plate, it is surprisingly flexible, allowing for maneuverability similar to that of light armor, which is rather unusual.
 				</text>
 			</lib>
 		</lib>

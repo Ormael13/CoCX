@@ -389,7 +389,7 @@ use namespace kGAMECLASS;
 			flushOutputTextToGUI();
 		}
 		public function celessArmor():void{
-			// TODO Actually write the scene
+			forestStory.display(context, "strings/celess-unicorn/armorScene");
 			getGame().celessScene.findArmor();
 			doNext(camp.returnToCampUseOneHour);
 		}
