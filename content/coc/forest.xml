@@ -306,9 +306,11 @@
 					The unicorn has long left but you spot a shine on the ground deeper in.
 					It looks like a set of untarnished silvery armor, likely an ancient treasure she left.
 					Upon unearthing the piece, you discover this full plate armor was clearly not made for a human but a centaur.
+					
 					The breastplate is ornamented with what you assume is a holy symbol, namely a blossoming oak tree <if test="flags[kFLAGS.MET_MARAE] gt 0">obviously Marae’s</if>.
 					It has plated barding and a skirt fit for a horse  body, it even comes with matching horseshoes. 
 					While clearly made like a full plate, it is surprisingly flexible, allowing for maneuverability similar to that of light armor, which is rather unusual.
+					
 				</text>
 			</lib>
 		</lib>

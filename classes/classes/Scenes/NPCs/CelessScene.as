@@ -29,6 +29,23 @@ package classes.Scenes.NPCs
 			_story=new Story("story", game.rootStory, "celess", true);
 		}
 		
+		public function save(saveto:*):void{
+			saveto.celess = {
+				age:_age,
+				corruption:_corruption,
+				name:_name,
+				armorFound:_armorFound
+			}
+		}
+		public function load(loadfrom:*):void{
+			if (loadfrom.celess != undefined){
+				_age = loadfrom.celess.age;
+				_corruption = loadfrom.celess.corruption;
+				_name = loadfrom.celess.name;
+				_armorFound = loadfrom.celess.armorFound;
+			}
+		}
+		
 		/* INTERFACE classes.TimeAwareInterface */
 		
 		public function timeChange():Boolean 
@@ -209,7 +226,7 @@ package classes.Scenes.NPCs
 			if (!player.goIntoHeat(true, 10)){player.goIntoRut(true, 10); }	
 		}
 		
-		public function itemImproveMenu(item:Useable=null):void{
+		public function itemImproveMenu(item:Useable = null, from:Useable = null ):void{
 			var improvableItems:Array = [
 					[weapons.BFSWORD,		weapons.NPHBLDE,	weapons.EBNYBLD],
 					[weapons.KATANA,		weapons.MASAMUN,	weapons.BLETTER],
@@ -219,7 +236,8 @@ package classes.Scenes.NPCs
 					[weaponsrange.BOWLONG,	null/*Artemis*/,	null/*Wild Hunt*/],
 					[weapons.KIHAAXE,		weapons.WG_GAXE,	weapons.DE_GAXE],
 					[weapons.SPEAR,			null/*Seraphic Spear*/,	null/*Demon Snakespear*/],
-					[weapons.JRAPIER,		weapons.Q_GUARD,	weapons.B_WIDOW]
+					[weapons.JRAPIER,		weapons.Q_GUARD,	weapons.B_WIDOW],
+					[armors.CTPALAD,		null,				armors.CTBGUAR]
 				];
 			var selectfrom:int = 1;
 			clearOutput();
@@ -227,13 +245,14 @@ package classes.Scenes.NPCs
 			outputText("<b>Not curruntly implemented</B>");
 			if (item != null){
 				_story.display(context, "strings/itemImprove/improveThatItem", {$name:_name});
+				player.destroyItems(from, 1);
 				inventory.takeItem(item, camp.returnToCampUseOneHour);
 				return;
 			}
 			if (isCorrupt){selectfrom = 2; }
 			for (var i:int = 0; i < improvableItems.length; i++){
 				if (player.hasItem(improvableItems[i][0], 1)){
-					addButton(i, (improvableItems[i][selectfrom])/*.id*/, itemImproveMenu,(improvableItems[i][selectfrom]));
+					addButton(i, (improvableItems[i][selectfrom])/*.id*/, itemImproveMenu,(improvableItems[i][selectfrom]),improvableItems[i][0]);
 				}
 				else if(improvableItems[i][selectfrom] == null){/*do nothing*/}
 				else{

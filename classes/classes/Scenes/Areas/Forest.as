@@ -205,16 +205,14 @@ use namespace kGAMECLASS;
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (/*player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant()*/ true);
-						},
-						chance: 100
+							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant();
+						}
 					}, {
 						name: "celess-armor",
 						call: celessArmor,
 						when: function():Boolean{
 							return game.celessScene.isFollower && !game.celessScene.armorFound;
-						},
-						chance: 0.1
+						}
 					});
 					/*
 					{
@@ -391,7 +389,7 @@ use namespace kGAMECLASS;
 		public function celessArmor():void{
 			forestStory.display(context, "strings/celess-unicorn/armorScene");
 			getGame().celessScene.findArmor();
-			doNext(camp.returnToCampUseOneHour);
+			inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
 		}
 		public function tripOnARoot():void {
 			forestStory.display(context, "strings/trip");
