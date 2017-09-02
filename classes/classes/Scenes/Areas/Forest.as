@@ -379,11 +379,11 @@ use namespace kGAMECLASS;
 				case 3:
 					forestStory.display(context, "strings/celess-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
 					player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
-					inventory.takeItem(shields.SACNCTL, camp.returnToCampUseOneHour);
+					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					break;
 				case 4:
 					forestStory.display(context, "strings/celess-unicorn/fuck-her");
-					inventory.takeItem(shields.SACNCTL, camp.returnToCampUseOneHour);
+					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					break;
 			}
 			flushOutputTextToGUI();

@@ -211,15 +211,15 @@ package classes.Scenes.NPCs
 		
 		public function itemImproveMenu(item:Useable=null):void{
 			var improvableItems:Array = [
-					[weapons.BFSWORD,"Nehilim Blade","Ebony Destroyer"],
-					[weapons.KATANA,"Masamune","Blood Letter"],
-					[weapons.W_STAFF,"Unicorn Staff","Nocturnus Staff"],
-					[shields.SACNCTL,"Sanctuary","Dark Aegis"],
-					[weapons.DEMSCYT,"Lifehunt Scythe",null],
-					[weaponsrange.BOWLONG,"Artemis","Wild Hunt"],
-					[weapons.KIHAAXE,"Winged Greataxe","Demonic Greataxe"],
-					[weapons.SPEAR,"Seraphic Spear","Demon Snakespear"],
-					[weapons.JRAPIER,"Queen's Guard","Black Widow"]
+					[weapons.BFSWORD,		weapons.NPHBLDE,	weapons.EBNYBLD],
+					[weapons.KATANA,		weapons.MASAMUN,	weapons.BLETTER],
+					[weapons.W_STAFF,		weapons.U_STAFF,	weapons.N_STAFF],
+					[shields.SANCTYN,		shields.SANCTYL,	shields.SANCTYD],
+					[weapons.DEMSCYT,		null/*Lifehunt Scythe*/,	null],
+					[weaponsrange.BOWLONG,	null/*Artemis*/,	null/*Wild Hunt*/],
+					[weapons.KIHAAXE,		weapons.WG_GAXE,	weapons.DE_GAXE],
+					[weapons.SPEAR,			null/*Seraphic Spear*/,	null/*Demon Snakespear*/],
+					[weapons.JRAPIER,		weapons.Q_GUARD,	weapons.B_WIDOW]
 				];
 			var selectfrom:int = 1;
 			clearOutput();
@@ -233,10 +233,11 @@ package classes.Scenes.NPCs
 			if (isCorrupt){selectfrom = 2; }
 			for (var i:int = 0; i < improvableItems.length; i++){
 				if (player.hasItem(improvableItems[i][0], 1)){
-					addButton(i, (improvableItems[i][selectfrom])/*.id*/, itemImproveMenu/*,(improvableItems[i][selectfrom])*/);
+					addButton(i, (improvableItems[i][selectfrom])/*.id*/, itemImproveMenu,(improvableItems[i][selectfrom]));
 				}
+				else if(improvableItems[i][selectfrom] == null){/*do nothing*/}
 				else{
-					addButtonDisabled(i, (improvableItems[i][selectfrom])/*.id*/);
+					addButtonDisabled(i, (improvableItems[i][selectfrom]).id);
 				}
 			}
 			addButton(14, "Back", campInteraction);
