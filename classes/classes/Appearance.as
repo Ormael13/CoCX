@@ -2520,7 +2520,9 @@
 					[HORNS_UNICORN, "unicorn"],
 					[HORNS_OAK, "oak"],
 					[HORNS_GARGOYLE, "gargoyle"],
-					[HORNS_ORCHID, "orchid"]
+					[HORNS_ORCHID, "orchid"],
+					[HORNS_ONI, "1 oni"],
+					[HORNS_ONI_X2, "2 oni"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(

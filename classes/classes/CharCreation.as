@@ -716,7 +716,7 @@ import fl.controls.ComboBox;
 			clearOutput();
 			outputText("You have " + hairDescript() + ".\n\nYou will proceed to customization.");
 			//chooseEndowment(false);
-			/*chooseEyesColor();
+			chooseEyesColor();
 		}
 		
 		private function chooseEyesColor():void {
@@ -737,9 +737,9 @@ import fl.controls.ComboBox;
 		}
 
 		private function setEyesColor(choice:String):void { //And choose hair
-			player.eyesColor = choice;
+			player.eyeColor = choice;
 			clearOutput();
-			outputText("You selected a " + choice + " eyes color.\n\nYou will proceed to customization.");*/
+			outputText("You selected a " + choice + " eyes color.\n\nYou will proceed to customization.");
 			//chooseEndowment(false);
 			genericStyleCustomizeMenu();
 		}

@@ -891,6 +891,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.hairLength = player.hairLength;
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyeType;
+		saveFile.data.eyeColor = player.eyeColor;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.tongueType = player.tongueType;
 		saveFile.data.earType = player.earType;
@@ -1734,6 +1735,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.eyeType = EYES_HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
+		if (saveFile.data.eyeColor == undefined)
+			player.eyeColor = "brown";
+		else
+			player.eyeColor = saveFile.data.eyeColor;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;

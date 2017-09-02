@@ -362,6 +362,11 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+			doNext(combatMenu);
+		}
 		menu();
 		clearOutput();
 		outputText("What spell will you use?\n\n");

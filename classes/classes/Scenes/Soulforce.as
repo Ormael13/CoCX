@@ -195,11 +195,18 @@ package classes.Scenes
 			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(9, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
-			addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
+			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
+			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
 			addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
 			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
+private function eyesColorSelection():void {
+	clearOutput();
+	player.eyeColor = "brown";
+	outputText("You now have brown eyes.");
+	doNext(SoulforceCheats);
+}
 		public function StatsMenu():void {
 			menu();
 			addButton(0, "Str", StatsMenuStr).hint("Adj Str.");

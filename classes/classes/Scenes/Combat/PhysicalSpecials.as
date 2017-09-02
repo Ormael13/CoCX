@@ -511,6 +511,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) powerfistspowervalue *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) powerfistspowervalue *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) powerfistspowervalue *= 2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) powerfistspowervalue *= 3;
 		return powerfistspowervalue;
 	}
 
@@ -554,6 +555,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.findPerk(PerkLib.GiantsReach) >= 0 && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large")) damage *= 1.25;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -634,6 +636,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.findPerk(PerkLib.GiantsReach) >= 0 && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large")) damage *= 1.25;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -786,6 +789,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 			damage *= monster.damagePercent() / 100;
 			if(damage < 0) damage = 5;
 			damage = Math.round(damage);
@@ -1658,6 +1662,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.weaponAttack;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1787,6 +1792,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 				damage = doDamage(damage);
 			}
 			//Different horn damage messages
@@ -1888,6 +1894,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 				//Round it off
 				damage = int(damage);
 				damage = doDamage(damage, true);
@@ -2040,6 +2047,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.spe;
 		damage += speedscalingbonus() * 0.2;
 		if (damage < 10) damage = 10;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("\n\nThis deal " + damage + " damage as your victim grow increasingly flushed by your potent aphrodisiac.");
@@ -2238,6 +2246,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 			damage = doDamage(damage);
 		}
 		if(damage <= 0) {
@@ -2366,6 +2375,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		//Reduce damage
 		damage *= monster.damagePercent() / 100;
 		//(None yet!)
@@ -2423,6 +2433,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2) + (player.shieldBlock * 2);
 		if (player.findPerk(PerkLib.ShieldSlam) >= 0) damage *= 1.2;
 		if (player.findPerk(PerkLib.SteelImpact) >= 0) damage += ((player.tou - 50) * 0.3);
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		damage *= (monster.damagePercent() / 100);
 		var chance:int = Math.floor(monster.statusEffectv1(StatusEffects.TimesBashed) + 1);
 		if (chance > 10) chance = 10;

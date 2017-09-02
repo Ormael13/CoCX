@@ -440,6 +440,8 @@ package classes.Items {
 		[HORNS_GOAT, null],
 		[HORNS_NONE, null],
 		[HORNS_OAK, null],
+		[HORNS_ONI, null],
+		[HORNS_ONI_X2, null],
 		[HORNS_ORCHID, null],
 		[HORNS_RHINO, null],
 		[HORNS_UNICORN, null],

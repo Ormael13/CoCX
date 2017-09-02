@@ -344,7 +344,7 @@ public class Skin extends SaveableBodyPart {
 			base.adj = "slippery rubber-like";
 		} else if (value == SKIN_TYPE_TATTOED_ONI) {
 			base.pattern = PATTERN_BATTLE_TATTOO;
-			base.adj = "tattooed";
+			base.adj = "battle tattooed";
 		}
 	}
 	override protected function loadFromOldSave(savedata:Object):void {

@@ -482,6 +482,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButton(0, "Continue", mspecials.singCompellingAria).hint("Continue singing.");
 			addButton(1, "Stop", stopChanneledSpecial).hint("Stop singing.");
 		}
+		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 2) addButton(0, "Continue", mspecials.startOniRampage).hint("Continue starting rampage.");
 	}
 	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 1) {
@@ -2080,6 +2081,7 @@ public function throwWeapon():void {
 		}
 		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -2745,6 +2747,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.ChiReflowAttack) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	//One final round
 	damage = Math.round(damage);
 	
@@ -2809,6 +2812,7 @@ public function attack():void {
 			if (damage > 0 && player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 			if (damage > 0 && player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 			if (damage > 0) damage = doDamage(damage, false);
 		
 			(monster as Doppleganger).mirrorAttack(damage);
@@ -4106,7 +4110,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
 	}
-	//Berzerker/Lustzerker/Dwarf Rage/Maleficium
+	//Berzerker/Lustzerker/Dwarf Rage/Oni Rampage/Maleficium
 	if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 		if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
 			player.removeStatusEffect(StatusEffects.Berzerking);
@@ -4129,8 +4133,15 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 		else player.addStatusValue(StatusEffects.DwarfRage,3,-1);
 	}
+	if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+		if (player.statusEffectv1(StatusEffects.OniRampage) <= 0) {
+			player.removeStatusEffect(StatusEffects.OniRampage);
+			outputText("<b>Your rage wear off.</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.OniRampage,1,-1);
+	}
 	if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-		if (player.statusEffectv3(StatusEffects.Maleficium) <= 0) {
+		if (player.statusEffectv1(StatusEffects.Maleficium) <= 0) {
 			player.removeStatusEffect(StatusEffects.Maleficium);
 			outputText("<b>Maleficium effect wore off!</b>\n\n");
 		}
@@ -4351,6 +4362,15 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.addStatusValue(StatusEffects.CooldownCompellingAria,1,-1);
 		}
 	}
+	//Oni Rampage
+	if (player.hasStatusEffect(StatusEffects.CooldownOniRampage)) {
+		if (player.statusEffectv1(StatusEffects.CooldownOniRampage) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownOniRampage);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownOniRampage,1,-1);
+		}
+	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
 	if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
@@ -4379,8 +4399,8 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1.5;
+		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
 		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
@@ -4404,8 +4424,8 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 2;
-		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 3;
+		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
+		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= player.internalChimeraRating();
 		if (healingPercent > (maximumRegeneration() * 2)) healingPercent = (maximumRegeneration() * 2);
 		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
@@ -4482,7 +4502,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
-		//oni rampage status effect boost - Lia want it be BIG number *sic* -_-''
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 6;
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
@@ -4503,8 +4523,8 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 5) maxRegen += 1;
 	if (player.findPerk(PerkLib.LizanRegeneration) >= 0) maxRegen += 1.5;
 	if (player.findPerk(PerkLib.LizanMarrow) >= 0) maxRegen += 0.5;
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 1;
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) maxRegen += 1.5;
+	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
+	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
 	return maxRegen;
 }
 
@@ -5047,6 +5067,7 @@ public function ScyllaSqueeze():void {
 	}
 	else fatigue(20, 2);
 	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100) * 1.5;
+	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	if (monster.plural == true) damage *= 5;
 	//Squeeze -
 	outputText("You start squeezing your");
@@ -5755,6 +5776,7 @@ public function greatDive():void {
 	var damage:Number = unarmedAttack();
 	damage += player.str;
 	damage += player.spe * 2;
+	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	outputText("You focus on " + monster.capitalA + monster.short + " fold your wing and dive down using gravity to increase the impact");
 	if (player.lowerBody == LOWER_BODY_TYPE_HARPY) {
 		outputText("making a bloody trail with your talons");

@@ -3188,14 +3188,13 @@ private function promptSaveUpdate():void {
 		}
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) flags[kFLAGS.AYANE_FOLLOWER] = 0;
 		if (flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] > 0) flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
-		doNext(doCamp);
+		eyesColorSelection();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
 		clearOutput();
 		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
-		eyesColorSelection();
 		doNext(doCamp);
 		return;
 	}
@@ -3203,7 +3202,6 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		clearOutput();
 		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
-		eyesColorSelection();
 		doNext(doCamp);
 		return;
 	}
@@ -3270,7 +3268,7 @@ private function chooseScalesColorSaveUpdate(color:String):void {
 	player.coatColor = color;
 	doNext(doCamp);
 }
-/*
+
 private function eyesColorSelection():void {
 	menu();
 	addButton(0, "Black", chooseEyesColorSaveUpdate, "black");
@@ -3288,11 +3286,11 @@ private function eyesColorSelection():void {
 
 private function chooseEyesColorSaveUpdate(color:String):void {
 	clearOutput();
+	player.eyeColor = color;
 	outputText("You now have " + color + " eyes. You will be returned to your camp now and you can continue your usual gameplay.");
-	player.eyesColor = color;
 	doNext(doCamp);
 }
-*/
+
 //Updates save. Done to ensure your save doesn't get screwed up.
 private function updateSaveFlags():void {
 	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;

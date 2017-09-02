@@ -320,6 +320,7 @@ package classes
 
 		//Eyetype
 		public var eyeType:Number = EYES_HUMAN;
+		public var eyeColor:String = "no";
 
 		//TongueType
 		public var tongueType:Number = TONGUE_HUMAN;
@@ -467,7 +468,7 @@ package classes
 			// 2.2. non-empty String fields
 			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
 				"short",
-				"skinDesc",
+				"skinDesc", "eyeColor",
 				"weaponName", "weaponVerb", "armorName"
 			]);
 			// 3. validate members
@@ -3214,6 +3215,9 @@ package classes
 			//Black cat beer = 25% reduction!
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				mult *= 0.75;
+			}
+			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
+				mult *= 0.8;
 			}
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {

@@ -2823,6 +2823,10 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				orcaCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && orcaCounter >= 3)
+				orcaCounter += 1;
 			
 			End("Player","racialScore");
 			return orcaCounter;
@@ -2836,11 +2840,17 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (faceType == FACE_ONI_TEETH)
 				oniCounter++;
+			if (hornType == HORNS_ONI)
+				oniCounter++;
 			if (armType == ARM_TYPE_ONI)
 				oniCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ONI)
 				oniCounter++;
+			if (eyeType == EYES_ONI && (eyeColor == "red" || eyeColor == "yellow" || eyeColor == "green"))
+				oniCounter++;
 			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
+				oniCounter++;
+			if (skin.base.pattern == PATTERN_BATTLE_TATTOO)
 				oniCounter++;
 			if (tailType == TAIL_TYPE_NONE)
 				oniCounter++;
@@ -2850,6 +2860,10 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (tallness >= 120)
 				oniCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				oniCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && oniCounter >= 3)
+				oniCounter += 1;
 			
 			End("Player","racialScore");
 			return oniCounter;
@@ -2869,6 +2883,10 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (hairType == HAIR_SILKEN)
 				elfCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				elfCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 3)
+				elfCounter += 1;
 			
 			End("Player","racialScore");
 			return elfCounter;

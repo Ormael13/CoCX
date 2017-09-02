@@ -1290,6 +1290,14 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns > 0)
 				outputText("  A huge pair of orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
+		if (player.hornType == HORNS_ONI_X2) {
+			if (player.horns > 0)
+				outputText("  You have a pair of horns on your head warning anyone who looks that you are an oni and do mean serious business.");
+		}
+		if (player.hornType == HORNS_ONI) {
+			if (player.horns > 0)
+				outputText("  You have a single horn on your head warning anyone who looks that you are an oni and do mean serious business.");
+		}
 	}
 	public function describeTongue():void {
 //Tongue
@@ -1342,6 +1350,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes have slitted pupils like that of a dragon.");
 		else if(player.eyeType == EYES_DEVIL)
 			outputText("  Your eyes look fiendish with their black sclera and glowing ember pupils.");
+		else if(player.eyeType == EYES_ONI)
+			outputText("  Your eyes look normal enough save for their fiendish " + player.eyeColor + " iris and slitted pupils.");
 		else if(player.eyeType == EYES_ELF)
 			outputText("  Your elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
 	}

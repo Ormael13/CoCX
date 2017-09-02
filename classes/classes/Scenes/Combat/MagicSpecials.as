@@ -116,6 +116,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.devilkinScore() >= 10) {
 			addButton(3, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 		}
+		if (player.oniScore() >= 12) {
+			addButton(4, "Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
+		}
 		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 			addButton(5, "Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
 		}
@@ -486,6 +489,48 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
 			outputText("\n\n");
+			enemyAI();
+		}
+	}
+
+	public function startOniRampage():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			outputText("A terrifying red aura of power shroud your body as you shout a loud thundering war cry and enter a murderous rampage.");
+			var onirampageDuration:Number = 6;
+			player.createStatusEffect(StatusEffects.OniRampage,onirampageDuration,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownOniRampage,10,0,0,0);
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			outputText("\n\n");
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+				enemyAI();
+			}
+			else enemyAI();
+		}
+		else {
+			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+			{
+				clearOutput();
+				outputText("You are too tired to start rampage.");
+				doNext(msMenu);
+				return;
+			}
+			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
+				outputText("You already rampaging!");
+				doNext(msMenu);
+				return;
+			}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+			fatigue(50, 1);
+			clearOutput();
+			outputText("That does it! You crouch and lift a leg then another in alternance, stomping the ground as you focus your anger.\n\n");
+			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttackType, 2, 0, 0, 0);
 			enemyAI();
 		}
 	}
