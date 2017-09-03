@@ -1116,7 +1116,8 @@ private function metamorphLizardEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.eyeType != EYES_HUMAN) removeOddEyes();
-	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue with a slit.  <b>You now have reptilian eyes!</b>");
+	player.eyeColor = "yellow";
+	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a [eyecolor] hue with a slit.  <b>You now have reptilian eyes!</b>");
 	player.eyeType = EYES_REPTILIAN;
 	doNext(accessMetamorphMenu);
 }

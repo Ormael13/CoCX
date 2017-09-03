@@ -338,6 +338,10 @@ package classes.Items {
 	public function setEyeType(eyeType:int):Boolean {
 		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
 	}
+	public function setEyeTypeAndColor(eyeType:int, color:String):Boolean {
+		player.eyeColor = color;
+		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
+	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
 		[EYES_BLACK_EYES_SAND_TRAP, null],
 		[EYES_CAT_SLITS, null],

@@ -320,7 +320,7 @@ package classes
 
 		//Eyetype
 		public var eyeType:Number = EYES_HUMAN;
-		public var eyeColor:String = "no";
+		public var eyeColor:String = "brown";
 
 		//TongueType
 		public var tongueType:Number = TONGUE_HUMAN;

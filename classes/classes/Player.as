@@ -6,6 +6,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Mutations;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.Jewelry;
@@ -2846,7 +2847,7 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ONI)
 				oniCounter++;
-			if (eyeType == EYES_ONI && (eyeColor == "red" || eyeColor == "yellow" || eyeColor == "green"))
+			if (eyeType == EYES_ONI && InCollection(eyeColor,Mutations.oniEyeColors))
 				oniCounter++;
 			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
 				oniCounter++;

@@ -184,6 +184,8 @@
         <property name="skin2" src="skin.base.color2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
+        <property name="iris" src="eyeColor" default="#0000ff">
+        </property>
         <common>
             <!--Multi-color with pattern (Requires more complex engine)-->
             <!--<color name="black and orange">#000000</color>-->
@@ -200,34 +202,10 @@
             <!--<color name="striped orange">#000000</color>-->
             <!--<color name="white and black">#eff3f6</color>-->
         </common>
-        <!-- Not yet in game-->
-        <!-- <property name="iris" src="'blue'" default="#0000ff">
-             &lt;!&ndash;Iris color overrides go here&ndash;&gt;
-             <color name="blue">#68a9ca</color>
-             <color name="aqua">#a0c5c5</color>
-             <color name="green">#4e7e4e</color>
-             <color name="amber">#ca9168</color>
-             <color name="hazel">#ad7852</color>
-             <color name="brown">#7e624e</color>
-             <color name="dark">#564b43</color>
-             <color name="red">#b34d4d</color>
-             <color name="pink">#d8c0d8</color>
-             <color name="purple">#7f619e</color>
-             <color name="steel">#808080</color>
-             <color name="gray">#999999</color>
-             <color name="silver">#b3b3b3</color>
-             <color name="golden">#bd9442</color>
-             <color name="crystal">#e3e8e8</color>
-             <color name="ruby">#e25050</color>
-             <color name="topaz">#dada58</color>
-             <color name="malachyte">#4db34d</color>
-             <color name="emerald">#58da58</color>
-             <color name="beryll">#68ca99</color>
-             <color name="sapphire">#5c70d6</color>
-             <color name="amethyst">#b288dd</color>
-         </property>-->
     </palette>
     <colorkeys>
+        <key src="#FF0000" base="iris"/>
+        <key src="#AA0000" base="iris" transform="darken(25)"/>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
         <key src="#CC00CC" base="hair"/>
         <key src="#880088" base="hair" transform="darken(25)"/>

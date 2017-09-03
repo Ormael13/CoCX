@@ -4,6 +4,7 @@
 package classes.Items.Consumables {
 import classes.Items.Consumable;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Mutations;
 import classes.PerkLib;
 
 public class OnikiriSake extends Consumable {
@@ -136,12 +137,12 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Eyes
-		if ((player.hornType == HORNS_ONI_X2 || player.hornType == HORNS_ONI) && player.eyeType != EYES_ONI && changes < changeLimit && rand(3) == 0) {
+		if ((player.hornType == HORNS_ONI_X2 || player.hornType == HORNS_ONI)
+			&& (player.eyeType != EYES_ONI || !InCollection(player.eyeColor, Mutations.oniEyeColors))&& changes < changeLimit && rand(3) == 0) {
 			var colorEyes:String;
-			colorEyes = randomChoice("green","yellow","red");
-			player.eyeColor = colorEyes;
-			outputText("\n\n You feel something fundamental change in your sight when you go check yourself in a puddle you notice your pupil now are <b>" + player.eyeColor + " just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
-			mutations.setEyeType(EYES_ONI);
+			colorEyes = randomChoice(Mutations.oniEyeColors);
+			mutations.setEyeTypeAndColor(EYES_ONI,colorEyes);
+			outputText("\n\n You feel something fundamental change in your sight when you go check yourself in a puddle you notice your pupil now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
 			changes++;
 		}
 		//Ears

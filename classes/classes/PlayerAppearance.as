@@ -1329,31 +1329,32 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeEyes():void {
 		if(player.eyeType == EYES_FOUR_SPIDER_EYES)
-			outputText("  In addition to your primary two eyes, you have a second, smaller pair on your forehead.");
+			outputText("  In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
 		else if(player.eyeType == EYES_BLACK_EYES_SAND_TRAP)
 			outputText("  Your eyes are solid spheres of inky, alien darkness.");
 		else if(player.eyeType == EYES_CAT_SLITS)
-			outputText("  Your eyes have vertically slit like those of cat.");
+			outputText("  Your [eyecolor] eyes have vertically slit like those of cat.");
 		else if(player.eyeType == EYES_GORGON)
-			outputText("  Your eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
+			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(player.eyeType == EYES_FENRIR)
 			outputText("  Your eyes glows with a freezing blue light icy smoke rising in the air around it.");
 		else if(player.eyeType == EYES_MANTICORE)
-			outputText("  Your eyes are similar to those of a cat but the red pupils dismiss any links to the regular felines in favor of something way more ominous.");
+			outputText("  Your eyes are similar to those of a cat but the [eyecolor] irises dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(player.eyeType == EYES_FOX)
-			outputText("  Your pupils looks like those of a fox with a slit in the middle.");
+			outputText("  Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
 		else if(player.eyeType == EYES_REPTILIAN)
-			outputText("  Your eyes looks like those of a reptile with yellow pupils and a slit.");
+			outputText("  Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
 		else if(player.eyeType == EYES_SNAKE)
-			outputText("  Your eyes have slitted pupils like that of a snake.");
+			outputText("  Your [eyecolor] eyes have slitted pupils like that of a snake.");
 		else if(player.eyeType == EYES_DRAGON)
-			outputText("  Your eyes have slitted pupils like that of a dragon.");
+			outputText("  Your [eyecolor] eyes have slitted pupils like that of a dragon.");
 		else if(player.eyeType == EYES_DEVIL)
-			outputText("  Your eyes look fiendish with their black sclera and glowing ember pupils.");
+			outputText("  Your eyes look fiendish with their black sclera and glowing [eyecolor] irises.");
 		else if(player.eyeType == EYES_ONI)
-			outputText("  Your eyes look normal enough save for their fiendish " + player.eyeColor + " iris and slitted pupils.");
+			outputText("  Your eyes look normal enough save for their fiendish [eyecolor] iris and slitted pupils.");
 		else if(player.eyeType == EYES_ELF)
-			outputText("  Your elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
+			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
+		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
 		//if bald
