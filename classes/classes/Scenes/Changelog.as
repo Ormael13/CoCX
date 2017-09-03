@@ -98,6 +98,7 @@ package classes.Scenes
 			outputText("-New melee weapons: Lance - buyable in He'Xin'Dao weapon shop (480 gems, 6-12 atk) and Trident (by Liadri) - buyable at Pinchou’s waterwear and tools’ at Beach (480 gems, 6-12 atk). Now both Spear and Lance have scaling of base atk depending on speed.\n");
 			outputText("-Spear and Whip was moved to weapon shop in He'Xin'Dao from Tel'Adre weapon shop\n");
 			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack (above 2x) unlock each 6 lvl's startng from lvl 6.\n");
+			outputText("-One of perk Heavy Armor Proficiency req changed form Job: Defender to Job: Knight.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 3 toughness lvl-up perk: Defence Stance Req. Job: Defender perk and 80+ tou. Effect: Defend move giving 60% phys dmg reduction and allow recovery of fatigue, mana, soulforce\n");
 			outputText("-New tier 4 toughness lvl-up perk: Mastered Defence Stance Req. Defence Stance perk and 120+ tou. Effect: Defend move giving 75% phys dmg reduction and allow increased (bonus to normal recovery in Defence Stance) recovery of fatigue (+1), mana (+5), soulforce (+1)\n");
@@ -113,13 +114,14 @@ package classes.Scenes
 			outputText("-New tier 1 wisdom lvl-up perk: Elemental Bond: Flesh\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Bond: Urges\n");
 			outputText("-New tier 5 toughness lvl-up perk: ShieldWard\n");//should it also affect chance to been grappled by enemies?
+			outputText("-New tier 3 toughness lvl-up perk: Lifeline\n");
+			outputText("-New tier 4 toughness lvl-up perk (multi-rank): Goliath I-VI\n");
+			outputText("-New tier 6 toughness lvl-up perk (multi-rank): Cheetah I-VI\n");
+			outputText("-New tier 0 sensitivity lvl-up perk: Eyes of the Hunter (Novice)\n");
+			outputText("-New tier 1 intelligence lvl-up perk: ArcaneRegenerationMinor\n");
 			outputText("-New tier   lvl-up perk: \n");
-			outputText("-New tier   lvl-up perk: \n");
-			outputText("-New tier   lvl-up perk: \n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New option at Soul Arena in 3rd submenu: fight with 3 enemies in a row to get Guided Bow at first win or 20 spirit stones for each win after first.\n");
 			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
@@ -138,6 +140,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -145,6 +151,9 @@ package classes.Scenes
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New melee weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -185,15 +194,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

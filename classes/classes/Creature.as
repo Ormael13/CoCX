@@ -151,10 +151,13 @@ package classes
 		public var sens:Number = 0;
 		public var cor:Number = 0;
 		public var fatigue:Number = 0;
+		public var mana:Number = 0;
+		public var soulforce:Number = 0;
 		
 		//Combat Stats
 		public var HP:Number = 0;
 		public var lust:Number = 0;
+		public var wrath:Number = 0;
 		
 		//Level Stats
 		public var XP:Number = 0;
@@ -460,7 +463,7 @@ package classes
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
-				"lust", "fatigue",
+				"lust", "fatigue", "soulforce", "mana", "wrath",
 				"level", "gems",
 				"tailCount", "tailVenom", "tailRecharge", "horns",
 				"HP", "XP"

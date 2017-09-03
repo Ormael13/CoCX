@@ -4407,7 +4407,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
-		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
+		HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
 	}
 	else {
 		//Regeneration
@@ -4432,7 +4432,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= player.internalChimeraRating();
 		if (healingPercent > (maximumRegeneration() * 2)) healingPercent = (maximumRegeneration() * 2);
-		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
+		HPChange(Math.round((player.maxHP() * healingPercent / 100) + (nonPercentBasedRegeneration() * 2)), false);
 	}
 }
 
@@ -4481,7 +4481,7 @@ public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 10;
+		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 5;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 10;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 10;
 		gainedmana *= manaRecoveryMultiplier();
@@ -4490,7 +4490,7 @@ public function manaregeneration(combat:Boolean = true):void {
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
-	//	if (player.findPerk(PerkLib.GreyArchmage) >= 0) gainedmana += 20;
+		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 10;
 		gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
@@ -4530,6 +4530,13 @@ public function maximumRegeneration():Number {
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
 	return maxRegen;
+}
+
+public function nonPercentBasedRegeneration():Number {
+	var maxNonPercentRegen:Number = 0;
+	if (player.findPerk(PerkLib.Lifeline) >= 0) maxNonPercentRegen += 50;
+	if (player.findPerk(PerkLib.Lifeline) >= 0 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50;
+	return maxNonPercentRegen;
 }
 
 internal var combatRound:int = 0;
@@ -4702,11 +4709,13 @@ public function display():void {
 	var hpDisplay:String = "";
 	var lustDisplay:String = "";
 	var fatigueDisplay:String = "";
+	var manaDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 	hpDisplay = monster.HP + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
 	lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();
 	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.eMaxFatigue();
+	manaDisplay = Math.floor(monster.mana) + " / " + monster.eMaxMana();
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -4820,6 +4829,21 @@ public function display():void {
 		outputText("HP: " + hpDisplay + "\n");
 		outputText("Lust: " + lustDisplay + "\n");
 		outputText("Fatigue: " + fatigueDisplay + "\n");
+		//soulforce
+		outputText("Mana: " + manaDisplay + "\n");
+		//wrath
+		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
+			outputText("\n----------------------------\n");
+			outputText("\nType: ");
+			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) outputText("Beast or Animal-morph ");
+			if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("Boss ");
+			if (monster.hasPerk(PerkLib.EnemyGigantType) >= 0) outputText("Gigant ");
+			if (monster.hasPerk(PerkLib.EnemyGodType) >= 0) outputText("God ");
+			if (monster.hasPerk(PerkLib.EnemyGroupType) >= 0) outputText("Group ");
+			//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+			//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+			outputText("\n");
+		}
 	}
 	if (debug){
 		outputText("\n----------------------------\n");

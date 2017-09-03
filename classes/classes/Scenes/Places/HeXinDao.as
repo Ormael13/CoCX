@@ -1516,7 +1516,7 @@ public function soularenaChallenge():void {
 	outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
 	menu();
 	addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-	//addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 3 diff enemies one after another.");
+	//if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 3 diff enemies one after another.");
 	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 3 diff enemies one after another.");
 	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 3 diff enemies one after another.");
 	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 3 diff enemies one after another.");

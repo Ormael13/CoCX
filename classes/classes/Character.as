@@ -656,6 +656,18 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.GoliathI) >= 0) max += Math.round(str*2);
+ 			if (findPerk(PerkLib.GoliathII) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathIII) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathIV) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathV) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathVI) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.CheetahI) >= 0) max += Math.round(spe);
+ 			if (findPerk(PerkLib.CheetahII) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahIII) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahIV) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahV) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahVI) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -1010,6 +1022,11 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
+				var multimax:Number = 1;
+				multimax += 0.1
+				max *= multimax;
+			}
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
