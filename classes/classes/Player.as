@@ -2877,11 +2877,15 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (eyeType == EYES_ELF)
 				elfCounter++;
+			if (tongueType == TONGUE_ELF)
+				elfCounter++;
 			if (armType == ARM_TYPE_ELF)
 				elfCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ELF)
 				elfCounter++;
 			if (hairType == HAIR_SILKEN)
+				elfCounter++;
+			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
 				elfCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				elfCounter += 10;
@@ -4210,6 +4214,8 @@ use namespace kGAMECLASS;
 			if(this.devilkinScore() >= 7) minSen += 10;
 			if(this.devilkinScore() >= 10) minSen += 15;
 			if(this.devilkinScore() >= 14) minSen += 30;
+			if(this.elfScore() >= 5) minSen += 15;
+			if(this.elfScore() >= 11) minSen += 15;
 
 			return {
 				str:minStr,
@@ -4635,11 +4641,13 @@ use namespace kGAMECLASS;
 				}
 			}//+10/10-20
 			if (elfScore() >= 5) {
-				if (elfScore() >= 12) {
-					maxStr += (100 * (1 + newGamePlusMod));
-					maxTou += (60 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
-					maxWis += (40 * (1 + newGamePlusMod));
+				if (elfScore() >= 11) {
+					maxStr -= (10 * (1 + newGamePlusMod));
+					maxTou -= (15 * (1 + newGamePlusMod));
+					maxSpe += (80 * (1 + newGamePlusMod));
+					maxInt += (80 * (1 + newGamePlusMod));
+					maxWis += (60 * (1 + newGamePlusMod));
+					maxSen += (30 * (1 + newGamePlusMod));
 				}
 				else {
 					maxStr -= (10 * (1 + newGamePlusMod));
@@ -4647,6 +4655,7 @@ use namespace kGAMECLASS;
 					maxSpe += (40 * (1 + newGamePlusMod));
 					maxInt += (40 * (1 + newGamePlusMod));
 					maxWis += (30 * (1 + newGamePlusMod));
+					maxSen += (15 * (1 + newGamePlusMod));
 				}
 			}//+10/10-20
 			if (demonScore() >= 5) {
@@ -5480,7 +5489,7 @@ use namespace kGAMECLASS;
 			}
 			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
 			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
-			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.KnockedBack);
+			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.RemovedArmor);
 			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
 			if (hasStatusEffect(StatusEffects.MirroredAttack)) removeStatusEffect(StatusEffects.MirroredAttack);
 			if (hasStatusEffect(StatusEffects.Tentagrappled)) removeStatusEffect(StatusEffects.Tentagrappled);

@@ -3443,6 +3443,10 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 	if(monster.hasStatusEffect(StatusEffects.NoLoot)) {
 		return;
 	}
+	if(player.hasStatusEffect(StatusEffects.SoulArena)) {
+		player.removeStatusEffect(StatusEffects.SoulArena);
+		return;
+	}
 	var itype:ItemType = monster.dropLoot();
 	if(monster.short == "tit-fucked Minotaur") {
 		itype = consumables.MINOCUM;

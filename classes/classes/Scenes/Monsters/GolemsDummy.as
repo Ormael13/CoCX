@@ -5,12 +5,23 @@
 package classes.Scenes.Monsters 
 {
 	import classes.*;
+	import classes.Scenes.Places.HeXinDao;
 	import classes.internals.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class GolemsDummy extends AbstractGolem
 	{
+		public var golems:HeXinDao = new HeXinDao();
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				golems.gaunletchallange1fight2();
+			}
+			else game.combat.finishCombat();
+		}
+		
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them swings their hands at you in a vicious backhand.");
 			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
@@ -25,9 +36,12 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(4);
-			if (choice < 3) eAttack();
-			if (choice == 3) backhand();
+			if (this.HPRatio() < 0.75) {
+				var choice:Number = rand(4);
+				if (choice < 3) eAttack();
+				if (choice == 3) backhand();
+			}
+			else eAttack();
 			combatRoundOver();
 		}
 		

@@ -116,6 +116,7 @@ public static const TONGUE_DEMONIC:int                                          
 public static const TONGUE_DRACONIC:int                                             =   3;
 public static const TONGUE_ECHIDNA:int                                              =   4;
 public static const TONGUE_CAT:int                               	                =   5;
+public static const TONGUE_ELF:int                               	                =   6;
 
 // eyeType
 public static const EYES_HUMAN:int                                                  =   0;

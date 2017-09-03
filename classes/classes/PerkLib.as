@@ -1079,6 +1079,9 @@ package classes
 		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
+		public static const ShieldWard:PerkType = mk("Shield Ward", "Shield Ward",
+				"When you wearing a shield lower chance to be knocked back or disarmed by enemy attacks.",
+				"You choose the 'Shield Ward' perk, allowing to lower chance to be knocked back or disarmed when using shield.");
 		public static const SluttySimplicity:PerkType = mk("Slutty Simplicity", "Slutty Simplicity",
 				"Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)",
 				"You choose the 'Slutty Simplicity' perk, granting increased tease effect when you are naked.");
@@ -1840,6 +1843,9 @@ package classes
 		PerfectDefenceStance.requirePerk(MasteredDefenceStance)
 							.requireTou(160)
 							.requireLevel(30);
+		ShieldWard.requirePerk(ShieldGrandmastery)
+				  .requireTou(120)
+				  .requireLevel(30);
 		//Tier 6 Toughness Perks
 		SuperiorEndurance.requireTou(210)
 						 .requireStr(140)

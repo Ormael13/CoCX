@@ -25,9 +25,12 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(4);
-			if (choice < 3) eAttack();
-			if (choice == 3) backhand();
+			if (this.HPRatio() < 0.75) {
+				var choice:Number = rand(4);
+				if (choice < 3) eAttack();
+				if (choice == 3) backhand();
+			}
+			else eAttack();
 			combatRoundOver();
 		}
 		

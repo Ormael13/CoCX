@@ -112,7 +112,11 @@ package classes.Scenes
 			outputText("-New tier 3 toughness lvl-up perk: ShieldHarmony\n");
 			outputText("-New tier 1 wisdom lvl-up perk: Elemental Bond: Flesh\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Bond: Urges\n");
+			outputText("-New tier 5 toughness lvl-up perk: ShieldWard\n");//should it also affect chance to been grappled by enemies?
 			outputText("-New tier   lvl-up perk: \n");
+			outputText("-New tier   lvl-up perk: \n");
+			outputText("-New tier   lvl-up perk: \n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -133,6 +137,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -140,6 +145,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
 			outputText("-(?use as reward in hidden cave dungeon?)New melee weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -179,6 +185,15 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

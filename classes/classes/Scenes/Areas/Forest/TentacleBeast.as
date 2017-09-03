@@ -4,9 +4,12 @@
 	import classes.internals.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Places.HeXinDao;
 
 	public class TentacleBeast extends Monster
 	{
+		public var golems:HeXinDao = new HeXinDao();
+		
 		private function tentaclePhysicalAttack():void {
 			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -54,7 +57,10 @@
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
-			if (hasStatusEffect(StatusEffects.PhyllaFight)) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				golems.gaunletchallange1fight3();
+			}
+			else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaTentacleDefeat();
 			}

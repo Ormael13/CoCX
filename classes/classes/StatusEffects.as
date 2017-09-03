@@ -536,6 +536,7 @@ package classes
 		public static const LethicesShell:CombatStatusEffect         = mk2("Lethices Magic Shell");
 		public static const WhipSilence:CombatStatusEffect           = mk2("Whip Silence");
 		public static const PigbysHands:CombatStatusEffect           = mk2("Pigbys Hands");
+		public static const SoulArena:CombatStatusEffect           	 = mk2("Soul Arena");
 
 		/**
 		 * Creates non-combat status affect

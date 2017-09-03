@@ -2546,7 +2546,7 @@ public static const REUSABLE_GOLEM_CORES_BAG:int                                
 public static const ELEMENTAL_CONJUER_SUMMONS:int                                   = 2538;
 public static const ATTACKING_ELEMENTAL_TYPE:int                                   	= 2539;
 public static const PINCHOU_SHOP:int                                   				= 2540;
-public static const UNKNOWN_FLAG_NUMBER_02541:int                                   = 2541;
+public static const SOUL_ARENA_FINISHED_GAUNLETS:int                                = 2541;
 public static const UNKNOWN_FLAG_NUMBER_02542:int                                   = 2542;
 public static const UNKNOWN_FLAG_NUMBER_02543:int                                   = 2543;
 public static const UNKNOWN_FLAG_NUMBER_02544:int                                   = 2544;

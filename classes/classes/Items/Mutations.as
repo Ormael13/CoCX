@@ -7212,12 +7212,18 @@
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
-			//if (rand(3) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
 			//Stats
+			if (player.sens < 80 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYour body becomes overwhelmed by stimuli for a moment making you shiver with a moan of pleasure at the mere caress of the wind. The excess sensation eventually dies down but leaves you more sensitive than before.");
+				dynStats("sen", 2);
+				if (player.sens < 40) dynStats("sen", 2);
+				changes++;
+			}
 			//Sexual
 			//Physical
 			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -7253,10 +7259,26 @@
 				changes++;
 			}
 			//elven senses
+			if (player.tongueType == TONGUE_HUMAN && player.tongueType != TONGUE_ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou throat starts to ache and your tongue tingle. You try to gasp for air your eyes opening wide in surprise as the voice that exits your throat entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of an elf, adapting even your tongue and voice.  <b>You now have the beautiful voice of the elves.</b>");
+				setTongueType(TONGUE_ELF);
+				changes++;
+			}
+			if (player.tongueType != TONGUE_HUMAN && player.tongueType != TONGUE_ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
+				setTongueType(TONGUE_HUMAN);
+				changes++;
+			}
 			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
 				setHairType(HAIR_SILKEN);
 				changes++;
+			}
+			//Hair Color
+			var elf_hair:Array = ["silver", "golden blonde", "leaf green", "black"];
+			if (!InCollection(player.hairColor, elf_hair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(elf_hair);
+				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}

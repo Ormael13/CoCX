@@ -2456,7 +2456,8 @@
 					[TONGUE_DEMONIC, "demonic"],
 					[TONGUE_DRACONIC, "draconic"],
 					[TONGUE_ECHIDNA, "echidna"],
-					[TONGUE_CAT, "cat"]
+					[TONGUE_CAT, "cat"],
+					[TONGUE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(

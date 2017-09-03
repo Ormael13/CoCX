@@ -517,6 +517,7 @@ package classes.Items {
 		[TONGUE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
 		[TONGUE_ECHIDNA, [null, "Echidna Tongue"]],
 		[TONGUE_HUMAN, [null, "Human Tongue"]],
+		[TONGUE_ELF, [null, "Elf Tongue"]],
 		[TONGUE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 

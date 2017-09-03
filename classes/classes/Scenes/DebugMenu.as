@@ -917,6 +917,7 @@ import flash.utils.describeType;
 			[TONGUE_DRACONIC, "(3) DRACONIC"],
 			[TONGUE_ECHIDNA, "(4) ECHIDNA"],
 			[TONGUE_CAT, "(5) CAT"],
+			[TONGUE_ELF, "(6) ELF"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[EYES_HUMAN, "(0) HUMAN"],
@@ -971,6 +972,8 @@ import flash.utils.describeType;
 			[HORNS_OAK, "(9) OAK"],
 			[HORNS_GARGOYLE, "(10) GARGOYLE"],
 			[HORNS_ORCHID, "(11) ORCHID"],
+			[HORNS_ONI_X2, "(12) ONI_X2"],
+			[HORNS_ONI, "(13) ONI"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,

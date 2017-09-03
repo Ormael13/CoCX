@@ -11,6 +11,7 @@ package classes.Scenes.Places {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
@@ -1514,6 +1515,11 @@ public function soularenaChallenge():void {
 	clearOutput();
 	outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
 	menu();
+	addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
+	//addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 3 diff enemies one after another.");
+	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 3 diff enemies one after another.");
+	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 3 diff enemies one after another.");
+	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 3 diff enemies one after another.");
 	//addButton(5, "Golemancer", golemancer);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
@@ -1603,6 +1609,35 @@ public function advancedtruegolems():void {
 	startCombat(new GolemsTrueAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
+}
+
+public function gaunletchallange1fight1():void {
+	clearOutput();
+	outputText("Soon will be some more or less fancy text here.");
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	startCombat(new GolemsDummy());
+}
+public function gaunletchallange1fight2():void {
+	clearOutput();
+	outputText("WIP TEXT. ");
+	startCombat(new TentacleBeast());
+}
+public function gaunletchallange1fight3():void {
+	clearOutput();
+	outputText("WIP TEXT. ");
+	startCombat(new DarkElfScout());
+}
+public function gaunletchallange1postfight():void {
+	clearOutput();
+	outputText("WIP TEXT. ");
+	if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
+		flags[kFLAGS.SPIRIT_STONES] += 20;
+		cleanupAfterCombat();
+	}
+	else {
+		flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 1;
+		inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
+	}
 }
 
 public function golemancer():void {

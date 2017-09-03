@@ -44,10 +44,18 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(6);
-			if (choice < 3) eAttack();
-			if (choice == 3 || choice == 4) backhand();
-			if (choice == 5) overhandSmash();
+			if (this.HPRatio() < 0.6) {
+				var choice2:Number = rand(5);
+				if (choice2 < 3) eAttack();
+				if (choice2 == 3) backhand();
+				if (choice2 == 4) overhandSmash();
+			}
+			else if (this.HPRatio() < 0.8) {
+				var choice1:Number = rand(4);
+				if (choice1 < 3) eAttack();
+				if (choice1 == 3) backhand();
+			}
+			else eAttack();
 			combatRoundOver();
 		}
 		
