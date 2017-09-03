@@ -52,7 +52,7 @@
 				After a few hours of this, the both of you head back to camp, still laughing.
 				<else>
 					You spend some time with your beloved daughter in the forest.
-					The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell them.
+					The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.
 					
 					<i>“Mom, they smell </i>so<i> good! Are they blooming all the time like this?”</i>
 					
@@ -271,13 +271,15 @@
 			<i>“Mom did you came over to see me?!”</i>
 		</text>
 		<text name="appearance">
-			Your daughter <output>$name</output> is a Unicorn/Bicorn with 
+			Your daughter <output>$name</output> is a 
 			<if test="isCorrupt">
+				Bicorn with 
 				Abyssal black fur. 
 				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you.
 				She wanders around in a black dress. By the look of it you'd think she stole it from a nun of the church of the fetish as it emphasise her generous D cup breast and put the focus on her assets. 
 				
 				<else>
+					Unicorn with 
 					immaculate white
 					Her blue eyes are the most innocent you've seen on mareth, if angels did exist she would be one.
 					She wander around in a white dress that covers her more then decent D cup breasts, through where she found it is a mystery even to you. Maybe it was a gift from her father though he never shown back to reclaim her.

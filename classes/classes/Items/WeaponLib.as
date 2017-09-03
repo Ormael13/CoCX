@@ -29,6 +29,7 @@ package classes.Items
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
 		public const DSWORD_:DualSwords = new DualSwords();
+		public const DSSPEAR:DemonSnakespear = new DemonSnakespear();
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
 		public const EBNYBLD:EbonyDestroyer = new EbonyDestroyer();
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
@@ -42,6 +43,7 @@ package classes.Items
 		public const L__AXE :LargeAxe = new LargeAxe();
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.","Aphrodisiac Weapon");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
+		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const L_STAFF:LethiciteStaff = new LethiciteStaff();
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
@@ -67,6 +69,7 @@ package classes.Items
 		public const SCARBLD:Weapon = new ScarredBlade();
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.");
+		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.");

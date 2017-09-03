@@ -1,25 +1,16 @@
 package classes.Items.Weapons 
 {
+	import classes.PerkLib;
 	public class NephilimBlade extends WeaponWithPerk
 	{
 		
 		public function NephilimBlade() 
 		{
 			super(
-				"NPHMBlade",
-				"Nephilim Blade",
-				"nephilim blade",
-				"a nephilim blade",
-				"slash",
-				52,
-				3000,
+				"NPHMBlade","Nephilim Blade","nephilim blade","a nephilim blade","slash",52,3000,
 				"Once upon a time on Mareth, a demigod of great purity named Nephilim is said to have existed. His duty was to shape the land at the demand of the gods, which he did. His task finished, he disappeared never to be found again. This sword is rumored to have belonged to him. While you don’t know for sure if the story is true, one thing is certain, this blade seeks and destroys corruption wherever it might find it, and will periodically wash its user of any impurity.",
 				"Large",
-				null,
-				0,
-				0,
-				0,
-				0
+				PerkLib.Sanctuary,0,0,0,0
 			);
 		}
 		override public function get attack():Number {
