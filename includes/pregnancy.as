@@ -1678,8 +1678,8 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birth to Celess
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS && player.pregnancyIncubation == 1){
-		player.createStatusEffect(StatusEffects.CampCelessTrigger, 0, 0, 0, 0);
 		player.knockUpForce(); //Clear Pregnancy
+		celessScene.birthScene();
 		return false;
 	}
 	//Give birth if it's time (to an imp!)

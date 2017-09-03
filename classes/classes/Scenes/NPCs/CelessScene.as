@@ -83,6 +83,9 @@ package classes.Scenes.NPCs
 		public function get isAdult():Boolean{
 			return _age == -1;
 		}
+		public function shouldDoBirth():Boolean{
+			return _age == -2;
+		}
 		
 		public function get armorFound():Boolean 
 		{
@@ -115,11 +118,17 @@ package classes.Scenes.NPCs
 			addButton(0, "Back", campInteraction);
 		}
 		public function birthScene():void{
-			clearOutput();
-			doNext(nameScene);
-			_story.display(context, "strings/birth/intro");
-			mainView.nameBox.text = "";
-			flushOutputTextToGUI();
+			if (_age == 0){
+				_age =-2;
+			}
+			else{
+				clearOutput();
+				doNext(nameScene);
+				_story.display(context, "strings/birth/intro");
+				mainView.nameBox.text = "";
+				flushOutputTextToGUI();
+			}
+			
 		}
 		public function nameScene():void{
 			if (mainView.nameBox.text == ""){
