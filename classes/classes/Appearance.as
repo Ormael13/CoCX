@@ -2198,7 +2198,7 @@
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
-			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+			return i_creature.eyeColor+ " "+DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
@@ -2464,7 +2464,7 @@
 				[
 					[EYES_HUMAN, "human"],
 					[EYES_FOUR_SPIDER_EYES, "4 spider"],
-					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
+					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap"],
 					[EYES_CAT_SLITS, "cat"],
 					[EYES_GORGON, "snake"],
 					[EYES_FENRIR, "fenrir"],
