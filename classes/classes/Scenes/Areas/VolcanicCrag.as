@@ -13,16 +13,11 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.VolcanicCrag.*;
 	import classes.Scenes.Areas.HighMountains.PhoenixScene;
 	import classes.Scenes.Areas.Forest.AlrauneScene;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-	
-	use namespace kGAMECLASS;
-	
+
 	public class VolcanicCrag extends BaseContent
 	{
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
 		public function VolcanicCrag() 
@@ -30,7 +25,7 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreVolcanicCrag():void {
-			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++
+			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
 			doNext(playerMenu);
 
 			var choice:Array = [];
@@ -56,7 +51,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			select = choice[rand(choice.length)];
@@ -87,6 +82,7 @@ package classes.Scenes.Areas
 					} else {
 						alrauneScene.alrauneVolcanicCrag();
 					}
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting, yet you this time you managed walk a little further inside this place than the last time.");

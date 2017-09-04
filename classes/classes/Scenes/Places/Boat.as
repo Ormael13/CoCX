@@ -8,15 +8,11 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
-	import classes.Player;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Boat()
 		{
 		}
@@ -39,7 +35,7 @@ package classes.Scenes.Places
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			clearOutput();

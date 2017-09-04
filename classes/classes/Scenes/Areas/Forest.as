@@ -6,12 +6,10 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Forest.*;
-	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
 	use namespace kGAMECLASS;
@@ -28,7 +26,6 @@ package classes.Scenes.Areas
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
@@ -228,7 +225,7 @@ package classes.Scenes.Areas
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
 				},
-				call  : etnaScene.repeatYandereEnc
+				call  : kGAMECLASS.etnaScene.repeatYandereEnc
 			}, {
 				name: "kitsune",
 				when: function():Boolean {

@@ -8,13 +8,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.DarkElfScene;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-
-	use namespace kGAMECLASS;
 
 	public class Mountain extends BaseContent
 	{
@@ -23,7 +17,6 @@ package classes.Scenes.Areas
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function Mountain()
@@ -41,7 +34,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
