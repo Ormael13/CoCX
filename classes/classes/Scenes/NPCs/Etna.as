@@ -13,8 +13,8 @@ package classes.Scenes.NPCs
 	
 	public class Etna extends Monster 
 	{
-		public var etnaScene:EtnaFollower = new EtnaFollower();
-		
+		public var etnaScene:EtnaFollower = game.etnaScene;
+
 		public function moveClawCombo():void {
 			createStatusEffect(StatusEffects.Attacks,2,0,0,0);
 			eAttack();

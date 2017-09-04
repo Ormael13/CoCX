@@ -7,8 +7,6 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.HighMountains.*;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
 	use namespace kGAMECLASS;
@@ -21,7 +19,6 @@ package classes.Scenes.Areas
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
@@ -65,8 +62,8 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && rand(3) == 0 && player.level >= 25) {
-				if (flags[kFLAGS.ETNA_AFFECTION] < 5) etnaScene.firstEnc();
-				else etnaScene.repeatEnc();
+				if (flags[kFLAGS.ETNA_AFFECTION] < 5) kGAMECLASS.etnaScene.firstEnc();
+				else kGAMECLASS.etnaScene.repeatEnc();
 				return;
 			}
 			//Temple of the Divine

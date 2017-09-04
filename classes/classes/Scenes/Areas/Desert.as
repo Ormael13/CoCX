@@ -10,8 +10,6 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Desert.*;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -23,7 +21,6 @@ package classes.Scenes.Areas
 		public var sandTrapScene:SandTrapScene = new SandTrapScene();
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public var wanderer:Wanderer = new Wanderer();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Desert()
 		{
 		}
@@ -146,7 +143,7 @@ package classes.Scenes.Areas
 						{
 							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2);
 						},
-						call: etnaScene.repeatYandereEnc
+						call: game.etnaScene.repeatYandereEnc
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",

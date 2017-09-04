@@ -17,9 +17,6 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.GlacialRift.*;
 	import classes.Scenes.Areas.Forest.AlrauneScene;
 	import classes.Scenes.NPCs.GooArmor;
-	import classes.Player;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 	
@@ -29,7 +26,6 @@ package classes.Scenes.Areas
 		public var yetiScene:YetiScene = new YetiScene();
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
 		public function GlacialRift() 
@@ -68,7 +64,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			select = choice[rand(choice.length)];

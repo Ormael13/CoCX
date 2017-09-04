@@ -64,7 +64,6 @@
 		public var dungeonHC:HiddenCave = new HiddenCave();
 		public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 		public var HolliPure:HolliPureScene = new HolliPureScene();
-		public var EtnaF:EtnaFollower = new EtnaFollower();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
 /* Replaced with calls to playerMenu
@@ -1016,7 +1015,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		addButton(3, "Etna", EtnaF.etnaCampMenu);
+		addButton(3, "Etna", kGAMECLASS.etnaScene.etnaCampMenu);
 	}
 	//Helia
 	if(kGAMECLASS.helScene.followerHel()) {
@@ -1512,7 +1511,7 @@ public function spellHealcamp():void {
 	//30% backfire!
 	var backfire:int = 30;
 	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
-	backfire -= (player.inte * 0,15);
+	backfire -= (player.inte * 0.15);
 	if (backfire < 15) backfire = 15;
 	else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
 	if(rand(100) < backfire) {
