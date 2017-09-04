@@ -5431,6 +5431,27 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.CooldownKick)) {
 				removeStatusEffect(StatusEffects.CooldownKick);
 			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectAir);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectEarth);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectFire);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectWater);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectIce);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectLightning);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectDarkness);
+			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
 				if (weapon == WeaponLib.FISTS) {

@@ -1022,15 +1022,18 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
-			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
+			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
 				var multimax:Number = 1;
-				multimax += 0.1
+				multimax += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
 				max *= multimax;
 			}
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
-			if (max > 29999) max = 29999;
+			if (max > 59999) max = 59999;
 			return max;
 		}
 		

@@ -78,7 +78,7 @@ package classes.Scenes
 			outputText("-New tier 9 toughness lvl-up perk: Shield Combat. Req. perk Steel Impact. Effect: when PC block an attack riposte with a shield bash damaging it opponent\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (2nd Stage). Req. Ascension: Unlocked Potential and be at second ascension. It costs 5 asc points and will give +2 to max lust/wrath and +6 to max soulforce at each lvl-up.\n");
-			outputText("-Added to all multi rank lvl-up perks 6th rank req. PC be in NG5+.\n");
+			outputText("-Added to all multi rank lvl-up perks 6th rank req. PC be in NG5+.\n");//put enemy perk in next line
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");
 			outputText("-Changed 5th and 6th stage of soul cultivation: Soul Scholar replacing Soul Exalt // Soul Elder replacing Soul Overlord\n");
 			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step. Also each perk above Job: Soul Cultivator will give +5 to max wisdom (non scalable).\n");
@@ -113,14 +113,20 @@ package classes.Scenes
 			outputText("-New tier 3 toughness lvl-up perk: ShieldHarmony\n");
 			outputText("-New tier 1 wisdom lvl-up perk: Elemental Bond: Flesh\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Bond: Urges\n");
-			outputText("-New tier 5 toughness lvl-up perk: ShieldWard\n");//should it also affect chance to been grappled by enemies?
+			outputText("-New tier 5 toughness lvl-up perk: ShieldWard\n");
 			outputText("-New tier 3 toughness lvl-up perk: Lifeline\n");
 			outputText("-New tier 4 toughness lvl-up perk (multi-rank): Goliath I-VI\n");
 			outputText("-New tier 6 toughness lvl-up perk (multi-rank): Cheetah I-VI\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Eyes of the Hunter (Novice)\n");
 			outputText("-New tier 1 intelligence lvl-up perk: ArcaneRegenerationMinor\n");
+			outputText("-New tier 1 sensitivity lvl-up perk: Eyes of the Hunter (Adept)\n");
+			outputText("-New tier 4 misc lvl-up perk: EnableCriticals\n");
+			outputText("-New tier 2 intelligence lvl-up perk: ArcaneRegenerationMajor\n");
+			outputText("-New tier 3 intelligence lvl-up perk: ArcaneRegenerationEpic\n");
+			outputText("-New tier 4 intelligence lvl-up perk: ArcaneRegenerationLegendary\n");
 			outputText("-New tier   lvl-up perk: \n");
 			outputText("-\n");
+			outputText("-New type of perks for enemies: Construct-type enemy. \n");
 			outputText("-New option at Soul Arena in 3rd submenu: fight with 3 enemies in a row to get Guided Bow at first win or 20 spirit stones for each win after first.\n");
 			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
@@ -141,6 +147,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -194,6 +204,16 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

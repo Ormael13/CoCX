@@ -503,6 +503,13 @@ package classes
 		public static const WolfHold:CombatStatusEffect                  = mk2("Wolf Hold");
 		
 		public static const CooldownCompellingAria:StatusEffectType     = mk2("Cooldown Compelling Aria");
+		public static const CooldownEAspectAir:StatusEffectType    		= mk2("Cooldown Elemental Aspect Air");
+		public static const CooldownEAspectEarth:StatusEffectType  		= mk2("Cooldown Elemental Aspect Earth");
+		public static const CooldownEAspectFire:StatusEffectType   		= mk2("Cooldown Elemental Aspect Fire");
+		public static const CooldownEAspectWater:StatusEffectType  		= mk2("Cooldown Elemental Aspect Water");
+		public static const CooldownEAspectIce:StatusEffectType    		= mk2("Cooldown Elemental Aspect Ice");
+		public static const CooldownEAspectLightning:StatusEffectType	= mk2("Cooldown Elemental Aspect Lightning");
+		public static const CooldownEAspectDarkness:StatusEffectType	= mk2("Cooldown Elemental Aspect Darkness");
 		public static const CooldownFascinate:StatusEffectType          = mk2("Cooldown Fascinate");
 		public static const CooldownFreezingBreath:StatusEffectType     = mk2("Cooldown Freezing Breath (F)");
 		public static const CooldownFreezingBreathYeti:StatusEffectType = mk2("Cooldown Freezing Breath (Y)");

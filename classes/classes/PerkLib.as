@@ -181,8 +181,33 @@ package classes
 		public static const ArcanePoolVI:PerkType = mk("Arcane Pool VI", "Arcane Pool VI",
 				"+1 extra mana per point of intelligence and wisdom.",
 				"You choose the 'Arcane Pool VI' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcaneRegenerationEpic:PerkType = mk("Arcane Regeneration (Epic)", "Arcane Regeneration (Epic)",
+				"[if (player.inte>=100)" +
+						"Increase by 150% base mana recovery and 30% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Epic)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationLegendary:PerkType = mk("Arcane Regeneration (Legendary)", "Arcane Regeneration (Legendary)",
+				"[if (player.inte>=125)" +
+						"Increase by 200% base mana recovery and 40% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Legendary)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationMajor:PerkType = mk("Arcane Regeneration (Major)", "Arcane Regeneration (Major)",
+				"[if (player.inte>=75)" +
+						"Increase by 100% base mana recovery and 20% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Major)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationMinor:PerkType = mk("Arcane Regeneration (Minor)", "Arcane Regeneration (Minor)",
-				"Increase by 50% base mana recovery and 10% max mana.",
+				"[if (player.inte>=50)" +
+						"Increase by 50% base mana recovery and 10% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
 				"You choose the 'Arcane Regeneration (Minor)' perk, increasing mana recovery and mana pool.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
@@ -522,6 +547,9 @@ package classes
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elemnts that aren't classified as one of four traditional.");
+		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
+				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
+				"You choose the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
@@ -537,6 +565,9 @@ package classes
 		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
 				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering and storing more golems.",
 				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
+				"Allow see few another few infomations about enemy (as long it apply to current viewed enemy).",
+				"You choose the 'Eyes of the Hunter (Adept)' perk, allowing you to gain wider than before range of information about enemy you fight.");
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
 				"Allow see few more than usual infomations about enemy.",
 				"You choose the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
@@ -1604,6 +1635,7 @@ package classes
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
+		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGroupType:PerkType = mk("Group-type enemy", "Group-type enemy", "");
@@ -1615,10 +1647,9 @@ package classes
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
+		//public static const EnemyGooType:PerkType = mk("", "", "");
+		//public static const EnemyPlantType:PerkType = mk("", "", "");
+		//public static const Enemy:PerkType = mk("", "", "");undead/ghost?
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
@@ -2304,6 +2335,10 @@ package classes
 							.requireInt(90)
 							.requirePerk(HalfStepToImprovedSpirituality)
 							.requireLevel(12);
+		ArcaneRegenerationMajor.requirePerk(Archmage)
+							   .requirePerk(ArcaneRegenerationMinor)
+							   .requireInt(75)
+							   .requireLevel(12);
 		//Tier 3 Intelligence perks
 		GrandArchmage.requirePerk(Archmage)
 					 .requireInt(100).requireLevel(18);
@@ -2336,6 +2371,10 @@ package classes
 						   .requirePerk(Archmage)
 						   .requireInt(100)
 						   .requireLevel(18);
+		ArcaneRegenerationEpic.requirePerk(GrandArchmage)
+							  .requirePerk(ArcaneRegenerationMajor)
+							  .requireInt(100)
+							  .requireLevel(18);
 		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
@@ -2368,6 +2407,10 @@ package classes
 							 .requireInt(160)
 							 .requireLevel(28)
 							 .requireNGPlus(2);
+		ArcaneRegenerationLegendary.requirePerk(GreyMage)
+								   .requirePerk(ArcaneRegenerationEpic)
+								   .requireInt(125)
+								   .requireLevel(24);
 		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
@@ -2641,6 +2684,9 @@ package classes
 		//Slot 6 - Tier 0
 		EyesOfTheHunterNovice.requireSen(25);
 		//Tier 1
+		EyesOfTheHunterAdept.requireSen(50)
+							.requirePerk(EyesOfTheHunterNovice)
+							.requireLevel(6);
 		//Tier 2
 		//Tier 3
 		//------------
@@ -3024,6 +3070,7 @@ package classes
 				   .requireStr(100)
 				   .requireTou(100)
 				   .requirePerk(JobWarlord);
+		EnableCriticals.requireLevel(24);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {

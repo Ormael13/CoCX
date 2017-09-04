@@ -2152,6 +2152,14 @@ package classes
 			return false;
 		}
 
+		//Crit immunity
+		public function isImmuneToCrits():Boolean
+		{
+			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0)
+				return true;//potem inne typy wrogów dodać tutaj: goo, żywiołaki, rośliny, nieumarli/duchy
+			return false;
+		}
+
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

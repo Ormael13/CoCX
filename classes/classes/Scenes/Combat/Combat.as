@@ -1007,6 +1007,7 @@ public function elementalattacks():void {
 		if (player.inte > 100) critChance += 10;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) critChance += 10;
+	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) damageelemental *= 1.75;
@@ -1729,6 +1730,7 @@ public function multiArrowsStrike():void {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -2075,6 +2077,7 @@ public function throwWeapon():void {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -2223,6 +2226,7 @@ public function shootWeapon():void {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -2731,6 +2735,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
@@ -4482,6 +4487,9 @@ public function manaregeneration(combat:Boolean = true):void {
 	if (combat) {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
 		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 5;
+		if (player.findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) gainedmana += 10;
+		if (player.findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) gainedmana += 15;
+		if (player.findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) gainedmana += 20;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 10;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 10;
 		gainedmana *= manaRecoveryMultiplier();
@@ -4491,6 +4499,9 @@ public function manaregeneration(combat:Boolean = true):void {
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
 		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 10;
+		if (player.findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) gainedmana += 20;
+		if (player.findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) gainedmana += 30;
+		if (player.findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) gainedmana += 40;
 		gainedmana *= manaRecoveryMultiplier();
 		kGAMECLASS.ManaChange(gainedmana, false);
 	}
@@ -4834,14 +4845,28 @@ public function display():void {
 		//wrath
 		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
 			outputText("\n----------------------------\n");
-			outputText("\nType: ");
+			outputText("\nGeneral Type: ");
 			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) outputText("Beast or Animal-morph ");
-			if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("Boss ");
+			if (monster.hasPerk(PerkLib.EnemyConstructType) >= 0) outputText("Construct ");
 			if (monster.hasPerk(PerkLib.EnemyGigantType) >= 0) outputText("Gigant ");
 			if (monster.hasPerk(PerkLib.EnemyGodType) >= 0) outputText("God ");
 			if (monster.hasPerk(PerkLib.EnemyGroupType) >= 0) outputText("Group ");
-			//if (monster.hasPerk(PerkLib) >= 0) outputText("");
-			//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
+				if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("Boss ");
+				outputText("\nElemental Type: ");
+				if (monster.hasPerk(PerkLib.DarknessNature) >= 0) outputText("Darkness Nature ");
+				if (monster.hasPerk(PerkLib.FireNature) >= 0) outputText("Fire Nature ");
+				if (monster.hasPerk(PerkLib.IceNature) >= 0) outputText("Ice Nature ");
+				if (monster.hasPerk(PerkLib.LightningNature) >= 0) outputText("Lightning Nature ");
+				//if (player.findPerk(PerkLib.) >= 0 && player.sens >= 75) {
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("Darkness Vulnerability ");
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("Fire Vulnerability ");
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("Ice Vulnerability ");
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("Lightning Vulnerability ");
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+				//}
+			}
 			outputText("\n");
 		}
 	}
@@ -5263,6 +5288,7 @@ public function ScyllaTease():void {
 				if (player.lib <= 100) critChance += player.lib / 5;
 				if (player.lib > 100) critChance += 20;
 			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
@@ -5422,6 +5448,7 @@ public function GooTease():void {
 				if (player.lib <= 100) critChance += player.lib / 5;
 				if (player.lib > 100) critChance += 20;
 			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;

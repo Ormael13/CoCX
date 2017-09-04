@@ -48,6 +48,7 @@ package classes.Scenes.Dungeons.D3
 			createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.str += 90 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 102 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

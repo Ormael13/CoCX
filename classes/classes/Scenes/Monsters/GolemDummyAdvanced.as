@@ -57,6 +57,7 @@ package classes.Scenes.Monsters
 			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

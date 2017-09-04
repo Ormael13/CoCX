@@ -364,7 +364,14 @@
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
-			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) temp *= 1.1;
+			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
+				var tempmulti:Number = 1;
+				tempmulti += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.3;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
+				temp *= tempmulti;
+			}
 			return temp;
 		}
 

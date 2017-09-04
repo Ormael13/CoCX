@@ -88,12 +88,19 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.devilkinScore() >= 10) {
 			addButton(button++, "Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n\nMana Cost: " + spellCost(40));
 		}
+		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(9, "Shielding", shieldingSpell);
+		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) addButton(9, "Immolation", immolationSpell);
+		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) addButton(9, "Ice Prison", iceprisonSpell);
+		addButton(10, "Misc", specialsMisc);
 		addButton(11, "BreathAtk", specialsBreathAttacks);
 		addButton(12, "(De)Buffs", specialsBuffsDebuffs);
-		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
-		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) addButton(13, "Immolation", immolationSpell);
-		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) addButton(13, "Ice Prison", iceprisonSpell);
+		addButton(13, "E.Aspect", specialsElementalAspect);
 		addButton(14, "Back", combatMenu, false);
+	}
+
+	private function specialsMisc():void {
+		menu();
+		addButton(14, "Back", msMenu);
 	}
 
 	private function specialsBuffsDebuffs():void {
@@ -166,6 +173,21 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else addButtonDisabled(9, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
 		}
+		addButton(14, "Back", msMenu);
+	}
+
+	private function specialsElementalAspect():void {
+		menu();
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", ElementalAspectAir);
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", );
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", ElementalAspectFire);
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", );
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(4, "Ice", ElementalAspectIce);
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(5, "Lightning", );
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(6, "Darkness", );
+		//wood
+		//metal
+		//?lust/corruption?
 		addButton(14, "Back", msMenu);
 	}
 
@@ -1441,6 +1463,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1611,6 +1634,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1726,6 +1750,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 	 if (player.inte > 100) critChance += 10;
 	 }
+	 if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	 if (rand(100) < critChance) {
 	 crit = true;
 	 dmg *= 1.75;
@@ -1844,6 +1869,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			dmg *= 1.75;
@@ -1975,6 +2001,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			dmg *= 1.75;
@@ -2099,6 +2126,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			dmg *= 1.75;
@@ -2548,6 +2576,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 		return;
 	}
+	
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
@@ -2577,7 +2606,68 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if(!combatRoundOver()) enemyAI();
 	}
+/*
+	public function ElementalAspectAir():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
 
+	public function ElementalAspectEarth():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
+*/
+	public function ElementalAspectFire():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
+			outputText("You already used fire elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
+/*
+	public function ElementalAspectWater():void {
+		clearOutput();
+		enemyAI();
+	}
+*/
+	public function ElementalAspectIce():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
+			outputText("You already used ice elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
+/*
+	public function ElementalAspectLightning():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
+			outputText("You already used lightning elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
+
+	public function ElementalAspectDarkness():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
+			outputText("You already used darkness elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		enemyAI();
+	}
+*/
 	//Arian's stuff
 //Using the Talisman in combat
 	public function immolationSpell():void {

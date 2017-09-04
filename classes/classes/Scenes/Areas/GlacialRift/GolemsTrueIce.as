@@ -85,6 +85,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

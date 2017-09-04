@@ -93,6 +93,7 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
