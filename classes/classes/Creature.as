@@ -2081,7 +2081,7 @@ package classes
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.OTETSU)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
 				return true;
 			return false;
 		}
@@ -2106,8 +2106,8 @@ package classes
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.RIBBON
-			 || game.player.weapon == game.weapons.ERIBBON)
+			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
+			 || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
 				return true;
 			return false;
 		}

@@ -179,12 +179,12 @@ public class MagicSpecials extends BaseCombatContent {
 	private function specialsElementalAspect():void {
 		menu();
 		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", ElementalAspectAir);
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", );
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", ElementalAspectFire);
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", );
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(4, "Ice", ElementalAspectIce);
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(5, "Lightning", );
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(6, "Darkness", );
+		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", ElementalAspectEarth);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", ElementalAspectFire);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", ElementalAspectWater);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(4, "Ice", ElementalAspectIce);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(5, "Lightning", ElementalAspectLightning);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(6, "Darkness", ElementalAspectDarkness);
 		//wood
 		//metal
 		//?lust/corruption?
@@ -2627,14 +2627,117 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectFire, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += inteligencescalingbonus();
+							else damage += inteligencescalingbonus() * 0.8;
+						}
+						else damage += inteligencescalingbonus() * 0.6;
+					}
+					else damage += inteligencescalingbonus() * 0.4;
+				}
+				else damage += inteligencescalingbonus() * 0.3;
+			}
+			else damage += inteligencescalingbonus() * 0.2;
+		}
+		else damage += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += wisdomscalingbonus();
+							else damage += wisdomscalingbonus() * 0.8;
+						}
+						else damage += wisdomscalingbonus() * 0.6;
+					}
+					else damage += wisdomscalingbonus() * 0.4;
+				}
+				else damage += wisdomscalingbonus() * 0.3;
+			}
+			else damage += wisdomscalingbonus() * 0.2;
+		}
+		else damage += wisdomscalingbonus() * 0.1;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
+		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
+		damage = Math.round(damage);
+		outputText("WIP TEXT. ");
+		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("\n\n");
+		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
-/*
+
 	public function ElementalAspectWater():void {
 		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
+			outputText("You already used water elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		player.createStatusEffect(StatusEffects.CooldownEAspectWater, 0, 0, 0, 0);
+		var temp:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) temp += inteligencescalingbonus();
+							else temp += inteligencescalingbonus() * 0.8;
+						}
+						else temp += inteligencescalingbonus() * 0.6;
+					}
+					else temp += inteligencescalingbonus() * 0.4;
+				}
+				else temp += inteligencescalingbonus() * 0.3;
+			}
+			else temp += inteligencescalingbonus() * 0.2;
+		}
+		else temp += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) temp += wisdomscalingbonus();
+							else temp += wisdomscalingbonus() * 0.8;
+						}
+						else temp += wisdomscalingbonus() * 0.6;
+					}
+					else temp += wisdomscalingbonus() * 0.4;
+				}
+				else temp += wisdomscalingbonus() * 0.3;
+			}
+			else temp += wisdomscalingbonus() * 0.2;
+		}
+		else temp += wisdomscalingbonus() * 0.1;
+		temp = Math.round(temp);
+		outputText("WIP TEXT. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		HPChange(temp,false);
+		outputText("\n\n");
 		enemyAI();
 	}
-*/
+
 	public function ElementalAspectIce():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
@@ -2643,9 +2746,66 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectIce, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += inteligencescalingbonus();
+							else damage += inteligencescalingbonus() * 0.8;
+						}
+						else damage += inteligencescalingbonus() * 0.6;
+					}
+					else damage += inteligencescalingbonus() * 0.4;
+				}
+				else damage += inteligencescalingbonus() * 0.3;
+			}
+			else damage += inteligencescalingbonus() * 0.2;
+		}
+		else damage += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += wisdomscalingbonus();
+							else damage += wisdomscalingbonus() * 0.8;
+						}
+						else damage += wisdomscalingbonus() * 0.6;
+					}
+					else damage += wisdomscalingbonus() * 0.4;
+				}
+				else damage += wisdomscalingbonus() * 0.3;
+			}
+			else damage += wisdomscalingbonus() * 0.2;
+		}
+		else damage += wisdomscalingbonus() * 0.1;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
+		if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
+		damage = Math.round(damage);
+		outputText("WIP TEXT. ");
+		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("\n\n");
+		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
-/*
+
 	public function ElementalAspectLightning():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
@@ -2654,6 +2814,62 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectLightning, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += inteligencescalingbonus();
+							else damage += inteligencescalingbonus() * 0.8;
+						}
+						else damage += inteligencescalingbonus() * 0.6;
+					}
+					else damage += inteligencescalingbonus() * 0.4;
+				}
+				else damage += inteligencescalingbonus() * 0.3;
+			}
+			else damage += inteligencescalingbonus() * 0.2;
+		}
+		else damage += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += wisdomscalingbonus();
+							else damage += wisdomscalingbonus() * 0.8;
+						}
+						else damage += wisdomscalingbonus() * 0.6;
+					}
+					else damage += wisdomscalingbonus() * 0.4;
+				}
+				else damage += wisdomscalingbonus() * 0.3;
+			}
+			else damage += wisdomscalingbonus() * 0.2;
+		}
+		else damage += wisdomscalingbonus() * 0.1;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
+		damage = Math.round(damage);
+		outputText("WIP TEXT. ");
+		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("\n\n");
+		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
 
@@ -2665,9 +2881,65 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectDarkness, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += inteligencescalingbonus();
+							else damage += inteligencescalingbonus() * 0.8;
+						}
+						else damage += inteligencescalingbonus() * 0.6;
+					}
+					else damage += inteligencescalingbonus() * 0.4;
+				}
+				else damage += inteligencescalingbonus() * 0.3;
+			}
+			else damage += inteligencescalingbonus() * 0.2;
+		}
+		else damage += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += wisdomscalingbonus();
+							else damage += wisdomscalingbonus() * 0.8;
+						}
+						else damage += wisdomscalingbonus() * 0.6;
+					}
+					else damage += wisdomscalingbonus() * 0.4;
+				}
+				else damage += wisdomscalingbonus() * 0.3;
+			}
+			else damage += wisdomscalingbonus() * 0.2;
+		}
+		else damage += wisdomscalingbonus() * 0.1;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+		damage = Math.round(damage);
+		outputText("WIP TEXT. ");
+		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("\n\n");
+		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
-*/
+
 	//Arian's stuff
 //Using the Talisman in combat
 	public function immolationSpell():void {

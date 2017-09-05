@@ -67,7 +67,7 @@ package classes.Scenes
 			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
 			outputText("-New tier 6 intelligence lvl-up perk: (Eternaly) Lasting Buffs. Req. (Ever)Lasting Buffs perk and 190+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
 			outputText("-New tier 6 wisdom lvl-up perk: Elemental Contract Rank 7. Req. perk Elemental Contract Rank 6 and 175+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 7\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Elemental Contract Rank 8. Req. perk Elemental Contract Rank 7 and 200+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to elder rank\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Contract Rank 8. Req. perk Elemental Contract Rank 7 and 200+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to elder rank\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
@@ -93,7 +93,8 @@ package classes.Scenes
 			outputText("-New type of melee weapons: Dual weapons. Dual Swords (800 gems and 10 atk), Dual BF Sword (4000 gems and 5-50 atk), Dual Huge Warhammer (2400 gems and 7-15 atk), pair of Whips (400 gems and 2 atk), pair of Succubi Whips (800 gems and 10 atk). All beside last two are buyable at Tel'Adre weapon shop and req. coresponding Dual Wield perks to be equipable. ");
 			outputText("Pair of Succubi Whips can be or bought from Sean's shop or found as drop from beating Vapula horde in Owca Pit. Pair of Whips are buyable in He'Xin'Dao weapon shop.\n");
 			outputText("-New items for range weapon slot: Tomes. Inquisitor’s Tome can be found as 3rd option at Inquisitor Tomb and Sage’s Sketchbook can be bought in Sean shop. Inquisitor’s Tome allow using HP instead of Mana if it too low for spellcasting, Sage’s Sketchbook increase spell power by 60% (stacing with wizard focus perk effects).\n");
-			outputText("-New melee weapon (by Liadri): Oni Tetsubo - buyable in river village shop (3600 gems, Large type, 45 base atk). It's can stun like Huge Warhammer and is Wrath Weapon.\n");
+			outputText("-New melee weapon (by Zevos): Eldritch Ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special). Can be found in one of Hidden Cave storages.\n");
+			outputText("-New melee weapon (by Liadri): Oni Tetsubo - buyable in river village shop (3600 gems, Large type, 45 base atk). It's can stun like Huge Warhammer and it's Wrath Weapon.\n");
 			outputText("-New melee weapon (by Liadri): Demonic Scythe - foundable in Magpie Hall after beating Basilisk King (2000 gems, Large type, 25 base atk, adds 100% to spell multiplier, each attack with it or casting spell when it's equiped will cause PC gain a little bit of corruption (up to 90)).\n");
 			outputText("-New melee weapons: Lance - buyable in He'Xin'Dao weapon shop (480 gems, 6-12 atk) and Trident (by Liadri) - buyable at Pinchou’s waterwear and tools’ at Beach (480 gems, 6-12 atk). Now both Spear and Lance have scaling of base atk depending on speed.\n");
 			outputText("-Spear and Whip was moved to weapon shop in He'Xin'Dao from Tel'Adre weapon shop\n");
@@ -124,9 +125,17 @@ package classes.Scenes
 			outputText("-New tier 2 intelligence lvl-up perk: ArcaneRegenerationMajor\n");
 			outputText("-New tier 3 intelligence lvl-up perk: ArcaneRegenerationEpic\n");
 			outputText("-New tier 4 intelligence lvl-up perk: ArcaneRegenerationLegendary\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: EyesOfTheHunterMaster\n");
+			outputText("-New tier   lvl-up perk: \n");
 			outputText("-New tier   lvl-up perk: \n");
 			outputText("-\n");
-			outputText("-New type of perks for enemies: Construct-type enemy. \n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-New type of perks for enemies: Construct-type enemy -> it disable crit chance (without having specific perk) and bleed status triggering after PC attack.\n");
 			outputText("-New option at Soul Arena in 3rd submenu: fight with 3 enemies in a row to get Guided Bow at first win or 20 spirit stones for each win after first.\n");
 			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
@@ -149,6 +158,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -160,7 +173,10 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, 
-			outputText("-(?use as reward in hidden cave dungeon?)New melee weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -204,6 +220,15 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

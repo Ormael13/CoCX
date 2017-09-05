@@ -542,7 +542,7 @@ package classes
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 7.",
 				"You choose 'Elemental Contract Rank 7' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank8:PerkType = mk("Elemental Contract Rank 8", "Elemental Contract Rank 8",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to elder rank.",
 				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
@@ -566,10 +566,13 @@ package classes
 				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering and storing more golems.",
 				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
-				"Allow see few another few infomations about enemy (as long it apply to current viewed enemy).",
+				"Allow see another few infomations about enemy (as long it apply to current viewed enemy) (req. 50+ sensitivity).",
 				"You choose the 'Eyes of the Hunter (Adept)' perk, allowing you to gain wider than before range of information about enemy you fight.");
+		public static const EyesOfTheHunterMaster:PerkType = mk("Eyes of the Hunter (Master)", "Eyes of the Hunter (Master)",
+				"Allow see more infomations about enemy (as long it apply to current viewed enemy) (req. 75+ sensitivity).",
+				"You choose the 'Eyes of the Hunter (Master)' perk, adding more possible to see information about enemy you fight in compare to Adept stage.");
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
-				"Allow see few more than usual infomations about enemy.",
+				"Allow see few more than usual infomations about enemy (req. 25+ sensitivity).",
 				"You choose the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
 		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
 				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
@@ -2500,7 +2503,7 @@ package classes
 		//Tier 3 Wisdom perks
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
-							  .requireLevel(18);ElementalBondFlesh
+							  .requireLevel(18);//ElementalBondFlesh
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)
@@ -2688,6 +2691,9 @@ package classes
 							.requirePerk(EyesOfTheHunterNovice)
 							.requireLevel(6);
 		//Tier 2
+		EyesOfTheHunterMaster.requireSen(75)
+							 .requirePerk(EyesOfTheHunterAdept)
+							 .requireLevel(12);
 		//Tier 3
 		//------------
 		// CORRUPTION

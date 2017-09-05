@@ -400,7 +400,7 @@ private function eyesColorSelection():void {
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-			addButton(4, "E. Ribbon", AddEldritchRibbon).hint("Add 1 Eldritch Ribbon.");
+		//	addButton(4, "", ).hint("Add 1 .");
 			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
@@ -408,7 +408,7 @@ private function eyesColorSelection():void {
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-			addButton(12, "GuidedBow", AddTheGuidedBow).hint("Add 1 Guided Bow.");
+			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Cat o' nine tail whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -535,9 +535,9 @@ private function eyesColorSelection():void {
 			outputText("\n\n<b>(Gained 1 Yeti Cum!)</b>\n\n");
 			inventory.takeItem(consumables.YETICUM, EquipmentMenu);
 		}
-		public function AddTheGuidedBow():void {
-			outputText("\n\n<b>(Gained 1 Guided Bow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BOWGUID, EquipmentMenu);
+		public function AddCatONineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
+			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");

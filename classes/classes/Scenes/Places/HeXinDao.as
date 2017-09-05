@@ -1631,6 +1631,7 @@ public function gaunletchallange1postfight():void {
 	clearOutput();
 	outputText("WIP TEXT. ");
 	if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
+		outputText("WIP TEXT about getting 20 Spirit Stones. ");
 		flags[kFLAGS.SPIRIT_STONES] += 20;
 		cleanupAfterCombat();
 	}

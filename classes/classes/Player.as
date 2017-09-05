@@ -483,7 +483,10 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			if(hasStatusEffect(StatusEffects.ChargeWeapon) && weaponName != "fists") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
+			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
+				if (weaponName != "fists" && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+				if (weaponPerk == "Large" || weaponPerk == "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+			}
 			attack = Math.round(attack);
 			return attack;
 		}

@@ -18,6 +18,7 @@ package classes.Items
 		public const BFSWORD:Weapon = new BFSword();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
+		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.");
 		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DEMSCYT:WeaponWithPerk = new WeaponWithPerk("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A mage catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);

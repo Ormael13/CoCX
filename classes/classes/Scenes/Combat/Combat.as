@@ -275,6 +275,21 @@ public function checkAchievementDamage(damage:Number):void
 	if (damage >= 2500) kGAMECLASS.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
 	if (damage >= 5000) kGAMECLASS.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
 }
+/*public function checkMinionsAchievementDamage(damage:Number):void
+{
+	flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] += damage;
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) kGAMECLASS.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) kGAMECLASS.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) kGAMECLASS.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) kGAMECLASS.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
+	if (damage >= 50) kGAMECLASS.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
+	if (damage >= 100) kGAMECLASS.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
+	if (damage >= 250) kGAMECLASS.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
+	if (damage >= 500) kGAMECLASS.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+	if (damage >= 1000) kGAMECLASS.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
+	if (damage >= 2500) kGAMECLASS.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
+	if (damage >= 5000) kGAMECLASS.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
+}*/
 public function approachAfterKnockback1():void
 {
 	clearOutput();
@@ -1046,6 +1061,7 @@ public function elementalattacks():void {
 	}
 	outputText("<b>(<font color=\"#800000\">" + damageelemental + "</font>)</b>\n\n");
 	damageelemental = doDamage(damageelemental);
+	//checkMinionsAchievementDamage(damageelemental);
 	if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
 		fatigueRecovery();
 		manaregeneration();
@@ -2929,25 +2945,26 @@ public function attack():void {
 		//Selfcorrupting weapons
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
-		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
-			//10% chance
-			if(rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
-				outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
-				if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
-			}
-			//50% Bleed chance
-			if (player.weapon == weapons.H_GAUNT && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
-			{
+		//10% Stun chance
+		if ((player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || player.weapon == weapons.S_GAUNT) && rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
+		//50% Bleed chance
+		if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP) && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
+		{
+			if (monster.findPerk(PerkLib.EnemyConstructType) >= 0) {
 				if (monster is LivingStatue)
 				{
 					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
 				}
-				else
-				{
-					monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
-					if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.");
-					else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.");
-				}
+				else outputText("Despite the rents you've torn in its exterior, " + monster.a + monster.short + " does not bleed.");
+			}
+			else
+			{
+				monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
+				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [weapon] leave behind.");
+				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
 			}
 		}
 	}
@@ -4846,26 +4863,26 @@ public function display():void {
 		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
 			outputText("\n----------------------------\n");
 			outputText("\nGeneral Type: ");
-			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) outputText("Beast or Animal-morph ");
-			if (monster.hasPerk(PerkLib.EnemyConstructType) >= 0) outputText("Construct ");
-			if (monster.hasPerk(PerkLib.EnemyGigantType) >= 0) outputText("Gigant ");
-			if (monster.hasPerk(PerkLib.EnemyGodType) >= 0) outputText("God ");
-			if (monster.hasPerk(PerkLib.EnemyGroupType) >= 0) outputText("Group ");
+			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) outputText("< Beast or Animal-morph > ");
+			if (monster.hasPerk(PerkLib.EnemyConstructType) >= 0) outputText("< Construct > ");
+			if (monster.hasPerk(PerkLib.EnemyGigantType) >= 0) outputText("< Gigant > ");
+			if (monster.hasPerk(PerkLib.EnemyGodType) >= 0) outputText("< God > ");
+			if (monster.hasPerk(PerkLib.EnemyGroupType) >= 0) outputText("< Group > ");
 			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
-				if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("Boss ");
+				if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("< Boss > ");
 				outputText("\nElemental Type: ");
-				if (monster.hasPerk(PerkLib.DarknessNature) >= 0) outputText("Darkness Nature ");
-				if (monster.hasPerk(PerkLib.FireNature) >= 0) outputText("Fire Nature ");
-				if (monster.hasPerk(PerkLib.IceNature) >= 0) outputText("Ice Nature ");
-				if (monster.hasPerk(PerkLib.LightningNature) >= 0) outputText("Lightning Nature ");
-				//if (player.findPerk(PerkLib.) >= 0 && player.sens >= 75) {
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("Darkness Vulnerability ");
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("Fire Vulnerability ");
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("Ice Vulnerability ");
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("Lightning Vulnerability ");
+				if (monster.hasPerk(PerkLib.DarknessNature) >= 0) outputText("< Darkness Nature > ");
+				if (monster.hasPerk(PerkLib.FireNature) >= 0) outputText("< Fire Nature > ");
+				if (monster.hasPerk(PerkLib.IceNature) >= 0) outputText("< Ice Nature > ");
+				if (monster.hasPerk(PerkLib.LightningNature) >= 0) outputText("< Lightning Nature > ");
+				if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
+					if (monster.hasPerk(PerkLib.DarknessVulnerability) >= 0) outputText("< Darkness Vulnerability > ");
+					if (monster.hasPerk(PerkLib.FireVulnerability) >= 0) outputText("< Fire Vulnerability > ");
+					if (monster.hasPerk(PerkLib.IceVulnerability) >= 0) outputText("< Ice Vulnerability > ");
+					if (monster.hasPerk(PerkLib.LightningVulnerability) >= 0) outputText("< Lightning Vulnerability > ");
 					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
 					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
-				//}
+				}
 			}
 			outputText("\n");
 		}
