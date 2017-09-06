@@ -179,7 +179,7 @@ public class MagicSpecials extends BaseCombatContent {
 	private function specialsElementalAspect():void {
 		menu();
 		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", ElementalAspectAir);
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", ElementalAspectEarth);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", ElementalAspectEarth);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", ElementalAspectFire);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", ElementalAspectWater);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(4, "Ice", ElementalAspectIce);
@@ -2610,15 +2610,35 @@ public class MagicSpecials extends BaseCombatContent {
 	public function ElementalAspectAir():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		enemyAI();
-	}
-
-	public function ElementalAspectEarth():void {
-		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		?giving PC for x turns flying status + smth else? knock back enemy/enemies? ake down all flying enemies and ground them as long effect is active (make special leave lingering for few turns status effect - similary long as stone skin)?
 		enemyAI();
 	}
 */
+	public function ElementalAspectEarth():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
+			outputText("You already used earth elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
+		player.createStatusEffect(StatusEffects.CooldownEAspectEarth, 0, 0, 0, 0);
+		var stoneskinbonus:Number = 0;
+		stoneskinbonus += player.inte * 0.1;
+		stoneskinbonus += player.wis * 0.1;
+		stoneskinbonus = Math.round(stoneskinbonus);
+		var stoneskinduration:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 1) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) stoneskinduration += 2;
+		player.createStatusEffect(StatusEffects.StoneSkin, stoneskinbonus, stoneskinduration, 0, 0);
+		outputText("WIP TEXT. \n\n");
+		enemyAI();
+	}
+
 	public function ElementalAspectFire():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) {

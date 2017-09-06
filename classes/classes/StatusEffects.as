@@ -485,6 +485,7 @@ package classes
 		public static const SheilaOil:CombatStatusEffect                 = mk2("Sheila Oil");
 		public static const Shielding:CombatStatusEffect                 = mk2("Sheilding");
 		public static const StoneLust:CombatStatusEffect                 = mk2("Stone Lust");
+		public static const StoneSkin:CombatStatusEffect                 = mk2("Stone Skin");
 		public static const Stunned:CombatStatusEffect                   = mk2("Stunned");
 		public static const TailWhip:CombatStatusEffect                  = mk2("Tail Whip");
 		public static const TemporaryHeat:CombatStatusEffect             = mk2("Temporary Heat");

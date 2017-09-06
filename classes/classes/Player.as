@@ -393,14 +393,15 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
-			if(hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
+			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
 				armorDef = 0;
 			}
-			if(hasStatusEffect(StatusEffects.Lustzerking)) {
+			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			if(hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -5075,18 +5076,25 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
-				maxStr -= (20 * (1 + newGamePlusMod));
-				maxTou -= (20 * (1 + newGamePlusMod));
-				maxSpe -= (20 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (50 * (1 + newGamePlusMod));
+				maxStr -= (15 * (1 + newGamePlusMod));
+				maxTou -= (15 * (1 + newGamePlusMod));
+				maxSpe -= (15 * (1 + newGamePlusMod));
+				maxInt += (20 * (1 + newGamePlusMod));
+				maxWis += (30 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				maxStr -= (40 * (1 + newGamePlusMod));
-				maxTou -= (40 * (1 + newGamePlusMod));
-				maxSpe -= (40 * (1 + newGamePlusMod));
-				maxInt += (50 * (1 + newGamePlusMod));
-				maxWis += (100 * (1 + newGamePlusMod));
+				maxStr -= (30 * (1 + newGamePlusMod));
+				maxTou -= (30 * (1 + newGamePlusMod));
+				maxSpe -= (30 * (1 + newGamePlusMod));
+				maxInt += (40 * (1 + newGamePlusMod));
+				maxWis += (60 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
+				maxStr -= (45 * (1 + newGamePlusMod));
+				maxTou -= (45 * (1 + newGamePlusMod));
+				maxSpe -= (45 * (1 + newGamePlusMod));
+				maxInt += (60 * (1 + newGamePlusMod));
+				maxWis += (90 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
 				maxStr += (10 * (1 + newGamePlusMod));

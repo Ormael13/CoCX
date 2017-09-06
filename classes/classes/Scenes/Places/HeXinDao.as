@@ -15,6 +15,7 @@ package classes.Scenes.Places {
 	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
+	import classes.Scenes.NPCs.Jinx;
 	//import classes.Scenes.Places.HeXinDao.*;
 	//import classes.Items.Armor;
 	//import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -1486,13 +1487,13 @@ public function soularenaSolo():void {
 	outputText("Picking the one on the left prepared for solo fight you enter there and looking around checking who is currently avialable for sparring session.");
 	menu();
 	//addButton(0, "Goblin", );//Goblinka
-	addButton(5, "D.Golem", dummygolem);
-	addButton(6, "I.D.Golem", improveddummygolem);
-	addButton(7, "A.D.Golem", advanceddummygolem);
-	addButton(8, "S.D.Golem", superiordummygolem);
-	addButton(10, "B.T.Golem", basictruegolem);
-	addButton(11, "I.T.Golem", improvedtruegolem);
-	addButton(12, "A.T.Golem", advancedtruegolem);
+	addButton(5, "D.Golem", dummygolem).hint("LVL 6");
+	addButton(6, "I.D.Golem", improveddummygolem).hint("LVL 12");
+	addButton(7, "A.D.Golem", advanceddummygolem).hint("LVL 18");
+	addButton(8, "S.D.Golem", superiordummygolem).hint("LVL 24");
+	addButton(10, "B.T.Golem", basictruegolem).hint("LVL 33");
+	addButton(11, "I.T.Golem", improvedtruegolem).hint("LVL 42");
+	addButton(12, "A.T.Golem", advancedtruegolem).hint("LVL 51");
 	addButton(14, "Back", soularena);
 }
 
@@ -1501,13 +1502,13 @@ public function soularenaGroup():void {
 	outputText("Picking the one on the right prepared for group fight you enter there and looking around checking who is currently avialable for sparring session.");
 	menu();
 	//addButton(0, "Goblins", );//Córki goblinki z solo areny ^^
-	addButton(5, "D.Golems", dummygolems);
-	addButton(6, "I.D.Golems", improveddummygolems);
-	addButton(7, "A.D.Golems", advanceddummygolems);
-	addButton(8, "S.D.Golems", superiordummygolems);
-	addButton(10, "B.T.Golems", basictruegolems);
-	addButton(11, "I.T.Golems", improvedtruegolems);
-	addButton(12, "A.T.Golems", advancedtruegolems);
+	addButton(5, "D.Golems", dummygolems).hint("LVL 6");
+	addButton(6, "I.D.Golems", improveddummygolems).hint("LVL 12");
+	addButton(7, "A.D.Golems", advanceddummygolems).hint("LVL 18");
+	addButton(8, "S.D.Golems", superiordummygolems).hint("LVL 24");
+	addButton(10, "B.T.Golems", basictruegolems).hint("LVL 33");
+	addButton(11, "I.T.Golems", improvedtruegolems).hint("LVL 42");
+	addButton(12, "A.T.Golems", advancedtruegolems).hint("LVL 51");
 	addButton(14, "Back", soularena);
 }
 
@@ -1516,11 +1517,12 @@ public function soularenaChallenge():void {
 	outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
 	menu();
 	addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-	//if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 3 diff enemies one after another.");
-	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 3 diff enemies one after another.");
-	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 3 diff enemies one after another.");
-	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 3 diff enemies one after another.");
-	//addButton(5, "Golemancer", golemancer);
+	//if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 4 diff enemies one after another.");
+	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
+	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
+	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
+	addButton(5, "Golemancer", golemancer);
+	addButton(6, "AyotechManiac", ayotechmaniac);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
@@ -1642,19 +1644,29 @@ public function gaunletchallange1postfight():void {
 }
 
 public function golemancer():void {
-	outputText("Not yet finished fight with sometimes showing up blank screen bug I will later on squish. But I don't want to disable whole fight for now from tests due to this.");
+	outputText("Not yet finished fight with things to finish/flesh up later on.");
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new Jeniffer());
 }
 
+public function ayotechmaniac():void {
+	outputText("Not yet finished fight with things to finish/flesh up later on.");
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	startCombat(new Jinx());
+}
+
 public function basicgolems():void {
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsBasic());
 }
 
 public function improvedgolems():void {
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsImproved());
 }
 
 public function advancedgolems():void {
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsAdvanced());
 }
 

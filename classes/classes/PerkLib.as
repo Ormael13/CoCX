@@ -515,11 +515,14 @@ package classes
 				"You gains bonus to max Lust depending on amount of summoned elementals and their ranks.",
 				"You choose the 'Elemental Bond: Urges' perk, allowing you to form bond with summoned elementals to share recived lust damage.");
 		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
-				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",// Rise by 1 maximum limit of controled elementals.
+				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",
 				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
 		public static const ElementalConjurerResolve:PerkType = mk("Elemental Conjurer Resolve", "Elemental Conjurer Resolve",
-				"Your mental attributes are at the cost of weakening physical ones.",// Increase by 1 maximum amount of elementals that conjuer can safely command.
+				"Your mental attributes are greatly enhanced at the cost of weakening physical ones.",
 				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse mental perfection at the cost of physical weakening.");
+		public static const ElementalConjurerSacrifice:PerkType = mk("Elemental Conjurer Sacrifice", "Elemental Conjurer Sacrifice",
+				"Your mental attributes are enhanced beyond limits at the cost of similar weakening physical ones.",
+				"You choose 'Elemental Conjurer Sacrifice' perk, showing your will to sacrifice everything in reaching beyond mental perfection.");
 		public static const ElementalContractRank1:PerkType = mk("Elemental Contract Rank 1", "Elemental Contract Rank 1",
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
 				"You choose 'Elemental Contract Rank 1' perk, rising your ability to command more and stronger elementals.");
@@ -1219,6 +1222,15 @@ package classes
 		public static const SteelImpact:PerkType = mk("Steel Impact", "Steel Impact",
 				"Add a part of your toughness to your weapon and shield damage.",
 				"You choose the 'Steel Impact' perk. Increasing damage of your weapon and shield.");
+		public static const StrongElementalBond:PerkType = mk("Strong Elemental Bond", "Strong Elemental Bond",
+				"You lower by 10 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Strong Elemental Bond' perk, enhancing your connection with elementals and lowering mana needed to maintain bonds.");
+		public static const StrongerElementalBond:PerkType = mk("Stronger Elemental Bond", "Stronger Elemental Bond",
+				"You lower by 30 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Stronger Elemental Bond' perk, futher enhancing your connection with elementals.");
+		public static const StrongestElementalBond:PerkType = mk("Strongest Elemental Bond", "Strongest Elemental Bond",
+				"You lower by 90 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Strongest Elemental Bond' perk, reaching near the peak of connection strength with your elementals.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
 				"At the cost of using additional mana you can super charge each temporal golem core attaing ever better effects than before.",
 				"You choose 'Super Charged Core' perk, learning how to make core charging more effective.");
@@ -2500,14 +2512,18 @@ package classes
 		ElementalBondUrges.requirePerk(ElementalContractRank2)
 						  .requireWis(75)
 						  .requireLevel(12);
+		StrongElementalBond.requirePerk(ElementalContractRank3)
+						   .requireWis(75)
+						   .requireLevel(12);
 		//Tier 3 Wisdom perks
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
-							  .requireLevel(18);//ElementalBondFlesh
+							  .requireLevel(18);
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)
 					 .requireLevel(18);
+		//
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)
@@ -2516,6 +2532,10 @@ package classes
 		ElementalContractRank5.requirePerk(ElementalContractRank4)
 							  .requireWis(125)
 							  .requireLevel(24);
+		StrongerElementalBond.requirePerk(StrongElementalBond)
+							 .requirePerk(ElementalContractRank5)
+							 .requireWis(125)
+							 .requireLevel(24);
 		//Tier 5 Wisdom perks
 		UnlockMind2ndStage.requirePerk(UnlockMind)
 						  .requireWis(150)
@@ -2527,13 +2547,21 @@ package classes
 		ElementalContractRank7.requirePerk(ElementalContractRank6)
 							  .requireWis(175)
 							  .requireLevel(36);
+		StrongestElementalBond.requirePerk(StrongerElementalBond)
+							  .requirePerk(ElementalContractRank7)
+							  .requireWis(175)
+							  .requireLevel(36);
+		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+								  .requireWis(160)
+								  .requireLevel(36);
 		//Tier 7 Wisdom perks
 		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
 								.requirePerk(FleshBodyApprenticeStage)
 								.requirePerk(JobMonk)
 								.requireWis(200)
 								.requireLevel(42);
-		ElementalContractRank8.requirePerk(ElementalContractRank7)
+		ElementalContractRank8.requirePerk(ElementalConjurerSacrifice)
+							  .requirePerk(ElementalContractRank7)
 							  .requireWis(200)
 							  .requireLevel(42);
 		//Tier 8 Wisdom perks
