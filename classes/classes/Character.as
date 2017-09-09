@@ -678,7 +678,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 150;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -763,8 +763,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
 			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 20;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) max += 10;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
@@ -813,8 +813,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) max += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) max += 1000;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
@@ -912,7 +912,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
 				if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
 				if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
-				if (findPerk(PerkLib.JobMunchkin) >= 0) multimax += 0.1;
+				if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.Dantain) >= 0) {
 					if (findPerk(PerkLib.JobSoulCultivator) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulApprentice) >= 0) multimax += 0.1;
@@ -952,6 +952,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 50;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
@@ -962,7 +963,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Anger) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 1299) max = 1299;//obecnie max to 1210
+			if (max > 1299) max = 1299;//obecnie max to 1260
 			return max;
 		}
 		

@@ -266,7 +266,7 @@ package classes.Scenes.NPCs
 			this.hairLength = 4;
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
-			this.weaponAttack = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponRangeName = "bow";//jak bedzie potem w camp to zrobić jej ulpszenie używanego łuku poza podnoszeniem lvl przez trening a potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
 			this.weaponRangeVerb= "shoot";
 			this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

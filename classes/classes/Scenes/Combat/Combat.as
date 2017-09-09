@@ -659,7 +659,9 @@ public function unarmedAttack():Number {
 	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) unarmed += 12 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) unarmed += 18 * (1 + player.newGamePlusMod());
+//	if (findPerk(OneOfBeastWarriorPerks) >= 0) unarmed *= 1.05;
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
+	unarmed = Math.round(unarmed);
 	return unarmed;
 }
 
@@ -4557,6 +4559,7 @@ public function manaregeneration(combat:Boolean = true):void {
 public function wrathregeneration(combat:Boolean = true):void {
 	var gainedwrath:Number = 0;
 	if (combat) {
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 2;
@@ -4568,6 +4571,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
@@ -4662,15 +4666,6 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	}
 	if (monster.findPerk(PerkLib.JobKnight) >= 0) monster.tou += (10 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobMonk) >= 0) monster.wis += (15 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobMunchkin) >= 0) {
-		monster.str += (25 * (1 + player.newGamePlusMod()));
-		monster.tou += (25 * (1 + player.newGamePlusMod()));
-		monster.spe += (25 * (1 + player.newGamePlusMod()));
-		monster.inte += (25 * (1 + player.newGamePlusMod()));
-		monster.wis += (25 * (1 + player.newGamePlusMod()));
-		monster.lib += (15 * (1 + player.newGamePlusMod()));
-		monster.sens += (15 * (1 + player.newGamePlusMod()));
-	}
 	if (monster.findPerk(PerkLib.JobRanger) >= 0) monster.spe += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobSeducer) >= 0) monster.lib += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobSorcerer) >= 0) monster.inte += (5 * (1 + player.newGamePlusMod()));
@@ -4696,6 +4691,15 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (monster.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
 		monster.str += (40 * (1 + player.newGamePlusMod()));
 		monster.wis += (40 * (1 + player.newGamePlusMod()));
+	}
+	if (monster.findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+		monster.str += (25 * (1 + player.newGamePlusMod()));
+		monster.tou += (25 * (1 + player.newGamePlusMod()));
+		monster.spe += (25 * (1 + player.newGamePlusMod()));
+		monster.inte += (25 * (1 + player.newGamePlusMod()));
+		monster.wis += (25 * (1 + player.newGamePlusMod()));
+		monster.lib += (15 * (1 + player.newGamePlusMod()));
+		monster.sens += (15 * (1 + player.newGamePlusMod()));
 	}
 	if (monster.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
 		monster.str += (10 * (1 + player.newGamePlusMod()));

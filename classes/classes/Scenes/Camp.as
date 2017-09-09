@@ -3054,9 +3054,9 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 13) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 14;
 		clearOutput();
-		outputText("Attention! All Munchkins Kindly leave thou gate sixty and nine. As replacesions there will be whole legion of All-Rounders commin in five, four, ...........aaaand their here ^^");
-		if (player.findPerk(PerkLib.JobMunchkin) >= 0) {
-			player.removePerk(PerkLib.JobMunchkin);
+		outputText("Attention! All Munchkins Kindly leave thou gate sixty and nine. As replacements there will be whole legion of All-Rounders commin in five, four, ...........aaaand their here ^^");
+		if (player.findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+			player.removePerk(PerkLib.DeityJobMunchkin);
 			player.createPerk(PerkLib.JobAllRounder, 0, 0, 0, 0);
 		}
 		if (flags[kFLAGS.EVANGELINE_TALKS] < 0) flags[kFLAGS.EVANGELINE_TALKS] = 0;

@@ -199,7 +199,7 @@
 			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*2) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.CheetahI) >= 0) temp += (this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 30;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 150;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
@@ -255,8 +255,8 @@
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
 			//Apply NG+, NG++, NG+++, etc.
@@ -281,8 +281,8 @@
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
@@ -310,7 +310,7 @@
 				if (this.level >= 16) temp += 40;
 			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp *= 1.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
 		
@@ -326,6 +326,7 @@
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;

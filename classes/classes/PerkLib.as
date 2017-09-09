@@ -466,6 +466,9 @@ package classes
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
 				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
 				"You choose 'Defence Stance' perk, training to master you defence pose.");
+		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
+				"You're Munchkin, an ultimate being that possess a god-like body and powers.",
+				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
@@ -791,6 +794,9 @@ package classes
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in using large weapons in fights.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
+		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
+				"You've trained in use of your own body to it limits in fights.",
+				"You choose 'Job: Beast Warrior' perk, training yourself to became Beast Warrior.");
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Brawler' perk, training yourself to became Brawler.");
@@ -827,9 +833,6 @@ package classes
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job: Monk",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Monk' perk, training yourself to became Monk.");
-		public static const JobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
-				"You're Munchkin, an ultimate being that possess a god-like body and powers.",
-				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
 				"You've trained in ranged combat.",
 				"You choose 'Job: Ranger' perk, training yourself to became Ranger.");
@@ -2917,8 +2920,11 @@ package classes
 		 }
 		 */
 		Metamorph.requirePerk(GeneticMemory);
-		//JobArtificer
-
+	//	JobArtificer.requireInt(25)
+	//				.requireWis(25);
+		JobBeastWarrior.requireStr(25)
+					   .requireTou(25)
+					   .requireSpe(25);
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
@@ -3110,7 +3116,7 @@ package classes
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
 		//		}
-/*		JobMunchkin.requirePerk(JobMonk)
+/*		DeityJobMunchkin.requirePerk(JobMonk)
 				   .requirePerk(JobKnight)
 				   .requirePerk(JobHunter)
 				   .requirePerk(JobEromancer)

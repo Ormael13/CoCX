@@ -3692,7 +3692,7 @@ use namespace kGAMECLASS;
 				prestigeJobs--;
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
 				prestigeJobs--;
-			if (findPerk(PerkLib.JobMunchkin) >= 0)
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
 				prestigeJobs++;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		prestigeJobs++;
@@ -5013,6 +5013,13 @@ use namespace kGAMECLASS;
 				maxSen += (6 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
+				maxStr += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * (1 + newGamePlusMod));
+				maxInt -= (5 * (1 + newGamePlusMod));
+				maxWis -= (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
@@ -5034,15 +5041,6 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobMunchkin) >= 0) {
-				maxStr += (25 * (1 + newGamePlusMod));
-				maxTou += (25 * (1 + newGamePlusMod));
-				maxSpe += (25 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (25 * (1 + newGamePlusMod));
-				maxLib += (15 * (1 + newGamePlusMod));
-				maxSen += (15 * (1 + newGamePlusMod));
-			}
 			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * (1 + newGamePlusMod));
@@ -5072,6 +5070,15 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
 				maxStr += (40 * (1 + newGamePlusMod));
 				maxWis += (40 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+				maxStr += (25 * (1 + newGamePlusMod));
+				maxTou += (25 * (1 + newGamePlusMod));
+				maxSpe += (25 * (1 + newGamePlusMod));
+				maxInt += (25 * (1 + newGamePlusMod));
+				maxWis += (25 * (1 + newGamePlusMod));
+				maxLib += (15 * (1 + newGamePlusMod));
+				maxSen += (15 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
