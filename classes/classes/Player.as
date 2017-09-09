@@ -1138,28 +1138,29 @@ use namespace kGAMECLASS;
 					race = "kitshoo";
 				}
 			}
-			//if (
 			if (horseScore() >= 4)
 			{
-				if (isTaur())
-					race = "centaur";
-				else
+				if (horseScore() >= 7)
 					race = "equine-morph";
+				else
+					race = "half equine-morph";
 			}
-			if (unicornScore() >= 5)
+			if (unicornScore() >= 9)
 			{
 				if (isTaur()) race = "unicorn-taur";
 				else {
 					race = "unicorn";
 				}
 			}
-			if (alicornScore() >= 6)
+			if (alicornScore() >= 11)
 			{
 				if (isTaur()) race = "alicorn-taur";
 				else {
 					race = "alicorn";
 				}
 			}
+			if (centaurScore() >= 8)
+				race = "centaur";
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
 			if (minotaurScore() >= 4)
@@ -1620,10 +1621,6 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (horseScore() >= 4)
 				chimeraCounter++;
-			if (unicornScore() >= 5)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
-				chimeraCounter++;
-			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
-				chimeraCounter++;
 			if (minotaurScore() >= 4)
 				chimeraCounter++;
 			if (cowScore() >= 4)
@@ -1715,13 +1712,15 @@ use namespace kGAMECLASS;
 //				grandchimeraCounter++;
 			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
 				grandchimeraCounter++;	
-/*			if (horseScore() >= 4)
+			if (horseScore() >= 7)
 				grandchimeraCounter++;
-			if (unicornScore() >= 5)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
+			if (unicornScore() >= 9)
 				grandchimeraCounter++;
-			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
+			if (alicornScore() >= 11)
+				grandchimeraCounter++;	
+			if (centaurScore() >= 8)
 				grandchimeraCounter++;
-*/			if (minotaurScore() >= 9)
+			if (minotaurScore() >= 9)
 				grandchimeraCounter++;
 			if (cowScore() >= 9)
 				grandchimeraCounter++;
@@ -2360,9 +2359,15 @@ use namespace kGAMECLASS;
 				horseCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				horseCounter++;
-			//Fur only counts if some equine features are present
-			if (hasFur() && horseCounter > 0)
+			if (hasFur()) {
+				if (armType == ARM_TYPE_HUMAN)
+					horseCounter++;
 				horseCounter++;
+			}
+			if (isTaur())
+				horseCounter -= 5;
+			if (unicornScore() > 9 || alicornScore() > 11)
+				horseCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				horseCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && horseCounter >= 3)
@@ -3071,25 +3076,28 @@ use namespace kGAMECLASS;
 		{
 			Begin("Player","racialScore","centaur");
 			var centaurCounter:Number = 0;
-			if (isTaur() && (lowerBody == LOWER_BODY_TYPE_HOOFED || lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
+			if (isTaur())
 				centaurCounter += 2;
-				if (tailType == TAIL_TYPE_HORSE)
-					centaurCounter++;
-				if (hasPlainSkinOnly())
-					centaurCounter++;
-				if (armType == ARM_TYPE_HUMAN)
-					centaurCounter++;
-				if (earType == EARS_HUMAN)
-					centaurCounter++;
-				if (faceType == FACE_HUMAN)
-					centaurCounter++;
-			}
-			if (antennae != ANTENNAE_NONE)
-				centaurCounter--;
-			if (faceType != FACE_HUMAN)
-				centaurCounter--;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED || lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+				centaurCounter++;
+			if (tailType == TAIL_TYPE_HORSE)
+				centaurCounter++;
+			if (hasPlainSkinOnly())
+				centaurCounter++;
+			if (armType == ARM_TYPE_HUMAN)
+				centaurCounter++;
+			if (earType == EARS_HUMAN || earType == EARS_HUMAN)
+				centaurCounter++;
+			if (faceType == FACE_HUMAN)
+				centaurCounter++;
+			if (horseCocks() > 0)
+				centaurCounter++;
+			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
+				centaurCounter++;
+			if (hornType != HORNS_NONE)
+				centaurCounter -= 3;
 			if (wingType != WING_TYPE_NONE)
-				centaurCounter--;
+				centaurCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				centaurCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && centaurCounter >= 3)
@@ -3103,6 +3111,8 @@ use namespace kGAMECLASS;
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
+				unicornCounter += 2;
+			if (faceType == FACE_HUMAN)
 				unicornCounter++;
 			if (earType == EARS_HORSE)
 				unicornCounter++;
@@ -3118,10 +3128,9 @@ use namespace kGAMECLASS;
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				unicornCounter++;
-			//Fur and hair color only counts if some unicorn features are present and it's white colored
-			if (unicornCounter > 0 && hasFur() && coatColor == "white")
+			if (hasFur() && coatColor == "white")
 				unicornCounter++;
-			if (unicornCounter > 0 && hairColor == "white")
+			if (hairColor == "white")
 				unicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				unicornCounter += 10;
@@ -3137,6 +3146,8 @@ use namespace kGAMECLASS;
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
+				alicornCounter += 2;
+			if (faceType == FACE_HUMAN)
 				alicornCounter++;
 			if (earType == EARS_HORSE)
 				alicornCounter++;
@@ -3156,10 +3167,9 @@ use namespace kGAMECLASS;
 				alicornCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				alicornCounter++;
-			//Fur and hair color only counts if some alicorn features are present and it's white colored
-			if (alicornCounter > 0 && hasFur() && coatColor == "white")
+			if (hasFur() && coatColor == "white")
 				alicornCounter++;
-			if (alicornCounter > 0 && hairColor == "white")
+			if (hairColor == "white")
 				alicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				alicornCounter += 10;
@@ -4500,9 +4510,14 @@ use namespace kGAMECLASS;
 				maxSpe += (15 * (1 + newGamePlusMod));
 			}//+15/10-20
 			if (horseScore() >= 4) {
-				maxSpe += (15 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxInt -= (10 * (1 + newGamePlusMod));
+				if (horseScore() >= 7) {
+					maxSpe += (70 * (1 + newGamePlusMod));
+					maxTou += (35 * (1 + newGamePlusMod));
+				}
+				else {
+					maxSpe += (40 * (1 + newGamePlusMod));
+					maxTou += (20 * (1 + newGamePlusMod));
+				}
 			}//+15/10-20
 			if (goblinScore() >= 4) {
 				maxInt += (20 * (1 + newGamePlusMod));
@@ -4740,13 +4755,15 @@ use namespace kGAMECLASS;
 					maxLib += (30 * (1 + newGamePlusMod));
 				}
 			}//+15/10-20
-			if (unicornScore() >= 5) {
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
+			if (unicornScore() >= 9) {
+				maxTou += (20 * (1 + newGamePlusMod));
+				maxSpe += (40 * (1 + newGamePlusMod));
+				maxInt += (75 * (1 + newGamePlusMod));
 			}//+(15)30/(10-20)30-40
-			if (alicornScore() >= 6) {
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (20 * (1 + newGamePlusMod));
+			if (alicornScore() >= 11) {
+				maxTou += (25 * (1 + newGamePlusMod));
+				maxSpe += (50 * (1 + newGamePlusMod));
+				maxInt += (90 * (1 + newGamePlusMod));
 			}//+(30)55/(30-40)50-60
 			if (phoenixScore() >= 10) {
 				maxStr += (20 * (1 + newGamePlusMod));
@@ -4850,9 +4867,9 @@ use namespace kGAMECLASS;
 					maxSpe += (40 * (1 + newGamePlusMod));
 				}
 			}
-			if (centaurScore() >= 5) {
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (30 * (1 + newGamePlusMod));
+			if (centaurScore() >= 8) {
+				maxTou += (80 * (1 + newGamePlusMod));
+				maxSpe += (40 * (1 + newGamePlusMod));
 			}//+40/30-40
 			if (isNaga()) {
 				maxStr += (15 * (1 + newGamePlusMod));
