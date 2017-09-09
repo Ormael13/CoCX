@@ -5083,23 +5083,29 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
-				maxStr -= (15 * (1 + newGamePlusMod));
-				maxTou -= (15 * (1 + newGamePlusMod));
-				maxSpe -= (15 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) {
+					maxStr -= (15 * (1 + newGamePlusMod));
+					maxTou -= (15 * (1 + newGamePlusMod));
+					maxSpe -= (15 * (1 + newGamePlusMod));
+				}
 				maxInt += (20 * (1 + newGamePlusMod));
 				maxWis += (30 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				maxStr -= (30 * (1 + newGamePlusMod));
-				maxTou -= (30 * (1 + newGamePlusMod));
-				maxSpe -= (30 * (1 + newGamePlusMod));
+				//if (findPerk(PerkLib.) < 0) {
+					maxStr -= (30 * (1 + newGamePlusMod));
+					maxTou -= (30 * (1 + newGamePlusMod));
+					maxSpe -= (30 * (1 + newGamePlusMod));
+				//}
 				maxInt += (40 * (1 + newGamePlusMod));
 				maxWis += (60 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
-				maxStr -= (45 * (1 + newGamePlusMod));
-				maxTou -= (45 * (1 + newGamePlusMod));
-				maxSpe -= (45 * (1 + newGamePlusMod));
+				//if (findPerk(PerkLib.) < 0) {
+					maxStr -= (45 * (1 + newGamePlusMod));
+					maxTou -= (45 * (1 + newGamePlusMod));
+					maxSpe -= (45 * (1 + newGamePlusMod));
+				//}
 				maxInt += (60 * (1 + newGamePlusMod));
 				maxWis += (90 * (1 + newGamePlusMod));
 			}

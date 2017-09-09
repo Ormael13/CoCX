@@ -12,7 +12,7 @@ package classes.Scenes.NPCs
 	{
 		private function sythBaseAttack():void {
 			if (hasStatusEffect(StatusEffects.Lustzerking)) createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
-			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+			else createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
 		
@@ -90,20 +90,21 @@ package classes.Scenes.NPCs
 		
 		private function sythBerserk():void {
 			outputText("Salamander roar and unleash his lustful fury in order to destroy you!\n\n");
-			this.weaponAttack += (15 + (15 * (1 + player.newGamePlusMod)));
+			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
 		
-	//	private function sythUltimateAttack():void {
-	//		
-	//	}
+		/*private function sythUltimateAttack():void {
+			outputText("Salamander ... WIP TEXT !\n\n");
+			flames of love covering whole body while Sythril slam into PC? lowers lust if Sythril had any, put cooldown for few turns before he can use it again
+		}*/
 		
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
 				else {
-					this.weaponAttack -= (15 + (15 * (1 + player.newGamePlusMod)));
+					this.weaponAttack -= (40 + (40 * (1 + player.newGamePlusMod)));
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
@@ -120,12 +121,23 @@ package classes.Scenes.NPCs
 			combatRoundOver();
 		}
 		
+		override public function get long():String
+		{
+			var str:String = "";
+			str += "You are fighting a (literally) smoking hot salamander – a eight foot tall man with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his sapphire eyes, while his body covers leather armor.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
+			if (hasStatusEffect(StatusEffects.Lustzerking))
+			{
+				str += "\n\n<b>Looking at his posture and gaze indicates that he's currently under effect of some sort of berserking state.</b>";
+			}
+			return str;
+		}
+		
 		public function Syth() 
 		{
 			this.a = "the ";
 			this.short = "salamander";//Syth(ril)
 			this.imageName = "syth";//make him bro-looking/but would he have bro mind or not...up to decide
-			this.long = "You are fighting a (literally) smoking hot salamander – a eight foot tall man with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.";//  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.
+			this.long = "";
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.balls = 2;
@@ -139,26 +151,28 @@ package classes.Scenes.NPCs
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
 			this.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+			this.hairColor = "white";
 			this.hairLength = 1;
-			initStrTouSpeInte(150, 120, 75, 60);
-			initLibSensCor(100, 25, 30);//increase ?spe, lower int?
-			this.weaponName = "sword";//change to some more berserker fitting weapon or some fist/gaunlet?
-			this.weaponVerb="slashing blade";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			initStrTouSpeInte(160, 120, 70, 60);
+			initLibSensCor(120, 25, 70);
+			this.weaponName = "pair of big fucking swords";
+			this.weaponVerb= "slash";
+			this.weaponAttack = 56 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
 			this.armorDef = 27 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;
+			this.additionalXP = 300;
 			this.bonusLust = 20;
 			this.lust = 30;
-			this.lustVuln = .25;
+			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 24;
-			this.gems = 15 + rand(8);
+			this.level = 30;
+			this.gems = 40 + rand(12);
 			this.drop = new ChainedDrop().
-					//add(armors.CHBIKNI,1/20).
-					add(weapons.SCIMITR,1/20).
+					add(weapons.DBFSWO,1/50).
+					add(armors.LEATHRA,1/20).
 					add(consumables.SALAMFW,0.7);
 			this.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
 			this.tailType = TAIL_TYPE_SALAMANDER;
@@ -166,12 +180,15 @@ package classes.Scenes.NPCs
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 3030;
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 6360;
 			checkMonster();
 		}
 		

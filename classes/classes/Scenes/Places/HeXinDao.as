@@ -1525,6 +1525,7 @@ public function soularenaChallenge():void {
 	addButton(5, "Golemancer", golemancer);
 	addButton(6, "AyotechManiac", ayotechmaniac);
 	addButton(7, "MachoSalamander", machosalamander);
+	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
@@ -1661,6 +1662,11 @@ public function machosalamander():void {
 	outputText("Not yet finished fight with things to finish/flesh up later on.");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new Syth());
+}
+
+public function basicgargoyle():void {
+	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	startCombat(new GargoyleBasic());
 }
 
 public function basicgolems():void {

@@ -42,7 +42,7 @@ package classes.Scenes.NPCs
 		{
 			var choice:Number = rand(2);
 			if (choice == 0) jinxBaseAttack();
-			if (choice == 1) jinxBaseAttack();
+			if (choice == 1) jinxAyotechCanon();
 			//if (choice == 2) sythAttack1();
 		}
 		

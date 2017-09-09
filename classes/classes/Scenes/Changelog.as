@@ -132,6 +132,7 @@ package classes.Scenes
 			outputText("-New tier 6 wisdom lvl-up perk: ElementalConjurerSacrifice\n");
 			outputText("-New tier   lvl-up perk: \n");
 			outputText("-New tier   lvl-up perk: \n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Resolve. Req.: Using Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Resolve perk.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -160,6 +161,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -189,6 +192,9 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
@@ -220,6 +226,12 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

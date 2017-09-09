@@ -1512,6 +1512,12 @@ package classes
 				"Allows access to a dragon ice breath attack.");
 		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
 				"Allows access to a dragon lightning breath attack.");
+		public static const ElementalConjurerMindAndBodyDedication:PerkType = mk("Elemental Conjurer Mind and Body Dedication", "Elemental Conjurer Mind and Body Dedication",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Dedication.");
+		public static const ElementalConjurerMindAndBodyResolve:PerkType = mk("Elemental Conjurer Mind and Body Resolve", "Elemental Conjurer Mind and Body Resolve",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Resolve.");
+		public static const ElementalConjurerMindAndBodySacrifice:PerkType = mk("Elemental Conjurer Mind and Body Sacrifice", "Elemental Conjurer Mind and Body Sacrifice",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Sacrifice.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
