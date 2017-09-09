@@ -205,7 +205,7 @@ use namespace kGAMECLASS;
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant();
+							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
 						}
 					}, {
 						name: "celess-armor",
@@ -381,6 +381,7 @@ use namespace kGAMECLASS;
 					break;
 				case 4:
 					forestStory.display(context, "strings/celess-unicorn/fuck-her");
+					kGAMECLASS.celessScene.findArmor();
 					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					break;
 			}
@@ -388,7 +389,7 @@ use namespace kGAMECLASS;
 		}
 		public function celessArmor():void{
 			forestStory.display(context, "strings/celess-unicorn/armorScene");
-			getGame().celessScene.findArmor();
+			kGAMECLASS.celessScene.findArmor();
 			inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
 		}
 		public function tripOnARoot():void {
