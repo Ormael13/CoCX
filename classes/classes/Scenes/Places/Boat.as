@@ -8,15 +8,11 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
-	import classes.Player;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Boat()
 		{
 		}
@@ -39,7 +35,7 @@ package classes.Scenes.Places
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			clearOutput();
@@ -86,7 +82,8 @@ package classes.Scenes.Places
 			var choice:Array = [0, 1, 2, 3];
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2)
 				choice[choice.length] = 4;
-			choice[choice.length] = 5;
+			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
+			choice[choice.length] = 6;
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT
@@ -107,6 +104,11 @@ package classes.Scenes.Places
 					return;
 				case 4:
 					lake.fetishZealotScene.zealotBoat();
+					return;
+				case 5:
+					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
+					outputText("<b>You got a fish!<\b>");
+					inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 					return;
 				case 5:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;

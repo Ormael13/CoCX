@@ -6,12 +6,9 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-import classes.Scenes.API.GroupEncounter;
-import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
@@ -32,7 +29,6 @@ use namespace kGAMECLASS;
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
@@ -249,7 +245,7 @@ use namespace kGAMECLASS;
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
 				},
-				call  : etnaScene.repeatYandereEnc
+				call  : kGAMECLASS.etnaScene.repeatYandereEnc
 			}, {
 				name: "kitsune",
 				when: function():Boolean {
@@ -330,7 +326,8 @@ use namespace kGAMECLASS;
 				when: Encounters.fn.ifLevelMin(3)
 			}, {
 				name  : "dark_elf_scout",
-				call  : darkelfScene.introDarkELfScout
+				call  : darkelfScene.introDarkELfScout,
+				chance: 0.8
 			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,

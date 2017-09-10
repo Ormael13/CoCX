@@ -7,8 +7,6 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Swamp.*;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -18,7 +16,6 @@ package classes.Scenes.Areas
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		public var rogar:Rogar = new Rogar();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Swamp()
 		{
 		}
@@ -46,7 +43,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {

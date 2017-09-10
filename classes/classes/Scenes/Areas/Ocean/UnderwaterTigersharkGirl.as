@@ -28,7 +28,7 @@ package classes.Scenes.Areas.Ocean
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
-			outputText("Your opponent take a turn and charge at you at high speed jaw open as she go in for the kill viciously biting you. You start to bleed in abundance the water around you turning red. ");
+			outputText("Your opponent take a turn and charge at you at high speed jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takeDamage(damage, true);
@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Ocean
 			this.a = "the ";
 			this.short = "shark-girl";
 			this.imageName = "izma";
-			this.long = "The tiger shark girl is menacingly circling you off waiting for the opportunity to viciously strike. These creatures clearly look way more deadly in the water then out of it!";
+			this.long = "The tiger shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
 			this.createCock(15,2.2);
 			this.balls = 4;
@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Ocean
 			this.lust = 20;
 			this.lustVuln = .20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 62;
+			this.level = 58;
 			this.gems = rand(15) + 10;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).
@@ -101,7 +101,7 @@ package classes.Scenes.Areas.Ocean
 			this.spe += 82 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 44 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 23940;
+			this.newgamebonusHP = 20520;
 			checkMonster();
 		}
 		

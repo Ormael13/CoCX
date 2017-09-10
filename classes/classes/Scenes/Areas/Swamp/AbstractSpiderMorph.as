@@ -164,6 +164,10 @@ package classes.Scenes.Areas.Swamp
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
+			//Shield Ward
+			else if (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0) {
+				outputText("You block the webbing with your shield, causing it to miss it orginal target.");
+			}
 			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
 				outputText("The webbing hits your ");
 				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");

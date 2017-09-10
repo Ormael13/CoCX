@@ -630,20 +630,21 @@ import classes.GlobalFlags.kFLAGS;
 			if (tou >= 851) max += Math.round(tou);
 			if (tou >= 901) max += Math.round(tou);
 			if (tou >= 951) max += Math.round(tou);
-			if (game.player.alicornScore() >= 6) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.centaurScore() >= 5) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.alicornScore() >= 11) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 10) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.gorgonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.horseScore() >= 4) max += (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.unicornScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.unicornScore() >= 9) max += (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyII) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyIII) >= 0) max += 50;
@@ -656,6 +657,18 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
 			if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.GoliathI) >= 0) max += Math.round(str*2);
+ 			if (findPerk(PerkLib.GoliathII) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathIII) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathIV) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathV) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.GoliathVI) >= 0) max += Math.round(str*2);
+			if (findPerk(PerkLib.CheetahI) >= 0) max += Math.round(spe);
+ 			if (findPerk(PerkLib.CheetahII) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahIII) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahIV) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahV) >= 0) max += Math.round(spe);
+			if (findPerk(PerkLib.CheetahVI) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -666,7 +679,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 150;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -751,8 +764,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
 			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 20;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) max += 10;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 50;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
@@ -801,8 +814,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) max += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) max += 1000;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
@@ -900,7 +913,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
 				if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
 				if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
-				if (findPerk(PerkLib.JobMunchkin) >= 0) multimax += 0.1;
+				if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.Dantain) >= 0) {
 					if (findPerk(PerkLib.JobSoulCultivator) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulApprentice) >= 0) multimax += 0.1;
@@ -940,6 +953,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 50;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
@@ -950,7 +964,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Anger) >= 0) max += 200;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 1299) max = 1299;//obecnie max to 1210
+			if (max > 1299) max = 1299;//obecnie max to 1260
 			return max;
 		}
 		
@@ -1010,10 +1024,18 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
+				var multimax:Number = 1;
+				multimax += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
+				max *= multimax;
+			}
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
-			if (max > 29999) max = 29999;
+			if (max > 59999) max = 59999;
 			return max;
 		}
 		

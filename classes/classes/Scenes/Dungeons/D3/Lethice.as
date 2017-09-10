@@ -28,10 +28,10 @@ package classes.Scenes.Dungeons.D3
 			initStrTouSpeInte(320, 320, 150, 150);
 			initLibSensCor(180, 50, 100);
 			this.weaponName = "whip";
-			this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponVerb = "whip";
 			this.armorName = "wraps";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 3000;
 			this.bonusLust = 150;
 			this.gems = 200 + rand(100);
@@ -45,12 +45,12 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
-			this.str += 94 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 94 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.str += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 19920;
+			this.newgamebonusHP = 20160;
 			this.checkMonster();
 		}
 		

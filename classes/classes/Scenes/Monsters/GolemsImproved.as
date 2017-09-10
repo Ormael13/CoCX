@@ -38,10 +38,18 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(6);
-			if (choice < 3) eAttack();
-			if (choice == 3 || choice == 4) backhand();
-			if (choice == 5) overhandSmash();
+			if (this.HPRatio() < 0.6) {
+				var choice2:Number = rand(5);
+				if (choice2 < 3) eAttack();
+				if (choice2 == 3) backhand();
+				if (choice2 == 4) overhandSmash();
+			}
+			else if (this.HPRatio() < 0.8) {
+				var choice1:Number = rand(4);
+				if (choice1 < 3) eAttack();
+				if (choice1 == 3) backhand();
+			}
+			else eAttack();
 			combatRoundOver();
 		}
 		
@@ -68,6 +76,7 @@ package classes.Scenes.Monsters
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.str += 78 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

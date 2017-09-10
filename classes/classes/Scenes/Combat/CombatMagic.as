@@ -362,6 +362,11 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+			doNext(combatMenu);
+		}
 		menu();
 		clearOutput();
 		outputText("What spell will you use?\n\n");
@@ -572,6 +577,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.lib <= 100) critChance += player.lib / 5;
 			if (player.lib > 100) critChance += 20;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			lustDmg *= 1.75;
@@ -965,6 +971,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1049,6 +1056,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1134,6 +1142,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1223,6 +1232,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1609,6 +1619,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 				if (player.inte > 100) critChance += 10;
 			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				temp *= 1.75;
@@ -1728,6 +1739,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -1868,6 +1880,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 				if (player.inte > 100) critChance += 10;
 			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				temp *= 1.75;

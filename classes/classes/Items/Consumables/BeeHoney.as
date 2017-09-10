@@ -3,7 +3,8 @@
  */
 package classes.Items.Consumables
 {
-	import classes.GlobalFlags.*;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.*;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
 	import classes.CockTypesEnum;
@@ -152,8 +153,23 @@ package classes.Items.Consumables
 				mutations.setHornType(HORNS_NONE);
 				changes++;
 			}
+			// Chitin
+			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW
+				|| player.skin.coat.type != SKIN_COAT_CHITIN
+				|| player.skin.coat.pattern != PATTERN_BEE_STRIPES)) {
+				player.skin.growCoat(SKIN_COAT_CHITIN,{
+					color:"yellow",
+					color2:"black",
+					pattern:PATTERN_BEE_STRIPES
+				},Skin.COVERAGE_LOW);
+				// TODO grow chitin text
+				changes++;
+			}
 			//Bee Legs
-			if (changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_BEE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && Utils.rand(4) == 0) {
+			if (changes < changeLimit
+				&& player.lowerBody != LOWER_BODY_TYPE_BEE
+				&& player.lowerBody != LOWER_BODY_TYPE_GARGOYLE
+				&& Utils.rand(4) == 0) {
 				outputText("\n\nYour legs tremble with sudden unbearable pain, as if they're being ripped apart from the inside out and being stitched together again all at once.  You scream in agony as you hear bones snapping and cracking.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining black chitin from the thigh down, and downy yellow fuzz along your upper thighs.");
 				mutations.setLowerBody(LOWER_BODY_TYPE_BEE);
 				player.legCount = 2;

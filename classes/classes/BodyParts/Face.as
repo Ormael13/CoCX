@@ -8,28 +8,12 @@ import classes.internals.Utils;
 
 public class Face extends SaveableBodyPart {
 
-	private var _decoType:int = DECORATION_NONE;
-	public var decoAdj:String = "";
-
-	public function get decoType():int {
-		return _decoType;
-	}
-	public function set decoType(value:int):void {
-		_decoType = value;
-		if (value == DECORATION_NONE) decoAdj = "";
-		if (value == DECORATION_GENERIC && decoAdj == "") decoAdj = "something";
-	}
 	public function Face(creature:Creature) {
-		super(creature,"facePart",["decoType","decoAdj"]);
+		super(creature,"facePart",[]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
-		decoType = DECORATION_NONE;
-		decoAdj = "";
-	}
-	public function isDecorated():Boolean {
-		return decoType != DECORATION_NONE;
 	}
 	public function hasMuzzle():Boolean {
 		return [
@@ -104,14 +88,7 @@ public class Face extends SaveableBodyPart {
 			an  = "an ";
 			the = "the ";
 		}
-		var withDec:String = "";
-		if (deco && decoType != DECORATION_NONE) {
-			withDec = " with " + describeDeco();
-		}
-		return a + nounPhrase()+withDec;
-	}
-	public function describeDeco():String {
-		return Appearance.describeDecoration(creature, decoType, decoAdj);
+		return a + nounPhrase();
 	}
 	public function describeMF(article:Boolean=false):String {
 			var faceo:String = "";

@@ -47,6 +47,7 @@ public class AbstractGargoyle extends Monster
 		}
 		damage = Math.round(damage);
 		player.takeDamage(damage, true);
+		createStatusEffect(StatusEffects.AbilityCooldown1, 5, 0, 0, 0)
 		outputText(capitalA + short + " slam you with it mace like tail dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (player.findPerk(PerkLib.Resolute) < 0) {
 			outputText(" The attack is so devastating you're stunned by it!");
@@ -73,6 +74,7 @@ public class AbstractGargoyle extends Monster
 		}
 		damage = Math.round(damage);
 		player.takeDamage(damage, true);
+		createStatusEffect(StatusEffects.AbilityCooldown1, 5, 0, 0, 0)
 		outputText(capitalA + short + " swipe the field with it axe-bladed tail, slicing you");
 		//if () outputText("r team");jak PC ma 4+ pomocników
 		outputText(", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! The attack leaves you bleeding from deep wounds!");
@@ -95,6 +97,7 @@ public class AbstractGargoyle extends Monster
 		}
 		damage = Math.round(damage);
 		player.takeDamage(damage, true);
+		createStatusEffect(StatusEffects.AbilityCooldown2, 4, 0, 0, 0)
 		outputText(capitalA + short + " slam you with it mace like tail dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (player.findPerk(PerkLib.Resolute) < 0) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);

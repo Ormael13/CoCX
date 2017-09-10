@@ -79,7 +79,7 @@ package classes.Scenes.NPCs
 			this.weaponName = "spiked fists";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.armorName = "stone covered with soulmetal plating";
+			this.armorName = "stone covered by soulmetal plating";
 			this.armorDef = 45 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
@@ -89,7 +89,7 @@ package classes.Scenes.NPCs
 			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 56 * 20;
+			this.newgamebonusHP = 1120;//*20
 			checkMonster();
 		}
 		

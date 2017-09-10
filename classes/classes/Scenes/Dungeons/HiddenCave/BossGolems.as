@@ -81,7 +81,7 @@ package classes.Scenes.Dungeons.HiddenCave
 			initLibSensCor(10, 10, 50);
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
-					.add(useables.GOLCORE, 1);
+					.add(consumables.E_PEARL, 1);
 			this.level = 9;
 			this.bonusHP = 100;
 			this.weaponName = "stone fists";
@@ -93,6 +93,7 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -49,25 +49,30 @@ package classes.Scenes.Quests.UrtaQuest
 
 		private function minotaurDisarm():void
 		{
-			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
-				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your halberd.  You recoil as the chain impacts your halberd with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  With a strong pull, he rips the halberd off your hands and into a corner of the room. Shit!");
-				outputText("\n\nThe succubus laughs maniacally.  \"<i>Good boy, Fido!  Take that fox slut's toys away so she'll be easier to play with!</i>\"  The minotaur puffs his chest, proud of himself for pleasing his mistress.");
-			//	player.setWeapon(WeaponLib.FISTS);
+			if (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0) {
+				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your [shield].  You recoil as the chain impacts your [shield] with a loud clang, bouncing off it.  You smile triumphantly at the minotaur, only to notice his smirk fading away.  ");
 			}
 			else {
-				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your [weapon].  You recoil as the chain impacts your [weapon] with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  ");
-				if (player.weaponName != "fists") {
-					outputText("With a strong pull, he yanks your [weapon] off your hands and into a corner of the room. Shit!");
-				//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-				//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
+				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
+					outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your halberd.  You recoil as the chain impacts your halberd with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  With a strong pull, he rips the halberd off your hands and into a corner of the room. Shit!");
+					outputText("\n\nThe succubus laughs maniacally.  \"<i>Good boy, Fido!  Take that fox slut's toys away so she'll be easier to play with!</i>\"  The minotaur puffs his chest, proud of himself for pleasing his mistress.");
 				//	player.setWeapon(WeaponLib.FISTS);
-				//	player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 				}
+				else {
+				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your [weapon].  You recoil as the chain impacts your [weapon] with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  ");
+					if (player.weaponName != "fists") {
+						outputText("With a strong pull, he yanks your [weapon] off your hands and into a corner of the room. Shit!");
+					//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+					//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
+					//	player.setWeapon(WeaponLib.FISTS);
+					//	player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
+					}
+				}
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
+				player.setWeapon(WeaponLib.FISTS);
+				player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 			}
-			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
-			player.setWeapon(WeaponLib.FISTS);
-			player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 			kGAMECLASS.combatRoundOver();
 		}
 
