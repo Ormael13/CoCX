@@ -2,14 +2,12 @@
  * Coded by aimozg on 10.07.2017.
  */
 package coc.view {
-import coc.view.charview.CaseBlock;
+import coc.view.charview.CharViewCompiler;
+import coc.view.charview.CharViewContext;
 import coc.view.charview.CharViewSprite;
-import coc.view.charview.IfBlock;
-import coc.view.charview.LayerPart;
-import coc.view.charview.ModelPart;
 import coc.view.charview.Palette;
-import coc.view.charview.PartList;
-import coc.view.charview.SwitchPart;
+import coc.xlogic.Statement;
+import coc.xlogic.StmtList;
 
 import flash.display.BitmapData;
 import flash.display.Graphics;
@@ -22,7 +20,7 @@ public class CharView extends Sprite {
 
 	private var loading:Boolean;
 	private var sprites:Object = {}; // spritesheet/spritemap -> CharViewSprite
-	private var composite:CompositeImage;
+	public var composite:CompositeImage;
 	private var ss_total:int;
 	private var ss_loaded:int;
 	private var file_total:int;
@@ -34,7 +32,7 @@ public class CharView extends Sprite {
 	private var scale:Number;
 	private var pendingRedraw:Boolean;
 	private var loaderLocation:String;
-	private var parts:ModelPart;
+	private var parts:Statement;
 	private var _palette:Palette;
 
 	public function get palette():Palette {
@@ -77,7 +75,7 @@ public class CharView extends Sprite {
 		this._height       = 1;
 		this.scale         = 1;
 		this.pendingRedraw = false;
-		this.parts         = new PartList([]);
+		this.parts         = new StmtList();
 	}
 	private function init(xml:XML):void {
 		_width    = xml.@width;
@@ -88,14 +86,11 @@ public class CharView extends Sprite {
 		ss_loaded = 0;
 		ss_total  = -1;
 		/**/
-		var _parts:/*ModelPart*/Array = [];
 		loadPalette(xml);
-		var item:XML;
-		for each(item in xml.logic.*) {
-			_parts.push(loadPart(item));
-		}
-		this.parts = new PartList(_parts);
+		var compiler:CharViewCompiler = new CharViewCompiler(this);
+		this.parts = compiler.compileXMLList(xml.logic.*);
 		var n:int  = 0;
+		var item:XML;
 		for each(item in xml.spritesheet) {
 			n++;
 			loadSpritesheet(xml, item);
@@ -182,7 +177,7 @@ public class CharView extends Sprite {
 
 		// Mark visible layers
 		composite.hideAll();
-		parts.display(_character);
+		parts.execute(new CharViewContext(this,_character));
 
 		var keyColors:Object = _palette.calcKeyColors(_character);
 		var bd:BitmapData    = composite.draw(keyColors);
@@ -193,45 +188,6 @@ public class CharView extends Sprite {
 		g.endFill();
 		this.scaleX = scale;
 		this.scaleY = scale;
-	}
-	private function loadPart(x:XML):ModelPart {
-		var item:XML;
-		switch (x.localName()) {
-			case 'show':
-				return new LayerPart(composite, x.@part, true);
-			case 'hide':
-				return new LayerPart(composite, x.@part, false);
-			case 'if':
-				var thenBlock:/*ModelPart*/Array = [];
-				for each(item in x.*) {
-					thenBlock.push(loadPart(item));
-				}
-				return new IfBlock(x.@test.toString(), thenBlock);
-			case 'switch':
-				var hasval:Boolean           = x.attribute("value").length() > 0;
-				var cases:/*CaseBlock*/Array = [];
-				for each(var xcase:XML in x.elements("case")) {
-					var caseItems:/*ModelPart*/Array = [];
-					for each(item in xcase.*) {
-						caseItems.push(loadPart(item));
-					}
-					var hasval2:Boolean = hasval && xcase.attribute("value").length() > 0;
-					var hasval3:Boolean = hasval && xcase.attribute("values").length() > 0;
-					var hastest:Boolean = xcase.attribute("test").length() > 0;
-					cases.push(new CaseBlock(
-							hastest ? xcase.@test.toString() : null,
-							hasval3 ? '[' + xcase.@values.toString() + ']' :
-									hasval2 ? '[' + xcase.@value.toString() + ']' : null,
-							caseItems));
-				}
-				var defBlock:/*ModelPart*/Array = [];
-				for each (item in x.elements("default").*) {
-					defBlock.push(loadPart(item));
-				}
-				return new SwitchPart(hasval ? x.@value.toString() : null, cases, defBlock);
-			default:
-				throw new Error("Expected <layer>, <if>, or <switch>, got " + x.localName());
-		}
 	}
 	private function loadSpritemap(xml:XML, sm:XML):void {
 		const filename:String = sm.@file;

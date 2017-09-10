@@ -446,6 +446,12 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
+	// Celess birth scene
+	if (celessScene.shouldDoBirth()){
+		celessScene.birthScene();
+		hideMenus();
+		return;
+	}
 	//Exgartuan clearing
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
 		exgartuanCampUpdate();
@@ -1351,6 +1357,11 @@ public function campFollowers(descOnly:Boolean = false):void {
 			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
 			addButton(2, "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
 		}
+	}
+	//Celess
+	if (celessScene.isFollower){
+		outputText(celessScene.getName+" is currently resting on all four in the nearby grassland area.\n\n");
+		addButton(3, celessScene.getName, celessScene.campInteraction);
 	}
 	//Evangeline
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {

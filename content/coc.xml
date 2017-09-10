@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extend-story name="/" xmlns="xxc-story">
+    <!--Areas-->
+    <include path="coc/desert.xml"/>
+	<include path="coc/forest.xml"/>
+	<include path="coc/NPC/celess.xml"/>
+    <extend-zone name="deepwoods">
+
+    </extend-zone>
+</extend-story>

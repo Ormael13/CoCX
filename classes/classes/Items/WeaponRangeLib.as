@@ -14,6 +14,7 @@ package classes.Items
 
 		public static const NOTHING:WeaponRange = new Nothing();//orginalne wart atk f. pistol = 14 i b. rifle = 16
 //Blunderbuss ma 12 nie 4 naboje i też wymaga przeładowania
+		public const ARTEMIS:Artemis = new Artemis();
 		public const BLUNDER:WeaponRange = new WeaponRange("Blunder", "Blunderbuss", "blunderbuss rifle", "a blunderbuss rifle", "shot", 6, 300, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Rifle");
 		public const BOWGUID:WeaponRange = new WeaponRange("BowGuid", "BowGuided", "Guided bow", "a Guided bow", "shot", 1, 400, "A bow ornemented with a small carving representing a target. It seems to never miss no mather how poorly you aim.", "Bow");
 		public const BOWHUNT:WeaponRange = new WeaponRange("BowHunt", "BowHunt", "hunter bow", "a hunter bow", "shot", 10, 500, "This is a hunter bow. It allow to attain better accuracy of shooted arrows than long bow at the cost of slight lower damage.", "Bow");
@@ -41,6 +42,7 @@ package classes.Items
 		public const TRSXBOW:WeaponRangeWithPerk = new WeaponRangeWithPerk("TrSXBow", "Tra.S.Xbow", "training soul crossbow", "a training soul crossbow", "shot", 1, 50, "This crossbow was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal range weapon.", "Crossbow",
 				PerkLib.Accuracy1,5,0,0,0);
 		public const WARDBOW:Wardensbow = new Wardensbow();
+		public const WILDHUN:WildHunt = new WildHunt();
 		
 		//Tomes
 		public const I_TOME_:InquisitorsTome = new InquisitorsTome();

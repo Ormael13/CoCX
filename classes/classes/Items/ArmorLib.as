@@ -29,6 +29,8 @@ package classes.Items
 		public const CHBIKNI:ArmorWithPerk = new ArmorWithPerk("ChBikni","Chn Bikini","revealing chainmail bikini","a chainmail bikini",2,80,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light",
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 40, "A set of classy suitclothes.", "Light");
+		public const CTPALAD:CentaurArmor = new CentaurArmor();
+		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
 		public const DBARMOR:Armor = new PureMaraeArmor();
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 20, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",

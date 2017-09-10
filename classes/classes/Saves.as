@@ -1178,6 +1178,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		// Keybinds
 		saveFile.data.controls = getGame().inputManager.SaveBindsToObj();
+		
+		// TODO use an interface for this or something
+		saveFile.data.world = {};
+		saveFile.data.world.x = {};
+		getGame().celessScene.save(saveFile.data.world.x);
 	}
 	catch (error:Error)
 	{
@@ -2343,6 +2348,16 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
+		
+		// TODO use an interface for this or something
+		if (saveFile.data.world != undefined){
+			if (saveFile.data.world.x != undefined){
+				game.celessScene.load(saveFile.data.world.x);
+			}
+		} else{
+			game.celessScene.load(undefined);
+		}
+		
 		doNext(playerMenu);
 	}
 }

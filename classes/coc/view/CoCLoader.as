@@ -26,46 +26,77 @@ public class CoCLoader {
 	}
 	// [path:String]=>String
 	private static var TEXT_BUNDLE:Object  = {};
+
 	[Embed(source="../../../res/model.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_RES_MODEL_XML:Class;
-	TEXT_BUNDLE["res/model.xml"] = new BUNDLE_RES_MODEL_XML();
+	bundleText("res/model.xml",BUNDLE_RES_MODEL_XML);
+
+	[Embed(source="../../../content/coc.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_XML:Class;
+	bundleText("content/coc.xml", BUNDLE_CONTENT_COC_XML);
+
+	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;
+	bundleText("content/coc/desert.xml", BUNDLE_CONTENT_COC_DESERT_XML);
+
+	[Embed(source="../../../content/coc/forest.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_FOREST_XML:Class;
+	bundleText("content/coc/forest.xml", BUNDLE_CONTENT_COC_FOREST_XML);
+	
+	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
+	bundleText("content/coc/NPC/celess.xml", BUNDLE_CONTENT_COC_NPC_CELESS_XML);
+	
+	public static function bundleText(key:String,c:Class):void {
+		if (c) TEXT_BUNDLE[key] = new c();
+	}
 
 	// [path:String]=>BitmapData
 	private static var IMAGE_BUNDLE:Object = {};
-//	[Embed(source="../../../res/char1.png", mimeType="image/png")]
+//
+// [Embed(source="../../../res/char1.png", mimeType="image/png")]
 //	public static var BUNDLE_RES_CHAR1_PNG:Class;
-//	IMAGE_BUNDLE["res/char1.png"] = ldbmp(BUNDLE_RES_CHAR1_PNG);
+//	ldbmp("res/char1.png",BUNDLE_RES_CHAR1_PNG);
+
 	[Embed(source="../../../res/charview/alraune.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_ALRAUNE_PNG:Class;
-	IMAGE_BUNDLE["res/charview/alraune.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ALRAUNE_PNG);
+	bundleImage("res/charview/alraune.png",BUNDLE_RES_CHARVIEW_ALRAUNE_PNG);
+
 	[Embed(source="../../../res/charview/basic.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_BASIC_PNG:Class;
-	IMAGE_BUNDLE["res/charview/basic.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BASIC_PNG);
+	bundleImage("res/charview/basic.png",BUNDLE_RES_CHARVIEW_BASIC_PNG);
+
 	[Embed(source="../../../res/charview/beasts.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_BEASTS_PNG:Class;
-	IMAGE_BUNDLE["res/charview/beasts.png"] = ldbmp(BUNDLE_RES_CHARVIEW_BEASTS_PNG);
+	bundleImage("res/charview/beasts.png",BUNDLE_RES_CHARVIEW_BEASTS_PNG);
+
 	[Embed(source="../../../res/charview/chitin.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_CHITIN_PNG:Class;
-	IMAGE_BUNDLE["res/charview/chitin.png"] = ldbmp(BUNDLE_RES_CHARVIEW_CHITIN_PNG);
+	bundleImage("res/charview/chitin.png",BUNDLE_RES_CHARVIEW_CHITIN_PNG);
+
 	[Embed(source="../../../res/charview/hinezumi.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_HINEZUMI_PNG:Class;
-	IMAGE_BUNDLE["res/charview/hinezumi.png"] = ldbmp(BUNDLE_RES_CHARVIEW_HINEZUMI_PNG);
+	bundleImage("res/charview/hinezumi.png",BUNDLE_RES_CHARVIEW_HINEZUMI_PNG);
+
 	[Embed(source="../../../res/charview/manticore.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_MANTICORE_PNG:Class;
-	IMAGE_BUNDLE["res/charview/manticore.png"] = ldbmp(BUNDLE_RES_CHARVIEW_MANTICORE_PNG);
+	bundleImage("res/charview/manticore.png",BUNDLE_RES_CHARVIEW_MANTICORE_PNG);
+
 	[Embed(source="../../../res/charview/orca.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_ORCA_PNG:Class;
-	IMAGE_BUNDLE["res/charview/orca.png"] = ldbmp(BUNDLE_RES_CHARVIEW_ORCA_PNG);
+	bundleImage("res/charview/orca.png",BUNDLE_RES_CHARVIEW_ORCA_PNG);
+
 	[Embed(source="../../../res/charview/scales.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_SCALES_PNG:Class;
-	IMAGE_BUNDLE["res/charview/scales.png"] = ldbmp(BUNDLE_RES_CHARVIEW_SCALES_PNG);
+	bundleImage("res/charview/scales.png",BUNDLE_RES_CHARVIEW_SCALES_PNG);
 
-	private static function ldbmp(c:Class):BitmapData {
-		return c ? ((new c() as Bitmap).bitmapData) : null;
+	public static function bundleImage(key:String, c:Class):void {
+		var o:BitmapData = c ? ((new c() as Bitmap).bitmapData) : null;
+		if (o) IMAGE_BUNDLE[key] = o;
 	}
 	/**
 	 * @param path
-	 * @param callback Function (success:Boollean, result:*):*
+	 * @param callback Function (success:Boollean, result:*,event:Event):*
 	 * where result is String or Error
 	 * @param location "external", "internal"
 	 */

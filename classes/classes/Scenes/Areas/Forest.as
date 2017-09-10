@@ -9,10 +9,13 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.Areas.Forest.*;
+	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
-	use namespace kGAMECLASS;
+import coc.xxc.Story;
+import coc.xxc.stmts.ZoneStmt;
+
+use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{
@@ -30,7 +33,9 @@ package classes.Scenes.Areas
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
-		public function Forest() { }
+		public function Forest() {
+			onGameInit(init);
+		}
 		
 		public function isDiscovered():Boolean {
 			return player.exploredForest > 0;
@@ -64,12 +69,20 @@ package classes.Scenes.Areas
 				tentacleBeastScene.encounter();
 			}
 		}
-		private var _forestEncounter:Encounter = null;
-		public function get forestEncounter():Encounter { // lateinit because it references getGame()
+		private var _forestEncounter:GroupEncounter = null;
+		private var _deepwoodsEncounter:GroupEncounter = null;
+		public function get forestEncounter():GroupEncounter {
+			return _forestEncounter;
+		}
+		public function get deepwoodsEncounter():GroupEncounter {
+			return _deepwoodsEncounter
+		}
+		private var forestStory:Story;
+		private var deepwoodsStory:Story;
+		private function init():void {
 			const game:CoC     = getGame();
 			const fn:FnHelpers = Encounters.fn;
-			if (_forestEncounter == null) _forestEncounter =
-					Encounters.group({
+			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
 						call: game.exploration.genericGolGobImpEncounters
@@ -184,6 +197,18 @@ package classes.Scenes.Areas
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
+					},{
+						name: "celess-unicorn",
+						call: celessUnicornIntro,
+						when: function():Boolean{
+							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
+						}
+					}, {
+						name: "celess-armor",
+						call: celessArmor,
+						when: function():Boolean{
+							return game.celessScene.isFollower && !game.celessScene.armorFound;
+						}
 					});
 					/*
 					{
@@ -202,12 +227,7 @@ package classes.Scenes.Areas
 						chance: 0.10
 					}
 					*/
-			return _forestEncounter;
-		}
-		private var _deepwoodsEncounter:Encounter = null;
-		public function get deepwoodsEncounter():Encounter { // lateinit because it references getGame()
-			const game:CoC     = getGame();
-			return _deepwoodsEncounter ||= Encounters.group(/*kGAMECLASS.commonEncounters,*/ {
+			_deepwoodsEncounter = Encounters.group("deepwoods", /*kGAMECLASS.commonEncounters,*/ {
 				name: "shrine",
 				when: function():Boolean {
 					return flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1;
@@ -317,50 +337,83 @@ package classes.Scenes.Areas
 				call  : deepwoodsWalkFn,
 				chance: 0.01
 			});
+			// what we do here: create a Story (ZoneStmt) and register it in game.rootStory
+			// so it will be accessible from external files
+			forestStory = ZoneStmt.wrap(_forestEncounter,game.rootStory);
+			deepwoodsStory = ZoneStmt.wrap(_deepwoodsEncounter,game.rootStory);
 		}
 		public function exploreDeepwoods():void {
 			deepwoodsEncounter.execEncounter();
 		}
-
+		public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			switch(stage){
+				case 0:
+					forestStory.display(context, "strings/celess-unicorn/intro");
+					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless() || true)?2:3);
+					if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
+					addButton(5, "NoWay", celessUnicornIntro, 1);
+					break;
+				case 1:
+					forestStory.display(context, "strings/celess-unicorn/noway");
+					doNext(camp.returnToCampUseOneHour);
+					break;
+				case 2:
+					if (player.bRows() == 0){
+						player.createBreastRow();
+					}
+					player.growTits(3, 1, false, 1);
+					forestStory.display(context, "strings/celess-unicorn/okay-male");
+					while (player.hasCock()){
+						player.removeCock(0, 1);
+					}
+					player.createVagina();
+					addButton(0, "Next", celessUnicornIntro, 3,true);
+					break;
+				case 3:
+					forestStory.display(context, "strings/celess-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
+					player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+					break;
+				case 4:
+					forestStory.display(context, "strings/celess-unicorn/fuck-her");
+					kGAMECLASS.celessScene.findArmor();
+					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+					break;
+			}
+			flushOutputTextToGUI();
+		}
+		public function celessArmor():void{
+			forestStory.display(context, "strings/celess-unicorn/armorScene");
+			kGAMECLASS.celessScene.findArmor();
+			inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
+		}
 		public function tripOnARoot():void {
-			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
+			forestStory.display(context, "strings/trip");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function findTruffle():void {
-			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+			forestStory.display(context, "strings/truffle");
 			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 		}
 		public function findHPill():void {
-			outputText("You find a pill stamped with the letter 'H' discarded on the ground. ");
+			forestStory.display(context, "strings/hpill");
 			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 		}
 		public function findChitin():void {
 			clearOutput();
-			outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ");
+			forestStory.display(context, "strings/chitin");
 			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 		}
 		public function forestWalkFn():void {
-			if (player.cor < 80) {
-				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.");
-				dynStats("tou", .5, "int", 1);
-			}
-			else {
-				outputText("As you wander in the forest, you keep ");
-				if (player.gender == 1) outputText("stroking your half-erect [cocks] as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes.");
-				if (player.gender == 2) outputText("idly toying with your " + vaginaDescript(0) + " as you daydream about getting fucked by all kinds of monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.");
-				if (player.gender == 3) outputText("stroking alternatively your [cocks] and your " + vaginaDescript(0) + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes, before, or while, getting fucked by various monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.");
-				if (player.gender == 0) outputText("daydreaming about sex-demons with huge sexual attributes, and how you could please them.");
-				outputText("");
-				dynStats("tou", .5, "lib", .25, "lus", player.lib / 5);
-			}
+			forestStory.display(context, "strings/walk");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function marbleVsImp():void {
 			clearOutput();
-			outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
-			outputText("\n\nShe goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
-			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
+			forestStory.display(context, "string/marble");
 			//end event
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -369,7 +422,10 @@ package classes.Scenes.Areas
 			clearOutput();
 			//Increment forest exploration counter.
 			player.exploredForest++;
-			forestEncounter.execEncounter();
+			doNext(camp.returnToCampUseOneHour);
+			forestStory.execute(context);
+			flushOutputTextToGUI();
+			//forestEncounter.execEncounter();
 		}
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
@@ -480,22 +536,20 @@ package classes.Scenes.Areas
 		private function trappedSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
-
-			outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.\n\n");
+			forestStory.display(context, "strings/glade-satyr/0-intro");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
 				outputText("<b>New codex entry unlocked: Satyrs!</b>\n\n")
 			}
 			//(Player lacks a penis:
 			if(!player.hasCock()) {
-				outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.");
+				forestStory.display(context, "strings/glade-satyr/1-nocock");
 				doNext(camp.returnToCampUseOneHour);
 			}
 			//Player returns to camp)
 			//(Player has penis:
 			else {
-				outputText("You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n\n");
+				forestStory.display(context, "strings/glade-satyr/1-prompt");
 				//[Yes] [No]
 				simpleChoices("Ravage", rapeSatyr, "", null, "", null, "", null, "Leave", ignoreSatyr);
 			}
@@ -505,10 +559,7 @@ package classes.Scenes.Areas
 		private function ignoreSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			outputText("You shake your head, ");
-			if(player.cor < 50) outputText("disgusted by the strange thoughts this place seems to put into your mind");
-			else outputText("not feeling inclined to rape some satyr butt right now");
-			outputText(", and silently leave him to his pleasures.");
+			forestStory.display(context, "strings/glade-satyr/2-leave");
 			dynStats("lus", 5+player.lib/20);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -517,51 +568,7 @@ package classes.Scenes.Areas
 			clearOutput();
 			spriteSelect(99);
 			var x:Number = player.biggestCockIndex();
-
-			//(Low Corruption)
-			if(player.cor < 33) outputText("For a moment you hesitate... taking someone from behind without their consent seems wrong... but then again you doubt a satyr would pass on the opportunity if you were in his position.");
-			//(Medium Corruption)
-			else if(player.cor < 66) outputText("You smirk; normally you would have given this some thought, but the idea of free booty is all you need to make a decision.");
-			//High Corruption
-			else outputText("You grin; this is not even a choice!  Passing on free anal is just not something a decent person does, is it?");
-
-			outputText("  You silently strip your [armor] and ");
-			if(player.isNaga()) outputText("slither");
-			else outputText("sneak");
-
-			outputText(" towards the distracted satyr; stopping a few feet away, you stroke your " + cockDescript(x) + ", urging it to full erection and coaxing a few beads of pre, which you smear along your " + player.cockHead(x) + ".  With no warning, you lunge forward, grabbing and pulling his hips towards your " + cockDescript(x) + " and shoving as much of yourself inside his tight ass as you can.\n\n");
-
-			outputText("The satyr lets out a startled yelp, struggling against you, but between his awkward position and the mutant flower ravenously sucking on his sizable cock, he's helpless.\n\n");
-
-			outputText("You slap his butt with a open palm, leaving a clear mark on his taut behind.  He bleats, bucking wildly, but this serves only to slam his butt into your crotch until the flower hungrily sucks him back, sliding him off your prick.  You smile as a wicked idea hits you; you hit his ass again and again, making him buck into your throbbing " + Appearance.cockNoun(player.cocks[x].cockType) + ", while the flower keeps pulling him back inside; effectively making the satyr fuck himself.\n\n");
-
-			outputText("Eventually, his bleating and screaming start to annoy you, so you silence him by grabbing at his horns and shoving his head to the side, into one of the breast-like growths nearby.  The satyr unthinkingly latches onto the floral nipple and starts to suckle, quieting him as you hoped.  You're not sure why, but he starts to voluntarily buck back and forth between you and the flower; maybe he's getting into the spirit of things, or maybe the vegetal teat he's pulling on has introduced an aphrodisiac chemical after so many violent attempts to pull out of the kindred flower.\n\n");
-
-			outputText("You resolve not to think about it right now and just enjoy pounding the satyr's ass.  With his bucking you're able to thrust even farther into his tight puckered cherry, ");
-			if(player.cockArea(x) >= 100) outputText("stretching it all out of normal proportion and ruining it for whomever might happen to use it next.");
-			else outputText("stretching it to fit your " + cockDescript(x) + " like a condom.");
-			outputText("  Your groin throbs, ");
-			if(player.balls > 0) outputText("your balls churn, ");
-			outputText("and you grunt as you feel the first shots of cum flowing along " + sMultiCockDesc() + ", only to pour out into");
-			if(player.cockTotal() > 1) outputText(" and onto");
-			outputText(" the satyr's abused ass; you continue pounding him even as you climax, causing rivulets of cum to run down his cheeks and legs.\n\n");
-
-			outputText("Still slurping obscenely on the fake breast, the satyr groans and murmurs; you're not sure how much of a role the sap he's swallowing or the cunt-flower on his cock is playing, but it looks like he's actually enjoying himself now.");
-
-			//(Low Cum Amount)
-			if(player.cumQ() < 250) outputText("  As much as you'd love to fill his belly so full of spunk he'd look pregnant, you just can't muster any more, and pull out with a sigh.\n\n");
-			//(Medium Cum Amount)
-			else if(player.cumQ() < 1000) outputText("  You cum and cum, filling every crevice of his anal passage with warm jism, the slutty goatman doesn't seem to mind this in the least.  When you're finally spent, you pull out with a sigh, and watch as your cum backflows out of his ass to fall on the grass below.\n\n");
-			//(Large Cum Amount)
-			else outputText("  You cum and cum, filling every crevice of his anal passage with warm jism, and the slutty goatman doesn't seem to mind this in the least - yet.  You push him to his limits; cum backflows out of his ass and around your spewing prick, but still you dump more and more of your heavy load inside your now-willing cock-sleeve, inflating his belly like a balloon.  When you're finally spent, you pull out with a sigh and look at your handiwork; cum pours out of his ass like an open tap and his belly is absolutely bulging, making him look pregnant.\n\n");
-
-			outputText("The satyr is too absorbed in his own fucking of the plant-pussy, and his nursing of the tree boob to bewail your absence");
-			if(player.cumQ() >= 1000) outputText(", although his eyes have widened perceptibly along with the stretching of his stomach");
-			outputText(".\n\n");
-
-			outputText("You can't help but smile inwardly at the helpless goatman's eagerness, and decide to stick around and watch him a little longer.  It's not everyday you see a creature like him at your mercy.  Every once in awhile you egg him on with a fresh slapping of his butt. The satyr grumbles and huffs, but continues to thrust and rut mindlessly into the vegetative pussy feeding on his cock. You don't think it'll be long before he cums...\n\n");
-
-			outputText("As you watch the lewd display, you feel your arousal building and your " + cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?");
+			forestStory.display(context, "strings/glade-satyr/2-ravage",{$x:x});
 			player.orgasm();
 			//[Again][Leave]
 			simpleChoices("Again", secondSatyrFuck, "", null, "", null, "", null, "Leave", dontRepeatFuckSatyr);
@@ -571,7 +578,7 @@ package classes.Scenes.Areas
 		private function dontRepeatFuckSatyr():void {
 			clearOutput();
 			spriteSelect(99);
-			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your [armor] and leave the rutting satyr behind.\n\n");
+			forestStory.display(context, "strings/glade-satyr/3-leave");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//[=Again=]
@@ -579,15 +586,7 @@ package classes.Scenes.Areas
 			var x:int = player.cockThatFits(monster.analCapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			outputText("There's no harm in using the helpless goat once more... This time though, you decide you'll use his mouth.  With a yank on his horns, you forcefully dislodge him from the breast-plant and force him to his knees, turning his head towards you; he doesn't put up much resistance and when you present your erect shaft to him, he licks his lips in excitement and latches onto your " + cockDescript(x) + ".\n\n");
-
-			outputText("His mouth is exquisite; it feels slippery and warm and his lips are soft while his tongue wriggles about your shaft, trying to embrace and massage it.  He gloms onto your manhood with eager hunger, desperate to ravish you with his mouth.  Quivers of pleasure ripple and shudder through his body as he slobbers and gulps - and no wonder!  From the remnants of sap still in his mouth, you can feel currents of arousal tingling down your cock; if he's been drinking it straight, his mouth must be as sensitive as a cunt from the effects of this stuff.\n\n");
-
-			outputText("Having had your first orgasm mere minutes ago, you don't last long.  Within a few moments of his beginning you flood his mouth with a second load of cum, pulling out to paint his face with the last couple jets.\n\n");
-
-			outputText("With a great, garbled cry, the satyr cums on his own, gurgling through the sap-tinted cum drooling from his mouth as he spews into the waiting opening of his rapacious plant lover.  It swells and bloats as it gorges itself on his thick, stinking seed, stretching its stem until it is almost spherical, finally releasing him to collapse on his knees, free at last of the plant's grip.  He moans and bleats softly, leaking cummy sap from his chin onto his hairy chest, too overwhelmed by the combined fucking of yourself and the flower and too poisoned by whatever aphrodisiac he's been slurping on to move.\n\n");
-
-			outputText("You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your [armor] and leave the passed-out satyr behind as you go back to your camp.");
+			forestStory.display(context, "strings/glade-satyr/3-again",{$x:x});
 			player.orgasm();
 			dynStats("lib", 1, "sen", -5);
 			doNext(camp.returnToCampUseOneHour);

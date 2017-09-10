@@ -4,8 +4,10 @@
 package coc.view.charview {
 import coc.view.CharView;
 import coc.view.CompositeImage;
+import coc.xlogic.ExecContext;
+import coc.xlogic.Statement;
 
-public class LayerPart extends ModelPart {
+public class LayerPart extends Statement {
 	private var name:String;
 	private var image:CompositeImage;
 	private var visible:Boolean;
@@ -22,7 +24,7 @@ public class LayerPart extends ModelPart {
 		}
 	}
 
-	override public function display(character:Object):void {
+	override public function execute(context:ExecContext):void {
 		if (_prefix) {
 			image.setMultiVisibility(name,visible);
 		} else {

@@ -282,6 +282,20 @@ public function updatePregnancy():Boolean {
 				}
 			}
 		}
+		if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS){
+			if (player.pregnancyIncubation == 696){
+				outputText("\n<b>Since that day in the forest, your stomach has remained somewhat the same. You thought it would have turned back to normal by now. Seems like she did actually manage to impregnate you without taking your virginity, doesn’t it?</b>\n");
+				displayedUpdate = true;
+			}
+			if (player.pregnancyIncubation == 480){
+				outputText("\n<b>Your belly has gotten bigger again and the constant craving for cereals and vegetables gives you quite the idea of who might be the cause.</b>\n");
+				displayedUpdate = true;
+			}
+			if (player.pregnancyIncubation == 240){
+				outputText("\n<b>You feel small, but powerful, kicks every now and then. Your daughter clearly has quite the strong legs, it seems. You don’t know how you can tell it’s a girl, it just feels right. Moreover, you’re fairly certain she is going to be a herm like her sire.</b>\n");
+				displayedUpdate = true;
+			}
+		}
 		//Bunny tf preggoz
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) {
 			if(player.pregnancyIncubation == 800) {
@@ -1661,6 +1675,12 @@ public function updatePregnancy():Boolean {
 		}		
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("Exhausted by the 'birth' and the climax, you slip into a doze.\n");
+	}
+	//Give birth to Celess
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS && player.pregnancyIncubation == 1){
+		player.knockUpForce(); //Clear Pregnancy
+		celessScene.birthScene();
+		return false;
 	}
 	//Give birth if it's time (to an imp!)
 	if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_IMP) {

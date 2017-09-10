@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--content/coc/desert.xml-->
+<extend-zone name="desert" xmlns="xxc-story">
+    <lib name="strings">
+        <lib name="chest">
+            <text name="a">
+                While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.
+                You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.
+                Overcome with curiosity, you dig it out, only to discover that it's empty.
+                It would make a nice addition to your campsite.
+
+                You decide to bring it back to your campsite.
+            </text>
+            <text name="b">
+                <b>You now have <output>num2Text(inventory.itemStorageDirectGet().length)</output> storage item slots at camp.</b>
+            </text>
+        </lib>
+        <lib name="nails">
+            <text name="a">
+                While exploring the desert, you find the wreckage of a building.
+                Judging from the debris, it's the remains of the library that was destroyed by the fire.
+
+                You circle the wreckage for a good while and you can't seem to find anything to salvage.
+                Until something shiny catches your eye.  There are exposed nails that look like they can be scavenged.
+
+                You take your hammer out of your toolbox and you spend time extracting straight nails.
+                Some of the nails you've pulled out are bent but some are incredibly in good condition.
+                You could use these nails for construction.
+
+            </text>
+            <text name="b">
+                After spending nearly an hour scavenging, you've managed to extract <output>$extractedNail</output> nails.
+            </text>
+        </lib>
+    </lib>
+    <!-- This encounter is not present in the code and added through xml only -->
+    <encounter name="walk">
+        <lib name="ss">
+            <string name="intro">You walk through the shifting sands for an hour, finding nothing. </string>
+            <string name="str">The effort of struggling with the uncertain footing has made you stronger.</string>
+            <string name="tou">The effort of struggling with the uncertain footing has made you tougher.</string>
+        </lib>
+        <!-- logic -->
+        <display ref="ss/intro"/>
+        <if test="rand(2)==0">
+            <if test="rand(2)==0 and player.str lt 50">
+                <display ref="ss/str"/>
+                <dynStats str="0.5"/>
+                <elseif test="player.tou lt 50">
+                    <display ref="ss/tou"/>
+                    <dynStats tou="0.5"/>
+                </elseif>
+            </if>
+        </if>
+    </encounter>
+</extend-zone>

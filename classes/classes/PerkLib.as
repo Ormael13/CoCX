@@ -1440,6 +1440,7 @@ package classes
 		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",
 				"When mana is too low to cast a spell, automatically cast from hp instead.",null,true);
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();
+		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",

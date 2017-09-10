@@ -9,9 +9,16 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.Areas.Desert.*;
+  import classes.Scenes.API.GroupEncounter;
+  import classes.Scenes.Areas.Desert.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
-	use namespace kGAMECLASS;
+import coc.xlogic.Statement;
+import coc.xxc.Story;
+import coc.xxc.stmts.ZoneStmt;
+
+use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{
@@ -23,16 +30,19 @@ package classes.Scenes.Areas
 		public var wanderer:Wanderer = new Wanderer();
 		public function Desert()
 		{
+			onGameInit(init);
 		}
-		//Explore desert
+		private var story:Story;
 		
-		
-		private var _desertEncounter:Encounter = null;
-		public function get desertEncounter():Encounter { // lateinit because it references getGame()
+		private var _desertEncounter:GroupEncounter = null;
+		public function get desertEncounter():GroupEncounter {
+			return _desertEncounter;
+		}
+		private function init():void {
 			const game:CoC     = getGame();
 			const fn:FnHelpers = Encounters.fn;
-			if (_desertEncounter == null) _desertEncounter =
-					Encounters.group( //game.commonEncounters, 
+			_desertEncounter = Encounters.group("desert",
+					//game.commonEncounters,
 					{
 						name: "naga",
 						call: nagaScene.nagaEncounter
@@ -134,9 +144,6 @@ package classes.Scenes.Areas
 						when  : fn.ifLevelMin(2),
 						call  : oasis.oasisEncounter
 					}, {
-						name: "walk",
-						call: walkingDesertStatBoost
-					}, {
 						name: "Etna",
 						chance: 0.2,
 						when: function ():Boolean
@@ -151,12 +158,15 @@ package classes.Scenes.Areas
 						chance: 0.2,
 						when  : game.helScene.helSexualAmbushCondition
 					});
-			return _desertEncounter;
+			story = ZoneStmt.wrap(_desertEncounter,game.rootStory);
 		}
 		//Explore desert
 		public function exploreDesert():void {
 			player.exploredDesert++;
-			desertEncounter.execEncounter();
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour); // default button
+			story.execute(getGame().context);
+			flushOutputTextToGUI();
 		}
 
 		public function sandWitchPregnancyEvent():void {
@@ -164,34 +174,31 @@ package classes.Scenes.Areas
 			else sandWitchScene.witchBirfsSomeBees();
 		}
 
-
 		public function chestEncounter():void {
-			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  ");
+			story.display(context,"strings/chest/a");
 			for (var i:int = 0; i < 6; i++) {
 				inventory.createStorage();
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
-			outputText("<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
-			doNext(camp.returnToCampUseOneHour);
+			story.display(context,"strings/chest/b");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function nailsEncounter():void {
 			clearOutput();
-			outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n\n");
-			outputText("You circle the wreckage for a good while and you can't seem to find anything to salvage.  Until something shiny catches your eye.  There are exposed nails that look like they can be scavenged.\n\n");
-			outputText("You take your hammer out of your toolbox and you spend time extracting straight nails.  Some of the nails you've pulled out are bent but some are incredibly in good condition.  You could use these nails for construction.\n\n");
+			story.display(context,"strings/nails/a");
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
-			outputText("After spending nearly an hour scavenging, you've managed to extract " + extractedNail + " nails.\n\n");
+			story.display(context,"strings/nails/b",{$extractedNail:extractedNail});
+			outputText("\n\nNails: ");
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
-				outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/600");
 			}
 			else {
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
-				outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
