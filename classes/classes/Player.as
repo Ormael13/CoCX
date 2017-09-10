@@ -1503,9 +1503,8 @@ use namespace kGAMECLASS;
 				race = "gargoyle";
 			}
 			//</mod>
-			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur()) {
-				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
-				else race = "centaur";
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur() && wingType == WING_TYPE_FEATHERED_LARGE) {
+				race = "pegataur";
 			}
 			
 			if (lowerBody == LOWER_BODY_TYPE_PONY)
@@ -3074,6 +3073,8 @@ use namespace kGAMECLASS;
 		//Centaur score
 		public function centaurScore():Number
 		{
+			if (hornType == HORNS_UNICORN)
+				return 0;
 			Begin("Player","racialScore","centaur");
 			var centaurCounter:Number = 0;
 			if (isTaur())
@@ -3094,8 +3095,6 @@ use namespace kGAMECLASS;
 				centaurCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				centaurCounter++;
-			if (hornType != HORNS_NONE)
-				centaurCounter -= 3;
 			if (wingType != WING_TYPE_NONE)
 				centaurCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
@@ -3105,9 +3104,13 @@ use namespace kGAMECLASS;
 			End("Player","racialScore");
 			return centaurCounter;
 		}
-		
+
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
+			if (hornType != HORNS_UNICORN)
+				return 0;
+			if (wingType == WING_TYPE_FEATHERED_ALICORN)
+				return 0;
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
@@ -3120,31 +3123,32 @@ use namespace kGAMECLASS;
 				unicornCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
 				unicornCounter++;
+			if (legCount == 4)
+				unicornCounter++;
+			if (eyeColor == "red" || eyeColor == "blue")
+				unicornCounter++;
 			if (hornType == HORNS_UNICORN && horns < 6)
 				unicornCounter++;
 			if (hornType == HORNS_UNICORN && horns >= 6)
 				unicornCounter += 2;
-			if (horseCocks() > 0)
-				unicornCounter++;
-			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
-				unicornCounter++;
-			if (hasFur() && coatColor == "white")
+			if (hasFur() || hasPlainSkinOnly())
 				unicornCounter++;
 			if (hairColor == "white")
 				unicornCounter++;
-			if (centaurScore() > 7)
-				unicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				unicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && unicornCounter >= 3)
 				unicornCounter += 1;
-			
 			End("Player","racialScore");
 			return unicornCounter;
 		}
 		
 		//Determine Alicorn Rating
 		public function alicornScore():Number {
+			if (hornType != HORNS_UNICORN)
+				return 0;
+			if (wingType != WING_TYPE_FEATHERED_ALICORN)
+				return 0;
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
@@ -3157,24 +3161,20 @@ use namespace kGAMECLASS;
 				alicornCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
 				alicornCounter++;
+			if (legCount == 4)
+				alicornCounter++;
+			if (eyeColor == "red" || eyeColor == "blue")
+				alicornCounter++;
+			if (wingType == WING_TYPE_FEATHERED_ALICORN)
+				alicornCounter += 2;
 			if (hornType == HORNS_UNICORN && horns < 6)
 				alicornCounter++;
 			if (hornType == HORNS_UNICORN && horns >= 6)
 				alicornCounter += 2;
-			if (wingType == WING_TYPE_FEATHERED_ALICORN)
-				alicornCounter += 2;
-			if (wingType != WING_TYPE_FEATHERED_ALICORN)
-				alicornCounter -= 2;
-			if (horseCocks() > 0)
-				alicornCounter++;
-			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
-				alicornCounter++;
-			if (hasFur() && coatColor == "white")
+			if (hasFur() || hasPlainSkinOnly())
 				alicornCounter++;
 			if (hairColor == "white")
 				alicornCounter++;
-			if (centaurScore() > 7)
-				alicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				alicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && alicornCounter >= 3)
