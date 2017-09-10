@@ -12,9 +12,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Beach.*;
 	import classes.Scenes.NPCs.CeaniScene;
 	//import classes.Scenes.NPCs.CaiLin;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-	
+
 	use namespace kGAMECLASS;
 	
 	public class Beach extends BaseContent 
@@ -23,8 +21,7 @@ package classes.Scenes.Areas
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
-		public var etnaScene:EtnaFollower = new EtnaFollower();
-		
+
 		public function Beach() 
 		{
 		}
@@ -39,7 +36,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			

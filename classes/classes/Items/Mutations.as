@@ -15,6 +15,7 @@
 		import classes.GlobalFlags.kGAMECLASS;
 		import classes.GlobalFlags.kACHIEVEMENTS;
 		public static const gooSkinColors:Array = ["green","purple","blue","cerulean","emerald"];
+		public static const oniEyeColors:Array = ["red", "orange", "yellow"];
 // import classes.ItemSlotClass;
 
 //const FOX_BAD_END_WARNING:int = 477;
@@ -1560,12 +1561,19 @@
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && !player.isGargoyle()) {
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!");
 				else outputText("\n\nYour [skin base] itches intensely.  You gaze down as more and more hairs break forth from your [skin base], quickly transforming into a soft coat of fur.");
-				player.skin.growCoat(SKIN_COAT_FUR,{
-					color:randomChoice([
-						"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
-						"light gray", "silver", "white", "orange and white", "brown and white", "black and white"
-					])
-				});
+				if (rand(3)>0) {
+					player.skin.growCoat(SKIN_COAT_FUR, {
+						color: randomChoice([
+							"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
+							"light gray", "silver", "white"])
+					});
+				} else {
+					player.skin.growCoat(SKIN_COAT_FUR, {
+						color  : randomChoice(["orange", "brown", "black"]),
+						pattern: PATTERN_SPOTTED,
+						color2 : "white"
+					});
+				}
 				outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
 				changes++;
 			}
@@ -2325,6 +2333,13 @@
 			player.refillHunger(50);
 		}
 
+		public function elementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of four steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
+		}
+
 		public function bagofcosmos(player:Player):void
 		{
 			if (player.hasKeyItem("Bag of Cosmos") < 0) {
@@ -2854,8 +2869,13 @@
 			if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (player.skinDesc != "fur") outputText("\n\nYour [skin.type] itches intensely.  You scratch and scratch, but it doesn't bring any relief.  Fur erupts between your fingers, and you watch open-mouthed as it fills in over your whole body.  The fur is patterned in black and white, like that of a cow.  The color of it even spreads to your hair!  <b>You have cow fur!</b>");
 				else outputText("\n\nA ripple spreads through your fur as some patches darken and others lighten.  After a few moments you're left with a black and white spotted pattern that goes the whole way up to the hair on your head!  <b>You've got cow fur!</b>");
-				player.hairColor = "black and white spotted";
-				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor});
+				player.hairColor = "black";
+//				player.hairColor2 = "white"; // TODO 2-color hair
+				player.skin.growCoat(SKIN_COAT_FUR,{
+					color:"black",
+					color2:"white",
+					pattern:PATTERN_SPOTTED
+				});
 			}
 			//if enhanced to probova give a shitty cow face
 			else if (enhanced && player.faceType != FACE_COW_MINOTAUR && player.tailType != TAIL_TYPE_GARGOYLE) {
@@ -4249,7 +4269,7 @@
 				outputText(player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
-			if (player.hasCoat() && player.skin.base.isAny(SKIN_BASE_PLAIN, SKIN_BASE_STONE) && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasCoat() && player.skin.base.isAny(SKIN_BASE_PLAIN, SKIN_BASE_STONE) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ");
 				if (player.hasScales()) outputText("are");
 				else outputText("is");
@@ -5112,7 +5132,7 @@
 			//Lizard eyes
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				setEyeType(EYES_REPTILIAN);
+				setEyeTypeAndColor(EYES_REPTILIAN, "yellow");
 				changes++;
 			}
 			//Remove odd eyes
@@ -5366,7 +5386,7 @@
 			//Lizard eyes
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				setEyeType(EYES_REPTILIAN);
+				setEyeTypeAndColor(EYES_REPTILIAN, "ember");
 				changes++;
 			}
 			//Remove odd eyes
@@ -5671,7 +5691,7 @@
 			//Lizard eyes
 			if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				setEyeType(EYES_REPTILIAN);
+				setEyeTypeAndColor(EYES_REPTILIAN, "yellow");
 				changes++;
 			}
 			//Remove odd eyes
@@ -7200,17 +7220,23 @@
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
-			//if (rand(3) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
 			//Stats
+			if (player.sens < 80 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYour body becomes overwhelmed by stimuli for a moment making you shiver with a moan of pleasure at the mere caress of the wind. The excess sensation eventually dies down but leaves you more sensitive than before.");
+				dynStats("sen", 2);
+				if (player.sens < 40) dynStats("sen", 2);
+				changes++;
+			}
 			//Sexual
 			//Physical
 			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-					outputText("Something shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
+					outputText("\n\nSomething shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
 					setLowerBody(LOWER_BODY_TYPE_ELF);
 				}
 				else humanizeLowerBody();
@@ -7218,7 +7244,7 @@
 			}
 			if (player.lowerBody == LOWER_BODY_TYPE_ELF && player.armType != ARM_TYPE_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == ARM_TYPE_HUMAN) {
-					outputText("Something in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
+					outputText("\n\nSomething in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
 					setArmType(ARM_TYPE_ELF);
 				}
 				else humanizeArms();
@@ -7226,7 +7252,7 @@
 			}
 			if (player.armType == ARM_TYPE_ELF && player.earType != EARS_ELVEN && changes < changeLimit && rand(3) == 0) {
 				if (player.earType == EARS_HUMAN) {
-					outputText("Sounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
+					outputText("\n\nSounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
 					setEarType(EARS_ELVEN);
 				}
 				else humanizeEars();
@@ -7234,17 +7260,33 @@
 			}
 			if (player.earType == EARS_ELVEN && player.eyeType != EYES_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.eyeType == EYES_HUMAN) {
-					outputText("You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new pupils are like those of an elf’s with a vertical slit that reflects lights.</b>");
+					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>");
 					setEyeType(EYES_ELF);
 				}
 				else humanizeEyes();
 				changes++;
 			}
 			//elven senses
+			if (player.tongueType == TONGUE_HUMAN && player.tongueType != TONGUE_ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou throat starts to ache and your tongue tingle. You try to gasp for air your eyes opening wide in surprise as the voice that exits your throat entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of an elf, adapting even your tongue and voice.  <b>You now have the beautiful voice of the elves.</b>");
+				setTongueType(TONGUE_ELF);
+				changes++;
+			}
+			if (player.tongueType != TONGUE_HUMAN && player.tongueType != TONGUE_ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
+				setTongueType(TONGUE_HUMAN);
+				changes++;
+			}
 			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
-				outputText("Something changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
+				outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
 				setHairType(HAIR_SILKEN);
 				changes++;
+			}
+			//Hair Color
+			var elf_hair:Array = ["silver", "golden blonde", "leaf green", "black"];
+			if (!InCollection(player.hairColor, elf_hair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(elf_hair);
+				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
@@ -7677,7 +7719,7 @@
 			}
 			//Fox Eyes
 			if (player.faceType == FACE_FOX && player.eyeType != EYES_FOX && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox pupils.</b>");
+				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your eyes shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox eyes.</b>");
 				setEyeType(EYES_FOX);
 				changes++;
 			}
@@ -8015,7 +8057,7 @@
 			});
 			//Fox Eyes
 			mutationStep(player.earType == EARS_FOX && player.eyeType != EYES_FOX, 3, function(): void {
-				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox pupils.</b>");
+				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your eyes shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox eyes.</b>");
 				setEyeType(EYES_FOX);
 			});
 			//Kitsune arms
@@ -8044,7 +8086,6 @@
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			var changed:Boolean = mutationStep(player.skin.hasFur()
-					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
@@ -8075,6 +8116,7 @@
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
+				player.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
 				player.skin.base.adj = "sexy tattooed";
 
 			});
@@ -8570,7 +8612,7 @@
 			}
 			//PC Trap Effects
 			if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-				setEyeType(EYES_BLACK_EYES_SAND_TRAP);
+				setEyeTypeAndColor(EYES_BLACK_EYES_SAND_TRAP,"black");
 				//Eyes Turn Black:
 				outputText("\n\nYou blink, and then blink again.  It feels like something is irritating your eyes.  Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course.  The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it.  As soon as it goes you stride quickly over to the stream and stare at your reflection.  <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands.  You find you are merely grateful the change apparently hasn't affected your vision.");
 				changes++;
@@ -8896,7 +8938,7 @@
   					if (!player.hasItem(consumables.MINOCUM)) {
   						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
   					}
-  					else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
+  					else if (player.lust < player.maxLust() || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
   					//(mino cum in inventory and non-horse, 100 lust)
   					else {
   						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
@@ -10258,7 +10300,7 @@
 				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>");
-				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",color:"white and black"});
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",pattern:PATTERN_ORCA_UNDERBODY,color:"white",color2:"black"});
 				changes++;
 			}
 			//legs
@@ -10774,7 +10816,7 @@
 			//Eyes
 			if (rand(3) == 0 && changes < changeLimit && player.eyeType != EYES_DEVIL && player.faceType == FACE_DEVIL_FANGS) {
 				outputText("\n\nYour eyes feels like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance: the sclera is black and the pupils ember. Furthermore they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
-				setEyeType(EYES_DEVIL);
+				setEyeTypeAndColor(EYES_DEVIL,"ember");
 				changes++;
 			}
 			//Shrinkage!

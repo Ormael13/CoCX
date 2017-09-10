@@ -28,7 +28,7 @@ package classes.Scenes.Areas.Ocean
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
-			outputText("Your opponent take a turn and charge at you at high speed jaw open as she go in for the kill viciously biting you. You start to bleed in abundance the water around you turning red. ");
+			outputText("Your opponent take a turn and charge at you at high speed jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takeDamage(damage, true);
@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Ocean
 			this.a = "the ";
 			this.short = "shark-girl";
 			this.imageName = "sharkgirl";
-			this.long = "The shark/tiger shark girl is menacingly circling you off waiting for the opportunity to viciously strike. These creatures clearly look way more deadly in the water then out of it!";
+			this.long = "The shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 15, 0, 0, 0);
@@ -83,7 +83,7 @@ package classes.Scenes.Areas.Ocean
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 56;
+			this.level = 54;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).

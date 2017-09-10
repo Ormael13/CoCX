@@ -70,6 +70,7 @@ package classes.Scenes.Areas.Lake
 				if (player.hasVagina() || !player.hasCock()) addButton(1, "Facesitting", ottersForGals);
 			}
 			if (flags[kFLAGS.MET_OTTERGIRL] > 1) addButton(2, "Get Fish", getSomeFishYaFatty);
+			if (player.hasKeyItem("Fishing Pole") < 0) addButton(3, "Leave", getDatFishingPole);
 			addButton(4, "Leave", avoidZeOtterPussy);
 		}
 
@@ -265,6 +266,34 @@ package classes.Scenes.Areas.Lake
 
 			//(You have gained Fish Fillet!)
 			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
+		}
+		
+		//Fishing Rod
+		private function getDatFishingPole():void
+		{
+			clearOutput();
+			outputText("You mention to Calu that you would like to fish to but you have no idea of were to find a fishing pole.");
+			outputText("\"<i>So you want to start fishing to eh? Thats a humble pleasure of life. Don’t worry about finfing one, I got an extra if you can pay it to me. For 50 gems its yours.</i>\"");
+			menu();
+			if (player.gems >= 50) addButton(0, "Buy it", yesMissIHaveGems);
+			else addButtonDisabled(0, "Buy it", "You not have enough gems.");
+			addButton(1, "No thanks", noINotWannaFishing);
+		}
+		private function yesMissIHaveGems():void
+		{
+			clearOutput();
+			outputText("Sure why not. You buy the fishing pole from Calu.\n\n");
+			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.<\b>");
+			player.gems -= 50;
+			player.createKeyItem("Fishing Pole", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function noINotWannaFishing():void
+		{
+			clearOutput();
+			outputText("You will pass on this for now.\n\n");
+			outputText("\"<i>Well all okay. Just ask again if you ever change your mind.</i>\"");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 	}

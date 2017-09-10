@@ -67,7 +67,7 @@ package classes.Items {
 		}
 
 		public function humanizeFace():void {
-			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
+			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, <b>human face</b>.");
 			player.faceType = FACE_HUMAN;
 			changes++;
 		}
@@ -135,6 +135,7 @@ package classes.Items {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
 			}
+			outputText("You now have <b>human arms</b>!");
 			setArmType(ARM_TYPE_HUMAN);
 			changes++;
 		}
@@ -337,6 +338,10 @@ package classes.Items {
 	public function setEyeType(eyeType:int):Boolean {
 		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
 	}
+	public function setEyeTypeAndColor(eyeType:int, color:String):Boolean {
+		player.eyeColor = color;
+		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
+	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
 		[EYES_BLACK_EYES_SAND_TRAP, null],
 		[EYES_CAT_SLITS, null],
@@ -439,6 +444,8 @@ package classes.Items {
 		[HORNS_GOAT, null],
 		[HORNS_NONE, null],
 		[HORNS_OAK, null],
+		[HORNS_ONI, null],
+		[HORNS_ONI_X2, null],
 		[HORNS_ORCHID, null],
 		[HORNS_RHINO, null],
 		[HORNS_UNICORN, null],
@@ -514,6 +521,7 @@ package classes.Items {
 		[TONGUE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
 		[TONGUE_ECHIDNA, [null, "Echidna Tongue"]],
 		[TONGUE_HUMAN, [null, "Human Tongue"]],
+		[TONGUE_ELF, [null, "Elf Tongue"]],
 		[TONGUE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 

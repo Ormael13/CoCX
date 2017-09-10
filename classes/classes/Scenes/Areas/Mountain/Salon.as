@@ -347,7 +347,7 @@ private function hairDressingMainMenu():void {
 private function cutShort():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
-	if(player.hairType == 4) {
+	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
 		salonPurchaseMenu();
 		return;
@@ -361,7 +361,7 @@ private function cutShort():void {
 private function cutMedium():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
-	if(player.hairType == 4) {
+	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
 		salonPurchaseMenu();
 		return;
@@ -375,7 +375,7 @@ private function cutMedium():void {
 private function cutLong():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
-	if(player.hairType == 4) {
+	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for the contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
 		salonPurchaseMenu();
 		return;
@@ -389,7 +389,7 @@ private function cutLong():void {
 private function hairGrow():void {
 	spriteSelect(38);
 	//-asking for a lengthening treatment with tentacle hair:
-	if(player.hairType == 4) {
+	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not hair.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n");
 		salonPurchaseMenu();
 		return;
@@ -444,7 +444,7 @@ private function beardMenu():void {
 }
 
 private function cutBeard():void {
-	if(player.hairType == 4) {
+	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
 		beardMenu();
 		return;
@@ -476,7 +476,7 @@ private function growBeard(mode:int = 0):void {
 	}
 	//Grow existing beard.
 	else {
-			if(player.hairType == 4) {
+			if(player.hairType == 4 || player.hairType == 6) {
 				outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not beard.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n");
 				beardMenu();
 				return;

@@ -2360,7 +2360,7 @@ public static const UNLOCKED_MERIDIANS:int                      	               
 public static const GARGOYLE_BODY_MATERIAL:int                                      = 2352;
 public static const GARGOYLE_WINGS_TYPE:int     	                                = 2353;
 public static const GARGOYLE_QUEST:int                                 			    = 2354;//do sprawdzania jak daleko w quescie do uzyskania gargoyle body PC jest
-public static const GARGOYLE_02355:int                                   = 2355;
+public static const GARGOYLE_BODY_SCULPTING_PROGRESS:int                            = 2355;//jak bardzo ciało gargulca jest gotowe
 public static const GARGOYLE_02356:int                                   = 2356;
 public static const GARGOYLE_02357:int                                   = 2357;//na wszelki wypadek tyle flag zarezerwowanych
 public static const SOULFORCE_GAINED_FROM_CULTIVATING_2:int                         = 2358;
@@ -2546,7 +2546,7 @@ public static const REUSABLE_GOLEM_CORES_BAG:int                                
 public static const ELEMENTAL_CONJUER_SUMMONS:int                                   = 2538;
 public static const ATTACKING_ELEMENTAL_TYPE:int                                   	= 2539;
 public static const PINCHOU_SHOP:int                                   				= 2540;
-public static const UNKNOWN_FLAG_NUMBER_02541:int                                   = 2541;
+public static const SOUL_ARENA_FINISHED_GAUNLETS:int                                = 2541;
 public static const UNKNOWN_FLAG_NUMBER_02542:int                                   = 2542;
 public static const UNKNOWN_FLAG_NUMBER_02543:int                                   = 2543;
 public static const UNKNOWN_FLAG_NUMBER_02544:int                                   = 2544;

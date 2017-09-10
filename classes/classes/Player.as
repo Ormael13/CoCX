@@ -6,6 +6,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Mutations;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.Jewelry;
@@ -51,10 +52,6 @@ use namespace kGAMECLASS;
 		}
 		
 		public var startingRace:String = "human";
-		
-		public var soulforce:Number = 0;
-		public var mana:Number = 0;
-		public var wrath:Number = 0;
 		
 		//Autosave
 		public var slotName:String = "VOID";
@@ -396,14 +393,15 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
-			if(hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
+			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
 				armorDef = 0;
 			}
-			if(hasStatusEffect(StatusEffects.Lustzerking)) {
+			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			if(hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -486,7 +484,10 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			if(hasStatusEffect(StatusEffects.ChargeWeapon) && weaponName != "fists") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
+			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
+				if (weaponName != "fists" && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+				if (weaponPerk == "Large" || weaponPerk == "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+			}
 			attack = Math.round(attack);
 			return attack;
 		}
@@ -1137,28 +1138,29 @@ use namespace kGAMECLASS;
 					race = "kitshoo";
 				}
 			}
-			//if (
 			if (horseScore() >= 4)
 			{
-				if (isTaur())
-					race = "centaur";
-				else
+				if (horseScore() >= 7)
 					race = "equine-morph";
+				else
+					race = "half equine-morph";
 			}
-			if (unicornScore() >= 5)
+			if (unicornScore() >= 9)
 			{
 				if (isTaur()) race = "unicorn-taur";
 				else {
 					race = "unicorn";
 				}
 			}
-			if (alicornScore() >= 6)
+			if (alicornScore() >= 11)
 			{
 				if (isTaur()) race = "alicorn-taur";
 				else {
 					race = "alicorn";
 				}
 			}
+			if (centaurScore() >= 8)
+				race = "centaur";
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
 			if (minotaurScore() >= 4)
@@ -1619,10 +1621,6 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (horseScore() >= 4)
 				chimeraCounter++;
-			if (unicornScore() >= 5)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
-				chimeraCounter++;
-			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
-				chimeraCounter++;
 			if (minotaurScore() >= 4)
 				chimeraCounter++;
 			if (cowScore() >= 4)
@@ -1714,13 +1712,15 @@ use namespace kGAMECLASS;
 //				grandchimeraCounter++;
 			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
 				grandchimeraCounter++;	
-/*			if (horseScore() >= 4)
+			if (horseScore() >= 7)
 				grandchimeraCounter++;
-			if (unicornScore() >= 5)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
+			if (unicornScore() >= 9)
 				grandchimeraCounter++;
-			if (alicornScore() >= 6)	//coś pomyśleć aby bycie alicornem nie liczyło byciem chimerą od razu
+			if (alicornScore() >= 11)
+				grandchimeraCounter++;	
+			if (centaurScore() >= 8)
 				grandchimeraCounter++;
-*/			if (minotaurScore() >= 9)
+			if (minotaurScore() >= 9)
 				grandchimeraCounter++;
 			if (cowScore() >= 9)
 				grandchimeraCounter++;
@@ -2059,7 +2059,7 @@ use namespace kGAMECLASS;
 			var beeCounter:Number = 0;
 			if (hairColor == "shiny black")
 				beeCounter++;
-			if (hairColor == "black and yellow")
+			if (hairColor == "black and yellow") // TODO if hairColor2 == yellow && hairColor == black
 				beeCounter += 2;
 			if (antennae == ANTENNAE_BEE)
 			{
@@ -2359,9 +2359,15 @@ use namespace kGAMECLASS;
 				horseCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				horseCounter++;
-			//Fur only counts if some equine features are present
-			if (hasFur() && horseCounter > 0)
+			if (hasFur()) {
+				if (armType == ARM_TYPE_HUMAN)
+					horseCounter++;
 				horseCounter++;
+			}
+			if (isTaur())
+				horseCounter -= 5;
+			if (unicornScore() > 8 || alicornScore() > 10)
+				horseCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				horseCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && horseCounter >= 3)
@@ -2392,7 +2398,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter += 4;
 			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailCount < 2))
 				kitsuneCounter -= 7;
-			if (skin.base.adj == "sexy tattooed" || hasFur())
+			if (skin.base.pattern == PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
 		//	if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
@@ -2815,7 +2821,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "glossy")
 				orcaCounter++;
-			if (skinTone == "white and black")
+			if (skin.base.pattern == PATTERN_ORCA_UNDERBODY)
 				orcaCounter++;
 			if (wingType == WING_TYPE_NONE)
 				orcaCounter += 2;
@@ -2823,6 +2829,10 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				orcaCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && orcaCounter >= 3)
+				orcaCounter += 1;
 			
 			End("Player","racialScore");
 			return orcaCounter;
@@ -2836,11 +2846,17 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (faceType == FACE_ONI_TEETH)
 				oniCounter++;
+			if (hornType == HORNS_ONI)
+				oniCounter++;
 			if (armType == ARM_TYPE_ONI)
 				oniCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ONI)
 				oniCounter++;
+			if (eyeType == EYES_ONI && InCollection(eyeColor,Mutations.oniEyeColors))
+				oniCounter++;
 			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
+				oniCounter++;
+			if (skin.base.pattern == PATTERN_BATTLE_TATTOO)
 				oniCounter++;
 			if (tailType == TAIL_TYPE_NONE)
 				oniCounter++;
@@ -2850,6 +2866,10 @@ use namespace kGAMECLASS;
 				oniCounter++;
 			if (tallness >= 120)
 				oniCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				oniCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && oniCounter >= 3)
+				oniCounter += 1;
 			
 			End("Player","racialScore");
 			return oniCounter;
@@ -2863,12 +2883,20 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (eyeType == EYES_ELF)
 				elfCounter++;
+			if (tongueType == TONGUE_ELF)
+				elfCounter++;
 			if (armType == ARM_TYPE_ELF)
 				elfCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_ELF)
 				elfCounter++;
 			if (hairType == HAIR_SILKEN)
 				elfCounter++;
+			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
+				elfCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				elfCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 3)
+				elfCounter += 1;
 			
 			End("Player","racialScore");
 			return elfCounter;
@@ -3048,25 +3076,28 @@ use namespace kGAMECLASS;
 		{
 			Begin("Player","racialScore","centaur");
 			var centaurCounter:Number = 0;
-			if (isTaur() && (lowerBody == LOWER_BODY_TYPE_HOOFED || lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
+			if (isTaur())
 				centaurCounter += 2;
-				if (tailType == TAIL_TYPE_HORSE)
-					centaurCounter++;
-				if (hasPlainSkinOnly())
-					centaurCounter++;
-				if (armType == ARM_TYPE_HUMAN)
-					centaurCounter++;
-				if (earType == EARS_HUMAN)
-					centaurCounter++;
-				if (faceType == FACE_HUMAN)
-					centaurCounter++;
-			}
-			if (antennae != ANTENNAE_NONE)
-				centaurCounter--;
-			if (faceType != FACE_HUMAN)
-				centaurCounter--;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED || lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+				centaurCounter++;
+			if (tailType == TAIL_TYPE_HORSE)
+				centaurCounter++;
+			if (hasPlainSkinOnly())
+				centaurCounter++;
+			if (armType == ARM_TYPE_HUMAN)
+				centaurCounter++;
+			if (earType == EARS_HUMAN || earType == EARS_HUMAN)
+				centaurCounter++;
+			if (faceType == FACE_HUMAN)
+				centaurCounter++;
+			if (horseCocks() > 0)
+				centaurCounter++;
+			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
+				centaurCounter++;
+			if (hornType != HORNS_NONE)
+				centaurCounter -= 3;
 			if (wingType != WING_TYPE_NONE)
-				centaurCounter--;
+				centaurCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				centaurCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && centaurCounter >= 3)
@@ -3080,6 +3111,8 @@ use namespace kGAMECLASS;
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
+				unicornCounter += 2;
+			if (faceType == FACE_HUMAN)
 				unicornCounter++;
 			if (earType == EARS_HORSE)
 				unicornCounter++;
@@ -3095,11 +3128,12 @@ use namespace kGAMECLASS;
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				unicornCounter++;
-			//Fur and hair color only counts if some unicorn features are present and it's white colored
-			if (unicornCounter > 0 && hasFur() && coatColor == "white")
+			if (hasFur() && coatColor == "white")
 				unicornCounter++;
-			if (unicornCounter > 0 && hairColor == "white")
+			if (hairColor == "white")
 				unicornCounter++;
+			if (centaurScore() > 7)
+				unicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				unicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && unicornCounter >= 3)
@@ -3114,6 +3148,8 @@ use namespace kGAMECLASS;
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
 			if (faceType == FACE_HORSE)
+				alicornCounter += 2;
+			if (faceType == FACE_HUMAN)
 				alicornCounter++;
 			if (earType == EARS_HORSE)
 				alicornCounter++;
@@ -3133,11 +3169,12 @@ use namespace kGAMECLASS;
 				alicornCounter++;
 			if (hasVagina() && vaginaType() == VAGINA_TYPE_EQUINE)
 				alicornCounter++;
-			//Fur and hair color only counts if some alicorn features are present and it's white colored
-			if (alicornCounter > 0 && hasFur() && coatColor == "white")
+			if (hasFur() && coatColor == "white")
 				alicornCounter++;
-			if (alicornCounter > 0 && hairColor == "white")
+			if (hairColor == "white")
 				alicornCounter++;
+			if (centaurScore() > 7)
+				alicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				alicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && alicornCounter >= 3)
@@ -3669,7 +3706,7 @@ use namespace kGAMECLASS;
 				prestigeJobs--;
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
 				prestigeJobs--;
-			if (findPerk(PerkLib.JobMunchkin) >= 0)
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
 				prestigeJobs++;
 		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		prestigeJobs++;
@@ -3692,6 +3729,8 @@ use namespace kGAMECLASS;
 			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
 			if (findPerk(PerkLib.MilkMaid) >= 0)
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
+			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
+				total += (perkv4(PerkLib.ProductivityDrugs));
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > int.MAX_VALUE)
@@ -4182,13 +4221,16 @@ use namespace kGAMECLASS;
 			if (this.findPerk(PerkLib.HistoryReligious) >= 0 || this.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				minLib -= 2;
 			}
-			//Minimum Corruption
+			//Factory Perks
 			if(this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
+			if(this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=this.perkv2(PerkLib.ProductivityDrugs);}
 
 			//Minimum Sensitivity
 			if(this.devilkinScore() >= 7) minSen += 10;
 			if(this.devilkinScore() >= 10) minSen += 15;
 			if(this.devilkinScore() >= 14) minSen += 30;
+			if(this.elfScore() >= 5) minSen += 15;
+			if(this.elfScore() >= 11) minSen += 15;
 
 			return {
 				str:minStr,
@@ -4472,9 +4514,14 @@ use namespace kGAMECLASS;
 				maxSpe += (15 * (1 + newGamePlusMod));
 			}//+15/10-20
 			if (horseScore() >= 4) {
-				maxSpe += (15 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxInt -= (10 * (1 + newGamePlusMod));
+				if (horseScore() >= 7) {
+					maxSpe += (70 * (1 + newGamePlusMod));
+					maxTou += (35 * (1 + newGamePlusMod));
+				}
+				else {
+					maxSpe += (40 * (1 + newGamePlusMod));
+					maxTou += (20 * (1 + newGamePlusMod));
+				}
 			}//+15/10-20
 			if (goblinScore() >= 4) {
 				maxInt += (20 * (1 + newGamePlusMod));
@@ -4614,11 +4661,13 @@ use namespace kGAMECLASS;
 				}
 			}//+10/10-20
 			if (elfScore() >= 5) {
-				if (elfScore() >= 12) {
-					maxStr += (100 * (1 + newGamePlusMod));
-					maxTou += (60 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
-					maxWis += (40 * (1 + newGamePlusMod));
+				if (elfScore() >= 11) {
+					maxStr -= (10 * (1 + newGamePlusMod));
+					maxTou -= (15 * (1 + newGamePlusMod));
+					maxSpe += (80 * (1 + newGamePlusMod));
+					maxInt += (80 * (1 + newGamePlusMod));
+					maxWis += (60 * (1 + newGamePlusMod));
+					maxSen += (30 * (1 + newGamePlusMod));
 				}
 				else {
 					maxStr -= (10 * (1 + newGamePlusMod));
@@ -4626,6 +4675,7 @@ use namespace kGAMECLASS;
 					maxSpe += (40 * (1 + newGamePlusMod));
 					maxInt += (40 * (1 + newGamePlusMod));
 					maxWis += (30 * (1 + newGamePlusMod));
+					maxSen += (15 * (1 + newGamePlusMod));
 				}
 			}//+10/10-20
 			if (demonScore() >= 5) {
@@ -4709,13 +4759,15 @@ use namespace kGAMECLASS;
 					maxLib += (30 * (1 + newGamePlusMod));
 				}
 			}//+15/10-20
-			if (unicornScore() >= 5) {
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
+			if (unicornScore() >= 9) {
+				maxTou += (20 * (1 + newGamePlusMod));
+				maxSpe += (40 * (1 + newGamePlusMod));
+				maxInt += (75 * (1 + newGamePlusMod));
 			}//+(15)30/(10-20)30-40
-			if (alicornScore() >= 6) {
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (20 * (1 + newGamePlusMod));
+			if (alicornScore() >= 11) {
+				maxTou += (25 * (1 + newGamePlusMod));
+				maxSpe += (50 * (1 + newGamePlusMod));
+				maxInt += (90 * (1 + newGamePlusMod));
 			}//+(30)55/(30-40)50-60
 			if (phoenixScore() >= 10) {
 				maxStr += (20 * (1 + newGamePlusMod));
@@ -4819,9 +4871,9 @@ use namespace kGAMECLASS;
 					maxSpe += (40 * (1 + newGamePlusMod));
 				}
 			}
-			if (centaurScore() >= 5) {
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (30 * (1 + newGamePlusMod));
+			if (centaurScore() >= 8) {
+				maxTou += (80 * (1 + newGamePlusMod));
+				maxSpe += (40 * (1 + newGamePlusMod));
 			}//+40/30-40
 			if (isNaga()) {
 				maxStr += (15 * (1 + newGamePlusMod));
@@ -4982,6 +5034,13 @@ use namespace kGAMECLASS;
 				maxSen += (6 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
+				maxStr += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * (1 + newGamePlusMod));
+				maxInt -= (5 * (1 + newGamePlusMod));
+				maxWis -= (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
@@ -5003,15 +5062,6 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobMunchkin) >= 0) {
-				maxStr += (25 * (1 + newGamePlusMod));
-				maxTou += (25 * (1 + newGamePlusMod));
-				maxSpe += (25 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (25 * (1 + newGamePlusMod));
-				maxLib += (15 * (1 + newGamePlusMod));
-				maxSen += (15 * (1 + newGamePlusMod));
-			}
 			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * (1 + newGamePlusMod));
@@ -5042,21 +5092,43 @@ use namespace kGAMECLASS;
 				maxStr += (40 * (1 + newGamePlusMod));
 				maxWis += (40 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+				maxStr += (25 * (1 + newGamePlusMod));
+				maxTou += (25 * (1 + newGamePlusMod));
+				maxSpe += (25 * (1 + newGamePlusMod));
+				maxInt += (25 * (1 + newGamePlusMod));
+				maxWis += (25 * (1 + newGamePlusMod));
+				maxLib += (15 * (1 + newGamePlusMod));
+				maxSen += (15 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
-				maxStr -= (20 * (1 + newGamePlusMod));
-				maxTou -= (20 * (1 + newGamePlusMod));
-				maxSpe -= (20 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (50 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) {
+					maxStr -= (15 * (1 + newGamePlusMod));
+					maxTou -= (15 * (1 + newGamePlusMod));
+					maxSpe -= (15 * (1 + newGamePlusMod));
+				}
+				maxInt += (20 * (1 + newGamePlusMod));
+				maxWis += (30 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				maxStr -= (40 * (1 + newGamePlusMod));
-				maxTou -= (40 * (1 + newGamePlusMod));
-				maxSpe -= (40 * (1 + newGamePlusMod));
-				maxInt += (50 * (1 + newGamePlusMod));
-				maxWis += (100 * (1 + newGamePlusMod));
+				//if (findPerk(PerkLib.) < 0) {
+					maxStr -= (30 * (1 + newGamePlusMod));
+					maxTou -= (30 * (1 + newGamePlusMod));
+					maxSpe -= (30 * (1 + newGamePlusMod));
+				//}
+				maxInt += (40 * (1 + newGamePlusMod));
+				maxWis += (60 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
+				//if (findPerk(PerkLib.) < 0) {
+					maxStr -= (45 * (1 + newGamePlusMod));
+					maxTou -= (45 * (1 + newGamePlusMod));
+					maxSpe -= (45 * (1 + newGamePlusMod));
+				//}
+				maxInt += (60 * (1 + newGamePlusMod));
+				maxWis += (90 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
 				maxStr += (10 * (1 + newGamePlusMod));
@@ -5253,6 +5325,7 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
 			if(hasStatusEffect(StatusEffects.NagaBind)) removeStatusEffect(StatusEffects.NagaBind);
+			if(hasStatusEffect(StatusEffects.ScyllaBind)) removeStatusEffect(StatusEffects.ScyllaBind);
 			if(hasStatusEffect(StatusEffects.StoneLust)) {
 				removeStatusEffect(StatusEffects.StoneLust);
 			}
@@ -5329,6 +5402,9 @@ use namespace kGAMECLASS;
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
+			if(hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
+				removeStatusEffect(StatusEffects.UnderwaterOutOfAir);
+			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
 				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
@@ -5400,6 +5476,27 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.CooldownKick)) {
 				removeStatusEffect(StatusEffects.CooldownKick);
 			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectAir);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectEarth);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectFire);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectWater);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectIce);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectLightning);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectDarkness);
+			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
 				if (weapon == WeaponLib.FISTS) {
@@ -5455,7 +5552,7 @@ use namespace kGAMECLASS;
 			}
 			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
 			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
-			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.KnockedBack);
+			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.RemovedArmor);
 			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
 			if (hasStatusEffect(StatusEffects.MirroredAttack)) removeStatusEffect(StatusEffects.MirroredAttack);
 			if (hasStatusEffect(StatusEffects.Tentagrappled)) removeStatusEffect(StatusEffects.Tentagrappled);

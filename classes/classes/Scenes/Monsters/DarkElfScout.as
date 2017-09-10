@@ -9,14 +9,19 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.DarkElfScene;
+	import classes.Scenes.Places.HeXinDao;
 	
 	public class DarkElfScout extends Monster
 	{
-		public var darkelf:DarkElfScene = new DarkElfScene()
+		public var darkelf:DarkElfScene = new DarkElfScene();
+		public var golems:HeXinDao = new HeXinDao();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			darkelf.wonWithDarkElf();
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				golems.gaunletchallange1postfight();
+			}
+			else darkelf.wonWithDarkElf();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

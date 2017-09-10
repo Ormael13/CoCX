@@ -99,6 +99,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		//triple strike bonus
 		damage *= 3;
 		var crit:Boolean = false;
@@ -108,6 +109,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -168,6 +170,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
@@ -175,6 +178,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -202,6 +206,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(combatMenu);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
 			doNext(combatMenu);
 			return;
 		}
@@ -233,6 +243,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -258,6 +269,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
 			doNext(soulforceSpecials);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
+			doNext(combatMenu);
 			return;
 		}
 		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents " + monster.a + monster.short + ".  ");
@@ -287,6 +304,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -326,6 +344,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.soulforce < 100) {
 			outputText("<b>Your current soulforce is too low.</b>");
 			doNext(soulforceSpecials);
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
+			doNext(combatMenu);
 			return;
 		}
 		var doEffect:Function = function():* {
@@ -443,6 +467,12 @@ public class CombatSoulskills extends BaseCombatContent {
 			doNext(soulforceSpecials);
 			return;
 		}
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			clearOutput();
+			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
+			doNext(combatMenu);
+			return;
+		}
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
 		if (!player.hasStatusEffect(StatusEffects.Might)) {
 			outputText("drawing strength from it");
@@ -553,6 +583,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 	 if (player.inte > 100) critChance += 1;
 	 }
+	 if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	 if (rand(100) < critChance) {
 	 crit = true;
 	 damage *= 1.75;

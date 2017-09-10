@@ -2198,7 +2198,7 @@
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
-			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+			return i_creature.eyeColor+ " "+DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
@@ -2456,14 +2456,15 @@
 					[TONGUE_DEMONIC, "demonic"],
 					[TONGUE_DRACONIC, "draconic"],
 					[TONGUE_ECHIDNA, "echidna"],
-					[TONGUE_CAT, "cat"]
+					[TONGUE_CAT, "cat"],
+					[TONGUE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
 				[
 					[EYES_HUMAN, "human"],
 					[EYES_FOUR_SPIDER_EYES, "4 spider"],
-					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
+					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap"],
 					[EYES_CAT_SLITS, "cat"],
 					[EYES_GORGON, "snake"],
 					[EYES_FENRIR, "fenrir"],
@@ -2520,7 +2521,9 @@
 					[HORNS_UNICORN, "unicorn"],
 					[HORNS_OAK, "oak"],
 					[HORNS_GARGOYLE, "gargoyle"],
-					[HORNS_ORCHID, "orchid"]
+					[HORNS_ORCHID, "orchid"],
+					[HORNS_ONI, "1 oni"],
+					[HORNS_ONI_X2, "2 oni"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2719,32 +2722,6 @@
 					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
 				]
 		);
-		public static const DECORATION_TYPENAMES_:Array         = multipleMapsFromPairs(
-				[
-					[DECORATION_NONE, "nothing", ""],
-					[DECORATION_GENERIC, "generic", ""],
-					[DECORATION_TATTOO, "tattoo", ""]
-				]
-		);
-		public static const DEFAULT_DECORATION_TYPENAMES:Object = DECORATION_TYPENAMES_[0];
-		//public static const DEFAULT_DECORATION_NAMES:Object = DEFAULT_DECORATION_TYPENAMES_NAMES[1];
-
-		/**
-		 * A substitute text to fill after "on your <body part> you have ..."
-		 */
-		public static function describeDecoration(creature:Creature,decoType:int,decoAdj:String):String {
-			if (decoAdj && decoType != DECORATION_GENERIC) decoAdj += " ";
-			switch (decoType) {
-				case DECORATION_NONE:
-					return "nothing";
-				case DECORATION_TATTOO:
-					return decoAdj+"tattoo";
-				case DECORATION_GENERIC:
-					return decoAdj ? decoAdj : "<b>empty decoAdj bug</b>";
-				default:
-					return "<b>decoType bug "+decoType+"</b>"
-			}
-		}
 
 		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
 			[VAGINA_WETNESS_DRY, "dry"],

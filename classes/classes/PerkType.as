@@ -196,6 +196,16 @@ import flash.utils.Dictionary;
 			});
 			return this;
 		}
+		public function requireSen(value:int):PerkType {
+			requirements.push({
+				fn  : fnRequireAttr("sens", value),
+				text: "Sensitivity " + value,
+				type: "attr",
+				attr: "sens",
+				value: value
+			});
+			return this;
+		}
 		public function requireCor(value:int):PerkType {
 			requirements.push({
 				fn  : fnRequireAttr("cor", value),

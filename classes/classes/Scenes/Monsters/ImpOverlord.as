@@ -2,10 +2,8 @@ package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.NPCs.EtnaFollower;
-	
+
 	public class ImpOverlord extends Imp
 	{
 		public var spellCostCharge:int = 6;

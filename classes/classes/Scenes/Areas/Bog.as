@@ -6,15 +6,7 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.ConsumableLib;
-	import classes.Items.Consumables.BeeHoney;
-	import classes.Items.Consumables.PhoukaWhiskey;
-	import classes.Items.Consumables.RizzaRoot;
 	import classes.Scenes.Areas.Bog.*;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-
-	use namespace kGAMECLASS;
 
 	public class Bog extends BaseContent
 	{
@@ -22,7 +14,6 @@ package classes.Scenes.Areas
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		public var phoukaScene:PhoukaScene = new PhoukaScene();
 		public var lizanScene:LizanRogueScene = new LizanRogueScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Bog()
 		{
 		}
@@ -40,7 +31,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			if ((isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)) {

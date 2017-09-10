@@ -68,6 +68,9 @@ package classes
 		public static const FoundFactory:StatusEffectType                   = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType                   = mk("FuckedMarble");
 		public static const Fullness:StatusEffectType                       = mk("Fullness"); //Alternative to hunger
+		public static const GargoyleTFSettingTracker1:StatusEffectType      = mk("Gargoyle TF Setting Tracker 1");
+		public static const GargoyleTFSettingTracker2:StatusEffectType      = mk("Gargoyle TF Setting Tracker 2");
+		public static const GargoyleTFSettingTracker3:StatusEffectType      = mk("Gargoyle TF Setting Tracker 3");
 		public static const Goojob:StatusEffectType                         = mk("GOOJOB");
 		public static const GooStuffed:StatusEffectType                     = mk("gooStuffed");
 		public static const Groundpound:StatusEffectType                    = mk("Groundpound");
@@ -160,6 +163,7 @@ package classes
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
+		public static const SoulGemCrafting:StatusEffectType                = mk("SoulGemCrafting");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
 		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");
@@ -467,18 +471,21 @@ package classes
 		public static const NagaBind:CombatStatusEffect                  = mk2("Naga Bind");
 		public static const NagaVenom:CombatStatusEffect                 = mk2("Naga Venom");
 		public static const NoFlee:CombatStatusEffect                    = mk2("NoFlee");
+		public static const OniRampage:CombatStatusEffect                = mk2("Oni Rampage");
 		public static const ParalyzeVenom:CombatStatusEffect             = mk2("paralyze venom");
 		public static const PhysicalDisabled:CombatStatusEffect          = mk2("Physical Disabled");
 		public static const Poison:CombatStatusEffect                    = mk2("Poison");
 		public static const Rage:CombatStatusEffect                      = mk2("Rage");
 		public static const ResonanceVolley:CombatStatusEffect           = mk2("Resonance Volley");
 		public static const Sandstorm:CombatStatusEffect                 = mk2("sandstorm");
+		public static const ScyllaBind:CombatStatusEffect                = mk2("Scylla Bind");
 		public static const Sealed:CombatStatusEffect                    = mk2("Sealed");
 		public static const Sealed2:CombatStatusEffect                   = mk2("Sealed2");
 		public static const SharkBiteBleed:CombatStatusEffect            = mk2("Shark Bite Bleed");
 		public static const SheilaOil:CombatStatusEffect                 = mk2("Sheila Oil");
 		public static const Shielding:CombatStatusEffect                 = mk2("Sheilding");
 		public static const StoneLust:CombatStatusEffect                 = mk2("Stone Lust");
+		public static const StoneSkin:CombatStatusEffect                 = mk2("Stone Skin");
 		public static const Stunned:CombatStatusEffect                   = mk2("Stunned");
 		public static const TailWhip:CombatStatusEffect                  = mk2("Tail Whip");
 		public static const TemporaryHeat:CombatStatusEffect             = mk2("Temporary Heat");
@@ -489,6 +496,7 @@ package classes
 		public static const TwuWuv:CombatStatusEffect                    = mk2("Twu Wuv");
 		public static const UBERWEB:CombatStatusEffect                   = mk2("UBERWEB");
 		public static const UnderwaterCombatBoost:CombatStatusEffect     = mk2("UnderwaterCombatBoost");
+		public static const UnderwaterOutOfAir:CombatStatusEffect     	 = mk2("UnderwaterOutOfAir");
 		public static const VioletPupilTransformation:CombatStatusEffect = mk2("Violet Pupil Transformation");
 		public static const Web:CombatStatusEffect                       = mk2("Web");
 		public static const WebSilence:CombatStatusEffect                = mk2("Web-Silence");
@@ -496,16 +504,24 @@ package classes
 		public static const WolfHold:CombatStatusEffect                  = mk2("Wolf Hold");
 		
 		public static const CooldownCompellingAria:StatusEffectType     = mk2("Cooldown Compelling Aria");
-		public static const CooldownFascinate:StatusEffectType          = mk("Cooldown Fascinate");
-		public static const CooldownFreezingBreath:StatusEffectType     = mk("Cooldown Freezing Breath (F)");
-		public static const CooldownFreezingBreathYeti:StatusEffectType = mk("Cooldown Freezing Breath (Y)");
+		public static const CooldownEAspectAir:StatusEffectType    		= mk2("Cooldown Elemental Aspect Air");
+		public static const CooldownEAspectEarth:StatusEffectType  		= mk2("Cooldown Elemental Aspect Earth");
+		public static const CooldownEAspectFire:StatusEffectType   		= mk2("Cooldown Elemental Aspect Fire");
+		public static const CooldownEAspectWater:StatusEffectType  		= mk2("Cooldown Elemental Aspect Water");
+		public static const CooldownEAspectIce:StatusEffectType    		= mk2("Cooldown Elemental Aspect Ice");
+		public static const CooldownEAspectLightning:StatusEffectType	= mk2("Cooldown Elemental Aspect Lightning");
+		public static const CooldownEAspectDarkness:StatusEffectType	= mk2("Cooldown Elemental Aspect Darkness");
+		public static const CooldownFascinate:StatusEffectType          = mk2("Cooldown Fascinate");
+		public static const CooldownFreezingBreath:StatusEffectType     = mk2("Cooldown Freezing Breath (F)");
+		public static const CooldownFreezingBreathYeti:StatusEffectType = mk2("Cooldown Freezing Breath (Y)");
 		public static const CooldownIllusion:StatusEffectType           = mk2("Cooldown Illusion");
-		public static const CooldownInkSpray:StatusEffectType           = mk("Cooldown Ink Spray");
-		public static const CooldownKick:StatusEffectType          		= mk("Cooldown Kick");
-		public static const CooldownPhoenixFireBreath:StatusEffectType  = mk("Cooldown Phoenix Fire Breath");
-		public static const CooldownStoneClaw:StatusEffectType          = mk("Cooldown Stone Claw");
-		public static const CooldownTailSlam:StatusEffectType           = mk("Cooldown Tail Slam");
-		public static const CooldownTailSmack:StatusEffectType          = mk("Cooldown Tail Smack");
+		public static const CooldownInkSpray:StatusEffectType           = mk2("Cooldown Ink Spray");
+		public static const CooldownKick:StatusEffectType          		= mk2("Cooldown Kick");
+		public static const CooldownOniRampage:StatusEffectType	        = mk2("Cooldown Oni Rampage");
+		public static const CooldownPhoenixFireBreath:StatusEffectType  = mk2("Cooldown Phoenix Fire Breath");
+		public static const CooldownStoneClaw:StatusEffectType          = mk2("Cooldown Stone Claw");
+		public static const CooldownTailSlam:StatusEffectType           = mk2("Cooldown Tail Slam");
+		public static const CooldownTailSmack:StatusEffectType          = mk2("Cooldown Tail Smack");
 		public static const CooldownTerror:StatusEffectType             = mk2("Cooldown Terror");
 		public static const CooldownWingBuffet:StatusEffectType         = mk2("Cooldown Wing Buffet");
 		
@@ -528,6 +544,7 @@ package classes
 		public static const LethicesShell:CombatStatusEffect         = mk2("Lethices Magic Shell");
 		public static const WhipSilence:CombatStatusEffect           = mk2("Whip Silence");
 		public static const PigbysHands:CombatStatusEffect           = mk2("Pigbys Hands");
+		public static const SoulArena:CombatStatusEffect           	 = mk2("Soul Arena");
 
 		/**
 		 * Creates non-combat status affect

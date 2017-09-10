@@ -273,7 +273,7 @@ public class MaraFruit extends Consumable{
 			player.hairColor = "green";
 		}
 		//Horns
-		if (player.hairType == HAIR_LEAF && changes < changeLimit && rand(2) == 0) {
+		if ((player.hairType == HAIR_LEAF || player.hairType == HAIR_GRASS) && changes < changeLimit && rand(2) == 0) {
 			//Males/genderless get oak horns
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.horns == 0) {

@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Places.Boat;
 	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
@@ -194,11 +195,18 @@ package classes.Scenes
 			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(9, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
-			addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
+			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
+			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
 			addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
 			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
+private function eyesColorSelection():void {
+	clearOutput();
+	player.eyeColor = "brown";
+	outputText("You now have brown eyes.");
+	doNext(SoulforceCheats);
+}
 		public function StatsMenu():void {
 			menu();
 			addButton(0, "Str", StatsMenuStr).hint("Adj Str.");
@@ -392,7 +400,7 @@ package classes.Scenes
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-			addButton(4, "E. Ribbon", AddEldritchRibbon).hint("Add 1 Eldritch Ribbon.");
+		//	addButton(4, "", ).hint("Add 1 .");
 			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
@@ -400,7 +408,7 @@ package classes.Scenes
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-			addButton(12, "GuidedBow", AddTheGuidedBow).hint("Add 1 Guided Bow.");
+			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Cat o' nine tail whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -527,9 +535,9 @@ package classes.Scenes
 			outputText("\n\n<b>(Gained 1 Yeti Cum!)</b>\n\n");
 			inventory.takeItem(consumables.YETICUM, EquipmentMenu);
 		}
-		public function AddTheGuidedBow():void {
-			outputText("\n\n<b>(Gained 1 Guided Bow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BOWGUID, EquipmentMenu);
+		public function AddCatONineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
+			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
@@ -933,8 +941,8 @@ package classes.Scenes
 		}
 		public function FightForPearl():void {
 			clearOutput();
-			outputText("Entering battle with Krakken Boss! Enjoy ^^");
-			startCombat(new Krakken());
+			outputText("Entering battle with Deep Sea Kraken Boss! Enjoy ^^");
+			startCombat(new Kraken());
 		}
 		public function FightMarae():void {
 			clearOutput();
@@ -1189,35 +1197,38 @@ package classes.Scenes
 		}
 		public function SoulforceRegeneration():void {
 			menu();
-			addButton(0, "1 hour", SoulforceRegeneration1).hint("Cultivate for 1 hour (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(10) + " soulforce).");
-			addButton(1, "2 hours", SoulforceRegeneration2).hint("Cultivate for 2 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(30) + " soulforce).");
-			addButton(2, "4 hours", SoulforceRegeneration3).hint("Cultivate for 4 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(70) + " soulforce).");
-			addButton(3, "6 hours", SoulforceRegeneration4).hint("Cultivate for 6 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(110) + " soulforce).");
-			addButton(4, "8 hours", SoulforceRegeneration5).hint("Cultivate for 8 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(150) + " soulforce).");
+			addButton(0, "1 hour", SoulforceRegeneration1).hint("Cultivate for 1 hour (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(20) + " soulforce).");
+			addButton(1, "2 hours", SoulforceRegeneration2).hint("Cultivate for 2 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(60) + " soulforce).");
+			addButton(2, "4 hours", SoulforceRegeneration3).hint("Cultivate for 4 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(140) + " soulforce).");
+			addButton(3, "6 hours", SoulforceRegeneration4).hint("Cultivate for 6 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(220) + " soulforce).");
+			addButton(4, "8 hours", SoulforceRegeneration5).hint("Cultivate for 8 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(300) + " soulforce).");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function SoulforceRegeneration1():void {
 			clearOutput();
-			var soulforceamountrestored:int = 8;
-			if (player.alicornScore() >= 6) soulforceamountrestored += 10;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 10;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 40;
-			if (player.unicornScore() >= 5) soulforceamountrestored += 5;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 10;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 10;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 10;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 10;
-			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 10;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 8;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 8;
+			var soulforceamountrestored:int = 16;
+			if (player.alicornScore() >= 6) soulforceamountrestored += 20;
+			if (player.kitsuneScore() >= 6) soulforceamountrestored += 20;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 80;
+			if (player.unicornScore() >= 5) soulforceamountrestored += 10;
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 20;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 20;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 20;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 20;
+			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 20;
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 16;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 16;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor") {
 				var bonussoulforce:Number = 0;
@@ -1241,26 +1252,29 @@ package classes.Scenes
 		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
-			var soulforceamountrestored:int = 26;
-			if (player.alicornScore() >= 6) soulforceamountrestored += 30;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 30;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 120;
-			if (player.unicornScore() >= 5) soulforceamountrestored += 15;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 26;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 26;
+			var soulforceamountrestored:int = 52;
+			if (player.alicornScore() >= 6) soulforceamountrestored += 60;
+			if (player.kitsuneScore() >= 6) soulforceamountrestored += 60;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 240;
+			if (player.unicornScore() >= 5) soulforceamountrestored += 30;
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 60;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 60;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 60;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 60;
+			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 60;
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 52;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 52;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor") {
 				var bonussoulforce:Number = 0;
@@ -1285,26 +1299,29 @@ package classes.Scenes
 		}
 		public function SoulforceRegeneration3():void {
 			clearOutput();
-			var soulforceamountrestored:int = 62;
-			if (player.alicornScore() >= 6) soulforceamountrestored += 70;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 70;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 280;
-			if (player.unicornScore() >= 5) soulforceamountrestored += 35;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 62;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 62;
+			var soulforceamountrestored:int = 124;
+			if (player.alicornScore() >= 6) soulforceamountrestored += 140;
+			if (player.kitsuneScore() >= 6) soulforceamountrestored += 140;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 560;
+			if (player.unicornScore() >= 5) soulforceamountrestored += 70;
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 140;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 140;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 140;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 140;
+			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 140;
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 124;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 124;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor") {
 				var bonussoulforce:Number = 0;
@@ -1329,26 +1346,29 @@ package classes.Scenes
 		}
 		public function SoulforceRegeneration4():void {
 			clearOutput();
-			var soulforceamountrestored:int = 98;
-			if (player.alicornScore() >= 6) soulforceamountrestored += 110;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 110;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 440;
-			if (player.unicornScore() >= 5) soulforceamountrestored += 55;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 98;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 98;
+			var soulforceamountrestored:int = 196;
+			if (player.alicornScore() >= 6) soulforceamountrestored += 220;
+			if (player.kitsuneScore() >= 6) soulforceamountrestored += 220;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 880;
+			if (player.unicornScore() >= 5) soulforceamountrestored += 110;
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 220;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 220;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 220;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 220;
+			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 220;
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 196;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 196;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor") {
 				var bonussoulforce:Number = 0;
@@ -1373,26 +1393,29 @@ package classes.Scenes
 		}
 		public function SoulforceRegeneration5():void {
 			clearOutput();
-			var soulforceamountrestored:int = 134;
-			if (player.alicornScore() >= 6) soulforceamountrestored += 150;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 150;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 600;
-			if (player.unicornScore() >= 5) soulforceamountrestored += 75;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 134;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 134;
+			var soulforceamountrestored:int = 268;
+			if (player.alicornScore() >= 6) soulforceamountrestored += 300;
+			if (player.kitsuneScore() >= 6) soulforceamountrestored += 300;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 1200;
+			if (player.unicornScore() >= 5) soulforceamountrestored += 150;
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 300;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 300;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 300;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 300;
+			if (player.findPerk(PerkLib.DaoistKingStage) >= 0) soulforceamountrestored += 300;
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 268;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 268;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor") {
 				var bonussoulforce:Number = 0;
@@ -1442,11 +1465,14 @@ package classes.Scenes
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulSprite) >= 0) costPercent += 100;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) costPercent += 100;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulExalt) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulOverlord) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulTyrant) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulKing) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulEmperor) >= 0) costPercent += 100;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) costPercent += 100;
 			mod *= costPercent/100;
 			return mod;
 		}

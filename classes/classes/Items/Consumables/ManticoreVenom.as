@@ -131,8 +131,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Eyes
 		if (player.faceType == FACE_MANTICORE && player.eyeType != EYES_MANTICORE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a water puddle to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, these red pupils are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
-			mutations.setEyeType(EYES_MANTICORE);
+			outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a water puddle to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, these red irises are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
+			mutations.setEyeTypeAndColor(EYES_MANTICORE, "red");
 			changes++;
 		}
 		//Cat tounge

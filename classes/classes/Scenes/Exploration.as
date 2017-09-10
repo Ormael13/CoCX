@@ -182,16 +182,16 @@ package classes.Scenes
 					clearOutput();
 					//Improved dummy golem or golems
 					if (golemChooser >= 10 && golemChooser < 20) {
-						if (rand(4) < 2) {
+						/*if (rand(4) < 2) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummyImproved());
 							return;
 						}
-						else {
+						else {*/
 							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemDummyImproved());
 							return;
-						}
+						//}
 					}
 					//Advanced dummy golem or golems
 					if (golemChooser >= 20 && golemChooser < 30) {
@@ -260,7 +260,7 @@ package classes.Scenes
 					}
 					//Dummy golem or golems
 					else {
-						if (rand(4) < 2) {
+						/*if (rand(4) < 2) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
@@ -269,7 +269,7 @@ package classes.Scenes
 							startCombat(new GolemsDummy());
 							return;
 						}
-						else {
+						else {*/
 							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
@@ -277,7 +277,7 @@ package classes.Scenes
 							}
 							startCombat(new GolemDummy());
 							return;
-						}
+						//}
 					}
 				}
 				else {

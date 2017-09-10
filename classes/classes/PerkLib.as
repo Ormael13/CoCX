@@ -181,6 +181,34 @@ package classes
 		public static const ArcanePoolVI:PerkType = mk("Arcane Pool VI", "Arcane Pool VI",
 				"+1 extra mana per point of intelligence and wisdom.",
 				"You choose the 'Arcane Pool VI' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+		public static const ArcaneRegenerationEpic:PerkType = mk("Arcane Regeneration (Epic)", "Arcane Regeneration (Epic)",
+				"[if (player.inte>=100)" +
+						"Increase by 150% base mana recovery and 30% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Epic)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationLegendary:PerkType = mk("Arcane Regeneration (Legendary)", "Arcane Regeneration (Legendary)",
+				"[if (player.inte>=125)" +
+						"Increase by 200% base mana recovery and 40% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Legendary)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationMajor:PerkType = mk("Arcane Regeneration (Major)", "Arcane Regeneration (Major)",
+				"[if (player.inte>=75)" +
+						"Increase by 100% base mana recovery and 20% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Major)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationMinor:PerkType = mk("Arcane Regeneration (Minor)", "Arcane Regeneration (Minor)",
+				"[if (player.inte>=50)" +
+						"Increase by 50% base mana recovery and 10% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Arcane Regeneration (Minor)' perk, increasing mana recovery and mana pool.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You choose the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -306,6 +334,24 @@ package classes
 		public static const ChargedCore:PerkType = mk("Charged Core", "Charged Core",
 				"At the cost of using additional mana you can charge each temporal golem core allowing them to deal minot area of effect damages (it have small synergistic effect when more golems attacks at once).",
 				"You choose 'Charged Core' perk, learning how to make golems attacks be slight stronger.");
+		public static const CheetahI:PerkType = mk("Cheetah I", "Cheetah I",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah I' perk, granting +1 extra maximum HP for each point of speed.");
+		public static const CheetahII:PerkType = mk("Cheetah II", "Cheetah II",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah II' perk, granting +1 extra maximum HP for each point of speed.");
+		public static const CheetahIII:PerkType = mk("Cheetah III", "Cheetah III",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah III' perk, granting +1 extra maximum HP for each point of speed.");
+		public static const CheetahIV:PerkType = mk("Cheetah IV", "Cheetah IV",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah IV' perk, granting +1 extra maximum HP for each point of speed.");
+		public static const CheetahV:PerkType = mk("Cheetah V", "Cheetah V",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah V' perk, granting +1 extra maximum HP for each point of speed.");
+		public static const CheetahVI:PerkType = mk("Cheetah VI", "Cheetah VI",
+				"+1 extra HP per point of speed.",
+				"You choose the 'Cheetah VI' perk, granting +1 extra maximum HP for each point of speed.");
 		public static const ChimericalBodyAdvancedStage:PerkType = mk("Chimerical Body: Advanced Stage", "Chimerical Body: Advanced Stage",
 				"You feel naturaly adept at using every new appendage you gain as if they were yours from birth.",
 				"You choose the 'Chimerical Body: Advanced Stage' perk. Constant mutations rised your body adaptiveness to new level.");	
@@ -420,6 +466,9 @@ package classes
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
 				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
 				"You choose 'Defence Stance' perk, training to master you defence pose.");
+		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
+				"You're Munchkin, an ultimate being that possess a god-like body and powers.",
+				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
@@ -469,11 +518,14 @@ package classes
 				"You gains bonus to max Lust depending on amount of summoned elementals and their ranks.",
 				"You choose the 'Elemental Bond: Urges' perk, allowing you to form bond with summoned elementals to share recived lust damage.");
 		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
-				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",// Rise by 1 maximum limit of controled elementals.
+				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",
 				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
 		public static const ElementalConjurerResolve:PerkType = mk("Elemental Conjurer Resolve", "Elemental Conjurer Resolve",
-				"Your mental attributes are at the cost of weakening physical ones.",// Increase by 1 maximum amount of elementals that conjuer can safely command.
+				"Your mental attributes are greatly enhanced at the cost of weakening physical ones.",
 				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse mental perfection at the cost of physical weakening.");
+		public static const ElementalConjurerSacrifice:PerkType = mk("Elemental Conjurer Sacrifice", "Elemental Conjurer Sacrifice",
+				"Your mental attributes are enhanced beyond limits at the cost of similar weakening physical ones.",
+				"You choose 'Elemental Conjurer Sacrifice' perk, showing your will to sacrifice everything in reaching beyond mental perfection.");
 		public static const ElementalContractRank1:PerkType = mk("Elemental Contract Rank 1", "Elemental Contract Rank 1",
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
 				"You choose 'Elemental Contract Rank 1' perk, rising your ability to command more and stronger elementals.");
@@ -496,11 +548,14 @@ package classes
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 7.",
 				"You choose 'Elemental Contract Rank 7' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank8:PerkType = mk("Elemental Contract Rank 8", "Elemental Contract Rank 8",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to elder rank.",
 				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elemnts that aren't classified as one of four traditional.");
+		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
+				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
+				"You choose the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
@@ -516,6 +571,15 @@ package classes
 		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
 				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering and storing more golems.",
 				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
+				"Allow see another few infomations about enemy (as long it apply to current viewed enemy) (req. 50+ sensitivity).",
+				"You choose the 'Eyes of the Hunter (Adept)' perk, allowing you to gain wider than before range of information about enemy you fight.");
+		public static const EyesOfTheHunterMaster:PerkType = mk("Eyes of the Hunter (Master)", "Eyes of the Hunter (Master)",
+				"Allow see more infomations about enemy (as long it apply to current viewed enemy) (req. 75+ sensitivity).",
+				"You choose the 'Eyes of the Hunter (Master)' perk, adding more possible to see information about enemy you fight in compare to Adept stage.");
+		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
+				"Allow see few more than usual infomations about enemy (req. 25+ sensitivity).",
+				"You choose the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
 		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
 				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
 				"You choose the 'Fertility-' perk, making it harder to get pregnant.  It also decreases your cum volume by up to 30% (if appropriate)!");
@@ -549,6 +613,24 @@ package classes
 		public static const GlacialStorm:PerkType = mk("Glacial Storm", "Glacial Storm",
 				"Cumulative 20% damage increase for every subsequent ice spell without interruption.",
 				"You choose the 'Glacial Storm' perk. Cumulative 20% damage increase for every subsequent ice spell without interruption.");
+		public static const GoliathI:PerkType = mk("Goliath I", "Goliath I",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath I' perk, granting +2 extra maximum HP for each point of strength.");
+		public static const GoliathII:PerkType = mk("Goliath II", "Goliath II",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath II' perk, granting +2 extra maximum HP for each point of strength.");
+		public static const GoliathIII:PerkType = mk("Goliath III", "Goliath III",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath III' perk, granting +2 extra maximum HP for each point of strength.");
+		public static const GoliathIV:PerkType = mk("Goliath IV", "Goliath IV",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath IV' perk, granting +2 extra maximum HP for each point of strength.");
+		public static const GoliathV:PerkType = mk("Goliath V", "Goliath V",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath V' perk, granting +2 extra maximum HP for each point of strength.");
+		public static const GoliathVI:PerkType = mk("Goliath VI", "Goliath VI",
+				"+2 extra HP per point of strength.",
+				"You choose the 'Goliath VI' perk, granting +2 extra maximum HP for each point of strength.");
 		public static const GorgonsEyes:PerkType = mk("Gorgon's Eyes", "Gorgon's Eyes",
 				"Your eyes mutated and now even with any type of eyes you can use petrifying gaze. Additionaly it makes you more immune to all types of attack that are related to sight.",
 				"You choose the 'Gorgon's Eyes' perk. Prolonged using petrifying caused your eyes to change even more like those of gorgons.");
@@ -564,18 +646,18 @@ package classes
 				"You choose 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=150)" +
-						"Increases base spell strength by 100%, mana pool by 150 and regain it 100% faster." +
+						"Increases base spell strength by 100%, mana pool by 150 and regain it 300% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting it recovery.");
+				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150 and boosting it recovery by large margin.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=125)" +
-						"Increases base spell strength by 70% and mana pool by 105, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
+						"Increases base spell strength by 70%, mana pool by 105, regain it 100% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Grey Mage' perk. Your base spell and mana pool are greatly increased, treshold for White Magic rised and for Black lowered.");
+				"You choose the 'Grey Mage' perk. Your base spell mana pool and recover are greatly increased, treshold for White Magic rised and for Black lowered.");
 		public static const HeavyArmorProficiency:PerkType = mk("Heavy Armor Proficiency", "Heavy Armor Proficiency",
 				"Wearing Heavy Armor's grants 10% damage reduction.",
 				"You choose the 'Heavy Armor Proficiency' perk.  Due to your specialization in wearing heavy armor's you gain a little bit of damage reduction.");
@@ -712,6 +794,9 @@ package classes
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in using large weapons in fights.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
+		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
+				"You've trained in use of your own body to it limits in fights.",
+				"You choose 'Job: Beast Warrior' perk, training yourself to became Beast Warrior.");
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Brawler' perk, training yourself to became Brawler.");
@@ -748,9 +833,6 @@ package classes
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job: Monk",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Monk' perk, training yourself to became Monk.");
-		public static const JobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
-				"You're Munchkin, an ultimate being that possess a god-like body and powers.",
-				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
 				"You've trained in ranged combat.",
 				"You choose 'Job: Ranger' perk, training yourself to became Ranger.");
@@ -781,6 +863,9 @@ package classes
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
 				"Your proficiency in making golems allows to .",
 				"You choose 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
+				"Increases self heling by 100 out of combat and by 50 in combat (using defend option will double it).",
+				"You choose the 'Lifeline' perk, increasing your self healing.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +
@@ -830,22 +915,22 @@ package classes
 				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
 				"You choose the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManaAffinityVI:PerkType = mk("Mana Affinity VI", "Mana Affinity VI",
-				"Raises max mana by 35 and regain it 10% faster.",
+				"Raises max mana by 35 and regain it 20% faster.",
 				"You choose the 'Mana Affinity VI' perk, giving you an additional 35 mana and boosting it recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
@@ -980,6 +1065,9 @@ package classes
 		public static const Rage:PerkType = mk("Rage", "Rage",
 				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
 				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
+		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
+				"Reloading pistols or similar range weapons no longer using whole turn of action (or lowering by half reload cost).",
+				"You choose the 'Rapid Reload' perk, lowering time needed to reload with ammo range weapons like pistols.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
 				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
@@ -1076,6 +1164,9 @@ package classes
 		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
+		public static const ShieldWard:PerkType = mk("Shield Ward", "Shield Ward",
+				"When you wearing a shield lower chance to be knocked back or disarmed by enemy attacks.",
+				"You choose the 'Shield Ward' perk, allowing to lower chance to be knocked back or disarmed when using shield.");
 		public static const SluttySimplicity:PerkType = mk("Slutty Simplicity", "Slutty Simplicity",
 				"Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)",
 				"You choose the 'Slutty Simplicity' perk, granting increased tease effect when you are naked.");
@@ -1134,6 +1225,15 @@ package classes
 		public static const SteelImpact:PerkType = mk("Steel Impact", "Steel Impact",
 				"Add a part of your toughness to your weapon and shield damage.",
 				"You choose the 'Steel Impact' perk. Increasing damage of your weapon and shield.");
+		public static const StrongElementalBond:PerkType = mk("Strong Elemental Bond", "Strong Elemental Bond",
+				"You lower by 10 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Strong Elemental Bond' perk, enhancing your connection with elementals and lowering mana needed to maintain bonds.");
+		public static const StrongerElementalBond:PerkType = mk("Stronger Elemental Bond", "Stronger Elemental Bond",
+				"You lower by 30 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Stronger Elemental Bond' perk, futher enhancing your connection with elementals.");
+		public static const StrongestElementalBond:PerkType = mk("Strongest Elemental Bond", "Strongest Elemental Bond",
+				"You lower by 90 needed mana to sustain active elemntal in combat.",
+				"You choose the 'Strongest Elemental Bond' perk, reaching near the peak of connection strength with your elementals.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
 				"At the cost of using additional mana you can super charge each temporal golem core attaing ever better effects than before.",
 				"You choose 'Super Charged Core' perk, learning how to make core charging more effective.");
@@ -1340,6 +1440,7 @@ package classes
 		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",
 				"When mana is too low to cast a spell, automatically cast from hp instead.",null,true);
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();
+		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
@@ -1412,6 +1513,12 @@ package classes
 				"Allows access to a dragon ice breath attack.");
 		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
 				"Allows access to a dragon lightning breath attack.");
+		public static const ElementalConjurerMindAndBodyDedication:PerkType = mk("Elemental Conjurer Mind and Body Dedication", "Elemental Conjurer Mind and Body Dedication",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Dedication.");
+		public static const ElementalConjurerMindAndBodyResolve:PerkType = mk("Elemental Conjurer Mind and Body Resolve", "Elemental Conjurer Mind and Body Resolve",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Resolve.");
+		public static const ElementalConjurerMindAndBodySacrifice:PerkType = mk("Elemental Conjurer Mind and Body Sacrifice", "Elemental Conjurer Mind and Body Sacrifice",
+				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Sacrifice.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
@@ -1528,6 +1635,7 @@ package classes
 				"Increases minimum lust but provides some lust resistance.");
 		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
 				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
+		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
@@ -1552,6 +1660,7 @@ package classes
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
+		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGroupType:PerkType = mk("Group-type enemy", "Group-type enemy", "");
@@ -1563,10 +1672,9 @@ package classes
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
+		//public static const EnemyGooType:PerkType = mk("", "", "");
+		//public static const EnemyPlantType:PerkType = mk("", "", "");
+		//public static const Enemy:PerkType = mk("", "", "");undead/ghost?
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
@@ -1777,7 +1885,7 @@ package classes
 		Resolute.requirePerk(JobDefender)
 				.requireTou(75)
 				.requireLevel(12);
-		HeavyArmorProficiency.requirePerk(JobDefender)
+		HeavyArmorProficiency.requirePerk(JobKnight)
 							 .requireTou(75)
 							 .requireLevel(12);
 		IronMan.requireTou(60)
@@ -1816,6 +1924,9 @@ package classes
 		ShieldHarmony.requirePerk(ShieldExpertise)
 					 .requireTou(80)
 					 .requireLevel(18);
+		Lifeline.requirePerk(JobDefender)
+				.requireTou(75)
+				.requireLevel(18);
 		//Tier 4 Toughness Perks
 		AdvancedEndurance.requireLevel(24)
 						 .requireTou(150)
@@ -1828,6 +1939,18 @@ package classes
 		MasteredDefenceStance.requirePerk(DefenceStance)
 							 .requireTou(120)
 							 .requireLevel(24);
+		GoliathI.requirePerk(JobDefender)
+				.requirePerk(TankI)
+				.requireTou(100)
+				.requireLevel(24);
+		GoliathII.requirePerk(GoliathI)
+				 .requireTou(115)
+				 .requireLevel(26)
+				 .requireNGPlus(1);
+		GoliathIII.requirePerk(GoliathII)
+				  .requireTou(130)
+				  .requireLevel(28)
+				  .requireNGPlus(2);
 		//Tier 5 Toughness Perks
 		HalfStepToSuperiorEndurance.requireTou(180)
 								   .requireStr(120)
@@ -1836,11 +1959,37 @@ package classes
 		PerfectDefenceStance.requirePerk(MasteredDefenceStance)
 							.requireTou(160)
 							.requireLevel(30);
+		ShieldWard.requirePerk(ShieldGrandmastery)
+				  .requireTou(120)
+				  .requireLevel(30);
+		GoliathIV.requirePerk(GoliathIII)
+				 .requireTou(145)
+				 .requireLevel(30)
+				 .requireNGPlus(3);
+		GoliathV.requirePerk(GoliathIV)
+				.requireTou(160)
+				.requireLevel(32)
+				.requireNGPlus(4);
+		GoliathVI.requirePerk(GoliathV)
+				 .requireTou(175)
+				 .requireLevel(34)
+				 .requireNGPlus(5);
 		//Tier 6 Toughness Perks
 		SuperiorEndurance.requireTou(210)
 						 .requireStr(140)
 						 .requirePerk(HalfStepToSuperiorEndurance)
 						 .requireLevel(36);
+		CheetahI.requirePerk(GoliathI)
+				.requireTou(150)
+				.requireLevel(36);
+		CheetahII.requirePerk(CheetahI)
+				 .requireTou(165)
+				 .requireLevel(38)
+				 .requireNGPlus(1);
+		CheetahIII.requirePerk(CheetahII)
+				  .requireTou(180)
+				  .requireLevel(40)
+				  .requireNGPlus(2);
 		//Tier 7 Toughness Perks
 		HalfStepToPeerlessEndurance.requireTou(240)
 								   .requireStr(160)
@@ -1851,6 +2000,18 @@ package classes
 						   .requirePerk(JobWarrior)
 						   .requireTou(200)
 						   .requireLevel(42);
+		CheetahIV.requirePerk(CheetahIII)
+				 .requireTou(195)
+				 .requireLevel(42)
+				 .requireNGPlus(3);
+		CheetahV.requirePerk(CheetahIV)
+				.requireTou(210)
+				.requireLevel(44)
+				.requireNGPlus(4);
+		CheetahVI.requirePerk(CheetahV)
+				 .requireTou(225)
+				 .requireLevel(46)
+				 .requireNGPlus(5);
 		//Tier 8 Toughness Perks
 		PeerlessEndurance.requireTou(270)
 						 .requireStr(180)
@@ -2136,6 +2297,9 @@ package classes
 									  .requireInt(60)
 									  .requirePerk(BasicSpirituality)
 									  .requireLevel(6);
+		ArcaneRegenerationMinor.requirePerk(Mage)
+							   .requireInt(50)
+							   .requireLevel(6);
 		//Tier 2 Intelligence perks
 		Archmage.requirePerk(Mage)
 				.requireInt(75)
@@ -2196,6 +2360,10 @@ package classes
 							.requireInt(90)
 							.requirePerk(HalfStepToImprovedSpirituality)
 							.requireLevel(12);
+		ArcaneRegenerationMajor.requirePerk(Archmage)
+							   .requirePerk(ArcaneRegenerationMinor)
+							   .requireInt(75)
+							   .requireLevel(12);
 		//Tier 3 Intelligence perks
 		GrandArchmage.requirePerk(Archmage)
 					 .requireInt(100).requireLevel(18);
@@ -2228,6 +2396,10 @@ package classes
 						   .requirePerk(Archmage)
 						   .requireInt(100)
 						   .requireLevel(18);
+		ArcaneRegenerationEpic.requirePerk(GrandArchmage)
+							  .requirePerk(ArcaneRegenerationMajor)
+							  .requireInt(100)
+							  .requireLevel(18);
 		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
@@ -2260,6 +2432,10 @@ package classes
 							 .requireInt(160)
 							 .requireLevel(28)
 							 .requireNGPlus(2);
+		ArcaneRegenerationLegendary.requirePerk(GreyMage)
+								   .requirePerk(ArcaneRegenerationEpic)
+								   .requireInt(125)
+								   .requireLevel(24);
 		//Tier 5 Intelligence perks
 		GreyArchmage.requirePerk(GreyMage)
 					.requireInt(150)
@@ -2346,14 +2522,18 @@ package classes
 		ElementalBondUrges.requirePerk(ElementalContractRank2)
 						  .requireWis(75)
 						  .requireLevel(12);
+		StrongElementalBond.requirePerk(ElementalContractRank3)
+						   .requireWis(75)
+						   .requireLevel(12);
 		//Tier 3 Wisdom perks
 		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
-							  .requireLevel(18);ElementalBondFlesh
+							  .requireLevel(18);
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)
 					 .requireLevel(18);
+		//
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)
@@ -2362,6 +2542,10 @@ package classes
 		ElementalContractRank5.requirePerk(ElementalContractRank4)
 							  .requireWis(125)
 							  .requireLevel(24);
+		StrongerElementalBond.requirePerk(StrongElementalBond)
+							 .requirePerk(ElementalContractRank5)
+							 .requireWis(125)
+							 .requireLevel(24);
 		//Tier 5 Wisdom perks
 		UnlockMind2ndStage.requirePerk(UnlockMind)
 						  .requireWis(150)
@@ -2373,13 +2557,21 @@ package classes
 		ElementalContractRank7.requirePerk(ElementalContractRank6)
 							  .requireWis(175)
 							  .requireLevel(36);
+		StrongestElementalBond.requirePerk(StrongerElementalBond)
+							  .requirePerk(ElementalContractRank7)
+							  .requireWis(175)
+							  .requireLevel(36);
+		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+								  .requireWis(160)
+								  .requireLevel(36);
 		//Tier 7 Wisdom perks
 		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
 								.requirePerk(FleshBodyApprenticeStage)
 								.requirePerk(JobMonk)
 								.requireWis(200)
 								.requireLevel(42);
-		ElementalContractRank8.requirePerk(ElementalContractRank7)
+		ElementalContractRank8.requirePerk(ElementalConjurerSacrifice)
+							  .requirePerk(ElementalContractRank7)
 							  .requireWis(200)
 							  .requireLevel(42);
 		//Tier 8 Wisdom perks
@@ -2530,7 +2722,17 @@ package classes
 		//------------
 		// SENSITIVITY
 		//------------
-		//Nope.avi
+		//Slot 6 - Tier 0
+		EyesOfTheHunterNovice.requireSen(25);
+		//Tier 1
+		EyesOfTheHunterAdept.requireSen(50)
+							.requirePerk(EyesOfTheHunterNovice)
+							.requireLevel(6);
+		//Tier 2
+		EyesOfTheHunterMaster.requireSen(75)
+							 .requirePerk(EyesOfTheHunterAdept)
+							 .requireLevel(12);
+		//Tier 3
 		//------------
 		// CORRUPTION
 		//------------
@@ -2725,8 +2927,11 @@ package classes
 		 }
 		 */
 		Metamorph.requirePerk(GeneticMemory);
-		//JobArtificer
-
+	//	JobArtificer.requireInt(25)
+	//				.requireWis(25);
+		JobBeastWarrior.requireStr(25)
+					   .requireTou(25)
+					   .requireSpe(25);
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
@@ -2912,12 +3117,13 @@ package classes
 				   .requireStr(100)
 				   .requireTou(100)
 				   .requirePerk(JobWarlord);
+		EnableCriticals.requireLevel(24);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
 		//		}
-/*		JobMunchkin.requirePerk(JobMonk)
+/*		DeityJobMunchkin.requirePerk(JobMonk)
 				   .requirePerk(JobKnight)
 				   .requirePerk(JobHunter)
 				   .requirePerk(JobEromancer)

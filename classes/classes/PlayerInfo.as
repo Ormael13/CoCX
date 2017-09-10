@@ -87,6 +87,11 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
 
+		var mins:Object = player.getAllMinStats();
+		combatStats += "<b>Libido Minimum:</b> " + mins.lib + "\n";
+		combatStats += "<b>Sensitivity Minimum:</b> " + mins.sens + "\n";
+		combatStats += "<b>Corruption Minimum:</b> " + mins.cor + "\n";
+
 		if (combatStats != "")
 			outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
 		// End Combat Stats
