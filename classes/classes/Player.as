@@ -2366,7 +2366,7 @@ use namespace kGAMECLASS;
 			}
 			if (isTaur())
 				horseCounter -= 5;
-			if (unicornScore() > 9 || alicornScore() > 11)
+			if (unicornScore() > 8 || alicornScore() > 10)
 				horseCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				horseCounter += 10;
@@ -3132,6 +3132,8 @@ use namespace kGAMECLASS;
 				unicornCounter++;
 			if (hairColor == "white")
 				unicornCounter++;
+			if (centaurScore() > 7)
+				unicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				unicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && unicornCounter >= 3)
@@ -3171,6 +3173,8 @@ use namespace kGAMECLASS;
 				alicornCounter++;
 			if (hairColor == "white")
 				alicornCounter++;
+			if (centaurScore() > 7)
+				alicornCounter -= 5;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				alicornCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && alicornCounter >= 3)
