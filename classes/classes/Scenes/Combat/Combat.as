@@ -659,7 +659,7 @@ public function unarmedAttack():Number {
 	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) unarmed += 12 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) unarmed += 18 * (1 + player.newGamePlusMod());
-//	if (findPerk(OneOfBeastWarriorPerks) >= 0) unarmed *= 1.05;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) unarmed *= 1.1;
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
 	unarmed = Math.round(unarmed);
 	return unarmed;
@@ -3472,6 +3472,7 @@ public function enemyAIImpl():void {
 		//}
 	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
 }
 public function finishCombat():void
 {
@@ -4266,6 +4267,19 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
 	//	}
 	}
+	//Crinos Shape
+	if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+		if (player.wrath < mspecials.crinosshapeCost()) {
+			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
+			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
+			kGAMECLASS.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
+			player.removeStatusEffect(StatusEffects.CrinosShape);
+			outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor, the bestial chanches slowly fading away leaving you in your normal form.</b>\n\n");
+		}
+	//	else {
+	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
+	//	}
+	}
 	//Ezekiel Curse
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
 		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.findPerk(PerkLib.EzekielBlessing) >= 0) {
@@ -4570,6 +4584,12 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 6;
+		if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+			gainedwrath += 1;
+			if (player.findPerk(PerkLib.ImprovedCrinosShape) >= 0) gainedwrath += 2;
+			if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) gainedwrath += 3;
+			if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) gainedwrath += 4;
+		}
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {

@@ -395,7 +395,7 @@ package classes
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
 		public static const CriticalPerformance:PerkType = mk("Critical performance", "Critical performance",
-				"Allows your non periodic tease damage to critically hit based on your libido, maximum 20%.",
+				"Allows your non periodic tease damage to critically hit based on your libido, maximum +20%.",
 				"You choose the 'Critical performance' perk, allowing your non periodic tease damage to critically hit based on your libido.");
 		public static const Cupid:PerkType = mk("Cupid", "Cupid",
 				"You arrows are charged with heavy black magic inflicting lust on those pierced by them.",
@@ -508,6 +508,9 @@ package classes
 		public static const DualWieldLarge:PerkType = mk("Dual Wield (Large)", "Dual Wield (Large)",
 				"Allows you to wield two weapons of any large type.",
 				"You choose the 'Dual Wield (Large)' perk, training skill of using two large weapons.");
+		public static const EclipsingShadow:PerkType = mk("Eclipsing Shadow", "Eclipsing Shadow",
+				"Cumulative 20% damage increase for every subsequent darkness spell without interruption.",
+				"You choose the 'Eclipsing Shadow' perk. Cumulative 20% damage increase for every subsequent darkness spell without interruption.");
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
@@ -644,6 +647,9 @@ package classes
 		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
 				"Your proficiency in making golems allows to .",
 				"You choose 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
+				"Crinos Shape increase to physical might rise to 15% of str/tou/spe.",
+				"You choose the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=150)" +
 						"Increases base spell strength by 100%, mana pool by 150 and regain it 300% faster." +
@@ -699,10 +705,13 @@ package classes
 				"You choose the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 480!");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
-				"You choose the 'Heroism' perk.  Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
+				"You choose the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
 				"Allows you to perform six melee attacks with non-large weapons per round.",
-				"You choose the 'Hexa Attack' perk.  This allows you to make six melee attacks with non-large weapons.");
+				"You choose the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.");
+		public static const HighVoltage:PerkType = mk("High Voltage", "High Voltage",
+				"Cumulative 20% damage increase for every subsequent lightning spell without interruption.",
+				"You choose the 'High Voltage' perk. Cumulative 20% damage increase for every subsequent lightning spell without interruption.");
 		public static const HoldWithBothHands:PerkType = mk("Hold With Both Hands", "Hold With Both Hands",
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
@@ -719,6 +728,9 @@ package classes
 		public static const Impale:PerkType = mk("Impale", "Impale",
 				"Damage bonus of spears and lances critical hits is doubled as long speed is high enough.",
 				"You've chosen the 'Impale' perk. Your spear and lance critical hit attacks bonus damages are doubled.");
+		public static const ImprovedCrinosShape:PerkType = mk("Improved Crinos Shape", "Improved Crinos Shape",
+				"Crinos Shape increase to physical might rise to 10% of str/tou/spe.",
+				"You choose the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
 				"You choose the 'Improved Endurance' perk. Thanks to your physical conditioning, your maximum fatigue has been increased by 80!");
@@ -728,6 +740,15 @@ package classes
 		public static const ImprovedSpirituality:PerkType = mk("Improved Spirituality", "Improved Spirituality",
 				"Increases maximum mana by 80.",
 				"You choose the 'Improved Spirituality' perk. Thanks to your mystical conditioning, your maximum mana has been increased by 120!");
+		public static const ImprovingNaturesBlueprintsNaturalArmor:PerkType = mk("Improving Nature's Blueprints (Natural Armor)", "Improving Nature's Blueprints (Natural Armor)",
+				"Charge Armor can be casted even if PC is not wearing any armor as long it have any form of natural armor (any skin type providing bonus to armor) and slight boost armor while under Crinos Shape effects.",
+				"You choose the 'Improving Nature's Blueprints (Natural Armor)' perk, allowing you to use Charge Armor even without wearing any weapon and slight boost armor when using Crinos Shape.");
+		public static const ImprovingNaturesBlueprintsNaturalWeapons:PerkType = mk("Improving Nature's Blueprints (Natural Weapons)", "Improving Nature's Blueprints (Natural Weapons)",
+				"Charge Weapon can be cast whenever PC hold any weapon or merely using bare fists. And slight boost unarmed attacks while under Crinos Shape effects.",
+				"You choose the 'Improving Nature's Blueprints (Natural Weapons)' perk, allowing you to use Charge Weapon even without holding any weapon and slight boost unarmed attacks when using Crinos Shape.");
+		//public static const ImprovingNaturesBlueprints:PerkType = mk("Improving Nature's Blueprints ()", "Improving Nature's Blueprints ()",
+				//"Charge Armor can be casted even if PC is not wearing any armor as long it have any form of natural armor.",
+				//"You choose the 'Improving Nature's Blueprints ()' perk, allowing you to use Charge Armor even without wearing any weapon and slight boost armor while in Crinos Shape.");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
@@ -947,6 +968,9 @@ package classes
 		public static const Masochist:PerkType = mk("Masochist", "Masochist",
 				"Take 20% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
+		public static const MasterCrinosShape:PerkType = mk("Master Crinos Shape", "Master Crinos Shape",
+				"Crinos Shape increase to physical might rise to 20% of str/tou/spe.",
+				"You choose the 'Master Crinos Shape' perk, once again increasing boost gained in Crinos Shape.");
 		public static const MasteredDefenceStance:PerkType = mk("Mastered Defence Stance", "Mastered Defence Stance",
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
 				"You choose 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
@@ -1152,7 +1176,7 @@ package classes
 						"]",
 				"You choose the 'Shield Grandmastery' perk, lowering fatigue cost and increasing block chance as long as you're wielding a shield (Toughness-based).");
 		public static const ShieldHarmony:PerkType = mk("Shield Harmony", "Shield Harmony",
-				"When you using shield and isn't stunned gain 10% phys damage reduction.",
+				"When you using shield and isn't stunned, you gain 10% phys damage reduction.",
 				"You choose the 'Shield Harmony' perk, allowing to reduce recived phys damage when using shield.");
 		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
 				"[if(player.tou>=50)" +
@@ -2326,11 +2350,29 @@ package classes
 					.requirePerk(Channeling)
 					.requireCustomFunction(function (player:Player):Boolean {
 						return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
-							   || player.hasStatusEffect(StatusEffects.KnowsIceRain)
-							   || player.hasPerk(DragonIceBreath)
+								|| player.hasStatusEffect(StatusEffects.KnowsIceRain)
+								|| player.hasPerk(DragonIceBreath)
+								|| player.hasPerk(FreezingBreath)
+								|| player.hasPerk(FreezingBreathYeti)
 					}, "Any ice spell")
 					.requireLevel(12)
 					.requireInt(75);
+		HighVoltage.requirePerk(Archmage)
+				   .requirePerk(Channeling)
+				   .requireCustomFunction(function (player:Player):Boolean {
+					   return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
+								|| player.hasPerk(DragonLightningBreath)
+				   }, "Any lightning spell")
+				   .requireLevel(12)
+				   .requireInt(75);
+		EclipsingShadow.requirePerk(Archmage)
+					   .requirePerk(Channeling)
+					   .requireCustomFunction(function (player:Player):Boolean {
+						   return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
+								|| player.hasPerk(DragonDarknessBreath)
+					   }, "Any darkness spell")
+					   .requireLevel(12)
+					   .requireInt(75);
 		// Spell-boosting perks
 		// Battlemage: auto-use Might
 		Battlemage.requireLevel(12)
@@ -2929,9 +2971,9 @@ package classes
 		Metamorph.requirePerk(GeneticMemory);
 	//	JobArtificer.requireInt(25)
 	//				.requireWis(25);
-		JobBeastWarrior.requireStr(25)
-					   .requireTou(25)
-					   .requireSpe(25);
+		JobBeastWarrior.requireStr(20)
+					   .requireTou(20)
+					   .requireSpe(20);
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
@@ -2986,6 +3028,11 @@ package classes
 					   .requireWis(80)
 					   .requirePerk(BiggerGolemBag2)
 					   .requireNGPlus(2);
+		ImprovingNaturesBlueprintsNaturalWeapons.requirePerk(JobBeastWarrior)
+												.requireStr(35)
+												.requireTou(35)
+												.requireSpe(35)
+												.requireLevel(6);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -3054,6 +3101,11 @@ package classes
 				   .requireInt(70)
 				   .requireWis(70)
 				   .requirePerk(ApprenticeGolemMaker);
+		ImprovedCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalWeapons)
+						   .requireStr(50)
+						   .requireTou(50)
+						   .requireSpe(50)
+						   .requireLevel(12);
 		//Tier 3
 		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
 								   .requireLevel(18)
@@ -3084,6 +3136,11 @@ package classes
 					.requireStr(50)
 					.requireTou(50)
 					.requirePerk(JobWarlord);
+		ImprovingNaturesBlueprintsNaturalArmor.requirePerk(ImprovedCrinosShape)
+											  .requireStr(65)
+											  .requireTou(65)
+											  .requireSpe(65)
+											  .requireLevel(18);
 		//Tier 4
 		JobAllRounder.requireLevel(24)
 					 .requirePerk(JobGuardian)
@@ -3118,6 +3175,11 @@ package classes
 				   .requireTou(100)
 				   .requirePerk(JobWarlord);
 		EnableCriticals.requireLevel(24);
+		GreaterCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalArmor)
+						  .requireStr(80)
+						  .requireTou(80)
+						  .requireSpe(80)
+						  .requireLevel(24);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
@@ -3144,11 +3206,21 @@ package classes
 					 .requireStr(90)
 					 .requireTou(90)
 					 .requirePerk(CycloneStage2);
+		//.requirePerk(GreaterCrinosShape)
+		//				 .requireStr(95)
+		//				 .requireTou(95)
+		//				 .requireSpe(95)
+		//				 .requireLevel(30);
 		//Tier 6
 		CycloneStage4.requireLevel(36)
 					 .requireStr(120)
 					 .requireTou(120)
 					 .requirePerk(CycloneStage3);
+		MasterCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalArmor)
+						 .requireStr(110)
+						 .requireTou(110)
+						 .requireSpe(110)
+						 .requireLevel(36);
 		//Tier 7
 		CycloneStage5.requireLevel(42)
 					 .requireStr(160)

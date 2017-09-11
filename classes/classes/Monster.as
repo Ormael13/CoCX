@@ -326,15 +326,18 @@
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 50;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;
+			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) temp += 40;
+			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) temp += 80;
+			if (findPerk(PerkLib.MasterCrinosShape) >= 0) temp += 160;
 			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
-			if (findPerk(PerkLib.Rage) >= 0) temp += 200;
-			if (findPerk(PerkLib.Anger) >= 0) temp += 200;
+			if (findPerk(PerkLib.Rage) >= 0) temp += 250;
+			if (findPerk(PerkLib.Anger) >= 0) temp += 300;
 			return temp;
 		}
 		

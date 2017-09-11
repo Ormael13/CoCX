@@ -9,13 +9,15 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.GroupEncounter;
+	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
-import coc.xxc.Story;
-import coc.xxc.stmts.ZoneStmt;
+	import coc.xxc.Story;
+	import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{

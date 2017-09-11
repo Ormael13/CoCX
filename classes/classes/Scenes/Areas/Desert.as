@@ -9,16 +9,16 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-  import classes.Scenes.API.GroupEncounter;
-  import classes.Scenes.Areas.Desert.*;
+	import classes.Scenes.API.GroupEncounter;
+	import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
 
-import coc.xlogic.Statement;
-import coc.xxc.Story;
-import coc.xxc.stmts.ZoneStmt;
+	import coc.xlogic.Statement;
+	import coc.xxc.Story;
+	import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{
