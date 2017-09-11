@@ -200,7 +200,7 @@ use namespace kGAMECLASS;
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
+							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
 						}
 					}, {
 						name: "celess-armor",
@@ -350,7 +350,7 @@ use namespace kGAMECLASS;
 			switch(stage){
 				case 0:
 					forestStory.display("strings/celess-unicorn/intro");
-					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless() || true)?2:3);
+					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
 					if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
 					addButton(5, "NoWay", celessUnicornIntro, 1);
 					break;
