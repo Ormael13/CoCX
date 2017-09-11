@@ -20,9 +20,9 @@ public class BoundStory {
 			context.error(story,"Cannot dereference "+ref);
 			return;
 		}
-		if (locals) context.pushScope(locals);
-		context.execute(obj);
-		if (locals) context.popScope();
+		context.pushScope(locals||{});
+		obj.forceExecute(context);
+		context.popScope();
 	}
 	public function locate(ref:String):BoundStory {
 		var obj:Story = story.locate(ref);

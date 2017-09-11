@@ -4,6 +4,8 @@
 package coc.xxc.stmts {
 import classes.internals.Utils;
 
+import coc.script.Eval;
+
 import coc.xlogic.ExecContext;
 import coc.xlogic.Statement;
 import coc.xxc.StoryContext;
@@ -41,7 +43,12 @@ public class TextStmt extends Statement {
 	}
 
 	override public function execute(context:ExecContext):void {
+		context.debug(this,'print');
 		(context as StoryContext).game.outputText(content);
+	}
+
+	public function toString():String {
+		return '(text) "'+Eval.escapeString(content.substr(0,20))+(content.length>20?'"...[+'+(content.length-20)+']':'"');
 	}
 }
 }

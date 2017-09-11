@@ -14,24 +14,27 @@ public class Eval {
 
 	private var scopes:/*Object*/Array;
 	private var expr:String;
-	private var src:String;
+	private var _src:String;
 	private var _call:Function;
 	public function call(...scopes:/*Object*/Array):* {
 		return vcall(scopes);
+	}
+	public function get src():String {
+		return _src;
 	}
 	public function vcall(scopes:/*Object*/Array):* {
 		this.scopes = scopes;
 		try {
 			return _call();
 		} catch (e:Error){
-			error(src,"",e.message,false);
+			error(_src,"",e.message,false);
 		}
 	}
 
 	public function Eval(thiz:*, expr:String) {
 		this.scopes = [thiz];
-		this.src = expr;
-		this.expr = expr;
+		this._src   = expr;
+		this.expr   = expr;
 	}
 
 	private static const RX_FLOAT:RegExp = /^[+\-]?(\d+(\.\d+)?|\.\d+)(e[+\-]?\d+)?$/;
@@ -105,21 +108,21 @@ public class Eval {
 					y = evalExpr(0);
 					args.push(y);
 					if (eatStr(')')) break;
-					if (!eatStr(',')) throw error(src,expr,"Expected ')' or ','");
+					if (!eatStr(',')) throw error(_src,expr,"Expected ')' or ','");
 				}
 				x = wrapCall(x,args);
 			} else if (eatStr('.')) {
 				m = eat(LA_ID);
-				if (!m) throw error(src,expr,"Identifier expected");
+				if (!m) throw error(_src,expr,"Identifier expected");
 				x = wrapDot(x, wrapVal(m[0]));
 			} else if (eatStr('[')) {
 				y = evalUntil("]");
 				eatWs();
-				if (!eatStr(']')) throw error(src,expr,"Expected ']'");
+				if (!eatStr(']')) throw error(_src,expr,"Expected ']'");
 				x    = wrapDot(x, y);
 			} else if (eatStr('?')) {
 				y = evalUntil(':');
-				if (!eatStr(':')) throw error(src,expr,"Expected ':'");
+				if (!eatStr(':')) throw error(_src,expr,"Expected ':'");
 				z = evalExpr(0);
 				x = wrapIf(x, y, z);
 			} else if ((m = eat(LA_OPERATOR))) {
@@ -135,45 +138,57 @@ public class Eval {
 		}
 		return x;
 	}
-	private function calculate(x:Function,op:String,y:Function):* {
-//		trace("Evaluating " + (typeof x) + " " + x + " " + op + " " + (typeof y) + " " + y);
+	public static function calculateOp(x:*,op:String,y:*):* {
 		switch (op) {
 			case '>':
 			case 'gt':
-				return x() > y();
+				return x > y;
 			case '>=':
 			case 'gte':
 			case 'ge':
-				return x() >= y();
+				return x >= y;
 			case '<':
 			case 'lt':
-				return x() < y();
+				return x < y;
 			case '<=':
 			case 'lte':
 			case 'le':
-				return x() <= y();
+				return x <= y;
 			case '=':
 			case '==':
 			case 'eq':
-				return x() == y();
+				return x == y;
 			case '===':
-				return x() === y();
+				return x === y;
 			case '!=':
 			case 'ne':
 			case 'neq':
-				return x() != y();
+				return x != y;
 			case '!==':
-				return x() !== y();
+				return x !== y;
 			case '+':
-				return x() + y();
+				return x + y;
 			case '-':
-				return x() - y();
+				return x - y;
 			case '%':
-				return x() % y();
+				return x % y;
 			case '*':
-				return x() * y();
+				return x * y;
 			case '/':
-				return x() / y();
+				return x / y;
+			case '||':
+			case 'or':
+				return x || y;
+			case '&&':
+			case 'and':
+				return x && y;
+			default:
+				throw new Error("Unregistered operator " + op);
+		}
+	}
+	private function calculate(x:Function, op:String, y:Function):* {
+//		trace("Evaluating " + (typeof x) + " " + x + " " + op + " " + (typeof y) + " " + y);
+		switch (op) {
 			case '||':
 			case 'or':
 				return x() || y();
@@ -181,7 +196,11 @@ public class Eval {
 			case 'and':
 				return x() && y();
 			default:
-				throw error(src, expr, "Unregistered operator " + op, false);
+				try {
+					return calculateOp(x(),op,y());
+				} catch (e: Error) {
+					throw error(_src, expr, "Unregistered operator " + op, false);
+				}
 		}
 	}
 	private function evalExpr(minPrio:int):Function {
@@ -200,7 +219,7 @@ public class Eval {
 				while (eatStr(',')) {
 					f.push(evalExpr(0));
 				}
-				if (!eatStr("]")) throw error(src,expr,"Expected ',' or ']'");
+				if (!eatStr("]")) throw error(_src,expr,"Expected ',' or ']'");
 			}
 			x = wrapArray(f);
 		} else if ((m = eat(LA_INT))) {
@@ -222,22 +241,22 @@ public class Eval {
 				} else if ((m = eat(rex))) {
 					s += m[0];
 				} else {
-					throw error(src,expr,"Expected text");
+					throw error(_src,expr,"Expected text");
 				}
 			}
 			x = wrapVal(s);
 		} else if ((m = eat(LA_ID))) {
 			x = wrapId(m[0]);
 		} else {
-			throw error(src,expr,"Not a sub-expr");
+			throw error(_src,expr,"Not a sub-expr");
 		}
 		return evalPostExpr(x,minPrio);
 	}
 	private function evalUntil(until:String):* {
 		var x:* = evalExpr(0);
 		if (expr == until || expr.charAt(0) == until) return x;
-		if (until) throw error(src,expr,"Operator or " + until + "expected");
-		throw error(src,expr,"Operator expected");
+		if (until) throw error(_src,expr,"Operator or " + until + "expected");
+		throw error(_src,expr,"Operator expected");
 	}
 	private function eat(rex:RegExp):Array {
 		var m:Array = expr.match(rex);
@@ -261,7 +280,7 @@ public class Eval {
 	}
 	private function eatWs():void {
 		//noinspection StatementWithEmptyBodyJS
-		while (eat(/^\s+/) || eat(LA_BLOCK_COMMENT));
+		while (eat(/^\s+/) || eat(LA_BLOCK_COMMENT)){}
 	}
 	private function evalId(id:String):* {
 		switch (id) {
@@ -321,6 +340,10 @@ public class Eval {
 				return el();
 			})
 		};
+	}
+
+	public static function escapeString(s:String):String {
+		return s.replace(/\n/g,'\n').replace(/\r/g,'\r').replace(/'/g,"\\'").replace(/"/g,'\\"').replace(/\\/g,'\\\\');
 	}
 }
 }

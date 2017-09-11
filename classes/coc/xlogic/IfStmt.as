@@ -16,10 +16,19 @@ public class IfStmt extends Statement {
 
 	override public function execute(context:ExecContext):void {
 		if (expr.vcall(context.scopes)) {
+			context.debug(this,'then');
 			context.executeAll(thenBlock);
 		} else if (elseBlock != null) {
+			context.debug(this,'else');
 			context.execute(elseBlock);
+		} else {
+			context.debug(this,'skip');
 		}
+	}
+
+	public function toString():String {
+		return '<if test="'+expr.src+'"> [then '+thenBlock.length+'] '+
+				(elseBlock?'<else/> ':'')+'</if>';
 	}
 }
 }

@@ -2,6 +2,7 @@
  * Coded by aimozg on 28.08.2017.
  */
 package coc.xxc {
+import coc.script.Eval;
 import coc.xlogic.Compiler;
 import coc.xlogic.Statement;
 import coc.xlogic.StmtList;
@@ -38,7 +39,7 @@ public class StoryCompiler extends Compiler {
 		}
 		return this;
 	}
-	override protected function unknownTag(tag:String, x:XML):Statement {
+	override protected function compileTag(tag:String, x:XML):Statement {
 		switch (tag) {
 			case "b":
 			case "i":
@@ -58,10 +59,13 @@ public class StoryCompiler extends Compiler {
 			case "output":
 				return compileOutput(x);
 			case "lib":
+			case "macro":
 				return compileStory(x, true);
-			case "text":
+			case "set":
+				return compileSet(x);
 			case "story":
 			case "string":
+			case "text":
 				return compileStory(x, false);
 			case "zone":
 				return compileStoryBody(new ZoneStmt(stack[0], x.@name), x) as ZoneStmt;
@@ -72,7 +76,7 @@ public class StoryCompiler extends Compiler {
 			case "extend-zone":
 				return compileStoryBody(locate(x.@name), x) as ZoneStmt;
 			default:
-				throw new Error("Unknown tag "+tag);
+				return super.compileTag(tag, x);
 		}
 	}
 	public function includeFile(path:String,required:Boolean):IncludeStmt {
@@ -106,6 +110,15 @@ public class StoryCompiler extends Compiler {
 	}
 	protected function compileOutput(x:XML):OutputStmt {
 		return new OutputStmt(x.text().toString());
+	}
+	protected function compileSet(x:XML):SetStmt {
+		var attrs:* = attrMap(x);
+		var expr:String,op:String;
+		if ('value' in attrs) expr = attrs['value'];
+		else expr = "'"+Eval.escapeString(x.text().toString())+"'";
+		if ('op' in attrs) op = attrs[op];
+		else op = '=';
+		return new SetStmt(attrs['var'],expr,op);
 	}
 	protected function compileStory(x:XML, isLib:Boolean = false):Story {
 		return compileStoryBody(new Story(x.localName(),stack[0], x.@name, isLib), x);

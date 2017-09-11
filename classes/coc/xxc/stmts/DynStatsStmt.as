@@ -3,6 +3,7 @@
  */
 package coc.xxc.stmts {
 import classes.CoC;
+import classes.internals.Utils;
 
 import coc.script.Eval;
 
@@ -31,6 +32,10 @@ public class DynStatsStmt extends Statement{
 			}
 		}
 		game.dynStats.apply(game,arr);
+	}
+
+	public function toString():String {
+		return '<dynStats '+Utils.keys(args)+'/>';
 	}
 }
 }

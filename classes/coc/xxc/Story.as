@@ -11,6 +11,10 @@ public class Story extends StmtList{
 	public var lib:Object; /* [name:String]:Story */
 	public var isLib:Boolean;
 	public var tagname:String;
+
+	public function toString():String {
+		return '<'+tagname+' name="'+name+'" isLib='+isLib+'"> ['+stmts.length+'] </'+tagname+'>';
+	}
 	public function Story(tagname:String,parent:Story,name:String,isLib:Boolean=false) {
 		this.tagname = tagname;
 		this.parent = parent;
@@ -30,6 +34,13 @@ public class Story extends StmtList{
 
 	override public function execute(context:ExecContext):void {
 		if (isLib) return;
+		forceExecute(context);
+	}
+	/**
+	 * Executes Story even if it is a lib
+	 */
+	public function forceExecute(context:ExecContext):void {
+		context.debug(this,'enter');
 		super.execute(context);
 	}
 	public function bind(context:ExecContext):BoundStory {

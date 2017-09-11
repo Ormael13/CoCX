@@ -72,21 +72,47 @@
     </xs:element>
     <xs:element name="font">
         <xs:complexType mixed="true">
-            <xs:group ref="ns1:content"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
             <xs:attribute name="color"/>
         </xs:complexType>
     </xs:element>
+    <xs:element name="xcc-named-content" abstract="true" substitutionGroup="ns1:xcc-content"/>
     <xs:element name="xcc-content" abstract="true"/>
     <xs:complexType name="namedBlock" mixed="true">
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
         <xs:attribute name="name"/>
     </xs:complexType>
     <xs:element name="text" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
-    <xs:element name="string" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
-    <xs:element name="lib" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
-    <xs:element name="story" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
-    <xs:element name="extend-story" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
-    <xs:element name="zone" substitutionGroup="ns1:xcc-content">
+    <xs:element name="string" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="lib" substitutionGroup="ns1:xcc-named-content">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:xcc-named-content"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="story" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="macro" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="set" substitutionGroup="ns1:xcc-content">
+        <xs:complexType mixed="true">
+            <xs:attribute name="var" use="required"/>
+            <xs:attribute name="value"/>
+            <xs:attribute name="op">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="append"/>
+                        <xs:enumeration value="set"/>
+                        <xs:enumeration value="add"/>
+                        <xs:enumeration value="+="/>
+                        <xs:enumeration value="="/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="extend-story" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="zone" substitutionGroup="ns1:xcc-named-content">
         <xs:complexType mixed="true">
             <xs:complexContent>
                 <xs:extension base="ns1:namedBlock">
@@ -97,7 +123,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
-    <xs:element name="extend-zone" substitutionGroup="ns1:xcc-content">
+    <xs:element name="extend-zone" substitutionGroup="ns1:xcc-named-content">
         <xs:complexType mixed="true">
             <xs:complexContent>
                 <xs:extension base="ns1:namedBlock">
@@ -146,12 +172,6 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="var" substitutionGroup="ns1:xcc-content">
-        <xs:complexType>
-            <xs:attribute name="name" use="required"/>
-            <xs:attribute name="value" use="required"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

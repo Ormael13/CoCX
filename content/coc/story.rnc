@@ -45,15 +45,25 @@ font = element font {
     attribute color { text }?,
     content*
 }
-xcc-content = Text | String
-    | lib | story | extend-story | zone | extend-zone
+xcc-named-content = String | lib | story | macro | extend-story | zone | extend-zone
+xcc-content = Text | xcc-named-content
     | display | dynStats | output | Include
-    | var
+    | set
 namedBlock = attribute name { text }?, content*
 Text = element text { namedBlock }
 String = element string { namedBlock }
-lib = element lib { namedBlock }
+lib = element lib {
+	attribute name { text },
+	xcc-named-content*
+}
 story = element story { namedBlock }
+macro = element macro { namedBlock }
+set = element set {
+    attribute var { text },
+    attribute value { expression }?,
+    attribute op { 'append' | 'set' | 'add' | "+=" | '=' }?,
+    text*
+}
 extend-story = element extend-story { namedBlock }
 zone = element zone {
     namedBlock,
@@ -70,7 +80,8 @@ encounter = element encounter {
     content*
 }
 display = element display {
-    attribute ref { text }
+    attribute ref { text },
+    empty
 }
 dynStats = element dynStats {
     attribute str { expression }?,
@@ -81,14 +92,12 @@ dynStats = element dynStats {
     attribute sen { expression }?,
     attribute lus { expression }?,
     attribute cor { expression }?,
-    attribute scale { expression }?
+    attribute scale { expression }?,
+    empty
 }
 output = element output { expression }
 Include = element include {
     attribute path { text },
-    attribute required { "true" | "false" }?
-}
-var = element var {
-    attribute name { text },
-    attribute value { expression }
+    attribute required { "true" | "false" }?,
+    empty
 }
