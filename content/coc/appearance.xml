@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extend-story name="appearance" xmlns="xxc-story">
+    <text name="race">
+        <if test="player.race() != player.startingRace">
+            You began your journey as a <output>player.startingRace</output>, but gave that up as you explored the
+            dangers of this realm.
+        </if>
+        You are [tallness] tall [malefemaleherm] [race], with [bodytype].
+    </text>
+    <text name="gear">
+        <b>
+            You are currently
+            <if test="player.isNaked()" then="naked" else="wearing your [armor]"/>
+            and using your [weapon] as a melee weapon<if test="player.weaponRangeName != 'nothing'">, [weaponrangename] as range weapon</if>
+            <if test="player.shieldName != 'nothing'"> and [shield] as your shield</if>.
+            <switch value="player.jewelryName">
+                <case value="'nothing'"/>
+                <case values="'fox hairpin','seer\'s hairpin'">
+                    In your hair is <output>player.jewelryName</output>.
+                </case>
+                <default>
+                    Girding one of your fingers is <output>player.jewelryName</output>.
+                </default>
+            </switch>
+            <if test="player.hasKeyItem('Fenrir Collar') gte 0">
+                On your neck is Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.
+            </if>
+        </b>
+    </text>
+    <text name="faceShape">
+        <switch value="player.faceType">
+            <case value="FACE_SHARK_TEETH">
+                A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.
+            </case>
+            <case value="FACE_BUNNY">
+                The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.
+            </case>
+            <case value="FACE_SPIDER_FANGS">
+                A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.
+            </case>
+            <case value="FACE_FERRET_MASK">
+                The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.
+            </case>
+            <case value="FACE_MANTICORE">
+                You have a set of sharp cat-like teeth in your mouth.
+            </case>
+        </switch>
+    </text>
+</extend-story>

@@ -207,14 +207,25 @@ public class Eval {
 			x = wrapVal(parseInt(m[0]));
 		} else if ((m = eat(LA_FLOAT))) {
 			x = wrapVal(parseFloat(m[0]));
-		} else if (eatStr("'")) {
-			m = eat(/^[^'\\]*/);
-			if (!eatStr("'")) throw error(src,expr,"Expected '\\''");
-			x = wrapVal(m[0]);
-		} else if (eatStr('"')) {
-			m = eat(/^[^"\\]*/);
-			if (!eatStr('"')) throw error(src,expr,"Expected '\"'");
-			x = wrapVal(m[0]);
+		} else if ((m = eat(/^['"]/))) {
+			var delim:String = m[0];
+			var s:String = '';
+			var rex:RegExp = delim == '"' ? /^[^"\\]*/ : /^[^'\\]*/;
+			while(true) {
+				if (eatStr('\\')) {
+					var c:String = eatN(1);
+					s += {
+						'n':'\n','t':'\t','r':'','"':'"',"'":"'"
+					}[c] || '';
+				} else if (eatStr(delim)) {
+					break
+				} else if ((m = eat(rex))) {
+					s += m[0];
+				} else {
+					throw error(src,expr,"Expected text");
+				}
+			}
+			x = wrapVal(s);
 		} else if ((m = eat(LA_ID))) {
 			x = wrapId(m[0]);
 		} else {
@@ -230,15 +241,20 @@ public class Eval {
 	}
 	private function eat(rex:RegExp):Array {
 		var m:Array = expr.match(rex);
-		if (m) expr = expr.substr(m[0].length);
+		if (m) eatN(m[0].length);
 		return m;
 	}
 	private function unshift(s:String):void {
 		expr = s+expr;
 	}
+	private function eatN(n:int):String {
+		var s:String = expr.substr(0,n);
+		expr = expr.substr(n);
+		return s;
+	}
 	private function eatStr(s:String):Boolean {
 		if (expr.substr(0,s.length).indexOf(s) == 0) {
-			expr = expr.substr(s.length);
+			eatN(s.length);
 			return true;
 		}
 		return false;

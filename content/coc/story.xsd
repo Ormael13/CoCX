@@ -13,30 +13,20 @@
             </xs:choice>
         </xs:sequence>
     </xs:group>
-    <xs:element name="if">
-        <xs:complexType mixed="true">
-            <xs:sequence>
-                <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
-                <xs:choice minOccurs="0">
-                    <xs:element ref="ns1:elseif"/>
-                    <xs:element ref="ns1:else"/>
-                </xs:choice>
-            </xs:sequence>
-            <xs:attribute name="test" use="required"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="elseif">
-        <xs:complexType mixed="true">
-            <xs:sequence>
-                <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
-                <xs:choice minOccurs="0">
-                    <xs:element ref="ns1:elseif"/>
-                    <xs:element ref="ns1:else"/>
-                </xs:choice>
-            </xs:sequence>
-            <xs:attribute name="test" use="required"/>
-        </xs:complexType>
-    </xs:element>
+    <xs:element name="if" type="ns1:ifBody"/>
+    <xs:complexType name="ifBody" mixed="true">
+        <xs:sequence>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+            <xs:choice minOccurs="0">
+                <xs:element ref="ns1:elseif"/>
+                <xs:element ref="ns1:else"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="test" use="required"/>
+        <xs:attribute name="then"/>
+        <xs:attribute name="else"/>
+    </xs:complexType>
+    <xs:element name="elseif" type="ns1:ifBody"/>
     <xs:element name="else">
         <xs:complexType mixed="true">
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
@@ -72,12 +62,12 @@
     <!-- xxc statements -->
     <xs:element name="b">
         <xs:complexType mixed="true">
-            <xs:group ref="ns1:content"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="i">
         <xs:complexType mixed="true">
-            <xs:group ref="ns1:content"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="font">

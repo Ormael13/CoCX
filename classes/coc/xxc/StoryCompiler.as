@@ -124,10 +124,10 @@ public class StoryCompiler extends Compiler {
 		if (stack[0].tagname == 'string') {
 			trimStyle = TextStmt.TRIMSTYLE_NONE;
 		} else {
-			trimStyle = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT;
-			if (x==x.parent().children()[0]) trimStyle |= TextStmt.TRIM_LEFT;
+			trimStyle = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT | TextStmt.TRIM_NT_TN;
+			//if (x==x.parent().children()[0]) trimStyle |= TextStmt.TRIM_LEFT;
 		}
-		return new TextStmt(x.toString(), trimStyle);
+		return new TextStmt(s, trimStyle);
 	}
 	protected function locate(ref:String):Story {
 		var story:Story = stack[0].locate(ref);

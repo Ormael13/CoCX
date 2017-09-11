@@ -10,10 +10,11 @@ import coc.xxc.StoryContext;
 
 public class TextStmt extends Statement {
 	public static const TRIMSTYLE_NONE:int = 0;
-	public static const TRIM_LEFT:int      = 1;
-	public static const TRIM_RIGHT:int     = 2;
-	public static const TRIM_UNINDENT:int  = 4;
-	public static const TRIM_SQUEEZE:int   = 8;
+	public static const TRIM_LEFT:int      = 1; //  Trim leading whitespace
+	public static const TRIM_RIGHT:int     = 2; //  Trim trailing whitespace
+	public static const TRIM_UNINDENT:int  = 4; //  Remove whitespace right after line break
+	public static const TRIM_SQUEEZE:int   = 8; //  Replace single line breaks with spaces
+	public static const TRIM_NT_TN:int     = 16; // Remove leading \n\t+ and trailing \t*\n
 	public static const TRIMSTYLE_MAX:int  = TRIM_LEFT | TRIM_RIGHT | TRIM_UNINDENT | TRIM_SQUEEZE;
 	private var content:String;
 	public function TextStmt(content:String, trimStyle:int) {
@@ -23,6 +24,10 @@ public class TextStmt extends Statement {
 		}
 		if ((trimStyle & TRIM_RIGHT) != 0) {
 			content = Utils.trimRight(content);
+		}
+		if ((trimStyle & TRIM_NT_TN) != 0) {
+			content = content.replace(/^\n[ \t]+/,'')
+							 .replace(/[ \t]*\n$/,'');
 		}
 		if ((trimStyle & TRIM_UNINDENT) != 0) {
 			content = content.replace(/\n[ \t]+/g,'\n');

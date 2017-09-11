@@ -3,8 +3,19 @@ import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
+import coc.xxc.BoundStory;
+import coc.xxc.Story;
+
 public class PlayerAppearance extends BaseContent {
 
+
+	public function PlayerAppearance() {
+		onGameInit(init);
+	}
+	private var story:BoundStory;
+	private function init():void {
+		story = new Story("story",getGame().rootStory,"appearance").bind(getGame().context);
+	}
 	public function appearance():void {
 		if (getGame().gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
 		//Temp vars
@@ -737,27 +748,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.base.pattern == PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
-		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your [weapon] as a melee weapon");
-		if (player.weaponRangeName != "nothing")
-			outputText(",  [weaponrangename] as range weapon");
-		if (player.shieldName != "nothing")
-			outputText("  and [shield] as your shield");
-		outputText(".");
-		if (player.jewelryName != "nothing" && player.jewelryName != "fox hairpin" && player.jewelryName != "seer’s hairpin")
-			outputText("  Girding one of your fingers is " + player.jewelryName + ".");
-		if (player.jewelryName == "fox hairpin" || player.jewelryName == "seer’s hairpin")
-			outputText("  In your hair is " + player.jewelryName + ".");
-		if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  On your neck is Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
-		outputText("</b>");
+		story.display("gear");
 	}
 	public function describeRace():void {
-//Discuss race
-		if (player.race() != player.startingRace) outputText("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
-		//Height and race.
-		outputText("You are a ");
-		if (flags[kFLAGS.USE_METRICS] > 0) outputText(Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre");
-		else outputText(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch");
-		outputText(" tall [malefemaleherm] [race], with [bodytype].");
+		story.display("race");
 	}
 	public function describeLowerBody():void {
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY || player.lowerBody == LOWER_BODY_TYPE_SCYLLA || player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
@@ -1506,6 +1500,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeFaceShape():void {
+		story.display("faceShape");
 		if (player.facePart.isHumanShaped()) {
 			var odd:int = 0;
 			var skinAndSomething:String = "";
@@ -1551,7 +1546,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  The only oddity is your pair of dripping fangs which often hang over your lower lip.");
 				} else {
 					outputText("  In addition, a pair of fangs hang over your lower lip, dripping with venom.");
-		}
+				}
 			} else if (player.faceType == FACE_SALAMANDER_FANGS) {
 				if (odd == 0) {
 					outputText(".  The only oddity is your salamander fangs giving you a menacing smile.");

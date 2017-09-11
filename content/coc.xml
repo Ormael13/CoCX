@@ -18,6 +18,9 @@
     <!-- NPCs -->
     <include path="coc/NPC/celess.xml"/>
 
+    <!--Other-->
+    <include path="coc/appearance.xml"/>
+
     <!-- Modding -->
     <include path="mod.xml" required="false"/>
 </extend-story>

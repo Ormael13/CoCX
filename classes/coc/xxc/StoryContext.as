@@ -9,7 +9,7 @@ import coc.xlogic.ExecContext;
 public class StoryContext extends ExecContext{
 	public var game:CoC;
 	public function StoryContext(game:CoC) {
-		super([game]);
+		super([game,CoC]);
 		this.game = game;
 	}
 }

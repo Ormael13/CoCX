@@ -7,14 +7,14 @@ content =
 expression = text
 array-content-expression = text
 if = element if {
-    attribute test { expression },
-    content*,
-    (elseif|else)?
+    ifBody
 }
-elseif = element elseif {
+ifBody =
     attribute test { expression },
-    content*,
-    (elseif|else)?
+    (content* | attribute then { text }),
+    (elseif|else|attribute else { text })?
+elseif = element elseif {
+    ifBody
 }
 else = element else {
     content*
@@ -39,11 +39,11 @@ Default = element default {
     content*
 }
 # xxc statements
-b = element b { content }
-i = element i { content }
+b = element b { content* }
+i = element i { content* }
 font = element font {
     attribute color { text }?,
-    content
+    content*
 }
 xcc-content = Text | String
     | lib | story | extend-story | zone | extend-zone
