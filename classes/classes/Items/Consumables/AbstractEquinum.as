@@ -8,6 +8,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.Player;
 import classes.StatusEffects;
 
 public class AbstractEquinum extends Consumable {
@@ -460,6 +461,11 @@ public class AbstractEquinum extends Consumable {
 		//Remove odd eyes
 		if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
 			mutations.humanizeEyes();
+			changes++;
+		}
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyeColor != "blue" && player.eyeColor != "red") {
+			mutations.setEyeTypeAndColor(EYES_HUMAN, "blue");
+			outputText("\n\n<b>You have [eyecolor] eyes!</b>");
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears

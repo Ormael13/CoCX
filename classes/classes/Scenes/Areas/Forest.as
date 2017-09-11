@@ -6,12 +6,10 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.GroupEncounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.API.GroupEncounter;
 	import classes.Scenes.Areas.Forest.*;
-	import classes.Scenes.NPCs.EtnaFollower;
 	import classes.Scenes.Monsters.DarkElfScene;
 
 	import coc.xxc.Story;
