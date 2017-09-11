@@ -12,10 +12,10 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.DarkElfScene;
 
-import coc.xxc.Story;
-import coc.xxc.stmts.ZoneStmt;
+	import coc.xxc.Story;
+	import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{

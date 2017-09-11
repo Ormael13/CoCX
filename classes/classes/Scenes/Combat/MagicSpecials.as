@@ -120,8 +120,9 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else addButton(2, "Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero! \n\nWrath Cost: 50");
 		}
-		if (player.devilkinScore() >= 10) {
-			addButton(3, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.CrinosShape)) addButton(3, "Return", returnToNormalShape).hint("Return to normal from Crinos Shape.");
+			else addButton(3, "CrinosShape", assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + crinosshapeCost() + " per turn");
 		}
 		if (player.oniScore() >= 12) {
 			addButton(4, "Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
@@ -131,6 +132,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.Whispered) >= 0) {
 			addButton(6, "Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+		}
+		if (player.devilkinScore() >= 10) {
+			addButton(7, "Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 		}
 		addButton(14, "Back", msMenu);
 	}
@@ -951,7 +955,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
 		damage += rand(player.level + player.dragonScore());
-//	damage = calcGlacialMod(damage);
+		damage = calcVoltageMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -1053,7 +1057,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += inteligencescalingbonus();// * 0.5
 		damage += wisdomscalingbonus();// * 0.5
 		damage += rand(player.level + player.dragonScore());
-//	damage = calcGlacialMod(damage);
+		damage = calcEclypseMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -1579,6 +1583,87 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
+		enemyAI();
+	}
+	
+	public function crinosshapeCost():Number {
+		var modcsc:Number = 5;
+		if (player.findPerk(PerkLib.ImprovedCrinosShape) >= 0) modcsc += 5;
+		if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) modcsc += 10;
+		if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) modcsc += 20;
+		return modcsc;
+	}
+	public function assumeCrinosShape():void {
+		clearOutput();
+		if (player.wrath < crinosshapeCost()) {
+			outputText("Your wrath is too low to enter this state!");
+			doNext(msMenu);
+			return;
+		}
+		if(player.hasStatusEffect(StatusEffects.CrinosShape)) {
+			outputText("You already assumed Crinos Shape!");
+			doNext(msMenu);
+			return;
+		}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		player.wrath -= crinosshapeCost();
+		var temp1:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+		var tempStr:Number = 0;
+		var tempTou:Number = 0;
+		var tempSpe:Number = 0;
+		if (player.findPerk(PerkLib.ImprovedCrinosShape) >= 0) {
+			if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) {
+				if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) {
+					temp1 += player.str * 0.2;
+					temp2 += player.tou * 0.2;
+					temp3 += player.spe * 0.2;
+				}
+				else {
+					temp1 += player.str * 0.15;
+					temp2 += player.tou * 0.15;
+					temp3 += player.spe * 0.15;
+				}
+			}
+			else {
+				temp1 += player.str * 0.1;
+				temp2 += player.tou * 0.1;
+				temp3 += player.spe * 0.1;
+			}
+		}
+		else {
+			temp1 += player.str * 0.05;
+			temp2 += player.tou * 0.05;
+			temp3 += player.spe * 0.05;
+		}
+		temp1 = Math.round(temp1);
+		temp2 = Math.round(temp2);
+		temp3 = Math.round(temp3);
+		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
+		player.createStatusEffect(StatusEffects.CrinosShape, 0, 0, 0, 0);
+		tempStr = temp1;
+		tempTou = temp2;
+		tempSpe = temp3;
+		player.changeStatusValue(StatusEffects.CrinosShape,1,tempStr);
+		player.changeStatusValue(StatusEffects.CrinosShape,2,tempTou);
+		player.changeStatusValue(StatusEffects.CrinosShape,3,tempSpe);
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('tou');
+		mainView.statsView.showStatUp('spe');
+		player.str += player.statusEffectv1(StatusEffects.CrinosShape);
+		player.tou += player.statusEffectv2(StatusEffects.CrinosShape);
+		player.spe += player.statusEffectv3(StatusEffects.CrinosShape);
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function returnToNormalShape():void {
+		clearOutput();
+		outputText("Gathering all you willpower you forcefully subduing your inner beast and retunrning to your normal shape.");
+		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
+		kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
+		kGAMECLASS.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
+		player.removeStatusEffect(StatusEffects.CrinosShape);
 		enemyAI();
 	}
 	

@@ -300,21 +300,21 @@ use namespace kGAMECLASS;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
 			//Blacksmith history!
-			if(armorDef > 0 && (findPerk(PerkLib.HistorySmith) >= 0 || findPerk(PerkLib.PastLifeSmith) >= 0)) {
+			if (armorDef > 0 && (findPerk(PerkLib.HistorySmith) >= 0 || findPerk(PerkLib.PastLifeSmith) >= 0)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
 			//Skin armor perk
-			if(findPerk(PerkLib.ThickSkin) >= 0) {
+			if (findPerk(PerkLib.ThickSkin) >= 0) {
 				armorDef += (2 * (1 + newGamePlusMod));
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if(skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod);
-			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod);
-			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if(skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
-			if(skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (10 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod);
+			if (skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod);
+			if (skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (10 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod));
 			//Plant score bonuses
@@ -344,7 +344,7 @@ use namespace kGAMECLASS;
 			if (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) armorDef += (4 * (1 + newGamePlusMod));
 			if (lowerBody == LOWER_BODY_TYPE_GARGOYLE) armorDef += (8 * (1 + newGamePlusMod));
 			//Soul Cultivators bonuses
-			if(findPerk(PerkLib.BodyCultivator) >= 0) {
+			if (findPerk(PerkLib.BodyCultivator) >= 0) {
 				armorDef += (1 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
@@ -396,15 +396,19 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
 				armorDef = 0;
 			}
-			if (hasStatusEffect(StatusEffects.Lustzerking)) {
-				armorDef = Math.round(armorDef * 1.1);
-				armorDef += 1;
-			}
-			if (hasStatusEffect(StatusEffects.ChargeArmor) && !isNaked()) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
+			}
+			if (hasStatusEffect(StatusEffects.Lustzerking)) {
+				armorDef = Math.round(armorDef * 1.1);
+				armorDef += 1;
+			}
+			if (hasStatusEffect(StatusEffects.CrinosShape) && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) {
+				armorDef = Math.round(armorDef * 1.1);
+				armorDef += 1;
 			}
 			armorDef = Math.round(armorDef);
 			return armorDef;
@@ -444,48 +448,48 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.HiddenDualMomentum) >= 0 && weaponPerk == "Dual Large" && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.1);
 			}//20-60-100
-			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large" || !isFistOrFistWeapon())) {
+			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large" || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);//wyjątek potem dodać dla daggers i innych assasins weapons i dać im lepszy przelicznik
 			}//45-105-165
-			if(findPerk(PerkLib.SteelImpact) >= 0) {
+			if (findPerk(PerkLib.SteelImpact) >= 0) {
 				attack += ((tou - 50) * 0.3);
 			}
 			if (isFistOrFistWeapon()) {
-				if(findPerk(PerkLib.IronFistsI) >= 0 && str >= 50) {
+				if (findPerk(PerkLib.IronFistsI) >= 0 && str >= 50) {
 					attack += 10;
 				}
-				if(findPerk(PerkLib.IronFistsII) >= 0 && str >= 65) {
+				if (findPerk(PerkLib.IronFistsII) >= 0 && str >= 65) {
 					attack += 10;
 				}
-				if(findPerk(PerkLib.IronFistsIII) >= 0 && str >= 80) {
+				if (findPerk(PerkLib.IronFistsIII) >= 0 && str >= 80) {
 					attack += 10;
 				}
-				if(findPerk(PerkLib.IronFistsIV) >= 0 && str >= 95) {
+				if (findPerk(PerkLib.IronFistsIV) >= 0 && str >= 95) {
 					attack += 10;
 				}
-				if(findPerk(PerkLib.IronFistsV) >= 0 && str >= 110) {
+				if (findPerk(PerkLib.IronFistsV) >= 0 && str >= 110) {
 					attack += 10;
 				}
-				if(findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
+				if (findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
 					attack += 10;
 				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
-				if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
+				if (findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
 					attack += (5 * (1 + newGamePlusMod));
 				}		// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
-				if(kGAMECLASS.combat.unarmedAttack() > 0) {
+				if (kGAMECLASS.combat.unarmedAttack() > 0) {
 					attack += kGAMECLASS.combat.unarmedAttack();
 				}
 			}
-			if(armType == ARM_TYPE_MANTIS && weaponName == "fists") {
+			if (armType == ARM_TYPE_MANTIS && weaponName == "fists") {
 				attack += (15 * (1 + newGamePlusMod));
 			}
-			if(armType == ARM_TYPE_YETI && weaponName == "fists") {
+			if (armType == ARM_TYPE_YETI && weaponName == "fists") {
 				attack += (5 * (1 + newGamePlusMod));
 			}
-			if(hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			if(hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
+			if (hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
+			if (hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
-				if (weaponName != "fists" && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+				if (((weaponName == "fists" && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) || weaponName != "fists") && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 				if (weaponPerk == "Large" || weaponPerk == "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 			}
 			attack = Math.round(attack);
@@ -5192,6 +5196,12 @@ use namespace kGAMECLASS;
 				maxStr += statusEffectv1(StatusEffects.TranceTransformation);
 				maxTou += statusEffectv1(StatusEffects.TranceTransformation);
 			}
+			//Crinos Shape
+			if (hasStatusEffect(StatusEffects.CrinosShape)) {
+				maxStr += statusEffectv1(StatusEffects.CrinosShape);
+				maxTou += statusEffectv2(StatusEffects.CrinosShape);
+				maxSpe += statusEffectv3(StatusEffects.CrinosShape);
+			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
 				maxStr += statusEffectv1(StatusEffects.BeatOfWar);
@@ -5409,6 +5419,12 @@ use namespace kGAMECLASS;
 				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
 				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
 				removeStatusEffect(StatusEffects.TranceTransformation);
+			}
+			if(hasStatusEffect(StatusEffects.CrinosShape)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
+				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
+				kGAMECLASS.dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
+				removeStatusEffect(StatusEffects.CrinosShape);
 			}
 			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				removeStatusEffect(StatusEffects.VioletPupilTransformation);

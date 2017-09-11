@@ -38,12 +38,12 @@ public class CombatSoulskills extends BaseCombatContent {
 			addButton(5, "Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-			if (!player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
+			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
+			else {
 				if ((player.unicornScore() >= 5) && (player.alicornScore() >= 6)) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25) + ((player.alicornScore() - 5) * 25)) + " HP</b> per turn.");
 				else if (player.unicornScore() >= 5) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25)) + " HP</b> per turn.");
 				else addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
 			}
-			else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
 		}
 		if (player.findPerk(PerkLib.Trance) >= 0) {
 			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) addButton(11, "Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
@@ -320,6 +320,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		else enemyAI();
 	}
 
+	public function VioletPupilTransformationHealing():Number {
+		var modvpth:Number = 200;
+		//if () modvpth += 5;
+		//if (player.findPerk(PerkLib.) >= 0 || player.findPerk(PerkLib.) >= 0) modvpth *= 1.3;
+		return modvpth;
+	}
 	public function VioletPupilTransformation():void {
 		clearOutput();
 		if (player.soulforce < 100) {

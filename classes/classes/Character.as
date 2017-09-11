@@ -953,18 +953,21 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
-			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 50;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
+			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) max += 40;
+			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) max += 80;
+			if (findPerk(PerkLib.MasterCrinosShape) >= 0) max += 160;
 			if (findPerk(PerkLib.Berzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
-			if (findPerk(PerkLib.Rage) >= 0) max += 200;
-			if (findPerk(PerkLib.Anger) >= 0) max += 200;
+			if (findPerk(PerkLib.Rage) >= 0) max += 250;
+			if (findPerk(PerkLib.Anger) >= 0) max += 300;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 1299) max = 1299;//obecnie max to 1260
+			if (max > 1699) max = 1699;//obecnie max to 1660
 			return max;
 		}
 		

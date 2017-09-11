@@ -2152,6 +2152,14 @@ package classes
 			return false;
 		}
 
+		//Natural Armor (need at least to partialy covering whole body)
+		public function haveNaturalArmor():Boolean
+		{
+			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(SKIN_BASE_STONE))
+				return true;
+			return false;
+		}
+
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{

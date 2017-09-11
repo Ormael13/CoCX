@@ -53,6 +53,8 @@ public class CombatMagic extends BaseCombatContent {
 	internal function cleanupAfterCombatImpl():void {
 		fireMagicLastTurn = -100;
 		iceMagicLastTurn = -100;
+		lightningMagicLastTurn = -100;
+		darknessMagicLastTurn = -100;
 	}
 	internal function spellCostImpl(mod:Number):Number {
 		//Addiditive mods
@@ -353,6 +355,80 @@ public class CombatMagic extends BaseCombatContent {
 		return damage;
 	}
 
+	private var lightningMagicLastTurn:int = -100;
+	private var lightningMagicCumulated:int = 0;
+	internal function calcVoltageModImpl(damage:Number):int {
+		if (player.findPerk(PerkLib.HighVoltage) >= 0) {
+			var multiplier:Number = 1;
+			if (combatRound - lightningMagicLastTurn == 2) {
+				outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
+				switch(lightningMagicCumulated) {
+					case 0:
+					case 1:
+						multiplier = 1;
+						break;
+					case 2:
+						multiplier = 1.2;
+						break;
+					case 3:
+						multiplier = 1.35;
+						break;
+					case 4:
+						multiplier = 1.45;
+						break;
+					default:
+						multiplier = 1.5 + ((lightningMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
+				}
+				damage = Math.round(damage * multiplier);
+				lightningMagicCumulated++;
+				// XXX: Message?
+			} else {
+				if (combatRound - lightningMagicLastTurn > 2 && lightningMagicLastTurn > 0)
+					outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
+				lightningMagicCumulated = 1;
+			}
+			lightningMagicLastTurn = combatRound;
+		}
+		return damage;
+	}
+
+	private var darknessMagicLastTurn:int = -100;
+	private var darknessMagicCumulated:int = 0;
+	internal function calcEclypseModImpl(damage:Number):int {
+		if (player.findPerk(PerkLib.EclipsingShadow) >= 0) {
+			var multiplier:Number = 1;
+			if (combatRound - darknessMagicLastTurn == 2) {
+				outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
+				switch(darknessMagicCumulated) {
+					case 0:
+					case 1:
+						multiplier = 1;
+						break;
+					case 2:
+						multiplier = 1.2;
+						break;
+					case 3:
+						multiplier = 1.35;
+						break;
+					case 4:
+						multiplier = 1.45;
+						break;
+					default:
+						multiplier = 1.5 + ((darknessMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
+				}
+				damage = Math.round(damage * multiplier);
+				darknessMagicCumulated++;
+				// XXX: Message?
+			} else {
+				if (combatRound - darknessMagicLastTurn > 2 && darknessMagicLastTurn > 0)
+					outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
+				darknessMagicCumulated = 1;
+			}
+			darknessMagicLastTurn = combatRound;
+		}
+		return damage;
+	}
+
 	public function magicMenu():void {
 	//Pass false to combatMenu instead:	menuLoc = 3;
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 2 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
@@ -412,7 +488,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You are far too aroused to focus on white magic.\n\n");
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon) && player.weaponName != "fists")
+				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon) && (player.weaponName != "fists" || (player.weaponName == "fists" && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0)))
 					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
 				else if (player.weaponName == "fists") {
 					outputText("<b>Charge weapon can't be casted on your own fists.</b>\n\n");
@@ -424,7 +500,7 @@ public class CombatMagic extends BaseCombatContent {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeArmor) && !player.isNaked())
+				if (!player.hasStatusEffect(StatusEffects.ChargeArmor) && (!player.isNaked() || (player.isNaked() && player.haveNaturalArmor() && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0)))
 					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
 				else if (player.isNaked()) {
 					outputText("<b>Charge armor can't be casted without wearing any armor or even underwear.</b>\n\n");
@@ -1062,7 +1138,7 @@ public class CombatMagic extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		//High damage to goes.
-//	temp = calcGlacialMod(temp);
+		temp = calcEclypseMod(temp);
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
@@ -1448,7 +1524,10 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your [armor].  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
+		outputText("You utter words of power, summoning an electrical charge around your");
+		if (player.isNaked() && player.haveNaturalArmor() && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) outputText(" natural armor.");
+		else outputText(" [armor].");
+		outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -1745,7 +1824,7 @@ public class CombatMagic extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		//High damage to goes.
-//	temp = calcGlacialMod(temp);
+		temp = calcVoltageMod(temp);
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 5;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;
