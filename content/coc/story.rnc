@@ -45,8 +45,8 @@ font = element font {
     attribute color { text }?,
     content*
 }
-xcc-named-content = String | lib | story | macro | extend-story | zone | extend-zone
-xcc-content = Text | xcc-named-content
+xcc-named-content = Text | String | lib | story | macro | extend-story | zone | extend-zone
+xcc-content = xcc-named-content
     | display | dynStats | output | Include
     | set
 namedBlock = attribute name { text }?, content*

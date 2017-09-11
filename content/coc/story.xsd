@@ -82,7 +82,7 @@
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
         <xs:attribute name="name"/>
     </xs:complexType>
-    <xs:element name="text" substitutionGroup="ns1:xcc-content" type="ns1:namedBlock"/>
+    <xs:element name="text" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
     <xs:element name="string" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
     <xs:element name="lib" substitutionGroup="ns1:xcc-named-content">
         <xs:complexType>

@@ -2,15 +2,15 @@
 <extend-story name="appearance" xmlns="xxc-story">
     <text name="race">
         <if test="player.race() != player.startingRace">
-            You began your journey as a <output>player.startingRace</output>, but gave that up as you explored the
-            dangers of this realm.
+            <string>You began your journey as a <output>player.startingRace</output>, but gave that up as you explored the dangers of this realm.
+            </string>
         </if>
-        You are [tallness] tall [malefemaleherm] [race], with [bodytype].
+        <string>You are [tallness] tall [malefemaleherm] [race], with [bodytype].</string>
     </text>
     <text name="gear">
         <b>
             You are currently
-            <if test="player.isNaked()" then="naked" else="wearing your [armor]"/>
+            <if test="player.isNaked()" then="naked " else="wearing your [armor] "/>
             and using your [weapon] as a melee weapon<if test="player.weaponRangeName != 'nothing'">, [weaponrangename] as range weapon</if>
             <if test="player.shieldName != 'nothing'"> and [shield] as your shield</if>.
             <switch value="player.jewelryName">

@@ -137,8 +137,10 @@ public class StoryCompiler extends Compiler {
 		if (stack[0].tagname == 'string') {
 			trimStyle = TextStmt.TRIMSTYLE_NONE;
 		} else {
-			trimStyle = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT | TextStmt.TRIM_NT_TN;
-			//if (x==x.parent().children()[0]) trimStyle |= TextStmt.TRIM_LEFT;
+			trimStyle  = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT;
+			var ptn:XMLList = x.parent().text();
+			if (x==ptn[0]) trimStyle |= TextStmt.TRIM_LEFT;
+			if (x==ptn[ptn.length()-1]) trimStyle |= TextStmt.TRIM_RIGHT;
 		}
 		return new TextStmt(s, trimStyle);
 	}
