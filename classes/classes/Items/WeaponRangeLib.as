@@ -20,7 +20,7 @@ package classes.Items
 		public const BOWHUNT:WeaponRange = new WeaponRange("BowHunt", "BowHunt", "hunter bow", "a hunter bow", "shot", 10, 500, "This is a hunter bow. It allow to attain better accuracy of shooted arrows than long bow at the cost of slight lower damage.", "Bow");
 		public const BOWKELT:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowTain", "BowTain", "tainted bow", "a tainted bow", "shot", 30, 1500, "This bow is tainted by corruption in the past. It's quite effective at both short and long range. It balance helps uset to increase shooting accuracy quite a bit compared to other bows.", "Bow",
 				PerkLib.Accuracy1,10,0,0,0);
-		public const BOWLIGH:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowLigh", "BowLigh", "light bow", "a light bow", "shot", 5, 250, "This is a light bow. It averange in any way.", "Bow",
+		public const BOWLIGH:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowLigh", "BowLigh", "light bow", "a light bow", "shot", 5, 250, "This is a light bow. It's average in every way.", "Bow",
 				PerkLib.Accuracy2,40,0,0,0);
 		public const BOWLONG:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowLong", "BowLong", "longbow", "a longbow", "shot", 20, 1000, "This is a longbow. It allows to shoot arrows with greater speed dealing more damage at cost of slight lowered accuracy compared to hunter's bow.", "Bow",
 				PerkLib.Accuracy2,30,0,0,0);

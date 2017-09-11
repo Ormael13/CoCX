@@ -2928,7 +2928,7 @@ private function fixFlags():void {
 		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusEffectv1(StatusEffects.TakenGroPlus));
 		player.removeStatusEffect(StatusEffects.TakenGroPlus);
 	}
-	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 }
 private function promptSaveUpdate():void {
 	clearOutput();
