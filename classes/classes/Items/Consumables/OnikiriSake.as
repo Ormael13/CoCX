@@ -121,7 +121,7 @@ public class OnikiriSake extends Consumable {
 				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
 				if (player.gender == 3) outputText(" and");
 				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horn just like an oni.</b>");
+				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
 				mutations.setHornType(HORNS_ONI_X2, 1);
 			}
 			else {
@@ -131,7 +131,7 @@ public class OnikiriSake extends Consumable {
 				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
 				if (player.gender == 3) outputText(" and");
 				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
+				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horn just like an oni.</b>");
 				mutations.setHornType(HORNS_ONI, 1);
 			}
 			changes++;

@@ -1250,13 +1250,13 @@ package classes
 				"Add a part of your toughness to your weapon and shield damage.",
 				"You choose the 'Steel Impact' perk. Increasing damage of your weapon and shield.");
 		public static const StrongElementalBond:PerkType = mk("Strong Elemental Bond", "Strong Elemental Bond",
-				"You lower by 10 needed mana to sustain active elemntal in combat.",
+				"You lower by 10 needed mana to sustain active elemental in combat.",
 				"You choose the 'Strong Elemental Bond' perk, enhancing your connection with elementals and lowering mana needed to maintain bonds.");
 		public static const StrongerElementalBond:PerkType = mk("Stronger Elemental Bond", "Stronger Elemental Bond",
-				"You lower by 30 needed mana to sustain active elemntal in combat.",
+				"You lower by 30 needed mana to sustain active elemental in combat.",
 				"You choose the 'Stronger Elemental Bond' perk, futher enhancing your connection with elementals.");
 		public static const StrongestElementalBond:PerkType = mk("Strongest Elemental Bond", "Strongest Elemental Bond",
-				"You lower by 90 needed mana to sustain active elemntal in combat.",
+				"You lower by 90 needed mana to sustain active elemental in combat.",
 				"You choose the 'Strongest Elemental Bond' perk, reaching near the peak of connection strength with your elementals.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
 				"At the cost of using additional mana you can super charge each temporal golem core attaing ever better effects than before.",
@@ -3154,7 +3154,8 @@ package classes
 					 .requireSpe(75)
 					 .requireInt(75)
 					 .requireWis(75)
-					 .requireLib(45);
+					 .requireLib(45)
+					 .requireSen(45);
 	//	if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
 	//		ChimericalBodyPerfectStage;
 	//	}
@@ -3185,21 +3186,29 @@ package classes
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
 		//		}
-/*		DeityJobMunchkin.requirePerk(JobMonk)
-				   .requirePerk(JobKnight)
-				   .requirePerk(JobHunter)
-				   .requirePerk(JobEromancer)
-				   .requirePerk(JobEnchanter)
-				   .requirePerk(JobDervish)
-				   .requirePerk(JobDefender)
-				   .requirePerk(JobBarbarian)
-				   .requirePerk(JobAllRounder)
-				   .requireStr(150)
-				   .requireTou(150)
-				   .requireSpe(150)
-				   .requireInt(150)
-				   .requireWis(150)
-				   .requireLib(90); //requirePerk(JobEromancer)
+/*		DeityJobMunchkin.requirePerk(JobWarlord)
+						.requirePerk(JobMonk)
+						.requirePerk(JobKnight)
+						.requirePerk(JobGolemancer)
+						.requirePerk(JobHunter)
+						.requirePerk(JobEromancer)
+						.requirePerk(JobEnchanter)
+						.requirePerk(JobElementalConjurer)
+						.requirePerk(JobCourtesan)
+						.requirePerk(JobDervish)
+						.requirePerk(JobDefender)
+						.requirePerk(JobBrawler)
+						.requirePerk(JobBeastWarrior)
+						.requirePerk(JobBarbarian)
+						.requirePerk(JobAllRounder)
+						.requireStr(150)
+						.requireTou(150)
+						.requireSpe(150)
+						.requireInt(150)
+						.requireWis(150)
+						.requireLib(90)
+						.requireSen(90)
+						.requireLevel(30); //requirePerk(JobEromancer)
 */		//(Still need some other related stuff added to make PC true Munchkin
 		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
 		CycloneStage3.requireLevel(30)

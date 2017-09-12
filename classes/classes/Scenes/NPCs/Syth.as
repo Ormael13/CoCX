@@ -124,7 +124,7 @@ package classes.Scenes.NPCs
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting a (literally) smoking hot salamander – a eight foot tall man with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his sapphire eyes, while his body covers leather armor.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
+			str += "You are fighting a (literally) smoking hot salamander – a eight foot tall man with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his amber eyes, while his body covers leather armor.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
 			if (hasStatusEffect(StatusEffects.Lustzerking))
 			{
 				str += "\n\n<b>Looking at his posture and gaze indicates that he's currently under effect of some sort of berserking state.</b>";
