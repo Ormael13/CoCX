@@ -76,7 +76,7 @@ public class PerkTree extends BaseContent {
 		for each(perk in hints.roots) {
 			entry       = pdata[perk.id];
 			entry.depth = 0;
-			entry.tiers = [[entry]];
+			entry.tiers = [[]];
 			entry.roots = [entry];
 			q.push(entry);
 		}
@@ -92,7 +92,7 @@ public class PerkTree extends BaseContent {
 				}
 				child.depth = Math.max(child.depth,parent.depth + 1);
 				child.tier = perkTier(child,parent);
-				child.roots.push(root);
+				if (root!=child) child.roots.push(root);
 			}
 		}
 		// 3. Put tiers in their roots' arrays
@@ -133,7 +133,8 @@ public class PerkTree extends BaseContent {
 			if (rq.type == 'level') minlevel = rq.value;
 			else if(rq.type == 'ng+') ngplus = rq.value;
 		}
-		return Math.ceil(Math.max(
+		return Math.floor(Math.max(
+				1,
 				child.tier,
 				parent.tier,
 				child.depth / 6,
