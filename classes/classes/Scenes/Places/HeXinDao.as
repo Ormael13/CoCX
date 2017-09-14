@@ -444,28 +444,30 @@ public function Tier1():void {
 	addButton(7, "GoldenRind", GoldenRind).hint("Buy a golden rind.");
 	addButton(8, "GoldenSeed", GoldenSeed).hint("Buy a golden seed.");
 	addButton(9, "Gob.Ale", GobAle).hint("Buy a flagon of potent goblin ale.");
-	addButton(10, "KangaFruit", KangaFruit).hint("Buy a piece of kanga fruit.");
-	addButton(11, "La Bova", LaBova).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
-	addButton(12, "MouseCo", MouseCo).hint("Buy a handful of mouse cocoa.");
-	addButton(13, "MinoBlo", MinoBlo).hint("Buy a vial of Minotaur blood.");
+	addButton(10, "IncubiD", IncubiD).hint("Buy a flask of Incubi draft.");
+	addButton(11, "KangaFruit", KangaFruit).hint("Buy a piece of kanga fruit.");
+	addButton(12, "La Bova", LaBova).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
+	addButton(13, "MouseCo", MouseCo).hint("Buy a handful of mouse cocoa.");
 	addButton(14, "Back", mogahenmerchant);
 	statScreenRefresh();
 }
 
 public function Tier2():void {
 	menu();
-	addButton(0, "PigTruffle", PigTruffle).hint("Buy a pigtail truffle.");
-	addButton(1, "Reptilum", Reptilum).hint("Buy a vial of Reptilum.");
-	addButton(2, "RingFig", RingFig).hint("Buy a ringtail fig.");
-	addButton(3, "S.Gossr", SGossr).hint("Buy a bundle of pink, gossamer webbing.");
-	addButton(4, "SalamFW", SalamFW).hint("Buy a hip flask of Salamander Firewater.");
-	addButton(5, "Scorpinum", Scorpinum).hint("Buy a vial of Scorpinum.");
-	addButton(6, "Shark.T", SharkT).hint("Buy a sharp shark tooth.");
-	addButton(7, "SnakeOil", SnakeOil).hint("Buy a vial of snake oil.");
-	addButton(8, "TSTooth", TSTooth).hint("Buy a glowing tiger shark tooth.");
-	addButton(9, "W.Fruit", WFruit).hint("Buy a piece of whisker-fruit.");
-	addButton(10, "WetCloth", WetCloth).hint("Buy a wet cloth dripping with slippery slime.");
-	addButton(11, "YetiCum", YetiCum).hint("Buy a bottle of Yeti Cum.");
+	addButton(0, "MinoBlo", MinoBlo).hint("Buy a vial of Minotaur blood.");
+	addButton(1, "PigTruffle", PigTruffle).hint("Buy a pigtail truffle.");
+	addButton(2, "Reptilum", Reptilum).hint("Buy a vial of Reptilum.");
+	addButton(3, "RingFig", RingFig).hint("Buy a ringtail fig.");
+	addButton(4, "S.Gossr", SGossr).hint("Buy a bundle of pink, gossamer webbing.");
+	addButton(5, "SalamFW", SalamFW).hint("Buy a hip flask of Salamander Firewater.");
+	addButton(6, "Scorpinum", Scorpinum).hint("Buy a vial of Scorpinum.");
+	addButton(7, "Shark.T", SharkT).hint("Buy a sharp shark tooth.");
+	addButton(8, "SnakeOil", SnakeOil).hint("Buy a vial of snake oil.");
+	addButton(9, "SucMilk", SucMilk).hint("Buy a bottle of Succubi milk.");
+	addButton(10, "TSTooth", TSTooth).hint("Buy a glowing tiger shark tooth.");
+	addButton(11, "W.Fruit", WFruit).hint("Buy a piece of whisker-fruit.");
+	addButton(12, "WetCloth", WetCloth).hint("Buy a wet cloth dripping with slippery slime.");
+	addButton(13, "YetiCum", YetiCum).hint("Buy a bottle of Yeti Cum.");
 	addButton(14, "Back", mogahenmerchant);
 	statScreenRefresh();
 }
@@ -710,6 +712,26 @@ public function buyGobAle():void {
 	}
 }
 
+public function IncubiD():void {
+	clearOutput();
+	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace incubus in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
+	doYesNo(buyIncubiD, mogahenmerchant);
+}
+
+public function buyIncubiD():void {
+	if (player.gems < 18) {
+		clearOutput();
+		outputText("\n\nMoga shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this item.");
+		doNext(mogahenmerchant);
+	}
+	else {
+		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
+		player.gems -= 18;
+		inventory.takeItem(consumables.INCUBID, mogahenmerchant);
+		statScreenRefresh();
+	}
+}
+
 public function KangaFruit():void {
 	clearOutput();
 	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace kangaroo in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
@@ -946,6 +968,26 @@ public function buySnakeOil():void {
 		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
 		player.gems -= 18;
 		inventory.takeItem(consumables.SNAKOIL, mogahenmerchant);
+		statScreenRefresh();
+	}
+}
+
+public function SucMilk():void {
+	clearOutput();
+	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace sucubus in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
+	doYesNo(buySucMilk, mogahenmerchant);
+}
+
+public function buySucMilk():void {
+	if (player.gems < 18) {
+		clearOutput();
+		outputText("\n\nMoga shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this item.");
+		doNext(mogahenmerchant);
+	}
+	else {
+		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
+		player.gems -= 18;
+		inventory.takeItem(consumables.SUCMILK, mogahenmerchant);
 		statScreenRefresh();
 	}
 }

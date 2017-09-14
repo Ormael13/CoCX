@@ -59,6 +59,8 @@ package classes
 		public static const AscensionHardiness:AscensionHardinessPerk = new AscensionHardinessPerk();
 		public static const AscensionFertility:AscensionFertilityPerk = new AscensionFertilityPerk();
 		public static const AscensionFortune:AscensionFortunePerk = new AscensionFortunePerk();
+		public static const AscensionFury:AscensionFuryPerk = new AscensionFuryPerk();
+		public static const AscensionInnerPower:AscensionInnerPowerPerk = new AscensionInnerPowerPerk();
 		public static const AscensionMoralShifter:AscensionMoralShifterPerk = new AscensionMoralShifterPerk();
 		public static const AscensionMysticality:AscensionMysticalityPerk = new AscensionMysticalityPerk();
 		public static const AscensionSoulPurity:AscensionSoulPurityPerk = new AscensionSoulPurityPerk();

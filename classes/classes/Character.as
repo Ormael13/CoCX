@@ -965,6 +965,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
 			if (findPerk(PerkLib.Rage) >= 0) max += 250;
 			if (findPerk(PerkLib.Anger) >= 0) max += 300;
+			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
 			if (max > 1699) max = 1699;//obecnie max to 1660
@@ -1035,6 +1036,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
 				max *= multimax;
 			}
+			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
