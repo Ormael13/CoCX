@@ -372,8 +372,8 @@ public class PerkMenu extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 6) addButton(6, "Lightning", attackingElementalLightning);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 7) addButton(7, "Darkness", attackingElementalDarkness);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
-	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
 
 		var e:MouseEvent;
 		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
@@ -386,6 +386,16 @@ public class PerkMenu extends BaseContent {
 	}
 	public function elementalAttackReplacingPCmeleeAttack():void {
 		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
+			menu();
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalAir);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", attackingElementalEarth);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", attackingElementalFire);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", attackingElementalWater);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(5, "Ice", attackingElementalIce);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(6, "Lightning", attackingElementalLightning);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(7, "Darkness", attackingElementalDarkness);
+		}
 		summonsbehaviourOptions();
 	}
 	public function elementalAttackingAlongsidePC():void {

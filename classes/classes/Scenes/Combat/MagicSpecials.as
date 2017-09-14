@@ -2720,7 +2720,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) stoneskinduration += 2;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) stoneskinduration += 2;
 		player.createStatusEffect(StatusEffects.StoneSkin, stoneskinbonus, stoneskinduration, 0, 0);
-		outputText("WIP TEXT. \n\n");
+		outputText("Your elemental lifts stone and dirt from the ground, encasing you in a earthen shell stronger than any armor.\n\n");
 		enemyAI();
 	}
 
@@ -2775,7 +2775,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
-		outputText("WIP TEXT. ");
 		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -2787,8 +2786,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		damage = doDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		outputText("\n\n");
+		outputText("Your fire elemental douses your opponent with a torrent of fire <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -2837,7 +2836,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else temp += wisdomscalingbonus() * 0.1;
 		temp = Math.round(temp);
-		outputText("WIP TEXT. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -2893,7 +2892,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 		if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
-		outputText("WIP TEXT. ");
 		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -2905,8 +2903,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		damage = doDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		outputText("\n\n");
+		outputText("Your elemental produces a ray of hyper condensed cold and aims it straight at " + monster.a + monster.short + "  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -2960,7 +2958,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
 		damage = Math.round(damage);
-		outputText("WIP TEXT. ");
 		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -2972,8 +2969,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		damage = doDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		outputText("\n\n");
+		outputText("Your elemental charges electricity, then discharges it with a blinding bolt  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -3027,7 +3024,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
 		damage = Math.round(damage);
-		outputText("WIP TEXT. ");
 		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -3039,8 +3035,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		damage = doDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		outputText("\n\n");
+		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}

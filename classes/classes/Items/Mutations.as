@@ -30,7 +30,7 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			outputText("You open the can and bottom up hoping it wasn’t just a scam to buy an overpriced beer. Woa that’s one hell of a manly beverage! The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
+			outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
 			dynStats("str", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3));
 			player.refillHunger(10);
@@ -41,7 +41,7 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			outputText("The elixir taste foul at first but you guess it’s how it is with all medecine. As the merchant warned you about, you begin to feel your muscle like a coiled spring ready to allow you a swift dash. Your coordination definitively improved to as well as your vision as you can follow your movement despite the acceleration.");
+			outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
 			dynStats("spe", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3));
 			player.refillHunger(5);
@@ -50,7 +50,7 @@
 		public function incenseOfInsight(player:Player):void
 		{
 			clearOutput();
-			outputText("You use the incense and sit to meditate as the perfume of flower and fruits fill the area. You see visions of things you could do and things you could have done good and bad and when you open your eyes you realise you found new insight on your goals.");
+			outputText("You use the incense and sit to meditate as the perfume of flowers and fruits fill the area. You see visions of things you could do and things you could’ve done good and bad, and when you open your eyes you realise you found new insight on your goals.");
 			if (rand(3) == 0) outputText(player.modTone(15, 1));
 			if (player.wis < 50) {
 				player.wis += 1 + rand(4);

@@ -1660,29 +1660,38 @@ public function advancedtruegolems():void {
 
 public function gaunletchallange1fight1():void {
 	clearOutput();
-	outputText("Soon will be some more or less fancy text here.");
+	outputText("You register for the gauntlet challenge then when called, move out beyond the arena gate to face your opponent. The crowd is big, you sure will have quite the audience. A man with a necktie and a weird stick screams across the area.\n\n");
+	outputText("\"<i>Ladies and gentlemen! Today a new gladiator enter the arena seeking glory of the gauntlet! A triple battle for gold and fame!</i>\"\n\n");
+	outputText("The crowd cheers for you loudly.\n\n");
+	outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
+	outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsDummy());
 }
 public function gaunletchallange1fight2():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("As the last of the golem falls down, the commentator resumes.\n\n");
+	outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
+	outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
 	startCombat(new TentacleBeast());
 }
 public function gaunletchallange1fight3():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("As the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
+	outputText("\"<i>This contestant is smaller than the last two... Smarter too, and most of all extremely deadly. She’s paid a handsome sack of gems daily to kick the ass of anyone who reach this stage, yet is by far the deadliest combatant of her division. She’s your favorite and an expert huntress. Here she comes... Merisiel the dark elf!!!</i>\"\n\n");
+	outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf, however. She’s nothing like the gentle creature from your childhood stories as she observes you with a cruel, calculative gaze. The dark elf readies her bow, smirking.\n\n");
 	startCombat(new DarkElfScout());
 }
 public function gaunletchallange1postfight():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
 	if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
-		outputText("WIP TEXT about getting 20 Spirit Stones. ");
+		outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 		flags[kFLAGS.SPIRIT_STONES] += 20;
 		cleanupAfterCombat();
 	}
 	else {
+		outputText("\"<i>Good show, champion. As a reward for your performance, please accept this magical bow. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 		flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 1;
 		inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
 	}
