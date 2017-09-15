@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<story name="samirah" xmlns="xxc-story">
+	<lib name="strings">
+		<text name="debug">
+			Samirah debug text
+		</text>
+	</lib>
+</story>

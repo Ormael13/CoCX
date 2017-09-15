@@ -1,31 +1,24 @@
 package classes.Scenes.NPCs 
 {
-	import classes.BaseContent;
 	import classes.CoC;
 	import classes.Items.Useable;
-	import classes.SaveAwareInterface;
 	import classes.TimeAwareInterface;
-	import coc.xxc.Story;
 	/**
 	 * ...
 	 * @author Oxdeception
 	 */
-	public class CelessScene extends BaseContent implements TimeAwareInterface
+	public class CelessScene extends XXCNPC implements TimeAwareInterface
 	{
+		private static var _instance:CelessScene
 		private var _age:int=0;
 		private var _corruption:int=0;
 		private var _name:String = "Celess";
 		private var _armorFound:Boolean = false;
-		private var _story:Story;
 		
 		public function CelessScene() 
 		{
-			onGameInit(init);
-		}
-		public function init():void{
-			const game:CoC = getGame();
+			super("celess");
 			CoC.timeAwareClassAdd(this);
-			_story=new Story("story", game.rootStory, "celess", true);
 		}
 		
 		public function save(saveto:*):void{
