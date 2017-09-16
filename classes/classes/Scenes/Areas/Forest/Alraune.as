@@ -130,6 +130,7 @@ package classes.Scenes.Areas.Forest
 				//	.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

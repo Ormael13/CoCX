@@ -326,6 +326,9 @@ package classes
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
 				"Your transformed joins allows you to move more swiftly and with greater nimbleness.",
 				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
+		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
+				"Your nimble body allows you to move more swiftly and with greater nimbleness than before.",
+				"You choose the 'Cat-like Nimbleness (Evolved)' perk. Continuous usage of cat-like flexibility caused it to undergone change.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 30." +
@@ -502,7 +505,7 @@ package classes
 				"Draconic Lungs giving you slight increased speed and allows to use breath attack more often.",
 				"You choose the 'Draconic Lungs' perk. Your lungs due to repeadly usage of dragon breath attacks turned into draconic lungs.");
 		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
-				"Draconic Lungs giving you slight increased speed/toughness and increased threefold power of the dragon breath attacks.",
+				"Draconic Lungs (Evolved) giving you slight increased speed/toughness and increased threefold power of the dragon breath attacks.",
 				"You choose the 'Draconic Lungs (Evolved)' perk. Continuous exposition to draconic changes caused your lungs evolution into more complete form.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
 				"Allows you to wield two weapons (excluding large ones, staffs, with special perks and range ones).",
@@ -556,8 +559,11 @@ package classes
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to elder rank.",
 				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
-				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 2.",
+				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elements that aren't classified as one of four traditional.");
+		public static const ElementsOfTheOrtodoxPath:PerkType = mk("Elements of the Ortodox Path", "Elements of the Ortodox Path",
+				"You can now summon and command ether, wood and metal elementals. Also increase elementals command limit by 1.",
+				"You choose 'Elements of the Ortodox Path' perk, your time spent on studing elements allowed to be able clal those meantioned in more ortodox writings.");
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You choose the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
@@ -748,9 +754,9 @@ package classes
 		public static const ImprovingNaturesBlueprintsNaturalWeapons:PerkType = mk("Improving Nature's Blueprints (Natural Weapons)", "Improving Nature's Blueprints (Natural Weapons)",
 				"Charge Weapon can be cast whenever PC hold any weapon or merely using bare fists. And slight boost unarmed attacks while under Crinos Shape effects.",
 				"You choose the 'Improving Nature's Blueprints (Natural Weapons)' perk, allowing you to use Charge Weapon even without holding any weapon and slight boost unarmed attacks when using Crinos Shape.");
-		//public static const ImprovingNaturesBlueprints:PerkType = mk("Improving Nature's Blueprints ()", "Improving Nature's Blueprints ()",
-				//"Charge Armor can be casted even if PC is not wearing any armor as long it have any form of natural armor.",
-				//"You choose the 'Improving Nature's Blueprints ()' perk, allowing you to use Charge Armor even without wearing any weapon and slight boost armor while in Crinos Shape.");
+		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
+				"Changing negative bonuses to max Int and Wis form Job: Beast Warrior is the same value positive bonuses. While using Crinos hape increasing natural regeneration by 2% of max HP per turn.",
+				"You choose the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dul and slow witted along with increced regeneration while using Crinos Shape.");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
@@ -878,11 +884,11 @@ package classes
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed (req. 100+ tou).",
 				"You choose the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
-				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. (under construction)",
-				"You choose the 'Kitsune Thyroid Gland' perk. Some time after you grew ninth tail your enlightened entered on new level allowing you to form hoshi no tama inside your body.");
+				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed.",
+				"You choose the 'Kitsune Thyroid Gland' perk. Some time after you become kitsune part of your body changed allowing to boost your kitsune powers.");
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
-				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by one turn and speed of the recovery after using magic increased too. (under construction)",
-				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Some time after you grew ninth tail your enlightened entered on new level allowing you to form hoshi no tama inside your body.");
+				"Kitsune Thyroid Gland (Evolved) increase speed of the recovery after using magic, boost PC speed and wisdom. And make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).",
+				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Continued using of kitsune powers caused your thyroid gland to evolve.");
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
 				"Your proficiency in making golems allows to .",
 				"You choose 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
@@ -899,6 +905,9 @@ package classes
 		public static const LizanMarrow:PerkType = mk("Lizan Marrow", "Lizan Marrow",
 				"Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
 				"You choose the 'Lizan Marrow' perk. Constant regenerating your body caused pernamently change to your body marrow.");
+		public static const LizanMarrowEvolved:PerkType = mk("Lizan Marrow (Evolved)", "Lizan Marrow (Evolved)",
+				"Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
+				"You choose the 'Lizan Marrow (Evolved)' perk. Constant use of your lizan marrow caused it to change.");
 		public static const LongerLastingBuffsI:PerkType = mk("Long(er) Lasting Buffs I", "Long(er) Lasting Buffs I",
 				"Buff spells last 1 turn longer.",
 				"You choose the 'Long(er) Lasting Buffs I' perk. Constant use of buffs allowed you to optimize them a little bit.");
@@ -1085,6 +1094,24 @@ package classes
 		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
 				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
+		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury I' perk, increasing passive wrath generation and max Wrath.");
+		public static const PrimalFuryII:PerkType = mk("Primal Fury II", "Primal Fury II",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury II' perk, increasing passive wrath generation and max Wrath.");
+		public static const PrimalFuryIII:PerkType = mk("Primal Fury III", "Primal Fury III",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury III' perk, increasing passive wrath generation and max Wrath.");
+		public static const PrimalFuryIV:PerkType = mk("Primal Fury IV", "Primal Fury IV",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury IV' perk, increasing passive wrath generation and max Wrath.");
+		public static const PrimalFuryV:PerkType = mk("Primal Fury V", "Primal Fury V",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury V' perk, increasing passive wrath generation and max Wrath.");
+		public static const PrimalFuryVI:PerkType = mk("Primal Fury VI", "Primal Fury VI",
+				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
+				"You choose the 'Primal Fury VI' perk, increasing passive wrath generation and max Wrath.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
@@ -1155,6 +1182,9 @@ package classes
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands giving you slight boost to your natural stamina and libido.",
 				"You choose the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.");
+		public static const SalamanderAdrenalGlandsEvolved:PerkType = mk("Salamander Adrenal Glands (Evolved)", "Salamander Adrenal Glands (Evolved)",
+				"Your Salamander adrenal glands giving you slight boost to your natural strength, stamina, speed and libido and extend lustzerker and berserker duration by 2 turns.",
+				"You choose the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.");
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You choose the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!");
@@ -1690,6 +1720,7 @@ package classes
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGroupType:PerkType = mk("Group-type enemy", "Group-type enemy", "");
+		public static const EnemyPlantType:PerkType = mk("Plant-type enemy", "Plant-type enemy", "");
 		public static const FireNature:PerkType = mk("Fire Nature", "Fire Nature", "");
 		public static const FireVulnerability:PerkType = mk("Fire Vulnerability", "Fire Vulnerability", "");
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
@@ -2529,9 +2560,9 @@ package classes
 							.requireInt(270)
 							.requirePerk(HalfStepToPeerlessSpirituality)
 							.requireLevel(48);
-		Trance.requirePerk(PrestigeJobSeer)
+		/*Trance.requirePerk(PrestigeJobSeer)
 			  .requireInt(240)
-			  .requireLevel(48);
+			  .requireLevel(48);*/
 		//------------
 		// WISDOM
 		//------------
@@ -2540,8 +2571,10 @@ package classes
 								.requireWis(20);
 		ElementalContractRank1.requirePerk(ElementalConjurerResolve)
 							  .requireWis(25);
-		ElementsOfMarethBasics.requirePerk(ElementalContractRank1)
-							  .requireWis(30);
+		ElementsOfTheOrtodoxPath.requirePerk(ElementalContractRank1)
+								.requireWis(30);
+		ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
+							  .requireWis(35);
 		//Tier 1 Wisdom perks
 		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
 								   .requireWis(40)
@@ -2553,6 +2586,9 @@ package classes
 		ElementalBondFlesh.requirePerk(ElementalContractRank1)
 						  .requireWis(50)
 						  .requireLevel(6);
+		/*.requirePerk(ElementsOfMarethBasics)
+						.requireWis(35)
+						.requireLevel(6);*/
 		//Tier 2 Wisdom perks
 		JobMonk.requireWis(60)
 			   .requireLevel(12);
@@ -2976,6 +3012,13 @@ package classes
 		JobBeastWarrior.requireStr(20)
 					   .requireTou(20)
 					   .requireSpe(20);
+		PrimalFuryI.requirePerk(JobBeastWarrior);
+		PrimalFuryII.requirePerk(PrimalFuryI)
+					.requireLevel(2)
+					.requireNGPlus(1);
+		PrimalFuryIII.requirePerk(PrimalFuryII)
+					 .requireLevel(4)
+					 .requireNGPlus(2);
 		//Tier 1
 		ResistanceI.requireLevel(6);
 		Heroism.requireLevel(6);
@@ -3035,6 +3078,14 @@ package classes
 												.requireTou(35)
 												.requireSpe(35)
 												.requireLevel(6);
+		PrimalFuryIV.requirePerk(PrimalFuryIII)
+					.requireNGPlus(3);
+		PrimalFuryV.requirePerk(PrimalFuryIV)
+				   .requireLevel(8)
+				   .requireNGPlus(4);
+		PrimalFuryVI.requirePerk(PrimalFuryV)
+					.requireLevel(10)
+					.requireNGPlus(5);
 		//Tier 2
 		Survivalist2.requireLevel(12)
 					.requireHungerEnabled()
@@ -3057,14 +3108,28 @@ package classes
 				 .requirePerk(JobBarbarian);
 		Whipping.requireLevel(12)
 				.requirePerk(JobEromancer);
-		DraconicLungsEvolved.requireLevel(12).requirePerk(DraconicLungs).requireCustomFunction(function (player:Player):Boolean {
+		/*CatlikeNimblenessEvolved.requirePerk(CatlikeNimbleness).requireCustomFunction(function (player:Player):Boolean {
+			return player.catScore() >= 8;
+		}, "Cat race");*/
+		DraconicLungsEvolved.requireLevel(12)
+							.requirePerk(DraconicLungs)
+							.requireCustomFunction(function (player:Player):Boolean {
 			return player.dragonScore() >= 10;
 		}, "Dragon race");
 		KitsuneThyroidGlandEvolved.requireLevel(12)
 								  .requirePerk(KitsuneThyroidGland)
-								  .requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+								  .requireCustomFunction(function (player:Player):Boolean {
 			return player.kitsuneScore() >= 6;
 		}, "Kitsune race");
+		LizanMarrowEvolved.requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
+			return player.lizardScore() >= 8
+		}, "Lizan race");
+		MantislikeAgilityEvolved.requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
+			return player.mantisScore() >= 12
+		}, "Mantis race");
+		SalamanderAdrenalGlandsEvolved.requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
+			return player.salamanderScore() >= 7
+		}, "Salamander race");
 		ArcanePoolIV.requireLevel(12)
 					.requireInt(60)
 					.requireWis(60)
@@ -3217,17 +3282,17 @@ package classes
 					 .requireStr(90)
 					 .requireTou(90)
 					 .requirePerk(CycloneStage2);
-		//.requirePerk(GreaterCrinosShape)
-		//				 .requireStr(95)
-		//				 .requireTou(95)
-		//				 .requireSpe(95)
-		//				 .requireLevel(30);
+		ImprovingNaturesBlueprintsApexPredator.requirePerk(GreaterCrinosShape)
+											  .requireStr(95)
+											  .requireTou(95)
+											  .requireSpe(95)
+											  .requireLevel(30);
 		//Tier 6
 		CycloneStage4.requireLevel(36)
 					 .requireStr(120)
 					 .requireTou(120)
 					 .requirePerk(CycloneStage3);
-		MasterCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalArmor)
+		MasterCrinosShape.requirePerk(ImprovingNaturesBlueprintsApexPredator)
 						 .requireStr(110)
 						 .requireTou(110)
 						 .requireSpe(110)

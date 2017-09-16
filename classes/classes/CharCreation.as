@@ -771,7 +771,8 @@ import fl.controls.ComboBox;
 				}
 				addButton(2, "Beard Style", menuBeardSettings);
 			}
-			addButton(3, "Set Height", setHeight);
+			addButton(3, "Eyes Color", menuEyesColor);
+			addButton(4, "Set Height", setHeight);
 			if (player.hasCock()) addButton(5, "Cock Size", menuCockLength);
 			addButton(6, "Breast Size", menuBreastSize);
 			addButton(9, "Done", chooseEndowment, true);
@@ -864,6 +865,32 @@ import fl.controls.ComboBox;
 			menuBeardSettings();
 		}
 		
+		//-----------------
+		//-- EYES COLOURS
+		//-----------------
+		private function menuEyesColor():void {
+			clearOutput();
+			outputText("What is your eyes color?");
+			menu();
+			addButton(0, "Black", pickEyesColor, "black");
+			addButton(1, "Green", pickEyesColor, "green");
+			addButton(2, "Blue", pickEyesColor, "blue");
+			addButton(3, "Red", pickEyesColor, "red");
+			addButton(4, "White", pickEyesColor, "white");
+			addButton(5, "Brown", pickEyesColor, "brown");
+			addButton(6, "Yellow", pickEyesColor, "yellow");
+			addButton(7, "Grey", pickEyesColor, "grey");
+			addButton(10, "Purple", pickEyesColor, "purple");
+			addButton(11, "Golden", pickEyesColor, "golden");
+			addButton(13, "Silver", pickEyesColor, "silver");
+			addButton(14, "Back", genericStyleCustomizeMenu);
+		}
+
+		private function pickEyesColor(color:String = ""):void {
+			player.eyeColor = color;
+			genericStyleCustomizeMenu();
+		}
+
 		//-----------------
 		//-- HEIGHT
 		//-----------------

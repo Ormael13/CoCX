@@ -31,6 +31,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				//	.elseDrop(useables.B_CHITN);
 			this.removePerk(PerkLib.FireVulnerability);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
