@@ -247,7 +247,7 @@ public function helpBrookeOut():void {
 
 	outputText("\n\nBy the time she's long gone, the water is beginning to cool.  You've spent far too long in the shower as it is.  You quickly wash what you can before leaving the showers and fetching your gear, leaving the gym for now.");
 	// (Lust increased by 15)
-	dynStats("lus", 15 + player.lib/20, "resisted", false);
+	dynStats("lus", 15 + player.lib/20, "scale", false);
 	flags[kFLAGS.BROOKE_SHOWERED_WITH] = 1;
 	brookeAffection(4);
 	doNext(camp.returnToCampUseOneHour);
@@ -316,7 +316,7 @@ public function talkWithBrookeAboutWorkingOut():void {
 	if(brookeAffection() <= 39) outputText("\n\nSharing a shower with a naked girl just a few feet away is an unusual experience.  Of course, though, you're certainly not complaining – Brooke's an interesting girl, and she takes very good care of herself physically.  You enjoy her company.");
 	else outputText("\n\nThat damn Shepherd knows all of your buttons and all your weaknesses.  Every shower, she teases you in just the right ways, and it gets harder and harder to not just fuck her there in the stall.  Not that she'd mind, you're sure... but, it's a game you two play.  She likes pushing your limits, knowing that, when that limit breaks, it'll be a much harder workout than anything the gym could give her.  Which is something you both wouldn't mind.");
 	// (Lust increases by 10, Int increases by 1 with a cap of 50)
-	dynStats("lus", 10, "resisted", false);
+	dynStats("lus", 10, "scale", false);
 	if(player.inte < 50) dynStats("int", .5);
 	brookeAffection(4);
 	doNext(camp.returnToCampUseOneHour);
@@ -364,7 +364,7 @@ public function talkToBrookeAboutGymFolks():void {
 	//[if {Brooke's Affection >= 40}]
 	else outputText("\n\nThat damn Shepherd knows all of your buttons and all your weaknesses.  Every shower, she teases you in just the right ways, and it gets harder and harder to not just fuck her there in the stall.  Not that she'd mind, you're sure... but, it's a game you two play.  She likes pushing your limits, knowing that, when that limit breaks, it'll be a much harder workout than anything the gym could give her.  Which is something you both wouldn't mind.");
 	// (Lust increases by 15)
-	dynStats("lus", 15, "resisted", false);
+	dynStats("lus", 15, "scale", false);
 	brookeAffection(4);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -394,7 +394,7 @@ public function brookesRockinBod():void {
 	//[if {Brooke's Affection >= 40}
 	else outputText("\n\nThat damn Shepherd knows all of your buttons and all your weaknesses.  Every shower, she teases you in just the right ways, and it gets harder and harder to not just fuck her there in the stall.  Not that she'd mind, you're sure... but, it's a game you two play.  She likes pushing your limits, knowing that, when that limit breaks, it'll be a much harder workout than anything the gym could give her.  Which is something you both wouldn't mind.");
 	//(Lust increases by 15)
-	dynStats("lus", 15, "resisted", false);
+	dynStats("lus", 15, "scale", false);
 	brookeAffection(15);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -420,7 +420,7 @@ public function gropeDatBrooke():void {
 	outputText(".  <i>\"I'm game.  Hope you're ready, though; you're gonna need more than a few laps around the track to keep up with me.\"</i>");
 
 	outputText("\n\nYou narrow your eyes determinedly and, with a grin, you accept her challenge.");
-	dynStats("lus", 33, "resisted", false);
+	dynStats("lus", 33, "scale", false);
 	outputText("\n\nWhat is your weapon of choice?");
 	//[=Penetrate her=] [=Anal=] [=Tribadism=] [=Down on her=] [=Get laid=] [=Double-dicked=]
 	menu();

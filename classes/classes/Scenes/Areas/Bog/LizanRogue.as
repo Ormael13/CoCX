@@ -20,14 +20,14 @@ package classes.Scenes.Areas.Bog
 			else {
 				var statdrop:int = STAT_DROP_FLAT+STAT_DROP_MULT*player.newGamePlusMod();
 				outputText("The lizan flings himself back.  In the air he puts his blowgun to his lips and fires a single dart into your neck.  As you pull it out your limbs begin to feel like wet noodles, it appears you’ve been poisoned.");
-				game.dynStats("str", -statdrop, "spe", -statdrop);
+				player.dynStats("str", -statdrop, "spe", -statdrop);
 				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, statdrop, 0, statdrop, 0);
 				else {
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, statdrop);
 				}
 				if (player.cor > 50) {
-					game.dynStats("str", -statdrop, "spe", -statdrop);
+					player.dynStats("str", -statdrop, "spe", -statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, statdrop);
 				}
@@ -42,14 +42,14 @@ package classes.Scenes.Areas.Bog
 			else {
 				var statdrop:int = STAT_DROP_FLAT+STAT_DROP_MULT*player.newGamePlusMod();
 				outputText("The lizan rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using his blowgun to fire a single stinging dart into your neck.  You pull out the dart and your skin begins to feel hypersensitive, you’re going to have trouble defending yourself");
-				game.dynStats("tou", -statdrop, "sens", statdrop);
+				player.dynStats("tou", -statdrop, "sens", statdrop);
 				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 0, statdrop, 0, statdrop);
 				else {
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, statdrop);
 				}
 				if (player.cor > 50) {
-					game.dynStats("tou", -statdrop, "sens", statdrop);
+					player.dynStats("tou", -statdrop, "sens", statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, statdrop);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, statdrop);
 				}

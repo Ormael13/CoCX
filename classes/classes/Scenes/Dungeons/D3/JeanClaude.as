@@ -66,7 +66,7 @@ package classes.Scenes.Dungeons.D3
 					}
 					
 					applyTease(lustDelta);
-					game.dynStats("lus+", 20);
+					player.dynStats("lus+", 20);
 				}
 			}
 			else
@@ -74,7 +74,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\n“<i>Even when made the fool, still you try it, still you think you can entice me with things I have seen a thousand times before,</i>” Jean-Claude sighs. “<i>Why not give up, interloper? You do these things because they arouse YOU, not because you hope they arouse me. Give up, and embrace the life you were born to lead.</i>” Despite these words his hungry eyes remain on your body. Perhaps he can’t help it. You can only hope...");
 				
 				if (successful) applyTease(lustDelta);
-				game.dynStats("lus+", 20);
+				player.dynStats("lus+", 20);
 			}
 		}
 		

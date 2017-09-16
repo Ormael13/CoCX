@@ -132,7 +132,7 @@ public function plantGrowsToLevel2():void {
 	outputText("  Is this really Marae's gift?");
 	if(player.gender > 0) outputText("  Well, you could make use of this build up arousal on someone... just being around it seems to slowly turn you on.");
 	outputText("  Of course, destroying it would be the safest option.");
-	dynStats("lus", 33, "resisted", false);
+	dynStats("lus", 33, "scale", false);
 	if(silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	menu();

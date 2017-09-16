@@ -7,7 +7,7 @@ package classes.Scenes.Areas.GlacialRift
 	public class FrostGiant extends Monster
 	{
 		private function giantStrengthLoss(magnitude:int = 0):void {
-			game.dynStats("str", -magnitude);
+			player.dynStats("str", -magnitude);
 			player.addStatusValue(StatusEffects.GiantStrLoss, 2, magnitude);
 		}
 		
@@ -88,14 +88,14 @@ package classes.Scenes.Areas.GlacialRift
 				}
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("The thought of being constricted turns you on a bit. ")
-					game.dynStats("lust", 5);
+					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
 			}
 			else {
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("The thought of being constricted turns you on a bit. ")
-					game.dynStats("lust", 5);
+					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
 			}

@@ -12,7 +12,7 @@
 			outputText("Clara suddenly starts roughly manhandling her tit, noisily stuffing it into her mouth and starting to suck and slobber. Frothy milk quickly stains her mouth and she releases her breast, letting it fall back down. She belches and takes a stance to defend herself again; you can see the injuries you’ve inflicted actually fading as the healing power of her milk fills her.");
 			HP += 45;
 			lust += 5;
-			game.dynStats("lus", (5+player.lib/5));
+			player.dynStats("lus", (5+player.lib/5));
 			combatRoundOver();
 		}
 		//Clara throws a goblin potion, she has the web potion, the lust potion, and the weakening potion
@@ -53,7 +53,7 @@
 			else if(rand(2) == 0) outputText("Clara seems to relax for a moment and bounces her breasts in her hands.  \"<i>Come on, you know how good it is to drink cow-girl milk, just give up!</i>\" she coos.  Despite yourself, you can’t help but remember what it was like, and find yourself becoming aroused.");
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
 			outputText("\n");
-			game.dynStats("lus",5+player.lib/20);
+			player.dynStats("lus",5+player.lib/20);
 			combatRoundOver();
 		}
 
@@ -81,14 +81,14 @@
 			else if(player.hasVagina()) outputText("A sudden rush of Clara's hoofs clopping is the only warning you get before her attack comes, and you try to bring up your guard, only for her to deftly move past your defense and stick a hand into your [armor]!  She manages to worm her way to your [vagina] and pinches your [clit] before you can push her back out!  \"<i>Hmm, yeah, you're soo wet for me.</i>\" she taunts you behind your dazzled vision.");
 			//Bum: 
 			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
-			game.dynStats("lus",7+player.lib/15);
+			player.dynStats("lus",7+player.lib/15);
 			combatRoundOver();
 		}
 		//Every round if you're in Clara’s base; the PC’s lust is raised slightly.
 		protected function claraBonusBaseLustDamage():void
 		{
 			outputText("\nThe early effects of your addiction are making it harder and harder to continue the fight.  You need to end it soon or you’ll give in to those urges.");
-			game.dynStats("lus",2+player.lib/20);
+			player.dynStats("lus",2+player.lib/20);
 			combatRoundOver();
 		}
 		override protected function performCombatAction():void

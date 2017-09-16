@@ -73,7 +73,7 @@ private function consensualSatyrFuck(loc:int = 0):void {
 	
 	outputText("\n\nYou barely register what he's saying, the beverage hits you with such force you immediately stop drinking and start coughing, spilling some of the booze on the floor.");
 	//(+Lust)
-	dynStats("lus", 25, "resisted", false);
+	dynStats("lus", 25, "scale", false);
 	outputText("\n\nThe satyr bellows with laughter and takes a huge swig of his own wineskin.  \"<i>Looks like you need more practice with your liquor!</i>\" he chortles.  \"<i>Go on, drink up; practice makes perfect.</i>\"");
 	
 	outputText("\n\nIt suddenly dawns upon you that this satyr might not have the most noble intentions... you're pretty sure there's some sort of aphrodisiac inside this beverage he offered you, judging by the heat that spreads through your body.");

@@ -175,7 +175,7 @@ package classes.Scenes.NPCs
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg = Math.round(lustDmg);
-			game.dynStats("lus", lustDmg, "resisted", false);
+			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
 			fatigue += spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;

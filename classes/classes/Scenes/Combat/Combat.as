@@ -1184,7 +1184,7 @@ private function wait():void {
 	else if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
 		clearOutput();
 		outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
-		dynStats("lus", 30 + rand(5), "resisted", false);
+		dynStats("lus", 30 + rand(5), "scale", false);
 		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Whispered)) {
@@ -2376,7 +2376,7 @@ public function fantasize():void {
 	clearOutput();
 	if (monster.short == "frost giant" && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
 		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
-		dynStats("lus", temp2, "resisted", false);
+		dynStats("lus", temp2, "scale", false);
 		(monster as FrostGiant).giantBoulderFantasize();
 		enemyAI();
 		return;
@@ -2408,7 +2408,7 @@ public function fantasize():void {
 	}
 	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if " + monster.a + monster.short + " can tell what you were thinking.\n\n");
 	else outputText("\n");
-	dynStats("lus", temp2, "resisted", false);
+	dynStats("lus", temp2, "scale", false);
 	if(player.lust >= player.maxLust()) {
 		if(monster.short == "pod") {
 			outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n");
@@ -2440,7 +2440,7 @@ public function surrender():void {
 	temp3 += (player.maxLust() - player.lust);
 	clearOutput();
 	outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n");
-	dynStats("lus", temp3, "resisted", false);
+	dynStats("lus", temp3, "scale", false);
 	doNext(endLustLoss);
 }
 
@@ -3431,7 +3431,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	if(mod > 0) {
 		mainView.statsView.showStatDown( 'fatigue' );
 	}
-	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
+	dynStats("lus", 0, "scale", false); //Force display fatigue up/down by invoking zero lust change.
 	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
 	if(player.fatigue < 0) player.fatigue = 0;
 	statScreenRefresh();
@@ -3610,7 +3610,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	player.gems += monster.gems;
 	player.XP += monster.XP;
 	mainView.statsView.showStatUp('xp');
-	dynStats("lust", 0, "resisted", false); //Forces up arrow.
+	dynStats("lust", 0, "scale", false); //Forces up arrow.
 }
 
 //Update combat status effects
@@ -4178,7 +4178,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
 		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
 			player.removeStatusEffect(StatusEffects.DwarfRage);
 			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
 		}
@@ -4215,9 +4215,9 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Might)) {
 		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-			else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
 			player.removeStatusEffect(StatusEffects.Might);
 		//	statScreenRefresh();
 			outputText("<b>Might effect wore off!</b>\n\n");
@@ -4226,7 +4226,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Blink)) {
 		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-			kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
 			player.removeStatusEffect(StatusEffects.Blink);
 		//	statScreenRefresh();
 			outputText("<b>Blink effect wore off!</b>\n\n");
@@ -4258,8 +4258,8 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	//Trance Transformation
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {
 		if (player.soulforce < 50) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-			kGAMECLASS.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
 			player.removeStatusEffect(StatusEffects.TranceTransformation);
 			outputText("<b>The flow of power through you suddenly stops, as you no longer have the soul energy to sustain it.  You drop roughly to the floor, the crystal coating your [skin] cracking and fading to nothing.</b>\n\n");
 		}
@@ -4270,9 +4270,9 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	//Crinos Shape
 	if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
 		if (player.wrath < mspecials.crinosshapeCost()) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
-			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
-			kGAMECLASS.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
+			player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
 			player.removeStatusEffect(StatusEffects.CrinosShape);
 			outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor, the bestial chanches slowly fading away leaving you in your normal form.</b>\n\n");
 		}
@@ -4744,7 +4744,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
 	else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
 	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
-	monster.HP = monster.eMaxHP();
+	monster.HP = monster.maxHP();
 	monster.XP = monster.totalXP();
 	if (player.weaponRangeName == "gnoll throwing spear") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 20;
 	if (player.weaponRangeName == "gnoll throwing axes") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 10;
@@ -4753,7 +4753,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
 	if (player.weaponRange == weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
-		dynStats("lus", player.maxLust(), "resisted", false);
+		dynStats("lus", player.maxLust(), "scale", false);
 		doNext(endLustLoss);
 		return;
 	}
@@ -4796,7 +4796,7 @@ public function display():void {
 	var manaDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
-	hpDisplay = monster.HP + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
+	hpDisplay   = monster.HP + " / " + monster.maxHP() + " (" + (int(math * 1000) / 10) + "%)";
 	lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();
 	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.eMaxFatigue();
 	manaDisplay = Math.floor(monster.mana) + " / " + monster.eMaxMana();
@@ -5192,7 +5192,7 @@ public function ScyllaSqueeze():void {
 		fatigue(50, 2);
 	}
 	else fatigue(20, 2);
-	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100) * 1.5;
+	var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	if (monster.plural == true) damage *= 5;
 	//Squeeze -

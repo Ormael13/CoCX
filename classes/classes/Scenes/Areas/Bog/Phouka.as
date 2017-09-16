@@ -72,7 +72,7 @@ package classes.Scenes.Areas.Bog
 				else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY)
 					outputText("He grabs you and rubs up against your body.  For a moment you are lost in the feeling of his soft black fur.  Then you feel his cock pressing against your ribs and shove him away.");
 				else outputText("You are hypnotized by the equine cock jabbing at the air.  Then the " + this.short + " charges past you and you can taste the musk in the air.");
-				game.dynStats("lus", 15 + player.lib / 10 + player.cor / 5 + rand(10));
+				player.dynStats("lus", 15 + player.lib / 10 + player.cor / 5 + rand(10));
 			}
 			combatRoundOver();
 		}

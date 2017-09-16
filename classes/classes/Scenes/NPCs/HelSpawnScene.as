@@ -1307,7 +1307,7 @@ private function incestWithHelspawn():void {
 	outputText("\n\nYou grin as the beautiful salamander strokes your cheek, and says, \"<i>You're a hell of a lot better than any femmy spider boy, " + championRef() + ".  I'm a lucky girl to have someone like you to raise me... and to love me.</i>\"");
 	
 	outputText("\n\nYou kiss her again and send her on her way with a sharp swat on the ass.  She gives it a sexy wiggle as she walks, winking back at you as she saunters off.");
-	dynStats("lus", player.sens/10+5, "resisted", false);
+	dynStats("lus", player.sens/10+5, "scale", false);
 	flags[kFLAGS.HELSPAWN_INCEST] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1359,7 +1359,7 @@ private function umYum():void {
 			player.takeDamage(player.maxHP() / 4);
 			player.damageHunger(rand(10) + 15);
 			dynStats("lib", -10);
-			dynStats("lust", -100, "resisted", false);
+			dynStats("lust", -100, "scale", false);
 		}
 		outputText("You set the finished bowl down and ")
 	}

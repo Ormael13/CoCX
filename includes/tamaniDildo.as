@@ -25,7 +25,7 @@ public function sharkGirlGetsDildoed():void {
 	
 	outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.");
 	
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }
 
@@ -43,7 +43,7 @@ public function sandwitchGetsDildoed():void {
 	outputText("You wiggle the toy about, enjoying having taken such advantage of your now-unconscious foe.  But you have places to be, and you pull out your toy, ");
 	if(player.cor > 50) outputText("lick it clean, ");
 	outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.");
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }
 
@@ -61,6 +61,6 @@ public function succubusGetsDildoed():void {
 	outputText("Good.  You pick up the toy ");
 	if(player.cor > 75) outputText("giving it a long lick to taste the succubi's delicious flavor ");
 	outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...");
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }

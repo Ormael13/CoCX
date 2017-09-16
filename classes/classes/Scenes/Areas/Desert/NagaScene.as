@@ -1281,7 +1281,7 @@ public function naggaSqueeze():void {
 	}
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
-	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100);
+	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 	kGAMECLASS.doDamage(damage, true, true);
 	fatigue(20, 2);
 	//Enemy faints -

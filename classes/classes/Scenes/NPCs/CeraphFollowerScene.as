@@ -2158,7 +2158,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nClick.");
 				outputText("\n\nYour collar is removed, and you look around realizing your owner is gone.  Your muscles are sore from the journey and you NEED to masturbate...  You aren't even sure why you did that.");
 			}
-			dynStats("sen", 4, "lus=", 100, "resisted", false);
+			dynStats("sen", 4, "lus=", 100, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

@@ -38,7 +38,7 @@ import classes.internals.ChainedDrop;
 				}
 				else {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.");
-					game.dynStats("lus", 3);
+					player.dynStats("lus", 3);
 					//apply status here
 					basiliskSpeed(player,20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);

@@ -120,7 +120,7 @@ package classes.Scenes.NPCs
 				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
 				game.fatigue(10);
-				game.dynStats("lus", 25);
+				player.dynStats("lus", 25);
 				var damage:Number = 20 + rand(10);
 				damage = player.takeDamage(damage, true);
 			}
@@ -146,7 +146,7 @@ package classes.Scenes.NPCs
 				//sap rose shitposting
 				var damage:int = 10 + rand(5);
 				damage = player.takeDamage(damage, true);
-				game.dynStats("lus", 15);
+				player.dynStats("lus", 15);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}
 			combatRoundOver();
@@ -185,7 +185,7 @@ package classes.Scenes.NPCs
 			//lower monster lust by medium-lots and apply med sens-based lust damage
 			lust -= 20;
 			if (lust < 20) lust = 20;
-			game.dynStats("lus", 15 + player.sens / 5);
+			player.dynStats("lus", 15 + player.sens / 5);
 			combatRoundOver();
 		}
 

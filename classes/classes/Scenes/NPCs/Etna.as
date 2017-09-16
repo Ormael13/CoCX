@@ -39,7 +39,7 @@ package classes.Scenes.NPCs
 				outputText("The bony spike hits the mark dealing ");
 				player.takeDamage(tailspikedmg, true);
 				outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
-				game.dynStats("lus", lustdmg, "resisted", false);
+				player.dynStats("lus", lustdmg, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			}
 			else {
@@ -60,7 +60,7 @@ package classes.Scenes.NPCs
 			outputText(" in your direction crashing into you breast first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she ready her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
-			game.dynStats("lus", lustdmg, "resisted", false);
+			player.dynStats("lus", lustdmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			player.takeDamage(boobcrashdmg, true);
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);

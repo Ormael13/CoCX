@@ -192,7 +192,7 @@ package classes.Scenes.Dungeons
 			doYesNo(reallyRetry, declineRetry);
 		}
 		public function reallyRetry():void {
-			dynStats("lus", -100, "resisted", false);
+			dynStats("lus", -100, "scale", false);
 			player.fatigue = 0;
 			player.HP = player.maxHP();
 			statScreenRefresh();

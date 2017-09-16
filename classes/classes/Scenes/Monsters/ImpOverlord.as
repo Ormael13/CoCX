@@ -74,14 +74,14 @@ package classes.Scenes.Monsters
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 5) + rand(10);
 				lustDamage = lustDamage * (game.lustPercent() / 100);
-				game.dynStats("lus", lustDamage, "resisted", false);
+				player.dynStats("lus", lustDamage, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
 				fatigue += spellCostArouse;
 			}
 			//Heal
 			else if (spellChooser == 4 && fatigue <= (eMaxFatigue() - spellCostHeal)) {
 				outputText("He focuses on his body and his desire to end pain, trying to draw on his arousal without enhancing it.");
-				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/50));
+				var temp:int = int((inte / (2 + rand(3))) * (maxHP() / 50));
 				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 				addHP(temp);
 				fatigue += spellCostHeal;
@@ -106,7 +106,7 @@ package classes.Scenes.Monsters
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			player.takeDamage(damage, true);
-			game.dynStats("lus", 20 + player.cor / 10);
+			player.dynStats("lus", 20 + player.cor / 10);
 			combatRoundOver();
 		}
 
@@ -115,7 +115,7 @@ package classes.Scenes.Monsters
 		{
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
-			game.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
+			player.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
 			combatRoundOver();
 		}
 
@@ -126,7 +126,7 @@ package classes.Scenes.Monsters
 			var damage:int = 12 + rand(25);
 			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			game.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
+			player.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
 			combatRoundOver();
 		}
 		
@@ -149,7 +149,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("The cum lands on you, staining your [armor] and the cum even gets on your [skinfurscales]! You feel aroused from his cum.");
 				player.slimeFeed();
-				game.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
+				player.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
 			}
 			combatRoundOver();
 		}

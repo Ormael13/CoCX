@@ -29,7 +29,7 @@ package classes.Scenes.Dungeons.Factory
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
 			if (hasStatusEffect(StatusEffects.LustAura)) {
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
+				player.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
 			}
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
@@ -53,14 +53,14 @@ package classes.Scenes.Dungeons.Factory
 					outputText("The milk splashes into your [armor], soaking you effectively.  ");
 					if (player.cocks.length > 0) {
 						outputText("Your [cock] gets hard as the milk lubricates and stimulates it.  ");
-						game.dynStats("lus", 5);
+						player.dynStats("lus", 5);
 					}
 					if (player.vaginas.length > 0) {
 						outputText("You rub your thighs together as the milk slides between your pussy lips, stimulating you far more than it should.  ");
-						game.dynStats("lus", 5);
+						player.dynStats("lus", 5);
 					}
 				}
-				game.dynStats("lus", 7 + player.sens / 20);
+				player.dynStats("lus", 7 + player.sens / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
 			game.combatRoundOver();

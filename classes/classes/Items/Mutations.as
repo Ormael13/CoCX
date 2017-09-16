@@ -3119,7 +3119,7 @@
 			if (fuck) outputText("red");
 			else outputText("pink");
 			outputText(" potion, and its unnatural warmth immediately flows to your groin.");
-			dynStats("lus", (30 + rand(player.lib / 10)), "resisted", false);
+			dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
 
 			//Heat/Rut for those that can have them if "fuck draft"
 			if (fuck) {
@@ -7825,7 +7825,7 @@
 			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
 			//-30 fatigue, -2 libido, -10 lust]
 			fatigue(-10);
-			dynStats("lus", -25, "cor", (-3 - rand(2)), "resisted", false);
+			dynStats("lus", -25, "cor", (-3 - rand(2)), "scale", false);
 			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
 			player.refillHunger(10);
 			if(player.cor > 50) dynStats("cor", -1);
@@ -8227,7 +8227,7 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
 				//+100 LUST
-				dynStats("lus=", player.maxLust(), "resisted", false);
+				dynStats("lus=", player.maxLust(), "scale", false);
 				break;
 
 			//[Wither]
@@ -9603,7 +9603,7 @@
 			}
 			outputText("\n\nYou lick your lips clean, savoring the taste of the Winter Pudding.  You feel kinda antsy...");
 			//[Decrease player tone by 5, Increase Lust by 20, Destroy item.]
-			dynStats("lus", (10+player.lib/10), "resisted", false);
+			dynStats("lus", (10+player.lib/10), "scale", false);
 			
 			//[Optional, give the player antlers! (30% chance) Show this description if the player doesn't have horns already.]
 			if(player.horns == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {

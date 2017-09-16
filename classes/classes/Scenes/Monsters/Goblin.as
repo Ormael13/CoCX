@@ -42,8 +42,8 @@
 					outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.");
 					if(HPRatio() < 1) {
 						outputText("  She looks to have recovered from some of her wounds!\n");
-						addHP((eMaxHP() / 4) * multiplier);
-						if (short == "Tamani") addHP((eMaxHP() / 4) * multiplier);
+						addHP((maxHP() / 4) * multiplier);
+						if (short == "Tamani") addHP((maxHP() / 4) * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n");
 					combatRoundOver();
@@ -107,7 +107,7 @@
 			if (short == "goblin warrior") lustDmg *= 1.6;
 			if (short == "goblin shaman") lustDmg *= 1.6;
 			if (short == "goblin elder") lustDmg *= 2;
-			game.dynStats("lus", lustDmg);
+			player.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
 			combatRoundOver();
 		}

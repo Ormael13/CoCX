@@ -790,31 +790,26 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) MightDuration += 1;
 			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) MightDuration += 5;
 			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
-			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
-			temp = MightBoost;
-			tempTou = temp;
+			tempTou = MightBoost;
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
 				var MightIntBoost:Number = 0;
 				MightIntBoost += 25 * spellModBlack() * (1 + player.newGamePlusMod());
-				temp = MightIntBoost;
-				tempInt = temp;
+				tempInt = MightIntBoost;
+			} else {
+				tempStr = MightBoost;
 			}
-			else tempStr = temp;
-			//if(player.str + temp > 100) tempStr = 100 - player.str;
-			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
+			var oldHPratio:Number = player.hp100/100;
+			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
 			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
 			player.changeStatusValue(StatusEffects.Might,2,tempTou);
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) mainView.statsView.showStatUp('int');
-			else mainView.statsView.showStatUp('str');
-			// strUp.visible = true;
-			// strDown.visible = false;
-			mainView.statsView.showStatUp('tou');
-			// touUp.visible = true;
-			// touDown.visible = false;
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.inte += player.statusEffectv1(StatusEffects.Might);
-			else player.str += player.statusEffectv1(StatusEffects.Might);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				player.inte += player.statusEffectv1(StatusEffects.Might);
+			} else {
+				player.str += player.statusEffectv1(StatusEffects.Might);
+			}
 			player.tou += player.statusEffectv2(StatusEffects.Might);
+			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};
 

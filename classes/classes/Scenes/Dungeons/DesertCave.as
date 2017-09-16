@@ -774,7 +774,7 @@ package classes.Scenes.Dungeons
 			outputText(".  Of course, the wicked witch only releases you at this point.  \"<i>Do I look like one of the cum-hungry wenches around here?</i>\"");
 			
 			//add lust
-			dynStats("lus=", player.maxLust(), "resisted", false);
+			dynStats("lus=", player.maxLust(), "scale", false);
 			
 			outputText("\n\nAt that, a few nagging worries surge up to the forefront of your lust-addled thoughts.  You were hypnotized!  Worse than that, you can barely remember anything, let alone how you got here.  In addition, though less pressing, she's done something to you that'll make you only father females.  You don't remember much, but you know that's not quite right.  You jump up and nearly fall over your own [feet] in your hurry to get away from this woman - alluring and arousing as she is.  Pressing your back flat against the wall, you begin breathing faster and faster as you wrack your consciousness for an explanation.");
 			
@@ -891,7 +891,7 @@ package classes.Scenes.Dungeons
 				
 				outputText("\n\nSo if you avoid a facial she'll steal some of your semen production, but if you take it, she'll make you MORE virile.  While you're mulling it over, she's still grinding on you, distracting you with flashes of salacious delight.  The clock is ticking, and if you don't pick soon, she might pick for you.");
 				//[Facial] [No Facial]
-				dynStats("lus=", player.maxLust(), "resisted", false);
+				dynStats("lus=", player.maxLust(), "scale", false);
 				addButton(0,"Facial",tooBigCumWitchLossFacial).hint("Allow the Cum Witch to cum all over your face and increase your potency.");
 				addButton(1,"No Facial",tooBigCumWitchLossNoFacial).hint("Don't allow the Cum Witch to perform facial. This will reduce your cum production multiplier by 25%.");
 			}
@@ -2323,7 +2323,7 @@ package classes.Scenes.Dungeons
 				//(Award XP)
 				player.XP += 200;
 				mainView.statsView.showStatUp( 'xp' );
-				dynStats("lust", 0, "resisted", false); //Forces up arrow.
+				dynStats("lust", 0, "scale", false); //Forces up arrow.
 				//xpUp.visible = true;
 				statScreenRefresh();
 				//(Set friendly)
@@ -3809,7 +3809,7 @@ package classes.Scenes.Dungeons
 			}
 			//[Fuck Her](PC must have gender; if cooch, also C+ cups) [Don't]
 			menu();
-			dynStats("lus", 33, "resisted", false);
+			dynStats("lus", 33, "scale", false);
 			if(player.hasCock()) addButton(0,"Dick Fuck",fuckMilkbabeWithPenor).hint("Fuck the milk slave with your penis.");
 			if(player.hasVagina() && player.biggestTitSize() >= 3) addButton(1,"Lady Fuck",ladyFucks).hint("Have some vaginal and boob play.");
 			addButton(2,"Don't Fuck",dontFuckMilkBathBabe).hint("Skip the fucking.");

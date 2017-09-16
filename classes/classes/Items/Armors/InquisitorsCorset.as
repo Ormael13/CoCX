@@ -25,7 +25,7 @@ package classes.Items.Armors
 			outputText("\n\n");
 			outputText("You feel sexy... and pious.\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of mana!)\n\n");
 			//+lust
-			game.dynStats("lus", 5);
+			game.player.dynStats("lus", 5);
 		}
 		
 		override public function get description():String {

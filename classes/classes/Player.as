@@ -834,7 +834,7 @@ use namespace kGAMECLASS;
 						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('mana');
-					game.dynStats("lus", 0); //Force display arrow.
+					dynStats("lus", 0); //Force display arrow.
 				}
 				else {
 					//Wrath
@@ -850,10 +850,10 @@ use namespace kGAMECLASS;
 						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('hp');
-					game.dynStats("lus", 0); //Force display arrow.
+					dynStats("lus", 0); //Force display arrow.
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					game.dynStats("lus", int(damage / 2));
+					dynStats("lus", int(damage / 2));
 				}
 				//Prevent negatives
 				if (HP<=0){
@@ -3813,7 +3813,7 @@ use namespace kGAMECLASS;
 					hunger = maxHunger();
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatUp('hunger');
-				//game.dynStats("lus", 0, "resisted", false);
+				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n");
 				//Messages
 				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
@@ -3827,7 +3827,7 @@ use namespace kGAMECLASS;
 				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				if (oldHunger >= 90) kGAMECLASS.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
-				game.dynStats("lus", 0, "resisted", false);
+				dynStats("lus", 0, "scale", false);
 				kGAMECLASS.statScreenRefresh();
 			}
 		}
@@ -3841,7 +3841,7 @@ use namespace kGAMECLASS;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
 			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatDown('hunger');
-			game.dynStats("lus", 0, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 		}
 		
 		public function corruptionTolerance():int {
@@ -4194,7 +4194,7 @@ use namespace kGAMECLASS;
 			}
 		}
 
-		public function getAllMinStats():Object {
+		public override function getAllMinStats():Object {
 			var minStr:int = 1;
 			var minTou:int = 1;
 			var minSpe:int = 1;
@@ -4249,7 +4249,7 @@ use namespace kGAMECLASS;
 		}
 
 		//Determine minimum lust
-		public function minLust():Number
+		public override function minLust():Number
 		{
 			var min:Number = 0;
 			var minCap:Number = maxLust();
@@ -4322,17 +4322,7 @@ use namespace kGAMECLASS;
 			return min;
 		}
 		
-		public function getMaxStats(stats:String):int {
-			var obj:Object = getAllMaxStats();
-			if (stats == "str" || stats == "strength") return obj.str;
-			else if (stats == "tou" || stats == "toughness") return obj.tou;
-			else if (stats == "spe" || stats == "speed") return obj.spe;
-			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
-			else if (stats == "wis" || stats == "wisdom") return obj.wis;
-			else if (stats == "lib" || stats == "libido") return obj.lib;
-			else return 100;
-		}
-		public function getAllMaxStats():Object {
+		public override function getAllMaxStats():Object {
 			Begin("Player","getAllMaxStats");
 			var maxStr:int = 100;
 			var maxTou:int = 100;
@@ -5270,7 +5260,7 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.Sealed2);
 			}
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
+				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
@@ -5294,11 +5284,11 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.WolfHold)) removeStatusEffect(StatusEffects.WolfHold);
 			if(hasStatusEffect(StatusEffects.Whispered)) removeStatusEffect(StatusEffects.Whispered);
 			if(hasStatusEffect(StatusEffects.AkbalSpeed)) {
-				kGAMECLASS.dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
+				dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
 				removeStatusEffect(StatusEffects.AkbalSpeed);
 			}
 			if(hasStatusEffect(StatusEffects.AmilyVenom)) {
-				kGAMECLASS.dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
+				dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
 				removeStatusEffect(StatusEffects.AmilyVenom);
 			}
 			while(hasStatusEffect(StatusEffects.Blind)) {
@@ -5383,13 +5373,13 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.ChanneledAttack);
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -statusEffectv1(StatusEffects.Might));
-				else kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might));
-				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might));
+				else dynStats("str", -statusEffectv1(StatusEffects.Might));
+				dynStats("tou", -statusEffectv2(StatusEffects.Might));
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {
-				kGAMECLASS.dynStats("spe", -statusEffectv1(StatusEffects.Blink));
+				dynStats("spe", -statusEffectv1(StatusEffects.Blink));
 				removeStatusEffect(StatusEffects.Blink);
 			}
 			if(hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -5402,28 +5392,28 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.Blizzard);
 			}
 			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
+				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
 				removeStatusEffect(StatusEffects.BeatOfWar);
 			}
 			if(hasStatusEffect(StatusEffects.CastedSpell)) {
 				removeStatusEffect(StatusEffects.CastedSpell);
 			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
+				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
 			if(hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
 				removeStatusEffect(StatusEffects.UnderwaterOutOfAir);
 			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
-				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
+				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
+				dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
 				removeStatusEffect(StatusEffects.TranceTransformation);
 			}
 			if(hasStatusEffect(StatusEffects.CrinosShape)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
-				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
-				kGAMECLASS.dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
+				dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
+				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
+				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
 				removeStatusEffect(StatusEffects.CrinosShape);
 			}
 			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
@@ -5528,7 +5518,7 @@ use namespace kGAMECLASS;
 				str += statusEffectv1(StatusEffects.AnemoneVenom);
 				spe += statusEffectv2(StatusEffects.AnemoneVenom);
 				//Make sure nothing got out of bounds
-				kGAMECLASS.dynStats("cor", 0);
+				dynStats("cor", 0);
 
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
@@ -5539,7 +5529,7 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.GnollSpear)) {
 				spe += statusEffectv1(StatusEffects.GnollSpear);
 				//Make sure nothing got out of bounds
-				kGAMECLASS.dynStats("cor", 0);
+				dynStats("cor", 0);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
 				// speDown.visible = false;
@@ -5937,7 +5927,7 @@ use namespace kGAMECLASS;
 				sac.value1 += 5 * intensity;
 				sac.value2 += 5 * intensity;
 				sac.value3 += 48 * intensity;
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			else {
@@ -5945,7 +5935,7 @@ use namespace kGAMECLASS;
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>");
 				}
 				createStatusEffect(StatusEffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
-				game.dynStats("lib", 15 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 15 * intensity, "scale", false);
 			}
 			return true;
 		}
@@ -5972,7 +5962,7 @@ use namespace kGAMECLASS;
 				addStatusValue(StatusEffects.Rut, 1, 100 * intensity);
 				addStatusValue(StatusEffects.Rut, 2, 5 * intensity);
 				addStatusValue(StatusEffects.Rut, 3, 48 * intensity);
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			else {
 				if(output) {
@@ -5983,14 +5973,14 @@ use namespace kGAMECLASS;
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			
 			return true;
 		}
 		public function orgasmReal():void
 		{
-			game.dynStats("lus=", 0, "res", false);
+			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 
@@ -6074,6 +6064,136 @@ use namespace kGAMECLASS;
 				orgasm(otype);
 			}
 		}
-
+		
+		protected override function maxHP_base():Number {
+			var max:Number = super.maxHP_base();
+			if (alicornScore() >= 11) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 10) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (unicornScore() >= 9) max += (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			
+			return max;
+		}
+		protected override function maxLust_base():Number {
+			var max:Number = super.maxLust_base();
+			if (cowScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (cowScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (demonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 10) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (minotaurScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (phoenixScore() >= 5) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (salamanderScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			
+			return max;
+		}
+		
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number,dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean = true):void {
+			//Easy mode cuts lust gains!
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 2;
+			
+			//Set original values to begin tracking for up/down values if
+			//they aren't set yet.
+			//These are reset when up/down arrows are hidden with 
+			//hideUpDown();
+			//Just check str because they are either all 0 or real values
+			if(game.oldStats.oldStr == 0) {
+				game.oldStats.oldStr = str;
+				game.oldStats.oldTou = tou;
+				game.oldStats.oldSpe = spe;
+				game.oldStats.oldInte = inte;
+				game.oldStats.oldWis = wis;
+				game.oldStats.oldLib = lib;
+				game.oldStats.oldSens = sens;
+				game.oldStats.oldCor = cor;
+				game.oldStats.oldHP = HP;
+				game.oldStats.oldLust = lust;
+				game.oldStats.oldFatigue = fatigue;
+				game.oldStats.oldSoulforce = soulforce;
+				game.oldStats.oldHunger = hunger;
+			}
+			if (scale) {
+				//MOD CHANGES FOR PERKS
+				//Bimbos learn slower
+				if (findPerk(PerkLib.FutaFaculties) >= 0 || findPerk(PerkLib.BimboBrains) >= 0 || findPerk(PerkLib.BroBrains) >= 0) {
+					if (dinte > 0) dinte /= 2;
+					if (dinte < 0) dinte *= 2;
+				}
+				if (findPerk(PerkLib.FutaForm) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0) {
+					if (dlib > 0) dlib *= 2;
+					if (dlib < 0) dlib /= 2;
+				}
+				
+				// Uma's Perkshit
+				if (findPerk(PerkLib.ChiReflowSpeed) >= 0 && dspe < 0) dspe *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
+				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+				
+				//Apply lust changes in NG+.
+				dlust *= 1 + (newGamePlusMod() * 0.2);
+				
+				//lust resistance
+				if (dlust > 0 && scale) dlust *= game.lustPercent() / 100;
+				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
+				if (dcor > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dcor *= 0.5;
+				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
+				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
+				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
+				
+				if (sens > 50 && dsens > 0) dsens /= 2;
+				if (sens > 75 && dsens > 0) dsens /= 2;
+				if (sens > 90 && dsens > 0) dsens /= 2;
+				if (sens > 50 && dsens < 0) dsens *= 2;
+				if (sens > 75 && dsens < 0) dsens *= 2;
+				if (sens > 90 && dsens < 0) dsens *= 2;
+				
+				
+				//Bonus gain for perks!
+				if (findPerk(PerkLib.Strong) >= 0) dstr += dstr * perk(findPerk(PerkLib.Strong)).value1;
+				if (findPerk(PerkLib.Tough) >= 0) dtou += dtou * perk(findPerk(PerkLib.Tough)).value1;
+				if (findPerk(PerkLib.Fast) >= 0) dspe += dspe * perk(findPerk(PerkLib.Fast)).value1;
+				if (findPerk(PerkLib.Smart) >= 0) dinte += dinte * perk(findPerk(PerkLib.Smart)).value1;
+				if (findPerk(PerkLib.Lusty) >= 0) dlib += dlib * perk(findPerk(PerkLib.Lusty)).value1;
+				if (findPerk(PerkLib.Sensitive) >= 0) dsens += dsens * perk(findPerk(PerkLib.Sensitive)).value1;
+				
+				// Uma's Str Cap from Perks (Moved to max stats)
+				/*if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
+				{
+					if (str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
+					{
+						str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
+					}
+				}
+				if (findPerk(PerkLib.ChiReflowDefense) >= 0)
+				{
+					if (spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
+					{
+						spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
+					}
+				}*/
+			}
+			//Change original stats
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false);
+			//Refresh the stat pane with updated values
+			//mainView.statsView.showUpDown();
+			game.showUpDown();
+			game.statScreenRefresh();
+		}
 	}
 }

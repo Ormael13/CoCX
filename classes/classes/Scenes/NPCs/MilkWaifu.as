@@ -376,7 +376,7 @@ private function relaxWithMilkWaifu():void {
 	clearOutput();
 	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".  You spend the better part of an hour lounging, letting your cares float away in " + flags[kFLAGS.MILK_NAME] + "'s endless white bounty.  Finally though, you pull out the tub's plug and climb out, finding a towel nearby.  Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 	//(+Lust, -Fatigue)
-	dynStats("lus", 10+player.sens/10, "resisted", false);
+	dynStats("lus", 10+player.sens/10, "scale", false);
 	fatigue(-34);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -488,7 +488,7 @@ private function dontFuckTheMilkWaifu():void {
 	clearOutput();
 	outputText("You allow the girl to continue for a long, long while until your entire body feels deeply refreshed, her milk having soaked thoroughly into your body and making you feel fresh and revitalized.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she slips into your arms and presses her lips to yours.  Chuckling to yourself, you hold the girl as tight against yourself as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
-	dynStats("lus", 10+player.sens/10, "resisted", false);
+	dynStats("lus", 10+player.sens/10, "scale", false);
 	HPChange(player.maxHP()*.33,false);
 	fatigue(-20);
 	doNext(camp.returnToCampUseOneHour);
@@ -629,7 +629,7 @@ private function nyanCatMilkTime():void {
 		//If PC has Sophie or Isabella:
 		else outputText("\n\nThough you didn't intend for this to turn communal, " + flags[kFLAGS.MILK_NAME] + " certainly has more than enough to share.  You relax as the last trickles of milk pour into the pool, her breasts looking positively deflated.  You decide to leave the plug in for your friends as you clamber out, figuring they'll want to stockpile a little for the day before you drain it.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");
 		fatigue(-50);
-		dynStats("lus", 10+player.sens/10, "resisted", false);
+		dynStats("lus", 10+player.sens/10, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//Milk Time!  (DD Boobs Ver.)
@@ -657,7 +657,7 @@ private function finishMilkNormall():void {
 	outputText("\n\nAs soon as the explosive boobgasm subsides, she collapses back against you, chest heaving with pleasured exhaustion.  The milky stream trickles down to naught, her breasts momentarily depleted.  " + flags[kFLAGS.MILK_NAME] + " looks up at you and smiles ever so slightly, caressing your cheek before cupping her obviously-sore teats and staggering to her feet, searching for a towel.");
 	outputText("\n\n\"<i>Thank you, [name],</i>\" she says simply as you dry yourself off.");
 	fatigue(-50);
-	dynStats("lus", 10+player.sens/10, "resisted", false);
+	dynStats("lus", 10+player.sens/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Suckle]
@@ -675,7 +675,7 @@ private function suckleDatMilk():void {
 	player.slimeFeed();
 	player.refillHunger(50);
 	fatigue(-50);
-	dynStats("lus", 10+player.sens/10, "resisted", false);
+	dynStats("lus", 10+player.sens/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Fuck Her] (Needs a dick what fits)

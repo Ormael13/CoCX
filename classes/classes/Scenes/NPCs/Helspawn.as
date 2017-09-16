@@ -134,7 +134,7 @@ private function calledShot():void {
 			outputText("Seeing a momentary lull in the melee, " + flags[kFLAGS.HELSPAWN_NAME] + " slips out of reach, stumbling back and clutching at the bruises forming all over her body.  \"<i>Come on, " + flags[kFLAGS.HELSPAWN_NAME] + ", you can do this. Focus, focus,</i>\" she mutters, trying to catch her breath.  A moment later and she seems to have taken a second wind as she readies her weapon with a renewed vigor.");
 			lust -= 30;
 			if(lust < 0) lust = 0;
-			addHP(eMaxHP() / 3.0);
+			addHP(maxHP() / 3.0);
 		}
 
 		override public function defeated(hpVictory:Boolean):void

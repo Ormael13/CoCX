@@ -176,7 +176,7 @@
 				if (this.lustVuln <= 0.3) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
 			}
 			
-			this.HP = this.eMaxHP();
+this.HP = this.maxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
 			if (fatigue >= this.eMaxFatigue()) { //Exhausted!
@@ -236,8 +236,8 @@
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 					player.takeDamage(0.75*this.str + rand(15));
 				}
-				game.dynStats("lus+", 3 + rand(3));
-				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
+				player.dynStats("lus+", 3 + rand(3));
+				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
 				combatRoundOver();
 			}
 		}
@@ -264,7 +264,7 @@
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(.75*this.str + rand(15));
 			}
-			game.dynStats("lus+", 3 + rand(3));
+			player.dynStats("lus+", 3 + rand(3));
 			combatRoundOver();
 		}
 		
@@ -287,7 +287,7 @@
 			if (damage >= 0)
 			{
 				var sL:Number = player.lust;
-				game.dynStats("lus+", damage);
+				player.dynStats("lus+", damage);
 				sL = Math.round(player.lust - sL);
 				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
@@ -320,7 +320,7 @@
 		
 		private function showerDotEffect():void
 		{
-			game.dynStats("lus+", 2 + rand(2));
+			player.dynStats("lus+", 2 + rand(2));
 			
 			player.addStatusValue(StatusEffects.ShowerDotEffect, 1, -1);
 			
@@ -388,7 +388,7 @@
 			outputText(" They're so soft and pillowy that you can't help but enjoy the feel of them on your skin, and you take a deep, contented breath before remembering where you are and struggling out of the creamy valley.");
 			
 			outputText("\n\nYour foe giggles, favoring you with a blown kiss. Her nipples are obviously a little harder, but then again, so are yours.");
-			game.dynStats("lus+", 3 + rand(3));
+			player.dynStats("lus+", 3 + rand(3));
 			lust+=3 + rand(3);
 
 		}
@@ -415,7 +415,7 @@
 			if (this.hasStatusEffect(StatusEffects.LustAura))
 			{
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				game.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
+				player.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
 			}
 			else 
 			{
@@ -436,7 +436,7 @@
 				outputText("\n\nIt hangs there for a moment while the succubus yanks your mouth open, just in time to receive the undoubtedly drugged jism. It practically sizzles on your tongue, tasting of almonds and walnuts with a distinctly fruity aftertaste. Your mouth gulps it down automatically, and with slow-dawning comprehension, you understand how the succubus could be so obsessed with these plants. Your groin heats eagerly as the plant spunk absorbs into your system. Your pupils dilate. Gods, it feels good!");
 				
 				outputText("\n\nYou barely even realize that the temptress has stepped away. How can you fight this?");
-				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)), "cor+", 5);
+				player.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)), "cor+", 5);
 			}
 			else
 			{

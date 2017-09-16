@@ -56,7 +56,7 @@ package classes.Scenes.Areas.Forest
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
 			var lustDmg:int = rand(player.lib / 20) + rand(this.lib / 10) + 10;
-			game.dynStats("lus", lustDmg);
+			player.dynStats("lus", lustDmg);
 			outputText("\n\n");
 		}
 		

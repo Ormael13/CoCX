@@ -70,7 +70,7 @@ public function pumpkinFuck():void {
 	if(player.cumQ() < 1000) {
 		outputText("\n\nAll too soon, you finish and step away, satisfied.  The pumpkin's pussy seals closed slowly, cutting off the worst of the slime-flow.  You get dressed, but the plant's tendrils no longer bother you.  They lie still and flat, and even the perverse sweating comes to an end.  Whatever fel magic was behind this, it seems to have settled after the salty snack you gave it.  You get dressed and walk back to camp with a spring in your step.");
 		player.orgasm();
-		dynStats("cor", 2);
+		player.dynStats("cor", 2);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
@@ -82,7 +82,7 @@ public function pumpkinFuck():void {
 		outputText(" as if it would somehow protect your nude body.");
 		doNext(pumpkinFuckPartII);
 		player.orgasm();
-		dynStats("cor", 2);
+		player.dynStats("cor", 2);
 	}
 }
 //[Next]
@@ -133,7 +133,7 @@ public function pumpkinFuckPartIII():void {
 		outputText("\n\n(<b>Perk Gained: Fera's Boon - Alpha</b>)");
 		player.createPerk(PerkLib.FerasBoonAlpha,0,0,0,0);
 	}
-	dynStats("cor", 30);
+	player.dynStats("cor", 30);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -182,7 +182,7 @@ public function mountPumpkin():void {
 		doNext(pumpkinMountingLevelII);
 	}
 	player.orgasm();
-	dynStats("cor", 1);
+	player.dynStats("cor", 1);
 }
 
 //>Next
@@ -230,7 +230,7 @@ public function mountPumpkinsIII():void {
 		outputText("\n\n(<b>Perk Gained: Fera's Boon - Breeding Bitch</b>)");
 		player.createPerk(PerkLib.FerasBoonBreedingBitch,0,0,0,0);
 	}
-	dynStats("cor", 30);
+	player.dynStats("cor", 30);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -280,7 +280,7 @@ public function exploreFerasWonderland():void {
 	else if(player.hasVagina() && player.hasCock()) outputText(", and there's a telltale sticky tightness in your [armor], keeping your [cocks] tightly compressed while your [vagina] practically juices itself all over everything, so hot, wet, and unmistakably eager to feel something inside of it. You look up at those leaky stamen and the plump lips between them and wonder what it would feel like to stick yourself in between the lips and let the stamen go to town on your exposed holes.");
 	else {
 		outputText("\n\nWell, that was nice, but you don't see much reason to stick around.  You head back to camp with a wistful look over your shoulder.");
-		dynStats("lib", 1, "lus", 20, "cor", 1);
+		player.dynStats("lib", 1, "lus", 20, "cor", 1);
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
@@ -305,7 +305,7 @@ public function exploreFerasWonderland():void {
 		addButton(0,"Lips",fuckDemCorruptFlowerLips);
 		addButton(1,"Stamen",stickAStamenInIt);
 	}
-	dynStats("lib", 1, "lus", 25, "cor", 1);
+	player.dynStats("lib", 1, "lus", 25, "cor", 1);
 }
 
 //Leave
@@ -373,7 +373,7 @@ public function fuckDemCorruptFlowerLips():void {
 	outputText("\n\nThere isn't enough guidance in that question to rouse a response from your supine form, so Fera continues on, smiling all the while.  \"<i>Oh, I'm going to do it, [name].  You're going to do this for me.</i>\"  She idly slips a finger along the underside of [oneCock] and licks her lips.");
 	
 	//[next]
-	dynStats("lus=", player.maxLust());
+	player.dynStats("lus=", player.maxLust());
 	menu();
 	addButton(0,"Next",dickBoostingFuntimes);
 }
@@ -419,7 +419,7 @@ public function dickBoostingFuntimes():void {
 		}
 	}
 	player.orgasm();
-	dynStats("lib", 10, "cor", 5);
+	player.dynStats("lib", 10, "cor", 5);
 	if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
 		player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
 	}
@@ -432,7 +432,7 @@ public function postSeederUpgrade():void {
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, scratching [oneCock] and smiling as you feel how hard and sensitive it is.  You're already feeling pretty anxious for a fuck, especially after the crazy wet dreams you had last night, and you resolve to find a nice hole to dump a few loads into before too long.  First, you had better go check back up on your camp.  You've got to bring your A-game if you're going to fuck stronger babies into every weak pussy you come across.  Besides, the wait will only make your eventual sexual enjoyment that much messier.");
 	//Add ten more corruption.
 	//Add 50 lust.
-	dynStats("lus", 25, "cor", 10, "resisted", false);
+	player.dynStats("lus", 25, "cor", 10, "scale", false);
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -468,7 +468,7 @@ public function stickAStamenInIt():void {
 	outputText("?</i>\"");
 	outputText("\n\nWith the question asked, she awaits your slow-moving mind's answer.  No is not an option you're even capable of considering at this point.  Which do you want?");
 	//[Gape] [Tight] [Dick]
-	dynStats("lus=", player.maxLust(), "cor", 2);
+	player.dynStats("lus=", player.maxLust(), "cor", 2);
 	menu();
 	addButton(0,"Gape",gapeMePleaseFera);
 	addButton(1,"Tight",tightLikeAToigar);
@@ -517,7 +517,7 @@ public function gapeMePleaseFera():void {
 	if(player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 	//Add five corruption.
 	player.orgasm();
-	dynStats("cor", 3);
+	player.dynStats("cor", 3);
 	//[Next]
 	menu();
 	addButton(0,"Next",gapeByFeraEpilogue);
@@ -531,7 +531,7 @@ public function gapeByFeraEpilogue():void {
 	outputText("  You idly reach into your [armor] and stuff four fingers into yourself before sighing and removing them.  It just isn't the same as being full of cock.");
 	outputText("\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
 	//Add ten more corruption.
-	dynStats("lus", 20, "cor", 10, "resisted", false);
+	player.dynStats("lus", 20, "cor", 10, "scale", false);
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -565,7 +565,7 @@ public function tightLikeAToigar():void {
 	outputText("\n\nYou have no choice but to obey as you lose consciousness to the pleasure, your mind left as open to Fera's instructions as your pussy is to that ever-thrusting, continually-cumming vine-cock.");
 	//(cum!)
 	player.orgasm();
-	dynStats("lib", 5, "sen", 20, "cor", 3);
+	player.dynStats("lib", 5, "sen", 20, "cor", 3);
 	//Maximum size to 2
 	if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
 		player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
@@ -585,7 +585,7 @@ public function tightnessEpilogue():void {
 	clearOutput();
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could find yourself something to fight and fuck, but you ought to head back to camp first.  You idly reach into your [armor] and slip a finger into your [vagina], feeling your tight walls instinctively clamp down and squeeze it.  It's nice, but it's just so much better when you can do that to a captive cock until it has no choice but to impregnate you with its hot seed.  What better way to save the world than by making sure that the strongest get to breed as often as possible?");
 	outputText("\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
-	dynStats("lus", 20, "cor", 10, "resisted", false);
+	player.dynStats("lus", 20, "cor", 10, "scale", false);
 	doNext(camp.returnToCampUseFourHours);
 	//Add ten more corruption.
 }
@@ -605,7 +605,7 @@ public function growADickForFera():void {
 	outputText("\n\nYou're crying with sublime ecstasy as you let the pleasure consume you, simply feeling yourself constantly erupting, constantly swelling... constantly blissful.  Your eyes roll back, and Fera is whispering into your ear, but the words don't need to be understood, only heard, only left to burrow deeply into your psyche and embed themselves there, right where they can stay and take root.  You slip from consciousness to the feel of your new cock expanding past nine inches in length...");
 	//(cum!)
 	player.orgasm();
-	dynStats("lib", 10, "sen", 10, "cor", 3);
+	player.dynStats("lib", 10, "sen", 10, "cor", 3);
 	//Grow a 10" human or tentacle dick! RANDOM!
 	player.createCock();
 	player.cocks[0].cockLength = 10;
@@ -623,6 +623,6 @@ public function afterFeraGivesYouACawk():void {
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap. You rise, scratching your [cock] and smiling as you feel how hard and sensitive it is.  You're already feeling pretty anxious for a fuck, especially after the fucked up wet dreams you had last night, and you resolve to find a nice hole to dump a few loads into before too long.  First, you had better go check back up on your camp.  You've got to bring your A-game if you're going to fuck stronger babies into every weak pussy you come across.");
 	//Add ten more corruption.
 	//Add 50 lust.
-	dynStats("lus", 20, "cor", 10);
+	player.dynStats("lus", 20, "cor", 10);
 	doNext(camp.returnToCampUseFourHours);
 }

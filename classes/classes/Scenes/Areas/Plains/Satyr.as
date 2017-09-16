@@ -31,7 +31,7 @@ package classes.Scenes.Areas.Plains
 		private function satyrBate():void {
 			outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
 			//(small Libido based Lust increase, and increase lust)
-			game.dynStats("lus", (player.lib/5)+4);
+			player.dynStats("lus", (player.lib/5)+4);
 			lust += 5;
 			combatRoundOver();
 		}
@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Plains
 		private function bottleChug():void {
 			outputText("He whips a bottle of wine seemingly from nowhere and begins chugging it down, then lets out a bellowing belch towards you.  The smell is so horrible you cover your nose in disgust, yet you feel hot as you inhale some of the fetid scent.");
 			//(damage PC lust very slightly and raise the satyr's lust.)
-			game.dynStats("lus", (player.lib/5));
+			player.dynStats("lus", (player.lib/5));
 			lust += 5;
 			combatRoundOver();
 		}
@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Plains
 				outputText("You fall with a <b>THUD</b> and the Satyr doesn't even bother to undress you before he begins rubbing his massive cock on your body until he comes, soiling your [armor] and " + player.skinFurScales() + " with slimy, hot cum.  As it rubs into your body, you shiver with unwanted arousal.");
 				//large-ish sensitivity based lust increase if hit.)(This also relieves him of some of his lust, though not completely.)
 				lust -= 50;
-				game.dynStats("lus", (player.sens/5+20));
+				player.dynStats("lus", (player.sens/5+20));
 			}
 			combatRoundOver();
 		}

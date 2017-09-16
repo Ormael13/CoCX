@@ -31,13 +31,13 @@ package classes.Scenes.Areas.Ocean
 			//First application
 			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
-			game.dynStats("lus", (6 * amt));
+			player.dynStats("lus", (6 * amt));
 
 			//Loop through applying 1 point of venom at a time.
 			while (amt > 0) {
 				amt--;
 				//Str bottommed out, convert to lust
-				if (player.str < 6) game.dynStats("lus", 6);
+				if (player.str < 6) player.dynStats("lus", 6);
 				//Lose a point of str.
 				else {
 					showStatDown("str");
@@ -47,7 +47,7 @@ package classes.Scenes.Areas.Ocean
 					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 3);
 				}
 				//Spe bottomed out, convert to lust
-				if (player.spe < 6) game.dynStats("lus", 4);
+				if (player.spe < 6) player.dynStats("lus", 4);
 				//Lose a point of spe.
 				else {
 					showStatDown("spe");

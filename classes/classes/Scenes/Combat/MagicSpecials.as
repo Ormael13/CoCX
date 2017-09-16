@@ -1660,9 +1660,9 @@ public class MagicSpecials extends BaseCombatContent {
 	public function returnToNormalShape():void {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and retunrning to your normal shape.");
-		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
-		kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
-		kGAMECLASS.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
+		player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
+		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
+		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
 		player.removeStatusEffect(StatusEffects.CrinosShape);
 		enemyAI();
 	}

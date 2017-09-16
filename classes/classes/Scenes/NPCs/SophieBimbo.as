@@ -1554,7 +1554,7 @@ private function sophiePreggoTitJobs():void {
 	outputText("\n\nYou rock your [hips], unable to resist, but at the first sign of motion, Sophie pulls her tits away.  \"<i>Like, just let me milk your dick babe.  Hold still and I'll make sure it's everything you want.</i>\"  She shakes her tits enticingly for emphasis.");
 	
 	outputText("\n\nDo you let her rub your dick down with her tits how she wants, or push her down and go hog-wild on those giant, pregnancy-enhanced knockers?");
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 	//[Let Her] [Hog Wild]
 	menu();
 	addButton(0,"Let Her",letSophieMilkYoDick);
