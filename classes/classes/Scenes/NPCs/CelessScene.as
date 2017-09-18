@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.CoC;
 	import classes.Items.Useable;
+	import classes.Scenes.Camp;
 	import classes.TimeAwareInterface;
 	/**
 	 * ...
@@ -9,7 +10,7 @@ package classes.Scenes.NPCs
 	 */
 	public class CelessScene extends XXCNPC implements TimeAwareInterface
 	{
-		private static var _instance:CelessScene
+		private static var _instance:CelessScene;
 		private var _age:int=0;
 		private var _corruption:int=0;
 		private var _name:String = "Celess";
@@ -17,11 +18,26 @@ package classes.Scenes.NPCs
 		
 		public function CelessScene() 
 		{
-			super("celess");
-			CoC.timeAwareClassAdd(this);
+			if (!_instance){
+				super("celess");
+				CoC.timeAwareClassAdd(this);
+				Camp.addFollower(this);
+				_instance = this;
+			}
+			else 
+			{
+				throw new Error("Singleton. Use getInstance();");
+			}
+		}
+		public static function getInstance():CelessScene 
+		{
+			if (!_instance){
+				new CelessScene();
+			}
+			return _instance;
 		}
 		
-		public function save(saveto:*):void{
+		public override function save(saveto:*):void{
 			saveto.celess = {
 				age:_age,
 				corruption:_corruption,
@@ -29,7 +45,7 @@ package classes.Scenes.NPCs
 				armorFound:_armorFound
 			}
 		}
-		public function load(loadfrom:*):void{
+		public override function load(loadfrom:*):void{
 			if (loadfrom == undefined || loadfrom.celess == undefined){
 				_age = 0;
 				_corruption = 0;
@@ -42,6 +58,14 @@ package classes.Scenes.NPCs
 				_name = loadfrom.celess.name;
 				_armorFound = loadfrom.celess.armorFound;
 			}
+		}
+		public override function checkCampEvent():Boolean{
+			if (shouldDoBirth()){
+				birthScene();
+				hideMenus();
+				return true;
+			}
+			return false;
 		}
 		
 		/* INTERFACE classes.TimeAwareInterface */
@@ -88,10 +112,17 @@ package classes.Scenes.NPCs
 			_armorFound = true;
 		}
 		
-		public function campInteraction():void{
+		override public function campDescription(menuType:int=-1, descOnly:Boolean=false):void 
+		{
+			if (isFollower && menuType == FOLLOWER){
+				outputText(getName+" is currently resting on all four in the nearby grassland area.\n\n");
+				addButton(3, getName, campInteraction);
+			}
+		}
+		public override function campInteraction():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			_story.display(context, "strings/campInteraction", {$name:_name});
+			story.display(context, "strings/campInteraction", {$name:_name});
 			addButton(0, "Appearance", appearance);
 			if (isAdult){
 				addButton(1, "Incest", incestMenu);
@@ -106,7 +137,7 @@ package classes.Scenes.NPCs
 		public function appearance():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			_story.display(context, "strings/appearance",{$name:_name})
+			story.display(context, "strings/appearance",{$name:_name});
 			addButton(0, "Back", campInteraction);
 		}
 		public function birthScene():void{
@@ -116,7 +147,7 @@ package classes.Scenes.NPCs
 			else{
 				clearOutput();
 				doNext(nameScene);
-				_story.display(context, "strings/birth/intro");
+				story.display(context, "strings/birth/intro");
 				mainView.nameBox.text = "";
 				flushOutputTextToGUI();
 			}
@@ -143,20 +174,20 @@ package classes.Scenes.NPCs
 			mainView.nameBox.visible = false;
 			clearOutput();
 			doNext(camp.returnToCampUseFourHours);
-			_story.display(context, "strings/birth/nameScene",{$name:_name});
+			story.display(context, "strings/birth/nameScene",{$name:_name});
 			flushOutputTextToGUI();
 			
 		}
 		public function playtimeScene():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			_story.display(context, "strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
+			story.display(context, "strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
 			flushOutputTextToGUI();
 		}
 		public function growUpScene():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			_story.display(context, "strings/growUp", {$name:_name});
+			story.display(context, "strings/growUp", {$name:_name});
 			if (isCorrupt){
 				doHeatOrRut();
 				addButton(0, "Masturbate Her", incestScene, 5);
@@ -172,7 +203,7 @@ package classes.Scenes.NPCs
 		public function incestMenu():void{
 			if (isCorrupt){
 				clearOutput();
-				_story.display(context, "strings/incest/corruptMenu",{$name:_name});
+				story.display(context, "strings/incest/corruptMenu",{$name:_name});
 				addButton(0, "Suck her off", incestScene, 1);
 				if (player.isMaleOrHerm()){
 					addButton(1, "Fuck Her", incestScene, 0);
@@ -192,44 +223,44 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 			switch(scene){
 				case 0:
-					_story.display(context, "strings/incest/fuckHer",{$name:_name});
+					story.display(context, "strings/incest/fuckHer",{$name:_name});
 					break;
 				case 1:
-					_story.display(context, "strings/incest/suckHerOff",{$name:_name});
-					doHeatOrRut()
+					story.display(context, "strings/incest/suckHerOff",{$name:_name});
+					doHeatOrRut();
 					break;
 				case 2:
-					_story.display(context, "strings/incest/getFucked",{$name:_name});
-					doHeatOrRut()
+					story.display(context, "strings/incest/getFucked",{$name:_name});
+					doHeatOrRut();
 					break;
 				case 3:
-					_story.display(context, "strings/incest/pureIncest",{$name:_name});
-					doHeatOrRut()
+					story.display(context, "strings/incest/pureIncest",{$name:_name});
+					doHeatOrRut();
 					if (player.cor > 80){
 						_corruption++;
 						if (isCorrupt){
 							addButton(0, "Next", incestScene, 6);
 						}
 						else{
-							_story.display(context, "strings/incest/addCorruption", {$name:_name});
+							story.display(context, "strings/incest/addCorruption", {$name:_name});
 							dynStats("cor", -1);
 						}
 					}
 					break;
 				case 4:
-					_story.display(context, "strings/incest/centaurToys",{$name:_name});
+					story.display(context, "strings/incest/centaurToys",{$name:_name});
 					break;
 				case 5:
-					_story.display(context, "strings/incest/masturbateHer",{$name:_name});
+					story.display(context, "strings/incest/masturbateHer",{$name:_name});
 					break;
 				case 6:
-					_story.display(context, "strings/incest/pureCorruption",{$name:_name});
+					story.display(context, "strings/incest/pureCorruption",{$name:_name});
 					doHeatOrRut()
 			}
 			flushOutputTextToGUI();
 		}
 		public function doHeatOrRut():void{
-			_story.display(context, "strings/incest/doHeatOrRut",{$name:_name});
+			story.display(context, "strings/incest/doHeatOrRut",{$name:_name});
 			if (!player.goIntoHeat(true, 10)){player.goIntoRut(true, 10); }	
 		}
 		
@@ -265,7 +296,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 			outputText("<b>Not curruntly implemented</B>");
 			if (item != null){
-				_story.display(context, "strings/itemImprove/improveThatItem", {$name:_name});
+				story.display(context, "strings/itemImprove/improveThatItem", {$name:_name});
 				player.destroyItems(from, 1);
 				inventory.takeItem(item, camp.returnToCampUseOneHour);
 				return;

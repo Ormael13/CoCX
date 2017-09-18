@@ -2,18 +2,21 @@ package classes.Scenes.NPCs
 {
 	import classes.BaseContent;
 	import classes.CoC;
-	import coc.xxc.Story;
 	import classes.GlobalFlags.kGAMECLASS;
-	import coc.xxc.StoryContext;
+	import coc.xxc.Story;
 	
 	/**
 	 * ...
 	 * @author Oxdeception
 	 */
-	internal class XXCNPC extends BaseContent
+	public class XXCNPC extends BaseContent
 	{
-		protected var _story:Story;
-		protected var _context:StoryContext;
+		public static const COMPANION:int = -1;
+		public static const FOLLOWER:int = 0;
+		public static const LOVER:int = 1;
+		public static const SLAVE:int = 2;
+		
+		protected var story:Story;
 		protected var _storyName:String;
 		
 		public function XXCNPC(storyName:String) 
@@ -25,12 +28,33 @@ package classes.Scenes.NPCs
 			else {init();}
 		}
 		private function init():void{
-			_story = kGAMECLASS.rootStory.locate(_storyName);
-			_context = kGAMECLASS.context;
+			story = kGAMECLASS.rootStory.locate(_storyName);
 		}
-		protected function display(toDisplay:String):void
+		public function display(toDisplay:String):void
 		{
-			_story.display(_context, toDisplay);
+			story.display(context, toDisplay);
+		}
+		public function save(saveto:*):void{
+			
+		}
+		public function load(loadfrom:*):void{
+			
+		}
+		public function campInteraction():void{
+			
+		}
+		public function campDescription(menuType:int = -1, descOnly:Boolean = false ):void
+		{
+			display("strings/campDescription");
+		}
+		public function checkCampEvent():Boolean{
+			return false;
+		}
+		public function isCompanion(type:int = -1):Boolean{
+			return false;
+		}
+		public function get Name():String{
+			return _storyName;
 		}
 	}
 }

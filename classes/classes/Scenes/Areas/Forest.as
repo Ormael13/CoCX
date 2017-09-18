@@ -11,6 +11,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.DarkElfScene;
+	import classes.Scenes.NPCs.CelessScene;
 
 	import coc.xxc.Story;
 	import coc.xxc.stmts.ZoneStmt;
@@ -201,13 +202,13 @@ package classes.Scenes.Areas
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
+							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.getInstance().armorFound;
 						}
 					}, {
 						name: "celess-armor",
 						call: celessArmor,
 						when: function():Boolean{
-							return game.celessScene.isFollower && !game.celessScene.armorFound;
+							return CelessScene.getInstance().isFollower && !CelessScene.getInstance().armorFound;
 						}
 					});
 					/*
@@ -378,7 +379,7 @@ package classes.Scenes.Areas
 					break;
 				case 4:
 					forestStory.display(context, "strings/celess-unicorn/fuck-her");
-					kGAMECLASS.celessScene.findArmor();
+					CelessScene.getInstance().findArmor();
 					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					break;
 			}
@@ -386,7 +387,7 @@ package classes.Scenes.Areas
 		}
 		public function celessArmor():void{
 			forestStory.display(context, "strings/celess-unicorn/armorScene");
-			kGAMECLASS.celessScene.findArmor();
+			CelessScene.getInstance().findArmor();
 			inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
 		}
 		public function tripOnARoot():void {

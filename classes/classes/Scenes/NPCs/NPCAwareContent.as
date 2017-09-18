@@ -55,7 +55,7 @@ package classes.Scenes.NPCs
 		// Celess
 		protected function get celessScene():CelessScene
 		{
-			return kGAMECLASS.celessScene;
+			return CelessScene.getInstance();
 		}
 		// Ceraph
 		protected function get ceraphScene():CeraphScene
