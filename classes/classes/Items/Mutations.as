@@ -7233,6 +7233,30 @@
 				changes++;
 			}
 			//Sexual
+			if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
+				player.cocks[0].cockLength *= 2 / 3;
+				player.cocks[0].cockThickness *= 2 / 3;
+				dynStats("sen", -2, "lus", -10);
+				changes++;
+			}
+			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+				temp = 1 + rand(3);
+				if (player.breastRows.length > 0) {
+					if (player.breastRows[0].breastRating < 4 && rand(3) == 0) temp++;
+				}
+				outputText("\n\n");
+				player.growTits(temp, player.breastRows.length, true, 3);
+				if (player.breastRows.length == 0) {
+					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 2;
+					outputText("\n");
+				}
+			}
 			//Physical
 			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
@@ -7280,6 +7304,18 @@
 			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
 				setHairType(HAIR_SILKEN);
+				changes++;
+			}
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && (player.skinTone != "dark" || player.skinTone != "light" || player.skinTone != "tan") && changes < changeLimit && rand(3) == 0) {
+				var color:String;
+				color = randomChoice("dark","light","tan");
+				player.skinTone = color;
+				outputText("\n\nYour skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your skin is now flawless just like that of the elves.</b>");
+				player.skinAdj = "flawless";
+				changes++;
+			}
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+				humanizeSkin();
 				changes++;
 			}
 			//Hair Color

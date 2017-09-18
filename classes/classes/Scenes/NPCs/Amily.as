@@ -139,6 +139,12 @@
 		private function amilyDartGo():void
 		{
 			var dodged:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				game.combatRoundOver();
+				return;
+			}
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n");

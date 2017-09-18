@@ -1191,6 +1191,9 @@ package classes
 		public static const Seduction:PerkType = mk("Seduction", "Seduction",
 				"Upgrades your tease attack, making it more effective.",
 				"You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.");
+		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
+				"Allow to determine how corrupted or pure is enemy.",
+				"You choose the 'Sense Corruption' perk, allowing to determine how corrupted or pure is enemy.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
@@ -2828,6 +2831,7 @@ package classes
 		Acclimation.requireCor(50)
 				   .requirePerk(CorruptedLibido)
 				   .requireMinLust(20);
+		SenseCorruption.requireCor(50);
 		//Tier 1 Corruption Perks - acclimation over-rides
 		Sadist.requireCor(60)
 			  .requirePerk(CorruptedLibido)

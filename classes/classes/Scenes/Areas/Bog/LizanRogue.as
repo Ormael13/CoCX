@@ -14,7 +14,11 @@ package classes.Scenes.Areas.Bog
 		//3 - spe
 		//4 - sens
 		public function blowGun():void {
-			if (player.getEvasionRoll()) {
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  Then that tiny dart is stopeed by the wind wall that still surrounds you.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else if (player.getEvasionRoll()) {
 				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  You move just in time to avoid the tiny dart.");
 			}
 			else {

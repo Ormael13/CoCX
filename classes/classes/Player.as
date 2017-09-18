@@ -2918,6 +2918,14 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
 				elfCounter++;
+			if (skinTone == "dark" || skinTone == "light" || skinTone == "tan")
+				elfCounter++;
+			if (skinType == SKIN_TYPE_PLAIN && skinAdj == "flawless")
+				elfCounter += 2;//elfCounter++;
+			if (cocks.length < 6)
+				elfCounter++;
+			if (hasVagina() && biggestTitSize() >= 3)
+				elfCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				elfCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 3)

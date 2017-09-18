@@ -182,11 +182,11 @@ public class MagicSpecials extends BaseCombatContent {
 
 	private function specialsElementalAspect():void {
 		menu();
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", ElementalAspectAir);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", ElementalAspectAir);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", ElementalAspectEarth);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", ElementalAspectFire);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", ElementalAspectWater);
-		//if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", ElementalAspectEther);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", ElementalAspectEther);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", ElementalAspectWood);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", ElementalAspectMetal);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", ElementalAspectIce);
@@ -2704,6 +2704,17 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		player.createStatusEffect(StatusEffects.CooldownEAspectAir, 0, 0, 0, 0);
 		var windwallduration:Number = 0;
+		windwallduration += 1;
+		if (player.inte >= 20) windwallduration += 1;
+		if (player.inte >= 40) windwallduration += 1;
+		if (player.inte >= 60) windwallduration += 1;
+		if (player.inte >= 80) windwallduration += 1;
+		if (player.inte >= 100) windwallduration += Math.round((player.inte - 50) / 50);
+		if (player.wis >= 20) windwallduration += 1;
+		if (player.wis >= 40) windwallduration += 1;
+		if (player.wis >= 60) windwallduration += 1;
+		if (player.wis >= 80) windwallduration += 1;
+		if (player.wis >= 100) windwallduration += Math.round((player.wis - 50) / 50);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 1) windwallduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 2) windwallduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 3) windwallduration += 1;
@@ -2789,7 +2800,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
-		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -2858,14 +2868,77 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-/*
+
 	public function ElementalAspectEther():void {
 		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) {
+			outputText("You already used ether elemental aspect in this fight.");
+			doNext(specialsElementalAspect);
+			return;
+		}
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		?giving PC for x turns flying status + smth else? knock back enemy/enemies? ake down all flying enemies and ground them as long effect is active (make special leave lingering for few turns status effect - similary long as stone skin)?
+		player.createStatusEffect(StatusEffects.CooldownEAspectEther, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += inteligencescalingbonus();
+							else damage += inteligencescalingbonus() * 0.8;
+						}
+						else damage += inteligencescalingbonus() * 0.6;
+					}
+					else damage += inteligencescalingbonus() * 0.4;
+				}
+				else damage += inteligencescalingbonus() * 0.3;
+			}
+			else damage += inteligencescalingbonus() * 0.2;
+		}
+		else damage += inteligencescalingbonus() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 3) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
+					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
+						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += wisdomscalingbonus();
+							else damage += wisdomscalingbonus() * 0.8;
+						}
+						else damage += wisdomscalingbonus() * 0.6;
+					}
+					else damage += wisdomscalingbonus() * 0.4;
+				}
+				else damage += wisdomscalingbonus() * 0.3;
+			}
+			else damage += wisdomscalingbonus() * 0.2;
+		}
+		else damage += wisdomscalingbonus() * 0.1;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
+		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
+		damage = Math.round(damage);
+		/*if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
-*/
+
 	public function ElementalAspectWood():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) {

@@ -91,6 +91,7 @@ package classes.Scenes
 			outputText("-New tier 4 misc lvl-up perk: Cyclone (Stage 2). Req. Cyclone (Stage 1) perk and 70+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 15%\n");
 			outputText("-New tier 4 misc lvl-up perk: Giant's Reach. Req. Job: Warlord and 100+ in str and tou. Effect: whirlwing/whipping special dmg increased by 25% when using Large or Dual Large weapons\n");
 			outputText("-New tier 4 misc lvl-up perk: Enable Criticals. Req. nothing aside min level. Effect: PC can score crits on all naturaly immune to them enemies like constructs, goo or plants.\n");
+			outputText("-New tier 4 misc lvl-up perk: Greater Crinos Shape. Req. Improving Nature's Blueprints (Natural Armor) perk, 80+ str, 80+ tou and 80+ spe. Effect: Increase bonuses to str/tou/spe to 15%, +3 to generated wrath and increase cost to 20 wrath per turn when using Crios Shape, +80 to max Wrath\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
 			outputText("-New tier 4 toughness lvl-up perk: Shield Grandmastery. Req. perk Shield Mastery, 100+ tou. Effect: increase block chance up to 10% when PC tou is over and lowers fatigue costs of blocking by 50%\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Elemental Contract Rank 5. Req. perk Elemental Contract Rank 4 and 125+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 5\n");
@@ -104,8 +105,10 @@ package classes.Scenes
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perks Hidden Momentum and Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200)\n");
 			outputText("-New tier 5 toughness lvl-up perk: Perfect Defence Stance. Req. Mastered Defence Stance perk and 160+ tou. Effect: Defend move giving 95% phys dmg reduction, max phys dmg reduction cap is rised when using this move from 95% to 99% and allow increased (bonus to normal recovery in Defence Stance) recovery of fatigue (+2), mana (+10), soulforce (+2)\n");
 			outputText("-New tier 5 toughness lvl-up perk: Shield Ward Req. Shield Grandmastery perk and 120+ tou. Effect: When PC wearing a shield lower chance to be knocked back or disarmed by enemy attacks\n");
+			outputText("-New tier 5 misc lvl-up perk: Improving Nature's Blueprints (Apex Predator). Req. Greater Crinos Shape perk, 95+ str, 95+ tou and 95+ spe. Effect: Changing negative bous to max Int/Wis into positive one (+5 scalable), using Crinos Shape grants minor regeneration effect (+2% max HP per turn)\n");
 			outputText("-New tier 5 misc lvl-up perk: Cyclone (Stage 3). Req. Cyclone (Stage 2) perk and 90+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20%\n");
 			outputText("-New tier 6 misc lvl-up perk: Cyclone (Stage 4). Req. Cyclone (Stage 3) perk and 120+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20% and dmg multiplier for aoe specials like whirlwind by 50%\n");
+			outputText("-New tier 6 misc lvl-up perk: Master Crinos Shape. Req. Improving Nature's Blueprints (Apex Predator) perk, 110+ str, 110+ tou and 110+ spe. Effect: Increase bonuses to str/tou/spe to 20%, +4 to generated wrath and increase cost to 40 wrath per turn when using Crios Shape, +160 to max Wrath\n");
 			outputText("-New tier 6 speed lvl-up perk: Natural jouster (Master grade). Req. Natural jouster perk and 180+ spe. Effect: Increase attack power of spears/lances when PC attack once each turn and have taur/drider lower body or 2,5x higher speed if PC not have one of this specific lower body types (180+ for taurs/drider and 450+ for others)\n");
 			outputText("-New tier 6 toughness lvl-up perk (multi-rank): Cheetah I-VI. Req. for rank 1: lvl 18+, 150+ tou, perk Goliath I. Effect: +1 extra HP per point of speed\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Convergence. Req. Grey Archmage and 175+ int. Effect: Grey AoE spells hits twice single targets\n");
@@ -163,10 +166,7 @@ package classes.Scenes
 			outputText("-Spear and Whip was moved to weapon shop in He'Xin'Dao from Tel'Adre weapon shop\n");
 			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack (above 2x) unlock each 6 lvl's startng from lvl 6.\n");
 			outputText("-One of Heavy Armor Proficiency perk req changed from Job: Defender to Job: Knight.\n");
-			outputText("-New tier 4 misc lvl-up perk: Greater Crinos Shape. Req. Improving Nature's Blueprints (Natural Armor) perk, 80+ str, 80+ tou and 80+ spe. Effect: Increase bonuses to str/tou/spe to 15%, +3 to generated wrath and increase cost to 20 wrath per turn when using Crios Shape, +80 to max Wrath\n");
-			outputText("-New tier 6 misc lvl-up perk: Master Crinos Shape. Req. Improving Nature's Blueprints (Apex Predator) perk, 110+ str, 110+ tou and 110+ spe. Effect: Increase bonuses to str/tou/spe to 20%, +4 to generated wrath and increase cost to 40 wrath per turn when using Crios Shape, +160 to max Wrath\n");
-			outputText("-New tier 5 misc lvl-up perk: Improving Nature's Blueprints (Apex Predator). Req. Greater Crinos Shape perk, 95+ str, 95+ tou and 95+ spe. Effect: Changing negative bous to max Int/Wis into positive one (+5 scalable), using Crinos Shape grants minor regeneration effect (+2% max HP per turn)\n");
-			outputText("-New tier   lvl-up perk:  Req.  Effect: \n");
+			outputText("-New tier 0 corruption lvl-up perk: Sense Corruption. Req. 50+ corruption. Effect: Show in combat enemy current corruption\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

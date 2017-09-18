@@ -1121,14 +1121,16 @@ public function elementalattacks():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) critChance += 10;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) damageelemental *= 1.75;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) damageelemental *= 2;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) damageelemental *= 1.75;
 		else damageelemental *= 1.5;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) damageelemental *= 1.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) damageelemental *= 2.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) damageelemental *= 1.5;
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 2;
@@ -1153,7 +1155,7 @@ public function elementalattacks():void {
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) damageelemental *= (monster.damagePercent(false, true) / 100);
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 10) damageelemental *= (monster.damagePercent(false, true) / 100);
 	damageelemental = Math.round(damageelemental);
 	outputText("Your elemental hit " + monster.a + monster.short + "! ");
 	if (crit == true) {
@@ -4908,12 +4910,14 @@ public function display():void {
 	var lustDisplay:String = "";
 	var fatigueDisplay:String = "";
 	var manaDisplay:String = "";
+	var corruptionDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 	hpDisplay = monster.HP + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
 	lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();
 	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.eMaxFatigue();
 	manaDisplay = Math.floor(monster.mana) + " / " + monster.eMaxMana();
+	corruptionDisplay = monster.cor + " / 100 ";
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -5029,6 +5033,7 @@ public function display():void {
 		outputText("Fatigue: " + fatigueDisplay + "\n");
 		//soulforce
 		outputText("Mana: " + manaDisplay + "\n");
+		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
 		//wrath
 		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
 			outputText("\n----------------------------\n");
