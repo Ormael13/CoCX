@@ -5249,40 +5249,14 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusEffect(StatusEffects.Web);
 			}
-			if(hasStatusEffect(StatusEffects.Shielding)) removeStatusEffect(StatusEffects.Shielding);
-			if(hasStatusEffect(StatusEffects.HolliConstrict)) removeStatusEffect(StatusEffects.HolliConstrict);
-			if(hasStatusEffect(StatusEffects.LustStones)) removeStatusEffect(StatusEffects.LustStones);
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
-			if(hasStatusEffect(StatusEffects.Sealed)) {
-				removeStatusEffect(StatusEffects.Sealed);
-			}
-			if(hasStatusEffect(StatusEffects.Sealed2)) {
-				removeStatusEffect(StatusEffects.Sealed2);
-			}
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
 				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);
 			}
-			if(hasStatusEffect(StatusEffects.Berzerking)) {
-				removeStatusEffect(StatusEffects.Berzerking);
-			}
-			if(hasStatusEffect(StatusEffects.Lustzerking)) {
-				removeStatusEffect(StatusEffects.Lustzerking);
-			}
-			if(hasStatusEffect(StatusEffects.Maleficium)) {
-				removeStatusEffect(StatusEffects.Maleficium);
-			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
 			}
-			if(hasStatusEffect(StatusEffects.UBERWEB)) removeStatusEffect(StatusEffects.UBERWEB);
-			if(hasStatusEffect(StatusEffects.DriderKiss)) removeStatusEffect(StatusEffects.DriderKiss);
-			if(hasStatusEffect(StatusEffects.WebSilence)) removeStatusEffect(StatusEffects.WebSilence);
-			if(hasStatusEffect(StatusEffects.GooArmorSilence)) removeStatusEffect(StatusEffects.GooArmorSilence);
-			if(hasStatusEffect(StatusEffects.Bound)) removeStatusEffect(StatusEffects.Bound);
-			if(hasStatusEffect(StatusEffects.GooArmorBind)) removeStatusEffect(StatusEffects.GooArmorBind);
-			if(hasStatusEffect(StatusEffects.WolfHold)) removeStatusEffect(StatusEffects.WolfHold);
-			if(hasStatusEffect(StatusEffects.Whispered)) removeStatusEffect(StatusEffects.Whispered);
 			if(hasStatusEffect(StatusEffects.AkbalSpeed)) {
 				dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
 				removeStatusEffect(StatusEffects.AkbalSpeed);
@@ -5290,12 +5264,6 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.AmilyVenom)) {
 				dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
 				removeStatusEffect(StatusEffects.AmilyVenom);
-			}
-			while(hasStatusEffect(StatusEffects.Blind)) {
-				removeStatusEffect(StatusEffects.Blind);
-			}
-			if(hasStatusEffect(StatusEffects.SheilaOil)) {
-				removeStatusEffect(StatusEffects.SheilaOil);
 			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
@@ -5323,24 +5291,6 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
-			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
-			if(hasStatusEffect(StatusEffects.NagaBind)) removeStatusEffect(StatusEffects.NagaBind);
-			if(hasStatusEffect(StatusEffects.ScyllaBind)) removeStatusEffect(StatusEffects.ScyllaBind);
-			if(hasStatusEffect(StatusEffects.StoneLust)) {
-				removeStatusEffect(StatusEffects.StoneLust);
-			}
-			removeStatusEffect(StatusEffects.FirstAttack);
-			if(hasStatusEffect(StatusEffects.TemporaryHeat)) removeStatusEffect(StatusEffects.TemporaryHeat);
-			if(hasStatusEffect(StatusEffects.NoFlee)) removeStatusEffect(StatusEffects.NoFlee);
-			if(hasStatusEffect(StatusEffects.Poison)) removeStatusEffect(StatusEffects.Poison);
-			if(hasStatusEffect(StatusEffects.IsabellaStunned)) removeStatusEffect(StatusEffects.IsabellaStunned);
-			if(hasStatusEffect(StatusEffects.Stunned)) removeStatusEffect(StatusEffects.Stunned);
-			if(hasStatusEffect(StatusEffects.Confusion)) removeStatusEffect(StatusEffects.Confusion);
-			if(hasStatusEffect(StatusEffects.ThroatPunch)) removeStatusEffect(StatusEffects.ThroatPunch);
-			if(hasStatusEffect(StatusEffects.KissOfDeath)) removeStatusEffect(StatusEffects.KissOfDeath);
-			if(hasStatusEffect(StatusEffects.AcidSlap)) removeStatusEffect(StatusEffects.AcidSlap);
-			if(hasStatusEffect(StatusEffects.GooBind)) removeStatusEffect(StatusEffects.GooBind);
-			if(hasStatusEffect(StatusEffects.HarpyBind)) removeStatusEffect(StatusEffects.HarpyBind);
 			if(hasStatusEffect(StatusEffects.CalledShot)) {
 				spe += statusEffectv1(StatusEffects.CalledShot);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
@@ -5348,19 +5298,10 @@ use namespace kGAMECLASS;
 				// speUp.visible = true;
 				removeStatusEffect(StatusEffects.CalledShot);
 			}
-			if(hasStatusEffect(StatusEffects.DemonSeed)) {
-				removeStatusEffect(StatusEffects.DemonSeed);
-			}
 			if(hasStatusEffect(StatusEffects.ParalyzeVenom)) {
 				str += statusEffectv1(StatusEffects.ParalyzeVenom);
 				spe += statusEffectv2(StatusEffects.ParalyzeVenom);
 				removeStatusEffect(StatusEffects.ParalyzeVenom);
-			}
-			if(hasStatusEffect(StatusEffects.lustvenom)) {
-				removeStatusEffect(StatusEffects.lustvenom);
-			}
-			if(hasStatusEffect(StatusEffects.InfestAttempted)) {
-				removeStatusEffect(StatusEffects.InfestAttempted);
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				removeStatusEffect(StatusEffects.Flying);
@@ -5368,9 +5309,6 @@ use namespace kGAMECLASS;
 					removeStatusEffect(StatusEffects.FlyingNoStun);
 					removePerk(PerkLib.Resolute);
 				}
-			}
-			if(hasStatusEffect(StatusEffects.ChanneledAttack)) {
-				removeStatusEffect(StatusEffects.ChanneledAttack);
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
 				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might));
@@ -5382,28 +5320,13 @@ use namespace kGAMECLASS;
 				dynStats("spe", -statusEffectv1(StatusEffects.Blink));
 				removeStatusEffect(StatusEffects.Blink);
 			}
-			if(hasStatusEffect(StatusEffects.ChargeWeapon)) {
-				removeStatusEffect(StatusEffects.ChargeWeapon);
-			}
-			if(hasStatusEffect(StatusEffects.ChargeArmor)) {
-				removeStatusEffect(StatusEffects.ChargeArmor);
-			}
-			if(hasStatusEffect(StatusEffects.Blizzard)) {
-				removeStatusEffect(StatusEffects.Blizzard);
-			}
 			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
 				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
 				removeStatusEffect(StatusEffects.BeatOfWar);
 			}
-			if(hasStatusEffect(StatusEffects.CastedSpell)) {
-				removeStatusEffect(StatusEffects.CastedSpell);
-			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
-			}
-			if(hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
-				removeStatusEffect(StatusEffects.UnderwaterOutOfAir);
 			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
 				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
@@ -5415,18 +5338,6 @@ use namespace kGAMECLASS;
 				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
 				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
 				removeStatusEffect(StatusEffects.CrinosShape);
-			}
-			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-				removeStatusEffect(StatusEffects.VioletPupilTransformation);
-			}
-			if(hasStatusEffect(StatusEffects.ManaShield)) {
-				removeStatusEffect(StatusEffects.ManaShield);
-			}
-			if(hasStatusEffect(StatusEffects.AlraunePollen)) {
-				removeStatusEffect(StatusEffects.AlraunePollen);
-			}
-			if(hasStatusEffect(StatusEffects.AlrauneEntangle)) {
-				removeStatusEffect(StatusEffects.AlrauneEntangle);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
@@ -5445,63 +5356,6 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownInkSpray)) {
-				removeStatusEffect(StatusEffects.CooldownInkSpray);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				removeStatusEffect(StatusEffects.CooldownTailSmack);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				removeStatusEffect(StatusEffects.CooldownStoneClaw);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				removeStatusEffect(StatusEffects.CooldownTailSlam);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				removeStatusEffect(StatusEffects.CooldownWingBuffet);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownIllusion)) {
-				removeStatusEffect(StatusEffects.CooldownIllusion);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTerror)) {
-				removeStatusEffect(StatusEffects.CooldownTerror);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownFascinate)) {
-				removeStatusEffect(StatusEffects.CooldownFascinate);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-				removeStatusEffect(StatusEffects.CooldownCompellingAria);
-			}
-			if(hasStatusEffect(StatusEffects.MilkBlastCooldown)) {
-				removeStatusEffect(StatusEffects.MilkBlastCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.CumCannonCooldown)) {
-				removeStatusEffect(StatusEffects.CumCannonCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownKick)) {
-				removeStatusEffect(StatusEffects.CooldownKick);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectAir);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectEarth);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectFire);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectWater);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectIce);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectLightning);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectDarkness);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
@@ -5535,7 +5389,6 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusEffect(StatusEffects.GnollSpear);
 			}
-			if(hasStatusEffect(StatusEffects.BasiliskCompulsion)) removeStatusEffect(StatusEffects.BasiliskCompulsion);
 			if(hasStatusEffect(StatusEffects.BasiliskSlow)) {
 				spe += statusEffectv1(StatusEffects.BasiliskSlow);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
@@ -5543,8 +5396,6 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusEffect(StatusEffects.BasiliskSlow);
 			}
-			if (hasStatusEffect(StatusEffects.GiantGrabbed)) removeStatusEffect(StatusEffects.GiantGrabbed);
-			if (hasStatusEffect(StatusEffects.GiantBoulder)) removeStatusEffect(StatusEffects.GiantBoulder);
 			if (hasStatusEffect(StatusEffects.GiantStrLoss)) {
 				str += statusEffectv1(StatusEffects.GiantStrLoss);
 				removeStatusEffect(StatusEffects.GiantStrLoss);
@@ -5556,35 +5407,23 @@ use namespace kGAMECLASS;
 				sens -= statusEffectv4(StatusEffects.LizanBlowpipe);
 				removeStatusEffect(StatusEffects.LizanBlowpipe);
 			}
-			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
-			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
-			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.RemovedArmor);
-			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
-			if (hasStatusEffect(StatusEffects.MirroredAttack)) removeStatusEffect(StatusEffects.MirroredAttack);
-			if (hasStatusEffect(StatusEffects.Tentagrappled)) removeStatusEffect(StatusEffects.Tentagrappled);
-			if (hasStatusEffect(StatusEffects.TentagrappleCooldown)) removeStatusEffect(StatusEffects.TentagrappleCooldown);
-			if (hasStatusEffect(StatusEffects.ShowerDotEffect)) removeStatusEffect(StatusEffects.ShowerDotEffect);
 			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
 			{
 				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
-			if (hasStatusEffect(StatusEffects.VineHealUsed)) removeStatusEffect(StatusEffects.VineHealUsed);
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
-			if (hasStatusEffect(StatusEffects.TaintedMind)) removeStatusEffect(StatusEffects.TaintedMind);
-			if (hasStatusEffect(StatusEffects.PurpleHaze)) removeStatusEffect(StatusEffects.PurpleHaze);
-			if (hasStatusEffect(StatusEffects.MinotaurKingMusk)) removeStatusEffect(StatusEffects.MinotaurKingMusk);
-			if (hasStatusEffect(StatusEffects.MinotaurKingsTouch)) removeStatusEffect(StatusEffects.MinotaurKingsTouch);
-			if (hasStatusEffect(StatusEffects.LethicesRapeTentacles)) removeStatusEffect(StatusEffects.LethicesRapeTentacles);
-			if (hasStatusEffect(StatusEffects.OnFire)) removeStatusEffect(StatusEffects.OnFire);
-			if (hasStatusEffect(StatusEffects.LethicesShell)) removeStatusEffect(StatusEffects.LethicesShell);
-			if (hasStatusEffect(StatusEffects.WhipSilence)) removeStatusEffect(StatusEffects.WhipSilence);
-			if (hasStatusEffect(StatusEffects.PigbysHands)) removeStatusEffect(StatusEffects.PigbysHands);
+			
+			// All CombatStatusEffects are removed here
+			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
+				// Using a copy of array in case effects are removed/added in handler
+				if (statusEffects.indexOf(a[i])>=0) a[i].onCombatEnd();
+			}
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
