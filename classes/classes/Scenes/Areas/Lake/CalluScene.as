@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Lake
 				if (player.hasVagina() || !player.hasCock()) addButton(1, "Facesitting", ottersForGals);
 			}
 			if (flags[kFLAGS.MET_OTTERGIRL] > 1) addButton(2, "Get Fish", getSomeFishYaFatty);
-			if (player.hasKeyItem("Fishing Pole") < 0) addButton(3, "Leave", getDatFishingPole);
+			if (player.hasKeyItem("Fishing Pole") < 0) addButton(3, "FishingPole", getDatFishingPole);
 			addButton(4, "Leave", avoidZeOtterPussy);
 		}
 

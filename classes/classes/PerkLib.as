@@ -156,6 +156,9 @@ package classes
 		public static const AdvancedSpirituality:PerkType = mk("Advanced Spirituality", "Advanced Spirituality",
 				"Increases maximum mana by 300.",
 				"You choose the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 300!");	
+		public static const AdvancedTranquilness:PerkType = mk("Advanced Tranquilness", "Advanced Tranquilness",
+				"Increases maximum wrath by 100.",
+				"You choose the 'Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 100!");	
 		public static const Agility:PerkType = mk("Agility", "Agility",
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.");
@@ -260,6 +263,9 @@ package classes
 		public static const BasicSpirituality:PerkType = mk("Basic Spirituality", "Basic Spirituality",
 				"Increases maximum mana by 45.",
 				"You choose the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 45!");	
+		public static const BasicTranquilness:PerkType = mk("Basic Tranquilness", "Basic Tranquilness",
+				"Increases maximum wrath by 15.",
+				"You choose the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 15!");	
 		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
 				"Your proficiency in making golems allows to lower by 5% chance of core shattering and storing more golems/golem cores.",
 				"You choose 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
@@ -570,6 +576,18 @@ package classes
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
+		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
+				"Increases maximum fatigue by 700.",
+				"You choose the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 700!");
+		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
+				"Increases maximum lust by 350.",
+				"You choose the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 350!");
+		public static const EpicSpirituality:PerkType = mk("Epic Spirituality", "Epic Spirituality",
+				"Increases maximum mana by 1050.",
+				"You choose the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
+		public static const EpicTranquilness:PerkType = mk("Epic Tranquilness", "Epic Tranquilness",
+				"Increases maximum wrath by 350.",
+				"You choose the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
 		public static const EternalyLastingBuffs:PerkType = mk("(Eternaly) Lasting Buffs", "(Eternaly) Lasting Buffs",
 				"Buff spells last another 5 turns longer at another 2x increase of their costs.",
 				"You choose the '(Eternaly) Lasting Buffs' perk. Your mastery over buffs reached (eternaly) lasting level.");
@@ -684,6 +702,21 @@ package classes
 		public static const HalfStepToAdvancedSpirituality:PerkType = mk("Half-step-to Advanced Spirituality", "Half-step-to Advanced Spirituality",
 				"Increases maximum mana by 180.",
 				"You choose the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 180!");	
+		public static const HalfStepToAdvancedTranquilness:PerkType = mk("Half-step-to Advanced Tranquilness", "Half-step-to Advanced Tranquilness",
+				"Increases maximum wrath by 60.",
+				"You choose the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 60!");	
+		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
+				"Increases maximum fatigue by 700.",
+				"You choose the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 700!");
+		public static const HalfStepToEpicSelfControl:PerkType = mk("Half-step-to Epic Self-Control", "Half-step-to Epic Self-Control",
+				"Increases maximum lust by 350.",
+				"You choose the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 350!");
+		public static const HalfStepToEpicSpirituality:PerkType = mk("Half-step-to Epic Spirituality", "Half-step-to Epic Spirituality",
+				"Increases maximum mana by 1050.",
+				"You choose the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
+		public static const HalfStepToEpicTranquilness:PerkType = mk("Half-step-to Epic Tranquilness", "Half-step-to Epic Tranquilness",
+				"Increases maximum wrath by 350.",
+				"You choose the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
 		public static const HalfStepToImprovedEndurance:PerkType = mk("Half-step-to Improved Endurance", "Half-step-to Improved Endurance",
 				"Increases maximum fatigue by 50.",
 				"You choose the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!");
@@ -693,6 +726,21 @@ package classes
 		public static const HalfStepToImprovedSpirituality:PerkType = mk("Half-step-to Improved Spirituality", "Half-step-to Improved Spirituality",
 				"Increases maximum mana by 75.",
 				"You choose the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 75!");
+		public static const HalfStepToImprovedTranquilness:PerkType = mk("Half-step-to Improved Tranquilness", "Half-step-to Improved Tranquilness",
+				"Increases maximum wrath by 25.",
+				"You choose the 'Half-step-to Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 25!");
+		public static const HalfStepToInhumanEndurance:PerkType = mk("Half-step-to Inhuman Endurance", "Half-step-to Inhuman Endurance",
+				"Increases maximum fatigue by 700.",
+				"You choose the 'Half-step-to Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 700!");
+		public static const HalfStepToInhumanSelfControl:PerkType = mk("Half-step-to Inhuman Self-Control", "Half-step-to Inhuman Self-Control",
+				"Increases maximum lust by 350.",
+				"You choose the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 350!");
+		public static const HalfStepToInhumanSpirituality:PerkType = mk("Half-step-to Inhuman Spirituality", "Half-step-to Inhuman Spirituality",
+				"Increases maximum mana by 1050.",
+				"You choose the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
+		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
+				"Increases maximum wrath by 350.",
+				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
 				"You choose the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
@@ -702,6 +750,9 @@ package classes
 		public static const HalfStepToPeerlessSpirituality:PerkType = mk("Half-step-to Peerless Spirituality", "Half-step-to Peerless Spirituality",
 				"Increases maximum mana by 1050.",
 				"You choose the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1050!");
+		public static const HalfStepToPeerlessTranquilness:PerkType = mk("Half-step-to Peerless Tranquilness", "Half-step-to Peerless Tranquilness",
+				"Increases maximum wrath by 350.",
+				"You choose the 'Half-step-to Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 350!");
 		public static const HalfStepToSuperiorEndurance:PerkType = mk("Half-step-to Superior Endurance", "Half-step-to Superior Endurance",
 				"Increases maximum fatigue by 320.",
 				"You choose the 'Half-step-to Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 320!");
@@ -711,6 +762,9 @@ package classes
 		public static const HalfStepToSuperiorSpirituality:PerkType = mk("Half-step-to Superior Spirituality", "Half-step-to Superior Spirituality",
 				"Increases maximum mana by 480.",
 				"You choose the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 480!");
+		public static const HalfStepToSuperiorTranquilness:PerkType = mk("Half-step-to Superior Tranquilness", "Half-step-to Superior Tranquilness",
+				"Increases maximum wrath by 160.",
+				"You choose the 'Half-step-to Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 160!");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
 				"You choose the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
@@ -741,13 +795,16 @@ package classes
 				"You choose the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
-				"You choose the 'Improved Endurance' perk. Thanks to your physical conditioning, your maximum fatigue has been increased by 80!");
+				"You choose the 'Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 80!");
 		public static const ImprovedSelfControl:PerkType = mk("Improved Self-Control", "Improved Self-Control",
 				"Increases maximum lust by 40.",
-				"You choose the 'Improved Self-Control' perk. Thanks to your mental conditioning, your maximum lust has been increased by 40!");
+				"You choose the 'Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 40!");
 		public static const ImprovedSpirituality:PerkType = mk("Improved Spirituality", "Improved Spirituality",
 				"Increases maximum mana by 80.",
-				"You choose the 'Improved Spirituality' perk. Thanks to your mystical conditioning, your maximum mana has been increased by 120!");
+				"You choose the 'Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 120!");
+		public static const ImprovedTranquilness:PerkType = mk("Improved Tranquilness", "Improved Tranquilness",
+				"Increases maximum wrath by 40.",
+				"You choose the 'Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 40!");
 		public static const ImprovingNaturesBlueprintsNaturalArmor:PerkType = mk("Improving Nature's Blueprints (Natural Armor)", "Improving Nature's Blueprints (Natural Armor)",
 				"Charge Armor can be casted even if PC is not wearing any armor as long it have any form of natural armor (any skin type providing bonus to armor) and slight boost armor while under Crinos Shape effects.",
 				"You choose the 'Improving Nature's Blueprints (Natural Armor)' perk, allowing you to use Charge Armor even without wearing any weapon and slight boost armor when using Crinos Shape.");
@@ -775,6 +832,18 @@ package classes
 		public static const InhumanDesireVI:PerkType = mk("Inhuman Desire VI", "Inhuman Desire VI",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire VI' perk, giving you an additional 20 LP!");
+		public static const InhumanEndurance:PerkType = mk("Inhuman Endurance", "Inhuman Endurance",
+				"Increases maximum fatigue by 700.",
+				"You choose the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 700!");
+		public static const InhumanSelfControl:PerkType = mk("Inhuman Self-Control", "Inhuman Self-Control",
+				"Increases maximum lust by 350.",
+				"You choose the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 350!");
+		public static const InhumanSpirituality:PerkType = mk("Inhuman Spirituality", "Inhuman Spirituality",
+				"Increases maximum mana by 1050.",
+				"You choose the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
+		public static const InhumanTranquilness:PerkType = mk("Inhuman Tranquilness", "Inhuman Tranquilness",
+				"Increases maximum wrath by 350.",
+				"You choose the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
 		public static const InsightfulResourcesI:PerkType = mk("Insightful Resources I", "Insightful Resources I",
 				"+5 extra soulforce per point of wisdom.",
 				"You choose the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.");
@@ -1064,6 +1133,9 @@ package classes
 		public static const PeerlessSpirituality:PerkType = mk("Peerless Spirituality", "Peerless Spirituality",
 				"Increases maximum mana by 1500.",
 				"You choose the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1500!</b>");
+		public static const PeerlessTranquilness:PerkType = mk("Peerless Tranquilness", "Peerless Tranquilness",
+				"Increases maximum wrath by 500.",
+				"You choose the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum mana has been increased by 500!</b>");
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with non-large weapons per round.",
 				"You choose the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
@@ -1305,6 +1377,9 @@ package classes
 		public static const SuperiorSpirituality:PerkType = mk("Superior Spirituality", "Superior Spirituality",
 				"Increases maximum mana by 750.",
 				"You choose the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 750!</b>");
+		public static const SuperiorTranquilness:PerkType = mk("Superior Tranquilness", "Superior Tranquilness",
+				"Increases maximum wrath by 250.",
+				"You choose the 'Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 250!</b>");
 		public static const Survivalist:PerkType = mk("Survivalist", "Survivalist",
 				"Slows hunger rate by 20%.",
 				"You choose the 'Survivalist' perk.  With this perk, your hunger rate is reduced by 20%.");
@@ -1752,6 +1827,9 @@ package classes
 		StrongBack.requireStr(25);
 		StrongBack2.requirePerk(StrongBack)
 				   .requireStr(50);
+		BasicTranquilness.requireStr(30)
+						 .requireTou(10)
+						 .requireSpe(10);
 		//Tier 1 Strength Perks
 		ThunderousStrikes.requireLevel(6)
 						 .requireStr(80)
@@ -1780,6 +1858,11 @@ package classes
 		ThirstForBlood.requireLevel(6)
 					  .requireStr(75)
 					  .requirePerk(JobWarrior);
+		HalfStepToImprovedTranquilness.requireStr(60)
+									  .requireTou(20)
+									  .requireSpe(20)
+									  .requirePerk(BasicTranquilness)
+									  .requireLevel(6);
 		//Tier 2 Strength Perks
 		IronFistsIV.requireNGPlus(3)
 				   .requireLevel(12)
@@ -1808,6 +1891,11 @@ package classes
 						 .requirePerk(JobBarbarian)
 						 .requireStr(75)
 						 .requireStr(50);
+		ImprovedTranquilness.requireStr(90)
+							.requireTou(30)
+							.requireSpe(30)
+							.requirePerk(HalfStepToImprovedTranquilness)
+							.requireLevel(12);
 		//Tier 3 Strength Perks
 		ColdFury.requireLevel(18)
 				.requirePerk(Berzerker)
@@ -1820,6 +1908,11 @@ package classes
 					  .requirePerk(JobBarbarian)
 					  .requireStr(75)
 					  .requireSpe(50);
+		HalfStepToAdvancedTranquilness.requireStr(120)
+									  .requireTou(40)
+									  .requireSpe(40)
+									  .requirePerk(ImprovedTranquilness)
+									  .requireLevel(18);
 		//Tier 4 Strength Perks
 		WeaponGrandMastery.requirePerk(WeaponMastery)
 						  .requireStr(140)
@@ -1832,6 +1925,11 @@ package classes
 						 .requireStr(125)
 						 .requireSpe(100)
 						 .requireLevel(24);
+		AdvancedTranquilness.requireStr(150)
+							.requireTou(50)
+							.requireSpe(50)
+							.requirePerk(HalfStepToAdvancedTranquilness)
+							.requireLevel(24);
 		//Tier 5 Strength Perks
 		HiddenDualMomentum.requirePerk(HiddenMomentum)
 						  .requirePerk(DualWield)
@@ -1841,8 +1939,17 @@ package classes
 		UnlockId2ndStage.requirePerk(UnlockId)
 						.requireStr(150)
 						.requireLevel(30);
-		
+		HalfStepToSuperiorTranquilness.requireStr(180)
+									  .requireTou(60)
+									  .requireSpe(60)
+									  .requirePerk(AdvancedTranquilness)
+									  .requireLevel(30);
 		//Tier 6 Strength Perks
+		SuperiorTranquilness.requireStr(210)
+							.requireTou(70)
+							.requireSpe(70)
+							.requirePerk(HalfStepToSuperiorTranquilness)
+							.requireLevel(36);
 		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
 		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
 		//Tier 7 Strength Perks
@@ -1852,14 +1959,46 @@ package classes
 							.requireAnyPerk(Berzerker, Lustzerker)
 							.requireStr(200)
 							.requireLevel(42);
+		HalfStepToPeerlessTranquilness.requireStr(240)
+									  .requireTou(80)
+									  .requireSpe(80)
+									  .requirePerk(SuperiorTranquilness)
+									  .requireLevel(42);
 		//Tier 8 Strength Perks
 		Rage.requirePerk(PrestigeJobBerserker)
 			.requireLevel(48);
+		PeerlessTranquilness.requireStr(270)
+							.requireTou(90)
+							.requireSpe(90)
+							.requirePerk(HalfStepToPeerlessTranquilness)
+							.requireLevel(48);
 		//Tier 9 Strength Perks
 		Anger.requirePerk(Rage)
 			 .requireLevel(54);
+		HalfStepToInhumanTranquilness.requireStr(300)
+									 .requireTou(100)
+									 .requireSpe(100)
+									 .requirePerk(PeerlessTranquilness)
+									 .requireLevel(54);
 		//Tier 10 Strength Perks
 		//		Too Angry to Die perk
+		InhumanTranquilness.requireStr(330)
+						   .requireTou(110)
+						   .requireSpe(110)
+						   .requirePerk(HalfStepToInhumanTranquilness)
+						   .requireLevel(60);
+		//Tier 11 Strength Perks
+		HalfStepToEpicTranquilness.requireStr(360)
+								  .requireTou(120)
+								  .requireSpe(120)
+								  .requirePerk(InhumanTranquilness)
+								  .requireLevel(66);
+		//Tier 12 Strength Perks
+		EpicTranquilness.requireStr(390)
+						.requireTou(130)
+						.requireSpe(130)
+						.requirePerk(HalfStepToEpicTranquilness)
+						.requireLevel(72);
 		//------------
 		// TOUGHNESS
 		//------------
@@ -2082,7 +2221,25 @@ package classes
 		//Tier 9 Toughness Perks
 		ShieldCombat.requirePerk(SteelImpact)
 					.requireLevel(48);
+		HalfStepToInhumanEndurance.requireTou(300)
+								  .requireStr(200)
+								  .requirePerk(PeerlessEndurance)
+								  .requireLevel(54);
 		//Tier 10 Toughness Perks
+		InhumanEndurance.requireTou(330)
+						.requireStr(220)
+						.requirePerk(HalfStepToInhumanEndurance)
+						.requireLevel(60);
+		//Tier 11 Toughness Perks
+		HalfStepToEpicEndurance.requireTou(360)
+							   .requireStr(240)
+							   .requirePerk(InhumanEndurance)
+							   .requireLevel(66);
+		//Tier 12 Toughness Perks
+		EpicEndurance.requireTou(390)
+					 .requireStr(260)
+					 .requirePerk(HalfStepToEpicEndurance)
+					 .requireLevel(72);
 		//------------
 		// SPEED
 		//------------
@@ -2566,6 +2723,26 @@ package classes
 		/*Trance.requirePerk(PrestigeJobSeer)
 			  .requireInt(240)
 			  .requireLevel(48);*/
+		//Tier 9 Intelligence perks
+		HalfStepToInhumanSpirituality.requireWis(200)
+									 .requireInt(300)
+									 .requirePerk(PeerlessSpirituality)
+									 .requireLevel(54);
+		//Tier 10 Intelligence perks
+		InhumanSpirituality.requireWis(220)
+						   .requireInt(330)
+						   .requirePerk(HalfStepToInhumanSpirituality)
+						   .requireLevel(60);
+		//Tier 11 Intelligence perks
+		HalfStepToEpicSpirituality.requireWis(240)
+								  .requireInt(360)
+								  .requirePerk(InhumanSpirituality)
+								  .requireLevel(66);
+		//Tier 12 Intelligence perks
+		EpicSpirituality.requireWis(260)
+						.requireInt(390)
+						.requirePerk(HalfStepToEpicSpirituality)
+						.requireLevel(72);
 		//------------
 		// WISDOM
 		//------------
@@ -2670,8 +2847,8 @@ package classes
 		FertilityPlus.requireLib(25);
 		FertilityPlus.defaultValue1 = 15;
 		FertilityPlus.defaultValue2 = 1.75;
-		BasicSelfControl.requireLib(20)
-						.requireInt(30);
+		BasicSelfControl.requireLib(30)
+						.requireInt(20);
 		//Slot 5 - minimum libido
 		ColdBlooded.requireMinLust(20);
 		ColdBlooded.defaultValue1 = 20;
@@ -2695,8 +2872,8 @@ package classes
 					.requireInt(60)
 					.requireLevel(6);
 		ArcaneLash.requirePerk(JobEromancer).requireLevel(6);
-		HalfStepToImprovedSelfControl.requireLib(40)
-									 .requireInt(60)
+		HalfStepToImprovedSelfControl.requireLib(60)
+									 .requireInt(40)
 									 .requirePerk(BasicSelfControl)
 									 .requireLevel(6);
 		InhumanDesireI.requirePerk(JobSeducer)
@@ -2735,8 +2912,8 @@ package classes
 						.requireLib(115)
 						.requireLevel(16)
 						.requireNGPlus(2);
-		ImprovedSelfControl.requireLib(60)
-						   .requireInt(90)
+		ImprovedSelfControl.requireLib(90)
+						   .requireInt(60)
 						   .requirePerk(HalfStepToImprovedSelfControl)
 						   .requireLevel(12);
 		Transference.requirePerk(JobEromancer)
@@ -2763,8 +2940,8 @@ package classes
 					   .requireLib(175)
 					   .requireLevel(22)
 					   .requireNGPlus(5);
-		HalfStepToAdvancedSelfControl.requireLib(80)
-									 .requireInt(120)
+		HalfStepToAdvancedSelfControl.requireLib(120)
+									 .requireInt(80)
 									 .requirePerk(ImprovedSelfControl)
 									 .requireLevel(18);
 		ColdLust.requirePerk(Lustzerker)
@@ -2775,33 +2952,53 @@ package classes
 						 .requireLib(75)
 						 .requireLevel(18);
 		//Tier 4 Libido Perks
-		AdvancedSelfControl.requireLib(100)
-						   .requireInt(150)
+		AdvancedSelfControl.requireLib(150)
+						   .requireInt(100)
 						   .requirePerk(HalfStepToAdvancedSelfControl)
 						   .requireLevel(24);
 		CriticalPerformance.requirePerk(JobCourtesan)
 						   .requireLib(100)
 						   .requireLevel(24);
 		//Tier 5 Libido Perks
-		HalfStepToSuperiorSelfControl.requireLib(120)
-									 .requireInt(180)
+		HalfStepToSuperiorSelfControl.requireLib(180)
+									 .requireInt(120)
 									 .requirePerk(AdvancedSelfControl)
 									 .requireLevel(30);
 		//Tier 6 Libido Perks
-		SuperiorSelfControl.requireLib(140)
-						   .requireInt(210)
+		SuperiorSelfControl.requireLib(210)
+						   .requireInt(140)
 						   .requirePerk(HalfStepToSuperiorSelfControl)
 						   .requireLevel(36);
 		//Tier 7 Libido Perks
-		HalfStepToPeerlessSelfControl.requireLib(160)
-									 .requireInt(240)
+		HalfStepToPeerlessSelfControl.requireLib(240)
+									 .requireInt(160)
 									 .requirePerk(SuperiorSelfControl)
 									 .requireLevel(42);
 		//Tier 8 Libido Perks
-		PeerlessSelfControl.requireLib(180)
-						   .requireInt(270)
+		PeerlessSelfControl.requireLib(270)
+						   .requireInt(180)
 						   .requirePerk(HalfStepToPeerlessSelfControl)
 						   .requireLevel(48);
+		//Tier 9 Libido Perks
+		HalfStepToInhumanSelfControl.requireLib(300)
+									 .requireInt(200)
+									 .requirePerk(PeerlessSelfControl)
+									 .requireLevel(54);
+		//Tier 10 Libido Perks
+		InhumanSelfControl.requireLib(330)
+						   .requireInt(220)
+						   .requirePerk(HalfStepToInhumanSelfControl)
+						   .requireLevel(60);
+		//Tier 11 Libido Perks
+		HalfStepToEpicSelfControl.requireLib(360)
+									 .requireInt(240)
+									 .requirePerk(InhumanSelfControl)
+									 .requireLevel(66);
+		//Tier 12 Libido Perks
+		EpicSelfControl.requireLib(390)
+						   .requireInt(260)
+						   .requirePerk(HalfStepToEpicSelfControl)
+						   .requireLevel(72);
 		//------------
 		// SENSITIVITY
 		//------------
@@ -2831,7 +3028,7 @@ package classes
 		Acclimation.requireCor(50)
 				   .requirePerk(CorruptedLibido)
 				   .requireMinLust(20);
-		SenseCorruption.requireCor(50);
+		SenseCorruption.requireCor(75);
 		//Tier 1 Corruption Perks - acclimation over-rides
 		Sadist.requireCor(60)
 			  .requirePerk(CorruptedLibido)

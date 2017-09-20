@@ -5033,8 +5033,8 @@ public function display():void {
 		outputText("Fatigue: " + fatigueDisplay + "\n");
 		//soulforce
 		outputText("Mana: " + manaDisplay + "\n");
-		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
 		//wrath
+		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
 		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
 			outputText("\n----------------------------\n");
 			outputText("\n<b>General Type:</b>");

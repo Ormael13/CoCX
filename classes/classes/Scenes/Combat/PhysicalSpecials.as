@@ -403,13 +403,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack8x():void {
 		clearOutput();
-		if(player.wrath < 100) {
+		if(player.wrath < 125) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
 			doNext(combatMenu);
 			return;
 		}
-		player.wrath -= 100;
+		player.wrath -= 125;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -445,13 +445,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack10x():void {
 		clearOutput();
-		if(player.wrath < 200) {
+		if(player.wrath < 350) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
 			doNext(combatMenu);
 			return;
 		}
-		player.wrath -= 200;
+		player.wrath -= 350;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -734,7 +734,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
-			monster.teased(damage);
+			monster.teased(monster.lustVuln * damage);
 		}
 		//New lines and moving on!
 		outputText("\n\n");
@@ -863,8 +863,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" <b>" + monster.capitalA + monster.short + " is blinded!</b>");
 		monster.createStatusEffect(StatusEffects.InkBlind, 2, 0, 0, 0);
 		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-		var lustDmg:Number = 2 + (3 * player.teaseLevel) + rand(5);
-		monster.teased(lustDmg);
+		if (monster.lustVuln > 0) {
+			var lustDmg:Number = 2 + (3 * player.teaseLevel) + rand(5);
+			monster.teased(lustDmg);
+		}
 		outputText("\n\n");
 		statScreenRefresh();
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);

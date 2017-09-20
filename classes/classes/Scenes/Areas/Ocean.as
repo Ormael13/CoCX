@@ -62,7 +62,7 @@ package classes.Scenes.Areas
 					break;
 			*/	case 1:
 					outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
-					outputText("<b>You got a fish!<\b>");
+					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 					break;
 				default:

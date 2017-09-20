@@ -1436,7 +1436,7 @@ use namespace kGAMECLASS;
 			}
 			if (elfScore() >= 5)
 			{
-				if (oniScore() >= 11) {
+				if (elfScore() >= 11) {
 					if (isTaur()) race = "elf-taur";
 					else race = "elf";
 				}
