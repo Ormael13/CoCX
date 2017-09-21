@@ -3394,7 +3394,7 @@ private function giveArianScalesDyeVial():void {
 	clearOutput();
 	outputText("Holding the vial on your hand, you call for Arian’s attention, and ask [Arian em] to follow you to the nearest point of the stream.\n\n");
 	outputText("[Arian Ey] gives you an inquisitive look, but quickly caughts you intentions as [Arian ey] sees the vial on your hands. In a few moments, you reach to the water, when you ask [Arian em] to remove [Arian eir] clothes, as you can’t make the vial work with them put on.\n\n");
-	outputText("\"<i>Oh, okay,</i>\" [Arian ey] says, with a bit of embarrassment on [Arian eir] face. You boop his nose playfully, stating that you’ve had seen [Arian em] naked many times before.\n\n");
+	outputText("\"<i>Oh, okay,</i>\" [Arian ey] says, with a bit of embarrassment on [Arian eir] face. You boop [Arian em] nose playfully, stating that you’ve had seen [Arian em] naked many times before.\n\n");
 	outputText("[Arian Ey] smiles in return, letting [Arian eir] clothes fall to the ground, leaving [Arian eirs] body exposed to your ogling. You look at the exposed scales, covering the most of the lizan’s body");
 	if (flags[kFLAGS.ARIAN_VAGINA] == 1) {
 		outputText(", except for a bit of naked skin in ");

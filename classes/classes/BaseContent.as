@@ -13,8 +13,11 @@ import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
-	import coc.view.MainView;
-	/**
+import coc.view.CoCButton;
+import coc.view.MainView;
+import coc.xxc.StoryContext;
+
+/**
 	 * Quick hacky method to wrap new content in a class-based structure
 	 * BaseContent acts as an access wrapper around CoC, enabling children of BaseContent to interact with
 	 * function instances/properties of CoC in the same manner older content does with the minimal amount
@@ -333,14 +336,18 @@ import classes.internals.Utils;
 			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
-		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		protected function button(pos:int):CoCButton
+		{
+			return kGAMECLASS.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void
@@ -861,10 +868,10 @@ import classes.internals.Utils;
 		{
 			return kGAMECLASS.mainView;
 		}
-		
-		protected function set mainView(val:*):void
+
+		protected function get mainViewManager():MainViewManager
 		{
-			kGAMECLASS.mainView = val;
+			return kGAMECLASS.mainViewManager;
 		}
 		
 		protected function get model():GameModel
@@ -926,7 +933,12 @@ import classes.internals.Utils;
 		protected function darkTheme():Boolean {
 			return kGAMECLASS.mainViewManager.darkThemeImpl();
 		}
-
+		protected static function onGameInit(f:Function):void {
+			CoC.onGameInit(f);
+		}
+		protected function get context():StoryContext {
+			return kGAMECLASS.context;
+		}
 	}
 
 }

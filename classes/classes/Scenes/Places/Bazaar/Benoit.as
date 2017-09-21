@@ -334,8 +334,8 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			"", null, "", null);
-	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack, null, null, null, "This backpack will allow you to carry more items.");
-	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
+	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	addButton(14, "Back", benoitIntro);
 }
 

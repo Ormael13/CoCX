@@ -151,10 +151,13 @@ package classes
 		public var sens:Number = 0;
 		public var cor:Number = 0;
 		public var fatigue:Number = 0;
+		public var mana:Number = 0;
+		public var soulforce:Number = 0;
 		
 		//Combat Stats
 		public var HP:Number = 0;
 		public var lust:Number = 0;
+		public var wrath:Number = 0;
 		
 		//Level Stats
 		public var XP:Number = 0;
@@ -320,9 +323,10 @@ package classes
 
 		//Eyetype
 		public var eyeType:Number = EYES_HUMAN;
+		public var eyeColor:String = "brown";
 
 		//TongueType
-		public var tongueType:Number = TONUGE_HUMAN;
+		public var tongueType:Number = TONGUE_HUMAN;
 
 		//ArmType
 		public var armType:Number = ARM_TYPE_HUMAN;
@@ -459,7 +463,7 @@ package classes
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
-				"lust", "fatigue",
+				"lust", "fatigue", "soulforce", "mana", "wrath",
 				"level", "gems",
 				"tailCount", "tailVenom", "tailRecharge", "horns",
 				"HP", "XP"
@@ -467,7 +471,7 @@ package classes
 			// 2.2. non-empty String fields
 			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
 				"short",
-				"skinDesc",
+				"skinDesc", "eyeColor",
 				"weaponName", "weaponVerb", "armorName"
 			]);
 			// 3. validate members
@@ -1753,6 +1757,8 @@ package classes
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if(findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
+			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
+				quantity += (perkv3(PerkLib.ProductivityDrugs));
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
@@ -2034,9 +2040,15 @@ package classes
 		public static const canFlyWings:Array = [
 			WING_TYPE_BEE_LIKE_LARGE,
 			WING_TYPE_BAT_LIKE_LARGE,
+			WING_TYPE_BAT_LIKE_LARGE_2,
 			WING_TYPE_FEATHERED_LARGE,
+			WING_TYPE_FEATHERED_PHOENIX,
 			WING_TYPE_DRACONIC_LARGE,
+			WING_TYPE_DRACONIC_HUGE,
 			WING_TYPE_GIANT_DRAGONFLY,
+			WING_TYPE_MANTIS_LIKE_LARGE,
+			WING_TYPE_MANTIS_LIKE_LARGE_2,
+			WING_TYPE_MANTICORE_LIKE_LARGE,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2069,7 +2081,7 @@ package classes
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
 				return true;
 			return false;
 		}
@@ -2086,7 +2098,7 @@ package classes
 		public function isWeaponForWhirlwind():Boolean
 		{
 			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
-			 || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD)
+			 || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
 				return true;
 			return false;
 		}
@@ -2094,24 +2106,65 @@ package classes
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
+			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
+			 || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
 				return true;
 			return false;
 		}
 
 		//Using Tome
-	/*	public function isUsingTome():Boolean
+		public function isUsingTome():Boolean
 		{
-			if (game.player.jewelry == game.jewelries)
+			if (game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook")
 				return true;
 			return false;
-		}*/
+		}
+
+		//Natural Jouster perks req check
+		public function isMeetingNaturalJousterReq():Boolean
+		{
+			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+			 || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
+				return true;
+			return false;
+		}
+		public function isMeetingNaturalJousterMasterGradeReq():Boolean
+		{
+			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+			 || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
+				return true;
+			return false;
+		}
+
+		//1H Weapons
+		public function isOneHandedWeapons():Boolean
+		{
+			if (game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large")
+				return true;
+			return false;
+		}
 
 		//Naked
 		public function isNaked():Boolean
 		{
 			if (game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing")
 				return true;
+			return false;
+		}
+
+		//Natural Armor (need at least to partialy covering whole body)
+		public function haveNaturalArmor():Boolean
+		{
+			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(SKIN_BASE_STONE))
+				return true;
+			return false;
+		}
+
+		//Crit immunity
+		public function isImmuneToCrits():Boolean
+		{
+			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0)
+				return true;//potem inne typy wrogów dodać tutaj: goo, żywiołaki, rośliny, nieumarli/duchy
 			return false;
 		}
 
@@ -3116,7 +3169,7 @@ package classes
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == TONUGE_DEMONIC || tongueType == TONUGE_DRACONIC || tongueType == TONUGE_ECHIDNA;
+			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
 		}
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
@@ -3142,7 +3195,7 @@ package classes
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
-				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.LANCE || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
@@ -3170,6 +3223,9 @@ package classes
 			if (findPerk(PerkLib.HeavyArmorProficiency) >= 0 && tou >= 75 && armorPerk == "Heavy") {
 				mult *= 0.9;
 			}
+			if (findPerk(PerkLib.ShieldHarmony) >= 0 && tou >= 100 && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
+				mult *= 0.9;
+			}
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
 				mult *= 0.9;
 			}
@@ -3179,9 +3235,19 @@ package classes
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				mult *= 0.75;
 			}
+			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
+				mult *= 0.8;
+			}
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
-				mult *= 0.5;//potem doda sie efekty perkow zwiekszajace redukcje obrazen
+				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
+					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
+						else mult *= 0.25;
+					}
+					else mult *= 0.4;
+				}
+				else mult *= 0.5;
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
@@ -3190,8 +3256,9 @@ package classes
 			}
 			//Round things off.
 			mult = Math.round(mult);
-			//Caps damage reduction at 95%.		(when using defend with upgrading it perks would allow temporaly reach 99% xD)
-			if (mult < 5) mult = 5;
+			//Caps damage reduction at 95/99%.
+			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
 			return mult;
 		}
 

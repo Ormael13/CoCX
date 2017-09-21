@@ -27,6 +27,5 @@ package classes.Items.Weapons
 			while (game.player.findPerk(PerkLib.WizardsFocus) >= 0) game.player.removePerk(PerkLib.WizardsFocus);
 			return super.playerRemove();
 		}
-		
 	}
 }

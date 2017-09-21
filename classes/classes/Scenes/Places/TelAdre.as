@@ -1659,14 +1659,16 @@ public function weaponShop():void {
 	menu();
 	addButton(0, weapons.CLAYMOR.shortName, weaponBuy, weapons.CLAYMOR);
 	addButton(1, weapons.WARHAMR.shortName, weaponBuy, weapons.WARHAMR);
-	addButton(2, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
-	addButton(3, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
-	addButton(4, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(2, weapons.D_WHAM_.shortName, weaponBuy, weapons.D_WHAM_);
+	addButton(3, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
+	addButton(4, weapons.LANCE.shortName, weaponBuy, weapons.LANCE);
 	addButton(5, weapons.DAGGER.shortName, weaponBuy, weapons.DAGGER);
 	addButton(6, weapons.SCIMITR.shortName, weaponBuy, weapons.SCIMITR);
 	addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);
 	addButton(8, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
-	addButton(9, weapons.BFSWORD.shortName, weaponBuy, weapons.BFSWORD);
+	addButton(9, weapons.DSWORD_.shortName, weaponBuy, weapons.DSWORD_);
+	addButton(10, weapons.BFSWORD.shortName, weaponBuy, weapons.BFSWORD);
+	addButton(11, weapons.DBFSWO.shortName, weaponBuy, weapons.DBFSWO);
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
 		addButton(13, "ScarBlade", forgeScarredBlade);
 	}

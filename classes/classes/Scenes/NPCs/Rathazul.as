@@ -336,24 +336,24 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
-		if (showArmorMenu) addButton(0, "Armor&Weap", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour or weapon for you.");
+		if (showArmorMenu) addButton(0, "Armor&Weap", rathazulArmorMenu).hint("Ask Rathazul to make an armour or weapon for you.");
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(1, "Shop", rathazulShopMenu, dyes, philters, reductos, "Check Rathazul's wares.");
 		else
 			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
-		addButton(4, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		addButton(4, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
 		
-		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
-		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (dyes) addButton(8, "Make Dye", makeDyes, null, null, null, "Ask him to make a special dye for you. \n\nCost: 50 Gems.");
+		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+		if (dyes) addButton(8, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. \n\nCost: 50 Gems.");
 
-		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(11, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
+			addButton(11, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
 		}
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion, null, null, null, "Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
 
 		if(player.hasStatusEffect(StatusEffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
@@ -1133,9 +1133,9 @@ private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false
 	menu();
 	//Dyes
 	if (dyes) {
-		addButton(0, "Hair Dyes", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
-		addButton(1, "Skin Oils", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
-		addButton(2, "Body Lotions", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
+		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
+		addButton(1, "Skin Oils", buyOils).hint("Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
+		addButton(2, "Body Lotions", buyLotions).hint("Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
 	}
 	else {
 		addButtonDisabled(0, "Hair Dyes", "You can't afford to buy dyes. \n\n50 gems required.");

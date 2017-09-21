@@ -11,18 +11,17 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Beach.*;
 	import classes.Scenes.NPCs.CeaniScene;
-	import classes.Scenes.NPCs.CaiLin;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-	
+	//import classes.Scenes.NPCs.CaiLin;
+
 	use namespace kGAMECLASS;
 	
 	public class Beach extends BaseContent 
 	{
 		public var ceaniScene:CeaniScene = new CeaniScene();
-		public var gorgonScene:GorgonScene = new GorgonScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
-		
+		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
+		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
+		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
+
 		public function Beach() 
 		{
 		}
@@ -37,7 +36,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			
@@ -45,10 +44,10 @@ package classes.Scenes.Areas
 			var select:int;
 			
 			//Build choice list!
-		//	choice[choice.length] = 0;	//Stronger oasis demons pack
-			choice[choice.length] = 0;	//Gorgon
-			if (rand(2) == 0) choice[choice.length] = 1;	//Orca TF
-			if (rand(4) == 0) choice[choice.length] = 2;	//Find nothing! The rand will be removed from this once the Beach is populated with more encounters.
+			choice[choice.length] = 0;	//Stronger than oasis demons pack
+			if (rand(2) == 0) choice[choice.length] = 1;	//Pichou shop
+			if (rand(2) == 0) choice[choice.length] = 2;	//Orca TF
+			if (rand(4) == 0) choice[choice.length] = 3;	//Find nothing! The rand will be removed from this once the Beach is populated with more encounters.
 			
 			//Finding Sea Boat
 			if ((flags[kFLAGS.DISCOVERED_BEACH] >= 10) && flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && rand(3) == 0) {
@@ -81,19 +80,21 @@ package classes.Scenes.Areas
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
-			//	case 0:
-			//		outputText("Suprise! They're back ;) Get ready to brambleeeeeeeee!!!!\n\n", true);
-			//		startCombat(new DemonPackBeach());
-			//		break;
 				case 0:
-			//	case 1:
-					if (flags[kFLAGS.CAILIN_FOLLOWER] <= 0) {
-						flags[kFLAGS.CAILIN_FOLLOWER] = 1;
-						flags[kFLAGS.CAILIN_LVL_UP] = 0;
-					}
-					gorgonScene.gorgonEncounter();
+					demonsPack.demonspackEncounter();
 					break;
+			//	case 1:
+			//		if (flags[kFLAGS.CAILIN_FOLLOWER] <= 0) {
+			//			flags[kFLAGS.CAILIN_FOLLOWER] = 1;
+			//			flags[kFLAGS.CAILIN_LVL_UP] = 0;
+			//		}
+			//		gorgonScene.gorgonEncounter();
+			//		break;
 				case 1:
+					if (flags[kFLAGS.PINCHOU_SHOP] >= 1) pinchoushop.encounteringPinchouRepeat();
+					else pinchoushop.encounteringPinchouFirst();
+					break;
+				case 2:
 					clearOutput();
 					outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ")
 					inventory.takeItem(consumables.ORCASUN, camp.returnToCampUseOneHour);

@@ -64,13 +64,25 @@ package classes.Scenes.Dungeons
 			getGame().gameOver();
 			removeButton(1);
 		}
-		
 		public function defeatedByGuardianGolems():void {
 			clearOutput();
 			outputText("As you fall defeated to the ground the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
 			getGame().gameOver();
 			removeButton(1);
+		}
+		public function defeatedByBossGolems():void {
+			clearOutput();
+			outputText("As you fall defeated, with barely any time to collapse to the ground as the constructs continue to smash or slash you to death with their tails. By the time they are done with you there will be nothing left but a bloodstain on the stone floor...and some of you on the walls and maybe a little bit on cave roof too. Wait how did part of you get there?\n\n");
+			//[GAME OVER]
+			getGame().gameOver();
+			removeButton(1);
+		}
+		public function defeatedBossGolems():void {
+			clearOutput();
+			outputText("For now PLACEHOLDER text.\n\n");
+			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
+			cleanupAfterCombat();
 		}
 		
 		//Rooms
@@ -121,7 +133,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 43;
 			clearOutput();
 			outputText("<b><u>N Underground Passage</u></b>\n");
-			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
+			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
@@ -182,9 +194,9 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 48;
 			clearOutput();
 			outputText("<b><u>W Underground Passage</u></b>\n");
-			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
+			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
-			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(10, "West", roomNTE);
+			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
 		}
 		public function roomSWUP():void {
 			kGAMECLASS.dungeonLoc = 49;
@@ -205,7 +217,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 50;
 			clearOutput();
 			outputText("<b><u>Narrow Tunnel (E)</u></b>\n");
-			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
+			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNT, roomWUP);
 		}
 		public function roomNT():void {
@@ -250,7 +262,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nThere is an opened crate with two items inside.\n\n");
 				addButton(0, "Crate 1", takeDiamond);
 			}
-			else {
+			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 0) {
 				outputText("\n\nThere is an unopened crate with something inside.\n\n");
 				addButton(0, "Crate 1", takeAmetist);
 			}
@@ -321,14 +333,14 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 56;
 			clearOutput();
 			outputText("<b><u>Tunnel</u></b>\n");
-			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
+			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, roomSStaircaseB, roomTunnel01, null);
 		}
 		public function roomTunnel01():void {
 			kGAMECLASS.dungeonLoc = 57;
 			clearOutput();
 			outputText("<b><u>Tunnel</u></b>\n");
-			outputText("Various shattered humanoid squeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
+			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomTunnel02, roomTunnel00);
 			if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButton(6, "North", roomMediumCave);
 		}
@@ -350,21 +362,23 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 59;
 			clearOutput();
 			outputText("<b><u>Ted's Lair</u></b>\n");
-			outputText("This room is huge. At the center is the throne where the dragon man used to sit. ");
-			if (player.findPerk(PerkLib.SoulSense) >= 0) outputText("There is a small suspicious lever on the right next to a bed. ");
-			outputText("On the left is a small tatami used for meditations.");
+			outputText("The chamber you have entered is large.. At the center is an imposing throne with several shield like green scales littered around it. ");
+			if (player.findPerk(PerkLib.SoulSense) >= 0) {
+				outputText("There is a small suspicious lever on the right next to a bed. ");
+				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) outputText("And you already pulled it. ");
+			}
+			outputText("On the left is a small tatami mat and incense, it's obviously used for meditation.");
 			dungeons.setDungeonButtons(roomTunnel02, null, null, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
-				outputText("\n\n\"<i>Did you come to worship me mortal?</i>\" A dommering voice reaching your ears moment you enter the room. Stunned you stopped to look around.");
-				outputText("\n\n\"<i>So you not my worshiper YET... but you will bend to power of BAM HAMMER!!!</i>\"");
+				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Suprised you stopped to look around to find it source.");
+				outputText("\n\n\"<i>So you're not my worshiper YET... but my BAM HAMMER will make sure you will be!!!</i>\"");
 				startCombat(new Ted(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 5;
 				doNext(playerMenu);
 				return;
 			}
-			if (player.findPerk(PerkLib.SoulSense) >= 0) {
-				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButtonDisabled(6, "Lever", "You already pulled it.");
-				else addButton(0, "Pull Lever", pullTheLever, null, null, null, "Pull the lever. You suspect that it might open some secret doors.");
+			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] == 0) {
+				addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret door.");
 			}
 		}
 		public function roomSmallCaveW():void {
@@ -373,65 +387,73 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Small Cave (W)</u></b>\n");
 			outputText("This cave is filled with various storage crates.");
 			dungeons.setDungeonButtons(null, null, null, roomMediumCave);
-			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 5 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 6 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 7) {
+			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 5) {
 				outputText("\n\nA few of golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
 				startCombat(new GuardianGolems(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]++;
 				doNext(playerMenu);
 				return;
 			}
-		/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] == 5) {
-				outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
-				addButton(0, "", takeSoulPill4);
-			}
-		*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] > 0) {
-				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2]) + " pill bottles inside.\n\n");
+			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 5) {
+			/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] == 5) {
+					outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
+					addButton(0, "", takeSoulPill4);
+				}
+			*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] > 0) {
+					if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] < 5) {
+						outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2]) + " pill bottles inside.\n\n");
+						addButton(0, "SoulPill", takeSoulPill2);
+					}
+				}
+				else {
+					outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
 					addButton(0, "SoulPill", takeSoulPill2);
 				}
-			}
-			else {
-				outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
-				addButton(0, "SoulPill", takeSoulPill2);
 			}
 		}
 		public function roomMediumCave():void {
 			kGAMECLASS.dungeonLoc = 61;
 			clearOutput();
 			outputText("<b><u>Medium Cave</u></b>\n");
-			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
+			outputText("This medium sized cave is decorated with many silent statues. You somehow have the impression that they are watching you or maybe watching... ");
+			/*if(flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) outputText("empty space in the middle with some resin remains.");
+			else */outputText("something embeded in half translucent resin in the middle.");
 			dungeons.setDungeonButtons(roomSmallCaveN, roomTunnel01, roomSmallCaveW, roomSmallCaveE);//north(6), south(11), west(10), east(12), up(5), down(7)
-	/*		if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 8) {
+			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 8 && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 2 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2] == 5 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] == 5 && flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] == 5) {
+				outputText("\n\nA few of unusualy shaped golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
+				startCombat(new BossGolems(), true);
 				doNext(playerMenu);
 				return;
 			}
-	*/	}
+		}
 		public function roomSmallCaveE():void {
 			kGAMECLASS.dungeonLoc = 62;
 			clearOutput();
 			outputText("<b><u>Small Cave (E)</u></b>\n");
 			outputText("This cave is filled with various storage crates.");
 			dungeons.setDungeonButtons(null, null, roomMediumCave, null);
-			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 5 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 6 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 7) {
+			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 6) {
 				outputText("\n\nA few of golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
 				startCombat(new GuardianGolems(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]++;
 				doNext(playerMenu);
 				return;
 			}
-		/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] == 5) {
-				outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
-				addButton(0, "", takeSoulPill4);
-			}
-		*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] > 0) {
-				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3]) + " pill bottles inside.\n\n");
+			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 6) {
+			/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] == 5) {
+					outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
+					addButton(0, "", takeSoulPill4);
+				}
+			*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] > 0) {
+					if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3] < 5) {
+						outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3]) + " pill bottles inside.\n\n");
+						addButton(0, "SoulPill", takeSoulPill3);
+					}
+				}
+				else {
+					outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
 					addButton(0, "SoulPill", takeSoulPill3);
 				}
-			}
-			else {
-				outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
-				addButton(0, "SoulPill", takeSoulPill3);
 			}
 		}
 		public function roomSmallCaveN():void {
@@ -440,26 +462,28 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Small Cave (N)</u></b>\n");
 			outputText("This cave is filled with various storage crates.");
 			dungeons.setDungeonButtons(null, roomMediumCave, null, null);
-			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 5 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 6 || flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 7) {
+			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 7) {
 				outputText("\n\nA few of golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
 				startCombat(new GuardianGolems(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]++;
 				doNext(playerMenu);
 				return;
 			}
-		/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] == 5) {
-				outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
-				addButton(0, "", takeSoulPill4);
-			}
-		*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] > 0) {
-				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4]) + " pill bottles inside.\n\n");
+			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 7) {
+			/*	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] == 5) {
+					outputText("\n\nThere is a crate with " +  + " pill bottles inside.\n\n");
+					addButton(0, "", takeSoulPill4);
+				}
+			*/	if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] > 0) {
+					if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4] < 5) {
+						outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4]) + " pill bottles inside.\n\n");
+						addButton(0, "SoulPill", takeSoulPill4);
+					}
+				}
+				else {
+					outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
 					addButton(0, "SoulPill", takeSoulPill4);
 				}
-			}
-			else {
-				outputText("\n\nThere is an unopened crate with five pill bottles.\n\n");
-				addButton(0, "SoulPill", takeSoulPill4);
 			}
 		}
 		
@@ -487,31 +511,31 @@ package classes.Scenes.Dungeons
 		}
 		private function takeTSharkTooth():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]++
-			inventory.takeItem(consumables.TSTOOTH, roomLStorageW);
+			inventory.takeItem(consumables.TSTOOTH, roomLStorageE);
 		}
 		private function takeGoldenSeed():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]++
-			inventory.takeItem(consumables.GLDSEED, roomLStorageW);
+			inventory.takeItem(consumables.GLDSEED, roomLStorageE);
 		}
 		private function takeMaraFruit():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]++
-			inventory.takeItem(consumables.MARAFRU, roomLStorageW);
+			inventory.takeItem(consumables.MARAFRU, roomLStorageE);
 		}
 		private function takeSalamFireWat():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]++
-			inventory.takeItem(consumables.SALAMFW, roomLStorageW);
+			inventory.takeItem(consumables.SALAMFW, roomLStorageE);
 		}
 		private function takeAmetist():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 1;
-			inventory.takeItem(useables.AMETIST, roomLStorageE);
+			inventory.takeItem(useables.AMETIST, roomLStorageW);
 		}
 		private function takeDiamond():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 2;
-			inventory.takeItem(useables.DIAMOND, roomLStorageE);
+			inventory.takeItem(useables.DIAMOND, roomLStorageW);
 		}
 		private function takeEldritchRibbon():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 3;
-			inventory.takeItem(weapons.ERIBBON, roomLStorageE);
+			inventory.takeItem(weapons.ERIBBON, roomLStorageW);
 		}
 	}
 

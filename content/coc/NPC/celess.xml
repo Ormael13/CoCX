@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extend-story name="celess" xmlns="xxc-story">
+	<lib name="strings">
+		<lib name="birth">
+			<text name="intro">
+				You suddenly lose all strength from the waist down, forcing you to lay down on the moss as you go into labor. 
+
+				Unlike what you know of pregnancy, you don’t feel any pain from this, your daughter leaves your womb without trouble and, somehow, you even get an orgasm out of the deal. It starts with the head, then the torso. So far one would think you are giving birth to a human baby, but you know it’s otherwise. A horse body indeed follows suit right after, causing you to orgasm again as white fluids gush out of your happy love canal in a steady flow. She is finally out and starts her life as any and all babies do… with a lengthy and healthy cry!
+
+				You cradle your newborn daughter and bring her to your [breasts], feeling like taking a nap next to your child. First, however, comes an important question.. what will you name her?
+			</text>
+			<text name="nameScene">
+				<i>“<output>$name</output>... this is a good name, right my child?”\n\n</i>
+				
+				<output>$name</output> stops crying and looks at you with her big eyes, letting out a cute laugh in response.
+				You think she likes it. Having solved this important matter, you drift asleep with <output>$name</output> still hugging your chest.
+				
+				When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.
+				You are hardly surprised, already knowing how short most pregnancies are in Mareth.
+				<if test="player.inte gt 50">Maybe it’s due to how time and space distort in Mareth?</if>
+				Still, you had hoped this phase would have lasted at least a little bit longer.
+				<if test="isCorrupt">
+					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
+					She, unlike her sire, has twilight black hair and fur.
+					<else>
+						Your daughter wakes up as well, opening her beautiful azure eyes to the world.
+						She, like her sire, has pure white hair and fur as befits an unicorn. 
+					</else>
+				</if>
+				You expected her to have grown her horn by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?
+				[if(intelligence> 50)Does make sense, otherwise they would cause some nasty internal damage during birth.]
+				
+				<i>“Mom, is something wrong?”</i>
+				
+				You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not. 
+				For now, you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.
+			</text>
+		</lib>
+		<text name="playTime">
+			<if test="isCorrupt">
+				<output>$name</output> seems somewhat bored, and it occurs to you that being a mother comes before being the Champion.
+				You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps.
+				You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back.
+				You turn around and notice <output>$name</output> is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.
+				
+				<i>“Tehehe. Got you, mom.”</i>
+				
+				Ooooh reeeeally? Well then, it’s time you teach your daughter a lesson!
+				You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle.
+				Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover.
+				Eventually, you and <output>$name</output> are covered in so much cum her black fur almost appears white.
+				After a few hours of this, the both of you head back to camp, still laughing.
+				<else>
+					You spend some time with your beloved daughter in the forest.
+					The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.
+					
+					<i>“Mom, they smell </i>so<i> good! Are they blooming all the time like this?”</i>
+					
+					You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times.
+					<if test="player.inte gt 60">
+						Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help
+						<if test="$dangerousPlants">, the only thing you have is that one book from the traveling merchant, but it focuses more on the signs of the more dangerous ones and how to avoid them rather than their life cycle</if>
+					</if>.
+					
+					She doesn't seem to mind, though. Apparently more interested in playing, the both of you play tag, hide and seek and other such innocent games in the grove. However, an unwanted visitor shows up before the end of the last game.
+					The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers.
+					This happening in front of your daughter is <i>unacceptable</i>. 
+					You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and <output>$name</output>’s innocence.
+					You make sure to dispose of the body properly, not wanting to risk your daughter stumbling upon it and winding up traumatized. That taken care of, you go back to playing with your daughter.
+					
+					The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.
+					
+					As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.
+				</else>
+			</if>
+		</text>
+		<text name="growUp">
+			As you wake up this morning, you check the space next to you where <output>$name</output> usually sleeps, and find it empty. 
+			You almost panic for a moment, before calming down and deciding to go look for her. 
+			When you finally find her by the stream, she’s holding her forehead, visibly in pain.
+			
+			<if test="isCorrupt">
+				<i>“Ahhhh so good… this feels way too good!…Mom please look!”</i>
+				
+				Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of <output>$name</output>’s forehead. 
+				She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. 
+				Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already.
+				Her breasts, currently D-cups, are progressively inflating, finally stopping somewhere around E-cups. And as her horns finish their growth, her horsecock explodes, splattering much of the ground, covering it in white.
+				Your little girl seems to have matured to adulthood.
+				
+				<i>“Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.”</i>
+				
+				<else>
+					<i>“Oww! It hurts!...Mom… don’t look!”</i>
+					
+					You see your daughter is holding a large horn on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain 
+					<if test="silly()">, kinda obvious, what with her outright telling you less than two seconds ago,</if>
+					and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn.
+					
+					<i>“Mom… It’s terrible! I've grown this weird bony stump on my head, what do I do?”</i>
+					
+					You explain to your daughter that it's normal for unicorns to have a horn on their forehead and that you love her all the same, horn or not.
+					She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast.
+					Noticing where you’re looking, she blushes and tries to hide it from you, failing miserably due to being unable to reach it with her hands. All she achieves is looking somewhat silly.
+					You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horn or no horn, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it.
+					You sigh, she’s your daughter, and no matter the problems she might have, she can always come to you and you will gladly go to any length to help her with it. No exceptions.. 
+					
+					<i>“Mom, I’m a little scared…why did it get so big?! How do I get rid of this huge thing between my legs?”</i>
+					
+				</else>
+			</if>
+			
+			<if test="player.isFemaleOrHerm()">
+				This is a… somewhat unusual situation, but as a <if test="player.isFemale()">female<else>herm like her</else></if>it’s something you can understand.
+				<else>You really would prefer not to do this but sadly you have no other way to solve this problem.</else>
+			</if>
+			You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. 
+			You lick the flared tip to get a taste, satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it.
+			You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
+			
+			<if test="isCorrupt">
+				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
+				<else>
+					Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. <output>$name</output>’s horsecock finally shrinks back to its sheath, but she’s still blushing like a tomato.
+					
+					<i>“Mom, is this really ok with you?”</i>
+					
+					You would rather it be you than some imp after her purity, stealing your daughter firsts. 
+					She understands you’re doing this for her sake and does her best to stop blushing, being only moderately successful. 
+					The morning pretty much continues as normal, aside from a lecture on sex you put some time aside to give her, mainly on what and who to avoid and why.
+				</else>
+			</if>
+			
+		</text>
+		<lib name="incest">
+			<text name="masturbateHer">
+				You simply help her by masturbating her horse dong to satisfaction. Celess<output>$name</output> thanks you afterward and goes to sit in a corner to rest.
+			</text>
+			<text name="centaurToys">
+				You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.
+				Well that's one problem solved.
+			</text>
+			
+			<text name="pureIncest">
+				No matter how wicked you might be, you just can’t find the resolve to rape your innocent daughter.
+				Just as you're about to dismiss the idea completely, <output>$name</output> surprises you.
+				
+				<i>“MOM! HELP! ITS BACK!</i>
+				
+				You watch, spellbound, as <output>$name</output>’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, <output>$name</output> has no idea about how to get it to calm down.
+				It seems the job falls to you.
+				
+				<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>
+				
+				This is a… somewhat unusual situation, but as a female/(herm like her) it’s something you can understand.
+				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
+				
+				<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>
+				
+				<output>$name</output> whines as she finally orgasms, her sweet cum flooding your throat. 
+				It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. 
+				As her erection finally dies down, you feel something change in you as the cum reaches your stomach. 
+			</text>
+			<text name="addCorruption">
+				Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. 
+				You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.
+			</text>
+			<text name="pureCorruption">
+				<output>$name</output> suddenly starts moaning as she holds her horn with both hands.
+				
+				<i>“Ahhhh so good… this feels way too good!…Mom, please look!”</i>
+				
+				You watch spellbound as her horn suddenly fissures by the center, dividing into a duo of parallel horns, symbol of her newfound corruption.
+				Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. 
+				She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. 
+				Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. 
+				And as her horns finish repositioning on each side of her forehead, her horsecock explodes, splattering much of the ground, covering it in white. <output>$name</output> seems to have embraced her inner corruption.
+				
+				<i>“Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.”</i>
+				
+				This is a… somewhat unusual situation, but it’s something you can understand.
+				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. 
+				You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
+				You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
+				
+				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
+			</text>
+			
+			<text name="corruptMenu">
+				You ask <output>$name</output> if she’s up for some ‘fun’ with her mommy. <output>$name</output>’s horse ears instantly perk up at the mere mention of “fun”.
+
+				<i>“How would you like us to do it?”</i>
+			</text>
+			
+			<text name="fuckHer">
+				It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true">beside Edryn's of course</if>.
+				You ponder for a split second the implications of what you’re about to do, it’s about how long it takes you to dismiss them.
+				Amongst all of the people you know, the only one even remotely likely of still being a virgin is your daughter and with the way she debauches herself on a daily basis using the natural fauna
+				(if centaur toys) or the toys you brought back from Whitney’s farm(end of cut)
+				, you’re pretty sure her innocence died out a long time ago. <output>$name</output> is a big girl with… equally big assets, but today what you’re interested in is her gaping horsecunt.
+				<if test="silly()">You monster.</if>When you mention it to her, she does not even seem surprised, aside from asking what took you so long.
+				Merely smiling while teasingly flaunting her moistening cunt toward you, taunting you to take her already.
+				
+				<i>“Mommy wanna play daddy today? Sure, I can get in front of that ride.”</i>
+				
+				That being all the encouragement you need, you position yourself behind her and ram  your “Cock descript” into her warm gaping cunt without hesitation.
+				She moans in delight as you force in as much of your cock as you can  while looking for the perfect angle. <output>$name</output> taunts you with dirty talk all the while.
+				
+				<i>“Mom, please defile me as much as you want, punish my sinful pussy!”</i>
+				
+				Sinful, eh? Like mother like daughter. Her pussy, despite it’s size, acts as if it had a mind of its own, squeezing your cock as if trying to smother it.
+				You would suspect her of having some succubus blood were you not aware of her actual heritage.
+				
+				<i>“Tired already, mom? C’mon, you can screw me better than that! Or, perhaps, you'd rather be the one to be screwed?” </i>
+				
+				Oh, is that a little brat mocking you that you hear? Can’t have that, right? Let’s educate her!
+				You proceed to wildly fuck your nymphomaniac daughter’s hole, responding to her earlier assault with a flurry of aggressive thrusts. 
+				
+				<i>“Aaaaah Yes! Defile me! Use me to your heart's content!”</i>
+				
+				In the end, you manage to outlast her. With a scream, you orgasm, a handful of seconds after she does. You flood her thirsty cunt with your cum, making her moan in delight.
+				As expected, nothing spills out of her pussy, even after the both of you lay down in the grass to rest. 
+				
+				You snuggle for a time with <output>$name</output> then head back to your daily routine.
+			</text>
+			<text name="suckHerOff">
+				It's been a while since you last had a taste of her, thus you decide to give your daughter a sweet, loving blowjob! <output>$name</output> coos, delighted at the proposal.
+				
+				<i>“Oh… so mommy wants a taste of my delicious lower horn? Please, mom, feel free to indulge yourself.”</i>
+				
+				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise.
+				You lick the flared tip to get a taste.
+				Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
+				You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
+				
+				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
+			</text>
+			<text name="getFucked">
+				You could really use some of that horse meat down there and if <output>$name</output>’s raging erection is anything to go by, she’s in line with your thinking.
+				
+				You get rid of any clothing, giving a good show of your [ass] to <output>$name</output> who blushes in desire while trotting up to you. Soon, you feel the tip of her huge cock at the entrance of your vagina.
+				
+				<i>“Here I go, mom!” </i>
+				
+				She’s suddenly inside your pussy before you even had the time to shout a silent scream.
+				Weirdly it doesn’t hurt… you’d expect her massive cock to pierce your hymen, yet you don't feel any pain, only the pressure of her large member working your pussy with masterful effectiveness.
+				You moan in delight as she fucks you up to the cervix for several minutes, your belly bulging due to the sheer size of her cock.
+				Your eyes roll back as her cock drives your pussy completely crazy.. Hell, she has even more stamina than her sire! After a while, you feel her massive shaft twitch inside you as she readies to unload.
+				
+				<i>“Ahhhh mom.. I can’t hold it anymore!”</i>
+				
+				A huge volume of cum shoots into you, filling your womb until it’s full enough to make you look pregnant already.
+				You feel her removing her cock from your pussy as you pass out on the grass exhausted by the experience. 
+				
+				When you wake up you find <output>$name</output> sleeping with her head on your lap… seemingly protecting your inflated belly.
+				<if test="player.hasVirginVagina()">
+					Checking on your privates, you’re not surprised to discover you did, indeed, keep your virginity in spite of the crazy ride the young centauress gave you.
+					By now you already figured this is a common thing among unicorns.
+				</if>
+				You feel something change in you as the corrupted cum reaches your womb. 
+				
+			</text>
+			<text name="doHeatOrRut">
+				Lewd images of cocks <if test="player.isMaleOrHerm()">and vaginas</if> of all sizes and shapes fill your mind, making you drool in anticipation.
+				It seems your daughter’s condition is spreading over to you.
+			</text>
+		</lib>
+		<text name="campInteraction">
+			<output>$name</output> sees you coming over from afar and cheer up right away.
+			
+			<i>“Mom did you came over to see me?!”</i>
+		</text>
+		<text name="appearance">
+			Your daughter <output>$name</output> is a 
+			<if test="isCorrupt">
+				Bicorn with 
+				Abyssal black fur. 
+				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you.
+				She wanders around in a black dress. By the look of it you'd think she stole it from a nun of the church of the fetish as it emphasise her generous D cup breast and put the focus on her assets. 
+				
+				<else>
+					Unicorn with 
+					immaculate white
+					Her blue eyes are the most innocent you've seen on mareth, if angels did exist she would be one.
+					She wander around in a white dress that covers her more then decent D cup breasts, through where she found it is a mystery even to you. Maybe it was a gift from her father though he never shown back to reclaim her.
+					
+				</else>
+			</if> 
+			
+			<output>$name</output> inherited a massive horsecock from her father. Easily 20 inch long, this beast can apparently, if the tales are true, pierce through anything.
+			
+			<if test="isCorrupt">
+				She regularly use it to fuck imps and goblins alike when she is horny.
+				
+				<else>
+					She tend to be afraid of it, still too young and pure to understand how to properly use it. 
+					
+				</else>
+			</if>
+			As all centauress <output>$name</output> has a horse vagina behind her hindquarter.
+			<if test="isCorrupt">
+				Knowing her well she likely already took enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.
+				<else>
+					You pray that she will not lose her virginity to some corrupt creature. 
+				</else>
+			</if>
+		</text>
+		<lib name="itemImprove">
+			<text name="menuText">It occurs to you that <output>$name</output> could use her powers to empower one of your items, potentially creating powerful artifacts. Which item do you want to reforge?</text>
+			<text name="improveThatItem">
+				You ask <output>$name</output> if she could imbue an item with her power.
+				
+				<i>“Certainly mother! Just leave the item on the ground and let me get to work.”</i>
+				
+				<output>$name</output> trots over to the item and starts channeling power. 
+				<if test="isCorrupt">
+					You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. 
+					She start to massage her breasts then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item.
+					You see the armament transforming as fluid corruption seeps into the material, infusing it with unholy power. 
+					
+					She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.
+					<else>
+						Her horn starts to glow with a white halo of purity. 
+						She cradles the item within her hands like a newborn baby, then finally touches it with her horn, transferring the light into it.
+						A miracle happens, as the item changes shape and starts to glow with holy power.
+						
+						Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.
+					</else>
+				</if>
+			</text>
+		</lib>
+	</lib>	
+</extend-story>

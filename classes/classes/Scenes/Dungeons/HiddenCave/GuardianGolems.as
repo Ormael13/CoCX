@@ -48,12 +48,12 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.imageName = "guardian golems";
 			this.long = "You're currently fighting guardian golems. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			this.plural = true;
-			initStrTouSpeInte(20, 25, 20, 10);
-			initLibSensCor(10, 10, 50);
 			this.lustVuln = 0;
-			this.tallness = 72;
 			this.createBreastRow(0, 1);
 			initGenderless();
+			initStrTouSpeInte(20, 25, 20, 10);
+			initLibSensCor(10, 10, 50);
+			this.tallness = 72;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
 			this.level = 7;
@@ -63,9 +63,11 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "cracked stone";
 			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -70,9 +70,9 @@ public function encounterKiha():void {
 		outputText("What do you do?");
 		//[Fight] [Ask Why][Buy Passage][Leave]
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
-		addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Ask Why", askWhy).hint("Ask Kiha why she's trying to drive you off.");
+		addButton(2, "Buy Passage", offerToBuyPassageFromKiha).hint("Try to offer Kiha 200 gems to buy passage.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
@@ -88,13 +88,13 @@ public function encounterKiha():void {
 	else if(flags[kFLAGS.KIHA_TOLL] == 1 && rand(2) == 0) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>You again?  I've been thinking about what you said.  How about instead of beating you senseless, you pay me a tribute of 200 gems, and I'll let you pass through my territory unhindered.  Of course, if you stumble into my lair I might have to teach you a lesson.</i>\"  A greedy smile spreads across her dusky visage while her eyes burn with mischievous crimson light.  Wait a moment... wasn't this your idea?\n\n");
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute).hint("Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford to pay her!");
 			removeButton(1);
 		}
-		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea).hint("Tell Kiha the whole tribute thing was your idea.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
 	}
@@ -104,13 +104,13 @@ public function encounterKiha():void {
 		(flags[kFLAGS.KIHA_TOLL_DURATION] == 0 && rand(2) == 0))) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>If you want to explore my territory again, you'll need to pay the fee,</i>\" she flatly states.  This is absurd - she wants more gems already?  You'll go broke like this, AND it was your idea to begin with!  What do you do?");
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
+		addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute).hint("Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford to pay her again!");
 			removeButton(1);
 		}
-		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea).hint("Tell Kiha the whole tribute thing was your idea.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
 	}
@@ -124,9 +124,9 @@ public function encounterKiha():void {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?");
 			//[Fight] [Ask Why][Buy Passage][Leave]
 			menu();
-			addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
-			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
-			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+			addButton(0, "Fight", meetKihaAndFight).hint("Fight the dragoness!");
+			addButton(1, "Ask Why", askWhy).hint("Ask Kiha why she's trying to drive you off.");
+			addButton(2, "Buy Passage", offerToBuyPassageFromKiha).hint("Try to offer Kiha 200 gems to buy passage.");
 			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 			//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
@@ -193,7 +193,7 @@ public function kihaExplore(clearScreen:Boolean = true):void {
 	var event:Number = rand(10);
 	var itype:ItemType;
 	//Grabbin' Inquisitor Armor
-	if(event == 0 && flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0) {
+	if(event == 0 && (flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0 || flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 1)) {
 		inquisitorRobesDiscovery();
 		return;
 	}	
@@ -246,10 +246,10 @@ internal function kihaVictoryIntroduction():void {
 	outputText("\n\nYou could forcibly masturbate her.");
 	//Fems
 	menu();
-	addButton(0, "Masturbate", tsundereMasturbationChristmasCarol, null, null, null, "Forcibly masturbate Kiha.");
+	addButton(0, "Masturbate", tsundereMasturbationChristmasCarol).hint("Forcibly masturbate Kiha.");
 	if (player.lust >= 33 && player.hasVagina()) { //Fems
 		outputText("\n\nYou could use her tail as a dildo.");
-		addButton(1, "Use Tail", kihaVictoryPomfTail, null, null, null, "Use her tail as a dildo.");
+		addButton(1, "Use Tail", kihaVictoryPomfTail).hint("Use her tail as a dildo.");
 	}
 	if(player.hasCock()) { //Vagina with optional double-dick!
 		if(player.cockThatFits(monster.vaginalCapacity()) != -1 && player.lust >= 33) {
@@ -257,15 +257,15 @@ internal function kihaVictoryIntroduction():void {
 			if(player.cockThatFits2(monster.vaginalCapacity()) != -1 && player.cockTotal() > 1)
 				outputText(" and ass");
 			outputText(".");
-			addButton(2, "FuckHerPussy", victoryDickKiha, null, null, null, "Penetrate Kiha vaginally.");
+			addButton(2, "FuckHerPussy", victoryDickKiha).hint("Penetrate Kiha vaginally.");
 		}
 	}
 	if(player.cockThatFits(monster.analCapacity()) >= 0 && player.lust >= 33) { //Buttfuck 20 or less
-		addButton(3, "FuckHerAss", analRapuzulaKiha, null, null, null, "Penetrate Kiha anally.");
+		addButton(3, "FuckHerAss", analRapuzulaKiha).hint("Penetrate Kiha anally.");
 	}
 	if(player.cor < 40 || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) { //Conversation Only - Emotional Rape! (40- Corruption!)
 		outputText("\n\nNow that she's a captive audience, you could always talk to her.");
-		addButton(4, "Talk", rapeKihaWithWORDS, null, null, null, "Talk with Kiha and try to make progress.");
+		addButton(4, "Talk", rapeKihaWithWORDS).hint("Talk with Kiha and try to make progress.");
 	}
 	addButton(14, "Leave", cleanupAfterCombat);
 }
@@ -651,7 +651,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	outputText("Despite the pleasure of your crumbling restraint, the pleading shudders of your cumming body makes her even more aggressive than before.  \"<i>Yes!  Beg for mercy!  You don't deserve a minute of my time! How could someone like me ever be interested in a pig like you?</i>\"  To punctuate the game she's playing with your honeypot, Kiha pinches your " + clitDescript() + " between her fingers, the narrow nails of her claws squeezing your sensitive nub so tightly your jaw drops in a soundless scream of bliss.\n\n");
 
 	outputText("\"<i>Here's how this is going to go,</i>\" she murmurs when you've finally stopped gasping for breath.  \"<i>You will lick me until I tell you to stop, and every time you displease me I'm going to take it out on your sensitive little fuck hole.</i>\"  She swings around and sits on your face, smashing her wet cunt on your [face].  \"<i>Be grateful that I'm letting you do this,</i>\" she gurgles, pinching your clit again for emphasis.  Doing as you're told, you lick deeply into the warm velvet of the dragon's folds.");
-	if(player.tongueType == TONUGE_SNAKE) outputText("  You are grateful for your forked tongue, which allows you to cover more of her pussy at once.");
+	if(player.tongueType == TONGUE_SNAKE) outputText("  You are grateful for your forked tongue, which allows you to cover more of her pussy at once.");
 	else if(player.hasLongTongue()) outputText("  Your inhumanly long, prehensile tongue is a blessing here; you can reach into her deepest recesses, slurp your way into every nook and cranny, and generally provide a tongue-fuck that no human ever could.");
 	outputText("\n\n");
 
@@ -813,7 +813,6 @@ private function analRapuzulaKiha():void {
 		public function inquisitorRobesDiscovery():void {
 			clearOutput();
 			outputText("Cutting your way through the swamps in the hopes of finding something that isn't a spider, you are pleasantly surprised when you actually succeed.  You discover what seems to be a mossy stone door in a low hillside, adorned with some sort of complex puzzle lock composed of multiple stone circles decorated with animal symbols.  You don't know what lurks beyond the door, but if adventuring has taught you nothing else it is that something cool is always behind a puzzle.\n\n");
-
 			//[Intelligence less than 60]
 			if(player.inte < 60) {
 				outputText("Unfortunately, try as you might, you cannot seem to figure the lock out.  You spin the stone circles around multiple times to try and discern the pattern to them, but find yourself continually disappointed.  Eventually you resort to trying to listen for the sound of tumblers behind the door indicating a shifting lock.  It is not as successful as you hope.  Disappointed but not undeterred, you resolve to return to the mysterious lock at a later point, when you are more capable of handling its clever riddle.");
@@ -823,44 +822,31 @@ private function analRapuzulaKiha():void {
 			}
 			//[Intelligence greater than 60] 
 			outputText("While spinning the puzzle locks to try and determine the solution, you notice something curious about the repeated symbols adorning them.  Though initially you thought them to mean something in regards to where the locks were meant to sit, you begin to suspect that there is another trick to them.  Slowly working your way through the possibilities, your suspicions are confirmed: the symbols are a cipher, hiding the true answer to getting through the door.  Their rotation is a red herring, meant to obscure their nature.  If your translation is correct, the door is in fact magically sealed, and waiting for a spoken command to open: one that would never be casually spoken in its presence.\n\n");
-
 			outputText("\"<i>Chastity,</i>\" you say.\n\n");
-
 			outputText("The tumblers of the door spin, locking into a meaningless position.  Stone hinges scrape and rumble across the ground as the sealed entrance opens.  Stale air rushes out of the cavern.  Before you stone steps descend into the ground, and torches along the wall blaze into life.  This room may not have been touched in decades.\n\n");
-
 			outputText("You descend, alert.  Dust along the floor makes it difficult to discern if there are traps within the room, but the caution is possibly unwarranted, for you reach the bottom of the stairs without incident.  A single table and a chest are the only adornments of the interior.  Upon the table a rolled piece of parchment sits.  Though you are curious about the chest, the question of what this place is remains in your mind.  You unroll the parchment and read.\n\n");
-
 			outputText("<i>I have failed.\n\nI could have prevented all of the tragedy that will befall this land, if I were less arrogant.  It was my duty to root out corruption in the kingdom, and to ensure that no force could sully our name, or blaspheme against our queen.  But I was too certain of myself, too certain of what I thought to be true.  I believed that it was my duty to protect my queen from the dangerous and reckless thoughts of impure commoners and power-hungry mages.\n\n");
-
 			outputText("Instead, I should have protected them from my queen.\n\n");
-
 			outputText("When at last I reckoned the truth of Lethice's doings, the wheels turned too quickly to stop them.  The corruption spread through the kingdom like a famished beast.  Commoner and mage alike were swallowed by its depravity, and remade.  The demons were born, and had I possessed the foresight to watch my queen more carefully I could have stopped it.\n\n");
-
 			outputText("Do not mistake me for a coward, merely a fool.  I stood against my queen when at last I opened my eyes.  I dared to raise arms against her, and call upon the brightest of white fires, blazing with the desperation of a man determined to save his nation.  I failed.  She had feasted on so many souls, gained so much disgraceful power.  Before I could even gain a foothold I had already expended my energy.\n\n");
-
 			outputText("She mocked me.  Perhaps she was right to do so.  An infernal mark was seared into my body as punishment for my hubris.  \"<i>The Inedible Soul,</i>\" she declared me.  Stripped naked I was made to crawl through the city, spat and ejaculated upon, jeered at by the hedonists that now populated it.  None dared to try and change me, not with Lethice's mark upon me.  Such was my punishment.  Powerless, I watched as the land fell to the taint that it was once my duty to keep in check.\n\n");
-
 			outputText("I failed to stop the demons, and Lethice.  But I am one man, and there are many more who will come after me.  Many - too many - will fall, their souls and very nature devoured by the land, and for them I will suffer.  It is not their fault that my inaction created a force greater than they.\n\n");
-
 			outputText("But the demons - my former queen - are greedy.  They will expand, and conquer, and one day they will extend themselves too far.  One day a champion will challenge them.  Perhaps from another land, a stronger tribe, standing tall against the force that threatens it.  Perhaps from within our own kingdom, a hold-out, a child raised in hiding.  I do not know.\n\n");
-
 			outputText("If you have found this chamber, then you are wise.  Wiser and cleverer than most.  Perhaps you have the ability to be that champion.  Though I have failed, I have taken steps to ensure that my mistakes will not be repeated.  My magic found itself limited.  Yours will not.\n\n");
-
 			outputText("I have spent the last of my abilities to fashion attire suitable for a champion.  It is locked within the chest.  I am no fool - I know that it may be necessary to adapt this armor for  a body warped by corrupt powers.  It may also be necessary to deprave it, somewhat, to draw less attention to oneself in a society similarly changed.\n\n");
-
 			outputText("Stand before the chest, and ask for 'Retribution' or 'Carnality'.  The last of my magic, imbued therein, will do the rest.\n\n");
-
 			outputText("I dearly, sincerely hope with all my being that you are successful.  I name you the last Inquisitor of a defeated kingdom, and shed my power here.  If I am fortunate, I will live to see this land restored.  If not, it is worthy punishment for my hubris.\n\n");
-
 			outputText("Marae bless.\n\n");
-
 			outputText("-Inquisitor Zathul</i>\n\n");
-
 			outputText("You replace the scroll and look to the chest.   Will you say one of the key words?\n\n");
-
 			//if implying that Rathazul used to be an advisor to the queen before the fall, start by spelling his name correctly; else, proceed as normal
-			//[Retribution] [Carnality] [No]
-			simpleChoices("Retribution", retributionArmorIsCoolShit, "Carnality", carnalityArmorIsCoolShitToo, "", null, "", null, "NOPE!", noThankYouSirIDontWantAwesomeArmors);
+			menu();
+			addButton(0, "Retribution", retributionArmorIsCoolShit).hint("Use Retribution key word.");
+			addButton(1, "Carnality", carnalityArmorIsCoolShitToo).hint("Use Carnality key word.");
+			if (flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 1) addButton(2, "Insight", insightTomeIsCoolTome).hint("Use Insight key word.");
+			else if (player.inte >= 100) addButton(2, "Inspect", inspectInquisitorTomb).hint("Perhaps you should inspect the area before you make your decision?");
+			else addButtonDisabled(2,"???");
+			addButton(4, "NOPE!", noThankYouSirIDontWantAwesomeArmors).hint("Don't say any of key words yet.");
 		}
 
 		//[No]
@@ -875,12 +861,10 @@ private function analRapuzulaKiha():void {
 		public function retributionArmorIsCoolShit():void {
 			clearOutput();
 			outputText("With your word, the chest clicks.  Moving to lift the lid, you start when it does so of its own will.  Gleaming, brilliant light floods the room.  You had expected there to be a bit of showiness from the magic, yes, but having the robes actually rise up out of the chest seems excessive.  Dark red fabric stretches up as though on a mannequin - or a ghost.  Golden trim runs along its edges.  The back of the gloves feature clearly embroidered sigils that you do not recognize, but which you suspect meant something to a culture long forgotten.  It seems to be constructed primarily of two main portions - a sleeveless high-collared undershirt and skirt, and a hooded overcoat and mantle.  You gather the robes and place them in your pack to inspect further at camp.\n\n");
-
 			outputText("Turning to leave, you're startled by apparitions standing between you and the stairwell.  Faceless, translucent figures wearing the same robes you just discovered watch you carefully.  You brace yourself for a fight, but one by one they step to the side.  Carefully, you continue forward.  Each one bows as you pass them.\n\n");
-
 			outputText("The display makes you feel righteous.\n\n");
 			//[Player receives: 1x Inquisitor's Robes]
-			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
+			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
 			inventory.takeItem(armors.I_ROBES, camp.returnToCampUseOneHour);
 		}
 
@@ -890,13 +874,31 @@ private function analRapuzulaKiha():void {
 			outputText("With your word, the chest clicks.  Moving to lift the lid, you start when it does so of its own will.  Gleaming, brilliant light floods the room.  You had expected there to be a bit of showiness from the magic, yes, but having the robes actually rise up out of the chest seems excessive.  A dark red posture collar attached to sleeves floats above it as though on a mannequin - or a ghost.  The corset that rises beneath it looks perfectly fitted to you");
 			if(player.biggestTitSize() < 1) outputText(", which strikes you as unusual given your flat chest");
 			outputText(".  Red like dried blood, it looks devilishly tight.  A golden trim runs over the... well, the trim.  Similarly colored laces run down the back.  It connects naturally to a belt with a symbol you don't recognize emblazoned on the front, which in turn is affixed to a wavy skirt aligned to the side.  There don't actually seem to be any bottoms, and the skirt looks as though it will cover approximately nothing between your legs - but given your choice, that's probably to be expected.  A high pair of heeled boots completes the outfit, echoing a similar dark red lace along the side. You gather the ensemble and place them in your pack to inspect further at camp.\n\n");
-
 			outputText("Turning to leave you're startled by the apparitions standing between you and the stairwell.  Faceless, translucent figures wearing red and gold hooded robes, similar to the outfit just discovered, watch you carefully.  You brace yourself for a fight, but one by one they step to the side.  Carefully, you continue forward.  Each one bows as you pass them.\n\n");
-
 			outputText("The display makes you feel like a badass.\n\n");
 			//[Player receives 1x Inquisitor's Corset]
-			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
+			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
 			inventory.takeItem(armors.I_CORST, camp.returnToCampUseOneHour);
+		}
+
+		//[Insight]
+		public function inspectInquisitorTomb():void {
+			clearOutput();
+			outputText("You look at the scroll on the table, then at the chest in front of you. You feel like something is out of place. This gift…  your finely honed instinct tells you there might be something more. You spend a few minutes looking around the room, tapping the walls. You fail to find any hidden hollows or mechanisms, but this only fuels your suspicions. Taking the scroll out again, you notice the inquisitor’s signature flash. Just for a faint moment. Placing the scroll onto the table, you begin to trace runes of divination, of unseen things becoming transparent. Before your eyes, the signature of the inquisitor bursting into unnatural flame. However, it looks as if you’ve gone too far, before you know it the flames have consumed the letter and spread around you. ");
+			outputText("You turn to try and escape, but before you can take a step the flames die down, all at once. Turning back towards the table, you see a series of burn marks.  A message, hidden in the table itself. \"<i>If you are reading this, than you are cleverer than any of us were.</i>\" So that feeling... the fire, and this message. It was a test? \"<i>With the last of my strength, i alter the magic within the chest. If one were to prove worthy of it, this forbidden knowledge that i have guarded my entire life, could continue on. I offer something other than a garment, if you would have it. If you accept, simply stand before the chest and ask. \"<b>Insight</b>\" This knowledge is now yours to bear, use it wisely.</i>\"");
+			outputText(" You look from the message in the table to the chest. Insight. You could ask for this third gift, but you could also ask for the previous gifts, \"<i>Retribution</i>\", \"<i>Carnality</i>\". You might only get one chance, what will you choose?\n\n");
+			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
+			doNext(inquisitorRobesDiscovery);
+		}
+		public function insightTomeIsCoolTome():void {
+			clearOutput();
+			outputText("With your word, the chest clicks.  You start  to lift the lid,  when it does so of its own will. Gleaming, brilliant light floods the room. From within the chest lifts a tome, pages swishing as if caught in an invisible gust. As you reach out to touch it, the pages stop turning as the tome closes. You reach out and grab the book. After taking a moment to admire the rich scarlet leather and gold stitching of the cover, you undo the clasp and begin to read. This book holds the story of the fall of Mareth, a highly detailed account of the demon wars. But… as you flip through the pages, you notice some words are misspelled. Some grammar is improper. A cipher! ");
+			outputText("The forbidden knowledge the message mentioned, it’s concealed in this book! Encoded, so the unworthy cannot find it. You’ll need a great deal of time to puzzle this out. In the meantime, what information you’ve read so far is detailed and consistent with what you already know, so perhaps this book is useful in more ways than one.");
+			if(player.findPerk(PerkLib.JobSorcerer) >= 0) outputText(" Beyond that, the book pulses with magic, something you could certainly make use of. Power from... blood? Some sort of blood magic.");
+			outputText("\n\n");
+			//[Player receives: 1x Inquisitor's Tome]
+			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
+			inventory.takeItem(weaponsrange.I_TOME_, camp.returnToCampUseOneHour);
 		}
 }
 }

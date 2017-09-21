@@ -106,6 +106,10 @@ package classes.Scenes.Areas.Plains
 			var damage:Number = 0;
 			var slow:Number = 0;
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Dodged>
+			if(player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText("The gnoll pulls a javelin from behind her and throws it at you, but it's stopped by the wind wall.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but blind as she is, it goes wide.");

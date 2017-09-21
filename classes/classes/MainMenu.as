@@ -2,6 +2,7 @@ package classes {
 
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
+import classes.Scenes.Changelog;
 
 import coc.view.MainView;
 
@@ -23,15 +24,14 @@ public class MainMenu extends BaseContent {
 			CoC_Settings.debugBuild = false;
 		}
 
-		if (mainView.aCb.parent != null) {
-			mainView.removeChild(mainView.aCb);
-		}
+		mainView.hideComboBox();
 		getGame().mainViewManager.registerShiftKeys();
 		mainView.eventTestInput.x = -10207.5;
 		mainView.eventTestInput.y = -1055.1;
 		hideStats();
 		getGame().mainViewManager.startUpButtons();
 		kGAMECLASS.saves.loadPermObject();
+		if (getGame().gameSettings.charviewEnabled) mainView.charView.reload();
 		getGame().mainViewManager.setTheme();
 		//Reset newgame buttons
 		mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", getGame().charCreation.newGameFromScratch);
@@ -68,6 +68,7 @@ public class MainMenu extends BaseContent {
 			resume = playerMenu;
 
 		var achievements:Achievements = new Achievements();
+		var changelog:Changelog = new Changelog();
 
 		// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 		// that if you check if any images were found immediately when this screen is shown, you get 0
@@ -75,17 +76,17 @@ public class MainMenu extends BaseContent {
 		// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 		menu();
-		if (resume != null) addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+		if (resume != null) addButton(0, "Resume", resume).hint("Get back to gameplay?");
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
-		addButton(1, "Settings", getGame().gameSettings.settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
-		addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
-		addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
+		addButton(1, "Settings", getGame().gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+		addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
+		addButton(3, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 
-		addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
-		addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
-		//addButton(7, "Changelog", debugPane, null, null, null, "View changelog.");
-		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane, null, null, null, "View debug information.");
+		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
+		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
+		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It have many pages already.</i>");
+		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane).hint("View debug information.");
 	}
 
 	public function startupScreenBody():void {
@@ -278,7 +279,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
 		outputText("<li> Frogapus (The Wild Hunt)</li>");
 		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), Yeti Cum (yeti TF), Ceani the Orca girl)</li>");
-		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it)</li>");
+		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it, Ignis)</li>");
 		outputText("<li> Coalsack (Arian App desc, option to change his/her scales color)</li>");
 		outputText("<li> Fenoxo (Everything Else)</li>");
 		outputText("</ul>");

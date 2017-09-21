@@ -26,5 +26,4 @@ package classes.Perks
 			return true;
 		}
 	}
-
 }

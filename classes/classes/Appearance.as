@@ -89,6 +89,7 @@
 				else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 				else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
 				else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
+				else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 				description += "mane";
 				return description;
 			}
@@ -108,6 +109,7 @@
 			else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 			else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
+			else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 			description += "hair";
 
 			return description;
@@ -2196,7 +2198,7 @@
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
-			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+			return i_creature.eyeColor+ " "+DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
@@ -2378,6 +2380,8 @@
 			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", "",true],
 			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", "",true],
 			[SKIN_TYPE_MOSS, "moss", "moss", "",false],
+			[SKIN_TYPE_AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin","",false],
+			[SKIN_TYPE_TATTOED_ONI, "TATTOED_ONI", "tattooed skin","",false],
 			[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "",true],
 			[SKIN_TYPE_PARTIAL_STONE, "partial stone", "partial stone", "",false],
 			[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", "",true],
@@ -2397,7 +2401,8 @@
 					[HAIR_GORGON, "snake-like"],
 					[HAIR_LEAF, "leaf"],
 					[HAIR_FLUFFY, "fluffy"],
-					[HAIR_GRASS, "grass"]
+					[HAIR_GRASS, "grass"],
+					[HAIR_SILKEN, "silk-like"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2439,24 +2444,27 @@
 					[FACE_SALAMANDER_FANGS, "salamander"],
 					[FACE_YETI_FANGS, "yeti"],
 					[FACE_ORCA, "orca"],
-					[FACE_PLANT_DRAGON, "plant dragon"]
+					[FACE_PLANT_DRAGON, "plant dragon"],
+					[FACE_DRAGON_FANGS, "dragon fangs"],
+					[FACE_DEVIL_FANGS, "devil fangs"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
 				[
-					[TONUGE_HUMAN, "human"],
-					[TONUGE_SNAKE, "snake"],
-					[TONUGE_DEMONIC, "demonic"],
-					[TONUGE_DRACONIC, "draconic"],
-					[TONUGE_ECHIDNA, "echidna"],
-					[TONUGE_CAT, "cat"]
+					[TONGUE_HUMAN, "human"],
+					[TONGUE_SNAKE, "snake"],
+					[TONGUE_DEMONIC, "demonic"],
+					[TONGUE_DRACONIC, "draconic"],
+					[TONGUE_ECHIDNA, "echidna"],
+					[TONGUE_CAT, "cat"],
+					[TONGUE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
 				[
 					[EYES_HUMAN, "human"],
 					[EYES_FOUR_SPIDER_EYES, "4 spider"],
-					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
+					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap"],
 					[EYES_CAT_SLITS, "cat"],
 					[EYES_GORGON, "snake"],
 					[EYES_FENRIR, "fenrir"],
@@ -2464,7 +2472,10 @@
 					[EYES_FOX, "fox"],
 					[EYES_REPTILIAN, "reptilian"],
 					[EYES_SNAKE, "snake"],
-					[EYES_DRAGON, "dragon"]
+					[EYES_DRAGON, "dragon"],
+					[EYES_DEVIL, "devil"],
+					[EYES_ONI, "oni"],
+					[EYES_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2491,7 +2502,10 @@
 					[EARS_LION, "lion"],
 					[EARS_YETI, "yeti"],
 					[EARS_ORCA, "orca"],
-					[EARS_SNAKE, "snake"]
+					[EARS_SNAKE, "snake"],
+					[EARS_GOAT, "goat"],
+					[EARS_ONI, "oni"],
+					[EARS_ELVEN, "elven"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2507,7 +2521,9 @@
 					[HORNS_UNICORN, "unicorn"],
 					[HORNS_OAK, "oak"],
 					[HORNS_GARGOYLE, "gargoyle"],
-					[HORNS_ORCHID, "orchid"]
+					[HORNS_ORCHID, "orchid"],
+					[HORNS_ONI, "1 oni"],
+					[HORNS_ONI_X2, "2 oni"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2537,7 +2553,10 @@
 					[ARM_TYPE_DRAGON, "dragon"],
 					[ARM_TYPE_YETI, "yeti"],
 					[ARM_TYPE_ORCA, "orca"],
-					[ARM_TYPE_PLANT2, "tentacle-covered"]
+					[ARM_TYPE_PLANT2, "tentacle-covered"],
+					[ARM_TYPE_DEVIL, "devil"],
+					[ARM_TYPE_ONI, "oni"],
+					[ARM_TYPE_ELF, "elf"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2668,7 +2687,9 @@
 					[LOWER_BODY_TYPE_LION, "lion"],
 					[LOWER_BODY_TYPE_YETI, "yeti"],
 					[LOWER_BODY_TYPE_ORCA, "orca"],
-					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"]
+					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
+					[LOWER_BODY_TYPE_ONI, "oni"],
+					[LOWER_BODY_TYPE_ELF, "elf"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2701,32 +2722,6 @@
 					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
 				]
 		);
-		public static const DECORATION_TYPENAMES_:Array         = multipleMapsFromPairs(
-				[
-					[DECORATION_NONE, "nothing", ""],
-					[DECORATION_GENERIC, "generic", ""],
-					[DECORATION_TATTOO, "tattoo", ""]
-				]
-		);
-		public static const DEFAULT_DECORATION_TYPENAMES:Object = DECORATION_TYPENAMES_[0];
-		//public static const DEFAULT_DECORATION_NAMES:Object = DEFAULT_DECORATION_TYPENAMES_NAMES[1];
-
-		/**
-		 * A substitute text to fill after "on your <body part> you have ..."
-		 */
-		public static function describeDecoration(creature:Creature,decoType:int,decoAdj:String):String {
-			if (decoAdj && decoType != DECORATION_GENERIC) decoAdj += " ";
-			switch (decoType) {
-				case DECORATION_NONE:
-					return "nothing";
-				case DECORATION_TATTOO:
-					return decoAdj+"tattoo";
-				case DECORATION_GENERIC:
-					return decoAdj ? decoAdj : "<b>empty decoAdj bug</b>";
-				default:
-					return "<b>decoType bug "+decoType+"</b>"
-			}
-		}
 
 		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
 			[VAGINA_WETNESS_DRY, "dry"],

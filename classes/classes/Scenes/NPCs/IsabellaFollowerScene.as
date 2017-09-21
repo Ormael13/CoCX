@@ -204,20 +204,20 @@ public function callForFollowerIsabella():void {
 	}
 	
 	menu();
-	addButton(0, "Appearance", isabellasAppearance, null, null, null, "Examine Isabella's detailed appearance.");
-	addButton(1, "Talk", isabellaTalkMenu, null, null, null, "Ask Isabella about something.");
-	addButton(2, "Sex", campIzzySexMenu, null, null, null, "Have some sex with the cow-girl.");
-	addButton(3, "Spar", isabellaSparMenu, null, null, null, "Get into a quick battle with Isabella!");
-	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(4, "Accent Coach", isabellasAccentCoaching, null, null, null, "Teach Isabella to talk in normal accent.");
-	else addButton(4, "Accent Uncoach", isabellaAccentUncoaching, null, null, null, "Let Isabella talk the way she wants. This will pretty much throw away all the coaching progress you've made.");
-	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(5, "Get Milk", getMilk, null, null, null, "Get a bottle of Isabella's milk.");
+	addButton(0, "Appearance", isabellasAppearance).hint("Examine Isabella's detailed appearance.");
+	addButton(1, "Talk", isabellaTalkMenu).hint("Ask Isabella about something.");
+	addButton(2, "Sex", campIzzySexMenu).hint("Have some sex with the cow-girl.");
+	addButton(3, "Spar", isabellaSparMenu).hint("Get into a quick battle with Isabella!");
+	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(4, "Accent Coach", isabellasAccentCoaching).hint("Teach Isabella to talk in normal accent.");
+	else addButton(4, "Accent Uncoach", isabellaAccentUncoaching).hint("Let Isabella talk the way she wants. This will pretty much throw away all the coaching progress you've made.");
+	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(5, "Get Milk", getMilk).hint("Get a bottle of Isabella's milk.");
 	if (player.hasItem(consumables.PROBOVA) && player.gender > 0) {
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>");
-		addButton(6, "GiveProBova", isabellaBurps, null, null, null, "Give a bottle of Pro Bova to Isabella?", "Give Pro Bova");
+		addButton(6, "GiveProBova", isabellaBurps).hint("Give a bottle of Pro Bova to Isabella?", "Give Pro Bova");
 	}
 	if (player.hasItem(consumables.OVIELIX) && isabellaScene.pregnancy.isPregnant && flags[kFLAGS.ISABELLA_PREGNANCY_BOOSTED] == 0) {
 		outputText("\n\n<b>You can give Isabella a bottle of Ovi Elixir to take ten days off her pregnancy although it only works once per pregnancy.</b>");
-		addButton(7, "GiveOviElixir", isabellaTakesOviElixir, null, null, null, "Give a bottle of Ovi Elixir to Isabella? This will shorten her current pregnancy by ten days but you cannot do it again until she gives birth.", "Give Ovi Elixir");
+		addButton(7, "GiveOviElixir", isabellaTakesOviElixir).hint("Give a bottle of Ovi Elixir to Isabella? This will shorten her current pregnancy by ten days but you cannot do it again until she gives birth.", "Give Ovi Elixir");
 	}
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(10, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(10, "Go Camp", backToCamp);
@@ -736,7 +736,7 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("After toying with her for a while, you decide to bring your other tentacle dicks into the game; with expert precision, you move your " + cockDescript(t3) + " to her face.  Moaning under your gentle ministrations, she doesn't even notice the protruding mammoth about to lodge inside her drooling mouth. With a ferocious thrust you slam it all the way between her pulpy lips. Her sighs of pleasure are abruptly muffled as you block her windpipe with vegetal dickflesh. You start ramming your meat up and down her throat, its raw musk making her dizzy.  She tries to accommodate the monster stretching her mouth by moving her tongue around your erect " + cockDescript(t3) + ", squeezing it there and there, fondling your veins and milking your urethra of your pre-cum. You groan from the tongue-teasing and start filling her stomach with oozing fluid; the intimate contact makes her squirm a little more under the almost unbearable arousal. She's doing an expert job with her mouth, and her throat feels so good, so tender...  You try to stuff more of your " + cockDescript(t3) + " inside her, always wanting more pleasure; the additional pressure almost sends her over the edge as she eagerly gobbles your vegetal rod.\n\n");
 	
 	//[if demon tongue]
-	if(player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DRACONIC) {
+	if(player.tongueType == TONGUE_DEMONIC || player.tongueType == TONGUE_SNAKE || player.tongueType == TONGUE_DRACONIC) {
 		outputText("Using your long, extensible tongue, you decide to take a lick at her body.  Your tongue darts forward and gently locates her supple tits; you bring Isabelle closer with your vigorous tentacle dicks and start suckling at her breasts, drinking drops of her tasty milk one at a time.  Your constant stimulations arouse her more and more, and soon her nipples are releasing a regular trickle of her essence. You mercilessly drink her, probing your tongue around either of her udders as if to dig deeper to the source of this wonderful ambrosia. You keep gulping milk until you reach satiation, and then you drink some more. It's sweet, savory and invigorating; you could feed off her breasts for days.  You suckle her until her body shakes from the steady tactile provocation, before darting your tongue back.\n\n");
 		//end d-tongue inset
 	}
@@ -1569,9 +1569,9 @@ private function isabellaTalkMenu():void {
 		}
 	}
 	menu();
-	addButton(0, "Just Talk", isabellaScene.talkWithIsabella, null, null, null, "Have a chat with Isabella to pass the time.");
-	if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] == -1) addButton(1, "Contraception", toggleIsabellaContraceptives, null, null, null, flags[kFLAGS.ISABELLA_POTENCY_STATE] == 1 ? "Tell Isabella to start using the contraceptive herbs. This should prevent Isabella from getting pregnancy although it does not cancel any existing pregnancies." : "Tell Isabella to stop using the contraceptive herbs. This will allow you to get her pregnant.");
-	if ((isabellaScene.totalIsabellaChildren() > 0 || isabellaScene.pregnancy.isPregnant) && flags[kFLAGS.ISABELLA_COWMOTHER] < 1) addButton(2, "Cowify", isabellaCowifyPrompt, null, null, null, "Ask Isabella if she can turn into something special.");
+	addButton(0, "Just Talk", isabellaScene.talkWithIsabella).hint("Have a chat with Isabella to pass the time.");
+	if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] == -1) addButton(1, "Contraception", toggleIsabellaContraceptives).hint(flags[kFLAGS.ISABELLA_POTENCY_STATE] == 1 ? "Tell Isabella to start using the contraceptive herbs. This should prevent Isabella from getting pregnancy although it does not cancel any existing pregnancies." : "Tell Isabella to stop using the contraceptive herbs. This will allow you to get her pregnant.");
+	if ((isabellaScene.totalIsabellaChildren() > 0 || isabellaScene.pregnancy.isPregnant) && flags[kFLAGS.ISABELLA_COWMOTHER] < 1) addButton(2, "Cowify", isabellaCowifyPrompt).hint("Ask Isabella if she can turn into something special.");
 	addButton(4, "Back", callForFollowerIsabella);
 }
 

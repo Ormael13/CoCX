@@ -155,7 +155,7 @@ package classes.Scenes.Dungeons
 		private function doTensionRelease():void {
 			clearOutput();
 			//First time...
-			if(!player.hasStatusEffect(StatusEffects.TensionReleased)) {
+			if(!player.hasPerk(PerkLib.ProductivityDrugs)) {
 				outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ");
 				if(player.biggestTitSize() < 10) {
 					player.growTits(1, (2+rand(3)), true, 1);
@@ -163,66 +163,72 @@ package classes.Scenes.Dungeons
 				}
 				outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.");
 				player.orgasm();
-				dynStats("int", -2, "lib", 4, "cor", 4);
+				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 				player.slimeFeed();
-				player.createStatusEffect(StatusEffects.TensionReleased,0,0,0,0);
+
+				player.createPerk(PerkLib.ProductivityDrugs,0,0,0,0);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
+				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
+				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
+				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
 			}
 			//Second/third times...
-			else {
+			else if (player.getAllMinStats().lib < player.getAllMaxStats().lib) {
 				//[[2nd time]] 
-				if(player.statusEffectv1(StatusEffects.TensionReleased) == 0) {
-					outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
-					//Grow dick!
-					if(player.cocks.length > 0) {
-						player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
-						if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
-							outputText("You feel yourself gain in thickness as well, to match your new length.  ");
-							temp = player.cocks.length;
-							while(temp > 0) {
-								temp--;
-								if(player.cocks[temp].cockThickness < 2) player.cocks[temp].cockThickness++;
-							}
-						}
-						else if(player.averageCockLength() >= 15 && player.averageCockThickness() < 3) {
-							outputText("You feel yourself gain in thickness as well, to match your new length.  ");
-							temp = player.cocks.length;
-							while(temp > 0) {
-								temp--;
-								if(player.cocks[temp].cockThickness < 3) player.cocks[temp].cockThickness++;
-							}
+				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
+				//Grow dick!
+				if(player.cocks.length > 0) {
+					player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
+					if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
+						outputText("You feel yourself gain in thickness as well, to match your new length.  ");
+						temp = player.cocks.length;
+						while(temp > 0) {
+							temp--;
+							if(player.cocks[temp].cockThickness < 2) player.cocks[temp].cockThickness++;
 						}
 					}
-					//Grow chest
-					//(If player has 0 bewbs)
-					if(player.breastRows.length == 0) {
-						player.createBreastRow();
-						outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
+					else if(player.averageCockLength() >= 15 && player.averageCockThickness() < 3) {
+						outputText("You feel yourself gain in thickness as well, to match your new length.  ");
+						temp = player.cocks.length;
+						while(temp > 0) {
+							temp--;
+							if(player.cocks[temp].cockThickness < 3) player.cocks[temp].cockThickness++;
+						}
 					}
-					player.growTits(1, (2+rand(3)), true, 1);
-					outputText("  ");
-					outputText("Your " + nippleDescript(0) + "s ");
-					if(player.cocks.length > 0) outputText("and " + multiCockDescript());
-					outputText(" become rock hard, leaking fluids constantly.  ");
-					//MALE
-					if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all participants in this infernal orgy.  ");
-					//FEMALE
-					if(player.vaginas.length > 0 && player.cocks.length == 0) {
-						outputText("As you enter the sex-crazed crowd, you notice several \"girls\" with demonic cocks bloated by the use of drugs, getting drawn to you by the scent of your dripping wet " + vaginaDescript(0) + ". Sitting on the floor, you spread your legs wide, facing the nearest one with an inviting lewd moan, while you hungrily grab another cum-covered cock, that just filled up an obscenely wide gaping vagina, to suck it.  You are soon penetrated and fucked hard and deep, one huge infernal dick after another, as they all cum into you in turn. ");
-						player.cuntChange(150, true);
-					}
-					//HERM
-					if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ");
-					outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your [armor].  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...");
-					player.orgasm();
-					dynStats("int", -2, "lib", 4, "cor", 4);
-					player.createStatusEffect(StatusEffects.TensionReleased,0,0,0,0);
-					player.addStatusValue(StatusEffects.TensionReleased,1,1);
-					player.slimeFeed();
 				}
-				//Third time, move on to bad end!
-				else {
-					doBadEndTension();
+				//Grow chest
+				//(If player has 0 bewbs)
+				if(player.breastRows.length == 0) {
+					player.createBreastRow();
+					outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
 				}
+				player.growTits(1, (2+rand(3)), true, 1);
+				outputText("  ");
+				outputText("Your " + nippleDescript(0) + "s ");
+				if(player.cocks.length > 0) outputText("and " + multiCockDescript());
+				outputText(" become rock hard, leaking fluids constantly.  ");
+				//MALE
+				if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all participants in this infernal orgy.  ");
+				//FEMALE
+				if(player.vaginas.length > 0 && player.cocks.length == 0) {
+					outputText("As you enter the sex-crazed crowd, you notice several \"girls\" with demonic cocks bloated by the use of drugs, getting drawn to you by the scent of your dripping wet " + vaginaDescript(0) + ". Sitting on the floor, you spread your legs wide, facing the nearest one with an inviting lewd moan, while you hungrily grab another cum-covered cock, that just filled up an obscenely wide gaping vagina, to suck it.  You are soon penetrated and fucked hard and deep, one huge infernal dick after another, as they all cum into you in turn. ");
+					player.cuntChange(150, true);
+				}
+				//HERM
+				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ");
+				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your [armor].  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...");
+				player.orgasm();
+				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
+				player.slimeFeed();
+
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
+				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
+				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
+				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
+			}
+			//Third time, move on to bad end!
+			else {
+				doBadEndTension();
 			}
 			doNext(roomMainChamber);
 		}
@@ -915,15 +921,26 @@ package classes.Scenes.Dungeons
 			}
 			outputText("What do you do?  You could use her boon increase the size of your endowments or maybe regain some of your lost humanity!  Or you could play it safe and turn down her offer.  Although then you'd have to decide to let her go or kill her.");
 			menu();
-			addButton(0, "Grow Breasts", chooseBreasts, null, null, null, "Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
-			addButton(1, "Grow Dick", chooseDick, null, null, null, "Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
-			addButton(2, "Normal Face", normalFace, null, null, null, "Normalize your face. This will also remove your horns or antennae and change your ears back to human ears! \n\nAnd receive something else.");
-			addButton(3, "Normal Chest", normalChest, null, null, null, "Normalize your chest. This will shrink breasts larger than E-cup to a reasonable size and remove their other unusual traits, if you have it. This will also change your skin to human skin. \n\nAnd receive something else.");
-			addButton(4, "Normal Groin", normalGroin, null, null, null, "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. Or grow genitalia for genderless. \n\nAnd receive something else.");
-			addButton(5, "Normal Legs", normalLegs, null, null, null, "Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
+			addButton(0, "Grow Breasts", chooseBreasts).hint("Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
+			addButton(1, "Grow Dick", chooseDick).hint("Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
+			addButton(2, "Normal Face", normalFace).hint("Normalize your face. This will also remove your horns or antennae and change your ears back to human ears! \n\nAnd receive something else.");
+			addButton(3, "Normal Chest", normalChest).hint("Normalize your chest. This will shrink breasts larger than E-cup to a reasonable size and remove their other unusual traits, if you have it. This will also change your skin to human skin. \n\nAnd receive something else.");
+			addButton(4, "Normal Groin", normalGroin).hint("Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. Or grow genitalia for genderless. \n\nAnd receive something else.");
+			addButton(5, "Normal Legs", normalLegs).hint("Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
 			addButton(6, "More Lust", postOmnibusBoon, true, null, null, "Be always ready for sex.\n\nDo you think it is really good idea?");
-			addButton(8, "No (Let go)", letGoOmnibus, null, null, null, "Refuse the offer and let the demon go.");
-			addButton(9, "No (Kill Her)", killOmnibus, null, null, null, "Refuse the offer and kill the demon instead.");
+			addButton(8, "No (Let go)", letGoOmnibus).hint("Refuse the offer and let the demon go.");
+			addButton(9, "No (Kill Her)", killOmnibus).hint("Refuse the offer and kill the demon instead.");
+			if(player.inte + player.wis + player.cor > 100) addButton(10, "Valuable", demonicLethicite).hint("Ask if the demon has anything valuable she can give you, like lethicite.\n\nWho knows what might happen?");
+		}
+
+		private function demonicLethicite():void {
+			spriteSelect(16);
+			clearOutput();
+			outputText("The demon pouts at you. <i>Fiiiiine. All I've got on me is some processed lethicite. You'll need my help to absorb it.</i> The demoness reaches into her incredible skimpy chest band and pulls out a vial she had somehow managed to conceal there.\n\nShe unscrews the top, and then holds it before her and blows across it. A cloud of sparkling purplish black powder burst from the vial, flying right at you!");
+			outputText("\n\nYou stumble back in surprise, as the demoness makes a quick arcane gesture. The cloud glows, and then flies at your face, flowing into your mouth and nose before you can react.\n\n Your vision flashes purple, and a burning heat seems to spread through both your body and soul.\n\nThe heat in your body quickly turns into arousal, but the heat in your soul mostly dissapears- though what remains is making it feel like your soul is aroused! You realize that <b>your sex drive is increasing your soulforce, and you feel more demonic!</b>\n(Perk Gained - Demonic Lethicite - Soulforce increased and you are permanently slightly demonic!)");
+			dynStats("lus",player.maxLust)
+			player.createPerk(PerkLib.DemonicLethicite,0,0,0,0);
+			postOmnibusBoon();
 		}
 		
 		private function chooseBreasts():void {
@@ -1582,9 +1599,9 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0) {
 				if(player.hasKeyItem("Iron Key") < 0) {
 					outputText("  It seems your opponent dropped a small iron key as she fled.");
-					addButton(0, "Iron Key", takeIronKey, null, null, null, "Pick up the iron key. It looks like it might unlock the door in this factory.");
+					addButton(0, "Iron Key", takeIronKey).hint("Pick up the iron key. It looks like it might unlock the door in this factory.");
 				}
-				addButton(1, "Coffee", drinkCoffee, null, null, null, "Drink some coffee.");
+				addButton(1, "Coffee", drinkCoffee).hint("Drink some coffee.");
 				spriteSelect(96);
 			}
 			else {
@@ -1738,7 +1755,7 @@ package classes.Scenes.Dungeons
 			}
 			else {
 				if (player.hasKeyItem("Supervisor's Key") < 0) {
-					addButton(0, "Desk", takeSupervisorKey, null, null, null, "Check the desk for something.");
+					addButton(0, "Desk", takeSupervisorKey).hint("Check the desk for something.");
 				}
 			}
 		}
@@ -1762,8 +1779,8 @@ package classes.Scenes.Dungeons
 			}
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
-				addButton(0, "Valves", factoryOverload, null, null, null, "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
-				addButton(1, "Shutdown", factoryShutdown, null, null, null, "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
+				addButton(0, "Valves", factoryOverload).hint("Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
+				addButton(1, "Shutdown", factoryShutdown).hint("Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
 		

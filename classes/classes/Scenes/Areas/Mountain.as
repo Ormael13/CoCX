@@ -7,13 +7,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Mountain.*;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Monsters.DarkElfScene;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
-
-	use namespace kGAMECLASS;
 
 	public class Mountain extends BaseContent
 	{
@@ -22,7 +17,7 @@ package classes.Scenes.Areas
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function Mountain()
 		{
@@ -31,7 +26,7 @@ package classes.Scenes.Areas
 		public function exploreMountain():void
 		{
 			player.exploredMountain++;
-			var chooser:Number = rand(4);
+			var chooser:Number = rand(5);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -39,7 +34,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
@@ -92,7 +87,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 4;
+			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 5;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
 				trace("Dungeon start!")
 				kGAMECLASS.dungeons.enterFactory();
@@ -272,8 +267,16 @@ package classes.Scenes.Areas
 				}
 				hellHoundScene.hellhoundEncounter();
 			}
-			//Hairdresser
+			//Dark Elf Scout
 			if (chooser == 4) {
+				if (rand(2) == 0) {
+					darkelfScene.introDarkELfScout();
+					return;
+				}
+				hellHoundScene.hellhoundEncounter();
+			}
+			//Hairdresser
+			if (chooser == 5) {
 				salon.hairDresser();
 			}
 		}
@@ -340,9 +343,9 @@ package classes.Scenes.Areas
 			outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 
 			outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-			if (player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
-			else if (player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
-			else if (player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+			if (player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
+			else if (player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
+			else if (player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
 			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 

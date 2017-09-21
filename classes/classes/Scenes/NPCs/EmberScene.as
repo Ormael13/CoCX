@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.*;
+	import classes.Items.Consumables.EmberTF;
 
 	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -58,6 +59,7 @@ package classes.Scenes.NPCs
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 		public var pregnancy:PregnancyStore;
+		public var dragonTFchanges:EmberTF = new EmberTF();
 
 		public function EmberScene()
 		{
@@ -225,16 +227,16 @@ package classes.Scenes.NPCs
 			//if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || player.hasItem(consumables.OVIELIX, 1)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
 			//if (flags[kFLAGS.EMBER_MILK] > 0 /* || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 50)*/) milk = getMilkFromEmber;
 			menu();
-			addButton(0, "Appearance", embersAppearance, null, null, null, "Examine Ember's appearance.");
-			addButton(1, "Talk", talkToEmber, null, null, null, "Talk to Ember about some topics.");
-			addButton(2, "Drink Blood", bloodForTheBloodGod, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to give you some of " + emberMF("his", "her") + " blood to gain powers.");
-			if (flags[kFLAGS.EMBER_MILK] > 0 || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) addButton(3, "Drink Milk", getMilkFromEmber, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to let you drink " + emberMF("his", "her") + " milk." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Lactaid each time you want to suckle milk.") + "");
-			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
-			addButton(5, "Sex", emberSexMenu, null, null, null, "Get into a sex session with Ember.");
-			addButton(6, "Spar", decideToSparEmbra, null, null, null, "Do a quick battle with Ember!");
+			addButton(0, "Appearance", embersAppearance).hint("Examine Ember's appearance.");
+			addButton(1, "Talk", talkToEmber).hint("Talk to Ember about some topics.");
+			addButton(2, "Drink Blood", bloodForTheBloodGod).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to give you some of " + emberMF("his", "her") + " blood to gain powers.");
+			if (flags[kFLAGS.EMBER_MILK] > 0 || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) addButton(3, "Drink Milk", getMilkFromEmber).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to let you drink " + emberMF("his", "her") + " milk." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Lactaid each time you want to suckle milk.") + "");
+			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
+			addButton(5, "Sex", emberSexMenu).hint("Get into a sex session with Ember.");
+			addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember!");
 			if (model.time.hours >= 21 || model.time.hours < 5) {
-				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber, null, null, null, "Try to spend the night with Ember.");
-				else addButton(7, "Sleep With", sleepWithEmber, null, null, null, "Spend the night with Ember.");
+				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
+				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
 			addButton(14, "Back", camp.campFollowers);
 			//choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
@@ -309,14 +311,14 @@ package classes.Scenes.NPCs
 			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
 
-			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
-			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt, null, null, null, "Penetrate Ember anally with your cock.");
-			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(2, "Blow Ember", suckEmberCock, null, null, null, "Suck Ember's cock and get a taste of " + emberMF("his", "her") + " cum. " + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? "\n\nAnd get your belly stuffed, of course!" : "") + "");
-			if (player.hasCock() && player.lust >= 33) addButton(3, "Get Blown", stickDickInKnifeDrawer, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to suck you off.");
-			if (flags[kFLAGS.EMBER_GENDER] >= 2) addButton(4, "Eat Her Out", slurpDraggieCunnies, null, null, null, "Get a taste of Ember vagina!");
-			if (player.hasVagina() && player.lust >= 33) addButton(5, "Get Eaten Out", getEatenOutByEmbra, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to get a taste of your vagina.");
-			if (flags[kFLAGS.EMBER_GENDER] >= 2 && player.hasCock() && player.lust >= 33) addButton(6, "Penetrate Her", penetrateEmbrah, null, null, null, "Penetrate Ember vaginally!");
-			if ((flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.lust >= 33 && player.hasVagina()) addButton(7, "Get Penetrated", getPenetratedByEmberLastSexSceneWoooo, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate you vaginally with that cock of " + emberMF("his", "hers") + ".");
+			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
+			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt).hint("Penetrate Ember anally with your cock.");
+			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(2, "Blow Ember", suckEmberCock).hint("Suck Ember's cock and get a taste of " + emberMF("his", "her") + " cum. " + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? "\n\nAnd get your belly stuffed, of course!" : "") + "");
+			if (player.hasCock() && player.lust >= 33) addButton(3, "Get Blown", stickDickInKnifeDrawer).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to suck you off.");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2) addButton(4, "Eat Her Out", slurpDraggieCunnies).hint("Get a taste of Ember vagina!");
+			if (player.hasVagina() && player.lust >= 33) addButton(5, "Get Eaten Out", getEatenOutByEmbra).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to get a taste of your vagina.");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2 && player.hasCock() && player.lust >= 33) addButton(6, "Penetrate Her", penetrateEmbrah).hint("Penetrate Ember vaginally!");
+			if ((flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.lust >= 33 && player.hasVagina()) addButton(7, "Get Penetrated", getPenetratedByEmberLastSexSceneWoooo).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate you vaginally with that cock of " + emberMF("his", "hers") + ".");
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (player.hasItem(consumables.L_DRAFT) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
 			addButton(14, "Leave", emberCampMenu);
@@ -347,8 +349,8 @@ package classes.Scenes.NPCs
 			}
 			flags[kFLAGS.TIMES_FOUND_EMBERS_EGG]++;
 			menu();
-			addButton(0, "Take It", takeEmbersEggHomeInADoggieBag, null, null, null, "Take the egg home with you. \n\nYou'll be able to hatch the egg eventually.");
-			addButton(1, "Destroy It", destroyBabyEmberYouMonster, null, null, null, "Destroy the egg. (And optionally eat the egg) \n\nWhy would you do that?");
+			addButton(0, "Take It", takeEmbersEggHomeInADoggieBag).hint("Take the egg home with you. \n\nYou'll be able to hatch the egg eventually.");
+			addButton(1, "Destroy It", destroyBabyEmberYouMonster).hint("Destroy the egg. (And optionally eat the egg) \n\nWhy would you do that?");
 			addButton(4, "Leave", leaveEmbersAssOutToDry);
 		}
 
@@ -1088,7 +1090,7 @@ package classes.Scenes.NPCs
 			//Talk about Exploring
 			//Talk about Yourself
 			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", null, "Back", emberCampMenu);
-			if (flags[kFLAGS.EMBER_AFFECTION] >= 100 && flags[kFLAGS.EGG_BROKEN] < 1) addButton(3, "Eggshell", askEmberForEggshell, null, null, null, "Ask Ember for the eggshell. After all, you should have deserved the eggshell by now.");
+			if (flags[kFLAGS.EMBER_AFFECTION] >= 100 && flags[kFLAGS.EGG_BROKEN] < 1) addButton(3, "Eggshell", askEmberForEggshell).hint("Ask Ember for the eggshell. After all, you should have deserved the eggshell by now.");
 		}
 
 //Talk about Dragons (Z)
@@ -1573,312 +1575,9 @@ package classes.Scenes.NPCs
 		}
 
 //TF messages (Z)
-		public function emberTFs(drakesHeart:Boolean = false):void
+		public function emberTFs():void
 		{
-			var changes:int = 0;
-			var changeLimit:int = 2;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
-			//Gain Dragon Dick
-			if (changes < changeLimit && player.dragonCocks() < player.totalCocks() && rand(3) == 0) {
-				temp = 0;
-				var choices:Array = [];
-				var select:int;
-				temp = player.cockTotal();
-				//Build an array of all the locations for TF'able cocks.
-				while (temp > 0) {
-					temp--;
-					if (player.cocks[temp].cockType != CockTypesEnum.DRAGON) choices[choices.length] = temp;
-				}
-				//Randomly choose one of those locations
-				select = choices[rand(choices.length)];
-				outputText("\n\nYour " + cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
-				if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
-				else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
-				outputText("  <b>You now have a dragon penis.</b>");
-				//lose lust if sens>=50, gain lust if else
-				dynStats("sen", 10, "lus", 10);
-				changes++;
-				//Apply the TF
-				player.cocks[select].cockType = CockTypesEnum.DRAGON;
-				player.cocks[select].knotMultiplier = 1.3;
-			}
-			//-Existing horns become draconic, max of 4, max length of 1'
-			if (player.hornType != HORNS_DRACONIC_X4_12_INCH_LONG && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(5) == 0) {
-				//No dragon horns yet.
-				if (player.hornType != HORNS_DRACONIC_X2 && player.hornType != HORNS_DRACONIC_X4_12_INCH_LONG && player.hornType != HORNS_ORCHID) {
-					//Already have horns
-					if (player.horns > 0) {
-						//High quantity demon horns
-						if (player.hornType == HORNS_DEMON && player.horns > 4) {
-							outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
-							player.horns = 12;
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
-						}
-						else {
-							outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
-							player.hornType = HORNS_DRACONIC_X2;
-							if (player.horns > 13) {
-								outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
-								player.horns = 12;
-							}
-						}
-						changes++;
-					}
-					//No horns
-					else {
-						//-If no horns, grow a pair
-						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>");
-						player.horns = 4;
-						player.hornType = HORNS_DRACONIC_X2;
-						changes++;
-					}
-				}
-				//ALREADY DRAGON
-				else {
-					if (player.hornType == HORNS_DRACONIC_X2) {
-						if (player.horns < 12) {
-							if (rand(2) == 0) {
-								outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.");
-								player.horns += 1;
-							}
-							else {
-								outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
-								player.horns += 2 + rand(4);
-							}
-							if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
-							changes++;
-						}
-						//maxxed out, new row
-						else {
-							//--Next horn growth adds second row and brings length up to 12\"
-							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
-							changes++;
-						}
-					}
-				}
-			}
-			//Gain Dragon Ears
-			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_DRAGON) {
-				player.earType = EARS_DRAGON;
-				outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
-				changes++;
-			}
-			//Gain Dragon Eyes
-			if (player.earType == EARS_DRAGON && player.eyeType != EYES_DRAGON && rand(3) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_DRAGON;
-				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
-				changes++;
-			}
-			//Gain Dragon Tongue
-			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.tongueType != TONUGE_DRACONIC) {
-				outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-				player.tongueType = TONUGE_DRACONIC;
-				changes++;
-				//Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
-			}
-			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
-			//Gain Dragon Head
-			if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONUGE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON) {
-				outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
-				player.faceType = FACE_DRAGON;
-				changes++;
-			}
-			//Gain Dragon Fangs
-			if (changes < changeLimit && rand(3) == 0 && player.tongueType == TONUGE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.faceType != FACE_DRAGON_FANGS) {
-				outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
-				outputText(" But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
-				player.faceType = FACE_DRAGON_FANGS;
-				changes++;
-			}
-			//Gain Dragon Scales
-			if (player.hasPartialCoat(SKIN_COAT_DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
-				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
-				outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
-				changes++;
-			}
-			if (!player.hasDragonScales() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. ");
-				var color:String;
-				if (rand(10) == 0) {
-					color = randomChoice("purple","silver");
-				} else {
-					color = randomChoice("red","green","white","blue","black");
-				}
-				player.skin.growCoat(SKIN_COAT_DRAGON_SCALES,{color:color},Skin.COVERAGE_LOW);
-				outputText("<b>Your body is now partially covered in " + color + " shield-shaped dragon scales.</b>");
-				changes++;
-			}
-			//Gain Dragon Legs
-			if (player.lowerBody != LOWER_BODY_TYPE_DRAGON && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				//(if drider)
-				if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY)
-					outputText("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
-				//(If naga)
-				else if (player.isNaga()) {
-					outputText("\n\nYou fall on your face to the ground, hissing and screeching in pain - it feels like someone has grabbed the tip of your tail, pulled it viciously straight, and is now splitting it up the middle with a knife!  Paralyzed from the waist down, you claw desperately at the earth to try and alleviate the pain, and can only think to thank your lucky stars when it fades away.  Looking down where your tail was, though the scales remain, you realize you've become a biped again, your new feet sporting bestial claws on their toes.  <b>You now have dragon feet.</b>");
-				}
-				//(If Goo)
-				else if (player.isGoo()) {
-					outputText("\n\nA strange tingling sensation fills you, and you watch as your gooey blob of a body begins to ripple and shudder; you try to make it stop, but you can't control it.  Before your eyes, it shapes itself into the appearance of legs, the colored slime growing denser and thicker, the surface membrane texturing itself to look like scales.  Before you've quite realized what's happened, the slime has set like water freezing, leaving you with humanoid legs once again, though tipped with claws and very reptilian in appearance.  <b>You now have dragon feet.</b>");
-				}
-				//(If hoofed legs)
-				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
-					outputText("\n\nYou bellow in pain as your legs break and reform and your hooves seem to suddenly explode, the bones within twisting themselves into monstrous three-toed appendages, more like those of some terrible lizard-thing than anything else. <b>You now have dragon feet.</b>");
-				}
-				//(if centaur)
-				else if (player.isTaur()) {
-					outputText("\n\nYou cry out as spasms of pain suddenly rip through your quadrupedal body, bringing you crashing onto the ground.  Words cannot define the agony as muscles and bones twist and shift and collapse violently.  When it's all over, you stagger upright, finding yourself standing on two legs again.  Though covered in scales and with the paws of some monster lizard instead of feet, they otherwise look like your old human legs.  <b>You now have dragon feet.</b>");
-				}
-				//(If non-hoofed legs)
-				else {
-					outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
-				}
-				player.lowerBody = LOWER_BODY_TYPE_DRAGON;
-				player.legCount = 2;
-				changes++;
-			}
-			//Arms
-			if (player.armType != ARM_TYPE_DRAGON && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
-			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
-			//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
-			//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
-			//	}
-				player.armType = ARM_TYPE_DRAGON;
-				changes++;
-			}
-			//Gain Dragon Tail
-			if (player.tailType != TAIL_TYPE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				//(If no tail)
-				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
-				//(If tail)
-				else outputText("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes.  <b>You now have a dragon tail.</b>");
-				player.tailType = TAIL_TYPE_DRACONIC;
-				changes++
-			}
-			/*
-			 //9999 - prolly not gonna do this!
-			 Tail Slam Attack Effects:
-			 Deals ⅓ normal damage, but pierces 30 defense (stacks with perks) and has a (strength / 2) chance of stunning the opponent that turn.
-			 Note: Dunno how much defense critters usually have, but this is meant as a surprise attack of sorts, so it pierces a good amount of it.
-			 Tail Slam Attack Description:
-			 You spin around quickly, whipping your tail spikes at [enemy].
-
-			 Hit: Your tail slams against it/" + emberMF("him","her") + " with brutal force, the spikes on the tip extending to puncture flesh.
-			 Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
-			 */
-			//Grow Dragon Wings
-			if (player.wingType != WING_TYPE_DRACONIC_HUGE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				if (player.wingType == WING_TYPE_NONE) {
-					outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
-				}
-				//(If Small Dragon Wings Present)
-				else if (player.wingType == WING_TYPE_DRACONIC_SMALL) {
-					outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-					player.wingType = WING_TYPE_DRACONIC_LARGE;
-					player.wingDesc = "large, draconic";
-				}
-				//even larger dragon wings ^^
-				else if (player.wingType == WING_TYPE_DRACONIC_LARGE) {
-					outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
-					player.wingType = WING_TYPE_DRACONIC_HUGE;
-					player.wingDesc = "large, majestic draconic";
-				}
-				//(If other wings present)
-				else {
-					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
-				}
-				changes++;
-			}
-			//Get Dragon Breath (Tainted version)
-			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
-
-			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonFireBreath) < 0) {
-				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
-				player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
-				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
-				changes++;
-			}
-			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
-				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
-				player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
-				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
-				changes++;
-			}
-			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonLightningBreath) < 0) {
-				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon lightning breath!</b>)");
-				player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
-				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
-				changes++;
-			}
-			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonDarknessBreath) < 0) {
-				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon darkness breath!</b>)");
-				player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
-				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
-				changes++;
-			}
-			//grow up to 11 feet tall
-			if (changes < changeLimit && rand(2) == 0 && player.tallness < 132) {
-				temp = rand(5) + 3;
-				//Slow rate of growth after some tresholds
-				if (player.tallness >= 120) temp = Math.floor(temp / 3.5);
-				if (player.tallness >= 96 && player.tallness < 120) temp = Math.floor(temp / 2);
-				//Never 0
-				if (temp == 0) temp = 1;
-				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
-				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-				player.tallness += temp;
-				changes++;
-			}
-			if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
-				outputText("\n\nA sudden swell of lust races through your ");
-				if (player.hasCock()) {
-					outputText(cockDescript(0));
-					if (player.hasVagina()) outputText(" and ");
-				}
-				if (player.hasVagina()) outputText(vaginaDescript());
-				outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "Ember hadn't run you off") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : emberMF("him", "her")) + "; ");
-				if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
-					if (drakesHeart) {
-						outputText("filling a womb with your seed and fertilizing those eggs");
-					}
-					else {
-						outputText("filling her womb with your seed and fertilizing her eggs");
-						if (player.hasVagina() && flags[kFLAGS.EMBER_GENDER] == 3) outputText(" even while ");
-					}
-				}
-				if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 1)) {
-					outputText("taking that hard, spurting cock inside your own " + vaginaDescript(0));
-				}
-				outputText("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
-				if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
-					outputText("rut");
-					
-					player.goIntoRut(false);
-					changes++;
-				}
-				else {
-					outputText("heat");
-					
-					player.goIntoHeat(false);
-					changes++;
-				}
-				outputText("</b>.");
-			}
-			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+			dragonTFchanges.dragonTFeffects();
 		}
 
 //Get Egg (Ovilixer Ember) (Z)
@@ -1948,22 +1647,22 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou tell her that you do, though you can't resist commenting that she's moving a little faster than usual.  Ember looks at you through half-lidded eyes.  \"<i>And you're not moving fast enough.</i>\"  With a grin at her unusual good humor, you approach her and take up station between her thighs.  You ask if she wants your hands or your tongue to 'help' her this time.");
 				outputText("\n\n\"<i>J-just get started... before I change my mind about this...</i>\"");
 				outputText("\n\nWell, no point leaving her hanging around.  You let your tongue roll out");
-				if (player.tongueType > TONUGE_HUMAN) outputText(" and out... and out...");
+				if (player.tongueType > TONGUE_HUMAN) outputText(" and out... and out...");
 				outputText(" and then lean forward to give her a great, wet, sloppy lick, straight up the center of her pussy");
 				//(E.Herm:
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(" not stopping until you have slurped your way to the very tip of her cock");
 				outputText(", savoring the unmistakable taste of her intimate juices.");
 				outputText("\n\nEmber gasps and moans, leaning back to voice her pleasure to the skies; her legs quiver and her claws dig into the wood; her wings spread, beating gently to help her balance herself.  \"<i>D-don't stop...</i>\" she pleads.");
 				outputText("\n\nYou don't intend to, and continue to lick, playing your tongue as deeply into her depths as possible, ");
-				if (player.tongueType > TONUGE_HUMAN) outputText("which is quite far indeed, ");
+				if (player.tongueType > TONGUE_HUMAN) outputText("which is quite far indeed, ");
 				outputText("caressing and stroking and playing all the tricks you can possibly think of to orally pleasure your draconic lover.  From the amount of juices beginning to seep onto your lapping tongue");
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(" and dribbling down her painfully stiff dick");
 				outputText(", you think you're doing rather well.");
 				outputText("\n\nWhen your nose bumps into her little button of pleasure Ember nearly jumps; she closes her thighs around your head, smothering you on her dripping vagina.");
-				if (player.tongueType > TONUGE_HUMAN) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
+				if (player.tongueType > TONGUE_HUMAN) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
 				outputText("\n\n\"<i>It's coming!  Ah!  I'm coming!!</i>\" Ember screams, shaking with barely contained pleasure.  A flood of juices threaten to drown you, as Ember's legs hold you snug.");
 				if (flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her cock throbs and pumps out long streams of cum to paint the ground around you two; marking it as your special place.");
-				if (player.tongueType > TONUGE_HUMAN) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
+				if (player.tongueType > TONGUE_HUMAN) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
 				else outputText("\n\nYou can feel the shell of Ember's egg pressing against your tongue, and you abandon your licking to start probing gently with your fingers.  Under your careful guidance, the egg slips freely from Ember's body into your grasp.");
 
 				outputText("\n\nEmber's legs finally relax enough to let you escape... but her body slowly leans over in your direction, until she finally gives and collapses on top of you. Luckily you manage to move the egg out of the way, saving it from the pile of pleasured dragon before both of you crash into a sprawled pile on the ground.  You shake your head and smile at Ember, teasing her about how easily she just melts into a pile of mush from a little pleasure.");
@@ -2097,8 +1796,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(25);
@@ -2160,8 +1863,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(50);
@@ -2234,8 +1941,12 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+					if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				outputText("  You tell your dragon that you're finished.  You're up and turning to leave when a looping tail around your waist stops you.");
@@ -2606,7 +2317,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_GENDER] == 3 && (flags[kFLAGS.EMBER_ROUNDFACE] == 0 || flags[kFLAGS.EMBER_INTERNAL_DICK] > 0)) {
 				outputText("  Struck by perverse inspiration, you manage to wriggle your tongue under the base of " + emberMF("his", "her") + " cock and thrust it into " + emberMF("his", "her") + " genital slit.  You guide it as deep into the strangely pussy-like orifice as you can, tickling and caressing.");
 				//(DemonTongue:
-				if (player.tongueType > TONUGE_HUMAN) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his", "her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his", "her") + " body, except when " + emberMF("he", "she") + " reaches " + emberMF("his", "her") + " most aroused states...");
+				if (player.tongueType > TONGUE_HUMAN) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his", "her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his", "her") + " body, except when " + emberMF("he", "she") + " reaches " + emberMF("his", "her") + " most aroused states...");
 			}
 
 			outputText("\n\n\"<i>Ah!  M-more... touch me more...</i>\" Ember pleads, surrendering to pleasure at your hands.");
@@ -2957,7 +2668,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nEmber's enjoyment is very apparent, as each time you even breathe over her little pleasure bud, Ember bucks against you; her vaginal walls contract in hopes of gripping your tongue and pulling it deeper inside her, but your saliva combined with the ever-flowing dragon juice keeps it slick enough that Ember doesn't have a chance in heaven of holding your tongue back.  \"<i>Hmm... Ah!  A little more to the left...</i>\" Ember directs you.");
 
 			outputText("\n\nYour tongue bends with all of the ");
-			if (player.tongueType > TONUGE_HUMAN) outputText("inhuman ");
+			if (player.tongueType > TONGUE_HUMAN) outputText("inhuman ");
 			outputText("flexibility you can muster, wriggling into the dragon's depths and trying to caress and stroke every last one of her most intimate places.  At one point in your exploration of Ember's quivering depths, you discover a special spot, and every time you make contact with that little spongy spot Ember rewards you with a buck and renewed gush of fluids.");
 
 			outputText("\n\n\"<i>Ah!  If you keep doing this I'm going to- Oh!</i>\" Ember gasps, tongue lolling out as she loses herself in the pleasurable sensations you're oh-so-responsible for.  You continue to wriggle and undulate your tongue, stroking that special point with as much care as you can manage");
@@ -3316,7 +3027,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou strip down until you are unabashedly naked, drinking in the look of stunned rapturous lust that Ember is giving you.  Playing your fingers gently across your upper arms, you pout and ask if " + emberMF("he", "she") + "'s going to keep you waiting, enjoying your emotional control over the horny dragon.");
 
 			outputText("\n\nEmber flinches, " + emberMF("his", "her") + " trance broken.  \"<i>I... umm... fine!  Come here!</i>\"  Ember steps toward you.  You open your arms, ready to wrap " + emberMF("him", "her") + " in a hug, but instead find yourself swept off of your feet.  The dragon grins wickedly at you before suddenly plunging into a ferocious kiss, " + emberMF("his", "her") + " long tongue worming its way around ");
-			if (player.tongueType == TONUGE_HUMAN) outputText("yours ");
+			if (player.tongueType == TONGUE_HUMAN) outputText("yours ");
 			else outputText("your own inhumanly sinuous muscle ");
 			outputText("and slithering almost into your throat.  " + emberMF("He", "She") + " kisses you madly, even as " + emberMF("he", "she") + " sinks to " + emberMF("his", "her") + " knees and gently lays you out on the ground, clearly ready to start the sexing.");
 			if (player.hasCock()) outputText("  As if " + emberMF("his", "her") + " hands caressing your cock weren't evidence of that.");
@@ -4697,7 +4408,7 @@ package classes.Scenes.NPCs
 				}
 				else if (chooser == 1) {
 					outputText("\n\nAs you approach Ember's den, you notice that something is amiss... upon closer inspection you conclude that Ember is not home... could " + emberMF("he", "she") + " still be out, flying and exploring?");
-					outputText("\n\nWell, Ember is a big [girl], you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
+					outputText("\n\nWell, Ember is a big " + emberMF("boy", "girl") + ", you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
 					outputText("\n\nAs you enter your " + camp.homeDesc() + ", you are greatly surprised to see your " + camp.bedDesc() + " occupied by a certain sleeping " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "dragon" : emberMF("dragon-boy", "dragon-girl")) + "; and judging by the state of the " + camp.bedDesc() + " as well as the... messy... way Ember is sleeping, it would seem " + emberMF("he", "she") + " tosses around in " + emberMF("his", "her") + " sleep. With a sigh, you clear your throat to wake up Ember.");
 					outputText("\n\nEmber yawns and mutters something about you getting back to bed... well... you'd love to, so you decide to be a bit more aggressive and shake Ember awake.");
 					outputText("\n\n\"<i>Wha... Ok! I'm up, I'm up!</i>\" Ember complains, rubbing the sleep off " + emberMF("his", "her") + " eyes. \"<i>What is it?</i>\"");
@@ -4711,7 +4422,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText("\n\nAs you approach Ember's den, you notice that something is amiss... upon closer inspection you conclude that Ember is not home... ]could " + emberMF("he", "she") + " still be out, flying and exploring?");
-					outputText("\n\nWell, Ember is a big [girl], you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
+					outputText("\n\nWell, Ember is a big " + emberMF("boy", "girl") + ", you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
 					outputText("\n\nWhen you enter your " + camp.homeDesc() + ", you notice something unusual laying atop your " + camp.bedDesc() + ". It's a bloom you haven't seen before, no matter how far and wide your travels, with an almost heart-shaped blossom made from concentric rings of petals; purple, pink and gold. Its beautiful and it smells sweet, clean and pure. You wonder who would be responsible for this unexpected gift, but no one seems to be around... scratching your head in thought you walk outside and realize a very distinct set of prints going in and out of your " + camp.homeDesc() + "; using the survival skills you've developed, you conclude that these prints could only belong to Ember, and seem recent too... Considering the dragon's temper, you understand why " + emberMF("he", "she") + " didn't stick around to give it to you " + emberMF("him", "her") + "self, still that was sweet...");
 				}
 			}
@@ -4744,7 +4455,13 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+						if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+						if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
+					}
 					player.slimeFeed();
 					fatigue(-40);
 				}

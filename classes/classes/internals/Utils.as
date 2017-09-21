@@ -24,7 +24,11 @@ package classes.internals
 				return func.apply(null,args.concat(args2));
 			};
 		}
-		
+		public static function bindThis(func:Function,thiz:Object):Function {
+			return function(...args2):* {
+				return func.apply(thiz,args2);
+			}
+		}
 		public static function formatStringArray(stringList:Array):String { //Changes an array of values into "1", "1 and 2" or "1, (x, )y and z"
 			switch (stringList.length) {
 				case  0: return "";
@@ -352,6 +356,15 @@ package classes.internals
 			var rslt:String = "";
 			while (n-->0) rslt += s;
 			return rslt;
+		}
+		public static function trimLeft(s:String):String {
+			return s.replace(/^\s+/g,'');
+		}
+		public static function trimRight(s:String):String {
+			return s.replace(/\s+$/g,'');
+		}
+		public static function trimSides(s:String):String {
+			return trimLeft(trimRight(s));
 		}
 
 		private static var PF_NAME:Array      = []; // stack: classname+'.'+methodname

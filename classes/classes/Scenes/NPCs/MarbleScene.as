@@ -2035,7 +2035,7 @@ public function interactWithMarbleAtCamp():void {
 	addButton(2, "Present", gatherEvent);
 	addButton(3, "Give Item", canGiveItem() ? giveItem : null);
 	addButton(4, "Get Milk", milkEvent);
-	addButton(5, "Release", sexEvent, null, null, null, "Get with marble for a quick cuddle and some sex.");
+	addButton(5, "Release", sexEvent).hint("Get with marble for a quick cuddle and some sex.");
 	addButton(6, "Playtime", playtime);
 	addButton(7, "Break Up", breakUpWithMarble);
 	addButton(8, goEventString, marbleGoEvent);
@@ -3895,7 +3895,7 @@ private function giveMarbleTailjobRelease():void {
 	if(player.cor > 70) {
 		outputText("\n\nYou certainly don't mind the proof of your prowess marking your lower body like this, but you can think of something better to do with it.  In fact, you slowly move the tail towards your lips.");
 		//(Normal or Snake tongue) 
-		if(player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Your tongue runs along the length of the end of your tail, tasting both Marble's feminine secretions and her semen.  She gives you a smoldering gaze as you lick her juices up.  You grin at her.");
+		if(player.tongueType == TONGUE_SNAKE || player.hasLongTongue()) outputText("  Your tongue runs along the length of the end of your tail, tasting both Marble's feminine secretions and her semen.  She gives you a smoldering gaze as you lick her juices up.  You grin at her.");
 		//(Demon Tongue) 
 		if(player.hasLongTongue()) outputText("  You decide to put on a show for Marble, moving your tail as you drop out a large piece of your inhumanly long tongue, licking up her secretions sensuously while staring at her.  She quickly blushes under your gaze.");
 		outputText("\n\n\"<i>Sweetie, you wouldn't be trying to make me horny all over again, would you?</i>\"");
@@ -4367,7 +4367,7 @@ private function milkMarbleBarPullTail():void
 		outputText( "[pg]\"<i>Alright, let's put that rude tongue of yours to a much better job.  Lick me.</i>\"" );
 		
 		outputText( "[pg]You do as you're bid and get an approving smile in response.  Digging deeper inside her, you feel under her folds and plunge into her depths.  " );
-		if(player.tongueType > TONUGE_HUMAN) outputText( "You take full advantage of your inhumanly long tongue to fill her up, running across her passage all the way to the entrance to her womb and then back to her lower lips." );
+		if(player.tongueType > TONGUE_HUMAN) outputText( "You take full advantage of your inhumanly long tongue to fill her up, running across her passage all the way to the entrance to her womb and then back to her lower lips." );
 		else outputText( "You send your tongue as far into her passage as it will go and wriggle around her lower lips, trying to please your aggressive bovine lover to the best of your abilities." );
 	}
 	else

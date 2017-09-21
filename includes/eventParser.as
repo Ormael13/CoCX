@@ -12,7 +12,10 @@ import coc.view.MainView;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
 public function playerMenu():void {
-	if (!inCombat) spriteSelect(-1);
+	mainViewManager.hidePlayerDoll();
+	if (!inCombat) {
+		spriteSelect(-1);
+	}
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 	mainView.nameBox.visible = false;
 	if (gameState == 1 || gameState == 2) {
@@ -63,9 +66,9 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 		flags[kFLAGS.TIMES_BAD_ENDED]++;
 		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 		menu();
-		addButton(0, "Game Over", gameOverMenuOverride, null, null, null, "Your game has ended. Please load a saved file or start a new game.");
-		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Continue", camp.wakeFromBadEnd, null, null, null, "It's all just a dream. Wake up.");
-		//addButton(3, "NewGamePlus", charCreation.newGamePlus, null, null, null, "Start a new game with your equipment, experience, and gems carried over.");
+		addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
+		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Continue", camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
+		//addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
 		gameOverMenuOverride();
 		

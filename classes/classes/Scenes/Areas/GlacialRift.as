@@ -17,9 +17,6 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.GlacialRift.*;
 	import classes.Scenes.Areas.Forest.AlrauneScene;
 	import classes.Scenes.NPCs.GooArmor;
-	import classes.Player;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 	
@@ -29,7 +26,6 @@ package classes.Scenes.Areas
 		public var yetiScene:YetiScene = new YetiScene();
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
 		public function GlacialRift() 
@@ -68,7 +64,7 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
+				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
 			select = choice[rand(choice.length)];
@@ -203,7 +199,7 @@ package classes.Scenes.Areas
 			outputText("\n\nFor a few second cold air wash on your eyes and no matter how much you try to cover them with your hands to end the freezing sensation it won't stop. As your eyes begins to water the chilling finally end, you remove your hand as everything before you looks way clearer especially the snow which no longer blinds you. As you look at your reflection in the water you discover that not only your eyes glow with an unsettling blue aura, from your eyes now emanate a pair of bluish smoke of cold air contrasting with the ambient heat. <b>You now have glowing icy eyes.</b>");
 			outputText("\n\nYou feel the air freeze and condensate around you specifically behind your shoulder blades and all on the length of your spine. Jagged Ice spikes seems to have covered your back but oddly enough you don't feel the cold. <b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>");
 			outputText("\n\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw. <b>You can now use Freezing Breath and Frostbite.</b>");
-			player.eyeType = EYES_FENRIR;
+			getGame().mutations.setEyeTypeAndColor(EYES_FENRIR,"blue");
 			player.rearBody = REAR_BODY_FENRIR_ICE_SPIKES;
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);

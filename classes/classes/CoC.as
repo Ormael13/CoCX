@@ -15,6 +15,14 @@ import classes.internals.RootCounters;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
+import coc.view.CoCLoader;
+
+import coc.xlogic.ExecContext;
+import coc.xxc.Story;
+
+import coc.xxc.StoryCompiler;
+import coc.xxc.StoryContext;
+
 import flash.display.DisplayObjectContainer;
 
 import flash.utils.setTimeout;
@@ -113,6 +121,9 @@ the text from being too boring.
 	import flash.utils.ByteArray;
 	import flash.system.Capabilities;
 	import flash.display.Sprite;
+	import mx.logging.targets.TraceTarget;
+	import mx.logging.Log;
+	import mx.logging.LogEventLevel;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -126,6 +137,15 @@ the text from being too boring.
 
 	public class CoC extends MovieClip 
 	{
+		{
+			/*
+			 * This is a static initializer block, used as an ugly hack to setup
+			 * logging before any of the class variables are initialized.
+			 * This is done because they could log messages during construction.
+			 */
+
+			 CoC.setUpLogging();
+		}
 
 		// Include the functions. ALL THE FUNCTIONS
 
@@ -159,7 +179,7 @@ the text from being too boring.
 		
 		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
-		
+
 		// /
 		private var _perkLib:PerkLib                 = new PerkLib();// to init the static
 		private var _statusEffects:StatusEffects     = new StatusEffects();// to init the static
@@ -218,6 +238,7 @@ the text from being too boring.
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ayaneFollower:AyaneFollower = new AyaneFollower();
+		public var celessScene:CelessScene = new CelessScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var emberScene:EmberScene = new EmberScene();
@@ -248,6 +269,7 @@ the text from being too boring.
 		public var sophieBimbo:SophieBimbo = new SophieBimbo();
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
+		public var tedScene:TedScenes = new TedScenes();
 		public var urta:Urta = new Urta();
 		public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
 		public var urtaPregs:UrtaPregs = new UrtaPregs();
@@ -282,6 +304,9 @@ the text from being too boring.
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var debugInfoMenu:DebugInfo = new DebugInfo();
 		public var gameSettings:GameSettings = new GameSettings();
+		public var rootStory:Story = new Story("story",null,"root",true);
+		public var compiler:StoryCompiler = new StoryCompiler("content/").attach(rootStory);
+		public var context:StoryContext;
 
 		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
@@ -429,10 +454,33 @@ the text from being too boring.
 			return plains.bunnyGirl.isItEaster();
 		}
 
+		private static var traceTarget:TraceTarget;
+
+		private static function setUpLogging():void {
+			traceTarget = new TraceTarget();
+
+			traceTarget.level = LogEventLevel.WARN;
+
+			CONFIG::debug
+			{
+				traceTarget.level = LogEventLevel.DEBUG;
+			}
+
+			//Add date, time, category, and log level to the output
+			traceTarget.includeDate = true;
+			traceTarget.includeTime = true;
+			traceTarget.includeCategory = true;
+			traceTarget.includeLevel = true;
+
+			// let the logging begin!
+			Log.addTarget(traceTarget);
+		}
+
 		public function CoC()
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
+			context = new StoryContext(this);
 			
 			useables = new UseableLib();
 			
@@ -465,6 +513,9 @@ the text from being too boring.
 			this.mainView.onLevelClick = playerInfo.levelUpGo;
 			this.mainView.onPerksClick = perkMenu.displayPerks;
 			this.mainView.onStatsClick = playerInfo.displayStats;
+			this.mainView.onBottomButtonClick = function(i:int):void {
+				textHistory.push("<br>["+button(i).labelText+"]<br>");
+			};
 
 			// Set up all the messy global stuff:
 			
@@ -489,8 +540,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8e3";//f
-			version = ver + " (<b>More fixing</b>)";//Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1)
+			ver = "1.0.2_mod_Xianxia_0.8f";
+			version = ver + " (<b>Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -616,9 +667,6 @@ the text from being too boring.
 
 			// ******************************************************************************************
 
-			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.perkCbChangeHandler);
-
 			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 
@@ -642,9 +690,14 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-
+			execPostInit();
+			loadStory();
 			this.addFrameScript( 0, this.run );
 			//setTimeout(this.run,0);
+		}
+
+		private function loadStory():void {
+			compiler.includeFile("coc.xml");
 		}
 
 		public function run():void
@@ -729,6 +782,25 @@ the text from being too boring.
 		mainView.mainText.defaultTextFormat = fmt;
 		mainView.setOutputText(currentText);
 	}
-
+	/**
+	 * Places combobox after the visible text.
+	 */
+	public function placeComboBoxAfterText():void {
+		flushOutputTextToGUI();
+		mainView.placeComboBox(mainView.mainText.x+10, mainView.mainText.y+mainView.mainText.textHeight+10);
+		outputText("\n\n\n");
+	}
+	public function showComboBox(items:Array,prompt:String,onChange:Function):void {
+		mainView.showComboBox(items,prompt,onChange);
+		placeComboBoxAfterText();
+	}
+		private static var initQueue:/*Function*/Array      = [];
+		public static function onGameInit(f:Function):void {
+			initQueue.push(f);
+		}
+		private static function execPostInit():void {
+			var f:Function;
+			while ((f = initQueue.shift())) f();
+		}
 }
 }

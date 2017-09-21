@@ -7,10 +7,18 @@ import classes.Creature;
 
 public class SkinLayer extends BodyPart {
 	public var color:String  = "albino";
+	public var pattern:int   = PATTERN_NONE;
 	private var _desc:String = "";
 	private var _adj:String  = "";
+	private var _color2:String = "";
 	private var skin:Skin; // Reference to parent
 
+	public function get color2():String {
+		return _color2 || color;
+	}
+	public function set color2(value:String):void {
+		_color2 = value == color ? "" : value;
+	}
 	public function defaultDesc():String {
 		return Appearance.DEFAULT_SKIN_DESCS[type] || "skin";
 	}
@@ -40,9 +48,12 @@ public class SkinLayer extends BodyPart {
 		this.color = value;
 	}
 	override public function set type(value:int):void {
-		super.type = value;
-		_desc      = "";
-		if (!_adj) _adj = defaultAdj();
+		if (type != value) {
+			super.type = value;
+			_desc      = "";
+			pattern    = PATTERN_NONE;
+			if (!_adj) _adj = defaultAdj();
+		}
 	}
 	/**
 	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)
@@ -58,7 +69,7 @@ public class SkinLayer extends BodyPart {
 		desc = "skin";
 	}
 	public function SkinLayer(skin:Skin) {
-		super(skin.creature, ["adj", "desc", "color"]);
+		super(skin.creature, ["adj", "desc", "color", "color2", "pattern"]);
 		this.skin = skin;
 	}
 	public function describe(noAdj:Boolean = false, noColor:Boolean = false):String {
@@ -69,6 +80,19 @@ public class SkinLayer extends BodyPart {
 
 	override public function descriptionFull():String {
 		return describe();
+	}
+
+	override public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		super.loadFromObject(o, ignoreErrors);
+		if (_adj == "sexy tattooed") {
+			pattern = PATTERN_MAGICAL_TATTOO;
+		} else if (_adj == "covered with various intricate battle tattoos") {
+			pattern = PATTERN_BATTLE_TATTOO;
+		} else if (color == "white and black") {
+			color = "white";
+			color2 = "black";
+			pattern = PATTERN_ORCA_UNDERBODY;
+		}
 	}
 }
 }

@@ -7,8 +7,9 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Items.Useable;
 	import classes.Scenes.Monsters.Imp;
-
+	import classes.Scenes.NPCs.AyaneFollower;
 	public class KitsuneScene extends BaseContent
 	{
 		public function KitsuneScene()
@@ -662,8 +663,8 @@ package classes.Scenes.Areas.Forest
 					}
 					outputText("production has been enhanced.</b>");
 				}
-				if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
-				if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 4) {
+				if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 2) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
+				if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 2) {
 					flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
 					outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>");
 				}
@@ -941,7 +942,7 @@ package classes.Scenes.Areas.Forest
 			outputText("When she finally wraps her lips around your engorged nipples, you can't stop yourself from bellowing out a moan, every sensation upon your milk-laden tits magnified tenfold.  The corners of her lips curl up into a smile as she starts to suckle, looking up at you with mischief in her big green eyes.  As the intense pressure is suddenly relieved, you arch your back and moan, " + ((player.cocks.length > 0) ? sMultiCockDesc() + " becoming rock hard" : "") + ((player.gender == 3) ? " and " : "" ) + ((player.gender >= 2) ? "a puddle beginning to spread between your legs" : "" ) + " from the sheer pleasure of it." + ((player.cocks.length > 0) ? "\n\nSmirking happily, she lifts the back portion of her robes to expose her expansive bottom, lowering the jiggling cheeks against [eachCock].  A few of her tails snake down to coil around " + ((player.cocks.length > 1) ? "them" : "it" ) + ", holding " + ((player.cocks.length > 1) ? "them" : "it" ) + " against her ass and squeezing tightly as they begin to pump up and down slowly.  Though you cannot see it from this angle, you can feel her colossal cheeks quivering sensually around [eachCock], jiggling enticingly with every movement." : "" ) + "\n\n");
 			outputText("" + ((player.gender >= 2) ? ((player.gender == 3) ? "Another" : "A" ) + " silken black tail slithers down between your legs, tickling your groin teasingly.  It circles your " + vaginaDescript() + " slowly, brushing the tip up against your [clit] and gently toying with the sensitive lips, occasionally pressing up against your entrance and yet never actually penetrating you.  The torment is unbearable, but you are helplessly pinned underneath her, so all you can do is accept her tortuous teasings.\n\n" : "" ) + "");
 			outputText("Her tongue laps and swirls over your [nipple] incessantly, draining your milk from one breast while she gently squeezes and caresses the other" + ((player.breastRows.length > 1) ? "s" : "") + ".  When one of your [fullChest] goes dry, she quickly abandons it for " + ((player.breastRows.length > 1) ? "another" : "the other") + " one, using her magic to induce you to produce more.  Over and over, she sucks your tits dry, repeating the cycle at least a half dozen times before you start to lose count.  Every time your breasts begin to fill with milk again, their sensitivity seems to grow.  Eventually you are little more than a shivering, moaning wreck, your [nipples] every bit as sensitive as a clitoris.\n\n");
-			outputText("Just when you feel there is no end in sight, a growing tension in your chest and groin tells you that you are on the verge of climax.  Shivers course up and down your spine, and you begin to moan, lightly at first, but growing louder by the second" + ((player.cocks.length > 0) ? ".  [eachCock] twitch" + ((player.cocks.length > 1) ? "" : "es") + ", spurting cum up between the kitsune's ass cheeks and soaking her lower back with your virile spunk" : "") + ((player.gender >= 2) ? ((player.gender == 2) ? "Every" : ", while every") + " muscle in your neglected fuckhole tenses up, squeezing wantonly at nothing as your fluids rush out into a puddle beneath you" : "" ) + "\n\n");
+			outputText("Just when you feel there is no end in sight, a growing tension in your chest and groin tells you that you are on the verge of climax.  Shivers course up and down your spine, and you begin to moan, lightly at first, but growing louder by the second" + ((player.cocks.length > 0) ? ".  [eachCock] twitch" + ((player.cocks.length > 1) ? "" : "es") + ", spurting cum up between the kitsune's ass cheeks and soaking her lower back with your virile spunk" : "") + ((player.gender >= 2) ? ((player.gender == 2) ? " Every" : ", while every") + " muscle in your neglected fuckhole tenses up, squeezing wantonly at nothing as your fluids rush out into a puddle beneath you" : "" ) + "\n\n");
 			outputText("Your orgasm is accompanied by a fountain of creamy milk, and the kitsune can't suppress a giggle at the sight of your tremendous orgasm, licking droplets of your milk off her arms and fingers.  As the last ripples of your climax leave your body, your [chest] returns to its normal size, though it seems you are still lactating quite a bit more than before.  Having downed what surely must have been gallons of your milk, the kitsune's belly is a fair bit chubbier than it used to be, and she sighs in satisfaction, patting her stomach gently.\n\n");
 			outputText("\"<i>Mm...  that was </i>divine<i>,</i>\" she proclaims, gently leaning forward to kiss you on the forehead.  \"<i>Sleep tight now...  don't let the tentacles bite...</i>\"\n\n");
 			outputText("She whispers an incantation in a strange language, and you can slowly feel your already pleasure-worn consciousness leaving you, replaced with a warm, comforting darkness.  Your dreams are haunted by visions of yourself being turned into a human dairy cow, forced to live out the rest of your days as a living milk factory for your hungry kitsune mistress.");
@@ -2256,6 +2257,7 @@ package classes.Scenes.Areas.Forest
 		 Before you can say anything, she disappears below the water, leaving you alone with the trickling sound of the fountain.  With a shrug, you place the mystically enhanced teardrop-shaped jewel into your pouch." );
 		 */
 
+
 //[The Shrine of the Ninetails]
 //Discovery
 		public function kitsuneShrine():void
@@ -2269,6 +2271,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\"<i>Oh, so you are interested in becoming one of the blessed children of Taoth? I guess that can be arranged, it’s not like you are the first person to try, and I see you have already begun the conversion on your own initiative. Still, if you truly wish to reach enlightenment and become one of us, simply taking transformatives won’t suffice. You must also commit yourself to him truly. I can help you with that. Anytime you wish to further your transformation, visit the shrine. I will be there for you and perhaps, if you're lucky enough, the trickster god will see you worthy of his blessings.</i>\" Having finished talking she vanishes, leaving you alone in the woods.\n\n");
 					outputText("<b>You can now visit the forest shrine at will.</b>");
 					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED]++;
+					flags[kFLAGS.AYANE_FOLLOWER] = 0;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
@@ -2284,7 +2287,7 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.\n\n");
-				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 1) outputText("Ayane is meditating on a rock next to the shrine.\n\n");
+				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) outputText("Ayane is meditating on a rock next to the shrine.\n\n");
 				if (rand(3) == 0) outputText("A few kitsunes seem to be here to meditate today.\n\n");
 				outputText("");
 			}
@@ -2295,233 +2298,14 @@ package classes.Scenes.Areas.Forest
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
 			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < 10 && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
-			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", ayaneAtShrine);
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", getGame().ayaneFollower.ayaneShop);
 			if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
 			}
 			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
-
-//[Ayane Shop at Shrine]
-		private function ayaneAtShrine():void
-		{
-			clearOutput();
-			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");
-			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");
-			menu();
-			addButton(0, "WhiteKimono", sellWhiteKimono);
-			addButton(1, "RedKimono", sellRedKimono);
-			addButton(2, "BlueKimino", sellBlueKimono);
-			addButton(3, "PurpleKimono", sellPurpleKimono);
-			addButton(4, "ArcaneBangles", sellArcaneBangles);
-			addButton(5, "SpiritFocus", sellSpiritFocus);
-			addButton(6, "Fox Hairin", sellFoxHairpin);
-			addButton(7, "Fox Jewel", sellFoxJewel);
-			addButton(10, "Agility E.", sellAgilityElixir);
-			addButton(11, "Scholar T.", sellScholarTea);
-			addButton(12, "Vixen Tea", sellVixenTea);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
-		}
-		private function sellWhiteKimono():void {
-			clearOutput();
-			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-			doYesNo(buyWhiteKimono, ayaneAtShrine);
-		}
-		private function buyWhiteKimono():void {
-			if (player.gems < 200) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 200;
-				inventory.takeItem(armors.WKIMONO, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellRedKimono():void {
-			clearOutput();
-			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-			doYesNo(buyRedKimono, ayaneAtShrine);
-		}
-		private function buyRedKimono():void {
-			if (player.gems < 200) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 200;
-				inventory.takeItem(armors.RKIMONO, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellBlueKimono():void {
-			clearOutput();
-			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-			doYesNo(buyBlueKimono, ayaneAtShrine);
-		}
-		private function buyBlueKimono():void {
-			if (player.gems < 200) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 200;
-				inventory.takeItem(armors.BKIMONO, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellPurpleKimono():void {
-			clearOutput();
-			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-			doYesNo(buyPurpleKimono, ayaneAtShrine);
-		}
-		private function buyPurpleKimono():void {
-			if (player.gems < 200) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 200;
-				inventory.takeItem(armors.PKIMONO, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellArcaneBangles():void {
-			clearOutput();
-			outputText("\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>150 gems</b> gems is somewhat cheap for it.</i>\"");
-			doYesNo(buyArcaneBangles, ayaneAtShrine);
-		}
-		private function buyArcaneBangles():void {
-			if (player.gems < 150) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(150 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 150;
-				inventory.takeItem(armors.ARCBANG, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellSpiritFocus():void {
-			clearOutput();
-			outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>800 gems</b>.</i>\"");
-			doYesNo(buySpiritFocus, ayaneAtShrine);
-		}
-		private function buySpiritFocus():void {
-			if (player.gems < 800) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 800;
-				inventory.takeItem(shields.SPI_FOC, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellFoxHairpin():void {
-			clearOutput();
-			outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>800 gems</b>.</i>\"");
-			doYesNo(buyFoxHairpin, ayaneAtShrine);
-		}
-		private function buyFoxHairpin():void {
-			if (player.gems < 800) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 800;
-				inventory.takeItem(jewelries.FOXHAIR, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellFoxJewel():void {
-			clearOutput();
-			outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>50 gems</b>.</i>\"");
-			doYesNo(buyFoxJewel, ayaneAtShrine);
-		}
-		private function buyFoxJewel():void {
-			if (player.gems < 50) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 50;
-				inventory.takeItem(consumables.FOXJEWL, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellAgilityElixir():void {
-			clearOutput();
-			outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
-			doYesNo(buyAgilityElixir, ayaneAtShrine);
-		}
-		private function buyAgilityElixir():void {
-			if (player.gems < 15) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 15;
-				inventory.takeItem(consumables.AGILI_E, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellScholarTea():void {
-			clearOutput();
-			outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
-			doYesNo(buyScholarTea, ayaneAtShrine);
-		}
-		private function buyScholarTea():void {
-			if (player.gems < 15) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 15;
-				inventory.takeItem(consumables.SMART_T, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-		private function sellVixenTea():void {
-			clearOutput();
-			outputText("\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>15 gems</b> is a good deal to learn how to truly be lascivious.</i>\"");
-			doYesNo(buyVixenTea, ayaneAtShrine);
-		}
-		private function buyVixenTea():void {
-			if (player.gems < 15) {
-				clearOutput();
-				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-				doNext(ayaneAtShrine);
-			}
-			else {
-				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-				player.gems -= 15;
-				inventory.takeItem(consumables.VIXEN_T, ayaneAtShrine);
-				statScreenRefresh();
-			}
-		}
-
+		
 //[Read Books]
 		private function readKitsuneBooks():void
 		{

@@ -121,6 +121,7 @@ public class CombatTeases extends BaseContent {
 		else damage += 45 + ((player.level - 60) / 5);
 		if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
 		//partial skins bonuses
 		switch (player.coatType()) {
 			case SKIN_COAT_FUR:
@@ -1450,20 +1451,36 @@ public class CombatTeases extends BaseContent {
 				damage *= 1.15;
 				bonusDamage *= 1.15;
 			}
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
 			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (monster.plural) damage *= 1.3;
+			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
-
+			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 15) {
+				outputText("\n" + monster.a + monster.short + " is so mesmerised by your show that it stands there gawking.");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
-			else if (!justText) monster.teased(damage);
-
+			else if (!justText) {
+				monster.teased(damage);
+				if (crit == true) outputText(" <b>Critical!</b>");
+			}
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
-
 			// Similar to fetish check, only add XP if the player IS the player...
 			if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(1);
 		}

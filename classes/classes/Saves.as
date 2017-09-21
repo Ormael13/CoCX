@@ -632,6 +632,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		
+		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
 		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
@@ -678,6 +679,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 			
+			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
 			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
@@ -889,6 +891,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.hairLength = player.hairLength;
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyeType;
+		saveFile.data.eyeColor = player.eyeColor;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.tongueType = player.tongueType;
 		saveFile.data.earType = player.earType;
@@ -1175,6 +1178,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		// Keybinds
 		saveFile.data.controls = getGame().inputManager.SaveBindsToObj();
+		
+		// TODO use an interface for this or something
+		saveFile.data.world = {};
+		saveFile.data.world.x = {};
+		getGame().celessScene.save(saveFile.data.world.x);
 	}
 	catch (error:Error)
 	{
@@ -1732,6 +1740,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.eyeType = EYES_HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
+		if (saveFile.data.eyeColor == undefined)
+			player.eyeColor = "brown";
+		else
+			player.eyeColor = saveFile.data.eyeColor;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -1774,7 +1786,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
@@ -2336,6 +2348,16 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
+		
+		// TODO use an interface for this or something
+		if (saveFile.data.world != undefined){
+			if (saveFile.data.world.x != undefined){
+				game.celessScene.load(saveFile.data.world.x);
+			}
+		} else{
+			game.celessScene.load(undefined);
+		}
+		
 		doNext(playerMenu);
 	}
 }

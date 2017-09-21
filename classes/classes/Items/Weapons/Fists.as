@@ -18,6 +18,5 @@ package classes.Items.Weapons
 		override public function playerRemove():Weapon {
 			return null;
 		}
-		
 	}
 }

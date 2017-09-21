@@ -41,7 +41,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("You carefully step through the cratered rubble to claim your prize. It's a chunk of lethicite,");
 			
 			// 9999 dis shit.
-			if (player.hasKeyItem("Marae's Lethicite")) outputText(" easily as big as Marae's.");
+			if (player.hasKeyItem("Marae's Lethicite")>=0) outputText(" easily as big as Marae's.");
 			else outputText(" like the purple crystals in the factory, only this one is three times as big.");
 			outputText("\n\n<b>Lethicite acquired!</b>");
 			

@@ -131,14 +131,14 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Eyes
 		if (player.faceType == FACE_MANTICORE && player.eyeType != EYES_MANTICORE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a water puddle to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, these red pupils are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
-			mutations.setEyeType(EYES_MANTICORE);
+			outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a water puddle to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, these red irises are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
+			mutations.setEyeTypeAndColor(EYES_MANTICORE, "red");
 			changes++;
 		}
 		//Cat tounge
-		if (player.faceType == FACE_MANTICORE && player.tongueType != TONUGE_CAT && rand(3) == 0 && changes < changeLimit) {
+		if (player.faceType == FACE_MANTICORE && player.tongueType != TONGUE_CAT && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-			mutations.setTongueType(TONUGE_CAT);
+			mutations.setTongueType(TONGUE_CAT);
 			changes++;
 		}
 		//Venom Increase

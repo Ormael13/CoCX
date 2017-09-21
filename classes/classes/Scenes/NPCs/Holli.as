@@ -159,7 +159,7 @@ package classes.Scenes.NPCs
 			player.addStatusValue(StatusEffects.HolliConstrict, 1, 9);
 			//Struggle Succeed
 			//if demon/dragon tongue, automatic success
-			if (player.tongueType > TONUGE_HUMAN) {
+			if (player.tongueType > TONGUE_HUMAN) {
 				outputText("You can't move an arm nor a [leg] to bat the flower away... but she's literally holding your mouth open.  Your long tongue rolls out, gripping and ripping out several of the petals on the end of her stalk!  Holli screams and her roots slacken, allowing you to batter your way out of them.");
 				player.removeStatusEffect(StatusEffects.HolliConstrict);
 			}
@@ -268,6 +268,7 @@ package classes.Scenes.NPCs
 			this.gems = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

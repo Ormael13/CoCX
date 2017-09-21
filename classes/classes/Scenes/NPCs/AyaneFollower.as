@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Useable;
 	
 	public class AyaneFollower extends NPCAwareContent
 	{
@@ -18,10 +19,10 @@ public function ayaneCampMenu():void
 	clearOutput();
 	outputText("\"<i>Anything I can do for you " + player.mf("lord", "lady") + " [name]?</i>\"");
 	menu();
-	addButton(0, "Appearance", ayaneAppearance, null, null, null, "Examine Ayane detailed appearance.");
-	addButton(1, "Talk", ayaneTalkMenu, null, null, null, "Ask Ayane about something.");
-	addButton(2, "Shop", ayaneShop, null, null, null, "Check Ayane shop.");
-	addButton(3, "Sex", ayaneSexMenu, null, null, null, "Have some sex with Ayane.");
+	addButton(0, "Appearance", ayaneAppearance).hint("Examine Ayane detailed appearance.");
+	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
+	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
+	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -86,239 +87,90 @@ public function ayaneTalkPrayer():void
 	cheatTime(1/4);
 }
 
-private function ayaneShop():void {
-	clearOutput();
-	outputText("You tell Ayane you could use some items from her shop, and she displays her inventory for you to browse.\n\n");
-	menu();
-	addButton(0, "WhiteKimono", sellWhiteKimono);
-	addButton(1, "RedKimono", sellRedKimono);
-	addButton(2, "BlueKimino", sellBlueKimono);
-	addButton(3, "PurpleKimono", sellPurpleKimono);
-	addButton(4, "ArcaneBangles", sellArcaneBangles);
-	addButton(5, "SpiritFocus", sellSpiritFocus);
-	addButton(6, "Fox Hairin", sellFoxHairpin);
-	addButton(7, "Fox Jewel", sellFoxJewel);
-	addButton(10, "Agility B.", sellAgilityElixir);
-	addButton(11, "Scholar T.", sellScholarTea);
-	addButton(12, "IncenOfInsig", sellIncenseOfInsight);
-	addButton(13, "Vixen Tea", sellVixenTea);
-	addButton(14, "Back", ayaneCampMenu);
-}
-private function sellWhiteKimono():void {
-	clearOutput();
-	outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-	doYesNo(buyWhiteKimono, ayaneShop);
-}
-private function buyWhiteKimono():void {
-	if (player.gems < 200) {
+public function ayaneShop():void {
+	var atCamp:Boolean = (flags[kFLAGS.AYANE_FOLLOWER] == 2);
 		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
+		if (atCamp){
+			outputText("You tell Ayane you could use some items from her shop, and she displays her inventory for you to browse.\n\n");
+		}
+		else{
+			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");			
+			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");			
+		}
+		menu();
+		addButton(0, armors.WKIMONO.shortName, sellItem, armors.WKIMONO);
+		addButton(1, armors.RKIMONO.shortName, sellItem, armors.RKIMONO);
+		addButton(2, armors.BKIMONO.shortName, sellItem, armors.BKIMONO);
+		addButton(3, armors.PKIMONO.shortName, sellItem, armors.PKIMONO);
+		addButton(4, armors.ARCBANG.shortName, sellItem, armors.ARCBANG);
+		addButton(5, shields.SPI_FOC.shortName, sellItem, shields.SPI_FOC);
+		addButton(6, jewelries.FOXHAIR.shortName, sellItem, jewelries.FOXHAIR);
+		addButton(7, consumables.FOXJEWL.shortName, sellItem, consumables.FOXJEWL);
+		addButton(10, consumables.AGILI_E.shortName, sellItem, consumables.AGILI_E, 15);
+		addButton(11, consumables.SMART_T.shortName, sellItem, consumables.SMART_T);
+		addButton(12, consumables.VIXEN_T.shortName, sellItem, consumables.VIXEN_T)
+		addButton(13, consumables.INCOINS.shortName, sellItem, consumables.INCOINS);
+		if(atCamp){
+			addButton(14, "Back", ayaneCampMenu);
+		}
+		else{
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
+		}
 	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 200;
-		inventory.takeItem(armors.WKIMONO, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellRedKimono():void {
-	clearOutput();
-	outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-	doYesNo(buyRedKimono, ayaneShop);
-}
-private function buyRedKimono():void {
-	if (player.gems < 200) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 200;
-		inventory.takeItem(armors.RKIMONO, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellBlueKimono():void {
-	clearOutput();
-	outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-	doYesNo(buyBlueKimono, ayaneShop);
-}
-private function buyBlueKimono():void {
-	if (player.gems < 200) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 200;
-		inventory.takeItem(armors.BKIMONO, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellPurpleKimono():void {
-	clearOutput();
-	outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
-	doYesNo(buyPurpleKimono, ayaneShop);
-}
-private function buyPurpleKimono():void {
-	if (player.gems < 200) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 200;
-		inventory.takeItem(armors.PKIMONO, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellArcaneBangles():void {
-	clearOutput();
-	outputText("\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>150 gems</b> gems is somewhat cheap for it.</i>\"");
-	doYesNo(buyArcaneBangles, ayaneShop);
-}
-private function buyArcaneBangles():void {
-	if (player.gems < 150) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(150 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 150;
-		inventory.takeItem(armors.ARCBANG, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellSpiritFocus():void {
-	clearOutput();
-	outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>800 gems</b>.</i>\"");
-	doYesNo(buySpiritFocus, ayaneShop);
-}
-private function buySpiritFocus():void {
-	if (player.gems < 800) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 800;
-		inventory.takeItem(shields.SPI_FOC, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellFoxHairpin():void {
-	clearOutput();
-	outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>800 gems</b>.</i>\"");
-	doYesNo(buyFoxHairpin, ayaneShop);
-}
-private function buyFoxHairpin():void {
-	if (player.gems < 800) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 800;
-		inventory.takeItem(jewelries.FOXHAIR, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellFoxJewel():void {
-	clearOutput();
-	outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>50 gems</b>.</i>\"");
-	doYesNo(buyFoxJewel, ayaneShop);
-}
-private function buyFoxJewel():void {
-	if (player.gems < 50) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 50;
-		inventory.takeItem(consumables.FOXJEWL, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellAgilityElixir():void {
-	clearOutput();
-	outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough it would be wise to actually work on your agility for a fast trick or a swift escape. I think <b>15 gems</b> is not too steep a price for the gift of speed.</i>\"");
-	doYesNo(buyAgilityElixir, ayaneShop);
-}
-private function buyAgilityElixir():void {
-	if (player.gems < 15) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 15;
-		inventory.takeItem(consumables.AGILI_E, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellScholarTea():void {
-	clearOutput();
-	outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
-	doYesNo(buyScholarTea, ayaneShop);
-}
-private function buyScholarTea():void {
-	if (player.gems < 15) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 15;
-		inventory.takeItem(consumables.SMART_T, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellIncenseOfInsight():void {
-	clearOutput();
-	outputText("\"<i>These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.</i>\"");
-	doYesNo(buyIncenseOfInsight, ayaneShop);
-}
-private function buyIncenseOfInsight():void {
-	if (player.gems < 15) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 15;
-		inventory.takeItem(consumables.INCOINS, ayaneShop);
-		statScreenRefresh();
-	}
-}
-private function sellVixenTea():void {
-	clearOutput();
-	outputText("\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>15 gems</b> is a good deal to learn how to truly be lascivious.</i>\"");
-	doYesNo(buyVixenTea, ayaneShop);
-}
-private function buyVixenTea():void {
-	if (player.gems < 15) {
-		clearOutput();
-		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
-		doNext(ayaneShop);
-	}
-	else {
-		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
-		player.gems -= 15;
-		inventory.takeItem(consumables.VIXEN_T, ayaneShop);
-		statScreenRefresh();
-	}
+	private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{
+		cost = (cost > 0)? cost:item.value;
+		if (buy){
+			if (player.gems < cost){
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(cost - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneShop);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hands over to you purchased item.\n\n");
+				player.gems -= cost;
+				inventory.takeItem(item, ayaneShop);
+				statScreenRefresh();
+			}
+		}
+		else{
+			clearOutput();
+			menu();
+			switch(item){
+				case armors.WKIMONO:
+				case armors.RKIMONO:
+				case armors.BKIMONO:
+				case armors.PKIMONO:
+					outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
+					break;
+				case armors.ARCBANG:
+					outputText("\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> gems is somewhat cheap for it.</i>\"");
+					break;
+				case shields.SPI_FOC:
+					outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
+					break;
+				case jewelries.FOXHAIR:
+					outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>" + cost.toString() + " gems</b>.</i>\"");
+					break;
+				case consumables.FOXJEWL:
+					outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
+					break;
+				case consumables.AGILI_E:
+					outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough, it would be wise to actually work on your agility for a fast trick or a swift escape.</i>\"");
+					break;
+				case consumables.SMART_T:
+					outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>" + cost.toString() + " gems</b> is not too steep a price for the gift of intelligence.</i>\"");
+					break;
+				case consumables.VIXEN_T:
+					outputText("\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>" + cost.toString() + " gems</b> is a good deal to learn how to truly be lascivious.</i>\"");
+					break;
+				case consumables.INCOINS:
+					outputText("\"<i>These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.</i>\"");
+					break;
+			}
+			outputText("\n\nDo you buy "+ item.longName+"?");
+			addButton(0, "Yes", sellItem, item, cost, true);
+			addButton(1, "No", ayaneShop);
+		}
 }
 
 public function ayaneSexMenu():void
@@ -338,7 +190,7 @@ public function ayaneWorship():void
 	if (player.hasCock()) {
 		outputText("Ayane starts by cupping your balls with her hand, caressing them and applying her flames; causing them to slowly churn with cum and grow bigger as her magic increases your potency. She methodically moves her fingers up your length, tracing invisible designs along the flesh of your erect shaft. A pearl of precum appears on your tip which she proceeds to immediately lick, eliciting a pleasured moan from you. She methodically coats your shaft in a thick coat of her own saliva as she pulls it all in, her throat massaging your tip. ");
 		outputText("You are slightly disappointed when she pulls back, your length popping out of her mouth, but that is short lived as the horny priestess proceeds to shed her own clothes, hugs you, and inserts your shaft inside her warm waiting folds. Unable to hold yourself still anymore, you proceed to stir up her pussy relentlessly, making Ayane moan prayers to Taoth as she’s fucked. Her walls feel like they were made for your dick, and as you would expect of a kitsune pussy, they hungrily milk you for your semen.\n\n");
-		outputText("When you finally feel your balls emptying as you paint her vaginal canal white with your holy cum, something which seems to drive the lewd priestess over the edge as well. You sigh, relieved of your load, your balls slowly returning to their normal size.When you break the embrace you can’t help be smile in amusement as she tries to hold your cum inside of her.\n\n");
+		outputText("When you finally feel your balls emptying as you paint her vaginal canal white with your holy cum, something which seems to drive the lewd priestess over the edge as well. You sigh, relieved of your load, your balls slowly returning to their normal size. When you break the embrace you can’t help be smile in amusement as she tries to hold your cum inside of her.\n\n");
 	}
 	else {
 		outputText("Ayane starts by slowly teasing your entrance. You shiver in appreciation as she plays her fingers across your " + vaginaDescript() + ", carefully using small blue flames every now and then to puff up your pussy properly. You caress her hair as she proceeds to lick your lips, dipping her tongue inside and curling her tongue over your clit. Gasping, you let your tails flow over her body, the feeling of her skin on your fur erotically charged and exquisite. Your tails trace her numerous tattoos, while hers do your own. The sensations dance through your mind, rippling through ");

@@ -31,8 +31,8 @@ package classes.Scenes.Dungeons.Factory
 			if (player.gender == 0) {
 				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				game.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
-				game.addButton(1, "Orally", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
+				game.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
+				game.addButton(1, "Orally", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
 				game.addButton(4, "Leave", game.cleanupAfterCombat);
 			}
 			else {
@@ -46,9 +46,9 @@ package classes.Scenes.Dungeons.Factory
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) game.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 				}
-				game.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus, null, null, null, player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
-				game.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
-				game.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
+				game.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				game.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
+				game.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
 				game.addButton(4, "Nothing", game.cleanupAfterCombat);
 			}
 		}

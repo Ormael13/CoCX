@@ -45,6 +45,7 @@ package classes
 		public static const PREGNANCY_PHOENIX:int				=  36;
 		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		public static const PREGNANCY_ALRAUNE:int				=  38;
+		public static const PREGNANCY_CELESS:int				=  39;
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
@@ -94,6 +95,7 @@ package classes
 		public static const INCUBATION_KIHA:int                 = 384;
 		public static const INCUBATION_ISABELLA:int             = 2160; //Longest pregnancy ever.
 		public static const INCUBATION_ALRAUNE:int              = 168;
+		public static const INCUBATION_CELESS:int				= 720;
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types

@@ -953,7 +953,7 @@ public function IsabellaPostSpankFeedSex():void {
 	outputText(", pushing your torso so hard it sinks an inch or two into mud that reeks of Isabella's sex-juices.  You lie there, immobilized and defeated while you're forcibly raped, used like a small, disposable dildo.\n\n");
 	
 	outputText("The cow-girl lets some of the pressure off in order to tweak one of your " + nippleDescript(0) + "s, but as you gasp, her tongue is forced into your mouth, smothering your ");
-	if(player.tongueType == TONUGE_HUMAN) outputText("smaller");
+	if(player.tongueType == TONGUE_HUMAN) outputText("smaller");
 	else outputText("longer");
 	outputText(" one with the slippery smoothness of her cow-like organ.  It slides over the top, curls around squeezing, and then it's underneath yours, beckoning you to venture past Isabella's naturally darker lips.  Her fingers find her way into your hair, pulling on it to keep you exactly where she wants you, like a dog on a leash.  You groan helplessly into her mouth, your voice melding with her frenzied moans as she splatters mud, milk, and girl-cum from each thigh-jiggling impact.\n\n");
 	

@@ -593,12 +593,12 @@ private function owcaMainScreenOn():void {
 	}
 	//[Pit][Herds][Rebecc][Tavern][Kindra][Leave]
 	menu();
-	if(model.time.hours >= 16) addButton(0, "Pit", zePit, null, null, null, "Guard the Pit tonight.");
-	addButton(1, "Herds", herds, null, null, null, "Help herders with a sheeps.");
-	addButton(2, "Rebecc", rebeccMenu, null, null, null, "Visit Rebecc.");
-	addButton(3, "Tavern", owcaTavern, null, null, null, "Visit local tavern.");
-	if(flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(10, "LookAround", meetKindra, null, null, null, "Wander around the village.");
-	addButton(14, "Leave", leaveOwca, null, null, null, "Leave Owca.");
+	if(model.time.hours >= 16) addButton(0, "Pit", zePit).hint("Guard the Pit tonight.");
+	addButton(1, "Herds", herds).hint("Help herders with a sheeps.");
+	addButton(2, "Rebecc", rebeccMenu).hint("Visit Rebecc.");
+	addButton(3, "Tavern", owcaTavern).hint("Visit local tavern.");
+	if(flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(10, "LookAround", meetKindra).hint("Wander around the village.");
+	addButton(14, "Leave", leaveOwca).hint("Leave Owca.");
 }
 public function leaveOwca():void {
 	doNext(camp.returnToCampUseOneHour);

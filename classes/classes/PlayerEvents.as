@@ -78,20 +78,7 @@ package classes {
 			End("PlayerEvents","hourlyHunger");
 			//Evangeline went out for the items counter
 			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS]--;
-			//Soulforce natural regeneration
-		/*	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-				if (player.soulforce < player.maxSoulforce()) {
-					var naturalSoulforceRegeneration:Number = 0;
-					if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulApprentice) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulPersonage) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulWarrior) >= 0) naturalSoulforceRegeneration += 1;
-					if (player.findPerk(PerkLib.SoulSprite) >= 0) naturalSoulforceRegeneration += 1;
-					player.soulforce += naturalSoulforceRegeneration;
-					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-				}
-			}
-		*/	//cumOmeter dropping down
+			//cumOmeter dropping down
 			if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 0) {
 				/*if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] == 1) */flags[kFLAGS.SEXUAL_FLUIDS_LEVEL]--;/*
 				else flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] -= 2;*/
@@ -465,8 +452,12 @@ package classes {
 					else getGame().growHair(0.1);
 					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
 				}
-				//Clear dragon breath cooldown!
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				//Clear dragon breath cooldowns!
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 				//Reset Mara Fruit daily counter
 				if (flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] > 0) flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags
@@ -539,7 +530,9 @@ package classes {
 					player.hunger = 0; //Prevents negative
 				}
 				else {
-					kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+					if (prison.inPrison) {
+						kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+					}
 				}
 				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
 					player.modThickness(1, 1);
@@ -793,7 +786,7 @@ package classes {
 				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
 			}
 			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) {
-				outputText("\n<b>Without your tails, the balance is disturbed and you loosing insigns in third path.</b>\n");
+				outputText("\n<b>Without your tails, the balance is disturbed and you loose your insights into the third path.</b>\n");
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}
@@ -1028,6 +1021,7 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.BathedInHotSpring, 1, -1);
 			}
+			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");

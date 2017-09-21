@@ -92,6 +92,7 @@ package classes.Scenes.Places.Owca
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.drop = new WeightedDrop().
+					add(weapons.PSWHIP,5).
 					add(weapons.SUCWHIP,4).
 					add(armors.NURSECL,3).
 					add(armors.BONSTRP,2).

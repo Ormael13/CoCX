@@ -11,6 +11,8 @@
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.Areas.Forest.Alraune;
+	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
@@ -95,6 +97,7 @@
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
 		public var bonusInte:Number = 0;
+		public var bonusWis:Number = 0;
 		public var bonusLib:Number = 0;
 		public var newgamebonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
@@ -193,8 +196,10 @@
 			//Apply perks
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.TankI) >= 0) temp += ((this.tou*3) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.CheetahI) >= 0) temp += (this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 30;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 150;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
@@ -203,13 +208,13 @@
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
+			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulKing) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + player.newGamePlusMod()));
@@ -247,10 +252,15 @@
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) temp += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) temp += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) temp += 750;
+			if (findPerk(PerkLib.InhumanSelfControl) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) temp += 1500;
+			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 2250;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 50;
+			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
 			//Apply NG+, NG++, NG+++, etc.
@@ -272,11 +282,15 @@
 			if (findPerk(PerkLib.SuperiorEndurance) >= 0) temp += 500;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) temp += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToInhumanEndurance) >= 0) temp += 1500;
+			if (findPerk(PerkLib.InhumanEndurance) >= 0) temp += 2000;
+			if (findPerk(PerkLib.HalfStepToEpicEndurance) >= 0) temp += 3000;
+			if (findPerk(PerkLib.EpicEndurance) >= 0) temp += 4500;
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
@@ -304,7 +318,7 @@
 				if (this.level >= 16) temp += 40;
 			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.JobMunchkin) >= 0) temp *= 1.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
 		
@@ -319,15 +333,33 @@
 			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
+			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
+			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
+			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) temp += 60;
+			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) temp += 100;
+			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) temp += 160;
+			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) temp += 250;
+			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) temp += 350;
+			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) temp += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) temp += 750;
+			if (findPerk(PerkLib.InhumanTranquilness) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) temp += 1500;
+			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;
+			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) temp += 40;
+			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) temp += 80;
+			if (findPerk(PerkLib.MasterCrinosShape) >= 0) temp += 160;
 			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
-			if (findPerk(PerkLib.Rage) >= 0) temp += 200;
-			if (findPerk(PerkLib.Anger) >= 0) temp += 200;
+			if (findPerk(PerkLib.Rage) >= 0) temp += 250;
+			if (findPerk(PerkLib.Anger) >= 0) temp += 300;
 			return temp;
 		}
 		
@@ -335,8 +367,25 @@
 		{
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) temp += 180;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) temp += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) temp += 480;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 1050;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 1500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) temp += 2250;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) temp += 3000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) temp += 4500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 6750;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
+				temp += Math.round(this.inte * (1 + player.newGamePlusMod()));
+				temp += Math.round(this.wis * (1 + player.newGamePlusMod()));
+			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
@@ -345,6 +394,14 @@
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
+			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
+				var tempmulti:Number = 1;
+				tempmulti += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.3;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
+				temp *= tempmulti;
+			}
 			return temp;
 		}
 
@@ -360,7 +417,7 @@
 		 */
 		public function eBaseDamage():Number {
 			var damage:Number = 0;
-			//base dmg from str
+			damage += str;
 			if (str >= 21) damage += ((str - 20) * 0.25);
 			if (str >= 41) damage += ((str - 40) * 0.25);
 			if (str >= 61) damage += ((str - 60) * 0.25);
@@ -383,6 +440,11 @@
 			if (str >= 851) damage += ((str - 850) * 0.25);
 			if (str >= 901) damage += ((str - 900) * 0.25);
 			if (str >= 951) damage += ((str - 950) * 0.25);
+			if (str >= 1001) damage += ((str - 1000) * 0.25);
+			if (str >= 1051) damage += ((str - 1050) * 0.25);
+			if (str >= 1101) damage += ((str - 1100) * 0.25);
+			if (str >= 1151) damage += ((str - 1150) * 0.25);
+			if (str >= 1201) damage += ((str - 1200) * 0.25);
 			if (str < 10) damage = 10;
 			//weapon bonus
 			if (weaponAttack < 51) damage *= (1 + (weaponAttack * 0.03));
@@ -390,6 +452,119 @@
 			else if (weaponAttack >= 101 && weaponAttack < 151) damage *= (3.75 + ((weaponAttack - 100) * 0.02));
 			else if (weaponAttack >= 151 && weaponAttack < 201) damage *= (4.75 + ((weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((weaponAttack - 200) * 0.01));
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			//other
+			if (hasStatusEffect(StatusEffects.Bloodlust)) damage *= (1 + (0.1 * statusEffectv2(StatusEffects.Bloodlust)));
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseStrengthDamage():Number {
+			var damage:Number = 0;
+			damage += str;
+			if (str >= 21) damage += (str - 20);
+			if (str >= 41) damage += (str - 40);
+			if (str >= 61) damage += (str - 60);
+			if (str >= 81) damage += (str - 80);
+			if (str >= 101) damage += (str - 100);
+			if (str >= 151) damage += (str - 150);
+			if (str >= 201) damage += (str - 200);
+			if (str >= 251) damage += (str - 250);
+			if (str >= 301) damage += (str - 300);
+			if (str >= 351) damage += (str - 350);
+			if (str >= 401) damage += (str - 400);
+			if (str >= 451) damage += (str - 450);
+			if (str >= 501) damage += (str - 500);
+			if (str >= 551) damage += (str - 550);
+			if (str >= 601) damage += (str - 600);
+			if (str >= 651) damage += (str - 650);
+			if (str >= 701) damage += (str - 700);
+			if (str >= 751) damage += (str - 750);
+			if (str >= 801) damage += (str - 800);
+			if (str >= 851) damage += (str - 850);
+			if (str >= 901) damage += (str - 900);
+			if (str >= 951) damage += (str - 950);
+			if (str >= 1001) damage += (str - 1000);
+			if (str >= 1051) damage += (str - 1050);
+			if (str >= 1101) damage += (str - 1100);
+			if (str >= 1151) damage += (str - 1150);
+			if (str >= 1201) damage += (str - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseToughnessDamage():Number {
+			var damage:Number = 0;
+			damage += tou;
+			if (tou >= 21) damage += (tou - 20);
+			if (tou >= 41) damage += (tou - 40);
+			if (tou >= 61) damage += (tou - 60);
+			if (tou >= 81) damage += (tou - 80);
+			if (tou >= 101) damage += (tou - 100);
+			if (tou >= 151) damage += (tou - 150);
+			if (tou >= 201) damage += (tou - 200);
+			if (tou >= 251) damage += (tou - 250);
+			if (tou >= 301) damage += (tou - 300);
+			if (tou >= 351) damage += (tou - 350);
+			if (tou >= 401) damage += (tou - 400);
+			if (tou >= 451) damage += (tou - 450);
+			if (tou >= 501) damage += (tou - 500);
+			if (tou >= 551) damage += (tou - 550);
+			if (tou >= 601) damage += (tou - 600);
+			if (tou >= 651) damage += (tou - 650);
+			if (tou >= 701) damage += (tou - 700);
+			if (tou >= 751) damage += (tou - 750);
+			if (tou >= 801) damage += (tou - 800);
+			if (tou >= 851) damage += (tou - 850);
+			if (tou >= 901) damage += (tou - 900);
+			if (tou >= 951) damage += (tou - 950);
+			if (tou >= 1001) damage += (tou - 1000);
+			if (tou >= 1051) damage += (tou - 1050);
+			if (tou >= 1101) damage += (tou - 1100);
+			if (tou >= 1151) damage += (tou - 1150);
+			if (tou >= 1201) damage += (tou - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseSpeedDamage():Number {
+			var damage:Number = 0;
+			damage += spe;
+			if (spe >= 21) damage += (spe - 20);
+			if (spe >= 41) damage += (spe - 40);
+			if (spe >= 61) damage += (spe - 60);
+			if (spe >= 81) damage += (spe - 80);
+			if (spe >= 101) damage += (spe - 100);
+			if (spe >= 151) damage += (spe - 150);
+			if (spe >= 201) damage += (spe - 200);
+			if (spe >= 251) damage += (spe - 250);
+			if (spe >= 301) damage += (spe - 300);
+			if (spe >= 351) damage += (spe - 350);
+			if (spe >= 401) damage += (spe - 400);
+			if (spe >= 451) damage += (spe - 450);
+			if (spe >= 501) damage += (spe - 500);
+			if (spe >= 551) damage += (spe - 550);
+			if (spe >= 601) damage += (spe - 600);
+			if (spe >= 651) damage += (spe - 650);
+			if (spe >= 701) damage += (spe - 700);
+			if (spe >= 751) damage += (spe - 750);
+			if (spe >= 801) damage += (spe - 800);
+			if (spe >= 851) damage += (spe - 850);
+			if (spe >= 901) damage += (spe - 900);
+			if (spe >= 951) damage += (spe - 950);
+			if (spe >= 1001) damage += (spe - 1000);
+			if (spe >= 1051) damage += (spe - 1050);
+			if (spe >= 1101) damage += (spe - 1100);
+			if (spe >= 1151) damage += (spe - 1150);
+			if (spe >= 1201) damage += (spe - 1200);
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -836,6 +1011,18 @@
 		}
 
 		public function eAttack():void {
+			if (game.player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (hasStatusEffect(StatusEffects.Bloodlust)) addStatusValue(StatusEffects.Bloodlust,1,10);
+				else createStatusEffect(StatusEffects.Bloodlust,10,0,0,0);
+			}
+			if (hasStatusEffect(StatusEffects.Bloodlust) && !game.player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (statusEffectv1(StatusEffects.Bloodlust) <= 10) {
+					removeStatusEffect(StatusEffects.Bloodlust);
+				}
+				else {
+					addStatusValue(StatusEffects.Bloodlust,1,-10);
+				}
+			}
 			var attacks:int = statusEffectv1(StatusEffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
@@ -975,6 +1162,7 @@
 			//Block with shield
 			if (combatBlock(true)) {
 				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) game.combat.pspecials.shieldBash();
 				return true;
 			}
 			return false;
@@ -1093,12 +1281,18 @@
 		{
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
-			if (hasStatusEffect(StatusEffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
-			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+			if (hasStatusEffect(StatusEffects.InkBlind)) {
+				if (plural) game.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
+				else game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+			}
+			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) {
+				if (plural) game.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
+				else game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+			}
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
-			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
-			else game.outputText("Your foe is too dazed from your last hit to strike back!");
+				if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
+				else game.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
 			game.combatRoundOver();
 			return false;
@@ -1344,7 +1538,7 @@
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue + "/" + eMaxFatigue() + " fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue + "/" + eMaxFatigue() + " fatigue, " + mana + "/" + eMaxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";		//, " + soulforce + "/" + eMaxSoulforce() + " soulforce
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
@@ -1479,15 +1673,16 @@
 				//Countdown to heal
 				addStatusValue(StatusEffects.IzmaBleed,1,-1);
 				//Heal wounds
-				if(statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
+				if (statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
 				else {
-					var store:Number = eMaxHP() * (4 + rand(7))/100;
+					var store:Number = eMaxHP() * (4 + rand(7)) / 100;
+					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
 					store = game.doDamage(store);
-					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}
@@ -1535,6 +1730,9 @@
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 				}
+			}
+			if (hasStatusEffect(StatusEffects.Bloodlust)) {
+				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flows through the water the shark girl grows increasingly vicious. ");
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
@@ -1648,17 +1846,19 @@
 				}
 			}
 			//regeneration perks for monsters
-			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
+			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
 			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
-				if(findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
-				if(findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
-				if(findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
-				if(findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-				if(findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
-				if(findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1.5;
-				if(findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
+				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
+				if (findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
 				temp2 = Math.round(eMaxHP() * healingPercent / 100);
 				outputText("Due to natural regeneration " + short + " recover");
 				if (plural) outputText("s");

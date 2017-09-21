@@ -133,5 +133,11 @@ public class BaseCombatContent extends BaseContent {
 	protected function calcGlacialMod(damage:Number):int {
 		return combat.magic.calcGlacialModImpl(damage);
 	}
+	protected function calcVoltageMod(damage:Number):int {
+		return combat.magic.calcVoltageModImpl(damage);
+	}
+	protected function calcEclypseMod(damage:Number):int {
+		return combat.magic.calcEclypseModImpl(damage);
+	}
 }
 }

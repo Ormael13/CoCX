@@ -2,17 +2,17 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes.Areas.Battlefield 
 {
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
-	public class Krakken extends Monster
+	public class KrakkenBF extends Monster
 	{
 		
-		public function Krakken() 
+		public function KrakkenBF() 
 		{
 			this.a = "";
 			this.short = "Krakken";

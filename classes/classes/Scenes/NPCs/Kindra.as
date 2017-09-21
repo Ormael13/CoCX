@@ -65,40 +65,23 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.KINDRA_AFFECTION] < 7) outputText("Sheep-morph archer");
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 7) outputText("Kindra");
 			outputText(" casually fire an arrow at you with supreme skill.");
-			var damage:Number = 0;
-			damage += this.spe;
-			if (this.spe >= 21) damage += ((this.spe - 20) * 0.2);
-			if (this.spe >= 41) damage += ((this.spe - 40) * 0.2);
-			if (this.spe >= 61) damage += ((this.spe - 60) * 0.2);
-			if (this.spe >= 81) damage += ((this.spe - 80) * 0.2);
-			if (this.spe >= 101) damage += ((this.spe - 100) * 0.2);
-			if (this.spe >= 151) damage += ((this.spe - 150) * 0.2);
-			if (this.spe >= 201) damage += ((this.spe - 200) * 0.2);
-			if (this.spe >= 251) damage += ((this.spe - 250) * 0.2);
-			if (this.spe >= 301) damage += ((this.spe - 300) * 0.2);
-			if (this.spe >= 351) damage += ((this.spe - 350) * 0.2);
-			if (this.spe >= 401) damage += ((this.spe - 400) * 0.2);
-			if (this.spe >= 451) damage += ((this.spe - 450) * 0.2);
-			if (this.spe >= 501) damage += ((this.spe - 500) * 0.2);
-			if (this.spe >= 551) damage += ((this.spe - 550) * 0.2);
-			if (this.spe >= 601) damage += ((this.spe - 600) * 0.2);
-			if (this.spe >= 651) damage += ((this.spe - 650) * 0.2);
-			if (this.spe >= 701) damage += ((this.spe - 700) * 0.2);
-			if (this.spe >= 751) damage += ((this.spe - 750) * 0.2);
-			if (this.spe >= 801) damage += ((this.spe - 800) * 0.2);
-			if (this.spe >= 851) damage += ((this.spe - 850) * 0.2);
-			if (this.spe >= 901) damage += ((this.spe - 900) * 0.2);
-			if (this.spe >= 951) damage += ((this.spe - 950) * 0.2);
-			if (this.spe < 10) damage = 10;
-			damage = player.reduceDamage(damage);
-			if (damage < 10) damage = 10;
-			//weapon bonus
-			if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
-			else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
-			else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
-			else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
-			else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
-			player.takeDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText(" Still surrounding you wind wall stops it without much trouble.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else {
+				var damage:Number = 0;
+				damage += eBaseSpeedDamage() * 0.2;
+				damage = player.reduceDamage(damage);
+				if (damage < 10) damage = 10;
+				//weapon bonus
+				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
+				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
+				else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
+				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
+				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
+				player.takeDamage(damage, true);
+			}
 			outputText("\n\n");
 			fatigue += bowShooting();
 			flags[kFLAGS.KINDRA_ARROWS_SHOT]++;
@@ -289,7 +272,7 @@ package classes.Scenes.NPCs
 			this.hairLength = 4;
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
-			this.weaponAttack = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponRangeName = "bow";//jak bedzie potem w camp to zrobić jej ulpszenie używanego łuku poza podnoszeniem lvl przez trening a potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
 			this.weaponRangeVerb= "shoot";
 			this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

@@ -116,7 +116,7 @@ package classes.Scenes
 			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years | It's time to stop playing. Go outside.)", true);
 			addAchievement("Time Traveller", kACHIEVEMENTS.TIME_TRAVELLER, "Get to day 36,500+ by tampering with save", "", true);
 			
-			titleAchievementSection("Dungeons"); //10 achievements
+			titleAchievementSection("Dungeons"); //11 achievements
 			addAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER, "Clear any dungeon.");
 			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 3 dungeons.");
 			addAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear every dungeon in the game.");
@@ -127,6 +127,7 @@ package classes.Scenes
 			addAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL, "Clear the Tower of the Phoenix.");
 			addAchievement("Accomplice", kACHIEVEMENTS.DUNGEON_ACCOMPLICE, "Watch Helia kill the Harpy Queen.", "", true);
 			addAchievement("Extremely Celibate Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER, "Complete Phoenix Tower without ever orgasming from the beginning.", "", true);
+			addAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, "Fully clear the Hidden Cave.");
 			
 			titleAchievementSection("Fashion"); //3 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");

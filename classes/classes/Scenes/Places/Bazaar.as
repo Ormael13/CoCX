@@ -96,8 +96,8 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	menu();
 	addButton(0, "Shops", shopMenu);
 	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
-	addButton(2, "Food Tent", blackCock.enterTheBlackCock, null, null, null, "The incredible smell seems to come from that tent.", "The Black Cock");
-//	addButton(4, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+	addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
+//	addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
 	//Cinnabar
 	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
 	//Griping Demons
@@ -108,7 +108,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
-		addButton(6, "GripingDemons", overHearDemonsAboutSyrena, null, null, null, "Overhear the conversation of the two griping demons.", "Griping Demons");
+		addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
 	}
 	//Lilium
 	if (lilium.LiliumText(false) != null) {
