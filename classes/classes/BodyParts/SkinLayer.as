@@ -6,13 +6,19 @@ import classes.Appearance;
 import classes.Creature;
 
 public class SkinLayer extends BodyPart {
-	public var color:String  = "albino";
+	private var _color:String  = "";
 	public var pattern:int   = PATTERN_NONE;
 	private var _desc:String = "";
 	private var _adj:String  = "";
 	private var _color2:String = "";
 	private var skin:Skin; // Reference to parent
 
+	public function get color():String {
+		return _color || creature.hairColor;
+	}
+	public function set color(value:String):void {
+		_color = value == creature.hairColor ? "" : value;
+	}
 	public function get color2():String {
 		return _color2 || color;
 	}
