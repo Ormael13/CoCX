@@ -732,9 +732,9 @@ import fl.controls.ComboBox;
 			addButton(5, "Brown", setEyesColor, "brown");
 			addButton(6, "Yellow", setEyesColor, "yellow");
 			addButton(7, "Grey", setEyesColor, "grey");
-			addButton(10, "Purple", setEyesColor, "purple");
+			addButton(8, "Purple", setEyesColor, "purple");
+			addButton(10, "Silver", setEyesColor, "silver");
 			addButton(11, "Golden", setEyesColor, "golden");
-			addButton(13, "Silver", setEyesColor, "silver");
 		}
 
 		private function setEyesColor(choice:String):void { //And choose hair

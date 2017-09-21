@@ -17,17 +17,94 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog15();
+			Changelog16();
 		}
 		
-		private function Changelog15():void {
+		private function Changelog17():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8f:</b>\n\n");
+			outputText("<b>Version 0.8f2:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, 
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
+			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
+			outputText("\n");
+			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
+			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");
+			outputText("<b>Version 0.8g:</b>\n\n");
+			outputText("<b>Version 0.8h:</b>\n\n");
+			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("\n");
+			outputText("\n");cel na 0.8f: dodać siren TF
+			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8f: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8f: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8f: dodać nekomanta TF
+			outputText("\n");cel na 0.8f: dodać kitsune/salamander TF
+			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
+			outputText("\n");cel na 0.8f: dodać yuki-onna TF
+			outputText("\n");cel na 0.8f: pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8f: dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");*/
+			addButton(0, "Next", Changelog16);
+			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+		}
+		private function Changelog16():void {
+			clearOutput();
+			menu();
+			outputText("<b>(Part 1/2) Version 0.8f:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl, Dragon\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Eyes of the Hunter (Novice). Req. 25+ sens. Effect: Allow see some of enemy-related perks to give player info what type of attacks is effective or ineffective against such enemy. Req. 25+ sens to be active\n");
 			outputText("-New tier 0 misc lvl-up perk (multi-rank): Primal Fury I-VI. Req. for rank 1: lvl 1+, Job: Beast Warrior perk. Effect: Increase max wrath by 10 and wrath generation by 2 (in) or 1 (out) of combat\n");
 			outputText("-New tier 0 corruption lvl-up perk: Sense Corruption. Req. 75+ corruption. Effect: Show in combat enemy current corruption\n");
+			outputText("-New tier 0 strength lvl-up perk: Basic Tranquilness. Req. 30+ str, 10+ tou and 10+ spe. Effect: Inrease max Wrath by 15\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Job: Elemental Conjurer. Req. 10+ wis. Effect: Allow to summon 4 basic type of elementals for helping PC in fight, +5 to max wisdom (scalable)\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Conjurer Resolve. Req. Job: Elemental Conjurer and 20+ wis. Effect: +30 max Wis, +20 max Int, -15 max Str/Tou/Spe (scalable), +10% of elementals attacks dmg\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Contract Rank 1. Req. perk Elemental Conjurer Resolve and 25+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 1\n");
@@ -41,6 +118,7 @@ package classes.Scenes
 			outputText("-New tier 1 wisdom lvl-up perk: Elemental Bond: Flesh. Req. Elemental Contract Rank 1 perk and 50+ wis. Effect: PC gains bonus to max HP depending on amount of summoned elementals and their ranks\n");
 			outputText("-New tier 1 sensitivity lvl-up perk: Eyes of the Hunter (Adept). Req. Eyes of the Hunter (Novice) perk and 50+ sens. Effect: Add new possible to see enemy-perks (related to elemental nature). Req. 50+ sens to be active\n");
 			outputText("-New tier 1 strength lvl-up perk: Thirst for Blood. Req. Job: Warrior perk and 75+ str. Effect: Weapons and effects that causes bleed damage have this damage increased by 50%\n");
+			outputText("-New tier 1 strength lvl-up perk: Half-step-to Improved Tranquilness. Req. Basic Tranquilness perk, 60+ str, 20+ tou and 20+ spe. Effect: Inrease max Wrath by 25\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it)\n");
 			outputText("-New tier 1 misc lvl-up perk: Job: Golemancer. Req. 25+ int and 25+ wis. Effect: +5 max Int, +5 max Wis, allow to make temporal golems using golem core and stones, which would crumble after one attack with 20% base chance of core shattering. Allows to store up to 3 golems and 6 golem cores\n");
 			outputText("-New tier 1 misc lvl-up perk: Beginner Golem Maker. Req. Job: Golemancer perk, 30+ int and 30+ wis. Effect: Lower to 15% chance for core shattering after golem attack. PC extra dimensional golem bag can store 2 more temporal golems and 4 more golem cores\n");
@@ -56,6 +134,7 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Apprentice Golem Maker. Req. Beginner Golem Maker perk, 50+ int and 50+ wis. Effect: Lower to 10% chance for core shattering after golem attack and lower by 10 mana needed for making temporal golem. PC extra dimensional golem bag can store 2 more temporal golems\n");
 			outputText("-New tier 2 misc lvl-up perk: Charged Core Req. Apprentice Golem Maker perk, 70+ int, 70+ wis. Effect: Charging each golem core with a little bit more of mana they will deal mini aoe dmg after striking target. The more golems attack the bigger is synergistic effect.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Master). Req. Eyes of the Hunter (Adept) perk and 75+ sens. Effect: Add new possible to see enemy-perks (related to elemental weakness). Req. 75+ sens to be active\n");
+			outputText("-New tier 2 strength lvl-up perk: Improved Tranquilness. Req. Half-step-to Improved Tranquilness, 90+ str, 30+ tou and 30+ spe. Effect: Inrease max Wrath by 40\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Contract Rank 3. Req. perk Elemental Contract Rank 2 and 75+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 3\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Elemental Bond: Urges. Req. Elemental Contract Rank 2 perk and 75+ wis. Effect: PC gains bonus to max Lust depending on amount of summoned elementals and their ranks\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Strong Elemental Bond. Req. Elemental Contract Rank 3 perk and 75+ wis. Effect: Lower by 10 needed mana to sustain active elemental in combat\n");
@@ -82,6 +161,7 @@ package classes.Scenes
 			outputText("-New tier 3 wisdom lvl-up perk: Elemental Contract Rank 4. Req. perk Elemental Contract Rank 3 and 100+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 4\n");
 			outputText("-New tier 3 libido lvl-up perk: Arouse the audience Req. Job: Courtesan perk and 75+ lib. Effect: Increase the damage of non periodic tease against groups by 50% and periodic by 20%\n");
 			outputText("-New tier 3 speed lvl-up perk: Impale. Req. Natural jouster perk and 100+ spe. Effect: Double bonus dmg from crit attacks with Spear or Lance (75% -> 150%) as ong PC attack only once per turn with those weapons. It also affect crits from Power Attacks using spears/lances.\n");
+			outputText("-New tier 3 strength lvl-up perk: Half-step-to Advanced Tranquilness. Req. Improved Tranquilness perk, 120+ str, 40+ tou and 40+ spe. Effect: Inrease max Wrath by 60\n");
 			outputText("-New tier 3 toughness lvl-up perk: Lifeline Req. Job: Defender perk and 75+ tou. Effect: Increases self heling by 100 out of combat and by 50 in combat (using defend option will double it)\n");
 			outputText("-New tier 3 toughness lvl-up perk: Shield Harmony. Req. Shield Expertise perk and 80+ tou. Effect: When PC using shield and isn't stunned grants 10% phys damage reduction\n");
 			outputText("-New tier 3 toughness lvl-up perk: Defence Stance. Req. Job: Defender perk and 80+ tou. Effect: Defend move giving 60% phys dmg reduction and allow recovery of fatigue, mana, soulforce\n");
@@ -94,6 +174,7 @@ package classes.Scenes
 			outputText("-New tier 4 misc lvl-up perk: Enable Criticals. Req. nothing aside min level. Effect: PC can score crits on all naturaly immune to them enemies like constructs, goo or plants.\n");
 			outputText("-New tier 4 misc lvl-up perk: Greater Crinos Shape. Req. Improving Nature's Blueprints (Natural Armor) perk, 80+ str, 80+ tou and 80+ spe. Effect: Increase bonuses to str/tou/spe to 15%, +3 to generated wrath and increase cost to 20 wrath per turn when using Crios Shape, +80 to max Wrath\n");
 			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons\n");
+			outputText("-New tier 4 strength lvl-up perk: Advanced Tranquilness. Req. Half-step-to Advanced Tranquilness perk, 150+ str, 50+ tou and 50+ spe. Effect: Inrease max Wrath by 100\n");
 			outputText("-New tier 4 toughness lvl-up perk: Shield Grandmastery. Req. perk Shield Mastery, 100+ tou. Effect: increase block chance up to 10% when PC tou is over and lowers fatigue costs of blocking by 50%\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Elemental Contract Rank 5. Req. perk Elemental Contract Rank 4 and 125+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 5\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Stronger Elemental Bond. Req. Elemental Contract Rank 5, Strong Elemental Bond perks and 125+ wis. Effect: Lower by 30 needed mana to sustain active elemental in combat\n");
@@ -104,6 +185,7 @@ package classes.Scenes
 			outputText("-New tier 5 intelligence lvl-up perk: (Ever)Lasting Buffs. Req. Job: Enchanter perk and 160+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");
 			outputText("-New tier 5 wisdom lvl-up perk: Elemental Contract Rank 6. Req. perk Elemental Contract Rank 5 and 150+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 6\n");
 			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perks Hidden Momentum and Dual Wield, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200)\n");
+			outputText("-New tier 5 strength lvl-up perk: Half-step-to Superior Tranquilness. Req. Advanced Tranquilness perk, 180+ str, 60+ tou and 60+ spe. Effect: Inrease max Wrath by 160\n");
 			outputText("-New tier 5 toughness lvl-up perk: Perfect Defence Stance. Req. Mastered Defence Stance perk and 160+ tou. Effect: Defend move giving 95% phys dmg reduction, max phys dmg reduction cap is rised when using this move from 95% to 99% and allow increased (bonus to normal recovery in Defence Stance) recovery of fatigue (+2), mana (+10), soulforce (+2)\n");
 			outputText("-New tier 5 toughness lvl-up perk: Shield Ward Req. Shield Grandmastery perk and 120+ tou. Effect: When PC wearing a shield lower chance to be knocked back or disarmed by enemy attacks\n");
 			outputText("-New tier 5 misc lvl-up perk: Improving Nature's Blueprints (Apex Predator). Req. Greater Crinos Shape perk, 95+ str, 95+ tou and 95+ spe. Effect: Changing negative bous to max Int/Wis into positive one (+5 scalable), using Crinos Shape grants minor regeneration effect (+2% max HP per turn)\n");
@@ -111,6 +193,7 @@ package classes.Scenes
 			outputText("-New tier 6 misc lvl-up perk: Cyclone (Stage 4). Req. Cyclone (Stage 3) perk and 120+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 20% and dmg multiplier for aoe specials like whirlwind by 50%\n");
 			outputText("-New tier 6 misc lvl-up perk: Master Crinos Shape. Req. Improving Nature's Blueprints (Apex Predator) perk, 110+ str, 110+ tou and 110+ spe. Effect: Increase bonuses to str/tou/spe to 20%, +4 to generated wrath and increase cost to 40 wrath per turn when using Crios Shape, +160 to max Wrath\n");
 			outputText("-New tier 6 speed lvl-up perk: Natural jouster (Master grade). Req. Natural jouster perk and 180+ spe. Effect: Increase attack power of spears/lances when PC attack once each turn and have taur/drider lower body or 2,5x higher speed if PC not have one of this specific lower body types (180+ for taurs/drider and 450+ for others)\n");
+			outputText("-New tier 6 strength lvl-up perk: Superior Tranquilness. Req. Half-step-to Superior Tranquilness perk, 210+ str, 70+ tou and 70+ spe. Effect: Inrease max Wrath by 250\n");
 			outputText("-New tier 6 toughness lvl-up perk (multi-rank): Cheetah I-VI. Req. for rank 1: lvl 18+, 150+ tou, perk Goliath I. Effect: +1 extra HP per point of speed\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Convergence. Req. Grey Archmage and 175+ int. Effect: Grey AoE spells hits twice single targets\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Superior Spirituality. Req. Half-step-to Superior Spirituality perk, 210+ int and 140+ wis. Effect: Increase max mana by 750\n");
@@ -123,10 +206,35 @@ package classes.Scenes
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Daoist: Elder Stage. Req. Daoist: Warrior Stage perk. Effects: +10 to recovered soulforce during meditation, +40% to soulskill power, +50 max soulforce (all gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");
+			outputText("-New tier 7 strength lvl-up perk: Half-step-to Peerless Tranquilness. Req. Superior Tranquilness perk, 240+ str, 80+ tou and 80+ spe. Effect: Inrease max Wrath by 350\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Half-step-to Peerless Spirituality. Req. Superior Spirituality perk, 240+ int and 160+ wis. Effect: Increase max mana by 1050\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Peerless Spirituality. Req. Half-step-to Peerless Spirituality perk, 270+ int and 180+ wis. Effect: Increase max mana by 1500\n");
+			outputText("-New tier 8 strength lvl-up perk: Peerless Tranquilness. Req. Half-step-to Peerless Tranquilness perk, 270+ str, 90+ tou and 90+ spe. Effect: Inrease max Wrath by 500\n");
+			outputText("-New tier 9 strength lvl-up perk: Half-step-to Inhuman Tranquilness. Req. Peerless Tranquilness perk, 300+ str, 100+ tou and 100+ spe. Effect: Inrease max Wrath by 750\n");
 			outputText("-New tier 9 strength lvl-up perk: Anger. Req. perk Rage. Effect: increase base dmg by 1% for each missing 1% of PC health while under effects of berserker or lustzerker state. Adds 300 to max wrath cap\n");
 			outputText("-New tier 9 toughness lvl-up perk: Shield Combat. Req. perk Steel Impact. Effect: when PC block an attack riposte with a shield bash damaging it opponent\n");
+			outputText("-New tier 9 toughness lvl-up perk: Half-step-to Inhuman Endurance. Req. Peerless Endurance perk, 300+ tou and 200+ str. Effect: Inrease max Fatigue by 1500\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Half-step-to Inhuman . Req. Peerless Spirituality perk, 300+ int and 200+ wis. Effect: Inrease max Mana by 2250\n");
+			outputText("-New tier 9 libido lvl-up perk: Half-step-to Inhuman Self-Control. Req. Peerless Self-Control perk, 300+ lib and 200+ int. Effect: Inrease max Lust by 750\n");
+			outputText("-New tier 10 strength lvl-up perk: Inhuman Tranquilness. Req. Half-step-to Inhuman Tranquilness perk, 330+ str, 110+ tou and 110+ spe. Effect: Inrease max Wrath by 1000\n");
+			outputText("-New tier 10 toughness lvl-up perk: Inhuman Endurance. Req. Half-step-to Inhuman Endurance perk, 330+ tou and 220+ str. Effect: Inrease max Fatigue by 2000\n");
+			outputText("-New tier 10 intelligence lvl-up perk: Inhuman Spirituality. Req. Half-step-to Inhuman Spirituality perk, 330+ int and 220+ wis. Effect: Inrease max Mana by 3000\n");
+			outputText("-New tier 10 libido lvl-up perk: Inhuman Self-Control. Req. Half-step-to Inhuman Self-Control perk, 330+ lib and 220+ int. Effect: Inrease max Lust by 1000\n");
+			outputText("-New tier 11 strength lvl-up perk: Half-step-to Epic Tranquilness. Req. Inhuman Tranquilness perk, 360+ str, 120+ tou and 120+ spe. Effect: Inrease max Wrath by 1500\n");
+			outputText("-New tier 11 toughness lvl-up perk: Half-step-to Epic Endurance. Req. Inhuman Endurance perk, 360+ str and 240+ str. Effect: Inrease max Fatigue by 3000\n");
+			outputText("-New tier 11 intelligence lvl-up perk: Half-step-to Epic Spirituality. Req. Inhuman Spirituality perk, 360+ int and 240+ wis. Effect: Inrease max Mana by 4500\n");
+			outputText("-New tier 11 libido lvl-up perk: Half-step-to Epic Self-Control. Req. Inhuman Self-Control perk, 360+ lib and 240+ int. Effect: Inrease max Lust by 1500\n");
+			outputText("-New tier 12 strength lvl-up perk: Epic Tranquilness. Req. Half-step-to Epic Tranquilness perk, 390+ str, 130+ tou and 130+ spe. Effect: Inrease max Wrath by 2250\n");
+			outputText("-New tier 12 toughness lvl-up perk: Epic Endurance. Req. Half-step-to Epic Endurance perk, 390+ tou and 260+ str. Effect: Inrease max Fatigue by 4500\n");
+			outputText("-New tier 12 intelligence lvl-up perk: Epic Spirituality. Req. Half-step-to Epic Spirituality perk, 390+ int and 260+ wis. Effect: Inrease max Mana by 6750\n");
+			outputText("-New tier 12 libido lvl-up perk: Epic Self-Control. Req. Half-step-to Epic Self-Control perk, 390+ lib and 260+ int. Effect: Inrease max Lust by 2250\n");
+			addButton(0, "Next", Changelog15);
+			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+		}
+		private function Changelog15():void {
+			clearOutput();
+			menu();
+			outputText("<b>(Part 2/2) Version 0.8f:</b>\n\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Resolve. Req.: Using Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Resolve perk.\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
@@ -157,6 +265,12 @@ package classes.Scenes
 			outputText("-New body part - face: Oni Teeth Req. Oni Ears\n");
 			outputText("-New body part - pattern: Battle Tattoo Req. Plain skin\n");
 			outputText("-New magical special: Oni Rampage Req. 12+ points in Oni score. Using one turn PC enter rampage state next turn and stay in it for 6 turns. During this time PC can;t use any spell or magic oriented soulskills but all physical attacks or specials deal 200% more dmg. Cooldown of specials is 10 turns.\n");
+			outputText("-New TF item: Elf Ears. Can be gained as a drop from Dark Elf enemies. Using it will turn PC into Elf. Half Elf/Elf (scalable): -10/10 to max str, -10/15 to max Tou, +40/80 max Spe, +40/80 to max Int, +30/60 to max Wis, +15/30 to min and max sensibility.\n");
+			outputText("-New body part - legs: Elf Legs No Req.\n");
+			outputText("-New body part - arms: Elf Arms Req. Elf Legs\n");
+			outputText("-New body part - eyes: Elf Eyes Req. Elf Ears\n");
+			outputText("-New body part - tongue: Elf Tongue No Req.\n");
+			outputText("-New body part - hair type: Elf Silken Hair No Req.n");
 			outputText("-Scylla stat bouses changes to fit other reworked racial bonuses. Half-Scylla (4+)/Scylla(7+) bonuses are now as follows: +40/65 max Str, +20/40 max Int and +25/50 to max HP.\n");
 			outputText("-New enemy encounters: Dark Elf Scout (lvl 15 - Deepwood and Mountains) and Dark Elf Slaver (27 - High Mountains)\n");
 			outputText("-New accesory (by Zevos): Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");
@@ -170,39 +284,9 @@ package classes.Scenes
 			outputText("-Spear and Whip was moved to weapon shop in He'Xin'Dao from Tel'Adre weapon shop\n");
 			outputText("-Having perk Job: warrior adds new p.special: Power Attack. It's single attack enhanced with wrath (dealing more dmg). Depending on used type of power attack it power vary between 2x to 10x more. Each next stronger power attack (above 2x) unlock each 6 lvl's startng from lvl 6.\n");
 			outputText("-One of Heavy Armor Proficiency perk req changed from Job: Defender to Job: Knight.\n");
-			outputText("-New tier 0 strength lvl-up perk: Basic Tranquilness. Req. 30+ str, 10+ tou and 10+ spe. Effect: Inrease max Wrath by 15\n");
-			outputText("-New tier 1 strength lvl-up perk: Half-step-to Improved Tranquilness. Req. Basic Tranquilness perk, 60+ str, 20+ tou and 20+ spe. Effect: Inrease max Wrath by 25\n");
-			outputText("-New tier 2 strength lvl-up perk: Improved Tranquilness. Req. Half-step-to Improved Tranquilness, 90+ str, 30+ tou and 30+ spe. Effect: Inrease max Wrath by 40\n");
-			outputText("-New tier 3 strength lvl-up perk: Half-step-to Advanced Tranquilness. Req. Improved Tranquilness perk, 120+ str, 40+ tou and 40+ spe. Effect: Inrease max Wrath by 60\n");
-			outputText("-New tier 4 strength lvl-up perk: Advanced Tranquilness. Req. Half-step-to Advanced Tranquilness perk, 150+ str, 50+ tou and 50+ spe. Effect: Inrease max Wrath by 100\n");
-			outputText("-New tier 5 strength lvl-up perk: Half-step-to Superior Tranquilness. Req. Advanced Tranquilness perk, 180+ str, 60+ tou and 60+ spe. Effect: Inrease max Wrath by 160\n");
-			outputText("-New tier 6 strength lvl-up perk: Superior Tranquilness. Req. Half-step-to Superior Tranquilness perk, 210+ str, 70+ tou and 70+ spe. Effect: Inrease max Wrath by 250\n");
-			outputText("-New tier 7 strength lvl-up perk: Half-step-to Peerless Tranquilness. Req. Superior Tranquilness perk, 240+ str, 80+ tou and 80+ spe. Effect: Inrease max Wrath by 350\n");
-			outputText("-New tier 8 strength lvl-up perk: Peerless Tranquilness. Req. Half-step-to Peerless Tranquilness perk, 270+ str, 90+ tou and 90+ spe. Effect: Inrease max Wrath by 500\n");
-			outputText("-New tier 9 strength lvl-up perk: Half-step-to Inhuman Tranquilness. Req. Peerless Tranquilness perk, 300+ str, 100+ tou and 100+ spe. Effect: Inrease max Wrath by 750\n");
-			outputText("-New tier 10 strength lvl-up perk: Inhuman Tranquilness. Req. Half-step-to Inhuman Tranquilness perk, 330+ str, 110+ tou and 110+ spe. Effect: Inrease max Wrath by 1000\n");
-			outputText("-New tier 11 strength lvl-up perk: Half-step-to Epic Tranquilness. Req. Inhuman Tranquilness perk, 360+ str, 120+ tou and 120+ spe. Effect: Inrease max Wrath by 1500\n");
-			outputText("-New tier 12 strength lvl-up perk: Epic Tranquilness. Req. Half-step-to Epic Tranquilness perk, 390+ str, 130+ tou and 130+ spe. Effect: Inrease max Wrath by 2250\n");
-			outputText("-New tier 9 toughness lvl-up perk: Half-step-to Inhuman Endurance. Req. Peerless Endurance perk, 300+ tou and 200+ str. Effect: Inrease max Fatigue by 1500\n");
-			outputText("-New tier 10 toughness lvl-up perk: Inhuman Endurance. Req. Half-step-to Inhuman Endurance perk, 330+ tou and 220+ str. Effect: Inrease max Fatigue by 2000\n");
-			outputText("-New tier 11 toughness lvl-up perk: Half-step-to Epic Endurance. Req. Inhuman Endurance perk, 360+ str and 240+ str. Effect: Inrease max Fatigue by 3000\n");
-			outputText("-New tier 12 toughness lvl-up perk: Epic Endurance. Req. Half-step-to Epic Endurance perk, 390+ tou and 260+ str. Effect: Inrease max Fatigue by 4500\n");
-			outputText("-New tier 9 intelligence lvl-up perk: Half-step-to Inhuman . Req. Peerless Spirituality perk, 300+ int and 200+ wis. Effect: Inrease max Mana by 2250\n");
-			outputText("-New tier 10 intelligence lvl-up perk: Inhuman Spirituality. Req. Half-step-to Inhuman Spirituality perk, 330+ int and 220+ wis. Effect: Inrease max Mana by 3000\n");
-			outputText("-New tier 11 intelligence lvl-up perk: Half-step-to Epic Spirituality. Req. Inhuman Spirituality perk, 360+ int and 240+ wis. Effect: Inrease max Mana by 4500\n");
-			outputText("-New tier 12 intelligence lvl-up perk: Epic Spirituality. Req. Half-step-to Epic Spirituality perk, 390+ int and 260+ wis. Effect: Inrease max Mana by 6750\n");
-			outputText("-New tier 9 libido lvl-up perk: Half-step-to Inhuman Self-Control. Req. Peerless Self-Control perk, 300+ lib and 200+ int. Effect: Inrease max Lust by 750\n");
-			outputText("-New tier 10 libido lvl-up perk: Inhuman Self-Control. Req. Half-step-to Inhuman Self-Control perk, 330+ lib and 220+ int. Effect: Inrease max Lust by 1000\n");
-			outputText("-New tier 11 libido lvl-up perk: Half-step-to Epic Self-Control. Req. Inhuman Self-Control perk, 360+ lib and 240+ int. Effect: Inrease max Lust by 1500\n");
-			outputText("-New tier 12 libido lvl-up perk: Epic Self-Control. Req. Half-step-to Epic Self-Control perk, 390+ lib and 260+ int. Effect: Inrease max Lust by 2250\n");
-			outputText("-New TF item: Elf Ears. Can be gained as a drop from Dark Elf enemies. Using it will turn PC into Elf. Half Elf/Elf (scalable): -10/10 to max str, -10/15 to max Tou, +40/80 max Spe, +40/80 to max Int, +30/60 to max Wis, +15/30 to min and max sensibility.\n");
-			outputText("-New body part - legs: Elf Legs No Req.\n");
-			outputText("-New body part - arms: Elf Arms Req. Elf Legs\n");
-			outputText("-New body part - eyes: Elf Eyes Req. Elf Ears\n");
-			outputText("-New body part - tongue: Elf Tongue No Req.\n");
-			outputText("-New body part - hair type: Elf Silken Hair No Req.n");
 			outputText("-Visiting Temple of the Divine allow now to explore basement where PC can partialy form gargoyle body. Visiting Zetaz room in his Lair would give now option to find some interesting materials that would unlock in Evangeline menu new crafting option.\n");
 			outputText("-New dungeon added: Hidden Cave (some calls it Elemental Cave). It can be found when PC is at least lvl 6 and using Explore. It's said to be a former soul cultivator place so any PC that walk path of Soul Cultivators may find... a little more in this place than normal...\n");
+			outputText("-New Achievement to get: Tiger stalking the Dragon. Naturaly recived after dealing fully with a new dungeon.\n");
 			outputText("-Added in Camp Action new option: Questlog. It tracks all dungeon related quest and when PC clear each dungeon allow to recive one time reward (perk point(s) + stat points).\n");
 			outputText("-New group of M. Specials: Elemental Aspect. Having at least one summoned elemental will give PC chance to use their specific specials once per fight. Fire, Ice, Lighting, Darkness one elementals specialis elemental attack. Earth one is stone skin that rise armor for few turns, Wood and Metal similary boost temporaly PC armor but less than Earth one but eahc have additional effect: ");
 			outputText("wood will heal and metal will increase temporaly unarmed dmg. Water special is...simply heal without any chance to backfire. All specials power or duration depend on elemental rank and PC int/wis values.\n");
@@ -224,71 +308,8 @@ package classes.Scenes
 			outputText("-New version of text for one of soulskills replacing orginal ones when silly mode is active.\n");
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
-			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, 
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
-			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
-			outputText("\n");
-			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
-			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
-			outputText("\n");
-			outputText("<b>Version 0.8f2:</b>\n\n");
-			outputText("<b>Version 0.8g:</b>\n\n");
-			outputText("<b>Version 0.8h:</b>\n\n");
-			outputText("<b>Version 0.8i:</b>\n\n");
-			outputText("\n");
-			outputText("\n");cel na 0.8f: dodać siren TF
-			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8f: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8f: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8f: dodać nekomanta TF
-			outputText("\n");cel na 0.8f: dodać kitsune/salamander TF
-			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
-			outputText("\n");cel na 0.8f: dodać yuki-onna TF
-			outputText("\n");cel na 0.8f: pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8f: dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
-			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");*/
+			outputText("-Game will now keep track on PC eyes color. At save update player will be able to pick it. And during creation stage it will be another step that would allow picking it. Some races getting points now for having specific eye color.\n");
+			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n");
 			outputText("\n\n\n");
 			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
 			outputText("-Add more soulforce options.\n");
@@ -301,7 +322,6 @@ package classes.Scenes
 			outputText("-More camp build options (involving using stones and etc.)\n");
 			outputText("-Few more perks and achievements.\n");
 			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
-			outputText("-Add option to reward PC with 1 perk point for each cleared dungeon - for main story ones maybe even 2 perk points (since now it's way MORE perks to gain and would probably be even more to pick from making buy out all hard at normal lvl's to beat game ^^).\n");
 			addButton(0, "Next", Changelog14);
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
@@ -1118,5 +1138,4 @@ package classes.Scenes
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
 	}
-
 }

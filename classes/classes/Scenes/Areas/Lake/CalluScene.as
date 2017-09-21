@@ -283,7 +283,7 @@ package classes.Scenes.Areas.Lake
 		{
 			clearOutput();
 			outputText("Sure why not. You buy the fishing pole from Calu.\n\n");
-			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.<\b>");
+			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.</b>");
 			player.gems -= 50;
 			player.createKeyItem("Fishing Pole", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
