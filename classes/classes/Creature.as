@@ -184,11 +184,18 @@ package classes
 		3- goo!
 		4- anemononeoenoeneo!*/
 		public var hairType:Number = HAIR_NORMAL;
-		public var hairColor:String = "no";
+		private var _hairColor:String = "no";
 		public var hairLength:Number = 0;
+		public function get hairColor():String {
+			return _hairColor;
+		}
+		public function set hairColor(value:String):void {
+			_hairColor = value;
+			if (!skin.hasCoat()) skin.coat.color = value;
+		}
 
 		public function get coatColor():String {
-			if (!skin.hasCoat()) trace("[WARNING] get coatColor() called with no coat");
+			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {

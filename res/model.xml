@@ -166,15 +166,15 @@
         </property>
         <property name="hair2" src="hairColor" default="#ffffff">
         </property>
-        <property name="fur" src="skin.coat.color" default="#ffffff">
+        <property name="fur" src="coatColor" default="#ffffff">
         </property>
         <property name="fur2" src="skin.coat.color2" default="#ffffff">
         </property>
-        <property name="scales" src="skin.coat.color" default="#ffffff">
+        <property name="scales" src="coatColor" default="#ffffff">
         </property>
         <property name="scales2" src="skin.coat.color2" default="#ffffff">
         </property>
-        <property name="chitin" src="skin.coat.color" default="#ffffff">
+        <property name="chitin" src="coatColor" default="#ffffff">
         </property>
         <property name="chitin2" src="skin.coat.color2" default="#ffffff">
         </property>
