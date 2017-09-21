@@ -165,7 +165,7 @@
 				return kGAMECLASS.player.skin.coat.isAre();
 			},
 			"coat.color": function (thisPtr:*, aspect:*):* {
-				return kGAMECLASS.player.skin.coat.color;
+				return kGAMECLASS.player.coatColor;
 			},
 			"coat.color2": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.coat.color2;

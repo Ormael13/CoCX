@@ -313,6 +313,11 @@ public class StatsView extends Block {
 	//	soulforceBar.valueText= (player.soulforce/player.maxSoulforce()).toFixed(2)+'%';
 		hungerBar.maxValue    = player.maxHunger();
 		hungerBar.value       = player.hunger;
+		if (player.hunger < 25) {
+			hungerBar.statName = '/!\\ Satiety:';
+		} else {
+			hungerBar.statName = 'Satiety:';
+		}
 		var inPrison:Boolean          = game.prison.inPrison;
 		esteemBar.visible     		  = inPrison;
 		willBar.visible      		  = inPrison;
@@ -375,10 +380,7 @@ public class StatsView extends Block {
 			dtf.font = font;
 			e.valueLabel.defaultTextFormat = dtf;
 			e.valueLabel.setTextFormat(dtf);
-			dtf = e.nameLabel.defaultTextFormat;
-			dtf.color = textColor;
-			e.nameLabel.defaultTextFormat = dtf;
-			e.nameLabel.setTextFormat(dtf);
+			e.nameColor = textColor;
 			if (e.bar) e.bar.alpha    = barAlpha;
 			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
 		}
