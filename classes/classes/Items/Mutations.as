@@ -7683,8 +7683,10 @@
 							player.skin.coat.color = randomChoice(KitsuneScene.elderKitsuneColors);
 						else
 							player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
-				else
+				else {
+					// TODO patterns
 					player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
+				}
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
