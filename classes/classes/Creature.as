@@ -453,7 +453,19 @@ package classes
 			soulforce = Math.min(soulforce, maxSoulforce());
 			wrath = Math.min(wrath,maxWrath());
 		}
-		
+		// Lust gain, in % (100 = receive as is, 25 = receive one fourth, 0 = immune)
+		public function lustPercent():Number {
+			return 100;
+		}
+		public function takeDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+			if (applyRes) lustDmg *= lustPercent()/100;
+			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
+			return (lustDmg > 0 && lustDmg < 1) ? 1 : lustDmg;
+		}
 
 		/*
 		

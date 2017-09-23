@@ -5,7 +5,8 @@
 package classes.Scenes.Monsters 
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.StatusEffects.Combat.BasiliskSlowDebuff;
+import classes.internals.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.DarkElfScene;
@@ -57,15 +58,8 @@ package classes.Scenes.Monsters
 			outputText("An arrow hit you for ");
 			player.takeDamage(damage, true);
 			outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
-			if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
-				player.spe -= 2;
-			}
-			else {
-				player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
-				player.spe -= 3;
-			}
-			showStatDown( 'spe' );
+			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
+			bse.applyEffect(3);
 		}
 		
 		public function AnkleShot():void

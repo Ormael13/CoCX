@@ -1,6 +1,7 @@
 package classes
 {
-	import classes.StatusEffects.CombatStatusEffect;
+import classes.StatusEffects.Combat.*;
+import classes.StatusEffects.CombatStatusEffect;
 
 	/**
 	 * IMPORTANT NOTE:
@@ -400,14 +401,14 @@ package classes
 
 		// combat
 		public static const AcidSlap:StatusEffectType                  = mkCombat("Acid Slap");
-		public static const AkbalSpeed:StatusEffectType                = mkCombat("Akbal Speed");
+		public static const AkbalSpeed:StatusEffectType                = AkbalSpeedDebuff.TYPE;
 		public static const AlrauneEntangle:StatusEffectType           = mkCombat("Alraune Entangle");
 		public static const AlraunePollen:StatusEffectType             = mkCombat("Alraune Pollen");
-		public static const AmilyVenom:StatusEffectType                = mkCombat("Amily Venom");
-		public static const AnemoneVenom:StatusEffectType              = mkCombat("Anemone Venom");
+		public static const AmilyVenom:StatusEffectType                = AmilyVenomDebuff.TYPE;
+		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
 		public static const AttackDisabled:StatusEffectType            = mkCombat("Attack Disabled");
 		public static const BasiliskCompulsion:StatusEffectType        = mkCombat("Basilisk Compulsion");
-		public static const BasiliskSlow:StatusEffectType              = mkCombat("BasiliskSlow");
+		public static const BasiliskSlow:StatusEffectType              = BasiliskSlowDebuff.TYPE;
 		public static const BathedInHotSpring:StatusEffectType         = mkCombat("Bathed In Hot Spring");
 		public static const BeatOfWar:StatusEffectType                 = mkCombat("Beat of War");
 		public static const Berzerking:StatusEffectType                = mkCombat("Berzerking");
@@ -418,7 +419,7 @@ package classes
 		public static const Bloodlust:StatusEffectType                 = mkCombat("Bloodlust");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
-		public static const CalledShot:StatusEffectType                = mkCombat("Called Shot");
+		public static const CalledShot:StatusEffectType                = CalledShotDebuff.TYPE;
 		public static const CastedSpell:StatusEffectType               = mkCombat("Casted Spell");
 		public static const ChanneledAttack:StatusEffectType           = mkCombat("Channeled Attack");
 		public static const ChanneledAttackType:StatusEffectType       = mkCombat("Channeled Attack Type");
@@ -442,8 +443,8 @@ package classes
 		public static const Frostbite:StatusEffectType                 = mkCombat("Frostbite");
 		public static const GiantBoulder:StatusEffectType              = mkCombat("Giant Boulder");
 		public static const GiantGrabbed:StatusEffectType              = mkCombat("Giant Grabbed");
-		public static const GiantStrLoss:StatusEffectType              = mkCombat("GiantStrLoss");
-		public static const GnollSpear:StatusEffectType                = mkCombat("Gnoll Spear");
+		public static const GiantStrLoss:StatusEffectType              = GiantStrLossDebuff.TYPE;
+		public static const GnollSpear:StatusEffectType                = GnollSpearDebuff.TYPE;
 		public static const GooArmorBind:StatusEffectType              = mkCombat("GooArmorBind");
 		public static const GooArmorSilence:StatusEffectType           = mkCombat("GooArmorSilence");
 		public static const GooBind:StatusEffectType                   = mkCombat("GooBind");
@@ -457,7 +458,7 @@ package classes
 		public static const IsabellaStunned:StatusEffectType           = mkCombat("Isabella Stunned");
 		public static const IzmaBleed:StatusEffectType                 = mkCombat("Izma Bleed");
 		public static const KissOfDeath:StatusEffectType               = mkCombat("Kiss of Death");
-		public static const LizanBlowpipe:StatusEffectType             = mkCombat("Lizan Blowpipe");
+		public static const LizanBlowpipe:StatusEffectType             = LizanBlowpipeDebuff.TYPE;
 		public static const LustStones:StatusEffectType                = mkCombat("lust stones");
 		public static const lustvenom:StatusEffectType                 = mkCombat("lust venom");
 		public static const Lustzerking:StatusEffectType               = mkCombat("Lustzerking");
@@ -532,7 +533,7 @@ package classes
 		public static const Tentagrappled:StatusEffectType         = mkCombat("Tentagrappled");
 		public static const TentagrappleCooldown:StatusEffectType  = mkCombat("Tentagrapple Cooldown");
 		public static const ShowerDotEffect:StatusEffectType       = mkCombat("Shower Dot Effect");
-		public static const GardenerSapSpeed:StatusEffectType      = mkCombat("Sap Speed");
+		public static const GardenerSapSpeed:StatusEffectType      = GardenerSapSpeedDebuff.TYPE;
 		public static const VineHealUsed:StatusEffectType          = mkCombat("Vine Heal Used");
 		public static const DriderIncubusVenom:StatusEffectType    = mkCombat("Drider Incubus Venom");
 		public static const TaintedMind:StatusEffectType           = mkCombat("Tainted Mind");

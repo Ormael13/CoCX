@@ -2,8 +2,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+import classes.StatusEffects.Combat.CalledShotDebuff;
 
-	public class Helspawn extends Monster
+public class Helspawn extends Monster
 	{
 
 		override public function doAI():void
@@ -45,28 +46,8 @@ private function calledShot():void {
 	if(damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
-		var affect:int = 20 + rand(5);
-		if(player.hasStatusEffect(StatusEffects.CalledShot)) {
-			while(affect > 0 && player.spe >= 2) {
-				affect--;
-				player.addStatusValue(StatusEffects.CalledShot,1,1);
-				player.spe--;
-				showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-			}
-		}
-		else {
-			player.createStatusEffect(StatusEffects.CalledShot,0,0,0,0);
-			while(affect > 0 && player.spe >= 2) {
-				affect--;
-				player.addStatusValue(StatusEffects.CalledShot,1,1);
-				player.spe--;
-				showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-			}
-		}
+		var sec:CalledShotDebuff = player.createOrFindStatusEffect(StatusEffects.CalledShot) as CalledShotDebuff;
+		sec.increase();
 		damage = player.takeDamage(damage, true);
 	}
 }

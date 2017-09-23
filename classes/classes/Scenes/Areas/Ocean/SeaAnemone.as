@@ -5,7 +5,8 @@
 package classes.Scenes.Areas.Ocean
 {
 	import classes.*;
-	import classes.internals.WeightedDrop;
+import classes.StatusEffects.Combat.AnemoneVenomDebuff;
+import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class SeaAnemone extends Monster
@@ -28,36 +29,8 @@ package classes.Scenes.Areas.Ocean
 		//Apply the effects of AnemoneVenom()
 		public function applyVenom(amt:Number = 1):void
 		{
-			//First application
-			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
-			//Gain some lust
-			player.dynStats("lus", (6 * amt));
-
-			//Loop through applying 1 point of venom at a time.
-			while (amt > 0) {
-				amt--;
-				//Str bottommed out, convert to lust
-				if (player.str < 6) player.dynStats("lus", 6);
-				//Lose a point of str.
-				else {
-					showStatDown("str");
-					// strDown.visible = true;
-					// strUp.visible = false;
-					player.str -= 3;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 3);
-				}
-				//Spe bottomed out, convert to lust
-				if (player.spe < 6) player.dynStats("lus", 4);
-				//Lose a point of spe.
-				else {
-					showStatDown("spe");
-					// speDown.visible = true;
-					// speUp.visible = false;
-					player.spe -= 3;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 3);
-				}
-			}
-			game.statScreenRefresh();
+			var ave:AnemoneVenomDebuff = player.createOrFindStatusEffect(StatusEffects.AnemoneVenom) as AnemoneVenomDebuff;
+			ave.applyEffect(amt*3); // 3 times stronger than usual anemone
 		}
 
 

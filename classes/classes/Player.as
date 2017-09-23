@@ -820,8 +820,79 @@ use namespace kGAMECLASS;
 			if (damageMultiplier < 0.2) damageMultiplier = 0;
 			return int(damage * damageMultiplier);
 		}
+		
+		public override function lustPercent():Number {
+			var lust:Number = 100;
+			var minLustCap:Number = 25;
+			
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//ADDITIVE REDUCTIONS
+			//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
+			//TOTAL IS LIMITED TO 75%!
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Corrupted Libido reduces lust gain by 10%!
+			if(findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
+			//Acclimation reduces by 15%
+			if(findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
+			//Purity blessing reduces lust gain
+			if(findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
+			//Resistance = 10%
+			if(findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+			if(lust < minLustCap) lust = minLustCap;
+			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
+				if(lust >= 80) lust = 100;
+				else lust += 20;
+			}
+			lust += Math.round(perkv1(PerkLib.PentUp)/2);
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//MULTIPLICATIVE REDUCTIONS
+			//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER
+			//DRAWBACKS TO JUSTIFY IT.
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Bimbo body slows lust gains!
+			if((hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+			if(findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
+			if(findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
+			//Omnibus' Gift reduces lust gain by 15%
+			if(findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+			//Luststick reduces lust gain by 10% to match increased min lust
+			if(findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
+			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
+			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
+			//Berseking reduces lust gains by 10%
+			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
+			
+			//Items
+			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
+			if (armor == game.armors.DBARMOR) lust *= 0.9;
+			if (weapon == game.weapons.HNTCANE) lust *= 0.75;
+			if ((weapon == game.weapons.PURITAS) || (weapon == game.weapons.ASCENSU)) lust *= 0.9;
+			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
+			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (sac)
+			{
+				if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
+				{
+					lust *= sac.value2;
+				}
+			}
+			if(statusEffectv1(StatusEffects.Maleficium) > 0) {
+				if(lust >= 50) lust = 100;
+				else lust += 50;
+			}
+			lust = Math.round(lust);
+			if (hasStatusEffect(StatusEffects.Lustzerking) && findPerk(PerkLib.ColdLust) < 1) lust = 100;
+			return lust;
+		}
 
-		public function takeDamage(damage:Number, display:Boolean = false):Number{
+		public override function takeDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -5242,13 +5313,6 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 				kGAMECLASS.mainView.statsView.showStatUp('str');
 			}
-			while(hasStatusEffect(StatusEffects.Web)) {
-				spe += statusEffectv1(StatusEffects.Web);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.Web);
-			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
 				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
@@ -5256,14 +5320,6 @@ use namespace kGAMECLASS;
 			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
-			}
-			if(hasStatusEffect(StatusEffects.AkbalSpeed)) {
-				dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
-				removeStatusEffect(StatusEffects.AkbalSpeed);
-			}
-			if(hasStatusEffect(StatusEffects.AmilyVenom)) {
-				dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
-				removeStatusEffect(StatusEffects.AmilyVenom);
 			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
@@ -5290,18 +5346,6 @@ use namespace kGAMECLASS;
 				str += statusEffectv1(StatusEffects.Frostbite);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				removeStatusEffect(StatusEffects.Frostbite);
-			}
-			if(hasStatusEffect(StatusEffects.CalledShot)) {
-				spe += statusEffectv1(StatusEffects.CalledShot);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speDown.visible = false;
-				// speUp.visible = true;
-				removeStatusEffect(StatusEffects.CalledShot);
-			}
-			if(hasStatusEffect(StatusEffects.ParalyzeVenom)) {
-				str += statusEffectv1(StatusEffects.ParalyzeVenom);
-				spe += statusEffectv2(StatusEffects.ParalyzeVenom);
-				removeStatusEffect(StatusEffects.ParalyzeVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				removeStatusEffect(StatusEffects.Flying);
@@ -5367,51 +5411,6 @@ use namespace kGAMECLASS;
 				else {
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
-			}
-			if(hasStatusEffect(StatusEffects.AnemoneVenom)) {
-				str += statusEffectv1(StatusEffects.AnemoneVenom);
-				spe += statusEffectv2(StatusEffects.AnemoneVenom);
-				//Make sure nothing got out of bounds
-				dynStats("cor", 0);
-
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				// speUp.visible = true;
-				// strUp.visible = true;
-				removeStatusEffect(StatusEffects.AnemoneVenom);
-			}
-			if(hasStatusEffect(StatusEffects.GnollSpear)) {
-				spe += statusEffectv1(StatusEffects.GnollSpear);
-				//Make sure nothing got out of bounds
-				dynStats("cor", 0);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.GnollSpear);
-			}
-			if(hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				spe += statusEffectv1(StatusEffects.BasiliskSlow);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.BasiliskSlow);
-			}
-			if (hasStatusEffect(StatusEffects.GiantStrLoss)) {
-				str += statusEffectv1(StatusEffects.GiantStrLoss);
-				removeStatusEffect(StatusEffects.GiantStrLoss);
-			}
-			if (hasStatusEffect(StatusEffects.LizanBlowpipe)) {
-				str += statusEffectv1(StatusEffects.LizanBlowpipe);
-				tou += statusEffectv2(StatusEffects.LizanBlowpipe);
-				spe += statusEffectv3(StatusEffects.LizanBlowpipe);
-				sens -= statusEffectv4(StatusEffects.LizanBlowpipe);
-				removeStatusEffect(StatusEffects.LizanBlowpipe);
-			}
-			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
-			{
-				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{

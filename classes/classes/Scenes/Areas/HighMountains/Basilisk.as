@@ -2,6 +2,7 @@ package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
 import classes.BodyParts.Skin;
+import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedDrop;
 	import classes.GlobalFlags.*
 	
@@ -13,16 +14,8 @@ import classes.internals.ChainedDrop;
 	{
 
 		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
-			if(player.spe - amount < 1) {
-				amount = player.spe - 1;
-				if(amount < 0) amount = 0;
-			}
-			player.spe -= amount;
-			if(player.hasStatusEffect(StatusEffects.BasiliskSlow)) player.addStatusValue(StatusEffects.BasiliskSlow,1,amount);
-			else player.createStatusEffect(StatusEffects.BasiliskSlow,amount,0,0,0);
-			showStatDown( 'spe' );
-			// speUp.visible = false;
-			// speDown.visible = true;
+			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
+			bse.applyEffect(amount);
 		}
 
 		//special 1: basilisk mental compulsion attack

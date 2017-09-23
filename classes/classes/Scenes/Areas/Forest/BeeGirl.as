@@ -2,7 +2,8 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.internals.ChainedDrop;
+import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
+import classes.internals.ChainedDrop;
 
 	public class BeeGirl extends Monster {
 
@@ -86,17 +87,15 @@
 			//Paralise the other 50%!
 			else {
 				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
-				var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.ParalyzeVenom);
-				if (sac) {
-					sac.value1 += 2.9; //v1 - strenght penalty, v2 speed penalty
-					sac.value2 += 2.9;
-					player.dynStats("str", -3, "spe", -3);
+				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
+				if (paralyze) {
 					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
 				} else {
-					player.createStatusEffect(StatusEffects.ParalyzeVenom, 2, 2, 0, 0);
-					player.dynStats("str", -2, "spe", -2);
+					paralyze = new ParalyzeVenomDebuff();
+					player.addStatusEffect(paralyze);
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
 				}
+				paralyze.increase();
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);

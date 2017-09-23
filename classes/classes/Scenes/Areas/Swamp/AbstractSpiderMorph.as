@@ -6,8 +6,9 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
+import classes.StatusEffects.Combat.WebDebuff;
 
-	public class AbstractSpiderMorph extends Monster
+public class AbstractSpiderMorph extends Monster
 	{
 		public function AbstractSpiderMorph()
 		{
@@ -56,26 +57,18 @@ package classes.Scenes.Areas.Swamp
 			}
 			//Got hit
 			else {
-				if (!player.hasStatusEffect(StatusEffects.Web)) {
+				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
+				if (web == null) {
 					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.");
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
 					outputText("\n");
-					player.createStatusEffect(StatusEffects.Web, 0, 0, 0, 0);
+					web = new WebDebuff();
+					player.addStatusEffect(web);
 				}
 				else {
 					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
 				}
-				//Only apply as much speed slow as necessary.
-				var amount:Number = 25;
-				if (player.spe - amount < 1) {
-					amount = player.spe - 1;
-				}
-				//Apply changes, display arrows, and track speed lost
-				player.spe -= amount;
-				showStatDown('spe');
-				// speUp.visible = false;
-				// speDown.visible = true;
-				player.addStatusValue(StatusEffects.Web, 1, amount);
+				web.increase();
 
 			}
 			combatRoundOver();

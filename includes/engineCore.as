@@ -1186,74 +1186,7 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 }
 
 public function lustPercent():Number {
-	var lust:Number = 100;
-	var minLustCap:Number = 25;
-	
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//ADDITIVE REDUCTIONS
-	//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
-	//TOTAL IS LIMITED TO 75%!
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//Corrupted Libido reduces lust gain by 10%!
-	if(player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
-	//Acclimation reduces by 15%
-	if(player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
-	//Purity blessing reduces lust gain
-	if(player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
-	//Resistance = 10%
-	if(player.findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
-	if(lust < minLustCap) lust = minLustCap;
-	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
-		if(lust >= 80) lust = 100;
-		else lust += 20;
-	}
-	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//MULTIPLICATIVE REDUCTIONS
-	//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER
-	//DRAWBACKS TO JUSTIFY IT.
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//Bimbo body slows lust gains!
-	if((player.hasStatusEffect(StatusEffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
-	//Omnibus' Gift reduces lust gain by 15%
-	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
-	//Luststick reduces lust gain by 10% to match increased min lust
-	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
-	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
-	//Berseking reduces lust gains by 10%
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-	
-	//Items
-	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
-	if (player.armor == armors.DBARMOR) lust *= 0.9;
-	if (player.weapon == weapons.HNTCANE) lust *= 0.75;
-	if ((player.weapon == weapons.PURITAS) || (player.weapon == weapons.ASCENSU)) lust *= 0.9;
-	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
-	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
-	if (sac)
-	{
-		if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
-		{
-			lust *= sac.value2;
-		}
-	}
-	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
-		if(lust >= 50) lust = 100;
-		else lust += 50;
-	}
-	lust = Math.round(lust);
-	if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
-	return lust;
+	return player.lustPercent();
 }
 
 // returns OLD OP VAL

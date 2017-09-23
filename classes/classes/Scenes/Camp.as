@@ -748,13 +748,6 @@ private function doCamp():void { //Only called by playerMenu
 	
 	campSlavesMenu(true);
 
-	//Clear bee-status
-	if(player.hasStatusEffect(StatusEffects.ParalyzeVenom)) {
-		dynStats("str", player.statusEffectv1(StatusEffects.ParalyzeVenom),"spe", player.statusEffectv2(StatusEffects.ParalyzeVenom));
-		player.removeStatusEffect(StatusEffects.ParalyzeVenom);
-		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n");
-	}
-	
 	//Hunger check!
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
