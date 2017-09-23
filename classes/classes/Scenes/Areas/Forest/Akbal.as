@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Areas.Forest
 {
 	import classes.*;
-import classes.StatusEffects.Combat.AkbalSpeedDebuff;
 import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -107,12 +106,10 @@ import classes.internals.WeightedDrop;
 			//*Special Attack A - 
 			if (rand(2) == 0 && player.spe > 20)
 			{
-				var speedChange:Number = player.spe / 5 * -1;
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.");
 				
 				//(Speed decrease)
-				var ase:AkbalSpeedDebuff = player.createOrFindStatusEffect(StatusEffects.AkbalSpeed) as AkbalSpeedDebuff;
-				ase.increase();
+				player.addCombatDebuff('spe',player.spe / 5);
 			}
 			//*Special Attack B - 
 			else

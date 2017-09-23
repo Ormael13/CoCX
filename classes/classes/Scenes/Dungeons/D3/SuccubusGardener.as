@@ -6,7 +6,6 @@
 	import classes.PerkLib;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 
 /**
 	 * ...
@@ -404,8 +403,7 @@ this.HP = this.maxHP();
 			outputText("\n\nThe lactic adhesive effectively slows your movements. You won't be dodging around quite so nimbly anymore, but at least you get to watch the succubus moan and twist, kneading the last few golden droplets from her engorged tits. She licks a stray strand from her finger while watching you, smiling. <i>“Ready to give up yet?”</i>");
 			
 			// 20%?
-			var bse:GardenerSapSpeedDebuff = player.createOrFindStatusEffect(StatusEffects.GardenerSapSpeed) as GardenerSapSpeedDebuff;
-			bse.increase();
+			player.addCombatDebuff('spe',player.spe*0.2);
 		}
 		
 		private function lustAuraCast():void

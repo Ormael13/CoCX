@@ -1,16 +1,11 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 	import classes.*;
-import classes.StatusEffects.Combat.GiantStrLossDebuff;
 import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class FrostGiant extends Monster
 	{
-		private function giantStrengthLoss(magnitude:int = 0):void {
-			var gsl:GiantStrLossDebuff = player.createOrFindStatusEffect(StatusEffects.GiantStrLoss) as GiantStrLossDebuff;
-			gsl.applyEffect(magnitude);
-		}
 		
 		public function giantAttackPunch():void {
 			var damage:int = 0;
@@ -69,11 +64,11 @@ import classes.internals.WeightedDrop;
 				}
 				else if (player.str >= 60 && player.str < 80) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					giantStrengthLoss(1);
+					player.addCombatDebuff('str', 1);
 				}
 				else if (player.str >= 40 && player.str < 60) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					giantStrengthLoss(2);
+					player.addCombatDebuff('str', 2);
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
