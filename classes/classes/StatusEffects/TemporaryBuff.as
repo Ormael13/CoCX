@@ -86,16 +86,6 @@ public class TemporaryBuff extends StatusEffectClass{
 			default: return 0;
 		}
 	}
-	protected function apply(firstTime:Boolean):void {
-	}
-	override public function onAttach():void {
-		super.onAttach();
-		apply(true);
-	}
-	public function increase():void {
-		if (host == null) return;
-		apply(false);
-	}
 	override public function onRemove():void {
 		super.onRemove();
 		restore();

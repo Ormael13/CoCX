@@ -8,9 +8,8 @@ public class CalledShotDebuff extends CombatBuff {
 	public function CalledShotDebuff() {
 		super(TYPE,'spe');
 	}
-
-
-	override protected function apply(firstTime:Boolean):void {
+	
+	public function increase():void {
 		buffHost('spe', -20 - rand(5));
 	}
 }

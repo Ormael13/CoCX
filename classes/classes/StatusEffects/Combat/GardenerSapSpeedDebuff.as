@@ -10,7 +10,7 @@ public class GardenerSapSpeedDebuff extends CombatBuff {
 		super(TYPE,'spe');
 	}
 
-	override protected function apply(firstTime:Boolean):void {
+	public function increase():void {
 		buffHost('spe',-host.spe*0.2);
 	}
 }

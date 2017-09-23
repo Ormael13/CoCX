@@ -10,7 +10,7 @@ public class AmilyVenomDebuff extends CombatBuff {
 		super(TYPE,'str','spe');
 	}
 
-	override protected function apply(firstTime:Boolean):void {
+	public function increase():void {
 		buffHost('str', -2 - rand(5),'spe', -2 - rand(5));
 		
 		//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.

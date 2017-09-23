@@ -15,8 +15,8 @@ public class ParalyzeVenomDebuff extends CombatBuff {
 		}
 	}
 
-	override protected function apply(firstTime:Boolean):void {
-		buffHost('str',firstTime?-2:-3,'spe',firstTime?-2:-3);
+	public function increase():void {
+		buffHost('str',-3,'spe',-3);
 	}
 
 }
