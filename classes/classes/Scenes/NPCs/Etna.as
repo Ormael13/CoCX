@@ -5,8 +5,7 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
-import classes.internals.*;
+	import classes.internals.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -28,8 +27,7 @@ import classes.internals.*;
 			if (rand(100) < (this.spe - player.spe) / 2) {
 				var tailspikedmg:Number = Math.round(this.str / 16);
 				var lustdmg:Number = Math.round(this.lib / 6);
-				var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-				bse.applyEffect(2);
+				player.addCombatDebuff('spe',2);
 				outputText("The bony spike hits the mark dealing ");
 				player.takeDamage(tailspikedmg, true);
 				outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");

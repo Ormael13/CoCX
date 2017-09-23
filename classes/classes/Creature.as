@@ -14,7 +14,13 @@ package classes
 	import classes.PerkType;
 	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
-	import classes.internals.Utils;
+import classes.StatusEffects.Combat.CombatInteDebuff;
+import classes.StatusEffects.Combat.CombatSpeDebuff;
+import classes.StatusEffects.Combat.CombatStrDebuff;
+import classes.StatusEffects.Combat.CombatTouDebuff;
+import classes.StatusEffects.Combat.CombatWisDebuff;
+import classes.StatusEffects.TemporaryBuff;
+import classes.internals.Utils;
 	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
@@ -818,6 +824,11 @@ package classes
 			return error;
 		}
 		
+		/*
+		
+		[        P E R K S          ]
+		
+		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
 		private var _perks:Array;
@@ -1075,6 +1086,11 @@ package classes
 		return perk(counter).value4;
 	}
 		
+		/*
+		
+		[    S T A T U S   E F F E C T S    ]
+		
+		*/
 		//{region StatusEffects
 		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
 		{
@@ -1195,7 +1211,43 @@ package classes
 		{
 			statusEffects = [];
 		}
-
+		
+		/**
+		 * Applies (creates or increases) a combat-long debuff to stat.
+		 * Stat is fully restored after combat.
+		 * Different invocations are indistinguishable - do not use this if you need
+		 * to check for _specific_ debuff source (poison etc) mid-battle
+		 * @param stat 'str','spe','tou','inte','wis'
+		 * @param debuff Creature stat is decremented by this value.
+		 * @return (oldStat-newStat)
+		 */
+		public function addCombatDebuff(stat:String,debuff:Number):Number {
+			switch(stat) {
+				case 'str':
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrDebuff)
+							as CombatStrDebuff).applyEffect(debuff);
+				case 'spe':
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeDebuff)
+							as CombatSpeDebuff).applyEffect(debuff);
+				case 'tou':
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouDebuff)
+							as CombatTouDebuff).applyEffect(debuff);
+				case 'int':
+				case 'inte':
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteDebuff)
+							as CombatInteDebuff).applyEffect(debuff);
+				case 'wis':
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisDebuff)
+							as CombatWisDebuff).applyEffect(debuff);
+			}
+			trace("/!\\ ERROR: addCombatDebuff('"+stat+"', "+debuff+")");
+			return 0;
+		}
+		/*
+		
+		[    ? ? ?    ]
+		
+		*/
 		public function biggestTitSize():Number
 		{
 			if (breastRows.length == 0)

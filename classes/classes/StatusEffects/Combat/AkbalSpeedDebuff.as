@@ -12,7 +12,7 @@ public class AkbalSpeedDebuff extends CombatBuff {
 
 
 	override protected function apply(firstTime:Boolean):void {
-		buffHost('spe', -host.spe / 5 * -1);
+		buffHost('spe', -host.spe / 5);
 	}
 }
 

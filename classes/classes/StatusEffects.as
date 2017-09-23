@@ -398,7 +398,13 @@ import classes.StatusEffects.CombatStatusEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
-
+		
+		// universal combat debuffs
+		public static const GenericCombatStrDebuff:StatusEffectType  = CombatStrDebuff.TYPE;
+		public static const GenericCombatSpeDebuff:StatusEffectType  = CombatSpeDebuff.TYPE;
+		public static const GenericCombatTouDebuff:StatusEffectType  = CombatTouDebuff.TYPE;
+		public static const GenericCombatInteDebuff:StatusEffectType = CombatInteDebuff.TYPE;
+		public static const GenericCombatWisDebuff:StatusEffectType  = CombatWisDebuff.TYPE;
 		// combat
 		public static const AcidSlap:StatusEffectType                  = mkCombat("Acid Slap");
 		public static const AkbalSpeed:StatusEffectType                = AkbalSpeedDebuff.TYPE;
