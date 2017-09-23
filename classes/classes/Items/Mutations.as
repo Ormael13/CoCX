@@ -30,7 +30,7 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			outputText("You open the can and bottom up hoping it wasn’t just a scam to buy an overpriced beer. Woa that’s one hell of a manly beverage! The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
+			outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
 			dynStats("str", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3));
 			player.refillHunger(10);
@@ -41,7 +41,7 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			outputText("The elixir taste foul at first but you guess it’s how it is with all medecine. As the merchant warned you about, you begin to feel your muscle like a coiled spring ready to allow you a swift dash. Your coordination definitively improved to as well as your vision as you can follow your movement despite the acceleration.");
+			outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
 			dynStats("spe", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3));
 			player.refillHunger(5);
@@ -50,7 +50,7 @@
 		public function incenseOfInsight(player:Player):void
 		{
 			clearOutput();
-			outputText("You use the incense and sit to meditate as the perfume of flower and fruits fill the area. You see visions of things you could do and things you could have done good and bad and when you open your eyes you realise you found new insight on your goals.");
+			outputText("You use the incense and sit to meditate as the perfume of flowers and fruits fill the area. You see visions of things you could do and things you could’ve done good and bad, and when you open your eyes you realise you found new insight on your goals.");
 			if (rand(3) == 0) outputText(player.modTone(15, 1));
 			if (player.wis < 50) {
 				player.wis += 1 + rand(4);
@@ -7233,6 +7233,30 @@
 				changes++;
 			}
 			//Sexual
+			if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
+				player.cocks[0].cockLength *= 2 / 3;
+				player.cocks[0].cockThickness *= 2 / 3;
+				dynStats("sen", -2, "lus", -10);
+				changes++;
+			}
+			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+				temp = 1 + rand(3);
+				if (player.breastRows.length > 0) {
+					if (player.breastRows[0].breastRating < 4 && rand(3) == 0) temp++;
+				}
+				outputText("\n\n");
+				player.growTits(temp, player.breastRows.length, true, 3);
+				if (player.breastRows.length == 0) {
+					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 2;
+					outputText("\n");
+				}
+			}
 			//Physical
 			if (player.lowerBody != LOWER_BODY_TYPE_ELF && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
@@ -7280,6 +7304,19 @@
 			if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
 				setHairType(HAIR_SILKEN);
+				changes++;
+			}
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && (player.skinTone != "dark" || player.skinTone != "light" || player.skinTone != "tan") && changes < changeLimit && rand(3) == 0) {
+				var color:String;
+				color = randomChoice("dark","light","tan");
+				player.skinTone = color;
+				outputText("\n\nYour skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
+				outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
+				player.skinAdj = "flawless";
+				changes++;
+			}
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+				humanizeSkin();
 				changes++;
 			}
 			//Hair Color
@@ -7646,8 +7683,10 @@
 							player.skin.coat.color = randomChoice(KitsuneScene.elderKitsuneColors);
 						else
 							player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
-				else
+				else {
+					// TODO patterns
 					player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
+				}
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
@@ -8111,7 +8150,7 @@
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
-				outputText(" markings remain, as if etched into your skin. <b>You now have [skin].</b>");
+				outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);

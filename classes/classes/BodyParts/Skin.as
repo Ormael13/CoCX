@@ -91,6 +91,7 @@ public class Skin extends SaveableBodyPart {
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
+		this.coat.color = creature.hairColor;
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}

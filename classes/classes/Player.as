@@ -398,6 +398,8 @@ use namespace kGAMECLASS;
 			}
 			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
+			if (hasStatusEffect(StatusEffects.BarkSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
+			if (hasStatusEffect(StatusEffects.MetalSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.MetalSkin));
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -406,7 +408,7 @@ use namespace kGAMECLASS;
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			if (hasStatusEffect(StatusEffects.CrinosShape) && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) {
+			if (hasStatusEffect(StatusEffects.CrinosShape) && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
@@ -1434,7 +1436,7 @@ use namespace kGAMECLASS;
 			}
 			if (elfScore() >= 5)
 			{
-				if (oniScore() >= 11) {
+				if (elfScore() >= 11) {
 					if (isTaur()) race = "elf-taur";
 					else race = "elf";
 				}
@@ -1810,6 +1812,8 @@ use namespace kGAMECLASS;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
@@ -1822,11 +1826,17 @@ use namespace kGAMECLASS;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.LizanMarrowEvolved) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.MantislikeAgility) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
 				internalChimeraCounter++;
@@ -1851,6 +1861,8 @@ use namespace kGAMECLASS;
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
 				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
@@ -1863,11 +1875,17 @@ use namespace kGAMECLASS;
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
 				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.LizanMarrowEvolved) >= 0)
+				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.MantislikeAgility) >= 0)
 				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
+				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+				internalChimeraRatingCounter++;
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
 				internalChimeraRatingCounter++;
@@ -2264,6 +2282,8 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
 				catCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				catCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && catCounter >= 3)
 				catCounter += 1;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
@@ -2300,6 +2320,8 @@ use namespace kGAMECLASS;
 			if (lizardCounter > 0 && findPerk(PerkLib.LizanRegeneration) >= 0)
 				lizardCounter++;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
+				lizardCounter++;
+			if (findPerk(PerkLib.LizanMarrowEvolved) >= 0)
 				lizardCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				lizardCounter += 10;
@@ -2896,6 +2918,14 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
 				elfCounter++;
+			if (skinTone == "dark" || skinTone == "light" || skinTone == "tan")
+				elfCounter++;
+			if (skinType == SKIN_TYPE_PLAIN && skinAdj == "flawless")
+				elfCounter += 2;//elfCounter++;
+			if (cocks.length < 6)
+				elfCounter++;
+			if (hasVagina() && biggestTitSize() >= 3)
+				elfCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				elfCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 3)
@@ -2992,6 +3022,8 @@ use namespace kGAMECLASS;
 				mantisCounter++;
 			if (findPerk(PerkLib.MantislikeAgility) >= 0)
 				mantisCounter++;
+			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
+				mantisCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				mantisCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && mantisCounter >= 3)
@@ -3029,6 +3061,8 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
 				salamanderCounter++;
 			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+				salamanderCounter++;
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0)
 				salamanderCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				salamanderCounter += 10;
@@ -4989,6 +5023,12 @@ use namespace kGAMECLASS;
 				maxTou += (5 * (1 + newGamePlusMod));
 				maxLib += (5 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) > 0) {
+				maxStr += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * (1 + newGamePlusMod));
+				maxLib += (5 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.ScyllaInkGlands) > 0) {
 				maxStr += (10 * (1 + newGamePlusMod));
 			}
@@ -5018,6 +5058,9 @@ use namespace kGAMECLASS;
 				maxSpe += (5 * (1 + newGamePlusMod));
 				maxWis += (5 * (1 + newGamePlusMod));
 			}
+			/*if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) {
+				maxSpe += (10 * (1 + newGamePlusMod));
+			}*/
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {
 				maxStr += (5 * (1 + newGamePlusMod));
 				maxTou += (5 * (1 + newGamePlusMod));
@@ -5042,8 +5085,14 @@ use namespace kGAMECLASS;
 				maxStr += (5 * (1 + newGamePlusMod));
 				maxTou += (5 * (1 + newGamePlusMod));
 				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt -= (5 * (1 + newGamePlusMod));
-				maxWis -= (5 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
+					maxInt += (5 * (1 + newGamePlusMod));
+					maxWis += (5 * (1 + newGamePlusMod));
+				}
+				else {
+					maxInt -= (5 * (1 + newGamePlusMod));
+					maxWis -= (5 * (1 + newGamePlusMod));
+				}
 			}
 			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * (1 + newGamePlusMod));
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
@@ -5512,6 +5561,15 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
 				removeStatusEffect(StatusEffects.CooldownEAspectDarkness);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectWood)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectWood);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectMetal)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectMetal);
+			}
+			if(hasStatusEffect(StatusEffects.CooldownEAspectEther)) {
+				removeStatusEffect(StatusEffects.CooldownEAspectEther);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);

@@ -23,27 +23,33 @@ package classes.Scenes.NPCs
 		public function moveTailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
-			outputText("'s tail curls over and shoots a spike at you. ");
+			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
-				var tailspikedmg:Number = Math.round(this.str / 16);
-				var lustdmg:Number = Math.round(this.lib / 6);
-				if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-					player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
-					player.spe -= 2;
+				if (player.hasStatusEffect(StatusEffects.WindWall)) {
+					outputText("hits wind wall doing no damage to you.");
+					player.addStatusValue(StatusEffects.WindWall,2,-1);
 				}
 				else {
-					player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
-					player.spe -= 3;
+					var tailspikedmg:Number = Math.round(this.str / 16);
+					var lustdmg:Number = Math.round(this.lib / 6);
+					if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
+						player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
+						player.spe -= 2;
+					}
+					else {
+						player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
+						player.spe -= 3;
+					}
+					showStatDown( 'spe' );
+					outputText("hits the mark dealing ");
+					player.takeDamage(tailspikedmg, true);
+					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
+					game.dynStats("lus", lustdmg, "resisted", false);
+					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 				}
-				showStatDown( 'spe' );
-				outputText("The bony spike hits the mark dealing ");
-				player.takeDamage(tailspikedmg, true);
-				outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
-				game.dynStats("lus", lustdmg, "resisted", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			}
 			else {
-				outputText("The bony spike miss the mark.");
+				outputText("miss the mark.");
 			}
 		}
 		

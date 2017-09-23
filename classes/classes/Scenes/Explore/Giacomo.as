@@ -166,7 +166,7 @@ package classes.Scenes.Explore {
 		private function pitchManUpBeer():void {
 			spriteSelect(23);
 			clearOutput();
-			outputText("Giacomo holds up the item and says, \"<i>Ahh so you're interested into this beverage eh?  It is rumored to help weight lifter grow bigger muscle.  Yes " + player.mf("sir", "madam") + ", this is liquid gold for pilgrim and adventurer alike.  Interested?  It is <b>15 gems</b></i>.\"  ");
+			outputText("Giacomo holds up the item and says, \"<i>Ahh so you're interested into this beverage eh? It is rumored to help weight lifters grow bigger muscles. Only a handful of gems!  Yes " + player.mf("sir", "madam") + ", this is liquid gold for pilgrim and adventurer alike.  Interested?  It is <b>15 gems</b></i>.\"  ");
 			doYesNo(buyManUpBeer, potionMenu);
 		}
 		

@@ -37,10 +37,10 @@ package classes.Scenes.NPCs
 			this.tallness = 93;
 			this.hipRating = HIP_RATING_CURVY+3;
 			this.buttRating = BUTT_RATING_JIGGLY;
-			this.skinTone = "dusky";
+			this.skinTone = "light";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;//all below still to rework
-			initStrTouSpeInte(90, 80, 75, 60);
+			initStrTouSpeInte(70, 100, 75, 60);
 			initLibSensCor(70, 25, 30);
 			this.weaponName = "sword";
 			this.weaponVerb="slashing blade";
@@ -54,7 +54,7 @@ package classes.Scenes.NPCs
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 21;
+			this.level = 15;//15-30-45-60->xx lvl progression
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
@@ -64,8 +64,8 @@ package classes.Scenes.NPCs
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

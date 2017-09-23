@@ -670,13 +670,16 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.CheetahV) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.CheetahVI) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
-				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsFire);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsWater);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsIce);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEther)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsEther);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWood)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsWood);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsMetal)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsMetal);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
@@ -752,14 +755,21 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) max += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) max += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) max += 750;
+			if (findPerk(PerkLib.InhumanSelfControl) >= 0) max += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) max += 1500;
+			if (findPerk(PerkLib.EpicSelfControl) >= 0) max += 2250;
 			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
-				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsAir);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsFire);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsWater);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsIce);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEther)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEther);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWood)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsWood);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsMetal)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsMetal);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
@@ -771,7 +781,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 9999) max = 9999;
+			if (max > 15999) max = 15999;
 			return max;
 		}
 		
@@ -813,6 +823,10 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorEndurance) >= 0) max += 500;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) max += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) max += 1000;
+			if (findPerk(PerkLib.HalfStepToInhumanEndurance) >= 0) max += 1500;
+			if (findPerk(PerkLib.InhumanEndurance) >= 0) max += 2000;
+			if (findPerk(PerkLib.HalfStepToEpicEndurance) >= 0) max += 3000;
+			if (findPerk(PerkLib.EpicEndurance) >= 0) max += 4500;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
@@ -826,7 +840,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 29999) max = 29999;
+			if (max > 40999) max = 40999;
 			return max;
 		}
 		
@@ -952,6 +966,25 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.HexaAttack) >= 0) max += 10;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) max += 10;
+			if (findPerk(PerkLib.PrimalFuryII) >= 0) max += 10;
+			if (findPerk(PerkLib.PrimalFuryIII) >= 0) max += 10;
+			if (findPerk(PerkLib.PrimalFuryIV) >= 0) max += 10;
+			if (findPerk(PerkLib.PrimalFuryV) >= 0) max += 10;
+			if (findPerk(PerkLib.PrimalFuryVI) >= 0) max += 10;
+			if (findPerk(PerkLib.BasicTranquilness) >= 0) max += 15;
+			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) max += 25;
+			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) max += 40;
+			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) max += 60;
+			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) max += 100;
+			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) max += 160;
+			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) max += 250;
+			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) max += 350;
+			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) max += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) max += 750;
+			if (findPerk(PerkLib.InhumanTranquilness) >= 0) max += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) max += 1500;
+			if (findPerk(PerkLib.EpicTranquilness) >= 0) max += 2250;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
@@ -968,7 +1001,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 1699) max = 1699;//obecnie max to 1660
+			if (max > 8799) max = 8799;//obecnie max to 8720
 			return max;
 		}
 		
@@ -1020,6 +1053,10 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 750;
 			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 1050;
 			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 1500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) max += 2250;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 3000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 4500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 6750;
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
@@ -1040,7 +1077,8 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
-			if (max > 59999) max = 59999;
+			max = Math.round(max);
+			if (max > 79999) max = 79999;
 			return max;
 		}
 		
@@ -1059,6 +1097,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
 				maxven *= multimaxven;
 			}
+			maxven = Math.round(maxven);
 			return maxven;
 		}
 		

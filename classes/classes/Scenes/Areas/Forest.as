@@ -198,7 +198,7 @@ package classes.Scenes.Areas
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					},{
+					}/*,{
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
@@ -210,7 +210,7 @@ package classes.Scenes.Areas
 						when: function():Boolean{
 							return CelessScene.getInstance().isFollower && !CelessScene.getInstance().armorFound;
 						}
-					});
+					}*/);
 					/*
 					{
 						name  : "mimic",

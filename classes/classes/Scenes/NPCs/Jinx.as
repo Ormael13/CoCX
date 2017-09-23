@@ -21,20 +21,32 @@ package classes.Scenes.NPCs
 		
 		private function jinxAyotechPistol():void {
 			outputText("Ayotech maniac casually fire an ayotech pistol at you with high skill.");
-			var damage:Number = 0;
-			damage += this.weaponRangeAttack * 20;
-			player.takeDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText(" That is then stopped by wind wall.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else {
+				var damage:Number = 0;
+				damage += this.weaponRangeAttack * 20;
+				player.takeDamage(damage, true);
+			}
 			outputText("\n\n");
 		}
 		private function jinxAyotechCanon():void {
 			outputText("Ayotech maniac casually fire an ayotech canon at you with high skill.");
-			this.weaponRangeName = "ayotech canon";
-			this.weaponRangeAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			var damage:Number = 0;
-			damage += this.weaponRangeAttack * 20;
-			player.takeDamage(damage, true);
-			this.weaponRangeName = "ayotech pistol";
-			this.weaponRangeAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText(" Still your wind wall manages to stops it.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else {
+				this.weaponRangeName = "ayotech canon";
+				this.weaponRangeAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				var damage:Number = 0;
+				damage += this.weaponRangeAttack * 20;
+				player.takeDamage(damage, true);
+				this.weaponRangeName = "ayotech pistol";
+				this.weaponRangeAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			}
 			outputText("\n\n");
 		}
 		

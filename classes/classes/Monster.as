@@ -252,6 +252,10 @@
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) temp += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) temp += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) temp += 750;
+			if (findPerk(PerkLib.InhumanSelfControl) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) temp += 1500;
+			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 2250;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
@@ -278,6 +282,10 @@
 			if (findPerk(PerkLib.SuperiorEndurance) >= 0) temp += 500;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) temp += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToInhumanEndurance) >= 0) temp += 1500;
+			if (findPerk(PerkLib.InhumanEndurance) >= 0) temp += 2000;
+			if (findPerk(PerkLib.HalfStepToEpicEndurance) >= 0) temp += 3000;
+			if (findPerk(PerkLib.EpicEndurance) >= 0) temp += 4500;
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
@@ -325,6 +333,20 @@
 			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
+			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
+			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
+			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) temp += 60;
+			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) temp += 100;
+			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) temp += 160;
+			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) temp += 250;
+			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) temp += 350;
+			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) temp += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) temp += 750;
+			if (findPerk(PerkLib.InhumanTranquilness) >= 0) temp += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) temp += 1500;
+			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
@@ -354,6 +376,10 @@
 			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 750;
 			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 1050;
 			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 1500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) temp += 2250;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) temp += 3000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) temp += 4500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 6750;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
@@ -1255,12 +1281,18 @@
 		{
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
-			if (hasStatusEffect(StatusEffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
-			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+			if (hasStatusEffect(StatusEffects.InkBlind)) {
+				if (plural) game.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
+				else game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+			}
+			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) {
+				if (plural) game.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
+				else game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+			}
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
-			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
-			else game.outputText("Your foe is too dazed from your last hit to strike back!");
+				if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
+				else game.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
 			game.combatRoundOver();
 			return false;
@@ -1814,17 +1846,19 @@
 				}
 			}
 			//regeneration perks for monsters
-			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
+			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
 			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
-				if(findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
-				if(findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
-				if(findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
-				if(findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-				if(findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
-				if(findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1.5;
-				if(findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
+				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
+				if (findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
 				temp2 = Math.round(eMaxHP() * healingPercent / 100);
 				outputText("Due to natural regeneration " + short + " recover");
 				if (plural) outputText("s");

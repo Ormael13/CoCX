@@ -140,7 +140,7 @@ public final class ConsumableLib extends BaseContent
 		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "ElementalPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating group of golems. It's surrounded by fait aura of elements.", m.elementalPearl);
 
 		//NON-TRANSFORMATIVE ITEMS
-		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the imbiber natural swiftness and agility.", m.agilityElixir);
+		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);
 		public const AKBALSL:Consumable = new AkbalSaliva();
 		public const BANGB_M:MiniBangBall = new MiniBangBall();
 		//public const BANGBM1:BngBall = new BangBll();//BangBall mark 1 - nastpne powinny mieć coś ala mk 2 itd. nazwy w kodzie :P
@@ -151,7 +151,7 @@ public final class ConsumableLib extends BaseContent
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft", "FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", 6, "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.", curry(m.lustDraft, true));
-		public const INCOINS:SimpleConsumable = mk("incOIns", "incenOfIns", "an incense of Insight", 15, "These stick when burned are rumored to fill an area with a incense that allows for deep meditation and grant greater insight.", m.incenseOfInsight);
+		public const INCOINS:SimpleConsumable = mk("incOIns", "incenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const H_PILL:Consumable = new HealPill();
 		public const HRBCNT:Consumable = new HerbalContraceptive();
 		public const ICICLE_:Consumable = new IceShard();
@@ -159,7 +159,7 @@ public final class ConsumableLib extends BaseContent
 		public const L_DRAFT:SimpleConsumable = mk("L.Draft", "LustDraft", "a vial of roiling bubble-gum pink fluid", 20, "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.", curry(m.lustDraft, false));
 		public const LACTAID:Consumable = new Lactaid();
 		public const LUSTSTK:LustStick        = new LustStick();
-		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", 6, "A beverage made for people who believe brawn is better than brain.", m.manUpBeer);
+		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", 6, "A beverage made for people who believe brawn is better than brains.", m.manUpBeer);
 		public const MILKPTN:Consumable = new MilkPotion();
 		public const NUMBROX:Consumable = new NumbRocks();
 		public const NUMBOIL:Consumable = new NumbingOil();

@@ -2473,8 +2473,9 @@ public function wakeFromBadEnd():void {
 	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
 	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
 	if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
+	if (player.wis > 20) dynStats("wis", Math.ceil(-player.wis * 0.02) * penaltyMultiplier);
 	menu();
-	addButton(0, "Next", playerMenu);
+	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
 }
 
 //Camp wall
@@ -3184,10 +3185,10 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 19;
 		clearOutput();
-		outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC.");
+		outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
 		if (player.findPerk(PerkLib.SoulExalt) >= 0) {
 			player.removePerk(PerkLib.SoulExalt);
 			player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
@@ -3201,17 +3202,17 @@ private function promptSaveUpdate():void {
 		eyesColorSelection();
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
 		clearOutput();
-		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
+		outputText("Text.");
 		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		clearOutput();
-		outputText("I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too");
+		outputText("Text.");
 		doNext(doCamp);
 		return;
 	}
@@ -3289,9 +3290,9 @@ private function eyesColorSelection():void {
 	addButton(5, "Brown", chooseEyesColorSaveUpdate, "brown");
 	addButton(6, "Yellow", chooseEyesColorSaveUpdate, "yellow");
 	addButton(7, "Grey", chooseEyesColorSaveUpdate, "grey");
-	addButton(10, "Purple", chooseEyesColorSaveUpdate, "purple");
+	addButton(8, "Purple", chooseEyesColorSaveUpdate, "purple");
+	addButton(10, "Silver", chooseEyesColorSaveUpdate, "silver");
 	addButton(11, "Golden", chooseEyesColorSaveUpdate, "golden");
-	addButton(13, "Silver", chooseEyesColorSaveUpdate, "silver");
 }
 
 private function chooseEyesColorSaveUpdate(color:String):void {
