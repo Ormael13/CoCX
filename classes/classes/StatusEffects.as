@@ -400,11 +400,12 @@ import classes.StatusEffects.CombatStatusEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 		
 		// universal combat debuffs
-		public static const GenericCombatStrDebuff:StatusEffectType  = CombatStrDebuff.TYPE;
-		public static const GenericCombatSpeDebuff:StatusEffectType  = CombatSpeDebuff.TYPE;
-		public static const GenericCombatTouDebuff:StatusEffectType  = CombatTouDebuff.TYPE;
-		public static const GenericCombatInteDebuff:StatusEffectType = CombatInteDebuff.TYPE;
-		public static const GenericCombatWisDebuff:StatusEffectType  = CombatWisDebuff.TYPE;
+		
+		public static const GenericCombatStrBuff:StatusEffectType  = CombatStrBuff.TYPE;
+		public static const GenericCombatSpeBuff:StatusEffectType  = CombatSpeBuff.TYPE;
+		public static const GenericCombatTouBuff:StatusEffectType  = CombatTouBuff.TYPE;
+		public static const GenericCombatInteBuff:StatusEffectType = CombatInteBuff.TYPE;
+		public static const GenericCombatWisBuff:StatusEffectType  = CombatWisBuff.TYPE;
 		// combat
 		public static const AcidSlap:StatusEffectType                  = mkCombat("Acid Slap");
 		public static const AlrauneEntangle:StatusEffectType           = mkCombat("Alraune Entangle");
@@ -413,6 +414,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
 		public static const AttackDisabled:StatusEffectType            = mkCombat("Attack Disabled");
 		public static const BasiliskCompulsion:StatusEffectType        = mkCombat("Basilisk Compulsion");
+		public static const BasiliskSlow:StatusEffectType              = BasiliskSlowDebuff.TYPE;
 		public static const BathedInHotSpring:StatusEffectType         = mkCombat("Bathed In Hot Spring");
 		public static const BeatOfWar:StatusEffectType                 = mkCombat("Beat of War");
 		public static const Berzerking:StatusEffectType                = mkCombat("Berzerking");
@@ -535,6 +537,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const Tentagrappled:StatusEffectType         = mkCombat("Tentagrappled");
 		public static const TentagrappleCooldown:StatusEffectType  = mkCombat("Tentagrapple Cooldown");
 		public static const ShowerDotEffect:StatusEffectType       = mkCombat("Shower Dot Effect");
+		public static const GardenerSapSpeed:StatusEffectType      = GardenerSapSpeedDebuff.TYPE;
 		public static const VineHealUsed:StatusEffectType          = mkCombat("Vine Heal Used");
 		public static const DriderIncubusVenom:StatusEffectType    = mkCombat("Drider Incubus Venom");
 		public static const TaintedMind:StatusEffectType           = mkCombat("Tainted Mind");

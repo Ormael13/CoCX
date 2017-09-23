@@ -109,7 +109,7 @@ import classes.internals.WeightedDrop;
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.");
 				
 				//(Speed decrease)
-				player.addCombatDebuff('spe',player.spe / 5);
+				player.addCombatBuff('spe', -player.spe / 5);
 			}
 			//*Special Attack B - 
 			else

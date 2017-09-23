@@ -55,7 +55,7 @@ package classes.Scenes.Monsters
 			outputText("An arrow hit you for ");
 			player.takeDamage(damage, true);
 			outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
-			player.addCombatDebuff('spe',3);
+			player.addCombatBuff('spe',-3);
 		}
 		
 		public function AnkleShot():void

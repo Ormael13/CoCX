@@ -136,7 +136,7 @@ import classes.internals.*;
 			//<Hyena Attack 2 – Javelin – Successful – Player Entangled>
 			else if(rand(3) >= 1) {
 				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your [armor].  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
-				player.addCombatDebuff('spe',15);
+				player.addCombatBuff('spe',-15);
 				damage = player.takeDamage(25+rand(20), true);
 			}
 			//<Hyena Attack 2 – Javelin – Successful – Player Not Entangled>

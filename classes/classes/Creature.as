@@ -14,11 +14,11 @@ package classes
 	import classes.PerkType;
 	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
-import classes.StatusEffects.Combat.CombatInteDebuff;
-import classes.StatusEffects.Combat.CombatSpeDebuff;
-import classes.StatusEffects.Combat.CombatStrDebuff;
-import classes.StatusEffects.Combat.CombatTouDebuff;
-import classes.StatusEffects.Combat.CombatWisDebuff;
+import classes.StatusEffects.Combat.CombatInteBuff;
+import classes.StatusEffects.Combat.CombatSpeBuff;
+import classes.StatusEffects.Combat.CombatStrBuff;
+import classes.StatusEffects.Combat.CombatTouBuff;
+import classes.StatusEffects.Combat.CombatWisBuff;
 import classes.StatusEffects.TemporaryBuff;
 import classes.internals.Utils;
 	import classes.VaginaClass;
@@ -1218,29 +1218,29 @@ import classes.internals.Utils;
 		 * Different invocations are indistinguishable - do not use this if you need
 		 * to check for _specific_ debuff source (poison etc) mid-battle
 		 * @param stat 'str','spe','tou','inte','wis'
-		 * @param debuff Creature stat is decremented by this value.
+		 * @param buff Creature stat is decremented by this value.
 		 * @return (oldStat-newStat)
 		 */
-		public function addCombatDebuff(stat:String,debuff:Number):Number {
+		public function addCombatBuff(stat:String, buff:Number):Number {
 			switch(stat) {
 				case 'str':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrDebuff)
-							as CombatStrDebuff).applyEffect(debuff);
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrBuff)
+							as CombatStrBuff).applyEffect(buff);
 				case 'spe':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeDebuff)
-							as CombatSpeDebuff).applyEffect(debuff);
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeBuff)
+							as CombatSpeBuff).applyEffect(buff);
 				case 'tou':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouDebuff)
-							as CombatTouDebuff).applyEffect(debuff);
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouBuff)
+							as CombatTouBuff).applyEffect(buff);
 				case 'int':
 				case 'inte':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteDebuff)
-							as CombatInteDebuff).applyEffect(debuff);
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
+							as CombatInteBuff).applyEffect(buff);
 				case 'wis':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisDebuff)
-							as CombatWisDebuff).applyEffect(debuff);
+					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisBuff)
+							as CombatWisBuff).applyEffect(buff);
 			}
-			trace("/!\\ ERROR: addCombatDebuff('"+stat+"', "+debuff+")");
+			trace("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
 			return 0;
 		}
 		/*

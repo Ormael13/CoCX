@@ -47,7 +47,6 @@ import classes.internals.WeightedDrop;
 			else {
 				outputText("Your attempt to make way fails, and the giant grabs you in his very large, very cold, very strong hands. \"<i>Now, you die!</i>\"");
 				player.createStatusEffect(StatusEffects.GiantGrabbed, 2, 0, 0, 0);
-				if (!player.hasStatusEffect(StatusEffects.GiantStrLoss)) player.createStatusEffect(StatusEffects.GiantStrLoss, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -64,11 +63,11 @@ import classes.internals.WeightedDrop;
 				}
 				else if (player.str >= 60 && player.str < 80) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					player.addCombatDebuff('str', 1);
+					player.addCombatBuff('str', -1);
 				}
 				else if (player.str >= 40 && player.str < 60) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					player.addCombatDebuff('str', 2);
+					player.addCombatBuff('str', -2);
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
