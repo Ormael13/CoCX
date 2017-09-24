@@ -78,9 +78,9 @@ public class MainViewManager extends BaseContent {
 		} else {
 			mainView.statsView.toggleHungerBar(false);
 		}
-		mainView.statsView.refreshStats(getGame());
 		//Set theme!
 		setTheme();
+		mainView.statsView.refreshStats(getGame());
 	}
 	public function showPlayerDoll(reload:Boolean=false):void {
 			tweenOutStats();

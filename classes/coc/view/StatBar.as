@@ -5,6 +5,7 @@ package coc.view {
 import classes.internals.Utils;
 
 import flash.text.TextField;
+import flash.text.TextFormat;
 import flash.text.TextLineMetrics;
 
 public class StatBar extends Block {
@@ -218,6 +219,12 @@ public class StatBar extends Block {
 	}
 	public function set statName(value:String):void {
 		_nameLabel.text = value;
+	}
+	public function set nameColor(value:*):void {
+		var tf:TextFormat = _nameLabel.defaultTextFormat;
+		tf.color = Color.convertColor(value);
+		_nameLabel.defaultTextFormat = tf;
+		_nameLabel.setTextFormat(tf);
 	}
 
 	public function get bar():BitmapDataSprite {

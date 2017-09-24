@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Lake
 				if (player.hasVagina() || !player.hasCock()) addButton(1, "Facesitting", ottersForGals);
 			}
 			if (flags[kFLAGS.MET_OTTERGIRL] > 1) addButton(2, "Get Fish", getSomeFishYaFatty);
-			if (player.hasKeyItem("Fishing Pole") < 0) addButton(3, "Leave", getDatFishingPole);
+			if (player.hasKeyItem("Fishing Pole") < 0) addButton(3, "FishingPole", getDatFishingPole);
 			addButton(4, "Leave", avoidZeOtterPussy);
 		}
 
@@ -283,7 +283,7 @@ package classes.Scenes.Areas.Lake
 		{
 			clearOutput();
 			outputText("Sure why not. You buy the fishing pole from Calu.\n\n");
-			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.<\b>");
+			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.</b>");
 			player.gems -= 50;
 			player.createKeyItem("Fishing Pole", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

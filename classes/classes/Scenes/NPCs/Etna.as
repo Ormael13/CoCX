@@ -23,19 +23,25 @@ package classes.Scenes.NPCs
 		public function moveTailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
-			outputText("'s tail curls over and shoots a spike at you. ");
+			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
-				var tailspikedmg:Number = Math.round(this.str / 16);
-				var lustdmg:Number = Math.round(this.lib / 6);
-				player.addCombatBuff('spe',-2);
-				outputText("The bony spike hits the mark dealing ");
-				player.takeDamage(tailspikedmg, true);
-				outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
-				player.dynStats("lus", lustdmg, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
+				if (player.hasStatusEffect(StatusEffects.WindWall)) {
+					outputText("hits wind wall doing no damage to you.");
+					player.addStatusValue(StatusEffects.WindWall,2,-1);
+				}
+				else {
+					var tailspikedmg:Number = Math.round(this.str / 16);
+					var lustdmg:Number = Math.round(this.lib / 6);
+					player.addCombatBuff('spe',-2);
+					outputText("hits the mark dealing ");
+					player.takeDamage(tailspikedmg, true);
+					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
+					player.dynStats("lus", lustdmg, "scale", false);
+					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
+				}
 			}
 			else {
-				outputText("The bony spike miss the mark.");
+				outputText("miss the mark.");
 			}
 		}
 		

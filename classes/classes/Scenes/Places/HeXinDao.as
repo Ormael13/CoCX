@@ -1564,10 +1564,10 @@ public function soularenaChallenge():void {
 	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-	addButton(5, "Golemancer", golemancer);
-	addButton(6, "AyotechManiac", ayotechmaniac);
-	addButton(7, "MachoSalamander", machosalamander);
-	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
+	//addButton(5, "Golemancer", golemancer);
+	//addButton(6, "AyotechManiac", ayotechmaniac);
+	//addButton(7, "MachoSalamander", machosalamander);
+	//addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);

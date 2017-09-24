@@ -541,7 +541,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8f";
-			version = ver + " (<b>Perk-o-calipse 2 and Soul ()</b>)";//Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1)
+			version = ver + " (<b>Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
