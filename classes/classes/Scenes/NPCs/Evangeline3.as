@@ -192,10 +192,10 @@ package classes.Scenes.NPCs
 					var choice1:Number = rand(2);
 					if (choice1 == 0) eAttack();
 					if (choice1 == 1) {
-						if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						//else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();miejsce na ice spike spell w AI
 						else eAttack();
 					}

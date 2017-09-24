@@ -96,7 +96,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				if (player.lust >= player.maxLust()) return;
 			}
 			
-			if (this.HPRatio() <= 0.6 && fatigue < this.eMaxFatigue())
+			if (this.HPRatio() <= 0.6 && fatigue < this.maxFatigue())
 			{
 				vineHeal();
 			}
@@ -180,9 +180,9 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 this.HP = this.maxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
-			if (fatigue >= this.eMaxFatigue()) { //Exhausted!
+			if (fatigue >= this.maxFatigue()) { //Exhausted!
 				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
-				fatigue = this.eMaxFatigue();
+				fatigue = this.maxFatigue();
 			}
 		}
 		

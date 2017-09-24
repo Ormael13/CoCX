@@ -88,9 +88,9 @@ package classes.Scenes.Dungeons.D3
 			
 			// Priority use
 			if (_chargingArouse) arouseSpellCast();
-			else if ((this.lust+60)/this.eMaxLust() >= .9 && !_usedGottaCum) gottaCum();
+			else if ((this.lust+60)/this.maxLust() >= .9 && !_usedGottaCum) gottaCum();
 			else if (this.HPRatio() <= 0.5 && !_usedHeal) healUp();
-			else if (rand(lust)/this.eMaxLust() >= 0.4) this.hypnoCock();
+			else if (rand(lust)/this.maxLust() >= 0.4) this.hypnoCock();
 			else
 			{	
 				// Selections

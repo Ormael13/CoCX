@@ -91,14 +91,14 @@ package classes.Scenes.Dungeons.D3
 			// Because fuck having arguments with status effects :^)
 			_combatRound++;
 			
-if (this.lust < .65 * this.eMaxLust() && this.HP < .33 * this.maxHP()) {
+if (this.lust < .65 * this.maxLust() && this.HP < .33 * this.maxHP()) {
 				gainHpAndLust();
 			}
-			else if (this.lust >= .65 * this.eMaxLust() && this.HP >= .33 * this.maxHP()) {
+			else if (this.lust >= .65 * this.maxLust() && this.HP >= .33 * this.maxHP()) {
 				dropHpAndLust();
 			}
 			
-			if (rand(this.eMaxLust()) > lust + 10)
+			if (rand(this.maxLust()) > lust + 10)
 			{
 				spearStrike();
 				outputText("\n\n");
@@ -164,7 +164,7 @@ this.addHP(this.maxHP() * 0.1);
 			_hpGains++;
 			
 			outputText(" The demon gestures wildly, drawing a rune across his own chest. It flares, blood red and pulsing. Your foe’s wounds slowly edge close, fueled by magic. When the luminous symbol fades, the drider pants, his black skin flushing purple in places.");
-			if (this.lust > .65*this.eMaxLust())
+			if (this.lust > .65*this.maxLust())
 			{
 				if (_goblinFree) outputText(" His dick is rigid and bouncing, so hard it looks like it could go off at any moment.");
 				else outputText(" His balls are tensing underneath the goblin, and he keeps moaning under his breath.");

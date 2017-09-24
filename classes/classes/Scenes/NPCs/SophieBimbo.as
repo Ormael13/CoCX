@@ -81,10 +81,10 @@ internal function bimbotizeMeCaptainSophie():void {
 	clearOutput();
 	player.consumeItem(consumables.BIMBOLQ);
 	outputText("A wicked idea takes hold of you while you watch the harpy ");
-	if(monster.lust >= monster.eMaxLust()) outputText("touch herself");
+	if(monster.lust >= monster.maxLust()) outputText("touch herself");
 	else outputText("squirm in the dirt around her nest");
 	outputText(".  Releasing the ties on one of your pouches, you reach inside to claim the contents.  You produce the bottle of bimbo liqueur with a flourish, swirling the potent fluid inside its prison as you approach the downed harpy matron; she looks up at you with dumb, ");
-	if(monster.lust >= monster.eMaxLust()) outputText("lust");
+	if(monster.lust >= monster.maxLust()) outputText("lust");
 	else outputText("pain");
 	outputText("-glazed eyes, her beautiful but uncomprehending visage slack-jawed and empty.  It's a good look for her.\n\n");
 	

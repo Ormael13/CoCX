@@ -247,12 +247,12 @@ package classes.Scenes.NPCs
 					var choice3:Number = rand(2);
 					if (choice3 == 0) eAttack();
 					if (choice3 == 1) {
-						if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
-						else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
+						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
+						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						else eAttack();
 					}
 					//if (choice3 == 3) EvangelineTease();
@@ -264,14 +264,14 @@ package classes.Scenes.NPCs
 				var choice2:Number = rand(2);
 				if (choice2 == 0) eAttack();
 				if (choice2 == 1) {
-					if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-					else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
-					else if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-					else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
-					else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-					else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-					else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
-					else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+					if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
+					else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+					else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
+					else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
+					else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
+					else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+					else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
+					else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 					else eAttack();
 				}
 				//if (choice2 == 3) EvangelineTease();
@@ -283,21 +283,21 @@ package classes.Scenes.NPCs
 				if (choice1 == 0) eAttack();
 				if (choice1 == 1) {
 					if (this.lust > 50) {
-						if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
-						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
-						else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
+						else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
+						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						else eAttack();
 					}
 					else {
-						if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
+						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
 						else eAttack();
 					}
 				}

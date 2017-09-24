@@ -116,7 +116,7 @@
 			else player.addStatusValue(StatusEffects.ClaraCombatRounds,1,1);
 
 			//Bonus damage if not in camp
-			if(HP > 0 && lust < eMaxLust() && !player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp)) claraBonusBaseLustDamage();
+			if(HP > 0 && lust < maxLust() && !player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp)) claraBonusBaseLustDamage();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{

@@ -240,8 +240,7 @@
 			else if (this.HP > maxHP()) this.HP = maxHP();
 		}
 
-		public function eMaxLust():Number
-		{
+		protected override function maxLust_base():Number {
 			//Base lust
 			var temp:Number = 100 + this.bonusLust;
 			//Apply perks
@@ -270,7 +269,7 @@
 			return temp;
 		}
 		
-		public function eMaxFatigue():Number
+		public override function maxFatigue():Number
 		{
 			//Base fatigue
 			var temp:Number = 100 + this.level * 5;
@@ -301,7 +300,7 @@
 			return temp;
 		}
 		
-		public function eMaxSoulforce():Number
+		public override function maxSoulforce():Number
 		{
 			//Base soulforce
 			var temp:Number = 50;
@@ -324,7 +323,7 @@
 			return temp;
 		}
 		
-		public function eMaxWrath():Number
+		public override function maxWrath():Number
 		{
 			//Base wrath
 			var temp:Number = 100;
@@ -365,7 +364,7 @@
 			return temp;
 		}
 		
-		public function eMaxMana():Number
+		public override function maxMana():Number
 		{
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
@@ -1540,7 +1539,7 @@
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue + "/" + eMaxFatigue() + " fatigue, " + mana + "/" + eMaxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";		//, " + soulforce + "/" + eMaxSoulforce() + " soulforce
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);

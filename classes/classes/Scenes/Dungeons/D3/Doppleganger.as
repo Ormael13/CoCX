@@ -76,7 +76,7 @@ package classes.Scenes.Dungeons.D3
 				return;
 			}
 			
-			if (lust > eMaxLust())
+			if (lust > maxLust())
 			{
 				doNext(game.endLustVictory);
 				return;

@@ -27,14 +27,14 @@ package classes.Scenes.Monsters
 			}
 			//Spell time!
 			//Charge Weapon
-			if (spellChooser == 0 && fatigue <= (eMaxFatigue() - spellCostCharge)) {
+			if (spellChooser == 0 && fatigue <= (maxFatigue() - spellCostCharge)) {
 				outputText("The imp utters word of power, summoning an electrical charge around his scimitar. <b>It looks like he'll deal more physical damage now!</b>");
 				createStatusEffect(StatusEffects.ChargeWeapon, 25, 0, 0, 0);
 				this.weaponAttack += 25;
 				fatigue += spellCostCharge;
 			}
 			//Blind
-			else if (spellChooser == 1 && fatigue <= (eMaxFatigue() - spellCostBlind)) {
+			else if (spellChooser == 1 && fatigue <= (maxFatigue() - spellCostBlind)) {
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
 				if (player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
@@ -49,7 +49,7 @@ package classes.Scenes.Monsters
 				fatigue += spellCostBlind;
 			}
 			//Whitefire
-			else if (spellChooser == 2 && fatigue <= (eMaxFatigue() - spellCostWhitefire)) {
+			else if (spellChooser == 2 && fatigue <= (maxFatigue() - spellCostWhitefire)) {
 				var damage:int = inte + rand(50);
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -70,7 +70,7 @@ package classes.Scenes.Monsters
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
-			else if (spellChooser == 3 && fatigue <= (eMaxFatigue() - spellCostArouse)) {
+			else if (spellChooser == 3 && fatigue <= (maxFatigue() - spellCostArouse)) {
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 5) + rand(10);
 				lustDamage = lustDamage * (game.lustPercent() / 100);
@@ -79,7 +79,7 @@ package classes.Scenes.Monsters
 				fatigue += spellCostArouse;
 			}
 			//Heal
-			else if (spellChooser == 4 && fatigue <= (eMaxFatigue() - spellCostHeal)) {
+			else if (spellChooser == 4 && fatigue <= (maxFatigue() - spellCostHeal)) {
 				outputText("He focuses on his body and his desire to end pain, trying to draw on his arousal without enhancing it.");
 				var temp:int = int((inte / (2 + rand(3))) * (maxHP() / 50));
 				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
@@ -87,7 +87,7 @@ package classes.Scenes.Monsters
 				fatigue += spellCostHeal;
 			}
 			//Might
-			else if (spellChooser == 5 && fatigue <= (eMaxFatigue() - spellCostMight)) {
+			else if (spellChooser == 5 && fatigue <= (maxFatigue() - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
 				outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);

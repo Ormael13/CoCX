@@ -251,13 +251,16 @@ import classes.internals.Utils;
 			if (findPerk(PerkLib.CheetahV) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.CheetahVI) >= 0) max += Math.round(spe);
 			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
-				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsAir);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsFire);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsWater);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsIce);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 10 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEther)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsEther);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWood)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsWood);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsMetal)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsMetal);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 25 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
@@ -315,14 +318,21 @@ import classes.internals.Utils;
 			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) max += 250;
 			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) max += 350;
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 500;
+			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) max += 750;
+			if (findPerk(PerkLib.InhumanSelfControl) >= 0) max += 1000;
+			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) max += 1500;
+			if (findPerk(PerkLib.EpicSelfControl) >= 0) max += 2250;
 			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
-				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsAir);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsFire);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsWater);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsIce);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
-				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 1 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsAir);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsFire);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWater)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsWater);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEther)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEther);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWood)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsWood);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsMetal)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsMetal);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsIce);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsLightning);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
 			}
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
@@ -348,7 +358,7 @@ import classes.internals.Utils;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(9999,max);
+			return Math.min(15999,max);
 		}
 		public function maxFatigue():Number {
 			return 100;
