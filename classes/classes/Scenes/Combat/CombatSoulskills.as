@@ -37,6 +37,25 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
 			addButton(5, "Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
 		}
+		/*if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
+			addButton(6, "Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.");//\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti()
+		}*/
+		if (player.hasStatusEffect(StatusEffects.KnowsHurricaneDance)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
+				addButton(7, "Hurricane Dance", HurricaneDance).hint("Take on the aspect of the wind dodging attacks with aerial graces for a time.  \n\nWould go into cooldown after use for: 10 rounds");//  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "
+			}
+			else if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
+				outputText("<b>You need more time before you can use Hurricane Dance again.</b>\n\n");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsEarthStance)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
+				addButton(8, "Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds");//  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "
+			}
+			else if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
+				outputText("<b>You need more time before you can use Earth Stance again.</b>\n\n");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) addButton(9, "Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
 			else addButton(9, "Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
@@ -324,6 +343,50 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function IceFist():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var damage:Number = 0;
+		damage += unarmedAttack();
+		//other bonuses
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! (<b><font color=\"#800000\">" + damage + "</font></b>)");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function HurricaneDance():void {
+		clearOutput();
+		outputText("Your movement becomes more fluid and precise, increasing your speed and evasion.\n\n");
+		player.createStatusEffect(StatusEffects.HurricaneDance, 5, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownHurricaneDance, 10, 0, 0, 0);
+		enemyAI();
+	}
+	
+	public function EarthStance():void {
+		clearOutput();
+		outputText("Your body suddenly hardens like rock. You will be way harder to damage for a while.\n\n");
+		player.createStatusEffect(StatusEffects.EarthStance, 3, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownEarthStance, 10, 0, 0, 0);
+		enemyAI();
 	}
 	
 	public function activaterOverlimit():void {

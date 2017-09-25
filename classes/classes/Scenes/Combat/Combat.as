@@ -4550,6 +4550,38 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 		else player.addStatusValue(StatusEffects.MetalSkin,2,-1);
 	}
+	//Hurricane Dance
+	if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
+		if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownHurricaneDance);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownHurricaneDance,1,-1);
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.HurricaneDance)) {
+		if (player.statusEffectv1(StatusEffects.HurricaneDance) <= 0) {
+			player.removeStatusEffect(StatusEffects.HurricaneDance);
+			outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.HurricaneDance,1,-1);
+	}
+	//Earth Stance
+	if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
+		if (player.statusEffectv1(StatusEffects.CooldownEarthStance) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownEarthStance);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownEarthStance,1,-1);
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.EarthStance)) {
+		if (player.statusEffectv1(StatusEffects.EarthStance) <= 0) {
+			player.removeStatusEffect(StatusEffects.EarthStance);
+			outputText("<b>Earth Stance effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.EarthStance,1,-1);
+	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
 	if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);

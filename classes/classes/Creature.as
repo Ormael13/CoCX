@@ -3638,6 +3638,9 @@ import classes.internals.Utils;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult *= 0.8;
 			}
+			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
+				mult *= 0.7;
+			}
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
@@ -3674,6 +3677,7 @@ import classes.internals.Utils;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
 			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
 			return chance;
 		}
@@ -3684,7 +3688,7 @@ import classes.internals.Utils;
 		public const EVASION_MISDIRECTION:String = "Misdirection";
 		public const EVASION_UNHINDERED:String = "Unhindered";
 		public const EVASION_ILLUSION:String = "Illusion";
-		public const EVASION_FLYING:String = "Illusion";
+		public const EVASION_FLYING:String = "Flying";
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.

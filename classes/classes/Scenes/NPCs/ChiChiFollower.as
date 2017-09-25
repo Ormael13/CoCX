@@ -75,7 +75,18 @@ public function MeetingChiChiInHeXinDao():void {
 	menu();
 	if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) addButton(0, "Yes", TrainingSoulArtsWithChiChi);//usunąć if () jak dodam ostatni trening/walke
 	addButton(1, "No", NotReadyForTheTraining);
-	//addButton(2, "", SoulskilsManualsShop);manuals shop
+	addButton(2, "Shop", SoulskilsManualsShop);
+	addButton(4, "Leave", camp.returnToCampUseOneHour);
+}
+
+public function MeetingChiChiInHeXinDao2():void {
+	clearOutput();
+	outputText("Chi Chi cross her arm impatiently.\n\n");
+	outputText("\"<i>Anything else I can do for you [name]?</i>\"\n\n");
+	menu();
+	if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) addButton(0, "Yes", TrainingSoulArtsWithChiChi);//usunąć if () jak dodam ostatni trening/walke
+	addButton(1, "No", NotReadyForTheTraining);
+	addButton(2, "Shop", SoulskilsManualsShop);
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -149,18 +160,104 @@ public function TrainingSoulArtsWithChiChi():void {
 }
 
 public function SoulskilsManualsShop():void {
-	
+	clearOutput();
+	outputText("\"<i>I’m glad you take your training seriously, [name]. There are various scrolls I can teach you");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) outputText(" but I would need a few spirit stones first");
+	outputText(".</i>\"\n\n");
+	menu();
+	//addButton(0, "Ice Fist", SoulskilsManualsShopIceFist);
+	//addButton(1, "Fire Punch", SoulskilsManualsShopFirePunch);
+	addButton(2, "Hurricane Dance", SoulskilsManualsShopHurricaneDance);
+	addButton(3, "Earth Stance", SoulskilsManualsShopEarthStance);
+	//addButton(4, "Punishing Kick", SoulskilsManualsShopPunishingKick);
+	addButton(14, "Back", MeetingChiChiInHeXinDao2);
 }
 
-public function MeetingChiChiInHeXinDao2():void {
+public function SoulskilsManualsShopIceFist():void {
 	clearOutput();
-	outputText("Chi Chi cross her arm impatiently.\n\n");
-	outputText("\"<i>Anything else I can do for you [name]?</i>\"\n\n");
+	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
-	//addButton(0, "Yes", TrainingSoulArtsWithChiChi);
-	addButton(1, "No", NotReadyForTheTraining);
-	//addButton(2, "", SoulskilsManualsShop);manuals shop
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(0, "Yes", SoulskilsManualsShopIceFist2);
+	addButton(1, "No", SoulskilsManualsShop);
+}
+public function SoulskilsManualsShopIceFist2():void {
+	if (flags[kFLAGS.SPIRIT_STONES] < 5) {//flaga spr. czy married chi chi czy nie
+		outputText("\"<i>Sorry [name], but I don’t teach these for free. Get me spirit stones and then I will show you what you want.</i>\"\n\n");
+		doNext(SoulskilsManualsShop);
+	}
+	//if (married chi chi) outputText("\"<i>Well since we are together I will gladly teach you this technique for free... let me explain so you don’t mock it up and hurt yourself.</i>\"\n\n");
+	outputText("Chi Chi nods and begins to give you a full lecture of the technique. Once done, you practice on dummies for a few hours until you finally master it.\n\n");
+	outputText("<b>You learned how to use Ice Fist!</b>\n\n");
+	if (!player.hasStatusEffect(StatusEffects.KnowsIceFist)) player.createStatusEffect(StatusEffects.KnowsIceFist, 0, 0, 0, 0);
+	flags[kFLAGS.SPIRIT_STONES] -= 5;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function SoulskilsManualsShopFirePunch():void {
+	clearOutput();
+	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
+	menu();
+	//addButton(0, "Yes", );
+	addButton(1, "No", SoulskilsManualsShop);
+}
+public function SoulskilsManualsShopFirePunch2():void {
+	if (flags[kFLAGS.SPIRIT_STONES] < 5) {//flaga spr. czy married chi chi czy nie
+		outputText("\"<i>Sorry [name], but I don’t teach these for free. Get me spirit stones and then I will show you what you want.</i>\"\n\n");
+		doNext(SoulskilsManualsShop);
+	}
+	//if (married chi chi) outputText("\"<i>Well since we are together I will gladly teach you this technique for free... let me explain so you don’t mock it up and hurt yourself.</i>\"\n\n");
+	outputText("Chi Chi nods and begins to give you a full lecture of the technique. Once done, you practice on dummies for a few hours until you finally master it.\n\n");
+	outputText("<b>You learned how to use -techniquename-!</b>\n\n");
+	flags[kFLAGS.SPIRIT_STONES] -= 5;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function SoulskilsManualsShopHurricaneDance():void {
+	clearOutput();
+	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
+	menu();
+	addButton(0, "Yes", SoulskilsManualsShopHurricaneDance2);
+	addButton(1, "No", SoulskilsManualsShop);
+}
+public function SoulskilsManualsShopHurricaneDance2():void {
+	if (flags[kFLAGS.SPIRIT_STONES] < 5) {//flaga spr. czy married chi chi czy nie
+		outputText("\"<i>Sorry [name], but I don’t teach these for free. Get me spirit stones and then I will show you what you want.</i>\"\n\n");
+		doNext(SoulskilsManualsShop);
+	}
+	//if (married chi chi) outputText("\"<i>Well since we are together I will gladly teach you this technique for free... let me explain so you don’t mock it up and hurt yourself.</i>\"\n\n");
+	outputText("Chi Chi nods and begins to give you a full lecture of the technique. Once done, you practice on dummies for a few hours until you finally master it.\n\n");
+	outputText("<b>You learned how to use Hurricane Dance!</b>\n\n");
+	if (!player.hasStatusEffect(StatusEffects.KnowsHurricaneDance)) player.createStatusEffect(StatusEffects.KnowsHurricaneDance, 0, 0, 0, 0);
+	flags[kFLAGS.SPIRIT_STONES] -= 5;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function SoulskilsManualsShopEarthStance():void {
+	clearOutput();
+	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
+	menu();
+	addButton(0, "Yes", SoulskilsManualsShopEarthStance2);
+	addButton(1, "No", SoulskilsManualsShop);
+}
+public function SoulskilsManualsShopEarthStance2():void {
+	if (flags[kFLAGS.SPIRIT_STONES] < 5) {//flaga spr. czy married chi chi czy nie
+		outputText("\"<i>Sorry [name], but I don’t teach these for free. Get me spirit stones and then I will show you what you want.</i>\"\n\n");
+		doNext(SoulskilsManualsShop);
+	}
+	//if (married chi chi) outputText("\"<i>Well since we are together I will gladly teach you this technique for free... let me explain so you don’t mock it up and hurt yourself.</i>\"\n\n");
+	outputText("Chi Chi nods and begins to give you a full lecture of the technique. Once done, you practice on dummies for a few hours until you finally master it.\n\n");
+	outputText("<b>You learned how to use Earth Stance!</b>\n\n");
+	if (!player.hasStatusEffect(StatusEffects.KnowsEarthStance)) player.createStatusEffect(StatusEffects.KnowsEarthStance, 0, 0, 0, 0);
+	flags[kFLAGS.SPIRIT_STONES] -= 5;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function SoulskilsManualsShopPunishingKick():void {
+	clearOutput();
+	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
+	menu();
+	//addButton(0, "Yes", );
+	addButton(1, "No", SoulskilsManualsShop);
 }
 
 	}

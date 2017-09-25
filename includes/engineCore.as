@@ -1131,7 +1131,9 @@ public function hideUpDown():void {
 	oldStats.oldCor = 0;  
 	oldStats.oldHP = 0;
 	oldStats.oldLust = 0;
+	oldStats.oldWrath = 0;
 	oldStats.oldFatigue = 0;
+	oldStats.oldMana = 0;
 	oldStats.oldSoulforce = 0;
 	oldStats.oldHunger = 0;
 }
