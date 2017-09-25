@@ -41,15 +41,15 @@ package classes.Scenes.Areas.BlightRidge
 				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your [legs], smearing them with oozing demonic fluids.");
 				if (player.lust >= 80 || player.cor >= 80) {
 					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated [legs] free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
-					game.dynStats("lus", 13, "cor", 1);
+					player.dynStats("lus", 13, "cor", 1);
 				}
 				else if (player.lust >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					game.dynStats("lus", 8 + player.cor / 20);
+					player.dynStats("lus", 8 + player.cor / 20);
 				}
 				else {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
-					game.dynStats("lus", 5 + player.cor / 20);
+					player.dynStats("lus", 5 + player.cor / 20);
 				}
 				game.combat.takeDamage(5);
 			}
@@ -71,15 +71,15 @@ package classes.Scenes.Areas.BlightRidge
 				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your [legs], smearing them with oozing demonic fluids.");
 				if (player.lust >= 80 || player.cor >= 80) {
 					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated [legs] free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
-					game.dynStats("lus", 12, "cor", 0.5);
+					player.dynStats("lus", 12, "cor", 0.5);
 				}
 				else if (player.lust >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					game.dynStats("lus", 7 + player.cor / 25);
+					player.dynStats("lus", 7 + player.cor / 25);
 				}
 				else {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
-					game.dynStats("lus", 4 + player.cor / 25);
+					player.dynStats("lus", 4 + player.cor / 25);
 				}
 				game.combat.takeDamage(4);
 			}
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.BlightRidge
 			switch (rand(3)) {
 				case 0: //Face
 					outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.");
-					game.dynStats("lus", 3);
+					player.dynStats("lus", 3);
 					if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 						player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 					else player.addStatusValue(StatusEffects.DemonSeed, 1, 6);
@@ -113,7 +113,7 @@ package classes.Scenes.Areas.BlightRidge
 				case 1: //Chest
 					if (player.hasFuckableNipples()) {
 						outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.");
-						game.dynStats("lus", 3);
+						player.dynStats("lus", 3);
 						if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 							player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 						else player.addStatusValue(StatusEffects.DemonSeed, 1, 7);
@@ -124,7 +124,7 @@ package classes.Scenes.Areas.BlightRidge
 				default: //Crotch
 					if (player.vaginas.length > 0) {
 						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your [armor] and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
-						game.dynStats("lus", 3);
+						player.dynStats("lus", 3);
 						if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 							player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 						else player.addStatusValue(StatusEffects.DemonSeed, 1, 7);

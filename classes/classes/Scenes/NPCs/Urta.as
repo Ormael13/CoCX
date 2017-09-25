@@ -2293,7 +2293,7 @@ private function urtaAndScyllaBoningLikeBitchesSober():void {
 	if(!urtaLove()) outputText("fuck-buddy");
 	else outputText("lover");
 	outputText("'s lusty slip-up and skittish responses, pinching her booty for good measure while you decide just how to get involved in the potential <i>ménage à trois</i>.\n\nWhat do you do?");
-	dynStats("lus", 10 + player.lib/5, "resisted", false);
+	dynStats("lus", 10 + player.lib/5, "scale", false);
 	//Get worshipped requires gigantic dong
 	var worship:Function = null;
 	var fuck:Function = null;
@@ -4542,7 +4542,7 @@ private function urtaGooTesticleVoreRuinedOrgasms():void {
 
 	outputText("\n\nYou feel Urta's body shift around a few times, her legs bumping into your new \"home\" as she struggles to get comfortable.  Then, surprisingly, you can hear muffled snoring.  After being subjected to ruined orgasm after ruined orgasm, Urta just fell asleep!  Figuring there's not much you can do about it from in here, you relax your body as well.  As you calm down, you feel your body beginning to lose its shape.  If you think about it, you can regain your form, so rather than worry about it, you let yourself soften, mixing with Urta's spunk as you too drift off into a peaceful sleep.");
 
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 	//Next
 	menu();
 	addButton(0,"Next",urtasRuinedOrgasmsFromGooPartII);
@@ -5063,7 +5063,7 @@ private function urtaTakesPCOnWalkies():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 5;
 	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  <b>You're so fucking turned on after exhibiting yourself in such a way that you're dripping EVERYWHERE.  Such a good doggie.</b>");
-		dynStats("lus=", player.maxLust(), "resisted", false);
+		dynStats("lus=", player.maxLust(), "scale", false);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -5231,7 +5231,7 @@ private function urtaTakesPCOnWalkies():void {
 		outputText("\n\nAfter you pull back, you sit down and slowly pull Urta into your lap. It's slow going as she's in a blissful trance, barely able to sit up let alone move. Finally you manage to get her there and pull her into a deep, passionate kiss, both showing your undying affection for her and giving her time to recuperate.");
 		outputText("\n\nWhen she pulls back, her deep green eyes seem deliciously spacey, yet she's regained the ability to speak. \"<i>... That's... did I squirt on you?</i>\" She seems unable to recall the finer details of such a mind-blowing experience.");
 		outputText("\n\n\"<i>You did, my love. Twice.</i>\" You happily inform her. She snuggles into you and presses her muzzle against your neck - it's hard to tell if she's delighted, embarrassed, or both!");
-		dynStats("lus", 30, "resisted", false);
+		dynStats("lus", 30, "scale", false);
 		dynStats("lus", 150);
 		doNext(vixenAndCreamPartFinal);
 	}

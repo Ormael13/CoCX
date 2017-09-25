@@ -6,9 +6,7 @@ package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.DarkElfScene;
 	import classes.Scenes.Places.HeXinDao;
 	
 	public class DarkElfScout extends Monster
@@ -44,28 +42,26 @@ package classes.Scenes.Monsters
 		
 		public function PoisonedBowShoot():void
 		{
-			var damage:Number = 0;
-			damage += eBaseSpeedDamage() * 0.2;
-			damage = player.reduceDamage(damage);
-			if (damage < 10) damage = 10;
-			if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
-			else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
-			else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
-			else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
-			else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
-			damage = Math.round(damage);
-			outputText("An arrow hit you for ");
-			player.takeDamage(damage, true);
-			outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
-			if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
-				player.spe -= 2;
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText("An arrow hits wind wall dealing no damage to you.\n\n");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
 			}
 			else {
-				player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
-				player.spe -= 3;
+				var damage:Number = 0;
+				damage += eBaseSpeedDamage() * 0.2;
+				damage = player.reduceDamage(damage);
+				if (damage < 10) damage = 10;
+				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
+				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
+				else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
+				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
+				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
+				damage = Math.round(damage);
+				outputText("An arrow hit you for ");
+				player.takeDamage(damage, true);
+				outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
+				player.addCombatBuff('spe', -3);
 			}
-			showStatDown( 'spe' );
 		}
 		
 		public function AnkleShot():void
@@ -76,20 +72,26 @@ package classes.Scenes.Monsters
 		
 		public function WingClip():void
 		{
-			outputText("The dark elf makes a wicked smirk before letting out an arrow straight into your wing. You fall down, unable to fly and crashing to the ground. ");
-			player.removeStatusEffect(StatusEffects.Flying);
-			var damage:Number = 0;
-			damage += this.str * 1.5;
-			damage += eBaseSpeedDamage() * 1.5;
-			if (damage < 10) damage = 10;
-			if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
-			else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
-			else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
-			else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
-			else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
-			damage = Math.round(damage);
-			player.takeDamage(damage, true);
-			outputText("\n\n");
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText("An arrow hits wind wall dealing no damage to you.\n\n");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else {
+				outputText("The dark elf makes a wicked smirk before letting out an arrow straight into your wing. You fall down, unable to fly and crashing to the ground. ");
+				player.removeStatusEffect(StatusEffects.Flying);
+				var damage:Number = 0;
+				damage += this.str * 1.5;
+				damage += eBaseSpeedDamage() * 1.5;
+				if (damage < 10) damage = 10;
+				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
+				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
+				else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
+				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
+				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
+				damage = Math.round(damage);
+				player.takeDamage(damage, true);
+				outputText("\n\n");
+			}
 		}
 		
 		override protected function performCombatAction():void

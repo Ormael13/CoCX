@@ -37,8 +37,14 @@ package classes.Scenes.Places.Farm
 			outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
 
 			//Miss:
-			if(player.getEvasionRoll()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid the missile by the skin of your teeth!");
+				combatRoundOver();
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText("Still his arrow hits wind wall dealing no damage to you.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
 				combatRoundOver();
 				return;
 			}
@@ -71,7 +77,7 @@ package classes.Scenes.Places.Farm
 				if(player.lust >= 80) outputText("Your hand moves towards your groin seemingly of its own volition.");
 				else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
 			}
-			game.dynStats("lus", player.lib/5 + rand(10));
+			player.dynStats("lus", player.lib/5 + rand(10));
 			combatRoundOver();
 		}
 

@@ -656,7 +656,7 @@ import coc.xxc.StoryContext;
 		protected function dynStats(... args):void
 		{
 			// Bullshit to unroll the incoming array
-			kGAMECLASS.dynStats.apply(null, args);
+			player.dynStats.apply(player, args);
 		}
 
 		protected function silly():Boolean

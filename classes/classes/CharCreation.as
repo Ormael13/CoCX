@@ -27,7 +27,8 @@ import fl.controls.ComboBox;
 		public const MAX_ENDURANCE_LEVEL:int = 25;				//90 AP
 		public const MAX_HARDINESS_LEVEL:int = 25;				//90 AP
 		public const MAX_SOULPURITY_LEVEL:int = 25;				//90 AP
-	//	public const MAX_SOULPURITY_LEVEL:int = 20;
+		public const MAX_INNERPOWER_LEVEL:int = 25;				//90 AP
+		public const MAX_FURY_LEVEL:int = 25;					//90 AP
 		public const MAX_MYSTICALITY_LEVEL:int = 20;			//90 AP
 		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;	//90 AP
 		public const MAX_WISDOM_LEVEL:int = 5;					//15 AP
@@ -731,9 +732,9 @@ import fl.controls.ComboBox;
 			addButton(5, "Brown", setEyesColor, "brown");
 			addButton(6, "Yellow", setEyesColor, "yellow");
 			addButton(7, "Grey", setEyesColor, "grey");
-			addButton(10, "Purple", setEyesColor, "purple");
+			addButton(8, "Purple", setEyesColor, "purple");
+			addButton(10, "Silver", setEyesColor, "silver");
 			addButton(11, "Golden", setEyesColor, "golden");
-			addButton(13, "Silver", setEyesColor, "silver");
 		}
 
 		private function setEyesColor(choice:String):void { //And choose hair
@@ -770,7 +771,8 @@ import fl.controls.ComboBox;
 				}
 				addButton(2, "Beard Style", menuBeardSettings);
 			}
-			addButton(3, "Set Height", setHeight);
+			addButton(3, "Eyes Color", menuEyesColor);
+			addButton(4, "Set Height", setHeight);
 			if (player.hasCock()) addButton(5, "Cock Size", menuCockLength);
 			addButton(6, "Breast Size", menuBreastSize);
 			addButton(9, "Done", chooseEndowment, true);
@@ -863,6 +865,32 @@ import fl.controls.ComboBox;
 			menuBeardSettings();
 		}
 		
+		//-----------------
+		//-- EYES COLOURS
+		//-----------------
+		private function menuEyesColor():void {
+			clearOutput();
+			outputText("What is your eyes color?");
+			menu();
+			addButton(0, "Black", pickEyesColor, "black");
+			addButton(1, "Green", pickEyesColor, "green");
+			addButton(2, "Blue", pickEyesColor, "blue");
+			addButton(3, "Red", pickEyesColor, "red");
+			addButton(4, "White", pickEyesColor, "white");
+			addButton(5, "Brown", pickEyesColor, "brown");
+			addButton(6, "Yellow", pickEyesColor, "yellow");
+			addButton(7, "Grey", pickEyesColor, "grey");
+			addButton(10, "Purple", pickEyesColor, "purple");
+			addButton(11, "Golden", pickEyesColor, "golden");
+			addButton(13, "Silver", pickEyesColor, "silver");
+			addButton(14, "Back", genericStyleCustomizeMenu);
+		}
+
+		private function pickEyesColor(color:String = ""):void {
+			player.eyeColor = color;
+			genericStyleCustomizeMenu();
+		}
+
 		//-----------------
 		//-- HEIGHT
 		//-----------------
@@ -1553,14 +1581,30 @@ import fl.controls.ComboBox;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate.)");
 			menu();
-			addButton(0, "Perk Select", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
-			addButton(1, "Rare Perks", rarePerks).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
-			addButton(2, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5 per perk).", "Perk Selection");
-			if (player.ascensionPerkPoints >= 5) addButton(5, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
-			addButton(6, "Rename", renamePrompt).hint("Change your name at no charge?");
-			addButton(7, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure?");
+			addButton(0, "Perk Select(1)", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
+			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
+			addButton(2, "Rare Perks(1)", rarePerks).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
+			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5 per perk).", "Perk Selection");
+			if (player.ascensionPerkPoints >= 5) addButton(6, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
+			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge?");
+			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure?");
 		}
 		private function ascensionPerkMenu():void {
+			clearOutput();
+			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+			addButton(0, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
+			addButton(1, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
+			addButton(2, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " (No maximum level)");
+			addButton(3, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
+			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
+			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
+			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
+			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
+			addButton(14, "Back", ascensionMenu);
+		}
+		private function ascensionPerkMenu2():void {
 			clearOutput();
 			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
@@ -1569,15 +1613,9 @@ import fl.controls.ComboBox;
 			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
 			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL);
 			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL);
-			addButton(4, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL);
-			addButton(5, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
-			addButton(6, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
-			addButton(7, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " (No maximum level)");
-			addButton(8, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
-			addButton(9, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
-			addButton(10, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
-			addButton(11, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
-			addButton(12, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
+			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL);
+			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL);
+			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL);
 			addButton(14, "Back", ascensionMenu);
 		}
 		
@@ -1625,7 +1663,7 @@ import fl.controls.ComboBox;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addAscensionPerk2, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank && player.perkv1(perk) < 20) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to ascend again.");
-			addButton(4, "Back", ascensionPerkMenu);
+			addButton(4, "Back", ascensionPerkMenu2);
 		}
 		private function addAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -1633,7 +1671,7 @@ import fl.controls.ComboBox;
 			player.ascensionPerkPoints -= cost;
 			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
-			ascensionPerkSelection(perk, maxRank);
+			ascensionPerkSelection2(perk, maxRank);
 		}
 		
 		private function rarePerks():void {

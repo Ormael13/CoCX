@@ -197,7 +197,7 @@ public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 		//Clear itemswapping in case it hung somehow
 //No longer used:		itemSwapping = false;
 		//Player won
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) {
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) {
 			awardPlayer(nextFunc);
 		}
 		//Player lost
@@ -659,7 +659,11 @@ public function unarmedAttack():Number {
 	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) unarmed += 12 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) unarmed += 18 * (1 + player.newGamePlusMod());
-//	if (findPerk(OneOfBeastWarriorPerks) >= 0) unarmed *= 1.05;
+	if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
+		else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
+	}
+	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) unarmed *= 1.1;
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
 	unarmed = Math.round(unarmed);
 	return unarmed;
@@ -938,6 +942,45 @@ public function baseelementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+	}
 	if (player.mana < manacostofelementalattacking) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
 		doNext(combatMenu);
@@ -1035,6 +1078,39 @@ public function elementalattacks():void {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && damageelemental > 2100) damageelemental = 2100;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && damageelemental > 2700) damageelemental = 2700;
 	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1 && damageelemental > 50) damageelemental = 50;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2 && damageelemental > 150) damageelemental = 150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3 && damageelemental > 300) damageelemental = 300;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) > 3) damageelemental += intwisscaling();
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4 && damageelemental > 600) damageelemental = 600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5 && damageelemental > 1150) damageelemental = 1150;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6 && damageelemental > 1600) damageelemental = 1600;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7 && damageelemental > 2100) damageelemental = 2100;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8 && damageelemental > 2700) damageelemental = 2700;
+	}
 	if (player.findPerk(PerkLib.ElementalConjurerResolve) >= 0) damageelemental *= (1 + (0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 	if (player.findPerk(PerkLib.ElementalConjurerDedication) >= 0) damageelemental *= (1 + (0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 	if (player.findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) damageelemental *= (1 + (0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -1045,14 +1121,16 @@ public function elementalattacks():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) critChance += 10;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) damageelemental *= 1.75;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) damageelemental *= 2;
+		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) damageelemental *= 1.75;
 		else damageelemental *= 1.5;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) damageelemental *= 1.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) damageelemental *= 2.5;
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) damageelemental *= 1.5;
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damageelemental *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damageelemental *= 2;
@@ -1077,7 +1155,7 @@ public function elementalattacks():void {
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
 	}
-	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) damageelemental *= (monster.damagePercent(false, true) / 100);
+	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 10) damageelemental *= (monster.damagePercent(false, true) / 100);
 	damageelemental = Math.round(damageelemental);
 	outputText("Your elemental hit " + monster.a + monster.short + "! ");
 	if (crit == true) {
@@ -1086,7 +1164,7 @@ public function elementalattacks():void {
 	outputText("<b>(<font color=\"#800000\">" + damageelemental + "</font>)</b>\n\n");
 	damageelemental = doDamage(damageelemental);
 	//checkMinionsAchievementDamage(damageelemental);
-	if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
+	if(monster.HP >= 1 && monster.lust <= monster.maxLust()) {
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
@@ -1184,7 +1262,7 @@ private function wait():void {
 	else if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
 		clearOutput();
 		outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
-		dynStats("lus", 30 + rand(5), "resisted", false);
+		dynStats("lus", 30 + rand(5), "scale", false);
 		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Whispered)) {
@@ -1838,12 +1916,12 @@ public function multiArrowsStrike():void {
 			}
 			else {
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-				if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
-				if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
+				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 					if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 					else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 				}
-				if (monster.lust >= (monster.eMaxLust() * 0.6)) {
+				if (monster.lust >= (monster.maxLust() * 0.6)) {
 					outputText(monster.capitalA + monster.short + "'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
@@ -1852,7 +1930,7 @@ public function multiArrowsStrike():void {
 				lustArrowDmg = Math.round(lustArrowDmg);
 				monster.lust += lustArrowDmg;
 				outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
-				if (monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+				if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 			}
 		}
 		if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 10) {
@@ -1929,7 +2007,7 @@ public function multiArrowsStrike():void {
 				}
 				player.tailVenom -= 5;
 			}
-			if (monster.lust >= monster.eMaxLust()) {
+			if (monster.lust >= monster.maxLust()) {
 				outputText("\n\n");
 				checkAchievementDamage(damage);
 				flags[kFLAGS.ARROWS_SHOT]++;
@@ -1968,7 +2046,7 @@ public function multiArrowsStrike():void {
 		enemyAI();
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) {
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
 			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -1976,11 +2054,11 @@ public function multiArrowsStrike():void {
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) {
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
 			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -1988,11 +2066,11 @@ public function multiArrowsStrike():void {
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) {
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
 			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2000,11 +2078,11 @@ public function multiArrowsStrike():void {
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) {
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
 			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2012,11 +2090,11 @@ public function multiArrowsStrike():void {
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 6) {
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
 			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2024,7 +2102,7 @@ public function multiArrowsStrike():void {
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 }
@@ -2376,7 +2454,7 @@ public function fantasize():void {
 	clearOutput();
 	if (monster.short == "frost giant" && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
 		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
-		dynStats("lus", temp2, "resisted", false);
+		dynStats("lus", temp2, "scale", false);
 		(monster as FrostGiant).giantBoulderFantasize();
 		enemyAI();
 		return;
@@ -2408,7 +2486,7 @@ public function fantasize():void {
 	}
 	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if " + monster.a + monster.short + " can tell what you were thinking.\n\n");
 	else outputText("\n");
-	dynStats("lus", temp2, "resisted", false);
+	dynStats("lus", temp2, "scale", false);
 	if(player.lust >= player.maxLust()) {
 		if(monster.short == "pod") {
 			outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n");
@@ -2440,7 +2518,7 @@ public function surrender():void {
 	temp3 += (player.maxLust() - player.lust);
 	clearOutput();
 	outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n");
-	dynStats("lus", temp3, "resisted", false);
+	dynStats("lus", temp3, "scale", false);
 	doNext(endLustLoss);
 }
 
@@ -2641,7 +2719,7 @@ public function attack():void {
 		//basilisk counter attack (block attack, significant speed loss): 
 		else if(player.inte/5 + rand(20) < 25) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-			Basilisk.basiliskSpeed(player,20);
+			player.addCombatBuff('spe', -20);
 			player.removeStatusEffect(StatusEffects.FirstAttack);
 			combatRoundOver();
 			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
@@ -2806,7 +2884,7 @@ public function attack():void {
 				outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
 				damage = 0;
 				//Kick back to main if no damage occured!
-				if(monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+				if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 					if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 						attack();
 						return;
@@ -2831,7 +2909,7 @@ public function attack():void {
 				outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
 				damage = 0;
 				//Kick back to main if no damage occured!
-				if(monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+				if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 					if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 						attack();
 						return;
@@ -2995,7 +3073,7 @@ public function attack():void {
 	
 	if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack))
 	{
-		if (monster.HP < 1 || monster.lust > monster.eMaxLust())
+		if (monster.HP < 1 || monster.lust > monster.maxLust())
 		{
 			// noop
 		}
@@ -3030,7 +3108,7 @@ public function attack():void {
 public function meleeattackdamage():void {
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) {
 		WrathWeaponsProc();
-		if(monster.HP >= 1 && monster.lust <= monster.eMaxLust()) {
+		if(monster.HP >= 1 && monster.lust <= monster.maxLust()) {
 			if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 				attack();
 				return;
@@ -3048,134 +3126,134 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) {
 		WrathWeaponsProc();
-		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 			attack();
 		}
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 }
@@ -3431,7 +3509,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	if(mod > 0) {
 		mainView.statsView.showStatDown( 'fatigue' );
 	}
-	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
+	dynStats("lus", 0, "scale", false); //Force display fatigue up/down by invoking zero lust change.
 	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
 	if(player.fatigue < 0) player.fatigue = 0;
 	statScreenRefresh();
@@ -3472,6 +3550,7 @@ public function enemyAIImpl():void {
 		//}
 	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
 }
 public function finishCombat():void
 {
@@ -3589,7 +3668,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	}
 	if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
-		if (monster.lust >= monster.eMaxLust()) monster.gems += bonusGems3;
+		if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
 	}
 	if (player.findPerk(PerkLib.AscensionFortune) >= 0) {
 		monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
@@ -3609,7 +3688,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	player.gems += monster.gems;
 	player.XP += monster.XP;
 	mainView.statsView.showStatUp('xp');
-	dynStats("lust", 0, "resisted", false); //Forces up arrow.
+	dynStats("lust", 0, "scale", false); //Forces up arrow.
 }
 
 //Update combat status effects
@@ -3849,7 +3928,7 @@ private function combatStatusesUpdate():void {
 	}
 	//Basilisk compulsion
 	if(player.hasStatusEffect(StatusEffects.BasiliskCompulsion)) {
-		Basilisk.basiliskSpeed(player,15);
+		player.addCombatBuff('spe', -15);
 		//Continuing effect text: 
 		outputText("<b>You still feel the spell of those grey eyes, making your movements slow and difficult, the remembered words tempting you to look into its eyes again. You need to finish this fight as fast as your heavy limbs will allow.</b>\n\n");
 		flags[kFLAGS.BASILISK_RESISTANCE_TRACKER]++;
@@ -3893,13 +3972,13 @@ private function combatStatusesUpdate():void {
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
 	}
 	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
-		if(monster.lust < (monster.eMaxLust() * 0.5)) outputText("Your aura seeps into " + monster.a + monster.short + " but does not have any visible effects just yet.\n\n");
-		else if(monster.lust < (monster.eMaxLust() * 0.6)) {
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into " + monster.a + monster.short + " but does not have any visible effects just yet.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.6)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your unholy presence.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your unholy presence.\n\n");
 		}
-		else if(monster.lust < (monster.eMaxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
-		else if(monster.lust < (monster.eMaxLust() * 0.85)) {
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.85)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently basks in your presence.\n\n");
 			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently bask in your presence.\n\n");
 		}
@@ -3911,13 +3990,13 @@ private function combatStatusesUpdate():void {
 		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
-		if(monster.lust < (monster.eMaxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.\n\n");
-		else if(monster.lust < (monster.eMaxLust() * 0.6)) {
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.6)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
 		}
-		else if(monster.lust < (monster.eMaxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
-		else if(monster.lust < (monster.eMaxLust() * 0.85)) {
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.85)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
 			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
 		}
@@ -4177,7 +4256,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
 		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
 			player.removeStatusEffect(StatusEffects.DwarfRage);
 			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
 		}
@@ -4214,9 +4293,9 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Might)) {
 		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-			else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-			kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
 			player.removeStatusEffect(StatusEffects.Might);
 		//	statScreenRefresh();
 			outputText("<b>Might effect wore off!</b>\n\n");
@@ -4225,7 +4304,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Blink)) {
 		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-			kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
 			player.removeStatusEffect(StatusEffects.Blink);
 		//	statScreenRefresh();
 			outputText("<b>Blink effect wore off!</b>\n\n");
@@ -4257,10 +4336,23 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	//Trance Transformation
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {
 		if (player.soulforce < 50) {
-			kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-			kGAMECLASS.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
+			player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
 			player.removeStatusEffect(StatusEffects.TranceTransformation);
 			outputText("<b>The flow of power through you suddenly stops, as you no longer have the soul energy to sustain it.  You drop roughly to the floor, the crystal coating your [skin] cracking and fading to nothing.</b>\n\n");
+		}
+	//	else {
+	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
+	//	}
+	}
+	//Crinos Shape
+	if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+		if (player.wrath < mspecials.crinosshapeCost()) {
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
+			player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
+			player.removeStatusEffect(StatusEffects.CrinosShape);
+			outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor, the bestial chanches slowly fading away leaving you in your normal form.</b>\n\n");
 		}
 	//	else {
 	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
@@ -4422,12 +4514,33 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 	}
 	//Elemental Aspect status effects
+	if (player.hasStatusEffect(StatusEffects.WindWall)) {
+		if (player.statusEffectv2(StatusEffects.WindWall) <= 0) {
+			player.removeStatusEffect(StatusEffects.WindWall);
+			outputText("<b>Wind Wall effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.WindWall,2,-1);
+	}
 	if (player.hasStatusEffect(StatusEffects.StoneSkin)) {
 		if (player.statusEffectv2(StatusEffects.StoneSkin) <= 0) {
 			player.removeStatusEffect(StatusEffects.StoneSkin);
 			outputText("<b>Stone Skin effect wore off!</b>\n\n");
 		}
 		else player.addStatusValue(StatusEffects.StoneSkin,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.BarkSkin)) {
+		if (player.statusEffectv2(StatusEffects.BarkSkin) <= 0) {
+			player.removeStatusEffect(StatusEffects.BarkSkin);
+			outputText("<b>Bark Skin effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.BarkSkin,2,-1);
+	}
+	if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
+		if (player.statusEffectv2(StatusEffects.MetalSkin) <= 0) {
+			player.removeStatusEffect(StatusEffects.MetalSkin);
+			outputText("<b>Metal Skin effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.MetalSkin,2,-1);
 	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
@@ -4456,9 +4569,11 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
+		if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1.5;
+		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+		if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) healingPercent += 2;
 		if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
 		if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
@@ -4483,6 +4598,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
+		if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
@@ -4562,6 +4678,12 @@ public function wrathregeneration(combat:Boolean = true):void {
 	var gainedwrath:Number = 0;
 	if (combat) {
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryI) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryII) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryIII) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryIV) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryV) >= 0) gainedwrath += 2;
+		if (player.findPerk(PerkLib.PrimalFuryVI) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 2;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 2;
@@ -4570,10 +4692,22 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 6;
+		if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+			gainedwrath += 1;
+			if (player.findPerk(PerkLib.ImprovedCrinosShape) >= 0) gainedwrath += 2;
+			if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) gainedwrath += 3;
+			if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) gainedwrath += 4;
+		}
 		kGAMECLASS.WrathChange(gainedwrath, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryI) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryII) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryIII) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryIV) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryV) >= 0) gainedwrath += 1;
+		if (player.findPerk(PerkLib.PrimalFuryVI) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
@@ -4591,6 +4725,8 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 5) maxRegen += 1;
 	if (player.findPerk(PerkLib.LizanRegeneration) >= 0) maxRegen += 1.5;
 	if (player.findPerk(PerkLib.LizanMarrow) >= 0) maxRegen += 0.5;
+	if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) maxRegen += 0.5;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) maxRegen += 2;
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
 	return maxRegen;
@@ -4724,7 +4860,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
 	else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
 	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
-	monster.HP = monster.eMaxHP();
+	monster.HP = monster.maxHP();
 	monster.XP = monster.totalXP();
 	if (player.weaponRangeName == "gnoll throwing spear") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 20;
 	if (player.weaponRangeName == "gnoll throwing axes") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 10;
@@ -4733,7 +4869,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
 	if (player.weaponRange == weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
-		dynStats("lus", player.maxLust(), "resisted", false);
+		dynStats("lus", player.maxLust(), "scale", false);
 		doNext(endLustLoss);
 		return;
 	}
@@ -4774,12 +4910,14 @@ public function display():void {
 	var lustDisplay:String = "";
 	var fatigueDisplay:String = "";
 	var manaDisplay:String = "";
+	var corruptionDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
-	hpDisplay = monster.HP + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
-	lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();
-	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.eMaxFatigue();
-	manaDisplay = Math.floor(monster.mana) + " / " + monster.eMaxMana();
+	hpDisplay   = monster.HP + " / " + monster.maxHP() + " (" + (int(math * 1000) / 10) + "%)";
+	lustDisplay = Math.floor(monster.lust) + " / " + monster.maxLust();
+	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.maxFatigue();
+	manaDisplay = Math.floor(monster.mana) + " / " + monster.maxMana();
+	corruptionDisplay = monster.cor + " / 100 ";
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -4896,28 +5034,30 @@ public function display():void {
 		//soulforce
 		outputText("Mana: " + manaDisplay + "\n");
 		//wrath
+		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
 		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
 			outputText("\n----------------------------\n");
-			outputText("\nGeneral Type: ");
-			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) outputText("< Beast or Animal-morph > ");
-			if (monster.hasPerk(PerkLib.EnemyConstructType) >= 0) outputText("< Construct > ");
-			if (monster.hasPerk(PerkLib.EnemyGigantType) >= 0) outputText("< Gigant > ");
-			if (monster.hasPerk(PerkLib.EnemyGodType) >= 0) outputText("< God > ");
-			if (monster.hasPerk(PerkLib.EnemyGroupType) >= 0) outputText("< Group > ");
+			outputText("\n<b>General Type:</b>");
+			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) outputText("\n-Beast or Animal-morph");
+			if (monster.hasPerk(PerkLib.EnemyConstructType)) outputText("\n-Construct");
+			if (monster.hasPerk(PerkLib.EnemyGigantType)) outputText("\n-Gigant");
+			if (monster.hasPerk(PerkLib.EnemyGodType)) outputText("\n-God");
+			if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("\n-Group");
+			if (monster.hasPerk(PerkLib.EnemyPlantType)) outputText("\n-Plant");
 			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
-				if (monster.hasPerk(PerkLib.EnemyBossType) >= 0) outputText("< Boss > ");
-				outputText("\nElemental Type: ");
-				if (monster.hasPerk(PerkLib.DarknessNature) >= 0) outputText("< Darkness Nature > ");
-				if (monster.hasPerk(PerkLib.FireNature) >= 0) outputText("< Fire Nature > ");
-				if (monster.hasPerk(PerkLib.IceNature) >= 0) outputText("< Ice Nature > ");
-				if (monster.hasPerk(PerkLib.LightningNature) >= 0) outputText("< Lightning Nature > ");
+				if (monster.hasPerk(PerkLib.EnemyBossType)) outputText("\n-Boss");
+				outputText("\n<b>Elemental Type:</b>");
+				if (monster.hasPerk(PerkLib.DarknessNature)) outputText("\n-Darkness Nature");
+				if (monster.hasPerk(PerkLib.FireNature)) outputText("\n-Fire Nature");
+				if (monster.hasPerk(PerkLib.IceNature)) outputText("\n-Ice Nature");
+				if (monster.hasPerk(PerkLib.LightningNature)) outputText("\n-Lightning Nature");
 				if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
-					if (monster.hasPerk(PerkLib.DarknessVulnerability) >= 0) outputText("< Darkness Vulnerability > ");
-					if (monster.hasPerk(PerkLib.FireVulnerability) >= 0) outputText("< Fire Vulnerability > ");
-					if (monster.hasPerk(PerkLib.IceVulnerability) >= 0) outputText("< Ice Vulnerability > ");
-					if (monster.hasPerk(PerkLib.LightningVulnerability) >= 0) outputText("< Lightning Vulnerability > ");
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
-					//if (monster.hasPerk(PerkLib) >= 0) outputText("");
+					if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) outputText("\n-Darkness Vulnerability");
+					if (monster.findPerk(PerkLib.FireVulnerability) >= 0) outputText("\n-Fire Vulnerability");
+					if (monster.findPerk(PerkLib.IceVulnerability) >= 0) outputText("\n-Ice Vulnerability");
+					if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) outputText("\n-Lightning Vulnerability");
+					//if (monster.findPerk(PerkLib) >= 0) outputText("");
+					//if (monster.findPerk(PerkLib) >= 0) outputText("");
 				}
 			}
 			outputText("\n");
@@ -4957,122 +5097,122 @@ public function showMonsterLust():void {
 		if (monster.spe < 1) monster.spe = 1;
 		if (monster.str < 1) monster.str = 1;
 		if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
-		if (monster.lust > monster.eMaxLust()) combatRoundOver();
+		if (monster.lust > monster.maxLust()) combatRoundOver();
 	}
 	if(monster.short == "harpy") {
 		//(Enemy slightly aroused) 
-		if(monster.lust >= (monster.eMaxLust() * 0.45) && monster.lust < (monster.eMaxLust() * 0.7)) outputText("The harpy's actions are becoming more and more erratic as she runs her mad-looking eyes over your body, her chest jiggling, clearly aroused.  ");
+		if(monster.lust >= (monster.maxLust() * 0.45) && monster.lust < (monster.maxLust() * 0.7)) outputText("The harpy's actions are becoming more and more erratic as she runs her mad-looking eyes over your body, her chest jiggling, clearly aroused.  ");
 		//(Enemy moderately aroused) 
-		if(monster.lust >= (monster.eMaxLust() * 0.7) && monster.lust < (monster.eMaxLust() * 0.9)) outputText("She stops flapping quite so frantically and instead gently sways from side to side, showing her soft, feathery body to you, even twirling and raising her tail feathers, giving you a glimpse of her plush pussy, glistening with fluids.");
+		if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.9)) outputText("She stops flapping quite so frantically and instead gently sways from side to side, showing her soft, feathery body to you, even twirling and raising her tail feathers, giving you a glimpse of her plush pussy, glistening with fluids.");
 		//(Enemy dangerously aroused) 
-		if(monster.lust >= (monster.eMaxLust() * 0.9)) outputText("You can see her thighs coated with clear fluids, the feathers matted and sticky as she struggles to contain her lust.");
+		if(monster.lust >= (monster.maxLust() * 0.9)) outputText("You can see her thighs coated with clear fluids, the feathers matted and sticky as she struggles to contain her lust.");
 	}
 	else if(monster is Clara)
 	{
 		//Clara is becoming aroused
-		if(monster.lust <= (monster.eMaxLust() * 0.4))	 {}
-		else if(monster.lust <= (monster.eMaxLust() * 0.65)) outputText("The anger in her motions is weakening.");
+		if(monster.lust <= (monster.maxLust() * 0.4))	 {}
+		else if(monster.lust <= (monster.maxLust() * 0.65)) outputText("The anger in her motions is weakening.");
 		//Clara is somewhat aroused
-		else if(monster.lust <= (monster.eMaxLust() * 0.75)) outputText("Clara seems to be becoming more aroused than angry now.");
+		else if(monster.lust <= (monster.maxLust() * 0.75)) outputText("Clara seems to be becoming more aroused than angry now.");
 		//Clara is very aroused
-		else if(monster.lust <= (monster.eMaxLust() * 0.85)) outputText("Clara is breathing heavily now, the signs of her arousal becoming quite visible now.");
+		else if(monster.lust <= (monster.maxLust() * 0.85)) outputText("Clara is breathing heavily now, the signs of her arousal becoming quite visible now.");
 		//Clara is about to give in
 		else outputText("It looks like Clara is on the verge of having her anger overwhelmed by her lusts.");
 	}
 	//{Bonus Lust Descripts}
 	else if(monster.short == "Minerva") {
-		if(monster.lust < (monster.eMaxLust() * 0.4)) {}
+		if(monster.lust < (monster.maxLust() * 0.4)) {}
 		//(40)
-		else if(monster.lust < (monster.eMaxLust() * 0.6)) outputText("Letting out a groan Minerva shakes her head, focusing on the fight at hand.  The bulge in her short is getting larger, but the siren ignores her growing hard-on and continues fighting.  ");
+		else if(monster.lust < (monster.maxLust() * 0.6)) outputText("Letting out a groan Minerva shakes her head, focusing on the fight at hand.  The bulge in her short is getting larger, but the siren ignores her growing hard-on and continues fighting.  ");
 		//(60) 
-		else if(monster.lust < (monster.eMaxLust() * 0.8)) outputText("Tentacles are squirming out from the crotch of her shorts as the throbbing bulge grows bigger and bigger, becoming harder and harder... for Minerva to ignore.  A damp spot has formed just below the bulge.  ");
+		else if(monster.lust < (monster.maxLust() * 0.8)) outputText("Tentacles are squirming out from the crotch of her shorts as the throbbing bulge grows bigger and bigger, becoming harder and harder... for Minerva to ignore.  A damp spot has formed just below the bulge.  ");
 		//(80)
 		else outputText("She's holding onto her weapon for support as her face is flushed and pain-stricken.  Her tiny, short shorts are painfully holding back her quaking bulge, making the back of the fabric act like a thong as they ride up her ass and struggle against her cock.  Her cock-tentacles are lashing out in every direction.  The dampness has grown and is leaking down her leg.");
 	}
 	else if(monster.short == "Cum Witch") {
 		//{Bonus Lust Desc (40+)}
-		if(monster.lust < (monster.eMaxLust() * 0.4)) {}
-		else if(monster.lust < (monster.eMaxLust() * 0.5)) outputText("Her nipples are hard, and poke two visible tents into the robe draped across her mountainous melons.  ");
+		if(monster.lust < (monster.maxLust() * 0.4)) {}
+		else if(monster.lust < (monster.maxLust() * 0.5)) outputText("Her nipples are hard, and poke two visible tents into the robe draped across her mountainous melons.  ");
 		//{Bonus Lust Desc (50-75)}
-		else if(monster.lust < (monster.eMaxLust() * 0.75)) outputText("Wobbling dangerously, you can see her semi-hard shaft rustling the fabric as she moves, evidence of her growing needs.  ");
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Wobbling dangerously, you can see her semi-hard shaft rustling the fabric as she moves, evidence of her growing needs.  ");
 		//{75+}
-		if(monster.lust >= (monster.eMaxLust() * 0.75)) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears in its wake.  ");
+		if(monster.lust >= (monster.maxLust() * 0.75)) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears in its wake.  ");
 		//(85+}
-		if(monster.lust >= (monster.eMaxLust() * 0.85)) outputText("Every time she takes a step, those dark patches seem to double in size.  ");
+		if(monster.lust >= (monster.maxLust() * 0.85)) outputText("Every time she takes a step, those dark patches seem to double in size.  ");
 		//{93+}
-		if(monster.lust >= (monster.eMaxLust() * 0.93)) outputText("There's no doubt about it, the Cum Witch is dripping with pre-cum and so close to caving in.  Hell, the lower half of her robes are slowly becoming a seed-stained mess.  ");
+		if(monster.lust >= (monster.maxLust() * 0.93)) outputText("There's no doubt about it, the Cum Witch is dripping with pre-cum and so close to caving in.  Hell, the lower half of her robes are slowly becoming a seed-stained mess.  ");
 		//{Bonus Lust Desc (60+)}
-		if(monster.lust >= (monster.eMaxLust() * 0.70)) outputText("She keeps licking her lips whenever she has a moment, and she seems to be breathing awfully hard.  ");
+		if(monster.lust >= (monster.maxLust() * 0.70)) outputText("She keeps licking her lips whenever she has a moment, and she seems to be breathing awfully hard.  ");
 	}
 	else if(monster.short == "Kelt") {
 		//Kelt Lust Levels
 		//(sub 50)
-		if(monster.lust < (monster.eMaxLust() * 0.5)) outputText("Kelt actually seems to be turned off for once in his miserable life.  His maleness is fairly flaccid and droopy.  ");
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Kelt actually seems to be turned off for once in his miserable life.  His maleness is fairly flaccid and droopy.  ");
 		//(sub 60)
-		else if(monster.lust < (monster.eMaxLust() * 0.6)) outputText("Kelt's gotten a little stiff down below, but he still seems focused on taking you down.  ");
+		else if(monster.lust < (monster.maxLust() * 0.6)) outputText("Kelt's gotten a little stiff down below, but he still seems focused on taking you down.  ");
 		//(sub 70)
-		else if(monster.lust < (monster.eMaxLust() * 0.7)) outputText("Kelt's member has grown to its full size and even flared a little at the tip.  It bobs and sways with every movement he makes, reminding him how aroused you get him.  ");
+		else if(monster.lust < (monster.maxLust() * 0.7)) outputText("Kelt's member has grown to its full size and even flared a little at the tip.  It bobs and sways with every movement he makes, reminding him how aroused you get him.  ");
 		//(sub 80)
-		else if(monster.lust < (monster.eMaxLust() * 0.8)) outputText("Kelt is unabashedly aroused at this point.  His skin is flushed, his manhood is erect, and a thin bead of pre has begun to bead underneath.  ");
+		else if(monster.lust < (monster.maxLust() * 0.8)) outputText("Kelt is unabashedly aroused at this point.  His skin is flushed, his manhood is erect, and a thin bead of pre has begun to bead underneath.  ");
 		//(sub 90)
-		else if(monster.lust < (monster.eMaxLust() * 0.9)) outputText("Kelt seems to be having trouble focusing.  He keeps pausing and flexing his muscles, slapping his cock against his belly and moaning when it smears his pre-cum over his equine underside.  ");
+		else if(monster.lust < (monster.maxLust() * 0.9)) outputText("Kelt seems to be having trouble focusing.  He keeps pausing and flexing his muscles, slapping his cock against his belly and moaning when it smears his pre-cum over his equine underside.  ");
 		//(sub 100) 
 		else outputText("There can be no doubt that you're having quite the effect on Kelt.  He keeps fidgeting, dripping pre-cum everywhere as he tries to keep up the facade of fighting you.  His maleness is continually twitching and bobbing, dripping messily.  He's so close to giving in...");
 	}
 	else if(monster.short == "green slime") {
-		if(monster.lust >= (monster.eMaxLust() * 0.45) && monster.lust < (monster.eMaxLust() * 0.65)) outputText("A lump begins to form at the base of the figure's torso, where its crotch would be.  ");
-		if(monster.lust >= (monster.eMaxLust() * 0.65) && monster.lust < (monster.eMaxLust() * 0.85)) outputText("A distinct lump pulses at the base of the slime's torso, as if something inside the creature were trying to escape.  ");
-		if(monster.lust >= (monster.eMaxLust() * 0.85) && monster.lust < (monster.eMaxLust() * 0.93)) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  ");
-		if(monster.lust >= (monster.eMaxLust() * 0.93)) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  Its entire body pulses, and it is clearly beginning to lose its cohesion.  ");
+		if(monster.lust >= (monster.maxLust() * 0.45) && monster.lust < (monster.maxLust() * 0.65)) outputText("A lump begins to form at the base of the figure's torso, where its crotch would be.  ");
+		if(monster.lust >= (monster.maxLust() * 0.65) && monster.lust < (monster.maxLust() * 0.85)) outputText("A distinct lump pulses at the base of the slime's torso, as if something inside the creature were trying to escape.  ");
+		if(monster.lust >= (monster.maxLust() * 0.85) && monster.lust < (monster.maxLust() * 0.93)) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  ");
+		if(monster.lust >= (monster.maxLust() * 0.93)) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  Its entire body pulses, and it is clearly beginning to lose its cohesion.  ");
 	}
 	else if(monster.short == "Sirius, a naga hypnotist") {
-		if(monster.lust < (monster.eMaxLust() * 0.4)) {}
-		else if(monster.lust >= (monster.eMaxLust() * 0.4)) outputText("You can see the tip of his reptilian member poking out of its protective slit. ");
-		else if(monster.lust >= (monster.eMaxLust() * 0.6)) outputText("His cock is now completely exposed and half-erect, yet somehow he still stays focused on your eyes and his face is inexpressive.  ");
+		if(monster.lust < (monster.maxLust() * 0.4)) {}
+		else if(monster.lust >= (monster.maxLust() * 0.4)) outputText("You can see the tip of his reptilian member poking out of its protective slit. ");
+		else if(monster.lust >= (monster.maxLust() * 0.6)) outputText("His cock is now completely exposed and half-erect, yet somehow he still stays focused on your eyes and his face is inexpressive.  ");
 		else outputText("His cock is throbbing hard, you don't think it will take much longer for him to pop.   Yet his face still looks inexpressive... despite the beads of sweat forming on his brow.  ");
 
 	}
 	else if(monster.short == "kitsune") {
 		//Kitsune Lust states:
 		//Low
-		if(monster.lust > (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.5)) outputText("The kitsune's face is slightly flushed.  She fans herself with her hand, watching you closely.");
+		if(monster.lust > (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.5)) outputText("The kitsune's face is slightly flushed.  She fans herself with her hand, watching you closely.");
 		//Med
-		else if(monster.lust > (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.75)) outputText("The kitsune's cheeks are bright pink, and you can see her rubbing her thighs together and squirming with lust.");
+		else if(monster.lust > (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.75)) outputText("The kitsune's cheeks are bright pink, and you can see her rubbing her thighs together and squirming with lust.");
 		//High
-		else if(monster.lust > (monster.eMaxLust() * 0.3)) {
+		else if(monster.lust > (monster.maxLust() * 0.3)) {
 			//High (redhead only)
 			if(monster.hairColor == "red") outputText("The kitsune is openly aroused, unable to hide the obvious bulge in her robes as she seems to be struggling not to stroke it right here and now.");
 			else outputText("The kitsune is openly aroused, licking her lips frequently and desperately trying to hide the trail of fluids dripping down her leg.");
 		}
 	}
 	else if(monster.short == "demons") {
-		if(monster.lust > (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
-		if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.lust < (monster.eMaxLust() * 0.8)) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
-		if(monster.lust >= (monster.eMaxLust() * 0.8)) outputText(" The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
+		if(monster.lust > (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
+		if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.8)) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
+		if(monster.lust >= (monster.maxLust() * 0.8)) outputText(" The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
 	}
 	else {
 		if(monster.plural) {
-			if(monster.lust > (monster.eMaxLust() * 0.5) && monster.lust < (monster.eMaxLust() * 0.6)) outputText(monster.capitalA + monster.short + "' skin remains flushed with the beginnings of arousal.  ");
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.lust < (monster.eMaxLust() * 0.7)) outputText(monster.capitalA + monster.short + "' eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
+			if(monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText(monster.capitalA + monster.short + "' skin remains flushed with the beginnings of arousal.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "' eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
 			if(monster.cocks.length > 0) {
-				if(monster.lust >= (monster.eMaxLust() * 0.7) && monster.lust < (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groins.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulges more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groins.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulges more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
 			}
 			if(monster.vaginas.length > 0) {
-				if(monster.lust >= (monster.eMaxLust() * 0.7) && monster.lust < (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
 			}
 		}
 		else {
-			if(monster.lust > (monster.eMaxLust() * 0.5) && monster.lust < (monster.eMaxLust() * 0.6)) outputText(monster.capitalA + monster.short + "'s skin remains flushed with the beginnings of arousal.  ");
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.lust < (monster.eMaxLust() * 0.7)) outputText(monster.capitalA + monster.short + "'s eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
+			if(monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText(monster.capitalA + monster.short + "'s skin remains flushed with the beginnings of arousal.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "'s eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
 			if(monster.cocks.length > 0) {
-				if(monster.lust >= (monster.eMaxLust() * 0.7) && monster.lust < (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groin.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulge more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulge more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
 			}
 			if(monster.vaginas.length > 0) {
-				if(monster.lust >= (monster.eMaxLust() * 0.7) && monster.lust < (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.85)) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
 			}
 		}
 	}
@@ -5104,7 +5244,7 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 		doNext(endHpVictory);
 		return true;
 	}
-	if(monster.lust > monster.eMaxLust()) {
+	if(monster.lust > monster.maxLust()) {
 		doNext(endLustVictory);
 		return true;
 	}
@@ -5172,7 +5312,7 @@ public function ScyllaSqueeze():void {
 		fatigue(50, 2);
 	}
 	else fatigue(20, 2);
-	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100) * 1.5;
+	var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	if (monster.plural == true) damage *= 5;
 	//Squeeze -
@@ -5356,7 +5496,7 @@ public function ScyllaTease():void {
 			outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
 		}
 		outputText("\n\n");
-		if(monster.lust >= monster.eMaxLust()) {
+		if(monster.lust >= monster.maxLust()) {
 			doNext(endLustVictory);
 			return;
 		}
@@ -5516,7 +5656,7 @@ public function GooTease():void {
 			outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
 		}
 		outputText("\n\n");
-		if(monster.lust >= monster.eMaxLust()) {
+		if(monster.lust >= monster.maxLust()) {
 			doNext(endLustVictory);
 			return;
 		}

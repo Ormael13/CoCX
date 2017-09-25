@@ -33,10 +33,10 @@ package classes.Scenes.Areas
 			
 			//Build choice list!
 			choice[choice.length] = 0;	//SeaAnemone
-			choice[choice.length] = 1;	//Scylla
+		/*	choice[choice.length] = 1;	//Scylla
 			choice[choice.length] = 2;	//Shark girl
 			choice[choice.length] = 3;	//Tiger Shark girl
-			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 4;	//Fishing
+		*/	if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 1;	//Fishing
 			if (rand(4) == 0) choice[choice.length] = 5;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
 			
 			//Ceani
@@ -51,7 +51,7 @@ package classes.Scenes.Areas
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					kGAMECLASS.anemoneScene.mortalAnemoneeeeee();
 					break;
-				case 1:
+			/*	case 1:
 					scyllaScene.oceanScyllaEncounter();
 					break;
 				case 2:
@@ -60,9 +60,9 @@ package classes.Scenes.Areas
 				case 3:
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
-				case 4:
+			*/	case 1:
 					outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
-					outputText("<b>You got a fish!<\b>");
+					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 					break;
 				default:

@@ -139,7 +139,7 @@ public function goHomeFromVDay():void {
 	outputText("You decide your work here is done, and bid the three girls goodbye.  Scylla in particular seems grateful for your help, locking you in a smooshy hug for a few seconds before letting you go, and again expressing her gratitude for your help.  Well, that last gratitude almost made it worth it, though on the other hand, you find yourself a bit aroused by it...");
 	//With no other things to do, you go back to camp to rest.
 	//{Small Lust Increase, return to camp, go to sleep}
-	dynStats("lus", 10);
+	player.dynStats("lus", 10);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -361,7 +361,7 @@ public function fuckAbbyVDay():void {
 	}
 	
 	player.orgasm();
-	dynStats("sen", -3);
+	player.dynStats("sen", -3);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -394,7 +394,7 @@ public function pleasureAbbyVDay():void {
 		player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
 	}
 	
-	dynStats("lus", 80);
+	player.dynStats("lus", 80);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -525,7 +525,7 @@ public function fuckPastieForVDay():void {
 		player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
 	}
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -563,7 +563,7 @@ public function rubPastieOnYourWangDawg():void {
 		player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
 	}
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -600,7 +600,7 @@ public function goForAPushayDivePasty():void {
 	}
 	
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseTwoHours);
 }
 

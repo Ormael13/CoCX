@@ -6,11 +6,12 @@ package classes.Scenes.Places.HeXinDao
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.NPCs.NPCAwareContent;
 	import classes.Scenes.Places.HeXinDao.IgnisArenaSeer;
 
-	public class IgnisArenaSeerScene extends NPCAwareContent
+	public class IgnisArenaSeerScene extends HeXinDaoAbstractContent
 	{
+		
+		//public var arena:HeXinDao = new HeXinDao();
 		
 		public function IgnisArenaSeerScene() 
 		{}
@@ -27,7 +28,7 @@ package classes.Scenes.Places.HeXinDao
 			addButton(0, "Appearance", ignisAppearance);
 			addButton(1, "Talk", ignisTalks);
 			addButton(3, "Sparring", sparringWithIgnis);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			addButton(4, "Leave", heXinDao.soularena);
 		}
 		
 		public function ignisAppearance():void {

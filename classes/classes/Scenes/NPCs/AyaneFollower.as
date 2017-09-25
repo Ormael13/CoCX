@@ -155,7 +155,7 @@ public function ayaneShop():void {
 					outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
 					break;
 				case consumables.AGILI_E:
-					outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough it would be wise to actually work on your agility for a fast trick or a swift escape. I think <b>15 gems</b> is not too steep a price for the gift of speed.</i>\"");
+					outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough, it would be wise to actually work on your agility for a fast trick or a swift escape.</i>\"");
 					break;
 				case consumables.SMART_T:
 					outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>" + cost.toString() + " gems</b> is not too steep a price for the gift of intelligence.</i>\"");

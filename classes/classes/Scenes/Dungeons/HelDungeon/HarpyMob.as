@@ -51,11 +51,11 @@ package classes.Scenes.Dungeons.HelDungeon
 			if(player.findPerk(PerkLib.LuststickAdapted) >= 0) outputText("doing relatively little thanks to your adaptation");
 			else {
 				outputText("sending shivers of lust up your spine");
-				game.dynStats("lus", 5);
-				if(player.hasCock()) game.dynStats("lus", 15);
+				player.dynStats("lus", 5);
+				if(player.hasCock()) player.dynStats("lus", 15);
 			}
 			outputText(".");
-			game.dynStats("lus", 10);
+			player.dynStats("lus", 10);
 			combatRoundOver();
 		}
 		

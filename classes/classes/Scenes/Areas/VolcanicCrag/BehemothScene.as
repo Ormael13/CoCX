@@ -154,7 +154,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				
 			}
 			outputText("\n\nPLACEHOLDER");
-			dynStats("lib", -1, "lus", -20, "resisted", false, "noBimbo", true);
+			dynStats("lib", -1, "lus", -20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cum offer

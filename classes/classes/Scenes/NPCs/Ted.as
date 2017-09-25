@@ -15,47 +15,47 @@ package classes.Scenes.NPCs
 	{
 		private function tedSpecialAttackOne():void {
 			var damage:Number = 0;
-			if(hasStatusEffect(StatusEffects.Blind)) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Dragon-boy makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");
 			}
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");
 				combatRoundOver();
 				return;
 			}
 			damage = int((str + 60 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			damage /= 2;
-			if(damage <= 0) {
+			if (damage <= 0) {
 				damage = 0;
 				outputText("You easily deflect and block the damage from dragon boy wide swing.");//Ted's
 			}
-			outputText("Dragon boy easily hits you with a wide, difficult to avoid swing.  ");
+			else outputText("Dragon boy easily hits you with a wide, difficult to avoid swing.  ");
 			if(damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 		}
 		private function tedSpecialAttackTwo():void {
 			var damage:Number = 0;
-			if(hasStatusEffect(StatusEffects.Blind)) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Dragon-boy unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
 				combatRoundOver();
 				return;
 			}
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
 				outputText("You manage to roll out of the way of a massive overhand swing.");
 				combatRoundOver();
 				return;
 			}
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");
 				combatRoundOver();
 				return;
 			}
 			damage = int((str + 30 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
-			if(damage <= 0) {
+			if (damage <= 0) {
 				damage = 0;
 				outputText("You somehow manage to deflect and block dragon-boy massive overhead swing.");//Ted's
 			}
-			if(damage > 0) {
+			if (damage > 0) {
 				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");
 				damage = player.takeDamage(damage, true);
 			}

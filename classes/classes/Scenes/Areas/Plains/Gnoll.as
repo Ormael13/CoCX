@@ -120,7 +120,7 @@ package classes.Scenes.Areas.Plains
 				outputText("The gnoll dances forward, then back, her whole body alive with sensual movement.  She catches the way you watch her and smirks, throwing in a hip-shake just for you.");
 				bonus += 6;
 			}
-			game.dynStats("lus", (bonus + 10 + player.lib/20 + rand(player.cor/20)));
+			player.dynStats("lus", (bonus + 10 + player.lib/20 + rand(player.cor/20)));
 			outputText("\n");
 		}
 

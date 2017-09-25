@@ -217,7 +217,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText(" Delicious.");
 				else outputText(" Why did you do that? And why did it feel so good.");
 			}
-			game.dynStats("lus", 15 + player.lib/20);
+			player.dynStats("lus", 15 + player.lib/20);
 		}
 
 		private function battleaxe():void
@@ -237,7 +237,7 @@ package classes.Scenes.Dungeons.D3
 
 		private function hpRestore():void
 		{
-			HP = eMaxHP();
+			HP = maxHP();
 			lustVuln += 0.15;
 
 			_milkDrinks++;
@@ -255,20 +255,20 @@ package classes.Scenes.Dungeons.D3
 				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if(player.lust > 75) {
 					outputText("swallowing it into your mouth without thinking.  ");
-					game.dynStats("lus", 15 + player.lib/10);
+					player.dynStats("lus", 15 + player.lib/10);
 				}
 				else {
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					game.dynStats("lus", 7.5 + player.lib/20);
+					player.dynStats("lus", 7.5 + player.lib/20);
 				}
 			}
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			game.dynStats("lus", 15 + player.lib/20);
+			player.dynStats("lus", 15 + player.lib/20);
 			if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-				game.dynStats("lus", 5+rand(5));
+				player.dynStats("lus", 5+rand(5));
 			}
 		}
 
@@ -306,7 +306,7 @@ package classes.Scenes.Dungeons.D3
 					outputText("Excellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
 				}
 
-				game.dynStats("lus", 5);
+				player.dynStats("lus", 5);
 			}
 		}
 

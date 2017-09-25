@@ -59,11 +59,11 @@ package classes.Items.Consumables
 				game.player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				if (game.player.inte > 35) {
 					game.player.inte = 35;
-					game.dynStats("int", -0.1);
+					game.player.dynStats("int", -0.1);
 				}
 				if (game.player.lib < 50) {
 					game.player.lib = 50;
-					game.dynStats("lib", .1);
+					game.player.dynStats("lib", .1);
 				}
 			}
 			else {
@@ -130,7 +130,7 @@ package classes.Items.Consumables
 					game.player.breastRows[0].breastRating += 5 + Utils.rand(5);
 					outputText(", admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple, " + game.player.breastCup(0) + " boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand ");
 				}
-				game.dynStats("sen", 20);
+				game.player.dynStats("sen", 20);
 				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + game.player.vaginaDescript(0) + " like no tomorrow.  By now, your " + game.player.clitDescript() + " is throbbing, and you give it an experimental ");
 				if (game.player.clitLength >= 3) outputText("jerk ");
 				else outputText("caress ");
@@ -159,10 +159,10 @@ package classes.Items.Consumables
 					outputText("Like, weirdest of all, your muscles seem to be vanishing!  Before your eyes, all muscle tone vanishes, leaving your body soft and gently curvy.  You poke yourself and giggle!  Everyone's totally going to want to, like, rub up against you at every opportunity.  Your thighs are so soft you bet you could squeeze a pair of dicks to orgasm without even touching your moist cunny.");
 					game.player.tone = 0;
 					if (game.player.str >= 30) {
-						if (game.player.str >= 90) game.dynStats("str", -10);
-						if (game.player.str >= 70) game.dynStats("str", -10);
-						if (game.player.str >= 50) game.dynStats("str", -10);
-						game.dynStats("str", -5);
+						if (game.player.str >= 90) game.player.dynStats("str", -10);
+						if (game.player.str >= 70) game.player.dynStats("str", -10);
+						if (game.player.str >= 50) game.player.dynStats("str", -10);
+						game.player.dynStats("str", -5);
 						outputText("  It does get a bit harder to carry yourself around with your diminished strength, but that's, like, what big strong hunks are for anyways!  You can just flirt until one of them volunteers to help out or something!  Besides, you don't need to be strong to jerk off cocks or finger slutty pussies!");
 					}
 					outputText("\n\n");
@@ -180,7 +180,7 @@ package classes.Items.Consumables
 					}
 				}
 				game.player.orgasm();
-				game.dynStats("int", -1, "lib", 5, "sen", 25);
+				game.player.dynStats("int", -1, "lib", 5, "sen", 25);
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
 				//Body

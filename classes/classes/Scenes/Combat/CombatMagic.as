@@ -53,6 +53,8 @@ public class CombatMagic extends BaseCombatContent {
 	internal function cleanupAfterCombatImpl():void {
 		fireMagicLastTurn = -100;
 		iceMagicLastTurn = -100;
+		lightningMagicLastTurn = -100;
+		darknessMagicLastTurn = -100;
 	}
 	internal function spellCostImpl(mod:Number):Number {
 		//Addiditive mods
@@ -353,6 +355,80 @@ public class CombatMagic extends BaseCombatContent {
 		return damage;
 	}
 
+	private var lightningMagicLastTurn:int = -100;
+	private var lightningMagicCumulated:int = 0;
+	internal function calcVoltageModImpl(damage:Number):int {
+		if (player.findPerk(PerkLib.HighVoltage) >= 0) {
+			var multiplier:Number = 1;
+			if (combatRound - lightningMagicLastTurn == 2) {
+				outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
+				switch(lightningMagicCumulated) {
+					case 0:
+					case 1:
+						multiplier = 1;
+						break;
+					case 2:
+						multiplier = 1.2;
+						break;
+					case 3:
+						multiplier = 1.35;
+						break;
+					case 4:
+						multiplier = 1.45;
+						break;
+					default:
+						multiplier = 1.5 + ((lightningMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
+				}
+				damage = Math.round(damage * multiplier);
+				lightningMagicCumulated++;
+				// XXX: Message?
+			} else {
+				if (combatRound - lightningMagicLastTurn > 2 && lightningMagicLastTurn > 0)
+					outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
+				lightningMagicCumulated = 1;
+			}
+			lightningMagicLastTurn = combatRound;
+		}
+		return damage;
+	}
+
+	private var darknessMagicLastTurn:int = -100;
+	private var darknessMagicCumulated:int = 0;
+	internal function calcEclypseModImpl(damage:Number):int {
+		if (player.findPerk(PerkLib.EclipsingShadow) >= 0) {
+			var multiplier:Number = 1;
+			if (combatRound - darknessMagicLastTurn == 2) {
+				outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
+				switch(darknessMagicCumulated) {
+					case 0:
+					case 1:
+						multiplier = 1;
+						break;
+					case 2:
+						multiplier = 1.2;
+						break;
+					case 3:
+						multiplier = 1.35;
+						break;
+					case 4:
+						multiplier = 1.45;
+						break;
+					default:
+						multiplier = 1.5 + ((darknessMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
+				}
+				damage = Math.round(damage * multiplier);
+				darknessMagicCumulated++;
+				// XXX: Message?
+			} else {
+				if (combatRound - darknessMagicLastTurn > 2 && darknessMagicLastTurn > 0)
+					outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
+				darknessMagicCumulated = 1;
+			}
+			darknessMagicLastTurn = combatRound;
+		}
+		return damage;
+	}
+
 	public function magicMenu():void {
 	//Pass false to combatMenu instead:	menuLoc = 3;
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 2 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
@@ -412,7 +488,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You are far too aroused to focus on white magic.\n\n");
 		else {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon) && player.weaponName != "fists")
+				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon) && (player.weaponName != "fists" || (player.weaponName == "fists" && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0)))
 					addButton(0, "Charge W.", spellChargeWeapon).hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
 				else if (player.weaponName == "fists") {
 					outputText("<b>Charge weapon can't be casted on your own fists.</b>\n\n");
@@ -424,7 +500,7 @@ public class CombatMagic extends BaseCombatContent {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				if (!player.hasStatusEffect(StatusEffects.ChargeArmor) && !player.isNaked())
+				if (!player.hasStatusEffect(StatusEffects.ChargeArmor) && (!player.isNaked() || (player.isNaked() && player.haveNaturalArmor() && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0)))
 					addButton(1, "Charge A.", spellChargeArmor).hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.  \n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
 				else if (player.isNaked()) {
 					outputText("<b>Charge armor can't be casted without wearing any armor or even underwear.</b>\n\n");
@@ -525,7 +601,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			doNext(playerMenu);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 			else enemyAI();
 			return;
 		}
@@ -539,35 +615,35 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 		if(player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmg *= 1.5;
-		if(monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
-		if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
+		if(monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 		}
-		if(monster.lust >= (monster.eMaxLust() * 0.6)) {
+		if(monster.lust >= (monster.maxLust() * 0.6)) {
 			outputText(monster.capitalA + monster.short + "'");
 			if(!monster.plural) outputText("s");
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if(monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 			}
 			else {
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-				if(monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
 		//Determine if critical tease!
@@ -591,7 +667,7 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 	public function spellHeal():void {
@@ -714,31 +790,26 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.findPerk(PerkLib.LongerLastingBuffsVI) >= 0) MightDuration += 1;
 			if (player.findPerk(PerkLib.EverLastingBuffs) >= 0) MightDuration += 5;
 			if (player.findPerk(PerkLib.EternalyLastingBuffs) >= 0) MightDuration += 5;
-			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
-			temp = MightBoost;
-			tempTou = temp;
+			tempTou = MightBoost;
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
 				var MightIntBoost:Number = 0;
 				MightIntBoost += 25 * spellModBlack() * (1 + player.newGamePlusMod());
-				temp = MightIntBoost;
-				tempInt = temp;
+				tempInt = MightIntBoost;
+			} else {
+				tempStr = MightBoost;
 			}
-			else tempStr = temp;
-			//if(player.str + temp > 100) tempStr = 100 - player.str;
-			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
+			var oldHPratio:Number = player.hp100/100;
+			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
 			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
 			player.changeStatusValue(StatusEffects.Might,2,tempTou);
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) mainView.statsView.showStatUp('int');
-			else mainView.statsView.showStatUp('str');
-			// strUp.visible = true;
-			// strDown.visible = false;
-			mainView.statsView.showStatUp('tou');
-			// touUp.visible = true;
-			// touDown.visible = false;
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.inte += player.statusEffectv1(StatusEffects.Might);
-			else player.str += player.statusEffectv1(StatusEffects.Might);
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				player.inte += player.statusEffectv1(StatusEffects.Might);
+			} else {
+				player.str += player.statusEffectv1(StatusEffects.Might);
+			}
 			player.tou += player.statusEffectv2(StatusEffects.Might);
+			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};
 
@@ -1062,7 +1133,7 @@ public class CombatMagic extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		//High damage to goes.
-//	temp = calcGlacialMod(temp);
+		temp = calcEclypseMod(temp);
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
@@ -1448,7 +1519,10 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your [armor].  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
+		outputText("You utter words of power, summoning an electrical charge around your");
+		if (player.isNaked() && player.haveNaturalArmor() && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) outputText(" natural armor.");
+		else outputText(" [armor].");
+		outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -1745,7 +1819,7 @@ public class CombatMagic extends BaseCombatContent {
 			temp *= 1.75;
 		}
 		//High damage to goes.
-//	temp = calcGlacialMod(temp);
+		temp = calcVoltageMod(temp);
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 5;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;

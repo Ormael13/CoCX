@@ -65,17 +65,23 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.KINDRA_AFFECTION] < 7) outputText("Sheep-morph archer");
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 7) outputText("Kindra");
 			outputText(" casually fire an arrow at you with supreme skill.");
-			var damage:Number = 0;
-			damage += eBaseSpeedDamage() * 0.2;
-			damage = player.reduceDamage(damage);
-			if (damage < 10) damage = 10;
-			//weapon bonus
-			if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
-			else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
-			else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
-			else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
-			else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
-			player.takeDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				outputText(" Still surrounding you wind wall stops it without much trouble.");
+				player.addStatusValue(StatusEffects.WindWall,2,-1);
+			}
+			else {
+				var damage:Number = 0;
+				damage += eBaseSpeedDamage() * 0.2;
+				damage = player.reduceDamage(damage);
+				if (damage < 10) damage = 10;
+				//weapon bonus
+				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
+				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));
+				else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
+				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
+				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
+				player.takeDamage(damage, true);
+			}
 			outputText("\n\n");
 			fatigue += bowShooting();
 			flags[kFLAGS.KINDRA_ARROWS_SHOT]++;
@@ -93,7 +99,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 6))) KindraFireBow06();
+				if (fatigue < (maxFatigue() - (bowShooting() * 6))) KindraFireBow06();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -101,7 +107,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 5))) KindraFireBow05();
+				if (fatigue < (maxFatigue() - (bowShooting() * 5))) KindraFireBow05();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -109,7 +115,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 4))) KindraFireBow04();
+				if (fatigue < (maxFatigue() - (bowShooting() * 4))) KindraFireBow04();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -117,7 +123,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 3))) KindraFireBow03();
+				if (fatigue < (maxFatigue() - (bowShooting() * 3))) KindraFireBow03();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -125,7 +131,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 2))) KindraFireBow02();
+				if (fatigue < (maxFatigue() - (bowShooting() * 2))) KindraFireBow02();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -133,7 +139,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
-				if (fatigue < (eMaxFatigue() - bowShooting())) KindraFireBow01();
+				if (fatigue < (maxFatigue() - bowShooting())) KindraFireBow01();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();

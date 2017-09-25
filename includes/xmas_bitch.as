@@ -239,10 +239,10 @@ public function xmasFuckFollowup():void {
 	//[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
 	//(-5 corruption)
-	dynStats("cor", -5);
+	player.dynStats("cor", -5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)
-	if(player.sens + 20 > 80) dynStats("sen", 5);
-	else dynStats("sen", 15);
+	if(player.sens + 20 > 80) player.dynStats("sen", 5);
+	else player.dynStats("sen", 15);
 	temp = 1001;
 	flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
@@ -258,10 +258,10 @@ public function xmasFuckFollowupFems():void {
 	//[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
 	//(-5 corruption)
-	dynStats("cor", -5);
+	player.dynStats("cor", -5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)
-	if(player.sens + 20 > 80) dynStats("sen", 5);
-	else dynStats("sen", 15);
+	if(player.sens + 20 > 80) player.dynStats("sen", 5);
+	else player.dynStats("sen", 15);
 	temp = 2002;
 	flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
@@ -293,5 +293,5 @@ public function xmasSmart():void {
 	clearOutput();
 	outputText("You nod to yourself, feeling pretty smart about your decision.");
 	doNext(playerMenu);
-	dynStats("int", 15);
+	player.dynStats("int", 15);
 }

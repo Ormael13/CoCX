@@ -23,27 +23,25 @@ package classes.Scenes.NPCs
 		public function moveTailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
-			outputText("'s tail curls over and shoots a spike at you. ");
+			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
-				var tailspikedmg:Number = Math.round(this.str / 16);
-				var lustdmg:Number = Math.round(this.lib / 6);
-				if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-					player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
-					player.spe -= 2;
+				if (player.hasStatusEffect(StatusEffects.WindWall)) {
+					outputText("hits wind wall doing no damage to you.");
+					player.addStatusValue(StatusEffects.WindWall,2,-1);
 				}
 				else {
-					player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
-					player.spe -= 3;
+					var tailspikedmg:Number = Math.round(this.str / 16);
+					var lustdmg:Number = Math.round(this.lib / 6);
+					player.addCombatBuff('spe',-2);
+					outputText("hits the mark dealing ");
+					player.takeDamage(tailspikedmg, true);
+					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
+					player.dynStats("lus", lustdmg, "scale", false);
+					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 				}
-				showStatDown( 'spe' );
-				outputText("The bony spike hits the mark dealing ");
-				player.takeDamage(tailspikedmg, true);
-				outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
-				game.dynStats("lus", lustdmg, "resisted", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			}
 			else {
-				outputText("The bony spike miss the mark.");
+				outputText("miss the mark.");
 			}
 		}
 		
@@ -60,7 +58,7 @@ package classes.Scenes.NPCs
 			outputText(" in your direction crashing into you breast first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she ready her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
-			game.dynStats("lus", lustdmg, "resisted", false);
+			player.dynStats("lus", lustdmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			player.takeDamage(boobcrashdmg, true);
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);

@@ -101,7 +101,7 @@
 			//The Zealot seems to have taken on the appearance of a young adult wearing a student uniform of sorts; of course, this isn't any less perverted than any of the other costumes this man wears.  This one includes a number of loose straps that you're certain would cause large sections of his clothes to fall off if somebody pulled on them.
 			outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.");
 		}
-		game.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
+		player.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
 		combatRoundOver();
 	}
 	//Special2: Lust transfer spell, it becomes more and 
@@ -109,7 +109,7 @@
 	//higher, but he can use it at any time (like the cultist).
 	private function zealotSpecial2():void {
 		outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.");
-		game.dynStats("lus", lust/2);
+		player.dynStats("lus", lust/2);
 		lust /= 2;
 		combatRoundOver();
 	}
@@ -120,7 +120,7 @@
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound");
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?");
 				else outputText(".");
-				game.dynStats("lus", (player.lib / 20 + 5));
+				player.dynStats("lus", (player.lib / 20 + 5));
 			}
 			super.postAttack(damage);
 		}

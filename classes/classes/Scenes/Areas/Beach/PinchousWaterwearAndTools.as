@@ -38,7 +38,7 @@ package classes.Scenes.Areas.Beach
 		}
 		public function PinchousWaterwearAndToolsShopMenu2():void {
 			clearOutput();
-			outputText("Liadri you gotta put some fancy text here xD\n\n");
+			outputText("\"<i>This is my shop: ‘Pinchou’s waterwear and tools’, my name is... oh it’s you again... Well sure go ahead and browse you know my inventory already.</i>\"\n\n");
 			PinchousWaterwearAndToolsShopMenu();
 		}
 		private function weaponBuy(itype:ItemType):void {
@@ -59,7 +59,7 @@ package classes.Scenes.Areas.Beach
 		}
 		public function leavePinchousWaterwearAndToolsShop():void {
 			clearOutput();
-			outputText("You wave her goodby and head back to camp.\n\n");
+			outputText("You wave her goodbye and head back to camp.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

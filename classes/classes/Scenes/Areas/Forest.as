@@ -12,10 +12,10 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.DarkElfScene;
 
-import coc.xxc.BoundStory;
-import coc.xxc.stmts.ZoneStmt;
+	import coc.xxc.BoundStory;
+	import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{
@@ -196,11 +196,11 @@ use namespace kGAMECLASS;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					},{
+					}/*,{
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || (player.isMale() && player.ass.virgin)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
+							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !game.celessScene.armorFound;
 						}
 					}, {
 						name: "celess-armor",
@@ -208,7 +208,7 @@ use namespace kGAMECLASS;
 						when: function():Boolean{
 							return game.celessScene.isFollower && !game.celessScene.armorFound;
 						}
-					});
+					}*/);
 					/*
 					{
 						name  : "mimic",
@@ -350,7 +350,7 @@ use namespace kGAMECLASS;
 			switch(stage){
 				case 0:
 					forestStory.display("strings/celess-unicorn/intro");
-					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless() || true)?2:3);
+					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
 					if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
 					addButton(5, "NoWay", celessUnicornIntro, 1);
 					break;
@@ -525,7 +525,7 @@ use namespace kGAMECLASS;
 				//SCENE END = FOR ALL OTHER CHARACTERS
 				else outputText("  You struggle and push with your [legs] as hard as you can, but it's no use.  You do the only thing you can and begin stroking your [cocks] with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your loins, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the forest floor.");
 			}
-			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
+			dynStats("lus", 25 + rand(player.cor / 5), "scale", false);
 			fatigue(5);
 			doNext(camp.returnToCampUseOneHour);
 		}

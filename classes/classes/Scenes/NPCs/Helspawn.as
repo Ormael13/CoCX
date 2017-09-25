@@ -2,8 +2,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+import classes.StatusEffects.Combat.CalledShotDebuff;
 
-	public class Helspawn extends Monster
+public class Helspawn extends Monster
 	{
 
 		override public function doAI():void
@@ -45,28 +46,8 @@ private function calledShot():void {
 	if(damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
-		var affect:int = 20 + rand(5);
-		if(player.hasStatusEffect(StatusEffects.CalledShot)) {
-			while(affect > 0 && player.spe >= 2) {
-				affect--;
-				player.addStatusValue(StatusEffects.CalledShot,1,1);
-				player.spe--;
-				showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-			}
-		}
-		else {
-			player.createStatusEffect(StatusEffects.CalledShot,0,0,0,0);
-			while(affect > 0 && player.spe >= 2) {
-				affect--;
-				player.addStatusValue(StatusEffects.CalledShot,1,1);
-				player.spe--;
-				showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-			}
-		}
+		var sec:CalledShotDebuff = player.createOrFindStatusEffect(StatusEffects.CalledShot) as CalledShotDebuff;
+		sec.increase();
 		damage = player.takeDamage(damage, true);
 	}
 }
@@ -134,7 +115,7 @@ private function calledShot():void {
 			outputText("Seeing a momentary lull in the melee, " + flags[kFLAGS.HELSPAWN_NAME] + " slips out of reach, stumbling back and clutching at the bruises forming all over her body.  \"<i>Come on, " + flags[kFLAGS.HELSPAWN_NAME] + ", you can do this. Focus, focus,</i>\" she mutters, trying to catch her breath.  A moment later and she seems to have taken a second wind as she readies her weapon with a renewed vigor.");
 			lust -= 30;
 			if(lust < 0) lust = 0;
-			addHP(eMaxHP() / 3.0);
+			addHP(maxHP() / 3.0);
 		}
 
 		override public function defeated(hpVictory:Boolean):void

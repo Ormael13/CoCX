@@ -45,7 +45,7 @@
 				}
 				temp = Math.round(temp);
 				player.takeDamage(temp, true);
-				game.dynStats("lus", 20+(player.sens/10));
+				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
 					doNext(game.endHpLoss);

@@ -1509,7 +1509,7 @@ private function shareTentaclesWithScylla2():void {
 		outputText("\n\nYou shift the cock wrapping around her body, slowly encircling Pastie just below the fairy's breasts, looping down her torso so that the tip can snake under her legs.  A steady stream of pre dribbles from the stimulated shaft as you flex around her petite hips, her cascading lubrication swiftly soaking her lower body, thighs to ankles.  Pressing the tip of your cock against her teensy toes, you push forward, your fluid-soaked urethra swallowing Pastie's wriggling feet.  Her fey-cum mixes with your own, sending a tingling wave of pressurized bliss through your loins and you push harder, sucking the fairy into your cock up to the knees.  The suckling sensation of being gradually engulfed by the voracious heat of your flesh robs the girl of the last of her faculties.  Mind broken by the taut compression of your dick's ravenous mass, Pastie moans and squirms, wriggling deeper into the embrace of your tentacle, until its swollen peak dilates at her hips.  Loosening your grip around her waist, you position your other cock directly above her, blobs of pre-cum bubbling down upon her head.  She looks up, blankly, and instantly understands.  Obediently, she raises her arms and slides her cum-slick hands into your urethra, tensing in a mindless orgasm as her arms slip into the mouth of her new god.  The bloated lips of your cock consume her wrists, elbows, and even her shoulders as Pastie's head vanishes into the drooling maw of your manhood.");
 	}
 	//[Next]
-	dynStats("lib", .5, "lus=", 100, "cor", .25, "resisted", false);
+	dynStats("lib", .5, "lus=", 100, "cor", .25, "scale", false);
 	menu();
 	addButton(0,"Next",shareTentaclesWithScylla3);
 }

@@ -1,15 +1,11 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 	import classes.*;
-	import classes.internals.WeightedDrop;
+import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class FrostGiant extends Monster
 	{
-		private function giantStrengthLoss(magnitude:int = 0):void {
-			game.dynStats("str", -magnitude);
-			player.addStatusValue(StatusEffects.GiantStrLoss, 2, magnitude);
-		}
 		
 		public function giantAttackPunch():void {
 			var damage:int = 0;
@@ -51,7 +47,6 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				outputText("Your attempt to make way fails, and the giant grabs you in his very large, very cold, very strong hands. \"<i>Now, you die!</i>\"");
 				player.createStatusEffect(StatusEffects.GiantGrabbed, 2, 0, 0, 0);
-				if (!player.hasStatusEffect(StatusEffects.GiantStrLoss)) player.createStatusEffect(StatusEffects.GiantStrLoss, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -68,11 +63,11 @@ package classes.Scenes.Areas.GlacialRift
 				}
 				else if (player.str >= 60 && player.str < 80) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					giantStrengthLoss(1);
+					player.addCombatBuff('str', -1);
 				}
 				else if (player.str >= 40 && player.str < 60) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					giantStrengthLoss(2);
+					player.addCombatBuff('str', -2);
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
@@ -88,14 +83,14 @@ package classes.Scenes.Areas.GlacialRift
 				}
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("The thought of being constricted turns you on a bit. ")
-					game.dynStats("lust", 5);
+					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
 			}
 			else {
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("The thought of being constricted turns you on a bit. ")
-					game.dynStats("lust", 5);
+					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
 			}

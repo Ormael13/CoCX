@@ -67,7 +67,7 @@ public function HaveABoysBath():void {
 	outputText("You decide to take a bath to rest your weary adventurer body.\n\n");
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo isn’t exactly what you would call muscular but his size and lean frame fits his mouse outlook.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see anything of Rathazul body beyond the hip level but again It’s not like you are this interested into knowing.\n\n");
-	if (flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and must be enjoying it.\n\n");
+	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and must be enjoying it.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember body and maleness could easily give all the other boys inferiority complex.\n\n");
 	if (camp.loversHotBathCount() > 0) {
 		outputText("You discuss your goals with the other guys when a girl's voices ring out from outside the spring.\n\n");
@@ -126,7 +126,7 @@ public function PeepingTom3():void {
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
 	}
 //	 outputText("As a naga, Samira take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");//Samira
-	if (flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian, while formerly a male, seems to get along with the other girls perfectly.\n\n");
+	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian, while formerly a male, seems to get along with the other girls perfectly.\n\n");
 	outputText("The girls are discussing womanly topics giving you a nice display of their assets.\n\n");
 	if (emberScene.followerEmber() && (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 		outputText("Something suddenly grabs you and lifts you by the leg. Turns out it’s Ember and she’s angry.\n\n");

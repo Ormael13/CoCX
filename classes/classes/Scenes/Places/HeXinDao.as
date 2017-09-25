@@ -444,28 +444,30 @@ public function Tier1():void {
 	addButton(7, "GoldenRind", GoldenRind).hint("Buy a golden rind.");
 	addButton(8, "GoldenSeed", GoldenSeed).hint("Buy a golden seed.");
 	addButton(9, "Gob.Ale", GobAle).hint("Buy a flagon of potent goblin ale.");
-	addButton(10, "KangaFruit", KangaFruit).hint("Buy a piece of kanga fruit.");
-	addButton(11, "La Bova", LaBova).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
-	addButton(12, "MouseCo", MouseCo).hint("Buy a handful of mouse cocoa.");
-	addButton(13, "MinoBlo", MinoBlo).hint("Buy a vial of Minotaur blood.");
+	addButton(10, "IncubiD", IncubiD).hint("Buy a flask of Incubi draft.");
+	addButton(11, "KangaFruit", KangaFruit).hint("Buy a piece of kanga fruit.");
+	addButton(12, "La Bova", LaBova).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
+	addButton(13, "MouseCo", MouseCo).hint("Buy a handful of mouse cocoa.");
 	addButton(14, "Back", mogahenmerchant);
 	statScreenRefresh();
 }
 
 public function Tier2():void {
 	menu();
-	addButton(0, "PigTruffle", PigTruffle).hint("Buy a pigtail truffle.");
-	addButton(1, "Reptilum", Reptilum).hint("Buy a vial of Reptilum.");
-	addButton(2, "RingFig", RingFig).hint("Buy a ringtail fig.");
-	addButton(3, "S.Gossr", SGossr).hint("Buy a bundle of pink, gossamer webbing.");
-	addButton(4, "SalamFW", SalamFW).hint("Buy a hip flask of Salamander Firewater.");
-	addButton(5, "Scorpinum", Scorpinum).hint("Buy a vial of Scorpinum.");
-	addButton(6, "Shark.T", SharkT).hint("Buy a sharp shark tooth.");
-	addButton(7, "SnakeOil", SnakeOil).hint("Buy a vial of snake oil.");
-	addButton(8, "TSTooth", TSTooth).hint("Buy a glowing tiger shark tooth.");
-	addButton(9, "W.Fruit", WFruit).hint("Buy a piece of whisker-fruit.");
-	addButton(10, "WetCloth", WetCloth).hint("Buy a wet cloth dripping with slippery slime.");
-	addButton(11, "YetiCum", YetiCum).hint("Buy a bottle of Yeti Cum.");
+	addButton(0, "MinoBlo", MinoBlo).hint("Buy a vial of Minotaur blood.");
+	addButton(1, "PigTruffle", PigTruffle).hint("Buy a pigtail truffle.");
+	addButton(2, "Reptilum", Reptilum).hint("Buy a vial of Reptilum.");
+	addButton(3, "RingFig", RingFig).hint("Buy a ringtail fig.");
+	addButton(4, "S.Gossr", SGossr).hint("Buy a bundle of pink, gossamer webbing.");
+	addButton(5, "SalamFW", SalamFW).hint("Buy a hip flask of Salamander Firewater.");
+	addButton(6, "Scorpinum", Scorpinum).hint("Buy a vial of Scorpinum.");
+	addButton(7, "Shark.T", SharkT).hint("Buy a sharp shark tooth.");
+	addButton(8, "SnakeOil", SnakeOil).hint("Buy a vial of snake oil.");
+	addButton(9, "SucMilk", SucMilk).hint("Buy a bottle of Succubi milk.");
+	addButton(10, "TSTooth", TSTooth).hint("Buy a glowing tiger shark tooth.");
+	addButton(11, "W.Fruit", WFruit).hint("Buy a piece of whisker-fruit.");
+	addButton(12, "WetCloth", WetCloth).hint("Buy a wet cloth dripping with slippery slime.");
+	addButton(13, "YetiCum", YetiCum).hint("Buy a bottle of Yeti Cum.");
 	addButton(14, "Back", mogahenmerchant);
 	statScreenRefresh();
 }
@@ -710,6 +712,26 @@ public function buyGobAle():void {
 	}
 }
 
+public function IncubiD():void {
+	clearOutput();
+	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace incubus in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
+	doYesNo(buyIncubiD, mogahenmerchant);
+}
+
+public function buyIncubiD():void {
+	if (player.gems < 18) {
+		clearOutput();
+		outputText("\n\nMoga shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this item.");
+		doNext(mogahenmerchant);
+	}
+	else {
+		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
+		player.gems -= 18;
+		inventory.takeItem(consumables.INCUBID, mogahenmerchant);
+		statScreenRefresh();
+	}
+}
+
 public function KangaFruit():void {
 	clearOutput();
 	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace kangaroo in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
@@ -946,6 +968,26 @@ public function buySnakeOil():void {
 		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
 		player.gems -= 18;
 		inventory.takeItem(consumables.SNAKOIL, mogahenmerchant);
+		statScreenRefresh();
+	}
+}
+
+public function SucMilk():void {
+	clearOutput();
+	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace sucubus in you.  Interested?  It is merely <b>18 gems</b></i>.\"");
+	doYesNo(buySucMilk, mogahenmerchant);
+}
+
+public function buySucMilk():void {
+	if (player.gems < 18) {
+		clearOutput();
+		outputText("\n\nMoga shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this item.");
+		doNext(mogahenmerchant);
+	}
+	else {
+		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
+		player.gems -= 18;
+		inventory.takeItem(consumables.SUCMILK, mogahenmerchant);
 		statScreenRefresh();
 	}
 }
@@ -1522,10 +1564,10 @@ public function soularenaChallenge():void {
 	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-	addButton(5, "Golemancer", golemancer);
-	addButton(6, "AyotechManiac", ayotechmaniac);
-	addButton(7, "MachoSalamander", machosalamander);
-	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
+	//addButton(5, "Golemancer", golemancer);
+	//addButton(6, "AyotechManiac", ayotechmaniac);
+	//addButton(7, "MachoSalamander", machosalamander);
+	//addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
@@ -1618,29 +1660,38 @@ public function advancedtruegolems():void {
 
 public function gaunletchallange1fight1():void {
 	clearOutput();
-	outputText("Soon will be some more or less fancy text here.");
+	outputText("You register for the gauntlet challenge then when called, move out beyond the arena gate to face your opponent. The crowd is big, you sure will have quite the audience. A man with a necktie and a weird stick screams across the area.\n\n");
+	outputText("\"<i>Ladies and gentlemen! Today a new gladiator enter the arena seeking glory of the gauntlet! A triple battle for gold and fame!</i>\"\n\n");
+	outputText("The crowd cheers for you loudly.\n\n");
+	outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
+	outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsDummy());
 }
 public function gaunletchallange1fight2():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("As the last of the golem falls down, the commentator resumes.\n\n");
+	outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
+	outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
 	startCombat(new TentacleBeast());
 }
 public function gaunletchallange1fight3():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("As the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
+	outputText("\"<i>This contestant is smaller than the last two... Smarter too, and most of all extremely deadly. She’s paid a handsome sack of gems daily to kick the ass of anyone who reach this stage, yet is by far the deadliest combatant of her division. She’s your favorite and an expert huntress. Here she comes... Merisiel the dark elf!!!</i>\"\n\n");
+	outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf, however. She’s nothing like the gentle creature from your childhood stories as she observes you with a cruel, calculative gaze. The dark elf readies her bow, smirking.\n\n");
 	startCombat(new DarkElfScout());
 }
 public function gaunletchallange1postfight():void {
 	clearOutput();
-	outputText("WIP TEXT. ");
+	outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
 	if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
-		outputText("WIP TEXT about getting 20 Spirit Stones. ");
+		outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 		flags[kFLAGS.SPIRIT_STONES] += 20;
 		cleanupAfterCombat();
 	}
 	else {
+		outputText("\"<i>Good show, champion. As a reward for your performance, please accept this magical bow. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 		flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 1;
 		inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
 	}

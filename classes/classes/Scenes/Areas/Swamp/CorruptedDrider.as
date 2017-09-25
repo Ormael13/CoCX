@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Swamp
 			
 			else if(!player.hasStatusEffect(StatusEffects.DriderKiss)) {
 				//(HIT? + 10 lust)
-				game.dynStats("lus", 10);
+				player.dynStats("lus", 10);
 				outputText("Before you can move, she's right on top of you, leaning ");
 				if(player.tallness < 72) outputText("down");
 				else outputText("over");
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.Swamp
 				player.addStatusValue(StatusEffects.DriderKiss,1,1);
 				if(player.statusEffectv1(StatusEffects.DriderKiss) == 1) {
 					//(HIT? + 15 lust)
-					game.dynStats("lus", 15);
+					player.dynStats("lus", 15);
 					outputText("Again, the drider ties your mouth up in her syrupy lip-lock, seeming to bind your mouth as effectively as her webs bind your body.  Her sweet venom bubbles and froths at the corners of the oral embrace, dripping over her many-breasted bosom and your [chest].");
 					if(player.hasCock()) outputText("  " + SMultiCockDesc() + " spews a rope of pre-cum into your [armor], desperate to get out and fuck.");
 					if(player.hasVagina()) outputText("  Fem-cum dribbles down your [legs] while your [clit] gets so hard you think it'll explode.");
@@ -82,7 +82,7 @@ package classes.Scenes.Areas.Swamp
 				else {
 					outputText("This time you barely move.  Your body is too entranced by the idea of another venom-laced kiss to resist.  Glorious purple goo washes into your mouth as her lips meet yours, sealing tight but letting your tongue enter her mouth to swirl around and feel the venom drip from her fangs.  It's heavenly!  Your [skin] grows hot and tingly, and you ache to be touched so badly.  Your " + nippleDescript(0) + "s feel hard enough to cut glass, and a growing part of you admits that you'd love to feel the drider's chitinous fingers pulling on them.");
 					//(HIT? + 20 lust)
-					game.dynStats("lus", 20);
+					player.dynStats("lus", 20);
 					if(player.hasCock() || player.hasVagina()) {
 						outputText("  The moisture in your crotch only gets worse.  At this point, a ");
 						if(player.wetness() < 3 && player.cumQ() < 200) outputText("small");
@@ -99,7 +99,7 @@ package classes.Scenes.Areas.Swamp
 		public function driderMasturbate():void {
 			//-Masturbate - (Lowers lust by 50, raises PC lust)
 			lust -= 30;
-			game.dynStats("lus", (10+player.lib/20));
+			player.dynStats("lus", (10+player.lib/20));
 			outputText("The spider-woman skitters back and gives you a lusty, hungry expression.  She shudders and moans, \"<i>Mmm, just watch what you're missing out on...</i>\"\n\n");
 			outputText("As soon as she finishes, her large clit puffs up, balloon-like.  A second later, it slides forward, revealing nine inches of glossy, girl-spunk-soaked shaft.  Nodules ring the corrupted penis' surface, while the tiny cum-slit perched atop the tip dribbles heavy flows of pre-cum.  She pumps at the fleshy organ while her other hand paws at her jiggling breasts, tugging on the hard ");
 			if(nipplesPierced > 0) outputText("pierced ");

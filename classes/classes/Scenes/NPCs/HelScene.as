@@ -559,7 +559,7 @@ internal function dpHel():void {
 	outputText("\"<i>Gotta admit,</i>\" she says, drawing in a sharp breath as your cocks withdraw to their heads inside her, \"<i>");
 	if(flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED] == 0) outputText("You're my first multi-cock.  Damn, never thought it'd be like THIS!");
 	else outputText("You're amazing!  I don't think I'll ever get used to sex like THIS!");
-	outputText("</i>\" she says, and slams herself down again.  You both gasp and moan in pleasure, and soon she's practically bounding on your manhoods, milking both your cocks raw in her sweltering hot depths.  You keep this up for a long minute, letting her bounce away on your cocks as she begins to moan lewdly.\n\n");
+	outputText("</i>\" she says, and slams herself down again.  You both gasp and moan in pleasure, and soon she's practically pounding on your manhoods, milking both your cocks raw in her sweltering hot depths.  You keep this up for a long minute, letting her bounce away on your cocks as she begins to moan lewdly.\n\n");
 
 	outputText("\"<i>Oh yeah, fuck my holes.  Just like that!</i>\"  She screams, clamping down on your cocks as her orgasm comes, and wraps her arms around your neck to shove your face into her pillowy cleavage, threatening to suffocate you.\n\n");
 

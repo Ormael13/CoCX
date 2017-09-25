@@ -195,7 +195,7 @@ package classes.Scenes.Areas.Mountain
 			if(monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				outputText("You expose yourself and attempt to focus on expelling your squirming pets toward Sheila but as you picture launching a flood of parasites from [eachCock], the fantasy she sent returns to you, breaking your concentration!  Your hand darts automatically to your crotch, stroking [oneCock] as you imagine unloading into her cunt... only with effort do you pull it away!\n\n");
 				outputText("\"<i>Oh, my,</i>\" the demon teases.  \"<i>You don't have to masturbate yourself, [name]... I'll be happy to do it for you.</i>\"\n\n");
-				dynStats("lus", 5 + player.sens/10, "resisted", false);
+				dynStats("lus", 5 + player.sens/10, "scale", false);
 				enemyAI();
 				return;
 			}
