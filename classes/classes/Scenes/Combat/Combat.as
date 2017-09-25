@@ -2203,6 +2203,7 @@ public function throwWeapon():void {
 		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -2871,6 +2872,7 @@ public function attack():void {
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	//One final round
 	damage = Math.round(damage);
 	
@@ -2936,6 +2938,7 @@ public function attack():void {
 			if (damage > 0 && player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 			if (damage > 0) damage = doDamage(damage, false);
 		
 			(monster as Doppleganger).mirrorAttack(damage);
@@ -3048,7 +3051,12 @@ public function attack():void {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		//Weapon Procs!
 		//10% Stun chance
-		if ((player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || player.weapon == weapons.S_GAUNT) && rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+		if ((player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.findPerk(PerkLib.MightyFist) < 0)) && rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
+		//20% Stun chance
+		if (player.isFistOrFistWeapon() && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
@@ -4577,6 +4585,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
 		if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
 		HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
 	}
@@ -5314,6 +5323,7 @@ public function ScyllaSqueeze():void {
 	else fatigue(20, 2);
 	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100) * 1.5;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	if (monster.plural == true) damage *= 5;
 	//Squeeze -
 	outputText("You start squeezing your");
@@ -6025,6 +6035,7 @@ public function greatDive():void {
 	damage += player.str;
 	damage += player.spe * 2;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	outputText("You focus on " + monster.capitalA + monster.short + " fold your wing and dive down using gravity to increase the impact");
 	if (player.lowerBody == LOWER_BODY_TYPE_HARPY) {
 		outputText("making a bloody trail with your talons");

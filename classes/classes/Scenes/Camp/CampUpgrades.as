@@ -55,6 +55,18 @@ flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS]:
 3 - dig a pool
 4 - add the wood walls
 
+flags[kFLAGS.CAMP_UPGRADES_SPARING_RING]:
+1 - 
+
+flags[kFLAGS.CAMP_UPGRADES_SUMONNING_CIRCLE]:
+1 - 
+
+flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD]:
+1 - 
+
+flags[kFLAGS.CAMP_UPGRADES_]:
+1 - 
+
 flags[kFLAGS.CAMP_UPGRADES_]:
 1 - 
 

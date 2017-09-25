@@ -241,6 +241,7 @@ the text from being too boring.
 		public var celessScene:CelessScene = new CelessScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
+		public var chichiScene:ChiChiFollower = new ChiChiFollower();
 		public var emberScene:EmberScene = new EmberScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var evangelineFollower:EvangelineFollower = new EvangelineFollower();
@@ -540,8 +541,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8f";
-			version = ver + " (<b>Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8g";
+			version = ver + " (<b></b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

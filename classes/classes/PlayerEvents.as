@@ -1021,6 +1021,29 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.BathedInHotSpring, 1, -1);
 			}
+			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
+				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
+					if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+						var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+						dynStats("str", -tempStrength);
+					}
+					if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+						var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+						dynStats("spe", -tempSpeed);
+					}
+					if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+						var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+						dynStats("inte", -tempIntelligence);
+					}
+					var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+					dynStats("tou", -tempToughness);
+					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
+					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 1, -1);
+			}
 			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {

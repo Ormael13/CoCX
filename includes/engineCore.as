@@ -1195,21 +1195,21 @@ public function lustPercent():Number {
 	//TOTAL IS LIMITED TO 75%!
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Corrupted Libido reduces lust gain by 10%!
-	if(player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
+	if (player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
 	//Acclimation reduces by 15%
-	if(player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
+	if (player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
 	//Purity blessing reduces lust gain
-	if(player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
 	//Resistance = 10%
-	if(player.findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
-	if(lust < minLustCap) lust = minLustCap;
-	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
+	if (player.findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+	if (lust < minLustCap) lust = minLustCap;
+	if (player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
@@ -1220,17 +1220,18 @@ public function lustPercent():Number {
 	//DRAWBACKS TO JUSTIFY IT.
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Bimbo body slows lust gains!
-	if((player.hasStatusEffect(StatusEffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
+	if ((player.hasStatusEffect(StatusEffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+	if (player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
+	if (player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 	//Omnibus' Gift reduces lust gain by 15%
-	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+	if (player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 	//Luststick reduces lust gain by 10% to match increased min lust
-	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
+	if (player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
+	if (player.hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	//Berseking reduces lust gains by 10%
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
+	if (player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
+	if (player.hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
 	
 	//Items
 	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
@@ -1247,7 +1248,7 @@ public function lustPercent():Number {
 			lust *= sac.value2;
 		}
 	}
-	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
+	if (player.statusEffectv1(StatusEffects.Maleficium) > 0) {
 		if(lust >= 50) lust = 100;
 		else lust += 50;
 	}

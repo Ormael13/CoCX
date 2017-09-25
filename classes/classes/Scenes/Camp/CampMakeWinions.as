@@ -204,7 +204,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) outputText(" (Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
-				outputText("\nDarkness");
+				outputText("\nWood");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) outputText(" (Rank 2)");
@@ -216,7 +216,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) outputText(" (Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
-				outputText("\nDarkness");
+				outputText("\nMetal");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) outputText(" (Rank 2)");
@@ -228,7 +228,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) outputText(" (Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
-				outputText("\nDarkness");
+				outputText("\nEther");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) outputText(" (Rank 0)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) outputText(" (Rank 1)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) outputText(" (Rank 2)");

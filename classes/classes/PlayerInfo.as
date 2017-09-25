@@ -435,6 +435,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.CEANI_AFFECTION] > 0)
 			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0)
+			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0)
 			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n";
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0)
@@ -606,6 +608,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.BathedInHotSpring) > 0)
 			statEffects += "Bathed in Hot Spring - " + player.statusEffectv1(StatusEffects.BathedInHotSpring) + " hours remaining. (Fatigue recovery rate 20% higher)\n";
+
+		if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)
+			statEffects += "Eating in 'Shira of the east' restaurant effect - " + player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) + " hours remaining. (Increased stats and elemental resistance)\n";
 
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";

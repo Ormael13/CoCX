@@ -1763,6 +1763,8 @@ package classes
 				"Provides resistance to the addictive effects of bottled LaBova milk.");
 		public static const MarblesMilk:PerkType = mk("Marble's Milk", "Marble's Milk",
 				"Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.");
+		public static const MightyFist:PerkType = mk("Mighty Fist", "Mighty Fist",
+				"Regular fist attacks now have a chance to cause stun and fist damage is increased by 5 (x NG tier).");
 		public static const Misdirection:PerkType = mk("Misdirection", "Misdirection",
 				"Grants additional evasion chances while wearing Raphael's red bodysuit.");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
@@ -1805,12 +1807,12 @@ package classes
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
+		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
 		//public static const EnemyGooType:PerkType = mk("", "", "");
 		//public static const EnemyPlantType:PerkType = mk("", "", "");
 		//public static const Enemy:PerkType = mk("", "", "");undead/ghost?
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType

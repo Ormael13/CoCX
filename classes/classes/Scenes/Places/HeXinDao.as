@@ -12,11 +12,13 @@ package classes.Scenes.Places {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Areas.Forest.TentacleBeast;
+	import classes.Scenes.NPCs.ChiChiFollower;
 	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
 	import classes.Scenes.NPCs.Jinx;
 	import classes.Scenes.NPCs.Syth;
+	import classes.Scenes.NPCs.ChiChiFollower;
 	//import classes.Scenes.Places.HeXinDao.*;
 	//import classes.Items.Armor;
 	//import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -25,7 +27,7 @@ package classes.Scenes.Places {
 {
 	
 	public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-	//public var vala:ValaScene = new ValaScene();
+	public var chichiScene:ChiChiFollower = new ChiChiFollower();
 	//public var TFmerch:MogaHen = new MogaHen();
 	
 	public function HeXinDao() 
@@ -52,6 +54,8 @@ public function riverislandMenuShow():void {
 	//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
 	//addButton(6, "", ); jakies miejsce aby zdobywac gems lub/i EXP - moze jakies zadania tu zlecane czy cos w tym stylu?
 	addButton(7, "Arena", soularena);
+	addButton(8, "Restaurant", restaurantShiraOfTheEast);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 3) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function golemmerchant():void {
@@ -1567,10 +1571,11 @@ public function soularenaChallenge():void {
 	//addButton(5, "Golemancer", golemancer);
 	//addButton(6, "AyotechManiac", ayotechmaniac);
 	//addButton(7, "MachoSalamander", machosalamander);
-	//addButton(9, "LvL 24 Gargoyle", basicgargoyle);
+	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 25) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
 	addButton(14, "Back", soularena);
 }
 
@@ -1716,6 +1721,7 @@ public function machosalamander():void {
 }
 
 public function basicgargoyle():void {
+	outputText("Not yet finished fight with things to finish/flesh up later on.");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GargoyleBasic());
 }
@@ -1735,7 +1741,161 @@ public function advancedgolems():void {
 	startCombat(new GolemsAdvanced());
 }
 
+public function restaurantShiraOfTheEast():void {
+	clearOutput();
+	outputText("You enter the exotic food restaurant ‘Shira of the east’ and check up the menu. Would you like to eat there?");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+	menu();
+	addButton(0, "Yes", restaurantYes);
+	addButton(1, "No", restaurantNo);
+}
 
+public function restaurantYes():void {
+	if (flags[kFLAGS.SPIRIT_STONES] >= 1) restaurantYesGems();
+	else restaurantYesNoGems();
+}
+
+public function restaurantYesGems():void {
+	clearOutput();
+	outputText("You take a seat and look at the menu. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("A dog morph that looks like a pekinese comes over to take your order.");
+	else outputText("A literally blazing mouse girl come over to take your order. Blazing is actually an understatement as her arms, legs and even her tail are on fire. ");
+	outputText("\n\n\"<i>Hello my name is ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("Rin");
+	else outputText("Chi Chi");
+	outputText(" and I will be your waitress today. We have dumplings, Won ton soups and ramen offered in mild, spicy and inferno version of the dishes. What will it be?</i>\"");
+	menu();
+	addButton(0, "Dumpling", restaurantDumpling);
+	addButton(1, "Soup", restaurantSoup);
+	addButton(2, "Ramen", restaurantRamen);
+}
+
+public function restaurantDumpling():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 5, 0, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 5, 0, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+public function restaurantSoup():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 0, 5, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 0, 5, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+public function restaurantRamen():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 5, 0, 0, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 5, 0, 0, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+private function FoodBuffDuration():void {
+	outputText("\n\nShe note your order on a paper.");
+	outputText("\n\n\"<i>What spicing will it be?</i>\"");
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) < 25) {
+		player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+}
+private function ResetFoodBuffStats():void {
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("str", -tempStrength);
+	}
+	if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("spe", -tempSpeed);
+	}
+	if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("inte", -tempIntelligence);
+	}
+	var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	dynStats("tou", -tempToughness);
+	player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
+}
+
+public function restaurantMild():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minute later.");
+	outputText("\n\nThe meal is comforting and its refreshing nature will likely help you resist hot temperature today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-50);
+	restaurantEndOfEating();
+}
+public function restaurantSpicy():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minute later.");
+	outputText("\n\nThe meal is a little spicy but regardless leaves you feeling fortified. The weather won’t feel as harsh to you today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-30);
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-30);
+	restaurantEndOfEating();
+}
+public function restaurantInferno():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minute later.");
+	outputText("\n\nWow the meal is so spicy you almost breath smokes and fire. You drink down several glass of water but can’t help starting to sweat as your inner  temperature rise. Likely you won’t have much to fear of the cold today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-50);
+	restaurantEndOfEating();
+}
+
+public function restaurantEndOfEating():void {
+	outputText("\n\nRegardless the food is excellent and you leaves in high spirit for the day.");
+	//if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) player.inte += player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+	//player.tou += player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("str", tempStrength);
+	}
+	if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("spe", tempSpeed);
+	}
+	if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("inte", tempIntelligence);
+	}
+	var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	dynStats("tou", tempToughness);
+	flags[kFLAGS.SPIRIT_STONES]--;
+	statScreenRefresh();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function restaurantYesNoGems():void {
+	clearOutput();
+	outputText("You would like to eat but you don’t have enough spirit stones to afford the food.");
+	doNext(riverislandVillageStuff);
+}
+
+public function restaurantNo():void {
+	clearOutput();
+	outputText("You aren’t hungry at the time maybe you will eat later.");
+	doNext(riverislandVillageStuff);
+}
 
 }
 }

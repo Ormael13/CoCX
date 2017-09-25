@@ -37,6 +37,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
 			addButton(5, "Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
+			if (player.hasStatusEffect(StatusEffects.Overlimit)) addButton(9, "Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
+			else addButton(9, "Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
 			else {
@@ -100,6 +104,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		//triple strike bonus
 		damage *= 3;
 		var crit:Boolean = false;
@@ -171,6 +176,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
@@ -318,6 +324,19 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function activaterOverlimit():void {
+		clearOutput();
+		outputText("You let out a primal roar of pain and fury, as you push your body beyond its normal capacity, a blood red aura cloaking your form.\n\n");
+		player.createStatusEffect(StatusEffects.Overlimit, 0, 0, 0, 0);
+		enemyAI();
+	}
+	public function deactivaterOverlimit():void {
+		clearOutput();
+		outputText("You let your rage cool down, feeling relieved as the stress in your body diminish along with your power.\n\n");
+		player.removeStatusEffect(StatusEffects.Overlimit);
+		enemyAI();
 	}
 
 	public function VioletPupilTransformationHealing():Number {

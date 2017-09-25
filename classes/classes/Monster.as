@@ -15,6 +15,7 @@
 	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+	import classes.Scenes.NPCs.ChiChi;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.internals.ChainedDrop;
@@ -1847,7 +1848,7 @@
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
@@ -1859,11 +1860,17 @@
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
+				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				temp2 = Math.round(eMaxHP() * healingPercent / 100);
-				outputText("Due to natural regeneration " + short + " recover");
-				if (plural) outputText("s");
-				else outputText("ed");
-				outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				if (this is ChiChi) {
+					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				}
+				else {
+					outputText("Due to natural regeneration " + short + " recover");
+					if (plural) outputText("s");
+					else outputText("ed");
+					outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				}
 				addHP(temp2);
 			}
 		}

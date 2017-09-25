@@ -11,7 +11,7 @@ package classes.Scenes.NPCs
 	
 	use namespace kGAMECLASS;
 	
-	public class Etna extends Monster 
+	public class Etna extends Monster
 	{
 		public var etnaScene:EtnaFollower = game.etnaScene;
 
@@ -121,19 +121,30 @@ package classes.Scenes.NPCs
 			etnaScene.etnaRapesPlayer();
 		}
 		
+		override public function get long():String {
+			var str:String = "";
+			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
+				if (hasStatusEffect(StatusEffects.Flying)) str += "Etna is circling you in the air readying a salvo of spike to throw at you.";
+				else str += "Etna is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+			}
+			else {
+				if (hasStatusEffect(StatusEffects.Flying)) str += "The manticore is circling you in the air readying a salvo of spike to throw at you.";
+				else str += "The manticore is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+			}
+			return str;
+		}
+		
 		public function Etna() 
 		{
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
 				this.short = "Etna";
-				if (hasStatusEffect(StatusEffects.Flying)) this.long = "Etna is circling you in the air readying a salvo of spike to throw at you.";
-				else this.long = "Etna is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+				this.long = "";
 			}
 			else {
 				this.a = "the ";
 				this.short = "manticore";
-				if (hasStatusEffect(StatusEffects.Flying)) this.long = "The manticore is circling you in the air readying a salvo of spike to throw at you.";
-				else this.long = "The manticore is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+				this.long = "";
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);

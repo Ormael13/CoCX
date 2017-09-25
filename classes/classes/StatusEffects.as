@@ -112,6 +112,7 @@ package classes
 		public static const KnowsManyBirds:StatusEffectType                 = mk("Knows Many Birds");
 		public static const KnowsManaShield:StatusEffectType                = mk("Knows Mana Shield");
 		public static const KnowsMight:StatusEffectType                     = mk("Knows Might");
+		public static const KnowsOverlimit:StatusEffectType                 = mk("Knows Overlimit");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
 		public static const KnowsTripleThrust:StatusEffectType              = mk("Knows Triple Thrust");
 		public static const KnowsVioletPupilTransformation:StatusEffectType = mk("Knows Violet Pupil Transformation");
@@ -160,6 +161,8 @@ package classes
 		public static const Rut:StatusEffectType                            = mk("rut");
 		public static const SharkGirl:StatusEffectType                      = mk("Shark-Girl");
 		public static const ShieldingSpell:StatusEffectType                 = mk("Shielding Spell");
+		public static const ShiraOfTheEastFoodBuff1:StatusEffectType        = mk("Shira of the east food buff part 1");
+		public static const ShiraOfTheEastFoodBuff2:StatusEffectType        = mk("Shira of the east food buff part 2");
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
@@ -478,6 +481,7 @@ package classes
 		public static const NagaVenom:CombatStatusEffect                 = mk2("Naga Venom");
 		public static const NoFlee:CombatStatusEffect                    = mk2("NoFlee");
 		public static const OniRampage:CombatStatusEffect                = mk2("Oni Rampage");
+		public static const Overlimit:CombatStatusEffect				 = mk2("Overlimit");
 		public static const ParalyzeVenom:CombatStatusEffect             = mk2("paralyze venom");
 		public static const PhysicalDisabled:CombatStatusEffect          = mk2("Physical Disabled");
 		public static const Poison:CombatStatusEffect                    = mk2("Poison");

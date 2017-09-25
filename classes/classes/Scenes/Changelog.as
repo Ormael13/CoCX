@@ -17,23 +17,23 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog16();
+			Changelog17();
 		}
 		
 		private function Changelog17():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8f2:</b>\n\n");
+			outputText("<b>Version 0.8g:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
+			outputText("-\n");//chi chi memo
+			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP reeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -60,7 +60,7 @@ package classes.Scenes
 			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
-			outputText("<b>Version 0.8g:</b>\n\n");
+			outputText("<b>Version 0.8f2:</b>\n\n");
 			outputText("<b>Version 0.8h:</b>\n\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("\n");
@@ -99,7 +99,7 @@ package classes.Scenes
 		private function Changelog16():void {
 			clearOutput();
 			menu();
-			outputText("<b>(Part 1/2) Version 0.8f:</b>\n\n");
+			outputText("<b>(Part 1/2) Version 0.8f (Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Phoenix, Orca, Naga, Gorgon, Vouivre, Couatl, Dragon\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Eyes of the Hunter (Novice). Req. 25+ sens. Effect: Allow see some of enemy-related perks to give player info what type of attacks is effective or ineffective against such enemy. Req. 25+ sens to be active\n");
 			outputText("-New tier 0 misc lvl-up perk (multi-rank): Primal Fury I-VI. Req. for rank 1: lvl 1+, Job: Beast Warrior perk. Effect: Increase max wrath by 10 and wrath generation by 2 (in) or 1 (out) of combat\n");
@@ -234,7 +234,7 @@ package classes.Scenes
 		private function Changelog15():void {
 			clearOutput();
 			menu();
-			outputText("<b>(Part 2/2) Version 0.8f:</b>\n\n");
+			outputText("<b>(Part 2/2) Version 0.8f (Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf):</b>\n\n");
 			outputText("-New event related perk that I forgot to meantione earlier: Improved venom gland. Req. using venom 50+ times and increase speed of producing venom.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Resolve. Req.: Using Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Resolve perk.\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Lineage. Req. Ascension: Hero's Heritage and be at second ascension. It costs 5 asc points and will give 2 perk points and 10 stat points (scalable with NG tiers) at the start of each new game.\n");
@@ -242,7 +242,7 @@ package classes.Scenes
 			outputText("-New Ascension perk: Inner Power. It works same way like Hardiness but giving +40 to max mana per rank. Max Rank: 25.\n");
 			outputText("-New Ascension perk: FURY. It works same way like Hardiness but giving +20 to max wrath per rank. Max Rank: 25.\n");
 			outputText("-Added to all multi rank lvl-up perks 6th rank req. PC be in NG5+. Also some of ascension perks can reach 25th rank now instead of 20th.\n");
-			outputText("-Exchanged req. min Libido and Intelligence for all below tier 9 libido perks for all perks fomr line of Self-Control (forx. ex. Basic Self-Control perk req. now 30+ li and 20+ int instead of old 30+ int and 20+ lib). It's due to overlapping with perks for rising max mana that also req. same amount int for each tier.\n");
+			outputText("-Exchanged req. min Libido and Intelligence for all below tier 9 libido perks for all perks fomr line of Self-Control (for ex. Basic Self-Control perk req. now 30+ li and 20+ int instead of old 30+ int and 20+ lib). It's due to overlapping with perks for rising max mana that also req. same amount int for each tier.\n");
 			outputText("-New type of perks for enemies: Construct-type enemy -> it disable crit chance (without having specific perk) and bleed status triggering after PC attack.\n");
 			outputText("-New type of perks for enemies: Plant-type enemy -> it disable crit chance (without having specific perk) and grants weak natural regeneration (1% max HP per turn).\n");
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");

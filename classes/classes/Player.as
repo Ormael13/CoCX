@@ -474,10 +474,13 @@ use namespace kGAMECLASS;
 				}
 				if (findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
 					attack += 10;
-				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				}
 				if (findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
 					attack += (5 * (1 + newGamePlusMod));
-				}		// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				}		// && (weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				if (findPerk(PerkLib.MightyFist) >= 0) {
+					attack += (5 * (1 + newGamePlusMod));
+				}
 				if (kGAMECLASS.combat.unarmedAttack() > 0) {
 					attack += kGAMECLASS.combat.unarmedAttack();
 				}
@@ -5250,6 +5253,13 @@ use namespace kGAMECLASS;
 				maxStr += statusEffectv1(StatusEffects.CrinosShape);
 				maxTou += statusEffectv2(StatusEffects.CrinosShape);
 				maxSpe += statusEffectv3(StatusEffects.CrinosShape);
+			}
+			//
+			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+				if (statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxStr += statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+				maxTou += statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+				if (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxSpe += statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+				if (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxInt += statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
 			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
