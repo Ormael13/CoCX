@@ -288,7 +288,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
 			player.orgasm();
-			dynStats("lus", 5, "resisted", false);
+			dynStats("lus", 5, "scale", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			cleanupAfterCombat(getGame().d3.resumeFromFight);

@@ -286,7 +286,7 @@ public function fuckPlantGrowsToLevel2():void {
 	outputText("  Is this Marae's idea of a gift?");
 	if(player.gender > 0) outputText("  Well, you could give it a whirl... just being around it seems to slowly turn you on.");
 	outputText("  Of course, destroying it would be the safest option.");
-	dynStats("lus", 33, "resisted", false);
+	dynStats("lus", 33, "scale", false);
 	if(silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]

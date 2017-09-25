@@ -1549,7 +1549,7 @@ public function getADrinkYouBitch():void {
 private function drinkDirectly():void {
 	clearOutput();
 	outputText("Approaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.  ");
-	dynStats("lus", -25, "cor", -.5, "resisted", false);
+	dynStats("lus", -25, "cor", -.5, "scale", false);
 	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);

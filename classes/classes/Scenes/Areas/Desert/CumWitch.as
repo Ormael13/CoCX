@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Desert
 				}
 				hits--;
 			}
-			game.dynStats("lus", damage+bonus);
+			player.dynStats("lus", damage+bonus);
 			combatRoundOver();
 		}
 
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.Desert
 			//*Used on males only, casts spell that causes balls to temporarily swell and increase lust by a moderate amount.  Unavoidable.
 			outputText("Gesticulating with her free hand, the Cum Witch utters impossible to pronounce words before closing her fingers tightly into a fist.  That same instant, you feel an onset of warmth in your [balls], a spreading heat that makes you tremble with growing lust.  A second later, [eachCock] is throbbing, and a runner of cum trickles from the [cockHead], a hint of your temporarily-enhanced virility.");
 			//(15-30 lust, based on libido)
-			game.dynStats("lus", 5+player.lib/12);
+			player.dynStats("lus", 5+player.lib/12);
 			player.hoursSinceCum += 100;
 			combatRoundOver();
 		}
@@ -93,7 +93,7 @@ package classes.Scenes.Areas.Desert
 				return;
 			}
 			outputText("It worms around your uterus, tickling it faintly before gently kneading your ovaries.  Your [legs] go weak as your womb throbs, hungering for something to fill it.  A trickle of wetness squirts from your [vagina] as the magic fades, and you squirm as your lust rises. If only something would make you pregnant!  Your eyes dart unbidden to the Witch's groin before you yank them away.");
-			game.dynStats("lus", 5+player.lib/12);
+			player.dynStats("lus", 5+player.lib/12);
 			combatRoundOver();
 		}
 
@@ -136,7 +136,7 @@ package classes.Scenes.Areas.Desert
 			else {
 				outputText("The Witch smirks, though you're too focused on her cock to see, and she continues, \"<i>Good " + player.mf("boy","girl") + ".  Watch it sway.  You're so focused on my cock now that the world is just falling away around it, sinking into nothingness, leaving only that wonderful cock behind for you to watch.  And since it's filling your view, you can feel it filling your mind as well, can't you?</i>\"");
 				outputText("\n\nYou nod, your view rigidly attached to her equally rigid tool as you utterly and completely fixate on her penis, admiring its curves, its thickness, and the way it seems to pulsate happily for you whenever you look at it just right.  The Witch keeps talking, but it's her dick that's important.  You start to drool as your [skin] flushes and your body heats.  Gods, her cock is gorgeous.  Reaching down, you begin to masturbate without thinking.  You don't know why, but it just feels like the right thing to do.");
-				game.dynStats("lus", 20);
+				player.dynStats("lus", 20);
 				if(player.lust <= 99) outputText("\n\nYou bump against something, startling yourself out of the cocknosis before you can completely fall for it.  Still, you keep seeing her dick every time you close your eyes, and your body is very turned on from how you were touching yourself.");
 				else outputText("\n\nYou play with yourself until you're on the very edge of orgasm.  At that moment, a loud *SNAP* startles you back to wakefulness, and as you look down at the cock bobbing just a few inches away, you realize it's hopeless.  You can't fight this.");
 				outputText("\n\nThe witch smiles knowingly.");
@@ -148,7 +148,7 @@ package classes.Scenes.Areas.Desert
 		//*Restores one third of her HP.
 		public function sandWitchCuntHeals():void {
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
-			addHP(eMaxHP()*0.33);
+			addHP(maxHP() * 0.33);
 			fatigue += 10;
 			combatRoundOver();
 		}

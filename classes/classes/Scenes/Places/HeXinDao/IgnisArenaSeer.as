@@ -53,7 +53,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText(" ");
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg = Math.round(lustDmg);
-			game.dynStats("lus", lustDmg, "resisted", false);
+			player.dynStats("lus", lustDmg, "scale", false);
 			if (!hasStatusEffect(StatusEffects.IgnisCounter)) createStatusEffect(StatusEffects.IgnisCounter, 1, 0, 0, 0);
 			else addStatusValue(StatusEffects.IgnisCounter, 1, 1);
 		}
@@ -107,7 +107,7 @@ package classes.Scenes.Places.HeXinDao
 		
 		override public function get long():String
 		{
-			var ignisBelow50:Boolean = (HP < eMaxHP() * 0.5);
+			var ignisBelow50:Boolean = (HP < maxHP() * 0.5);
 			return "You’re facing Ignis, a kitsune seer.   The white furred kitsune is wearing a "+
 					(ignisBelow50?("torn "):"") +
 					"grey kimono, flickering with magical flames. "+

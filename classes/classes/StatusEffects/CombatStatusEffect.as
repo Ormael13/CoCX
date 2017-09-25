@@ -3,14 +3,19 @@
  */
 package classes.StatusEffects
 {
-	import classes.StatusEffectType;
+import classes.StatusEffectClass;
+import classes.StatusEffectType;
 
-	public class CombatStatusEffect extends StatusEffectType
+public class CombatStatusEffect extends StatusEffectClass
+{
+
+	public function CombatStatusEffect(stype:StatusEffectType)
 	{
-
-		public function CombatStatusEffect(id:String)
-		{
-			super(id);
-		}
+		super(stype);
 	}
+
+	override public function onCombatEnd():void {
+		remove();
+	}
+}
 }

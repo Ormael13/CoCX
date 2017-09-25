@@ -233,7 +233,7 @@ import classes.internals.*;
 		}
 		
 		public function castSpell():void {
-			if (fatigue < (eMaxFatigue() - spellCostWhitefire())) WhiteFireSpell();//później jak dodam ice, lighting spells rozbudować wybór zakleć
+			if (fatigue < (maxFatigue() - spellCostWhitefire())) WhiteFireSpell();//później jak dodam ice, lighting spells rozbudować wybór zakleć
 			else eAttack();
 		}
 		

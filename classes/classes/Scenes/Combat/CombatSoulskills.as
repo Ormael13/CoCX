@@ -415,8 +415,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function DeactivateTranceTransformation():void {
 		clearOutput();
 		outputText("You disrupt the flow of power within you, softly falling to the ground as the crystal sheathing your [skin] dissipates into nothingness.");
-		kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-		kGAMECLASS.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
+		player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
+		player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
 		player.removeStatusEffect(StatusEffects.TranceTransformation);
 		enemyAI();
 	}

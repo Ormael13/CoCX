@@ -7733,7 +7733,7 @@ package classes.Scenes.NPCs
 			//if abdomen
 			if (player.canOviposit()) outputText("though the sight has certainly gotten you thinking about what you'll be doing with your next clutch.\n");
 			else outputText("though a distinct heat in your nethers leaves you wishing you had another clutch to unload right now\n");
-			dynStats("lus", (5+player.lib/10), "resisted", false);
+			dynStats("lus", (5+player.lib/10), "scale", false);
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNT] = 0;
 		}
 
@@ -7915,7 +7915,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe pleasant fog of your lust makes it hard to think.  Why can't these girls get that there's more than enough of you to go around?  You groan and you answer, \"<i>I'll take care of both of you... you're too hot for me to let you leave without a load in every hole.</i>\"");
 				outputText("\n\nThe girls share one last glare across your middle before both sets of eyes settle on your [cock biggest], two voices agreeing, \"<i>We can share.</i>\"");
 			}
-			dynStats("lib", 1, "sen", 1, "lus=", 100, "resisted", false);
+			dynStats("lib", 1, "sen", 1, "lus=", 100, "scale", false);
 			menu();
 			addButton(0,"Next",izmaAmilyDrugThreeWaySex);
 		}

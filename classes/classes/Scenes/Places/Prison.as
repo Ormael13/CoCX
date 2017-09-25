@@ -164,7 +164,7 @@ package classes.Scenes.Places
 			}
 			if (player.esteem > oldEsteem) showStatUp("esteem");
 			if (player.esteem < oldEsteem) showStatDown("esteem");
-			dynStats("lus", 0, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 			statScreenRefresh();
 		}
 		/**
@@ -178,7 +178,7 @@ package classes.Scenes.Places
 			if (player.will < 0) player.will = 0;
 			if (player.will > oldWill) showStatUp("will");
 			if (player.will < oldWill) showStatDown("will");
-			dynStats("lus", 0, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 			statScreenRefresh();
 		}
 		/**
@@ -222,7 +222,7 @@ package classes.Scenes.Places
 			}
 			if (player.obey > oldObey) showStatUp("obey");
 			if (player.obey < oldObey) showStatDown("obey");
-			dynStats("lus", 0, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 			statScreenRefresh();
 		}
 		

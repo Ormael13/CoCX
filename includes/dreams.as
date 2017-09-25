@@ -122,7 +122,7 @@ public function dreamSelect():Boolean {
 	// Well Adjusted cuts by half
 	if (player.findPerk(PerkLib.WellAdjusted) >= 0) dreamLust = (dreamLust / 2);
 
-	if (dreamLust > 0) dynStats("lus", dreamLust);
+	if (dreamLust > 0) player.dynStats("lus", dreamLust);
 	
 	//ACTUAL DREAM TEXTS
 	if(dreamtemp > 5) {
@@ -322,12 +322,12 @@ public function dreamSelect():Boolean {
 					//end dream
 					//lust increase
 				}
-				dynStats("lus", 25);
+				player.dynStats("lus", 25);
 			}
 			else {
 				//Female Trap Dream: 
 				outputText("odd things...\nYou find it difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at your supple tomboy body.   You dream of rough leather on your skin, tough cotton tight upon your [fullChest] and the smell of medicinal alcohol in your nose.  You dream of swaggering down the roads of your old home town, meeting the eyes of everyone you pass, daring them to ask; you dream of haunting bars and parties in a perpetual twilight, sweet talking every girl you see with casual, lust charged ease.  Women want you and men want to be you in the whirl of your sleeping mind.  There is a buzz running through these thoughts and images which energises and stupefies you; you find yourself charging through dream after tantalising dream, exhausting yet somehow never satisfying yourself.");
-				dynStats("lus", 25);
+				player.dynStats("lus", 25);
 			}
 		}
 		else if(daydream == 17) {
@@ -430,8 +430,8 @@ public function dayTenDreams():void {
 			outputText("You wake up in a sweat.  Fuck.");
 		}
 	}
-	if(player.cor < 50) dynStats("lus", 10);
-	else dynStats("lus", 25);
+	if(player.cor < 50) player.dynStats("lus", 10);
+	else player.dynStats("lus", 25);
 	doNext(playerMenu);
 }
 
@@ -474,7 +474,7 @@ public function displacerDreamII():void {
 	outputText("\n\nA soft \"sssht\" noise comes from behind you, that hole in the metal cave opening up once more.  Curious, you twist around so that you and your alien lover are butt-to-butt, and trot towards the doorway, dragging her along with you, though she's too blissed out to care.");
 	outputText("\n\nAs you pass through the doorway, your vision suddenly goes white... and you wake up with a start.");
 	player.orgasm();
-	dynStats("lib", 2, "sen", 2);
+	player.dynStats("lib", 2, "sen", 2);
 	menu();
 	addButton(0,"Next",displacerDreamIII);
 }

@@ -243,7 +243,7 @@ package classes.Scenes.NPCs
 			outputText("The defeated demon explains, \"<i>Though I am now and forever your slut, your slave, your bitch... those in my harem cannot be abandoned.  I am sad to say I cannot live with you, " + player.mf("Master", "Mistress") + ".</i>\"  She sees the look forming in your eyes and hastily adds, \"<i>Oh, I'll still be at your beck and call, but if I can't make it, I'll be sure to send you one of my pets.  Just rub this charm whenever you want my services, " + player.mf("Master", "Mistress") + ", and I'll be there.</i>\"  Ceraph holds out a tiny onyx bar tipped with rubies.  The gems shine and glitter with their own inner light, while the black shaft seems to drink in everything around it, leaving behind darkness.\n\n");
 
 			outputText("Well, with a harem as large as hers, it makes sense that she'd have to keep them in her lair and tend to them.  There's no way you could foster the people in your camp, and besides, since their Mistress is your slave, they're <b>now yours by extension, as well</b>.  Ceraph reaches down to ");
-			if (monster.lust >= monster.eMaxLust()) outputText("resume stroking");
+			if (monster.lust >= monster.maxLust()) outputText("resume stroking");
 			else outputText("stroke");
 			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my " + player.mf("Master", "Mistress") + " prefer to carry " + player.mf("his", "her") + " slave's token, or wear it as a belly-button piercing?</i>\"\n\n");
 
@@ -2158,7 +2158,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nClick.");
 				outputText("\n\nYour collar is removed, and you look around realizing your owner is gone.  Your muscles are sore from the journey and you NEED to masturbate...  You aren't even sure why you did that.");
 			}
-			dynStats("sen", 4, "lus=", 100, "resisted", false);
+			dynStats("sen", 4, "lus=", 100, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

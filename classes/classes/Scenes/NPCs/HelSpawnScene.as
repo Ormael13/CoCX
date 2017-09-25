@@ -1307,7 +1307,7 @@ private function incestWithHelspawn():void {
 	outputText("\n\nYou grin as the beautiful salamander strokes your cheek, and says, \"<i>You're a hell of a lot better than any femmy spider boy, " + championRef() + ".  I'm a lucky girl to have someone like you to raise me... and to love me.</i>\"");
 	
 	outputText("\n\nYou kiss her again and send her on her way with a sharp swat on the ass.  She gives it a sexy wiggle as she walks, winking back at you as she saunters off.");
-	dynStats("lus", player.sens/10+5, "resisted", false);
+	dynStats("lus", player.sens/10+5, "scale", false);
 	flags[kFLAGS.HELSPAWN_INCEST] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1359,7 +1359,7 @@ private function umYum():void {
 			player.takeDamage(player.maxHP() / 4);
 			player.damageHunger(rand(10) + 15);
 			dynStats("lib", -10);
-			dynStats("lust", -100, "resisted", false);
+			dynStats("lust", -100, "scale", false);
 		}
 		outputText("You set the finished bowl down and ")
 	}
@@ -1449,7 +1449,7 @@ internal function loseSparringToDaughter():void {
 internal function beatUpYourDaughter():void {
 	clearOutput();
 	//{If Sluttymander loses to lust (you monster)}:
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.eMaxLust()) {
+	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.maxLust()) {
 		outputText("\"<i>N-no more...</i>\" the slutty little salamander moans, slumping down to the ground, arms wrapping around herself.  \"<i>Fuck, you're sexy... so horny...</i>\" she groans, hands slipping down to her soaked bikini bottom.");
 		
 		outputText("\n\nShaking your head, you give her a little push, flopping her onto her back.  She just lets out a little whimper and finally tears her panties away, giving her unrestricted access to her sodden box.  \"<i>Hey, d-don't just leave me like this,</i>\" she whines, but to no avail.");

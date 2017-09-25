@@ -86,11 +86,11 @@ import classes.GlobalFlags.*;
 				else if (player.cor > 20) outputText("A prickling pain spreads throughout your skull.  ");
 				else outputText("You feel a mildly unpleasant tingling inside your skull.  ");
 				if (player.cor > 0) outputText("It quickly passes, leaving you more clearheaded");
-				getGame().dynStats("cor", -(1 + (player.cor / 20)));
+				game.player.dynStats("cor", -(1 + (player.cor / 20)));
 				//Libido Reduction
 				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
-					getGame().dynStats("lib", -3, "lus", -20);
+					game.player.dynStats("lib", -3, "lus", -20);
 					changes++;
 				}
 				else if (player.cor > 0) outputText(".");
@@ -105,7 +105,7 @@ import classes.GlobalFlags.*;
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
 			//Intelligence Boost
 			if (changes < changeLimit && Utils.rand(2) == 0 && player.inte < 80) {
-				getGame().dynStats("int", 0.1 * (80 - player.inte));
+				game.player.dynStats("int", 0.1 * (80 - player.inte));
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
 				changes++;
 			}
@@ -137,7 +137,7 @@ import classes.GlobalFlags.*;
 				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
 				else outputText(player.skinTone + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				getGame().dynStats("sen", -5);
+				game.player.dynStats("sen", -5);
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Antennae
@@ -273,7 +273,7 @@ import classes.GlobalFlags.*;
 					player.cocks[0].cockLength = Utils.rand(3) + 8;
 					player.cocks[0].cockThickness = 2;
 					player.orgasm();
-					getGame().dynStats("sen", 10);
+					game.player.dynStats("sen", 10);
 				}
 				else if (player.cocks.length > 1) {
 					var biggest:int = player.biggestCockIndex();
@@ -282,7 +282,7 @@ import classes.GlobalFlags.*;
 					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.removeCock(biggest, 1);
 					player.orgasm();
-					getGame().dynStats("sen", 5);
+					game.player.dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cArea() < 100) {
 					outputText("\n\nYour [cock] suddenly becomes rock hard and incredibly sensitive to the touch.  You pull away your [armor], and start to masturbate furiously as it rapidly swells in size.  When the change finally finishes, you realize that your [cock] has both grown much longer and wider!  <b>");
@@ -294,7 +294,7 @@ import classes.GlobalFlags.*;
 					outputText("</b>");
 					player.cocks[0].cockLength += (Utils.rand(3) + 4) * mult; //4 to 6 inches in length
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
-					getGame().dynStats("sen", 5);
+					game.player.dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
 					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
@@ -303,7 +303,7 @@ import classes.GlobalFlags.*;
 					player.cocks[0].cockType = CockTypesEnum.BEE;
 					player.cocks[0].cockLength += 5 * mult;
 					player.cocks[0].cockThickness += 1 * mult;
-					getGame().dynStats("sen", 15);
+					game.player.dynStats("sen", 15);
 				}
 				else {
 					if (mult > 0) {
@@ -314,16 +314,16 @@ import classes.GlobalFlags.*;
 					else {
 						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + getGame().cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
 					}
-					getGame().dynStats("sen", 3);
+					game.player.dynStats("sen", 3);
 				}
 				if (player.cor >= 5) {
 					outputText("\n\nYour mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
 					var corLoss:int = Math.min(0.1 * player.cor + 5, player.cor);
-					getGame().dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
+					game.player.dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
 				}
 				else {
 					outputText("\n\nYou find your mind is drifting to the thought of using your member to fertilize hundreds and hundreds of eggs every day.  You shake your head, the bizarre fantasy catching you completely off guard.");
-					getGame().dynStats("cor=", 0, "lib", 5);
+					game.player.dynStats("cor=", 0, "lib", 5);
 				}
 				if (player.femininity >= 60 || player.femininity <= 40) {
 					outputText("\n\nYour face shifts in shape, becoming more androgynous.");
@@ -331,7 +331,7 @@ import classes.GlobalFlags.*;
 						player.femininity -= 3;
 					else player.femininity += 3;
 				}
-				getGame().dynStats("lust", 0.2 * player.lib + 5);
+				game.player.dynStats("lust", 0.2 * player.lib + 5);
 			}
 			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return(false);

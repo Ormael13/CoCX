@@ -677,7 +677,7 @@ private function sellYourBooze():void {
 	else outputText("Niamh giggles as you try to move your breasts closer to the bar to be milked by the patrons, but it's obvious only the top pair of your tits can easily rest on the counter top.  \"<i>Lassie, it might be unconventional, but givin' the circumstance mayhaps it'd be best if ye laid down on the bar.</i>\"");
 	outputText("\n\nIt isn't long before patrons start lining up for mugs of your particular brand of booze.  They tug on your nipples, teasing the beverage from your teats.  Each drunken tug however encourages your libido, arousing you further.");
 	if(player.hasVagina()) outputText("  You feel your excitement dripping down the inside of your thighs as your pussy wettens.");
-	dynStats("lus", 10 + player.sens/5, "resisted", false);
+	dynStats("lus", 10 + player.sens/5, "scale", false);
 	//[If player has cocks]
 	if(player.hasCock()) outputText("  You start to feel sympathetic sensations in [eachCock] as the hands and paws of the bar goers milk your nipples.  With their fingers sliding over your sensitive nubs you can easily imagine them sliding up and down your cock");
 	if(player.cockTotal() > 1) outputText("s");

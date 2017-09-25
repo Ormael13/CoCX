@@ -42,7 +42,7 @@
 					//(AUTO-LOSE)
 					else {
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
-						game.dynStats("lus", 1000);
+						player.dynStats("lus", 1000);
 					}
 				}
 			}
@@ -56,7 +56,7 @@
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!");
-					game.dynStats("lus", 5);
+					player.dynStats("lus", 5);
 				}
 				player.createStatusEffect(StatusEffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
@@ -64,7 +64,7 @@
 			else {
 				if (rand(2) == 0) {
 					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your [skin.type], smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your [armor] to caress you more intimately while you're at her mercy.");
-					game.dynStats("lus", 9 + player.sens / 10);
+					player.dynStats("lus", 9 + player.sens / 10);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {
@@ -73,7 +73,7 @@
 					else if (player.lust < 60) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
 					else if (player.lust < 80) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
 					else outputText("It makes you ache and tremble with need, practically begging for another touch.");
-					game.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
+					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
 				}
 			}
 			combatRoundOver();
@@ -117,9 +117,9 @@
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your [skin.type], is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
-				game.dynStats("lus", 5);
+				player.dynStats("lus", 5);
 			}
-			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
+			player.dynStats("lus", player.lib / 20 + 5 + rand(5));
 			outputText("\n\n");
 			doAI();
 		}
@@ -139,7 +139,7 @@
 				tou += 10;
 				HP += 20;
 				lust = 33;
-				game.dynStats("lus", 3);
+				player.dynStats("lus", 3);
 				outputText("\n");
 				combatRoundOver();
 				return;

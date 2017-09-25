@@ -84,7 +84,7 @@ package classes.Scenes.NPCs
 			outputText("Salamander start drawing symbols in the air toward you.");
 			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10;
 			lustDmg = Math.round(lustDmg);
-			game.dynStats("lus", lustDmg, "resisted", false);
+			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
 		}
 		
