@@ -483,7 +483,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const NagaVenom:StatusEffectType                 = mkCombat("Naga Venom");
 		public static const NoFlee:StatusEffectType                    = mkCombat("NoFlee");
 		public static const OniRampage:StatusEffectType                = mkCombat("Oni Rampage");
-		public static const Overlimit:CombatStatusEffect				 = mk2("Overlimit");
+		public static const Overlimit:StatusEffectType                 = mkCombat("Overlimit");
 		public static const ParalyzeVenom:StatusEffectType             = mkCombat("paralyze venom");
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
 		public static const Poison:StatusEffectType                    = mkCombat("Poison");

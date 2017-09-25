@@ -1188,13 +1188,6 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 public function lustPercent():Number {
 	return player.lustPercent();
 }
-/*
-	//Berseking reduces lust gains by 10%
-	if (player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-	if (player.hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
-
-	//Items
- */
 // returns OLD OP VAL
 public function applyOperator(old:Number, op:String, val:Number):Number {
 	switch(op) {

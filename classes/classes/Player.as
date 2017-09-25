@@ -871,8 +871,9 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
-			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			
+			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
+			if (hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
+
 			//Items
 			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
 			if (armor == game.armors.DBARMOR) lust *= 0.9;
