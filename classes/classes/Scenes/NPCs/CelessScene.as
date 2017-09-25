@@ -1,10 +1,11 @@
 package classes.Scenes.NPCs 
 {
-	import classes.CoC;
-	import classes.Items.Useable;
-	import classes.Scenes.Camp;
-	import classes.TimeAwareInterface;
-	/**
+import classes.CoC;
+import classes.Items.Useable;
+import classes.Scenes.Camp;
+import classes.TimeAwareInterface;
+
+/**
 	 * ...
 	 * @author Oxdeception
 	 */
@@ -87,11 +88,12 @@ package classes.Scenes.NPCs
 		}
 		// End Interface implementation
 		
-		public function get getName():String{
+		override public function get Name():String{
 			return _name;
 		}
-		public function get isFollower():Boolean{
-			return _age != 0;
+		override public function isCompanion(type:int = -1):Boolean{
+			if(type == COMPANION || type == FOLLOWER) return _age != 0;
+			return false;
 		}
 		public function get isCorrupt():Boolean{
 			return _corruption >30;
@@ -112,12 +114,14 @@ package classes.Scenes.NPCs
 			_armorFound = true;
 		}
 		
-		override public function campDescription(menuType:int=-1, descOnly:Boolean=false):void 
+		override public function campDescription(menuType:int=-1, descOnly:Boolean=false):Boolean
 		{
-			if (isFollower && menuType == FOLLOWER){
-				outputText(getName+" is currently resting on all four in the nearby grassland area.\n\n");
-				addButton(3, getName, campInteraction);
+			if (isCompanion() && (menuType == FOLLOWER || menuType == COMPANION)){
+				outputText(Name+" is currently resting on all four in the nearby grassland area.\n\n");
+                addButton(3, Name, campInteraction);
+				return descOnly;
 			}
+			return false;
 		}
 		public override function campInteraction():void{
 			clearOutput();

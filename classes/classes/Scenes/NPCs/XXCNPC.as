@@ -3,7 +3,9 @@ package classes.Scenes.NPCs
 	import classes.BaseContent;
 	import classes.CoC;
 	import classes.GlobalFlags.kGAMECLASS;
-	import coc.xxc.Story;
+import classes.Scenes.Camp;
+
+import coc.xxc.Story;
 	
 	/**
 	 * ...
@@ -34,6 +36,12 @@ package classes.Scenes.NPCs
 		{
 			story.display(context, toDisplay);
 		}
+		protected function displaySimple(path:String):void{
+			clearOutput();
+			display(path);
+			menu();
+			doNext(camp.returnToCampUseOneHour);
+		}
 		public function save(saveto:*):void{
 			
 		}
@@ -43,9 +51,9 @@ package classes.Scenes.NPCs
 		public function campInteraction():void{
 			
 		}
-		public function campDescription(menuType:int = -1, descOnly:Boolean = false ):void
+		public function campDescription(menuType:int = -1, descOnly:Boolean = false ):Boolean
 		{
-			display("strings/campDescription");
+			return false;
 		}
 		public function checkCampEvent():Boolean{
 			return false;

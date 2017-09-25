@@ -208,7 +208,7 @@ package classes.Scenes.Areas
 						name: "celess-armor",
 						call: celessArmor,
 						when: function():Boolean{
-							return CelessScene.getInstance().isFollower && !CelessScene.getInstance().armorFound;
+							return CelessScene.getInstance().isCompanion() && !CelessScene.getInstance().armorFound;
 						}
 					}*/);
 					/*
