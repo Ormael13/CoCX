@@ -318,7 +318,7 @@ public class GoblinScene extends BaseContent
 			clearOutput();
 			spriteSelect(24);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
-			story.display("strings/defeated/CorruptDick");
+			story.display("strings/CorruptDick");
 			player.orgasm();
 			dynStats("cor", 1);
 			cleanupAfterCombat();
@@ -328,35 +328,9 @@ public class GoblinScene extends BaseContent
 		private function manRapesGoblinTooBig():void
 		{
 			clearOutput();
-			outputText(images.showImage("goblin-win-male-corruptedbj"));
-			var x:Number = player.biggestCockIndex();
 			spriteSelect(24);
-			outputText("You whip out your stiffening maleness, revealing its ");
-			if (player.cockArea(x) < 80) outputText("nearly ");
-			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n");
-			outputText("You ");
-			if (player.cor < 50) outputText("shrug and guess you may as well try since she's ready");
-			else outputText("grin, happy to try and stretch her around yourself");
-			outputText(".  The ");
-			if (player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flare");
-			else outputText("head");
-			outputText(" of your [cock biggest] visibly pulses in excitement as you brush it against her already-slick folds.  She squirms under you, clearly enjoying the feeling of you pushing against her opening.  With painful slowness, you begin pushing forward, feeling her body stretch around your ");
-			if (player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flare");
-			else outputText("crown");
-			outputText(", but after a moment or two of progress the tiny passage will stretch no more, and you're sure you can't force any more in without hurting her.\n\n");
-			outputText("Disgruntled with the tease, you pull out and slide it onto her torso, pinning her underneath your [cock biggest] and smearing her face and body with her juices.  Her tits squish down enough that her erect little purple nipples barely poke out on each side.  The little slut looks relieved and more than a little turned on.  She licks her lips and speaks happily, \"<i>Thanks hun, I think you would have torn me in half!  Don't worry, I'm more than happy to get soaked with your cum,</i>\" as she wraps her arms and legs around you");
-			if (player.hasKnot(0)) outputText(" hooking the heels of her feet just behind your knot");
-			outputText(".\n\n");
-			outputText("\"<i>She's good at this,</i>\" you muse as she begins grinding underneath you, using her legs to piston her entire body up and down your length, her arms and hands rubbing and caressing you with surprising passion.  The feeling is intense – these goblins know how to please a ");
-			if (player.gender == 3) outputText("herm");
-			else outputText("man");
-			outputText(", that's for sure!  You start dripping with excitement, soaking the goblin's face with an errant drop.  Her smile only broadens when she blinks it away.   A trail of warm wetness licks its way up your tip as the goblin greedily begins to devour your pre, going so far as to lick it from your urethra.  Your " + hipDescript() + " twitch, lifting her off the ground as she clings to your member.\n\n");
-			outputText("You'd never think such an act would be so enjoyable, but it's just too good.  You lose control, blasting a load of hot seed over the goblin's face.  She sputters and tries to wipe the spunk from her eyes when your next blast hits her square in the forehead, unbalancing the sprightly woman.   She thumps down hard on the ground after losing her grip on your spasming [cock biggest].  You step back, dick bobbling in the air as your orgasm finishes, ");
-			if (player.cumQ() < 75) outputText("splattering her a few more times with potent seed.  ");
-			else if (player.cumQ() < 250) outputText("painting her with a thick layer of seed.  ");
-			else outputText("soaking her and leaving her in a thick puddle of seed. ");
-			outputText("The green slut seems to handle it pretty well, even going so far as to scoop up your spunk and rub it into her cunt as she masturbates.  She licks her lips as she watches you redress, a sultry smile on her cum-painted face, \"<i>You tasted as good as I thought stud!  Maybe shrink that bad-boy down and come visit me for a better visit next time ok?  Hopefully by then all this baby batter I'm cramming into my box will give me a nice belly for you to rub!</i>\"\n\n");
-			outputText("You shake your head and leave, somewhat drained and relieved by the experience.");
+			outputText(images.showImage("goblin-win-male-corruptedbj"));
+			story.display("strings/DickTooBig");
 			player.orgasm();
 			cleanupAfterCombat();
 		}
