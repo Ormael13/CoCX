@@ -873,7 +873,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		statScreenRefresh();
-		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 	
@@ -1362,7 +1362,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) combatRoundOver();
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
 	public function scyllaGrapple():void {
@@ -1509,7 +1509,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) combatRoundOver();
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
 	public function spiderBiteAttack():void {
@@ -1562,7 +1562,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) combatRoundOver();
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
 	public function fenrirFrostbite():void {
@@ -1613,7 +1613,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You lunge headfirst, maw open for a bite. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) combatRoundOver();
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
 //Mantis Omni Slash (AoE attack)
@@ -1846,10 +1846,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 //Upheaval Attack
@@ -1935,10 +1935,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
 //Player sting attack
@@ -2021,7 +2021,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 //Player tail spike attack
@@ -2102,7 +2102,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) player.createStatusEffect(StatusEffects.FirstAttack,0,0,0,0);
 			playerTailSpike();
 		}
-		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 
@@ -2294,7 +2294,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 			enemyAI();
 		}
 		else {
@@ -2435,7 +2435,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if(monster.HP < 1 || monster.lust > monster.eMaxLust()) combatRoundOver();
+		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
 

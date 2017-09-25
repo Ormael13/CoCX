@@ -48,7 +48,7 @@ package classes.Items.Consumables
 				outputText("You feel your testicles shift, pulling the skin of your " + game.player.sackDescript() + " a little bit as they grow to " + game.player.ballsDescriptLight() + ".  ");
 			}
 			if (game.player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
-			game.dynStats("lus", 10);
+			game.player.dynStats("lus", 10);
 			game.inventory.itemGoNext();
 		}
 
@@ -60,7 +60,7 @@ package classes.Items.Consumables
 				game.player.growTits(Utils.rand(5) + 1, 1, true, 1);
 			else
 				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 1);
-			game.dynStats("lus", 10);
+			game.player.dynStats("lus", 10);
 			game.inventory.itemGoNext();
 		}
 
@@ -70,7 +70,7 @@ package classes.Items.Consumables
 			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
 			game.player.clitLength++;
 			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
-			game.dynStats("sen", 2, "lus", 10);
+			game.player.dynStats("sen", 2, "lus", 10);
 			game.inventory.itemGoNext();
 		}
 
@@ -96,7 +96,7 @@ package classes.Items.Consumables
 			if (game.player.hasSheath())
 				outputText("sheath.");
 			else outputText("crotch.");
-			game.dynStats("sen", 2, "lus", 10);
+			game.player.dynStats("sen", 2, "lus", 10);
 			game.inventory.itemGoNext();
 		}
 
@@ -107,7 +107,7 @@ package classes.Items.Consumables
 		//Grow nipples
 			outputText("Your nipples engorge, prodding hard against the inside of your " + game.player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n");
 			game.player.nippleLength += (Utils.rand(2) + 3) / 10;
-			game.dynStats("lus", 15);
+			game.player.dynStats("lus", 15);
 			//NIPPLECUNTZZZ
 			if (!game.player.hasFuckableNipples() && Utils.rand(4) == 0) {
 				var nowFuckable:Boolean = false;

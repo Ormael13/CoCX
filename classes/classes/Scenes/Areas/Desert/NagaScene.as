@@ -494,7 +494,7 @@ private function nagaVictoryFemale():void {
    			//(Loss by HPs)
 			//NO RAEP IF LOSS BY HPs, FUCK CENTAURS! SRSLY! GROW NORMAL LEGS!
    			//(Loss by Lust)
-			if(monster.lust >= monster.eMaxLust()) {
+			if(monster.lust >= monster.maxLust()) {
 				outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The ");
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga");
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon");
@@ -1281,7 +1281,7 @@ public function naggaSqueeze():void {
 	}
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
-	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100);
+	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 	kGAMECLASS.doDamage(damage, true, true);
 	fatigue(20, 2);
 	//Enemy faints -
@@ -1446,7 +1446,7 @@ public function naggaTease():void {
 		outputText("\n\n");
 		//OLD
 		//monster.lust += 5 + rand(15);
-		if(monster.lust >= monster.eMaxLust()) {
+		if(monster.lust >= monster.maxLust()) {
 			doNext(kGAMECLASS.combat.endLustVictory);
 			return;
 		}

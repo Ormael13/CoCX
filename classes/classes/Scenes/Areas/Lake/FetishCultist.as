@@ -80,7 +80,7 @@
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.");
 			}
-			game.dynStats("lus", (player.lib/10 + player.cor/20)+4);
+			player.dynStats("lus", (player.lib/10 + player.cor/20)+4);
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.combat.combatMenu);
@@ -103,7 +103,7 @@
 				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your [cocks], painfully hardened by a vast amount of blood rushing to your groin.");
 				if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.");
 				outputText("\n\nYou notice that the young woman seems to have calmed down some.");
-				game.dynStats("lus", (lust/3 * (1 + player.cor/300)));
+				player.dynStats("lus", (lust/3 * (1 + player.cor/300)));
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}

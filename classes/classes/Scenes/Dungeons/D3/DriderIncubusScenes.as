@@ -743,7 +743,7 @@ package classes.Scenes.Dungeons.D3
 			//Orgasm
 			//Pass an hour.
 			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
-			getGame().dynStats("cor+", 20);
+			player.dynStats("cor+", 20);
 			player.orgasm();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
@@ -811,7 +811,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nMoaning weakly, the spunk-bloated demon slumps forward. You withdraw from him with a wet <i>pop</i> the echoes throughout the court, silencing the demon host. You make eye contact with Lethice, holding her gaze as you gather your [armor]. Behind you, the drider is helpless but to moan and leak spooge from his well-fucked ass.");
 			if (player.cor >= 75) outputText(" You can't wait to see how the Demon Queen feels when she's skewered on your rod!");
 
-			getGame().dynStats("cor+", 20);
+			player.dynStats("cor+", 20);
 			player.orgasm();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();

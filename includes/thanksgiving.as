@@ -103,7 +103,7 @@ public function basteThatTurkeyBooty():void {
 	
 	outputText("\n\nThe turkey-girl smiles at you and flops onto her back, spreading her meaty thighs to give you a good look at the trimmed red bush between her legs, and the glistening slit of her vagina.  It looks like she wants some stuffing....");
 	player.orgasm();
-	dynStats("sen", -1);
+	player.dynStats("sen", -1);
 	simpleChoices("Stuff Her", stuffDatTurkeyWithSpoo, "", null, "", null, "", null, "That'll Do", thatllDoTurkey);
 }
 
@@ -136,7 +136,7 @@ public function stuffDatTurkeyWithSpoo():void {
 	
 	outputText("\n\nSoon, between your kneading out the thick gravy from her breasts and the spunk leaking out from her loins, mixing with what you splattered across her minutes earlier, the poor turkey is absolutely filthy, covered in the remnants of your rough fucking.  Slowly, languidly, you pull out from inside her, your cock still dribbling little rivulets of cum onto the musky girl's thighs.  The air around you now reeks of sex and a warm meal, her strange breastmilk creating a strong aroma of its own below that of drying spooge.");
 	player.orgasm();
-	dynStats("sen", -1);
+	player.dynStats("sen", -1);
 	if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0) {
 		outputText("\n\nAs you lay atop the turkey, you hear a faint, almost pleading, \"<i>Gobble?</i>\"  from her. Furrowing your brow, you pick yourself up to look at the cum-slathered turkey.  As soon as you're off her, she rolls over onto her hands and knees, her big bubble butt sticking up in the air for you, her plume of feathers tickling your cheeks.  She... still wants more?</i>\"");
 		simpleChoices("Spit-Roast", spitRoastThatTurkey, "", null, "", null, "", null, "That's Enough", thatllDoTurkey);
@@ -172,7 +172,7 @@ public function spitRoastThatTurkey():void {
 	
 	outputText("\n\nYou pull out of her with a wet squelch, grinning as a flood of your spunk starts to pour from her abused asshole, mixing in with the titgravy and two other loads you blew on her previously.  Supported by her huge tits, the turkey-girl goes limp, finally contented by the third fucking, her body stained and completely covered in your cum.  Looking around her, you see Hel lying on her back, snoring quietly after her own tail-based orgasm, her own body coated liberally with femcum and globs of your own spunk that rubbed off on her.");
 	player.orgasm();
-	dynStats("sen", -1);
+	player.dynStats("sen", -1);
 	doNext(thatllDoTurkey);
 }
 
@@ -254,7 +254,7 @@ public function femaleAndTurkeyMainCourse():void {
 	outputText("\n\nFinally though, her climax begins to die down.  She holds you close for a few moments, gulping down air after her body-shaking finish.  You continue to drain her breast, though you feel your [vagina] starting to leave a damp patch on the inside of your armour, dripping down your thighs to soak into the log beneath you.  The hand on your head begins to move its way out of your hair, trailing down your neck almost lovingly as her breathing starts to return to normal.  Her touch is almost electric against your skin and you suddenly find yourself very aware of how much your body has been reacting whilst your brain was fixated on her mind-numbingly good goo.");
 	
 	outputText("\n\nFinally, unable to withstand it any longer, you break your lips away from her teat and push the girl to the ground, your hunger for her body finally having overcome your hunger for her gravy.  She looks up at you with a confused expression to begin with, but once she sees your hands darting to the clasps of your armor, a much more sultry look crosses her features.");
-	dynStats("lus", 30);
+	player.dynStats("lus", 30);
 	doNext(haveTurkeyGirlDesertInYourCunt);
 }
 	
@@ -385,7 +385,7 @@ public function gravyBoatDatTurkturk():void {
 	
 	outputText("\n\nLooks like she wants you to return the favor!");
 	player.orgasm();
-	dynStats("lib", 1);
+	player.dynStats("lib", 1);
 	menu();
 	addButton(0,"Next",seasonHerDatTurkeyBitch);
 }
@@ -411,7 +411,7 @@ public function seasonHerDatTurkeyBitch():void {
 	outputText("\n\n\"<i>Gobbles, gobble,</i>\" you command, poking a finger into her drooling slit.");
 	
 	outputText("\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your [cocks].  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	player.dynStats("lus=", player.maxLust(), "scale", false);
 	menu();
 	addButton(0,"Next",turkeyDesertBitches);
 }
@@ -501,7 +501,7 @@ public function pigSlutRoastingGreet():void {
 	outputText("\n\nYou grin. You could really go for a wild night right about now and a cheap whore sounds like just the right thing to ease your... stress.");
 	awardAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, true, true);
 	//{Lust = lust + 10}
-	dynStats("lus", 5);
+	player.dynStats("lus", 5);
 	menu();
 	if(player.gems >= 1) addButton(0,"Throw gem",getARoastPiggueOinkOinkOinkMotherfucker);
 	addButton(1, "Nah", telAdre.barTelAdre);
@@ -580,7 +580,7 @@ public function tenderizeDatPigSloot():void {
 	outputText("\n\nYour hands are a blur as they play some unknown rhythm on her bouncing booty, as if they were acting on their own. The piggy slut has her hands clenching down on a nearby pillow, teeth gritted as you have your way with her colossal ass. Tears streak down onto the pillow, staining the fabric wet. The sight of her weeping sex is all you need to know to continue; the desperately oinking whore turns out to be a bit of a masochist...");
 	
 	outputText("\n\nYou look around the room for a more fitting tool to use on this pain-loving slut, even as you turn the whore's jiggling butt cheeks into a pair of booty bongos.");
-	dynStats("lus", 25, "resisted", false);
+	player.dynStats("lus", 25, "scale", false);
 	//[ Hardcore ] [ Softcore ]
 	menu();
 	addButton(0,"Softcore",hamRoastTenderizeHerSoftcore);
@@ -603,7 +603,7 @@ public function tenderizeHerHardcore():void {
 	outputText("\n\n\"<i>Oink! OINK! <b>OINK!</b></i>\" her pathetic squealing only excites you more, the sounds of loud strikes from your whip filling the room.");
 	
 	outputText("\n\nYou lose yourself in the excitement, your own [vagOrAss] twitching with delight each time your whip comes down on her bubbly buttocks.");
-	dynStats("lus", 25, "resisted", false);
+	player.dynStats("lus", 25, "scale", false);
 	//[ Next ]
 	menu();
 	addButton(0,"Next",spankEpilogueColonYoureAHorriblePersonForAbusingADumbPigGirl);
@@ -631,7 +631,7 @@ public function hamRoastTenderizeHerSoftcore():void {
 	
 	outputText("\n\nYou lose yourself in the excitement, your own [vagOrAss] twitching with delight each time your paddle comes down on her bubbly buttocks.");
 	
-	dynStats("lus", 25, "resisted", false);
+	player.dynStats("lus", 25, "scale", false);
 	menu();
 	addButton(0,"Next",spankEpilogueColonYoureAHorriblePersonForAbusingADumbPigGirl);
 	//[ Next ]

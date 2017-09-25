@@ -26,7 +26,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		public function tease():void {
 			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
-			game.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
+			player.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
 			combatRoundOver();
 		}
 		

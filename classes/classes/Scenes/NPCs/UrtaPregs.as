@@ -1668,7 +1668,7 @@ private function acceptUrtaRimJobbies():void {
 	//Both choices converge here.
 	outputText("\n\nIt takes a little work, but eventually the pair of you manage to get yourselves looking decent, though you've little doubt you still smell fairly strongly of sex.  Urta smiles, cuddles up against you and kisses you, then yawns.  \"<i>Well, I'm not pent up any more, but now I'm tired.  This baby could come any day now, so I need my sleep - I'm going home to take a nap, [name].  Take care of yourself, all right?</i>\" she tells you.");
 	outputText("\n\nYou kiss her goodbye and step out.");
-	dynStats("lus", player.sens/10, "resisted", false);
+	dynStats("lus", player.sens/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -77,7 +77,7 @@ package classes.Scenes.Places.Farm
 				if(player.lust >= 80) outputText("Your hand moves towards your groin seemingly of its own volition.");
 				else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
 			}
-			game.dynStats("lus", player.lib/5 + rand(10));
+			player.dynStats("lus", player.lib/5 + rand(10));
 			combatRoundOver();
 		}
 

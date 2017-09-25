@@ -67,7 +67,7 @@ package classes.Scenes.Areas.GlacialRift
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 				tempSpeedLoss += 10;
-				game.dynStats("spe", -10);
+				player.dynStats("spe", -10);
 			}
 			combatRoundOver();
 			//take slight damage, reduce speed
@@ -77,7 +77,7 @@ package classes.Scenes.Areas.GlacialRift
 			//lust increased
 			if (rand(player.lib + player.cor) >= 30 && rand(3) > 0) {
 				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.")
-				game.dynStats("lust", 20 + rand(10));
+				player.dynStats("lust", 20 + rand(10));
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
 			combatRoundOver();
@@ -96,13 +96,13 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dynStats("spe", tempSpeedLoss);
+			player.dynStats("spe", tempSpeedLoss);
 			game.glacialRift.yetiScene.winAgainstYeti();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dynStats("spe", tempSpeedLoss);
+			player.dynStats("spe", tempSpeedLoss);
 			game.glacialRift.yetiScene.loseToYeti();
 		}
 		

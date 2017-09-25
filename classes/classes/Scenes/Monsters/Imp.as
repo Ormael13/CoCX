@@ -44,7 +44,7 @@
 		
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			game.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
+			player.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
@@ -85,7 +85,7 @@
 		
 		protected function lustMagicAttack1():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			game.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
+			player.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");

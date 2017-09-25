@@ -458,10 +458,10 @@ package classes.Scenes.Dungeons
 			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hair style, breast size, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
 			
 			outputText("\n\nBig, brown eyes look up at you with obvious fear as you approach.  Well, that won't do.  You hold your hand out to her calmly, putting as welcoming a smile as you can for your fallen foe.  She looks around her ");
-			if(monster.lust >= monster.eMaxLust()) outputText("masturbating companions");
+			if(monster.lust >= monster.maxLust()) outputText("masturbating companions");
 			else outputText("groaning companions");
 			outputText(" for advice but finds none, and with no other choice, she takes your hand and allows you to separate her from her kin.  You put a hand to her cheek and tell her that you won't hurt her.  She and her kind have incited a great deal of lust in you, and while you intend to vent it on her, you don't see why it has to be unpleasant for her.");
-			if(monster.lust >= monster.eMaxLust()) outputText("  Judging by the omnipresent flush on her cheeks and the scent of female honey inundating the air, she's more than ready to help you with your problem.");
+			if(monster.lust >= monster.maxLust()) outputText("  Judging by the omnipresent flush on her cheeks and the scent of female honey inundating the air, she's more than ready to help you with your problem.");
 			else outputText("  Her cheekbones slowly color at the thought, turning almost entirely beet-red.  At the same time, her nipples seem to tighten beneath her robes, signalling her body's acceptance of your intent.");
 			
 			outputText("\n\nThe beautiful sand witch shudders and shrugs out of her robes, allowing her four, sweat-glossed breasts to sway free just inches away.  You immediately grasp one in your hand and grope it - not too forcefully, just enough to admire her curvy bosom properly.  She flinches at the contact, but when your exploratory thumb caresses the side of her areola, she tilts her head back and sighs.  A single drop of milk escapes her lusty teat onto your finger, and you lift it to your lips to taste.  Creamy, sweet flavor tickles your tongue.  You hum in unexpected delight, how marvellous!");
@@ -471,7 +471,7 @@ package classes.Scenes.Dungeons
 			if(player.tallness < 60) outputText("through her buttcheeks");
 			else outputText("along her arched spine");
 			outputText(", fully engorged and ready for action.  For now, you're content to continue to molest your chosen fuck-toy, dipping a pair of fingers into her ");
-			if(monster.lust >= monster.eMaxLust()) outputText("well-soaked");
+			if(monster.lust >= monster.maxLust()) outputText("well-soaked");
 			else outputText("rapidly-moistening");
 			outputText(" cunts in order to make sure she's prepared.  The witch bites her lip to stifle a lewd moan, so you drag the pads of your fingers across each of her clits simultaneously.  This shatters whatever restraint she was showing into a little more than slick cunt-juice.  Even now, it's dripping down her inner thighs.  She's properly moaning with your strokes now, and you judge she's ready.");
 			
@@ -774,7 +774,7 @@ package classes.Scenes.Dungeons
 			outputText(".  Of course, the wicked witch only releases you at this point.  \"<i>Do I look like one of the cum-hungry wenches around here?</i>\"");
 			
 			//add lust
-			dynStats("lus=", player.maxLust(), "resisted", false);
+			dynStats("lus=", player.maxLust(), "scale", false);
 			
 			outputText("\n\nAt that, a few nagging worries surge up to the forefront of your lust-addled thoughts.  You were hypnotized!  Worse than that, you can barely remember anything, let alone how you got here.  In addition, though less pressing, she's done something to you that'll make you only father females.  You don't remember much, but you know that's not quite right.  You jump up and nearly fall over your own [feet] in your hurry to get away from this woman - alluring and arousing as she is.  Pressing your back flat against the wall, you begin breathing faster and faster as you wrack your consciousness for an explanation.");
 			
@@ -891,7 +891,7 @@ package classes.Scenes.Dungeons
 				
 				outputText("\n\nSo if you avoid a facial she'll steal some of your semen production, but if you take it, she'll make you MORE virile.  While you're mulling it over, she's still grinding on you, distracting you with flashes of salacious delight.  The clock is ticking, and if you don't pick soon, she might pick for you.");
 				//[Facial] [No Facial]
-				dynStats("lus=", player.maxLust(), "resisted", false);
+				dynStats("lus=", player.maxLust(), "scale", false);
 				addButton(0,"Facial",tooBigCumWitchLossFacial).hint("Allow the Cum Witch to cum all over your face and increase your potency.");
 				addButton(1,"No Facial",tooBigCumWitchLossNoFacial).hint("Don't allow the Cum Witch to perform facial. This will reduce your cum production multiplier by 25%.");
 			}
@@ -2323,7 +2323,7 @@ package classes.Scenes.Dungeons
 				//(Award XP)
 				player.XP += 200;
 				mainView.statsView.showStatUp( 'xp' );
-				dynStats("lust", 0, "resisted", false); //Forces up arrow.
+				dynStats("lust", 0, "scale", false); //Forces up arrow.
 				//xpUp.visible = true;
 				statScreenRefresh();
 				//(Set friendly)
@@ -3809,7 +3809,7 @@ package classes.Scenes.Dungeons
 			}
 			//[Fuck Her](PC must have gender; if cooch, also C+ cups) [Don't]
 			menu();
-			dynStats("lus", 33, "resisted", false);
+			dynStats("lus", 33, "scale", false);
 			if(player.hasCock()) addButton(0,"Dick Fuck",fuckMilkbabeWithPenor).hint("Fuck the milk slave with your penis.");
 			if(player.hasVagina() && player.biggestTitSize() >= 3) addButton(1,"Lady Fuck",ladyFucks).hint("Have some vaginal and boob play.");
 			addButton(2,"Don't Fuck",dontFuckMilkBathBabe).hint("Skip the fucking.");

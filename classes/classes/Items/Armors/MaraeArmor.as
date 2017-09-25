@@ -72,7 +72,7 @@ package classes.Items.Armors
 			if (getGame().player.lust < 20)
 			{
 				outputText("\n\nYou can feel the tentacles inside your breastplate slither their way and tease your [butt]. You " + (game.player.cor < 60 ? "gasp in surprise" : "moan in pleasure") + ".");
-				game.dynStats("lust", 30);
+				game.player.dynStats("lust", 30);
 			}
 		}
 	}

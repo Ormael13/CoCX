@@ -157,13 +157,13 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	fixFlags();
 	if(player.hasStatusEffect(StatusEffects.Might)) {
-		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-		else kGAMECLASS.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-		kGAMECLASS.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
+		else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
+		player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
 		player.removeStatusEffect(StatusEffects.Might);
 	}
 	if(player.hasStatusEffect(StatusEffects.Blink)) {
-		kGAMECLASS.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+		player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
 		player.removeStatusEffect(StatusEffects.Blink);
 	}
 	if(player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -748,13 +748,6 @@ private function doCamp():void { //Only called by playerMenu
 	
 	campSlavesMenu(true);
 
-	//Clear bee-status
-	if(player.hasStatusEffect(StatusEffects.ParalyzeVenom)) {
-		dynStats("str", player.statusEffectv1(StatusEffects.ParalyzeVenom),"spe", player.statusEffectv2(StatusEffects.ParalyzeVenom));
-		player.removeStatusEffect(StatusEffects.ParalyzeVenom);
-		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n");
-	}
-	
 	//Hunger check!
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
@@ -1713,21 +1706,21 @@ private function swimInStreamFinish():void {
 	{
 		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n");
 		dynStats("cor", 0.5);
-		if (player.cor < 25) dynStats("lust", 30, "resisted", true);
-		if (player.cor >= 25 && player.cor < 50) dynStats("lust", 20, "resisted", true);
-		if (player.cor >= 50) dynStats("lust", 10, "resisted", true);
+		if (player.cor < 25) dynStats("lust", 30, "scale", true);
+		if (player.cor >= 25 && player.cor < 50) dynStats("lust", 20, "scale", true);
+		if (player.cor >= 50) dynStats("lust", 10, "scale", true);
 	}
 	else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
 		outputText("You feel a bit cleaner after swimming in the waters. \n\n");
-		if (player.cor < 33) dynStats("lust", -30, "resisted", false);
-		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -20, "resisted", false);
-		if (player.cor >= 66) dynStats("lust", -10, "resisted", false);
+		if (player.cor < 33) dynStats("lust", -30, "scale", false);
+		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -20, "scale", false);
+		if (player.cor >= 66) dynStats("lust", -10, "scale", false);
 	}
 	else {
 		outputText("You feel a little bit cleaner after swimming in the waters. \n\n");
-		if (player.cor < 33) dynStats("lust", -15, "resisted", false);
-		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -10, "resisted", false);
-		if (player.cor >= 66) dynStats("lust", -5, "resisted", false);
+		if (player.cor < 33) dynStats("lust", -15, "scale", false);
+		if (player.cor >= 33 && player.cor < 66) dynStats("lust", -10, "scale", false);
+		if (player.cor >= 66) dynStats("lust", -5, "scale", false);
 	}
 	outputText("Eventually, you swim back to the riverbank and dry yourself off");
 	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName);
@@ -1758,17 +1751,17 @@ private function watchSunset():void {
 		if (player.cor < 33) 
 		{
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood.");
-			dynStats("cor", -1, "lib", -1, "lust", -30, "resisted", false);
+			dynStats("cor", -1, "lib", -1, "lust", -30, "scale", false);
 		}
 		if (player.cor >= 33 && player.cor < 66) 
 		{
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories are somewhat twisted from some of the perverted moments. You shake your head and just relax.");
-			dynStats("cor", -0.5, "lib", -1, "lust", -20, "resisted", false);
+			dynStats("cor", -0.5, "lib", -1, "lust", -20, "scale", false);
 		}
 		if (player.cor >= 66) 
 		{
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you shake your head and focus on relaxing.");
-			dynStats("cor", 0, "lib", -1, "lust", -10, "resisted", false);
+			dynStats("cor", 0, "lib", -1, "lust", -10, "scale", false);
 		}
 	}
 	//Greatest moments GO!
@@ -1777,17 +1770,17 @@ private function watchSunset():void {
 		if (player.cor < 33) 
 		{
 			outputText("You reflect back on your greatest adventures and how curiosity got the best of you. You remember some of the greatest places you discovered.");
-			dynStats("lust", -30, "resisted", false);
+			dynStats("lust", -30, "scale", false);
 		}
 		if (player.cor >= 33 && player.cor < 66) 
 		{
 			outputText("You reflect back on your greatest adventures. Of course, some of them involved fucking and getting fucked by the denizens of Mareth. You suddenly open your eyes from the memory and just relax, wondering why you thought of that in the first place.");
-			dynStats("lust", -20, "resisted", false);
+			dynStats("lust", -20, "scale", false);
 		}
 		if (player.cor >= 66) 
 		{
 			outputText("You reflect back on your greatest adventures. You chuckle at the moments you were dominating and the moments you were submitting. You suddenly open your eyes from the memory and just relax.");
-			dynStats("lust", -10, "resisted", false);
+			dynStats("lust", -10, "scale", false);
 		}
 	}
 	//Greatest moments GO!
@@ -1797,7 +1790,7 @@ private function watchSunset():void {
 		if (rand(2) == 0) outputText("do");
 		else outputText("accomplish");
 		outputText(" before you went through the portal. You felt a bit sad that you didn't get to achieve your old goals.");
-		dynStats("lust", -30, "resisted", false);
+		dynStats("lust", -30, "scale", false);
 
 	}
 	outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.");
@@ -1828,7 +1821,7 @@ private function watchStars():void {
 			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Kitteh6660 know?");
 	}
 	outputText("\n\nYou let your mind wander and relax.");
-	dynStats("lus", -15, "resisted", false);
+	dynStats("lus", -15, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

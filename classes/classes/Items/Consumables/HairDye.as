@@ -63,7 +63,7 @@ import classes.GlobalFlags.kGAMECLASS;
 				outputText("You now have " + game.hairDescript() + ".");
 				if (game.player.lust > 50) {
 					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-					game.dynStats("lus", -15);
+					game.player.dynStats("lus", -15);
 				}
 			}
 			game.inventory.itemGoNext();
@@ -76,7 +76,7 @@ import classes.GlobalFlags.kGAMECLASS;
 			outputText("You now have [skin coat].");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.dynStats("lus", -15);
+				game.player.dynStats("lus", -15);
 			}
 			game.inventory.itemGoNext();
 		}

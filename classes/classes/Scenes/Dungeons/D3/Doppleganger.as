@@ -61,7 +61,7 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\n“<i>What’s the matter, [name]?</i>” " + player.mf("he", "she") +" breathes, staring lustfully into your eyes as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. “<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>”");
 				
-				game.dynStats("lus", damage + (rand(7) - 3));
+				player.dynStats("lus", damage + (rand(7) - 3));
 			}
 			addTalkShit();
 		}
@@ -76,7 +76,7 @@ package classes.Scenes.Dungeons.D3
 				return;
 			}
 			
-			if (lust > eMaxLust())
+			if (lust > maxLust())
 			{
 				doNext(game.endLustVictory);
 				return;
@@ -131,7 +131,7 @@ package classes.Scenes.Dungeons.D3
 				case 5:
 					outputText("\n\nThe shimmering intensifies for a moment as something... shifts....");
 					
-					game.dynStats("lus+", 1000);
+					player.dynStats("lus+", 1000);
 					
 					break;
 					

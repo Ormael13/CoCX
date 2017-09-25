@@ -2,7 +2,8 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.internals.ChainedDrop;
+import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
+import classes.internals.ChainedDrop;
 
 	public class BeeGirl extends Monster {
 
@@ -16,7 +17,7 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
 				}
 				player.lust = 98;
-				game.dynStats("lus", 1);
+				player.dynStats("lus", 1);
 				game.forest.beeGirlScene.afterfightoptionswithBeeGirl();
 			}
 			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
@@ -73,7 +74,7 @@
 				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
-				game.dynStats("lus", 25);
+				player.dynStats("lus", 25);
 				if (player.lust > 60) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
@@ -86,17 +87,15 @@
 			//Paralise the other 50%!
 			else {
 				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
-				var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.ParalyzeVenom);
-				if (sac) {
-					sac.value1 += 2.9; //v1 - strenght penalty, v2 speed penalty
-					sac.value2 += 2.9;
-					game.dynStats("str", -3, "spe", -3);
+				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
+				if (paralyze) {
 					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
 				} else {
-					player.createStatusEffect(StatusEffects.ParalyzeVenom, 2, 2, 0, 0);
-					game.dynStats("str", -2, "spe", -2);
+					paralyze = new ParalyzeVenomDebuff();
+					player.addStatusEffect(paralyze);
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
 				}
+				paralyze.increase();
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
