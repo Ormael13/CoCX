@@ -22,6 +22,7 @@ public class StoryContext extends ExecContext{
 				CockTypesEnum:CockTypesEnum,
 				kFLAGS:kFLAGS,
 				kGAMECLASS:kGAMECLASS,
+				Math:Math,
 				Skin:Skin
 			}
 		]);

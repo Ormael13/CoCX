@@ -343,74 +343,7 @@ public class GoblinScene extends BaseContent
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-getridden"));
-			//(FITS( barley) – Get ridden)
-			if (player.cockArea(x) > monster.vaginalCapacity() * .8) {
-				outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle, and lower her down towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
-				outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down, ");
-				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing painfully against your demonic nubs");
-				else if (player.hasKnot(0)) outputText("stretching painfully around your knot");
-				else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you");
-				outputText(". With each and every step she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
-				if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
-				else outputText("torso");
-				outputText(" to help support herself.  A steady pulse of motion massages you in time with the green girl's breathing.  You realize just how much of her body must be devoted to accommodating monstrous members, no wonder goblins are so fragile in a fight!\n\n");
-				outputText("She pants happily, her tongue rolling free from her mouth as she comments, \"<i>So full. . .</i>\"  Still wincing from the monster inside her she begins to cheer you on, \"<i>oooh go-ah-faster! I wanna bounce!</i>\"\n\n");
-				outputText("It's all the encouragement you need, and you break into a run, feeling her lithe form bounce on your " + cockDescript(x) + ", drawing out a cacophony of cries ranging from happy wails and moans to slight yelps of pain. Her tiny fists dig into your ");
-				if (player.biggestTitSize() >= 1) outputText("tits");
-				else outputText("skin");
-				outputText(" as she hangs on, clenching and smashing her ample tits against you. You run hard, feeling her bounce and wriggle as her cunt and rapid breathing squeezing and milking you like you never before. You're sure if you could feel like this every time you took a jog, you'd be in great shape.\n\n");
-				outputText("\"<i>Ooh fuck stud, bounce me! Yeah just like that,</i>\" she moans, \"<i>Are you gonna cum? Omigod please cum, I need you to fill me up just like this!</i>\"\n\n");
-				outputText("The familiar tightness of a coming orgasm grows in your groin, tightening as you near release. You pick up the pace, full out sprinting, letting the girl bounce and jiggle as she clings to you, supported entirely by your " + cockDescript(x) + ". ");
-				if (player.balls > 0) outputText("Your [balls] tighten, releasing the seed of your orgasm.  ");
-				outputText("The howl of a powerful orgasm fills your ears as your cumming sets off the little green cock-sleeve. One of her hands lets go, and starts rubbing her belly while she kisses and licks your belly-button.");
-				if (player.cumQ() >= 100) outputText("  Your enhanced body easily stuffs her full of cream, pudging her belly out slightly, your seed staying embedded in her womb with nowhere to escape, her cunt plugged tightly with your " + cockDescript(x) + ".");
-				if (player.cumQ() >= 500) outputText("  The orgasm is so potent that by the time you wind down, she looks to be sporting a pregnancy the size of a medicine ball.  Your cum is trapped inside her, unable to find any gap between her walls and your " + cockDescript(x) + ".");
-				else if (player.cumQ() >= 250) outputText("  The orgasm is so potent that by the time you wind down, she looks heavily pregnant.  Your cum is unable to find any gap between her walls and your " + cockDescript(x) + ".");
-				outputText("\n\n");
-				outputText("You pant and stop, pulling the stuffed goblin off you and setting her on the ground, smiling in satisfaction as your cum ");
-				if (player.cumQ() >= 250) outputText("pours out in a river");
-				else outputText("leaks");
-				outputText(" from her now-gaping twat. She rubs her belly and blows you a kiss, still trying to catch her breath. You smirk and begin redressing. Once finished, you start walking away, but she calls out one last time to you, \"<i>MMMmm I hope you don't mind if I find you again. I need more of your baby batter so I can give you lots of beautiful sluts to fuck!</i>\"\n\n");
-				if (player.cor > 50) outputText("Chuckling");
-				else outputText("Shuddering");
-				outputText(", you make your way back to camp, satisfied.");
-			}
-			//(FITS – Get ridden)
-			else {
-				outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her down towards your " + cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
-				outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down ");
-				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing perfectly against your demonic nubs");
-				else if (player.hasKnot(0)) outputText("stretching tightly around your knot");
-				else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling absolutely perfect around you");
-				outputText(".  With each and every step you take, she slides down further, until she sits fully impaled on you, grabbing your ");
-				if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
-				else outputText("torso");
-				outputText(" to help support herself.   A steady pulse of motion massages you in time with the green girl's breathing, making you realize just how much of her body must be devoted to accommodating monstrous members.\n\n");
-				outputText("She pants happily, her tongue rolling free from her mouth as she cheers you on, \"<i>oooh go-ah-faster!  I wanna bounce!</i>\"\n\n");
-				outputText("It's all the encouragement you need, and you break into a run, feeling her lithe form bounce on your " + cockDescript(x) + ", drawing out a cacophony of happy wails and moans.  Her tiny fists dig into your ");
-				if (player.biggestTitSize() >= 1) outputText("tits");
-				else outputText("skin");
-				outputText(" as she hangs on, clenching and smashing her ample tits against you.  You run hard, feeling her bounce and wriggle as her cunt and rapid breathing begin squeezing and milking you like never before.  You're sure if you could feel like this every time you took a jog, you'd be in great shape.\n\n");
-				outputText("\"<i>Ooh fuck stud, bounce me! Yeah just like that,</i>\" she moans, \"<i>Are you gonna cum? Omigod please cum, I need you to fill me like this!</i>\"\n\n");
-				outputText("The familiar tightness of a coming orgasm grows in your groin, tightening as you near release.  You pick the pace, full out sprinting, letting the girl bounce and jiggle as she clings to you, supported entirely by your " + cockDescript(x) + ".  ");
-				if (player.balls > 0) outputText("Your [balls] tighten, releasing the seed of your orgasm.  ");
-				outputText("The howl of a powerful orgasm fills your ears as your cumming sets off the little green cock-sleeve.  One of her hands lets go, and starts rubbing her belly while she kisses and licks your belly-button.");
-				if (player.cumQ() >= 250) {
-					outputText("  Your enhanced body easily stuffs her full of cream, pudging her belly out slightly and dripping down your ");
-					if (player.balls > 0) outputText(ballsDescriptLight());
-					else outputText("legs");
-					outputText(".");
-				}
-				if (player.cumQ() >= 500) outputText("  The orgasm is so potent that by the time you wind down, she looks heavily pregnant and your cum squirts out of any gap it can find between her walls and your " + cockDescript(x) + ".");
-				outputText("\n\n");
-				outputText("You pant and stop, pulling the stuffed goblin off you and setting her on the ground, smiling in satisfaction as your cum ");
-				if (player.cumQ() >= 250) outputText("pours out in a river");
-				else outputText("leaks");
-				outputText(" from her now-gaping twat.  She rubs her belly and blows you a kiss, still trying to catch her breath.  You smirk and begin redressing.  Once finished, you start walking away, but she calls out one last time to you, \"<i>Ummm I hope you don't mind if I find you again.  I need more of your baby batter so I can give you lots of beautiful sluts to fuck!</i>\"\n\n");
-				if (player.cor > 50) outputText("Chuckling");
-				else outputText("Shuddering");
-				outputText(", you make your way back to camp, satisfied.");
-			}
+			story.display("strings/RapeJog");
 			cleanupAfterCombat();
 			player.orgasm();
 		}
