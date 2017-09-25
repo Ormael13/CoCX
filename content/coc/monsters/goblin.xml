@@ -83,7 +83,7 @@
         </text>
         <text name="RapeFemNaga">
             You slither over to the helpless goblin, who watches you half in fear, half in curiosity.
-            <if test="player.faceType == 5 /*FACE_SNAKE_FANGS*/">
+            <if test="player.faceType == FACE_SNAKE_FANGS">
                 You bare your fangs at her and the curiosity disappears. She turns to run, but your tail is faster than she is.
                 <else>
                     You smile at her and the fear disappears. She's still wary though, and you make sure to grab her with your tail before she changes her mind about you.
@@ -133,13 +133,13 @@
 
             By the third bottle she's given up on struggling and is instead trying to grind her cunt into your knee.  Her mouth is open wide and her entire face is flushed reddish-purple with desire.  You finish force-feeding her the remaining bottles and shove her, catching her ankles to hold her over your leg with her ass in the air.  The scent of her arousal and the vapors from all the drugs and aphrodisiacs give you a bit of a 'contact high', at least in the sense that your [vagina]
             <switch value="player.vaginas[0].vaginalWetness">
-                <case lt="2 /*VAGINA_WETNESS_WET*/">
+                <case lt="VAGINA_WETNESS_WET">
                     grows puffy and moist.
                 </case>
-                <case lt="4 /*VAGINA_WETNESS_DROOLING*/">
+                <case lt="VAGINA_WETNESS_DROOLING">
                     drips with feminine moisture.
                 </case>
-                <case lt="5 /*VAGINA_WETNESS_SLAVERING*/">
+                <case lt="VAGINA_WETNESS_SLAVERING">
                     slowly begins to soak your thighs.
                 </case>
                 <default>
@@ -158,13 +158,13 @@
 
             You cum on the drugged green bitch,
             <switch value="player.vaginas[0].vaginalWetness">
-                <case gt="4 /*VAGINA_WETNESS_SLAVERING*/">
+                <case gt="VAGINA_WETNESS_SLAVERING">
                     splattering her with your fluids.
                 </case>
-                <case gt="3 /*VAGINA_WETNESS_SLICK*/">
+                <case gt="VAGINA_WETNESS_SLICK">
                     coating her face with the proof of your pleasure.
                 </case>
-                <case gt="2 /*VAGINA_WETNESS_WET*/">
+                <case gt="VAGINA_WETNESS_WET">
                     leaving her sticky with your nether-juices.
                 </case>
                 <default>
@@ -193,6 +193,82 @@
                     a bit guilty about overdoing it.
                 </else>
             </if>
+        </text>
+        <text name="CorruptDick">
+            <set var="$x" value="player.biggestCockIndex()"/>
+            You begin to remove your [armor], looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily.
+            Your [cocks] <if test="player.cockTotal() eq 1" then="is" else="are all"/> far more aware of the situation than she is as you stoop down and strip her of every scrap of her admittedly sparse clothing.
+            While you look her over, <if test="player.cockTotal() eq 1" then="your [cock]" else="one of your [cocks]"/> comes to rest on top of her and the fact that it's <if test="player.cocks[$x].cockLength lt 20" then="about as long as her entire torso" else="bigger than she is"/> gives you a wicked idea.
+
+            You have a seat, legs wide, on the ground and hold the little goblin whore with her relatively tiny slit resting at the tip of your [cock biggest]. Finally out of her stupor a look of extreme conflict crosses her face as her need for cock and cum goes to war with her survival instincts. On the brink of defeat, those instinct suddenly regroup and beat back her lust once she feels the pain of just the [cockhead biggest] of your [cock biggest] starting to stretch out her [monster vagina]. She does all she can to resist, but with the way you're holding this is little more than flailing wildly and pushing against your [cock biggest] with her feet, practically climbing it like the tree trunk it must look like from her perspective.
+
+            Both of you dripping with sweat from your respective exertions, you slowly begin to realize the combination of her furious struggling and the tightness of her [monster vagina] is going to keep you from the penetration you were so looking forward to. However, as you begin to consider finishing off in her throat, a darkness stirs and another idea crosses your mind.
+
+            The goblin relaxes a little when she feels you no longer pressing her down onto your [cock biggest]. She absolutely thrills when you bring her tiny pussy to your lips and begin to have at it. Your tongue plays around both on the inside and outside of her [monster vagina] until you coax her little nub out from hiding. You wrap your lips around it and begin putting your corruption to task. As you drive the goblin slut closer and closer to orgasm, working over her clit with an expertise rarely found outside of the infernal ranks, bolts of corrupt energies travel from your tongue, through her clit, and deep into her core. As she cums, screaming, you pull off of her, admiring the outward signs of your demonic handiwork. What before was an average sized love button has swollen five times its size into a proud, engorged clit... and that's not the only thing you enlarged.
+
+            You reposition your fucktoy so that now she's facing away from you and again bring your [cock biggest] into contact with her [monster vagina]. Again she struggles, but after her orgasm she doesn't have the strength to put up a decent fight; all her resistance does is arouse you further, now that she's fighting the inevitable. You begin to press her down onto yourself.
+
+            "<i>Too much...</i>" she says, weakly. The tip of the head pops in.
+
+            "<i>You'll kill me...</i>" she pleads. The rest of the head follows.
+
+            "<i>Stop...</i>" she begs. The shaft starts to sink in.
+
+            "<i>Don't...</i>" More enters her small body.
+
+            "<i>Please...</i>" She fills to capacity.
+
+            "<i>Please...</i>" And beyond.
+
+            "<i>... Fuck me.</i>"
+
+            You ram home the rest of your [cock biggest] left outside of your newly christened dick jockey. It's enough to orgasm the bitch, and you haven't even gotten started. You <if test="player.cocks[$x].cockLength lt 20" then="can feel the massive bulge in her midsection" else="stretch her so much that you can see the bulge even from this angle"/> and it drives your lust even higher. You withdraw more cock from the hole than your cum starved slut has body, causing her eyes to roll into the back of her head as her [monster vagina] clamps down on you and she cums again. Every time you pull out or hammer home brings her off to the point that by the time you've both gotten down on all fours, rutting like a pair of wild animals, she can only lie there, practically foaming at the wide open mouth<if test="player.biggestTitSize() ge 1">, her head resting between your [breasts]<switch value="player.biggestLactation()">
+            <case lt="1">.</case>
+            <case lt="2"> as your[nipples] occasionally drip milky tears onto her face.</case>
+            <case lt="3"> as your[nipples] weep streams of milk onto her features.</case>
+            <default> as your[nipples] plaster her with gouts of fluid.</default></switch>
+            Her hair is matted with <if test="player.isLactating()" then="milk and "/>the sweat of the both of you, and the only sound she makes is an occasional gurgle of ecstasy every few orgasms.
+
+            "<i>Alright, whore. You wanted my babies? Here. They. CUM!</i>" you yell.
+            However,
+            <if test="player.hasVagina()"> while your [vagina]
+                <switch value="player.vaginas[0].vaginalWetness">
+                    <case lte="VAGINA_WETNESS_SLICK"> juices </case>
+                    <case lte="VAGINA_WETNESS_DROOLING"> floods </case>
+                    <default> explodes </default>
+                </switch>
+                <elseif test="player.cockTotal() gt 1">
+                    while your other <output>Appearance.cockNoun(CockTypesEnum.HUMAN)</output>
+                    <if test="player.cockTotal() gt 2" then=" drench her, " else="drenches her, "/>
+                </elseif>
+            </if>
+            the bitch is too tight! Like a natural cock-ring!
+            <if test="player.balls ge 2" then="Your [balls] are trying but, her" else="Her"/>
+            spasming [monster vagina] is clamping down so hard on your [cock biggest] that it can't release.
+
+            The moment passes and you're left unsatisfied.  This only serves to piss you off as your cum receptacle fails in its one duty. You, however, are undaunted. In fact you redouble your efforts. If this size queen slut wants to deny you your pay off while getting off herself, well, you'll just have to cum her into oblivion the next go-round.
+
+            For what seems like hours you almost literally screw the brains out of her little green head, working yourself back up to the brink. You consider pulling out this time, but decide against it. At least two loads worth at once; it'll work, and the bitch has it coming.
+
+            "<i>Let's. Try. This. AGAIN!</i>" you shout, pulling the two of you back into a sitting position and arching both of your backs.
+
+            Your [cock biggest] is pressed so firmly against her skin that you can see the cum working its way up and out of your shaft and bloating your goblin toy with only the first shot.
+            <if test="player.cockTotal() eq 2">
+                Your remaining penis blasts geysers into the air, coating you both with spunk.
+                <elseif test="player.cockTotal() gt 2">
+                    Your remaining [cocks] blast geysers into the air, coating you both in your spunk.
+                </elseif>
+            </if>
+            The same tightness that prevented your cumming the first time now ensures that none of the copious amount of seed you blast into her escapes until you pull out. It's a good thing your corruption was so effective, as she is beginning to look pregnant enough to hold a beach ball.
+
+            Finally you blow your last wad into this latest piece of ass, shoving her off of your [cock biggest] and letting her fall to the ground. The impact sends torrents of cum sluicing out of her.
+
+            You stand and prepare to leave, looking down at the goblin slut you just finished with.
+
+            "<i>I hope my daughters are a better fuck than their bitch mother,</i>" you say. "<i>Tell'em to find me if they want to get split like a log too.</i>"
+
+            She absolutely will.
+        </if>
         </text>
     </lib>
 </extend-story>

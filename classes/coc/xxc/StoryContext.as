@@ -5,6 +5,7 @@ package coc.xxc {
 import classes.Appearance;
 import classes.BodyParts.Skin;
 import classes.CoC;
+import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
@@ -18,6 +19,7 @@ public class StoryContext extends ExecContext{
 			CoC,
 			{
 				Appeearance:Appearance,
+				CockTypesEnum:CockTypesEnum,
 				kFLAGS:kFLAGS,
 				kGAMECLASS:kGAMECLASS,
 				Skin:Skin
