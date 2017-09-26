@@ -78,6 +78,10 @@ public class CoCLoader {
 	public static var BUNDLE_RES_CHARVIEW_HINEZUMI_PNG:Class;
 	bundleImage("res/charview/hinezumi.png",BUNDLE_RES_CHARVIEW_HINEZUMI_PNG);
 
+	[Embed(source="../../../res/charview/kitsune.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_KITSUNE_PNG:Class;
+	bundleImage("res/charview/kitsune.png",BUNDLE_RES_CHARVIEW_KITSUNE_PNG);
+
 	[Embed(source="../../../res/charview/manticore.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_MANTICORE_PNG:Class;
 	bundleImage("res/charview/manticore.png",BUNDLE_RES_CHARVIEW_MANTICORE_PNG);
