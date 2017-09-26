@@ -454,6 +454,7 @@
 			else if (weaponAttack >= 101 && weaponAttack < 151) damage *= (3.75 + ((weaponAttack - 100) * 0.02));
 			else if (weaponAttack >= 151 && weaponAttack < 201) damage *= (4.75 + ((weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((weaponAttack - 200) * 0.01));
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -493,6 +494,7 @@
 			if (str >= 1101) damage += (str - 1100);
 			if (str >= 1151) damage += (str - 1150);
 			if (str >= 1201) damage += (str - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -530,6 +532,7 @@
 			if (tou >= 1101) damage += (tou - 1100);
 			if (tou >= 1151) damage += (tou - 1150);
 			if (tou >= 1201) damage += (tou - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -567,6 +570,7 @@
 			if (spe >= 1101) damage += (spe - 1100);
 			if (spe >= 1151) damage += (spe - 1150);
 			if (spe >= 1201) damage += (spe - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -1639,6 +1643,13 @@
 					removeStatusEffect(StatusEffects.Flying);
 				}
 			}
+			if(hasStatusEffect(StatusEffects.PunishingKick)) {
+				addStatusValue(StatusEffects.PunishingKick,1,-1);
+				if(statusEffectv1(StatusEffects.PunishingKick) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer under Punishing Kick effect!</b>\n\n");
+					removeStatusEffect(StatusEffects.PunishingKick);
+				}
+			}
 			if(hasStatusEffect(StatusEffects.Sandstorm)) {
 				//Blinded:
 				if(player.hasStatusEffect(StatusEffects.Blind)) {
@@ -1845,6 +1856,23 @@
 					store4 = game.doDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
+				}
+			}
+			//Fire Punch Burn DoT
+			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
+					outputText("Flames left by Fire Punch " + a + short + " finally stop burning.\n\n");
+					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store6:Number = (player.spe + player.inte) * game.combat.soulskillMod() * 0.5;
+					store6 = game.doDamage(store6);
+					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 				}
 			}
 			//regeneration perks for monsters

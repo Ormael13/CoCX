@@ -177,7 +177,6 @@ package classes.Scenes.NPCs
 			this.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
-			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

@@ -12,13 +12,13 @@ package classes.Scenes.Places {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Areas.Forest.TentacleBeast;
-	import classes.Scenes.NPCs.ChiChiFollower;
 	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
+	import classes.Scenes.NPCs.ChiChiFollower;
 	import classes.Scenes.NPCs.Jinx;
 	import classes.Scenes.NPCs.Syth;
-	import classes.Scenes.NPCs.ChiChiFollower;
+	import classes.Scenes.NPCs.Rangiku;
 	//import classes.Scenes.Places.HeXinDao.*;
 	//import classes.Items.Armor;
 	//import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -1571,6 +1571,7 @@ public function soularenaChallenge():void {
 	//addButton(5, "Golemancer", golemancer);
 	//addButton(6, "AyotechManiac", ayotechmaniac);
 	//addButton(7, "MachoSalamander", machosalamander);
+	addButton(8, "MissSalamander", misssalamander);
 	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
@@ -1703,42 +1704,48 @@ public function gaunletchallange1postfight():void {
 }
 
 public function golemancer():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
 	startCombat(new Jeniffer());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function ayotechmaniac():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
 	startCombat(new Jinx());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function machosalamander():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
 	startCombat(new Syth());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+}
+
+public function misssalamander():void {
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	startCombat(new Rangiku());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgargoyle():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
 	startCombat(new GargoyleBasic());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsBasic());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function improvedgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsImproved());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function advancedgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 	startCombat(new GolemsAdvanced());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function restaurantShiraOfTheEast():void {
@@ -1765,9 +1772,9 @@ public function restaurantYesGems():void {
 	else outputText("Chi Chi");
 	outputText(" and I will be your waitress today. We have dumplings, Won ton soups and ramen offered in mild, spicy and inferno version of the dishes. What will it be?</i>\"");
 	menu();
-	addButton(0, "Dumpling", restaurantDumpling);
-	addButton(1, "Soup", restaurantSoup);
-	addButton(2, "Ramen", restaurantRamen);
+	addButton(0, "Dumpling", restaurantDumpling).hint("Effects: +Spe, +Tou", "Dumpling");
+	addButton(1, "Soup", restaurantSoup).hint("Effects: +Int, +Tou", "Soup");
+	addButton(2, "Ramen", restaurantRamen).hint("Effects: +Str, +Tou", "Ramen");
 }
 
 public function restaurantDumpling():void {

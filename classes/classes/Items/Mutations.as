@@ -7328,6 +7328,30 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
+		public function voltageTopaz(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			//if (rand(2) == 0) changeLimit++;
+			//if (rand(3) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+			//Stats
+			//Sexual
+			//Physical
+			//Hair Color
+			var raiju_hair:Array = ["purple", "light blue", "yellow", "white"];
+			if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(raiju_hair);
+				outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		public function isabellaMilk(player:Player):void
 		{
 			player.slimeFeed();

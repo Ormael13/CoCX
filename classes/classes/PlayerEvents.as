@@ -471,6 +471,8 @@ package classes {
 				if (flags[kFLAGS.CEANI_DAILY_TRAINING] > 0) flags[kFLAGS.CEANI_DAILY_TRAINING] = 0;
 				//Reset Kindra Training daiy limit
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
+				//Reset Chi Chi Training daiy limit
+				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;

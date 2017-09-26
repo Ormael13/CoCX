@@ -433,15 +433,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 				addButton(1, "Shoot", fireBow).hint( "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
 		}
 		addButton(2, "Items", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-		if (canUseMagic()) addButton(3, "Spells", magic.magicMenu).hint("Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
+		addButton(3, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		addButton(4, "Tease", teaseAttack).hint("Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
-		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying)) addButton(5, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
-		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying)) {
-			if (player.canFly()) addButton(5, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			else addButtonDisabled(5, "P. Specials", "No way you could reach enemy in air with p. specials.");
-		}
-		else if(player.hasStatusEffect(StatusEffects.Flying)) addButton(5, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
-		addButton(6, "M. Specials", mspecials.msMenu).hint("Mental and supernatural special attack menu.", "Magical Specials");
+		if (canUseMagic()) addButton(5, "Spells", magic.magicMenu).hint("Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
+		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
 		addButton(7, "Soulforce", soulskills.soulforceSpecials).hint("Soulforce attacks menu.", "Soulforce Specials");
 		addButton(8, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.Level)) {
@@ -451,8 +446,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 				else addButtonDisabled(8, "Struggle", "You're too tired to struggle.");
 			}
 		}
-		addButton(9, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(10, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
+		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		if (monster is DriderIncubus)
 			{
 				m = monster as DriderIncubus;
@@ -518,14 +512,16 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		attacks = null;
 	}
 	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
-		addButton(0, "Attack", (monster as DriderIncubus).taintedMindAttackAttempt);
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) addButton(0, "E.Attack", baseelementalattacks).hint( "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
+		else addButton(0, "Attack", (monster as DriderIncubus).taintedMindAttackAttempt);
 		addButton(2, "Items", inventory.inventoryMenu);
-		if (canUseMagic()) addButton(3, "Spells", magic.magicMenu);
+		addButton(3, "Fantasize", fantasize);
 		addButton(4, "Tease", teaseAttack);
-		addButton(5, "P. Specials", (monster as DriderIncubus).taintedMindAttackAttempt);
-		addButton(6, "M. Specials", mspecials.msMenu);
+		if (canUseMagic()) addButton(5, "Spells", magic.magicMenu);
+		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
+		addButton(7, "Soulforce", soulskills.soulforceSpecials).hint("Soulforce attacks menu.", "Soulforce Specials");
 		addButton(8, (monster.hasStatusEffect(StatusEffects.Level) ? "Climb" : "Wait"), wait);
-		addButton(9, "Fantasize", fantasize);
+		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		var m:DriderIncubus = monster as DriderIncubus;
 		if (!m.goblinFree) addButton(11, "Free Goblin", m.freeGoblin);
 		addButton(14, "Run", runAway);
@@ -546,7 +542,6 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (monster.hasStatusEffect(StatusEffects.PhysicalDisabled)) {
 		outputText("<b>  Even physical special attacks are out of the question.</b>");
 		removeButton(1); //Removes bow usage.
-		removeButton(5); //Removes physical special attack.
 	}
 	//Bound: Struggle or wait
 	if (isPlayerBound()) {
@@ -591,7 +586,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	}
 	//Silence: Disables magic menu.
 	if (isPlayerSilenced()) {
-		removeButton(2);
+		removeButton(5);
 	}
 	//Stunned: Recover, lose 1 turn.
 	if (isPlayerStunned()) {
@@ -617,6 +612,27 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		menu();
 		addButton(0, "Tease", GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(4, "Release", GooLeggoMyEggo);
+	}
+}
+
+public function PhysicalMagicalSpecials():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
+		addButton(0, "P. Specials", (monster as DriderIncubus).taintedMindAttackAttempt);
+	}
+	else {
+		if (!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying)) addButton(0, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
+		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying)) {
+			if (player.canFly()) addButton(0, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			else addButtonDisabled(0, "P. Specials", "No way you could reach enemy in air with p. specials.");
+		}
+		else if (player.hasStatusEffect(StatusEffects.Flying)) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
+	}
+	addButton(1, "M. Specials", mspecials.msMenu).hint("Mental and Supernatural special attack menu.", "Magical Specials");
+	addButton(14, "Back", combatMenu, false);
+	//Disabled physical attacks
+	if (monster.hasStatusEffect(StatusEffects.PhysicalDisabled)) {
+		removeButton(0); //Removes physical special attack.
 	}
 }
 
@@ -1164,7 +1180,8 @@ public function elementalattacks():void {
 	outputText("<b>(<font color=\"#800000\">" + damageelemental + "</font>)</b>\n\n");
 	damageelemental = doDamage(damageelemental);
 	//checkMinionsAchievementDamage(damageelemental);
-	if(monster.HP >= 1 && monster.lust <= monster.maxLust()) {
+	if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
+		wrathregeneration();
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
@@ -1244,7 +1261,8 @@ private function wait():void {
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 	//Gain fatigue if not fighting sand tarps
 	if (!monster.hasStatusEffect(StatusEffects.Level)) {
-		fatigue(-5);
+		fatigue( -5);
+		wrathregeneration();
 		manaregeneration();
 		soulforceregeneration();
 	}
@@ -2506,6 +2524,7 @@ public function defendpose():void {
 	outputText("You decide not to take any offensive action this round preparing for " + monster.a + monster.short + " attack assuming defensive pose.\n\n");
 	player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
 	if (player.findPerk(PerkLib.DefenceStance) >= 0) {
+		wrathregeneration();
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
@@ -3122,6 +3141,7 @@ public function meleeattackdamage():void {
 				return;
 			}
 			outputText("\n");
+			wrathregeneration();
 			fatigueRecovery();
 			manaregeneration();
 			soulforceregeneration();
@@ -5405,6 +5425,7 @@ public function ScyllaTease():void {
 	}
 	//(Otherwise)
 	else {
+		wrathregeneration();
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
@@ -5571,6 +5592,7 @@ public function GooTease():void {
 	}
 	//(Otherwise)
 	else {
+		wrathregeneration();
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
@@ -6121,26 +6143,26 @@ public function toughnessscalingbonus():Number {
 
 public function soulskillMod():Number {
 	var modss:Number = 1;
-	if(player.findPerk(PerkLib.DaoistCultivator) >= 0) modss += .1;		// && player.inte >= 25 (zmienić na wisdom)
+	if(player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modss += .1;
 	if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) modss += .2;		// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) modss += .2;		// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) modss += .2;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 30) modss += .2;
+		if (player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 40) modss += .2;
+		if (player.findPerk(PerkLib.SoulWarrior) >= 0 && player.wis >= 50) modss += .2;
 	}
 	if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) modss += .3;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulScholar) >= 0) modss += .3;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulElder) >= 0) modss += .3;		// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulSprite) >= 0 && player.wis >= 60) modss += .3;
+		if (player.findPerk(PerkLib.SoulScholar) >= 0 && player.wis >= 70) modss += .3;
+		if (player.findPerk(PerkLib.SoulElder) >= 0 && player.wis >= 80) modss += .3;
 	}
 	if (player.findPerk(PerkLib.DaoistElderStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) modss += .4;			// && player.inte >= 25 (zmienić na wisdom)
+		if (player.findPerk(PerkLib.SoulExalt) >= 0 && player.wis >= 90) modss += .4;
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0 && player.wis >= 100) modss += .4;
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0 && player.wis >= 110) modss += .4;
 	}
 	if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulKing) >= 0) modss += .5;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) modss += .5;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0) modss += .5;
+		if (player.findPerk(PerkLib.SoulKing) >= 0 && player.wis >= 120) modss += .5;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0 && player.wis >= 130) modss += .5;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0 && player.wis >= 140) modss += .5;
 	}
 	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modss += .3;
 	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modss += .4;
@@ -6155,7 +6177,7 @@ public function soulskillMod():Number {
 
 public function soulskillcostmulti():Number {
 	var multiss:Number = 1;
-	if (player.findPerk(PerkLib.SoulApprentice) >= 0) multiss += 1;
+	if (soulskillMod() > 1) multiss += Math.round(soulskillMod() - 1);/*
 	if (player.findPerk(PerkLib.SoulPersonage) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulWarrior) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulSprite) >= 0) multiss += 1;
@@ -6166,7 +6188,7 @@ public function soulskillcostmulti():Number {
 	if (player.findPerk(PerkLib.SoulTyrant) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulKing) >= 0) multiss += 1;
 	if (player.findPerk(PerkLib.SoulEmperor) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulAncestor) >= 0) multiss += 1;
+	if (player.findPerk(PerkLib.SoulAncestor) >= 0) multiss += 1;*/
 	if (player.level >= 24 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
 	if (player.level >= 42 && player.wis >= 140) multiss += 1;//początek zdolności latania
 	if (player.level >= 60 && player.wis >= 200) multiss += 1;//początek czegoś tam 1

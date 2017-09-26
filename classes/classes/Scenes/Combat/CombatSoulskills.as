@@ -24,25 +24,17 @@ public class CombatSoulskills extends BaseCombatContent {
 		//return;
 		//}
 		menu();
-		var button:int = 0;
-		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
-			addButton(0, "Triple Thrust", TripleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust three times toward your enemy.\n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
+		addButton(0, "Physical", PhysicalSoulskills).hint("Physical Soulskills", "Physical Soulskills");
+		addButton(1, "Magical", MagicalSoulskills).hint("Magical Soulskills", "Magical Soulskills");
+		if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
+			addButton(4, "Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
-			addButton(1, "Draco Sweep", DracoSweep).hint("Use a little bit of soulforce to infuse your weapon and then sweep ahead hitting as many enemies as possible.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+		if (player.hasStatusEffect(StatusEffects.KnowsFirePunch)) {
+			addButton(5, "Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
-			addButton(2, "Many Birds", ManyBirds).hint("Project a figment of your soulforce as a crystal traveling at extreme speeds.\n\nSoulforce cost: " + 10 * soulskillCost() * soulskillcostmulti());
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
-			addButton(5, "Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
-		}
-		/*if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
-			addButton(6, "Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.");//\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti()
-		}*/
 		if (player.hasStatusEffect(StatusEffects.KnowsHurricaneDance)) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
-				addButton(7, "Hurricane Dance", HurricaneDance).hint("Take on the aspect of the wind dodging attacks with aerial graces for a time.  \n\nWould go into cooldown after use for: 10 rounds");//  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "
+				addButton(6, "Hurricane Dance", HurricaneDance).hint("Take on the aspect of the wind dodging attacks with aerial graces for a time.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
 				outputText("<b>You need more time before you can use Hurricane Dance again.</b>\n\n");
@@ -50,27 +42,33 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsEarthStance)) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
-				addButton(8, "Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds");//  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "
+				addButton(7, "Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
 				outputText("<b>You need more time before you can use Earth Stance again.</b>\n\n");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsPunishingKick)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
+				addButton(8, "Punishing Kick", PunishingKick).hint("A vicious kick that can daze an opponent, reducing its damage for a while.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
+			}
+			else if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
+				outputText("<b>You need more time before you can use Punishing Kick again.</b>\n\n");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) addButton(9, "Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
 			else addButton(9, "Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
-			else {
-				if ((player.unicornScore() >= 5) && (player.alicornScore() >= 6)) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25) + ((player.alicornScore() - 5) * 25)) + " HP</b> per turn.");
-				else if (player.unicornScore() >= 5) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25)) + " HP</b> per turn.");
-				else addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
-			}
+		addButton(14, "Back", combatMenu, false);
+	}
+	public function PhysicalSoulskills():void {
+		menu();
+		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
+			addButton(0, "Triple Thrust", TripleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust three times toward your enemy.\n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.findPerk(PerkLib.Trance) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) addButton(11, "Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
-			else addButton(11, "DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
+		if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
+			addButton(1, "Draco Sweep", DracoSweep).hint("Use a little bit of soulforce to infuse your weapon and then sweep ahead hitting as many enemies as possible.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 		}
 		if (player.weapon == weapons.WGSWORD) {
 			addButton(12, "Beat of War", BeatOfWar).hint("Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
@@ -84,14 +82,37 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.weaponRangeName == "Warden’s bow") {
 			addButton(13, "ResonanceVolley", ResonanceVolley).hint("Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n\nSoulforce cost: 150");
 		}
-		addButton(14, "Back", combatMenu, false);
+		addButton(14, "Back", soulforceSpecials);
 	}
+	public function MagicalSoulskills():void {
+		menu();
+		if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
+			addButton(0, "Many Birds", ManyBirds).hint("Project a figment of your soulforce as a crystal traveling at extreme speeds.\n\nSoulforce cost: " + 10 * soulskillCost() * soulskillcostmulti());
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
+			addButton(1, "Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation).hint("Deactivate Violet Pupil Transformation.");
+			else {
+				if ((player.unicornScore() >= 5) && (player.alicornScore() >= 6)) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25) + ((player.alicornScore() - 5) * 25)) + " HP</b> per turn.");
+				else if (player.unicornScore() >= 5) addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25)) + " HP</b> per turn.");
+				else addButton(10, "V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
+			}
+		}
+		if (player.findPerk(PerkLib.Trance) >= 0) {
+			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) addButton(11, "Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+			else addButton(11, "DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
+		}
+		addButton(14, "Back", soulforceSpecials);
+	}
+	
 	public function TripleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
@@ -126,6 +147,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		//triple strike bonus
 		damage *= 3;
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
@@ -141,7 +163,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		damage = doDamage(damage);
-		outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
+			monster.removeStatusEffect(StatusEffects.Frozen);
+			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary! <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		}
+		else outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -161,7 +188,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to sweep it towards " + monster.a + monster.short + ".  ");
@@ -231,7 +258,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(combatMenu);
+			doNext(MagicalSoulskills);
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -293,7 +320,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(MagicalSoulskills);
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -348,6 +375,18 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function IceFist():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		if (player.findPerk(PerkLib.FireAffinity) >= 0) {
+			outputText("Try as you want, you can’t call on the power of this technique due to your close affinity to fire.");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
 		damage += unarmedAttack();
 		//other bonuses
@@ -366,7 +405,77 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		damage = doDamage(damage);
+		monster.spe -= 20;
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! (<b><font color=\"#800000\">" + damage + "</font></b>)");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+			if (monster.spe - 20 >= 0) {
+				monster.addStatusValue(StatusEffects.Frozen, 1, 20);
+				monster.spe -= 20;
+			}
+			else {
+				monster.addStatusValue(StatusEffects.Frozen, 1, monster.spe);
+				monster.spe -= monster.spe;
+			}
+		}
+		else {
+			monster.createStatusEffect(StatusEffects.Frozen, 0, 0, 0, 0);
+			if (monster.spe - 20 >= 0) {
+				monster.addStatusValue(StatusEffects.Frozen, 1, 20);
+				monster.spe -= 20;
+			}
+			else {
+				monster.addStatusValue(StatusEffects.Frozen, 1, monster.spe);
+				monster.spe -= monster.spe;
+			}
+		}
+		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+		else {
+			outputText("  <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be frozen by your attack.</b>");
+		}
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function FirePunch():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		if (player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			outputText("Try as you want, you can’t call on the power of this technique due to your close affinity to cold.");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		var damage:Number = 0;
+		damage += unarmedAttack();
+		//other bonuses
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
+		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. (<b><font color=\"#800000\">" + damage + "</font></b>)");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -375,6 +484,13 @@ public class CombatSoulskills extends BaseCombatContent {
 	
 	public function HurricaneDance():void {
 		clearOutput();
+		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
 		outputText("Your movement becomes more fluid and precise, increasing your speed and evasion.\n\n");
 		player.createStatusEffect(StatusEffects.HurricaneDance, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownHurricaneDance, 10, 0, 0, 0);
@@ -383,9 +499,53 @@ public class CombatSoulskills extends BaseCombatContent {
 	
 	public function EarthStance():void {
 		clearOutput();
+		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
 		outputText("Your body suddenly hardens like rock. You will be way harder to damage for a while.\n\n");
 		player.createStatusEffect(StatusEffects.EarthStance, 3, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownEarthStance, 10, 0, 0, 0);
+		enemyAI();
+	}
+	
+	public function PunishingKick():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
+			outputText("<b>Your current soulforce is too low.</b>");
+			doNext(soulforceSpecials);
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		var damage:Number = 0;
+		damage += unarmedAttack();
+		//other bonuses
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
+		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. " + monster.capitalA + monster.short + " will have a hard time recovering its balance for a while. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
 		enemyAI();
 	}
 	
@@ -412,7 +572,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 100) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(MagicalSoulskills);
 			return;
 		}
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
@@ -431,7 +591,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 100) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(MagicalSoulskills);
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -507,7 +667,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		var tempStr:Number = 0;
@@ -530,7 +690,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n\n");
@@ -541,7 +701,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 150) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n\n");
@@ -552,7 +712,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		if (player.soulforce < 200) {
 			outputText("<b>Your current soulforce is too low.</b>");
-			doNext(soulforceSpecials);
+			doNext(PhysicalSoulskills);
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {

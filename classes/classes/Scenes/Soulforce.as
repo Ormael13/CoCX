@@ -311,7 +311,6 @@ private function eyesColorSelection():void {
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(9, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
-			if (player.findPerk(PerkLib.SoulElder) < 0 && player.findPerk(PerkLib.SoulExalt) >= 0) addButton(10, "Rep.S.Perks", ReplacingSoulPerks).hint("Add Soul Scholar and/or Soul Elder perks plus adjusting stages of cultivation to accomodate for this change.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
@@ -330,44 +329,6 @@ private function eyesColorSelection():void {
 			if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) < 0) {
 				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
-		public function ReplacingSoulPerks():void {
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) {
-				player.removePerk(PerkLib.SoulEmperor);
-				player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Emperor, Gained Perk: Soul Tyrant!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulKing) >= 0) {
-				player.removePerk(PerkLib.SoulKing);
-				player.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul King, Gained Perk: Soul Overlord!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) {
-				player.removePerk(PerkLib.SoulTyrant);
-				player.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Tyrant, Gained Perk: Soul Exalt!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
-				player.removePerk(PerkLib.SoulOverlord);
-				player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Overlord, Gained Perk: Soul Elder!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) {
-				player.removePerk(PerkLib.SoulExalt);
-				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Exalt, Gained Perk: Soul Scholar!)</b>");
-			}
-			if (player.findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				player.removePerk(PerkLib.FleshBodyOverlordStage);
-				player.createPerk(PerkLib.FleshBodyElderStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage, Gained Perk: Flesh Body Elder Stage!)</b>");
-			}
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-				player.removePerk(PerkLib.DaoistOverlordStage);
-				player.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage, Gained Perk: Daoist Elder Stage!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
@@ -417,7 +378,7 @@ private function eyesColorSelection():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "OnikiriSake", AddOnikiriSake).hint("Add 1 Onikiri Sake. (1st iteration - still incomplete TF)");
+			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz. (1st iteration - still incomplete TF)");
 			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
@@ -479,9 +440,9 @@ private function eyesColorSelection():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, NonEquipmentMenu);
 		}
-		public function AddOnikiriSake():void {
-			outputText("\n\n<b>(Gained 1 bottle of Onikiri Sake!)</b>\n\n");
-			inventory.takeItem(consumables.ONISAKE, SoulforceCheats);
+		public function AddVoltageTopaz():void {
+			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
+			inventory.takeItem(consumables.VOLTTOP, SoulforceCheats);
 		}
 		public function AddBladeGrass():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");

@@ -1520,6 +1520,17 @@ use namespace kGAMECLASS;
 					else race = "half elf";
 				}
 			}
+			if (raijuScore() >= 5)
+			{
+				if (raijuScore() >= 10) {
+					if (isTaur()) race = "raiju-taur";
+					else race = "raiju";
+				}
+				else {
+					if (isTaur()) race = "half raiju-taur";
+					else race = "half raiju";
+				}
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -1721,6 +1732,8 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (elfScore() >= 5)
 				chimeraCounter++;
+			if (raijuScore() >= 5)
+				chimeraCounter++;
 			if (bunnyScore() >= 4)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
@@ -1819,6 +1832,8 @@ use namespace kGAMECLASS;
 			if (oniScore() >= 12)
 				grandchimeraCounter++;
 			if (elfScore() >= 11)
+				grandchimeraCounter++;
+			if (raijuScore() >= 10)
 				grandchimeraCounter++;
 //			if (bunnyScore() >= 4)
 //				grandchimeraCounter++;
@@ -2991,7 +3006,7 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (hairType == HAIR_SILKEN)
 				elfCounter++;
-			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
+			if (hairColor == "black" || hairColor == "leaf green" || hairColor == "golden blonde" || hairColor == "silver")
 				elfCounter++;
 			if (skinTone == "dark" || skinTone == "light" || skinTone == "tan")
 				elfCounter++;
@@ -3008,6 +3023,21 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return elfCounter;
+		}
+
+		//Elf score
+		public function raijuScore():Number {
+			Begin("Player","racialScore","raiju");
+			var raijuCounter:Number = 0;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
+				raijuCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				raijuCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && raijuCounter >= 3)
+				raijuCounter += 1;
+			
+			End("Player","racialScore");
+			return raijuCounter;
 		}
 
 		//Determine Mutant Rating
@@ -4344,6 +4374,8 @@ use namespace kGAMECLASS;
 			if(this.devilkinScore() >= 14) minSen += 30;
 			if(this.elfScore() >= 5) minSen += 15;
 			if(this.elfScore() >= 11) minSen += 15;
+			if(this.raijuScore() >= 5) minSen += 25;
+			if(this.raijuScore() >= 10) minSen += 25;
 
 			return {
 				str:minStr,
@@ -4779,6 +4811,20 @@ use namespace kGAMECLASS;
 					maxInt += (40 * (1 + newGamePlusMod));
 					maxWis += (30 * (1 + newGamePlusMod));
 					maxSen += (15 * (1 + newGamePlusMod));
+				}
+			}//+10/10-20
+			if (raijuScore() >= 5) {
+				if (raijuScore() >= 10) {
+					maxSpe += (70 * (1 + newGamePlusMod));
+					maxInt += (50 * (1 + newGamePlusMod));
+					maxLib += (80 * (1 + newGamePlusMod));
+					maxSen += (50 * (1 + newGamePlusMod));
+				}
+				else {
+					maxSpe += (35 * (1 + newGamePlusMod));
+					maxInt += (25 * (1 + newGamePlusMod));
+					maxLib += (40 * (1 + newGamePlusMod));
+					maxSen += (25 * (1 + newGamePlusMod));
 				}
 			}//+10/10-20
 			if (demonScore() >= 5) {
