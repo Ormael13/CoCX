@@ -8,7 +8,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.DarkElfScene;
-	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 	public class Mountain extends BaseContent
 	{
@@ -23,6 +24,7 @@ package classes.Scenes.Areas
 		{
 		}
 		//Explore Mountain
+		//fixme @Oxdeception convert to encounters API
 		public function exploreMountain():void
 		{
 			player.exploredMountain++;
@@ -41,6 +43,11 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15 && rand(5) == 0) {
 				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) kGAMECLASS.electraScene.firstEnc();
 				else kGAMECLASS.electraScene.repeatMountainEnc();
+				return;
+			}
+			//Diva
+			if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0 && rand(5) == 0){
+				DivaScene.getInstance().encounter();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain

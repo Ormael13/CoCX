@@ -46,6 +46,10 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
 	bundleText("content/coc/NPC/celess.xml", BUNDLE_CONTENT_COC_NPC_CELESS_XML);
+
+	[Embed(source="../../../content/coc/NPC/diva.xml",mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_NPC_DIVA_XML:Class;
+	bundleText("content/coc/NPC/diva.xml",BUNDLE_CONTENT_COC_NPC_DIVA_XML);
 	
 	[Embed(source="../../../content/coc/NPC/samirah.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_NPC_SAMIRAH_XML:Class;

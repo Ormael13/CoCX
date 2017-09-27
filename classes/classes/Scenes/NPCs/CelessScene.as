@@ -1,15 +1,13 @@
 package classes.Scenes.NPCs 
 {
-	import classes.BaseContent;
-	import classes.CoC;
-	import classes.Items.Useable;
-	import classes.Scenes.Camp;
-	import classes.SaveAwareInterface;
-	import classes.TimeAwareInterface;
+import classes.CoC;
+import classes.Items.Useable;
+import classes.Scenes.Camp;
+import classes.TimeAwareInterface;
 
-import coc.xxc.BoundStory;
-import coc.xxc.Story;
-	/**
+import flash.utils.getQualifiedClassName;
+
+/**
 	 * ...
 	 * @author Oxdeception
 	 */
@@ -20,14 +18,15 @@ import coc.xxc.Story;
 		private var _corruption:int=0;
 		private var _name:String = "Celess";
 		private var _armorFound:Boolean = false;
-		
+
 		public function CelessScene() 
 		{
 			if (!_instance){
 				super("celess");
 				CoC.timeAwareClassAdd(this);
 				Camp.addFollower(this);
-				_instance = this;
+                _instance = this;
+				addSavedNPC(this);
 			}
 			else
 			{
@@ -41,16 +40,19 @@ import coc.xxc.Story;
 			}
 			return _instance;
 		}
-		/*
-		public function init():void{
-			const game:CoC = getGame();
-			CoC.timeAwareClassAdd(this);
-			_story=new Story("story", game.rootStory, "celess", true).bind(game.context);
+        public static function get instance():CelessScene {
+            return getInstance();
+        }
+		public override function unload():void{
+			CoC.timeAwareClassRemove(_instance);
+			Camp.removeFollower(_instance);
+			removeSavedNPC(_instance);
+			_instance = null;
 		}
-		*/
 		
 		public override function save(saveto:*):void{
 			saveto.celess = {
+				myClass:getQualifiedClassName(this),
 				age:_age,
 				corruption:_corruption,
 				name:_name,
@@ -59,10 +61,7 @@ import coc.xxc.Story;
 		}
 		public override function load(loadfrom:*):void{
 			if (loadfrom == undefined || loadfrom.celess == undefined){
-				_age = 0;
-				_corruption = 0;
-				_name = "Celess";
-				_armorFound = false;
+				unload();
 			}
 			else{
 				_age = loadfrom.celess.age;
@@ -127,7 +126,7 @@ import coc.xxc.Story;
 		
 		override public function campDescription(menuType:int=-1, descOnly:Boolean=false):Boolean
 		{
-			if (isCompanion() && (menuType == FOLLOWER || menuType == COMPANION)){
+			if (isCompanion(menuType)){
 				outputText(Name+" is currently resting on all four in the nearby grassland area.\n\n");
                 addButton(3, Name, campInteraction);
 				return descOnly;
@@ -328,5 +327,5 @@ import coc.xxc.Story;
 			}
 			addButton(14, "Back", campInteraction);
 		}
-	}
+    }
 }

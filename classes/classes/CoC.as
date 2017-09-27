@@ -176,6 +176,10 @@ the text from being too boring.
 		private var playerEvent:PlayerEvents;
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
+		public static function timeAwareClassRemove(toRemove:TimeAwareInterface):void{
+			var i:int = _timeAwareClassList.indexOf(toRemove);
+			if(i>=0){_timeAwareClassList.splice(i,1);}
+		}
 		
 		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
