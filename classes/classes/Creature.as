@@ -431,7 +431,7 @@ import classes.internals.Utils;
 			var prevSens:Number  = sens;
 			var prevLust:Number  = lust;
 			var prevCor:Number  = cor;
-			modStats(argz.str, argz.tou, argz.spe, argz.inte, argz.wis, argz.lib, argz.sens, argz.lust, argz.cor, argz.sca);
+			modStats(argz.str, argz.tou, argz.spe, argz.inte, argz.wis, argz.lib, argz.sens, argz.lust, argz.cor, argz.scale, argz.max);
 			End("Creature","dynStats");
 			//trace("dynStats("+args.join(", ")+") => ("+[str,tou,spe,inte,wis,lib,sens,lust,cor].join(", ")+")");
 			return {
@@ -446,8 +446,27 @@ import classes.internals.Utils;
 				cor:cor-prevCor
 			};
 		}
-		public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean = true):void {
-			var maxes:Object = getAllMaxStats();
+		public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+			var maxes:Object;
+			if (max) {
+				maxes = getAllMaxStats();
+				maxes.lib = 100;
+				maxes.sens = 100;
+				maxes.cor = 100;
+				maxes.lust = maxLust();
+			} else {
+				maxes = {
+					str:Infinity,
+					tou:Infinity,
+					spe:Infinity,
+					inte:Infinity,
+					wis:Infinity,
+					lib:Infinity,
+					sens:Infinity,
+					cor:Infinity,
+					lust:Infinity
+				}
+			}
 			var mins:Object = getAllMinStats();
 			var oldHPratio:Number = hp100/100;
 			str  = Utils.boundFloat(mins.str, str + dstr, maxes.str);
@@ -457,8 +476,8 @@ import classes.internals.Utils;
 			wis  = Utils.boundFloat(mins.wis, wis + dwis, maxes.wis);
 			lib  = Utils.boundFloat(mins.lib, lib + dlib, maxes.lib);
 			sens = Utils.boundFloat(mins.sens, sens + dsens, maxes.sens);
-			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
-			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
+			lust = Utils.boundFloat(mins.lust, lust + dlust, maxes.lust);
+			cor  = Utils.boundFloat(mins.cor, cor + dcor, maxes.cor);
 			
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();
@@ -3749,7 +3768,8 @@ import classes.internals.Utils;
 		/**
 		 * Generate increments for stats
 		 *
-		 * @return Object of (newStat-oldStat) with keys str, tou, spe, inte, wis, lib, sens, lust, cor, scale
+		 * @return Object of (newStat-oldStat) with keys str, tou, spe, inte, wis, lib, sens, lust, cor
+		 * and flags scale, max
 		 * */
 		public static function parseDynStatsArgs(c:Creature, args:Array):Object {
 			// Check num of args, we should have a multiple of 2
@@ -3768,7 +3788,8 @@ import classes.internals.Utils;
 				sen: [ 0, "+"],
 				lus: [ 0, "+"],
 				cor: [ 0, "+"],
-				sca: [ true, "="]
+				scale: [ true, "="],
+				max: [ true, "="]
 			};
 			var aliases:Object = {
 				"strength":"str",
@@ -3781,9 +3802,9 @@ import classes.internals.Utils;
 				"sens": "sen",
 				"lust": "lus",
 				"corruption": "cor",
-				"scale": "sca",
-				"res": "sca",
-				"resisted": "sca",
+				"sca": "scale",
+				"res": "scale",
+				"resisted": "scale",
 				"wisdom": "wis"
 			};
 			
@@ -3840,7 +3861,8 @@ import classes.internals.Utils;
 				sens    : newSens - c.sens,
 				lust    : newLust - c.lust,
 				cor     : newCor - c.cor,
-				scale   : argDefs.scale
+				scale   : argDefs.scale[0],
+				max     : argDefs.max[0]
 			};
 		}
 	}
