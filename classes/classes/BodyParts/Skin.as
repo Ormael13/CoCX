@@ -253,6 +253,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasBattleTattoo():Boolean {
 		return base.pattern == PATTERN_BATTLE_TATTOO;
 	}
+	public function hasLightningShapedTattoo():Boolean {
+		return base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO;
+	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
 		base.restore(keepTone);

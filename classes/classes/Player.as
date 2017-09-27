@@ -3029,6 +3029,24 @@ use namespace kGAMECLASS;
 		public function raijuScore():Number {
 			Begin("Player","racialScore","raiju");
 			var raijuCounter:Number = 0;
+			if (earType == EARS_WEASEL)
+				raijuCounter++;
+			if (eyeType == EYES_RAIJU)
+				raijuCounter++;
+			if (faceType == FACE_RAIJU_FANGS)
+				raijuCounter++;
+			if (armType == ARM_TYPE_RAIJU)
+				raijuCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_RAIJU)
+				raijuCounter++;
+			if (tailType == TAIL_TYPE_RAIJU)
+				raijuCounter++;
+			if (rearBody == REAR_BODY_RAIJU_MANE)
+				raijuCounter++;
+			if (skin.base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO)
+				raijuCounter++;
+			if (hairType == HAIR_STORM)
+				raijuCounter++;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
 				raijuCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)

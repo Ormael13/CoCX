@@ -903,16 +903,16 @@ public function companionsCount():Number {
 
 public function followersCount():Number {
 	var counter:Number = 0;
-	if(emberScene.followerEmber()) counter++;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
-	if(followerShouldra()) counter++;
-	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
-	if(flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
-	if(flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-	if(helspawnFollower()) counter++;
+	if (emberScene.followerEmber()) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
+	if (followerShouldra()) counter++;
+	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
@@ -921,51 +921,52 @@ public function followersCount():Number {
 
 public function slavesCount():Number {
 	var counter:Number = 0;
-	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
-	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
-	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
-	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
+	if (latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
+	if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
+	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
+	if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
 	//Bimbo sophie
-	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(ceraphIsFollower()) counter++;
-	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (ceraphIsFollower()) counter++;
+	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
 
 public function loversCount():Number {
 	var counter:Number = 0;
 	if (arianScene.arianFollower()) counter++;
-	if(flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if(followerHel()) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
 	//Izma!
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
-	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
-	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
-	if(followerKiha()) counter++;
-	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
-	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
+	if (followerKiha()) counter++;
+	if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
+	if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
 
 public function loversHotBathCount():Number {
 	var counter:Number = 0;
-	if(emberScene.followerEmber()) counter++;
-	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-	if(flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if(followerHel()) counter++;
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
-	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
-	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
-	if(followerKiha()) counter++;
-	if(flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
+	if (emberScene.followerEmber()) counter++;
+	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
+	if (followerKiha()) counter++;
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
 	return counter;
 }
 
 public function sparableCampMembersCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	return counter;
 }
 

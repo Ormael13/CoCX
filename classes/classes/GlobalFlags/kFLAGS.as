@@ -2317,7 +2317,7 @@ public static const CAMP_UPGRADES_WAREHOUSE_GRANARY:int                         
 public static const CAMP_UPGRADES_KITSUNE_SHRINE:int                                = 2309;
 public static const CAMP_UPGRADES_HOT_SPRINGS:int                   	            = 2310;
 public static const CAMP_UPGRADES_SPARING_RING:int	                                = 2311;
-public static const CAMP_UPGRADES_SUMONNING_CIRCLE:int                              = 2312;
+public static const CAMP_UPGRADES_SUMMONING_CIRCLE:int                              = 2312;
 public static const CAMP_UPGRADES_MAGIC_WARD:int	                             	= 2313;
 public static const CAMP_UPGRADES_NUMBER_02314:int                             = 2314;
 public static const CAMP_UPGRADES_NUMBER_02315:int                             = 2315;
