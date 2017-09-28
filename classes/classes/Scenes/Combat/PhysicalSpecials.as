@@ -238,7 +238,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 5) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 5;
@@ -280,7 +280,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 10) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 10;
@@ -322,7 +322,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 20) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 20;
@@ -364,7 +364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 50) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 50;
@@ -406,7 +406,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 125) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 125;
@@ -448,7 +448,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.wrath < 350) {
 			clearOutput();
 			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
+			doNext(powerAttackMenu);
 			return;
 		}
 		player.wrath -= 350;
@@ -779,7 +779,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform tail slap attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		fatigue(40,2);
@@ -820,7 +820,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform tail smack attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		fatigue(40,1);
@@ -850,7 +850,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform an ink spray attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 //		doNext(combatMenu);
@@ -882,7 +882,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.lust < 100) {
 			clearOutput();
 			outputText("You are not horny enough to use this special.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
@@ -910,7 +910,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.lust < 100) {
 			clearOutput();
 			outputText("You are not horny enough to use this special.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
@@ -1107,7 +1107,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(60) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to strangulate enemy.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1127,7 +1127,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(60) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform an stone claw attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1193,7 +1193,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform an tail slam attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1265,7 +1265,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to perform an wing buffet attack.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1863,7 +1863,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 			outputText("You're too fatigued to use a charge attack!");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		fatigue(15,2);
@@ -2443,7 +2443,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
 			outputText("You are too tired to perform a shield bash.");
-			doNext(combatMenu);
+			doNext(psMenu);
 			return;
 		}
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");

@@ -206,13 +206,13 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to focus this ability.");
-			doNext(combatMenu);
+			doNext(specialsBuffsDebuffs);
 			return;
 		}
 		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			clearOutput();
 			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.");
-			doNext(combatMenu);
+			doNext(specialsBuffsDebuffs);
 			return;
 		}
 		if(monster.short == "pod" || monster.inte == 0) {
@@ -267,7 +267,7 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -354,7 +354,7 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -502,7 +502,7 @@ public class MagicSpecials extends BaseCombatContent {
 			{
 				clearOutput();
 				outputText("You are too tired to sing.");
-				doNext(combatMenu);
+				doNext(msMenu);
 				return;
 			}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -563,7 +563,7 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe fire.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -693,13 +693,13 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe fire.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 		//Not Ready Yet:
 		if(player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -831,13 +831,13 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 		//Not Ready Yet:
 		if(player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -934,13 +934,13 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			clearOutput();
 			outputText("You are too tired to breathe lightning.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 		//Not Ready Yet:
 		if(player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1036,13 +1036,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			outputText("You are too tired to breathe dakness.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 		//Not Ready Yet:
 		if(player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1138,7 +1138,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.fatigue + 20 > player.maxFatigue()) {
 			clearOutput();
 			outputText("You are too tired to breathe fire.");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -1281,7 +1281,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 			outputText("You are too tired to breathe fire.\n");
-			doNext(combatMenu);
+			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
