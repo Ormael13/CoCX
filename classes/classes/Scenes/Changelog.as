@@ -28,7 +28,16 @@ package classes.Scenes
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
 			outputText("-\n");//chi chi memo
 			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP reeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
-			outputText("-\n");
+			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Electra/Raiju fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
+			outputText("-New body part - legs: Raiju Legs No Req.\n");
+			outputText("-New body part - arms: Raiu Arms Req. Raiju Legs\n");
+			outputText("-New body part - tail: Raiju Horn Req. Raiju Arms\n");
+			outputText("-New body part - read body: Raiju Mane Req. Raiju Tail\n");
+			outputText("-New body part - face: Raiju Canines Req. Raiju Mane\n");
+			outputText("-New body part - ears: Raiju Ears Req. Raiju Canines\n");
+			outputText("-New body part - eyes: Raiju Eyes Req. Raiju Ears\n");
+			outputText("-New body part - hair type: Raiju Storm Hair No Req.\n");
+			outputText("-New body part - pattern: Lightning Shaped Tattoo No Req.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -37,10 +46,14 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -77,6 +90,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -248,14 +263,14 @@ package classes.Scenes
 			outputText("-New 9th stage of soul cultivation: Soul Tyrant (req. lvl 54+, 180+ wisdom and Soul Overlord perk).\n");
 			outputText("-Changed 5th and 6th stage of soul cultivation: Soul Scholar replacing Soul Exalt // Soul Elder replacing Soul Overlord\n");
 			outputText("-All cultivation stages form 5th was moved two step higher so Soul Exalt moved form 5th to 7th step and Soul Overlord moved form 6th to 8th step. Also each perk above Job: Soul Cultivator will give +5 to max wisdom (non scalable).\n");
-			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems. Using it will turn PC into Devilkin/Devil. Half fiend/Devilkin (scalable): +35/50 to max str, -10/20 to max Spe, +40/60 to max Int, +50/75 to max Lib, +10/15 to min and max sensibility.\n");
+			outputText("-New TF item: Infernal Wine Craftable by Evangeline when PC would bring her 1 Satyr Wine, 1 Succubus Milk, 1 Incubus Draft and 480 gems. Using it will turn PC into Devilkin/Devil. Half fiend/Devilkin (scalable): +35/50 to max Str, -10/20 to max Spe, +40/60 to max Int, +50/75 to max Lib, +10/15 to min and max Sensibility.\n");
 			outputText("-New Body part: Devil Arms Req. Tiny or Large bat wings.\n");
 			outputText("-New Body part: Goat Ears Req. Goat Horns\n");
 			outputText("-New Body part: Devil Fangs Req. Goat Ears\n");
 			outputText("-New Body part: Devil Eyes Req. Devil Fangs\n");
 			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemeis weak to fire or pure enemies.\n");
 			outputText("-New magical special: Maleficium Req. 10+ pts in Devil score. Rise spellpower by 100% and lower by 50% lust resistance. Using this special cost 50 lust and it last for 10 turns.\n");
-			outputText("-New TF item: Onikiri Sake. Can be gained as a drop from Izumi fight. Using it will turn PC into Oni. Half Oni/Oni (scalable): +50/100 to max str, +30/60 to max Tou, -10/20 to max Int, +20/40 to max Wis, +10/15 to min and max sensibility.\n");
+			outputText("-New TF item: Onikiri Sake. Can be gained as a drop from Izumi fight. Using it will turn PC into Oni. Half Oni/Oni (scalable): +50/100 to max Str, +30/60 to max Tou, -10/20 to max Int, +20/40 to max Wis, +10/15 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Oni Legs No Req.\n");
 			outputText("-New body part - arms: Oni Arms Req. Oni Legs\n");
 			outputText("-New body part - horns: Oni Horn Req. Oni Arms\n");
@@ -265,12 +280,12 @@ package classes.Scenes
 			outputText("-New body part - face: Oni Teeth Req. Oni Ears\n");
 			outputText("-New body part - pattern: Battle Tattoo Req. Plain skin\n");
 			outputText("-New magical special: Oni Rampage Req. 12+ points in Oni score. Using one turn PC enter rampage state next turn and stay in it for 6 turns. During this time PC can;t use any spell or magic oriented soulskills but all physical attacks or specials deal 200% more dmg. Cooldown of specials is 10 turns.\n");
-			outputText("-New TF item: Elf Ears. Can be gained as a drop from Dark Elf enemies. Using it will turn PC into Elf. Half Elf/Elf (scalable): -10/10 to max str, -10/15 to max Tou, +40/80 max Spe, +40/80 to max Int, +30/60 to max Wis, +15/30 to min and max sensibility.\n");
+			outputText("-New TF item: Elf Ears. Can be gained as a drop from Dark Elf enemies. Using it will turn PC into Elf. Half Elf/Elf (scalable): -10/10 to max Str, -10/15 to max Tou, +40/80 max Spe, +40/80 to max Int, +30/60 to max Wis, +15/30 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Elf Legs No Req.\n");
 			outputText("-New body part - arms: Elf Arms Req. Elf Legs\n");
 			outputText("-New body part - eyes: Elf Eyes Req. Elf Ears\n");
 			outputText("-New body part - tongue: Elf Tongue No Req.\n");
-			outputText("-New body part - hair type: Elf Silken Hair No Req.n");
+			outputText("-New body part - hair type: Elf Silken Hair No Req.\n");
 			outputText("-Scylla stat bouses changes to fit other reworked racial bonuses. Half-Scylla (4+)/Scylla(7+) bonuses are now as follows: +40/65 max Str, +20/40 max Int and +25/50 to max HP.\n");
 			outputText("-New enemy encounters: Dark Elf Scout (lvl 15 - Deepwood and Mountains) and Dark Elf Slaver (27 - High Mountains)\n");
 			outputText("-New accesory (by Zevos): Seer's Hairpin - gained after beating Ignis for the first time (1600 gems, increase spell and soulskill power multiplier by 20%, lower costs of spells and soulskills by 20%), atm it takes ring slot but later on will be moved to slot made for various misc. items PC can equip.\n");

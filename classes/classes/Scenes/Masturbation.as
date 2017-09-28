@@ -1892,9 +1892,12 @@ package classes.Scenes {
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
 			}
 			//DONE!
-			player.orgasm();
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			dynStats("sen", (-0.5));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) dynStats("sen", 0.5);
+			else {
+				player.orgasm();
+				dynStats("sen", (-0.5));
+			}
 		}
 		
 		private function titCum(cumQuantity:Number = 3):void {

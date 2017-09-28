@@ -492,11 +492,19 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButton(1, "Stop", stopChanneledSpecial).hint("Stop singing.");
 		}
 		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 2) addButton(0, "Continue", mspecials.startOniRampage).hint("Continue starting rampage.");
+		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		}
 	}
 	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 1) {
 			addButton(0, "Continue", mspecials.singCompellingAria).hint("Continue singing.");
 			addButton(1, "Stop", stopChanneledSpecial).hint("Stop singing.");
+		}
+		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
 		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.AttackDisabled))

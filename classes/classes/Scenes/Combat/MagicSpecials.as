@@ -7,6 +7,7 @@ import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
+import classes.Scenes.Places.TelAdre.UmasShop;
 
 public class MagicSpecials extends BaseCombatContent {
 	public function MagicSpecials() {}
@@ -38,6 +39,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				outputText("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
 			}
+		}
+		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+			addButton(button++, "OrgasmicLightningStrike", OrgasmicLightningStrike).hint("Sorry Liadri not wrote tooltip for this yet.");
 		}
 		if (player.findPerk(PerkLib.Incorporeality) >= 0) {
 			addButton(button++, "Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
@@ -519,6 +523,101 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	
+	public function OrgasmicLightningStrike():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var temp2:Number = 0;
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
+			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward " + monster.a + monster.short + ", gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continue to ramp up.\n\n");
+			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
+			dynStats("lus", temp2, "scale", false);
+			var lustDmgF:Number = 0;
+			var bimbo:Boolean   = false;
+			var bro:Boolean     = false;
+			var futa:Boolean    = false;
+			lustDmgF = 6 + rand(3);
+			if (player.findPerk(PerkLib.SensualLover) >= 0) {
+				lustDmgF += 2;
+			}
+			if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+			if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+			if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+			if (bimbo || bro || futa) {
+				lustDmgF += 5;
+			}
+			if (player.level < 30) lustDmgF += player.level;
+			else if (player.level < 60) lustDmgF += 30 + ((player.level - 30) / 2);
+			else lustDmgF += 45 + ((player.level - 60) / 5);
+			if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+			else lustDmgF += player.teaseLevel * 2;
+			if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+			switch (player.coatType()) {
+				case SKIN_COAT_FUR:
+					lustDmgF += (1 + player.newGamePlusMod());
+					break;
+				case SKIN_COAT_SCALES:
+					lustDmgF += (2 * (1 + player.newGamePlusMod()));
+					break;
+				case SKIN_COAT_CHITIN:
+					lustDmgF += (3 * (1 + player.newGamePlusMod()));
+					break;
+				case SKIN_COAT_BARK:
+					lustDmgF += (4 * (1 + player.newGamePlusMod()));
+					break;
+			}
+			if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+				lustDmgF *= (1 + player.lust100);
+			}
+			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+				lustDmgF *= 1.15;
+			}
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				lustDmgF *= 1.75;
+			}
+			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+			lustDmgF = lustDmgF * monster.lustVuln;
+			lustDmgF = Math.round(lustDmgF);
+			monster.teased(lustDmgF);
+			if (crit == true) outputText(" <b>Critical!</b>");
+			outputText("\n\n");
+			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			enemyAI();
+		}
+		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			outputText("You continue masturbating, lost in the sensation as lightning run across your form. You are almost there!\n\n");
+			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
+			dynStats("lus", temp2, "scale", false);
+			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
+			enemyAI();
+		}
+		else {
+			clearOutput();
+			outputText("You begin to fiercely masturbate, ");
+			if (player.gender == 2) outputText("fingering your [pussy]");
+			if (player.gender == 1) outputText("jerking your [cock]");
+			if (player.gender == 3) outputText("jerking your [cock] and fingering your [pussy]");
+			outputText(". Static electricity starts to build in your body.\n\n");
+			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
+			dynStats("lus", temp2, "scale", false);
+			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttackType, 3, 0, 0, 0);
+			enemyAI();
+		}
+	}
 
 	public function startOniRampage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -960,7 +1059,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
-//	if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
+		if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 2;
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) damage *= (1 + player.lust100);
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {

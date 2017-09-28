@@ -1368,7 +1368,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.eyeType == EYES_ELF)
 			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
 		else if(player.eyeType == EYES_RAIJU)
-			outputText("  Your eyes are [eyecolor] that constantly glows with voltage power. They have a slitted pupil like those of a beast.");
+			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
 		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
@@ -1742,7 +1742,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your mouth is mostly human save for your two large ogre like canines.  It's decorated by [skin coat].");
 		}
 		if (player.faceType == FACE_RAIJU_FANGS) {
-			outputText("  Your mouth is mostly human save for your two sharp weasel canines.  It's decorated by [skin coat].");
+			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
 		if (player.faceType == FACE_ORCA) {
 			if (player.skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")

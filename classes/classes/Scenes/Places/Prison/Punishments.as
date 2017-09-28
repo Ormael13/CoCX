@@ -417,7 +417,7 @@ package classes.Scenes.Places.Prison
 			{
 				player.buttChange(1.7 * newVal,true,true,false);
 			}
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) < 0 || !player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasm();
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
 			doNext(camp.returnToCampUseOneHour);

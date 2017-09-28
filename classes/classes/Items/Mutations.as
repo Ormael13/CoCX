@@ -7334,6 +7334,7 @@
 			clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
+			var temp2:Number = 0;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
@@ -7358,6 +7359,19 @@
 				changes++;
 			}
 			//Sexual
+			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+				player.growTits(1 + rand(2), 1, false, 3);
+				outputText("\n\nYou feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new " + player.breastRows[0].breastRating + " cup size.");
+				if (player.breastRows.length == 0) {
+					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 2;
+					outputText("\n");
+				}
+			}
 			//Physical
 			var raiju_hair:Array = ["purple", "light blue", "yellow", "white"];
 			if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -7366,7 +7380,7 @@
 			}
 			if (player.lowerBody != LOWER_BODY_TYPE_RAIJU && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-					outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidently hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get use to your <b>Raiju paws!</b>");
+					outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidently hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
 					setLowerBody(LOWER_BODY_TYPE_RAIJU);
 				}
 				else humanizeLowerBody();
@@ -7393,14 +7407,14 @@
 				changes++;
 			}
 			if (player.tailType == TAIL_TYPE_RAIJU && player.rearBody != REAR_BODY_RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck Several strands of your new fur collar are quite dark, arcing around it like lightning.");
+				outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
 				setRearBody(REAR_BODY_RAIJU_MANE);
 				changes++;
 			}
 			if (player.rearBody == REAR_BODY_RAIJU_MANE && player.faceType != FACE_RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nY");
 				if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-				outputText("ou feel your two canines grow bigger and slightly sharper not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
+				outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
 				setFaceType(FACE_RAIJU_FANGS);
 				changes++;
 			}
@@ -7412,7 +7426,7 @@
 				else humanizeEars();
 				changes++;
 			}
-			var raiju_eyes_color:Array = ["electric blue", "green", "teal"];
+			var raiju_eyes_color:Array = ["blue", "green", "teal"];
 			if (player.earType == EARS_WEASEL && player.eyeType != EYES_RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.eyeType == EYES_HUMAN) {
 					player.eyeColor = randomChoice(raiju_eyes_color);
@@ -7435,6 +7449,12 @@
 			//	}
 				player.skin.base.pattern = PATTERN_LIGHTNING_SHAPED_TATTOO;
 				player.skin.base.adj = "lightning shaped tattooed";
+				changes++;
+			}
+			if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				temp2 += 1 + rand(3);
+				outputText("\n\nYour hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
+				player.hairLength += temp2;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

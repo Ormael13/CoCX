@@ -160,6 +160,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const PostAkbalSubmission:StatusEffectType            = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
+		public static const RaijuLightningStatus:StatusEffectType           = mk("Raiju lightning status");
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const Rut:StatusEffectType                            = mk("rut");

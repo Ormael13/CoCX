@@ -1824,7 +1824,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 2;
 		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 0.5;
 		if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 0.2;
-//	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
+		if (player.findPerk(PerkLib.LightningAffinity) >= 0) temp *= 2;
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) temp *= (1 + player.lust100);
 		temp = Math.round(temp);
 		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
