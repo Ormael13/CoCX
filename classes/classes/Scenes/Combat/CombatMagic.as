@@ -441,7 +441,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (inCombat && player.hasStatusEffect(StatusEffects.OniRampage)) {
 			clearOutput();
 			outputText("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
-			doNext(combatMenu);
+			addButton(0,"Next",combatMenu,false);
 		}
 		menu();
 		clearOutput();

@@ -106,7 +106,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		addButton(14, "Back", soulforceSpecials);
 	}
-	
+
 	public function TripleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -264,7 +264,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			clearOutput();
 			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
-			doNext(combatMenu);
+            addButton(0,"Next",combatMenu,false);
 			return;
 		}
 		if (silly ()) outputText("You focus your soulforce, projecting it as an aura around you.  As you concentrate, dozens, hundreds, thousands of tiny, ethereal birds shimmer into existence.  As you raise your hand up, more and more appear, until the area around you and " + monster.a + monster.short + "  is drowned in spectral flappy shapes.  ");
@@ -326,7 +326,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			clearOutput();
 			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
-			doNext(combatMenu);
+            addButton(0,"Next",combatMenu,false);
 			return;
 		}
 		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents " + monster.a + monster.short + ".  ");
@@ -440,7 +440,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function FirePunch():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -481,7 +481,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function HurricaneDance():void {
 		clearOutput();
 		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
@@ -496,7 +496,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownHurricaneDance, 10, 0, 0, 0);
 		enemyAI();
 	}
-	
+
 	public function EarthStance():void {
 		clearOutput();
 		if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
@@ -511,7 +511,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownEarthStance, 10, 0, 0, 0);
 		enemyAI();
 	}
-	
+
 	public function PunishingKick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -548,7 +548,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function activaterOverlimit():void {
 		clearOutput();
 		outputText("You let out a primal roar of pain and fury, as you push your body beyond its normal capacity, a blood red aura cloaking your form.\n\n");
@@ -597,7 +597,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			clearOutput();
 			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
-			doNext(combatMenu);
+            addButton(0,"Next",combatMenu,false);
 			return;
 		}
 		var doEffect:Function = function():* {
@@ -718,7 +718,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			clearOutput();
 			outputText("You are too angry to think straight. Smash your puny opponents first and think later.");
-			doNext(combatMenu);
+            addButton(0,"Next",combatMenu,false);
 			return;
 		}
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
