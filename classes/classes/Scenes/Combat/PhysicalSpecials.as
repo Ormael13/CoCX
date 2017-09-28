@@ -2072,7 +2072,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("\n\nThis deal " + damage + " damage as your victim grow increasingly flushed by your potent aphrodisiac.");
+		outputText(" This deal " + damage + " damage as your victim grows increasingly flushed by your potent aphrodisiac.");
 		//Lust damage!
 		var lustdamage:Number = 35 + rand(player.lib / 10);
 		if (player.level < 10) damage += 20 + (player.level * 3);

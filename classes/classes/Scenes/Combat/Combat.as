@@ -4117,6 +4117,10 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 		dynStats("lus", 7 + int(player.sens)/10);
 	}
+	if(player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
+		outputText("Liadri would surely come with fancy text to tell about this effect (raiju static discharge).\n\n");
+		dynStats("lus", 14 + int(player.sens)/8);
+	}
 	if(player.hasStatusEffect(StatusEffects.KissOfDeath)) {
 		//Effect 
 		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");

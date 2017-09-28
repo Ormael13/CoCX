@@ -978,7 +978,7 @@ public class PlayerAppearance extends BaseContent {
 //	else if(player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
 //		outputText("  Around your waist just under your nectar coated pussy expends the petals of a large orchid big enough to engulf you entirely. While you don't technically have legs you can walk around on your " + num2Text(player.legCount)+ " vines which pretty much look like tentacle cocks.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_LION)
-			outputText("  Your " + num2Text(player.legCount) + " legs, covered in dark fur up to the thigh where it turns white, end up with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.");
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in [skin coat.color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_YETI)
 			outputText("  Your " + num2Text(player.legCount) + " fur covered legs end with a pair of very large yeti feet, leaving large tracks and granting you easy mobility in the snow.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_ORCA)
@@ -1033,7 +1033,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
-			outputText("  Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and it’s pussy-like interior can be used to milk male organs. ");
+			outputText("  Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and its pussy-like interior can be used to milk male organs. ");
 			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
 		if (player.tailType == TAIL_TYPE_MANTIS_ABDOMEN)
@@ -1140,7 +1140,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX)
 			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
 		else if (player.armType == ARM_TYPE_LION)
-			outputText("  Your arms are covered in dark-fur up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
+			outputText("  Your arms are covered in [skin coat.color] up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
 		else if (player.armType == ARM_TYPE_KITSUNE)
 			outputText("  Your arms are somewhat human save for your sharp nails.");
 		else if (player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON)
@@ -1192,9 +1192,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.wingType == WING_TYPE_BAT_LIKE_LARGE_2)
 			outputText("  Two pairs of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_SMALL)
-			outputText("  A pair of small leathery wings covered with fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
+			outputText("  A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_LARGE)
-			outputText("  A pair of large ominous leathery wings covered with fur expand from your back. You can open them wide to soar high in search of your next prey.");
+			outputText("  A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.");
 		if (player.wingType == WING_TYPE_FEATHERED_LARGE)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
 		if (player.wingType == WING_TYPE_FEATHERED_ALICORN)
@@ -1321,7 +1321,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tongueType == TONGUE_ECHIDNA)
 			outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
 		else if (player.tongueType == TONGUE_CAT)
-			outputText("  Your tongue is rough like that of a cat. You sometime groom yourself with it.");
+			outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
 		else if (player.tongueType == TONGUE_ELF)
 			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
 	}
@@ -1352,7 +1352,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.eyeType == EYES_FENRIR)
 			outputText("  Your eyes glows with a freezing blue light icy smoke rising in the air around it.");
 		else if(player.eyeType == EYES_MANTICORE)
-			outputText("  Your eyes are similar to those of a cat but the [eyecolor] irises dismiss any links to the regular felines in favor of something way more ominous.");
+			outputText("  Your eyes are similar to those of a cat, with slit pupil. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(player.eyeType == EYES_FOX)
 			outputText("  Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
 		else if(player.eyeType == EYES_REPTILIAN)

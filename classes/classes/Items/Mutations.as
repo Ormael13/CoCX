@@ -7361,7 +7361,7 @@
 			//Sexual
 			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
 				player.growTits(1 + rand(2), 1, false, 3);
-				outputText("\n\nYou feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new " + player.breastRows[0].breastRating + " cup size.");
+				outputText("\n\nYou feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
 				if (player.breastRows.length == 0) {
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();

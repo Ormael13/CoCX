@@ -35,9 +35,9 @@ package classes.Scenes.NPCs
 					player.addCombatBuff('spe',-2);
 					outputText("hits the mark dealing ");
 					player.takeDamage(tailspikedmg, true);
-					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
+					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. You took ");
 					player.dynStats("lus", lustdmg, "scale", false);
-					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
+					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b> lust damage!");
 				}
 			}
 			else {
@@ -48,14 +48,14 @@ package classes.Scenes.NPCs
 		public function moveTakeFlight():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
-			outputText(" takes flight aiming with her tail as she prepare to unleash a volley of spikes at you!");
+			outputText(" takes flight, aiming with her tail as she prepares to unleash a volley of spikes at you!");
 			createStatusEffect(StatusEffects.Flying,7,0,0,0);
 		}
 		
 		public function moveBoobCrash():void {
-			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna fly down");
-			else outputText("The flying manticore dive");
-			outputText(" in your direction crashing into you breast first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she ready her next attack!");
+			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna flies down");
+			else outputText("The flying manticore dives");
+			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she ready her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.dynStats("lus", lustdmg, "scale", false);

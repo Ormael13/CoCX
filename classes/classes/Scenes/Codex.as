@@ -124,6 +124,9 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_ORCS] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_RAIJU] > 0) {
+				num++;
+			}
 			if (flags[kFLAGS.CODEX_ENTRY_RHINOS] > 0) {
 				num++;
 			}
@@ -159,7 +162,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] > 0) {
 				num++;
 			}
-			if (num >= 26) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 27) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		
@@ -170,7 +173,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/26");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/27");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -232,12 +235,13 @@ package classes.Scenes
 			addCodexButton("Orcs", "Orcs", codexEntryOrcs, kFLAGS.CODEX_ENTRY_ORCS);
 			
 			//2nd row
+			addCodexButton("Raijus", "Raiju", codexEntryRaijus, kFLAGS.CODEX_ENTRY_RAIJU);
 			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
-			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
 			
 			//3rd row
+			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
@@ -678,6 +682,29 @@ package classes.Scenes
 			headerSub("Courtship");
 			outputText("Men and women are on equal ground socially. It is equally common to see a female dominate a male as it is to see vise versa. When the dominatrix is in question usually the pair (or party) will decide through a wrestling match or various other forms of physical combat. The most common relationship practiced is two men with one female. The female serves as a means of reproduction while the two men compete with each other over her affections. The only notable difference between Orcish men and women is when weakness is taken into account. It is looked down upon within Orcish culture to breed with a weak female, or letting a weak male breed with a female. Even in their peaceful culture, breeding with partners that increase the chances of weak offspring is looked down upon. There seem to be no moral trappings for a dominate male to take a weaker, submissive male or two for himself. since the possibility of breeding is impossible. Without a potentially weak offspring there is no fear of cultural backlash.");
 			outputText("\n\n(By: Donto) ")
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryRaijus():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Raijus";
+			clearOutput();
+			headerMain("Raijus");
+			outputText("<b>Genders:</b> Male, Female\n");
+			outputText("Liadri would soon write rest of it. I think she would, right Liadri?");
+			outputText("<b>Height:</b> Height goes here\n");
+			outputText("<b>Build:</b> Build type\n");
+			outputText("<b>Skin tone:</b> Skin tone\n");
+			outputText("<b>Hair:</b> Hair type\n");
+			outputText("<b>Eye color:</b> Eye colour\n");
+			headerSub("Header1");
+			outputText("Lorem ipsum dolor sit amet");
+			headerSub("Header2");
+			outputText("Lorem ipsum dolor sit amet");
+			headerSub("Header3");
+			outputText("Lorem ipsum dolor sit amet");
+			headerSub("Header4");
+			outputText("Lorem ipsum dolor sit amet");
+			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}
 		
