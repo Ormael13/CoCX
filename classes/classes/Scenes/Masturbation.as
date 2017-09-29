@@ -788,42 +788,44 @@ package classes.Scenes {
 			//ORGASM GOES HERE
 			orgazmo(autofellatio, nippleFuck);
 			//POST MASTUBLATORY BLISS
-			outputText("\n\n");
-			if (player.cocks.length > 0) {
-				//Single Cock
-				if (player.cocks.length == 1) {
-					if (player.lib < 30)
-						outputText("You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
-						outputText("You roll and begin to doze, your semi-erect [cock] flopping against you. ");
-					else if (player.lib <= 80) {
-						outputText("As you close your eyes and relax, your [cock] surges back to erectness, ensuring ");
-						if (player.cor < 50)
-							outputText("your dreams will be filled with sex.");
-						else outputText("you dream in a depraved kinky fantasia.");
+			if (player.findPerk(PerkLib.ElectrifiedDesire) < 0 || !player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				outputText("\n\n");
+				if (player.cocks.length > 0) {
+					//Single Cock
+					if (player.cocks.length == 1) {
+						if (player.lib < 30)
+							outputText("You quickly fall asleep, spent. ");
+						else if (player.lib < 55)
+							outputText("You roll and begin to doze, your semi-erect [cock] flopping against you. ");
+						else if (player.lib <= 80) {
+							outputText("As you close your eyes and relax, your [cock] surges back to erectness, ensuring ");
+							if (player.cor < 50)
+								outputText("your dreams will be filled with sex.");
+							else outputText("you dream in a depraved kinky fantasia.");
+						}
+						else outputText("You groan and drift to sleep, your rigid [cock] pulsing and throbbing with continual lust.");
 					}
-					else outputText("You groan and drift to sleep, your rigid [cock] pulsing and throbbing with continual lust.");
+					//Multi Cock
+					else {
+						if (player.lib < 30)
+							outputText("You quickly fall asleep, spent. ");
+						else if (player.lib < 55)
+							outputText("You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
+						else if (player.lib <= 80) {
+							outputText("As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
+							if (player.cor < 50)
+								outputText("your dreams will be filled with sex.");
+							else outputText("you dream in a depraved kinky fantasia.");
+						}
+						else outputText("You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
+					}
 				}
-				//Multi Cock
+				//No cock ending
 				else {
-					if (player.lib < 30)
-						outputText("You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
-						outputText("You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
-					else if (player.lib <= 80) {
-						outputText("As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
-						if (player.cor < 50)
-							outputText("your dreams will be filled with sex.");
-						else outputText("you dream in a depraved kinky fantasia.");
-					}
-					else outputText("You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
+					if (player.vaginas.length > 0)
+						outputText("You sigh softly and drift off into a quick nap, smelling of sex."); //Girl ending
+					else outputText("You sigh and drift off to sleep."); //Genderless ending
 				}
-			}
-			//No cock ending
-			else {
-				if (player.vaginas.length > 0)
-					outputText("You sigh softly and drift off into a quick nap, smelling of sex."); //Girl ending
-				else outputText("You sigh and drift off to sleep."); //Genderless ending
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1893,10 +1895,13 @@ package classes.Scenes {
 			}
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) dynStats("sen", 0.5);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 0.5);
+			}
 			else {
 				player.orgasm();
-				dynStats("sen", (-0.5));
+				dynStats("sen", -0.5);
 			}
 		}
 		
@@ -2014,7 +2019,8 @@ package classes.Scenes {
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
 				}
-				player.orgasm();
+				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+				else player.orgasm();
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				doNext(camp.returnToCampUseOneHour);
 				outputText("\n");
@@ -2084,7 +2090,8 @@ package classes.Scenes {
 			else if (player.gender == 3)
 				doNext(onaholeFutaContinuation);
 			else {
-				player.orgasm();
+				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+				else player.orgasm();
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -2094,8 +2101,14 @@ package classes.Scenes {
 			if (player.balls > 0)
 				outputText("you pass out with aching, empty balls.");
 			else outputText("you pass out with [cocks] sore from exertion.");
-			dynStats("sen", -1);
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 1);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -1);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2104,8 +2117,14 @@ package classes.Scenes {
 			outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10));
 			outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ");
 			outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.");
-			dynStats("sen", -1);
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 1);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -1);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 				
@@ -2141,7 +2160,8 @@ package classes.Scenes {
 		
 			dynStats("lib", -1.5, "sen", .75, "cor", .5);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2155,8 +2175,14 @@ package classes.Scenes {
 					outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ");
 					outputText(player.breastCup(0));
 					outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.");
-					player.orgasm();
-					dynStats("sen", -1);
+					if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+						player.orgasmRaijuStyle();
+						dynStats("sen", 1);
+					}
+					else {
+						player.orgasm();
+						dynStats("sen", -1);
+					}
 					doNext(camp.returnToCampUseOneHour);
 				}
 				//Repeated use!
@@ -2165,8 +2191,14 @@ package classes.Scenes {
 					outputText("Switching the belt on, it begins to immediately vibrate and rub every sensitive part of your [vagina]. You immediately glow with pleasure as the machine works its magic on your hungry pussy. Worried about the machine winding down, you re-crank the gear box occasionally to ensure that you get worked over by the tireless device as long as you can handle it.\n\n");
 					outputText("Eventually, the machine tweaks your nerves and your [clit] just right, triggering a massive orgasm that leaves you bucking wildly like an untamed horse, screaming in mind-numbing pleasure. Your uncontrollable movement dislodges the key from the gear box and you have no choice but to wait for the machine and your still-orgasming body to wind down, and THEN find the goddamn thing. After about fifteen minutes, the machine expends the last of its energy, leaving you a twitching heap until you can move to find the meddlesome key.\n\n");
 					outputText("Fortunately, you locate the key near your feet, saving you the money of having another made for the device. You put aside your machine, your lusts slaked, for now.");
-					player.orgasm();
-					dynStats("sen", -1);
+					if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+						player.orgasmRaijuStyle();
+						dynStats("sen", 1);
+					}
+					else {
+						player.orgasm();
+						dynStats("sen", -1);
+					}
 					doNext(camp.returnToCampUseOneHour);
 				}
 				flags[kFLAGS.TIMES_MASTURBATED]++;
@@ -2266,8 +2298,14 @@ package classes.Scenes {
 			//Stats & next event
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			player.orgasm();
-			dynStats("sen", -0.5);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 0.5);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -0.5);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2372,8 +2410,14 @@ package classes.Scenes {
 			//Stats & next event
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			player.orgasm();
-			dynStats("sen", (-0.5));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 0.5);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -0.5);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2409,9 +2453,15 @@ package classes.Scenes {
 			outputText("When you wake, the black latex is no longer covering your body and the belt is silent around your waist. Cum drips from the tip of your cock and the top part of your [legs] are coated with your feminine juices. ");
 			if (player.biggestLactation() >= 2) outputText("Thin streams of creamy milk flow from your [allbreasts], your torso and midsection dripping wet from the stuff. ");
 			outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.");
-			dynStats("sen", -1);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 1);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -1);
+			}
 			if (player.lib < 30) dynStats("lib", .5);
 			if (player.lib < 50) dynStats("lib", .5);
 			if (player.lib < 60) dynStats("lib", .5);
@@ -2520,8 +2570,14 @@ package classes.Scenes {
 				outputText("You're a bit confused by how much you enjoyed the perverse activity.");
 			else outputText("You're horrified at what you're doing to deal with your inner perversions.");
 			//DONE!
-			player.orgasm();
-			dynStats("sen", (-0.5));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 0.5);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -0.5);
+			}
 		}
 		
 		private function centaurHugeCock():void {
@@ -2680,8 +2736,14 @@ package classes.Scenes {
 			}
 			outputText("Sated for now, you rest for an hour or so before climbing back atop your hooves.");
 			//DONE!
-			player.orgasm();
-			dynStats("sen", (-0.5));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 0.5);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -0.5);
+			}
 		}
 		
 		private function centaurCantMasturbate():void {
@@ -2751,13 +2813,17 @@ package classes.Scenes {
 				player.gems += gems;
 			}
 			else {
-				outputText(", until she's full up and leaking onto the ground.\n\n");
-		
+				outputText(", until she's full up and leaking onto the ground.\n\n");		
 				outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.");
 			}
-		
-			player.orgasm();
-			dynStats("sen", -2);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 2);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -2);
+			}
 			doNext(camp.returnToCampUseOneHour);
 			player.addKeyValue("Fake Mare", 1, 1);
 		}
@@ -2787,8 +2853,14 @@ package classes.Scenes {
 			outputText("You sense your own orgasm coming as a hot, sticky fluid rushes into you.  You scream your pleasure as the statue unloads a load of hot faux-spunk into your womb, flooding your cunt with its strange seed.  So utterly and completely filled, you cannot hold back your orgasm.  You cum, your [vagina] clamping down hard on the fake cock buried inside you, milking it for more and more of its thick, creamy spooge.\n\n");
 		
 			outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your [ass].  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.");
-			player.orgasm();
-			dynStats("sen", -2);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 2);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -2);
+			}
 			doNext(camp.returnToCampUseOneHour);
 			player.addKeyValue("Centaur Pole", 1, 1);
 			trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
@@ -2935,7 +3007,8 @@ package classes.Scenes {
 				flags[kFLAGS.DICK_EGG_INCUBATION] = 48;
 			}
 			player.dumpEggs();
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 			flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2996,7 +3069,8 @@ package classes.Scenes {
 			
 			outputText("\n\nFeeling lighter and a bit happier than you have in a while, you pick yourself up and redress, quickly heading back to camp.\n");
 			flags[kFLAGS.DICK_EGG_INCUBATION] = 0;
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 		}
 		
 		//I Regret Nothing/Exgartuan:
@@ -3100,7 +3174,8 @@ package classes.Scenes {
 				player.createStatusEffect(StatusEffects.Eggchest, 3 + rand(10), 1 + rand(4), 0, 0);
 				
 			}
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 			dynStats("sen", 1);
 			player.dumpEggs();
 			doNext(camp.returnToCampUseOneHour);
@@ -3118,7 +3193,8 @@ package classes.Scenes {
 			outputText(" Fucking yourself with abandon your black girlcum starts to rain on the ground until everywhere around you is entirely soaked but you don't care this feels way too good to stop.");
 			outputText(" For hour your lock yourself in constant bliss until after a number of incalculable consecutive orgasm you collapse to the ground exhausted and entirely drenched in black ink.\n\n");
 			outputText("You proceed to clean yourself up in the nearby stream then go lay down on the grass to dry drifting off into a quick nap.");
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -3301,8 +3377,14 @@ package classes.Scenes {
 			if (player.tentacleCocks() > 1 || player.stamenCocks() > 1) outputText("s");
 			outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
-			player.orgasm();
-			dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -3373,8 +3455,14 @@ package classes.Scenes {
 			outputText("\n\nFamiliar twinges start down in your pitcher. Orgasm is rapidly closing in, and there’s no slowing your frenzied vines at this point.  You gurgle as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak. Then, as your multitude of stamens thrust deep inside yourself, a volcano of pleasure erupts, pumping thick flows of liquid pollen straight into your snatch, ass, and mouth.  You gulp the flow down as best you are able. Your birth canal is quickly flooded with pollen, while your squeezable ass’s interior is painted with more plant juice.");
 			outputText("\n\nAt once, your whole body sags back, limp and drained. You move your vines move back to their normal position, popping out of your vagina, ass, and mouth, leaving your orifices to dribble the spent passion. Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
-			player.orgasm();
-			dynStats("sen", (-1*(1 + player.stamenCocks())));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -3441,8 +3529,14 @@ package classes.Scenes {
 					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
 			}
-			player.orgasm();
-			dynStats("sen", -2);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 2);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -2);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -3462,8 +3556,14 @@ package classes.Scenes {
 			player.buttChange(player.cockArea(tentacle), true, true, false);
 			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
-			player.orgasm();
-			dynStats("sen", -2);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 2);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -2);
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -3503,8 +3603,14 @@ package classes.Scenes {
 			var gems:int = midasCockJackingGemsRoll();
 		
 			outputText("\n\n<b>You have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.</b>");
-			player.orgasm();
-			dynStats("sen", -1);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 1);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -1);
+			}
 			player.gems += gems;
 			flags[kFLAGS.GILDED_JERKED]++
 			statScreenRefresh();
@@ -3546,8 +3652,14 @@ package classes.Scenes {
 				outputText("\n\nThe erotic pumping of the phallic object picks up the pace as you gently build a rhythm with the beating of your heart and tensing of your vaginal walls. Your breathing heaves, and your moans become almost as desperate as they are lustful. Soon the pleasure is rising up into unstoppable tide of phallus-induced ecstasy, and you slide from against the rock to on your side, still fucking yourself with blissful joy. The constant thrusting of the toy begins to make you shake and lose rhythm, your body wanting only to fuck as hard and fast as possible.");
 				outputText("\n\nYour orgasm arrives with supreme relief as you force the dildo to your furthest depths. Juices spurt from your genitals, and you roll onto your back to rest. When your breathing regulates, you pull the thoroughly used toy from your [vagina] and prepare to return to camp.");
 			}
-			player.orgasm();
-			dynStats("sen", -1.5);
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				player.orgasmRaijuStyle();
+				dynStats("sen", 1.5);
+			}
+			else {
+				player.orgasm();
+				dynStats("sen", -1.5);
+			}
 			statScreenRefresh();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -3579,7 +3691,8 @@ package classes.Scenes {
 			else outputText("\n\n");
 			outputText("Your body shakes and rocks from the anal orgasm before slumping onto your back. Happily tightening around the toy with each beat of your hammering heart, you rest.");
 			outputText("\n\nSome time later, you gather your things and return to camp.");
-			player.orgasm();
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			else player.orgasm();
 			dynStats("sen", 0.5);
 			statScreenRefresh();
 			doNext(camp.returnToCampUseOneHour);

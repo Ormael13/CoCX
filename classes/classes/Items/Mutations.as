@@ -3132,19 +3132,21 @@
 			if (player.lust >= player.maxLust() && !kGAMECLASS.inCombat) {
 				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ");
 				if (player.cocks.length > 0) {
-					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you.  ");
+					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
 				}
 				if (player.cocks.length > 0 && player.vaginas.length > 0) {
 					outputText("At the same time your ");
 				}
 				if (player.vaginas.length > 0) {
-					outputText(vaginaDescript(0) + " soaks your thighs.  ");
+					outputText(vaginaDescript(0) + " soaks your thighs");
 				}
-				if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss.  ");
-				outputText("Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
+				if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss");
+				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
+				outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
 				//increase player libido, and maybe sensitivity too?
 				player.orgasm();
 				dynStats("lib", 2, "sen", 1);
+				if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
 			}
 			if (player.lust > player.maxLust()) player.lust = player.maxLust();
 			outputText("\n\n");

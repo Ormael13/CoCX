@@ -3565,6 +3565,10 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	}
 //ENEMYAI!
 public function enemyAIImpl():void {
+	if(monster.HP < 1) {
+		doNext(endHpVictory);
+		return;
+	}
 	monster.doAI();
 	//Violet Pupil Transformation
 	if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {

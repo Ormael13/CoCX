@@ -66,7 +66,7 @@ package classes.Scenes.NPCs
 			outputText(" gleefully fingers herself while looking at you with a half crazed look.\n\n");
 			outputText("\"<i>Do you know... How frustrating it is to be dependant on someone else to achieve release? Ohhhh soon you will find out!</i>\"\n\n");
 			outputText("The display left you aroused but likely she's preparing something. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.\n\n");
-			lust -= lust100 * 0.2;
+			lust += maxLust() * 0.2;
 			createStatusEffect(StatusEffects.RaijuUltReady,0,0,0,0);
 		}
 		public function moveOrgasmicLightningBolt():void {
@@ -78,17 +78,19 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var damageLust:Number = 0;
-				damageLust += lust100 * 0.9;
+				damageLust += lust * 2;
+				damageLust = Math.round(damageLust);
 				player.dynStats("lus", damageLust, "scale", false);
 				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
-			lust -= lust100 * 0.9;
+			lust -= lust * 0.2;
+			removeStatusEffect(StatusEffects.RaijuUltReady);
 			createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.RaijuUltReady)) {
+			if (hasStatusEffect(StatusEffects.RaijuUltReady) && !hasStatusEffect(StatusEffects.AbilityCooldown1)) {
 				moveOrgasmicLightningBolt();
 			}
 			else {
