@@ -107,6 +107,7 @@
 				"skintone"					: function(thisPtr:*):* {
 					return kGAMECLASS.player.skinTone;
 				},
+				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.combat.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.tongueDescript(); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },

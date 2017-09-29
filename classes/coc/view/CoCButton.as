@@ -216,5 +216,13 @@ public class CoCButton extends Block {
 		visible = false;
 		return this;
 	}
+	/**
+	 * Show the button with all properties from previous configuration
+	 * @return this
+	 */
+	public function unhide():CoCButton {
+		visible = true;
+		return this;
+	}
 }
 }

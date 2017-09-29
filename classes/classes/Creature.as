@@ -501,6 +501,14 @@ import classes.internals.Utils;
 			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
 			return (lustDmg > 0 && lustDmg < 1) ? 1 : lustDmg;
 		}
+		/**
+		 * Get the remaining fatigue of the Creature.
+		 * @return maximum amount of fatigue that still can be used
+		 */
+		public function fatigueLeft():Number
+		{
+			return maxFatigue() - fatigue;
+		}
 
 		/*
 		
@@ -3044,6 +3052,10 @@ import classes.internals.Utils;
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
+		
+		public function isFlying():Boolean {
+			return hasStatusEffect(StatusEffects.Flying);
+		}
 
 		public function canOvipositSpider():Boolean
 		{
@@ -3589,6 +3601,66 @@ import classes.internals.Utils;
 		 */
 		public function hasLongTongue():Boolean {
 			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
+		}
+		
+		public function hairOrFur():String
+		{
+			return Appearance.hairOrFur(this);
+		}
+		
+		public function hairDescript():String
+		{
+			return Appearance.hairDescription(this);
+		}
+		
+		public function beardDescript():String
+		{
+			return Appearance.beardDescription(this);
+		}
+		
+		public function hipDescript():String
+		{
+			return Appearance.hipDescription(this);
+		}
+		
+		public function assDescript():String
+		{
+			return buttDescript();
+		}
+		
+		public function buttDescript():String
+		{
+			return Appearance.buttDescription(this);
+		}
+		
+		public function tongueDescript():String
+		{
+			return Appearance.tongueDescription(this);
+		}
+		
+		public function hornDescript():String
+		{
+			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
+		}
+		
+		public function tailDescript():String
+		{
+			return Appearance.tailDescript(this);
+		}
+		
+		public function oneTailDescript():String
+		{
+			return Appearance.oneTailDescript(this);
+		}
+		
+		public function wingsDescript():String
+		{
+			return Appearance.wingsDescript(this);
+		}
+		
+		public function eyesDescript():String
+		{
+			return Appearance.eyesDescript(this);
 		}
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {

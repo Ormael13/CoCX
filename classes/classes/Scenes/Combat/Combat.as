@@ -46,6 +46,7 @@ public class Combat extends BaseContent {
 	public var magic:CombatMagic           = new CombatMagic();
 	public var teases:CombatTeases         = new CombatTeases();
 	public var soulskills:CombatSoulskills = new CombatSoulskills();
+	public var ui:CombatUI                 = new CombatUI();
 
 	public function get inCombat():Boolean {
 		return getGame().inCombat;
@@ -295,8 +296,8 @@ public function approachAfterKnockback1():void
 	clearOutput();
 	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
-	if (player.weaponRangeName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
-	if (player.weaponRangeName == "blunderbuss rifle") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
+	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
 	outputText("At the same time, you open the magazine of your ");
 	if (player.weaponRangePerk == "Pistol") outputText("pistol");
 	if (player.weaponRangePerk == "Rifle") outputText("rifle");
@@ -329,7 +330,7 @@ public function approachAfterKnockback3():void
 	return;
 }
 
-private function isPlayerSilenced():Boolean
+public function isPlayerSilenced():Boolean
 {
 	var temp:Boolean = false;
 	if (player.hasStatusEffect(StatusEffects.ThroatPunch)) temp = true;
@@ -338,7 +339,7 @@ private function isPlayerSilenced():Boolean
 	return temp;
 }
 
-private function isPlayerBound():Boolean 
+public function isPlayerBound():Boolean
 {
 	var temp:Boolean = false;
 	if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
@@ -364,7 +365,7 @@ private function isPlayerBound():Boolean
 	return temp;
 }
 
-private function isPlayerStunned():Boolean 
+public function isPlayerStunned():Boolean
 {
 	var temp:Boolean = false;
 	if (player.hasStatusEffect(StatusEffects.IsabellaStunned) || player.hasStatusEffect(StatusEffects.Stunned)) {
@@ -382,7 +383,7 @@ private function isPlayerStunned():Boolean
 	return temp;
 }
 
-private function canUseMagic():Boolean {
+public function canUseMagic():Boolean {
 	if (player.hasStatusEffect(StatusEffects.ThroatPunch)) return false;
 	if (player.hasStatusEffect(StatusEffects.WebSilence)) return false;
 	if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
@@ -402,103 +403,28 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	statScreenRefresh();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	if (combatRoundOver()) return;
-	menu();
-	var attacks:Function = normalAttack;
+	ui.mainMenu();
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
-		//Standard menu before modifications.
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) addButton(0, "E.Attack", baseelementalattacks).hint( "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
-		else if (!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
-			addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
-		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
-			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
-		else if (player.hasStatusEffect(StatusEffects.Flying))
-		{
-			if (player.weapon != weapons.SPEAR || player.weapon != weapons.LANCE) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
-			else addButton(0, "Attack", basemeleeattacks).hint( "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
-		}
-		//Bow attack
-		if (player.weaponRangePerk == "Bow")
-			addButton(1, "Bow", fireBow).hint( "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
-		//Crossbow attack
-		if (player.weaponRangePerk == "Crossbow")
-			addButton(1, "Crossbow", fireBow).hint( "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
-		if (player.weaponRangePerk == "Throwing") {
-			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRange != weaponsrange.SHUNHAR) addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
-			else addButton(1, "Throw", fireBow).hint( "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
-		}
-		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
-			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0)
-				addButton(1, "Reload", reloadWeapon).hint( "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-			else
-				addButton(1, "Shoot", fireBow).hint( "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
-		}
-		addButton(2, "Items", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-		addButton(3, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		addButton(4, "Tease", teaseAttack).hint("Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
-		if (canUseMagic()) addButton(5, "Spells", magic.magicMenu).hint("Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
+		
+		
+		if (canUseMagic()) addButton(5, "", magic.magicMenu).hint("");
 		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
-		addButton(7, "Soulforce", soulskills.soulforceSpecials).hint("Soulforce attacks menu.", "Soulforce Specials");
-		addButton(8, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
-		if (monster.hasStatusEffect(StatusEffects.Level)) {
-			if (monster is SandTrap) addButton(8, "Climb", wait).hint("Climb the sand to move away from the sand trap.");
-			if (monster is Alraune) {
-				if (player.fatigue + 50 <= player.maxFatigue()) addButton(8, "Struggle", wait).hint("Struggle to forcefully pull yourself a good distance away from plant woman.");
-				else addButtonDisabled(8, "Struggle", "You're too tired to struggle.");
-			}
-		}
 		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
-		if (monster is DriderIncubus)
-			{
-				m = monster as DriderIncubus;
-				if (!m.goblinFree) addButton(11, "Free Goblin", m.freeGoblin);
-			}
-		else if (monster is Lethice)
-		{
-			var ml:Lethice = monster as Lethice;
-			whitefireLustCap = player.maxLust() * 0.75;
-			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.GreyMage) >= 0) whitefireLustCap = (player.maxLust() - 45);
-			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
-			gotEnergy = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
-			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
-			{
-				if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy)
-				{
-					addButton(11, "Dispell", ml.dispellRapetacles);
-				}
-			}
-		}
 		else addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
 		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
-		addButton(14, "Run", runAway).hint("Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
+		
 	}
 	//Modify menus.
 	if (kGAMECLASS.urtaQuest.isUrta()) {
-		addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+		addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
 		addButton(1, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
-		addButton(2, "M. Specials", mspecials.msMenu).hint("Mental and supernatural special attack menu.", "Magical Specials");
+		addButton(2, "M. Specials", kGAMECLASS.urtaQuest.urtaMSpecials).hint("Mental and supernatural special attack menu.", "Magical Specials");
 		addButton(3, "Tease", teaseAttack);
 		addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
 	}
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned())) {
-		addButton(1, "Stop", stopChanneledSpecial);
-	}
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 1) {
-			addButton(0, "Continue", mspecials.singCompellingAria).hint("Continue singing.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop singing.");
-		}
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 2) addButton(0, "Continue", mspecials.startOniRampage).hint("Continue starting rampage.");
-	}
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 1) {
-			addButton(0, "Continue", mspecials.singCompellingAria).hint("Continue singing.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop singing.");
-		}
-	}
+	
 	if (monster.hasStatusEffect(StatusEffects.AttackDisabled))
 	{
 		if (monster is Lethice)
@@ -509,29 +435,13 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		{
 			outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
 		}
-		attacks = null;
-	}
-	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) addButton(0, "E.Attack", baseelementalattacks).hint( "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
-		else addButton(0, "Attack", (monster as DriderIncubus).taintedMindAttackAttempt);
-		addButton(2, "Items", inventory.inventoryMenu);
-		addButton(3, "Fantasize", fantasize);
-		addButton(4, "Tease", teaseAttack);
-		if (canUseMagic()) addButton(5, "Spells", magic.magicMenu);
-		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
-		addButton(7, "Soulforce", soulskills.soulforceSpecials).hint("Soulforce attacks menu.", "Soulforce Specials");
-		addButton(8, (monster.hasStatusEffect(StatusEffects.Level) ? "Climb" : "Wait"), wait);
-		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
-		var m:DriderIncubus = monster as DriderIncubus;
-		if (!m.goblinFree) addButton(11, "Free Goblin", m.freeGoblin);
-		addButton(14, "Run", runAway);
 	}
 	//Knocked back
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
-		outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
-		if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Reload&Approach", approachAfterKnockback1).hint("Reload your range weapon while approaching.", "Reload and Approach");
-		else if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] > 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Shoot&Approach", approachAfterKnockback2).hint("Fire a round at your opponent and approach.", "Fire and Approach");
+		
+		if (player.ammo <= 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Reload&Approach", approachAfterKnockback1).hint("Reload your range weapon while approaching.", "Reload and Approach");
+		else if (player.ammo > 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Shoot&Approach", approachAfterKnockback2).hint("Fire a round at your opponent and approach.", "Fire and Approach");
 		else addButton(0, "Approach", approachAfterKnockback3).hint("Close some distance between you and your opponent.");
 		if (player.weaponRangePerk == "Bow") addButton(1, "Bow", fireBow);
 		if (player.weaponRangePerk == "Crossbow") addButton(1, "Crossbow", fireBow);
@@ -543,55 +453,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		outputText("<b>  Even physical special attacks are out of the question.</b>");
 		removeButton(1); //Removes bow usage.
 	}
-	//Bound: Struggle or wait
-	if (isPlayerBound()) {
-		menu();
-		addButton(0, "Struggle", struggle);
-		addButton(1, "Wait", wait);
-		if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
-			addButton(6, "M. Special", mspecials.msMenu);
-		}
-		if (player.hasStatusEffect(StatusEffects.Bound)) {
-			addButton(0, "Struggle", (monster as Ceraph).ceraphBindingStruggle);
-			addButton(1, "Wait", (monster as Ceraph).ceraphBoundWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
-			addButton(0, "Struggle", (monster as Izumi).chokeSlamStruggle);
-			addButton(1, "Wait", (monster as Izumi).chokeSlamWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
-			addButton(0, "Struggle", (monster as Izumi).titSmotherStruggle);
-			addButton(1, "Wait", (monster as Izumi).titSmotherWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
-			addButton(0, "Struggle", (monster as SuccubusGardener).grappleStruggle);
-			addButton(1, "Wait", (monster as SuccubusGardener).grappleWait);
-		}
-		else if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
-			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
-			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);
-			addButton(5, "Wait", (monster as Lethice).grappleWait);
-		
-			var whitefireLustCap:int = player.maxLust() * 0.75;
-			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.GreyMage) >= 0) whitefireLustCap = (player.maxLust() - 45);
-			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
-			var gotEnergy:Boolean = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
-			if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy)
-			{
-				addButton(1, "Dispell", (monster as Lethice).dispellRapetacles);
-			}
-		}
-	}
 	//Silence: Disables magic menu.
 	if (isPlayerSilenced()) {
 		removeButton(5);
-	}
-	//Stunned: Recover, lose 1 turn.
-	if (isPlayerStunned()) {
-		menu();
-		addButton(0, "Recover", wait);
 	}
 	else if (monster.hasStatusEffect(StatusEffects.Constricted)) {
 		menu();
@@ -621,22 +485,17 @@ public function PhysicalMagicalSpecials():void {
 		addButton(0, "P. Specials", (monster as DriderIncubus).taintedMindAttackAttempt);
 	}
 	else {
-		if (!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying)) addButton(0, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
-		else if (!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying)) {
+		if (!player.isFlying() && !monster.isFlying()) addButton(0, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
+		else if (!player.isFlying() && monster.isFlying()) {
 			if (player.canFly()) addButton(0, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			else addButtonDisabled(0, "P. Specials", "No way you could reach enemy in air with p. specials.");
 		}
-		else if (player.hasStatusEffect(StatusEffects.Flying)) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
+		else if (player.isFlying()) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
 	}
-	addButton(1, "M. Specials", mspecials.msMenu).hint("Mental and Supernatural special attack menu.", "Magical Specials");
 	addButton(14, "Back", combatMenu, false);
-	//Disabled physical attacks
-	if (monster.hasStatusEffect(StatusEffects.PhysicalDisabled)) {
-		removeButton(0); //Removes physical special attack.
-	}
 }
 
-private function teaseAttack():void {
+	internal function teaseAttack():void {
 	teases.teaseAttack();
 }
 
@@ -690,6 +549,10 @@ private function normalAttack():void {
 	attack();
 }
 public function basemeleeattacks():void {
+	if (monster is DriderIncubus) {
+		(monster as DriderIncubus).taintedMindAttackAttempt();
+		return;
+	}
 	clearOutput();
 	if (kGAMECLASS.urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -1257,7 +1120,7 @@ public function lustAttack():void {
 	combatRoundOver();
 }
 
-private function wait():void {
+internal function wait():void {
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 	//Gain fatigue if not fighting sand tarps
 	if (!monster.hasStatusEffect(StatusEffects.Level)) {
@@ -1390,8 +1253,8 @@ private function wait():void {
 		enemyAI();
 	}
 }
-
-private function struggle():void {
+	
+	internal function struggle():void {
 	if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
 		clearOutput();
 		if (player.str / 9 + rand(20) + 1 >= 15) {
@@ -1534,7 +1397,7 @@ public function arrowsAccuracy():Number {
 		else accmod += 100;
 	}
 	if (player.findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0) accmod += 60;
-	if (player.hasStatusEffect(StatusEffects.Flying)) accmod -= 100;
+	if (player.isFlying()) accmod -= 100;
 //	if(player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) mod += .7;
 //	if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 //	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
@@ -1649,7 +1512,7 @@ public function fireBow():void {
 		else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 	}
 	if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
-		flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
+		player.ammo--;
 	}
 //	if (player.weaponRangePerk == "Rifle") {
 		//fatigue(50, 4);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
@@ -2149,7 +2012,7 @@ public function throwWeapon():void {
 	var accRange:Number = 0;
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	if (player.weaponRange != weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
+	if (player.weaponRange != weaponsrange.SHUNHAR) player.ammo--;
 	fatigue(fc);
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
@@ -2283,7 +2146,7 @@ public function throwWeapon():void {
 		if (monster.plural) outputText("s");
 		outputText(".\n\n");
 	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1 || flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] == 0) {
+	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1 || player.ammo == 0) {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic ");
@@ -2292,7 +2155,7 @@ public function throwWeapon():void {
 			outputText("s?”</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 		}
-		if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
+		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
 		enemyAI();
 	} else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
@@ -2440,13 +2303,13 @@ public function shootWeapon():void {
 }
 
 public function reloadWeapon():void {
-	if (player.weaponRangeName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
-	if (player.weaponRangeName == "blunderbuss rifle") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
+	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
 	outputText("You open the magazine of your ");
 	if (player.weaponRangeName == "flintlock pistol") outputText("pistol");
 	if (player.weaponRangeName == "blunderbuss rifle") outputText("rifle");
 	outputText(" to reload the ammunition.  If you too tired it would use up this turn action.\n\n");
-	if(player.fatigue + (10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]) > player.maxFatigue()) {
+	if(player.fatigue + (10 * player.ammo) > player.maxFatigue()) {
 		if (player.findPerk(PerkLib.RapidReload) < 0) {
 			clearOutput();
 			outputText("You are too tired to act in this round after reloaing your weapon.");
@@ -2455,8 +2318,8 @@ public function reloadWeapon():void {
 		else doNext(combatMenu);
 	}
 	else {
-		if (player.findPerk(PerkLib.RapidReload) < 0) fatigue(10 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);
-		else fatigue(5 * flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]);//czy całkiem usunąć koszt przeładowania?
+		if (player.findPerk(PerkLib.RapidReload) < 0) fatigue(10 * player.ammo);
+		else fatigue(5 * player.ammo);//czy całkiem usunąć koszt przeładowania?
 		doNext(combatMenu);
 	}
 }
@@ -4399,7 +4262,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 	}
 	//Flying
-	if(player.hasStatusEffect(StatusEffects.Flying)) {
+	if(player.isFlying()) {
 		player.addStatusValue(StatusEffects.Flying,1,-1);
 		if(player.statusEffectv1(StatusEffects.Flying) >= 0) outputText("<b>You keep making circles in the air around your opponent.</b>\n\n");
 		else {
@@ -4923,12 +4786,12 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
 	monster.HP = monster.maxHP();
 	monster.XP = monster.totalXP();
-	if (player.weaponRangeName == "gnoll throwing spear") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 20;
-	if (player.weaponRangeName == "gnoll throwing axes") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 10;
-	if (player.weaponRangeName == "training javelins") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 10;
-	if (player.weaponRangeName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
-	if (player.weaponRangeName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 2;
-	if (player.weaponRange == weaponsrange.SHUNHAR) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 1;
+	if (player.weaponRangeName == "gnoll throwing spear") player.ammo = 20;
+	if (player.weaponRangeName == "gnoll throwing axes") player.ammo = 10;
+	if (player.weaponRangeName == "training javelins") player.ammo = 10;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
+	if (player.weaponRangeName == "blunderbuss") player.ammo = 2;
+	if (player.weaponRange == weaponsrange.SHUNHAR) player.ammo = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "scale", false);
 		doNext(endLustLoss);
@@ -6100,7 +5963,7 @@ public function greatDive():void {
 	damage = doDamage(damage);
 	checkAchievementDamage(damage);
 	outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>).\n\n");
-	if (player.hasStatusEffect(StatusEffects.Flying)) player.removeStatusEffect(StatusEffects.Flying);
+	if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
 	if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
 		player.removeStatusEffect(StatusEffects.FlyingNoStun);
 		player.removePerk(PerkLib.Resolute);

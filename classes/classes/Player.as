@@ -562,6 +562,12 @@ use namespace kGAMECLASS;
 		override public function get weaponRangeValue():Number {
 			return _weaponRange.value;
 		}
+		public function get ammo():int {
+			return flags[kFLAGS.FLINTLOCK_PISTOL_AMMO];
+		}
+		public function set ammo(value:int):void {
+			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
+		}
 		
 		//override public function get jewelries.
 		override public function get jewelryName():String {

@@ -40,6 +40,109 @@
 			"shortest"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockHead(kGAMECLASS.player.shortestCockIndex()); }
 		}
 
+		public var monsterLookups:Object = {
+			"agility"					: function(thisPtr:*):* { return "[Agility]"; },
+			"allbreasts"				: function(thisPtr:*):* { return kGAMECLASS.monster.allBreastsDescript(); },
+			"alltits"				    : function(thisPtr:*):* { return kGAMECLASS.monster.allBreastsDescript(); },
+			"armor"						: function(thisPtr:*):* { return kGAMECLASS.monster.armorName;},
+			"armorname"					: function(thisPtr:*):* { return kGAMECLASS.monster.armorName;},
+			"ass"						: function(thisPtr:*):* { return kGAMECLASS.monster.buttDescript();},
+			"asshole"					: function(thisPtr:*):* { return kGAMECLASS.monster.assholeDescript(); },
+			"balls"						: function(thisPtr:*):* { return kGAMECLASS.monster.ballsDescriptLight(); },
+//			"bodytype"					: function(thisPtr:*):* { return kGAMECLASS.monster.bodyType(); },
+			"boyfriend"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("boyfriend", "girlfriend"); },
+			"breasts"					: function(thisPtr:*):* { return kGAMECLASS.monster.breastDescript(0); },
+			"butt"						: function(thisPtr:*):* { return kGAMECLASS.monster.buttDescript();},
+			"butthole"					: function(thisPtr:*):* { return kGAMECLASS.monster.assholeDescript();},
+			"chest"						: function(thisPtr:*):* { return kGAMECLASS.monster.chestDesc(); },
+			"claws"						: function(thisPtr:*):* { return kGAMECLASS.monster.claws(); },
+			"clit"						: function(thisPtr:*):* { return kGAMECLASS.monster.clitDescript(); },
+			"cock"						: function(thisPtr:*):* { return kGAMECLASS.monster.cockDescript(0);},
+			"cockhead"					: function(thisPtr:*):* { return kGAMECLASS.monster.cockHead(0);},
+			"cocks"						: function(thisPtr:*):* { return kGAMECLASS.monster.multiCockDescriptLight(); },
+			"cunt"						: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
+			"eachcock"					: function(thisPtr:*):* { return kGAMECLASS.monster.sMultiCockDesc();},
+			"eyes"						: function(thisPtr:*):* { return kGAMECLASS.monster.eyesDescript();},
+			"eyecolor"					: function(thisPtr:*):* { return kGAMECLASS.monster.eyeColor;},
+//			"face"						: function(thisPtr:*):* { return kGAMECLASS.monster.face(); },
+			"feet"						: function(thisPtr:*):* { return kGAMECLASS.monster.feet(); },
+			"foot"						: function(thisPtr:*):* { return kGAMECLASS.monster.foot(); },
+			"fullchest"					: function(thisPtr:*):* { return kGAMECLASS.monster.allChestDesc(); },
+			"hair"						: function(thisPtr:*):* { return kGAMECLASS.monster.hairDescript(); },
+			"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.monster.hairColor; },
+			"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.monster.hairOrFur(); },
+			"he"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("he", "she"); },
+			"him"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("him", "her"); },
+			"himher"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("him", "her"); },
+			"himself"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("himself", "herself"); },
+			"herself"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("himself", "herself"); },
+			"hips"						: function(thisPtr:*):* { return kGAMECLASS.monster.hipDescript();},
+			"his"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("his", "her"); },
+			"hisher"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("his", "her"); },
+			"horns"						: function(thisPtr:*):* { return kGAMECLASS.monster.hornDescript(); },
+			"leg"						: function(thisPtr:*):* { return kGAMECLASS.monster.leg(); },
+			"legs"						: function(thisPtr:*):* { return kGAMECLASS.monster.legs(); },
+			"lowergarment"				: function(thisPtr:*):* { return kGAMECLASS.monster.lowerGarmentName; },
+			"man"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("man", "woman"); },
+			"men"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("men", "women"); },
+			"malefemaleherm"			: function(thisPtr:*):* { return kGAMECLASS.monster.maleFemaleHerm(); },
+			"master"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("master","mistress"); },
+			"multicock"					: function(thisPtr:*):* { return kGAMECLASS.monster.multiCockDescriptLight(); },
+			"multicockdescriptlight"	: function(thisPtr:*):* { return kGAMECLASS.monster.multiCockDescriptLight(); },
+			"name"						: function(thisPtr:*):* { return kGAMECLASS.monster.short;},
+			"nipple"					: function(thisPtr:*):* { return kGAMECLASS.monster.nippleDescript(0);},
+			"nipples"					: function(thisPtr:*):* { return kGAMECLASS.monster.nippleDescript(0) + "s";},
+			"onecock"					: function(thisPtr:*):* { return kGAMECLASS.monster.oMultiCockDesc();},
+			"pussy"						: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
+			"sack"						: function(thisPtr:*):* { return kGAMECLASS.monster.sackDescript(); },
+			"sheath"					: function(thisPtr:*):* { return kGAMECLASS.monster.sheathDescription(); },
+			"shield"					: function(thisPtr:*):* { return kGAMECLASS.monster.shieldName; },
+			"skin"						: function(thisPtr:*):* {
+				return kGAMECLASS.monster.skin.describe('skin',false,false);
+			},
+			"skin.noadj": function(thisPtr:*):* {
+				return kGAMECLASS.monster.skin.describe('skin',true,false);
+			},
+			"skin.notone": function(thisPtr:*):* {
+				return kGAMECLASS.monster.skin.describe('skin',false,true);
+			},
+			"skin.type": function(thisPtr:*):* {
+				return kGAMECLASS.monster.skin.describe('skin',true,true);
+			},
+			"skin.color": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.monster.skin.tone;
+			},
+			"skin.isare": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.monster.skin.isAre();
+			},
+			"skin.vs": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.monster.skin.isAre("s","");
+			},
+			"skinfurscales"				: function(thisPtr:*):* {
+				return kGAMECLASS.monster.skin.describe('coat');
+			},
+			"skintone"					: function(thisPtr:*):* {
+				return kGAMECLASS.monster.skinTone;
+			},
+			"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.monster.tallness); },
+			"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.monster.upperGarmentName; },
+			"vag"						: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
+			"vagina"					: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
+			"vagorass"					: function(thisPtr:*):* { return (kGAMECLASS.monster.hasVagina() ? kGAMECLASS.monster.vaginaDescript() : kGAMECLASS.monster.assholeDescript()); },
+			"weapon"					: function(thisPtr:*):* { return kGAMECLASS.monster.weaponName;},
+			"weaponname"				: function(thisPtr:*):* { return kGAMECLASS.monster.weaponName; },
+			"weaponrangename"			: function(thisPtr:*):* { return kGAMECLASS.monster.weaponRangeName; },
+			"cockplural"				: function(thisPtr:*):* { return (kGAMECLASS.monster.cocks.length == 1) ? "cock" : "cocks"; },
+			"dickplural"				: function(thisPtr:*):* { return (kGAMECLASS.monster.cocks.length == 1) ? "dick" : "dicks"; },
+			"headplural"				: function(thisPtr:*):* { return (kGAMECLASS.monster.cocks.length == 1) ? "head" : "heads"; },
+			"prickplural"				: function(thisPtr:*):* { return (kGAMECLASS.monster.cocks.length == 1) ? "prick" : "pricks"; },
+			"boy"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("boy", "girl"); },
+			"guy"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("guy", "girl"); },
+			"wings"						: function(thisPtr:*):* { return kGAMECLASS.monster.wingsDescript(); },
+			"tail"						: function(thisPtr:*):* { return kGAMECLASS.monster.tailDescript(); },
+			"onetail"					: function(thisPtr:*):* { return kGAMECLASS.monster.oneTailDescript(); }
+		};
+
 
 		// These tags take a two-word tag with a **numberic** attribute for lookup.
 		// [object NUMERIC-attribute]
@@ -191,6 +294,7 @@
 			// NPCs:
 			"rubi"		: rubiLookups,
 			"arian"		: arianLookups,
+			"monster"	: monsterLookups,
 
 			// PC Attributes:
 
