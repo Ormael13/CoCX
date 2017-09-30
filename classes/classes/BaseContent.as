@@ -666,6 +666,16 @@ import coc.xxc.StoryContext;
 			kGAMECLASS.HPChange(changeNum,display);
 		}
 
+		// For fatigue(mod,type) calls
+		public static const USEFATG_NORMAL:int = 0;
+		public static const USEFATG_MAGIC:int = 1;
+		public static const USEFATG_PHYSICAL:int = 2;
+		public static const USEFATG_MAGIC_NOBM:int = 3;
+		public static const USEFATG_BOW:int = 4;
+		public static const USEFATG_WHITE:int = 5;
+		public static const USEFATG_BLACK:int = 6;
+		public static const USEFATG_WHITE_NOBM:int = 7;
+		public static const USEFATG_BLACK_NOBM:int = 8;
 		protected function fatigue(mod:Number,type:Number=0):void {
 			kGAMECLASS.fatigue(mod, type);
 		}

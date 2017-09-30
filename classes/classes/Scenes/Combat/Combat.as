@@ -3314,60 +3314,36 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 		if (player.unicornScore() >= 5) multi += 0.05;
 		return multi;
 	}
-	public static const USEFATG_NORMAL:int = 0;
-	public static const USEFATG_MAGIC:int = 1;
-	public static const USEFATG_PHYSICAL:int = 2;
-	public static const USEFATG_MAGIC_NOBM:int = 3;
-	public static const USEFATG_BOW:int = 4;
-	public static const USEFATG_WHITE:int = 5;
-	public static const USEFATG_BLACK:int = 6;
-	public static const USEFATG_WHITE_NOBM:int = 7;
-	public static const USEFATG_BLACK_NOBM:int = 8;
+	public function fatigueCost(mod:Number,type:Number = USEFATG_NORMAL):Number {
+		switch (type) {
+			//Spell reductions
+			case USEFATG_MAGIC:
+			case USEFATG_MAGIC_NOBM:
+				return spellCost(mod);
+			case USEFATG_WHITE:
+			case USEFATG_WHITE_NOBM:
+				return spellCostWhite(mod);
+			case USEFATG_BLACK:
+			case USEFATG_BLACK_NOBM:
+				return spellCostBlack(mod);
+			case USEFATG_PHYSICAL:
+				return physicalCost(mod);
+			case USEFATG_BOW:
+				return bowCost(mod);
+			default:
+				return mod;
+		}
+	}
 //Modify fatigue (mod>0 - subtract, mod<0 - regen)//types:
 public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
-	//Spell reductions
-	if(type == USEFATG_MAGIC) {
-		mod = spellCost(mod);
+	mod = fatigueCost(mod,type);
+	if (type === USEFATG_MAGIC || type === USEFATG_WHITE || type === USEFATG_BLACK) {
 		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
+		if (player.hasPerk(PerkLib.BloodMage)) {
 			combat.takeDamage(mod);
 			statScreenRefresh();
 			return;
 		}
-	}
-	//Physical special reductions
-	if(type == USEFATG_PHYSICAL) {
-		mod = physicalCost(mod);
-	}
-	if(type == USEFATG_MAGIC_NOBM) {
-		mod = spellCost(mod);
-	}
-	if (type == USEFATG_BOW) {
-		mod = bowCost(mod);
-	}
-	if (type == USEFATG_WHITE) {
-		mod = spellCostWhite(mod);
-		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			combat.takeDamage(mod);
-			statScreenRefresh();
-			return;
-		}
-	}
-	if (type == USEFATG_BLACK) {
-		mod = spellCostBlack(mod);
-		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			combat.takeDamage(mod);
-			statScreenRefresh();
-			return;
-		}
-	}
-	if (type == USEFATG_WHITE_NOBM) {
-		mod = spellCostWhite(mod);
-	}
-	if (type == USEFATG_BLACK_NOBM) {
-		mod = spellCostBlack(mod);
 	}
 	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
 	if(player.fatigue <= 0 && mod < 0) return;

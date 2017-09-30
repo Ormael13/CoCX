@@ -83,7 +83,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Upheaval - requires rhino horn
 		if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
-			buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
+			bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
+			bd.requireFatigue(physicalCost(15));
 		}
 		//Infest if infested
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
@@ -99,9 +100,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armType == ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
 			bd = buttons.add("Multi Slash", mantisMultiSlash);
 			if (monster.plural) {
-				bd.hint("Attempt to slash your foes with your wrists scythes! \n\nFatigue Cost: " + physicalCost(60) + "");
+				bd.hint("Attempt to slash your foes with your wrists scythes! \n");
+				bd.requireFatigue(60);
 			} else {
-				bd.hint("Attempt to slash your foe with your wrists scythes! \n\nFatigue Cost: " + physicalCost(24) + "");
+				bd.hint("Attempt to slash your foe with your wrists scythes! \n");
+				bd.requireFatigue(24);
 			}
 		}
 		if (player.tail.isAny(TAIL_TYPE_BEE_ABDOMEN, TAIL_TYPE_SCORPION)) {
@@ -135,46 +138,37 @@ public class PhysicalSpecials extends BaseCombatContent {
 			buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 		}
 		if (player.tailType == TAIL_TYPE_SALAMANDER) {
-			buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+			bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+			bd.requireFatigue(physicalCost(40));
 		}
 		if (player.tailType == TAIL_TYPE_ORCA) {
 			bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
+			bd.requireFatigue(physicalCost(40));
 			if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 				bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 			}
 		}
-		if (player.hasPerk(PerkLib.InkSpray)) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownInkSpray) && !monster.hasStatusEffect(StatusEffects.Blind)) {
-				if (player.gender == 1) {
-					if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
-						buttons.add("Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
-					}
-					else {
-						buttons.add("Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
-					}
-				}
-				if (player.gender == 2 || player.gender == 3) {
-					if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
-						buttons.add("Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
-					}
-					else {
-						buttons.add("Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
-					}
-				}
-			}
-			else if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
+		if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0) {
+			var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
+			var cooldown:int    = player.hasPerk(PerkLib.ScyllaInkGlands) ? 4 : 8;
+			
+			bd = buttons.add("Ink Spray", inkSpray);
+			bd.requireFatigue(physicalCost(30));
+			bd.hint("Lift " +liftWhat +" and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of " +cooldown+" rounds before it can be used again)");
+			if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 				bd.disable("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
-			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
 				bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
 			}
 		}
 		if (player.hasVagina() && player.cowScore() >= 9) {
-			bd = buttons.add("Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			bd = buttons.add("Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
+			bd.requireLust(100);
 			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.hasCock() && player.minotaurScore() >= 9) {
-			bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
+			bd.requireLust(100);
 			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.canFly()) {
@@ -198,7 +192,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.shield != ShieldLib.NOTHING) {
-			buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+			bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+			bd.requireFatigue(physicalCost(20));
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 			buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
@@ -223,23 +218,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 			bd = buttons.add("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
+			bd.requireFatigue(physicalCost(60));
 			if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
-			
 		}
 		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
+			bd.requireFatigue(physicalCost(60));
 			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
 			}
 		}
 		if (player.tailType == TAIL_TYPE_GARGOYLE) {
 			bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
+			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
 		if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) {
 			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
+			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 				bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
 			}
@@ -774,12 +772,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSlapAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform tail slap attack.");
-			doNext(psMenu);
-			return;
-		}
 		fatigue(40,2);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
@@ -815,12 +807,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSmackAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(40) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform tail smack attack.");
-			doNext(psMenu);
-			return;
-		}
 		fatigue(40,1);
 		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
@@ -845,14 +831,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function inkSpray():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform an ink spray attack.");
-			doNext(psMenu);
-			return;
-		}
-//		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
 		if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownInkSpray,4,0,0,0);
@@ -877,12 +855,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function milkBlask():void {
 		clearOutput();
-		if(player.lust < 100) {
-			clearOutput();
-			outputText("You are not horny enough to use this special.");
-			doNext(psMenu);
-			return;
-		}
 		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing " + monster.a + monster.short + " with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
 		var damage:Number = 0;
@@ -905,12 +877,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function cumCannon():void {
 		clearOutput();
-		if(player.lust < 100) {
-			clearOutput();
-			outputText("You are not horny enough to use this special.");
-			doNext(psMenu);
-			return;
-		}
 		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting " + monster.a + monster.short + " away and knocking it prone. ");
 		var damage:Number = 0;
@@ -1102,12 +1068,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function AlrauneStrangulate():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(60) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to strangulate enemy.");
-			doNext(psMenu);
-			return;
-		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(60,1);
 		var damage:Number = 0;
@@ -1122,12 +1082,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function StoneClawAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(60) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform an stone claw attack.");
-			doNext(psMenu);
-			return;
-		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(60,1);
 		player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
@@ -1188,12 +1142,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function TailSlamAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform an tail slam attack.");
-			doNext(psMenu);
-			return;
-		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
 		player.createStatusEffect(StatusEffects.CooldownTailSlam,5,0,0,0);
@@ -1260,12 +1208,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function WingBuffetAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(player.fatigue + physicalCost(30) > player.maxFatigue()) {
-			clearOutput();
-			outputText("You are too tired to perform an wing buffet attack.");
-			doNext(psMenu);
-			return;
-		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
 		player.createStatusEffect(StatusEffects.CooldownWingBuffet,5,0,0,0);
@@ -1841,11 +1783,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
-			outputText("You're too fatigued to use a charge attack!");
-			doNext(psMenu);
-			return;
-		}
 		fatigue(15,2);
 		var damage:Number = 0;
 		//Amily!
@@ -2402,11 +2339,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
-		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
-			outputText("You are too tired to perform a shield bash.");
-			doNext(psMenu);
-			return;
-		}
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
 		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
