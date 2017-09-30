@@ -242,6 +242,7 @@ the text from being too boring.
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var chichiScene:ChiChiFollower = new ChiChiFollower();
+		public var electraScene:ElectraFollower = new ElectraFollower();
 		public var emberScene:EmberScene = new EmberScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var evangelineFollower:EvangelineFollower = new EvangelineFollower();

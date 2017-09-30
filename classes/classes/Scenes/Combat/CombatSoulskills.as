@@ -154,7 +154,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 	}
-	
+
 	public function TripleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -446,7 +446,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function FirePunch():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -477,7 +477,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function HurricaneDance():void {
 		clearOutput();
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
@@ -487,7 +487,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownHurricaneDance, 10, 0, 0, 0);
 		enemyAI();
 	}
-	
+
 	public function EarthStance():void {
 		clearOutput();
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
@@ -497,7 +497,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownEarthStance, 10, 0, 0, 0);
 		enemyAI();
 	}
-	
+
 	public function PunishingKick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -529,7 +529,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function activaterOverlimit():void {
 		clearOutput();
 		outputText("You let out a primal roar of pain and fury, as you push your body beyond its normal capacity, a blood red aura cloaking your form.\n\n");

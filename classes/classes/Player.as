@@ -3035,6 +3035,24 @@ use namespace kGAMECLASS;
 		public function raijuScore():Number {
 			Begin("Player","racialScore","raiju");
 			var raijuCounter:Number = 0;
+			if (earType == EARS_WEASEL)
+				raijuCounter++;
+			if (eyeType == EYES_RAIJU)
+				raijuCounter++;
+			if (faceType == FACE_RAIJU_FANGS)
+				raijuCounter++;
+			if (armType == ARM_TYPE_RAIJU)
+				raijuCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_RAIJU)
+				raijuCounter++;
+			if (tailType == TAIL_TYPE_RAIJU)
+				raijuCounter++;
+			if (rearBody == REAR_BODY_RAIJU_MANE)
+				raijuCounter++;
+			if (skin.base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO)
+				raijuCounter++;
+			if (hairType == HAIR_STORM)
+				raijuCounter++;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
 				raijuCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
@@ -5937,7 +5955,7 @@ use namespace kGAMECLASS;
 			if (countCockSocks("gilded") > 0) {
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
+				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 				gems += bonusGems;
 			}
 		}
@@ -5986,6 +6004,14 @@ use namespace kGAMECLASS;
 			}
 
 			if (real) orgasmReal();
+		}
+		public function orgasmRaijuStyle():void
+		{
+			game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
+			dynStats("lus", game.player.maxLust() * 0.1, "sca", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
 		}
 		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
 			options = Utils.extend({

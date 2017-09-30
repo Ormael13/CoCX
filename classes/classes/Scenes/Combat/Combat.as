@@ -416,7 +416,23 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
 	}
-	
+	if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned())) {
+		addButton(1, "Stop", stopChanneledSpecial);
+	}
+	/*
+	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		}
+	}
+	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
+		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		}
+	}
+	*/
 	if (monster.hasStatusEffect(StatusEffects.AttackDisabled))
 	{
 		if (monster is Lethice)
@@ -3386,6 +3402,10 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	}
 //ENEMYAI!
 public function enemyAIImpl():void {
+	if(monster.HP < 1) {
+		doNext(endHpVictory);
+		return;
+	}
 	monster.doAI();
 	//Violet Pupil Transformation
 	if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
@@ -3937,6 +3957,10 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			outputText("The orb continues vibrating in your ass, doing its best to arouse you.\n\n");
 		}
 		dynStats("lus", 7 + int(player.sens)/10);
+	}
+	if(player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
+		outputText("Liadri would surely come with fancy text to tell about this effect (raiju static discharge).\n\n");
+		dynStats("lus", 14 + int(player.sens)/8);
 	}
 	if(player.hasStatusEffect(StatusEffects.KissOfDeath)) {
 		//Effect 

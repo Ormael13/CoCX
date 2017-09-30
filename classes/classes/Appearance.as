@@ -91,6 +91,7 @@
 				else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 				else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 				description += "mane";
+				if (i_creature.hairType == HAIR_STORM) description += " that ends with glowing lightning shaped locks";
 				return description;
 			}
 			//if medium length refer to as locks sometimes
@@ -111,7 +112,7 @@
 			else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 			else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 			description += "hair";
-
+			if (i_creature.hairType == HAIR_STORM) description += " that ends with glowing lightning shaped locks";
 			return description;
 		}
 		
@@ -2408,7 +2409,8 @@
 					[HAIR_LEAF, "leaf"],
 					[HAIR_FLUFFY, "fluffy"],
 					[HAIR_GRASS, "grass"],
-					[HAIR_SILKEN, "silk-like"]
+					[HAIR_SILKEN, "silk-like"],
+					[HAIR_STORM, "glowing lightning shaped"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2452,7 +2454,8 @@
 					[FACE_ORCA, "orca"],
 					[FACE_PLANT_DRAGON, "plant dragon"],
 					[FACE_DRAGON_FANGS, "dragon fangs"],
-					[FACE_DEVIL_FANGS, "devil fangs"]
+					[FACE_DEVIL_FANGS, "devil fangs"],
+					[FACE_RAIJU_FANGS, "raiju"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2481,7 +2484,8 @@
 					[EYES_DRAGON, "dragon"],
 					[EYES_DEVIL, "devil"],
 					[EYES_ONI, "oni"],
-					[EYES_ELF, "elf"]
+					[EYES_ELF, "elf"],
+					[EYES_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2511,7 +2515,8 @@
 					[EARS_SNAKE, "snake"],
 					[EARS_GOAT, "goat"],
 					[EARS_ONI, "oni"],
-					[EARS_ELVEN, "elven"]
+					[EARS_ELVEN, "elven"],
+					[EARS_WEASEL, "weasel"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2562,7 +2567,8 @@
 					[ARM_TYPE_PLANT2, "tentacle-covered"],
 					[ARM_TYPE_DEVIL, "devil"],
 					[ARM_TYPE_ONI, "oni"],
-					[ARM_TYPE_ELF, "elf"]
+					[ARM_TYPE_ELF, "elf"],
+					[ARM_TYPE_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2598,7 +2604,8 @@
 					[TAIL_TYPE_GARGOYLE, "gargoyle"],
 					[TAIL_TYPE_MANTICORE_PUSSYTAIL, "manticore pussytail"],
 					[TAIL_TYPE_ORCA, "orca"],
-					[TAIL_TYPE_YGGDRASIL, "yggdrasil"]
+					[TAIL_TYPE_YGGDRASIL, "yggdrasil"],
+					[TAIL_TYPE_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2695,7 +2702,8 @@
 					[LOWER_BODY_TYPE_ORCA, "orca"],
 					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
 					[LOWER_BODY_TYPE_ONI, "oni"],
-					[LOWER_BODY_TYPE_ELF, "elf"]
+					[LOWER_BODY_TYPE_ELF, "elf"],
+					[LOWER_BODY_TYPE_RAIJU, "raiju"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2708,7 +2716,8 @@
 					[REAR_BODY_BEHEMOTH, "behemoth spikes"],
 					[REAR_BODY_LION_MANE, "lion mane"],
 					[REAR_BODY_SHARK_FIN, "shark fin"],
-					[REAR_BODY_ORCA_BLOWHOLE, "orca blowhole"]
+					[REAR_BODY_ORCA_BLOWHOLE, "orca blowhole"],
+					[REAR_BODY_RAIJU_MANE, "raiju mane"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

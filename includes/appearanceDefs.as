@@ -54,6 +54,7 @@ public static const PATTERN_BEE_STRIPES:int                                     
 public static const PATTERN_TIGER_STRIPES:int                                      =     4;
 public static const PATTERN_BATTLE_TATTOO:int                                      =     5;
 public static const PATTERN_SPOTTED:int                                            =     6;
+public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int                            =     7;
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
@@ -67,6 +68,7 @@ public static const HAIR_LEAF:int												   =	 7;
 public static const HAIR_FLUFFY:int												   =	 8;
 public static const HAIR_GRASS:int												   =	 9;
 public static const HAIR_SILKEN:int												   =	10;
+public static const HAIR_STORM:int												   =	11;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;
@@ -108,6 +110,7 @@ public static const FACE_PLANT_DRAGON:int                                		    =
 public static const FACE_DRAGON_FANGS:int                                           =   30;
 public static const FACE_DEVIL_FANGS:int                                            =   31;
 public static const FACE_ONI_TEETH:int	                                            =   32;
+public static const FACE_RAIJU_FANGS:int                                            =   33;
 
 // tongueType
 public static const TONGUE_HUMAN:int                                                =   0;
@@ -133,6 +136,7 @@ public static const EYES_DRAGON:int                          	                  
 public static const EYES_DEVIL:int                          	                    =  11;
 public static const EYES_ONI:int	                          	                    =  12;
 public static const EYES_ELF:int	                          	                    =  13;
+public static const EYES_RAIJU:int	                          	                    =  14;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -161,6 +165,7 @@ public static const EARS_SNAKE:int													=  22;
 public static const EARS_GOAT:int													=  23;
 public static const EARS_ONI:int													=  24;
 public static const EARS_ELVEN:int                                                  =  25;
+public static const EARS_WEASEL:int                                                 =  26;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -212,6 +217,7 @@ public static const ARM_TYPE_PLANT2:int												=  18;
 public static const ARM_TYPE_DEVIL:int												=  19;
 public static const ARM_TYPE_ONI:int												=  20;
 public static const ARM_TYPE_ELF:int												=  21;
+public static const ARM_TYPE_RAIJU:int												=  22;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -257,6 +263,7 @@ public static const TAIL_TYPE_WOLF:int        			                            =  
 public static const TAIL_TYPE_GARGOYLE:int                                    		=  30;
 public static const TAIL_TYPE_ORCA:int                                  	  		=  31;
 public static const TAIL_TYPE_YGGDRASIL:int                                  	  	=  32;
+public static const TAIL_TYPE_RAIJU:int                                  	  		=  33;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -325,6 +332,7 @@ public static const LOWER_BODY_TYPE_ORCA:int										=  37;
 public static const LOWER_BODY_TYPE_YGG_ROOT_CLAWS:int								=  38;
 public static const LOWER_BODY_TYPE_ONI:int											=  39;
 public static const LOWER_BODY_TYPE_ELF:int											=  40;
+public static const LOWER_BODY_TYPE_RAIJU:int										=  41;
 
 // rearBody
 public static const REAR_BODY_NONE:int                                              =   0;
@@ -335,6 +343,7 @@ public static const REAR_BODY_LION_MANE:int                                     
 public static const REAR_BODY_BEHEMOTH:int                     			            =   5; // NYI
 public static const REAR_BODY_SHARK_FIN:int                                         =   6;
 public static const REAR_BODY_ORCA_BLOWHOLE:int                                     =   7;
+public static const REAR_BODY_RAIJU_MANE:int                                     	=   8;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;

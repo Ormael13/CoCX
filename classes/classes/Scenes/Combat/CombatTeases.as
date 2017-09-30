@@ -193,6 +193,7 @@ public class CombatTeases extends BaseContent {
 		//44 Bikini Mail Tease
 		//45 Lethicite Armor Tease
 		//46 Alraune Tease
+		//47 Manticore Tailpussy Tease
 		//==============================
 		//BUILD UP LIST OF TEASE CHOICES!
 		//==============================
@@ -599,6 +600,13 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 46;
 			choices[choices.length] = 46;
 			choices[choices.length] = 46;
+		}
+		//47 - Manticore Tailpussy Tease
+		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+			choices[choices.length] = 47;
+			choices[choices.length] = 47;
+			choices[choices.length] = 47;
+			choices[choices.length] = 47;
 		}
 		//=======================================================
 		//    CHOOSE YOUR TEASE AND DISPLAY IT!
@@ -1188,6 +1196,13 @@ public class CombatTeases extends BaseContent {
 				 }
 				 */
 				break;
+				//manticore tailpussy teases
+			case 47:
+				outputText("You suddenly open your tail pussy presenting your drooling hole to " + monster.a + monster.short + " and smirking.\n\n");
+				outputText("\"<i>Bet you want a shot at this, look how much this bad girl is ready for you.</i>\"");
+				chance += 3;
+				damage += 3;
+				break;
 		}
 		//===========================
 		//BUILD BONUSES IF APPLICABLE
@@ -1447,6 +1462,10 @@ public class CombatTeases extends BaseContent {
 			//NERF TEASE DAMAGE
 			damage *= .7;
 			bonusDamage *= .7;
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+				damage *= (1 + player.lust100);
+				bonusDamage *= (1 + player.lust100);
+			}
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				damage *= 1.15;
 				bonusDamage *= 1.15;
