@@ -401,20 +401,8 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (newRound) combatStatusesUpdate(); //Update Combat Statuses
 	display();
 	statScreenRefresh();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	if (combatRoundOver()) return;
 	ui.mainMenu();
-	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
-		
-		
-		if (canUseMagic()) addButton(5, "", magic.magicMenu).hint("");
-		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
-		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
-		else addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
-		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
-		
-	}
 	//Modify menus.
 	if (kGAMECLASS.urtaQuest.isUrta()) {
 		addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
@@ -436,46 +424,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
 		}
 	}
-	//Knocked back
-	if (player.hasStatusEffect(StatusEffects.KnockedBack))
-	{
-		
-		if (player.ammo <= 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Reload&Approach", approachAfterKnockback1).hint("Reload your range weapon while approaching.", "Reload and Approach");
-		else if (player.ammo > 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) addButton(0, "Shoot&Approach", approachAfterKnockback2).hint("Fire a round at your opponent and approach.", "Fire and Approach");
-		else addButton(0, "Approach", approachAfterKnockback3).hint("Close some distance between you and your opponent.");
-		if (player.weaponRangePerk == "Bow") addButton(1, "Bow", fireBow);
-		if (player.weaponRangePerk == "Crossbow") addButton(1, "Crossbow", fireBow);
-		if (player.weaponRangePerk == "Throwing") addButton(1, "Throw", fireBow);
-		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") addButton(1, "Shoot", fireBow);
-	}
 	//Disabled physical attacks
 	if (monster.hasStatusEffect(StatusEffects.PhysicalDisabled)) {
 		outputText("<b>  Even physical special attacks are out of the question.</b>");
 		removeButton(1); //Removes bow usage.
-	}
-	//Silence: Disables magic menu.
-	if (isPlayerSilenced()) {
-		removeButton(5);
-	}
-	else if (monster.hasStatusEffect(StatusEffects.Constricted)) {
-		menu();
-		addButton(0, "Squeeze", kGAMECLASS.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(1, "Tease", kGAMECLASS.desert.nagaScene.naggaTease);
-		addButton(4, "Release", kGAMECLASS.desert.nagaScene.nagaLeggoMyEggo);
-	}
-	else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
-		menu();
-		if (monster.plural) {
-			addButton(0, "Squeeze", ScyllaSqueeze).hint("Squeeze your foes with your tentacles attempting to break them appart! \n\nFatigue Cost: " + physicalCost(50) + "");
-		}
-		else addButton(0, "Squeeze", ScyllaSqueeze).hint("Squeeze your foe with your tentacle attempting to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(1, "Tease", ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(4, "Release", ScyllaLeggoMyEggo);
-	}
-	else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
-		menu();
-		addButton(0, "Tease", GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(4, "Release", GooLeggoMyEggo);
 	}
 }
 

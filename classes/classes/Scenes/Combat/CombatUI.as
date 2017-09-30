@@ -28,6 +28,8 @@ public class CombatUI extends BaseCombatContent {
 	private var magspButtons:/*ButtonData*/Array = [];
 	private var physpButtons:/*ButtonData*/Array = [];
 	private var spellButtons:/*ButtonData*/Array = [];
+	private var soulforceButtons:/*ButtonData*/Array = [];
+	private var otherButtons:/*ButtonData*/Array = [];
 	public function mainMenu():void {
 		menu();
 		
@@ -94,6 +96,11 @@ public class CombatUI extends BaseCombatContent {
 //		if (pspcButtons.length > 0) btnPSpecials.show("P. Specials", submenuPSpecials, "Physical special attack menu.", "Physical Specials");
 		if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
 //		if (magicButtons.length > 0) btnMagic.show("Spells", submenuMagic, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+		// if (!canUseMagic()) btnMagic.disable();
+//		//Silence: Disables magic menu.
+//		if (isPlayerSilenced()) {
+//			removeButton(5);
+//		}
 //		if (soulSkillButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulskills, "Soulforce attacks menu.", "Soulforce Specials");
 //		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
 		
@@ -102,7 +109,7 @@ public class CombatUI extends BaseCombatContent {
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 		
-		// Modifications - full replacements
+		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
 		} else if (isPlayerStunned()) {
@@ -110,6 +117,33 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Recover", combat.wait);
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 			mainMenuWhenChanneling();
+		} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
+			if (player.ammo <= 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")){
+				btnMelee.show("Reload&Approach", combat.approachAfterKnockback1, "Reload your range weapon while approaching.", "Reload and Approach");
+			} else if (player.ammo > 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) {
+				btnMelee.show("Shoot&Approach", combat.approachAfterKnockback2, "Fire a round at your opponent and approach.", "Fire and Approach");
+			} else {
+				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.");
+			}
+		} else if (monster.hasStatusEffect(StatusEffects.Constricted)) {
+			menu();
+			addButton(0, "Squeeze", kGAMECLASS.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tease", kGAMECLASS.desert.nagaScene.naggaTease);
+			addButton(4, "Release", kGAMECLASS.desert.nagaScene.nagaLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
+			menu();
+			addButton(0, "Squeeze", combat.ScyllaSqueeze);
+			if (monster.plural) {
+				button(0).hint("Squeeze your foes with your tentacles attempting to break them appart! \n\nFatigue Cost: " + physicalCost(50) + "");
+			} else {
+				button(0).hint("Squeeze your foe with your tentacle attempting to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
+			}
+			addButton(1, "Tease", combat.ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
+			menu();
+			addButton(0, "Tease", combat.GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(4, "Release", combat.GooLeggoMyEggo);
 		}
 		
 		// Modifications - monster-special actions
@@ -196,19 +230,38 @@ public class CombatUI extends BaseCombatContent {
 	}
 	
 	internal function addMagSpButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text);
+		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
 		magspButtons.push(bd);
 		return bd;
 	}
 	internal function addPhySpButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text);
+		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
 		physpButtons.push(bd);
 		return bd;
 	}
 	internal function addSpellButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text);
+		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
 		spellButtons.push(bd);
 		return bd;
+	}
+	internal function addSoulforceButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
+		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
+		soulforceButtons.push(bd);
+		return bd;
+	}
+	private function submenu(list:/*ButtonData*/Array,page:int,self:Function):void {
+		list = list.filter(function(e:ButtonData,i:int,a:Array):Boolean{
+			return e.visible;
+		}).sortOn('text');
+		menu();
+		var total:int = list.length;
+		var n:int = Math.min(total,(page+1)*12);
+		for (var i:int = page*12; i<n; i++) {
+			list[i].applyTo(button(i));
+		}
+		button(12).show("< Prev", curry(self, page-1)).disableIf(page==0);
+		button(13).show("Next >", curry(self, page+1)).disableIf(n>=total);
+		button(14).show("Back",mainMenu);
 	}
 	internal function submenuMSpecials(page:int=0):void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 6 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
@@ -218,24 +271,19 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		magspButtons.sortOn('text');
-		menu();
-		var total:int = magspButtons.length;
-		var n:int = Math.min(total,(page+1)*12);
-		for (var i:int = page*12; i<n; i++) {
-			magspButtons[i].applyTo(button(i));
-		}
-		if (page>0) {
-			button(12).show("< Prev", curry(submenuMSpecials, page-1));
-		}
-		if (n < total) {
-			button(13).show("Next >", curry(submenuMSpecials, page+1));
-		}
-		button(14).show("Back",mainMenu);
+		combat.mspecials.buildMenu(this);
+		submenu(magspButtons,page,submenuMSpecials);
+	}
+	internal function submenuOther(page:int=0):void {
+		//addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
+//		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
+//		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
+//		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
+//		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
+	
 	}
 	private function buildSubmenus():void {
 //		combat.pspecials.buildMenu(this);
-		combat.mspecials.buildMenu(this);
 //		combat..buildMenu(this);
 //		combat..buildMenu(this);
 //		combat..buildMenu(this);
