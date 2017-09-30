@@ -17,6 +17,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			super();
 			this.short = "cinderbloom alraune";
 			this.imageName = "cinderbloom alraune";
+			this.long = "You are fighting against an Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
 			this.skinTone = "chocolate";
 			this.hairColor = "blonde";
 			initStrTouSpeInte(10, 250, 10, 100);

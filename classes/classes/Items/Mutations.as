@@ -895,7 +895,7 @@
 			//Wolf paws
 			if (rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && changes < changeLimit) {
 				if (player.isBiped() && player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-					outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paw.</b>");
+					outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>");
 					setLowerBody(LOWER_BODY_TYPE_WOLF);
 					player.legCount = 2;
 					changes++;

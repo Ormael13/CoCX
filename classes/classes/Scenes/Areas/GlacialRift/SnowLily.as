@@ -17,6 +17,7 @@ package classes.Scenes.Areas.GlacialRift
 			super();
 			this.short = "snow lily alraune";
 			this.imageName = "snow lily alraune";
+			this.long = "You are fighting against an Snow Lily, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
 			this.skinTone = "light blue";
 			this.hairColor = "white";
 			initStrTouSpeInte(10, 250, 10, 100);

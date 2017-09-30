@@ -1061,6 +1061,14 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 1, -1);
 			}
+			if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) >= 1) {
+				if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) == 1) {
+					player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
+					outputText("\n<b>Effect of Raiju Lightning wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, -1);
+			}
 			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {

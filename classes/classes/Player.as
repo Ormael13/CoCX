@@ -6009,7 +6009,7 @@ use namespace kGAMECLASS;
 		{
 			game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
 			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
-			dynStats("lus", game.player.maxLust() * 0.1, "sca", false);
+			dynStats("lus", +(game.player.maxLust() * 0.1), "sca", false);
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 		}

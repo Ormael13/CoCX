@@ -707,6 +707,14 @@ private function doCamp():void { //Only called by playerMenu
 		}
 		outputText("\n\n");
 	}
+	//Magic Ward
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the warding stones. ");
+		else outputText("Right before the ring of traps are your warding stones. ");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) outputText("They are currently inactive.");
+		else outputText("They are glowing with power, protecting your camp from intruders.");
+		outputText("\n\n");
+	}
 	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ");
 	outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.");
 	if (flags[kFLAGS.ANT_KIDS] > 1000) outputText(" Really close to it there is a small entrance to the underground maze created by your ant children. And due to Phylla wish from time to time one of your children coming out this entrance to check on the situation near portal. You feel a little more safe now knowing that it will be harder for anyone to go near the portal without been noticed or...if someone came out of the portal.");
@@ -1361,7 +1369,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 		outputText("There is a small bedroll for Evangeline near the camp edge");
 		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
-		else outputText(", though she probably wander somewhere near camp looking for more ingredient to make her potions.");
+		else outputText(", though she probably wander somewhere near camp looking for more ingredients to make her potions.");
 		outputText(" Next to it stands a small chest with her personal stuff.\n\n");
 		addButton(5, "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
 	}
@@ -1479,6 +1487,7 @@ private function campActions():void {
 	addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
@@ -1500,6 +1509,21 @@ private function campWinionsArmySim():void {
 	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
 	addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 	addButton(14, "Back", campActions);
+}
+
+private function MagicWardMenu():void {
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
+		clearOutput();
+		outputText("You touch one of the warding stones, and feel a surge of power as every stone comes alive with power.  The ward is up, and your camp should be safe.");
+		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 3;
+		doNext(campActions);
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3) {
+		clearOutput();
+		outputText("You touch one of the warding stones and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
+		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
+		doNext(campActions);
+	}
 }
 
 public function spellHealcamp():void {
@@ -2755,6 +2779,9 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePoints += 2;
+	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > ) performancePoints += 2;
+	//if (flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE] > ) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
 	//Children
 	var childPerformance:int = 0;
 	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());

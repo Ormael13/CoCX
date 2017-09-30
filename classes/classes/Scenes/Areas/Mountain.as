@@ -37,6 +37,12 @@ package classes.Scenes.Areas
 				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Electra
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15 && rand(5) == 0) {
+				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) kGAMECLASS.electraScene.repeatMountainEnc();
+				else kGAMECLASS.electraScene.firstEnc();
+				return;
+			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
 			if ((player.level >= 5 || player.exploredMountain >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
 				clearOutput();

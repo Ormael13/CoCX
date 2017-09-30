@@ -148,10 +148,10 @@ public function etnaRapeIntro():void
 	clearOutput();
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 	else outputText("The manticore");
-	outputText(" is laying on the ground, ");
+	outputText(" is laying on the ground ");
 	if (monster.HP < 1)outputText("defeated");
 	else outputText("too horny to fight back");
-	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand.\n\n\"<i>So strong... so powerful! If you would only let me taste you I promise I will make it feel sooooo good.</i>\"\n\n");
+	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand.\n\n\"<i>So strong... so powerful! If you would only let me taste you, I promise I will make it feel sooooo good.</i>\"\n\n");
 	outputText("Do you grant her request?");
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
@@ -285,11 +285,11 @@ private function etnaCome2Camp():void
 		outputText("Jojo notices the manticore right away breaking into a defensive stance and reciting a few of his teachers mantra. \"<i>[name] that thing is a manticore! I seriously hope you know what you're doing. She reeks of serious demonic corruption, so make sure you meditate with me regularly.</i>\"\n\n");
 		outputText("You assure Jojo that you will and that Etna won't cause problems.\n\n");
 	}
-	if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) outputText("Amily sees the manticore and pulls out her blow pipe. \"<i>A manticore, here?! This is a catastrophe! You need to keep it out of the camp! I bet she’s fully corrupted and will rape anyone given the chance.</i>\" You tell Amily that Etna isn’t dangerous and won't harm anyone, however the mouse remains wary of the manticore, even going as far as staying several meters away from her at all times. Maybe this is some kind of mouse versus cat relation problem, go figure.\n\n");
+	if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) outputText("Amily sees the manticore and pulls out her blow pipe.\n\n\"<i>A manticore, HERE?! This is a catastrophe! You need to keep it out of the camp! I bet she’s fully corrupted and will rape anyone given the chance.</i>\"\n\nYou tell Amily that Etna isn’t dangerous and won't harm anyone, however the mouse remains wary of the manticore, even going as far as staying several meters away from her at all times. Maybe this is some kind of mouse versus cat relation problem, go figure.\n\n");
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		outputText("Sophie flies down and lands right in front of Etna. As they glare at each other you get the feeling that they already know each other, and judging by the looks on their faces, neither is happy about the other being there...\n\n");
-		outputText("\"<i>Damned cat, figures that you would try stealing [name] from me. You're here only to slake your endless thirst, aren’t you?</i>\"\n\n");
-		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\" It takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
+		outputText("\"<i>Damned cat, figures that you would try stealing [name] from me. You're here only to sate your endless thirst, aren’t you?</i>\"\n\n");
+		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\"\n\nIt takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
 	}
 	outputText("Her examination of your camp done, Etna proceed to make herself comfortable and settle down.\n\n");
 	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
@@ -301,8 +301,8 @@ private function etnaCome2Camp():void
 public function etnaRapeNoCamp():void
 {
 	clearOutput();
-	outputText("While the manticore’s feelings toward you are sincere, this is all too fast for you and you tell her so. \"<i>It's all fine... I’ll keep ambushing you until you finally say yes or I lose interest.</i>\" She jumps off a nearby rock and takes flight. \"<i>I <b>will</b> have your heart one way or another so watch your back out there because you will never know when or where I'll strike next.</i>\"\n\n");
-	outputText("You leave, heading back towards your camp. Just what did you get yourself into?");
+	outputText("While the manticore’s feelings toward you are sincere, this is all too fast for you and you tell her so.\n\n\"<i>It's all fine... I’ll keep ambushing you until you finally say yes or I lose interest.</i>\"\n\nShe jumps off a nearby rock and takes flight. Giving you a last quick glance.\n\n");
+	outputText("\"<i>I <b>will</b> have your heart one way or another so watch your back out there because you will never know when or where I'll strike next.</i>\"\n\nYou leave, heading back towards your camp. Just what did you get yourself into?");
 	etnaAffection(-30);
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 2) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 2;
 	cleanupAfterCombat();
@@ -312,16 +312,29 @@ public function etnaRapeYandere():void
 {
 	clearOutput();
 	outputText("Defeated, you barely register as Etna joyfully takes a nearby rock and knocks it against your head making you lose consciousness.\n\n");
-	outputText("You wake up in what looks like a dark room underground. The only source of light is a candle on a table in the corner. To your surprise it's filled with various sex toys and drawings and paintings featuring you, this is getting creepier by the second.\n\n");
+	outputText("You wake up in what looks like a dark room underground. The only source of light is a candle on a table in the corner. To your surprise it's filled with various sex toys and the cave like walls are covered drawings and paintings depicting you. This is getting creepier by the second. A voice you know all too well start speaking to you at first in hushed tone then hysterical notes.\n\n");
 	outputText("\"<i>Slept well love? I couldn't stand you saying no when your eyes were clearly saying yes so I brought you here in order to help you become more honest with yourself. I know you love me and I will never let you leave me again, <b>we will</b> be together forever. You love me don’t you? <b>DON’T YOU</b>?</i>\"\n\n");
-	outputText("You see a pair of red cat pupils glowing in the dark to your right... She’s in there with you and she’s clearly going to give you a run for your money if you don’t escape this deathtrap. You try to stand up and run but to your horror you discover she tied you up to a chair. You’re utterly powerless!\n\n");
-	outputText("Etna doesn’t give you any time to think it over, as she proceeds to approach you, holding one of her spikes like a dagger, and impales your legs and arms no less than six times causing blood to splatter on her, but mainly filling you to the brim with aphrodisiac. She then gives you a potion to close your wounds.\n\n");
-	outputText("\"<i>Ahhh i'm covered with [name]’s blood! This is such a wonderful feeling, I will never ever wash again!</i>\" She’s giving you a creepy blissful stare as she toss away the spike and pounce on you. \"<i>Be mine [name]!</i>\"\n\n");
+	outputText("You see a pair of red cat eyes glowing in the dark to your right... It is obviously Etna. She’s in there with you and she’s clearly going to give you a run for your gems if you don’t escape this deathtrap. You try to stand up and run but to your horror you discover she tied you up to a chair. You’re utterly powerless! Etna resume speaking.\n\n");
+	outputText("\"<i>You led me on and on, having sex with me, repeatedly turning me on");
+	//if () outputText(" and even going so far as to confess your undying love for me");
+	outputText(". Yet... In the end you denied me or should I say us.. Like if our story had never existed. You hurt me [name]... You have no idea how much your words hurted me it was like my whole world was falling apart.  To cement back our bond as lovers I will share to you all the pain you inflicted on my heart so that your heart can understand it to.</i>\"\n\n");
+	outputText("Wait share what?! Etna doesn’t give you any time to contemplate the things she will do to you as she proceeds to walk out of the shadow, holding one of her spikes like a dagger. It’s dripping with venom and you have an excellent idea of what she plan to do with it.\n\n");
+	outputText("\"<i>You and I are going to play a game [name]. See these flowers on the table there. For each petal I pull and count as you loving me I’m going to stab you once and for each that I pull and count as hating me I’m going to stab you twice! So let us begin, you love me...</i>\"\n\n");
+	outputText("Etna impale your leg with her spike and this causes some of your blood to splatter on the ground, you start by screaming in pain then tormented pleasure due to aphrodisiac contained in the spike. Etna however is barely getting started!\n\n");
+	outputText("\"<i>You hate me...</i>\"\n\n");
+	outputText("This time she impale you in both leg! This cruel little game plays for a full hour as blood flies everywhere... painting the floor, the walls and even Etna herself. Every time you think you are about to run out fluids to spill Etna pulls a healing pill and force feed it to you, closing your wounds and repeating this sick cycle of pain and pleasure anew. Etna keeps on wounding you until she reach the final petal.\n\n");
+	outputText("\"<i>You love me! See that?! Even the roses told it. <b>YOU LOVE ME!!!</b></i>\"\n\n");
+	outputText("She laughs, her fur and skin painted red with your blood. You are too afraid to reply to her that the simple act of pulling petals from flowers doesn’t mean anything in your relationship with her.\n\n");
+	outputText("\"<i>Ahhh [name]’s blood! Look at me, I’m entirely covered with your fluids, isn’t that a true show of my unwavering affection?! This is such a wonderful feeling, I would never ever wash again just so to preserve it forever!</i>\"\n\n");
+	outputText("She’s giving you a blissful stare as she tosses away the spike and pounces on you, her tail already open and drooling ");
+	if (player.hasCock()) outputText("as she prepare to feast");
+	else outputText("at the mere thought of finally having sex with you");
+	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
 	player.tou -= 5;
 	statScreenRefresh();
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
-		outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to free yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love crazed manticore notices you’ve escaped.\n\n");
+		outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love crazed manticore notices you’ve escaped.\n\n");
 		player.orgasm();
 		cleanupAfterCombat();
 		return;
@@ -331,9 +344,9 @@ public function etnaRapeYandere():void
 
 public function etnaRapeYandereBadEnd():void
 {
-	outputText("Too weak to fight or crawl your way out, you stay on the ground at the mercy of Etna. Maybe it isn’t such a bad thing. After all, she clearly loves you and if she is willing to go this far to keep you next to her, there isn’t much you can do about it. Etna will never let you leave the cave ever again and, as such, you give up on your quest in order to live with your somewhat obsessed lover. ");
+	outputText("You wake up before Etna does and see a spike you could use to break free but you are too weak to fight or crawl your way to it. Therefore you stay on the ground, at the mercy of Etna. Maybe it isn’t such a bad thing. After all, she clearly loves you and if she is willing to go this far to keep you next to her, there isn’t much you can do about it. Etna will never let you leave the cave ever again and, as such, you give up on your quest in order to live with your somewhat obsessed lover. ");
 	if(player.hasStatusEffect(StatusEffects.CampMarble)) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
-	outputText("Your adventure seem to have come to an end but at least you will live the rest of your life showered with love.");
+	outputText("Your adventure seems to have come to an end but at least you will live the rest of your life showered with love.");
 	getGame().gameOver();
 }
 
@@ -354,7 +367,7 @@ public function etnaRapeIntro2():void
 public function etnaCampMenu():void
 {
 	clearOutput();
-	outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her. \"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk with me? I must admit, my tail is itching, you already know how hungry I am.</i>\" She gives you a naughty expression that tells everything.");
+	outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her.\n\n\"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk with me? I must admit, my tail is itching, you already know how hungry I am.</i>\"\n\nShe gives you a naughty expression that tells everything. Obviously a manticore is always ready.");
 	menu();
 	addButton(0, "Appearance", etnaAppearance).hint("Examine Etna's detailed appearance.");
 	addButton(1, "Talk", etnaTalkMenu).hint("Ask Etna about something.");
