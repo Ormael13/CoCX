@@ -1240,7 +1240,7 @@ public function nagaPlayerConstrict():void {
 		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
 		return;
 	}
-	fatigue(10,2);
+	fatigue(10, USEFATG_PHYSICAL);
 	//Amily!
 	if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
@@ -1283,7 +1283,7 @@ public function naggaSqueeze():void {
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 	kGAMECLASS.doDamage(damage, true, true);
-	fatigue(20, 2);
+	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
 	if(monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");

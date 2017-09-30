@@ -670,7 +670,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else {
 			outputText("feeling it mend your wounds");
-			fatigue(30, 8);
+			fatigue(30, USEFATG_BLACK_NOBM);
 			combat.magic.spellHealEffect();
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -716,9 +716,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }
 	 }
 	 if (monster.plural) {
-	 fatigue(60, 2);
+	 fatigue(60, USEFATG_PHYSICAL);
 	 }
-	 else fatigue(24, 2);
+	 else fatigue(24, USEFATG_PHYSICAL);
 	 //Amily!
 	 if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 	 outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");

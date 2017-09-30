@@ -1833,7 +1833,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30,1);
+		fatigue(30, USEFATG_MAGIC);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;

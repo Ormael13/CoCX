@@ -534,7 +534,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(50,2);
+		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		damage += player.str;
 		if (player.hasPerk(PerkLib.Whirlwind)) damage += strenghtscalingbonus() * 0.2;
@@ -613,7 +613,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(50,2);
+		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many " + monster.a + monster.short + " as possible.  ");
 		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -772,7 +772,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSlapAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(40,2);
+		fatigue(40, USEFATG_PHYSICAL);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
 		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
@@ -807,7 +807,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function tailSmackAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(40,1);
+		fatigue(40, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
 		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
@@ -831,7 +831,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function inkSpray():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(30,1);
+		fatigue(30, USEFATG_PHYSICAL);
 		if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownInkSpray,4,0,0,0);
 		}
@@ -1069,7 +1069,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(60,1);
+		fatigue(60, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		damage += player.tou;
 		damage += toughnessscalingbonus() * 0.5;
@@ -1083,7 +1083,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(60,1);
+		fatigue(60, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
 		var damage:Number = 0;
 		//str bonuses
@@ -1143,7 +1143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30,1);
+		fatigue(30, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownTailSlam,5,0,0,0);
 		var damage:Number = 0;
 		//str bonuses
@@ -1209,7 +1209,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30,1);
+		fatigue(30, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownWingBuffet,5,0,0,0);
 		var damage:Number = 0;
 		damage += player.str/5;
@@ -1318,7 +1318,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(10,2);
+		fatigue(10, USEFATG_PHYSICAL);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1369,7 +1369,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(10,2);
+		fatigue(10, USEFATG_PHYSICAL);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1500,7 +1500,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(10,2);
+		fatigue(10, USEFATG_PHYSICAL);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1557,9 +1557,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (monster.plural) {
-			fatigue(60, 2);
+			fatigue(60, USEFATG_PHYSICAL);
 		}
-		else fatigue(24, 2);
+		else fatigue(24, USEFATG_PHYSICAL);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
@@ -1661,7 +1661,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(25,2);
+		fatigue(25, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -1783,7 +1783,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(15,2);
+		fatigue(15, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -2128,7 +2128,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(25,2);
+		fatigue(25, USEFATG_PHYSICAL);
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -2211,7 +2211,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(20,2);
+		fatigue(20, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownKick,5,0,0,0);
 		//Variant start messages!
 		if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
@@ -2364,7 +2364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
 		}
 		checkAchievementDamage(damage);
-		fatigue(20,2);
+		fatigue(20, USEFATG_PHYSICAL);
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -2384,7 +2384,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("white");
 		}
 		outputText(" light and grow turning into a huge spear of condensed energy.  ");
-		fatigue(300,4);
+		fatigue(300, USEFATG_BOW);
 		var damage:Number = 0;
 		damage += player.spe;
 		damage += speedscalingbonus() * 0.2;
@@ -2455,7 +2455,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many " + monster.a + monster.short + " as possible.  ");
-		fatigue(300,4);
+		fatigue(300, USEFATG_BOW);
 		var damage:Number = 0;
 		damage += player.spe;
 		damage += speedscalingbonus() * 0.2;

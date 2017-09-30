@@ -180,7 +180,7 @@ package classes.Scenes.Areas.Mountain
 			
 			//(if PC uses Infest)
 			if(monster.short == "Izma") {
-				fatigue(40,2);
+				fatigue(40, USEFATG_PHYSICAL);
 				clearOutput();
 				outputText("With a great squeeze, you will your body to push out a load of semen filled with worms.  Izma's eyes widen in shock as she dives and rolls away from the torrent.  \"<i>What the fuck!</i>\" she yells. \"<i>Is that what that smell was?  That's disgusting!  Get away from me [name], I DON'T want what you've got.  Don't talk to me again while you've got those nasty things!</i>\"  Izma grabs her locker between her hands and wades into the lake, swimming away by means of her tail while holding the books out of the water.");
 				//(set Izmacounter to 0)
@@ -199,7 +199,7 @@ package classes.Scenes.Areas.Mountain
 				enemyAI();
 				return;
 			}
-			fatigue(40,2);
+			fatigue(40, USEFATG_PHYSICAL);
 			clearOutput();
 			outputText("With a great squeeze, you will your body to push out a load of semen filled with worms. You moan in pleasure and release as your fluids launch at your enemy. Worms and cum fly through the air in an attempt to coat your opponent with your new pets.  ");
 			//Viable target?

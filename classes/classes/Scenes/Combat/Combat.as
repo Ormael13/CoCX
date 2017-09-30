@@ -1497,7 +1497,7 @@ public function fireBow():void {
 		player.ammo--;
 	}
 //	if (player.weaponRangePerk == "Rifle") {
-		//fatigue(50, 4);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
+		//fatigue(50, USEFATG_BOW);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
 //	}
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
 	//Keep logic sane if this attack brings victory
@@ -5181,9 +5181,9 @@ public function ScyllaSqueeze():void {
 		}
 	}
 	if (monster.plural) {
-		fatigue(50, 2);
+		fatigue(50, USEFATG_PHYSICAL);
 	}
-	else fatigue(20, 2);
+	else fatigue(20, USEFATG_PHYSICAL);
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -5895,7 +5895,7 @@ public function greatDive():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(50,1);
+	fatigue(50, USEFATG_MAGIC);
 	var damage:Number = unarmedAttack();
 	damage += player.str;
 	damage += player.spe * 2;

@@ -49,7 +49,7 @@ public class MagicSpecials extends BaseCombatContent {
 			// Corrupt Fox Fire
 			bd = buttons.add("C.FoxFire", corruptedFoxFire,"Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n");
 			bd.requireSoulforce(40*soulskillCost() * soulskillcostmulti());
-			bd.requireFatigue(spellCost(100) * kitsuneskillCost());
+			bd.requireFatigue(spellCost(100) * kitsuneskillCost(),true);
 			if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			}
@@ -77,7 +77,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			// Pure Fox Fire
 			bd = buttons.add("P.FoxFire", pureFoxFire, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n");
-			bd.requireFatigue(spellCost(100));
+			bd.requireFatigue(spellCost(100),true);
 			bd.requireSoulforce(40 * soulskillCost() * soulskillcostmulti());
 			if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
@@ -87,7 +87,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: " + 3 + " rounds\n";
 				bd.requireSoulforce(20* soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(200)
+				bd.requireFatigue(200);
 			} else if (player.tailCount == 9 || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: " + 6 + " rounds\n";
 				bd.requireSoulforce(20* soulskillCost() * soulskillcostmulti());
@@ -333,11 +333,10 @@ public class MagicSpecials extends BaseCombatContent {
 		
 		// JOJO specials - moved from Spells (no longer silenceable)
 		if (player.hasPerk(PerkLib.CleansingPalm)) {
-			bd = buttons.add("C.Palm", combat.magic.spellCleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
+			bd = buttons.add("C.Palm", combat.magic.spellCleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n", "Cleansing Palm");
+			bd.requireFatigue(spellCost(30),true);
 			if (player.cor >= (10 + player.corruptionTolerance())) {
 				bd.disable("You are too corrupt to use this ability!");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(30) > player.maxFatigue()) {
-				bd.disable("You are too tired to cast this spell.");
 			}
 		}
 	}
@@ -362,7 +361,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(10, 3);
+		fatigue(10, USEFATG_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -395,7 +394,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function fenrirFreezingBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(150, 3);
+		fatigue(150, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreath,10,0,0,0);
 		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
 		damage = calcGlacialMod(damage);
@@ -474,7 +473,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function yetiFreezingBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(50, 3);
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,10,0,0,0);
 		var damage:Number = 0;
 		if (player.tou >= 21 && player.tou < 41) damage += (player.tou / 2 + rand((player.tou * 3) / 4));
@@ -614,7 +613,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else {
-			fatigue(50, 3);
+			fatigue(50, USEFATG_MAGIC_NOBM);
 			clearOutput();
 			outputText("You start singing a enrapturing song.");
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
@@ -737,7 +736,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else {
-			fatigue(50, 3);
+			fatigue(50, USEFATG_MAGIC_NOBM);
 			clearOutput();
 			outputText("That does it! You crouch and lift a leg then another in alternance, stomping the ground as you focus your anger.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -749,7 +748,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function phoenixfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(40, 3);
+		fatigue(40, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.CooldownPhoenixFireBreath,5,0,0,0);
 		var damage:Number = 0;
 		damage += 50 + rand(20);
@@ -871,7 +870,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragonfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(50, 3);
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -995,7 +994,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragoniceBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(50, 3;
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1084,7 +1083,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragonlightningBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(50, 3);
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1174,7 +1173,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragondarknessBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		fatigue(50, 3);
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1400,7 +1399,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.cor < 50) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		fatigue(20, 3);
+		fatigue(20, USEFATG_MAGIC_NOBM);
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		//Amily!
@@ -1519,7 +1518,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function magicbolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//	fatigue(40,1);
+//	fatigue(40, USEFATG_MAGIC);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic bolt touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -1826,7 +1825,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function petrify():void {
 		clearOutput();
-		fatigue(100,3);
+		fatigue(100, USEFATG_MAGIC_NOBM);
 		if(monster.plural) {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
 			if (player.hairType == HAIR_GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss ");
@@ -1861,7 +1860,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 foxFire2();
 	 }
 	 public function foxFire2():void {
-	 	 fatigue(60, 1);
+	 	 fatigue(60, USEFATG_MAGIC);
 	 if(monster.hasStatusEffect(StatusEffects.Shell)) {
 	 outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 	 enemyAI();
@@ -1974,7 +1973,7 @@ public class MagicSpecials extends BaseCombatContent {
 		corruptedFoxFire2();
 	}
 	public function corruptedFoxFire2():void {
-		fatigue((100 * kitsuneskillCost()),1);
+		fatigue((100 * kitsuneskillCost()),USEFATG_MAGIC);
 		//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 		outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.  ");
 		var dmg:Number = 0;
@@ -2091,7 +2090,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fusedFoxFire2();
 	}
 	public function fusedFoxFire2():void {
-		fatigue((250 * kitsuneskillCost()),1);
+		fatigue((250 * kitsuneskillCost()),USEFATG_MAGIC);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -2205,7 +2204,7 @@ public class MagicSpecials extends BaseCombatContent {
 		pureFoxFire2();
 	}
 	public function pureFoxFire2():void {
-		fatigue((100 * kitsuneskillCost()),1);
+		fatigue((100 * kitsuneskillCost()),USEFATG_MAGIC);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -2347,15 +2346,15 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneTerror2():void {
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 3, 0, 0, 0);
-			fatigue(200,3);
+			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 6, 0, 0, 0);
-			fatigue(100,3);
+			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 9, 0, 0, 0);
-			fatigue(50,3);
+			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
@@ -2380,15 +2379,15 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneIllusion2():void {
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,3,0,0,0);
-			fatigue(200,3);
+			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,6,0,0,0);
-			fatigue(100,3);
+			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,9,0,0,0);
-			fatigue(50,3);
+			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -2459,7 +2458,7 @@ public class MagicSpecials extends BaseCombatContent {
 //Transfer
 	public function lustTransfer():void {
 		clearOutput();
-		fatigue(40,3);
+		fatigue(40, USEFATG_MAGIC_NOBM);
 		var lusttransfered:Number = 0;
 		lusttransfered += Math.round(player.lust * 0.15);
 		player.lust -= lusttransfered;
@@ -2515,7 +2514,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(30, 2);
+		fatigue(30, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownFascinate,4,0,0,0);
 		outputText("You start with first pose to attract " + monster.a + monster.short + " attention.  Then you follow with second and then third pose of your enchanting dance.");
 		var lustDmg:Number = 5;
@@ -2578,7 +2577,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(30,3);
+		fatigue(30, USEFATG_MAGIC_NOBM);
 		outputText("You start drawing symbols in the air toward " + monster.a + monster.short + ".");
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.hasPerk(PerkLib.BlackHeart)) lustDmg += player.inte / 10;
