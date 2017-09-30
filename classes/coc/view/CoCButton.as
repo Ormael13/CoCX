@@ -142,7 +142,7 @@ public class CoCButton extends Block {
 	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
 		this.labelText     = text;
 		this.callback      = callback;
-		this.toolTipHeader = toolTipHeader;
+		this.toolTipHeader = toolTipHeader||text;
 		this.toolTipText   = toolTipText;
 		this.visible       = true;
 		this.enabled       = true;
@@ -156,7 +156,7 @@ public class CoCButton extends Block {
 	public function showDisabled(text:String,toolTipText:String="",toolTipHeader:String=""):CoCButton {
 		this.labelText     = text;
 		this.callback      = null;
-		this.toolTipHeader = toolTipHeader;
+		this.toolTipHeader = toolTipHeader||text;
 		this.toolTipText   = toolTipText;
 		this.visible       = true;
 		this.enabled       = false;
@@ -169,7 +169,7 @@ public class CoCButton extends Block {
 	 */
 	public function text(text:String,toolTipText:String = "",toolTipHeader:String=""):CoCButton {
 		this.labelText = text;
-		this.toolTipText = toolTipText;
+		this.toolTipText = toolTipText||labelText;
 		this.toolTipHeader = toolTipHeader;
 		return this;
 	}
@@ -179,7 +179,7 @@ public class CoCButton extends Block {
 	 */
 	public function hint(toolTipText:String = "",toolTipHeader:String=""):CoCButton {
 		this.toolTipText = toolTipText;
-		this.toolTipHeader = toolTipHeader;
+		this.toolTipHeader = toolTipHeader||labelText;
 		return this;
 	}
 	/**

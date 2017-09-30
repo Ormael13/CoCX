@@ -15,232 +15,259 @@ import classes.Scenes.NPCs.Anemone;
 import classes.StatusEffects;
 import classes.Scenes.Camp.CampMakeWinions;
 
+import coc.view.ButtonData;
+
 public class PhysicalSpecials extends BaseCombatContent {
 
 	public var winionsMaker:CampMakeWinions = new CampMakeWinions();
 	
-//------------
-// P. SPECIALS
-//------------
-	public function psMenu():void {
-		if(kGAMECLASS.urtaQuest.isUrta()) {
-			kGAMECLASS.urtaQuest.urtaSpecials();
-			return;
-		}
-		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
-			clearOutput();
-			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-			enemyAI();
-			return;
-		}
-		menu();
-		var button:int = 0;
+	//------------
+	// P. SPECIALS
+	//------------
+	internal function buildMenu(ui:CombatUI):void {
+		var bd:ButtonData;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) {
-			addButton(button++, "PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
+			ui.addPhySpButton("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
 		}
 		if (player.hairType == 4) {
-			addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
+			ui.addPhySpButton("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 		}
 		//Bitez
 		if (player.faceType == FACE_SHARK_TEETH) {
-			addButton(button++, "SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
+			ui.addPhySpButton("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 		}
 		if (player.faceType == FACE_ORCA) {
-			addButton(button++, "OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
+			ui.addPhySpButton("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 		}
-		else if (player.faceType == FACE_SNAKE_FANGS) {
-			addButton(button++, "Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.faceType == FACE_SNAKE_FANGS) {
+			bd = ui.addPhySpButton("Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			if (player.tailVenom < 25) {
+				bd.disable("You do not have enough venom to bite right now!");
+			}
 		}
-		else if (player.faceType == FACE_SPIDER_FANGS) {
-			addButton(button++, "Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+		if (player.faceType == FACE_SPIDER_FANGS) {
+			bd = ui.addPhySpButton("Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			if (player.tailVenom < 25) {
+				bd.disable("You do not have enough venom to bite right now!");
+			}
 		}
-		else if (player.faceType == FACE_WOLF) {
-			addButton(button++, "Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
+		if (player.faceType == FACE_WOLF) {
+			ui.addPhySpButton("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 		}
 		//Constrict
 		if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-			addButton(button++, "Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
+			ui.addPhySpButton("Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 		}
 		//Grapple
 		if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
-			addButton(button++, "Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+			ui.addPhySpButton("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 		}
 		//Engulf
 		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			addButton(button++, "Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
+			ui.addPhySpButton("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Kick attackuuuu
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownKick)) {
-				addButton(button++, "Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
-			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
-				outputText("<b>You need more time before you can perform Kick again.</b>\n\n");
+			bd = ui.addPhySpButton("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+			if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+				bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
 			}
 		}
 		//Gore if mino horns or unicorn/alicorn horn
 		if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
-			addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+			ui.addPhySpButton("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 		}
 		if (player.hornType == HORNS_UNICORN && player.horns >= 6) {
-			addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
+			ui.addPhySpButton("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
 		}
 		//Upheaval - requires rhino horn
 		if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
-			addButton(button++, "Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
+			ui.addPhySpButton("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
 		}
 		//Infest if infested
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-			addButton(button++, "Infest", kGAMECLASS.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+			ui.addPhySpButton("Infest", kGAMECLASS.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 		}
 		//Kiss supercedes bite.
 		if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
-			addButton(button++, "Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
+			bd = ui.addPhySpButton("Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
+			if(player.hasStatusEffect(StatusEffects.Blind)) {
+				bd.disable("There's no way you'd be able to find their lips while you're blind!");
+			}
 		}
 		if (player.armType == ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
+			bd = ui.addPhySpButton("Multi Slash", mantisMultiSlash);
 			if (monster.plural) {
-				addButton(button++, "Multi Slash", mantisMultiSlash).hint("Attempt to slash your foes with your wrists scythes! \n\nFatigue Cost: " + physicalCost(60) + "");
+				bd.hint("Attempt to slash your foes with your wrists scythes! \n\nFatigue Cost: " + physicalCost(60) + "");
+			} else {
+				bd.hint("Attempt to slash your foe with your wrists scythes! \n\nFatigue Cost: " + physicalCost(24) + "");
 			}
-			else addButton(button++, "Multi Slash", mantisMultiSlash).hint("Attempt to slash your foe with your wrists scythes! \n\nFatigue Cost: " + physicalCost(24) + "");
 		}
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) addButton(button++, "Sting", playerStinger).hint("Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SCORPION) addButton(button++, "Sting", playerStinger).hint("Attempt to use your venomous scorpion stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(button++, "Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) addButton(button++, "Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-		if (player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_RACCOON) addButton(button++, "Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
-		if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
-		if (player.tailType == TAIL_TYPE_ORCA) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				addButton(button++, "Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
+		if (player.tail.isAny(TAIL_TYPE_BEE_ABDOMEN, TAIL_TYPE_SCORPION)) {
+			bd = ui.addPhySpButton("Sting", playerStinger);
+			var stingername:String,period:String;
+			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+				stingername = "venomous bee stinger";
+				period = "your abdomen's refractory period";
+			} else if (player.tailType == TAIL_TYPE_SCORPION){
+				stingername = "venomous scorpion stinger";
+				period = "your refractory period";
 			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				outputText("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
+			bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			if (player.tailVenom < 25) {
+				bd.disable("You do not have enough venom to sting right now!");
+			}
+		}
+		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+			bd = ui.addPhySpButton("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			if (player.tailVenom < 25) {
+				bd.disable("You do not have enough venom to shoot spike right now!");
+			}
+		}
+		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+			bd = ui.addPhySpButton("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+			if(player.tailVenom < 30) {
+				bd.disable("You do not have enough webbing to shoot right now!");
+			}
+		}
+		if (player.tail.isAny(TAIL_TYPE_SHARK, TAIL_TYPE_LIZARD, TAIL_TYPE_KANGAROO, TAIL_TYPE_DRACONIC, TAIL_TYPE_RACCOON)) {
+			ui.addPhySpButton("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
+		}
+		if (player.tailType == TAIL_TYPE_SALAMANDER) {
+			ui.addPhySpButton("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+		}
+		if (player.tailType == TAIL_TYPE_ORCA) {
+			bd = ui.addPhySpButton("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
+			if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
+				bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 			}
 		}
 		if (player.findPerk(PerkLib.InkSpray) >= 0) {
 			if (!player.hasStatusEffect(StatusEffects.CooldownInkSpray) && !monster.hasStatusEffect(StatusEffects.Blind)) {
 				if (player.gender == 1) {
 					if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
-						addButton(button++, "Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
+						ui.addPhySpButton("Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
 					}
 					else {
-						addButton(button++, "Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
+						ui.addPhySpButton("Ink Spray", inkSpray).hint("Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
 					}
 				}
 				if (player.gender == 2 || player.gender == 3) {
 					if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
-						addButton(button++, "Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
+						ui.addPhySpButton("Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
 					}
 					else {
-						addButton(button++, "Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
+						ui.addPhySpButton("Ink Spray", inkSpray).hint("Lift your front tentacle and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 8 round before it can be used again)");
 					}
 				}
 			}
 			else if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
-				outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
+				bd.disable("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 			}
 			else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
-				outputText("<b>You need more time before you can shoot ink again.</b>\n\n");
+				bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
 			}
 		}
 		if (player.hasVagina() && player.cowScore() >= 9) {
-			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) addButtonDisabled(button++, "Milk Blast", "You can't use it more than once during fight.");
-			else addButton(button++, "Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			bd = ui.addPhySpButton("Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.hasCock() && player.minotaurScore() >= 9) {
-			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) addButtonDisabled(button++, "Cum Cannon", "You can't use it more than once during fight.");
-			else addButton(button++, "Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			bd = ui.addPhySpButton("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n\nLust Cost: 100");
+			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.canFly()) {
-			addButton(button++, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			ui.addPhySpButton("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 		}
 		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
-			if (monster.isFlying() && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/1", "Your golem can't attack flying target. (Only golems made by expert golem maker can do this)");
-			else addButton(button++, "Send T.Gol/1", sendTemporalGolem1).hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can shatter leaving it unable to be reused in future!</b>");
-		}
-		if (monster.plural) {
-			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
-				if (monster.isFlying() && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/3", "Your golems can't attack flying target. (Only golems made by expert golem maker can do this)");
-				else addButton(button++, "Send T.Gol/3", sendTemporalGolem3).hint("Send three golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+			bd = ui.addPhySpButton("Send T.Gol/1", sendTemporalGolem1)
+			  .hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can shatter leaving it unable to be reused in future!</b>");
+			if (monster.plural) {
+				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
+					bd = ui.addPhySpButton("Send T.Gol/3", sendTemporalGolem3)
+					  .hint("Send three golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+				}
+				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
+					bd = ui.addPhySpButton("Send T.Gol/5", sendTemporalGolem5)
+					  .hint("Send five golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+				}
 			}
-			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
-				if (monster.isFlying() && player.findPerk(PerkLib.ExpertGolemMaker) < 0) addButtonDisabled(button++, "Send T.Gol/5", "Your golems can't attack flying target. (Only golems made by expert golem maker can do this)");
-				else addButton(button++, "Send T.Gol/5", sendTemporalGolem5).hint("Send five golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+			if (monster.isFlying() && player.findPerk(PerkLib.ExpertGolemMaker) < 0) {
+				bd.disable("Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
 			}
 		}
 		if (player.shield != ShieldLib.NOTHING) {
-			addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+			ui.addPhySpButton("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
-			addButton(button++, "Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
+			ui.addPhySpButton("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 		}
 		if (monster.plural) {
-			if (player.isWeaponsForWhipping()) addButton(button++, "Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
-			if ((player.isWeaponForWhirlwind() && player.findPerk(PerkLib.PowerSweep) < 0) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.findPerk(PerkLib.PowerSweep) >= 0)) addButton(button++, "Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+			// Whipping
+			if (player.isWeaponsForWhipping()) ui.addPhySpButton("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+			// Whirlwind
+			if ((player.isWeaponForWhirlwind() && player.findPerk(PerkLib.PowerSweep) < 0) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.findPerk(PerkLib.PowerSweep) >= 0)) ui.addPhySpButton("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+			// Barrage
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
-				addButton(button++, "Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
+				ui.addPhySpButton("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 			}
 		}
 		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
-			if (!player.hasStatusEffect(StatusEffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
-			else if (player.hasStatusEffect(StatusEffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
-			if (!player.hasStatusEffect(StatusEffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
-			else if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) outputText("<b>You already entangle your opponent.</b>\n\n");
+			// Pollen
+			bd = ui.addPhySpButton("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
+			if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
+			// Entangle
+			bd = ui.addPhySpButton("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
+			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
-			if (monster.tallness > 120 || monster.findPerk(PerkLib.EnemyGigantType) > 0) outputText("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
-			else addButton(button++, "Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
+			bd = ui.addPhySpButton("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
+			if (monster.tallness > 120 || monster.findPerk(PerkLib.EnemyGigantType) > 0) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
+			
 		}
 		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
-			if (!player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				addButton(button++, "Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
-			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				outputText("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
+			bd = ui.addPhySpButton("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
+			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
+				bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
 			}
 		}
 		if (player.tailType == TAIL_TYPE_GARGOYLE) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				addButton(button++, "Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
-			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				outputText("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
+			bd = ui.addPhySpButton("Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
+			if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
+				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
 		if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) {
-			if (!player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				addButton(button++, "Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
-			}
-			else if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				outputText("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
+			bd = ui.addPhySpButton("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
+			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
+				bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
 			}
 		}
-		addButton(14, "Back", combatMenu, false);
 	}
 	
 	public function powerAttackMenu():void {
 		menu();
-		addButton(0, "2x", powerAttack2x);
-		if (player.level >= 6) addButton(1, "3x", powerAttack3x);
-		else addButtonDisabled(1, "???");
-		if (player.level >= 12) addButton(2, "4x", powerAttack4x);
-		else addButtonDisabled(2, "???");
-		if (player.level >= 18) addButton(3, "6x", powerAttack6x);
-		else addButtonDisabled(3, "???");
-		if (player.level >= 24) addButton(4, "8x", powerAttack8x);
-		else addButtonDisabled(4, "???");
-		if (player.level >= 30) addButton(5, "10x", powerAttack10x);
-		else addButtonDisabled(5, "???");
-		addButton(14, "Back", psMenu);
+		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 5,"You are too calm to use this special.");
+		if (player.level >= 6) {
+			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 10,"You are too calm to use this special.");
+		} else addButtonDisabled(1, "???");
+		if (player.level >= 12) {
+			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 20,"You are too calm to use this special.");
+		} else addButtonDisabled(2, "???");
+		if (player.level >= 18) {
+			addButton(3, "6x", powerAttack6x).disableIf(player.wrath < 50,"You are too calm to use this special.");
+		} else addButtonDisabled(3, "???");
+		if (player.level >= 24) {
+			addButton(4, "8x", powerAttack8x).disableIf(player.wrath < 125,"You are too calm to use this special.");
+		} else addButtonDisabled(4, "???");
+		if (player.level >= 30) {
+			addButton(5, "10x", powerAttack10x).disableIf(player.wrath < 350,"You are too calm to use this special.");
+		} else addButtonDisabled(5, "???");
+		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		if(player.wrath < 5) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
+		
 		player.wrath -= 5;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -277,12 +304,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack3x():void {
 		clearOutput();
-		if(player.wrath < 10) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
 		player.wrath -= 10;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -319,12 +340,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack4x():void {
 		clearOutput();
-		if(player.wrath < 20) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
 		player.wrath -= 20;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -361,12 +376,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack6x():void {
 		clearOutput();
-		if(player.wrath < 50) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
 		player.wrath -= 50;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -403,12 +412,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack8x():void {
 		clearOutput();
-		if(player.wrath < 125) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
 		player.wrath -= 125;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -445,12 +448,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack10x():void {
 		clearOutput();
-		if(player.wrath < 350) {
-			clearOutput();
-			outputText("You are too calm to use this special.");
-			doNext(combatMenu);
-			return;
-		}
 		player.wrath -= 350;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -1315,12 +1312,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Keep logic sane if this attack brings victory
-		if(player.tailVenom < 30) {
-			clearOutput();
-			outputText("You do not have enough webbing to shoot right now!");
-			doNext(psMenu);
-			return;
-		}
 		player.tailVenom -= 30;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Amily!
@@ -1466,12 +1457,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-//Pass false to combatMenu instead:		menuLoc = 1;
-		if (player.tailVenom < 25) {
-			outputText("You do not have enough venom to bite right now!");
-			doNext(psMenu);
-			return;
-		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1515,12 +1500,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-//Pass false to combatMenu instead:		menuLoc = 1;
-		if (player.tailVenom < 25) {
-			outputText("You do not have enough venom to bite right now!");
-			doNext(psMenu);
-			return;
-		}
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1946,12 +1925,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Keep logic sane if this attack brings victory
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		if (player.tailVenom < 25) {
-			outputText("You do not have enough venom to sting right now!");
-			doNext(psMenu);
-			return;
-		}
 		//Worms are immune!
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural weapons, you quickly thrust your stinger at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving you to stab only at air.\n\n");
@@ -2028,13 +2001,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function playerTailSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		//Keep logic sane if this attack brings victory
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		if (player.tailVenom < 25) {
-			outputText("You do not have enough venom to shoot spike right now!");
-			doNext(psMenu);
-			return;
-		}
+		
 		//Worms are immune!
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural weapons, you quickly shooting an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
@@ -2109,13 +2076,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function kissAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
-		if(player.hasStatusEffect(StatusEffects.Blind)) {
-			clearOutput();
-			outputText("There's no way you'd be able to find their lips while you're blind!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-			doNext(psMenu);
-			return;
-		}
 		clearOutput();
 		var attack:Number = rand(6);
 		switch(attack) {

@@ -16,7 +16,6 @@ public class MagicSpecials extends BaseCombatContent {
 	// M. SPECIALS
 	//------------
 	internal function buildMenu(ui:CombatUI):void {
-		var button:int = 0;
 		var bd:ButtonData;
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = ui.addMagSpButton("M.Bolt", magicbolt);

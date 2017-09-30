@@ -32,6 +32,11 @@ public class CombatUI extends BaseCombatContent {
 	private var otherButtons:/*ButtonData*/Array = [];
 	public function mainMenu():void {
 		menu();
+		magspButtons.splice(0);
+		physpButtons.splice(0);
+		spellButtons.splice(0);
+		soulforceButtons.splice(0);
+		otherButtons.splice(0);
 		
 		var btnMelee:CoCButton      = button(0);
 		var btnRanged:CoCButton     = button(1);
@@ -92,9 +97,13 @@ public class CombatUI extends BaseCombatContent {
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
-		buildSubmenus();
-//		if (pspcButtons.length > 0) btnPSpecials.show("P. Specials", submenuPSpecials, "Physical special attack menu.", "Physical Specials");
-		if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
+		combat.mspecials.buildMenu(this);
+		combat.pspecials.buildMenu(this);
+//		combat..buildMenu(this);
+//		combat..buildMenu(this);
+//		combat..buildMenu(this);
+		if (physpButtons.length > 0) btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
+		if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
 //		if (magicButtons.length > 0) btnMagic.show("Spells", submenuMagic, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
 		// if (!canUseMagic()) btnMagic.disable();
 //		//Silence: Disables magic menu.
@@ -173,7 +182,7 @@ public class CombatUI extends BaseCombatContent {
 		var btnStruggle:CoCButton  = addButton(0, "Struggle", combat.struggle);
 		var btnBoundWait:CoCButton = addButton(1, "Wait", combat.wait);
 		if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
-			addButton(6, "M. Special", submenuMSpecials);
+			addButton(6, "M. Special", submenuMagSpecials);
 		}
 		if (player.hasStatusEffect(StatusEffects.Bound)) {
 			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
@@ -256,14 +265,14 @@ public class CombatUI extends BaseCombatContent {
 		menu();
 		var total:int = list.length;
 		var n:int = Math.min(total,(page+1)*12);
-		for (var i:int = page*12; i<n; i++) {
-			list[i].applyTo(button(i));
+		for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
+			list[li].applyTo(button(bi%12));
 		}
 		button(12).show("< Prev", curry(self, page-1)).disableIf(page==0);
 		button(13).show("Next >", curry(self, page+1)).disableIf(n>=total);
 		button(14).show("Back",mainMenu);
 	}
-	internal function submenuMSpecials(page:int=0):void {
+	internal function submenuMagSpecials(page:int =0):void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 6 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.Sealed) == 6) outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -271,22 +280,31 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		combat.mspecials.buildMenu(this);
-		submenu(magspButtons,page,submenuMSpecials);
+		submenu(magspButtons,page,submenuMagSpecials);
+	}
+	internal function submenuPhySpecials(page:int =0):void {
+		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
+			clearOutput();
+			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			enemyAI();
+			return;
+		}
+		if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
+			(monster as DriderIncubus).taintedMindAttackAttempt();
+			return;
+		}
+		submenu(physpButtons,page,submenuPhySpecials);
 	}
 	internal function submenuOther(page:int=0):void {
 		//addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 //		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
 //		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
-//		addButton(6, "Specials", PhysicalMagicalSpecials).hint("Physical, Mental and Supernatural attacks menu.", "P/M Specials");
 //		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
-	
-	}
-	private function buildSubmenus():void {
-//		combat.pspecials.buildMenu(this);
-//		combat..buildMenu(this);
-//		combat..buildMenu(this);
-//		combat..buildMenu(this);
+//		if (!player.isFlying() && monster.isFlying()) {
+//			if (player.canFly()) addButton(0, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+//			else addButtonDisabled(0, "P. Specials", "No way you could reach enemy in air with p. specials.");
+//		}
+//		else if (player.isFlying()) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
 	
 	}
 }

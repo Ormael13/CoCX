@@ -406,7 +406,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	//Modify menus.
 	if (kGAMECLASS.urtaQuest.isUrta()) {
 		addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
-		addButton(1, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
+		addButton(1, "P. Specials", kGAMECLASS.urtaQuest.urtaSpecials).hint("Physical special attack menu.", "Physical Specials");
 		addButton(2, "M. Specials", kGAMECLASS.urtaQuest.urtaMSpecials).hint("Mental and supernatural special attack menu.", "Magical Specials");
 		addButton(3, "Tease", teaseAttack);
 		addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
@@ -429,22 +429,6 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		outputText("<b>  Even physical special attacks are out of the question.</b>");
 		removeButton(1); //Removes bow usage.
 	}
-}
-
-public function PhysicalMagicalSpecials():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
-		addButton(0, "P. Specials", (monster as DriderIncubus).taintedMindAttackAttempt);
-	}
-	else {
-		if (!player.isFlying() && !monster.isFlying()) addButton(0, "P. Specials", pspecials.psMenu).hint("Physical special attack menu.", "Physical Specials");
-		else if (!player.isFlying() && monster.isFlying()) {
-			if (player.canFly()) addButton(0, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			else addButtonDisabled(0, "P. Specials", "No way you could reach enemy in air with p. specials.");
-		}
-		else if (player.isFlying()) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
-	}
-	addButton(14, "Back", combatMenu, false);
 }
 
 	internal function teaseAttack():void {
