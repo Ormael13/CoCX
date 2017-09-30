@@ -121,7 +121,7 @@ public class CombatUI extends BaseCombatContent {
 			btnMagic.disable();
 		}
 		// Submenu - Soulskills
-//		combat.soulskills.buildMenu(soulforceButtons);
+		combat.soulskills.buildMenu(soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
 		// Submenu - Other
 		combat.buildOtherActions(otherButtons);
@@ -214,7 +214,7 @@ public class CombatUI extends BaseCombatContent {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);
 			btnBoundWait.call((monster as SuccubusGardener).grappleWait);
 		}
-		else if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
+		if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
 			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);
 			addButton(5, "Wait", (monster as Lethice).grappleWait);
@@ -285,6 +285,12 @@ public class CombatUI extends BaseCombatContent {
 		submenu(spellButtons,mainMenu);
 	}
 	internal function submenuSoulforce():void {
+		//if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
+		//clearOutput();
+		//outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+		//enemyAI();
+		//return;
+		//}
 		submenu(soulforceButtons,mainMenu);
 	}
 	internal function submenuOther():void {
