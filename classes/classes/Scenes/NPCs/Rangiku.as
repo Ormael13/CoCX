@@ -60,6 +60,8 @@ package classes.Scenes.NPCs
 					//add(armors.CHBIKNI,1/20).
 					//add(weapons.SCIMITR,1/20).
 					add(consumables.SALAMFW,0.7);
+			this.armType = ARM_TYPE_SALAMANDER;
+			this.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

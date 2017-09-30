@@ -83,7 +83,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		
 		public function PCbeatenIgnisAtArena():void {
-			outputText("\"<i>[Champion], you’re a pretty good at this.  Hell, you would need to be to survive my little trick at the beginning!</i>\" He holds out his hand, you shake in a gesture of sportsmanship. ");
+			outputText("\"<i>[name], you’re a pretty good at this.  Hell, you would need to be to survive my little trick at the beginning!</i>\" He holds out his hand, you shake in a gesture of sportsmanship. ");
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] == 2) {
 				outputText("As you pull your hand away, you notice that Ignis passed you something during the handshake. It looks like...  Some sort of ornate hair pin? It’s made of silver, with an ornate eye of silver wire and lens of crystal at the tip. Ignis winks conspiratorially at you.  \"<i>That's a seer’s pin. It’s a decoration and a tool, from the old times.  Look through the lens at the tip, and you can see past most illusions and deceptive magics. It’s aura can also boost your magic and soulpower.</i>\"  ");
 				flags[kFLAGS.IGNIS_ARENA_SEER]++;

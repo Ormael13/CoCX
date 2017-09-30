@@ -206,7 +206,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function superWhisperAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > player.maxFatigue())
+		if (player.fatigue + spellCost(10) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to focus this ability.");
@@ -234,7 +234,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(10, 1);
+		fatigue(10, 3);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -267,7 +267,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function fenrirFreezingBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(150) > player.maxFatigue())
+		if (player.fatigue + spellCost(150) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
@@ -275,7 +275,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(150, 1);
+		fatigue(150, 3);
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreath,10,0,0,0);
 		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
 		damage = calcGlacialMod(damage);
@@ -354,7 +354,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function yetiFreezingBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+		if (player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
@@ -362,7 +362,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50, 1);
+		fatigue(50, 3);
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,10,0,0,0);
 		var damage:Number = 0;
 		if (player.tou >= 21 && player.tou < 41) damage += (player.tou / 2 + rand((player.tou * 3) / 4));
@@ -502,7 +502,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else {
-			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+			if (player.fatigue + spellCost(50) > player.maxFatigue())
 			{
 				clearOutput();
 				outputText("You are too tired to sing.");
@@ -510,7 +510,7 @@ public class MagicSpecials extends BaseCombatContent {
 				return;
 			}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-			fatigue(50, 1);
+			fatigue(50, 3);
 			clearOutput();
 			outputText("You start singing a enrapturing song.");
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
@@ -633,7 +633,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else {
-			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+			if (player.fatigue + spellCost(50) > player.maxFatigue())
 			{
 				clearOutput();
 				outputText("You are too tired to start rampage.");
@@ -646,7 +646,7 @@ public class MagicSpecials extends BaseCombatContent {
 				return;
 			}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-			fatigue(50, 1);
+			fatigue(50, 3);
 			clearOutput();
 			outputText("That does it! You crouch and lift a leg then another in alternance, stomping the ground as you focus your anger.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -658,7 +658,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function phoenixfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue())
+		if (player.fatigue + spellCost(40) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe fire.");
@@ -666,7 +666,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(40, 1);
+		fatigue(40, 3);
 		player.createStatusEffect(StatusEffects.CooldownPhoenixFireBreath,5,0,0,0);
 		var damage:Number = 0;
 		damage += 50 + rand(20);
@@ -788,7 +788,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragonfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+		if (player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe fire.");
@@ -802,7 +802,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50, 1);
+		fatigue(50, 3);
 		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -926,7 +926,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragoniceBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+		if (player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe ice.");
@@ -940,7 +940,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50, 1);
+		fatigue(50, 3);
 		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1029,7 +1029,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragonlightningBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+		if (player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			clearOutput();
 			outputText("You are too tired to breathe lightning.");
@@ -1043,7 +1043,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50, 1);
+		fatigue(50, 3);
 		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1133,7 +1133,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function dragondarknessBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+		if (player.fatigue + spellCost(50) > player.maxFatigue())
 		{
 			outputText("You are too tired to breathe dakness.");
 			doNext(specialsBreathAttacks);
@@ -1146,7 +1146,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(50, 1);
+		fatigue(50, 3);
 		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		damage += inteligencescalingbonus();// * 0.5
@@ -1379,13 +1379,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.cor < 50) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
+		if (player.fatigue + spellCost(20) > player.maxFatigue()) {
 			outputText("You are too tired to breathe fire.\n");
 			doNext(specialsBreathAttacks);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(20, 1);
+		fatigue(20, 3);
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		//Amily!
@@ -1868,7 +1868,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function petrify():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(100) > player.maxFatigue()) {
+		if (player.fatigue + spellCost(100) > player.maxFatigue()) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
@@ -1878,7 +1878,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		fatigue(100,1);
+		fatigue(100,3);
 		if(monster.plural) {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
 			if (player.hairType == HAIR_GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss ");
@@ -2415,7 +2415,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneTerror():void {
 		clearOutput();
 		//Fatigue Cost: 25
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
+		if(player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
@@ -2444,15 +2444,15 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 3, 0, 0, 0);
-			fatigue(200,1);
+			fatigue(200,3);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 6, 0, 0, 0);
-			fatigue(100,1);
+			fatigue(100,3);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 9, 0, 0, 0);
-			fatigue(50,1);
+			fatigue(50,3);
 		}
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
@@ -2464,7 +2464,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneIllusion():void {
 		clearOutput();
 		//Fatigue Cost: 25
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
+		if(player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
@@ -2488,15 +2488,15 @@ public class MagicSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,3,0,0,0);
-			fatigue(200,1);
+			fatigue(200,3);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,6,0,0,0);
-			fatigue(100,1);
+			fatigue(100,3);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,9,0,0,0);
-			fatigue(50,1);
+			fatigue(50,3);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -2567,12 +2567,12 @@ public class MagicSpecials extends BaseCombatContent {
 //Transfer
 	public function lustTransfer():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		if(player.fatigue + spellCost(40) > player.maxFatigue()) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
 		}
-		fatigue(40,1);
+		fatigue(40,3);
 		var lusttransfered:Number = 0;
 		lusttransfered += Math.round(player.lust * 0.15);
 		player.lust -= lusttransfered;
@@ -2617,7 +2617,7 @@ public class MagicSpecials extends BaseCombatContent {
 //Fascinate
 	public function Fascinate():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
+		if(player.fatigue + spellCost(30) > player.maxFatigue()) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
@@ -2638,7 +2638,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		fatigue(30, 1);
+		fatigue(30, 2);
 		player.createStatusEffect(StatusEffects.CooldownFascinate,4,0,0,0);
 		outputText("You start with first pose to attract " + monster.a + monster.short + " attention.  Then you follow with second and then third pose of your enchanting dance.");
 		var lustDmg:Number = 5;
@@ -2696,7 +2696,7 @@ public class MagicSpecials extends BaseCombatContent {
 //Lust strike
 	public function LustStrike():void {
 		clearOutput();
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
+		if(player.fatigue + spellCost(50) > player.maxFatigue()) {
 			outputText("You are too tired to use this ability.");
 			doNext(msMenu);
 			return;
@@ -2711,7 +2711,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		fatigue(30,1);
+		fatigue(30,3);
 		outputText("You start drawing symbols in the air toward " + monster.a + monster.short + ".");
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.findPerk(PerkLib.BlackHeart) >= 0) lustDmg += player.inte / 10;

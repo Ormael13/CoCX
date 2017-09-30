@@ -41,7 +41,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			else {
-				outputText("miss the mark.");
+				outputText("misses its mark.");
 			}
 		}
 		
@@ -55,7 +55,7 @@ package classes.Scenes.NPCs
 		public function moveBoobCrash():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna flies down");
 			else outputText("The flying manticore dives");
-			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she ready her next attack!");
+			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage, then she pulls off leaving you dazed and aroused as she readies her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.dynStats("lus", lustdmg, "scale", false);
@@ -117,11 +117,11 @@ package classes.Scenes.NPCs
 			var str:String = "";
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
 				if (hasStatusEffect(StatusEffects.Flying)) str += "Etna is circling you in the air readying a salvo of spike to throw at you.";
-				else str += "Etna is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+				else str += "Etna is currently circling you looking for an opening to strike. She’s actually good on the eye and you would give her more attention if not for the fact she’s trying to beat you down and rape you.";
 			}
 			else {
 				if (hasStatusEffect(StatusEffects.Flying)) str += "The manticore is circling you in the air readying a salvo of spike to throw at you.";
-				else str += "The manticore is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
+				else str += "The manticore is currently circling you looking for an opening to strike. She’s actually good on the eye and you would give her more attention if not for the fact she’s trying to beat you down and rape you.";
 			}
 			return str;
 		}

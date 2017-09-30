@@ -4122,7 +4122,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		dynStats("lus", 7 + int(player.sens)/10);
 	}
 	if(player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
-		outputText("Liadri would surely come with fancy text to tell about this effect (raiju static discharge).\n\n");
+		outputText("The raiju electricity stored in your body continuously tingle around your genitals!\n\n");
 		dynStats("lus", 14 + int(player.sens)/8);
 	}
 	if(player.hasStatusEffect(StatusEffects.KissOfDeath)) {

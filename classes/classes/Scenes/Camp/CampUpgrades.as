@@ -62,7 +62,9 @@ flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE]:
 1 - 
 
 flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD]:
-1 - 
+1 - readed Warding Tome
+2 - builded Ward / Inactive Ward
+3 - Active Ward
 
 flags[kFLAGS.CAMP_UPGRADES_]:
 1 - 
@@ -88,6 +90,9 @@ public function buildmiscMenu():void {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0 && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. 100 fatigue)");
+	//sparring ring
+	//summoning circle
+	//magic ward
 	addButton(14, "Back", playerMenu);
 }
 

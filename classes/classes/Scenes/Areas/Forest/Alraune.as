@@ -22,7 +22,7 @@ package classes.Scenes.Areas.Forest
 		
 		public function alrauneWait():void {
 			clearOutput();
-			outputText("You struggle against the alraune vines, forcefully pulling yourself a good distance away from her.\n\n");
+			outputText("You struggle against the Alraune vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
 			player.fatigue += 50;
 			doAI();
@@ -30,7 +30,7 @@ package classes.Scenes.Areas.Forest
 		
 		public function alraunePollenCloud():void {
 			clearOutput();
-			outputText("The alraune giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
+			outputText("The Alraune giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
 			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
 			outputText("There is no way you will be able to not breathe it in and you feel your desire rise as the insidious aphrodisiac does its dirty work.\n\n");
 			createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
@@ -47,11 +47,11 @@ package classes.Scenes.Areas.Forest
 		public function alrauneTeaseAttack():void {
 			clearOutput();
 			if (rand(2) == 1) {
-				outputText("The alraune parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n");
+				outputText("The Alraune parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n");
 				outputText("\"<i>Don’t you want a taste of what my lovely body can offer? It is all yours to play with, all you need to do is give in to me.</i>\"\n\n");
 			}
 			else {
-				outputText("The alraune grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n");
+				outputText("The Alraune grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n");
 				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n");
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Forest
 			this.a = "an ";
 			this.short = "alraune";
 			this.imageName = "alraune";
-			this.long = "You are fighting against an alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
+			this.long = "You are fighting against an Alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;

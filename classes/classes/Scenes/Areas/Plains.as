@@ -49,6 +49,11 @@ package classes.Scenes.Areas
 				kGAMECLASS.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Electra
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && rand(5) == 0) {
+				kGAMECLASS.electraScene.repeatPlainsEnc();
+				return;
+			}
 			//Find Niamh
 			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
 				kGAMECLASS.telAdre.niamh.niamhPostTelAdreMoveOut();

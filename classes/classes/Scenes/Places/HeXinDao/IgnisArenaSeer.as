@@ -99,7 +99,7 @@ package classes.Scenes.Places.HeXinDao
 		override public function defeated(hpVictory:Boolean):void
 		{
 			clearOutput();
-			if (HP <= 0) outputText("Ignis staggers, signaling he’s had enough.  \"<i>I surrender!  I surrender!  Damn...  You’re pretty good, [champion].</i>\"");
+			if (HP <= 0) outputText("Ignis staggers, signaling he’s had enough.  \"<i>I surrender!  I surrender!  Damn...  You’re pretty good, [name].</i>\"");
 			else outputText("Ignis collapses, his self control finally taxed beyond limit.  He throws aside his kimono and begins vigorously masturbating, in full view of everyone in the arena’s stands. Within a minute, Ignis’ foxcock is hanging limp and the kitsune himself is covered in several layers of his own cum.  After catching his breath, he shakily puts his kimono on and gestures at you.  \"<i>That was quite a display.  You could give the demons a run for their money.!</i>\"");
 			outputText(" He walks up to you, still somewhat shaky from the fight.  ");
 			ignisfight.PCbeatenIgnisAtArena();

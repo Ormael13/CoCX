@@ -84,6 +84,7 @@ package classes.Scenes.NPCs
 				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
 			lust -= lust * 0.2;
+			if (lust < 0) lust = 0;
 			removeStatusEffect(StatusEffects.RaijuUltReady);
 			createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
 		}
@@ -106,6 +107,19 @@ package classes.Scenes.NPCs
 				}
 			}
 			combatRoundOver();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			/*if (flags[kFLAGS.ETNA_FOLLOWER] >= 2) etnaScene.etnaRapeIntro2();
+			else if (flags[kFLAGS.ETNA_AFFECTION] > 75) etnaScene.etnaReady2Come2Camp();
+			else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 1 && flags[kFLAGS.ETNA_AFFECTION] > 15) etnaScene.etnaRape3rdWin();
+			else */electraScene.PlayerSexElectra();
+		}
+		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			electraScene.ElectraSexPlayer();
 		}
 		
 		public function Electra() 
@@ -145,7 +159,7 @@ package classes.Scenes.NPCs
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
-			this.gems = 45 + rand(40);
+			this.gems = 500;
 			this.drop = new ChainedDrop().
 					add(armors.INDESSR,1/10).
 					add(consumables.L_DRAFT,1/4).
