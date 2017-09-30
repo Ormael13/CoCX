@@ -9,21 +9,22 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 
 import coc.view.ButtonData;
+import coc.view.ButtonDataList;
 
 public class MagicSpecials extends BaseCombatContent {
 	public function MagicSpecials() {}
 	//------------
 	// M. SPECIALS
 	//------------
-	internal function buildMenu(ui:CombatUI):void {
+	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
-			bd = ui.addMagSpButton("M.Bolt", magicbolt);
+			bd = buttons.add("M.Bolt", magicbolt);
 			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 		}
 		if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
-			bd = ui.addMagSpButton("Compelling Aria");
+			bd = buttons.add("Compelling Aria");
 			if (!player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				bd.enable(singCompellingAria, "Sing for a moment.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
@@ -31,10 +32,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Incorporeality)) {
-			ui.addMagSpButton("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
+			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
 		}
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
-			bd = ui.addMagSpButton("F.FoxFire", fusedFoxFire).hint("Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(250) + "\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti() + "");
+			bd = buttons.add("F.FoxFire", fusedFoxFire).hint("Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(250) + "\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti() + "");
 			if ((!player.hasPerk(PerkLib.BloodMage) && player.fatigue + (spellCost(250) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 100 * soulskillCost() * soulskillcostmulti())) {
 				bd.disable("You are too tired to use this ability.");
 			} else if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -43,14 +44,14 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.CorruptedKitsune) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			// Corrupt Fox Fire
-			bd = ui.addMagSpButton("C.FoxFire", corruptedFoxFire).hint("Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
+			bd = buttons.add("C.FoxFire", corruptedFoxFire).hint("Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if ((!player.hasPerk(PerkLib.BloodMage) && player.fatigue + (spellCost(100) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 40 * soulskillCost() * soulskillcostmulti())) {
 				bd.disable("You are too tired to use this ability.");
 			} else if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			}
 			// Terror
-			bd = ui.addMagSpButton("Terror", kitsuneTerror);
+			bd = buttons.add("Terror", kitsuneTerror);
 			if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				bd.disable("<b>You need more time before you can use Terror again.</b>\n\n");
 			} else if(!player.hasPerk(PerkLib.BloodMage) && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
@@ -66,14 +67,14 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			// Pure Fox Fire
-			bd = ui.addMagSpButton("P.FoxFire", pureFoxFire).hint("Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
+			bd = buttons.add("P.FoxFire", pureFoxFire).hint("Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if ((!player.hasPerk(PerkLib.BloodMage) && player.fatigue + (spellCost(100) * kitsuneskillCost()) > player.maxFatigue()) || (player.soulforce < 40 * soulskillCost() * soulskillcostmulti())) {
 				bd.disable("You are too tired to use this ability.");
 			} else if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			}
 			// Illusion
-			bd = ui.addMagSpButton("Illusion",kitsuneIllusion);
+			bd = buttons.add("Illusion",kitsuneIllusion);
 			if (player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) bd.hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			else if (player.tailCount == 9 || player.hasPerk(PerkLib.KitsuneThyroidGland)) bd.hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			else bd.hint("Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
@@ -91,7 +92,7 @@ public class MagicSpecials extends BaseCombatContent {
 	*/
 		if (player.hasPerk(PerkLib.DarkCharm)) {
 			// Fascinate
-			bd = ui.addMagSpButton("Fascinate",Fascinate, "Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
+			bd = buttons.add("Fascinate",Fascinate, "Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
 				bd.disable("<b>You need more time before you can use Fascinate again.</b>\n\n");
 			} else if(!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(30) > player.maxFatigue()) {
@@ -100,7 +101,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to reach the enemy's mind with your charming display while you can't even move.");
 			}
 			// Lust Strike
-			bd = ui.addMagSpButton("Lust Strike", LustStrike);
+			bd = buttons.add("Lust Strike", LustStrike);
 			if (player.hasPerk(PerkLib.BlackHeart)) {
 				bd.hint("Use arcane gestures to flare up enemy lust. The higher your libido, intelligence and horny you're at the moment the higher enemy lust will rise. \n\nFatigue Cost: " + spellCost(50));
 			} else {
@@ -113,58 +114,58 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Transference)) {
-			bd = ui.addMagSpButton("Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
+			bd = buttons.add("Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
 			if(!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(40) > player.maxFatigue()) {
 				bd.disable("You are too tired to use this ability.");
 			}
 		}
 		if (player.devilkinScore() >= 10) {
-			bd = ui.addMagSpButton("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n\nMana Cost: " + spellCost(40));
+			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n\nMana Cost: " + spellCost(40));
 			if(!player.hasPerk(PerkLib.BloodMage) && player.mana < spellCostWhite(40)) {
 				bd.disable("Your mana is too low to cast this.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) ui.addMagSpButton("Shielding", shieldingSpell);
-		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) ui.addMagSpButton("Immolation", immolationSpell);
-		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) ui.addMagSpButton("Ice Prison", iceprisonSpell);
+		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
+		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
+		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) buttons.add("Ice Prison", iceprisonSpell);
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
-			ui.addMagSpButton("DragonFire", dragonfireBreath).hint("Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
+			buttons.add("DragonFire", dragonfireBreath).hint("Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Fire Breath");
 		}
 		if (player.hasPerk(PerkLib.DragonIceBreath)) {
-			ui.addMagSpButton("DragonIce", dragoniceBreath).hint("Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
+			buttons.add("DragonIce", dragoniceBreath).hint("Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
 		}
 		if (player.hasPerk(PerkLib.DragonLightningBreath)) {
-			ui.addMagSpButton("DragonLightning", dragonlightningBreath).hint("Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
+			buttons.add("DragonLightning", dragonlightningBreath).hint("Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
 		}
 		if (player.hasPerk(PerkLib.DragonDarknessBreath)) {
-			ui.addMagSpButton("DragonDarkness", dragondarknessBreath).hint("Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
+			buttons.add("DragonDarkness", dragondarknessBreath).hint("Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
 		}
 		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
-			bd = ui.addMagSpButton("FreezingBreath", fenrirFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
+			bd = buttons.add("FreezingBreath", fenrirFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
 			if (player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
 				bd.disable("You need more time before you can use Freezing Breath again.");
 			}
 		}
 		if (player.hasPerk(PerkLib.FreezingBreathYeti)) {
-			bd = ui.addMagSpButton("FreezingBreath", yetiFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
+			bd = buttons.add("FreezingBreath", yetiFreezingBreath).hint("Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
 			if (player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
 				bd.disable("You need more time before you can use Freezing Breath again.");
 			}
 		}
 		if (player.hasPerk(PerkLib.FireLord)) {
-			ui.addMagSpButton("Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
+			buttons.add("Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
 		}
 		if (player.hasPerk(PerkLib.Hellfire)) {
-			ui.addMagSpButton("Hellfire",hellFire).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
+			buttons.add("Hellfire",hellFire).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
 		}
 		if (player.hasPerk(PerkLib.PhoenixFireBreath)) {
-			bd = ui.addMagSpButton("PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
+			bd = buttons.add("PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
 			if (player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
 				bd.disable("You need more time before you can use Phoenix Fire again.");
 			}
 		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
-			bd = ui.addMagSpButton("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: 50");
+			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: 50");
 			if (player.wrath < 50) {
 				bd.disable("Your wrath is too low to enter this state!");
 			} else if(player.hasStatusEffect(StatusEffects.DwarfRage)) {
@@ -172,7 +173,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Berzerker)) {
-			bd = ui.addMagSpButton("Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero! \n\nWrath Cost: 50");
+			bd = buttons.add("Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero! \n\nWrath Cost: 50");
 			if (player.hasPerk(PerkLib.ColdFury)) {
 				bd.hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance! \n\nWrath Cost: 50");
 			}
@@ -183,7 +184,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Lustzerker)) {
-			bd = ui.addMagSpButton("Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero! \n\nWrath Cost: 50");
+			bd = buttons.add("Lustserk", lustzerk).hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero! \n\nWrath Cost: 50");
 			if (player.hasPerk(PerkLib.ColdLust)) {
 				bd.hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense! \n\nWrath Cost: 50");
 			}
@@ -195,16 +196,16 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior)) {
 			if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
-				ui.addMagSpButton("Return", returnToNormalShape).hint("Return to normal from Crinos Shape.");
+				buttons.add("Return", returnToNormalShape).hint("Return to normal from Crinos Shape.");
 			} else {
-				bd = ui.addMagSpButton("CrinosShape", assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + crinosshapeCost() + " per turn");
+				bd = buttons.add("CrinosShape", assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + crinosshapeCost() + " per turn");
 				if (player.wrath < crinosshapeCost()) {
 					bd.disable("Your wrath is too low to enter this state!");
 				}
 			}
 		}
 		if (player.oniScore() >= 12) {
-			bd = ui.addMagSpButton("Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
+			bd = buttons.add("Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
 			if (!player.hasPerk(PerkLib.BloodMage) && player.fatigueLeft() < spellCost(50)) {
 				bd.disable("You are too tired to start rampage.");
 			} else if(player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -212,7 +213,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.eyeType == EYES_GORGON && player.hairType == HAIR_GORGON || player.hasPerk(PerkLib.GorgonsEyes)) {
-			bd = ui.addMagSpButton("Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
+			bd = buttons.add("Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
 			if(!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(100) > player.maxFatigue()) {
 				bd.disable("You are too tired to use this ability.");
 			} else if (monster is LivingStatue) {
@@ -220,75 +221,85 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Whispered)) {
-			ui.addMagSpButton("Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
+			buttons.add("Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
 		}
 		if (player.devilkinScore() >= 10) {
-			bd = ui.addMagSpButton("Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
+			bd = buttons.add("Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 			if(player.hasStatusEffect(StatusEffects.Maleficium)) {
 				bd.disable("You already empowered with corrupt power!");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
-			bd = ui.addMagSpButton("Air E.Asp", ElementalAspectAir);
+			bd = buttons.add("Air E.Asp", ElementalAspectAir);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
 				bd.disable("You already used air elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
-			bd = ui.addMagSpButton("Earth E.Asp", ElementalAspectEarth);
+			bd = buttons.add("Earth E.Asp", ElementalAspectEarth);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
 				bd.disable("You already used earth elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
-			bd = ui.addMagSpButton("Fire E.Asp", ElementalAspectFire);
+			bd = buttons.add("Fire E.Asp", ElementalAspectFire);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
 				bd.disable("You already used fire elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
-			bd = ui.addMagSpButton("Water E.Asp", ElementalAspectWater);
+			bd = buttons.add("Water E.Asp", ElementalAspectWater);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
 				bd.disable("You already used water elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
-			bd = ui.addMagSpButton("Ether E.Asp", ElementalAspectEther);
+			bd = buttons.add("Ether E.Asp", ElementalAspectEther);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) {
 				bd.disable("You already used ether elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
-			bd = ui.addMagSpButton("Wood E.Asp", ElementalAspectWood);
+			bd = buttons.add("Wood E.Asp", ElementalAspectWood);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) {
 				bd.disable("You already used wood elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
-			bd = ui.addMagSpButton("Metal E.Asp", ElementalAspectMetal);
+			bd = buttons.add("Metal E.Asp", ElementalAspectMetal);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) {
 				bd.disable("You already used metal elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
-			bd = ui.addMagSpButton("Ice E.Asp", ElementalAspectIce);
+			bd = buttons.add("Ice E.Asp", ElementalAspectIce);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
 				bd.disable("You already used ice elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
-			bd = ui.addMagSpButton("Lightning E.Asp", ElementalAspectLightning);
+			bd = buttons.add("Lightning E.Asp", ElementalAspectLightning);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
 				bd.disable("You already used lightning elemental aspect in this fight.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
-			bd = ui.addMagSpButton("Darkness E.Asp", ElementalAspectDarkness);
+			bd = buttons.add("Darkness E.Asp", ElementalAspectDarkness);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
 				bd.disable("You already used darkness elemental aspect in this fight.");
 			}
 		}
 		//?lust/corruption?
+		
+		// JOJO specials - moved from Spells (no longer silenceable)
+		if (player.hasPerk(PerkLib.CleansingPalm)) {
+			bd = buttons.add("C.Palm", combat.magic.spellCleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
+			if (player.cor >= (10 + player.corruptionTolerance())) {
+				bd.disable("You are too corrupt to use this ability!");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(30) > player.maxFatigue()) {
+				bd.disable("You are too tired to cast this spell.");
+			}
+		}
 	}
 
 	//New Abilities and Items

@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.BaseContent;
+import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkLib;
@@ -17,6 +18,7 @@ import classes.StatusEffectClass;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
+import coc.view.ButtonDataList;
 
 import coc.view.CoCButton;
 
@@ -25,18 +27,18 @@ public class CombatUI extends BaseCombatContent {
 	public function CombatUI() {
 	}
 	
-	private var magspButtons:/*ButtonData*/Array = [];
-	private var physpButtons:/*ButtonData*/Array = [];
-	private var spellButtons:/*ButtonData*/Array = [];
-	private var soulforceButtons:/*ButtonData*/Array = [];
-	private var otherButtons:/*ButtonData*/Array = [];
+	private var magspButtons:ButtonDataList = new ButtonDataList();
+	private var physpButtons:ButtonDataList = new ButtonDataList();
+	private var spellButtons:ButtonDataList = new ButtonDataList();
+	private var soulforceButtons:ButtonDataList = new ButtonDataList();
+	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
 		menu();
-		magspButtons.splice(0);
-		physpButtons.splice(0);
-		spellButtons.splice(0);
-		soulforceButtons.splice(0);
-		otherButtons.splice(0);
+		magspButtons.clear();
+		physpButtons.clear();
+		spellButtons.clear();
+		soulforceButtons.clear();
+		otherButtons.clear();
 		
 		var btnMelee:CoCButton      = button(0);
 		var btnRanged:CoCButton     = button(1);
@@ -95,23 +97,35 @@ public class CombatUI extends BaseCombatContent {
 				btnRanged.showDisabled("Shoot");
 		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-
+		
 		// Submenus
-		combat.mspecials.buildMenu(this);
-		combat.pspecials.buildMenu(this);
-//		combat..buildMenu(this);
-//		combat..buildMenu(this);
-//		combat..buildMenu(this);
+		
+		// Submenu - Physical Specials
+		combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
+		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
+			btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
+		}
+		// Submenu - Magical Specials
+		combat.mspecials.buildMenu(magspButtons);
 		if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
-//		if (magicButtons.length > 0) btnMagic.show("Spells", submenuMagic, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
-		// if (!canUseMagic()) btnMagic.disable();
-//		//Silence: Disables magic menu.
-//		if (isPlayerSilenced()) {
-//			removeButton(5);
-//		}
-//		if (soulSkillButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulskills, "Soulforce attacks menu.", "Soulforce Specials");
-//		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
+		if (combat.isPlayerSilenced()) {
+			btnMSpecials.disable();
+		}
+		// Submenu - Spells
+		combat.magic.buildMenu(spellButtons);
+		if (spellButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+		} else if (!combat.canUseMagic()) {
+			btnMagic.disable();
+		}
+		// Submenu - Soulskills
+//		combat.soulskills.buildMenu(soulforceButtons);
+		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
+		// Submenu - Other
+		combat.buildOtherActions(otherButtons);
+		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
 		
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
@@ -237,42 +251,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 	}
-	
-	internal function addMagSpButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
-		magspButtons.push(bd);
-		return bd;
-	}
-	internal function addPhySpButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
-		physpButtons.push(bd);
-		return bd;
-	}
-	internal function addSpellButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
-		spellButtons.push(bd);
-		return bd;
-	}
-	internal function addSoulforceButton(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
-		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
-		soulforceButtons.push(bd);
-		return bd;
-	}
-	private function submenu(list:/*ButtonData*/Array,page:int,self:Function):void {
-		list = list.filter(function(e:ButtonData,i:int,a:Array):Boolean{
-			return e.visible;
-		}).sortOn('text');
-		menu();
-		var total:int = list.length;
-		var n:int = Math.min(total,(page+1)*12);
-		for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
-			list[li].applyTo(button(bi%12));
-		}
-		button(12).show("< Prev", curry(self, page-1)).disableIf(page==0);
-		button(13).show("Next >", curry(self, page+1)).disableIf(n>=total);
-		button(14).show("Back",mainMenu);
-	}
-	internal function submenuMagSpecials(page:int =0):void {
+	internal function submenuMagSpecials():void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 6 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.Sealed) == 6) outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -280,9 +259,9 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		submenu(magspButtons,page,submenuMagSpecials);
+		submenu(magspButtons,mainMenu);
 	}
-	internal function submenuPhySpecials(page:int =0):void {
+	internal function submenuPhySpecials():void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 			clearOutput();
 			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -293,19 +272,23 @@ public class CombatUI extends BaseCombatContent {
 			(monster as DriderIncubus).taintedMindAttackAttempt();
 			return;
 		}
-		submenu(physpButtons,page,submenuPhySpecials);
+		submenu(physpButtons,mainMenu);
 	}
-	internal function submenuOther(page:int=0):void {
-		//addButton(11, "Surrender", surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-//		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0 || player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(12,"Combat Options",combatOptionsSubMenu);
-//		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
-//		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(9, "Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
-//		if (!player.isFlying() && monster.isFlying()) {
-//			if (player.canFly()) addButton(0, "Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-//			else addButtonDisabled(0, "P. Specials", "No way you could reach enemy in air with p. specials.");
-//		}
-//		else if (player.isFlying()) addButton(0, "Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
-	
+	internal function submenuSpells():void {
+		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 2 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
+			clearOutput();
+			if (player.statusEffectv2(StatusEffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			if (player.statusEffectv2(StatusEffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
+			enemyAI();
+			return;
+		}
+		submenu(spellButtons,mainMenu);
+	}
+	internal function submenuSoulforce():void {
+		submenu(soulforceButtons,mainMenu);
+	}
+	internal function submenuOther():void {
+		submenu(otherButtons,mainMenu);
 	}
 }
 }

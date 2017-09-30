@@ -34,6 +34,10 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 
+import coc.view.ButtonData;
+
+import coc.view.ButtonDataList;
+
 import coc.view.MainView;
 import classes.Saves;
 import classes.internals.Utils;
@@ -430,6 +434,32 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		removeButton(1); //Removes bow usage.
 	}
 }
+	internal function buildOtherActions(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		buttons.add("Surrender",combat.surrender,"Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+			buttons.add("Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
+		}
+		if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) {
+			buttons.add("Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions,"You can adjust your range strike settings.");
+		}
+		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+			buttons.add("Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions,"You can adjust your elemental summons behaviour during combat.");
+		}
+		if (CoC_Settings.debugBuild && !debug) {
+			buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
+		}
+		if (player.hasPerk(PerkLib.JobDefender)) {
+			buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
+		}
+		if (!player.isFlying() && monster.isFlying()) {
+			if (player.canFly()) {
+				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			}
+		} else if (player.isFlying()) {
+			buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
+		}
+	}
 
 	internal function teaseAttack():void {
 	teases.teaseAttack();
@@ -5133,24 +5163,6 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 	return false;
 }
 
-public function combatOptionsSubMenu():void {
-	menu();
-	clearOutput();
-	if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
-		outputText("\n<b>You can adjust your melee attack settings.</b>");
-		addButton(0,"Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions);
-	}
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) {
-		outputText("\n<b>You can adjust your range strike settings.</b>");
-		addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
-	}
-//	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
-	if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
-		outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
-		addButton(3,"Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions);
-	}
-	addButton(14, "Back", combatMenu, false);
-}
 
 public function ScyllaSqueeze():void {
 	clearOutput();
