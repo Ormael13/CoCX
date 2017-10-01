@@ -96,7 +96,7 @@ public function meet2Kindra():void {
 	outputText("\"<i>What is it you wanted exactly [name]?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", kindraAppearance).hint("Examine Kindra's detailed appearance.");
-	addButton(1, "Fight", fight2Kindra).hint("Fight her");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(1, "Fight", fight2Kindra).hint("Fight her");
 	if (player.statusEffectv1(StatusEffects.Kindra) < 150) addButton(2, "Training", trainingArcheryWithKindra).hint("Train your archery skills with her.");
 	else addButtonDisabled(2, "Training", "You finished advanced archery training.");
 	addButton(14, "Back", camp.campFollowers);

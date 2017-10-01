@@ -629,12 +629,14 @@ private function doCamp():void { //Only called by playerMenu
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and camp edge is set place where you will store piles of wood or stones used for constructions. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and camp edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and camp edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 1) outputText("\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your camp.\n\n");
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -826,6 +828,11 @@ private function doCamp():void { //Only called by playerMenu
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 1) flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] = 1;
 	}
+	//Unlock sparring ring.
+	if (sparableCampMembersCount() >= 3)
+	{
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
+	}
 	
 	//Menu
 	
@@ -974,7 +981,15 @@ public function loversHotBathCount():Number {
 
 public function sparableCampMembersCount():Number {
 	var counter:Number = 0;
+	if (emberScene.followerEmber()) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (helspawnFollower()) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (followerKiha()) counter++;
 	return counter;
 }
 
@@ -2779,7 +2794,7 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePoints += 2;
-	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > ) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
 	//if (flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE] > ) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
 	//Children

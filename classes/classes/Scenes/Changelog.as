@@ -38,8 +38,8 @@ package classes.Scenes
 			outputText("-New body part - eyes: Raiju Eyes Req. Raiju Ears\n");
 			outputText("-New body part - hair type: Raiju Storm Hair No Req.\n");
 			outputText("-New body part - pattern: Lightning Shaped Tattoo No Req.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New build option: Sparring Ring. It cost 50 wood, 50 fatigue and 1 hour to construct. Req. 3+ sparrable npc's and before it's not build will lock out spar options. Completing it will add also 2 ascension points.\n");
+			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

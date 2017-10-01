@@ -6001,9 +6001,15 @@ use namespace kGAMECLASS;
 		}
 		public function orgasmRaijuStyle():void
 		{
-			game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
-			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
-			dynStats("lus", +(game.player.maxLust() * 0.1), "sca", false);
+			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				game.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
+				dynStats("lus", (60 + rand(20)), "sca", false);
+			}
+			else {
+				game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				dynStats("lus", (game.player.maxLust() * 0.1), "sca", false);
+			}
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 		}

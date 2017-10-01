@@ -233,7 +233,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_MILK] > 0 || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) addButton(3, "Drink Milk", getMilkFromEmber).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to let you drink " + emberMF("his", "her") + " milk." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Lactaid each time you want to suckle milk.") + "");
 			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
 			addButton(5, "Sex", emberSexMenu).hint("Get into a sex session with Ember.");
-			addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember!");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember!");
 			if (model.time.hours >= 21 || model.time.hours < 5) {
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
