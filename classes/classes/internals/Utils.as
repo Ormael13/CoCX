@@ -61,6 +61,14 @@ package classes.internals
 			return x < min ? min : x > max ? max : x;
 		}
 		/**
+		 * Mimics JS Object.keys
+		 */
+		public static function keys(o:Object):/*String*/Array {
+			var r:/*String*/Array = [];
+			for (var k:String in o) r.push(k);
+			return r;
+		}
+		/**
 		 * Deleting obj[key] with default.
 		 *
 		 * If `key` in `obj`: return `obj[key]` and delete `obj[key]`

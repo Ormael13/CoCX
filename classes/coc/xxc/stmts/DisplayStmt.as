@@ -15,12 +15,17 @@ public class DisplayStmt extends Statement{
 	}
 
 	override public function execute(context:ExecContext):void {
+		context.debug(this,'enter');
 		var obj:Story = Story.locateSplit(story,ref);
 		if (!obj) {
 			context.error(this,"Cannot dereference "+ref.join('/'));
 			return;
 		}
-		context.execute(obj);
+		obj.forceExecute(context);
+	}
+
+	public function toString():String {
+		return '<display ref="'+ref+'"/>';
 	}
 }
 }

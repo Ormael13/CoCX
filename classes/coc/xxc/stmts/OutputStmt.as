@@ -14,7 +14,13 @@ public class OutputStmt extends Statement{
 	}
 
 	override public function execute(context:ExecContext):void {
-		(context as StoryContext).game.outputText(""+content.vcall(context.scopes));
+		var value:* = content.vcall(context.scopes);
+		context.debug(this,'value = "'+Eval.escapeString(value)+'"');
+		(context as StoryContext).game.outputText(""+ value);
+	}
+
+	public function toString():String {
+		return '<output>'+content.src+'</output>';
 	}
 }
 }

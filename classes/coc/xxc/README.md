@@ -110,7 +110,7 @@ TODO
 
 ### Display elements
 
-#### text
+#### text, string, story, lib, macro
 
 ```relax-ng
 Text = element text { 
@@ -125,15 +125,21 @@ Outputs its content, processing whitespace __in XML text during compilation__ (i
 
 This _story_ is saved in the outer text block as `name`.
 
-#### string
+##### <string>
 
-```relax-ng
-String = element string { 
-    attribute name { text }?, 
-    content*
-}
-```
-As `<text>` but no whitespace processing is done.  
+As `<text>` but no whitespace processing is done.
+
+##### <lib>
+
+Used for grouping. Can only contain named display elements 
+
+##### <macro>
+
+Skipped when iterated from outer element, but can be displayed by name
+
+##### <story>
+
+Same as `<text>`  
 
 #### display
 
@@ -153,6 +159,10 @@ TODO
 TODO
 
 ### Action elements
+
+#### set
+
+TODO
 
 #### dynStats
 
@@ -180,21 +190,20 @@ TODO
 
 #### if-elseif-else
 
-```relax-ng
-if = element if {
-    attribute test { expression },
-    content*,
-    (elseif|else)?
-}
-elseif = element elseif {
-    attribute test { expression },
-    content*,
-    (elseif|else)?
-}
-else = element else {
-    content*
-}
+```xml
+<if test="condition" then="thenString" else="elseString">
+    thenContent
+    <elseif>...</elseif>
+    <else>
+    elseContent
+    </else>
+</if>
 ```
+
+* `condition` (expression) is required;
+* `thenString` is a raw string, not an expression;
+* `else="""`, `<elseif>`, and `<else>` are optional and only one of them should be present;
+* `<elseif>` has same structure as `<if>`.
 
 #### switch-case-default
 

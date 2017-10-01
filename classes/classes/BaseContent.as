@@ -52,6 +52,11 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.timeQ;
 		}
 
+		protected function get measurements():Measurements
+		{
+			return kGAMECLASS.measurements;
+		}
+
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
 		}
@@ -935,9 +940,6 @@ import coc.xxc.StoryContext;
 		}
 		protected static function onGameInit(f:Function):void {
 			CoC.onGameInit(f);
-		}
-		protected function get context():StoryContext {
-			return kGAMECLASS.context;
 		}
 	}
 

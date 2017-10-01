@@ -15,6 +15,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.NPCs.EtnaFollower;
 
 	import coc.xlogic.Statement;
+	import coc.xxc.BoundStory;
 	import coc.xxc.Story;
 	import coc.xxc.stmts.ZoneStmt;
 
@@ -32,7 +33,7 @@ package classes.Scenes.Areas
 		{
 			onGameInit(init);
 		}
-		private var story:Story;
+		private var story:BoundStory;
 		
 		private var _desertEncounter:GroupEncounter = null;
 		public function get desertEncounter():GroupEncounter {
@@ -158,14 +159,14 @@ package classes.Scenes.Areas
 						chance: 0.2,
 						when  : game.helScene.helSexualAmbushCondition
 					});
-			story = ZoneStmt.wrap(_desertEncounter,game.rootStory);
+			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
 		//Explore desert
 		public function exploreDesert():void {
 			player.exploredDesert++;
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour); // default button
-			story.execute(getGame().context);
+			story.execute();
 			flushOutputTextToGUI();
 		}
 
@@ -175,22 +176,22 @@ package classes.Scenes.Areas
 		}
 
 		public function chestEncounter():void {
-			story.display(context,"strings/chest/a");
+			story.display("strings/chest/a");
 			for (var i:int = 0; i < 6; i++) {
 				inventory.createStorage();
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
-			story.display(context,"strings/chest/b");
+			story.display("strings/chest/b");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function nailsEncounter():void {
 			clearOutput();
-			story.display(context,"strings/nails/a");
+			story.display("strings/nails/a");
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
-			story.display(context,"strings/nails/b",{$extractedNail:extractedNail});
+			story.display("strings/nails/b",{$extractedNail:extractedNail});
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;

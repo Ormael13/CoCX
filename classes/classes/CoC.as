@@ -334,7 +334,7 @@ the text from being too boring.
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
 
-
+		public var measurements:Measurements = Measurements.init();
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -691,6 +691,7 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
+			new Story("lib",rootStory,"monsters",true);
 			execPostInit();
 			loadStory();
 			this.addFrameScript( 0, this.run );
@@ -698,7 +699,7 @@ the text from being too boring.
 		}
 
 		private function loadStory():void {
-			compiler.includeFile("coc.xml");
+			compiler.includeFile("coc.xml", true);
 		}
 
 		public function run():void

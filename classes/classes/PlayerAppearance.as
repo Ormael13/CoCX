@@ -3,8 +3,19 @@ import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
+import coc.xxc.BoundStory;
+import coc.xxc.Story;
+
 public class PlayerAppearance extends BaseContent {
 
+
+	public function PlayerAppearance() {
+		onGameInit(init);
+	}
+	private var story:BoundStory;
+	private function init():void {
+		story = new Story("story",getGame().rootStory,"appearance").bind(getGame().context);
+	}
 	public function appearance():void {
 		if (getGame().gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
 		//Temp vars
@@ -737,6 +748,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.base.pattern == PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
+		// story.display("gear");
 		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your [weapon] as a melee weapon");
 		if (player.weaponRangeName != "nothing")
 			outputText(",  [weaponrangename] as range weapon");
@@ -751,6 +763,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("</b>");
 	}
 	public function describeRace():void {
+		// story.display("race");
 //Discuss race
 		if (player.race() != player.startingRace) outputText("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
 		//Height and race.
@@ -1506,6 +1519,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeFaceShape():void {
+		// story.display("faceShape");
 		if (player.facePart.isHumanShaped()) {
 			var odd:int = 0;
 			var skinAndSomething:String = "";
