@@ -468,6 +468,7 @@ import classes.internals.Utils;
 				}
 			}
 			var mins:Object = getAllMinStats();
+			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
 			str  = Utils.boundFloat(mins.str, str + dstr, maxes.str);
 			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
