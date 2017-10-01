@@ -511,7 +511,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			addButton(2,"Threesomes",heliaThreesomes).hint("Invite someone for threesomes activity with Helia!");
 		}
 		addButton(4,"Talk",heliaOptions).hint("Discuss with Helia about various topics.");
-		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!");
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!");
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
 		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.");
 		if (flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {

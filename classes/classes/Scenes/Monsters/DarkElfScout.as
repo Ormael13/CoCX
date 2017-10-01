@@ -103,7 +103,7 @@ package classes.Scenes.Monsters
 				else DarkElfBowShooting();
 			}
 			if (choice == 2) {
-				if (player.hasStatusEffect(StatusEffects.Flying) && rand(4) == 0) WingClip();
+				if (player.isFlying() && rand(4) == 0) WingClip();
 				else DarkElfBowShooting();
 			}
 			combatRoundOver();

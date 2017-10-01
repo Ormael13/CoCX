@@ -47,7 +47,7 @@ public function valeriaFollower():void {
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
 	menu();
 	addButton(0, "Appearance", valeriaAppearance).hint("Examine Valeria's appearance.");
-	addButton(1, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(1, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
 	if (player.lust >= 33) addButton(2, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
 	addButton(3, "Talk", talkWithValeria).hint("Discuss with Valeria.");
 	addButton(4, "Take", takeValeria).hint(armors.GOOARMR.description);

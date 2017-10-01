@@ -1144,7 +1144,7 @@ public function helspawnsMainMenu():void {
 	//[Talk]
 	addButton(1,"Talk",talkToHelspawn);
 	//[Spar]
-	addButton(2,"Spar",sparHelspawn);
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2,"Spar",sparHelspawn);
 	//[Sex] {?}
 	//[Appearance]
 	addButton(8,"Appearance",helSpawnsAppearanceScreen);

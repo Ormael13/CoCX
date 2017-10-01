@@ -76,6 +76,15 @@ public class BaseCombatContent extends BaseContent {
 	protected function isWieldingRangedWeapon():Boolean {
 		return combat.isWieldingRangedWeapon();
 	}
+	protected function isPlayerBound():Boolean {
+		return combat.isPlayerBound();
+	}
+	protected function isPlayerSilenced():Boolean {
+		return combat.isPlayerSilenced();
+	}
+	protected function isPlayerStunned():Boolean {
+		return combat.isPlayerStunned();
+	}
 	// =================
 	// MODIFIERS
 	// =================

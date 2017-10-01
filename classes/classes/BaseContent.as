@@ -13,6 +13,8 @@ import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
+import coc.view.ButtonData;
+import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 import coc.view.MainView;
 import coc.xxc.StoryContext;
@@ -669,6 +671,16 @@ import coc.xxc.StoryContext;
 			kGAMECLASS.HPChange(changeNum,display);
 		}
 
+		// For fatigue(mod,type) calls
+		public static const USEFATG_NORMAL:int = 0;
+		public static const USEFATG_MAGIC:int = 1;
+		public static const USEFATG_PHYSICAL:int = 2;
+		public static const USEFATG_MAGIC_NOBM:int = 3;
+		public static const USEFATG_BOW:int = 4;
+		public static const USEFATG_WHITE:int = 5;
+		public static const USEFATG_BLACK:int = 6;
+		public static const USEFATG_WHITE_NOBM:int = 7;
+		public static const USEFATG_BLACK_NOBM:int = 8;
 		protected function fatigue(mod:Number,type:Number=0):void {
 			kGAMECLASS.fatigue(mod, type);
 		}
@@ -940,6 +952,25 @@ import coc.xxc.StoryContext;
 		}
 		protected static function onGameInit(f:Function):void {
 			CoC.onGameInit(f);
+		}
+		protected function get context():StoryContext {
+			return kGAMECLASS.context;
+		}
+		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0):void {
+			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
+				return e.visible;
+			}).sortOn('text');
+			menu();
+			var total:int = list.length;
+			var n:int = Math.min(total,(page+1)*12);
+			for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
+				list[li].applyTo(button(bi%12));
+			}
+			if (page!=0 || total>12) {
+				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1)).disableIf(page == 0);
+				button(13).show("Next Page", curry(submenu, buttons, back, page + 1)).disableIf(n >= total);
+			}
+			if (back != null) button(14).show("Back",back);
 		}
 	}
 

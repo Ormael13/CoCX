@@ -123,6 +123,18 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.FACTORY_TAKEN_LACTAID]++;
 			inventory.takeItem(consumables.LACTAID, roomPremiumStorage);
 		}
+		private function takeWardTome():void {
+			clearOutput();
+			outputText("These drugs aside, maybe there is something else here that can be of use?  A quick search becomes a not so quick search as you realize how much junk is in these boxes.");
+			if (player.inte < 50) {
+				outputText(" Sadly, everything is either useless, corruptive or both.");
+				doNext(roomPremiumStorage);
+			}
+			else {
+				outputText(" While most of this stuff is either dangerous to use or just plain junk, you stumble on a book of spells.  This appears to be a tome on the theories behind magical wards.  This could be useful!");
+				inventory.takeItem(consumables.WARDTOM, roomPremiumStorage);
+			}
+		}
 		
 		private function drinkCoffee():void {
 			spriteSelect(96);
@@ -1810,6 +1822,7 @@ package classes.Scenes.Dungeons
 				outputText("There is an unopened crate with five bottles of something called 'Gro+' inside.\n\n");
 				addButton(1, "GroPlus", takeGroPlus);
 			}
+			if(flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] < 1) addButton(2, "Search", takeWardTome);
 		}
 		
 		public function roomBathroom():void {

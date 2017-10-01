@@ -1844,7 +1844,7 @@ public function restaurantMild():void {
 	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
 	else outputText("Chi Chi");
-	outputText(" comes back with your order a few minute later.");
+	outputText(" comes back with your order a few minutes later.");
 	outputText("\n\nThe meal is comforting and its refreshing nature will likely help you resist hot temperature today.");
 	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-50);
 	restaurantEndOfEating();
@@ -1853,7 +1853,7 @@ public function restaurantSpicy():void {
 	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
 	else outputText("Chi Chi");
-	outputText(" comes back with your order a few minute later.");
+	outputText(" comes back with your order a few minutes later.");
 	outputText("\n\nThe meal is a little spicy but regardless leaves you feeling fortified. The weather won’t feel as harsh to you today.");
 	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-30);
 	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-30);
@@ -1863,14 +1863,14 @@ public function restaurantInferno():void {
 	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
 	else outputText("Chi Chi");
-	outputText(" comes back with your order a few minute later.");
-	outputText("\n\nWow the meal is so spicy you almost breath smokes and fire. You drink down several glass of water but can’t help starting to sweat as your inner  temperature rise. Likely you won’t have much to fear of the cold today.");
+	outputText(" comes back with your order a few minutes later.");
+	outputText("\n\nWow, the meal is so spicy you almost breathe smoke and fire. You gulp down several glasses of water but still start to sweat as your inner temperature rises. It’s likely you won’t have much to fear of the cold today.");
 	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-50);
 	restaurantEndOfEating();
 }
 
 public function restaurantEndOfEating():void {
-	outputText("\n\nRegardless the food is excellent and you leaves in high spirit for the day.");
+	outputText("\n\nRegardless the food is excellent and you leave in high spirits for the rest of the day.");
 	//if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) player.inte += player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
 	//player.tou += player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
 	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {

@@ -398,7 +398,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on an air elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsAir, 1, 1, 0, 0);
@@ -421,7 +421,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on an earth elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsEarth, 1, 1, 0, 0);
@@ -444,7 +444,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a fire elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsFire, 1, 1, 0, 0);
@@ -467,7 +467,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a water elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsWater, 1, 1, 0, 0);
@@ -490,7 +490,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on an ice elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsIce, 1, 1, 0, 0);
@@ -513,7 +513,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a lightning elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsLightning, 1, 1, 0, 0);
@@ -536,7 +536,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a darkness elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsDarkness, 1, 1, 0, 0);
@@ -559,7 +559,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a wood elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsWood, 1, 1, 0, 0);
@@ -582,7 +582,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on a metal elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsMetal, 1, 1, 0, 0);
@@ -605,7 +605,7 @@ package classes.Scenes.Camp
 			fatigue(50);
 			statScreenRefresh();
 			outputText("You call on an ether elemental pulling energy from the ether so to allow the being to enter your world.\n\n");
-			outputText("The elemental appear at your side in a spontaneous explosion of energy.");
+			outputText("The elemental appears at your side in a spontaneous explosion of energy.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsEther, 1, 1, 0, 0);

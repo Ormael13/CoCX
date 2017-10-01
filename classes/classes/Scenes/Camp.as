@@ -629,12 +629,14 @@ private function doCamp():void { //Only called by playerMenu
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and camp edge is set place where you will store piles of wood or stones used for constructions. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and camp edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and camp edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ");
+	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 1) outputText("\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your camp.\n\n");
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -705,6 +707,14 @@ private function doCamp():void { //Only called by playerMenu
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
 			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		}
+		outputText("\n\n");
+	}
+	//Magic Ward
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the warding stones. ");
+		else outputText("Right before the ring of traps are your warding stones. ");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) outputText("They are currently inactive.");
+		else outputText("They are glowing with power, protecting your camp from intruders.");
 		outputText("\n\n");
 	}
 	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ");
@@ -818,6 +828,11 @@ private function doCamp():void { //Only called by playerMenu
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 1) flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] = 1;
 	}
+	//Unlock sparring ring.
+	if (sparableCampMembersCount() >= 3)
+	{
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
+	}
 	
 	//Menu
 	
@@ -903,16 +918,16 @@ public function companionsCount():Number {
 
 public function followersCount():Number {
 	var counter:Number = 0;
-	if(emberScene.followerEmber()) counter++;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
-	if(followerShouldra()) counter++;
-	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
-	if(flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
-	if(flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-	if(helspawnFollower()) counter++;
+	if (emberScene.followerEmber()) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
+	if (followerShouldra()) counter++;
+	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
@@ -921,51 +936,60 @@ public function followersCount():Number {
 
 public function slavesCount():Number {
 	var counter:Number = 0;
-	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
-	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
-	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
-	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
+	if (latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
+	if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
+	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
+	if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
 	//Bimbo sophie
-	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(ceraphIsFollower()) counter++;
-	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (ceraphIsFollower()) counter++;
+	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
 
 public function loversCount():Number {
 	var counter:Number = 0;
 	if (arianScene.arianFollower()) counter++;
-	if(flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if(followerHel()) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
 	//Izma!
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
-	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
-	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
-	if(followerKiha()) counter++;
-	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
-	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
+	if (followerKiha()) counter++;
+	if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
+	if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
 
 public function loversHotBathCount():Number {
 	var counter:Number = 0;
-	if(emberScene.followerEmber()) counter++;
-	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if(flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-	if(flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if(followerHel()) counter++;
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
-	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
-	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
-	if(followerKiha()) counter++;
-	if(flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
+	if (emberScene.followerEmber()) counter++;
+	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
+	if (followerKiha()) counter++;
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
 	return counter;
 }
 
 public function sparableCampMembersCount():Number {
 	var counter:Number = 0;
+	if (emberScene.followerEmber()) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (helspawnFollower()) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (followerHel()) counter++;
+	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (followerKiha()) counter++;
 	return counter;
 }
 
@@ -1360,7 +1384,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 		outputText("There is a small bedroll for Evangeline near the camp edge");
 		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
-		else outputText(", though she probably wander somewhere near camp looking for more ingredient to make her potions.");
+		else outputText(", though she probably wander somewhere near camp looking for more ingredients to make her potions.");
 		outputText(" Next to it stands a small chest with her personal stuff.\n\n");
 		addButton(5, "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
 	}
@@ -1478,6 +1502,7 @@ private function campActions():void {
 	addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
@@ -1499,6 +1524,21 @@ private function campWinionsArmySim():void {
 	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
 	addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 	addButton(14, "Back", campActions);
+}
+
+private function MagicWardMenu():void {
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
+		clearOutput();
+		outputText("You touch one of the warding stones, and feel a surge of power as every stone comes alive with power.  The ward is up, and your camp should be safe.");
+		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 3;
+		doNext(campActions);
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3) {
+		clearOutput();
+		outputText("You touch one of the warding stones and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
+		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
+		doNext(campActions);
+	}
 }
 
 public function spellHealcamp():void {
@@ -2754,6 +2794,9 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
+	//if (flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE] > ) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
 	//Children
 	var childPerformance:int = 0;
 	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());

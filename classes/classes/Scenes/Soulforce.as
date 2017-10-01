@@ -10,6 +10,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Areas.DeepSea.Kraken;
+	import classes.Scenes.NPCs.Electra;
 	import classes.Scenes.Places.Boat;
 	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
@@ -18,6 +19,7 @@ package classes.Scenes
 	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 	import classes.Scenes.Areas.Forest.WorldTree;
 	import classes.Scenes.Areas.HighMountains.IzumiScene;
+	import classes.Scenes.NPCs.Electra;
 	import classes.Scenes.NPCs.Sonya;
 	import classes.Scenes.NPCs.RyuBiDragon;
 	import classes.Scenes.Areas.Forest.Alraune;
@@ -411,6 +413,7 @@ private function eyesColorSelection():void {
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
 			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(14, "Back", SoulforceCheats);
@@ -944,6 +947,11 @@ private function eyesColorSelection():void {
 			clearOutput();
 			outputText("Entering battle with Dark Elf Sniper! Enjoy ^^");
 			startCombat(new DarkElfSniper());
+		}
+		public function FightElectra():void {
+			clearOutput();
+			outputText("Entering battle with Electra! Enjoy ^^");
+			startCombat(new Electra());
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");

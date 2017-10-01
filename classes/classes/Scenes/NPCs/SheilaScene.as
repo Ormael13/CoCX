@@ -527,7 +527,7 @@ private function sheilaPologyFight():void {
 //requires PC has mastered the spell and has enough fatigue/lust to use it
 private function sheilaPologyCastArouse():void {
 	clearOutput();
-	fatigue(15,1);
+	fatigue(15, USEFATG_MAGIC);
 	outputText("You nod at the woman and tell her that you forgive her, even as the gears of revenge turn in the dark corners of your mind.  As she smiles and begins to babble in relief, you focus on her slender body and recite under your breath the first of the formulae that will leave her a gibbering, begging mess.");
 	
 	outputText("\n\n\"<i>-wanna thank you for not taking it personally.  I mean... it was a rough day, yeah, but I had no idea that it was that close to the surface, that I'd lose control after just a little teasing from you, y'know?</i>\"  You nod again in mock understanding as your eyes move to the woman's crotch and your litany to its second phase.");

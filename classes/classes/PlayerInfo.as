@@ -441,6 +441,8 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n";
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0)
 			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
+		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
+			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
 		if (getGame().emberScene.emberAffection() > 0)
 			interpersonStats += "<b>Ember Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
 		if (getGame().helFollower.helAffection() > 0)

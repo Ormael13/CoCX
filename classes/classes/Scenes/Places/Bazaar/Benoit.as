@@ -559,7 +559,7 @@ private function buyFlintlockConfirmation():void {
 	}
 	outputText("\"<i>Here you go.  I have no need for zis,</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
 	flags[kFLAGS.BENOIT_PISTOL_BOUGHT]++;
-	flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+	player.ammo = 4;
 	player.gems -= 200;
 	statScreenRefresh();
 	inventory.takeItem(weaponsrange.FLINTLK, benoitsBuyMenu);

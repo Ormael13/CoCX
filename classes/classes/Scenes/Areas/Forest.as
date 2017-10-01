@@ -246,6 +246,13 @@ package classes.Scenes.Areas
 				},
 				call  : kGAMECLASS.etnaScene.repeatYandereEnc
 			}, {
+				name  : "electra",
+				when  : function():Boolean {
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
+						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
+				},
+				call  : kGAMECLASS.electraScene.repeatDeepwoodsEnc
+			}, {
 				name: "kitsune",
 				when: function():Boolean {
 					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 3;
