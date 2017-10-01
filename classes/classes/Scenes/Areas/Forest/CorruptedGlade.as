@@ -317,17 +317,17 @@ package classes.Scenes.Areas.Forest {
 				case 0: //Fire breath
 					outputText("You charge the fire within you and as soon as you build it up enough, you unleash it on the glade, lighting them on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(50, 1);
+					fatigue(50, USEFATG_MAGIC);
 					break;
 				case 1: //Nine tails foxfire
 					outputText("Holding out your palm, you conjure a flame that dances across your fingertips.  You launch it at the glade with a ferocious throw, and it bursts on impact, setting the glade on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, 1);
+					fatigue(20, USEFATG_MAGIC);
 					break;
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, 1);
+					fatigue(20, USEFATG_MAGIC);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");

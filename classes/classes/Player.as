@@ -562,6 +562,12 @@ use namespace kGAMECLASS;
 		override public function get weaponRangeValue():Number {
 			return _weaponRange.value;
 		}
+		public function get ammo():int {
+			return flags[kFLAGS.FLINTLOCK_PISTOL_AMMO];
+		}
+		public function set ammo(value:int):void {
+			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
+		}
 		
 		//override public function get jewelries.
 		override public function get jewelryName():String {
@@ -6080,7 +6086,7 @@ use namespace kGAMECLASS;
 			return max;
 		}
 		
-		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number,dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean = true):void {
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number,dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 2;
 			
@@ -6165,7 +6171,7 @@ use namespace kGAMECLASS;
 				}*/
 			}
 			//Change original stats
-			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false);
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
 			//Refresh the stat pane with updated values
 			//mainView.statsView.showUpDown();
 			game.showUpDown();

@@ -190,7 +190,7 @@ package classes.Scenes.Camp
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
-			fatigue(50, 2);
+			fatigue(50, USEFATG_PHYSICAL);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cut down the tree yourself with large axe.
@@ -201,7 +201,7 @@ package classes.Scenes.Camp
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
-			fatigue(50, 2);
+			fatigue(50, USEFATG_PHYSICAL);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -229,7 +229,7 @@ package classes.Scenes.Camp
 			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
-			fatigue(50, 2);
+			fatigue(50, USEFATG_PHYSICAL);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		

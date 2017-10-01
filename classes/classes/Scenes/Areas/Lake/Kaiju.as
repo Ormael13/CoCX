@@ -100,7 +100,7 @@ private function insultTheKaijuFirstMeeting():void {
 private function yesBurnDatClit():void {
 	clearOutput();
 	spriteSelect(103);
-	fatigue(30,1);
+	fatigue(30, USEFATG_MAGIC);
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and the green girl's finger is enveloped in a flash of white flames!  She drops you back into the boat as she cries out and plunges her hand into the lake water.  \"<i>Ow! That was so mean!</i>\" she says before placing her singed finger into her mouth and sucking on it.  It doesn't take too long before her natural reflex to pain becomes clouded by her unnatural lust and she begins sucking on her finger erotically, her other hand reaching for her cock and pussy.  She seems to have lost interest in you as she tries to bring herself to orgasm.  You take this opportunity to quietly sneak away.");
 	//[Lust is increased and giant turtle girl is no longer encounter-able][End whitefire scene]
 	dynStats("lus", 15);
