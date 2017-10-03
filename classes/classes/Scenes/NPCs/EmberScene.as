@@ -2069,6 +2069,10 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Okay... I guess you have some skill, after all,</i>\" Ember admits.  \"<i>Next time I'm beating you up, it's a promise!</i>\"  You smile, knowing just how much pride the dragon had to swallow, and tell " + emberMF("him", "her") + " that you'll see what happens when it happens.");
 				outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 				emberAffection(5);
+				if (emberAffection() >= 100) {
+					if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
+					else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
+				}
 			}
 			cleanupAfterCombat();
 		}

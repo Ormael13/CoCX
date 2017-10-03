@@ -39,8 +39,8 @@ package classes.Scenes.Areas
 			}
 			//Electra
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15 && rand(5) == 0) {
-				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) kGAMECLASS.electraScene.repeatMountainEnc();
-				else kGAMECLASS.electraScene.firstEnc();
+				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) kGAMECLASS.electraScene.firstEnc();
+				else kGAMECLASS.electraScene.repeatMountainEnc();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain

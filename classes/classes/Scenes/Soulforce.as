@@ -10,7 +10,6 @@ package classes.Scenes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Areas.DeepSea.Kraken;
-	import classes.Scenes.NPCs.Electra;
 	import classes.Scenes.Places.Boat;
 	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
@@ -199,7 +198,8 @@ package classes.Scenes
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
 			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
 			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
-			addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
+			//addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
+			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -317,6 +317,80 @@ private function eyesColorSelection():void {
 			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function FasterOrInstantCampNPCRecruitment():void {
+			menu();
+			if (flags[kFLAGS.EMBER_HATCHED] < 1 && flags[kFLAGS.TOOK_EMBER_EGG] < 1) addButton(0, "Ember", InstaEmberEggInCamp);
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(3, "Etna", SuccubusishMantioreOnLeash);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] < 1) addButton(5, "Ember 1UP", Ember1stLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 4 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] < 1) addButton(8, "Etna 1UP", Etna1stLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) addButton(10, "Ember DeLvL", EmberTestDeLvL);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) addButton(13, "Etna DeLvL", EtnaTestDeLvL);
+			addButton(14, "Back", SoulforceCheats);
+		}
+		public function InstaEmberEggInCamp():void {
+			player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
+			flags[kFLAGS.TOOK_EMBER_EGG] = 1;
+			flags[kFLAGS.EMBER_COR] = 50;
+			outputText("\n\n<b>Ember Egg put in camp.</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function SuccubusishMantioreOnLeash():void {
+			flags[kFLAGS.ETNA_AFFECTION] = 80;
+			flags[kFLAGS.ETNA_FOLLOWER] = 2;
+			flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
+			outputText("\n\n<b>Watch for Etna is in da hous... err camp.</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember1stLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 1;
+			outputText("\n\n<b>Ember 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember2ndLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 2;
+			outputText("\n\n<b>Ember 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember3rdLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 3;
+			outputText("\n\n<b>Ember 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember4thLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 4;
+			outputText("\n\n<b>Ember 4th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function EmberTestDeLvL():void {
+			flags[kFLAGS.EMBER_LVL_UP]--;
+			outputText("\n\n<b>Ember been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna1stLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 1;
+			outputText("\n\n<b>Etna 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna2ndLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 2;
+			outputText("\n\n<b>Etna 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function EtnaTestDeLvL():void {
+			flags[kFLAGS.ETNA_LVL_UP]--;
+			outputText("\n\n<b>Etna been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function AyaneWrongSettingUpFollowerFlagFix():void {
 			flags[kFLAGS.AYANE_FOLLOWER] = 0;
