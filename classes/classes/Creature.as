@@ -383,7 +383,7 @@ import classes.internals.Utils;
 			else return 100;
 		}
 		/**
-		 * @return keys: str, tou, spe, inte
+		 * @return keys: str, tou, spe, inte, wis, lib, sens, cor
 		 */
 		public function getAllMaxStats():Object {
 			return {
@@ -393,7 +393,8 @@ import classes.internals.Utils;
 				inte:100,
 				wis:100,
 				lib:100,
-				sens:100
+				sens:100,
+				cor:100
 			};
 		}
 		public function getAllMinStats():Object {
@@ -450,9 +451,6 @@ import classes.internals.Utils;
 			var maxes:Object;
 			if (max) {
 				maxes = getAllMaxStats();
-				maxes.lib = 100;
-				maxes.sens = 100;
-				maxes.cor = 100;
 				maxes.lust = maxLust();
 			} else {
 				maxes = {
@@ -468,6 +466,7 @@ import classes.internals.Utils;
 				}
 			}
 			var mins:Object = getAllMinStats();
+			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
 			str  = Utils.boundFloat(mins.str, str + dstr, maxes.str);
 			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
