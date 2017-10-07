@@ -210,32 +210,79 @@ package classes.Scenes.NPCs
 			this.skin.coat.type = SKIN_COAT_SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(85, 80, 85, 60);
-			initLibSensCor(50, 45, 66);
+			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
+				initStrTouSpeInte(85, 80, 85, 60);
+				initLibSensCor(50, 45, 66);
+				this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 35 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 500;
+				this.level = 21;
+				this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 2160;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
+				initStrTouSpeInte(115, 110, 115, 80);
+				initLibSensCor(75, 65, 66);
+				this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 50 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 600;
+				this.level = 31;
+				this.str += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 5840;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
+				initStrTouSpeInte(165, 150, 160, 100);
+				initLibSensCor(100, 85, 66);
+				this.weaponAttack = 48 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 65 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 700;
+				this.level = 41;
+				this.str += 49 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 10100;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
+				initStrTouSpeInte(230, 210, 220, 120);
+				initLibSensCor(125, 105, 66);
+				this.weaponAttack = 58 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 80 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 800;
+				this.level = 51;
+				this.str += 92 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 88 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 50 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 21720;
+			}
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
-			this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick scales";
-			this.armorDef = 35 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
 				this.armorDef += 2;
-			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 21;
 			this.gems = rand(15) + 95;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = WING_TYPE_DRACONIC_LARGE;
 			this.wingDesc = "huge";
 			this.tailType = TAIL_TYPE_LIZARD;
-			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2160;
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

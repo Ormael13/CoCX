@@ -78,10 +78,10 @@ package classes.Scenes.Dungeons.D3
 			//player.fatigue = 0;
 			//player.hunger = player.maxHunger();
 			//model.time.hours = 23;
-			//inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseEightHours);
 			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			//doNext(camp.returnToCampUseOneHour);
+			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseOneHour);
 		}
 		
 		private function quitToMenu():void {

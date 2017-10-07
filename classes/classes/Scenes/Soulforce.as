@@ -330,8 +330,10 @@ private function eyesColorSelection():void {
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 4 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
 			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) addButton(6, "Isabella 1UP", Isabella1stLvLUp);
 			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) addButton(6, "Isabella 2UP", Isabella2ndLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) addButton(6, "Isabella 3UP", Isabella3rdLvLUp);
 			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] < 1) addButton(7, "Kiha 1UP", Kiha1stLvLUp);
 			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.KIHA_LVL_UP] == 1) addButton(7, "Kiha 2UP", Kiha2ndLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.KIHA_LVL_UP] == 2) addButton(7, "Kiha 3UP", Kiha3rdLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] < 1) addButton(8, "Etna 1UP", Etna1stLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ETNA_LVL_UP] == 2) addButton(8, "Etna 3UP", Etna3rdLvLUp);
@@ -402,14 +404,20 @@ private function eyesColorSelection():void {
 		}
 		public function Isabella1stLvLUp():void {
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.EMBER_LVL_UP] = 1;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 1;
 			outputText("\n\n<b>Isabella 1st LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function Isabella2ndLvLUp():void {
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.EMBER_LVL_UP] = 2;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 2;
 			outputText("\n\n<b>Isabella 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella3rdLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 3;
+			outputText("\n\n<b>Isabella 3rd LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function IsabellaTestDeLvL():void {
@@ -427,6 +435,12 @@ private function eyesColorSelection():void {
 			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KIHA_LVL_UP] = 2;
 			outputText("\n\n<b>Kiha 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha3rdLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 32;
+			outputText("\n\n<b>Kiha 3rd LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function KihaTestDeLvL():void {

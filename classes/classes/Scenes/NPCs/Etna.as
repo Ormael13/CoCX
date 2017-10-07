@@ -16,18 +16,17 @@ package classes.Scenes.NPCs
 		public var etnaScene:EtnaFollower = game.etnaScene;
 
 		public function moveClawCombo():void {
-			if (flags[kFLAGS.ETNA_LVL_UP] < 1) createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) createStatusEffect(StatusEffects.Attacks, 3, 0, 0, 0);
+			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
 		
 		public function moveTailSpike():void {
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) {
-				TailSpike();
-				outputText("\n\n");
-				TailSpike();
-			}
-			else TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 4) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) TailSpike();
+			TailSpike();
 		}
 		public function TailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
@@ -52,6 +51,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("misses its mark.");
 			}
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) outputText("\n\n");
 		}
 		
 		public function moveTakeFlight():void {

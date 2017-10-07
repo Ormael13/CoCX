@@ -196,7 +196,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(130, 100, 120, 100);
 				initLibSensCor(60, 40, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 43 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 63 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 74 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 900;
 				this.level = 30;
 				this.str += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -210,7 +210,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(140, 110, 140, 110);
 				initLibSensCor(70, 45, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 49 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 72 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 94 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1000;
 				this.level = 40;
 				this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -224,7 +224,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(150, 120, 160, 120);
 				initLibSensCor(80, 50, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 81 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 114 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1100;
 				this.level = 50;
 				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -238,7 +238,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(250, 200, 210, 200);
 				initLibSensCor(100, 55, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 112 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 150 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1500;
 				this.level = 60;
 				this.str += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

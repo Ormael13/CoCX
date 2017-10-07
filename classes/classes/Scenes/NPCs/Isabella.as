@@ -211,7 +211,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(110, 150, 100, 90);
 				initLibSensCor(90, 25, 40);
 				this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 24+ (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1000;
 				this.level = 30;
 				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -225,7 +225,7 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(150, 200, 130, 120);
 				initLibSensCor(120, 25, 40);
 				this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1400;
 				this.level = 40;
 				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -234,6 +234,20 @@ package classes.Scenes.NPCs
 				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 				this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 10900;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
+				initStrTouSpeInte(200, 250, 160, 150);
+				initLibSensCor(150, 25, 40);
+				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1800;
+				this.level = 50;
+				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 16380;
 			}
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";

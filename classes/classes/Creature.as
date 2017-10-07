@@ -380,6 +380,7 @@ import classes.internals.Utils;
 			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
 			else if (stats == "wis" || stats == "wisdom") return obj.wis;
 			else if (stats == "lib" || stats == "libido") return obj.lib;
+			else if (stats == "sens" || stats == "sen" || stats == "sensitivity") return obj.sen;
 			else return 100;
 		}
 		/**
