@@ -4925,30 +4925,34 @@ public function display():void {
 		outputText("Mana: " + manaDisplay + "\n");
 		//wrath
 		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
-		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
+		if (player.whenEyesOfTheHunterActivates()) {
 			outputText("\n----------------------------\n");
-			outputText("\n<b>General Type:</b>");
-			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) outputText("\n-Beast or Animal-morph");
-			if (monster.hasPerk(PerkLib.EnemyConstructType)) outputText("\n-Construct");
-			if (monster.hasPerk(PerkLib.EnemyGigantType)) outputText("\n-Gigant");
-			if (monster.hasPerk(PerkLib.EnemyGodType)) outputText("\n-God");
-			if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("\n-Group");
-			if (monster.hasPerk(PerkLib.EnemyPlantType)) outputText("\n-Plant");
+			if (player.whenGeneralEnemyPerksDisplayed()) outputText("\n<b>General Type:</b>");
+			if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
+				if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) outputText("\n-Beast or Animal-morph");
+				if (monster.hasPerk(PerkLib.EnemyConstructType)) outputText("\n-Construct");
+				if (monster.hasPerk(PerkLib.EnemyGigantType)) outputText("\n-Gigant");
+				if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("\n-Group");
+				if (monster.hasPerk(PerkLib.EnemyPlantType)) outputText("\n-Plant");
+			}
 			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
 				if (monster.hasPerk(PerkLib.EnemyBossType)) outputText("\n-Boss");
-				outputText("\n<b>Elemental Type:</b>");
+				if (monster.hasPerk(PerkLib.EnemyGodType)) outputText("\n-God");
+			}
+			if (player.whenElementalEnemyPerksDisplayed()) outputText("\n<b>Elemental Type:</b>");
+			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
 				if (monster.hasPerk(PerkLib.DarknessNature)) outputText("\n-Darkness Nature");
 				if (monster.hasPerk(PerkLib.FireNature)) outputText("\n-Fire Nature");
 				if (monster.hasPerk(PerkLib.IceNature)) outputText("\n-Ice Nature");
 				if (monster.hasPerk(PerkLib.LightningNature)) outputText("\n-Lightning Nature");
-				if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
-					if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) outputText("\n-Darkness Vulnerability");
-					if (monster.findPerk(PerkLib.FireVulnerability) >= 0) outputText("\n-Fire Vulnerability");
-					if (monster.findPerk(PerkLib.IceVulnerability) >= 0) outputText("\n-Ice Vulnerability");
-					if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) outputText("\n-Lightning Vulnerability");
-					//if (monster.findPerk(PerkLib) >= 0) outputText("");
-					//if (monster.findPerk(PerkLib) >= 0) outputText("");
-				}
+			}
+			if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
+				if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) outputText("\n-Darkness Vulnerability");
+				if (monster.findPerk(PerkLib.FireVulnerability) >= 0) outputText("\n-Fire Vulnerability");
+				if (monster.findPerk(PerkLib.IceVulnerability) >= 0) outputText("\n-Ice Vulnerability");
+				if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) outputText("\n-Lightning Vulnerability");
+				//if (monster.findPerk(PerkLib) >= 0) outputText("");
+				//if (monster.findPerk(PerkLib) >= 0) outputText("");
 			}
 			outputText("\n");
 		}

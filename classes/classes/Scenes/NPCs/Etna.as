@@ -16,11 +16,20 @@ package classes.Scenes.NPCs
 		public var etnaScene:EtnaFollower = game.etnaScene;
 
 		public function moveClawCombo():void {
-			createStatusEffect(StatusEffects.Attacks,2,0,0,0);
+			if (flags[kFLAGS.ETNA_LVL_UP] < 1) createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) createStatusEffect(StatusEffects.Attacks, 3, 0, 0, 0);
 			eAttack();
 		}
 		
 		public function moveTailSpike():void {
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) {
+				TailSpike();
+				outputText("\n\n");
+				TailSpike();
+			}
+			else TailSpike();
+		}
+		public function TailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
 			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
@@ -179,6 +188,20 @@ package classes.Scenes.NPCs
 				this.inte += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 18900;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
+				initStrTouSpeInte(130, 210, 360, 200);
+				initLibSensCor(260, 110, 80);
+				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 250;
+				this.level = 60;
+				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 32480;
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);

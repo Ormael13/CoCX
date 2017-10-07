@@ -321,14 +321,23 @@ private function eyesColorSelection():void {
 		public function FasterOrInstantCampNPCRecruitment():void {
 			menu();
 			if (flags[kFLAGS.EMBER_HATCHED] < 1 && flags[kFLAGS.TOOK_EMBER_EGG] < 1) addButton(0, "Ember", InstaEmberEggInCamp);
+			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] < 1) addButton(1, "Isabella", LilCocksLoverSummoning);
+			if (flags[kFLAGS.KIHA_FOLLOWER] < 1) addButton(2, "Kiha", ResidentCampDragonishTsundere);
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(3, "Etna", SuccubusishMantioreOnLeash);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] < 1) addButton(5, "Ember 1UP", Ember1stLvLUp);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 4 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) addButton(6, "Isabella 1UP", Isabella1stLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) addButton(6, "Isabella 2UP", Isabella2ndLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] < 1) addButton(7, "Kiha 1UP", Kiha1stLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.KIHA_LVL_UP] == 1) addButton(7, "Kiha 2UP", Kiha2ndLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] < 1) addButton(8, "Etna 1UP", Etna1stLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ETNA_LVL_UP] == 2) addButton(8, "Etna 3UP", Etna3rdLvLUp);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) addButton(10, "Ember DeLvL", EmberTestDeLvL);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) addButton(11, "Isabella DeLvL", IsabellaTestDeLvL);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) addButton(12, "Kiha DeLvL", KihaTestDeLvL);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) addButton(13, "Etna DeLvL", EtnaTestDeLvL);
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -337,6 +346,22 @@ private function eyesColorSelection():void {
 			flags[kFLAGS.TOOK_EMBER_EGG] = 1;
 			flags[kFLAGS.EMBER_COR] = 50;
 			outputText("\n\n<b>Ember Egg put in camp.</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function LilCocksLoverSummoning():void {
+			flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] = 240;
+			flags[kFLAGS.ISABELLA_AFFECTION] = 100;
+			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
+			flags[kFLAGS.ISABELLA_PLAINS_DISABLED] = 1;
+			outputText("\n\n<b>I heard you love cows loving small cocks...so here you will get Isabella *wink wink*</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function ResidentCampDragonishTsundere():void {
+			flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2;
+			flags[kFLAGS.KIHA_AFFECTION] >= 100;
+			flags[kFLAGS.KIHA_MOVE_IN_OFFER] == 1;
+			flags[kFLAGS.KIHA_FOLLOWER] = 1;
+			outputText("\n\n<b>We need more...yandered dragon-like waifu. Or was it only more of Kiha?</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function SuccubusishMantioreOnLeash():void {
@@ -375,6 +400,40 @@ private function eyesColorSelection():void {
 			outputText("\n\n<b>Ember been De-LvL'd!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
+		public function Isabella1stLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 1;
+			outputText("\n\n<b>Isabella 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella2ndLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 2;
+			outputText("\n\n<b>Isabella 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function IsabellaTestDeLvL():void {
+			flags[kFLAGS.ISABELLA_LVL_UP]--;
+			outputText("\n\n<b>Isabella been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha1stLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 1;
+			outputText("\n\n<b>Kiha 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha2ndLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 2;
+			outputText("\n\n<b>Kiha 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function KihaTestDeLvL():void {
+			flags[kFLAGS.KIHA_LVL_UP]--;
+			outputText("\n\n<b>Kiha been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
 		public function Etna1stLvLUp():void {
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 1;
@@ -385,6 +444,12 @@ private function eyesColorSelection():void {
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 2;
 			outputText("\n\n<b>Etna 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna3rdLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 3;
+			outputText("\n\n<b>Etna 3rd LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function EtnaTestDeLvL():void {

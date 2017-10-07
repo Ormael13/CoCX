@@ -179,12 +179,12 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("flat"));
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) {
-				initStrTouSpeInte(100 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90, 80 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90);
+				initStrTouSpeInte(120, 90, 100, 90);
 				initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 600 + (game.flags[kFLAGS.EMBER_AFFECTION] * 2);
-				this.level = 20 + Math.round(game.flags[kFLAGS.EMBER_AFFECTION] / 20);
+				this.bonusHP = 800;
+				this.level = 20;
 				this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
