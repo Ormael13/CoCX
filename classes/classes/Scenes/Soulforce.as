@@ -359,9 +359,9 @@ private function eyesColorSelection():void {
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function ResidentCampDragonishTsundere():void {
-			flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2;
-			flags[kFLAGS.KIHA_AFFECTION] >= 100;
-			flags[kFLAGS.KIHA_MOVE_IN_OFFER] == 1;
+			flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 2;
+			flags[kFLAGS.KIHA_AFFECTION] = 100;
+			flags[kFLAGS.KIHA_MOVE_IN_OFFER] = 1;
 			flags[kFLAGS.KIHA_FOLLOWER] = 1;
 			outputText("\n\n<b>We need more...yandered dragon-like waifu. Or was it only more of Kiha?</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);

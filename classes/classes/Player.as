@@ -6014,7 +6014,7 @@ use namespace kGAMECLASS;
 			}
 			else {
 				game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
-				dynStats("lus", (game.player.maxLust() * 0.1), "sca", false);
+				dynStats("lus", (maxLust() * 0.1), "sca", false);
 			}
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;

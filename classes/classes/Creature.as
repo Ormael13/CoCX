@@ -2508,7 +2508,13 @@ import classes.internals.Utils;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+				return true;
+			return false;
+		}
+		public function isDualLowGradeWrathWeapon():Boolean
+		{
+			if (game.player.weapon == game.weapons.DBFSWO)
 				return true;
 			return false;
 		}

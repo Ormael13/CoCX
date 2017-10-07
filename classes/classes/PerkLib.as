@@ -1266,6 +1266,9 @@ package classes
 		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
 				"Allow to determine how corrupted or pure is enemy.",
 				"You choose the 'Sense Corruption' perk, allowing to determine how corrupted or pure is enemy.");
+		public static const SenseWrath:PerkType = mk("Sense Wrath", "Sense Wrath",
+				"Allow to determine how much wrath enemy have.",
+				"You choose the 'Sense Wrath' perk, allowing to determine how much angry is enemy.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
@@ -3010,6 +3013,8 @@ package classes
 		//------------
 		//Slot 6 - Tier 0
 		EyesOfTheHunterNovice.requireSen(25);
+		SenseWrath.requireSen(25);
+		//.requireMinSens(15);
 		//Tier 1
 		EyesOfTheHunterAdept.requireSen(50)
 							.requirePerk(EyesOfTheHunterNovice)

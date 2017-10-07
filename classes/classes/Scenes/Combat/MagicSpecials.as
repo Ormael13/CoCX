@@ -202,7 +202,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
-			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n");
+			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n", "Dwarf Rage");
 			bd.requireWrath(50);
 			if(player.hasStatusEffect(StatusEffects.DwarfRage)) {
 				bd.disable("You already raging!");

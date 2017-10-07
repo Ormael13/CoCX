@@ -299,7 +299,7 @@ import fl.controls.ComboBox;
 				{
 					player.removeBreastRow(1, 1);
 				}
-				if (player.nippleLength > 1) player.nippleLength = 1;
+				if (player.nippleLength > 0.25) player.nippleLength = 0.25;
 				while (player.biggestTitSize() > 14) player.shrinkTits(true);
 				//Sorry but you can't come, Valeria!
 			//	if (!(oldPlayer.armor is GooArmor))

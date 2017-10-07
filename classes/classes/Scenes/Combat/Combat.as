@@ -3142,6 +3142,16 @@ public function WrathWeaponsProc():void {
 			}
 		}
 	}
+	if (player.isDualLowGradeWrathWeapon()) {
+		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 20) player.wrath -= 20;
+		else {
+			takeDamage(200);
+			if (player.HP < 1) {
+				doNext(endHpLoss);
+				return;
+			}
+		}
+	}
 }
 
 public function combatMiss():Boolean {
@@ -3227,7 +3237,11 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	damage = Math.round(damage);
 	
 	if(damage < 0) damage = 1;
-	if (apply) monster.HP -= damage;
+	if (apply) {
+		monster.HP -= damage;
+		monster.wrath += Math.round(damage / 10);
+		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+	}
 	if (display) {
 		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + temp + "</font>)</b>"); //Damage
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + temp + "</font>)</b>"); //Miss/block
@@ -4799,14 +4813,18 @@ public function display():void {
 	var hpDisplay:String = "";
 	var lustDisplay:String = "";
 	var fatigueDisplay:String = "";
+	var soulforceDisplay:String = "";
 	var manaDisplay:String = "";
+	var wrathDisplay:String = "";
 	var corruptionDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 	hpDisplay   = monster.HP + " / " + monster.maxHP() + " (" + (int(math * 1000) / 10) + "%)";
 	lustDisplay = Math.floor(monster.lust) + " / " + monster.maxLust();
 	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.maxFatigue();
+	soulforceDisplay = Math.floor(monster.soulforce) + " / " + monster.maxSoulforce();
 	manaDisplay = Math.floor(monster.mana) + " / " + monster.maxMana();
+	wrathDisplay = Math.floor(monster.wrath) + " / " + monster.maxWrath();
 	corruptionDisplay = monster.cor + " / 100 ";
 
 	//trace("trying to show monster image!");
@@ -4921,9 +4939,9 @@ public function display():void {
 		outputText("HP: " + hpDisplay + "\n");
 		outputText("Lust: " + lustDisplay + "\n");
 		outputText("Fatigue: " + fatigueDisplay + "\n");
-		//soulforce
-		outputText("Mana: " + manaDisplay + "\n");
-		//wrath
+		if (player.findPerk(PerkLib.SoulSense) >= 0) outputText("Soulforce: " + soulforceDisplay + "\n");
+		if (player.findPerk(PerkLib.JobSorcerer) >= 0) outputText("Mana: " + manaDisplay + "\n");
+		if (player.findPerk(PerkLib.SenseWrath) >= 0) outputText("Wrath: " + wrathDisplay + "\n");
 		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
 		if (player.whenEyesOfTheHunterActivates()) {
 			outputText("\n----------------------------\n");
