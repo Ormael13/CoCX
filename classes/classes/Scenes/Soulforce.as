@@ -533,7 +533,7 @@ private function eyesColorSelection():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz. (1st iteration - still incomplete TF)");
+			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
 			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
@@ -681,11 +681,13 @@ private function eyesColorSelection():void {
 			inventory.takeItem(weaponsrange.I_TOME_, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
-			if (flags[kFLAGS.LETHICE_DEFEATED] < 1) {
+			if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
+				outputText("\n\n<b>You already used this cheat code!</b>");
+			}
+			else {
 				flags[kFLAGS.LETHICE_DEFEATED] = 1;
 				outputText("\n\n<b>You can Ascend now even if you not beaten Lethice yet!</b>");
 			}
-			else outputText("\n\n<b>You already used this cheat code!</b>");
 			doNext(AscensionMenu);
 		}
 		public function AddAscensionPerkPoints1():void {
