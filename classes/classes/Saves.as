@@ -9,8 +9,8 @@ import classes.GlobalFlags.kCOUNTERS;
 	import classes.internals.SimpleJsonable;
 	import classes.internals.CountersStorage;
 	import classes.internals.RootCounters;
-
-	CONFIG::AIR 
+	import classes.Scenes.NPCs.CelessScene;
+	CONFIG::AIR
 	{
 		import flash.filesystem.File;
 		import flash.filesystem.FileMode;
@@ -899,6 +899,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
+		saveFile.data.rearBody = player.rearBody;
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -1182,7 +1183,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// TODO use an interface for this or something
 		saveFile.data.world = {};
 		saveFile.data.world.x = {};
-		getGame().celessScene.save(saveFile.data.world.x);
+		CelessScene.getInstance().save(saveFile.data.world.x);
 	}
 	catch (error:Error)
 	{
@@ -2352,10 +2353,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		// TODO use an interface for this or something
 		if (saveFile.data.world != undefined){
 			if (saveFile.data.world.x != undefined){
-				game.celessScene.load(saveFile.data.world.x);
+				CelessScene.getInstance().load(saveFile.data.world.x);
 			}
 		} else{
-			game.celessScene.load(undefined);
+			CelessScene.getInstance().load(undefined);
 		}
 		
 		doNext(playerMenu);

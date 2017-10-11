@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<story name="samirah" xmlns="xxc-story">
+	<lib name="strings">
+		<text name="campDescription">
+			Samirah is quietly sunbathing on a rock, her long tail wrapped around on itself.
+			She looks like she is very busy having a hissing conversation with a common snake which, considering her way of speech, isn’t really that strange.
+		</text>
+		<lib name="encounters">
+			<text name="intro">
+				You head back into the desert yet again and see the naga from atop a nearby dune.
+				Unlike the last few times, she spots you from far away and slithers up to you.
+
+				<i>
+					“Hello, it’s nice to see you again.
+					I just realised that, despite all the times we have met, we still haven’t exchanged names.
+					My name is Samirah Dalijah, but you can just call me Samirah.”
+				</i>
+
+				You tell her that your name is [name]
+
+				<i>
+					“That's a weird name for a Naga, but I guess that since you weren't born as one it makes sense.
+					So… How do you feel about getting some stress relief lover?”
+				</i>
+				She wraps her arms around your waist as she draws you closer to her, making her intentions clear.
+			</text>
+			<text name="maxAffection">
+				You decide to head back into the desert and spot Samirah atop a nearby dune.
+				She spots you across the distance and slithers toward you.
+				Once she’s near you, she wraps herself and her tail around you in a warm hug.
+
+				<i>
+					“I’m glad you came back, [name].
+					Between hunting for food and trying to make contact with the natives of this dimension, there is nothing interesting to do.
+					Their speech pattern is so weird, how am I supposed to even understand them if they don’t have a tail to begin with?”
+				</i>
+
+				Wait, not only is there no way that she can be understood by anyone, but she also has absolutely no idea of what people are saying?
+
+				<i>
+					“Of course I can’t understand them! How can they even properly speak without tails?
+					I can guess their mood by their facial expression but thats about it.”
+				</i>
+
+				You remember about Evangeline’s knack for alchemy and head home, leaving Samirah to her thoughts as you tell her you're coming back with a solution.
+
+				<i>“Be safe and come back soon [name]! This desert isn’t the same without you around.”</i>
+			</text>
+			<text name="givePotion">
+				You head back in the desert and quickly spot Samirah sunbathing on a sand dune.
+				She notices you and slithers over to you as you bring the potion to her.
+
+				<i>“What is this item you brought [name]?”</i>
+
+				You tell her that this is something that will help her understand the language of the people of Mareth.
+				She doesn’t question you, but simply grabs the potion and chugs it down.
+				It doesn’t seem to have much of an effect on Samirah, which causes her to look at you as if to ask you if this was a joke,
+				when a sand witch pops out of nowhere, asking if she can cast a spell on you. Samirah’s pointed ears twitch as the both of you reply.
+
+				<i>“No thanks, I know how that whole song and dance ends!”</i>
+
+				The witch leaves, pissed at your brutal replies, as the both of you look at each other. Samirah look at you quite surprised.
+
+				<i>
+					“Wow, it worked! I can understand the two legs now! Thank you [name].
+					Say I have been thinking about it and there is something I would like to ask you.
+					You see this place is kind of desolate and unsafe even to me so would you mind if I came along with you this time?
+					Living in the desert tends to get boring after a while and I would like to stay closer to you from now on.”
+				</i>
+			</text>
+			<lib name="joinCampReq">
+				<text name="yes">
+					The naga smiles, her two snake fang tips showing cutely from under her lips <if test="player.race() eq 'naga'"> her tail entwining with yours</if>.
+
+					<i>
+						“It will be good not to be alone anymore.
+						I do not have any items with me and, truthfully, I don’t need anything from here, so settling down with you should be easy.”
+					</i>
+
+					She slithers by your side all the way back to your camp.
+				</text>
+				<text name="no">
+					You would prefer her to stay in the desert for now.
+
+					<i>“I understand, this might be a bit sudden. Take your time to consider it.”</i>
+
+					You wave goodbye and head back to camp.
+				</text>
+				<text name="encounter">
+					Samirah spots you from a dune and slither over right away.
+
+					<i>
+						“Have you reconsidered -pcname-? Would you mind if I came along with you back to your camp?
+						Living in the desert tends to get boring after a while and I would like to stay closer to you from now on.”
+					</i>
+				</text>
+			</lib>
+		</lib>
+		<lib name="sexMenu">
+			<text name="menu"></text>
+			<text name="fuckHer">
+				You gingerly slide one of your fingers inside her, feeling for depth as well as for wetness. Samirah coos softly, unable to withhold her moans.
+
+				<i>“Please don’t hold back lover, I can barely wait.”</i>
+
+				You slowly begin moving your fingers in and out of her wet snatch, petting her underbelly with your free hand.
+				You can tell that she is tense; the look on her face is a mix of passion and anticipation. She smiles as you place your warm meaty, [cock] against her belly.
+				She falls still as your length rubs against her. You look deeply into her amber eyes as you wrap your arms around her, and after a moment of hesitation, you kiss her passionately.
+				She relaxes in your arms and returns the kiss, abandoning herself to your will.
+
+				Chills run down your spine as her delicate forked tongue tangles with your own, and you gently press the tip of your [cock] against her scaly, moist pussy-lips.
+				Her tail slowly wraps around your legs as she moans in a soft and vaguely hissing voice.
+				You slowly sink your engorged member into her depths, pausing for a moment to let her adjust to your presence, before beginning to pump away, kissing her passionately as you both get caught up in the wonderful sensations of your intertwined bodies.
+				Her tight passage massages your length, and her scaly body rubbing on your skin only encourages you to go further as you rock back and forth in her embrace.
+				You gradually increase your pace, hearing her moans become louder as she moves her hips in time with yours. Your fingers dig into her smooth backside as you continue thrusting into her, pleasure building for what seems like a wonderful eternity.
+				You finally reach your limit, thrusting frantically until you climax, shooting thick ropes of sperm deep inside her as the both of you wail with excitement.
+
+				You slowly untangle yourself from the panting naga and leave her to rest, basking in the warmth of sex and sun.
+			</text>
+			<text name="fuckHerWild">
+				Samirah drapes her arms around your shoulders in a friendly hug, pressing her chest firmly against you.
+				You respond by wrapping your arms around her waist and pulling her closer to you.
+
+				Your snake lover lets out a soft moan and leans her head forward, pressing her lips against yours.
+				You squeeze her body even more firmly in response, the tips of your tails wrapping around one another.
+				You open your mouth and press your tongue against her lips.
+				She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke your own.
+
+				The kiss continues and both of your bodies rub together sensually, your tails continuing to wrap around one another.
+				There is a pulsing in your [cock] as it starts to grow hard against the naga’s soft belly.
+				Feeling this, Samirah gently pulls away, slowly letting your tongue out of her mouth.
+				As she does so her hands make their way over your shoulders, down your abs, and stops at your [cock].
+
+				Gently she starts to stroke the length of your [cock] with one hand while circling the tip with the other.
+				A hiss of pleasure escapes your lips as the naga strokes your [cock], her talented fingers bringing you further into a state of arousal.
+				She stops her caress and brings her hand to a scaly covering at her crotch, spreading it wide to reveal her soft pussy.
+
+				She carefully lines your member up with her opening and starts to tease the tip before gently inserting the first few inches.
+				She pulls her hips back slightly before pushing them back down, swallowing a bit more of you into her.
+				As she pulls back the second time, she shifts her arms to rest on your shoulders and grips your back tightly as she pushes you deeper inside of her.
+
+				Every thrust brings you deeper inside of her pussy, its soft walls massaging you.
+				It seems like her pussy manages to swallow your entire cock in no time at all.
+				Samirah pauses for a moment, your hips pressed together, panting.
+				You shift your arms up a little higher to rest at her waist and lower your head to nuzzle at her neck.
+				She leans her head into yours and wraps one of her arms around your head.
+				Once more she pulls back her hips before thrusting them back onto your cock.
+				No longer is she slowly bringing you inside her, now she thrusts herself onto you, going faster and faster.
+				Your tails tighten around each other as you reach climax.
+				A sudden yell escapes your throat as you cum inside of her, your tail squeezing hard enough to crush a lesser being.
+				The naga shudders in your grip as she reaches her own climax.
+
+				The two of you lay there for a moment, basking in the warm glow of orgasm.
+				Eventually Samirah slowly unwraps her tail from your own and gives you a kiss.
+
+				<i>“That was wonderful [name], let’s do this more often.”</i>
+			</text>
+			<text name="tongueJob">
+				As you entangle with Samirah, she lets out a soft moan and leans her head forward, pressing her lips against yours.
+				You squeeze her body even more firmly in response, the tips of your tails wrapping around one another.
+				You open your mouth and press your tongue against her lips.
+				She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke your own.
+
+				The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another.
+				There is a pulsing in your [cock] as it starts to grow hard against the naga’s soft belly.
+				Feeling this, the naga gently pulls away, slowly letting your tongue out of her mouth.
+				As she does so, her hands make their way over your shoulders, down your abs, and stop at your [cock].
+
+				<i>“You’re quite the big boy, aren’t you?”</i> she says as she wraps both of her hands around your now throbbing [cock].
+				She starts to slide her hands up and down your length.
+				Sticking out her tongue, she wraps it around the tip and licks at the pre that is already starting to leak out.
+
+				A hiss of pleasure escapes your lips as the naga strokes and licks at your [cock], her talented fingers and tongue bringing you into a further state of arousal.
+				The naga stops her caressing and brings your [cock] to her chest, pressing her breasts around it.
+				She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body.
+				Once she is satisfied with her body’s slickness, she quickens her pace.
+
+				You moan in pleasure as the nagi takes the tip of your member into her mouth and starts to suck.
+				You can feel her deft tongue licking every inch of your cock head.
+
+				At your limit, you let out a yell as you cum into her mouth.
+				You collapse onto the dirt and lay there, basking in the warm glow of your orgasm.
+				The nagi slides onto your chest and gives you a kiss.
+				<i>“I rather enjoyed that,”</i> she hisses into your ear, <i>“We should do this more often.”</i>
+			</text>
+			<text name="tailPen">
+				<i>“Um let's see what I can do… how about this pose first?”</i>
+
+				The lust within you builds as you view the naga lying slumped on the ground in front of you, her coils twitching and tail tip marking the dirt.
+				Stepping forward, you gather her human half into your arms and she moans softly as your breasts rub against hers.
+				Smiling, you languidly lick her neck, her skin smooth and dry beneath your tongue.
+				Reaching down, you grab the end of her tail and bring it to your dripping pussy, rubbing it back and forth across your entrance.
+				Under your caresses, Samirah rises, slowly circling you, winding herself around you again and again as you continue to use her tail tip to stimulate yourself.
+				She comes to a stop, her coils now loosely around half your body, as she once again faces you, her tail twitching hungrily in your grasp.
+				You lean forward to kiss her, caught up in the moment, as Samirah tail twitches out of your grasp and suddenly spears upwards; you gasp and moan in pleasure as it dives into your moist pussy.
+				Once again grinding your body against hers, your stiff nipples rub against one another, eliciting more moans from the both of you.
+				Her coils tighten slowly, squeezing your body in a tight hug as her tail thrashes wildly inside you, driving you closer and closer to your limit.
+				With a scream of ecstasy, you climax, your juices spurting out and coating her tail, your arms squeeze her tightly as you continue to cum.
+				Samirah slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, your moisture on her scales quickly drying under the sun.
+
+				<i>“I hope you liked it.”</i>
+
+				That, you sure did!
+			</text>
+			<text name="twinTail">
+				Samirah starts by draping her arms around your shoulders in a friendly hug and pressing her chest firmly against you.
+				In response, you slowly wrap your arms around her waist and pull her closer.
+				Samirah face is only a few inch away from yours, her tail battering the ground in anticipation as she whispers to your ears.
+
+				<i>“Feel like resuming were we last left off?”</i>
+
+				You sure do agree the both of you could resume on that as you let your hand trail down to her waist line.
+				The fragile balance breaks as she lets out a soft moan and leans her head forward, pressing her lips against yours.
+				You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another.
+				You open your mouth and press your tongue against her lips.
+				She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke your own.
+
+				The kiss continues and you can feel your breasts pressing against her own.
+				You kiss her harder, pressing your body as close as you can, enjoying the feeling of your two bodies entwined together.
+				You wrap your tail around hers, trying to make every part of your body touch every part of hers.
+				The feeling of her scaled tail rubbing against your body sends shivers of ecstasy down your spine.
+				You pull away from her mouth and move your head to kiss at her neck, carefully nibbling at it so as to not break the skin.
+				Traveling down, you pause at her collarbone, letting go of her hips to bring your hands up to her perfectly rounded breasts.
+				A moan escapes the nagi’s lips as you massage her erect nipples.
+				Your mouth continues its trek down the nagi’s supple body and you make sure to pause on each breast, circling inward and stopping on each nipple to suck gently on them.
+
+				Once more your hands move down the nagas body, making their way across her sides as your mouth simultaneously kisses at the smooth flesh of her exposed belly.
+				Goose pimples slowly begin to appear, denoting how much she enjoys it.
+				You pause at her hips, hovering over the slit at her crotch.
+				One of your hands slide down to the slit and you start to stroke at it gently as you kiss at the area around it.
+				Your partner shudders a bit, overcome by the sensations.
+				Slowly you slide a finger into her, hearing a gasp of pleasure as you move it around inside her.
+				You twist your fingers deeper inside of her, feeling the moist walls of her love canal press around your finger.
+				Carefully you move your hand and push another of your fingers inside, then a third, moving them to massage her innermost depths.
+				The naga’s whole body is shuddering with arousal at your touch.
+				It would be easy enough to bring her to a climax like this, but you decide that you want to make a slight change to the situation.
+
+				You slide your fingers out of her and lift yourself up to look into her flushed face.
+				<i>“N-no,”</i> she pants. <i>“Don’t stop... So close...”</i>
+
+				You place a finger onto her luscious lips.
+				<i>“Shhhhh,”</i> you say lovingly. <i>“All good things must come to an end, but I’m not done yet.”</i>
+
+				You untangle the end of your tail from hers and bring it up between the two of you, sliding it between your palmable breasts and inserting it sensually into your mouth.
+				You suck on the end, making sure to coat it liberally before bringing it down to Samirah awaiting slit.
+
+				The tip of your tail slides into her soft folds, eliciting a gasp from her.
+				You press further into her, feeling the walls of her pussy tighten over the length of your improvised shaft.
+				Now that you are free of any length constraints, you decide you can now finish her off with the most intense orgasm she has ever had.
+				Your scaly tail slowly crawls inside the depths of your friend, taking its time to tickle every lump, to tease all the sensitive bits while she grips you with all of her strength.
+				Your friend pulls herself to your body, hugging you tight and squishing her breasts against yours.
+				She wraps her arms around you, and begins to whisper things into your ear, <i>“P-please... more... deeper...”</i>
+
+				You simply run your tongue around her ear, gently nibbling on it as you slowly impale your naga lover on your thick, nimble tail.
+				Her tail whips back and forth across the sand as she slowly succumbs to the intense pleasure of your deep, intimate penetration.
+				You begin to wriggle your own tail inside your naga friend and her response is immediate.
+				First, she shudders as a chill of excitement rushes up her spine.
+				As the sensation overwhelms her, she lets out a wail of satisfaction followed by a series of loud moans in time with your tail’s various jerks and twists inside her.
+				As the naga girl begins to climax, driven over the edge by your tail’s intense sensations, her tail begins to flick about wildly.
+				In a stroke of genius, you manage to grab the end of her tail, holding it more or less steady against your own [clit].
+				As her tail wiggles back and forth, it drives your [clit] insane, rubbing it over and over again.
+				You prolong your friend’s climax by driving your wriggling tail ever deeper inside her and soon you find yourself close to orgasm.
+				As you feel your own climax commence, you clench your teeth and lean against your partner, your breasts mashing together and your juices beginning to intermingle.
+				As you both begin to calm down again, chests heaving, the only thing you can think to do is to kiss your partner.
+
+				She returns your kiss, but, while you are distracted she prepares herself to help you in the same way you helped her.
+				She begins to rub her tail along your [pussy], getting it wet.
+				As you feel her scaly member begin to slide inside your own [pussy], the very thought gets you excited.
+				Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her.
+				As you continue to passionately kiss each other, your tongues wrapping around one another and your arms wrapped around each other’s warm bodies, you cannot think of a better place to be.
+				Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating.
+				The both of you collapse upon the sand, too focused on one another to care about the surroundings.
+				That is how it carried on for what seemed like a beautiful, passionate eternity.
+				You wake up several hours later, lying on the ground next to your friend, and you can’t help but notice how cute she looks asleep.
+				Your tails are still buried within one another, testament to the intensity of your lovemaking.
+				You had sex until the both of you collapsed, side by side, juices dripping out into the ground.
+				You slowly remove your tail from inside her body, and simultaneously pull hers from your [pussy].
+				You kiss her on the cheek, and are just close enough to hear her whisper <i>“No matter how many time we do this it’s always a wonderful experience.”</i>
+
+				You simply entwine your tail with hers and lay against her for a while, your brain still intoxicated with passion.
+				You wake up an hour later ready to resume adventuring and highly satisfied.
+			</text>
+		</lib>
+		<lib name="talkMenu">
+			<text name="menu"></text>
+			<text name="her">
+				What can she tell about her. Actualy why did she come to the hell hole that is Mareth in the first place.
+
+				<i>
+					“Well it was kind of an accident.
+					Our caravan entered an area of unstable dimensional rift and got pulled in it,
+					I think there was one or two male and a few female with me but we all got separated on our way here.
+					Truth be told I heard some got prey to strange magic,
+					got caught by the demons or were changed by the land transformatives turning into different creatures.
+					Of course even amongst the naga exist various subspecies.”
+				</i>
+
+				<if test="$medusa">Now that she mention it is it normal for naga to develop petrification powers or even snake hairs?
+
+					<i>
+						“Actually yes, it is uncommon, but it happens to very gifted individuals.
+						One naga out of ten is born within this rare breed with a gaze so strong it turns prey to stone.
+						I guess the snake hairs is just a symptom of it.”
+					</i>
+				</if>
+
+				You thank Samirah for her time and go back to your things.
+			</text>
+			<text name="naga">
+				So how the naga homeworld looks like exactly?
+
+				<i>
+					“Well it’s a large land of sandy dunes with oasis every now and then.
+					We travel between sandstorms for sustenance and resources not to despoil the land of everything.
+					Even then a naga can survive alone in the Gobis desert for several weeks before running out of water or food.”
+				</i>
+
+				So, wait, they never experienced any cold weather there?
+
+				<i>
+					“Of course not! Else we would spend our days hibernating.
+					Nights in the world of Gobis are cold and us naga spend all of it sleeping, else, we would  be hunting night and day.“
+				</i>
+			</text>
+			<lib name="clothes">
+				<text name="intro">
+					You inquire on the clothes naga wears out of Mareth.
+
+					<i>
+						“Truthfully, while I normally wouldn’t go naked,
+						this land quickly teaches you it's easier to not wear anything rather than being dressed when it comes down to finding prey.
+						However I still have some clothes from my homeland in my stash at what's left of the caravan. Let me get them for you.”
+					</i>
+
+					She head out and comes back an hour later with a large chest.
+					She pulls out several lascivious and colorful dresses clearly made for naga.
+					The top piece which consist of a collar and a black silk bikini connected with a pink veil at the breast intersection.
+					It is accompanied by two sleeves, embellished with golden trim and golden bangles.
+					As you expected it seems to be what you would see on a desert seductress.
+					The bottom is similar to a panty of the same design save that it has but a single hole and is made to hang around a naga waist.
+					Around the length of the panty is a pink veil that goes down to what would be the knee on a human body.
+					<if test="player.isFemale()">
+						<if test="player.isNaga()">
+							Well now that you think of it you are almost jealous. Not to mention that going commando isn’t exactly your style either. Ever since you became a naga you had to go without any form of bottom undergarment. You ask Samirah if she would mind giving you one of these lovely dresses since she has no use for them at the time.
+
+							<i>“Well I guess we're lovers so I don’t see the harm in letting you wear something I used to. Here let me show you how to put it on.”
+
+							</i>
+							<else>
+								Of course despite how nice it would look on you it was made with a snake tail in mind and your current body simply won’t allow you to wear it.
+							</else>
+						</if>
+					</if>
+				</text>
+				<text name="clothesGet">
+					Samirah helps you put the dress on, and, you got to admit, it indeed looks beautiful on you, even going so far as to put the accent on your assets. Samirah bring out a mirror out of her stash so you can look yourself up. You slither right and left and even dance a little, giggling as you admire yourself. Samirah was right about it, your curves do sure look beautiful. She goes to stash the mirror and then reply.
+
+					<i>“The dress is yours, take good care of it. If you ever want to switch color just let me know, I have other options.”
+
+					</i>
+				</text>
+				<text name="colorChoose">
+					<i>“Oh did you want to change color?”</i>
+				</text>
+				<text name="colorChange">
+					Samirah pick up and stack your previous dress.
+
+					<i>“If you ever want to switch dress again just let me know.”</i>
+				</text>
+				<text name="nah">
+					<i>“If you ever want to switch dress just let me know.”</i>
+				</text>
+
+			</lib>
+			<lib name="hypnosis">
+				<text name="intro">
+					You inquire on the nagas weird ability to hypnotise their prey. Just how do they do it?
+
+					<i>
+						“Well that's a weird question [name].
+						Truth be told holding someone in trance is as easy for me as breathing is to you,
+						but I think it’s all about maintaining eye contact and using the proper movement.
+						If the target will is weak it should be somewhat easy to capture and break.”
+					</i>
+
+					<if test="player.isNaga()">
+						You nod thanking her for the information but ask if she could teach you how to properly use it yourself. Truth be told hypnosis doesn’t seem to be something you can use naturally even as a naga.
+
+						<i>
+							“Well, now this is odd, I thought you would have figured out by now but I guess since you are a former human you may lack some instinctive knowledge your confused body simply cannot process.
+							In these circumstances I could show you what it is to be a naga.”
+						</i>
+
+						Samirah gives you the ABC of proper hypnosis starting with the gaze.
+						<if test="player.isFemale()">
+							You never thought a proper belly dance would help maintain an opponent captive of your gaze either,
+							is the whole thing just about capturing the target attention?
+						</if>
+
+						<i>“The point is to give a show the target wants to look so to force its gaze toward you and mesmerise it.</i>
+						Once its attention is caught it should be easy for you to maintain it for as long as you want.
+						Once that is done you can do tons of things to your prey and even go so far as to have it do things to you.”
+						<else>
+							You nod thanking her for the information.
+						</else>
+					</if>
+				</text>
+				<text name="training">
+					You proceed to study hypnosis and other mind trick with Samirah and finish today session successfully,
+					even managing to get a small lizard that crawled into your camp to look at your eyes for a while.
+					You thank the naga for her time having learned quite a bit.
+					She couldn't teach you everything yet but you sure are making progress.
+
+					<i>
+						“It was nothing really [name] all I did was help you unlock your innate ability as a naga.
+						You still need a few more session before we are done but you learn quickly.”
+					</i>
+				</text>
+				<text name="trainingDone">
+					You proceed to study hypnosis and other mind trick with Samirah and finish today session successfully,
+					even managing to get a small lizard that crawled into your camp to look at your eyes for as long as you wished it to,
+					going so far as to pick it up. You thank the naga for her time.
+
+					<i>
+						“It was nothing really [name] all I did was help you unlock your innate ability as a naga.
+						Use what you learned well.”
+					</i>
+				</text>
+				<text name="calmDown">
+					<i>“Sorry [name] but you need to let what you have learned sink in before I teach you further.”</i>
+				</text>
+			</lib>
+		</lib>
+	</lib>
+</story>

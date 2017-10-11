@@ -12,11 +12,10 @@ package classes.Scenes.Areas.Beach
 	
 	public class Gorgon extends Monster
 	{
-		public var nagaScene:NagaScene = new NagaScene();
+		public var nagaScene:NagaScene = new NagaScene(true);
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.NAGA_OR_GORGON] = 2;
 			nagaScene.nagaRapeChoice();
 		}
 
@@ -27,7 +26,6 @@ package classes.Scenes.Areas.Beach
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {
-				flags[kFLAGS.NAGA_OR_GORGON] = 2;
 				nagaScene.nagaFUCKSJOOOOOO();
 			}
 		}

@@ -1,16 +1,16 @@
 ﻿package classes.Scenes{
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 	import classes.Scenes.Camp.*;
-	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Dungeons.*;
+	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.HeXinDao;
-
 	import coc.view.MainView;
+
 	
 	use namespace kGAMECLASS;
 
@@ -66,6 +66,14 @@
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
+		private static var _campFollowers:Vector.<XXCNPC> = new Vector.<XXCNPC>;
+		
+		public static function addFollower(newEntry:XXCNPC):void {_campFollowers.push(newEntry); }
+		
+		public static function removeFollower(toRemove:XXCNPC):void{
+			var i:int = _campFollowers.indexOf(toRemove);
+			if (i >= 0){_campFollowers.splice(i, 1); }
+		}
 /* Replaced with calls to playerMenu
 		public function campMenu():void {
 			kGAMECLASS.playerMenu();
@@ -446,11 +454,8 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
-	// Celess birth scene
-	if (celessScene.shouldDoBirth()){
-		celessScene.birthScene();
-		hideMenus();
-		return;
+	for each (var npc:XXCNPC in _campFollowers){
+		if (npc.checkCampEvent()){return;}
 	}
 	//Exgartuan clearing
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
@@ -1261,7 +1266,6 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		outputText("\n\n");
 		addButton(9,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
 	}
-	//Samirah
 //	addButtonDisabled(10, "???", "We have been entangled since the beginning.");
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -1375,11 +1379,6 @@ public function campFollowers(descOnly:Boolean = false):void {
 			addButton(2, "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
 		}
 	}
-	//Celess
-	if (celessScene.isFollower){
-		outputText(celessScene.getName+" is currently resting on all four in the nearby grassland area.\n\n");
-		addButton(3, celessScene.getName, celessScene.campInteraction);
-	}
 	//Evangeline
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 		outputText("There is a small bedroll for Evangeline near the camp edge");
@@ -1474,6 +1473,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
 		addButton(13, "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
+    for each(var npc:XXCNPC in _campFollowers){
+        npc.campDescription(XXCNPC.FOLLOWER,descOnly);
+    }
 	addButton(14,"Back",playerMenu);
 }
 

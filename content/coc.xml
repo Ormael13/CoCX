@@ -17,6 +17,7 @@
 
     <!-- NPCs -->
     <include path="coc/NPC/celess.xml"/>
+    <include path="coc/NPC/samirah.xml"/>
 
     <!--Other-->
     <include path="coc/appearance.xml"/>

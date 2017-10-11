@@ -238,7 +238,6 @@ the text from being too boring.
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ayaneFollower:AyaneFollower = new AyaneFollower();
-		public var celessScene:CelessScene = new CelessScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var chichiScene:ChiChiFollower = new ChiChiFollower();
