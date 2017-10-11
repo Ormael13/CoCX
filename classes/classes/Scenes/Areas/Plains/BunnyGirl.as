@@ -43,7 +43,7 @@ public function bunnbunbunMeet():void {
 		
 		outputText("She claps both hands over her mouth, leaving her swollen prick to bounce precipitously while she awaits your response.\n\n");
 		
-		outputText("(If you're going to sex her, which of her body parts will you use?");
+		outputText("(If you’re going to have sex with her, which of her body parts will you use?");
 		dynStats("lus", 5+player.lib/20);
 		var DickInV:Function = null;
 		var Vagina:Function = null;
@@ -94,7 +94,7 @@ private function talkToBunnyBunBun():void {
 	outputText("Rose color erupts on her face as she drops her basket and covers her mouth, \"<i>Did I just say fuck!? EEP!</i>\"  With her basket no longer in hand, her groin is revealed!  A mammoth, 14-inch dong bounces proudly between her legs.  It's veiny and tipped with a narrow head while a pair of egg-shaped orbs bounce in the sack underneath it.  She jumps and tries to cover it up again, but all she succeeds in doing is accidentally giving it a stroke.  A dollop of pre-cum squirts onto her hand as she moans without thinking, \"<i>Ooooh damn I need to breed.</i>\"\n\n");
 	
 	outputText("In no time flat she's on her back, playing with herself and lifting her balls to expose a bubblegum-pink gash.  You could 'help' her with that or you could leave.  Of course if you leave you doubt you'll find her again.  Maybe a good fucking will clear her head long enough for her to figure out how to leave this land and return to wherever she came from?\n\n");
-	outputText("(If you're going to sex her, which of her body parts will you use?");
+	outputText("(If you’re going to have sex with her, which of her body parts will you use?");
 	var DickInV:Function = null;
 	var Vagina:Function = null;
 	var sixtyNine:Function = null;
@@ -137,7 +137,7 @@ private function rapeBunBun():void {
 		outputText("The horny bun-herm follows your gaze and breaks into a slowly spreading grin, revealing a pair of cute buck-teeth as she asks, \"<i>Oh, you just wanted to fuck?  Why didn't you just ask?  I thought you were going to eat me!</i>\"  Her confident declaration does little to hide the bright red blush coloring her cheeks, making it clear this situation is a little strange to her.\n\n");
 		
 		dynStats("lus", 10, "cor", 3);
-		outputText("(If you're going to sex her, which of her body parts will you use?");
+		outputText("(If you’re going to have sex with her, which of her body parts will you use?");
 		var DickInV:Function = null;
 		var Vagina:Function = null;
 		var sixtyNine:Function = null;

@@ -137,7 +137,16 @@ public function campRathazul():void {
 	if(player.lust > 150) dynStats("lus", -4);
 	if(player.lust > 200) dynStats("lus", -5);
 	if(player.lust > 300) dynStats("lus", -5);
-	if(player.lust > 400) dynStats("lus", -5);
+	if(player.lust > 400) dynStats("lus", -6);
+	if(player.lust > 500) dynStats("lus", -6);
+	if(player.lust > 600) dynStats("lus", -7);
+	if(player.lust > 700) dynStats("lus", -7);
+	if(player.lust > 800) dynStats("lus", -8);
+	if(player.lust > 1000) dynStats("lus", -8);
+	if(player.lust > 1200) dynStats("lus", -9);
+	if(player.lust > 1400) dynStats("lus", -9);
+	if(player.lust > 1600) dynStats("lus", -10);
+	if(player.lust > 1800) dynStats("lus", -10);
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
@@ -1197,7 +1206,7 @@ private function buyDye(dye:ItemType):void {
 	spriteSelect(49);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-dye"));
-	inventory.takeItem(dye, returnToRathazulMenu);
+	inventory.takeItem(dye, rathazulShopMenu);
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
@@ -1208,7 +1217,7 @@ private function buyDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(returnToRathazulMenu);
+	doNext(rathazulShopMenu);
 }
 
 //Scales dyes
@@ -1237,7 +1246,7 @@ private function makeDye1():void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(useables.VIALCLE, returnToRathazulMenu);
+	inventory.takeItem(useables.VIALCLE, rathazulShopMenu);
 }
 
 private function makeDye2():void {
@@ -1248,7 +1257,7 @@ private function makeDye2():void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(useables.VIALTUR, returnToRathazulMenu);
+	inventory.takeItem(useables.VIALTUR, rathazulShopMenu);
 }
 
 private function makeDye3():void {
@@ -1259,7 +1268,7 @@ private function makeDye3():void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(useables.VIALPIN, returnToRathazulMenu);
+	inventory.takeItem(useables.VIALPIN, rathazulShopMenu);
 }
 
 private function makeDye4():void {
@@ -1270,7 +1279,7 @@ private function makeDye4():void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(useables.VIALRAI, returnToRathazulMenu);
+	inventory.takeItem(useables.VIALRAI, rathazulShopMenu);
 }
 
 private function makeDyeNevermind():void {
@@ -1279,7 +1288,7 @@ private function makeDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(returnToRathazulMenu);
+	doNext(rathazulShopMenu);
 }
 
 //Skin Oils
@@ -1306,7 +1315,7 @@ private function buyOil(oil:ItemType):void {
 	spriteSelect(49);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-oil"));
-	inventory.takeItem(oil, returnToRathazulMenu);
+	inventory.takeItem(oil, rathazulShopMenu);
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
@@ -1317,7 +1326,7 @@ private function buyOilNevermind():void {
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(returnToRathazulMenu);
+	doNext(rathazulShopMenu);
 }
 
 //Body Lotions
@@ -1340,7 +1349,7 @@ private function buyLotion(lotion:ItemType):void {
 	spriteSelect(49);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-lotion"));
-	inventory.takeItem(lotion, returnToRathazulMenu);
+	inventory.takeItem(lotion, rathazulShopMenu);
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
@@ -1351,7 +1360,7 @@ private function buyLotionNevermind():void {
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(returnToRathazulMenu);
+	doNext(rathazulShopMenu);
 }
 
 //Reducto
@@ -1363,13 +1372,13 @@ private function buyReducto():void {
 		outputText(images.showImage("rathazul-buy-reducto"));
 		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
 		player.gems -= cost;
-		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
+		inventory.takeItem(consumables.REDUCTO, rathazulShopMenu);
 		statScreenRefresh();
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
 		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 	}
 }
 
@@ -1382,13 +1391,13 @@ private function buyGroPlus():void {
 		outputText(images.showImage("rathazul-buy-groplus"));
 		outputText("Rathazul hands you the GroPlus with a nod before returning to his work.\n\n");
 		player.gems -= cost;
-		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
+		inventory.takeItem(consumables.GROPLUS, rathazulShopMenu);
 		statScreenRefresh();
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
 		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 	}
 }
 
@@ -1397,7 +1406,7 @@ private function buyGroPlus():void {
 		clearOutput();
 		player.gems -= 100;
 		statScreenRefresh();
-		inventory.takeItem(item, returnToRathazulMenu);
+		inventory.takeItem(item, rathazulShopMenu);
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 
@@ -1406,7 +1415,7 @@ private function rathazulMakesPureHoney():void {
 	clearOutput();
 	if (player.gems < 25) {
 		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 		return;
 	}
 	player.destroyItems(consumables.BEEHONY, 1);
@@ -1415,19 +1424,19 @@ private function rathazulMakesPureHoney():void {
 	outputText("You hand over a vial of bee honey and the 25 gems.");
 	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the bee honey and begin brewing something. ");
 	outputText("\n\nA few minutes later, he comes back with the crystal vial that contains glittering liquid.  \"<i>It's ready. The honey should be pure now,</i>\" he says. He hands you over the vial of honey and goes back to working.  ");
-	inventory.takeItem(consumables.PURHONY, returnToRathazulMenu);
+	inventory.takeItem(consumables.PURHONY, rathazulShopMenu);
 }
 
 private function rathazulMakesMilkPotion():void {
 	clearOutput();
 	if (player.gems < 250) {
 		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 		return;
 	}
 	else if (!(player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2))) {
 		outputText("\"<i>I'm sorry but you don't have the materials I need. I need five bottles of Lactaid and two bottles of purified LaBova,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 		return;
 	}
 	player.destroyItems(consumables.LACTAID, 5);
@@ -1437,7 +1446,7 @@ private function rathazulMakesMilkPotion():void {
 	outputText("You hand over the ingredients and 250 gems.");
 	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
 	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
-	inventory.takeItem(consumables.MILKPTN, returnToRathazulMenu);
+	inventory.takeItem(consumables.MILKPTN, rathazulShopMenu);
 }
 
 private function rathazulMakesScorpioPotion():void {
@@ -1445,12 +1454,12 @@ private function rathazulMakesScorpioPotion():void {
 	clearOutput();
 	if (player.gems < 100) {
 		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 		return;
 	}
 	else if (!(player.hasItem(consumables.BEEHONY, 2) && player.hasItem(consumables.SNAKOIL, 2))) {
 		outputText("\"<i>I'm sorry but you don't have the materials I need. I need two vials of Bee Honey and two vials of snake oil,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
+		doNext(rathazulShopMenu);
 		return;
 	}
 	player.destroyItems(consumables.BEEHONY, 2);
@@ -1460,7 +1469,7 @@ private function rathazulMakesScorpioPotion():void {
 	outputText("You hand over two vials of Bee Honey, two vials of Snake Oil and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
 	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Scorpinum\" and nods.");
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(consumables.SCORICO, returnToRathazulMenu);
+	inventory.takeItem(consumables.SCORICO, rathazulShopMenu);
 }
 
 

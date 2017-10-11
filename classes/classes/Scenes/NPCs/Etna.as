@@ -16,11 +16,19 @@ package classes.Scenes.NPCs
 		public var etnaScene:EtnaFollower = game.etnaScene;
 
 		public function moveClawCombo():void {
-			createStatusEffect(StatusEffects.Attacks,2,0,0,0);
+			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
 		
 		public function moveTailSpike():void {
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 4) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) TailSpike();
+			TailSpike();
+		}
+		public function TailSpike():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
 			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
@@ -43,6 +51,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("misses its mark.");
 			}
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) outputText("\n\n");
 		}
 		
 		public function moveTakeFlight():void {
@@ -138,6 +147,62 @@ package classes.Scenes.NPCs
 				this.short = "manticore";
 				this.long = "";
 			}
+			if (flags[kFLAGS.ETNA_LVL_UP] < 1) {
+				initStrTouSpeInte(100, 150, 240, 170);
+				initLibSensCor(170, 80, 80);
+				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 100;
+				this.level = 30;
+				this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 9960;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
+				initStrTouSpeInte(110, 170, 280, 180);
+				initLibSensCor(200, 90, 80);
+				this.weaponAttack = 42 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 150;
+				this.level = 40;
+				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 14100;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
+				initStrTouSpeInte(120, 190, 320, 190);
+				initLibSensCor(230, 100, 80);
+				this.weaponAttack = 48 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 200;
+				this.level = 50;
+				this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 18900;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
+				initStrTouSpeInte(130, 210, 360, 200);
+				initLibSensCor(260, 110, 80);
+				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 250;
+				this.level = 60;
+				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 32480;
+			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
@@ -150,19 +215,13 @@ package classes.Scenes.NPCs
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(100, 150, 240, 170);
-			initLibSensCor(170, 80, 80);
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "skimpy black bikini";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 100;
 			this.bonusLust = 50;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 30;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().
 					add(armors.S_SWMWR,1/12).
@@ -178,12 +237,6 @@ package classes.Scenes.NPCs
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 9960;
 			checkMonster();
 		}
 		

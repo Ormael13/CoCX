@@ -1543,14 +1543,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (monster.plural) {
-			if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+			if (player.fatigue + physicalCost(60) > player.maxFatigue()) {
 				outputText("You are too tired to slash " + monster.a + " " + monster.short + ".");
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
 		}
 		else {
-			if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+			if (player.fatigue + physicalCost(24) > player.maxFatigue()) {
 				outputText("You are too tired to slash " + monster.a + " " + monster.short + ".");
 				addButton(0, "Next", combatMenu, false);
 				return;

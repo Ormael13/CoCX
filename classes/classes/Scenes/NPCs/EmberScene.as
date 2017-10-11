@@ -2070,6 +2070,8 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 				emberAffection(5);
 			}
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
 			cleanupAfterCombat();
 		}
 

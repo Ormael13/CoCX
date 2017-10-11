@@ -954,7 +954,7 @@ import classes.GlobalFlags.*;
 				}
 				outputText("\n\nWith a groan your face contorts as you feel fluid working through [eachCock] as you pound the fleshy bunz of the little lust addled and cum covered satyr.");
 				if (player.hasKnot()) {
-					outputText("\n\nWith a hoarse yell you shove your [knot] into the satyr who gives a yelp as your [cock] spasms inside him, spurting into his now gaping love tunnel with a vengeance. ");
+					outputText("\n\nWith a hoarse yell you shove your knot into the satyr who gives a yelp as your [cock] spasms inside him, spurting into his now gaping love tunnel with a vengeance. ");
 					if (player.cumQ() >= 2500) outputText("You watch with relish as the little guy’s stomach swells, your baby batter filling him up from the back door and pushing his still bent legs forward, forcing him to let them go. ");
 					outputText("Andy Mathis looks up at you with a lazy smile as he holds his hand up, asking for a high five. With a chuckle and a shake of your head you give it to him before tugging your knot, uncocking his insides and letting your potent seed spread onto the floor. Feeling a little tired and sweaty you look down at your cum covered and lightly dozing fuck buddy, watching his chest rise and fall before you gather your [armor] and exit through the back gate, headed back for camp now that you’ve had your fill.");
 				}

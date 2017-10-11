@@ -193,33 +193,80 @@ package classes.Scenes.NPCs
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(80, 108, 75, 64);
-			initLibSensCor(64, 25, 40);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
+				initStrTouSpeInte(80, 108, 75, 64);
+				initLibSensCor(64, 25, 40);
+				this.weaponAttack = 18 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 700;
+				this.level = 20;
+				this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 2280;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
+				initStrTouSpeInte(110, 150, 100, 90);
+				initLibSensCor(90, 25, 40);
+				this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1000;
+				this.level = 30;
+				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 6480;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
+				initStrTouSpeInte(150, 200, 130, 120);
+				initLibSensCor(120, 25, 40);
+				this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1400;
+				this.level = 40;
+				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 10900;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
+				initStrTouSpeInte(200, 250, 160, 150);
+				initLibSensCor(150, 25, 40);
+				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1800;
+				this.level = 50;
+				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 16380;
+			}
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
-			this.weaponAttack = 18 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "giant shield";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusHP = 700;
 			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 20;
 			this.gems = rand(10) + 25;
 			this.tailType = TAIL_TYPE_COW;
 			this.tailRecharge = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2280;
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

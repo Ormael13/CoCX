@@ -17,6 +17,7 @@ package classes.Scenes.NPCs
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
 				else eAttack();
 			}
+			combatRoundOver();
 		}
 		
 		public function Specials1():void {
@@ -64,11 +65,11 @@ package classes.Scenes.NPCs
 			this.a = "the ";
 			this.short = "J1c golem";
 			this.imageName = "J1c golem";
-			this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's ten feet tall without general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Despite been controled by a goblin it construction prevents you from using sexual tactics to win this fight.";
+			this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's ten feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Despite been controled by a goblin it construction greatly reduce effects of most of sexual moves.";
 			this.plural = false;
 			initStrTouSpeInte(120, 120, 20, 10);
 			initLibSensCor(10, 10, 50);
-			this.lustVuln = 0;
+			this.lustVuln = .1;
 			this.tallness = 120;
 			this.createBreastRow(0, 1);
 			initGenderless();

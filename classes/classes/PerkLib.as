@@ -586,8 +586,8 @@ package classes
 				"Increases maximum mana by 1050.",
 				"You choose the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
 		public static const EpicTranquilness:PerkType = mk("Epic Tranquilness", "Epic Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 2250.",
+				"You choose the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 2250!");
 		public static const EternalyLastingBuffs:PerkType = mk("(Eternaly) Lasting Buffs", "(Eternaly) Lasting Buffs",
 				"Buff spells last another 5 turns longer at another 2x increase of their costs.",
 				"You choose the '(Eternaly) Lasting Buffs' perk. Your mastery over buffs reached (eternaly) lasting level.");
@@ -715,8 +715,8 @@ package classes
 				"Increases maximum mana by 1050.",
 				"You choose the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
 		public static const HalfStepToEpicTranquilness:PerkType = mk("Half-step-to Epic Tranquilness", "Half-step-to Epic Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 1500.",
+				"You choose the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 1500!");
 		public static const HalfStepToImprovedEndurance:PerkType = mk("Half-step-to Improved Endurance", "Half-step-to Improved Endurance",
 				"Increases maximum fatigue by 50.",
 				"You choose the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!");
@@ -739,8 +739,8 @@ package classes
 				"Increases maximum mana by 1050.",
 				"You choose the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
 		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 750.",
+				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 750!");
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
 				"You choose the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
@@ -842,8 +842,8 @@ package classes
 				"Increases maximum mana by 1050.",
 				"You choose the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
 		public static const InhumanTranquilness:PerkType = mk("Inhuman Tranquilness", "Inhuman Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 1000.",
+				"You choose the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 1000!");
 		public static const InsightfulResourcesI:PerkType = mk("Insightful Resources I", "Insightful Resources I",
 				"+5 extra soulforce per point of wisdom.",
 				"You choose the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.");
@@ -1266,6 +1266,9 @@ package classes
 		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
 				"Allow to determine how corrupted or pure is enemy.",
 				"You choose the 'Sense Corruption' perk, allowing to determine how corrupted or pure is enemy.");
+		public static const SenseWrath:PerkType = mk("Sense Wrath", "Sense Wrath",
+				"Allow to determine how much wrath enemy have.",
+				"You choose the 'Sense Wrath' perk, allowing to determine how much angry is enemy.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
@@ -2987,29 +2990,31 @@ package classes
 						   .requireLevel(48);
 		//Tier 9 Libido Perks
 		HalfStepToInhumanSelfControl.requireLib(300)
-									 .requireInt(200)
-									 .requirePerk(PeerlessSelfControl)
-									 .requireLevel(54);
+									.requireInt(200)
+									.requirePerk(PeerlessSelfControl)
+									.requireLevel(54);
 		//Tier 10 Libido Perks
 		InhumanSelfControl.requireLib(330)
-						   .requireInt(220)
-						   .requirePerk(HalfStepToInhumanSelfControl)
-						   .requireLevel(60);
+						  .requireInt(220)
+						  .requirePerk(HalfStepToInhumanSelfControl)
+						  .requireLevel(60);
 		//Tier 11 Libido Perks
 		HalfStepToEpicSelfControl.requireLib(360)
-									 .requireInt(240)
-									 .requirePerk(InhumanSelfControl)
-									 .requireLevel(66);
+								 .requireInt(240)
+								 .requirePerk(InhumanSelfControl)
+								 .requireLevel(66);
 		//Tier 12 Libido Perks
 		EpicSelfControl.requireLib(390)
-						   .requireInt(260)
-						   .requirePerk(HalfStepToEpicSelfControl)
-						   .requireLevel(72);
+					   .requireInt(260)
+					   .requirePerk(HalfStepToEpicSelfControl)
+					   .requireLevel(72);
 		//------------
 		// SENSITIVITY
 		//------------
 		//Slot 6 - Tier 0
 		EyesOfTheHunterNovice.requireSen(25);
+		SenseWrath.requireSen(25);
+		//.requireMinSens(15);
 		//Tier 1
 		EyesOfTheHunterAdept.requireSen(50)
 							.requirePerk(EyesOfTheHunterNovice)

@@ -380,10 +380,11 @@ import classes.internals.Utils;
 			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
 			else if (stats == "wis" || stats == "wisdom") return obj.wis;
 			else if (stats == "lib" || stats == "libido") return obj.lib;
+			else if (stats == "sens" || stats == "sen" || stats == "sensitivity") return obj.sen;
 			else return 100;
 		}
 		/**
-		 * @return keys: str, tou, spe, inte
+		 * @return keys: str, tou, spe, inte, wis, lib, sens, cor
 		 */
 		public function getAllMaxStats():Object {
 			return {
@@ -393,7 +394,8 @@ import classes.internals.Utils;
 				inte:100,
 				wis:100,
 				lib:100,
-				sens:100
+				sens:100,
+				cor:100
 			};
 		}
 		public function getAllMinStats():Object {
@@ -450,9 +452,6 @@ import classes.internals.Utils;
 			var maxes:Object;
 			if (max) {
 				maxes = getAllMaxStats();
-				maxes.lib = 100;
-				maxes.sens = 100;
-				maxes.cor = 100;
 				maxes.lust = maxLust();
 			} else {
 				maxes = {
@@ -2509,7 +2508,13 @@ import classes.internals.Utils;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+				return true;
+			return false;
+		}
+		public function isDualLowGradeWrathWeapon():Boolean
+		{
+			if (game.player.weapon == game.weapons.DBFSWO)
 				return true;
 			return false;
 		}
@@ -2593,6 +2598,30 @@ import classes.internals.Utils;
 		{
 			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0)
 				return true;//dodać inne typy wrogów: goo, żywiołaki, nieumarli/duchy
+			return false;
+		}
+
+		//Eyes of the Hunter
+		public function whenEyesOfTheHunterActivates():Boolean
+		{
+			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
+				return true;
+			return false;
+		}
+		public function whenGeneralEnemyPerksDisplayed():Boolean
+		{
+			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0)))
+				return true;
+			return false;
+		}
+		public function whenElementalEnemyPerksDisplayed():Boolean
+		{
+			if ((game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
+				return true;
 			return false;
 		}
 

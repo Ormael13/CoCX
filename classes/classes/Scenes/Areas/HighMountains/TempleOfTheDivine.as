@@ -60,12 +60,13 @@ package classes.Scenes.Areas.HighMountains
 			outputText("</i>\"");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" She says, winking with a lusty smile.");
 			menu();
-			addButtonDisabled(0, "???", "Cummin Sooooon!");
-			addButtonDisabled(1, "???", "Cummin Sooooon!");
-			addButton(5, "Sapphire", sapphiremenu).hint("Cummin Sooooon!");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("I think I must ask Lia for fancy tooltip here.");
+			}
+			addButton(5, "Sapphire", sapphiremenu).hint("I think I must ask Lia for fancy tooltip here.");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButtonDisabled(7, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
+			addButton(7, "Basement", templeBasement).hint("I think I must ask Lia for fancy tooltip here.");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -73,24 +74,71 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("What would you like to do in the temple?");
 			menu();
-			addButtonDisabled(0, "???", "Cummin Sooooon!");
-			addButtonDisabled(1, "???", "Cummin Sooooon!");
-			addButton(5, "Sapphire", sapphiremenu).hint("Cummin Sooooon!");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("I think I must ask Lia for fancy tooltip here.");
+			}
+			addButton(5, "Sapphire", sapphiremenu).hint("I think I must ask Lia for fancy tooltip here.");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButtonDisabled(7, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement).hint("Cummin Sooooon!");
+			addButton(7, "Basement", templeBasement).hint("I think I must ask Lia for fancy tooltip here.");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
+		public function PlayerPrayAtTemple():void {
+			clearOutput();
+			if (anyOfAltairsRepaired()) {
+				outputText("I think Lia would write here nice text to let pick which Altair to use for prayer.");
+				menu();
+				addButton(14, "Back", templemainmenu);
+			}
+			else {
+				outputText("You attempt a prayer to a god of Mareth. Sadly, if this place ever housed the god’s divine power, its ruined state no longer can contain it. It seems you will get no benefit from praying here until you repair the altars, with the god simply unable to contact you while the building is in this sinful state.\n\n");
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function anyOfAltairsRepaired():Boolean {
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1)
+				return true;
+			return false;
+		}
+		
 		public function TempleAltairsRebuildMenu():void {
-			outputText("What would you like to do in the temple?");
-			menu();
-			addButtonDisabled(0, "Marae", "Cummin Sooooon!");
-			addButtonDisabled(1, "Taoth", "Cummin Sooooon!");
-			addButtonDisabled(2, "Fenrir", "Cummin Sooooon!");
-			addButtonDisabled(3, "Fera", "Cummin Sooooon!");
-		//	addButtonDisabled(4, "???", "Cummin Sooooon!");
-			addButton(14, "Back", templemainmenu);
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
+				clearOutput();
+				outputText("Would you like to repair something in the temple?\n\n");
+				kGAMECLASS.camp.cabinProgress.checkMaterials();
+				menu();
+				addButtonDisabled(0, "Marae", "Cummin Sooooon!");
+				addButtonDisabled(1, "Taoth", "Cummin Sooooon!");
+				addButtonDisabled(2, "Fenrir", "Cummin Sooooon!");
+				addButtonDisabled(3, "Fera", "Cummin Sooooon!");
+				//addButtonDisabled(4, "???", "Cummin Sooooon!");
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) addButton(10, "Statue of Marae", templemainmenu);
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) addButton(11, "Prayer Bench", templemainmenu);
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) addButton(12, "Repairing the gargoyles on the walls", templemainmenu);
+				addButton(13, "CheckProgress", currentStateOfTemple).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(14, "Back", templemainmenu);
+			}
+			else {
+				clearOutput();
+				outputText("You take your time to look the place over. After a few moments, you conclude that, while restoring it back to its former glory isn't impossible, it will be a long and arduous task. To make it back into the temple it was in its glory days, you estimate that you will need to repair the altars, all of the stone statues including the one depicting Marae, and the benches which should then make the temple fully functional again as a place of worship.");
+				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
+				doNext(camp.returnToCampUseOneHour);
+			}
+		}
+		
+		public function currentStateOfTemple():void {
+			clearOutput();
+			outputText("The Altar of Marae ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1) outputText("is broken, a large fissure running along its center. Crude graffiti litters the once pure stone with obscenities.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) outputText("shines, illuminated by a ray of light as if beckoning the faithful. A single white flower trails its way up one side, assuring her divine presence is there.");
+			outputText("\n\nTo the left of Marae's Altar, the Altar of Taoth");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) outputText(" lies shattered into pieces. The trickster god can not even be visualised from the rubble that once made up his effigy.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1) outputText(", the trickster god, has a mesmerising outlook, his effigy making a mocking smile. You swear you can hear faint laughter coming from its direction.");
+			outputText("\n\nTo your right is the ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("damaged Altar of Fenrir. Even in this state its aura is ominous, promising eventual demise to everyone.You almost dare not approach, lest your journey ends here.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fenrir, an ominous aura radiates from it as it sits dark and foreboding.");
+			doNext(TempleAltairsRebuildMenu);
 		}
 		
 		public function sapphiremenu():void {
@@ -98,12 +146,27 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
-		//	addButton(0,"This place", templemainmenu);
+			addButton(0,"This place", TalkThisPlace).hint("Fancy tooltip that Lia will surely make soon.");
 			addButton(1,"Her", TalkHer).hint("Fancy tooltip that Lia will surely make soon.");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex).hint("Another fancy tooltip that Lia will surely make soon.");
 			addButton(4,"Back", templemainmenu);
 		}
-		
+		public function TalkThisPlace():void {
+			clearOutput();
+			outputText("Sapphire is glad to tell you about the history of the building. ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
+				outputText("She starts to explain again.\n\n");
+			}
+			else {
+				outputText("She starts to explain.\n\n");
+				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] = 1;
+			}
+			outputText("\"<i>This is the Temple of the Divines. While there are many churches and holy sites across Mareth, this one is the most important of them all. It was built by mortals for the worship of not one deity, but instead all the deities of Mareth. It serves as a neutral ground for everyone, including rival cults.</i>\"\n\n");
+			outputText("Curious, you ask about the broken altars and the shattered gargoyles littering the floor. Why is the temple in ruins?\n\n");
+			outputText("Sapphire's expression switches to one of anger.\n\n");
+			outputText("\"<i>That is the demons doing... This temple is very close to their original entrance into Mareth. Their queen's attention was drawn to this place and the first thing they did was to attempt to destroy and defile it. For the demons, gods are not beings to worship but rather huge sources of power, only good for corruption and then harvesting. Unfortunately, a god is only as strong as the collective belief of his or her adherents. The most direct way to weaken a deity is by directly attacking his or her followers and desecrating any consecrated altars.");
+			outputText(" I managed to slay the fiends who invaded here, but not before they did great damage to the temple; so much damage, that it is no longer able to house any divine power. I would repair the damage myself, but sadly as the sole guardian and caretaker I can't leave my post, lest the demons use that opportunity to destroy what's left of the temple.  Maybe if you were to bring materials and repair the temple's many features, the link to the various gods of Mareth would be restored.</i>\"\n\n");
+		}
 		public function TalkHer():void {
 			clearOutput();
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
@@ -136,7 +199,6 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 3) flags[kFLAGS.SAPPHIRE_TALKS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
 		public function TalkSex():void {
 			clearOutput();
 			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
@@ -204,8 +266,8 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
 				menu();
-				addButton(0, "Statue", currentStateOfStatue).hint("Cummin Sooooon!");
-				addButton(1, "Strange Book", strangeBookOfGolems).hint("Cummin Sooooon!");
+				addButton(0, "Statue", currentStateOfStatue).hint("Lia will make fancy tooltip soon ^^");
+				addButton(1, "Strange Book", strangeBookOfGolems).hint("Lia will make fancy tooltip soon ^^");
 				addButtonDisabled(2, "Spare Statue", "Cummin Sooooon!");
 				addButton(4, "Back", templemainmenu);
 			}
@@ -217,21 +279,6 @@ package classes.Scenes.Areas.HighMountains
 				addButton(0, "Marble", chooseToWorkOnMarbleStatue);
 				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
 			}
-		}
-		
-		public function chooseToWorkOnMarbleStatue():void {
-			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
-		}
-		public function chooseToWorkOnAlabasterStatue():void {
-			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
 		}
 		
 		public function currentStateOfStatue():void {
@@ -334,6 +381,21 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("You decide to come back later to finish the work.");
 			doNext(templemainmenu);
+		}
+		
+		public function chooseToWorkOnMarbleStatue():void {
+			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
+			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
+			flags[kFLAGS.GARGOYLE_QUEST] = 1;
+			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
+			currentStateOfStatue();
+		}
+		public function chooseToWorkOnAlabasterStatue():void {
+			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
+			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
+			flags[kFLAGS.GARGOYLE_QUEST] = 1;
+			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
+			currentStateOfStatue();
 		}
 		
 		public function SculptFrameAndFace():void {
@@ -604,7 +666,6 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
 			flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(templeBasement);
-		}
-		//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3)
+		}//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3)
 	}
 }
