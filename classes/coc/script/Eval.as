@@ -222,10 +222,10 @@ public class Eval {
 				if (!eatStr("]")) throw error(_src,expr,"Expected ',' or ']'");
 			}
 			x = wrapArray(f);
-		} else if ((m = eat(LA_INT))) {
-			x = wrapVal(parseInt(m[0]));
 		} else if ((m = eat(LA_FLOAT))) {
 			x = wrapVal(parseFloat(m[0]));
+		} else if ((m = eat(LA_INT))) {
+			x = wrapVal(parseInt(m[0]));
 		} else if ((m = eat(/^['"]/))) {
 			var delim:String = m[0];
 			var s:String = '';
