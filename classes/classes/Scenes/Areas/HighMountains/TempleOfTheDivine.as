@@ -61,12 +61,12 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" She says, winking with a lusty smile.");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
-				addButton(0, "Pray", PlayerPrayAtTemple).hint("I think I must ask Lia for fancy tooltip here.");
-				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
 			}
-			addButton(5, "Sapphire", sapphiremenu).hint("I think I must ask Lia for fancy tooltip here.");
+			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement).hint("I think I must ask Lia for fancy tooltip here.");
+			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -75,12 +75,12 @@ package classes.Scenes.Areas.HighMountains
 			outputText("What would you like to do in the temple?");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
-				addButton(0, "Pray", PlayerPrayAtTemple).hint("I think I must ask Lia for fancy tooltip here.");
-				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
 			}
-			addButton(5, "Sapphire", sapphiremenu).hint("I think I must ask Lia for fancy tooltip here.");
+			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
 			addButtonDisabled(6, "???", "Cummin Sooooon!");
-			addButton(7, "Basement", templeBasement).hint("I think I must ask Lia for fancy tooltip here.");
+			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 		

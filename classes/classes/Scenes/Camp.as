@@ -62,6 +62,7 @@
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
 		public var dungeonHC:HiddenCave = new HiddenCave();
+		public var dungeonDD:DenOfDesire = new DenOfDesire();
 		public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -2323,6 +2324,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) return true;
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
+	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
 	return false;
 }
 
@@ -2437,6 +2439,7 @@ private function dungeons():void {
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (kGAMECLASS.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (kGAMECLASS.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills.");
+	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge.");
 	addButton(14, "Back", places);
 }
 
@@ -3466,6 +3469,10 @@ private function updateAchievements():void {
 	}
 	if (kGAMECLASS.dungeons.checkHiddenCaveClear()) {
 		awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
+		dungeonsCleared++;
+	}
+	if (kGAMECLASS.dungeons.checkDenOfDesireClear()) {
+		awardAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER);
 		dungeonsCleared++;
 	}
 	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
