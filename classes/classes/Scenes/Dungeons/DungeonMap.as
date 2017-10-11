@@ -405,7 +405,7 @@ package classes.Scenes.Dungeons {
 					rawOutputText("\n         |         ");
 				}
 			}
-			else if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc < 60) { //Hidden Cave
+			else if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc < 64) { //Hidden Cave
 				rawOutputText("Hidden Cave");
 				if (kGAMECLASS.dungeonLoc == 39) {
 					rawOutputText(", Entrance");
@@ -722,6 +722,53 @@ package classes.Scenes.Dungeons {
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
+				}
+			}
+			else if (kGAMECLASS.dungeonLoc >= 64 && kGAMECLASS.dungeonLoc < 68) { //Den of Desire
+				rawOutputText("Den of Desire");
+				if (kGAMECLASS.dungeonLoc == 64) {
+					rawOutputText(", Entrance");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 64) {
+					rawOutputText(", Great Hall");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 66) {
+					rawOutputText(", Laboratory");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 67) {
+					rawOutputText(", Hero slayer omnibus room");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
 				}
 			}
 		}

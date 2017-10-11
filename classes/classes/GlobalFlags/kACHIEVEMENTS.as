@@ -233,8 +233,8 @@ package classes.GlobalFlags
 		public static const GENERAL_STATS_300:int				= 199;
 		public static const ZONE_DIVER:int						= 200; //Explore Deep Sea 100 times.
 		public static const UNKNOWN_ACHIEVEMENT_201:int			= 201; //Explore Battlefield 100 times.
-		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int			= 202;
-		public static const UNKNOWN_ACHIEVEMENT_203:int			= 203;
+		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int	= 202;
+		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int	= 203;
 		public static const UNKNOWN_ACHIEVEMENT_204:int			= 204;
 		public static const UNKNOWN_ACHIEVEMENT_205:int			= 205;
 		public static const UNKNOWN_ACHIEVEMENT_206:int			= 206;
