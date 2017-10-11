@@ -137,7 +137,7 @@ import coc.xxc.Story;
 		public override function campInteraction():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display(context, "strings/campInteraction", {$name:_name});
+			story.display("strings/campInteraction", {$name:_name});
 			addButton(0, "Appearance", appearance);
 			if (isAdult){
 				addButton(1, "Incest", incestMenu);
@@ -152,7 +152,7 @@ import coc.xxc.Story;
 		public function appearance():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display(context, "strings/appearance",{$name:_name});
+			story.display("strings/appearance",{$name:_name});
 			addButton(0, "Back", campInteraction);
 		}
 		public function birthScene():void{
@@ -162,7 +162,7 @@ import coc.xxc.Story;
 			else{
 				clearOutput();
 				doNext(nameScene);
-				story.display(context, "strings/birth/intro");
+				story.display("strings/birth/intro");
 				mainView.nameBox.text = "";
 				flushOutputTextToGUI();
 			}
@@ -189,20 +189,20 @@ import coc.xxc.Story;
 			mainView.nameBox.visible = false;
 			clearOutput();
 			doNext(camp.returnToCampUseFourHours);
-			story.display(context, "strings/birth/nameScene",{$name:_name});
+			story.display("strings/birth/nameScene",{$name:_name});
 			flushOutputTextToGUI();
 			
 		}
 		public function playtimeScene():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display(context, "strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
+			story.display("strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
 			flushOutputTextToGUI();
 		}
 		public function growUpScene():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display(context, "strings/growUp", {$name:_name});
+			story.display("strings/growUp", {$name:_name});
 			if (isCorrupt){
 				doHeatOrRut();
 				addButton(0, "Masturbate Her", incestScene, 5);
@@ -218,7 +218,7 @@ import coc.xxc.Story;
 		public function incestMenu():void{
 			if (isCorrupt){
 				clearOutput();
-				story.display(context, "strings/incest/corruptMenu",{$name:_name});
+				story.display("strings/incest/corruptMenu",{$name:_name});
 				addButton(0, "Suck her off", incestScene, 1);
 				if (player.isMaleOrHerm()){
 					addButton(1, "Fuck Her", incestScene, 0);
@@ -238,18 +238,18 @@ import coc.xxc.Story;
 			doNext(camp.returnToCampUseOneHour);
 			switch(scene){
 				case 0:
-					story.display(context, "strings/incest/fuckHer",{$name:_name});
+					story.display("strings/incest/fuckHer",{$name:_name});
 					break;
 				case 1:
-					story.display(context, "strings/incest/suckHerOff",{$name:_name});
+					story.display("strings/incest/suckHerOff",{$name:_name});
 					doHeatOrRut();
 					break;
 				case 2:
-					story.display(context, "strings/incest/getFucked",{$name:_name});
+					story.display("strings/incest/getFucked",{$name:_name});
 					doHeatOrRut();
 					break;
 				case 3:
-					story.display(context, "strings/incest/pureIncest",{$name:_name});
+					story.display("strings/incest/pureIncest",{$name:_name});
 					doHeatOrRut();
 					if (player.cor > 80){
 						_corruption++;
@@ -257,25 +257,25 @@ import coc.xxc.Story;
 							addButton(0, "Next", incestScene, 6);
 						}
 						else{
-							story.display(context, "strings/incest/addCorruption", {$name:_name});
+							story.display("strings/incest/addCorruption", {$name:_name});
 							dynStats("cor", -1);
 						}
 					}
 					break;
 				case 4:
-					story.display(context, "strings/incest/centaurToys",{$name:_name});
+					story.display("strings/incest/centaurToys",{$name:_name});
 					break;
 				case 5:
-					story.display(context, "strings/incest/masturbateHer",{$name:_name});
+					story.display("strings/incest/masturbateHer",{$name:_name});
 					break;
 				case 6:
-					story.display(context, "strings/incest/pureCorruption",{$name:_name});
+					story.display("strings/incest/pureCorruption",{$name:_name});
 					doHeatOrRut()
 			}
 			flushOutputTextToGUI();
 		}
 		public function doHeatOrRut():void{
-			story.display(context, "strings/incest/doHeatOrRut",{$name:_name});
+			story.display("strings/incest/doHeatOrRut",{$name:_name});
 			if (!player.goIntoHeat(true, 10)){player.goIntoRut(true, 10); }	
 		}
 		
@@ -311,7 +311,7 @@ import coc.xxc.Story;
 			doNext(camp.returnToCampUseOneHour);
 			outputText("<b>Not curruntly implemented</B>");
 			if (item != null){
-				story.display(context, "strings/itemImprove/improveThatItem", {$name:_name});
+				story.display("strings/itemImprove/improveThatItem", {$name:_name});
 				player.destroyItems(from, 1);
 				inventory.takeItem(item, camp.returnToCampUseOneHour);
 				return;

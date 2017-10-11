@@ -5,6 +5,8 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Camp;
 
+import coc.xxc.BoundStory;
+
 import coc.xxc.Story;
 	
 	/**
@@ -18,7 +20,7 @@ import coc.xxc.Story;
 		public static const LOVER:int = 1;
 		public static const SLAVE:int = 2;
 		
-		protected var story:Story;
+		protected var story:BoundStory;
 		protected var _storyName:String;
 		
 		public function XXCNPC(storyName:String) 
@@ -30,11 +32,11 @@ import coc.xxc.Story;
 			else {init();}
 		}
 		private function init():void{
-			story = kGAMECLASS.rootStory.locate(_storyName);
+			story = kGAMECLASS.rootStory.locate(_storyName).bind(kGAMECLASS.context);
 		}
 		public function display(toDisplay:String):void
 		{
-			story.display(context, toDisplay);
+			story.display(toDisplay);
 		}
 		protected function displaySimple(path:String):void{
 			clearOutput();

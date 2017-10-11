@@ -722,7 +722,7 @@ import classes.internals.Utils;
 		//Fertility is a % out of 100.
 		public var fertility:Number = 10;
 		public var nippleLength:Number = .25;
-		public var breastRows:Array;
+		public var breastRows:/*BreastRowClass*/Array;
 		public var ass:AssClass = new AssClass();
 
 		public function get clitLength():Number {
