@@ -51,7 +51,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Den of Desire
-			if (getGame().dungeons.canFindDenOfDesire() && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && ((rand(6) == 0) || (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 && rand(2) == 0))) {
+			if (getGame().dungeons.canFindDenOfDesire() && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && ((rand(10) == 0) || (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 && rand(2) == 0))) {
 				clearOutput();
 				outputText("You come across a set of old ruins, their grounds littered with statues, with an underground entrance leading deeper inside. ");
 				if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0) outputText("This looks to be the lair of the golemancer Rathazul mentioned. ");

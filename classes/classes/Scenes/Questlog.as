@@ -59,7 +59,8 @@ package classes.Scenes
 			if (kGAMECLASS.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			if (kGAMECLASS.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
-			//if (kGAMECLASS.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(, "Den of Desire", );
+			if (kGAMECLASS.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
+			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -121,6 +122,16 @@ package classes.Scenes
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
 			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 3;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForDenOfDesire():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 2;
 			doNext(accessQuestlogMainMenu);
 		}
 	}

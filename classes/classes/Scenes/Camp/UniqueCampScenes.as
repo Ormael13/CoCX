@@ -43,6 +43,18 @@ public function playwithyourplantdaughters():void
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function playsRathazulAndSoulgemScene():void
+{
+	clearOutput();
+	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours? Because yes I know exactly what this dangerous crystal your carrying is.</i>\"\n\n");
+	outputText("When you mention you want to create a golem, Rathazul seems to lose himself in thought, as if trying to remember something.\n\n");
+	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialised in such constructs. She was obsessed with creating the perfect servant. However when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");
+	outputText("Losing her humanity likely didn't do any good to her already fragile sanity. None can say  what you will find.</i>\"\n\n");
+	outputText("You thank Rathazul for telling you this as this might just be the information you need.");
+	flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
+
 	}
 
 }
