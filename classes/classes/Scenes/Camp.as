@@ -53,6 +53,7 @@
 		public var campUpgrades:CampUpgrades = new CampUpgrades();
 		public var campScenes:CampScenes = new CampScenes();
 		public var campMake:CampMakeWinions = new CampMakeWinions();
+		public var campUniqueScenes:UniqueCampScenes = new UniqueCampScenes();
 		public var codex:Codex = new Codex();
 		public var questlog:Questlog = new Questlog();
 		public var soulforce:Soulforce = new Soulforce();
@@ -172,6 +173,10 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	if(player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 		player.removeStatusEffect(StatusEffects.ChargeArmor);
+	}
+	if(player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+		campUniqueScenes.playsRathazulAndSoulgemScene();
+		return;
 	}
 	if(!marbleScene.marbleFollower())
 	{

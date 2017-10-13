@@ -146,26 +146,28 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
-			addButton(0,"This place", TalkThisPlace).hint("Fancy tooltip that Lia will surely make soon.");
-			addButton(1,"Her", TalkHer).hint("Fancy tooltip that Lia will surely make soon.");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex).hint("Another fancy tooltip that Lia will surely make soon.");
+			addButton(0,"This place", TalkThisPlace).hint("Learn about the temple.");
+			addButton(1,"Her", TalkHer).hint("How about her?");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2,"Sex", TalkSex).hint("Have some sweet time with her.");
 			addButton(4,"Back", templemainmenu);
 		}
 		public function TalkThisPlace():void {
 			clearOutput();
-			outputText("Sapphire is glad to tell you about the history of the building. ");
+			outputText(" You admit to being curious and Sapphire is glad to tell you about the history of the building. She starts to ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
-				outputText("She starts to explain again.\n\n");
+				outputText("explain again.\n\n");
 			}
 			else {
-				outputText("She starts to explain.\n\n");
+				outputText("explain.\n\n");
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] = 1;
 			}
 			outputText("\"<i>This is the Temple of the Divines. While there are many churches and holy sites across Mareth, this one is the most important of them all. It was built by mortals for the worship of not one deity, but instead all the deities of Mareth. It serves as a neutral ground for everyone, including rival cults.</i>\"\n\n");
 			outputText("Curious, you ask about the broken altars and the shattered gargoyles littering the floor. Why is the temple in ruins?\n\n");
 			outputText("Sapphire's expression switches to one of anger.\n\n");
-			outputText("\"<i>That is the demons doing... This temple is very close to their original entrance into Mareth. Their queen's attention was drawn to this place and the first thing they did was to attempt to destroy and defile it. For the demons, gods are not beings to worship but rather huge sources of power, only good for corruption and then harvesting. Unfortunately, a god is only as strong as the collective belief of his or her adherents. The most direct way to weaken a deity is by directly attacking his or her followers and desecrating any consecrated altars.");
-			outputText(" I managed to slay the fiends who invaded here, but not before they did great damage to the temple; so much damage, that it is no longer able to house any divine power. I would repair the damage myself, but sadly as the sole guardian and caretaker I can't leave my post, lest the demons use that opportunity to destroy what's left of the temple.  Maybe if you were to bring materials and repair the temple's many features, the link to the various gods of Mareth would be restored.</i>\"\n\n");
+			outputText("\"<i>That is the demons doing... This temple is very close to the area were they first started appearing. Their queen's attention was drawn to this place and the first thing they did was to attempt to destroy and defile it. For the demons, gods are not beings to worship but rather huge sources of power, only good for corruption and then harvesting. Unfortunately, a god is only as strong as the collective belief of his or her adherents. The most direct way to weaken a deity is by attacking his or her followers and desecrating any consecrated altars.");
+			outputText(" I managed to slay the fiends who invaded the place, but not before they did great damage to the temple; so much damage, that it is no longer able to house any divine power. I would repair the damage myself, but sadly as the sole guardian and caretaker I can't leave my post to gather materials like stone and wood, lest the demons use that opportunity to destroy what's left of the temple. Maybe if you were to bring materials and repair the temple's many features, the link to the various gods of Mareth would be restored.</i>\"\n\n");
+			outputText("Repairing the temple eh? Well thats one thing you could do. You thank her for her time and proceed to head back to camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function TalkHer():void {
 			clearOutput();
@@ -656,6 +658,9 @@ package classes.Scenes.Areas.HighMountains
 		}
 		public function readStrangeBookOfGolems():void {
 			clearOutput();
+			outputText("You read the book with keen interest, perhaps you can learn something useful from it.\n\n");
+			outputText("GOLEMANCY THE ART OF SOULCRAFT\n\n");
+			outputText("By Aerin Fowl priest of Marae\n\n");
 			outputText("Golemancy is the art of creating an artificial being from the combination of a statue and a soul. While any soul can give life to a golem, for the purpose of giving it at least minimal intelligence and autonomy, it is recommended to use the soul of a living or deceased humanoid. The most suiting and moral soul for such a purpose is generally the soul of a person near death’s door or a willing sacrifice. ");
 			outputText("Most of the Gargoyle crafted in this way are infused with the soul of pious priests and nun willing to protect the church of Marae for all eternity. Golems knows no hunger or pain but can be destroyed thus freeing their soul back. To prevent such a thing most golem are given the ability to recover by eating raw stone in order to repair themselves magically. To create a golem start by sculpting a suitable vessel for the soul. ");
 			outputText("Once this is done, place the body of the sacrifice or the captured soul of the being you wish to infuse your golem with on a sacred altar. Have the statue, still on its pedestal, carried over to face the altar but at a safe distance in case it accidentally lashes out at you in confusion upon awakening. It is often the case for already dead sacrifices, who are often snatched from the afterlife or have lounged in anguish for months inside the soul gem before being prepared.\n\n");
