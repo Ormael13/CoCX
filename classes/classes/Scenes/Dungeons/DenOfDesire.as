@@ -78,7 +78,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("You stand triumphant before the omnibus and do the only thing suitable for such a foul being as her. A few seconds later, she finally lay dead at your feet, no longer a menace and you have access to her somewhat large library of research. Her knowledge of golems is quite vast, maybe even horrifyingly so due to what she intended to use it for. This woman must have known about them when she was still human or at least must have taken a strong interest in them as a demon. ");
 			if (flags[kFLAGS.GARGOYLE_QUEST] == 4) outputText("Regardless of the reason, she had exactly whatever missing information you needed to finish the ritual. ");
-			outputText("You pick up her research, not wanting it to fall into the wrong hands, plus  it may come in handy in the future.\n\n");
+			else outputText("You pick up her research, not wanting it to fall into the wrong hands, plus  it may come in handy in the future.\n\n");
 			//outputText("<b>(Key Item Acquired: Gargoyle demonic researches!)</b>");
 			//player.createKeyItem("Gargoyle demonic researches", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 3;

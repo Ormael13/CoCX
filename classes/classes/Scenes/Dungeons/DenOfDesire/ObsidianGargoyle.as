@@ -35,6 +35,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 		}
+		
 		public function moveDevourMagic():void {
 			if (hasStatusEffect(StatusEffects.DevourMagic)) {
 				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun)) {
@@ -77,11 +78,12 @@ package classes.Scenes.Dungeons.DenOfDesire
 				createStatusEffect(StatusEffects.DevourMagic, 0, 0, 0, 0);
 			}
 		}
+		
 		public function moveGargoyleTailSlamAttack():void {
 			if (player.getEvasionRoll()) {
 				outputText("The gargoyle hammers her tail down on you attempting to crush you under its mace like tip. You dodge out of the way as her tail crashes on the floor, leaving a small crater where you stood a mere second ago.");
 			}
-			else GargoyleTailSlamAttack()
+			else GargoyleTailSlamAttack();
 		}
 		
 		override protected function performCombatAction():void

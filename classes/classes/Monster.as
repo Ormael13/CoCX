@@ -13,6 +13,7 @@
 	import classes.Scenes.Areas.Forest.Alraune;
 	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.ChiChi;
@@ -1805,7 +1806,7 @@
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
-				if(this is OmnibusOverseer) {
+				if (this is OmnibusOverseer || this is HeroslayerOmnibus) {
 					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) {

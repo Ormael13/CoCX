@@ -39,10 +39,11 @@
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n");
 						outputText("Ceraph sighs and asks, \"<i>Why would you move?  It would make you feel soooo good!</i>\"");
 					}
-					//(AUTO-LOSE)
+					//(Direct Hit)
 					else {
-						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
+						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].");
 						player.dynStats("lus", 1000);
+						if (player.lust >= player.maxLust()) outputText("  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 					}
 				}
 			}
@@ -69,9 +70,9 @@
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {
 					outputText("Ceraph blows hot kisses in your ear and slides and rubs against you as she slips over to embrace your front.  She holds up a finger, licks it, and wiggles it back and forth.  It begins to glow pink, dimly at first and then with increasing luminosity.  Once it's reached a brilliant intensity, the sparkling digit is roughly inserted into your mouth.  You can feel the dark magic soaking into your body just like water soaks into a sponge.  ");
-					if (player.lust < 33) outputText("It makes you feel warm and flushed.");
-					else if (player.lust < 60) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
-					else if (player.lust < 80) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
+					if (player.lust < .33*player.maxLust()) outputText("It makes you feel warm and flushed.");
+					else if (player.lust < .6*player.maxLust()) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
+					else if (player.lust < .8*player.maxLust()) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
 					else outputText("It makes you ache and tremble with need, practically begging for another touch.");
 					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
 				}
@@ -129,17 +130,17 @@
 		private function ceraphSpecial3():void
 		{
 			//[Mini-cum] – takes place of double-attack if very horny
-			if (lust >= 75) {
+			if (lust >= (maxLust() * 0.75)) {
 				outputText("Ceraph spreads her legs and buries three fingers in her sopping twat, her thumb vigorously rubbing against the base of her bumpy prick.  Her other hand wraps around the meaty pole and begins jerking it rapidly.  In one practiced movement she stops jerking long enough to wrap the whip around her nodule-studded demon-cock, using it like a cockring.  The organ swells thanks to the forced blood-flow, and after a few more seconds of intense masturbation, the demoness cums hard.  Her cunny squirts all over her hand, dripping clear feminine drool down her thighs.  Ceraph's masculine endowment pulses and twitches, blasting out two big squirts of jizm before it slows to a trickle.\n");
 				outputText("Letting out a throaty sigh, the demon unties her self-induced binding and gives you a wink.  Did you really just stand there and watch the whole thing?  Amazingly Ceraph actually seems stronger after such a crude display...");
 				//(+10 str/toughness, 1 level, and 10 xp reward.)
-				XP += 10;
-				level += 1;
-				str += 10;
-				tou += 10;
-				HP += 20;
-				lust = 33;
-				player.dynStats("lus", 3);
+				XP += 20;
+				level += 2;
+				str += 15;
+				tou += 15;
+				HP += 100;
+				lust = (maxLust() * 0.33);
+				player.dynStats("lus", 30);
 				outputText("\n");
 				combatRoundOver();
 				return;
