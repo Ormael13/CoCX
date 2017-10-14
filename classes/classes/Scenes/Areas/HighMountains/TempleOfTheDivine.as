@@ -270,7 +270,7 @@ package classes.Scenes.Areas.HighMountains
 				menu();
 				addButton(0, "Statue", currentStateOfStatue).hint("Lia will make fancy tooltip soon ^^");
 				addButton(1, "Strange Book", strangeBookOfGolems).hint("Lia will make fancy tooltip soon ^^");
-				addButtonDisabled(2, "Spare Statue", "Cummin Sooooon!");
+				//if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_PATH] < 1) addButton(2, "Spare Statue", ).hint("Lia will make fancy tooltip soon ^^");
 				addButton(4, "Back", templemainmenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
@@ -360,6 +360,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1))outputText("unfinished");
 			outputText(" body.");
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 1) outputText("Progress: " + flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]);
 			menu();
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(0, "Frame&Face", SculptFrameAndFace);
 			else addButtonDisabled(0, "Frame&Face", "You already sculpted Frame and Face.");
@@ -377,6 +378,7 @@ package classes.Scenes.Areas.HighMountains
 			else addButtonDisabled(6, "Chest", "You already sculpted Chest.");//progress flag at 8/10
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(8, "Cock", SculptCock);
 			else addButtonDisabled(8, "Cock", "You already sculpted Cock Area.");//look at CharCreation.as line 958 for setitng thicknes based on picked length
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 8 && flags[kFLAGS.GARGOYLE_QUEST] == 3) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -649,6 +651,33 @@ package classes.Scenes.Areas.HighMountains
 			doNext(camp.returnToCampUseSixHours);
 		}
 		
+		public function becomingGargoyle():void {
+			clearOutput();
+			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1)) {
+				if (player.inte < 80) {
+					outputText("While you do have all the ingredient required as it states in the formula you feel you don't understand magic well enough yet to risk the ritual. Who knows what fate awaits you should you fail it. You resolve to come back when you have enough arcane knowledge to attempt this.");
+					doNext(templeBasement);
+				}
+				else {
+					outputText("You think you’ve gathered all you need and proceed to move the statue up from the basement to the cathedral center next to the altar where it ought to be. You ask Sapphire to help you carry it, to which she complies, albeit she throws you several worried looks.");
+					outputText("\n\nAre you sure about this? There's no turning back past this point.");
+					menu();
+					addButton(0, "No", becomingGargoyleNo);
+				}
+			}
+			else {
+				outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first.");
+				if (!player.hasItem(useables.SOULGEM, 1)) outputText(" Lia what about text to not yet possesed Soul Gem?");
+				flags[kFLAGS.GARGOYLE_QUEST]++;
+				doNext(templeBasement);
+			}
+		}
+		public function becomingGargoyleNo():void {
+			clearOutput();
+			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
+			doNext(templeBasement);
+		}
+		
 		public function strangeBookOfGolems():void {
 			clearOutput();
 			outputText("This book seems to explain the process of crafting a Gargoyle in length. It seems to imply your friend up there may have been made out from the soul of a willing sacrifice or a long dead person. Will you read it?");
@@ -671,6 +700,6 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
 			flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(templeBasement);
-		}//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3)
+		}//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3, po skończeniu ciała ale bez zapisków z Den of Desire 4, po wyczyszczeniu Den of Desire 5)
 	}
 }

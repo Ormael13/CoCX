@@ -174,7 +174,7 @@ private function doCamp():void { //Only called by playerMenu
 	if(player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 		player.removeStatusEffect(StatusEffects.ChargeArmor);
 	}
-	if(player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+	if(player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul) && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 1) {
 		campUniqueScenes.playsRathazulAndSoulgemScene();
 		return;
 	}

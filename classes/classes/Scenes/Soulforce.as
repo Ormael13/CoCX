@@ -200,7 +200,8 @@ package classes.Scenes
 			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
 			//addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
+			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
+			//addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 private function eyesColorSelection():void {
@@ -208,6 +209,18 @@ private function eyesColorSelection():void {
 	player.eyeColor = "brown";
 	outputText("You now have brown eyes.");
 	doNext(SoulforceCheats);
+}
+private function resetObsydianGargoyleFlag():void {
+	clearOutput();
+	outputText("You can now go fight Obsydian Gargoyle again.... for test!!!");
+	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
+	doNext(SoulforceCheats);
+}
+private function resetHeroslayerOmnibusFlag():void {
+	clearOutput();
+	outputText("You can now go fight Heroslayer Omnibus again.... for test!!!");
+	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
+	doNext(resetObsydianGargoyleFlag);
 }
 		public function StatsMenu():void {
 			menu();
