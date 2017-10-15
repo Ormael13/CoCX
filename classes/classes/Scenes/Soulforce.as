@@ -213,12 +213,14 @@ private function eyesColorSelection():void {
 private function resetObsydianGargoyleFlag():void {
 	clearOutput();
 	outputText("You can now go fight Obsydian Gargoyle again.... for test!!!");
+	if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_NAME] != 0) player.removeKeyItem("Black Soul Gem");
 	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 	doNext(SoulforceCheats);
 }
 private function resetHeroslayerOmnibusFlag():void {
 	clearOutput();
 	outputText("You can now go fight Heroslayer Omnibus again.... for test!!!");
+	player.removeKeyItem("Gargoyle demonic researches");
 	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
 	doNext(resetObsydianGargoyleFlag);
 }

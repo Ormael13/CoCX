@@ -213,7 +213,7 @@ package classes.Scenes.Areas.HighMountains
 					addButtonDisabled(0,"???", "Req. Gargoyle PC.");
 					addButtonDisabled(1,"???", "Req. Gargoyle PC and Onyx/Krystal.");
 					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation).hint("Lia will make fancy tooltip soon ^^");
-					addButtonDisabled(3,"FuckHer", "Lia will make fancy tooltip soon ^^");
+					if (player.hasCock()) addButton(3,"FuckHer", SapphireFuckHer).hint("Lia will make fancy tooltip soon ^^");
 				}
 				addButton(4,"Back", sapphiremenu);
 			}
@@ -262,15 +262,81 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
+		public function SapphireFuckHer():void {
+			clearOutput();
+			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
+			outputText("You begin to gently pull sapphire into a kiss as you lay her over the nearest altar. Sapphire tongue is actually quite skilled for someone who barely discovered the joy of sex. You entwine and seek each other's out for a few minute caressing the gargoyle smooth stone skin with your hand. Sapphire gasp as your fingers trace the outline of her perfectly sculpted curves.\n\n");
+			outputText("\"<i>Ahhhn [name] I...mmm</i>\"\n\n");
+			outputText("You tease her skin for a while then get down to business exposing your [cock] to the temple cold air. You shiver for a moment but this is only momentaneous as your tips finds the entrance to sapphire warm canal slowly pressing against it. Sapphire gasp as you gently press your tip near her tight folds not going in yet.\n\n");
+			outputText("\"<i>P..please [name] do not make me wait anymore I...I can’t..</i>\"\n\n");
+			outputText("You finally decide to oblige her, her eyes going wide as you plunge in as far as you can go burying your length into her tight pussy. As a creature made of living stone you should have guessed by now her cunt wouldn't be the most flexible. It squeeze on your cock like a vice. Sapphire long tongue is loling out and she pant slowly this must be quite the experience for her. ");
+			outputText("You begin to slowly slide in and out of her your gargoyle lover arms and legs locking you in a tight grip as pleasure overtake her. You are unlikely to escape for as long as she is not satisfied. Her tight crazy cunt attempt to milks you for all its worth and soon you find yourself on the verge of orgasm.\n\n");
+			if (player.isGargoyle()) {
+				outputText("Sapphire and you makes a high pitched screech as she clamp on your [cock] her cunt pulsing as you fuck her with wild abandon pulling your penis in and out at high speed the sound of two wet rock sliding against each other echoing in the temple. Sapphire on her side keep mercilessly milking your cock forcing you both to pass through several orgasm until you reach your final peak petrifying together into a completely pleasure addled expression. ");
+				outputText("The two of you stay somewhat unconscious a fair hour the pleasure echoing into the core of your very being before you regain mobility your cock sliding out of her cunt with the sound of grinding stone.\n\n");
+				outputText("\"<i>Mmmm that sure was one hell of a ride to heaven [name] I hope we will do this again some other time.</i>\"\n\n");
+				outputText("You nod still mouth gaping from the feeling of your cock and gear up as you head back to camp.\n\n");
+			}
+			else {
+				outputText("Sapphire makes a high pitched screech as she clamp on your [cock] her cunt pulsing as you fill her with your load painting her stone insides with your cum. You try to slide out but she is far too gone to let you go and keep mercilessly milking your cock forcing you to pass through several orgasm until she reach her final peak petrifying into hard stone. ");
+				outputText("To your dismay your cock is buried hilt deep into her and you wait a fair hour before she regain mobility cum flowing out of her cunt as she slide off.\n\n");
+				outputText("\"<i>Oops... I got carried away. I hope you don’t mind [name].</i>\"\n\n");
+				outputText("You nod absentmindedly and gear up as you head back to camp.\n\n");
+			}
+			sapphireAffection(5);
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function krystalonyxmenu():void {
+			clearOutput();
+			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+			else outputText("him");
+			outputText(" if ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
+			else outputText("he");
+			outputText(" would feel like indulging in some quality time with you. ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Her");
+			else outputText("His");
+			outputText(" eternal watch must get boring sometimes. ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
+			else outputText("He");
+			outputText(" fawns over you, clearly showing ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+			else outputText("his");
+			outputText(" interest.\n\n");
+			outputText("\n\n\"<i>You're my savior and hero! How could I refuse such a request?");
+			if (player.isGargoyle()) outputText(" There’s even a water source nearby to use as lube if necessary.");
+			outputText("</i>\"");
+			if (player.lust + 50 < player.maxLust()) player.lust += 50;
+			else player.lust = player.maxLust();
+			menu();
+			addButtonDisabled(0, "Tail Fuck", "Lia will make fancy tooltip soon ^^");
+			addButtonDisabled(1, "Tribadism", "Lia will make fancy tooltip soon ^^");
+			addButtonDisabled(2, "69", "Lia will make fancy tooltip soon ^^");
+			addButtonDisabled(3, "Get fucked", "Lia will make fancy tooltip soon ^^");
+			if (player.hasCock()) addButton(4, "Fuck Her", KrystalFuckHer).hint("Lia will make fancy tooltip soon ^^");
+			addButton(14, "Back", templemainmenu);
+		}
+		
+		public function KrystalFuckHer():void {
+			clearOutput();
+			outputText("Krystal sure has a lovely body, you can’t deny that. Her breasts are perfectly shaped, her face could make any man fall for her and that pussy looks so inviting it would be impossible to say no. You slowly push Krystal to the ground ");
+			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
+			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
 		
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
 				menu();
-				addButton(0, "Statue", currentStateOfStatue).hint("Lia will make fancy tooltip soon ^^");
-				addButton(1, "Strange Book", strangeBookOfGolems).hint("Lia will make fancy tooltip soon ^^");
-				//if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_PATH] < 1) addButton(2, "Spare Statue", ).hint("Lia will make fancy tooltip soon ^^");
+				addButton(0, "Statue", currentStateOfStatue).hint("Check on the statue.");
+				addButton(1, "Strange Book", strangeBookOfGolems).hint("Examine the strange book.");
+				if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_PATH] < 1) addButton(2, "Spare Statue", makingNewGargoyle).hint("Check on the spare statue.");
 				addButton(4, "Back", templemainmenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
@@ -281,6 +347,82 @@ package classes.Scenes.Areas.HighMountains
 				addButton(0, "Marble", chooseToWorkOnMarbleStatue);
 				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
 			}
+		}
+		
+		public function makingNewGargoyle():void {
+			if (flags[kFLAGS.ONYX_GENDER] < 1) makingNewGargoylePart1();
+			else makingNewGargoylePart4();
+		}
+		public function makingNewGargoylePart1():void {
+			clearOutput();
+			outputText("Thinking about your lonely friend up there, you look at the spare gargoyle body and take the Black Soul Gem out of your pack. Maybe she could use the company of another gargoyle.\n\n");
+			outputText("Everyone deserves a second chance, but you ponder if using the soul of a formerly sex starved aberration is a bright idea.");
+			menu();
+			addButton(0, "Yes", makingNewGargoylePart2);
+			addButton(1, "No", templeBasement);
+		}
+		public function makingNewGargoylePart2():void {
+			clearOutput();
+			outputText("You work for six hours, sculpting the spare statue parts to your liking with an artist's passion, then head back to camp for a break.");
+			menu();
+			addButton(0, "Female", makingNewGargoyleFemale);
+			addButton(1, "Herm", makingNewGargoyleHerm);
+			addButton(2, "Male", makingNewGargoyleFMale);
+		}
+		public function makingNewGargoyleFemale():void {
+			flags[kFLAGS.ONYX_GENDER] = 1;
+			doNext(camp.returnToCampUseSixHours);
+		}
+		public function makingNewGargoyleHerm():void {
+			flags[kFLAGS.ONYX_GENDER] = 2;
+			doNext(camp.returnToCampUseSixHours);
+		}
+		public function makingNewGargoyleFMale():void {
+			flags[kFLAGS.ONYX_GENDER] = 3;
+			doNext(camp.returnToCampUseSixHours);
+		}
+		public function makingNewGargoylePart4():void {
+			clearOutput();
+			outputText("You conduct the ritual according to the book, carrying the statue to the altar and mixing your own blood with the ingredients as to carefully bind the new gargoyle to you, in case it’s soul is unstable. You draw the required arcane circles around the statue under the gaze of Sapphire. Once done, you place the Black Soul Gem on the altar and chant the arcane words.\n\n");
+			outputText("\"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
+			outputText("As you chant the last word, the gem seems to be assimilated directly into the alabaster/marble body, disappearing without a trace. The statue's eyes start to dimly glow with a pale purple light as the new gargoyle awakens with a surprised expression. \"<i>What happened...? I was dead, finally destroyed by your hands and at rest. But now I’m alive again. My thoughts free of the constant plague of sexual desires, and in a new body. Am I to be given a second chance?</i>\"\n\n");
+			outputText("You start by asking the gargoyle for its name, not desiring to force it into the role of a slave again.\n\n");
+			outputText("\"<i>My name?... While I used to be one soul, I am now many. Since I'm a living statue and I’m closer to a ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Female");
+			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("Male");
+			outputText(" being, I guess I’ll name myself ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
+				outputText("Krystal");
+				mainView.nameBox.text = "Krystal";
+				flags[kFLAGS.ONYX_NAME] = mainView.nameBox.text;
+				mainView.nameBox.text = "";
+			}
+			else {
+				outputText("Onyx");
+				mainView.nameBox.text = "Onyx";
+				flags[kFLAGS.ONYX_NAME] = mainView.nameBox.text;
+				mainView.nameBox.text = "";
+			}
+			outputText(". Are you going to be my master from now on?</i>\"\n\n");
+			outputText("You have no intention of being such a thing, and you clearly state to " + flags[kFLAGS.ONYX_NAME] + " that the only order you'll ever give ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+			else outputText("him");
+			outputText(" is to help Sapphire guard this temple from potential corrupted influences such as demons and minotaurs. For the rest of ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+			else outputText("his");
+			outputText(" time, ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
+			else outputText("he");
+			outputText(" is officially free to act and live as ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
+			else outputText("he");
+			outputText(" wishes, without the constraints of obedience to a master. " + flags[kFLAGS.ONYX_NAME] + "'s face would shed tears if it could, after living for years as a slave to a demon master, the freedom you offer the gargoyle is something it only dared to dream of.\n\n");
+			outputText("\"<i>If that's the condition, then I will do as you ask. Thank you so much for everything, and should you ever need anything special, I will be here in the temple for you. It feels so good to finally be able to make my own choices again.</i>\"\n\n");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She gives you an affectionate kiss on the cheek, surprising you, then flies to perch on a nearby pedestal and begins her watch.");
+			else outputText("He warmly hugs you to show his appreciation, then flies to perch on a nearby pedestal and begins his watch.");
+			outputText("\n\n");
+			flags[kFLAGS.ONYX_PATH] = 2;
+			player.removeKeyItem("Black Soul Gem");
 		}
 		
 		public function currentStateOfStatue():void {
@@ -784,6 +926,6 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
 			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(templeBasement);
-		}//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3, po skończeniu ciała ale bez zapisków z Den of Desire 4, po wyczyszczeniu Den of Desire 5)
+		}
 	}
 }

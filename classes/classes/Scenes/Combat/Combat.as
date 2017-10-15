@@ -3865,7 +3865,7 @@ private function combatStatusesUpdate():void {
 		player.addStatusValue(StatusEffects.HeroBane,1,-1);
 		if(player.statusEffectv1(StatusEffects.HeroBane) <= 0) {
 			player.removeStatusEffect(StatusEffects.HeroBane);
-			outputText("<b>text for hero ane ending (by Liadri)</b>\n\n");
+			outputText("<b>You feel your body lighten as the curse linking your vitality to that of the omnibus ends.</b>\n\n");
 		}
 	}
 	if(player.hasStatusEffect(StatusEffects.AcidSlap)) {
