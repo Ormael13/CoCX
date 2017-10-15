@@ -2975,11 +2975,16 @@ public function attack():void {
 	
 	outputText("\n");
 	checkAchievementDamage(damage);
+	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+		player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+	}
 	meleeattackdamage();
 }
 public function meleeattackdamage():void {
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if(monster.HP >= 1 && monster.lust <= monster.maxLust()) {
 			if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 				attack();
@@ -2999,6 +3004,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3011,6 +3017,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3023,6 +3030,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3035,6 +3043,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3047,6 +3056,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3059,6 +3069,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3071,6 +3082,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3083,6 +3095,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3095,6 +3108,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3107,6 +3121,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3119,6 +3134,7 @@ public function meleeattackdamage():void {
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) {
 		WrathWeaponsProc();
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
 		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
@@ -3150,6 +3166,17 @@ public function WrathWeaponsProc():void {
 				doNext(endHpLoss);
 				return;
 			}
+		}
+	}
+}
+
+public function HeroBaneProc():void {
+	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+		outputText("\nYou feel " + monster.a + monster.short + " wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
+		takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
+		if (player.HP < 1) {
+			doNext(endHpLoss);
+			return;
 		}
 	}
 }
@@ -3833,6 +3860,13 @@ private function combatStatusesUpdate():void {
 		deoxigen += (player.maxHP() * 0.05);
 		deoxigen = takeDamage(deoxigen);
 		outputText("<b>You are running out of oxygen you need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
+	}
+	if(player.hasStatusEffect(StatusEffects.HeroBane)) {
+		player.addStatusValue(StatusEffects.HeroBane,1,-1);
+		if(player.statusEffectv1(StatusEffects.HeroBane) <= 0) {
+			player.removeStatusEffect(StatusEffects.HeroBane);
+			outputText("<b>text for hero ane ending (by Liadri)</b>\n\n");
+		}
 	}
 	if(player.hasStatusEffect(StatusEffects.AcidSlap)) {
 		var slap:Number = 3 + (player.maxHP() * 0.02);

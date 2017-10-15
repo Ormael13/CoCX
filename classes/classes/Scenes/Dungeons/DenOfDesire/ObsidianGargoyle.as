@@ -143,7 +143,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 			this.tallness = 120;
 			this.drop = NO_DROP;
 			this.level = 28;
-			this.bonusHP = 500;
+			this.bonusHP = 2500;
 			this.additionalXP = 500;
 			this.lustVuln = 0;
 			this.weaponName = "stone claws";

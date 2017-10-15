@@ -38,13 +38,12 @@ package classes.Scenes.Dungeons
 			outputText("You scream in horror as you finally realize what's happening. The gargoyle didn't just rape you, she literally devoured your soul and now you're stuck for eternity, to be a part of the many victims powering this foul creature’s twisted core!\n\n");
 			//[GAME OVER]
 			getGame().gameOver();
-			removeButton(1);
 		}
 		public function defeatedObsidianGargoyle():void {
 			clearOutput();
 			outputText("Screaming in agony, the abominations body begins to fissure everywhere as she look at you with a tearful expression of release and say a final “thank you”. Her body breaks down, crumbling on the ground into a pile of stone rubble. What looks to be a good hundred or more different ghostly forms escape from the stony remains, moving upward to whatever place they are going, although you notice a few remain stuck in a gem like stone.\n\n");
-			//outputText("<b>(Key Item Acquired: Black Soul Gem!)</b>");
-			//player.createKeyItem("Black Soul Gem", 0, 0, 0, 0);
+			outputText("<b>(Key Item Acquired: Black Soul Gem!)</b>");
+			player.createKeyItem("Black Soul Gem", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
 			cleanupAfterCombat();
 		}
@@ -72,17 +71,18 @@ package classes.Scenes.Dungeons
 			outputText("You've long forgotten everything about your past life. You are ‘master’s’ fuck toy and pet now and your only duty and joy is as ‘master’s’ tool, to thoroughly rape anyone who dares to enter these ruins.\n\n");
 			//[GAME OVER]
 			getGame().gameOver();
-			removeButton(1);
 		}
 		public function defeatedHeroslayerOmnibus():void {
 			clearOutput();
 			outputText("You stand triumphant before the omnibus and do the only thing suitable for such a foul being as her. A few seconds later, she finally lay dead at your feet, no longer a menace and you have access to her somewhat large library of research. Her knowledge of golems is quite vast, maybe even horrifyingly so due to what she intended to use it for. This woman must have known about them when she was still human or at least must have taken a strong interest in them as a demon. ");
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 4) outputText("Regardless of the reason, she had exactly whatever missing information you needed to finish the ritual. ");
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 5) {
+				outputText("Regardless of the reason, she had exactly whatever missing information you needed to finish the ritual. ");
+				flags[kFLAGS.GARGOYLE_QUEST]++;
+			}
 			else outputText("You pick up her research, not wanting it to fall into the wrong hands, plus  it may come in handy in the future.\n\n");
-			//outputText("<b>(Key Item Acquired: Gargoyle demonic researches!)</b>");
-			//player.createKeyItem("Gargoyle demonic researches", 0, 0, 0, 0);
+			outputText("<b>(Key Item Acquired: Gargoyle demonic researches!)</b>");
+			player.createKeyItem("Gargoyle demonic researches", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 3;
-			//flags[kFLAGS.GARGOYLE_QUEST] = 5;
 			cleanupAfterCombat();
 		}
 		
@@ -99,8 +99,6 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 65;
 			clearOutput();
 			outputText("<b><u>Great Hall</u></b>\n");
-			outputText("You stand in a great hall. Many statues line the walls here, giving the somewhat ominous feeling of being watched. The remains of the obsidian gargoyle still litter the floor.");
-			dungeons.setDungeonButtons(roomLaboratory, roomEntrance, null, null);
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 2) {
 				outputText("\n\nAs you set foot into a great hall, lined with obsidian statues depicting demons in various act of utter debauchery, one of the statues starts moving, turning its head toward you, as it slides off of the literally rock hard cock of the other statue on the pedestal representing a minor incubus.");
 				outputText("\n\n\"<i>An intruder? Here? Please do me! Let me fuck your soul out! I've been starved for years and I'm pent up for a release. Master won't ever let me have release. I must.... FEED!</i>\"");
@@ -110,6 +108,8 @@ package classes.Scenes.Dungeons
 				doNext(playerMenu);
 				return;
 			}
+			outputText("You stand in a great hall. Many statues line the walls here, giving the somewhat ominous feeling of being watched. The remains of the obsidian gargoyle still litter the floor.");
+			dungeons.setDungeonButtons(roomLaboratory, roomEntrance, null, null);
 		}
 		public function roomLaboratory():void {
 			kGAMECLASS.dungeonLoc = 66;
@@ -122,8 +122,6 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 67;
 			clearOutput();
 			outputText("<b><u>Hero slayer omnibus room</u></b>\n");
-			outputText("This is where the Omnibus was practicing her horrifying research to create demonic gargoyles. Her blood is still warm on the floor; there is nothing left to do here.");
-			dungeons.setDungeonButtons(null, roomLaboratory, null, null);
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 3) {
 				outputText("\n\nYou enter what looks like a wizard's laboratory. There are various statues, still uncarved lining the walls along with a veiled one in the back of the room. A demon seems to be working with what looks to be soulstones, Lethicite shards and books. As she notice that she is no longer alone, she turns around to face you. She isn't really the right term, she clearly is an omnibus as a very manly tool sits comfortably between her legs.");
 				outputText("\n\nThe omnibus simply gives you an amused smirk. \"<i>It seems you've defeated my pet. I guess I should've expected as much from a failed experiment. No matter. This is only a setback and I'm about done... yes, you will do perfectly. Since that foolish mage I defeated at that ruined cathedral to obtain the rituals I needed, I couldn't find a suitable subject.</i>\"");
@@ -133,6 +131,8 @@ package classes.Scenes.Dungeons
 				doNext(playerMenu);
 				return;
 			}
+			outputText("This is where the Omnibus was practicing her horrifying research to create demonic gargoyles. Her blood is still warm on the floor; there is nothing left to do here.");
+			dungeons.setDungeonButtons(null, roomLaboratory, null, null);
 		}
 	}
 }

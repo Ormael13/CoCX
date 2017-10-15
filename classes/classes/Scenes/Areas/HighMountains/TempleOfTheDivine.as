@@ -286,14 +286,14 @@ package classes.Scenes.Areas.HighMountains
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 10) outputText("a finished");
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11) outputText("a finished");
 			else outputText("an incomplete");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText(" marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText(" alabaster");
 			outputText(" gargoyle. This statue looks like ");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("it has a gorgeous female face");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("it has a handsome male face");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("!!! Androgen face desc !!!");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("it has a face that would look good on a male or a female");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("its face is yet to be finished");
 			outputText(" and its ");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("bald head looks great.");
@@ -313,7 +313,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(".\n\n");
 			}
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
-			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && !player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) outputText("There's a block where its crotch would be.");
+			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1 || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1)) outputText("There's a block where its crotch would be.");
 			else {
 				outputText("At statue crotch ");
 				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
@@ -329,9 +329,26 @@ package classes.Scenes.Areas.HighMountains
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 10) outputText("8 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 11) outputText("8.5 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 12) outputText("9 inch");
-					outputText(" long cock.");
+					outputText(" long cock");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) {
+						outputText(" along with a pair of ");
+						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 2) outputText("large");
+						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 3) outputText("baseball-sized");
+						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 4) outputText("apple-sized");
+						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 5) outputText("grapefruit-sized");
+						outputText(" balls");
+					}
+					outputText(".");
 				}
-				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("there is no cock.");
+				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 2) outputText("there is no cock.");
+				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) > 0) {
+					if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
+						if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) outputText(" Beneath it");
+						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
+						outputText(" there is a tight vagina, with a tiny clit.");
+					}
+					else outputText("");
+				}
 			}
 			outputText("\n\nAll details in its");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
@@ -342,15 +359,15 @@ package classes.Scenes.Areas.HighMountains
 			outputText(".\n\nIt's arms ");
 			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with a set of bestial four fingered sharp stone claws");
 			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("ends with very human fist");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 0)outputText("have yet to be sculpted");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("have yet to be sculpted");
 			outputText(". It's legs ");
 			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with clawed bestial feets with three toe at the front and one at the back");
 			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("are human like");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 0)outputText("have yet to be defined");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("have yet to be defined");
 			outputText(". Its ");
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("mace like");
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("axe like");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 0)outputText("unfinished");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("unfinished");
 			outputText(" tail seems to be there right above its ");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
 				outputText("perfectly made ");
@@ -360,25 +377,29 @@ package classes.Scenes.Areas.HighMountains
 			}
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1))outputText("unfinished");
 			outputText(" body.");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 1) outputText("Progress: " + flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]);
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 1) outputText("\n\nProgress: " + flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]);
 			menu();
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(0, "Frame&Face", SculptFrameAndFace);
-			else addButtonDisabled(0, "Frame&Face", "You already sculpted Frame and Face.");
+			else addButtonDisabled(0, "Frame&Face", "You already sculpted the Frame and Face.");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] < 1) addButton(1, "Wings", SculptWings);
-			else addButtonDisabled(1, "Wings", "You already sculpted Wings.");
+			else addButtonDisabled(1, "Wings", "You already sculpted the Wings.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(2, "Tail", SculptTail);
-			else addButtonDisabled(2, "Tail", "You already sculpted Tail.");
+			else addButtonDisabled(2, "Tail", "You already sculpted the Tail.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(3, "Legs", SculptLegs);
-			else addButtonDisabled(3, "Legs", "You already sculpted Legs.");
+			else addButtonDisabled(3, "Legs", "You already sculpted the Legs.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(4, "Arms", SculptArms);
-			else addButtonDisabled(4, "Arms", "You already sculpted Arms.");
+			else addButtonDisabled(4, "Arms", "You already sculpted the Arms.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(5, "Hair", SculptHair);
-			else addButtonDisabled(5, "Hair", "You already sculpted Hair.");
+			else addButtonDisabled(5, "Hair", "You already sculpted the Hair.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(6, "Chest", SculptChest);
-			else addButtonDisabled(6, "Chest", "You already sculpted Chest.");//progress flag at 8/10
+			else addButtonDisabled(6, "Chest", "You already sculpted the Chest.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(7, "Pussy", SculptPussy);
+			else addButtonDisabled(7, "Pussy", "You already sculpted the Pussy Area.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(8, "Cock", SculptCock);
-			else addButtonDisabled(8, "Cock", "You already sculpted Cock Area.");//look at CharCreation.as line 958 for setitng thicknes based on picked length
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 8 && flags[kFLAGS.GARGOYLE_QUEST] == 3) addButton(13, "Ritual", becomingGargoyle);
+			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(9, "Balls", SculptBalls);
+			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -443,7 +464,7 @@ package classes.Scenes.Areas.HighMountains
 		public function SculptTail():void {
 			menu();
 			addButton(0, "Mace", SculptMaceTail).hint("Sculpt mace shaped tail tip.");
-			addButton(1, "Feathered", SculptAxeTail).hint("Sculpt axe shaped tail tip.");
+			addButton(1, "Axe", SculptAxeTail).hint("Sculpt axe shaped tail tip.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptMaceTail():void {
@@ -567,9 +588,26 @@ package classes.Scenes.Areas.HighMountains
 			SecondPartOfSculptingText();
 		}
 		
+		public function SculptPussy():void {
+			menu();
+			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
+			addButton(1, "Yes", SculptPussyYes).hint("Sculpt pussy.");
+			addButton(14, "Back", currentStateOfStatue);
+		}
+		public function SculptPussyNo():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 1, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptPussyYes():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 2, 0, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		
 		public function SculptCock():void {
 			menu();
-			addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) != 1) addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
 			addButton(1, "4\"", SculptCock1).hint("Sculpt 4' cock.");
 			addButton(2, "4.5\"", SculptCock2).hint("Sculpt 4.5' cock.");
 			addButton(3, "5\"", SculptCock3).hint("Sculpt 5' cock.");
@@ -644,6 +682,43 @@ package classes.Scenes.Areas.HighMountains
 			SecondPartOfSculptingText();
 		}
 		
+		public function SculptBalls():void {
+			menu();
+			addButton(0, "No", SculptBallsNo).hint("Don't sculpt balls.");
+			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) >= 2)  {
+				addButton(1, "Large", SculptBallsLarge).hint("Sculpt large balls.");
+				addButton(2, "Baseball", SculptBallsBaseballSized).hint("Sculpt baseball-sized balls.");
+				addButton(3, "Apple", SculptBallsAppleSized).hint("Sculpt apple-sized balls.");
+				addButton(4, "Grapefruit", SculptBallsGrapefruitSized).hint("Sculpt grapefruit-sized balls.");
+			}
+			addButton(14, "Back", currentStateOfStatue);
+		}
+		public function SculptBallsNo():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 1, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptBallsLarge():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 2, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptBallsBaseballSized():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 3);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 3, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptBallsAppleSized():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 4);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 4, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		public function SculptBallsGrapefruitSized():void {
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 5);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 5, 0, 0);
+			SecondPartOfSculptingText();
+		}
+		
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
@@ -653,7 +728,8 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function becomingGargoyle():void {
 			clearOutput();
-			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1)) {
+			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] < 6) flags[kFLAGS.GARGOYLE_QUEST] = 6;
+			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] == 6) {
 				if (player.inte < 80) {
 					outputText("While you do have all the ingredient required as it states in the formula you feel you don't understand magic well enough yet to risk the ritual. Who knows what fate awaits you should you fail it. You resolve to come back when you have enough arcane knowledge to attempt this.");
 					doNext(templeBasement);
@@ -666,9 +742,9 @@ package classes.Scenes.Areas.HighMountains
 				}
 			}
 			else {
-				outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first.");
-				if (!player.hasItem(useables.SOULGEM, 1)) outputText(" Lia what about text to not yet possesed Soul Gem?");
-				flags[kFLAGS.GARGOYLE_QUEST]++;
+				if (player.hasKeyItem("Gargoyle demonic researches") < 0 && player.hasItem(useables.SOULGEM, 1)) outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first. ");
+				if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && !player.hasItem(useables.SOULGEM, 1)) outputText("While you do have the demonic researches in hand the ritual specifically ask for a soul gem. Guess you will have to craft one.");
+				if (flags[kFLAGS.GARGOYLE_QUEST] == 4) flags[kFLAGS.GARGOYLE_QUEST]++;
 				doNext(templeBasement);
 			}
 		}
@@ -676,6 +752,14 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
 			doNext(templeBasement);
+		}//look at CharCreation.as line 958 for setitng thicknes based on picked length
+		public function becomingGargoyleYes():void {
+			clearOutput();
+			outputText("You proceed according to the ritual as described in the book, however a question poses itself. What kind of blood will you use?");
+			menu();
+			addButton(0, "OwnBlood", becomingGargoyleNo);
+			if (player.hasItem(consumables.MINOBLO, 1)) addButton(1, "Minotaur", becomingGargoyleNo);
+			else addButtonDisabled(1, "Minotaur", "Need Minotaur Blood vial for this option");
 		}
 		
 		public function strangeBookOfGolems():void {
@@ -698,7 +782,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
 			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
-			flags[kFLAGS.GARGOYLE_QUEST]++;
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(templeBasement);
 		}//GARGOYLE_QUEST - flaga do śledzenia postepu questu (po zdobyciu zapisków jest na wartości 3, po skończeniu ciała ale bez zapisków z Den of Desire 4, po wyczyszczeniu Den of Desire 5)
 	}

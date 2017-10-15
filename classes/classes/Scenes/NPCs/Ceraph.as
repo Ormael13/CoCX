@@ -168,7 +168,7 @@
 			}
 			//Determine damage - str modified by enemy toughness!
 			else {
-				damage = int((str + weaponAttack) - Math.random() * (player.tou + player.armorDef));
+				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
 					damage = player.takeDamage(damage);
 				}
@@ -178,16 +178,16 @@
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				if (damage > 0 && damage < 6) {
+				if (damage > 0 && damage < 61) {
 					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
-				if (damage > 5 && damage < 11) {
+				if (damage > 60 && damage < 121) {
 					outputText(capitalA + short + " wounds you! ");
 				}
-				if (damage > 10 && damage < 21) {
+				if (damage > 120 && damage < 201) {
 					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
-				if (damage > 20) {
+				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -215,7 +215,7 @@
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!
-				damage = int((str + weaponAttack) - Math.random() * (player.tou + player.armorDef));
+				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
 					damage = player.takeDamage(damage);
 				}
@@ -225,16 +225,16 @@
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				if (damage > 0 && damage < 6) {
+				if (damage > 0 && damage < 61) {
 					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
-				if (damage > 5 && damage < 11) {
+				if (damage > 60 && damage < 121) {
 					outputText(capitalA + short + " wounds you! ");
 				}
-				if (damage > 10 && damage < 21) {
+				if (damage > 120 && damage < 201) {
 					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
-				if (damage > 20) {
+				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");

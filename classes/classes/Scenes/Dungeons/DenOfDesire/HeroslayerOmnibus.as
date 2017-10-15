@@ -48,7 +48,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!
-				damage = int((str + weaponAttack) - Math.random() * (player.tou + player.armorDef));
+				damage = int((eBaseDamage() * 1.5) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
 					damage = player.takeDamage(damage);
 				}
@@ -58,16 +58,16 @@ package classes.Scenes.Dungeons.DenOfDesire
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				if (damage > 0 && damage < 6) {
+				if (damage > 0 && damage < 101) {
 					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
-				if (damage > 5 && damage < 11) {
+				if (damage > 100 && damage < 201) {
 					outputText(capitalA + short + " wounds you! ");
 				}
-				if (damage > 10 && damage < 21) {
+				if (damage > 200 && damage < 401) {
 					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
-				if (damage > 20) {
+				if (damage > 400) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -114,22 +114,27 @@ package classes.Scenes.Dungeons.DenOfDesire
 				}
 			}
 		}
-		/*
+		
 		public function moveHerobane():void {
 			outputText("The omnibus throws an ethereal chain at you, binding you to her.");
+			player.createStatusEffect(StatusEffects.HeroBane, 2, 0, 0, 0);
 		}
-		*/
+		
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				moveShadowfire();
 			}
 			else {
-				var choice:Number = rand(4);
+				var choice:Number = rand(5);
 				if (choice == 0) moveLustAura();
 				if (choice == 1) moveFireWhip();
 				if (choice == 2) moveShadowfire();
-				if (choice == 3) eAttack();
+				if (choice == 3) {
+					if (player.hasStatusEffect(StatusEffects.HeroBane)) moveShadowfire();
+					else moveHerobane();
+				}
+				if (choice == 4) eAttack();
 			}
 			combatRoundOver();
 		}
@@ -169,12 +174,12 @@ package classes.Scenes.Dungeons.DenOfDesire
 			initLibSensCor(120, 50, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demon-skin";
 			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 200;
-			this.bonusLust = 40;
-			this.lust = 50;
+			this.bonusHP = 2500;
+			this.bonusLust = 50;
+			this.lust = 30;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
