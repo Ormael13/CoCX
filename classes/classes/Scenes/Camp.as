@@ -1279,6 +1279,9 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		outputText("\n\n");
 		addButton(11, "Nieve", getGame().approachNieve);
 	}
+    for each(var npc:XXCNPC in _campFollowers){
+        npc.campDescription(XXCNPC.LOVER,descOnly);
+    }
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1328,6 +1331,9 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		sophieBimbo.sophieCampLines();
 		addButton(12, "Sophie", sophieBimbo.approachBimboSophieInCamp);
 	}
+    for each(var npc:XXCNPC in _campFollowers){
+        npc.campDescription(XXCNPC.SLAVE,descOnly);
+    }
 	addButton(14, "Back", playerMenu);
 }
 
