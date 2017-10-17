@@ -81,8 +81,8 @@ package classes.Scenes.Areas.Bog
 				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 				if (player.lust >= 33) {
 					outputText("You wonder what you should do to the lizan.");
-					addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
-					addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your " + player.vaginaDescript() + ".");
+					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
+					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your " + player.vaginaDescript() + ".");
 					if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 					if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 					addButton(4, "Leave", cleanupAfterCombat);

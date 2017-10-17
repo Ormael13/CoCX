@@ -317,7 +317,7 @@ public function underwaterDateMaleVer():void
 	outputText("\"<i>Don’t worry about moving, just let your big girl do the job for you.</i>\"\n\n");
 	outputText("Thanks to the low gravity underwater, she manage to slide on your [cock] at a very slow pace making you gasp as she slowly move up and down using her tail as a lift. Heck you are glad you are underwater otherwise you are not sure you could properly lift her through the fact that her tail is doing most of the work helps. ");
 	if (player.cocks[x].cockLength >= 22) outputText("Ceani looks to be lost in the pleasure of your [cock], her spasming pussy desperately trying to milk your [cock] as it hits her cervix on every trust. She really must not get a decent fuck this often and you almost feel bad for her. ");
-	outputText("Her cun’t is as hungry as she is relentlessly devouring your [cock] massaging your flesh to the best of her ability. Soon however you can feel the telltale sign of your own climax as your dick begin to twitch. You and Ceani moans in ecstasy as you fill up full of semen the same color as her belly.\n\n");
+	outputText("Her cunt is as hungry as she is relentlessly devouring your [cock] massaging your flesh to the best of her ability. Soon however you can feel the telltale sign of your own climax as your dick begin to twitch. You and Ceani moans in ecstasy as you fill up full of semen the same color as her belly.\n\n");
 	outputText("\"<i>Mhhmmmmm [name] I wonder if you have any idea how delicious it feels to be filled like this underwater. ");
 	if (player.gender == 3) outputText("Perhaps you should try a man underwater one day and see it for yourself.");
 	else outputText("But again, you don’t have a pussy so I guess it’s not something you could understand.");

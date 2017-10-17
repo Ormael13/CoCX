@@ -5495,6 +5495,12 @@ use namespace kGAMECLASS;
 				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);
 			}
+			if(hasStatusEffect(StatusEffects.Berzerking)) {
+				removeStatusEffect(StatusEffects.Berzerking);
+			}
+			if(hasStatusEffect(StatusEffects.Lustzerking)) {
+				removeStatusEffect(StatusEffects.Lustzerking);
+			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
 			}
@@ -5577,6 +5583,9 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.HeroBane)) {
+				removeStatusEffect(StatusEffects.HeroBane);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);

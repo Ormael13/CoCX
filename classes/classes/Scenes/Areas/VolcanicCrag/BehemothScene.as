@@ -274,7 +274,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		}
 		
 		private function analPitchBehemoth():void {
-			var x:int = player.cockThatFits(48);
+			var x:int = player.cockThatFits(72);
 			clearOutput();
 			outputText(images.showImage("behemoth-anal-pitch"));
 			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. " + player.clothedOrNaked("The two of you strip yourselves naked. You toss your [armor] into a neat pile. ") + "The behemoth removes his loincloth, revealing his large cock.");

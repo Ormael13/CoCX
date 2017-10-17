@@ -250,6 +250,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const ConstrictedScylla:StatusEffectType  = mk("Constricted Scylla");
 		public static const CoonWhip:StatusEffectType           = mk("Coon Whip");
 		public static const Counter:StatusEffectType            = mk("Counter");
+		public static const DevourMagic:StatusEffectType        = mk("DevourMagic");
 		public static const DomFight:StatusEffectType           = mk("domfight");
 		public static const DrankMinoCum:StatusEffectType       = mk("drank mino cum");
 		public static const DrankMinoCum2:StatusEffectType      = mk("drank mino cum2")
@@ -472,6 +473,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const GoreBleed:StatusEffectType                 = mkCombat("Gore Bleed");
 		public static const HarpyBind:StatusEffectType                 = mkCombat("HarpyBind");
 		public static const Hemorrhage:StatusEffectType                = mkCombat("Hemorrhage");
+		public static const HeroBane:StatusEffectType                  = mkCombat("HeroBane");
 		public static const HolliConstrict:StatusEffectType            = mkCombat("Holli Constrict");
 		public static const HurricaneDance:StatusEffectType	           = mkCombat("Hurricane Dance");
 		public static const ImmolationDoT:StatusEffectType             = mkCombat("Immolation DoT");

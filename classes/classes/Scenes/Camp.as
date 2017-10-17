@@ -182,7 +182,7 @@ private function doCamp():void { //Only called by playerMenu
 	if(player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 		player.removeStatusEffect(StatusEffects.ChargeArmor);
 	}
-	if(player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+	if(player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul) && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 1) {
 		campUniqueScenes.playsRathazulAndSoulgemScene();
 		return;
 	}
@@ -753,7 +753,7 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//Kitsune Shrine
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) {
-		outputText("A shrine to Taoth stand next to your camp, its presence warm your heart with the fox god laughter.\n\n");
+		outputText("A shrine to Taoth stands next to your camp, its presence warms your heart with the fox god’s laughter.\n\n");
 	}
 	
 	//Display NPCs

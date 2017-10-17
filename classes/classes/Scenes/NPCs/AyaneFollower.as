@@ -64,10 +64,9 @@ public function ayaneTalkTaoth():void
 {
 	clearOutput();
 	outputText("You observe that Taoth seems to like jokes and pranks. Is there any particular reason for that?\n\n");
-	outputText("Ayane ponders the meaning of your question for a moment and then shrugs helplessly. \"<i>To question a god’s motivations is like asking why the water flows downward or why the sun and the moon trade places. Taoth has always been the trickster in the pantheon. Each god has a role and Taoth role seems to be one the of chaotic influences to counterbalance the other deities overly serious demeanor. ");
-	outputText("People need his laughter even more in these dark times when all hope fades.</i>\"\n\n");
+	outputText("Ayane ponders the meaning of your question for a moment and then shrugs helplessly. \"<i>To question a god’s motivations is like asking why the water flows downward or why the sun and the moon trade places. Taoth has always been the trickster in the pantheon. Each god has a role and Taoth role seems to be one of chaotic influences to counterbalance the other deities overly serious demeanor. People need his laughter even more in these dark times when all hope fades.</i>\"\n\n");
 	outputText("So in theory the reason he's the prankster of the pantheon is because everyone else is way too serious?\n\n");
-	outputText("Ayane nods at this statement. \"<i>Deities could do with smiling more or with knowing how to have a good time. Taoth is here to remind them and us that order cannot exist without chaos, lest the world would be a bleak place indeed.</i>\"\n\n");
+	outputText("Ayane nods at this statement. \"<i>Deities could do with smiling more or with knowing how to have a good time. Taoth is here to remind them and us that order cannot exist without chaos, otherwise the world would be a bleak place indeed.</i>\"\n\n");
 	doNext(ayaneTalkMenu);
 	cheatTime(1/4);
 }
@@ -176,8 +175,8 @@ public function ayaneShop():void {
 public function ayaneSexMenu():void
 {
 	clearOutput();
-	outputText("Ayane's ears perk up as you mention your interest and she takes on a seductive pose.\n\n");
-	outputText("\"<i>Oh?! I’m game, what do you have in mind?</i>\"\n\n");
+	outputText("Ayane's ears perk up as you mention your interest. She takes on a seductive pose, setting up the mood.\n\n");
+	outputText("\"<i>Oh?! I’m always game, what do you have in mind?</i>\"\n\n");
 	menu();
 	addButton(0, "Worship", ayaneWorship);
 	if (player.hasCock()) addButton(1, "Anal", ayaneAnal);
