@@ -835,7 +835,7 @@ private function doCamp():void { //Only called by playerMenu
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 1) flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] = 1;
 	}
 	//Unlock sparring ring.
-	if (sparableCampMembersCount() >= 3)
+	if (sparableCampMembersCount() >= 2)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
 	}

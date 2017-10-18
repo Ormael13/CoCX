@@ -26,9 +26,10 @@ package classes.Scenes
 			outputText("<b>Version 0.8g:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
-			outputText("-\n");//chi chi memo
+			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");// or new enemy to fight at Soul Arena. If PC will not force her into suicide she can teach PC few soulskills
 			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP reeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
-			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Electra/Raiju fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
+			outputText("-New enemy in Mountains / Deepwoods / Plains: Raiju/Electra. As first encounter with her will be always in Mountains and afer it she can be encountered in any of those 3 locations. It even come with brand new and shiny codex entry to unlock about Raiju race.\n");
+			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Raiju/Electra fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Raiju Legs No Req.\n");
 			outputText("-New body part - arms: Raiu Arms Req. Raiju Legs\n");
 			outputText("-New body part - tail: Raiju Horn Req. Raiju Arms\n");
@@ -38,26 +39,25 @@ package classes.Scenes
 			outputText("-New body part - eyes: Raiju Eyes Req. Raiju Ears\n");
 			outputText("-New body part - hair type: Raiju Storm Hair No Req.\n");
 			outputText("-New body part - pattern: Lightning Shaped Tattoo No Req.\n");
-			outputText("-New build option: Sparring Ring. It cost 50 wood, 50 fatigue and 1 hour to construct. Req. 3+ sparrable npc's and before it's not build will lock out spar options. Completing it will add also 2 ascension points.\n");
+			outputText("-New build option: Sparring Ring. It cost 50 wood, 50 fatigue and 1 hour to construct. Req. 2+ sparrable npc's and before it's not build will lock out spar options. Completing it will add also 2 ascension points.\n");
 			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Sense Wrath. Req. 25+ sens. Effect: Show in combat enemy current wrath\n");
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
+			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished.\n");
+			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
+			outputText("-New Dungeon added called Den of Desire located in Blihht Ridge with two enemies and archievment for completing it (also reward in Questlog like for any of other 6 dungeons). It's location on diffulty similar to Phoenix Tower for PC at lvl 25 or higher to proceed smooth.\n");
+			outputText("-One of the enemies in new dungeon will give PC Key Item called Black Soul gem. It's needed item to make and then 'bring back to life' second gargoye in Temple of Divine calling itself either Krystal (female/herm version) or Onyx (male version). It have only sex secene eithr with PC alone or in treesome with Sapphire and PC.\n");
+			outputText("-Aside Krystal/Onyx Sapphire herself also gained few new sex scenes and talk scene that allow to unlock options to slowly rebuild/restore Temple back to it old glory.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
