@@ -1786,6 +1786,10 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (yetiScore() >= 6)
 				chimeraCounter++;
+			if (batScore() >= 6)
+				chimeraCounter++;
+			if (vampireScore() >= 6)
+				chimeraCounter++;
 			if (gargoyleScore() >= 6)
 				chimeraCounter++;
 			if (gooScore() >= 4)
@@ -1896,6 +1900,10 @@ use namespace kGAMECLASS;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
 			if (yetiScore() >= 12)
+				grandchimeraCounter++;
+			if (batScore() >= 10)
+				grandchimeraCounter++;
+			if (vampireScore() >= 10)
 				grandchimeraCounter++;
 //			if (gargoyleScore() >= 6)
 //				grandchimeraCounter++;
