@@ -5,12 +5,15 @@ import classes.GlobalFlags.kCOUNTERS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
-	import classes.Scenes.Places.TelAdre.Katherine;
+import classes.Scenes.NPCs.XXCNPC;
+import classes.Scenes.Places.TelAdre.Katherine;
 	import classes.internals.SimpleJsonable;
 	import classes.internals.CountersStorage;
 	import classes.internals.RootCounters;
 
-	CONFIG::AIR 
+import flash.utils.getDefinitionByName;
+
+CONFIG::AIR
 	{
 		import flash.filesystem.File;
 		import flash.filesystem.FileMode;
@@ -899,6 +902,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
+		saveFile.data.rearBody = player.rearBody;
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -1179,10 +1183,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// Keybinds
 		saveFile.data.controls = getGame().inputManager.SaveBindsToObj();
 		
-		// TODO use an interface for this or something
-		saveFile.data.world = {};
-		saveFile.data.world.x = {};
-		getGame().celessScene.save(saveFile.data.world.x);
+		// TODO @Oxdeception recheck
+		saveFile.data.world = [];
+		saveFile.data.world.x = [];
+		for each(var npc:XXCNPC in XXCNPC.SavedNPCs){
+			npc.save(saveFile.data.world.x);
+		}
 	}
 	catch (error:Error)
 	{
@@ -2349,13 +2355,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
 		
-		// TODO use an interface for this or something
-		if (saveFile.data.world != undefined){
-			if (saveFile.data.world.x != undefined){
-				game.celessScene.load(saveFile.data.world.x);
+		// TODO @Oxdeception recheck
+		XXCNPC.unloadSavedNPCs();
+		if(saveFile.data.world == undefined){saveFile.data.world = [];}
+		if(saveFile.data.world.x == undefined){saveFile.data.world.x = [];}
+		for each(var savedNPC:* in saveFile.data.world.x){
+			if(savedNPC.myClass != undefined){
+                var ref:Class = getDefinitionByName(savedNPC.myClass) as Class;
+                ref["instance"].load(saveFile.data.world.x);
 			}
-		} else{
-			game.celessScene.load(undefined);
 		}
 		
 		doNext(playerMenu);

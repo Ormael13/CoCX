@@ -107,6 +107,11 @@
                     You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your [armor] and leave the passed-out satyr behind as you go back to your camp.
                 </text>
             </lib>
+            <text name="deepwoods">
+                After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.
+
+                <b>Deepwoods exploration unlocked!</b>
+            </text>
 			<lib name="celess-unicorn">
 				<text name="intro">
 					As you wander the woods, you stumble upon a large clearing.
@@ -215,7 +220,7 @@
 						</text> 
 						<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horn’ will pierce right through it.”\n\n</i></text>
 						<text name="taurSex">
-							She trots to you, her massive horsemeat hardening as she prepares to mount your “pussy descript”. She take a whiff of your ‘pussy type’ going so far as to give it a lick or two just so she can taste it. Satisfied, she gets on you and you can feel the tip of her flare making contact with your vaginal lips. 
+							She trots to you, her massive horsemeat hardening as she prepares to mount your [pussy]. She take a whiff of your [pussy] going so far as to give it a lick or two just so she can taste it. Satisfied, she gets on you and you can feel the tip of her flare making contact with your vaginal lips.
 							
 							<i>“Mmmmmm what a nice mare pussy. I can only imagine how it will feel to fuck that. Well, here I go!” </i>
 							

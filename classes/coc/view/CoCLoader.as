@@ -46,6 +46,14 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
 	bundleText("content/coc/NPC/celess.xml", BUNDLE_CONTENT_COC_NPC_CELESS_XML);
+
+	[Embed(source="../../../content/coc/NPC/diva.xml",mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_NPC_DIVA_XML:Class;
+	bundleText("content/coc/NPC/diva.xml",BUNDLE_CONTENT_COC_NPC_DIVA_XML);
+	
+	[Embed(source="../../../content/coc/NPC/samirah.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_CONTENT_COC_NPC_SAMIRAH_XML:Class;
+	bundleText("content/coc/NPC/samirah.xml", BUNDLE_CONTENT_COC_NPC_SAMIRAH_XML);
 	
 	public static function bundleText(key:String,c:Class):void {
 		if (c) TEXT_BUNDLE[key] = new c();
@@ -124,11 +132,12 @@ public class CoCLoader {
 					try {
 						LOGGER.info("Loaded external "+path);
 						TEXT_BUNDLE[path] = loader.data;
-						callback(true, loader.data, e);
 					} catch (e:Error) {
 						LOGGER.warn(e.name+" loading external "+path+": "+e.message);
 						orLocal(new ErrorEvent("error",false,false,e.message));
+						return;
 					}
+					callback(true, loader.data, e);
 				});
 				var req:URLRequest = new URLRequest(path);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
@@ -170,19 +179,21 @@ public class CoCLoader {
 				var loader:Loader = new Loader();
 				var cli:LoaderInfo = loader.contentLoaderInfo;
 				cli.addEventListener(Event.COMPLETE, function (e:Event):void {
+					var bmp:Bitmap = null;
 					try {
-						var bmp:Bitmap = cli.content as Bitmap;
-						if (bmp) {
-							LOGGER.info("Loaded external "+path);
-							IMAGE_BUNDLE[path] = bmp.bitmapData;
-							callback(true, bmp.bitmapData, e);
-						} else {
-							LOGGER.warn("Not found external "+path);
-							callback(false, null, e);
-						}
+						bmp = cli.content as Bitmap;
 					} catch (e:Error) {
 						LOGGER.warn(e.name+" loading external "+path+": "+e.message);
 						orLocal(new ErrorEvent("error",false,false,e.message));
+						return;
+					}
+					if (bmp) {
+						LOGGER.info("Loaded external "+path);
+						IMAGE_BUNDLE[path] = bmp.bitmapData;
+						callback(true, bmp.bitmapData, e);
+					} else {
+						LOGGER.warn("Not found external "+path);
+						callback(false, null, e);
 					}
 				});
 				cli.addEventListener(IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {

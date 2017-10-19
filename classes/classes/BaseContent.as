@@ -54,6 +54,11 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.timeQ;
 		}
 
+		protected function get measurements():Measurements
+		{
+			return kGAMECLASS.measurements;
+		}
+
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
 		}

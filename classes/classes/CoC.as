@@ -176,6 +176,10 @@ the text from being too boring.
 		private var playerEvent:PlayerEvents;
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
+		public static function timeAwareClassRemove(toRemove:TimeAwareInterface):void{
+			var i:int = _timeAwareClassList.indexOf(toRemove);
+			if(i>=0){_timeAwareClassList.splice(i,1);}
+		}
 		
 		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
@@ -238,7 +242,6 @@ the text from being too boring.
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ayaneFollower:AyaneFollower = new AyaneFollower();
-		public var celessScene:CelessScene = new CelessScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var chichiScene:ChiChiFollower = new ChiChiFollower();
@@ -692,6 +695,7 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
+			new Story("lib",rootStory,"monsters",true);
 			execPostInit();
 			loadStory();
 			this.addFrameScript( 0, this.run );
@@ -699,7 +703,7 @@ the text from being too boring.
 		}
 
 		private function loadStory():void {
-			compiler.includeFile("coc.xml");
+			compiler.includeFile("coc.xml", true);
 		}
 
 		public function run():void

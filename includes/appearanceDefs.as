@@ -111,6 +111,7 @@ public static const FACE_DRAGON_FANGS:int                                       
 public static const FACE_DEVIL_FANGS:int                                            =   31;
 public static const FACE_ONI_TEETH:int	                                            =   32;
 public static const FACE_RAIJU_FANGS:int                                            =   33;
+public static const FACE_VAMPIRE:int                                                =   34;
 
 // tongueType
 public static const TONGUE_HUMAN:int                                                =   0;
@@ -137,6 +138,7 @@ public static const EYES_DEVIL:int                          	                   
 public static const EYES_ONI:int	                          	                    =  12;
 public static const EYES_ELF:int	                          	                    =  13;
 public static const EYES_RAIJU:int	                          	                    =  14;
+public static const EYES_VAMPIRE:int                                                =  15;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -166,6 +168,8 @@ public static const EARS_GOAT:int													=  23;
 public static const EARS_ONI:int													=  24;
 public static const EARS_ELVEN:int                                                  =  25;
 public static const EARS_WEASEL:int                                                 =  26;
+public static const EARS_BAT:int                                                    =  27;
+public static const EARS_VAMPIRE:int                                                =  28;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -289,6 +293,8 @@ public static const WING_TYPE_GARGOYLE_LIKE_LARGE:int                           
 public static const WING_TYPE_PLANT:int                     			            =  21;
 public static const WING_TYPE_MANTICORE_LIKE_SMALL:int                              =  22;
 public static const WING_TYPE_MANTICORE_LIKE_LARGE:int                              =  23;
+public static const WING_TYPE_BAT_ARM:int                                           =  24;
+public static const WING_TYPE_VAMPIRE:int                                           =  25;
 
 // lowerBody
 public static const LOWER_BODY_TYPE_HUMAN:int                                       =   0;
@@ -344,6 +350,7 @@ public static const REAR_BODY_BEHEMOTH:int                     			            = 
 public static const REAR_BODY_SHARK_FIN:int                                         =   6;
 public static const REAR_BODY_ORCA_BLOWHOLE:int                                     =   7;
 public static const REAR_BODY_RAIJU_MANE:int                                     	=   8;
+public static const REAR_BODY_BAT_COLLAR:int                                        =   9;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
