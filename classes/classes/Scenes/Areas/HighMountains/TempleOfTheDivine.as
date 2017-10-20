@@ -210,8 +210,8 @@ package classes.Scenes.Areas.HighMountains
 				outputText("</i>\"\n\n");
 				menu();
 				if (player.lust > 33) {
-					addButtonDisabled(0,"???", "Req. Gargoyle PC.");
-					addButtonDisabled(1,"???", "Req. Gargoyle PC and Onyx/Krystal.");
+					if (player.isGargoyle() && player.hasVagina()) addButton(0,"Gargoyle double tailfuck", SapphireGargoyleDoubleTailfuck).hint("Let's put these tails to use.");
+					if ((player.isGargoyle() || player.isNaga() || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_SALAMANDER) && flags[kFLAGS.ONYX_PATH] > 0) addButton(1,"Triple Tail Ouroboros", SapphireTripleTailOuroboros).hint("How about you all uses your tails to get eachother off?");
 					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation).hint("Help both you and her soothe that itch.");
 					if (player.hasCock()) addButton(3,"FuckHer", SapphireFuckHer).hint("Let's plunder that stony cavern of hers.");
 				}
@@ -236,6 +236,86 @@ package classes.Scenes.Areas.HighMountains
 			}
 		}
 		
+		public function SapphireGargoyleDoubleTailfuck():void {
+			clearOutput();
+			outputText("You check Sapphire’s tail then look at yours. An idea sparks in your mind as you tell Sapphire to get on all fours.\n\n");
+			outputText("\"<i>I don't know what’s on your mind but I'm very curious to try it now.</i>\"\n\n");
+			outputText("She complies and you go to her backside, positioning yourself to have your [ass] facing hers. You tell her to entwine her tail around yours, then insert her tip in your pussy. She gets the hint as you proceed to do the same with hers. Now, having both of your tail tips in each others pussies, you tell her to move forward and backward. She yelps in surprise as you do the same, both of your tails sliding in and out of each other's pussies at a decent rhythm. Gosh truth be told you are enjoying your tail just as much as your pussy right now. It’s like discovering you had a ");
+			if (player.gender == 2) outputText("second");
+			if (player.gender == 3) outputText("third");
+			outputText(" sexual organ all along. It feels very similar to a cock in a way");
+			if (player.gender == 3) outputText(" maybe even better then a cock");
+			outputText(", at this rate you will develop a tail fetish.\n\n");
+			outputText("You fuck each other passionately, drawing closer then moving apart, making the both of you moan in delight at this intense mutual penetration. This is like fucking and getting fucked at the same time… simply perfect. By all means you don’t know anymore whether you will cum from your tail or from your pussy.\n\n");
+			outputText("After a fair hour of constant sex, the pair of you finally orgasm and you both fall on the ground tails still tangled up and petrified in pleasure. You wake up a few minutes later tail still in each other pussy and completely satisfied. You get back your gear and wave a goodbye to Sapphire as you head back to camp.\n\n");
+			sapphireAffection(5);
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function SapphireTripleTailOuroboros():void {
+			clearOutput();
+			outputText("You think it over then remember about " + flags[kFLAGS.ONYX_NAME] + " being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
+			outputText("You begin by kissing Sapphire then exchanging with " + flags[kFLAGS.ONYX_NAME] + " the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you " + flags[kFLAGS.ONYX_NAME] + " is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal’s waiting cunt");
+			else outputText("Onyx’s rock hard dick");
+			outputText(". Not to be left unstimulated you welcome " + flags[kFLAGS.ONYX_NAME] + "’s tail ");
+			if (player.gender == 2 || player.gender == 3) outputText("in your ready snatch");
+			if (player.gender == 3) outputText(" and ");
+			if (player.gender == 1 || player.gender == 3) outputText("around your throbbing [cock]");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(". Krystal giggle");
+			else outputText(". Onyx chuckle");
+			outputText(" at the anticipation of ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+			else outputText("his");
+			outputText(" privates being played with.\n\n\"<i>Oh [name] this is gunna be so much fun!</i>\"\n\n");
+			outputText("You count to ten and the three of you begin tail teasing each other, making a chorus of moans sapphire tigh vagina gripping your tail.\n\n");
+			outputText("\"<i>Oh my gosh [name]!!... this feeling is aaahh...Aaaaaaahhhn!!! Fuck meee fuck my brain out!</i>\"\n\n");
+			outputText("This was an understatement, Sapphire’s cunt is pretty much eating your tail and although it does not produce any form of lubrication, her rough stone skin slides perfectly against yours, the friction creating heat ");
+			if (player.isGargoyle()) outputText("and sparks ");
+			outputText("inside her vagina like a wet stone and making you gasp at the caressing of your tail tip. Gosh your tail is feeling so good, you wouldn’t even mind it if the rest of your body was left unattended!");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(" Krystal seems to be locked in a blissful dreamy expression of her own");
+			else outputText(" Onyx seems to enjoy the feeling of his cock");
+			outputText(" as ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
+			else outputText("he");
+			if (player.gender == 1 || player.gender == 3) outputText(" jerks");
+			if (player.gender == 3) outputText(" and");
+			if (player.gender == 2 || player.gender == 3) outputText(" penetrates");
+			outputText(" you masterfully. Your ");
+			if (player.gender == 2 || player.gender == 3) outputText("pussy is alight with pleasure");
+			if (player.gender == 3) outputText(" and your ");
+			if (player.gender == 1 || player.gender == 3) {
+				outputText("rock hard cock is pulsing from ");
+				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
+				else outputText("his");
+				outputText(" ministration");
+			}
+			outputText(" making you moan in complete bliss. Truth be told, you don’t know how long you will hold out until you reach your peak and lose control. Your tail is not any less sensible than your ");
+			if (player.gender == 2 || player.gender == 3) outputText("pussy");
+			if (player.gender == 3) outputText("or your ");
+			if (player.gender == 1 || player.gender == 3) outputText("cock");
+			outputText(", it quakes in Sapphire hot cunt from the constant pleasure of penetration and touch, squirming and feeling for Sapphire every hot spots just like a cock, only increasing Sapphire own delight. The tempo accelerate as the sound of rock grinding against rock and heavy panting assisted with moans fills the temple. Soon the three of you lock in a silent scream as you all orgasm together, ");
+			if (!player.isGargoyle()) outputText("Sapphire and " + flags[kFLAGS.ONYX_NAME] + " ");
+			outputText("freezing in the characteristic immobilism related to a gargoyle's stone form as you all lose consciousness from the intense fuck. ");
+			if (player.isGargoyle()) {
+				outputText("Anybody finding the three of you right now would think the artists of the temple were serious perverts carving a trio of statues fucking");
+				if (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3 || player.hasCock()) outputText("(if a male present) and jerking");
+				outputText(" each other.\n\n");
+			}
+			else outputText("You regain your sense faster than your two stony friends. Mainly because you can’t petrify from pleasure like they do.\n\n");
+			if (player.isGargoyle()) {
+				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " nod as you propose that you should have that kind of bonding more often.\n\n");
+				sapphireAffection(5);
+				player.orgasm();
+				doNext(camp.returnToCampUseFourHours);
+			}
+			else {
+				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
+				sapphireAffection(5);
+				player.orgasm();
+				doNext(camp.returnToCampUseOneHour);
+			}
+		}
 		public function SapphireMutualMasturbation():void {
 			clearOutput();
 			outputText("Unable to decide on a position you decide to help the temple guardian blow some steam by fingering her. The both of you sit down next to each other and you open the games by kissing Sapphire.");

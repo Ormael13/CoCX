@@ -549,7 +549,8 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
-			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
+			addButton(4, "Red Blood", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
+			//addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
@@ -618,6 +619,10 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddBladeGrass():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
 			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
+		}
+		public function AddRedBlood():void {
+			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
+			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
