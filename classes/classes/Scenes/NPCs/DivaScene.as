@@ -120,8 +120,9 @@ public class DivaScene extends XXCNPC{
             if(timesReduced < 5){timesReduced++;}
         }
         if(player.batScore() >= 6 || player.vampireScore() >= 6){
-            display("camp/sexMenu/moonlightSonata/"+player.isFemale()?"fe":""+"male/bat");
-            if(player.isMaleOrHerm()){
+            if(player.isFemale()){display("camp/sexMenu/moonlightSonata/female/bat");}
+            else if(player.isMaleOrHerm()){
+                display("camp/sexMenu/moonlightSonata/female/bat");
                 display("camp/sexMenu/moonlightSonata/male/regular",{$combat:fromCombat})
             }
         } else {
@@ -140,7 +141,9 @@ public class DivaScene extends XXCNPC{
             scene("combat/scenes/intro/final");
             startCombat(new Diva(true));
         } else {
-            scene("combat/scenes/intro/"+(status==0)? "first":"second");
+            if(status == 0){scene("combat/scenes/intro/first");}
+            else{scene("combat/scenes/intro/second");}
+
             startCombat(new Diva);
         }
     }
@@ -148,6 +151,7 @@ public class DivaScene extends XXCNPC{
         clearOutput();
         doNext(next==null?camp.returnToCampUseOneHour:next);
         display(ref);
+        flushOutputTextToGUI();
     }
 }
 }

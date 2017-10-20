@@ -1164,6 +1164,7 @@ internal function wait():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
+		if(monster is Diva){(monster as Diva).moveBite();}
 		if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
 		else outputText("The " + monster.short + "");
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
@@ -1300,6 +1301,7 @@ internal function wait():void {
 			if (monster is Naga) takeDamage(7 + rand(5));
 			if (monster is Gorgon) takeDamage(17 + rand(15));
 			if (monster is CaiLin) takeDamage(10 + rand(8));
+			if(monster is Diva){(monster as Diva).moveBite();}
 		}
 		combatRoundOver();
 	}
