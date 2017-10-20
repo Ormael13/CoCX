@@ -31,8 +31,8 @@ public class Diva extends Monster {
         this.hairLength = 16;
         initLibSensCor(40,50,50);
         initStrTouSpeInte(levelBonus,2.5*levelBonus,3.5*levelBonus,4*levelBonus);
-        this.weaponName = "fist";
-        this.weaponVerb = "punch";
+        this.weaponName = "dive";
+        this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus+ (2*flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
         this.wingType = WING_TYPE_BAT_LIKE_LARGE;
@@ -45,6 +45,10 @@ public class Diva extends Monster {
         this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
         checkMonster();
     }
+    override public function get long():String{
+        display("battleDescript");
+        return "";
+    }
     override protected function performCombatAction():void{
         if(_sonicScreamCooldown > 0){_sonicScreamCooldown--;}
         if(player.hasStatusEffect(StatusEffects.NagaBind)){
@@ -53,12 +57,15 @@ public class Diva extends Monster {
             var options:Array = [moveEmbrace,moveSwoopToss];
             if(_sonicScreamCooldown == 0){options.push(moveSonicScream);}
             if(finalFight && !player.hasStatusEffect(StatusEffects.Blind)){options.push(moveDarkness);}
-            options[rand(options.length)]();
+            if(attackSucceeded()){options[rand(options.length)]();}
         }
         game.combatRoundOver();
     }
     private function display(ref:String,locals:*=null):void{
         _scene.display(ref,locals);
+    }
+    public override function isFlying():Boolean{
+        return !hasStatusEffect(StatusEffects.Stunned);
     }
     public function handlePlayerSpell(spell:String=""):void{
         if(spell == "whitefire" && player.hasStatusEffect(StatusEffects.Blind)){
@@ -76,20 +83,23 @@ public class Diva extends Monster {
         if(rand(120) >= (player.spe > 80)? player.spe:80){
             player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0);
             display("moves/embrace/hit");
+        } else {
+            display("moves/embrace/miss");
         }
-        display("moves/embrace/miss");
     }
-    private function moveBite():void{
+    public function moveBite():void{
         addHP(maxHP()* .2);
         var dam:int = 10;
         for(var i:int = 0; i < _biteCounter;i++){
             dam += dam*.10;
         }
         _biteCounter++;
+        display("moves/bite");
         player.takeDamage(dam);
         player.takeLustDamage(rand(5));
     }
     private function moveSwoopToss():void{
+        display("moves/swoopToss");
         var dam:int = 20;
         dam += rand((100 - player.tallness) * .25);
         player.takeDamage(dam);
@@ -112,29 +122,32 @@ public class Diva extends Monster {
     }
     override public function defeated(hpVictory:Boolean):void{
         if(finalFight){
-            display("defeated/final/intro");
+            display("scenes/defeated/final/intro");
             game.addButton(0,"Yes",finalChoice,0);
             game.addButton(1,"No", finalChoice,1);
             game.addButton(2,"Never",finalChoice,2);
         }
         else{
-            display("defeated/normal");
+            doNext(cleanupAfterCombat);
+            display("scenes/defeated/normal");
             DivaScene.getInstance().status++;
-            cleanupAfterCombat();
         }
+        game.flushOutputTextToGUI();
         function finalChoice(choice:int):void{
+            game.clearOutput();
             if(choice == 0){
                 DivaScene.getInstance().status = -1;
-                display("defeated/final/yesChoice");
+                display("scenes/defeated/final/yesChoice");
             }
             else if(choice == 1){
-                display("defeated/final/noChoice");
+                display("scenes/defeated/final/noChoice");
             }
             else{
                 DivaScene.getInstance().status = -2;
-                display("defeated/final/neverChoice");
+                display("scenes/defeated/final/neverChoice");
             }
-            cleanupAfterCombat();
+            game.flushOutputTextToGUI();
+            doNext(cleanupAfterCombat);
         }
     }
     //endregion
