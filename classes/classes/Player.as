@@ -871,6 +871,8 @@ use namespace kGAMECLASS;
 			if(findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 			//Omnibus' Gift reduces lust gain by 15%
 			if(findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+			//Fera Blessing reduces lust gain by 15%
+			if(hasStatusEffect(StatusEffects.BlessingOfDivineFera)) lust *= .85;
 			//Luststick reduces lust gain by 10% to match increased min lust
 			if(findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
 			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
@@ -4462,7 +4464,9 @@ use namespace kGAMECLASS;
 			//Bimbo body boosts minimum lust by 40
 			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) min += 40;
 			//Omnibus' Gift
-			if(findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
+			if (findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
+			//Fera Blessing
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
 			//Nymph perk raises to 30
 			if(findPerk(PerkLib.Nymphomania) >= 0) min += 30;
 			//Oh noes anemone!
@@ -5459,6 +5463,13 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
 				maxSpe += statusEffectv2(StatusEffects.FeedingEuphoria);
 			}
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+				maxStr += statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
+				maxTou += statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
+			}
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
 				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);
@@ -6201,6 +6212,7 @@ use namespace kGAMECLASS;
 				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
 				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
+				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
 				
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;

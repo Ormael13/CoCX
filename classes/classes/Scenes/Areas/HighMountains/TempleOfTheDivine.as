@@ -89,6 +89,10 @@ package classes.Scenes.Areas.HighMountains
 			if (anyOfAltairsRepaired()) {
 				outputText("I think Lia would write here nice text to let pick which Altair to use for prayer.");
 				menu();
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Tooltip needed.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Tooltip needed.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Tooltip needed.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Tooltip needed.");
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -97,9 +101,130 @@ package classes.Scenes.Areas.HighMountains
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function anyOfAltairsRepaired():Boolean {
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1)
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1)
 				return true;
 			return false;
+		}
+		public function loosingMaraeBlessing():void {
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
+				outputText("<b>You lost the Blessing of Divine Agency - Marae</b>\n");
+				player.removeStatusEffect(StatusEffects.BlessingOfDivineMarae);
+			}
+		}
+		public function loosingTaothBlessing():void {
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
+				outputText("<b>You lost the Blessing of Divine Agency - Taoth</b>\n");
+				var tempSpe:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+				player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
+				dynStats("spe", -tempSpe);
+			}
+		}
+		public function loosingFenrirBlessing():void {
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
+				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
+				var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
+				var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
+				player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
+				dynStats("str", -tempStr);
+				dynStats("tou", -tempTou);
+			}
+		}
+		public function loosingFeraBlessing():void {
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) {
+				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
+				outputText("<b>You lost the Blessing of Divine Agency - Fera</b>\n");
+				player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+			}
+		}
+		public function loosing__Blessing():void {
+			
+		}
+		public function PlayerPrayAtTempleMaraeAltair():void {
+			clearOutput();
+			outputText("You pray to Marae. As you speak your prayer, you feel the warmth of the goddess' serenity flow through you, her motherly love for this land swaddling you; healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your white magic.\n");
+			loosingTaothBlessing();
+			loosingFenrirBlessing();
+			loosingFeraBlessing();
+			outputText("<b>You gained the Blessing of Divine Agency - Marae for 7 days</b>");
+			player.createStatusEffect(StatusEffects.BlessingOfDivineMarae, 169, 0.1, 0, 0);
+			if (player.HP < player.maxHP()) player.HP = player.maxHP();
+			dynStats("cor", -10);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function PlayerPrayAtTempleTaothAltair():void {
+			clearOutput();
+			outputText("You pray to the trickster patron Taoth. As you word out your prayer, suggestions of pranks flow into your mind, both playful and troublemaking, as you feel the laughter of the god cheer you up, healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your agility.\n");
+			loosingMaraeBlessing();
+			loosingFenrirBlessing();
+			loosingFeraBlessing();
+			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
+			var temp1:Number = 0;
+			var tempSpe:Number = 0;
+			temp1 += player.spe * 0.1;
+			temp1 = Math.round(temp1);
+			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
+			tempSpe = temp1;
+			player.changeStatusValue(StatusEffects.BlessingOfDivineTaoth,2,tempSpe);
+			mainView.statsView.showStatUp('spe');
+			player.spe += player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			if (player.HP < player.maxHP()) player.HP = player.maxHP();
+			dynStats("cor", -10);
+			statScreenRefresh();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function PlayerPrayAtTempleFenrirAltair():void {
+			clearOutput();
+			outputText("You pray to yourself. Truthfully, it's almost funny how you rebuilt your own altar just so you could be your own follower, but still, the altar functions as a catalyst for your power; and catalyze it, it does. As you word out your prayer, you feel the cold countenance of the magic of the god of winter filling you, healing your wounds and washing away corrupt thoughts. You also feel your boons empowering your might.\n");
+			loosingMaraeBlessing();
+			loosingTaothBlessing();
+			loosingFeraBlessing();
+			outputText("<b>You gained the Blessing of Divine Agency - Fenrir for 7 days</b>");
+			var temp1:Number = 0;
+			var temp2:Number = 0;
+			var tempStr:Number = 0;
+			var tempTou:Number = 0;
+			temp1 += player.str * 0.1;
+			temp2 += player.tou * 0.1;
+			temp1 = Math.round(temp1);
+			temp2 = Math.round(temp2);
+			player.createStatusEffect(StatusEffects.BlessingOfDivineFenrir, 169, 0, 0, 0);
+			tempStr = temp1;
+			tempTou = temp2;
+			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,2,tempStr);
+			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,3,tempTou);
+			mainView.statsView.showStatUp('str');
+			mainView.statsView.showStatUp('tou');
+			player.str += player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
+			player.tou += player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
+			if (player.HP < player.maxHP()) player.HP = player.maxHP();
+			dynStats("cor", -10);
+			statScreenRefresh();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function PlayerPrayAtTempleFeraAltair():void {
+			clearOutput();
+			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your “talents”.\n");
+			loosingMaraeBlessing();
+			loosingTaothBlessing();
+			loosingFenrirBlessing();
+			outputText("<b>You gained the Blessing of Divine Agency - Fera for 7 days</b>");
+			player.createStatusEffect(StatusEffects.BlessingOfDivineFera, 169, 0, 0, 0);
+			if (player.HP < player.maxHP()) player.HP = player.maxHP();
+			dynStats("cor", 10);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function PlayerPrayAtTemple__Altair():void {
+			clearOutput();
+			outputText("I think Lia would write here nice text to let pick which Altair to use for prayer.\n");
+			loosingMaraeBlessing();
+			loosingTaothBlessing();
+			loosingFenrirBlessing();
+			loosingFeraBlessing();
+			outputText("<b>You gained the Blessing of Divine Agency - __ for 7 days</b>");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function TempleAltairsRebuildMenu():void {
@@ -108,11 +233,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Would you like to repair something in the temple?\n\n");
 				kGAMECLASS.camp.cabinProgress.checkMaterials();
 				menu();
-				addButtonDisabled(0, "Marae", "Cummin Sooooon!");
-				addButtonDisabled(1, "Taoth", "Cummin Sooooon!");
-				addButtonDisabled(2, "Fenrir", "Cummin Sooooon!");
-				addButtonDisabled(3, "Fera", "Cummin Sooooon!");
-				//addButtonDisabled(4, "???", "Cummin Sooooon!");
+				addButton(0, "Altairs", rebuildGodsAltairs).hint("Repair the altar.");
 				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) addButton(10, "Statue of Marae", templemainmenu);
 				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) addButton(11, "Prayer Bench", templemainmenu);
 				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) addButton(12, "Repairing the gargoyles on the walls", templemainmenu);
@@ -126,6 +247,63 @@ package classes.Scenes.Areas.HighMountains
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
+		public function rebuildGodsAltairs():void {
+			menu();
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1) {
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(0, "Marae", rebuildMaraeAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				else addButtonDisabled(0, "Marae", "You not have enough stones.");
+			}
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 1 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) {
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(1, "Taoth", rebuildTaothAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				else addButtonDisabled(1, "Taoth", "You not have enough stones.");
+			}
+			if (player.hasKeyItem("Fenrir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(2, "Fenrir", rebuildFenrirAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				else addButtonDisabled(2, "Fenrir", "You not have enough stones.");
+			}
+			if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] != 0 && player.cor >= 80 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1) {
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(3, "Fera", rebuildFeraAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				else addButtonDisabled(3, "Fera", "You not have enough stones.");
+			}
+			//addButtonDisabled(4, "???", "Cummin Sooooon!");
+			addButton(14, "Back", TempleAltairsRebuildMenu);
+		}
+		
+		public function rebuildMaraeAltair():void {
+			clearOutput();
+			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae. By the time you're done you can feel divine power amass around it anew.");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
+			doNext(camp.returnToCampUseEightHours);
+		}
+		public function rebuildTaothAltair():void {
+			clearOutput();
+			outputText("You work for 8 hours, sculpting stone and repairing the altar of Taoth. By the time you're done you can feel divine power amass around it anew.");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] = 1;
+			doNext(camp.returnToCampUseEightHours);
+		}
+		public function rebuildFenrirAltair():void {
+			clearOutput();
+			outputText("You work for 8 hours, sculpting stone and repairing the altar of Fenrir. By the time you're done you can feel a cold chilling aura amass around it. Was that really such a good idea?");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] = 1;
+			doNext(camp.returnToCampUseEightHours);
+		}
+		public function rebuildFeraAltair():void {
+			clearOutput();
+			outputText("You work for the entire day sculpting stone and repairing the altar of Fera. By the time you're done you can feel divine power albeit tainted amass around it anew.");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
+			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] = 1;
+			doNext(camp.returnToCampUseEightHours);
+		}/*
+		public function rebuild__Altair():void {
+			clearOutput();
+			outputText("The Altar of Marae ");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_] = 1;
+			doNext(camp.returnToCampUseEightHours);
+		}*/
 		
 		public function currentStateOfTemple():void {
 			clearOutput();

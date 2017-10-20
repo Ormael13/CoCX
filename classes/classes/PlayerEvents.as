@@ -343,6 +343,44 @@ package classes {
 					needNext = true;
 				}
 			}
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+				player.addStatusValue(StatusEffects.BlessingOfDivineFenrir, 1, -1);
+				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) <= 0) {
+					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
+					var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
+					var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
+					player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
+					dynStats("str", -tempStr);
+					dynStats("tou", -tempTou);
+					needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) {
+				player.addStatusValue(StatusEffects.BlessingOfDivineFera, 1, -1);
+				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) <= 0) {
+					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
+					player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+					needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+				player.addStatusValue(StatusEffects.BlessingOfDivineMarae, 1, -1);
+				if (player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) <= 0) {
+					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
+					player.removeStatusEffect(StatusEffects.BlessingOfDivineMarae);
+					needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+				player.addStatusValue(StatusEffects.BlessingOfDivineTaoth, 1, -1);
+				if (player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) <= 0) {
+					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
+					var tempSpeed:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+					player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
+					dynStats("spe", -tempSpeed);
+					needNext = true;
+				}
+			}
 			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
 				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
