@@ -89,10 +89,10 @@ package classes.Scenes.Areas.HighMountains
 			if (anyOfAltairsRepaired()) {
 				outputText("I think Lia would write here nice text to let pick which Altair to use for prayer.");
 				menu();
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Tooltip needed.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Tooltip needed.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Tooltip needed.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Tooltip needed.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -234,9 +234,9 @@ package classes.Scenes.Areas.HighMountains
 				kGAMECLASS.camp.cabinProgress.checkMaterials();
 				menu();
 				addButton(0, "Altairs", rebuildGodsAltairs).hint("Repair the altar.");
-				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) addButton(10, "Statue of Marae", templemainmenu);
-				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) addButton(11, "Prayer Bench", templemainmenu);
-				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) addButton(12, "Repairing the gargoyles on the walls", templemainmenu);
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) addButton(10, "Statue of Marae", templemainmenu);
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) addButton(11, "Prayer Bench", templemainmenu);
+				//if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 6) addButton(12, "Repairing the gargoyles on the walls", templemainmenu);
 				addButton(13, "CheckProgress", currentStateOfTemple).hint("I think I must ask Lia for fancy tooltip here.");
 				addButton(14, "Back", templemainmenu);
 			}
@@ -250,19 +250,19 @@ package classes.Scenes.Areas.HighMountains
 		public function rebuildGodsAltairs():void {
 			menu();
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1) {
-				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(0, "Marae", rebuildMaraeAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(0, "Marae", rebuildMaraeAltair);
 				else addButtonDisabled(0, "Marae", "You not have enough stones.");
 			}
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 1 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) {
-				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(1, "Taoth", rebuildTaothAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(1, "Taoth", rebuildTaothAltair);
 				else addButtonDisabled(1, "Taoth", "You not have enough stones.");
 			}
 			if (player.hasKeyItem("Fenrir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
-				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(2, "Fenrir", rebuildFenrirAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(2, "Fenrir", rebuildFenrirAltair);
 				else addButtonDisabled(2, "Fenrir", "You not have enough stones.");
 			}
 			if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] != 0 && player.cor >= 80 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1) {
-				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(3, "Fera", rebuildFeraAltair).hint("I think I must ask Lia for fancy tooltip here.");
+				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(3, "Fera", rebuildFeraAltair);
 				else addButtonDisabled(3, "Fera", "You not have enough stones.");
 			}
 			//addButtonDisabled(4, "???", "Cummin Sooooon!");
@@ -274,6 +274,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae. By the time you're done you can feel divine power amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3) flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			doNext(camp.returnToCampUseEightHours);
 		}
 		public function rebuildTaothAltair():void {
@@ -316,6 +317,9 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nTo your right is the ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("damaged Altar of Fenrir. Even in this state its aura is ominous, promising eventual demise to everyone.You almost dare not approach, lest your journey ends here.");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fenrir, an ominous aura radiates from it as it sits dark and foreboding.");
+			outputText("\n\nOn the side is the ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("broken altar of Fera. You believe it was damaged way before the demons came in, likely by the priesthood tending the temple.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fera. An aura of depraved lust rise from it, inviting you to unknown pleasure. This altar radiate a clearly demonic aura and dims the sanctity of the temple like an idol.");
 			doNext(TempleAltairsRebuildMenu);
 		}
 		

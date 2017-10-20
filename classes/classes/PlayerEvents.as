@@ -375,9 +375,9 @@ package classes {
 				player.addStatusValue(StatusEffects.BlessingOfDivineTaoth, 1, -1);
 				if (player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) <= 0) {
 					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var tempSpeed:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+					var temporalSpeed:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
 					player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-					dynStats("spe", -tempSpeed);
+					dynStats("spe", -temporalSpeed);
 					needNext = true;
 				}
 			}
