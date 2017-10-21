@@ -454,9 +454,11 @@ the text from being too boring.
 		}
 
 		// holidayz
-		public function isEaster():Boolean
-		{
+		public function isEaster():Boolean {
 			return plains.bunnyGirl.isItEaster();
+		}
+		public function isHalloween():Boolean {
+			return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 		}
 
 		private static var traceTarget:TraceTarget;

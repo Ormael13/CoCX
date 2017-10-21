@@ -153,7 +153,9 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Stat Pts", toggleStatGain).hint("Toggles stat gain mode");
 		if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 		if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
-		addButton(10, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+		
+		addButton(10, "Eternal Holiday", toggleEternalHoliday).hint("Toggles etenral holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
@@ -246,22 +248,24 @@ public class GameSettings extends BaseContent {
 		//toggle silly mode
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = !flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 		settingsScreenGameSettings();
-
-
 	}
 
 	public function toggleStandards():void {
 		//toggle low standards
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = !flags[kFLAGS.LOW_STANDARDS_FOR_ALL];
 		settingsScreenGameSettings();
-
 	}
 
 	public function toggleHyperHappy():void {
 		//toggle hyper happy
 		flags[kFLAGS.HYPER_HAPPY] = !flags[kFLAGS.HYPER_HAPPY];
 		settingsScreenGameSettings();
+	}
 
+	public function toggleEternalHoliday():void {
+		//toggle eternal holiday
+		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
+		settingsScreenGameSettings();
 	}
 
 	public function toggleSFW():void {

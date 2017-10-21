@@ -461,6 +461,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -565,6 +570,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -853,6 +863,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
@@ -981,6 +996,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
@@ -1071,6 +1091,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1161,6 +1186,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1250,6 +1280,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1386,6 +1421,11 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
 		}
@@ -1498,6 +1538,11 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
@@ -1586,6 +1631,11 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(temp);
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -1807,6 +1857,11 @@ public class MagicSpecials extends BaseCombatContent {
 	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 	//	spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -2075,6 +2130,11 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
+		}
+		combat.HeroBaneProc();
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -2189,6 +2249,11 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
+		}
+		combat.HeroBaneProc();
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -2309,6 +2374,11 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
+		}
+		combat.HeroBaneProc();
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -3155,6 +3225,11 @@ public class MagicSpecials extends BaseCombatContent {
 		player.removeStatusEffect(StatusEffects.ImmolationSpell);
 		kGAMECLASS.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -3185,6 +3260,11 @@ public class MagicSpecials extends BaseCombatContent {
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		kGAMECLASS.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 

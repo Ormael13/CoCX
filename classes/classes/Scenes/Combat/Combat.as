@@ -1755,6 +1755,10 @@ public function multiArrowsStrike():void {
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		if (flags[kFLAGS.ARROWS_SHOT] >= 1) kGAMECLASS.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -1911,6 +1915,7 @@ public function multiArrowsStrike():void {
 		enemyAI();
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) {
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
@@ -1923,6 +1928,7 @@ public function multiArrowsStrike():void {
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) {
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
@@ -1935,6 +1941,7 @@ public function multiArrowsStrike():void {
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) {
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
@@ -1947,6 +1954,7 @@ public function multiArrowsStrike():void {
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) {
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
@@ -1959,6 +1967,7 @@ public function multiArrowsStrike():void {
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 6) {
+		HeroBaneProc();
 		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
@@ -2103,6 +2112,10 @@ public function throwWeapon():void {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */		damage = Math.round(damage);
 		damage = doDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -2140,8 +2153,11 @@ public function throwWeapon():void {
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 		}
 		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
+		HeroBaneProc();
 		enemyAI();
-	} else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
+	}
+	else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
+		HeroBaneProc();
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
 		throwWeapon();
@@ -2251,6 +2267,10 @@ public function shootWeapon():void {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */		damage = Math.round(damage);
 		damage = doDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -3181,8 +3201,10 @@ public function WrathWeaponsProc():void {
 
 public function HeroBaneProc():void {
 	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-		outputText("\nYou feel " + monster.a + monster.short + " wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
-		takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
+		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) {
+			outputText("\nYou feel " + monster.a + monster.short + " wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
+			takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
+		}
 		if (player.HP < 1) {
 			doNext(endHpLoss);
 			return;
@@ -4898,7 +4920,12 @@ public function display():void {
 			if (monster is Alraune) {
 				if (temp == 5|| temp == 6) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
 				else if(temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
-				else outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the plant woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
+				else {
+					outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the ");
+					if (isHalloween()) outputText("pumpkin");
+					else outputText("plant");
+					outputText(" woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
+				}
 				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the pitcher.  Alternately, you could try to tease it or hit it at range.");
 			}
 			outputText("\n\n");

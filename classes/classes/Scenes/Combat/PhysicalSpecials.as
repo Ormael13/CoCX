@@ -222,7 +222,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
 		}
 		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
-			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
+			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws (available if you have no shield, use a one handed weapon or are unarmed).  \n\nWould go into cooldown after use for: 3 rounds");
 			bd.requireFatigue(physicalCost(60));
 			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
@@ -254,19 +254,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 20,"You are too calm to use this special.");
 		} else addButtonDisabled(2, "???");
 		if (player.level >= 18) {
-			addButton(3, "6x", powerAttack6x).disableIf(player.wrath < 50,"You are too calm to use this special.");
+			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 45,"You are too calm to use this special.");
 		} else addButtonDisabled(3, "???");
 		if (player.level >= 24) {
-			addButton(4, "8x", powerAttack8x).disableIf(player.wrath < 125,"You are too calm to use this special.");
+			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 100,"You are too calm to use this special.");
 		} else addButtonDisabled(4, "???");
 		if (player.level >= 30) {
-			addButton(5, "10x", powerAttack10x).disableIf(player.wrath < 350,"You are too calm to use this special.");
+			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 250,"You are too calm to use this special.");
 		} else addButtonDisabled(5, "???");
+		if (player.level >= 36) {
+			addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
+		} else addButtonDisabled(6, "???");
 		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		
 		player.wrath -= 5;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
@@ -299,6 +301,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function powerAttack3x():void {
@@ -335,6 +342,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function powerAttack4x():void {
@@ -371,11 +383,57 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
+		enemyAI();
+	}
+	public function powerAttack5x():void {
+		clearOutput();
+		player.wrath -= 45;
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 5;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			if (player.hasPerk(PerkLib.Impale) && (!player.hasPerk(PerkLib.DoubleAttack) || (player.hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
+			else damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function powerAttack6x():void {
 		clearOutput();
-		player.wrath -= 50;
+		player.wrath -= 100;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -407,11 +465,57 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
+		enemyAI();
+	}
+	public function powerAttack7x():void {
+		clearOutput();
+		player.wrath -= 250;
+		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		var damage:Number = 0;
+		damage += powerfistspoweeeeer();
+		damage *= 7;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			if (player.hasPerk(PerkLib.Impale) && (!player.hasPerk(PerkLib.DoubleAttack) || (player.hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
+			else damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function powerAttack8x():void {
 		clearOutput();
-		player.wrath -= 125;
+		player.wrath -= 600;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -443,42 +547,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		enemyAI();
-	}
-	public function powerAttack10x():void {
-		clearOutput();
-		player.wrath -= 350;
-		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
-		var damage:Number = 0;
-		damage += powerfistspoweeeeer();
-		damage *= 10;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
-			if (player.inte > 100) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && (!player.hasPerk(PerkLib.DoubleAttack) || (player.hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		damage = Math.round(damage);
-		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. ");
-		if (crit == true) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function powerfistspoweeeeer():Number {
@@ -601,6 +674,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -691,6 +769,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -801,6 +884,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -872,6 +960,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	
@@ -894,6 +987,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -1125,7 +1223,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("You slash your adversary with your sharp stone claw dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You slash your adversary with your sharp stone claws, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1136,6 +1234,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -1202,6 +1305,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -1248,6 +1356,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -1630,11 +1743,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
 		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
 			outputText("\n");
+			combat.HeroBaneProc();
 			enemyAI();
 		}
 		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] >= 1) {
+			combat.HeroBaneProc();
 			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
 			mantisMultipleAttacks();
 		}
@@ -1767,6 +1886,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -1851,6 +1975,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -2001,6 +2130,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Use tail mp
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		//Kick back to main if no damage occured!
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
 		else {
@@ -2191,6 +2325,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" " + monster.capitalA + monster.short + " bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 			enemyAI();
@@ -2333,6 +2472,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
 		else enemyAI();
 	}
@@ -2366,6 +2510,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		fatigue(20, USEFATG_PHYSICAL);
 		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 	public function archerSidewinder():void {
@@ -2443,6 +2592,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 
@@ -2514,6 +2668,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.ARROWS_SHOT] += 12;
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
 		enemyAI();
 	}
 

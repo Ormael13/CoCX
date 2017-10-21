@@ -15,11 +15,19 @@ package classes.Scenes.Areas.VolcanicCrag
 		public function Cinderbloom() 
 		{
 			super();
-			this.short = "cinderbloom alraune";
+			if (game.isHalloween()) {
+				this.short = "Jack-O-Raune";
+				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
+				this.skinTone = "pale orange";
+				this.hairColor = "dark green";
+			}
+			else {
+				this.short = "cinderbloom alraune";
+				this.long = "You are fighting against an Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
+				this.skinTone = "chocolate";
+				this.hairColor = "blonde";
+			}
 			this.imageName = "cinderbloom alraune";
-			this.long = "You are fighting against an Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-			this.skinTone = "chocolate";
-			this.hairColor = "blonde";
 			initStrTouSpeInte(10, 250, 10, 100);
 			initLibSensCor(200, 50, 0);
 			this.armorDef = 90 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

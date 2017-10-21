@@ -73,8 +73,9 @@ package classes.Scenes.Areas.HighMountains
 				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
 			}
 			if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
-			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takeingExcaliburFromAltair);
+			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takingExcaliburFromAltair);
 			if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
+			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
 			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
 			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "" + flags[kFLAGS.ONYX_NAME] + "", krystalonyxmenu).hint("Have a sex with " + flags[kFLAGS.ONYX_NAME] + ".");
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
@@ -84,7 +85,7 @@ package classes.Scenes.Areas.HighMountains
 		public function PlayerPrayAtTemple():void {
 			clearOutput();
 			if (anyOfAltairsRepaired()) {
-				outputText("I think Lia would write here nice text to let pick which Altair to use for prayer.");
+				outputText("I think Lia would write here nice text to let pick which Altar to use for prayer.");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
@@ -155,7 +156,10 @@ package classes.Scenes.Areas.HighMountains
 			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) blessingPower += 0.05;
 			player.createStatusEffect(StatusEffects.BlessingOfDivineMarae, 169, blessingPower, 0, 0);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
-			dynStats("cor", -10);
+			var purifyingPower:Number = 0;
+			purifyingPower += 10;
+			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) purifyingPower += 5;
+			dynStats("cor", -purifyingPower);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function PlayerPrayAtTempleTaothAltair():void {
@@ -237,16 +241,16 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Would you like to repair something in the temple?\n\n");
 				kGAMECLASS.camp.cabinProgress.checkMaterials();
 				menu();
-				addButton(0, "Altairs", rebuildGodsAltairs).hint("Repair the altar.");
+				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
 					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones.");
 				}
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Repairing the gargoyles on the walls", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
 					else addButtonDisabled(2, "Repairing the gargoyles on the walls", "You not have enough stones.");
 				}
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
 					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood or/and nails.");
 				}
@@ -333,7 +337,7 @@ package classes.Scenes.Areas.HighMountains
 			doNext(camp.returnToCampUseEightHours);
 		}
 		public function makeNewPrayerBenches():void {
-			clearOutput();//TEMPLE_OF_THE_DIVINE_PROGRESS na 8 jest na początku
+			clearOutput();
 			outputText("You work for the entire day carving wood and hammering nails. By the time you're done the temple now has a set of brand new prayer bench.");
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,1,2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 2, 0, 0, 0);
@@ -374,10 +378,7 @@ package classes.Scenes.Areas.HighMountains
 				}
 			}
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 9) {
-				outputText(" There ");
-				if (player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker) == 2) outputText("is pair of");
-				else outputText("are " + player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker) + "");
-				outputText(" benches in the temple for the worshipers to sit upon.");
+				outputText(" There are " + player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker) + " benches in the temple for the worshipers to sit upon.");
 			}
 			doNext(TempleAltairsRebuildMenu);
 		}
@@ -400,7 +401,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			doNext(templemainmenu);
 		}
-		public function takeingExcaliburFromAltair():void {
+		public function takingExcaliburFromAltair():void {
 			clearOutput();
 			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
 			player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
@@ -430,7 +431,9 @@ package classes.Scenes.Areas.HighMountains
 			doNext(templemainmenu);
 		}
 		public function takingPurePearlFromAltair():void {
-			
+			clearOutput();
+			outputText("You recover the pearl from the Altar the temple power dimming slightly.");
+			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}
 		
 		public function sapphiremenu():void {

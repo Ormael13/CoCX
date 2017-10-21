@@ -1098,6 +1098,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1166,6 +1171,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1239,6 +1249,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1311,6 +1326,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1673,6 +1693,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -1752,6 +1777,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1858,6 +1888,11 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
+		}
+		combat.HeroBaneProc();
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();

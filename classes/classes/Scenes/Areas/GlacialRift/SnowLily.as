@@ -15,11 +15,19 @@ package classes.Scenes.Areas.GlacialRift
 		public function SnowLily() 
 		{
 			super();
-			this.short = "snow lily alraune";
+			if (game.isHalloween()) {
+				this.short = "Jack-O-Raune";
+				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
+				this.skinTone = "pale orange";
+				this.hairColor = "dark green";
+			}
+			else {
+				this.short = "snow lily alraune";
+				this.long = "You are fighting against an Snow Lily, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
+				this.skinTone = "light blue";
+				this.hairColor = "white";
+			}
 			this.imageName = "snow lily alraune";
-			this.long = "You are fighting against an Snow Lily, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-			this.skinTone = "light blue";
-			this.hairColor = "white";
 			initStrTouSpeInte(10, 250, 10, 100);
 			initLibSensCor(200, 50, 0);
 			this.armorDef = 90 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

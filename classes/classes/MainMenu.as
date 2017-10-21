@@ -131,6 +131,8 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
 		if (isValentine())
 			outputText("\n\n<b>It's Valentine's!</b>");
+		if (isHalloween())
+			outputText("\n\n<b>It's Halloween!</b>");
 		if (getGame().helFollower.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
