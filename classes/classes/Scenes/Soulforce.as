@@ -595,7 +595,11 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(3, "AscenPerks10", AddAscensionPerkPoints3).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
 			addButton(4, "AscenPerks50", AddAscensionPerkPoints4).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
 			addButton(14, "Back", SoulforceCheats);
-		}
+		}/*
+		public function AddBladeGrass():void {
+			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
+			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
+		}*/
 		public function AddStaff():void {
 			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
 			inventory.takeItem(weapons.E_STAFF, EquipmentMenu);
@@ -615,10 +619,6 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
 			inventory.takeItem(consumables.VOLTTOP, SoulforceCheats);
-		}
-		public function AddBladeGrass():void {
-			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
-			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
@@ -668,10 +668,6 @@ private function resetHeroslayerOmnibusFlag():void {
 			outputText("\n\n");
 			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
 		}
-		public function AddYetiCum():void {
-			outputText("\n\n<b>(Gained 1 Yeti Cum!)</b>\n\n");
-			inventory.takeItem(consumables.YETICUM, EquipmentMenu);
-		}
 		public function AddCatONineTailWhip():void {
 			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
 			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
@@ -679,10 +675,6 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
-		}
-		public function AddEldritchRibbon():void {
-			outputText("\n\n<b>(Gained 1 Eldritch Ribbon!)</b>\n\n");
-			inventory.takeItem(weapons.ERIBBON, EquipmentMenu);
 		}
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");

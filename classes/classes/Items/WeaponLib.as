@@ -34,6 +34,7 @@ package classes.Items
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
 		public const EBNYBLD:EbonyDestroyer = new EbonyDestroyer();
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
+		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 21, 1680, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");

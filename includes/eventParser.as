@@ -252,6 +252,12 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
+	//Drop Excalibur if corrupted!
+	if (player.weaponPerk == "Excalibur" && player.cor >= (33 + player.corruptionTolerance())) {
+		outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+		return true;
+	}
 	//Drop scarred blade if not corrupted enough!
 	if (player.weapon == weapons.SCARBLD && player.cor < (66 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 		kGAMECLASS.sheilaScene.rebellingScarredBlade();

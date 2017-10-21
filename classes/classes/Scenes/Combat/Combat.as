@@ -2915,6 +2915,13 @@ public function attack():void {
 		}
 		//Selfcorrupting weapons
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		//Selfpurifying and Lust lowering weapons
+		if (player.weapon == weapons.EXCALIB) {
+			if (player.cor > 10) dynStats("cor", -0.3);
+			var excaliburLustSelf:Number = 0;
+			excaliburLustSelf = (rand(2) == 0)?0:1;
+			if (excaliburLustSelf > 0) dynStats("lus", -excaliburLustSelf);
+		}
 		//Weapon Procs!
 		//10% Stun chance
 		if ((player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.findPerk(PerkLib.MightyFist) < 0)) && rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {

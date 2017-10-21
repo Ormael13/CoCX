@@ -194,6 +194,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const Tamani:StatusEffectType                         = mk("Tamani");//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TamaniFemaleEncounter:StatusEffectType          = mk("Tamani Female Encounter");//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TelAdre:StatusEffectType                        = mk("Tel'Adre");
+		public static const TempleOfTheDivineTracker:StatusEffectType       = mk("Temple of the Divine Tracker");
 		public static const TentacleBadEndCounter:StatusEffectType          = mk("TentacleBadEndCounter");
 		public static const TentacleJojo:StatusEffectType                   = mk("Tentacle Jojo");
 		public static const TensionReleased:StatusEffectType                = mk("TensionReleased");
