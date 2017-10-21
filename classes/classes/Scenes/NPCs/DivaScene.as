@@ -1,4 +1,5 @@
 package classes.Scenes.NPCs {
+import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
 
 import coc.view.ButtonDataList;
@@ -42,16 +43,19 @@ public class DivaScene extends XXCNPC{
             myClass:getQualifiedClassName(this),
             status:status,
             firstLoss:firstLoss,
-            timesReduced:timesReduced
+            timesReduced:timesReduced,
+            bloodUsed:VampireBlood.first
         }
     }
     public override function load(loadfrom:*):void{
         if(loadfrom == undefined || loadfrom.diva == undefined){
+            VampireBlood.first=true;
             unload();
         } else {
             status = loadfrom.diva.status;
             firstLoss = loadfrom.diva.firstLoss;
             timesReduced = loadfrom.diva.timesReduced;
+            VampireBlood.first = loadfrom.diva.bloodUsed;
         }
     }
     public override function isCompanion(type:int = -1):Boolean{

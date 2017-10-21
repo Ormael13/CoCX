@@ -128,9 +128,9 @@ public class Diva extends Monster {
             game.addButton(2,"Never",finalChoice,2);
         }
         else{
-            doNext(cleanupAfterCombat);
             display("scenes/defeated/normal");
             DivaScene.getInstance().status++;
+            cleanupAfterCombat();
         }
         game.flushOutputTextToGUI();
         function finalChoice(choice:int):void{
@@ -146,8 +146,7 @@ public class Diva extends Monster {
                 DivaScene.getInstance().status = -2;
                 display("scenes/defeated/final/neverChoice");
             }
-            game.flushOutputTextToGUI();
-            doNext(cleanupAfterCombat);
+            cleanupAfterCombat();
         }
     }
     //endregion

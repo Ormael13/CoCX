@@ -6,7 +6,7 @@ import coc.xxc.BoundStory;
 
 public class VampireBlood extends Consumable {
     private var pure:Boolean;
-    private var first:Boolean;
+    public static var first:Boolean = true;
     public function VampireBlood(purified:Boolean=false) {
         super(
                 purified ? "VampBld" : "RedVial",
@@ -65,8 +65,10 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'skinTone',
                 ChangeTo: "pale",
                 Addition: {
-                    BodyPart: 'eyeColor',
-                    ChangeTo: "blood red"
+                    Eyes:{
+                        BodyPart: 'eyeColor',
+                        ChangeTo: "blood red"
+                    }
                 }
             });
         } else {
@@ -80,7 +82,7 @@ public class VampireBlood extends Consumable {
         for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (rand(tf.Chance? tf.Chance : 3) == 0) {
-                if (tf.Check()) {
+                if (tf.check && tf.Check()) {
                     tf.Override();
                     changes++;
                 }
@@ -94,6 +96,7 @@ public class VampireBlood extends Consumable {
                 }
             }
         }
+        if(changes == 0){story.display("noChange");}
         return false;
     }
 }

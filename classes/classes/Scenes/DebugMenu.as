@@ -5,7 +5,9 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.MainViewManager;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+import classes.MainViewManager;
 
 import coc.view.Color;
 
@@ -32,6 +34,7 @@ import flash.utils.describeType;
 		public var dyeArray:Array = [];
 		public var materialArray:Array = [];
 		public var rareArray:Array = [];
+		public var testArray:Array = [];
 		
 		
 		public function DebugMenu() 
@@ -92,6 +95,7 @@ import flash.utils.describeType;
 			addButton(7, "Armours", displayItemPage, armourArray, 1);
 			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
 			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
+			addButton(10,"ConsumableLib",displayItemPage,testArray,1);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -133,7 +137,16 @@ import flash.utils.describeType;
 		}
 		
 		private function setItemArrays():void {
-			if (setArrays) return; //Already set, cancel.
+            if (setArrays) return; //Already set, cancel.
+            var xmlList:XMLList = describeType(ConsumableLib).factory.constant;
+            for each (var item:XML in xmlList){
+                if(consumables[item.@name] is Consumable){
+					testArray.push(consumables[item.@name]);
+                    trace(String(consumables[item.@name]));
+				} else {
+					trace("Not Added: "+String(consumables[item.@name]));
+				}
+            }
 			//Build arrays here
 			//------------
 			// Transformatives
