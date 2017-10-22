@@ -796,7 +796,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("<i>“Well, my beautiful lover, you heard what zhe zzzaid.  I hope you come lotzzz for your friend,”</i> the queen says while the stinger moves towards the handmaiden’s honeypot and forces itself inside her.  As the phallus is inserted, a sudden shudder goes through the queens abdomen and finally pushes you over the edge.  Your bee prick erupts with pleasure and you feel your seed flow deep inside the queen’s abdomen, to fertilize her eggs." + (player.cumQ() < 500 ? "  You’re surprised to feel just how much flows out of you, you’ve never cum that much before." : "") + "\n\n");
 			outputText("You can’t think anymore, you can only thrust into the wondrous slit in front of you and cum, again and again until you hear a voice cry out in orgasmic pleasure to your side.  You turn to see your handmaiden finish being filled.  She drifts over to you and takes your hand and places it on her swollen abdomen.  <i>“You did a good job, lover.  I hope you can zzztay with uzzz forever, helping the queen fertilize her eggzzz every day.”</i>\n\n");
 			outputText("Of course you agree, nothing else in the world matters anymore to you, only this vagina in front of you and the bee whose abdomen you have your hand on can truly bring you the release you need.  You could never turn away from them, nor could you ever turn away from your duty to your queen.  <i>“I’m glad to hear that from you, lover.  Welcome to my hive,”</i> speaks the queen’s voice in your mind.\n\n");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		//Talk to the bee-girl
@@ -1019,7 +1019,7 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			spriteSelect(6);
 			outputText("As a member of the fertile cast within the bee hive, the days run together, and the once-champion’s life is filled with nothing but eggs, and playing with the drones and other members of the fertile cast.  Just as her older sister, the young bee will one day tempt another champion to their embrace and fill them with the eggs of their hive.  They won’t even be able to comprehend that their latest incubator wouldn’t have been willing if it hadn’t been for her siren’s song.  Nor will they spare any head to the critical mission that they sent out to accomplish all those months ago.  Nothing of her old self remains now.\n\n");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function beeMaidenConversationRejectCandy():void {

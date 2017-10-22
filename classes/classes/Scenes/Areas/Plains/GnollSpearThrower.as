@@ -13,7 +13,7 @@ import classes.internals.*;
 		private function hyenaPhysicalAttack():void {
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -220,7 +220,7 @@ import classes.internals.*;
 		{
 			var damage:Number = 0;
 //return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -307,12 +307,12 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(short == "alpha gnoll") {
-				game.clearOutput();
+				EngineCore.clearOutput();
 				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
-				game.menu();
-				game.addButton(0,"Fuck",	game.urtaQuest.winRapeHyenaPrincess);
-				game.addButton(1,"Succ Milk", game.urtaQuest.useSuccubiMilkOnGnollPrincesses);
-				game.addButton(4,"Leave",game.urtaQuest.urtaNightSleep);
+				EngineCore.menu();
+				EngineCore.addButton(0,"Fuck",	game.urtaQuest.winRapeHyenaPrincess);
+				EngineCore.addButton(1,"Succ Milk", game.urtaQuest.useSuccubiMilkOnGnollPrincesses);
+				EngineCore.addButton(4,"Leave",game.urtaQuest.urtaNightSleep);
 			} else {
 				game.plains.gnollSpearThrowerScene.hyenaVictory();
 			}

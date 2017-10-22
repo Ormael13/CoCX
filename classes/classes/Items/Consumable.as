@@ -4,6 +4,7 @@
 package classes.Items
 {
 import classes.DefaultDict;
+import classes.EngineCore;
 import classes.GlobalFlags.*;
 import classes.Player;
 import classes.Scenes.Camp;
@@ -27,7 +28,7 @@ import classes.internals.Utils;
 		protected function get prison():Prison { return kGAMECLASS.prison; }
 		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
 		protected function get camp():Camp { return kGAMECLASS.camp; }
-		protected function doNext(eventNo:Function):void { kGAMECLASS.doNext(eventNo); }
+		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
 		protected function rand(n:Number):int { return Utils.rand(n); }
 		
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {

@@ -4,10 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class EtnaFollower extends NPCAwareContent
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class EtnaFollower extends NPCAwareContent
 	{
 		
 		public function EtnaFollower() 
@@ -347,7 +347,7 @@ public function etnaRapeYandereBadEnd():void
 	outputText("You wake up before Etna does and see a spike you could use to break free but you are too weak to fight or crawl your way to it. Therefore you stay on the ground, at the mercy of Etna. Maybe it isn’t such a bad thing. After all, she clearly loves you and if she is willing to go this far to keep you next to her, there isn’t much you can do about it. Etna will never let you leave the cave ever again and, as such, you give up on your quest in order to live with your somewhat obsessed lover. ");
 	if(player.hasStatusEffect(StatusEffects.CampMarble)) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
 	outputText("Your adventure seems to have come to an end but at least you will live the rest of your life showered with love.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 public function etnaRapeIntro2():void

@@ -713,7 +713,7 @@ public class KitsuneScene extends BaseContent
 			outputText("The glimmer of your past is long forgotten, and all you are left with is the depravity with which they use your many-limbed body, an abominable form they themselves bestowed upon you.  Each night they ravage you to the point of exhaustion, their twisted magic sustaining you well beyond the endurance of a mortal, to fuel their own twisted desires.\n\n");
 			outputText("You are forever the sisters' servant now, a beast of pure perversion cultivated for the sole purpose of providing them pleasure.\n\n");
 			outputText("<b>THE END</b>");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 

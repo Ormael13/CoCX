@@ -16,7 +16,7 @@ import classes.internals.*;
 			var damage:Number = 0;
 			var attack:Number = rand(6);
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -86,7 +86,7 @@ import classes.internals.*;
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 			}
 		}
 		
@@ -129,7 +129,7 @@ import classes.internals.*;
 			var damage:Number = 0;
 			var attack:Number = rand(6);
 //return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -199,7 +199,7 @@ import classes.internals.*;
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 			}
 		}
 
@@ -252,7 +252,7 @@ import classes.internals.*;
 				var damage:Number = 0;
 				var attack:Number = rand(6);
 //return to combat menu when finished
-				doNext(game.playerMenu);
+				doNext(EventParser.playerMenu);
 //Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -322,7 +322,7 @@ import classes.internals.*;
 						outputText(" ");
 						player.takeDamage(damage);
 					}
-					game.statScreenRefresh();
+					EngineCore.statScreenRefresh();
 				}
 				gnollAttackText();
 			}

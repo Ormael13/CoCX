@@ -24,14 +24,14 @@ As Fenoxo has made his game code open source, this license DOES NOT transfer to 
 For further information and license requests, Dxasmodeus may be contacted through private message at the Futanari Palace. http://www.futanaripalace.com/forum.php. */
 
 package classes.Scenes.Explore {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class Giacomo extends BaseContent implements TimeAwareInterface {
+public class Giacomo extends BaseContent implements TimeAwareInterface {
 
 		public function Giacomo() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedSuccubi:int;
@@ -902,7 +902,7 @@ package classes.Scenes.Explore {
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 				else {

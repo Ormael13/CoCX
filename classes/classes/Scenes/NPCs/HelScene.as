@@ -1,9 +1,9 @@
 package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class HelScene extends NPCAwareContent implements TimeAwareInterface {
+public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
 
@@ -12,7 +12,7 @@ package classes.Scenes.NPCs{
 			pregnancy = new PregnancyStore(kFLAGS.HELIA_PREGNANCY_TYPE, kFLAGS.HEL_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 200, 100);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedHeliaIsabellaThreesome:int;

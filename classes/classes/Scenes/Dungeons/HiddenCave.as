@@ -4,17 +4,14 @@
  */
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Dungeons.HiddenCave.*;
-	import classes.Scenes.NPCs.Ted;
-	import classes.PerkLib;
-	
-	public class HiddenCave extends DungeonAbstractContent
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.PerkLib;
+import classes.Scenes.Dungeons.HiddenCave.*;
+import classes.Scenes.NPCs.Ted;
+
+public class HiddenCave extends DungeonAbstractContent
 	{
 		private static const DUNGEON_HIDDEN_CAVE_ENTRANCE:int		= 39;
 		private static const DUNGEON_HIDDEN_CAVE_SE_UP:int			= 40;
@@ -61,19 +58,19 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("As you fall defeated to the ground the construct continue to pummel you to death. By the time it's done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedByGuardianGolems():void {
 			clearOutput();
 			outputText("As you fall defeated to the ground the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedByBossGolems():void {
 			clearOutput();
 			outputText("As you fall defeated, with barely any time to collapse to the ground as the constructs continue to smash or slash you to death with their tails. By the time they are done with you there will be nothing left but a bloodstain on the stone floor...and some of you on the walls and maybe a little bit on cave roof too. Wait how did part of you get there?\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedBossGolems():void {
 			clearOutput();

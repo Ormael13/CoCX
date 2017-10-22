@@ -1,9 +1,10 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	
-	/**
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+
+/**
 	 * Moderate boost to HP.
 	 * 
 	 * Retro UTG stuff!
@@ -20,7 +21,7 @@ package classes.Items.Consumables
 			var rand:int = Math.random() * 100;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
-			if (game.HPChange(50 + player.tou, true)) {
+			if (EngineCore.HPChange(50 + player.tou, true)) {
 				outputText("Some of your wounds are healed. ");
 			}
 			else

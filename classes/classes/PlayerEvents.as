@@ -7,7 +7,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
 		public function PlayerEvents():void {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
@@ -453,16 +453,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] > 0) {
 					switch (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]) {
 						case 1:
-							if (!needNext) needNext = getGame().growHair(0.2);
-							else getGame().growHair(0.2);
+							if (!needNext) needNext = EventParser.growHair(0.2);
+							else EventParser.growHair(0.2);
 							break;
 						case 2:
-							if (!needNext) needNext = getGame().growHair(0.5);
-							else getGame().growHair(0.5);
+							if (!needNext) needNext = EventParser.growHair(0.5);
+							else EventParser.growHair(0.5);
 							break;
 						case 3:
-							if (!needNext) needNext = getGame().growHair(1.1);
-							else getGame().growHair(1.1);
+							if (!needNext) needNext = EventParser.growHair(1.1);
+							else EventParser.growHair(1.1);
 						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
@@ -483,9 +483,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Hair grows if not disabled by lizardness
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-					if (!needNext) needNext = getGame().growHair(0.1);
-					else getGame().growHair(0.1);
-					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
+					if (!needNext) needNext = EventParser.growHair(0.1);
+					else EventParser.growHair(0.1);
+					if (player.beardLength > 0 && player.beardLength < 12) EventParser.growBeard(0.02);
 				}
 				//Clear dragon breath cooldowns!
 				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
@@ -1046,7 +1046,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "scale", false);
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
 					if (player.lib < 1) player.lib = 1;
-					getGame().statScreenRefresh();
+					EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
 					needNext = true;
 				}
@@ -1059,7 +1059,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
 					if (player.lib < 10) player.lib = 10;
-					getGame().statScreenRefresh();
+                    EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
 					needNext = true;
 				}
@@ -1287,7 +1287,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 					player.orgasm(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+                    EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;
@@ -1307,7 +1307,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					return true;
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Drider dreams proc
@@ -1325,7 +1325,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;
@@ -1360,7 +1360,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.plantScore() >= 4 && player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_WORLD_TREE] < 1) {
 					outputText("\nYou find yourself in a forest. You feel a delicate melody fill the air around you, and while it has no discernable sound it somehow resonates with your being. Without even realizing it, you find yourself walking towards the source. Before long, you’re standing before a towering goliath of a tree, much larger than the others around you. As you touch the bark, you hear a soft voice. “Welcome home”. You bolt awake, and realize it was but a dream.  But somehow, you still feel the song whispering in your mind... <b>Perhaps you could seek out this tree in the waking world?</b>");
 					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					return true;
 				}
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here

@@ -21,16 +21,16 @@ public class IncubusMechanic extends Monster {
 		
 		private function defeatedInDungeon1(hpVictory:Boolean):void {
 			clearOutput();
-			game.menu();
+			EngineCore.menu();
 			if (hpVictory)
 				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
 			if (player.gender == 0) {
 				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				game.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				game.addButton(1, "Orally", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				game.addButton(4, "Leave", game.cleanupAfterCombat);
+				EngineCore.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
+				EngineCore.addButton(1, "Orally", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
+				EngineCore.addButton(4, "Leave", game.cleanupAfterCombat);
 			}
 			else {
 				player.dynStats("lus", 1);
@@ -41,12 +41,12 @@ public class IncubusMechanic extends Monster {
 				else {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) game.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) EngineCore.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 				}
-				game.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
-				game.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				game.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				game.addButton(4, "Nothing", game.cleanupAfterCombat);
+				EngineCore.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				EngineCore.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
+				EngineCore.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
+				EngineCore.addButton(4, "Nothing", game.cleanupAfterCombat);
 			}
 		}
 		

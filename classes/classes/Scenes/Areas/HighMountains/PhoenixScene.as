@@ -1,10 +1,9 @@
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class PhoenixScene extends BaseContent
+public class PhoenixScene extends BaseContent
 	{
 		//" + (player.cocks.length == 1 ? "": "") + "
 		public function PhoenixScene() 
@@ -310,7 +309,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
 			rawOutputText("\n\n[DATA EXPUNGED]");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	}
 

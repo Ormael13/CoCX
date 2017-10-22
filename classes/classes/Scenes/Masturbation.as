@@ -2267,7 +2267,7 @@ public class Masturbation extends BaseContent {
 			outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
 			outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n");
 			outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function lickYerGirlParts():void { //Female cat masturbation

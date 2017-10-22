@@ -1,14 +1,15 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.BaseContent;
-	import classes.Monster;
-	import classes.StatusEffects;
-	import classes.Items.WeaponLib;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import flash.net.SharedObject;
-	
-	public class LethiceScenes extends BaseContent
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
+import classes.StatusEffects;
+
+import flash.net.SharedObject;
+
+public class LethiceScenes extends BaseContent
 	{
 		public static const GAME_END_REDEMPTION:uint = 1;
 		public static const GAME_END_CONSORT:uint = 2;
@@ -846,7 +847,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nYou bark eagerly and lunge up into her lap, burying your face between your loving Mistress’s thighs as the doors slam closed behind you, sealing the Champion of Ingnam’s fate...");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		private function theChoiceDunDunDun():void

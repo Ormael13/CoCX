@@ -148,7 +148,7 @@ public class Kiha extends Monster
 			var select:Number = rand(5);
 			if (select <= 1) eAttack();
 			else if (select == 2) {
-				if (game.silly()) sillyModeKihaAttack();
+				if (EngineCore.silly()) sillyModeKihaAttack();
 				else kihaFirePunch();
 			}
 			else if (select == 3) kihaFireBreath();

@@ -46,7 +46,7 @@ public class Kitsune extends Monster
 		{
 			clearOutput();
 			outputText("Happily, you slump deeper into the fluffy tails, eliciting an amused giggle from the kitsune.");
-			if (game.silly()) outputText("  You're so glad you got to touch fluffy tail.");
+			if (EngineCore.silly()) outputText("  You're so glad you got to touch fluffy tail.");
 			outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 			player.dynStats("lus", 5 + player.sens / 10);
 			combatRoundOver();

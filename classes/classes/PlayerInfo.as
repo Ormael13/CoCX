@@ -23,7 +23,7 @@ public class PlayerInfo extends BaseContent {
 		var combatStats:String = "";
 
 		combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
-		combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(getGame().lustPercent())) + "% (Higher is better.)\n";
+		combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(getGame().player.lustPercent())) + "% (Higher is better.)\n";
 
 		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";

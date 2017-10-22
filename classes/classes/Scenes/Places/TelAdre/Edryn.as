@@ -16,7 +16,7 @@ public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface 
 		public function Edryn()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.EDRYN_PREGNANCY_TYPE, kFLAGS.EDRYN_PREGNANCY_INCUBATION, 0, 0);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

@@ -24,7 +24,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 
 		public function ShouldraScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

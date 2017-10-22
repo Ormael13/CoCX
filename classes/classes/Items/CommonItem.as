@@ -3,12 +3,13 @@
  */
 package classes.Items
 {
-	import classes.CoC;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-	import classes.Player;
+import classes.CoC;
+import classes.EngineCore;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.ItemType;
+import classes.Player;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class CommonItem extends ItemType{
 
@@ -20,10 +21,10 @@ package classes.Items
 		}
 
 		public function clearOutput():void{
-			kGAMECLASS.clearOutput();
+			EngineCore.clearOutput();
 		}
 		public function outputText(text:String):void{
-			kGAMECLASS.outputText(text);
+			EngineCore.outputText(text);
 		}
 
 		public function CommonItem(id:String, shortName:String=null, longName:String=null, value:Number=0, description:String=null)

@@ -44,7 +44,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			pregnancy = new PregnancyStore(kFLAGS.MARBLE_PREGNANCY_TYPE, kFLAGS.MARBLE_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 648, 528, 432, 288, 144);
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6 (< 144)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedMarbleMilk:int; //Make sure we test each of these events just once in timeChangeLarge
@@ -3043,7 +3043,7 @@ public function marbleBadEndFollowup():void {
 	//wrap things up
 	outputText("\n\n");
 	outputText("You've abandoned your quest due to your inability to refuse Marble, thanks to the effect her milk has on you.  However, you may have a chance to help the next one complete his quest, or maybe you won't.  As it stands now, this is where your story ends.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //BIRTHING OVERWRITES SECKS

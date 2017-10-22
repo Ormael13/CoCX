@@ -1,6 +1,8 @@
 package classes.Scenes.Places.Farm
 {
 import classes.AppearanceDefs;
+import classes.EngineCore;
+import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Consumable;
@@ -342,7 +344,7 @@ import classes.StatusEffects;
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
 				flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] = 0;
-				kGAMECLASS.showStats();
+				EngineCore.showStats();
 			}
 			
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0)
@@ -1015,7 +1017,7 @@ import classes.StatusEffects;
 			menu();
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(0, "Izma", kGAMECLASS.izmaScene.izmaFollowerMenu);
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", kGAMECLASS.gameOver);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", EventParser.gameOver);
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", kGAMECLASS.isabellaFollowerScene.callForFollowerIsabella);
 			

@@ -5,7 +5,6 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Weapon;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -56,7 +55,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 		public function AnemoneScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface
@@ -1269,7 +1268,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				return item == consumables.W__BOOK || item == consumables.B__BOOK || item == consumables.W_STICK || item is Weapon;
 			}
 			menu();
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 			var foundItem:Boolean = false;
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {

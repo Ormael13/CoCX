@@ -46,8 +46,8 @@ use namespace kGAMECLASS;
 		
 		protected final function outputText(text:String, clear:Boolean = false):void
 		{
-			if (clear) game.clearOutputTextOnly();
-			game.outputText(text);
+			if (clear) EngineCore.clearOutputTextOnly();
+			EngineCore.outputText(text);
 		}
 		
 		public var startingRace:String = "human";
@@ -4030,12 +4030,12 @@ use namespace kGAMECLASS;
 				else if (hunger >= 75 && hunger < 90) outputText("<b>You feel so satisfied. </b>");
 				else if (hunger >= 90) outputText("<b>Your stomach feels so full. </b>");
 				if (weightChange > 0) outputText("<b>You feel like you've put on some weight. </b>");
-				kGAMECLASS.awardAchievement("Tastes Like Chicken ", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
-				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
-				if (oldHunger >= 90) kGAMECLASS.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
+				EngineCore.awardAchievement("Tastes Like Chicken ", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
+				if (oldHunger < 1 && hunger >= 100) EngineCore.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
+				if (oldHunger >= 90) EngineCore.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				dynStats("lus", 0, "scale", false);
-				kGAMECLASS.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 			}
 		}
 		
@@ -5525,7 +5525,7 @@ use namespace kGAMECLASS;
 			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
-				kGAMECLASS.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
 			}
 			if(hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -6030,7 +6030,7 @@ use namespace kGAMECLASS;
 			if (countCockSocks("gilded") > 0) {
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
+				EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 				gems += bonusGems;
 			}
 		}
@@ -6083,13 +6083,13 @@ use namespace kGAMECLASS;
 		public function orgasmRaijuStyle():void
 		{
 			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
-				game.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				EngineCore.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
 				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
 				dynStats("lus", (60 + rand(20)), "sca", false);
 				game.mutations.voltageTopaz(false,kGAMECLASS.player);
 			}
 			else {
-				game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				EngineCore.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
 				dynStats("lus", (maxLust() * 0.1), "sca", false);
 			}
 			hoursSinceCum = 0;
@@ -6207,7 +6207,7 @@ use namespace kGAMECLASS;
 				dlust *= 1 + (newGamePlusMod() * 0.2);
 				
 				//lust resistance
-				if (dlust > 0 && scale) dlust *= game.lustPercent() / 100;
+				if (dlust > 0 && scale) dlust *= EngineCore.lustPercent() / 100;
 				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
 				if (dcor > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dcor *= 0.5;
 				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
@@ -6251,8 +6251,8 @@ use namespace kGAMECLASS;
 			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
 			//Refresh the stat pane with updated values
 			//mainView.statsView.showUpDown();
-			game.showUpDown();
-			game.statScreenRefresh();
+			EngineCore.showUpDown();
+			EngineCore.statScreenRefresh();
 		}
 	}
 }

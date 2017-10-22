@@ -6,6 +6,7 @@ import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
+import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
@@ -332,7 +333,7 @@ public class Centaurinum extends Consumable{
 		//FAILSAFE CHANGE
 		if (changes == 0) {
 			outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-			game.HPChange(50, true);
+			EngineCore.HPChange(50, true);
 			dynStats("lus", 3);
 		}
 		player.refillHunger(10);

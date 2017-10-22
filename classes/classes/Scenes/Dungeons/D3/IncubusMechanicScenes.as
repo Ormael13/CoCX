@@ -1,14 +1,14 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
-	import classes.CockTypesEnum;
-	import classes.PregnancyStore;
-	
-	/**
+import classes.BaseContent;
+import classes.CockTypesEnum;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.PregnancyStore;
+import classes.Scenes.Dungeons.Factory.IncubusMechanic;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -693,7 +693,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he","she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
-			getGame().gameOver(); // G-G-G-GAMEOVER.
+			EventParser.gameOver(); // G-G-G-GAMEOVER.
 		}
 		
 		
@@ -821,7 +821,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 	}

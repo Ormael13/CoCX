@@ -3,13 +3,11 @@
  */
 package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.internals.Utils;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.internals.Utils;
 
-	public final class GroPlus extends Consumable {
+public final class GroPlus extends Consumable {
 		
 		public function GroPlus() {
 			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
@@ -29,7 +27,7 @@ package classes.Items.Consumables
 			var gpNipples:Function	= (game.player.totalNipples() > 0 ? growPlusNipples : null);
 			clearOutput();
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
-			game.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
+			EngineCore.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
 			return(true);
 		}
 		

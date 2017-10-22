@@ -22,10 +22,10 @@ public function displayControls():void
 {
 	mainView.hideAllMenuButtons();
 	inputManager.DisplayBindingPane();
-	menu();
-	addButton(0, "Reset Ctrls", resetControls);
-	addButton(1, "Clear Ctrls", clearControls);
-	addButton(4, "Back", hideControls);
+	classes.EngineCore.menu();
+	classes.EngineCore.addButton(0, "Reset Ctrls", resetControls);
+	classes.EngineCore.addButton(1, "Clear Ctrls", clearControls);
+	classes.EngineCore.addButton(4, "Back", hideControls);
 }
 
 public function hideControls():void
@@ -39,38 +39,38 @@ public function resetControls():void
 {
 	inputManager.HideBindingPane();
 
-	clearOutput();
-	outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
+	classes.EngineCore.clearOutput();
+	classes.EngineCore.outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
 	
-	doYesNo(resetControlsYes, displayControls);
+	classes.EngineCore.doYesNo(resetControlsYes, displayControls);
 }
 
 public function resetControlsYes():void
 {
 	inputManager.ResetToDefaults();
 
-	clearOutput();
-	outputText("Controls have been reset to defaults!\n\n");
+	classes.EngineCore.clearOutput();
+	classes.EngineCore.outputText("Controls have been reset to defaults!\n\n");
 	
-	doNext(displayControls);
+	classes.EngineCore.doNext(displayControls);
 }
 
 public function clearControls():void
 {
 	inputManager.HideBindingPane();
 
-	clearOutput();
-	outputText("Are you sure you want to clear all of the currently bound controls?");
+	classes.EngineCore.clearOutput();
+	classes.EngineCore.outputText("Are you sure you want to clear all of the currently bound controls?");
 	
-	doYesNo(clearControlsYes, displayControls);
+	classes.EngineCore.doYesNo(clearControlsYes, displayControls);
 }
 
 public function clearControlsYes():void
 {
 	inputManager.ClearAllBinds();
 
-	clearOutput();
-	outputText("Controls have been cleared!");
+	classes.EngineCore.clearOutput();
+	classes.EngineCore.outputText("Controls have been cleared!");
 	
-	doNext(displayControls);
+	classes.EngineCore.doNext(displayControls);
 }

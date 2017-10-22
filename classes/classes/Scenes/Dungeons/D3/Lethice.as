@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.D3
 {
 import classes.AppearanceDefs;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
@@ -210,12 +211,12 @@ public class Lethice extends Monster
 			}
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 
-			game.doNext(game.combat.combatMenu);
+			EngineCore.doNext(game.combat.combatMenu);
 			game.player.mana -= 30;
 			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			game.combat.spellPerkUnlock();
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			game.enemyAI();
 		}
 
@@ -491,10 +492,10 @@ public class Lethice extends Monster
 
 			outputText("\n\nWhile the demons are down, and Lethice is still recovering from your first skirmish, you have a much-needed moment to relieve the tensions starting to grow within you. Or you could press the attack, and take the fight to the queen.");
 
-			game.menu();
-			if (player.hasCock() || player.hasVagina()) game.addButton(0, "DemonFuck", p2DemonFuck, hpVictory);
-			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) game.addButton(1, "Heal", p2Heal);
-			game.addButton(2, "Next", p2Next);
+			EngineCore.menu();
+			if (player.hasCock() || player.hasVagina()) EngineCore.addButton(0, "DemonFuck", p2DemonFuck, hpVictory);
+			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) EngineCore.addButton(1, "Heal", p2Heal);
+			EngineCore.addButton(2, "Next", p2Next);
 		}
 
 		private function p2DemonFuck(hpVictory:Boolean):void
@@ -518,10 +519,10 @@ public class Lethice extends Monster
 			outputText("\n\nAround you, spurred on by your face-fucking the omnibus, the defeated demon court undulates in waves of orgiastic pleasure, gleefully sucking each other’s cocks, penetrating any hole they can find, or simply rolling on the floor locked in each other’s sensual embraces. Those that didn’t join the fight hoot and holler from the stands, encouraging you to fuck the omnibus like the eager slut she is. For her part, the horny demon just smirks up at you between long, loving licks across your sex.");
 
 			// [Oral Finish] [Fuck Demoncunt] [Ride Dogcock]
-			game.menu();
-			game.addButton(0, "OralFinish", oralFinish);
-			if (player.hasCock()) game.addButton(1, "FuckDemon", fuckDemon);
-			game.addButton(2, "RideCock", rideCock);
+			EngineCore.menu();
+			EngineCore.addButton(0, "OralFinish", oralFinish);
+			if (player.hasCock()) EngineCore.addButton(1, "FuckDemon", fuckDemon);
+			EngineCore.addButton(2, "RideCock", rideCock);
 		}
 
 		private function oralFinish():void
@@ -596,7 +597,7 @@ public class Lethice extends Monster
 			outputText("Drawing on your magic, you use the opportunity to mend your wounds. No foe dares challenge you during the brief lull in battle, enabling you to maintain perfect concentration. With your flesh freshly knit and ready for battle, you look to Lethice.");
 			var temp:Number = int((player.inte / (2 + rand(3)) * game.combat.spellMod()) * (player.maxHP() / 150));
 			if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-			game.HPChange(temp,false);
+			EngineCore.HPChange(temp,false);
 
 			beginPhase3(true);
 		}
@@ -629,9 +630,9 @@ public class Lethice extends Monster
 			pronoun2 = "her";
 			pronoun3 = "her";
 			
-			game.menu();
+			EngineCore.menu();
 			
-			if (doLethNext) game.addButton(0, "Next", p2Next);
+			if (doLethNext) EngineCore.addButton(0, "Next", p2Next);
 			else combatRoundOver();
 		}
 
@@ -825,7 +826,7 @@ public class Lethice extends Monster
 					var damage:Number = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
-					game.statScreenRefresh();
+					EngineCore.statScreenRefresh();
 					outputText("\n");
 				}
 				else

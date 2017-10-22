@@ -12,7 +12,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface
 		{
 			pregnancy = new PregnancyStore(kFLAGS.KIHA_PREGNANCY_TYPE, kFLAGS.KIHA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 384, 336, 288, 240, 192, 144, 96, 48);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

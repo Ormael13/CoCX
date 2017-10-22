@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Places.Boat{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
-	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 
-	public class SharkGirlScene extends AbstractBoatContent{
+public class SharkGirlScene extends AbstractBoatContent{
 
 	public function SharkGirlScene()
 	{
@@ -224,7 +224,7 @@ private function sharkBadEnd2():void {
 	outputText("\"<i>My, he's... certainly a virile creature, isn't he?</i>\" a tiger shark asks, taking a seat on a nearby rock. Another shark girl chuckles in response, \"<i>Oh I know. Our numbers have practically doubled because of him.</i>\" She gestures to several heavily pregnant shark girls lazing on the sands, caressing their bumps happily.\n\n");
 	outputText("\"<i>Wow. When I heard rumors of your pack getting a new male, I had to check it out for myself. But I didn't think he'd be anything like this...</i>\" the tiger shark says, rubbing her own genitalia. You blow your load inside the shark girl before pausing a moment to catch your breath, your quad of cantaloupe-sized balls churning with more cum. You look up, ready to start on another girl, and catch sight of a human moving across the shoreline. A grin spreads across your face at the sight and you direct the girls' attention to the lone human.\n\n");
 	outputText("\"<i>Fresh meat!</i>\"");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 /*-------------------------

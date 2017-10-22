@@ -1,9 +1,10 @@
 package classes.Scenes.Areas.Plains 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	/**
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+/**
 	 * ...
 	 * @author Kitteh6660
 	 */
@@ -85,7 +86,7 @@ package classes.Scenes.Areas.Plains
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
-				game.outputText("The gatekeeper appears to be immune to your fear.\n\n");
+				EngineCore.outputText("The gatekeeper appears to be immune to your fear.\n\n");
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) {

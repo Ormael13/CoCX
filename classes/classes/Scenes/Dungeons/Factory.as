@@ -180,7 +180,7 @@ use namespace kGAMECLASS;
 				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
 			}
 			//Second/third times...
-			else if (player.getAllMinStats().lib < player.getAllMaxStats().lib) {
+			else if (player.getAllMinStats()["lib"] < player.getAllMaxStats()["lib"]) {
 				//[[2nd time]] 
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
 				//Grow dick!
@@ -1308,7 +1308,7 @@ use namespace kGAMECLASS;
 			
 			outputText("<b>This kind of treatment continues for a few days, until sucking, fucking and getting fucked is the only thing you desire. As your mind is now broken, injections are no longer necessary to keep you in a perfect pleasure state. After a month, they even untie you, since you are now their complete cum-puppet, eager only to please and obey.</b>");
 			//The style on this part wasn't up to par with the rest, so I rewrote some of it, while keeping the meaning
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		public function doBadEndSuccubusPart1():void {
@@ -1398,7 +1398,7 @@ use namespace kGAMECLASS;
 			else outputText("Later on, in a moment of clarity, you look around and realize you aren't alone.  ");
 			outputText("In rows alongside you are a large number of other captives, every single one endowed with freakishly sized breasts, and nearly all gifted with throbbing demonic dicks.  Some small analytical part of you notes that the farther down the line they are, the older and larger they have become.   You look down and see your own massive tits, shiny tainted nipples still pumping out streams of milk.  The huge throbbing demon-cock between your legs begins to get hard as the machines crank back up, filling you full of happy horniness.");
 			if(player.statusEffectv3(StatusEffects.Marble) == 1 || player.hasStatusEffect(StatusEffects.CampMarble)) outputText("  With Marble here too, you'll be around for a long time.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function doBadEndOmnibusPart1():void {
@@ -1465,7 +1465,7 @@ use namespace kGAMECLASS;
 				else outputText("Your mistress looks down with approval and speaks, \"<i>Very good.  ");
 				outputText("I want you to stay here and cum 'til morning.  My pet needs lots of nutrition to recharge, and I have plans for new ways to teach you to obey tomorrow.</i>\"\n\n");
 				outputText("Happy to have such a wonderful task, you spend the next day being bathed in drugged aphrodisiacs, cumming over and over and over.  Every morning the creature flashes you into obedience while the voice teaches you more and more about how to think.  After a week you're the perfect pet.  By the end of your first month of servitude, any memories of your past life are gone.  You spend the rest of your days feeding your mistress and her pet, and helping her refine and breed her pets in order to teach others the way.");
-				getGame().gameOver();
+				EventParser.gameOver();
 				return;
 			}
 			//Dick version
@@ -1503,7 +1503,7 @@ use namespace kGAMECLASS;
 				outputText("Your mistress pats your head and whispers commands in your ear while the now-sated slave-making creature devours your cum, turning it into more 'reward'.  You don't pay attention to her words, what's important is serving mistress and cumming for your panty-toy as often as possible.  You don't need to worry, she will tell you what to think.  She's just so perfect and amazing, you don't know why anyone would want to harm her or her wonderful creations.  'Gods it feels good to obey' is the last thought your mind ever thinks for itself.\n\n");
 				outputText("In the days to come, you spend your time being teased by your new mistress until you feel as if you'll burst, then being brought to sudden explosive orgasms that fill your panty-prison to capacity.  After every session you black out, but each time you mind less and less.  You wanted to be here, having these wonderful orgasms and obeying your beautiful mistress.\n\n");
 				outputText("After a month she starts letting you live without your favorite panties.  You beg her to put them back on you, but she often makes you crawl around the factory, pooling pre-cum everywhere from your swollen prick as you beg her to be put back into the pleasure-panties.  Sometimes, if you're lucky, she'll fuck you, or send you out to catch another adventurer.  There is nothing you love more than cumming into your tentacle-panties while another one of your mistress' creations teaches a slut how to embrace her true nature.");
-				getGame().gameOver();
+				EventParser.gameOver();
 				return;
 			}
 			//(Female) 
@@ -1548,7 +1548,7 @@ use namespace kGAMECLASS;
 				outputText("You blink a few times, and sit up, finding yourself back in the chair.  Your pink panty-creature has closed back up, trapping the demon's cum inside you.  The corrupted seed is so potent you can actually feel it tainting your body further as it spreads into your core.  You stretch languidly as you try to recover from the best orgasm of your life.  Perhaps you can escape?  No, you can't leave, the panties are already massaging your aching cunt and toying with your still-hard " + clitDescript() + ".  You squirm as it effects you, ramping your body's desires back up to the max.  Maybe if you take a load in the front AND back at the same time it'll sate the creature long enough for you to escape....\n\n");
 				outputText("You set off into the factory, looking for the Omnibus and an Incubus to help.\n\n");
 				outputText("<b>One month later:</b>\nYou lick the demonic jism from your lips and stretch, happy your mistress provided you with your fifth orgasm of the morning.  Normally she only lets her favorite slut get her off three or four times before lunch.  You squirm as your panties go to work, taking you back to that wonderful plateau of pleasure that only your masters and mistresses can bring you down from.  Thinking back, this really is the best way for things to end.  You thank your mistress and ask if you can see if any of the imps want to knock you up again.  She smiles condescendingly and nods, making your cunt squeeze with happiness.  Imps have such great cum!");
-				getGame().gameOver();
+				EventParser.gameOver();
 				return;
 			}
 		}
@@ -1576,7 +1576,7 @@ use namespace kGAMECLASS;
 			else outputText("moo");
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.");
 			dynStats("int", -100, "lib", 100, "cor", 2);
-			getGame().gameOver();			
+			EventParser.gameOver();			
 		}
 		
 		private function doBadEndDemon():void {
@@ -1584,7 +1584,7 @@ use namespace kGAMECLASS;
 			if(player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.");
 			else if(player.gender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...");
 			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		//ROOMS

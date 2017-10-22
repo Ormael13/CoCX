@@ -11,7 +11,7 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 		public function MinervaScene() {
 			pregnancy = new PregnancyStore(kFLAGS.MINERVA_PREGNANCY_TYPE, kFLAGS.MINERVA_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 216, 144, 72);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 //const MINERVA_LOVE:int = 813;

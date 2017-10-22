@@ -1,10 +1,11 @@
 package classes.Items.Consumables 
 {
 import classes.AppearanceDefs;
+import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 
-public class HairDye extends Consumable 
+public class HairDye extends Consumable
 	{
 		private var _color:String;
 		
@@ -23,27 +24,27 @@ public class HairDye extends Consumable
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			game.menu();
+			EngineCore.menu();
 			 
 			if (game.player.hairLength > 0) {
 				outputText("You have " + game.player.hairColor + " hair.");
-				if (game.player.hairColor != _color) game.addButton(0, "Hair", dyeHair);
-				else game.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
+				if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
+				else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
 			} else {
 				outputText("You have no hair.");
-				game.addButtonDisabled(0, "Hair", "You are bald!");
+				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
 			if (game.player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
 				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) game.addButton(1, "Fur", dyeFur);
-				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
+				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
+				else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
 			} else {
 				outputText("\n\nYou have no fur.");
-				game.addButtonDisabled(1, "Fur", "You have no fur!");
+				EngineCore.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
 			
-			game.addButton(4, "Nevermind", dyeCancel);
+			EngineCore.addButton(4, "Nevermind", dyeCancel);
 			return true;
 		}
 		

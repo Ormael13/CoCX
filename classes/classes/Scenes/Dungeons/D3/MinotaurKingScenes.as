@@ -1,13 +1,13 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Appearance;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.Items.WeaponLib;
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
+import classes.PerkLib;
+import classes.StatusEffects;
 
-	public class MinotaurKingScenes extends BaseContent
+public class MinotaurKingScenes extends BaseContent
 	{
 		public function MinotaurKingScenes()
 		{
@@ -138,7 +138,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
 			outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
 			outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	
 		private function buttufucku():void
@@ -441,7 +441,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");
 			outputText("\n\nYou smile and request someone fuck your mouth. It always feels better with one in each end.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		private function leavethem():void

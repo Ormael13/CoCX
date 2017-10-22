@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class SandWitchScene extends BaseContent implements TimeAwareInterface {
+public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 
 //const EGG_WITCH_TYPE:int = 589;
 //const EGG_WITCH_COUNTER:int = 588;
@@ -17,7 +17,7 @@
 												//Event: 0 (= not pregnant), 1, 2 (< 96)
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_DRIDER_EGGS, 96);
 												//Event: 0 (= not pregnant), 1, 2 (< 96)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -159,7 +159,7 @@ internal function sandwitchRape():void {
 				while(temp > 0) {
 					temp--;
 					//If that breast didnt have nipples reset length
-					if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nippleLength = .2;
+					if(player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;
 				}
 				dynStats("sen", 2, "lus", 1);
@@ -237,7 +237,7 @@ private function sandWitchBadEndPartThree():void {
 		outputText("No sooner have you spoken than a huge torrent of milk spurts from each of your nipples. Between the sudden alleviation of your pain and the sensitivity of your nipples, you orgasm almost instantly with a huge groan of relief. When you can focus your eyes again, you see that the Sand Witch... your new Mistress... is bathing languidly in the basin, relaxing in a pool of your fresh breastmilk.\n\n");
 		outputText("The dusky-skinned witch catches your eye and smiles, this time more warmly than before. \"<i>See? You'll enjoy yourself more if you obey your Mistress. After all, I <b>ALWAYS</b> get what I want...</i>\"\n\nAs much as you hate to admit it, you realize that she's right. You're trapped here on top of your bloated bust, at the mercy of this perverse spellcaster. She has all the time in the world to train you, and between the pain of overfilled breasts and the orgasmic joy of being drained, it won't take her long to turn you into a perfectly obedient, even eager, milk-slave...");
 	}
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //Sandwitch gets raped

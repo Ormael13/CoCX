@@ -45,14 +45,14 @@ public class SandWitch extends Monster
 				player.createStatusEffect(StatusEffects.StoneLust, 0, 0, 0, 0);
 				player.dynStats("lus", 2 + int(player.sens) / 10);
 			}
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 		}
 		
 		public function SandWitch()
 		{
 			trace("SandWitch Constructor!");
 			this.a = "the ";
-			if(game.silly()){
+			if(EngineCore.silly()){
 				this.short = "sand witch";
 				this.imageName = "sandwidch";
 			} else {

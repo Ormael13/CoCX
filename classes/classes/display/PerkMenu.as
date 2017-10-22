@@ -4,6 +4,7 @@
 package classes.display {
 import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkClass;
@@ -51,8 +52,8 @@ public class PerkMenu extends BaseContent {
 			addButton(8, "Elementals",summonsbehaviourOptions);
 		}
 		addButton(9, "Database", perkDatabase);
-		addButton(10, "Number of", kGAMECLASS.doNothing);
-		addButton(11, "perks: " + player.perks.length, kGAMECLASS.doNothing);
+		addButton(10, "Number of", EngineCore.doNothing);
+		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 	}
 
 	public function doubleAttackOptions():void {

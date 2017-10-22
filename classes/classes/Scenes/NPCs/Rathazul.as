@@ -11,7 +11,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 	//After he has crafted 3 things for the player, option to move into camp.
 		public function Rathazul()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface

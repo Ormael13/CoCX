@@ -1,16 +1,12 @@
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Dungeons.DenOfDesire.*;
-	//import classes.Scenes.NPCs.;
-	import classes.PerkLib;
-	
-	public class DenOfDesire extends DungeonAbstractContent
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Dungeons.DenOfDesire.*;
+
+//import classes.Scenes.NPCs.;
+public class DenOfDesire extends DungeonAbstractContent
 	{
 		private static const DUNGEON_DEN_OF_DESIRE_ENTRANCE:int  			= 64;
 		private static const DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:int  	= 65;
@@ -37,7 +33,7 @@ package classes.Scenes.Dungeons
 			outputText(" \"<i>Sorry, it seems I made yet another victim. It's ok though, you'll get to experience pleasure from the feelings of this body while you’re here. Albeit you'll likely go mad from it before long, as they all have before you.</i>\" She laughs hysterically then jumps back right into the fray.\n\n");
 			outputText("You scream in horror as you finally realize what's happening. The gargoyle didn't just rape you, she literally devoured your soul and now you're stuck for eternity, to be a part of the many victims powering this foul creature’s twisted core!\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedObsidianGargoyle():void {
 			clearOutput();
@@ -70,7 +66,7 @@ package classes.Scenes.Dungeons
 			outputText("Each woman or man you fuck becomes a new demon and each soul you steal fuels you with more power and desire. It is just so good and right to serve.\n\n");
 			outputText("You've long forgotten everything about your past life. You are ‘master’s’ fuck toy and pet now and your only duty and joy is as ‘master’s’ tool, to thoroughly rape anyone who dares to enter these ruins.\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedHeroslayerOmnibus():void {
 			clearOutput();

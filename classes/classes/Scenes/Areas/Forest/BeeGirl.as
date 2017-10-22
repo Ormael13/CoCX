@@ -99,7 +99,7 @@ public class BeeGirl extends Monster {
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.playerMenu);
+			else doNext(EventParser.playerMenu);
 		}
 
 		public function BeeGirl()

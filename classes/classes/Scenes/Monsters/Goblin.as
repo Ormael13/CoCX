@@ -74,7 +74,7 @@ public class Goblin extends Monster
 				else if (color == "black") {
 					//Increase fatigue
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-					game.fatigue(10 + rand(25) * multiplier);
+					EngineCore.fatigue(10 + rand(25) * multiplier);
 				}
 			}
 			if (!plural) combatRoundOver();

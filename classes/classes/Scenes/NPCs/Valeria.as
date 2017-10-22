@@ -8,7 +8,7 @@ public class Valeria extends NPCAwareContent implements TimeAwareInterface {
 
 		public function Valeria()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

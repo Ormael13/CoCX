@@ -26,7 +26,7 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 			pregnancy = new PregnancyStore(kFLAGS.IZMA_PREGNANCY_TYPE, kFLAGS.IZMA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 250, 200, 150, 100, 50);
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,  5,  6 (< 50)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedIzmaLatexy:int; //Make sure we test each of these events just once in timeChangeLarge
@@ -826,7 +826,7 @@ private function IzmaBadEnd():void {
 
 	outputText("Izma seems to pause for a moment, distracted by something; you whine slightly in protest.  \"<i>Shut up for a second,</i>\" she orders.  You turn your head and narrow your eyes in a bid to see what Izma is looking at, and eventually pick out a figure drawing closer along the sands.  A human girl, from what you can see.  The sight manages to bring back a few memories of a more confused time, before you met your alpha. Izma grins at the sight and licks her lips.  \"<i>Well, wouldja look at that.  Hm... I suppose I could do with a harem...</i>\"");
 	//GAME OVERYUUUUU
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 

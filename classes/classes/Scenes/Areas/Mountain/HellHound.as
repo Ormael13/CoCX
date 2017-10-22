@@ -56,7 +56,7 @@ public class HellHound extends Monster
 					return;
 				}
 			}
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 		}
 		protected function hellhoundScent():void {
 			if(player.hasStatusEffect(StatusEffects.NoFlee)) {
@@ -108,7 +108,7 @@ public class HellHound extends Monster
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
-					game.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}
@@ -123,7 +123,7 @@ public class HellHound extends Monster
 						temp2 = game.mountain.hellHoundScene.hellHoundPropahRape;
 					}
 					outputText(".  What do you do?");
-					game.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.");

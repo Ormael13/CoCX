@@ -439,7 +439,7 @@ public final class Mutations extends MutationsHelper
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
+					//player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -1025,7 +1025,7 @@ public final class Mutations extends MutationsHelper
 					else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
 				}
 				if (temp == 1) outputText("\n\nYou devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
-				getGame().gameOver();
+				EventParser.gameOver();
 				return;
 			}
 			//WARNING, overdose VERY close!
@@ -2528,7 +2528,7 @@ public final class Mutations extends MutationsHelper
 			//Heals the player 70-100 health
 			HPChange(70 + rand(31), true);
 			//Restores a portion of fatigue (once implemented)
-			kGAMECLASS.changeFatigue(-25);
+			EngineCore.changeFatigue(-25);
 			//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 			if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 				player.addStatusValue(StatusEffects.BottledMilk, 1, (6 + rand(6)));
@@ -6486,7 +6486,7 @@ public final class Mutations extends MutationsHelper
 					outputText("\n\nStill hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...");
 					outputText("\n\nLosing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.");
 					//[GAME OVER]
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 				outputText("\n\nWhile chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>");
@@ -7272,7 +7272,7 @@ public final class Mutations extends MutationsHelper
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
+					//player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -7389,7 +7389,7 @@ public final class Mutations extends MutationsHelper
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
+					//player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -7612,7 +7612,7 @@ public final class Mutations extends MutationsHelper
 					if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
 					outputText("\n\nA sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
 					outputText("\n\nYou roll over and crawl free of the [armor] covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 			}
@@ -9380,7 +9380,7 @@ public final class Mutations extends MutationsHelper
 				{
 					//-If you fail to heed the warning, it’s game over:
 					outputText("\n\nAs you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 			}
@@ -9665,7 +9665,7 @@ public final class Mutations extends MutationsHelper
 					outputText("\n\nWhen you awaken, you are greeted by a large dog licking at your face. The dog seems oddly familiar. \"<i>Bessy, whatcha doin’ girl?</i>\" a voice calls. The voice seems familiar as well. A funny-looking pig on two legs soon appears at the dog’s side. \"<i>Now, now, what do we have here?</i>\" The pig inspects you for a moment, eventually finding a hint of pigtail truffle on your snout.");
 					outputText("\n\n\"<i>Ah no...</i>\" he says sadly, shaking his head. \"<i>Come with me little " + player.mf("guy", "gal") + ",  I’ve got a place for ya.</i>\"  He then leads you to his shack, nestled in a small clearing in a nearby forest. \"<i>You don’t need ‘ta worry about a thing.  Come ‘ta think of it...</i>\"  he taps his chin for a moment,  \"<i>I know what I could use you for. You could be my own personal truffle hog! The more truffles, the better!</i>\"");
 					outputText("\n\nYou take wonderfully to your new job. Finding truffles is fun, and the funny pig takes great care of you. You couldn’t ask for better. Sure, the world is full of demons and the like, but here, you’re safe, and that’s all you care about.");
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 			}*/
@@ -10834,7 +10834,7 @@ public final class Mutations extends MutationsHelper
 					outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
+					//player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 1;
 					outputText("\n");

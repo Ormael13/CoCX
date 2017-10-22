@@ -45,8 +45,9 @@ use namespace kGAMECLASS;
 		}
 */
 
-		public function Camp(campInitialize:Function) {
-			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
+		public function Camp(/*campInitialize:Function*/) {
+			EventParser.doCamp=doCamp;
+			//campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 		}
 		
 		public var cabinProgress:CabinProgress = new CabinProgress();
@@ -1964,7 +1965,7 @@ public function rest():void {
 			outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n");
 		}
 		
-		kGAMECLASS.HPChangeNotify(player.HP - hpBefore);
+		EngineCore.HPChangeNotify(player.HP - hpBefore);
 	}
 	else {
 		clearOutput();
@@ -2250,7 +2251,7 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nYou could call for Rathazul to help you.");
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
 	}
-	else getGame().gameOver();
+	else EventParser.gameOver();
 }
 private function applyReductoAndEscapeBadEnd():void {
 	clearOutput();
@@ -2293,7 +2294,7 @@ public function badEndHunger():void {
 		}
 	}
 	player.HP = 0;
-	getGame().gameOver();
+	EventParser.gameOver();
 	removeButton(1); //Can't continue, you're dead!
 }
 //Bad End if you have 100 min lust.
@@ -2302,7 +2303,7 @@ public function badEndMinLust():void {
 	outputText("The thought of release overwhelms you. You frantically remove your [armor] and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.");
 	outputText("\n\nYou spend the rest of your life masturbating, unable to stop.");
 	player.orgasm();
-	getGame().gameOver();
+	EventParser.gameOver();
 	removeButton(1); //Can't wake up, must load.
 }
 
@@ -2328,7 +2329,7 @@ public function allNaturalSelfStimulationBeltBadEnd():void {
 	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
 	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n");
 	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found

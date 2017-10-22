@@ -4,6 +4,7 @@
 package classes.Items.Armors
 {
 import classes.AppearanceDefs;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Monster;
@@ -138,7 +139,7 @@ public final class LustyMaidensArmor extends Armor {
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
 				game.cleanupAfterCombat();
-			else game.doNext(game.camp.returnToCampUseOneHour);
+			else EngineCore.doNext(game.camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -44,7 +44,7 @@ public class Marae extends Monster
 			else
 			{
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
+				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (EngineCore.lustPercent() / 100);
 				player.dynStats("lust", lustDmg, "scale", false);
 				outputText("(+" + lustDmg + " lust)");
 				
@@ -96,7 +96,7 @@ public class Marae extends Monster
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
-				game.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
+				EngineCore.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);

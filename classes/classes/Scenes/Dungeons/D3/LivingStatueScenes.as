@@ -1,7 +1,9 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	/**
+import classes.BaseContent;
+import classes.EventParser;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -55,7 +57,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("You slump to your knees, overwhelmed and unable to see the shadow of the falling hammer. Your last thoughts are of regret.");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	}
 

@@ -5,7 +5,7 @@ import classes.GlobalFlags.kFLAGS;
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		
 		public function CorruptedGlade() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		public function timeChange():Boolean {

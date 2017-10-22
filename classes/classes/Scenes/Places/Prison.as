@@ -1,14 +1,14 @@
 //Prisoner Mod WIP
 package classes.Scenes.Places 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
-	import classes.Scenes.Places.Prison.*
-	
-	import coc.view.MainView;
-	
-	public class Prison extends BaseContent implements TimeAwareInterface
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.Scenes.Places.Prison.*;
+
+import coc.view.MainView;
+
+public class Prison extends BaseContent implements TimeAwareInterface
 	{
 		//Link to class files.
 		public var prisonLetter:PrisonLetters = new PrisonLetters();
@@ -50,7 +50,7 @@ package classes.Scenes.Places
 		public function get inPrison():Boolean { return flags[kFLAGS.IN_PRISON] > 0; }
 		
 		public function Prison() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface

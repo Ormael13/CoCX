@@ -10,7 +10,7 @@ public class Hel extends Monster
 		private function helAttack():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -63,7 +63,7 @@ public class Hel extends Monster
 		private function helAttack2():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -126,7 +126,7 @@ public class Hel extends Monster
 				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20);
 				player.dynStats("lus", lust);
 				//Apply resistance
-				lust *= game.lustPercent()/100;
+				lust *= EngineCore.lustPercent()/100;
 				//Clean up
 				lust = Math.round(lust * 10)/10;
 				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n");

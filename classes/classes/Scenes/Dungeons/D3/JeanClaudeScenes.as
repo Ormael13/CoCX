@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	
-	/**
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.StatusEffects;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -321,7 +322,7 @@
 			if (player.hasVagina()) outputText(" and [vagina]");
 			outputText(", it disappears into the depths forever. Your mind is a blank canvas of pure, submissive pleasure and it, like your limitless future, is golden.");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function bwombBadEnd():void
@@ -369,7 +370,7 @@
 
 			//THE END
 			// 9999
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 	}

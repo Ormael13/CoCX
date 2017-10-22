@@ -39,7 +39,7 @@ import classes.GlobalFlags.kFLAGS;
 			}
 			outputText("Izma rushes you with impressive speed, striking a few precise locations on your joints with her fingertips before leaping back.  It doesn't hurt, but you feel tired and sore. \"<i>Pressure points...</i>\" she laughs, seeing your confused expression.");
 			//(Fatigue damage)
-			game.fatigue(20+rand(20));
+			EngineCore.fatigue(20+rand(20));
 		}
 
 		private function IzmaSpecials2():void {

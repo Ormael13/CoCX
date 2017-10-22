@@ -2,6 +2,7 @@
 {
 import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 
@@ -236,7 +237,7 @@ import classes.PerkLib;
 
 			outputText("\n\nYou quickly go completely insane, just like your bodysnatcher did, although not in a way [he] ever knew. You will never be able to express that insanity though. Every hour there is a new scene of complete depravity for you to reflect, personify and act out. A demon’s dearest wish - an eternity of constantly changing, mind-boggling sex - is your final fate.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	}
 

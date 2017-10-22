@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
+public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
 //const MET_NIAMH:int = 446;
 //const GOT_NIAMH_BEER:int = 447;
 //const TALKED_NIAMH:int = 448;
@@ -15,7 +15,7 @@
 
 		public function Niamh()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

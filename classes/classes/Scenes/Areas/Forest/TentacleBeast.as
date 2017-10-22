@@ -53,7 +53,7 @@ public class TentacleBeast extends Monster
 		{
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
-				game.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
+				EngineCore.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
@@ -67,7 +67,7 @@ public class TentacleBeast extends Monster
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
+					EngineCore.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}

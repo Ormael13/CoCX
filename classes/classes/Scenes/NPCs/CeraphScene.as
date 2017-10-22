@@ -447,7 +447,7 @@ public class CeraphScene extends NPCAwareContent
 
 			outputText("The champion that left Ingnam so long ago is totally unrecognizable, body and soul.  The spirit that once burned bright with the desire to save the innocents of the village has been warped and twisted beyond repair.  The once-champion known only as 'pet', not even worthy of a proper name, spends all " + player.mf("his", "her") + " time lusting after Mistress Ceraph, taking part in her depraved orgies and willingly submitting to any kinks or debaucheries that are presented to " + player.mf("him", "her") + ".  Pet's life of individuality and choice is over, all that remains is pleasure and pain.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 //[Initial Meeting Text]

@@ -230,7 +230,7 @@ private function oasisBadEndEpilogue():void {
 	if(player.gender <= 1) outputText(" and a few doses of fermented succubi milk");
 	outputText("...\n\n");
 	outputText("A year has gone by since the day you became a slave. You find yourself sitting at the feet of your master wearing nothing but a black collar around your neck. Your belly extends out in front of you, filled to the brim with your master's baby. You smile, happy to be here to please your master and carry his young as memories of your past and your mission fade deep into the depths of your mind. Your only mission in life now is to service your master and the other members of the tribe in whatever they ask, without question or hesitation. As the tribe prepares for the next 'Feast', a commotion at the other side of the encampment catches your attention. The guards bring forth a human captive they found wandering in the oasis, and you smile dimly as you watch master invite the stranger to join them all in the Feast...");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 	}
 }

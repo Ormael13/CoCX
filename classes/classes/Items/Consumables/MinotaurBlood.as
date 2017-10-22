@@ -5,6 +5,7 @@ package classes.Items.Consumables {
 import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.CockTypesEnum;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
@@ -416,7 +417,7 @@ public class MinotaurBlood extends Consumable {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}
-			game.HPChange(50, true);
+			EngineCore.HPChange(50, true);
 			dynStats("lus", 50);
 		}
 		player.refillHunger(25);

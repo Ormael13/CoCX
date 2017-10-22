@@ -38,7 +38,7 @@ public class Clara extends Monster
 				//Increase fatigue
 				if(color == "black") {
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-					game.fatigue(10 + rand(25));
+					EngineCore.fatigue(10 + rand(25));
 				}
 			}
 			combatRoundOver();

@@ -1,12 +1,12 @@
 ﻿package classes.Scenes.Areas.Mountain{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Salon extends BaseContent implements TimeAwareInterface {
+public class Salon extends BaseContent implements TimeAwareInterface {
 
 		public function Salon()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

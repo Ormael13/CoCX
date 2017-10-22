@@ -39,7 +39,7 @@ public class Sheila extends Monster
 			else {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
-				kGAMECLASS.fatigue(5+rand(5));
+				EngineCore.fatigue(5+rand(5));
 				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
@@ -75,7 +75,7 @@ public class Sheila extends Monster
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
 				damage = player.takeDamage(damage, true);
-				kGAMECLASS.fatigue(10+rand(6));
+				EngineCore.fatigue(10+rand(6));
 			}
 			spe += 60;
 			combatRoundOver();

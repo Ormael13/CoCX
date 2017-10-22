@@ -142,13 +142,13 @@ use namespace kGAMECLASS;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.clearOutput();
+			EngineCore.clearOutput();
 			outputText("The minotaur lord is defeated!  ");
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
 				outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
-				game.menu();
-				game.addButton(0,"Fuck",game.urtaQuest.winRapeAMinoLordAsUrta);
-				game.addButton(4, "Leave", game.urtaQuest.beatMinoLordOnToSuccubi);
+				EngineCore.menu();
+				EngineCore.addButton(0,"Fuck",game.urtaQuest.winRapeAMinoLordAsUrta);
+				EngineCore.addButton(4, "Leave", game.urtaQuest.beatMinoLordOnToSuccubi);
 			}
 			else game.mountain.minotaurScene.minoVictoryRapeChoices();
 		}

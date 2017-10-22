@@ -1,4 +1,4 @@
-import classes.GlobalFlags.kGAMECLASS;
+import classes.EngineCore;
 import classes.GlobalFlags.kGAMECLASS;
 import flash.ui.Keyboard;
 import coc.view.MainView;
@@ -33,9 +33,9 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_1");
-			clearOutput();
-			outputText("Game saved to slot 1!");
-			doNext(playerMenu);
+            EngineCore.clearOutput();
+			EngineCore.outputText("Game saved to slot 1!");
+			EngineCore.doNext(classes.EventParser.playerMenu);
 		}
 	});
 
@@ -47,9 +47,9 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_2");
-			clearOutput();
-			outputText("Game saved to slot 2!");
-			doNext(playerMenu);
+			EngineCore.clearOutput();
+			EngineCore.outputText("Game saved to slot 2!");
+			EngineCore.doNext(classes.EventParser.playerMenu);
 		}
 	});
 
@@ -61,9 +61,9 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_3");
-			clearOutput();
-			outputText("Game saved to slot 3!");
-			doNext(playerMenu);
+			EngineCore.clearOutput();
+			EngineCore.outputText("Game saved to slot 3!");
+			EngineCore.doNext(classes.EventParser.playerMenu);
 		}
 	});
 
@@ -75,9 +75,9 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_4");
-			clearOutput();
-			outputText("Game saved to slot 4!");
-			doNext(playerMenu);
+			EngineCore.clearOutput();
+			EngineCore.outputText("Game saved to slot 4!");
+			EngineCore.doNext(classes.EventParser.playerMenu);
 		}
 	});
 
@@ -89,9 +89,9 @@ inputManager.AddBindableControl(
 		{
 			mainView.nameBox.text = "";
 			saves.saveGame("CoC_5");
-			clearOutput();
-			outputText("Game saved to slot 5!");
-			doNext(playerMenu);
+			EngineCore.clearOutput();
+			EngineCore.outputText("Game saved to slot 5!");
+			EngineCore.doNext(classes.EventParser.playerMenu);
 		}
 	});
 
@@ -106,11 +106,11 @@ inputManager.AddBindableControl(
 			{
 				if (saves.loadGame("CoC_1"))
 				{
-					showStats();
-					statScreenRefresh();
-					clearOutput();
-					outputText("Slot 1 Loaded!");
-					doNext(playerMenu);
+					EngineCore.showStats();
+					EngineCore.statScreenRefresh();
+					EngineCore.clearOutput();
+					EngineCore.outputText("Slot 1 Loaded!");
+					EngineCore.doNext(classes.EventParser.playerMenu);
 				}
 			}
 		}
@@ -127,11 +127,11 @@ inputManager.AddBindableControl(
 			{
 				if (saves.loadGame("CoC_2"))
 				{
-					showStats();
-					statScreenRefresh();
-					clearOutput();
-					outputText("Slot 2 Loaded!");
-					doNext(playerMenu);
+					EngineCore.showStats();
+					EngineCore.statScreenRefresh();
+					EngineCore.clearOutput();
+					EngineCore.outputText("Slot 2 Loaded!");
+					EngineCore.doNext(classes.EventParser.playerMenu);
 				}
 			}
 		}
@@ -148,11 +148,11 @@ inputManager.AddBindableControl(
 			{
 				if (saves.loadGame("CoC_3"))
 				{
-					showStats();
-					statScreenRefresh();
-					clearOutput();
-					outputText("Slot 3 Loaded!");
-					doNext(playerMenu);
+					EngineCore.showStats();
+					EngineCore.statScreenRefresh();
+					EngineCore.clearOutput();
+					EngineCore.outputText("Slot 3 Loaded!");
+					EngineCore.doNext(classes.EventParser.playerMenu);
 				}
 			}
 		}
@@ -169,11 +169,11 @@ inputManager.AddBindableControl(
 			{
 				if (saves.loadGame("CoC_4"))
 				{
-					showStats();
-					statScreenRefresh();
-					clearOutput();
-					outputText("Slot 4 Loaded!");
-					doNext(playerMenu);
+					EngineCore.showStats();
+					EngineCore.statScreenRefresh();
+					EngineCore.clearOutput();
+					EngineCore.outputText("Slot 4 Loaded!");
+					EngineCore.doNext(classes.EventParser.playerMenu);
 				}
 			}
 		}
@@ -190,11 +190,11 @@ inputManager.AddBindableControl(
 			{
 				if (saves.loadGame("CoC_5"))
 				{
-					showStats();
-					statScreenRefresh();
-					clearOutput();
-					outputText("Slot 5 Loaded!");
-					doNext(playerMenu);
+					EngineCore.showStats();
+					EngineCore.statScreenRefresh();
+					EngineCore.clearOutput();
+					EngineCore.outputText("Slot 5 Loaded!");
+					EngineCore.doNext(classes.EventParser.playerMenu);
 				}
 			}
 		}
@@ -275,7 +275,7 @@ inputManager.AddBindableControl(
 			return;
 		}
 		// Button 14
-		if (kGAMECLASS.buttonIsVisible(14) && kGAMECLASS.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
+		if (EngineCore.buttonIsVisible(14) && EngineCore.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
 		{
 			//trace( "keyboard(): processing space bar for button 9",
 			//	mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
@@ -314,7 +314,7 @@ inputManager.AddBindableControl(
 			//	mainView.getButtonText( 5 ) );
 			mainView.toolTipView.hide();
 			executeButtonClick(5);
-			return;
+			//return;
 		}
 	});
 	
@@ -453,7 +453,7 @@ inputManager.AddBindableControl(
 	"Button 11",
 	"Activate button 11",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(10))
+		if (EngineCore.buttonIsVisible(10))
 		{
 			mainView.toolTipView.hide();
 			executeButtonClick(10);
@@ -463,7 +463,7 @@ inputManager.AddBindableControl(
 	"Button 12",
 	"Activate button 12",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(11))
+		if (EngineCore.buttonIsVisible(11))
 		{
 			mainView.toolTipView.hide();
 			executeButtonClick(11);
@@ -473,7 +473,7 @@ inputManager.AddBindableControl(
 	"Button 13",
 	"Activate button 13",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(12))
+		if (EngineCore.buttonIsVisible(12))
 		{
 			mainView.toolTipView.hide();
 			executeButtonClick(12);
@@ -483,7 +483,7 @@ inputManager.AddBindableControl(
 	"Button 14",
 	"Activate button 14",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(13))
+		if (EngineCore.buttonIsVisible(13))
 		{
 			mainView.toolTipView.hide();
 			executeButtonClick(13);
@@ -493,7 +493,7 @@ inputManager.AddBindableControl(
 	"Button 15",
 	"Activate button 15",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(14))
+		if (EngineCore.buttonIsVisible(14))
 		{
 			mainView.toolTipView.hide();
 			executeButtonClick(14);
@@ -506,7 +506,7 @@ inputManager.AddBindableControl(
 		trace(kGAMECLASS.mainViewManager.traceSelf());
 		kGAMECLASS.outputHistory();
 	}
-)
+);
 inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
 	"Cheat code to get free hummus",

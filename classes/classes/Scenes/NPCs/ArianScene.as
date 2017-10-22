@@ -91,7 +91,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 	{
 		public function ArianScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

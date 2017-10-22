@@ -3,11 +3,11 @@
  */
 package classes.Scenes.Areas.Bog
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class PhoukaScene extends BaseContent implements TimeAwareInterface {
+public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
 		internal static var phoukaForm:int = 0; //This keeps track of the form of the phouka across different scenes and through combat
 		internal static const PHOUKA_FORM_FAERIE:int = 0;
@@ -17,7 +17,7 @@ package classes.Scenes.Areas.Bog
 
 		public function PhoukaScene() 
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

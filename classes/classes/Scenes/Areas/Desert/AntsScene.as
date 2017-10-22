@@ -57,7 +57,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		public function AntsScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.PHYLLA_VAGINAL_PREGNANCY_TYPE, kFLAGS.PHYLLA_DRIDER_INCUBATION, 0, 0);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -470,7 +470,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\n<b>Epilogue</b>\n");
 			outputText("You live out the rest of your days in blissful ignorance, helping the colony in any way you can. Mostly you're used as an experimental sex toy. They force you to drink an uncountable number of different potions and elixirs. Eventually you start to beg for more as your mind and body crave the sexual liquids. Oftentimes Chylla even puts you in the arena, sometimes to pleasure yourself in front of the whole colony or calling upon you to service as many males as you can please at once. Sometimes you're a male, sometimes you're a female, and sometimes both. Your mind becomes completely consumed with pleasing the colony in any way you can. You never get to see the outside world or Phylla again, but you don't care. You're busy pleasing every cock placed in front of you. As long as you're helping the colony grow and become strong, nothing else matters to you.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 //Good End

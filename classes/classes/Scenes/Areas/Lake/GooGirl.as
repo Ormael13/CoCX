@@ -18,7 +18,7 @@ public class GooGirl extends Monster
 		{
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the goo-girl ");
 			else outputText("The slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!

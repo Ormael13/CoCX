@@ -100,7 +100,7 @@ public class Katherine extends TelAdreAbstractContent implements TimeAwareInterf
 		{
 			_breasts = new BreastStore(kFLAGS.KATHERINE_BREAST_SIZE);
 			CoC.saveAwareClassAdd(_breasts);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'

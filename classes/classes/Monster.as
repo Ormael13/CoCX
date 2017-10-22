@@ -38,8 +38,8 @@ import flash.utils.getQualifiedClassName;
 			return game.player;
 		}
 		protected final function outputText(text:String,clear:Boolean=false):void{
-			if (clear) game.clearOutputTextOnly();
-			game.outputText(text);
+			if (clear) EngineCore.clearOutputTextOnly();
+			EngineCore.outputText(text);
 		}
 		protected final function combatRoundOver():void{
 			game.combatRoundOver();
@@ -52,10 +52,10 @@ import flash.utils.getQualifiedClassName;
 			kGAMECLASS.mainView.statsView.showStatDown(a);
 		}
 		protected final function statScreenRefresh():void {
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 		}
 		protected final function doNext(eventNo:Function):void { //Now typesafe
-			game.doNext(eventNo);
+			EngineCore.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
 			return game.combat.combatMiss();
@@ -1036,7 +1036,7 @@ import flash.utils.getQualifiedClassName;
 				    var damage:int = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
-					game.statScreenRefresh();
+					EngineCore.statScreenRefresh();
 					outputText("\n");
 				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
@@ -1184,7 +1184,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n");
+				if (game.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
 				if (!handleConstricted()) return;
@@ -1225,9 +1225,9 @@ import flash.utils.getQualifiedClassName;
 		protected function handleConstricted():Boolean
 		{
 			if (player.lowerBody == 26) {
-			game.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
+			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
@@ -1235,9 +1235,9 @@ import flash.utils.getQualifiedClassName;
 			return false;
 			}
 			else if (player.lowerBody == 8) {
-			game.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
+			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
@@ -1245,9 +1245,9 @@ import flash.utils.getQualifiedClassName;
 			return false;
 			}
 			else {
-			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
+			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
@@ -1264,17 +1264,17 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foes shake free of their fear and ready themselves for battle.");
+					EngineCore.outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}
 				else {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foe shakes free of its fear and readies itself for battle.");
+					EngineCore.outputText("Your foe shakes free of its fear and readies itself for battle.");
 				}
 			}
 			else {
 				addStatusValue(StatusEffects.Fear, 1, -1);
-				if (plural) game.outputText(capitalA + short + " are too busy shivering with fear to fight.");
-				else game.outputText(capitalA + short + " is too busy shivering with fear to fight.");
+				if (plural) EngineCore.outputText(capitalA + short + " are too busy shivering with fear to fight.");
+				else EngineCore.outputText(capitalA + short + " is too busy shivering with fear to fight.");
 			}
 			game.combatRoundOver();
 			return false;
@@ -1288,17 +1288,17 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
-				if (plural) game.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
-				else game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
+				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
 			}
 			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) {
-				if (plural) game.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
+				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			}
-			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!");
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
-				if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
-				else game.outputText("Your foe is too dazed from your last hit to strike back!");
+				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
+				else EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
 			game.combatRoundOver();
 			return false;
@@ -1349,7 +1349,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			game.doNext(game.camp.returnToCampUseEightHours);
+			EngineCore.doNext(game.camp.returnToCampUseEightHours);
 		}
 
 		/**
@@ -1560,7 +1560,7 @@ import flash.utils.getQualifiedClassName;
 
 		protected function clearOutput():void
 		{
-			game.clearOutput();
+			EngineCore.clearOutput();
 		}
 
 		public function dropLoot():ItemType

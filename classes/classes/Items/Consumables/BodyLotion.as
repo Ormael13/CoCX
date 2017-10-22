@@ -1,11 +1,11 @@
 package classes.Items.Consumables 
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.Utils;
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	
-	/**
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+import classes.internals.Utils;
+
+/**
 	 * Body lotions, courtesy of Foxxling.
 	 * @author Kitteh6660
 	 */
@@ -86,7 +86,7 @@ package classes.Items.Consumables
 		override public function useItem():Boolean {
 			if (game.player.skinAdj == _adj) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. Once you’ve finished you feel reinvigorated. ");
-				game.HPChange(10, true);
+				EngineCore.HPChange(10, true);
 			}
 			else {
 				if (game.player.hasGooSkin()) { //If skin is goo, don't change.

@@ -10,7 +10,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 		{
 			pregnancy = new PregnancyStore(kFLAGS.JOY_PREGNANCY_TYPE, kFLAGS.JOY_PREGNANCY_INCUBATION, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 96, 72, 48);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -2698,7 +2698,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	else if (player.findPerk(PerkLib.HistoryScholar) >= 0)
 	{
 		outputText("You tell Jojo about your insatiable thirst for knowledge and how you spent a lot of time in school. You tell him the story about how you ‘convinced’ Mr. ");
-		if (kGAMECLASS.silly()) outputText("Savin");
+		if (EngineCore.silly()) outputText("Savin");
 		else outputText("Sellet");
 		outputText(" to let you read some of the rare books in his collection, skipping over how much begging and pleading was actually involved.\n\n");
 	}

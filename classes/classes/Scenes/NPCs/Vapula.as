@@ -8,7 +8,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 	{
 		public function Vapula()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface

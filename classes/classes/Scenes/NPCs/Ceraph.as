@@ -147,7 +147,7 @@ public class Ceraph extends Monster
 			var damage:Number = 0;
 			outputText("The demoness weaves her whip in the air until you can practically hear it slithering like a snake, cutting the air as it weaves back and forth, still magically alight with flames.  In a blink she lashes out twice in quick succession!\n");
 			//First hit!
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!");
@@ -192,7 +192,7 @@ public class Ceraph extends Monster
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
 			//SECOND ATTACK HERE------
 			//Blind dodge change
@@ -239,7 +239,7 @@ public class Ceraph extends Monster
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
 			combatRoundOver();
 		}

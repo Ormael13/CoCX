@@ -2,6 +2,7 @@
 import classes.AppearanceDefs;
 import classes.BaseContent;
 import classes.CoC_Settings;
+import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -258,17 +259,17 @@ public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 public function checkAchievementDamage(damage:Number):void
 {
 	flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] += damage;
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) kGAMECLASS.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) kGAMECLASS.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) kGAMECLASS.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) kGAMECLASS.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
-	if (damage >= 50) kGAMECLASS.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
-	if (damage >= 100) kGAMECLASS.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
-	if (damage >= 250) kGAMECLASS.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
-	if (damage >= 500) kGAMECLASS.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
-	if (damage >= 1000) kGAMECLASS.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
-	if (damage >= 2500) kGAMECLASS.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
-	if (damage >= 5000) kGAMECLASS.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) EngineCore.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) EngineCore.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) EngineCore.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) EngineCore.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
+	if (damage >= 50) EngineCore.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
+	if (damage >= 100) EngineCore.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
+	if (damage >= 250) EngineCore.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
+	if (damage >= 500) EngineCore.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+	if (damage >= 1000) EngineCore.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
+	if (damage >= 2500) EngineCore.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
+	if (damage >= 5000) EngineCore.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
 }
 /*public function checkMinionsAchievementDamage(damage:Number):void
 {
@@ -1744,7 +1745,7 @@ public function multiArrowsStrike():void {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		if (flags[kFLAGS.ARROWS_SHOT] >= 1) kGAMECLASS.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
+		if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
@@ -4585,7 +4586,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedsoulforce += 2;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedsoulforce += 2;
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
-		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
+		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 8;
@@ -4602,7 +4603,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 4;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 4;
 		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 4;
-		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
+		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 }
 
@@ -4618,7 +4619,7 @@ public function manaregeneration(combat:Boolean = true):void {
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 10;
 		gainedmana *= manaRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
-		kGAMECLASS.ManaChange(gainedmana, false);
+		EngineCore.ManaChange(gainedmana, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
@@ -4627,7 +4628,7 @@ public function manaregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) gainedmana += 30;
 		if (player.findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) gainedmana += 40;
 		gainedmana *= manaRecoveryMultiplier();
-		kGAMECLASS.ManaChange(gainedmana, false);
+		EngineCore.ManaChange(gainedmana, false);
 	}
 }
 
@@ -4655,7 +4656,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) gainedwrath += 3;
 			if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) gainedwrath += 4;
 		}
-		kGAMECLASS.WrathChange(gainedwrath, false);
+		EngineCore.WrathChange(gainedwrath, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 1;
@@ -4669,7 +4670,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
 		if (player.findPerk(PerkLib.Anger) >= 0) gainedwrath += 1;
-		kGAMECLASS.WrathChange(gainedwrath, false);
+		EngineCore.WrathChange(gainedwrath, false);
 	}
 }
 

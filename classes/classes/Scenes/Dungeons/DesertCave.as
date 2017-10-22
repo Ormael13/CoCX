@@ -210,7 +210,7 @@ public class DesertCave extends DungeonAbstractContent
 			//[END]
 			player.orgasm();
 			dynStats("lib", 1, "sen", -1);
-			getGame().gameOver();
+			EventParser.gameOver();
 			player.HP = player.maxHP();
 		}
 
@@ -316,7 +316,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou wander around the desert for a while, muttering an introduction of who you are and what you want to do.  Then, you see a figure walking along the dunes. Okay, time to show them your stuff.  Getting to the figure, you announce yourself:");
 			outputText("\n\n\"<i>Excuse me, I'm a sand witch, may I cast a spell on you?</i>\"");
 			player.HP = player.maxHP();
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		//*Membered Folks Get Milked
@@ -422,7 +422,7 @@ public class DesertCave extends DungeonAbstractContent
 			player.orgasm();
 			dynStats("lib", 5);
 			//GAME OVER
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		//PC Wins
@@ -694,7 +694,7 @@ public class DesertCave extends DungeonAbstractContent
 			
 			outputText("\n\nStill, as you massage her quaking testes and drink down her delicious jism, you have to think, \"<i>Life is good.</i>\"");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 		//*Male Loss - Turned Into Cum Pump
@@ -824,7 +824,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText(" Marae.  Their abilities, numbers, and familiarity at dealing with demons lend them great success at battling Lethice's growing hordes, and within the span of another decade, the demons are exterminated.  The witches are hailed as saviors, and young females of all races seek to join them.  You, of course, inseminate all of them.");
 			
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 		//*Repeat Desert Loss Male
@@ -2657,7 +2657,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world.  Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
 			
 			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question... is a world ruled by lusty milk witches any better than the corrupt one that preceded it?");
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 			
@@ -2768,7 +2768,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world. Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
 			
 			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in new blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question remains: is a world ruled by lusty milk witches any better than the 'corrupt' one that preceded it?");
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 

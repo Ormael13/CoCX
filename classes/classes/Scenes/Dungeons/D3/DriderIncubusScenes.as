@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
@@ -192,7 +193,7 @@ public class DriderIncubusScenes extends BaseContent
 			else outputText(" and");
 			outputText(" served in the breeding pits, endlessly fornicating to maintain an army of expendable imps.");
 			outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow "+ player.mf("him", "her") +" to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		public function beatTheSpooderbutt(hpVictory:Boolean):void

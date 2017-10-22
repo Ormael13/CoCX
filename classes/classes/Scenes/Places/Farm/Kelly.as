@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Places.Farm{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
+public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
 //const KELT_BREAK_LEVEL:int = 725;
 //const KELLY_CUNT_TYPE:int = 726;
@@ -44,7 +44,7 @@ Every encounter raises corruption by 5, except the last one that raises corrupti
 			pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

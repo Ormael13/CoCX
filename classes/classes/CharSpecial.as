@@ -538,7 +538,7 @@ import classes.Items.*;
 			player.lib = 15;
 			player.cor = 0;
 			kGAMECLASS.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			player.hairLength=13;
 			player.skin.restore();
 			player.faceType = AppearanceDefs.FACE_HUMAN;
@@ -619,7 +619,7 @@ import classes.Items.*;
 			player.lib = 15;
 			player.cor = 0;
 			kGAMECLASS.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			player.hairLength = 1;
 			player.skin.setAllProps({base:{color:"light"}});
 			player.hairColor = "brown";
@@ -1003,7 +1003,7 @@ import classes.Items.*;
 			player.lib = 15;
 			player.cor = 0;
 			kGAMECLASS.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			player.skin.restore();
 			player.faceType = AppearanceDefs.FACE_HUMAN;
 			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
@@ -1238,7 +1238,7 @@ import classes.Items.*;
 			player.lib = 30;
 			player.cor = 71;
 			kGAMECLASS.notes = "Cheater!";
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			player.hairLength = 10;
 			player.skin.restore();
 			player.faceType = AppearanceDefs.FACE_HUMAN;
@@ -1449,7 +1449,7 @@ import classes.Items.*;
 			player.lib = 15;
 			player.cor = 0;
 			kGAMECLASS.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			player.hairLength = 10;
 			player.skin.restore();
 			player.faceType = AppearanceDefs.FACE_HUMAN;
@@ -1733,7 +1733,7 @@ import classes.Items.*;
 			
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			
 			player.gems += 20;
 			
@@ -1970,7 +1970,7 @@ import classes.Items.*;
 
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 
 			player.gems += 15+ rand(55);
 			

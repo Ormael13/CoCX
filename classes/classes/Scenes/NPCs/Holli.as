@@ -119,7 +119,7 @@ public class Holli extends Monster
 				else outputText("have me inside you");
 				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
-				game.fatigue(10);
+				EngineCore.fatigue(10);
 				player.dynStats("lus", 25);
 				var damage:Number = 20 + rand(10);
 				damage = player.takeDamage(damage, true);

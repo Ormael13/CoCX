@@ -18,13 +18,13 @@ public class SecretarialSuccubus extends AbstractSuccubus
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					player.dynStats("lus", 1);
-					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
-					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
+					EngineCore.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) EngineCore.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else if (player.lust>=33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
 					player.dynStats("lus", 1);
-					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
-					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
+					EngineCore.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) EngineCore.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else {
 					doNext(factory.doLeaveSuccubus);
 				}

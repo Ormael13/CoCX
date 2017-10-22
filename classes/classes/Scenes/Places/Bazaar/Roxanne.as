@@ -41,7 +41,7 @@ WIN:
 
 		public function Roxanne()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

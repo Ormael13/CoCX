@@ -1155,7 +1155,7 @@ import coc.view.MainView;
 			player.tone += 5;
 			player.thickness += 5;
 			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			chooseHistory();
 		}
 		
@@ -1570,7 +1570,7 @@ import coc.view.MainView;
 			clearOutput();
 			hideMenus();
 			mainView.nameBox.visible = false;
-			kGAMECLASS.displayHeader("Ascension");
+			EngineCore.displayHeader("Ascension");
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate.)");

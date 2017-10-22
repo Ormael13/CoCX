@@ -40,7 +40,7 @@ import coc.xxc.StoryContext;
 
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
-			kGAMECLASS.cheatTime(time, needNext);
+			EventParser.cheatTime(time, needNext);
 		}
 		/*protected function incrementDay(time:Number):void
 		{
@@ -74,12 +74,12 @@ import coc.xxc.StoryContext;
 
 		public function goNext(time:Number,defNext:Boolean):Boolean
 		{
-			return kGAMECLASS.goNext(time,defNext);
+			return EventParser.goNext(time,defNext);
 		}
 		
 		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
 		{
-			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
+			return EngineCore.awardAchievement(title, achievement, display, nl, nl2);
 		}
 		
 		protected function isHalloween():Boolean
@@ -166,12 +166,12 @@ import coc.xxc.StoryContext;
 		
 		protected function showStats():void
 		{
-			kGAMECLASS.showStats();
+			EngineCore.showStats();
 		}
 
 		protected function statScreenRefresh():void
 		{
-			kGAMECLASS.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 		}
 
 		protected function get combat():Combat {
@@ -205,11 +205,11 @@ import coc.xxc.StoryContext;
 
 		protected function hideStats():void
 		{
-			kGAMECLASS.hideStats();
+			EngineCore.hideStats();
 		}
 		protected function hideUpDown():void
 		{
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 		}
 
 		/* This class extends Utils, no need for a non-static version of this function
@@ -236,12 +236,12 @@ import coc.xxc.StoryContext;
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
-			return kGAMECLASS.createCallBackFunction(func,arg);
+			return EngineCore.createCallBackFunction(func,arg);
 		}
 
 		protected function createCallBackFunction2(func:Function, ...args):Function
 		{
-			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
+			return EngineCore.createCallBackFunction2.apply(null,[func].concat(args));
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
@@ -249,7 +249,7 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function doSFWloss():Boolean {
-			return kGAMECLASS.doSFWloss();
+			return EngineCore.doSFWloss();
 		}
 		
 		
@@ -262,21 +262,21 @@ import coc.xxc.StoryContext;
 		// (Mostly traceback printing, etc...)
 		protected function rawOutputText(output:String, purgeText:Boolean = false):void
 		{
-			kGAMECLASS.rawOutputText(output, purgeText);
+			EngineCore.rawOutputText(output, purgeText);
 		}
 
 		protected function outputText(output:String):void
 		{
-			kGAMECLASS.outputText(output);
+			EngineCore.outputText(output);
 		}
 		
 		protected function clearOutput():void
 		{
-			kGAMECLASS.clearOutputTextOnly();
+			EngineCore.clearOutputTextOnly();
 		}
 		protected function displayHeader(string:String):void
 		{
-			kGAMECLASS.displayHeader(string);
+			EngineCore.displayHeader(string);
 		}
 		
 		protected function flushOutputTextToGUI():void {
@@ -285,17 +285,17 @@ import coc.xxc.StoryContext;
 
 		protected function doNext(eventNo:Function):void //Now typesafe
 		{
-			kGAMECLASS.doNext(eventNo);
+			EngineCore.doNext(eventNo);
 		}
 		
 		protected function menu():void
 		{
-			kGAMECLASS.menu();
+			EngineCore.menu();
 		}
 
 		protected function hideMenus():void
 		{
-			kGAMECLASS.hideMenus();
+			EngineCore.hideMenus();
 		}
 		
 		//To be phased out
@@ -309,7 +309,7 @@ import coc.xxc.StoryContext;
 								text8:String, butt8:Function,
 								text9:String, butt9:Function,
 								text0:String, butt0:Function):void { //Now typesafe
-			kGAMECLASS.choices(
+			EngineCore.choices(
 					text1, butt1,
 					text2, butt2,
 					text3, butt3,
@@ -329,7 +329,7 @@ import coc.xxc.StoryContext;
 								text3:String, butt3:Function,
 								text4:String, butt4:Function,
 								text5:String, butt5:Function):void { //Now typesafe
-			kGAMECLASS.simpleChoices(text1, butt1,
+			EngineCore.simpleChoices(text1, butt1,
 					text2, butt2,
 					text3, butt3,
 					text4, butt4,
@@ -337,31 +337,31 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function doYesNo(eventYes:Function, eventNo:Function):void { //Now typesafe
-			kGAMECLASS.doYesNo(eventYes, eventNo);
+			EngineCore.doYesNo(eventYes, eventNo);
 		}
 
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return EngineCore.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
 		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		protected function button(pos:int):CoCButton
 		{
-			return kGAMECLASS.button(pos);
+			return EngineCore.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void
 		{
-			kGAMECLASS.removeButton(arg);
+			EngineCore.removeButton(arg);
 		}
 
 		protected function hasButton(arg:*):Boolean
 		{
-			return kGAMECLASS.hasButton(arg);
+			return EngineCore.hasButton(arg);
 		}
 
 /* Replaced by Utils.formatStringArray, which does almost the same thing in one function
@@ -379,7 +379,7 @@ import coc.xxc.StoryContext;
 */
 		
 		protected function openURL(url:String):void{
-			return kGAMECLASS.openURL(url);
+			return EngineCore.openURL(url);
 		}
 		
 		protected function sackDescript():String
@@ -660,12 +660,12 @@ import coc.xxc.StoryContext;
 
 		protected function silly():Boolean
 		{
-			return kGAMECLASS.silly();
+			return EngineCore.silly();
 		}
 
 		protected function HPChange(changeNum:Number,display:Boolean):void
 		{
-			kGAMECLASS.HPChange(changeNum,display);
+			EngineCore.HPChange(changeNum,display);
 		}
 
 		// For fatigue(mod,type) calls
@@ -679,7 +679,7 @@ import coc.xxc.StoryContext;
 		public static const USEFATG_WHITE_NOBM:int = 7;
 		public static const USEFATG_BLACK_NOBM:int = 8;
 		protected function fatigue(mod:Number,type:Number=0):void {
-			kGAMECLASS.fatigue(mod, type);
+			EngineCore.fatigue(mod, type);
 		}
 
 		protected function useMana(mod:Number,type:Number=0):void
@@ -695,7 +695,7 @@ import coc.xxc.StoryContext;
 		}
 */
 		
-		protected function playerMenu():void { kGAMECLASS.playerMenu(); }
+		protected function playerMenu():void { EventParser.playerMenu(); }
 		
 		protected function get player():Player
 		{
@@ -933,15 +933,15 @@ import coc.xxc.StoryContext;
 		}
 		
 		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
-			return kGAMECLASS.buttonTextIsOneOf(index, possibleLabels);
+			return EngineCore.buttonTextIsOneOf(index, possibleLabels);
 		}		
 		
 		protected function getButtonText(index:int):String {
-			return kGAMECLASS.getButtonText(index);
+			return EngineCore.getButtonText(index);
 		}
 		
 		protected function buttonIsVisible(index:int):Boolean {
-			return kGAMECLASS.buttonIsVisible(index);
+			return EngineCore.buttonIsVisible(index);
 		}
 				
 		protected function darkTheme():Boolean {

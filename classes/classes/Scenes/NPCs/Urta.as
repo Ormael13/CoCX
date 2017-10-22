@@ -56,7 +56,7 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 			pregnancy = new PregnancyStore(kFLAGS.URTA_PREGNANCY_TYPE, kFLAGS.URTA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 334, 288, 240, 192, 144, 96, 48);
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,   6,  7,  8,  9 (< 48)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

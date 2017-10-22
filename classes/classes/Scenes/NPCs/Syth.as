@@ -36,7 +36,7 @@ public class Syth extends Monster
 		private function sythAttack2():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");

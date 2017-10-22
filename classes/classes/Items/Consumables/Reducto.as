@@ -3,14 +3,12 @@
  */
 package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.internals.Utils;
+import classes.CockTypesEnum;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.internals.Utils;
 
-	public final class Reducto extends Consumable {
+public final class Reducto extends Consumable {
 		
 		public function Reducto() {
 			super("Reducto", "Reducto", "a salve marked as 'Reducto'", 30, "This container full of paste can be used to shrink a body part down by a significant amount.");
@@ -33,7 +31,7 @@ package classes.Items.Consumables
 			var rdtHorns:Function	= (game.player.horns > 2 ? shrinkHorns : null);
 			clearOutput();
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
-			game.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
+			EngineCore.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
 				"Hips", rdtHips, "Nipples", rdtNipples, "Horns", rdtHorns, "", null, "Nevermind", reductoCancel);
 			return(true);
 		}

@@ -80,7 +80,7 @@ public class SheilaScene extends NPCAwareContent implements TimeAwareInterface {
 		public function SheilaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.SHEILA_PREGNANCY_TYPE, kFLAGS.SHEILA_PREGNANCY_INCUBATION, 0, 0);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -5038,7 +5038,7 @@ public function badEndScarredBlade():void {
 	if (marbleFollower()) outputText("\n\n\"<i>NOOOOO! Sweetie!</i>\" Marble cries.");
 	getGame().inCombat = false;
 	flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 public function breakScarredBlade():void {

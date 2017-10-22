@@ -55,7 +55,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 */
 
 		public function Exgartuan() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedExgartuan:int;

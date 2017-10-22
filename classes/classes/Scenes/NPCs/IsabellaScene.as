@@ -17,7 +17,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 		{
 			pregnancy = new PregnancyStore(kFLAGS.ISABELLA_PREGNANCY_TYPE, kFLAGS.ISABELLA_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, 240);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedIsabella:int; //Make sure we test this event just once in timeChangeLarge

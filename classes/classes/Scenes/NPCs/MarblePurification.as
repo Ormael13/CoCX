@@ -16,12 +16,11 @@ flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 5 = QUEST COMPLETE
 */
 
 package classes.Scenes.NPCs {
-	import adobe.utils.CustomActions;
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class MarblePurification extends NPCAwareContent{
+public class MarblePurification extends NPCAwareContent{
 
 	public function MarblePurification()
 	{
@@ -832,7 +831,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nOnce you’ve finished drinking, mistress directs you to lie down on her bed.  She wants to use you for her pleasure.  As always, you’re happy to comply.  Just as things have been for so long, she mounts your custom prepared equipment: a kitty cock, 9 by 1.6 inches.  You are just happy that you can serve as her sex toy so well.  It fills you with such joy to watch the body of the most beautiful woman in the world bounce on top of yours, in that fine dress with her chest still exposed and tumbling around above you.");
 	 	outputText("\n\nThis is your life now.  Reduced to the milk addicted slave of a Lacta Bovine, you have abandoned your mission just to serve and be used for the rest of your life.");
 		//game over
-		getGame().gameOver();
+		EventParser.gameOver();
 	}
 
 	//Win scenes against Clara

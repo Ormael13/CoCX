@@ -6,6 +6,8 @@ import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
+import classes.EngineCore;
+import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
@@ -77,7 +79,7 @@ public class AbstractEquinum extends Consumable {
 							if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n");
 							if (player.gender == 3) outputText("You are somewhat confused as you can see a bulge near her thighs but also huge boobs jiggling as she walks, and you can't say if she's a male or female.\n\n");
 							outputText("As soon as you lay eyes on the creature, a wave of nostalgia overtakes you. Somehow, looking at that creature makes you sad, as if you forgot something important.\n\n\"<i>How strange to see a horse here all alone,</i>\" the creature muses, \"<i>In any case, you're still the least bizarre creature I've met here.  Not to mention the only one that hasn't tried to rape me,</i>\" it says with a sigh.\n\nYou answer with an interrogative whinny.\n\n\"<i>Hey, I've got an idea. I'll take you back to the camp. I'll feed you and in return you can help me complete my quest. What do you say?</i>\"\n\nInstinctively, you utter a happy and approving whinny.\n\nYou failed in your quest, losing your focus and more importantly, losing yourself.  But, even so, you found a new meaning to your life, and have a new chance to succeed where you once failed.");
-							getGame().gameOver();
+							EventParser.gameOver();
 							return false;
 						}
 					}
@@ -93,7 +95,7 @@ public class AbstractEquinum extends Consumable {
 						if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n");
 						if (player.gender == 3) outputText("You are somewhat confused as you can see a bulge near her thighs but also huge boobs jiggling as she walks, and you can't say if she's a male or female.\n\n");
 						outputText("As soon as you lay eyes on the creature, a wave of nostalgia overtakes you. Somehow, looking at that creature makes you sad, as if you forgot something important.\n\n\"<i>How strange to see a horse here all alone,</i>\" the creature muses, \"<i>In any case, you're still the least bizarre creature I've met here.  Not to mention the only one that hasn't tried to rape me,</i>\" it says with a sigh.\n\nYou answer with an interrogative whinny.\n\n\"<i>Hey, I've got an idea. I'll take you back to the camp. I'll feed you and in return you can help me to complete my quest. What do you say?</i>\"\n\nInstictively, you utter a happy and approving whinny.\n\nYou failed in your quest, losing you focus and more importantly, losing yourself.  But, even so, you found a new meaning to your life, and have a new chance to achieve what you once failed.");
-						getGame().gameOver();
+						EventParser.gameOver();
 						return false;
 					}
 				}
@@ -579,9 +581,9 @@ public class AbstractEquinum extends Consumable {
 		//FAILSAFE CHANGE
 		if (changes == 0) {
 			outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-			if (type == 0) game.HPChange(20, true);
-			if (type == 1) game.HPChange(100, true);
-			if (type == 2) game.HPChange(500, true);
+			if (type == 0) EngineCore.HPChange(20, true);
+			if (type == 1) EngineCore.HPChange(100, true);
+			if (type == 2) EngineCore.HPChange(500, true);
 			dynStats("lus", 3);
 		}
 		player.refillHunger(15);

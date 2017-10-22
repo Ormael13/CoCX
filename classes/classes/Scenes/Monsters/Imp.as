@@ -80,7 +80,7 @@ public class Imp extends Monster
 			outputText("\n");
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.playerMenu);
+			else doNext(EventParser.playerMenu);
 		}
 		
 		protected function lustMagicAttack1():void {
@@ -121,7 +121,7 @@ public class Imp extends Monster
 			outputText("\n");
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.playerMenu);
+			else doNext(EventParser.playerMenu);
 		}
 		
 		public function Imp(noInit:Boolean=false)

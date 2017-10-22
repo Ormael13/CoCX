@@ -12,7 +12,7 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 
 		public function MinotaurMobScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -1090,7 +1090,7 @@ private function minotaurGangBadEnd2():void {
 	outputText("He's pulled back and replaced, and you wonder which of your boys is getting sloppy seconds.  Who cares, as long as you get to feel him cum in you until you go dizzy!");
 	player.orgasm();
 	dynStats("lib", 100, "sen", 100);
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 	
 

@@ -15,7 +15,7 @@ public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 //- Player does not have a cock or balls, for now
 
 		public function Raphael() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedRussetRogue:int;

@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs {
 import classes.Appearance;
 import classes.AppearanceDefs;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Monster;
@@ -124,9 +125,9 @@ public class Diva extends Monster {
     override public function defeated(hpVictory:Boolean):void{
         if(finalFight){
             display("scenes/defeated/final/intro");
-            game.addButton(0,"Yes",finalChoice,0);
-            game.addButton(1,"No", finalChoice,1);
-            game.addButton(2,"Never",finalChoice,2);
+            EngineCore.addButton(0,"Yes",finalChoice,0);
+            EngineCore.addButton(1,"No", finalChoice,1);
+            EngineCore.addButton(2,"Never",finalChoice,2);
         }
         else{
             display("scenes/defeated/normal");
@@ -135,7 +136,7 @@ public class Diva extends Monster {
         }
         game.flushOutputTextToGUI();
         function finalChoice(choice:int):void{
-            game.clearOutput();
+            EngineCore.clearOutput();
             if(choice == 0){
                 DivaScene.getInstance().status = -1;
                 display("scenes/defeated/final/yesChoice");

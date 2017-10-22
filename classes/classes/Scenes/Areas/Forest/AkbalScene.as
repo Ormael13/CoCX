@@ -5,7 +5,6 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armors.LustyMaidensArmor;
 
 public class AkbalScene extends BaseContent
@@ -50,7 +49,7 @@ public class AkbalScene extends BaseContent
 						buttFuck = rapeAkbal;
 					outputText("\n\nDo you rape him?");
 					//Rape / Don't Rape
-					kGAMECLASS.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 					return;
 				}
 			}
@@ -453,7 +452,7 @@ public class AkbalScene extends BaseContent
 		private function girlsRapeAkbalPart2():void
 		{
 			clearOutput();
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 			//Centaur
 			outputText(images.showImage("akbal-deepwoods-female-taur-bindakbal"));
 			if (player.isTaur())

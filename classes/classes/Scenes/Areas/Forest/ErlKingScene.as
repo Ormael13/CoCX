@@ -575,7 +575,7 @@ public class ErlKingScene extends BaseContent
 			outputText("The Master stands up, and as you wobble to your feet, the two other Hounds move forwards, their broad tongue licking your chest, stomach, and dick, cleaning the cum from your fur.\n\n");
 
 			outputText("<b>The Master sounds his horn, and your ears perk up.  Astride his horse, he gallops off into the fog-haunted woods, and, like the rest of the Hounds, you follow.</b>\n\n");
-			getGame().gameOver();
+			EventParser.gameOver();
 
 //			menu();
 //			doNext(5025); // Find out the gameover shits

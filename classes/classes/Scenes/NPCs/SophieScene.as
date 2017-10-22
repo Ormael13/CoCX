@@ -13,7 +13,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 			pregnancy = new PregnancyStore(kFLAGS.SOPHIE_PREGNANCY_TYPE, kFLAGS.SOPHIE_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 100);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedSophie:int; //Make sure we test this event just once in timeChangeLarge

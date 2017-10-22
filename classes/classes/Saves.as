@@ -378,11 +378,11 @@ public function saveLoad(e:MouseEvent = null):void
 	//addButton(5, "Save to File", saveToFile);
 	addButton(6, "Load File", loadFromFile);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
-	addButton(14, "Back", kGAMECLASS.gameOver, true);
+	addButton(14, "Back", EventParser.gameOver, true);
 	
 	
 	if (temp == 777) {
-		addButton(14, "Back", kGAMECLASS.gameOver, true);
+		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
 	if (player.str == 0) {

@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
+public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
 
 //176 TIMES HAD YOGA
 //177 MET/FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
@@ -26,7 +26,7 @@
 			pregnancy = new PregnancyStore(kFLAGS.COTTON_PREGNANCY_TYPE, kFLAGS.COTTON_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 200, 100, 40);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4,  5 (< 40)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface

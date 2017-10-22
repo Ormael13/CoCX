@@ -24,7 +24,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		public function amilyAttack():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -80,7 +80,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 					lust += 10 * lustVuln;
 				}
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
 			game.combatRoundOver();
 		}
@@ -91,7 +91,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			var dodged:Number = 0;
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				dodged++;
