@@ -39,19 +39,20 @@ public class VampireBlood extends Consumable {
         } else {
             story.display(pure ? "useText/pure" : "useText/normal");
         }
+        //outputText("\n\n");
         story = story.locate("tfText");
 
         var tfArr:Array = [
             {
                 BodyPart: 'wingType',
                 ChangeTo: pure ? WING_TYPE_VAMPIRE : WING_TYPE_BAT_ARM,
-                Check   : player.hasGooSkin,
+                Check   : player.hasGooSkin(),
                 Override: mutations.humanizeSkin
             }, {
                 BodyPart: 'earType',
                 ChangeTo: pure ? EARS_VAMPIRE : EARS_BAT,
                 Check   : pure ? player.earType != EARS_HUMAN : false,
-                Override: pure ? mutations.humanizeEars() : null
+                Override: pure ? mutations.humanizeEars : null
             }, {
                 BodyPart: 'eyeType',
                 ChangeTo: EYES_VAMPIRE
@@ -82,12 +83,13 @@ public class VampireBlood extends Consumable {
         for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (rand(tf.Chance? tf.Chance : 3) == 0) {
-                if (tf.check && tf.Check()) {
+                if (tf.Check) {
                     tf.Override();
                     changes++;
                 }
-                else if (tf.ChangeTo != -1 && player[tf.BodyPart] != tf.ChangeTo) {
+                if (tf.ChangeTo != -1 && player[tf.BodyPart] != tf.ChangeTo) {
                     story.display(tf.BodyPart, {$pure: pure});
+                    outputText("\n\n");
                     player[tf.BodyPart] = tf.ChangeTo;
                     for each(var extra:Object in tf.Addition){
                         player[extra.BodyPart] = extra.ChangeTo;

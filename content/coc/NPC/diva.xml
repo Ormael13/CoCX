@@ -157,7 +157,7 @@
 
                     She take on an annoyed expression then declares <i>“Cough cough... ahem..Oh how terrible, I the almighty queen of darkness lost to the hero what will happen of me will thy hero rape me and make me his bride by force or will I be left alone in this castle as he/she goes on for a new quest.“
 
-                    </i>
+                </i>
 
                     Tired of her nonsense you decide to give her exactly what she asked for.
                     But the girl screams a spell that clearly doesn’t exist and disappears in a cloud of smoke from what is obviously a smoke bomb leaving one last warning.
@@ -536,18 +536,21 @@
         <lib name="useText">
             <text name="first">
                 Ew! This thing is indeed blood. It tastes awful, a strong, coppery taste, the liquid is thick from the iron content.
-                As you try to get the taste out of your mouth, you feel something begin to change in you
+                As you try to get the taste out of your mouth, you feel something begin to change in you.
+
             </text>
             <text name="vampire">
                 The blood tastes wonderful, as always.
                 You have downed the whole vial much sooner than you would have liked.
                 <if test="silly()">You filthy druggie.</if>
-                Leaving you wishing for more even as the vampiric blood starts changing your body further
+                Leaving you wishing for more even as the vampiric blood starts changing your body further.
+
             </text>
             <text name="pure">
                 The blood tastes awful, a strong, coppery taste, and is thick from the iron content.
                 Yet, under the blood’s metallic aftertaste, there's a hint of sweetness to it that you can’t really put your finger on.
                 As you try to get the taste out of your mouth, you feel your body starting to change.
+
             </text>
             <text name="normal">
                 You uncork the vial and down it’s contents.
@@ -555,6 +558,7 @@
                 <if test="silly()">What else were you expecting with that label and smell? Tomato juice with iron shavings?</if>
                 With some effort, you force down the blood and swallow it.
                 A rush of heat flows through your veins as your body starts to react to the new blood.
+
             </text>
         </lib>
         <lib name="tfText">
@@ -610,7 +614,7 @@
             <text name="earType">
                 <if test="$pure">
                     <if test="player.earType ne EARS_HUMAN">
-                        our ears revert back to their old human shape you had almost forgotten what humans ears felt like, before you can dwell on the implications of that, the changes continue.
+                        Before you can dwell on the implications of that, the changes continue.\n\n
                     </if>
                     Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing.
                     <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>
@@ -645,9 +649,7 @@
                 Or just the blood, really. You aren’t picky.
                 Really, it’s up to you whether just rip off some poor sod’s throat and drink straight from the tap or drink blood from a wineglass, what with <b>your new vampire fangs!</b>
             </text>
-            <text name="noChange">
-                Odd.  You don't feel any different.
-            </text>
+            <text name="noChange">Odd.  You don't feel any different.</text>
         </lib>
     </lib>
 </story>
