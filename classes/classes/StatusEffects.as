@@ -455,6 +455,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const Confusion:StatusEffectType                 = mkCombat("Confusion");
 		public static const CrinosShape:StatusEffectType               = mkCombat("Crinos Shape");
 		public static const Defend:StatusEffectType                    = mkCombat("Defend");
+		public static const DefendMonsterVer:StatusEffectType          = mkCombat("Defend Monster Ver");
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");

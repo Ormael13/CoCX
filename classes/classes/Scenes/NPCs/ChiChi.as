@@ -47,22 +47,42 @@ package classes.Scenes.NPCs
 			outputText(" ");
 		}
 		
+		public function DefensiveStance():void {
+			outputText("The mouse looks to be in a rough shape. However, instead of dropping down and admitting defeat like most of your foes, she resumes standing and howls with rage, her fire increasing in size as she goes berserk. To your surprise, Chi Chi’s movement suddenly shifts as she begins to parry, dodge and block your every move with vexing efficiency. However she looks to be suffering. ");
+			outputText("<b>There is an obsessed fury about it, like she is determined to defeat you at all cost. Perhaps you should surrender?</b>");
+			createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.9, 0, 0);
+		}
+		
 		override protected function performCombatAction():void {
-			/*if (this.HPRatio() < 0.75 && !hasStatusEffect(StatusEffects.)) defence;
-			else */ PentaStrike();
+			if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
+			else PentaStrike();
 			combatRoundOver();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
+			else */chichiScene.WonFirstFight();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			chichiScene.LostFirstFight();
+			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
+			else */chichiScene.LostFirstFight();
+		}
+		
+		override public function get long():String {
+			var str:String = "";
+			str += "Chi Chi is a mouse morph albeit a strange one because her fist, tail and even legs are on fire. She has pink fur and bright red hairs which always seems as if about to catch fire. She wears a pair of gauntlet and a qipao characteristic of her homeland.";
+			if (hasStatusEffect(StatusEffects.DefendMonsterVer)) str += " Chi Chi looks in great pain but keep fighting on with little regards for her wounds. <b>It would be smart to surrender so she doesn’t go so far as to kill herself for an arena match!</b>";
+			return str;
 		}
 		
 		public function ChiChi() 
 		{
 			this.a = "";
 			this.short = "Master Chi Chi of the four winds";
-			this.long = "Chi Chi is a mouse morph albeit a strange one because her fist, tail and even legs are on fire. She has pink fur and bright red hairs which always seems as if about to catch fire. She wears a pair of gauntlet and a qipao characteristic of her homeland.";
+			this.long = "";
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("C"));
@@ -70,8 +90,8 @@ package classes.Scenes.NPCs
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_NOTICEABLE+1;
 			this.skinTone = "light";
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;

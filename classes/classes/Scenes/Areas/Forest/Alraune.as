@@ -177,7 +177,7 @@ package classes.Scenes.Areas.Forest
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 20;
+			this.level = 24;
 			this.gems = rand(20) + 5;
 			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6)
 				//	.add(consumables.W__BOOK, 1 / 4)

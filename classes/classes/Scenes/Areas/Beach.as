@@ -128,5 +128,4 @@ package classes.Scenes.Areas
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-
 }

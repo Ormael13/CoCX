@@ -1019,8 +1019,8 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		public function makingNewGargoyle():void {
-			if (flags[kFLAGS.ONYX_GENDER] < 1) makingNewGargoylePart1();
-			else makingNewGargoylePart4();
+			if (flags[kFLAGS.ONYX_GENDER] >= 1) makingNewGargoylePart4();
+			else makingNewGargoylePart1();
 		}
 		public function makingNewGargoylePart1():void {
 			clearOutput();
@@ -1062,15 +1062,11 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" being, I guess I’ll name myself ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
 				outputText("Krystal");
-				mainView.nameBox.text = "Krystal";
-				flags[kFLAGS.ONYX_NAME] = mainView.nameBox.text;
-				mainView.nameBox.text = "";
+				flags[kFLAGS.ONYX_NAME] = "Krystal";
 			}
 			else {
 				outputText("Onyx");
-				mainView.nameBox.text = "Onyx";
-				flags[kFLAGS.ONYX_NAME] = mainView.nameBox.text;
-				mainView.nameBox.text = "";
+				flags[kFLAGS.ONYX_NAME] = "Onyx";
 			}
 			outputText(". Are you going to be my master from now on?</i>\"\n\n");
 			outputText("You have no intention of being such a thing, and you clearly state to " + flags[kFLAGS.ONYX_NAME] + " that the only order you'll ever give ");
@@ -1092,6 +1088,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n");
 			flags[kFLAGS.ONYX_PATH] = 2;
 			player.removeKeyItem("Black Soul Gem");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function currentStateOfStatue():void {

@@ -88,7 +88,7 @@ import classes.internals.WeightedDrop;
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.");
 				//(Lust increase)
-				player.dynStats("lus", 7 + (100 - player.inte) / 10);
+				player.dynStats("lus", 9 + rand(9));
 				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
@@ -96,7 +96,7 @@ import classes.internals.WeightedDrop;
 			{
 				outputText("The whispering in your head grows, many voices of undetermined sex telling you all the things the demon wishes to do to you. You can only blush.");
 				//(Lust increase)
-				player.dynStats("lus", 12 + (100 - player.inte) / 10);
+				player.dynStats("lus", 12 + rand(12));
 			}
 			game.combatRoundOver();
 		}
@@ -144,7 +144,7 @@ import classes.internals.WeightedDrop;
 				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-					var damage2:int = inte / 5;
+					var damage2:int = inte / 4;
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 					damage2 = Math.round(damage2);
@@ -171,7 +171,7 @@ import classes.internals.WeightedDrop;
 				outputText("Akbal licks himself, ignoring you for now.");
 			else
 				outputText("Akbal licks one of his wounds, and you scowl as the injury quickly heals itself.");
-			addHP(30);
+			addHP(30 * (1 + rand(4)));
 			lust += 10;
 			game.combatRoundOver();
 		}
@@ -201,19 +201,19 @@ import classes.internals.WeightedDrop;
 			this.skin.growFur({color:"spotted"});
 			this.hairColor = "black";
 			this.hairLength = 5;
-			initStrTouSpeInte(61, 76, 70, 86);
-			initLibSensCor(70, 50, 100);
+			initStrTouSpeInte(61, 89, 75, 86);
+			initLibSensCor(80, 50, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 15 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 17 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "shimmering pelt";
-			this.armorDef = 8 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 20;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 100;
 			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 16;
+			this.level = 20;
 			this.gems = 40;
 			this.drop = new WeightedDrop().
 					add(consumables.INCUBID,4).
@@ -227,11 +227,11 @@ import classes.internals.WeightedDrop;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1440;
+			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2340;
 			checkMonster();
 		}
 

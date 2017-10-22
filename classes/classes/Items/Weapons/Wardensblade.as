@@ -25,7 +25,7 @@ package classes.Items.Weapons
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Daoist's Focus (+40% Soulskill Power)";
+			desc += "\nSpecial: Daoist's Focus (+40% Magical Soulskill Power)";
 			desc += "\nSpecial: Blade-Warden (enables Blade Dance soul skill)";
 			return desc;
 		}

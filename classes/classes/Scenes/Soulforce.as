@@ -531,7 +531,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-		//	addButton(4, "", ).hint("Add 1 .");
+			addButton(4, "MasterGloves", AddMasterGloves).hint("Add 1 master Gloves.");
 			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
@@ -675,6 +675,10 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
+		}
+		public function AddMasterGloves():void {
+			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
+			inventory.takeItem(weapons.MASTGLO, EquipmentMenu);
 		}
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");

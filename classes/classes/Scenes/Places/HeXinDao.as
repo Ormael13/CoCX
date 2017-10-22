@@ -1516,17 +1516,21 @@ private function debitWeaponRange(itype:ItemType):void {
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: dummy golem, grupa dummy golems, true golem, ?group of true golems, weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, which only briefly glance at you the moment you pass by them. Inside after few a moment a tall slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
-	outputText("\n\n\"<i>Greeting to the Soul Arena. Don't pick up fights outside of the proper place or you will be thrown out. If you break any rule here you will be kicked out. Knowing this go pick the area where you want to train or maybe go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains you all that is needed and walk away.");
-	outputText("\n\nSo which one of the three possible sub areas you gonna visit this time?");
-	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) ("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes as he does so.");
-	menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosuku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
-	addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
-	addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
-	addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
-	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
-	addButton(14, "Back", riverislandVillageStuff);
-	statScreenRefresh();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15) chichiScene.EnterOfTheChiChi();
+	else {
+		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, which only briefly glance at you the moment you pass by them. Inside after few a moment a tall slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
+		outputText("\n\n\"<i>Greeting to the Soul Arena. Don't pick up fights outside of the proper place or you will be thrown out. If you break any rule here you will be kicked out. Knowing this go pick the area where you want to train or maybe go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains you all that is needed and walk away.");
+		outputText("\n\nSo which one of the three possible sub areas you gonna visit this time?");
+		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) ("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes as he does so.");
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 1) flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
+		menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosuku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
+		addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
+		addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
+		addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
+		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
+		addButton(14, "Back", riverislandVillageStuff);
+		statScreenRefresh();
+	}
 }
 
 public function soularenaSolo():void {
@@ -1576,89 +1580,103 @@ public function soularenaChallenge():void {
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 25) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
 	addButton(14, "Back", soularena);
 }
 
 public function dummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummy());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummyImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummyAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummySuperior());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function dummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummy());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummyImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummyAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummySuperior());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
@@ -1672,6 +1690,7 @@ public function gaunletchallange1fight1():void {
 	outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
 	outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummy());
 }
 public function gaunletchallange1fight2():void {
@@ -1705,45 +1724,53 @@ public function gaunletchallange1postfight():void {
 
 public function golemancer():void {
 	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Jeniffer());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function ayotechmaniac():void {
 	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Jinx());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function machosalamander():void {
 	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Syth());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function misssalamander():void {
 	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Rangiku());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgargoyle():void {
 	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GargoyleBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function improvedgolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function advancedgolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }

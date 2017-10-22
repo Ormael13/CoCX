@@ -30,9 +30,13 @@ public function EnterOfTheChiChi():void {
 
 public function WonFirstFight():void {
 	clearOutput();
-	
+	outputText("The mouse looks at you in complete disbelief, her shaking voice slowly breaking down as she falls to her knees and coughs blood on the ground.\n\n");
+	outputText("\"<i>Is this... my blood... it is... beautiful. I never thought I would see the day when I...</i>\"\n\n");
+	outputText("She smiles as she stand a final time, trying to run toward you to deliver one last punch. But midway, she falls to the ground, still smiling, with an obvious trail of blood on the corner of her mouth. Muttering two last words.\n\n");
+	outputText("\"<i>Thank you...</i>\"\n\n");
+	outputText("The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her glove on the ground as a prize for your victory.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
-	cleanupAfterCombat();
+	inventory.takeItem(weapons.MASTGLO, cleanupAfterCombat);
 	return;
 }
 
@@ -152,7 +156,8 @@ public function TrainingSoulArtsWithChiChi():void {
 		doNext(camp.returnToCampUseFourHours);
 	}
 	else {
-		outputText("Liadri what does Chi Chi say when PC want train with her more than once a day?\n\n");
+		outputText("Chi Chi respond by the negative.\n\n");
+		outputText("\"<i>I meant it as a joke. No not today you are still in a pretty rough shape, pushing training further would compromise your health. Go take a break.</i>\"");
 		doNext(MeetingChiChiInHeXinDao2);
 	}
 }

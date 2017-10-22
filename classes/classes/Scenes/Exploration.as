@@ -180,22 +180,15 @@ package classes.Scenes
 					else if (player.level < 42 && golemChooser >= 50) golemChooser = 49;
 					else if (player.level < 51 && golemChooser >= 60) golemChooser = 59;
 					clearOutput();
-					//Improved dummy golem or golems
+					//Improved dummy golem
 					if (golemChooser >= 10 && golemChooser < 20) {
-						/*if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsDummyImproved());
-							return;
-						}
-						else {*/
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemDummyImproved());
-							return;
-						//}
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemDummyImproved());
+						return;
 					}
 					//Advanced dummy golem or golems
 					if (golemChooser >= 20 && golemChooser < 30) {
-						if (rand(4) < 2) {
+						if (rand(4) == 0) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummyAdvanced());
 							return;
@@ -208,7 +201,7 @@ package classes.Scenes
 					}
 					//Superior dummy golem or golems
 					if (golemChooser >= 30 && golemChooser < 40) {
-						if (rand(4) < 2) {
+						if (rand(4) == 0) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummySuperior());
 							return;
@@ -221,7 +214,7 @@ package classes.Scenes
 					}
 					//Basic true golem or golems
 					if (golemChooser >= 40 && golemChooser < 50) {
-						if (rand(4) < 2) {
+						if (rand(4) == 0) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueBasic());
 							return;
@@ -234,7 +227,7 @@ package classes.Scenes
 					}
 					//Improved true golem or golems
 					if (golemChooser >= 50 && golemChooser < 60) {
-						if (rand(4) < 2) {
+						if (rand(4) == 0) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueImproved());
 							return;
@@ -247,7 +240,7 @@ package classes.Scenes
 					}
 					//Advanced true golem or golems
 					if (golemChooser >= 60) {
-						if (rand(4) < 2) {
+						if (rand(4) == 0) {
 							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueAdvanced());
 							return;
@@ -258,26 +251,15 @@ package classes.Scenes
 							return;
 						}
 					}
-					//Dummy golem or golems
+					//Dummy golem
 					else {
-						/*if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
-							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-							}
-							startCombat(new GolemsDummy());
-							return;
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
+						if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
 						}
-						else {*/
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
-							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-							}
-							startCombat(new GolemDummy());
-							return;
-						//}
+						startCombat(new GolemDummy());
+						return;
 					}
 				}
 				else {
@@ -394,6 +376,55 @@ package classes.Scenes
 			//Omnibus
 			else {
 				TrueDemons.OmnibusEncounter();
+				return;
+			}
+		}
+		public function genericGolemsEncounters1(even:Boolean = false):void {
+			var golemsChooser:int = rand(60);
+			//Limit chooser range
+			if (player.level < 12 && golemsChooser >= 10) golemsChooser = 9;
+			else if (player.level < 18 && golemsChooser >= 20) golemsChooser = 19;
+			else if (player.level < 24 && golemsChooser >= 30) golemsChooser = 29;
+			else if (player.level < 33 && golemsChooser >= 40) golemsChooser = 39;
+			clearOutput();
+			//Improved dummy golems
+			if (golemsChooser >= 10 && golemsChooser < 20) {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
+				startCombat(new GolemsDummyImproved());
+				return;
+			}
+			//Advanced dummy golems
+			if (golemsChooser >= 20 && golemsChooser < 30) {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
+				startCombat(new GolemsDummyAdvanced());
+				return;
+			}
+			//Superior dummy golems
+			if (golemsChooser >= 30 && golemsChooser < 40) {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
+				startCombat(new GolemsDummySuperior());
+				return;
+			}
+			//Basic true golems
+			if (golemsChooser >= 40 && golemsChooser < 50) {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
+				startCombat(new GolemsTrueBasic());
+				return;
+			}
+			//Improved true golems
+			if (golemsChooser >= 50) {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
+				startCombat(new GolemsTrueImproved());
+				return;
+			}
+			//Dummy golems
+			else {
+				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
+				if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
+				}
+				startCombat(new GolemsDummy());
 				return;
 			}
 		}

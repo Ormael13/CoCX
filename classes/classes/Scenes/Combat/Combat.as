@@ -3274,6 +3274,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		if (PlayerHPRatio() < 1) bonusDamageFromMissingHP += 1 - PlayerHPRatio();
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.HP - damage <= 0) {
 		/* No monsters use this perk, so it's been removed for now
 		if(monster.findPerk(PerkLib.LastStrike) >= 0) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
@@ -3281,7 +3282,6 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		*/
 		doNext(endHpVictory);
 	}
-	
 	// Uma's Massage Bonuses
 	var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
 	if (sac)
@@ -3291,10 +3291,8 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 			damage *= sac.value2;
 		}
 	}
-	
 	damage = Math.round(damage);
-	
-	if(damage < 0) damage = 1;
+	if (damage < 0) damage = 1;
 	if (apply) {
 		monster.HP -= damage;
 		monster.wrath += Math.round(damage / 10);
@@ -3306,7 +3304,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + temp + "</font>)</b>"); //Heal
 	}
 	//Isabella gets mad
-	if(monster.short == "Isabella") {
+	if (monster.short == "Isabella") {
 		flags[kFLAGS.ISABELLA_AFFECTION]--;
 		//Keep in bounds
 		if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
@@ -3314,7 +3312,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	//Interrupt gigaflare if necessary.
 	if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
 	//Keep shit in bounds.
-	if(monster.HP < 0) monster.HP = 0;
+	if (monster.HP < 0) monster.HP = 0;
 	return damage;
 }
 
@@ -6043,10 +6041,9 @@ public function toughnessscalingbonus():Number {
 	return toughnessscalingvalue;
 }
 
-
 public function soulskillMod():Number {
 	var modss:Number = 1;
-	if(player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modss += .1;
+	if (player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modss += .1;
 	if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 30) modss += .2;
 		if (player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 40) modss += .2;
@@ -6072,10 +6069,52 @@ public function soulskillMod():Number {
 //	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modss += .5;
 	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
 	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
-	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.findPerk(PerkLib.SeersInsight) >= 0) modss += player.perkv1(PerkLib.SeersInsight);
+	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
 	return modss;
+}
+public function soulskillPhysicalMod():Number {
+	var modssp:Number = 1;
+	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modssp += .3;
+	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modssp += .4;
+//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modssp += .5;
+	if (player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
+	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	return modssp;
+}
+public function soulskillMagicalMod():Number {
+	var modssm:Number = 1;
+	if (player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modssm += .1;
+	if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 30) modssm += .2;
+		if (player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 40) modssm += .2;
+		if (player.findPerk(PerkLib.SoulWarrior) >= 0 && player.wis >= 50) modssm += .2;
+	}
+	if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulSprite) >= 0 && player.wis >= 60) modssm += .3;
+		if (player.findPerk(PerkLib.SoulScholar) >= 0 && player.wis >= 70) modssm += .3;
+		if (player.findPerk(PerkLib.SoulElder) >= 0 && player.wis >= 80) modssm += .3;
+	}
+	if (player.findPerk(PerkLib.DaoistElderStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulExalt) >= 0 && player.wis >= 90) modssm += .4;
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0 && player.wis >= 100) modssm += .4;
+		if (player.findPerk(PerkLib.SoulTyrant) >= 0 && player.wis >= 110) modssm += .4;
+	}
+	if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
+		if (player.findPerk(PerkLib.SoulKing) >= 0 && player.wis >= 120) modssm += .5;
+		if (player.findPerk(PerkLib.SoulEmperor) >= 0 && player.wis >= 130) modssm += .5;
+		if (player.findPerk(PerkLib.SoulAncestor) >= 0 && player.wis >= 140) modssm += .5;
+	}
+	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modssm += .3;
+	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modssm += .4;
+//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modssm += .5;
+	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modssm += player.perkv1(PerkLib.DaoistsFocus);
+	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
+	if (player.findPerk(PerkLib.SeersInsight) >= 0) modssm += player.perkv1(PerkLib.SeersInsight);
+	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	if (player.shieldName == "spirit focus") modssm += .2;
+	return modssm;
 }
 
 public function soulskillcostmulti():Number {

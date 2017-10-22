@@ -179,7 +179,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 		else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		//soulskill mod effect
-		damage *= soulskillMod();
+		damage *= combat.soulskillPhysicalMod();
 		//other bonuses
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -255,7 +255,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 		else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		//soulskill mod effect
-		damage *= soulskillMod();
+		damage *= combat.soulskillPhysicalMod();
 		//group enemies bonus
 		if (monster.plural == true) damage *= 5;
 		//other bonuses
@@ -322,7 +322,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
-		damage *= soulskillMod();
+		damage *= combat.soulskillMagicalMod();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		//Determine if critical hit!
@@ -376,7 +376,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
-		damage *= soulskillMod();
+		damage *= combat.soulskillMagicalMod();
 		//group enemies bonus
 		if (monster.plural == true) damage *= 5;
 		//other bonuses
@@ -896,7 +896,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //triple strike bonus
 	 damage *= 3;
 	 //soulskill mod effect
-	 damage *= soulskillMod();
+	 damage *= combat.soulskillPhysicalMod();
 	 //final touches
 	 damage *= (monster.damagePercent() / 100);
 	 damage = doDamage(damage);

@@ -165,12 +165,12 @@ package classes.Scenes.Places.Farm
 			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tough skin";
 			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 200;
+			this.bonusHP = 250;
 			this.bonusLust = 20;
 			this.lust = 40;
 			this.lustVuln = 0.83;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 12;
+			this.level = 13;
 			this.gems = rand(15) + 25;
 			this.tailType = TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;

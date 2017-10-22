@@ -2523,7 +2523,7 @@ import classes.internals.Utils;
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT)
+			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO)
 				return true;
 			return false;
 		}

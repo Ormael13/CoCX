@@ -28,6 +28,8 @@ package classes.Scenes
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
 			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");// or new enemy to fight at Soul Arena. If PC will not force her into suicide she can teach PC few soulskills
 			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP reeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
+			outputText("-New perk for weapons: Body Cultivator's Focus. It increase by x% all dmg done with physical based soulskills.\n");
+			outputText("-Perks Daoist's Focus and Seer’s Insight would now only boost magical soulskills instead of all soulskills.\n");
 			outputText("-New enemy in Mountains / Deepwoods / Plains: Raiju/Electra. As first encounter with her will be always in Mountains and afer it she can be encountered in any of those 3 locations. It even come with brand new and shiny codex entry to unlock about Raiju race.\n");
 			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Raiju/Electra fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Raiju Legs No Req.\n");
@@ -45,12 +47,10 @@ package classes.Scenes
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
 			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished.\n");
 			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
-			outputText("-New Dungeon added called Den of Desire located in Blihht Ridge with two enemies and archievment for completing it (also reward in Questlog like for any of other 6 dungeons). It's location on diffulty similar to Phoenix Tower for PC at lvl 25 or higher to proceed smooth.\n");
-			outputText("-One of the enemies in new dungeon will give PC Key Item called Black Soul gem. It's needed item to make and then 'bring back to life' second gargoye in Temple of Divine calling itself either Krystal (female/herm version) or Onyx (male version). It have only sex secene eithr with PC alone or in treesome with Sapphire and PC.\n");
+			outputText("-New Dungeon added called Den of Desire located in Blihht Ridge with two enemies and achievment for completing it (also reward in Questlog like for any of other 6 dungeons). It's location on diffulty similar to Phoenix Tower for PC at lvl 25 or higher to proceed smooth.\n");
+			outputText("-One of the enemies in new dungeon will give PC Key Item called Black Soul Gem. It's needed item to make and then 'bring back to life' second gargoye in Temple of Divine calling itself either Krystal (female/herm version) or Onyx (male version). It have only sex secene eithr with PC alone or in treesome with Sapphire and PC.\n");
 			outputText("-Aside Krystal/Onyx Sapphire herself also gained few new sex scenes and talk scene that allow to unlock options to slowly rebuild/restore Temple back to it old glory.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Liadri): Master Gloves - obtainable for beating Chi Chi in first match against her or after making her PC waifu (3600 gems, Large type, 0 base atk). It boost by 40% physical soulskills power.\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second\n");/*ostatni punkt changelogu
 			outputText("-\n");
