@@ -3889,7 +3889,7 @@ use namespace kGAMECLASS;
             Begin("Player","racialScore","vampire");
             var counter:int = 0;
             if(earType == EARS_BAT){ counter-=10;}
-            else if(earType == EARS_ELFIN){ counter++;}
+            else if(earType == EARS_VAMPIRE){ counter++;}
 			if(wingType == WING_TYPE_VAMPIRE){counter += 4;}
             if(lowerBody == LOWER_BODY_TYPE_HUMAN) {counter++;}
 			if(armType == ARM_TYPE_HUMAN){counter++;}
