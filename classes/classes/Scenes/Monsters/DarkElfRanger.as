@@ -4,13 +4,11 @@
  */
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.DarkElfScene;
-	
-	public class DarkElfRanger extends DarkElfScout
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class DarkElfRanger extends DarkElfScout
 	{
 		override public function DarkElfBowShooting():void
 		{
@@ -35,15 +33,15 @@ package classes.Scenes.Monsters
 			this.short = "dark elf ranger";
 			this.imageName = "dark elf";
 			this.long = "This woman with dark skin has long pointed ears. You suspect her to be a dark elf, though why she’s here on the surface, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_ELF;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_ELF;
 			this.skinTone = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;

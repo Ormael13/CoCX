@@ -1,14 +1,9 @@
 package classes {
 
-import coc.view.MainView;
-
-import flash.events.Event;
-
-import fl.controls.ComboBox;
-import fl.data.DataProvider;
-
-import classes.Scenes.NPCs.IsabellaScene;
 import classes.GlobalFlags.*;
+import classes.Scenes.NPCs.IsabellaScene;
+
+import coc.view.MainView;
 
 /**
  * The new home of Stats and Perks
@@ -231,12 +226,12 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += ")\n";
 		}
 		bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) {
-			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != FACE_SNAKE_FANGS && player.faceType != FACE_SPIDER_FANGS)
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != AppearanceDefs.FACE_SNAKE_FANGS && player.faceType != AppearanceDefs.FACE_SPIDER_FANGS)
 				bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS))
+			else if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS))
 				bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)
+			else if (player.tailType != AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)
 				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 		}
 

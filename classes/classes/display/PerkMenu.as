@@ -2,9 +2,9 @@
  * Created by aimozg on 22.05.2017.
  */
 package classes.display {
+import classes.AppearanceDefs;
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkClass;
 import classes.PerkLib;
@@ -195,7 +195,7 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", normalArrows2);
 		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", normalArrows3);
-		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
+		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 
 		var e:MouseEvent;
 		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);

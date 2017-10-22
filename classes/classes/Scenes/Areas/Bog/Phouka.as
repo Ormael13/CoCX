@@ -3,11 +3,11 @@
  */
 package classes.Scenes.Areas.Bog
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.WeightedDrop;
 
-	public class Phouka extends Monster
+public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
 		{ 
@@ -274,17 +274,17 @@ package classes.Scenes.Areas.Bog
 			this.cumMultiplier = 5;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 5;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HUMAN
-			this.armType = ARM_TYPE_HUMAN;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN
+			this.armType = AppearanceDefs.ARM_TYPE_HUMAN;
 			this.skinTone = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
-			this.earType = EARS_ELFIN;
+			this.earType = AppearanceDefs.EARS_ELFIN;
 			initStrTouSpeInte(90, 70, 140, 40);
 			initLibSensCor(90, 35, 100);
 			this.weaponName = "claws";
@@ -304,7 +304,7 @@ package classes.Scenes.Areas.Bog
 				.add(consumables.SDELITE, 13)
 				.add(consumables.P_WHSKY, 35)
 				.add(null, 20);
-			this.wingType = WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
+			this.wingType = AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
 			this.wingDesc = "small black faerie wings";
 			this.str += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -2,10 +2,7 @@ package classes.Scenes.Combat {
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
-import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.HelDungeon.*;
-import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 public class CombatTeases extends BaseContent {
@@ -124,16 +121,16 @@ public class CombatTeases extends BaseContent {
 		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
 		//partial skins bonuses
 		switch (player.coatType()) {
-			case SKIN_COAT_FUR:
+			case AppearanceDefs.SKIN_COAT_FUR:
 				damage += (1 + player.newGamePlusMod());
 				break;
-			case SKIN_COAT_SCALES:
+			case AppearanceDefs.SKIN_COAT_SCALES:
 				damage += (2 * (1 + player.newGamePlusMod()));
 				break;
-			case SKIN_COAT_CHITIN:
+			case AppearanceDefs.SKIN_COAT_CHITIN:
 				damage += (3 * (1 + player.newGamePlusMod()));
 				break;
-			case SKIN_COAT_BARK:
+			case AppearanceDefs.SKIN_COAT_BARK:
 				damage += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
@@ -371,7 +368,7 @@ public class CombatTeases extends BaseContent {
 			if (player.ass.analLooseness >= 5) choices[choices.length] = 16;
 		}
 		//17 Bee abdomen tease
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
 			choices[choices.length] = 17;
 			choices[choices.length] = 17;
 		}
@@ -399,7 +396,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 21;
 		}
 		//22 SPOIDAH SILK
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) {
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
@@ -518,7 +515,7 @@ public class CombatTeases extends BaseContent {
 		//38 Kitsune Tease
 		//39 Kitsune Tease
 		//40 Kitsune Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+		if (player.kitsuneScore() >= 2 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
@@ -537,7 +534,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 40;
 		}
 		//41 Kitsune Gendered Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+		if (player.kitsuneScore() >= 2 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
@@ -556,7 +553,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 42;
 		}
 		//43 - special mino + cowgirls
-		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW) {
+		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == AppearanceDefs.TAIL_TYPE_COW) {
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
@@ -602,7 +599,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 46;
 		}
 		//47 - Manticore Tailpussy Tease
-		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
@@ -613,7 +610,7 @@ public class CombatTeases extends BaseContent {
 		//=======================================================
 		select = choices[rand(choices.length)];
 		if (monster.short.indexOf("minotaur") != -1) {
-			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == AppearanceDefs.TAIL_TYPE_COW)
 				select = 43;
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {

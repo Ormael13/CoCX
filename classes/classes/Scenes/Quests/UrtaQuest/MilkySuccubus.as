@@ -1,12 +1,11 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Monsters.AbstractSuccubus;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 	
 	public class MilkySuccubus extends AbstractSuccubus
 	{
@@ -94,15 +93,15 @@ package classes.Scenes.Quests.UrtaQuest
 			this.imageName = "milkysuccubus";
 			this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("G"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = 84;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
@@ -124,11 +123,11 @@ package classes.Scenes.Quests.UrtaQuest
 			this.gems = rand(40)+50;
 			this.additionalXP = 100;
 			this.drop = NO_DROP;
-			this.hornType = HORNS_COW_MINOTAUR;
+			this.hornType = AppearanceDefs.HORNS_COW_MINOTAUR;
 			this.horns = 2;
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;

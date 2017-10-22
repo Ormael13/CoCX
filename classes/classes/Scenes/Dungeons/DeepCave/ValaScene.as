@@ -1,11 +1,10 @@
 package classes.Scenes.Dungeons.DeepCave 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.ShouldraFollower;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class ValaScene extends BaseContent
+public class ValaScene extends BaseContent
 	{
 		// VALA_CUMBATH_TIMES:int = 433;
 		// TIMES_VALA_CONSENSUAL_BIG:int = 767;
@@ -63,7 +62,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//HERPY DERPY HERMY
 			else if(player.gender == 3) {
 				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further past the girl's gaping spincter until a mere 9 inches remains protruding from her bright pink hole. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your " + buttDescript() + " against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your ");
-				if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail");
+				if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("tail");
 				else outputText("knees");
 				outputText(".  Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your " + buttDescript() + " and presses against your " + vaginaDescript(0) + ", its girth exciting and frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n");
 				outputText("You quickly recover and prepare your second surprise. Reaching around your " + hipDescript() + ", you grab your stiffening [cock] and pull it backwards, until it's just under the dildo connecting the two of you. With a thrust backwards, you jam your dick into her drooling pussy, while driving more of the dildo inside your clenching walls, slamming the fairy's distended rosette in lusty punishment for her over-eagerness. She giggles and humps right back, driving another inch of your shaft into her rectum and your uterus, your love-canal aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other and thrusting your tail-like [cock] into the fairy until you end up ass-to-ass, your " + buttDescript() + " smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begins to form on the floor, each wet slap splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lip as you make your thrusts more forceful, slamming yourself into her violated nethers, the fairy's body as bloated from the minotaur dildo as from your own girth. She, in turn, is just as consumed by lust and tries to jackhammer right back into you, until you can feel the rounded wooden base pushing against your cervix, the mouth of her own womb slamming against your cockhead, blissful pain coursing through your lower body.\n\n");
@@ -93,7 +92,7 @@ package classes.Scenes.Dungeons.DeepCave
 				player.consumeItem(consumables.PURHONY, 1);
 				flags[kFLAGS.VALA_HEALED_HONEY] = 1;
 				outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. She clings onto your ");
-				if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail");
+				if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("tail");
 				else outputText(player.leg());
 				outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a less viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n");
 				outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"");
@@ -461,7 +460,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 				outputText("She needs no additional urging, and wraps her whip-thin arms around your " + buttDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to drip warm fluid onto her tongue, she flaps like she means it.  ");
 				//(PC Has Wings: 
-				if(player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ");
+				if(player.wingType > AppearanceDefs.WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ");
 				
 				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, clinging to each other in a desperate 69. Under her well-practiced mouth, you can feel your " + vaginaDescript(0) + " drooling nearly as much as the fey girl's, your utter dominion of the fairy delighting you nearly to the verge of orgasm.\n\n");
 
@@ -473,7 +472,7 @@ package classes.Scenes.Dungeons.DeepCave
 				
 				outputText("She needs no additional urging, and wraps her whip-thin legs around your " + hipDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to leak globs of pre-cum into her sucking box, she flaps like she means it. ");
 				//(PC Has Wings: 
-				if(player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ");
+				if(player.wingType > AppearanceDefs.WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ");
 				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, you mounting her doggy-style, hands gripping her ribs as you lean over her. The tight clenching of her overburdened flight turns her loose pussy into a tight, clenching sphincter that practically milks your shaft with every heartbeat.\n\n");
 				
 				outputText("She makes a short circuit around the room, slowing enough to savor each thrust, your pounding giving her a short burst of speed as you ride the bitch through the air, every muscle in both of your bodies tense with the effort. You're still not convinced she's been sufficiently humbled, however, so you thread your arms under her wings and loop your hands around the sides of her face. You slide your forefingers into her mouth and hook the fingers to pull her cheeks wide open. Like a horse's reins, you jerk the fairy's head back and wrap your other fingers under her jaw, fully controlling her head. She tries to speak, but slurs the words, drool gushing from her wrenched mouth. You guide her head up, and she rises, descending when you yank it down. Satisfied that she understands your commands, you decide that it's time to take your mare through her paces.");

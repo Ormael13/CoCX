@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class HellHound extends Monster
+public class HellHound extends Monster
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
@@ -160,12 +160,12 @@
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_DOG;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DOG;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -187,7 +187,7 @@
 							consumables.BLACKPP,
 							consumables.DBLPEPP,
 							consumables.LARGEPP);
-			this.tailType = TAIL_TYPE_DOG;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

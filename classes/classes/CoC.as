@@ -8,34 +8,57 @@
 package classes
 {
 	// BREAKING ALL THE RULES.
+import classes.CoC_Settings;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
-import classes.GlobalFlags.kFLAGS;
-import classes.internals.CountersStorage;
-import classes.internals.RootCounters;
+import classes.InputManager;
+import classes.Items.*;
+import classes.Parser.Parser;
+import classes.PerkLib;
+import classes.Scenes.*;
+import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Combat.Combat;
+import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Dungeons.DungeonEngine;
+import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.Explore.*;
+import classes.Scenes.Monsters.*;
+import classes.Scenes.NPCs.*;
+import classes.Scenes.Places.*;
+import classes.Scenes.Quests.*;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
+import classes.internals.CountersStorage;
+import classes.internals.RootCounters;
 
-import coc.view.CoCLoader;
-
-import coc.xlogic.ExecContext;
+import coc.model.GameModel;
+import coc.model.TimeModel;
 import coc.xxc.Story;
-
 import coc.xxc.StoryCompiler;
 import coc.xxc.StoryContext;
 
-import flash.display.DisplayObjectContainer;
-
+import flash.display.MovieClip;
+import flash.display.Sprite;
+import flash.events.*;
+import flash.net.SharedObject;
+import flash.net.URLRequest;
+import flash.net.navigateToURL;
+import flash.net.registerClassAlias;
+import flash.utils.ByteArray;
 import flash.utils.setTimeout;
 
-// This file contains most of the persistent gamestate flags.
-	import classes.Scenes.Combat.Combat;
-	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
-	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
-	import classes.Scenes.Areas.Beach.Gorgon;
-	import classes.Scenes.Dungeons.DungeonEngine; // This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
-	import classes.Scenes.Dungeons.D3.D3; // Likely due to D3's complexity, that dungeon is split out separately.
+import mx.logging.Log;
+import mx.logging.LogEventLevel;
+import mx.logging.targets.TraceTarget;
 
-	import classes.CoC_Settings; // This file creates basic variables for CoC itself (debug flags, buffers, button manipulation)
+// This file contains most of the persistent gamestate flags.
+// This file creates the gameclass that the game will run within.
+// This file creates the flags for the achievements system.
+// This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
+// Likely due to D3's complexity, that dungeon is split out separately.
+
+// This file creates basic variables for CoC itself (debug flags, buffers, button manipulation)
 
 /* 
 One very important thing to know about descriptions in this game is that many words are based on hidden integer values. 
@@ -55,77 +78,36 @@ Further complicating this is that the code will also sometimes have a randomized
 the text from being too boring.
 */
 
-	import classes.AssClass; // Creates the class that holds ass-related variables as described above. 
-	import classes.BreastRowClass; // Creates the class that holds breast-related variables.
-	import classes.Items.*; // This pulls in all the files in the Items folder. Basically any inventory item in the game
-	import classes.PerkLib; // This instantiates the IDs, names, and descriptions of perks. Does NOT have any code related to the actual perk! Use the ID field to search the code base for that. 
+// Creates the class that holds ass-related variables as described above.
 
-	import classes.Player; // Creates a player with all that entails. See file for more info. Also see Creature.as.
-	import classes.Cock; // Creates the class that holds cock-related variables. Also has several functions for growing and shrinking cocks.
-	import classes.Creature; // Creates basic information for all characters in CoC. Contains many descriptors.
-	import classes.ItemSlotClass; // Creates item slots
-	import classes.PerkClass; // The function in this file pulls perk information from PerkLib for later querying
-	import classes.StatusEffectClass;// Similar to PerkClass, but for status effects in combat.
-	import classes.VaginaClass; // Creates vaginas
-	import classes.ImageManager; // Image voodoo for sprites
-	import classes.internals.Utils; // This file contains much voodoo for randomizing item arrays and other useful functions.
+// Creates the class that holds breast-related variables.
+// This pulls in all the files in the Items folder. Basically any inventory item in the game
+// This instantiates the IDs, names, and descriptions of perks. Does NOT have any code related to the actual perk! Use the ID field to search the code base for that.
+
+
+// Creates a player with all that entails. See file for more info. Also see Creature.as.
+// Creates the class that holds cock-related variables. Also has several functions for growing and shrinking cocks.
+// Creates basic information for all characters in CoC. Contains many descriptors.
+// Creates item slots
+// The function in this file pulls perk information from PerkLib for later querying
+// Similar to PerkClass, but for status effects in combat.
+// Creates vaginas
+// Image voodoo for sprites
+// This file contains much voodoo for randomizing item arrays and other useful functions.
 
 
 	// This line not necessary, but added because I'm pedantic like that.
-	import classes.InputManager;
-
-	import classes.Parser.Parser; // Much text voodoo for how to make all the description/pronoun/etc replacement work.
+// Much text voodoo for how to make all the description/pronoun/etc replacement work.
 
 // All the files below with Scenes loads the main content for the game.
 
-	import classes.Scenes.*;
-	import classes.Scenes.Areas.*;
-	import classes.Scenes.Areas.Desert.*
-	import classes.Scenes.Areas.Forest.*
-	import classes.Scenes.Areas.HighMountains.*
-	import classes.Scenes.Areas.Mountain.*
-	import classes.Scenes.Areas.Swamp.*
-	import classes.Scenes.Dungeons.DeepCave.*;
-	import classes.Scenes.Dungeons.DesertCave.*;
-	import classes.Scenes.Dungeons.Factory.*;
-	import classes.Scenes.Dungeons.HelDungeon.*;
-	import classes.Scenes.Explore.*;
-	import classes.Scenes.Monsters.*;
-	import classes.Scenes.NPCs.*;
-	import classes.Scenes.Places.*;
-	import classes.Scenes.Places.TelAdre.*;
-	import classes.Scenes.Quests.*;
-	//import coc.view.MainView; // Creates the framework for the game screen.
-	import coc.view.MainView;
-	import coc.model.GameModel; // Uncertain.
-	import coc.model.TimeModel; // Various time-related functions for setting the game clock and querying its state.
+//import coc.view.MainView; // Creates the framework for the game screen.
+// Uncertain.
+// Various time-related functions for setting the game clock and querying its state.
 
 	// Class based content? In my CoC?! It's more likely than you think!
-	import classes.content.*;
-	
-	// All the imports below are for Flash.
-	import fl.controls.ComboBox;
-	import fl.data.DataProvider;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
-	import flash.events.*
-	import flash.net.FileReference;
-	import flash.net.navigateToURL;
-	import flash.net.registerClassAlias;
-	import flash.net.SharedObject;
-	import flash.net.SharedObjectFlushStatus;
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.net.URLRequest;
-	import flash.text.*;
-	import flash.utils.ByteArray;
-	import flash.system.Capabilities;
-	import flash.display.Sprite;
-	import mx.logging.targets.TraceTarget;
-	import mx.logging.Log;
-	import mx.logging.LogEventLevel;
-
-	/****
+// All the imports below are for Flash.
+/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
 	
@@ -154,10 +136,10 @@ the text from being too boring.
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/eventParser.as";
 		include "../../includes/engineCore.as";
-		// Lots of constants
-		include "../../includes/appearanceDefs.as";
 
-		//Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
+
+
+        //Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
 		//	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
 		private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
 	

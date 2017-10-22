@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.GlacialRift 
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class FrostGiant extends Monster
+
+public class FrostGiant extends Monster
 	{
 		
 		public function giantAttackPunch():void {
@@ -222,11 +222,11 @@ import classes.internals.WeightedDrop;
 			this.ballSize = 2;
 			this.cumMultiplier = 2;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 20*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"deep blue"});
 			this.hairColor = "white";
 			this.hairLength = 8;

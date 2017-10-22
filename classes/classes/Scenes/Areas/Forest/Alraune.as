@@ -4,11 +4,11 @@
  */
 package classes.Scenes.Areas.Forest 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.internals.ChainedDrop;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.internals.ChainedDrop;
 
-	public class Alraune extends Monster
+public class Alraune extends Monster
 	{
 		public function trapLevel(adjustment:Number = 0):Number {
 			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,6,0,0,0);
@@ -156,14 +156,14 @@ package classes.Scenes.Areas.Forest
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = HIP_RATING_CURVY+3;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
+			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 			this.hairLength = 6;
 			initStrTouSpeInte(10, 100, 10, 60);
 			initLibSensCor(100, 50, 0);

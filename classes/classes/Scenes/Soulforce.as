@@ -4,33 +4,25 @@
  */
 package classes.Scenes 
 {
-	import classes.*
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Places.Boat;
-	import classes.Scenes.Areas.Forest.Tamani;
-	import classes.Scenes.Areas.Forest.TamaniScene;
-	import classes.Scenes.Areas.Forest.TamanisDaughters;
-	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
-	import classes.Scenes.Areas.Forest.WorldTree;
-	import classes.Scenes.Areas.HighMountains.IzumiScene;
-	import classes.Scenes.Areas.DeepSea.Kraken;
-	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
-	import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
-	import classes.Scenes.Places.Boat.Marae;
-	import classes.Scenes.Monsters.DarkElfScout;
-	import classes.Scenes.Monsters.DarkElfSlaver;
-	import classes.Scenes.Monsters.DarkElfRanger;
-	import classes.Scenes.Monsters.DarkElfSniper;
-	import classes.Scenes.Monsters.DarkElfSniper;
-	import classes.Scenes.NPCs.Electra;
-	import classes.Scenes.NPCs.Sonya;
-	import classes.Scenes.NPCs.RyuBiDragon;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
+import classes.Scenes.Areas.Forest.TamaniScene;
+import classes.Scenes.Areas.Forest.WorldTree;
+import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Monsters.DarkElfRanger;
+import classes.Scenes.Monsters.DarkElfScout;
+import classes.Scenes.Monsters.DarkElfSlaver;
+import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.NPCs.Electra;
+import classes.Scenes.NPCs.RyuBiDragon;
+import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.Places.Boat.Marae;
+
+use namespace kGAMECLASS;
 	
 	public class Soulforce extends BaseContent
 	{
@@ -1277,19 +1269,19 @@ private function resetHeroslayerOmnibusFlag():void {
 		}
 		public function BackToHumanForm():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 0;
-			player.armType = ARM_TYPE_HUMAN;
-			player.eyeType = EYES_HUMAN;
-			player.antennae = ANTENNAE_NONE;
-			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
-			player.wingType = WING_TYPE_NONE;
+			player.wingType = AppearanceDefs.WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
-			player.tongueType = TONGUE_HUMAN;
-			player.tailType = TAIL_TYPE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
 			player.tailRecharge = 0;
 			player.horns = 0;
-			player.hornType = HORNS_NONE;
-			player.earType = EARS_HUMAN;
+			player.hornType = AppearanceDefs.HORNS_NONE;
+			player.earType = AppearanceDefs.EARS_HUMAN;
 			player.skin.restore();
 			clearOutput();
 			outputText("You have become fully human again.");
@@ -1325,23 +1317,23 @@ private function resetHeroslayerOmnibusFlag():void {
 			doNext(GargoyleBodyChanges);
 		}
 		public function GargoyleBodyChanges():void {
-			player.skin.setBaseOnly({type:SKIN_TYPE_STONE});
-			player.hairType = HAIR_NORMAL;
-			player.faceType = FACE_HUMAN;
-			player.hornType = HORNS_GARGOYLE;
+			player.skin.setBaseOnly({type:AppearanceDefs.SKIN_TYPE_STONE});
+			player.hairType = AppearanceDefs.HAIR_NORMAL;
+			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.hornType = AppearanceDefs.HORNS_GARGOYLE;
 			player.horns = 12 + rand(4); 
-			player.armType = ARM_TYPE_GARGOYLE;
-			player.tailType = TAIL_TYPE_GARGOYLE;
+			player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
+			player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
 			player.tailRecharge = 0;
-			player.wingType = WING_TYPE_GARGOYLE_LIKE_LARGE;
-			player.lowerBody = LOWER_BODY_TYPE_GARGOYLE;
+			player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
+			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
 			player.legCount = 2;
-			player.eyeType = EYES_HUMAN;
-			player.antennae = ANTENNAE_NONE;
-			player.tongueType = TONGUE_HUMAN;
-			player.earType = EARS_HUMAN;
-			player.gillType = GILLS_NONE;
-			player.rearBody = REAR_BODY_NONE;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
 			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {

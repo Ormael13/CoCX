@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 /**
@@ -234,14 +234,14 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.imageName = "amily";
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 48, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;

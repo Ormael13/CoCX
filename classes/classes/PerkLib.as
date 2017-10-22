@@ -3,12 +3,9 @@
  */
 package classes
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Perks.*;
-	import classes.GlobalFlags.*;
-	import classes.Creature;
+import classes.Perks.*;
 
-	public class PerkLib
+public class PerkLib
 	{
 
 		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
@@ -2398,8 +2395,8 @@ package classes
 		EnvenomedBolt.requireLevel(18)
 					 .requirePerk(JobHunter)
 					 .requireCustomFunction(function (player:Player):Boolean {
-						 return player.tail.isAny(Creature.TAIL_TYPE_BEE_ABDOMEN, Creature.TAIL_TYPE_SCORPION, Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL)
-								|| player.facePart.isAny(Creature.FACE_SNAKE_FANGS, Creature.FACE_SPIDER_FANGS);
+						 return player.tail.isAny(AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, AppearanceDefs.TAIL_TYPE_SCORPION, AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL)
+								|| player.facePart.isAny(AppearanceDefs.FACE_SNAKE_FANGS, AppearanceDefs.FACE_SPIDER_FANGS);
 					 }, "Venom-producing tail, abdomen, or fangs");
 		DancersVitalityIV.requirePerk(DancersVitalityIII)
 						 .requireSpe(105)
@@ -3184,7 +3181,7 @@ package classes
 				return player.lizardScore() >= 4
 			}, "Lizan race");
 		ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
-			return player.manticoreScore() >= 10 && player.tailType == Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL
+			return player.manticoreScore() >= 10 && player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL
 		}, "Manticore race and tail");
 		MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 			return player.mantisScore() >= 6

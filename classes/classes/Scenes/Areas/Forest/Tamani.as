@@ -1,11 +1,11 @@
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.Goblin;
+import classes.internals.*;
 
-	public class Tamani extends Goblin
+public class Tamani extends Goblin
 	{
 
 		override protected function goblinTeaseAttack():void
@@ -131,15 +131,15 @@ package classes.Scenes.Areas.Forest
 			this.imageName = "tamani";
 			this.long = "She keeps her arms folded across her " + game.forest.tamaniScene.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 55, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 40;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "greenish gray";
 			this.hairColor = "pink and black";
 			this.hairLength = 16;

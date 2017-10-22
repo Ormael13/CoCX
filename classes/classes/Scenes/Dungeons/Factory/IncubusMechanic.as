@@ -1,14 +1,11 @@
 package classes.Scenes.Dungeons.Factory
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.Dungeons.Factory;
-	import classes.internals.*;
-	import flash.display.InteractiveObject;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.internals.*;
 
-	public class IncubusMechanic extends Monster {
+public class IncubusMechanic extends Monster {
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -178,12 +175,12 @@ package classes.Scenes.Dungeons.Factory
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
@@ -220,8 +217,8 @@ package classes.Scenes.Dungeons.Factory
 			}
 			this.special1 = cockTripAttack;
 			this.special2 = spoogeAttack;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

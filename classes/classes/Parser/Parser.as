@@ -313,7 +313,7 @@ package classes.Parser
 		private function convertConditionalArgumentFromStr(arg:String):*
 		{
 			// convert the string contents of a conditional argument into a meaningful variable.
-			var argLower:* = arg.toLowerCase()
+			var argLower:* = arg.toLowerCase();
 			var argResult:* = -1;
 
 			// Note: Case options MUST be ENTIRELY lower case. The comparaison string is converted to
@@ -361,7 +361,7 @@ package classes.Parser
 			}
 
 
-			if (printConditionalEvalDebug || LogErrors) trace("WARNING: Could not convert to number. Evaluated ", arg, " as", argResult)
+			if (printConditionalEvalDebug || logErrors) trace("WARNING: Could not convert to number. Evaluated ", arg, " as", argResult);
 			return argResult;
 		}
 

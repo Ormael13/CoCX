@@ -1,9 +1,9 @@
 package classes.Scenes.Areas.Bog
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class ChameleonGirl extends Monster
+public class ChameleonGirl extends Monster
 	{
 
 		public function chameleonTongueAttack():void
@@ -128,14 +128,14 @@ package classes.Scenes.Areas.Bog
 			this.imageName = "chameleongirl";
 			this.long = "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(2) + 68;
-			this.hipRating = HIP_RATING_AMPLE + 2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skin.setBaseOnly({color:skinToneAdj[0],adj:skinToneAdj[1],type:SKIN_BASE_PLAIN});
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE + 2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.skin.setBaseOnly({color:skinToneAdj[0],adj:skinToneAdj[1],type:AppearanceDefs.SKIN_BASE_PLAIN});
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(120, 120, 105, 95);

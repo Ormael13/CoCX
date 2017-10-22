@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Desert
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class SandTrap extends Monster
+public class SandTrap extends Monster
 	{
 		//Wait:
 		public function sandTrapWait():void {
@@ -125,11 +125,11 @@
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 150;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "fair";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -148,7 +148,7 @@
 			this.level = 5;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

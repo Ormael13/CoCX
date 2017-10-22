@@ -1,10 +1,10 @@
 package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.WeightedDrop;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.WeightedDrop;
 
-	public class Vala extends Monster
+public class Vala extends Monster
 	{
 		//Vala AI
 
@@ -104,15 +104,15 @@ package classes.Scenes.Dungeons.DeepCave
 			this.imageName = "vala";
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 25, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
@@ -144,7 +144,7 @@ package classes.Scenes.Dungeons.DeepCave
 			var wingDesc:String = "shimmering wings";
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
+			this.wingType = AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE;
 			this.wingDesc = wingDesc;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

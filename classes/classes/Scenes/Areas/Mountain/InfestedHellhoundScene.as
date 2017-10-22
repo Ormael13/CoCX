@@ -3,10 +3,10 @@
  */
 package classes.Scenes.Areas.Mountain
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class InfestedHellhoundScene extends BaseContent
+public class InfestedHellhoundScene extends BaseContent
 	{
 		public function InfestedHellhoundScene()
 		{
@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Mountain
 		{
 			clearOutput();
 			outputText("A low snarl vibrates through your body, ");
-			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle");
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle");
 			else outputText("rattling your teeth");
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n");
 			outputText("Somehow you know this thing isn't going to let you just walk away.");
@@ -118,7 +118,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 			}
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
-			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
+			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
 				//(LUST) 
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");

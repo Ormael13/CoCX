@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
+import classes.*;
+import classes.GlobalFlags.*;
 import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
 
-	public class BeeGirl extends Monster {
+public class BeeGirl extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void {
 			clearOutput();
@@ -109,14 +109,14 @@ import classes.internals.ChainedDrop;
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
 			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = HIP_RATING_CURVY+3;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.lowerBody = LOWER_BODY_TYPE_BEE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
+			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_BEE;
 			this.skinTone = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
@@ -138,9 +138,9 @@ import classes.internals.ChainedDrop;
 					.add(consumables.W__BOOK, 1 / 4)
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
-			this.antennae = ANTENNAE_BEE;
-			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
-			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
+			this.antennae = AppearanceDefs.ANTENNAE_BEE;
+			this.wingType = AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL;
+			this.tailType = AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;
 			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

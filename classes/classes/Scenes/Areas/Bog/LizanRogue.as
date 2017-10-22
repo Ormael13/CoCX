@@ -1,12 +1,11 @@
 package classes.Scenes.Areas.Bog 
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
 import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	
-	public class LizanRogue extends Monster
+
+public class LizanRogue extends Monster
 	{
 		//1 - str
 		//2 - tou
@@ -81,7 +80,7 @@ import classes.internals.*;
 		public function LizanRogue() 
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
-			this.skin.growCoat(SKIN_COAT_SCALES,{color:skinToneAdj});
+			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:skinToneAdj});
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";
@@ -90,11 +89,11 @@ import classes.internals.*;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(8, 3, CockTypesEnum.LIZARD);
 			this.createCock(8, 3, CockTypesEnum.LIZARD);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_MOIST;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_MOIST;
 			this.tallness = 60 + rand(10);
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinDesc = "skin";
 			this.hairColor = "black";
 			this.hairLength = 15;

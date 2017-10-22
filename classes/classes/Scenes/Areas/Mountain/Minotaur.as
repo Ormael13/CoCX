@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
 
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -65,20 +65,20 @@
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skin.growFur({color:furColor});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = furColor;
 			this.hairLength = 3;
 			initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
 			initLibSensCor(40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
 			this.weaponAttack = (hasAxe ? (50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) : (40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])));
@@ -99,7 +99,7 @@
 						.elseDrop(null);
 			}
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += (hasAxe ? 20 : 15) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -1,10 +1,10 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class ImpWarlord extends Imp
+public class ImpWarlord extends Imp
 	{
 		public function clawAttack():void {
 			outputText("The imp warlord charges at you with his claws ready! ");
@@ -76,12 +76,12 @@ package classes.Scenes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
 			initLibSensCor(71, 35, 100);
@@ -103,7 +103,7 @@ package classes.Scenes.Monsters
 					add(consumables.INCUBID,12).
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRNG,1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
 			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

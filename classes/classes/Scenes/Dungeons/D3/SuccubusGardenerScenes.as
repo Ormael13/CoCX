@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.StatusEffects;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	
-	/**
+import classes.AppearanceDefs;
+import classes.BaseContent;
+import classes.CockTypesEnum;
+import classes.GlobalFlags.kFLAGS;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -490,7 +490,7 @@
 			outputText("\n\nThere's just too much physical sensation going on for you to focus on coherent thoughts. Every part of your body feels like it's screaming its awareness at you. Your tail is a little itchy, for instance. Your legs are a little tired, but it's that good kind of 'just went for walkies' tired. Your nose can smell soooo much. And best of all, your cock feels like it's three times as sensitive. It's so much easier to just think in emotions and images instead of abstract concepts like words.");
 
 			outputText("\n\nMistress clasps a collar around your furry neck.");
-			if (player.skinType != SKIN_TYPE_FUR) outputText(" Was that there before?");
+			if (player.skinType != AppearanceDefs.SKIN_TYPE_FUR) outputText(" Was that there before?");
 			outputText(" It feels very right, and in your excitement, it's hard not to hump her leg. It must be obvious to her, because your dick");
 			if (player.cocks.length > 1) outputText("s are");
 			else outputText(" is");

@@ -1,33 +1,32 @@
 ﻿package classes
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.ArmorLib;
-	import classes.Items.ConsumableLib;
-	import classes.Items.JewelryLib;
-	import classes.Items.UseableLib;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRangeLib;
-	import classes.Items.ShieldLib;
-	import classes.Items.UndergarmentLib;
-	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
-	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
-	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
-	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
-	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
-	import classes.Scenes.NPCs.ChiChi;
-	import classes.Scenes.NPCs.Kiha;
-	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
-	import classes.internals.ChainedDrop;
-	import classes.internals.MonsterCounters;
-	import classes.internals.RandomDrop;
-	import classes.internals.Utils;
-	import classes.internals.WeightedDrop;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.ArmorLib;
+import classes.Items.ConsumableLib;
+import classes.Items.JewelryLib;
+import classes.Items.ShieldLib;
+import classes.Items.UndergarmentLib;
+import classes.Items.UseableLib;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRangeLib;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
+import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+import classes.Scenes.NPCs.ChiChi;
+import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
+import classes.internals.ChainedDrop;
+import classes.internals.MonsterCounters;
+import classes.internals.RandomDrop;
+import classes.internals.Utils;
+import classes.internals.WeightedDrop;
 
-	import flash.utils.getQualifiedClassName;
+import flash.utils.getQualifiedClassName;
 
-	/**
+/**
 	 * ...
 	 * @author Yoffy, Fake-Name, aimozg
 	 */
@@ -1492,13 +1491,13 @@
 					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
 					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
 			result += Hehas;
-			if (tailType == TAIL_TYPE_NONE) result += "no tail, ";
+			if (tailType == AppearanceDefs.TAIL_TYPE_NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == HORNS_NONE) result += "no horns, ";
+			if (hornType == AppearanceDefs.HORNS_NONE) result += "no horns, ";
 			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == WING_TYPE_NONE) result += "no wings, ";
+			if (wingType == AppearanceDefs.WING_TYPE_NONE) result += "no wings, ";
 			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == ANTENNAE_NONE) result += "no antennae.\n\n";
+			if (antennae == AppearanceDefs.ANTENNAE_NONE) result += "no antennae.\n\n";
 			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
 
 			// GENITALS AND BREASTS
@@ -1722,7 +1721,7 @@
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
-					if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns wounds");
+					if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns wounds");
 					else outputText("horn wound");
 					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
@@ -1733,13 +1732,13 @@
 					store5 = game.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
-						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText(capitalA + short + " bleeds profusely from the jagged ");
-						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}

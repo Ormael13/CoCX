@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
+public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
 
 //New Status:
 //+Tamani's Husband – (Still need too big loss scene and centaur version)
@@ -953,7 +953,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Of course she's right – you can feel her wetness on your chest and you want to bury your face in it while she strokes you.  Tamani watches your eyes and turns to give you a better view, presenting her snatch while she leans back to stroke you.  She titters, \"<i>Yes, get a good look at your wife's cunt.  It looks so delicious, so warm, so inviting.  You want nothing more than to bury your cock or face into it, don't you?  That's because it's your wife's cunt, and you're a good husband.</i>\"\n\n");
 	
 	outputText("Her hand starts stroking you faster and her juices start to drip down the sides of your torso");
-	if(player.skinType == SKIN_TYPE_FUR) outputText(", matting your [skin coat.color] fur");
+	if(player.skinType == AppearanceDefs.SKIN_TYPE_FUR) outputText(", matting your [skin coat.color] fur");
 	outputText(" as she continues ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("filling your mind with truths");
 	else outputText("reinforcing your image of yourself as an obedient husband");

@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
+public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 	{
 
 //const IZMA_NO_COCK:int = 439;
@@ -1872,8 +1872,8 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ");
-		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping");
-		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing");
+		if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("dripping");
+		else if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("gushing");
 		else outputText("cascading");
 		outputText(" feminine fluids onto the sticky ground beneath you both");
 	}
@@ -1909,8 +1909,8 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ");
-		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping");
-		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing");
+		if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("dripping");
+		else if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("gushing");
 		else outputText("cascading");
 		outputText(" feminine fluids onto the sticky ground beneath you both");
 	}

@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Places.Boat
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 
-	public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
+public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
 		public function MaraeScene() {
 			CoC.timeAwareClassAdd(this);
@@ -283,8 +283,8 @@ private function alraunezeMeYes0():void {
 		player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	}
 	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
-	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;
-	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
+	if (player.wingType == AppearanceDefs.WING_TYPE_PLANT) player.wingType = AppearanceDefs.WING_TYPE_NONE;
+	player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 	player.legCount = 12;
 	doNext(camp.returnToCampUseTwoHours);
 }
@@ -665,8 +665,8 @@ private function MaraeIIStageII():void {
 		}
 		outputText("\n\n");
 
-		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("Sticky wetness glistens between your thighs");
-		else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Drops of feminine arousal run down your thighs");
+		if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) outputText("Sticky wetness glistens between your thighs");
+		else if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Drops of feminine arousal run down your thighs");
 		else outputText("Trails of viscous feminine fluid leak from your " + vaginaDescript(0));
 		outputText(", reminding you of your unused femsex.  Marae grunts underneath you, and while at first you assume it's from the penetration, the prodding of two cock-like protrusions at your lusty holes corrects your misguided assumptions.  You pull back and begin to fuck her in earnest, and with each long rock back, you can see she's grown tentacles from underneath her ass, like two prehensile tails.  They push forwards and spear you, arresting your movement while you try to cope with the sudden stretching of two of your orifices.  Warmth radiates from the twin intruders along with a slippery fullness.  They're pumping something inside you that tingles and makes " + sMultiCockDesc() + " bounce and drip.");
 		player.cuntChange(12,true,true,false);

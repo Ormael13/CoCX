@@ -1,11 +1,10 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.Items.*
-	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.*;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -93,13 +92,13 @@ package classes.Scenes.Dungeons.D3
 			tallness = 86;
 			ass.analLooseness = 0;
 			ass.analWetness = 0;
-			hipRating = HIP_RATING_AVERAGE;
-			buttRating = BUTT_RATING_AVERAGE;
-			lowerBody = LOWER_BODY_TYPE_LIZARD;
+			hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
+			lowerBody = AppearanceDefs.LOWER_BODY_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(100, 200, 110, 70);
 			initLibSensCor(40, 40, 80);
-			faceType = FACE_LIZARD;
+			faceType = AppearanceDefs.FACE_LIZARD;
 			weaponName = "cutlass";
 			weaponVerb = "slash";
 			weaponAttack = 25 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

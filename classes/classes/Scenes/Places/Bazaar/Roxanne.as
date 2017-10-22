@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Places.Bazaar{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
+public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
 
 //Roxanne Poisontail
 //-no hair, 
@@ -426,7 +426,7 @@ private function roxanneReamsYouNormal():void {
 	outputText(".\n\n");
 	
 	outputText("There's nothing to do but lie there and accept it.  You're too drunk to run even if you did get the aggressive shemale out of your rectum.  Worse still, her 'crew' of male lizans are standing guard in a ring around the pair of you.  Even though they seem focused on protecting against external threats, you know you'd never get past them without tripping over a tail or being snatched by a strong, sober arm. You belch and relax, your face sliding over the booze-slicked table while Roxanne starts to pound away at your stretched ");
-	if(player.tailType > TAIL_TYPE_NONE) outputText("tail-hole");
+	if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("tail-hole");
 	else outputText("anus");
 	outputText(".  It begins to feel good");
 	if(player.hasCock()) outputText(", very good,");
@@ -503,7 +503,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	outputText("The nude newhalf pounces, her thigh-sized monster-cock gushing pre-cum over your belly and twitching in anticipation of the violation to come.  Her need is so cute... endearing even, but it isn't until your gear is being removed that you remember Roxanne intends to hilt that thing inside you.  Your eyes go wide, your mouth stammering and blubbering about how it will never fit.  She places a scaled finger on your boozy lips and whispers, \"<i>Shhhh, don't struggle.  You knew what you were getting into, " + player.mf("my dear","sexy girl") + ".  You wouldn't welch out on a wager, would you?  Besides, it's much too late for you to do anything... my nude, drunken cock-holster.</i>\"\n\n");
 	
 	outputText("Oh gods, Roxanne's right.  She finished getting you naked while she was talking, and you're completely exposed.  Her hands grab your arm and pull, rolling you onto your front and letting your [legs] hang off the side of her bed toward the floor.  It's such a silly pose that you nearly forget how perfect a target it makes your " + buttDescript() + "!  The now-confident lizan gives your butt-cheek a slap, giggling when you start in surprise.  ");
-	if(player.tailType > TAIL_TYPE_NONE) outputText("She lifts your tail ");
+	if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("She lifts your tail ");
 	else outputText("She spreads your cheeks ");
 	outputText("to examine your " + assholeDescript() + ", licking the ring before she prods it with a gentle finger-tip.  The excited pirate exclaims, \"<i>");
 	if(player.analCapacity() < 150) outputText("Oh, poor " + player.mf("boy","girl") + "!  I don't think you can handle me like this.  Let me get the ointment... after all, I want you to come back for more.");
@@ -521,13 +521,13 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	if(player.analCapacity() >= 150) outputText("spit");
 	else outputText("ointment");
 	outputText("-slicked ass to accept ever-greater quantities of cock.  Sharp fingernails drag over your " + hipDescript());
-	if(player.skinType == SKIN_TYPE_PLAIN) outputText(", leaving red lines in your unblemished skin");
+	if(player.skinType == AppearanceDefs.SKIN_TYPE_PLAIN) outputText(", leaving red lines in your unblemished skin");
 	outputText(" while your hips visibly spread, somehow accepting something a normal human body never could.");
 	player.buttChange(Math.floor(30+(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]/4)),true,true,false);
 	outputText("\n\n");
 	
 	outputText("Roxanne stops and pants lustily, her two-foot prehensile tongue hanging into her cavernous cleavage while she strokes the exposed half of her member.  She traces one of her fingers over the swell of your left cheek, letting her nail leave behind ");
-	if(player.skinType == SKIN_TYPE_SCALES) outputText("a roughly-scratched 'X' on your scales");
+	if(player.skinType == AppearanceDefs.SKIN_TYPE_SCALES) outputText("a roughly-scratched 'X' on your scales");
 	else outputText("an irritated, red 'X' on your skin");
 	outputText(".  You whimper from the pain and the awkward fullness, but she asks, \"<i>Should we get that tattooed on there?  A nice red 'X' to claim Roxanne Poisontail's favorite treasure... wouldn't that be nice?</i>\"  A submissive mewl escapes your lips while you try to focus on her words, but the alcohol and complete body distention keep your frazzled consciousness from digesting anything but more cock.\n\n");
 	

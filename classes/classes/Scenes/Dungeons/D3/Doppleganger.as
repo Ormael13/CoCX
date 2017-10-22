@@ -1,14 +1,15 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BreastRowClass;
-	import classes.Cock;
-	import classes.Monster;
-	import classes.VaginaClass;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.AppearanceDefs;
+import classes.BreastRowClass;
+import classes.Cock;
+import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.PerkLib;
+import classes.StatusEffects;
+import classes.VaginaClass;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -301,38 +302,38 @@ package classes.Scenes.Dungeons.D3
 			
 			switch(player.earType)
 			{
-				case EARS_HORSE:
+				case AppearanceDefs.EARS_HORSE:
 					str += " a pair of horse-like ears";
 					break;
-				case EARS_FERRET:
+				case AppearanceDefs.EARS_FERRET:
 					str += " a small pair of rounded ferret ears";
 					break;
-				case EARS_DOG:
+				case AppearanceDefs.EARS_DOG:
 					str += " a pair of dog ears";
 					break;
-				case EARS_COW:
+				case AppearanceDefs.EARS_COW:
 					str += " a pair of round, floppy cow ears";
 					break;
-				case EARS_ELFIN:
+				case AppearanceDefs.EARS_ELFIN:
 					str += " a large pair of pointy ears";
 					break;
-				case EARS_CAT:
+				case AppearanceDefs.EARS_CAT:
 					str += " a pair of cute, fuzzy cat ears";
 					break;
-				case EARS_LIZARD:
-				case EARS_DRAGON:
+				case AppearanceDefs.EARS_LIZARD:
+				case AppearanceDefs.EARS_DRAGON:
 					str += " a pair of rounded protrusions with small holes";
 					break;
-				case EARS_BUNNY:
+				case AppearanceDefs.EARS_BUNNY:
 					str += " a pair of floppy rabbit ears";
 					break;
-				case EARS_FOX:
+				case AppearanceDefs.EARS_FOX:
 					str += " a pair of large, adept fox ears";
 					break;
-				case EARS_RACCOON:
+				case AppearanceDefs.EARS_RACCOON:
 					str += " a pair of vaugely egg-shaped, furry racoon ears";
 					break;
-				case EARS_MOUSE:
+				case AppearanceDefs.EARS_MOUSE:
 					str += " a pair of large, dish-shaped mouse ears";
 					break;
 				default:

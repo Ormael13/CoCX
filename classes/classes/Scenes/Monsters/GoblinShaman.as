@@ -1,11 +1,10 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class GoblinShaman extends Goblin
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class GoblinShaman extends Goblin
 	{
 		public var spellCostCharge:int = 6;
 		public var spellCostBlind:int = 8;
@@ -140,15 +139,15 @@ package classes.Scenes.Monsters
 			this.imageName = "goblinshaman";
 			this.long = "The goblin before you stands approximately three feet and a half. Her ears appear to be pierced more times than the amount of piercings a typical goblin has. Her hair is deep indigo. She’s unlike most of the goblins you’ve seen. She’s wielding a staff in her right hand. In addition to the straps covering her body, she’s wearing a necklace seemingly carved with what looks like shark teeth. She’s also wearing a tattered loincloth, unlike most goblins who would show off their pussies. From the looks of one end of her staff glowing, she’s clearly a shaman!";
 			if (player.hasCock()) this.long += "  She's clearly intent on casting you into submission just so she can forcibly make you impregnate her.";
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 44 + rand(7);
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "indigo";
 			this.hairLength = 4;

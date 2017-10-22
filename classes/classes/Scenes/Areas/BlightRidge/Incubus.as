@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Areas.BlightRidge
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Incubus extends Monster
 	{
@@ -150,12 +149,12 @@ package classes.Scenes.Areas.BlightRidge
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
@@ -181,8 +180,8 @@ package classes.Scenes.Areas.BlightRidge
 			this.additionalXP = 50;
 			this.special1 = cockTripAttack2;
 			this.special2 = spoogeAttack2;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

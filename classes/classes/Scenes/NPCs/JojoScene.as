@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.GlobalFlags.*;
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.*;
 
-	public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
+public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
 
@@ -464,9 +464,9 @@ public function useTentacleJojo():void {
 	else {
 		//With cunt
 		if(player.hasVagina()) {
-			if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into your oversized cum-receptacles");
+			if(player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into your oversized cum-receptacles");
 			else {
-				if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication");
+				if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication");
 				else outputText("forcing their way inside your " + vaginaDescript(0) + " and " + assholeDescript());
 			}
 		}
@@ -534,8 +534,8 @@ public function useTentacleJojo():void {
 		if(player.pregnancyIncubation == 0) outputText("mildly pregnant");
 		else outputText("even more pregnant");
 		outputText(".  Your body spasms around them, locked in the throes of orgasm");
-		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ");
-		else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ");
+		if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ");
+		else if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ");
 		else outputText(".  ");
 		//(If big clit being sucked – 
 		if(player.cockTotal() <= 2 && player.balls == 0) {
@@ -1331,8 +1331,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if(player.biggestLactation() >= 1.5 && player.biggestTitSize() > 2 && player.mostBreastsPerRow() >= 2 && player.breastRows.length >= 1) outputText("Every sensual peak within you is mirrored with small spurts of milk from your nipples.  It eventually trickles down to Jojo's tongue, spurring his efforts on.  ");
 				outputText("The mousey gets more and more in to eating your box, making it harder and harder to stave off an orgasm.  You wrap ");
-				if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("your coils ");
-				else if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("your jiggling goo ");
+				if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("your coils ");
+				else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("your jiggling goo ");
 				else outputText("your thighs ");
 				outputText("around his head and quiver with passion, ");
 				if(player.averageVaginalWetness() <= 1) outputText("squeezing him tightly into your " + vaginaDescript(0) + ".");
@@ -1449,7 +1449,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				if (player.isBiped()) outputText(" brushes against your calf");
 				else outputText(" brushes against your [leg]");
 				outputText(".  You get a devilish idea, ");
-				if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("and push his " + monster.cockDescriptShort(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ");
+				if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("and push his " + monster.cockDescriptShort(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ");
 				else outputText("and push his " + monster.cockDescriptShort(0) + " with your [foot], sandwiching it under one [foot] and on top of the other.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your [feet], doing your best to impart a [foot] fetish on his slowly warping mind.  You feel a hot wetness on your [feet], and they grow slicker and wetter every second. Jojo's cum drips out from between them, glazing them white.  ");
 				if(player.averageVaginalWetness() <= 1) outputText("You clamp down on his muzzle as you writhe in orgasm.  ");
 				if(player.averageVaginalWetness() > 1 && player.averageVaginalWetness() <= 3) outputText("Your legs trap his muzzle in your " + vaginaDescript(0) + " as orgasm wracks your body.  ");

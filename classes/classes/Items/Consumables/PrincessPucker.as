@@ -1,9 +1,10 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	
-	public class PrincessPucker extends Consumable 
+import classes.AppearanceDefs;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+
+public class PrincessPucker extends Consumable 
 	{
 		public function PrincessPucker() 
 		{
@@ -27,7 +28,7 @@ package classes.Items.Consumables
 				dynStats("lus-", 20, "sen-", 2);
 			}
 
-			if (player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.hairColor != "pink")
+			if (player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && player.hairColor != "pink")
 			{
 				if (rand(5) == 0)
 				{

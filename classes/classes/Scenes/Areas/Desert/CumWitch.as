@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.Desert
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.WeightedDrop;
 
-	public class CumWitch extends Monster
+public class CumWitch extends Monster
 	{
 		public function cumWitchAI():void {
 			//Hurt!
@@ -180,14 +180,14 @@ package classes.Scenes.Areas.Desert
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

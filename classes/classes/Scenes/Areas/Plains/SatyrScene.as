@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Plains{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.UniqueSexScenes;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.UniqueSexScenes;
 
-	public class SatyrScene extends BaseContent{
+public class SatyrScene extends BaseContent{
 
 	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 	
@@ -275,8 +275,8 @@ internal function defeatASatyr():void {
 	if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "FuckHisButt", malesTakeAdvantageOfSatyrs);
 	if(player.hasVagina()) addButton(1, "Ride Face", femaleTakesAdvantageOfSatyr);
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-	if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-	if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+	if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+	if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 	addButton(4, "Leave", cleanupAfterCombat);
 }
 //Female (Z)

@@ -1,12 +1,10 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Desert.Naga;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Desert.Naga;
 
-	public class Sirius extends Naga
+public class Sirius extends Naga
 	{
 
 		override public function eAttack():void
@@ -109,13 +107,13 @@ package classes.Scenes.Quests.UrtaQuest
 			this.plural = false;
 			this.createCock(14,2);
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+10;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_NAGA;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_NAGA;
 			this.skinTone = "mediterranean-toned";
 			this.hairColor = "orange";
 			this.hairLength = 16;

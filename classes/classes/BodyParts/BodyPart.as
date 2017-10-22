@@ -5,12 +5,10 @@ package classes.BodyParts {
 import classes.CoC_Settings;
 import classes.Creature;
 import classes.internals.SimpleJsonable;
-import classes.internals.Utils;
 
 public class BodyPart extends SimpleJsonable {
-	include "../../../includes/appearanceDefs.as";
 
-	protected var _type:int = 0;
+    protected var _type:int = 0;
 	public function restore(keepColor:Boolean = true):void {
 		type = 0;
 	}

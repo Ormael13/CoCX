@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class GreenSlime extends Monster
+public class GreenSlime extends Monster
 	{
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -66,12 +66,12 @@
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 80;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_GOO;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GOO;
 			this.skinTone = "green";
 			initStrTouSpeInte(25, 30, 10, 5);
 			initLibSensCor(50, 60, 20);

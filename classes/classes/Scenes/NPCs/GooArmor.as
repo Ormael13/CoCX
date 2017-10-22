@@ -1,11 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Lake.GooGirl;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Lake.GooGirl;
 
-	public class GooArmor extends GooGirl
+public class GooArmor extends GooGirl
 	{
 		public function gooArmorAI():void {
 			if(rand(2) == 0 && !player.hasStatusEffect(StatusEffects.GooArmorSilence)) gooSilenceAttack();
@@ -105,17 +104,17 @@ package classes.Scenes.NPCs
 			this.imageName = "gooarmor";
 			this.long = "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skin.setBaseOnly({color:"blue",type:SKIN_BASE_GOO});
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.skin.setBaseOnly({color:"blue",type:AppearanceDefs.SKIN_BASE_GOO});
 			this.hairColor = "black";
 			this.hairLength = 15;
-			this.hairType = HAIR_GOO;
+			this.hairType = AppearanceDefs.HAIR_GOO;
 			initStrTouSpeInte(120, 110, 100, 80);
 			initLibSensCor(90, 35, 50);
 			this.weaponName = "goo sword";

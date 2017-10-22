@@ -3,9 +3,9 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -117,8 +117,8 @@ public class GoblinScene extends BaseContent
 			}
 			if (player.hasVagina()) {
 				outputText(images.showImage("goblin-loss-female-raped"));
-				if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_NORMAL) outputText("The lips of your sex engorge, becoming almost as puffy as the goblin's.  ");
-				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Feminine lubricant soaks into the back of your [armor].  ");
+				if (player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_NORMAL) outputText("The lips of your sex engorge, becoming almost as puffy as the goblin's.  ");
+				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Feminine lubricant soaks into the back of your [armor].  ");
 				else outputText("It rapidly forms into a puddle as your " + vaginaDescript(0) + " does its best to show just how ready you are.  ");
 			}
 			outputText("Your " + nippleDescript(0) + "s poke upwards, giving the goblin easy targets.  She grabs hold of them ");
@@ -194,7 +194,7 @@ public class GoblinScene extends BaseContent
 				outputText("By now your passage feels as stuffed as it ever has been, crammed totally full of the squishy expanded double-dong.  Every motion the tiny slut makes is amplified directly into the fuck-stick plugging your " + vaginaDescript(0) + ".  Judging by how wonderful it feels rubbing and twisting against your sensitive walls, the aphrodisiac is definitely having an effect.  You moan and spread your legs wide, giving the tiny dominatrix free reign over your body.  She wiggles against you harder, throwing her head back and running her fingers through her " + monster.hairColor + " hair, shouting out encouragement all the while, \"<i>Mmmm, you like this, don't you slut?  Doesn't my dildo just fill you up perfectly?  Keep wiggling those hips – the aphrodisiac is gravity fed, and with you on the bottom you'll be blissed into unconsciousness soon.  Just don't cum before me hun, I want to feel release with you.</i>\"\n\n");
 				outputText("You lose yourself to the sweet sensations of the bloated dildo that joins your simmering groins.  Rocking back and forth, scissoring relentlessly against your green mistress, you moan, drowning yourself in a sea of drug-enhanced pleasure. The goblin cries out and thrashes in sudden orgasm, twisting the fat dildo violently around inside your " + vaginaDescript(0) + ".   The juices of her orgasm react with the toy, stretching you almost painfully and pushing you past the point of no return.  Your bodies thrash together, wracked by twin orgasms that leave you smeared with a mixture of sweat and girl-cum.\n\n");
 				outputText("Later, the wet goblin audibly pops off the dildo.  She stumbles, bow-legged, before teasing your [clit] and yanking her toy free.  Your lips ");
-				if (player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING) outputText("gape apart momentarily");
+				if (player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("gape apart momentarily");
 				else outputText("gape wider than ever, but only for a moment");
 				outputText(".\n\n");
 				outputText("She plants a kiss on your lips and mutters, \"<i>Can't forget this,</i>\" as she puts her dildo away.  You find yourself smiling and watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance.  Your eyelids drift closed and your lips go numb as her drugged lipstick puts you out.  ");
@@ -240,7 +240,7 @@ public class GoblinScene extends BaseContent
 				//Buttsex toggle
 				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) buttseks = gobboButtSecks;
 				//Spidercondom
-				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
+				if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option

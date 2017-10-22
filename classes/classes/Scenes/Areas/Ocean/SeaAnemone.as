@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Areas.Ocean
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects.Combat.AnemoneVenomDebuff;
 import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
 
-	public class SeaAnemone extends Monster
+public class SeaAnemone extends Monster
 	{
 		private static const STAT_DOWN_FLAT:int = 4;
 		private static const STAT_DOWN_MULT:int = 4;
@@ -62,19 +62,19 @@ import classes.internals.WeightedDrop;
 			this.long = "The sea anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.";
 			// this.plural = false;
 			this.createCock(7,1,CockTypesEnum.ANEMONE);
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 5, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
 			this.skinTone = "purple";
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
-			this.hairType = HAIR_ANEMONE;
+			this.hairType = AppearanceDefs.HAIR_ANEMONE;
 			initStrTouSpeInte(200, 160, 127, 140);
 			initLibSensCor(150, 70, 50);
 			this.weaponName = "tendrils";

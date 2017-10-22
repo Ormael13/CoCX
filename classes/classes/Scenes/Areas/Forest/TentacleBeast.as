@@ -1,12 +1,12 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Places.HeXinDao;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.HeXinDao;
+import classes.internals.*;
 
-	public class TentacleBeast extends Monster
+public class TentacleBeast extends Monster
 	{
 		public var golems:HeXinDao = new HeXinDao();
 		
@@ -123,11 +123,11 @@
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "bark";
 			this.hairColor = "green";
@@ -150,7 +150,7 @@
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class Kitsune extends Monster
+public class Kitsune extends Monster
 	{
 
 
@@ -215,17 +215,17 @@ package classes.Scenes.Areas.Forest
 				this.cumMultiplier = 1.5;
 				this.hoursSinceCum = ballSize * 10;
 			}
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(24) + 60;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
 			this.skinTone = "pale";
-			this.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
+			this.skin.base.pattern = AppearanceDefs.PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(35, 55, 110, 105);
@@ -245,7 +245,7 @@ package classes.Scenes.Areas.Forest
 			this.drop = new WeightedDrop().
 					add(armors.ARCBANG,1).
 					add(consumables.FOXJEWL,4);
-			this.tailType = TAIL_TYPE_FOX;
+			this.tailType = AppearanceDefs.TAIL_TYPE_FOX;
 			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

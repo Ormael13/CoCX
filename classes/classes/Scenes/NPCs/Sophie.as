@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.Scenes.Areas.HighMountains.Harpy;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -269,15 +269,15 @@
 			this.imageName = "sophie";
 			this.long = "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
+			this.hipRating = AppearanceDefs.HIP_RATING_INHUMANLY_WIDE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
 			this.skin.setBaseOnly({color:"pink"});
 			this.skinDesc = "feathers";
 			this.hairColor = "pink";
@@ -298,7 +298,7 @@
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			this.wingType = WING_TYPE_HARPY;
+			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
 			this.wingDesc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;

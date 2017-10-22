@@ -1,11 +1,10 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class GoblinWarrior extends Goblin
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class GoblinWarrior extends Goblin
 	{
 		public function slash():void {
 			outputText("The goblin charges at you with her sword!  As soon as she approaches you, she swings her sword! ");
@@ -68,15 +67,15 @@ package classes.Scenes.Monsters
 			this.imageName = "goblinwarrior";
 			this.long = "The goblin before you is slightly taller than most of the goblins and her hair is a deep red hue. She has dark green skin and her ears are pierced in several spots. Unlike most goblins you've seen, this one is well armed. She's wearing a metal breastplate that covers her torso, offering her more defense. There are more straps covering her legs than a goblin typically has. She's wielding a shortsword in her right hand and a wooden shield in her left hand. Despite how well-armed she is, her nipples and cooter are exposed.";
 			if (player.hasCock()) this.long += "  She's clearly intent on beating you up just so she can forcibly make you impregnate her.";
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 44 + rand(7);
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;

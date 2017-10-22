@@ -1,11 +1,9 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class HarpyQueen extends Monster
+public class HarpyQueen extends Monster
 	{
 		public var spellCostWhitefire:int = 12;
 		
@@ -114,14 +112,14 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.imageName = "harpyqueen";
 			this.long = "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_HARPY;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HARPY;
 			this.skin.setBaseOnly({color:"red"});
 			this.skinDesc = "feathers";
 			this.hairColor = "black";
@@ -142,8 +140,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.level = 30;
 			this.gems = rand(25)+160;
 			this.additionalXP = 50;
-			this.tailType = TAIL_TYPE_HARPY;
-			this.wingType = WING_TYPE_FEATHERED_LARGE;
+			this.tailType = AppearanceDefs.TAIL_TYPE_HARPY;
+			this.wingType = AppearanceDefs.WING_TYPE_FEATHERED_LARGE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);

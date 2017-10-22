@@ -4,12 +4,12 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Kindra extends Monster
 	{
@@ -260,13 +260,13 @@ package classes.Scenes.NPCs
 				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 177 * 50;
 			}
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_TIGHT);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 64;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "white";
 			this.hairColor = "white";
 			this.hairLength = 4;

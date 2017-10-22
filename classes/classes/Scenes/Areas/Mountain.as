@@ -3,15 +3,15 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Mountain.*;
-	import classes.Scenes.Monsters.DarkElfScene;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Mountain.*;
+import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
-	public class Mountain extends BaseContent
+public class Mountain extends BaseContent
 	{
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
@@ -74,7 +74,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] < 3) {
 					trace("CHANCE AT HELLHOUND GAO");
 					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-					if (player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
+					if (player.faceType == AppearanceDefs.FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == AppearanceDefs.TAIL_TYPE_DOG && (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 						trace("PASS BODYCHECK");
 						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
 							hellHoundScene.HellHoundMasterEncounter();
@@ -356,9 +356,9 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 
 			outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-			if (player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
-			else if (player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
-			else if (player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
+			if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("serpentine ");
+			else if (player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText("demonic ");
+			else if (player.tongueType == AppearanceDefs.TONGUE_DRACONIC) outputText("draconic ");
 			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 

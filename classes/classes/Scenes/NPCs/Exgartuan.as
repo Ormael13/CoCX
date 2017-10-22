@@ -1,8 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+
+public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
 //EXGARTUAN STATUS
 //v1 - Location - 1 = dick, 2 = tits
@@ -370,8 +371,8 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your [allbreasts] and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n");
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + breastDescript(0) + ".  They slide over every sensitive inch of ");
-		if(player.hasFur() == SKIN_TYPE_FUR) outputText("furry-covered flesh");
-		else if(player.hasScales() == SKIN_TYPE_SCALES) outputText("soft scaley flesh");
+		if(player.hasFur() == AppearanceDefs.SKIN_TYPE_FUR) outputText("furry-covered flesh");
+		else if(player.hasScales() == AppearanceDefs.SKIN_TYPE_SCALES) outputText("soft scaley flesh");
 		else if(player.hasGooSkin()) outputText("gooey surface");
 		else outputText("flesh");
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your [allbreasts].  The entire time your hands never touch one of your " + nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n");
@@ -897,8 +898,8 @@ private function exgartuanSleepSurprise():void {
 			//(no balls)
 			if(player.balls == 0) {
 				outputText("The ");
-				if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("puffy");
-				else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("glistening");
+				if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) outputText("puffy");
+				else if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
 				if(player.hasScales()) outputText("scales");
@@ -911,8 +912,8 @@ private function exgartuanSleepSurprise():void {
 			//(Herms + Balls)
 			else {
 				outputText("The ");
-				if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("puffy");
-				else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("glistening");
+				if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) outputText("puffy");
+				else if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but with your hands so focused on your [cock], there's little for your " + vaginaDescript(0) + " to feel.  The closest it gets to pleasure is the sensation of your " + sackDescript() + " slapping against it with the steady rhythm of your masturbation.  If only you had taken care of yourself earlier!  You might have had enough control over your rebellious tool to let a hand attend to your OTHER needs.\n\n");
 			}

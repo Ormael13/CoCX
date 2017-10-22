@@ -1,9 +1,9 @@
 package classes.Scenes.Places.Farm
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Kelt extends Monster
+public class Kelt extends Monster
 	{
 		//Trample - once every five turns
 		private function keltTramplesJoo():void {
@@ -147,13 +147,13 @@ package classes.Scenes.Places.Farm
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = player.ballSize * 10;
 			this.createBreastRow(Appearance.breastCupInverse(breakLevel2?"B":"A"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.legCount = 4;
 			this.skinTone = "tan";
 			this.hairColor = randomChoice("black","brown");
@@ -172,7 +172,7 @@ package classes.Scenes.Places.Farm
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 13;
 			this.gems = rand(15) + 25;
-			this.tailType = TAIL_TYPE_HORSE;
+			this.tailType = AppearanceDefs.TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

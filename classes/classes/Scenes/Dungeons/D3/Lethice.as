@@ -1,17 +1,13 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.Monster;
-	import classes.Appearance;
-	import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
-	import classes.StatusEffects;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.CockTypesEnum;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.WeightedDrop;
+import classes.AppearanceDefs;
+import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.PerkLib;
+import classes.StatusEffects;
+import classes.internals.WeightedDrop;
 
-	public class Lethice extends Monster
+public class Lethice extends Monster
 	{
 		public function Lethice()
 		{
@@ -23,8 +19,8 @@ package classes.Scenes.Dungeons.D3
 			this.createBreastRow(8);
 			this.balls = 2;
 			this.ballSize = 4;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(320, 320, 150, 150);
 			initLibSensCor(180, 50, 100);
 			this.weaponName = "whip";

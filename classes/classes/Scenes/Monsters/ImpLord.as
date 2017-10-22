@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class ImpLord extends Imp
+public class ImpLord extends Imp
 	{
 		//Special Attack 1
 		protected function impFire():void
@@ -99,12 +99,12 @@
 			this.pronoun1 = "he";
 			this.pronoun2 = "him";
 			this.pronoun3 = "his";
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
 			initLibSensCor(55, 35, 100);
@@ -125,7 +125,7 @@
 					add(consumables.LABOVA_,1).
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

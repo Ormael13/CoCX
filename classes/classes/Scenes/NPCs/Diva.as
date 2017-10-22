@@ -1,5 +1,6 @@
 package classes.Scenes.NPCs {
 import classes.Appearance;
+import classes.AppearanceDefs;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Monster;
@@ -19,13 +20,13 @@ public class Diva extends Monster {
         this.a = "";
         this.short = "Diva";
         this.long = "";
-        this.createVagina(false,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+        this.createVagina(false,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
         createBreastRow(Appearance.breastCupInverse("DD"));
-        this.ass.analLooseness= ANAL_LOOSENESS_NORMAL;
-        this.ass.analWetness = ANAL_WETNESS_DRY;
+        this.ass.analLooseness= AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+        this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
         this.tallness = (5*12)+6;
-        this.hipRating = HIP_RATING_CURVY;
-        this.buttRating = BUTT_RATING_NOTICEABLE;
+        this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+        this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
@@ -35,7 +36,7 @@ public class Diva extends Monster {
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus+ (2*flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-        this.wingType = WING_TYPE_BAT_LIKE_LARGE;
+        this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 1000;
         this.bonusLust = 50;
         this.lustVuln = 1;

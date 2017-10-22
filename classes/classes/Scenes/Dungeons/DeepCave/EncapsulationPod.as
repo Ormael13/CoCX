@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -156,8 +156,8 @@
 			//[Round 2 Description]
 			else if(statusEffectv1(StatusEffects.Round) == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
-				if(player.hasFullCoatOfType(SKIN_COAT_FUR)) _long += "furry ";
-				if(player.hasFullCoatOfType(SKIN_COAT_SCALES)) _long += "scaley ";
+				if(player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) _long += "furry ";
+				if(player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_SCALES)) _long += "scaley ";
 				_long += "inch of your [legs], crotch, and " + game.assDescript() + ".";
 			}
 			//[Round 3 Description]
@@ -208,9 +208,9 @@
 			initGenderless();
 			createBreastRow(0,0);
 			this.tallness = 120;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_BUTTLESS;
-			this.skin.setBaseOnly({type:SKIN_BASE_PLAIN,color:"purple",desc:"covering"});
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
+			this.skin.setBaseOnly({type:AppearanceDefs.SKIN_BASE_PLAIN,color:"purple",desc:"covering"});
 			this.hairColor = "black";
 			this.hairLength = 0;
 			initStrTouSpeInte(180, 1, 1, 1);

@@ -1,16 +1,14 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.Monster;
-	import classes.Appearance;
-	import classes.StatusEffects;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
-	import classes.internals.WeightedDrop;
+import classes.AppearanceDefs;
+import classes.CockTypesEnum;
+import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.PerkLib;
+import classes.StatusEffects;
+import classes.internals.WeightedDrop;
 
-	public class MinotaurKing extends Monster
+public class MinotaurKing extends Monster
 	{
 		public function MinotaurKing()
 		{
@@ -23,8 +21,8 @@ package classes.Scenes.Dungeons.D3
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(290, 290, 100, 70);
 			initLibSensCor(220, 10, 100);
 			this.weaponName = "axe";

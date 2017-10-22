@@ -3,28 +3,24 @@
  */
 package classes.Scenes
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Beach;
-	import classes.Scenes.Areas.Beach.*;
-	import classes.Scenes.Areas.BlightRidge;
-	import classes.Scenes.Areas.BlightRidge.*;
-	import classes.Scenes.Areas.DeepSea;
-	import classes.Scenes.Areas.DeepSea.*;
-	import classes.Scenes.Areas.Ocean;
-	import classes.Scenes.Areas.Ocean.*;
-	import classes.Scenes.Dungeons.HiddenCave;
-	import classes.Scenes.NPCs.EvangelineFollower;
-	import classes.Scenes.NPCs.RyuBiDragon;
-	import classes.Scenes.Places.HeXinDao;
-	//import classes.Scenes.Areas.nazwa lokacji;
-	//import classes.Scenes.Areas.nazwa lokacji;
-	import classes.Scenes.Explore.ExploreDebug;
-	import classes.Scenes.Explore.Giacomo;
-	import classes.Scenes.Monsters.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Beach;
+import classes.Scenes.Areas.BlightRidge;
+import classes.Scenes.Areas.BlightRidge.*;
+import classes.Scenes.Areas.DeepSea;
+import classes.Scenes.Areas.Ocean;
+import classes.Scenes.Dungeons.HiddenCave;
+import classes.Scenes.Explore.ExploreDebug;
+import classes.Scenes.Monsters.*;
+import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.RyuBiDragon;
+import classes.Scenes.Places.HeXinDao;
 
-	public class Exploration extends BaseContent
+//import classes.Scenes.Areas.nazwa lokacji;
+	//import classes.Scenes.Areas.nazwa lokacji;
+public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
 		public var blightridge:BlightRidge = new BlightRidge();
@@ -483,10 +479,10 @@ package classes.Scenes
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
-					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
-					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
-					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG) outputText("in your paws");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("in your scales");
 					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
@@ -719,7 +715,7 @@ package classes.Scenes
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 				}
 			}
 			//FOR CENTAURS
@@ -733,7 +729,7 @@ package classes.Scenes
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 				}
 			}
 			outputText("\n\n");

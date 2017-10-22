@@ -3,14 +3,13 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.BodyParts.SkinLayer;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Items.Useable;
-	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.NPCs.AyaneFollower;
-	public class KitsuneScene extends BaseContent
+import classes.*;
+import classes.BodyParts.SkinLayer;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Monsters.Imp;
+
+public class KitsuneScene extends BaseContent
 	{
 		public function KitsuneScene()
 		{
@@ -1033,7 +1032,7 @@ package classes.Scenes.Areas.Forest
 			}
 			//Use same text for anal sex, but using analCapacity instead:
 			if (player.gender >= 2) {
-				outputText(((player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
+				outputText(((player.vaginas[0].vaginalLooseness < AppearanceDefs.VAGINA_LOOSENESS_GAPING) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
 			}
 			else {
 				outputText(((player.ass.analLooseness < 3) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
@@ -1954,7 +1953,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Your whole body shakes from top to bottom as you are quickly driven back to the precipice, the magically enhanced ministrations of her tongue giving you no quarter as she assaults your nethers with an almost hungry fervor.  Your muscles clamp tightly around her tongue as a rush of fluid comes spilling out into the kitsune's mouth, drenching her chin with your musky feminine juices.  You pull her inward with every last ounce of strength you possess, moaning obscenely, then repeat the action for a second and third time.  On the third moan, your ecstatic scream echoes through the forest, sending birds flocking to the sky as your orgasm tears through your body in a tidal wave of shivers.\n\n");
 
-			outputText("Her tongue continues to wriggle against your quivering walls throughout the duration of your thrashing climax, hungrily funneling every drop that comes rushing out into her mouth." + ((player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) ? "  Streams of girlcum spray from your slavering cunt, soaking her face in the moments before she opens her mouth wide, eagerly swallowing all that she can." : "" ) + "  After what feels like an eternity, your orgasm begins to wane, the shivering pulses of pleasure ebbing away and your mind slowly clearing.  Panting heavily, you loosen your death grip on her head, letting her pull back to catch her breath as you collapse on your back to do the same.\n\n");
+			outputText("Her tongue continues to wriggle against your quivering walls throughout the duration of your thrashing climax, hungrily funneling every drop that comes rushing out into her mouth." + ((player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) ? "  Streams of girlcum spray from your slavering cunt, soaking her face in the moments before she opens her mouth wide, eagerly swallowing all that she can." : "" ) + "  After what feels like an eternity, your orgasm begins to wane, the shivering pulses of pleasure ebbing away and your mind slowly clearing.  Panting heavily, you loosen your death grip on her head, letting her pull back to catch her breath as you collapse on your back to do the same.\n\n");
 
 			outputText("She licks her lips in satisfaction, then wipes her mouth on her sleeve, sighing happily before slumping back to rest against the side of a tree.  You lie splayed out on the ground in ecstasy for several minutes before finally summoning up the strength to stand, and when you do so, a cursory glance around suggests that the wily kitsune has made her getaway.  As you gather your things and prepare to head back to camp, you can almost hear the faint echo of a mischievous giggle filtering through the forest.");
 			player.orgasm();
@@ -1986,7 +1985,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Her warm canal constricts around your invasive digits almost immediately, her back arching high and a loud groan filling the air, drowning out the sweet squelch of her soaking hole squeezing around your fingertips.  You pump your fingers in and out a few times, your other hand caressing her throbbing member slowly, gathering dollops of pre from the tip and spreading them down the shaft.\n\n");
 
-			outputText("You move yourself into position, lowering yourself down over her hips with your hands resting on her knees for support.  As the head of her cock kisses the opening of your " + vaginaDescript() + ", a cool tingle begins to spread from your loins, shivering its way up your spine.  Playfully, you rock your hips forward and back, teasing the tip of her member with the sensual caress of your warm cleft.  A thin trickle of lubricant slides down her sensitive shaft, making her shudder with delight.  You slow your movements to a crawl, almost to the point of standing still, " + ((player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_LOOSE) ? "then with a sudden lurch forward, you drop yourself onto her throbbing rod, driving it to the hilt in one pass.  A smoldering tingle ebbs and flows through your loins, strongest at the tip of her throbbing cock." : "slowly allowing it inside.  Easing yourself down, you groan eagerly as the girthy rod stretches your " + vaginaDescript() + ".  At long last, your hips connect with hers, and you take a deep breath and pause for a moment as a smoldering tingle radiates through your loins."));
+			outputText("You move yourself into position, lowering yourself down over her hips with your hands resting on her knees for support.  As the head of her cock kisses the opening of your " + vaginaDescript() + ", a cool tingle begins to spread from your loins, shivering its way up your spine.  Playfully, you rock your hips forward and back, teasing the tip of her member with the sensual caress of your warm cleft.  A thin trickle of lubricant slides down her sensitive shaft, making her shudder with delight.  You slow your movements to a crawl, almost to the point of standing still, " + ((player.vaginas[0].vaginalLooseness > AppearanceDefs.VAGINA_LOOSENESS_LOOSE) ? "then with a sudden lurch forward, you drop yourself onto her throbbing rod, driving it to the hilt in one pass.  A smoldering tingle ebbs and flows through your loins, strongest at the tip of her throbbing cock." : "slowly allowing it inside.  Easing yourself down, you groan eagerly as the girthy rod stretches your " + vaginaDescript() + ".  At long last, your hips connect with hers, and you take a deep breath and pause for a moment as a smoldering tingle radiates through your loins."));
 			player.cuntChange(12, true, true, false);
 			outputText("\n\n");
 
@@ -2264,7 +2263,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
-				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailCount >= 2) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == AppearanceDefs.EARS_FOX && player.tailCount >= 2) {
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
 					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
@@ -2353,7 +2352,7 @@ package classes.Scenes.Areas.Forest
 			var tailzBefore:int = player.tailCount;
 			clearOutput();
 			outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
-			if (player.hasItem(consumables.FOXJEWL) && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX) {
+			if (player.hasItem(consumables.FOXJEWL) && player.earType == AppearanceDefs.EARS_FOX && player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 				var notANineTail:Boolean = player.findPerk(PerkLib.CorruptedNinetails) < 0
 										   || player.perkv4(PerkLib.CorruptedNinetails) > 0;
 				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && player.tailCount >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
@@ -2451,7 +2450,7 @@ package classes.Scenes.Areas.Forest
 				doNext(camp.returnToCampUseOneHour);
 			}
 			var tailzAfter:int = player.tail.count;
-			if (player.tailType == TAIL_TYPE_FOX && tailzBefore < tailzAfter) return tailzAfter;
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_FOX && tailzBefore < tailzAfter) return tailzAfter;
 			return 0;
 		}
 

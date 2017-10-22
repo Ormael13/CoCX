@@ -1,38 +1,33 @@
 ﻿package classes
 {
 
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Inventory;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.*;
 import classes.Scenes.NPCs.XXCNPC;
-import classes.Scenes.Places.TelAdre.Katherine;
-	import classes.internals.SimpleJsonable;
-	import classes.internals.CountersStorage;
-	import classes.internals.RootCounters;
+import classes.internals.CountersStorage;
+import classes.internals.RootCounters;
 
+import flash.events.Event;
+import flash.events.IOErrorEvent;
+import flash.events.MouseEvent;
+import flash.net.FileReference;
+import flash.net.SharedObject;
+import flash.net.URLLoader;
+import flash.net.URLLoaderDataFormat;
+import flash.net.URLRequest;
+import flash.utils.ByteArray;
 import flash.utils.getDefinitionByName;
+import flash.utils.getQualifiedClassName;
 
 CONFIG::AIR
-	{
-		import flash.filesystem.File;
-		import flash.filesystem.FileMode;
-		import flash.filesystem.FileStream;
-	}
-	
-	import flash.net.FileFilter;
-	import flash.net.FileReference;
-	import flash.events.Event;
-	import flash.net.URLRequest;
-	import flash.utils.ByteArray;
-	import flash.net.URLLoader;
-	import flash.net.SharedObject;
-	import flash.events.MouseEvent;
-	import flash.events.IOErrorEvent;
-	import classes.Items.*;
-	import classes.GlobalFlags.kFLAGS;
-	import flash.net.URLLoaderDataFormat;
-
+{
+    import flash.filesystem.File;
+    import flash.filesystem.FileMode;
+    import flash.filesystem.FileStream;
+}
 
 public class Saves extends BaseContent {
 
@@ -79,7 +74,7 @@ public function cloneObj(obj:Object):Object
 
 public function getClass(obj:Object):Class
 {
-	return Class(flash.utils.getDefinitionByName(flash.utils.getQualifiedClassName(obj)));
+	return Class(getDefinitionByName(getQualifiedClassName(obj)));
 }
 
 //ASSetPropFlags(Object.prototype, ["clone"], 1);
@@ -218,7 +213,7 @@ public function loadScreenAIR():void
 		i++;
 	}
 	menu();
-	var s:int = 0
+	var s:int = 0;
 	while (s < 14) {
 		//if (slots[s] != null) addButton(s, "Slot " + (s + 1), slots[s]);
 		if (slots[s] != null) addButton(s, "Slot " + (s + 1), selectLoadButton, gameObjects[s], "CoC_" + String(s+1));
@@ -284,7 +279,7 @@ public function loadScreen():void
 		}
 	}
 	menu();
-	var s:int = 0
+	var s:int = 0;
 	while (s < 14) {
 		if (slots[s] != 0) addButton(s, "Slot " + (s+1), slots[s]);
 		s++;
@@ -304,7 +299,7 @@ public function saveScreen():void
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
 	{
-		saveGame(flags[kFLAGS.HARDCORE_SLOT])
+		saveGame(flags[kFLAGS.HARDCORE_SLOT]);
 		clearOutput();
 		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.");
 		doNext(playerMenu);
@@ -341,7 +336,7 @@ public function saveScreen():void
 	
 	outputText("<b>Leave the notes box blank if you don't wish to change notes.\r<u>NOTES:</u></b>");
 	menu();
-	var s:int = 0
+	var s:int = 0;
 	while (s < 14) {
 		addButton(s, "Slot " + (s+1), saveFuncs[s]);
 		s++;
@@ -356,7 +351,7 @@ public function saveLoad(e:MouseEvent = null):void
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
 	mainView.nameBox.visible = false;
-	var autoSaveSuffix:String = ""
+	var autoSaveSuffix:String = "";
 	if (player.autoSave) autoSaveSuffix = "ON";
 	else autoSaveSuffix = "OFF";
 	
@@ -464,7 +459,7 @@ public function deleteScreen():void
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>");
 	menu();
-	var s:int = 0
+	var s:int = 0;
 	while (s < 14) {
 		if (delFuncs[s] != null) addButton(s, "Slot " + (s+1), delFuncs[s]);
 		s++;
@@ -620,7 +615,7 @@ public function savePermObject(isFile:Boolean):void {
 	var dataError:Error;
 	
 	try {
-		var i:int
+		var i:int;
 		//flag settings
 		saveFile.data.flags = [];
 		for (i = 0; i < achievements.length; i++) {
@@ -670,7 +665,7 @@ public function savePermObject(isFile:Boolean):void {
 
 public function loadPermObject():void {
 	var saveFile:* = SharedObject.getLocal("CoC_Main", "/");
-	trace("Loading achievements!")
+	trace("Loading achievements!");
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
 	if (saveFile.data.exists)
@@ -1440,7 +1435,7 @@ public function onDataLoaded(evt:Event):void
  */
 private function unFuckSaveDataBeforeLoading(data:Object):void {
 	if (data.tail === undefined) {
-		var venomAsCount:Boolean = data.tailType == TAIL_TYPE_FOX;
+		var venomAsCount:Boolean = data.tailType == AppearanceDefs.TAIL_TYPE_FOX;
 		data.tail = {
 			type    : data.tailType,
 			venom   : venomAsCount ? 0 : data.tailVenum,
@@ -1743,7 +1738,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = EYES_HUMAN;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
@@ -1778,11 +1773,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.gillType != undefined)
 			player.gillType = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)
-			player.gillType = GILLS_NONE;
+			player.gillType = AppearanceDefs.GILLS_NONE;
 		else
-			player.gillType = saveFile.data.gills ? GILLS_ANEMONE : GILLS_NONE;
+			player.gillType = saveFile.data.gills ? AppearanceDefs.GILLS_ANEMONE : AppearanceDefs.GILLS_NONE;
 		if (saveFile.data.armType == undefined)
-			player.armType = ARM_TYPE_HUMAN;
+			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
 		else
 			player.armType = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
@@ -1792,11 +1787,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = TONGUE_HUMAN;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = EARS_HUMAN;
+			player.earType = AppearanceDefs.EARS_HUMAN;
 		else
 			player.earType = saveFile.data.earType;
 		if (saveFile.data.earValue == undefined)
@@ -1804,19 +1799,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.earValue = saveFile.data.earValue;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = ANTENNAE_NONE;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
 		else
 			player.antennae = saveFile.data.antennae;
 		player.horns = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = HORNS_NONE;
+			player.hornType = AppearanceDefs.HORNS_NONE;
 		else
 			player.hornType = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE : saveFile.data.rearBody;
+		player.rearBody = (saveFile.data.rearBody == undefined) ? AppearanceDefs.REAR_BODY_NONE : saveFile.data.rearBody;
 
 		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
@@ -2556,7 +2551,7 @@ public function unFuckSave():void
 		//If dick length zero then player has never met Kath, no need to set flags. If her breast size is zero then set values for flags introduced with the employment expansion
 		if (flags[kFLAGS.KATHERINE_BREAST_SIZE] != 0) return; //Must be a new format save
 		if (flags[kFLAGS.KATHERINE_DICK_LENGTH] != 0) { 
-			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= BREAST_CUP_B;
+			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= AppearanceDefs.BREAST_CUP_B;
 			flags[kFLAGS.KATHERINE_BALL_SIZE]		= 1;
 			flags[kFLAGS.KATHERINE_HAIR_COLOR]		= "neon pink";
 			flags[kFLAGS.KATHERINE_HOURS_SINCE_CUM] = 200; //Give her maxed out cum for that first time

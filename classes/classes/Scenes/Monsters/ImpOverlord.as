@@ -1,10 +1,10 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class ImpOverlord extends Imp
+public class ImpOverlord extends Imp
 	{
 		public var spellCostCharge:int = 6;
 		public var spellCostBlind:int = 8;
@@ -229,12 +229,12 @@ package classes.Scenes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
 			initLibSensCor(75, 35, 100);
@@ -258,7 +258,7 @@ package classes.Scenes.Monsters
 					add(consumables.SUCMILK,12).
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

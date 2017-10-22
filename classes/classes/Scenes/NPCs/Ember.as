@@ -1,10 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.ChainedDrop;
 
-	public class Ember extends Monster
+public class Ember extends Monster
 	{
 		private function emberMF(male:String,female:String):String{
 			return game.emberScene.emberMF(male,female);
@@ -173,7 +173,7 @@ package classes.Scenes.NPCs
 				// this.hoursSinceCum = 0;
 			}
 			if(gender >= 2) {
-				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 				createBreastRow(Appearance.breastCupInverse("F"));
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
@@ -248,11 +248,11 @@ package classes.Scenes.NPCs
 				this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 26880;
 			}
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -263,9 +263,9 @@ package classes.Scenes.NPCs
 			this.lust = 20;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;
-			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
-			this.tailType = TAIL_TYPE_DRACONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

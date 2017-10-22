@@ -624,7 +624,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 6 && temp < 6) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 6 && temp < 6) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
@@ -632,7 +632,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 10 && temp < 10) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 10 && temp < 10) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
@@ -640,7 +640,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 16 && temp < 16) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 16 && temp < 16) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
@@ -648,7 +648,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 26 && temp < 26) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 26 && temp < 26) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
@@ -656,7 +656,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 40 && temp < 40) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 40 && temp < 40) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
@@ -664,7 +664,7 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}
-	else if(player.hairType == HAIR_GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
+	else if(player.hairType == classes.AppearanceDefs.HAIR_GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
 		outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>");
 		return true;
 	}

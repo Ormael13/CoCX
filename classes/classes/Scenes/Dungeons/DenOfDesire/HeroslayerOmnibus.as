@@ -4,12 +4,10 @@
  */
 package classes.Scenes.Dungeons.DenOfDesire 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class HeroslayerOmnibus extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class HeroslayerOmnibus extends Monster
 	{
 		public function moveLustAura():void {
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
@@ -157,16 +155,16 @@ package classes.Scenes.Dungeons.DenOfDesire
 			this.long = "This omnibus has lustrous black skin and a pair of goat like horns sitting like a crown above her fiery red hair. While you don't know her name you're pretty sure she defeated " + flags[kFLAGS.GAR_NAME] + "’s former master and that she's a serious threat. She wields a flaming whip and seems to hold a purple fireball in her other hand. Her very presence is intoxicating, saturating the very air with lust.";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "black";
 			this.hairColor = "red";
 			this.hairLength = 20;

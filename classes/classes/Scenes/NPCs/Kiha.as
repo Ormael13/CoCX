@@ -1,11 +1,11 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Skin;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
+import classes.*;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.ChainedDrop;
 
-	public class Kiha extends Monster
+public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
 			game.spriteSelect(72);
@@ -194,20 +194,20 @@ package classes.Scenes.NPCs
 			else 
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_LOOSE;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12+1;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
 			this.skin.base.color = "dark";
 			this.skin.coat.color = "red";
-			this.skin.coat.type = SKIN_COAT_SCALES;
+			this.skin.coat.type = AppearanceDefs.SKIN_COAT_SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
 			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
@@ -277,9 +277,9 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 95;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.wingType = WING_TYPE_DRACONIC_LARGE;
+			this.wingType = AppearanceDefs.WING_TYPE_DRACONIC_LARGE;
 			this.wingDesc = "huge";
-			this.tailType = TAIL_TYPE_LIZARD;
+			this.tailType = AppearanceDefs.TAIL_TYPE_LIZARD;
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

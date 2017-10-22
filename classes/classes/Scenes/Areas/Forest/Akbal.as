@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Akbal extends Monster
+
+public class Akbal extends Monster
 	{
 
 		override public function eAttack():void
@@ -193,11 +193,11 @@ import classes.internals.WeightedDrop;
 			createBreastRow();
 			createBreastRow();
 			createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"spotted"});
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -223,7 +223,7 @@ import classes.internals.WeightedDrop;
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;
 			this.special3 = akbalHeal;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -1,12 +1,10 @@
 package classes.Items.Consumables 
 {
-import classes.Creature;
-import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.Utils;
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
+import classes.AppearanceDefs;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
 
-	public class HairDye extends Consumable 
+public class HairDye extends Consumable 
 	{
 		private var _color:String;
 		
@@ -36,7 +34,7 @@ import classes.GlobalFlags.kGAMECLASS;
 				game.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.hasCoatOfType(SKIN_COAT_FUR)) {
+			if (game.player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) game.addButton(1, "Fur", dyeFur);
 				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");

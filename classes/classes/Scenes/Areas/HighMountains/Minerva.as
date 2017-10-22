@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class Minerva extends Monster
+public class Minerva extends Monster
 	{
 
 		//Normal Attacks for all Minerva Types
@@ -219,16 +219,16 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10 || flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) ballSize += 2;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			//Set breast size based on pure/corrupt
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) createBreastRow(Appearance.breastCupInverse("G"));
 			else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) createBreastRow(Appearance.breastCupInverse("E"));
 			else createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 8*12+4;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
 			this.skinTone = "blue";
 			this.hairColor = "red";
 			this.hairLength = 25;
@@ -254,7 +254,7 @@ package classes.Scenes.Areas.HighMountains
 			this.gems = rand(40)+25;
 			this.additionalXP = 50;
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
-			this.wingType = WING_TYPE_HARPY;
+			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
 			this.wingDesc = "fluffy feathery";
 			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

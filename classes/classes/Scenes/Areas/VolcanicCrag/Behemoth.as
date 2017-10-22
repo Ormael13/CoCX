@@ -1,10 +1,9 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Behemoth extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class Behemoth extends Monster
 	{
 		public function tailWhip():void {
 			outputText("The behemoth charges at you with his spiked tail raised!  ");
@@ -55,21 +54,21 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.ballSize = 3;
 			this.cumMultiplier = 25;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 9*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.base.color = "purple";
 			this.skin.growFur({color:"purple"});
 			this.hairColor = "black";
 			this.hairLength = 8;
-			this.earType = EARS_ELFIN;
-			this.faceType = FACE_CAT;
+			this.earType = AppearanceDefs.EARS_ELFIN;
+			this.faceType = AppearanceDefs.FACE_CAT;
 			this.horns = 7;
-			this.hornType = HORNS_DRACONIC_X2
-			this.lowerBody = LOWER_BODY_TYPE_CAT
-			this.tailType = TAIL_TYPE_BEHEMOTH
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT
+			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH
 			initStrTouSpeInte(180, 130, 100, 115);
 			initLibSensCor(35, 15, 15);
 			this.weaponName = "claws";

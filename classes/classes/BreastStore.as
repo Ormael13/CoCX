@@ -1,11 +1,8 @@
 package classes
 {
-	import classes.internals.Utils;
-	import classes.Appearance;
-	import classes.CoC;
-	import classes.SaveAwareInterface;
-	
-	public class BreastStore extends Utils implements SaveAwareInterface
+import classes.internals.Utils;
+
+public class BreastStore extends Utils implements SaveAwareInterface
 	{
 		private static const MAX_FLAG_VALUE:int				= 2999;
 		private static const BREAST_STORE_VERSION_1:String	= "1";
@@ -95,8 +92,8 @@ package classes
 		public function get cupSize():int { return _cupSize; }
 
 		public function set cupSize(value:int):void {
-			if (value < CoC.BREAST_CUP_FLAT) value = CoC.BREAST_CUP_FLAT;
-			if (value > CoC.BREAST_CUP_ZZZ_LARGE) value = CoC.BREAST_CUP_ZZZ_LARGE;
+			if (value < AppearanceDefs.BREAST_CUP_FLAT) value = AppearanceDefs.BREAST_CUP_FLAT;
+			if (value > AppearanceDefs.BREAST_CUP_ZZZ_LARGE) value = AppearanceDefs.BREAST_CUP_ZZZ_LARGE;
 			_cupSize = value;
 		}
 
@@ -129,62 +126,62 @@ package classes
 
 		public function adj():String {
 			switch (_cupSize) {
-				case CoC.BREAST_CUP_FLAT:		return "non-existent";
-				case CoC.BREAST_CUP_A:			return "small";
-				case CoC.BREAST_CUP_B:
-				case CoC.BREAST_CUP_C:			return "palmable";
-				case CoC.BREAST_CUP_D:
-				case CoC.BREAST_CUP_DD:
-				case CoC.BREAST_CUP_DD_BIG:		return "sizeable";
-				case CoC.BREAST_CUP_E:
-				case CoC.BREAST_CUP_E_BIG:
-				case CoC.BREAST_CUP_EE:
-				case CoC.BREAST_CUP_EE_BIG:
-				case CoC.BREAST_CUP_F:
-				case CoC.BREAST_CUP_F_BIG:
-				case CoC.BREAST_CUP_FF:
-				case CoC.BREAST_CUP_FF_BIG:		return "huge";
-				case CoC.BREAST_CUP_G:
-				case CoC.BREAST_CUP_G_BIG:
-				case CoC.BREAST_CUP_GG:
-				case CoC.BREAST_CUP_GG_BIG:
-				case CoC.BREAST_CUP_H:
-				case CoC.BREAST_CUP_H_BIG:
-				case CoC.BREAST_CUP_HH:
-				case CoC.BREAST_CUP_HH_BIG:
-				case CoC.BREAST_CUP_I:
-				case CoC.BREAST_CUP_I_BIG:
-				case CoC.BREAST_CUP_II:
-				case CoC.BREAST_CUP_II_BIG:		return "gigantic";
-				case CoC.BREAST_CUP_J:
-				case CoC.BREAST_CUP_J_BIG:
-				case CoC.BREAST_CUP_JJ:
-				case CoC.BREAST_CUP_JJ_BIG:
-				case CoC.BREAST_CUP_K:
-				case CoC.BREAST_CUP_K_BIG:
-				case CoC.BREAST_CUP_KK:
-				case CoC.BREAST_CUP_KK_BIG:
-				case CoC.BREAST_CUP_L:
-				case CoC.BREAST_CUP_L_BIG:
-				case CoC.BREAST_CUP_LL:
-				case CoC.BREAST_CUP_LL_BIG:
-				case CoC.BREAST_CUP_M:
-				case CoC.BREAST_CUP_M_BIG:
-				case CoC.BREAST_CUP_MM:
-				case CoC.BREAST_CUP_MM_BIG:
-				case CoC.BREAST_CUP_MMM:
-				case CoC.BREAST_CUP_MMM_LARGE:	return "mammoth";
+				case AppearanceDefs.BREAST_CUP_FLAT:		return "non-existent";
+				case AppearanceDefs.BREAST_CUP_A:			return "small";
+				case AppearanceDefs.BREAST_CUP_B:
+				case AppearanceDefs.BREAST_CUP_C:			return "palmable";
+				case AppearanceDefs.BREAST_CUP_D:
+				case AppearanceDefs.BREAST_CUP_DD:
+				case AppearanceDefs.BREAST_CUP_DD_BIG:		return "sizeable";
+				case AppearanceDefs.BREAST_CUP_E:
+				case AppearanceDefs.BREAST_CUP_E_BIG:
+				case AppearanceDefs.BREAST_CUP_EE:
+				case AppearanceDefs.BREAST_CUP_EE_BIG:
+				case AppearanceDefs.BREAST_CUP_F:
+				case AppearanceDefs.BREAST_CUP_F_BIG:
+				case AppearanceDefs.BREAST_CUP_FF:
+				case AppearanceDefs.BREAST_CUP_FF_BIG:		return "huge";
+				case AppearanceDefs.BREAST_CUP_G:
+				case AppearanceDefs.BREAST_CUP_G_BIG:
+				case AppearanceDefs.BREAST_CUP_GG:
+				case AppearanceDefs.BREAST_CUP_GG_BIG:
+				case AppearanceDefs.BREAST_CUP_H:
+				case AppearanceDefs.BREAST_CUP_H_BIG:
+				case AppearanceDefs.BREAST_CUP_HH:
+				case AppearanceDefs.BREAST_CUP_HH_BIG:
+				case AppearanceDefs.BREAST_CUP_I:
+				case AppearanceDefs.BREAST_CUP_I_BIG:
+				case AppearanceDefs.BREAST_CUP_II:
+				case AppearanceDefs.BREAST_CUP_II_BIG:		return "gigantic";
+				case AppearanceDefs.BREAST_CUP_J:
+				case AppearanceDefs.BREAST_CUP_J_BIG:
+				case AppearanceDefs.BREAST_CUP_JJ:
+				case AppearanceDefs.BREAST_CUP_JJ_BIG:
+				case AppearanceDefs.BREAST_CUP_K:
+				case AppearanceDefs.BREAST_CUP_K_BIG:
+				case AppearanceDefs.BREAST_CUP_KK:
+				case AppearanceDefs.BREAST_CUP_KK_BIG:
+				case AppearanceDefs.BREAST_CUP_L:
+				case AppearanceDefs.BREAST_CUP_L_BIG:
+				case AppearanceDefs.BREAST_CUP_LL:
+				case AppearanceDefs.BREAST_CUP_LL_BIG:
+				case AppearanceDefs.BREAST_CUP_M:
+				case AppearanceDefs.BREAST_CUP_M_BIG:
+				case AppearanceDefs.BREAST_CUP_MM:
+				case AppearanceDefs.BREAST_CUP_MM_BIG:
+				case AppearanceDefs.BREAST_CUP_MMM:
+				case AppearanceDefs.BREAST_CUP_MMM_LARGE:	return "mammoth";
 				default:
 			}
 			return("titanic");
 		}
 
-		public function canTitFuck():Boolean { return _cupSize >= CoC.BREAST_CUP_C; }
+		public function canTitFuck():Boolean { return _cupSize >= AppearanceDefs.BREAST_CUP_C; }
 
 		public function cup():String { return Appearance.breastCup(_cupSize); } //The cup size alone
 
 		public function description(useAdj:Boolean = false, isMale:Boolean = false):String {
-			if (_cupSize == CoC.BREAST_CUP_FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
+			if (_cupSize == AppearanceDefs.BREAST_CUP_FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
 			return (useAdj ? adj() + " " : "") + cup() + " breasts";
 		}
 
@@ -192,7 +189,7 @@ package classes
 			return breastDescript(cupSize, 0.5 * lactationLevel);
 		}
 
-		public function hasBreasts():Boolean { return _cupSize != CoC.BREAST_CUP_FLAT; }
+		public function hasBreasts():Boolean { return _cupSize != AppearanceDefs.BREAST_CUP_FLAT; }
 
 		public function lactating():Boolean { return _lactation >= LACTATION_LIGHT; }
 

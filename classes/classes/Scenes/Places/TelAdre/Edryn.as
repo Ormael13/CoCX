@@ -1,9 +1,9 @@
 package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface {
+public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface {
 //VARS
 //player.statusEffectv1(StatusEffects.Edryn) >= 4 = FREE SEX
 // EDRYN_TIMES_HEL_THREESOMED:int = 404;
@@ -971,7 +971,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("Startled from your sexual fog, you jerk back and gasp.  The smell – it's like sex distilled into orgasm and fired straight into your brain.  Your " + hipDescript() + " shake uncontrollably, spasming wildly as your scent-addled mind sets off a full-body orgasm.  ");
 	if(player.hasVagina()) {
 		outputText("Your " + vaginaDescript(0) + " contracts and spasms with the rest of you, ");
-		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("squirting");
+		if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("squirting");
 		else outputText("leaking");
 		outputText(" in a pale imitation of Edryn's box.  ");
 	}
@@ -1110,7 +1110,7 @@ public function eatEdrynPussyLikeABawss():void {
 	outputText("\n\nEdryn trots closer and says, \"<i>Then you'd best eat up hon, 'cause I got you a four course meal.</i>\"  Her swollen pussy is just inches away from you now.  The black lips part slightly before you, winking slowly as moisture begins to run from the bestial entrance, visibly fogging the air before you.  A web of girlish goo hangs across the slightly-spread entrance, and after one last inhalation of her almost sweet scent, you dive on in.  Your nose is the first casualty of your aggressive war on centaur-cunt, slurped down by the hungry folds as soon as you're pushing up against them.  You keep pushing until your mouth has slipped through the moist, sticky veil that hangs across her vagina, kissing her fat-lipped horse-pussy with gusto while you let your tongue slither out to play.");
 
 	outputText("\n\nAt the first lick, Edryn gets palpably wetter.  Sloppy juice washes out from inside her, covering your cheeks and chin before dripping off onto your [chest], leaving you marked with her feminine odor.  ");
-	if(player.tongueType > TONGUE_HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
+	if(player.tongueType > AppearanceDefs.TONGUE_HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
 	outputText("The busty, animalistic woman moans unashamedly, hands going to her breasts to squeeze them, her clit filling up to its full size.  You can feel the sensitive nodule plump up against the top of your mouth, so you open wide enough to give it a quick suck before returning to polishing her innards.  After that the equine pleasure-buzzer gets rock-hard and continues to bulge meaningfully against you, pulsing hotly in your mouth.");
 	outputText("\n\nYou sway dizzily on your [feet] as you try to focus on just basking in her pussy's delicious... potent... sexy aroma.  [EachCock] is lifting needily with every passing second.  ");
 	if(player.cockTotal() == 1) outputText("It's");

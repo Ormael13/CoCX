@@ -1,9 +1,9 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Holli extends Monster
+public class Holli extends Monster
 	{
 		/*Fight -Z
 		 Marae's offshoot, [monster] stands rooted in front of you.  Solid black eyes with golden pupils stare out at you.  Her normally-nude body is concealed inside her tree, though occasionally she will flash you the devilish grin of a sadistic temptress and the bark will split to reveal a pale, jiggling bit of flesh.  A pair of gnarled oak horns sprout from her forehead; leaves and flowers alternately bloom and wither on them as her face contorts with emotion.
@@ -159,7 +159,7 @@ package classes.Scenes.NPCs
 			player.addStatusValue(StatusEffects.HolliConstrict, 1, 9);
 			//Struggle Succeed
 			//if demon/dragon tongue, automatic success
-			if (player.tongueType > TONGUE_HUMAN) {
+			if (player.tongueType > AppearanceDefs.TONGUE_HUMAN) {
 				outputText("You can't move an arm nor a [leg] to bat the flower away... but she's literally holding your mouth open.  Your long tongue rolls out, gripping and ripping out several of the petals on the end of her stalk!  Holli screams and her roots slacken, allowing you to batter your way out of them.");
 				player.removeStatusEffect(StatusEffects.HolliConstrict);
 			}
@@ -241,14 +241,14 @@ package classes.Scenes.NPCs
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

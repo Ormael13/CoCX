@@ -2,6 +2,7 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
+import classes.AppearanceDefs;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -10,10 +11,10 @@ import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Anemone;
 import classes.StatusEffects;
-import classes.Scenes.Camp.CampMakeWinions;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -34,55 +35,55 @@ public class PhysicalSpecials extends BaseCombatContent {
 			buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 		}
 		//Bitez
-		if (player.faceType == FACE_SHARK_TEETH) {
+		if (player.faceType == AppearanceDefs.FACE_SHARK_TEETH) {
 			buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 		}
-		if (player.faceType == FACE_ORCA) {
+		if (player.faceType == AppearanceDefs.FACE_ORCA) {
 			buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 		}
-		if (player.faceType == FACE_SNAKE_FANGS) {
+		if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
 			bd = buttons.add("Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 			if (player.tailVenom < 25) {
 				bd.disable("You do not have enough venom to bite right now!");
 			}
 		}
-		if (player.faceType == FACE_SPIDER_FANGS) {
+		if (player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
 			bd = buttons.add("Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 			if (player.tailVenom < 25) {
 				bd.disable("You do not have enough venom to bite right now!");
 			}
 		}
-		if (player.faceType == FACE_WOLF) {
+		if (player.faceType == AppearanceDefs.FACE_WOLF) {
 			buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 		}
 		//Constrict
-		if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
 			buttons.add("Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 		}
 		//Grapple
-		if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
+		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA) {
 			buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 		}
 		//Engulf
-		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
+		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Kick attackuuuu
-		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
+		if (player.isTaur() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BUNNY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO) {
 			bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
 			if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
 				bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
 			}
 		}
 		//Gore if mino horns or unicorn/alicorn horn
-		if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
+		if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR && player.horns >= 6) {
 			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 		}
-		if (player.hornType == HORNS_UNICORN && player.horns >= 6) {
+		if (player.hornType == AppearanceDefs.HORNS_UNICORN && player.horns >= 6) {
 			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
 		}
 		//Upheaval - requires rhino horn
-		if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
+		if (player.hornType == AppearanceDefs.HORNS_RHINO && player.horns >= 2 && player.faceType == AppearanceDefs.FACE_RHINO) {
 			bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 			bd.requireFatigue(physicalCost(15));
 		}
@@ -97,7 +98,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("There's no way you'd be able to find their lips while you're blind!");
 			}
 		}
-		if (player.armType == ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
+		if (player.armType == AppearanceDefs.ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
 			bd = buttons.add("Multi Slash", mantisMultiSlash);
 			if (monster.plural) {
 				bd.hint("Attempt to slash your foes with your wrists scythes! \n");
@@ -107,13 +108,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.requireFatigue(24);
 			}
 		}
-		if (player.tail.isAny(TAIL_TYPE_BEE_ABDOMEN, TAIL_TYPE_SCORPION)) {
+		if (player.tail.isAny(AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, AppearanceDefs.TAIL_TYPE_SCORPION)) {
 			bd = buttons.add("Sting", playerStinger);
 			var stingername:String,period:String;
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
 				stingername = "venomous bee stinger";
 				period = "your abdomen's refractory period";
-			} else if (player.tailType == TAIL_TYPE_SCORPION){
+			} else if (player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION){
 				stingername = "venomous scorpion stinger";
 				period = "your refractory period";
 			}
@@ -122,26 +123,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("You do not have enough venom to sting right now!");
 			}
 		}
-		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
 			bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 			if (player.tailVenom < 25) {
 				bd.disable("You do not have enough venom to shoot spike right now!");
 			}
 		}
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) {
 			bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 			if(player.tailVenom < 30) {
 				bd.disable("You do not have enough webbing to shoot right now!");
 			}
 		}
-		if (player.tail.isAny(TAIL_TYPE_SHARK, TAIL_TYPE_LIZARD, TAIL_TYPE_KANGAROO, TAIL_TYPE_DRACONIC, TAIL_TYPE_RACCOON)) {
+		if (player.tail.isAny(AppearanceDefs.TAIL_TYPE_SHARK, AppearanceDefs.TAIL_TYPE_LIZARD, AppearanceDefs.TAIL_TYPE_KANGAROO, AppearanceDefs.TAIL_TYPE_DRACONIC, AppearanceDefs.TAIL_TYPE_RACCOON)) {
 			buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 		}
-		if (player.tailType == TAIL_TYPE_SALAMANDER) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER) {
 			bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 			bd.requireFatigue(physicalCost(40));
 		}
-		if (player.tailType == TAIL_TYPE_ORCA) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_ORCA) {
 			bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
 			bd.requireFatigue(physicalCost(40));
 			if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
@@ -208,7 +209,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 			}
 		}
-		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
 			// Pollen
 			bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 			if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
@@ -221,21 +222,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(60));
 			if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
 		}
-		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
+		if (player.armType == AppearanceDefs.ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws (available if you have no shield, use a one handed weapon or are unarmed).  \n\nWould go into cooldown after use for: 3 rounds");
 			bd.requireFatigue(physicalCost(60));
 			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
 			}
 		}
-		if (player.tailType == TAIL_TYPE_GARGOYLE) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE) {
 			bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
-		if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) {
+		if (player.wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) {
 			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
@@ -846,7 +847,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				temp--;
 			}
 			monster.addStatusValue(StatusEffects.CoonWhip,2,2);
-			if(player.tailType == TAIL_TYPE_RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
+			if(player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 		}
 		outputText("\n\n");
 		enemyAI();
@@ -1765,10 +1766,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural ");
-			if (player.hornType == HORNS_COW_MINOTAUR) outputText("weapons, ");
+			if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns ");
+			if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();
@@ -1825,7 +1826,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//normal
 			if(rand(4) > 0) {
 				outputText("You lower your head and charge, skewering " + monster.a + monster.short + " on ");
-				if (player.hornType == HORNS_COW_MINOTAUR) outputText("one of your bullhorns!  ");
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("one of your bullhorns!  ");
 				else outputText("your horn!  ");
 			}
 			//CRIT
@@ -1833,7 +1834,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				//doubles horn bonus damage
 				damage *= 2;
 				outputText("You lower your head and charge, slamming into " + monster.a + monster.short + " and burying ");
-				if (player.hornType == HORNS_COW_MINOTAUR) outputText("both your horns ");
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("both your horns ");
 				else outputText("your horn ");
 				outputText("into " + monster.pronoun2 + "! <b>Critical hit!</b>  ");
 			}
@@ -1860,13 +1861,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(damage < 20) outputText("You pull yourself free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			if (damage >= 20 && damage < 40) {
 				outputText("You struggle to pull your ");
-				if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns ");
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns ");
 				else outputText("horn ");
 				outputText("free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			}
 			if (damage >= 40) {
 				outputText("With great difficulty you rip your ");
-				if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns ");
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns ");
 				else outputText("horn ");
 				outputText("free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			}
@@ -1876,7 +1877,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Special vala changes
 			if(monster.short == "Vala") {
 				outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your ");
-				if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns ");
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns ");
 				else outputText("horn ");
 				outputText("as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
 				dynStats("lus", 5);
@@ -2248,8 +2249,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
 			clearOutput();
-			if (player.faceType == FACE_SHARK_TEETH) outputText("You're too fatigued to use your shark-like jaws!");
-			if (player.faceType == FACE_ORCA) outputText("You're too fatigued to use your orca-like jaws!");
+			if (player.faceType == AppearanceDefs.FACE_SHARK_TEETH) outputText("You're too fatigued to use your shark-like jaws!");
+			if (player.faceType == AppearanceDefs.FACE_ORCA) outputText("You're too fatigued to use your orca-like jaws!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -2271,8 +2272,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("You open your mouth wide, your ");
-		if (player.faceType == FACE_SHARK_TEETH) outputText("shark teeth extending out");
-		if (player.faceType == FACE_ORCA) outputText("sharp orca teeth shining briefly");
+		if (player.faceType == AppearanceDefs.FACE_SHARK_TEETH) outputText("shark teeth extending out");
+		if (player.faceType == AppearanceDefs.FACE_ORCA) outputText("sharp orca teeth shining briefly");
 		clearOutput();
 		outputText(". Snarling with hunger, you lunge at your opponent, set to bite right into them!  ");
 		if(player.hasStatusEffect(StatusEffects.Blind)) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
@@ -2353,16 +2354,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(20, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownKick,5,0,0,0);
 		//Variant start messages!
-		if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
+		if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO) {
 			//(tail)
-			if(player.tailType == TAIL_TYPE_KANGAROO) outputText("You balance on your flexible kangaroo-tail, pulling both legs up before slamming them forward simultaneously in a brutal kick.  ");
+			if(player.tailType == AppearanceDefs.TAIL_TYPE_KANGAROO) outputText("You balance on your flexible kangaroo-tail, pulling both legs up before slamming them forward simultaneously in a brutal kick.  ");
 			//(no tail)
 			else outputText("You balance on one leg and cock your powerful, kangaroo-like leg before you slam it forward in a kick.  ");
 		}
 		//(bunbun kick)
-		else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) outputText("You leap straight into the air and lash out with both your furred feet simultaneously, slamming forward in a strong kick.  ");
+		else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BUNNY) outputText("You leap straight into the air and lash out with both your furred feet simultaneously, slamming forward in a strong kick.  ");
 		//(centaur kick)
-		else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+		else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PONY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED)
 			if(player.isTaur()) outputText("You lurch up onto your backlegs, lifting your forelegs from the ground a split-second before you lash them out in a vicious kick.  ");
 			//(bipedal hoof-kick)
 			else outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ");
@@ -2388,7 +2389,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//50% chance of hit (int boost)
 			if(rand(100) + player.inte/3 >= 50) {
 				temp = int(player.str / 5 - rand(5));
-				if(player.tailType == TAIL_TYPE_KANGAROO) temp += 3;
+				if(player.tailType == AppearanceDefs.TAIL_TYPE_KANGAROO) temp += 3;
 				if(temp == 0) temp = 1;
 				outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + temp + " damage.\n\n");
 				monster.HP -= temp;
@@ -2424,10 +2425,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += speedscalingbonus() * 0.5;
 		//Leg bonus
 		//Bunny - 20, 1 hoof = 30, 2 hooves = 40, Kangaroo - 50
-		if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+		if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PONY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED)
 			damage += 30;
-		else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) damage += 20;
-		else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 50;
+		else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BUNNY) damage += 20;
+		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO) damage += 50;
 		if(player.isTaur()) damage += 10;
 		//Damage post processing!
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;

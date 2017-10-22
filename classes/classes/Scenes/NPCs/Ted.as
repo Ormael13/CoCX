@@ -4,12 +4,11 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+
+use namespace kGAMECLASS;
 	
 	public class Ted extends Monster
 	{
@@ -110,11 +109,11 @@ package classes.Scenes.NPCs
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 50;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 78;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.setBaseOnly({color:"white"});
 			this.skinDesc = "skin";
 			this.hairColor = "brown";

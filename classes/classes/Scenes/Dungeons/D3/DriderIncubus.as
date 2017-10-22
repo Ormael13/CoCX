@@ -1,16 +1,14 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.Monster;
-	import classes.Appearance;
-	import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
-	import classes.StatusEffects;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	import classes.StatusEffects;
-	import classes.PerkLib;
+import classes.AppearanceDefs;
+import classes.CockTypesEnum;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.PerkLib;
+import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
+import classes.StatusEffects;
 
-	public class DriderIncubus extends AbstractSpiderMorph
+public class DriderIncubus extends AbstractSpiderMorph
 	{
 		public function DriderIncubus()
 		{
@@ -23,8 +21,8 @@ package classes.Scenes.Dungeons.D3
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(140, 300, 140, 90);
 			initLibSensCor(160, 40, 100);
 			this.weaponName = "spear";

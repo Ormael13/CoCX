@@ -1,8 +1,8 @@
 package classes.Scenes.Areas.Forest {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
+public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		
 		public function CorruptedGlade() {
 			CoC.timeAwareClassAdd(this);
@@ -140,33 +140,33 @@ package classes.Scenes.Areas.Forest {
 				if (tentacle == 0) { //Small
 					outputText("a little small for your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VAGINA_LOOSENESS_TIGHT:		tentacleSize =   0; break;
-						case VAGINA_LOOSENESS_NORMAL:		tentacleSize =   4; break;
-						case VAGINA_LOOSENESS_LOOSE:		tentacleSize =  16; break;
-						case VAGINA_LOOSENESS_GAPING:		tentacleSize =  40; break;
-						case VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize =  65; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_TIGHT:		tentacleSize =   0; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_NORMAL:		tentacleSize =   4; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_LOOSE:		tentacleSize =  16; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING:		tentacleSize =  40; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize =  65; break;
 						default:							tentacleSize = 100;
 					}
 				}
 				if (tentacle == 1) { //Normal
 					outputText("well suited to your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VAGINA_LOOSENESS_TIGHT:		tentacleSize =   3; break;
-						case VAGINA_LOOSENESS_NORMAL:		tentacleSize =   7; break;
-						case VAGINA_LOOSENESS_LOOSE:		tentacleSize =  26; break;
-						case VAGINA_LOOSENESS_GAPING:		tentacleSize =  60; break;
-						case VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize = 115; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_TIGHT:		tentacleSize =   3; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_NORMAL:		tentacleSize =   7; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_LOOSE:		tentacleSize =  26; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING:		tentacleSize =  60; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize = 115; break;
 						default:							tentacleSize = 175;
 					}
 				}
 				if (tentacle == 2) { //Large
 					outputText("almost too big to cram in your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VAGINA_LOOSENESS_TIGHT:		tentacleSize =   6; break;
-						case VAGINA_LOOSENESS_NORMAL:		tentacleSize =   9; break;
-						case VAGINA_LOOSENESS_LOOSE:		tentacleSize =  34; break;
-						case VAGINA_LOOSENESS_GAPING:		tentacleSize =  78; break;
-						case VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize = 135; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_TIGHT:		tentacleSize =   6; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_NORMAL:		tentacleSize =   9; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_LOOSE:		tentacleSize =  34; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING:		tentacleSize =  78; break;
+						case AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE:	tentacleSize = 135; break;
 						default:							tentacleSize = 210;
 					}
 				}
@@ -292,7 +292,7 @@ package classes.Scenes.Areas.Forest {
 			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
 				addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
 			}
-			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
+			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == AppearanceDefs.TAIL_TYPE_FOX && player.tailCount >= 7) {
 				addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {

@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.Places{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.MarbleScene;
-	import classes.Scenes.Places.Farm.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.NPCs.MarbleScene;
+import classes.Scenes.Places.Farm.*;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Farm extends BaseContent{
 	public var keltScene:KeltScene = new KeltScene();
@@ -427,7 +427,7 @@ public function workFarm():void {
 		outputText("  The first thing that hits you is the smell, a mingling of sweat, milk, droppings, and rotting hay. There are also probably some cows in Whitney's herd ready for breeding.\n\n");
 		outputText("Opening the door to one of the empty stalls, Whitney says, \"<i>I don't get to them as often as I should. Anything you can do would help.</i>\"\n\n");
 		outputText("You steel yourself, ignore your ");
-		if(player.faceType == FACE_DOG) outputText("sensitive ");
+		if(player.faceType == AppearanceDefs.FACE_DOG) outputText("sensitive ");
 		outputText("nose, and set to work.");
 		//[Lust increase based on libido, degree of cow/mino features] 
 		dynStats("lus", player.cowScore() + player.minotaurScore());

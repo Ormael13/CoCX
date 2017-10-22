@@ -3,11 +3,11 @@
  */
 package classes.Items
 {
-	import classes.GlobalFlags.*;
-	import classes.Scenes.Camp;
-	import classes.Scenes.Places.Prison;
-	import classes.DefaultDict;
-	import classes.Player;
+import classes.DefaultDict;
+import classes.GlobalFlags.*;
+import classes.Player;
+import classes.Scenes.Camp;
+import classes.Scenes.Places.Prison;
 import classes.internals.Utils;
 
 /**
@@ -16,9 +16,8 @@ import classes.internals.Utils;
 	 */
 	public class Consumable extends Useable
 	{
-		include "../../../includes/appearanceDefs.as";
 
-		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+        protected function get mutations():Mutations { return kGAMECLASS.mutations; }
 		protected function get changes():int { return mutations.changes; }
 		protected function set changes(val:int):void { mutations.changes = val; }
 		protected function get changeLimit():int { return mutations.changeLimit; }

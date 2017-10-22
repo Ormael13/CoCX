@@ -1,18 +1,18 @@
 ﻿package classes.Scenes{
-	import classes.*;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.*;
-	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
-	import classes.Scenes.Camp.*;
-	import classes.Scenes.Dungeons.*;
-	import classes.Scenes.NPCs.*;
-	import classes.Scenes.Places.HeXinDao;
-	import coc.view.MainView;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.*;
+import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+import classes.Scenes.Camp.*;
+import classes.Scenes.Dungeons.*;
+import classes.Scenes.NPCs.*;
+import classes.Scenes.Places.HeXinDao;
 
-	
-	use namespace kGAMECLASS;
+import coc.view.MainView;
+
+use namespace kGAMECLASS;
 
 	public class Camp extends NPCAwareContent{
 
@@ -828,7 +828,7 @@ private function doCamp():void { //Only called by playerMenu
 	//Unlock something in character creation.
 	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
 	{
-		if (player.gender == GENDER_HERM)
+		if (player.gender == AppearanceDefs.GENDER_HERM)
 		{
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>");
@@ -1930,7 +1930,7 @@ public function rest():void {
 			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n");
 		}
-		else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
+		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER)
 		{
 			if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n");
@@ -1987,7 +1987,7 @@ public function doWait():void {
 	if (timeQ == 0) {
 		timeQ = 4;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
-		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
+		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
 		else outputText("You wait " + num2Text(timeQ) + " hours...\n");
 		//Marble withdrawl
 		if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
@@ -2227,7 +2227,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
 		outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 	}
-	if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+	if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
 		outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n");
 	}
 	//REGULAR HP/FATIGUE RECOVERY
@@ -3202,7 +3202,7 @@ private function promptSaveUpdate():void {
 			player.perkPoints = player.perkPoints + 1;
 		}
 		//Update chitin
-		if (player.hasCoatOfType(SKIN_COAT_CHITIN)) {
+		if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN)) {
 			if (player.mantisScore() >= 5) player.skin.coat.color = "green";
 			if (player.spiderScore() >= 5) player.skin.coat.color = "pale white";
 			if (player.mantisScore() < 5 && player.spiderScore() < 5) {
@@ -3217,12 +3217,12 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 18;
 		clearOutput();
 		outputText("Multi tails get broken or was it venom in them...so we fixed that both will not gonna mess up other or so we think ^^");
-		if (player.tailType == TAIL_TYPE_FOX) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 			player.tailCount = player.tailVenom;
 			if (player.tailCount < 1) player.tailCount = 1;
 			player.tailVenom = 0;
 		}
-		if (player.faceType == FACE_SNAKE_FANGS) {
+		if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
 			if (player.tailRecharge < 5) player.tailRecharge = 5;
 		}
 		if (player.findPerk(PerkLib.Cupid) >= 0) {

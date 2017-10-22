@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -110,11 +110,11 @@
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE + 1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE + 1;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -140,7 +140,7 @@
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.special3 = hellHoundWormCannon;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

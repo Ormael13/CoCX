@@ -3,11 +3,11 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
 
-	public class CeraphScene extends NPCAwareContent
+public class CeraphScene extends NPCAwareContent
 	{
 		public function CeraphScene()
 		{
@@ -430,7 +430,7 @@ package classes.Scenes.NPCs
 			outputText("What the hell?  Did you just call yourself pet?  You struggle internally, thinking, \"<i>When did pet start thinking of " + player.mf("him", "her") + "self as pet?</i>\"  A tingle of new arousal shivers through you – Mistress Ceraph has made it impossible for you to think or call yourself anything other than pet!  What else is she going to do to you?\n\n");
 
 			outputText("\"<i>Oh it's so cute watching my pets and toys truly learn their new names.  Now come here pet, a good pet wears a collar so everyone knows who " + player.mf("he", "she") + " belongs to,</i>\" says Mistress as she pulls a thick black collar off a hook on the wall.  Compliant, you allow her to fasten it around your neck, waggling your ");
-			if (player.tailType == TAIL_TYPE_NONE) outputText("backside");
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("backside");
 			else outputText("tail");
 			outputText(" back and forth to show Mistress how happy you are.  Obedience slowly crowds your mind, rolling over your other thoughts and concerns inexorably.  Your worries, cares, and troubles slide away, replaced with an all-consuming need to please.");
 			doNext(agreeToBeABitchPt2);

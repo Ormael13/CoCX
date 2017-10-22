@@ -1,10 +1,10 @@
 package classes.Scenes.Places.Prison 
 {
-	import classes.*;
-	import classes.Scenes.Monsters.Imp;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Scruffy extends Imp
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.Imp;
+
+public class Scruffy extends Imp
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -27,11 +27,11 @@ package classes.Scenes.Places.Prison
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -49,7 +49,7 @@ package classes.Scenes.Places.Prison
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -1,9 +1,9 @@
 package classes.Scenes.Dungeons.DesertCave
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class SandWitchMob extends Monster
+public class SandWitchMob extends Monster
 	{
 		public function sandWitchMobAI():void {
 			if(!hasStatusEffect(StatusEffects.Sandstorm)) sandStormAttack();
@@ -158,14 +158,14 @@ package classes.Scenes.Dungeons.DesertCave
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "bronzed";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

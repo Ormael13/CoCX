@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.HighMountains{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class MinotaurMobScene extends BaseContent implements TimeAwareInterface {
+public class MinotaurMobScene extends BaseContent implements TimeAwareInterface {
 
 //Vars:
 //325 Times met
@@ -301,20 +301,20 @@ private function nonAddictMinotaurGangBang():void {
 	
 	if(player.isTaur()) {
 		outputText("A sudden, forceful push rolls your equine body onto its flank, and a larger member is pressed against your clutching ");
-		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole");
+		if(player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("asshole");
 		else outputText("tailhole");
 		outputText(".  ");
 	}
 	else if(player.isNaga()) outputText("A sudden, forceful yank stretches out your tail, and a larger member presses between your " + buttDescript() + " to prod at your clutching asshole.  ");
 	else if(player.isGoo()) {
 		outputText("A sudden, forceful push rolls you to your side, and you feel shaggy fur rubbing through your gooey folds while a larger member is pressed against your clutching ");
-		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole");
+		if(player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("asshole");
 		else outputText("tailhole");
 		outputText(".  ");
 	}
 	else {
 		outputText("A sudden, powerful yank lifts one of your legs high into the air, and you feel a larger member pressing against your clutching ");
-		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole");
+		if(player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("asshole");
 		else outputText("tailhole");
 		outputText(".  ");
 	}
@@ -426,7 +426,7 @@ private function loseToMinoMobVeryPregnant():void {
 	outputText("Pain radiates through your " + buttDescript() + " as a strong impact rocks your body.  You'd glance back, but the penis in your mouth holds your head stationary while it begins to slide in and out of your throat.  Another cheek-reddening slap hits your ass, and this time you definitely feel the large, furred shape of a minotaur's hand as the source of your discomfort.  The cock in your mouth draws back, not far enough to empty your mouth, yet far enough for you to breathe in sweet, sweet air through your nose. It plunges back in, just in time for another butt-reddening smack to push you the last few inches back towards those sweaty balls.\n\n");
 	
 	outputText("You look up and oogle the " + num2Text((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 1)) + " dicks hovering just inches away from you.  Even the minitaur is there, his smaller dick dripping the sweet cream of his need at the sight of his slutty, utterly debased mother.  It turns you on so much, even more than the cream in your belly.  You reach out and grab two of the dicks to stroke, lubricating fingers with hot, wet pre-cum.");
-	if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC || player.tailType == TAIL_TYPE_COW || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO) outputText("  Even your tail reaches up to curl around a third, stroking the thick meat.");
+	if(player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_DEMONIC || player.tailType == AppearanceDefs.TAIL_TYPE_COW || player.tailType == AppearanceDefs.TAIL_TYPE_SHARK || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD || player.tailType == AppearanceDefs.TAIL_TYPE_KANGAROO) outputText("  Even your tail reaches up to curl around a third, stroking the thick meat.");
 	outputText("\n\n");
 	
 	outputText("\"<i>It looks like Mom is really into it, huh?  Look at her, deep-throating and drooling like an addict.  What do you have to say for yourself, Mom?  Oh?  You'd rather keep sucking cock than talk?  Well, alright then; just keep sucking, I think my bro is about to have a present for you,</i>\" predicts the second-largest minotaur.\n\n");
@@ -847,7 +847,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("start licking Momma's pussy.</i>\"  As if to emphasize your point, you ");
 		if(player.isTaur()) {
 			outputText("turn ");
-			if(player.tailType > TAIL_TYPE_NONE) outputText("and lift your tail ");
+			if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("and lift your tail ");
 			outputText("to expose the glistening pinkness of your womanhood.");
 		}
 		//ELSE

@@ -1,37 +1,32 @@
 ﻿//CoC Creature.as
 package classes
 {
-	import classes.BodyParts.Claws;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.IOrifice;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.SkinLayer;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.UnderBody;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkType;
-	import classes.StatusEffectType;
-	import classes.Items.JewelryLib;
+import classes.BodyParts.Claws;
+import classes.BodyParts.Face;
+import classes.BodyParts.IOrifice;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.UnderBody;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.JewelryLib;
+import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.StatusEffects.Combat.CombatInteBuff;
 import classes.StatusEffects.Combat.CombatSpeBuff;
 import classes.StatusEffects.Combat.CombatStrBuff;
 import classes.StatusEffects.Combat.CombatTouBuff;
 import classes.StatusEffects.Combat.CombatWisBuff;
-import classes.StatusEffects.TemporaryBuff;
 import classes.internals.Utils;
-	import classes.VaginaClass;
-	import classes.Scenes.Places.TelAdre.UmasShop;
-	import flash.display.InteractiveObject;
-	import flash.errors.IllegalOperationError;
 
-	public class Creature extends Utils
+import flash.errors.IllegalOperationError;
+
+
+    public class Creature extends Utils
 	{
 
-		include "../../includes/appearanceDefs.as";
 
-		public function get game():CoC {
+        public function get game():CoC {
 			return kGAMECLASS;
 		}
 		public function get flags():DefaultDict {
@@ -519,10 +514,10 @@ import classes.internals.Utils;
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		public function get gender():int {
-			if (hasCock() && hasVagina()) return GENDER_HERM;
-			if (hasCock()) return GENDER_MALE;
-			if (hasVagina()) return GENDER_FEMALE;
-			return GENDER_NONE;
+			if (hasCock() && hasVagina()) return AppearanceDefs.GENDER_HERM;
+			if (hasCock()) return AppearanceDefs.GENDER_MALE;
+			if (hasVagina()) return AppearanceDefs.GENDER_FEMALE;
+			return AppearanceDefs.GENDER_NONE;
 		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
@@ -534,7 +529,7 @@ import classes.internals.Utils;
 		2- ghost
 		3- goo!
 		4- anemononeoenoeneo!*/
-		public var hairType:Number = HAIR_NORMAL;
+		public var hairType:Number = AppearanceDefs.HAIR_NORMAL;
 		private var _hairColor:String = "no";
 		public var hairLength:Number = 0;
 		public function get hairColor():String {
@@ -554,7 +549,7 @@ import classes.internals.Utils;
 			skin.coat.color = value;
 		}
 
-		public var beardStyle:Number = BEARD_NORMAL;
+		public var beardStyle:Number = AppearanceDefs.BEARD_NORMAL;
 		public var beardLength:Number = 0;
 				
 		public var skin:Skin;
@@ -607,11 +602,11 @@ import classes.internals.Utils;
 		// </mod>
 		public var underBody:UnderBody;
 
-		public var earType:Number = EARS_HUMAN;
+		public var earType:Number = AppearanceDefs.EARS_HUMAN;
 		public var earValue:Number = 0;
-		public var hornType:Number = HORNS_NONE;
+		public var hornType:Number = AppearanceDefs.HORNS_NONE;
 		public var horns:Number = 0;
-		private var _wingType:Number = WING_TYPE_NONE;
+		private var _wingType:Number = AppearanceDefs.WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
 		public function get wingType():Number { return _wingType; }
 		public function set wingType(value:Number):void { _wingType = value; }
@@ -641,7 +636,7 @@ import classes.internals.Utils;
 		10 - curvy//flaring
 		15 - child-bearing/fertile
 		20 - inhumanly wide*/
-		public var hipRating:Number = HIP_RATING_BOYISH;
+		public var hipRating:Number = AppearanceDefs.HIP_RATING_BOYISH;
 		
 		/*buttRating
 		0 - buttless
@@ -653,7 +648,7 @@ import classes.internals.Utils;
 		13 - expansive
 		16 - huge
 		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = BUTT_RATING_BUTTLESS;
+		public var buttRating:Number = AppearanceDefs.BUTT_RATING_BUTTLESS;
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -677,24 +672,24 @@ import classes.internals.Utils;
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = ANTENNAE_NONE;
+		public var antennae:Number = AppearanceDefs.ANTENNAE_NONE;
 
 		//Eyetype
-		public var eyeType:Number = EYES_HUMAN;
+		public var eyeType:Number = AppearanceDefs.EYES_HUMAN;
 		public var eyeColor:String = "brown";
 
 		//TongueType
-		public var tongueType:Number = TONGUE_HUMAN;
+		public var tongueType:Number = AppearanceDefs.TONGUE_HUMAN;
 
 		//ArmType
-		public var armType:Number = ARM_TYPE_HUMAN;
+		public var armType:Number = AppearanceDefs.ARM_TYPE_HUMAN;
 
 		//GillType
-		public var gillType:int = GILLS_NONE;
-		public function hasGills():Boolean { return gillType != GILLS_NONE; }
+		public var gillType:int = AppearanceDefs.GILLS_NONE;
+		public function hasGills():Boolean { return gillType != AppearanceDefs.GILLS_NONE; }
 		
 		//RearBody
-		public var rearBody:Number = REAR_BODY_NONE;
+		public var rearBody:Number = AppearanceDefs.REAR_BODY_NONE;
 
 		//Sexual Stuff		
 		//MALE STUFF
@@ -853,14 +848,14 @@ import classes.internals.Utils;
 			}
 			// 4.2. hair
 			if (hairLength <= 0) {
-				if (hairType != HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
+				if (hairType != AppearanceDefs.HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
 			}
 			// 4.3. tail
-			if (tailType == TAIL_TYPE_NONE) {
+			if (tailType == AppearanceDefs.TAIL_TYPE_NONE) {
 				if (tailCount != 0) error += "No tail but tailCount = "+tailCount+". ";
 			}
 			// 4.4. horns
-			if (hornType == HORNS_NONE){
+			if (hornType == AppearanceDefs.HORNS_NONE){
 				if (horns>0) error += "horns > 0 but hornType = HORNS_NONE. ";
 			} else {
 				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
@@ -1816,7 +1811,7 @@ import classes.internals.Utils;
 			if (index < 0) index = biggestCockIndex();
 			var isPierced:Boolean = (cocks.length == 1) && (cocks[index].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (cocks.length == 1) && (cocks[index].sock != "");
-			var isGooey:Boolean = (skin.type == SKIN_TYPE_GOO);
+			var isGooey:Boolean = (skin.type == AppearanceDefs.SKIN_TYPE_GOO);
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey);
 		}
 
@@ -2465,18 +2460,18 @@ import classes.internals.Utils;
 		}
 
 		public static const canFlyWings:Array = [
-			WING_TYPE_BEE_LIKE_LARGE,
-			WING_TYPE_BAT_LIKE_LARGE,
-			WING_TYPE_BAT_LIKE_LARGE_2,
-			WING_TYPE_FEATHERED_LARGE,
-			WING_TYPE_FEATHERED_PHOENIX,
-			WING_TYPE_DRACONIC_LARGE,
-			WING_TYPE_DRACONIC_HUGE,
-			WING_TYPE_GIANT_DRAGONFLY,
-			WING_TYPE_MANTIS_LIKE_LARGE,
-			WING_TYPE_MANTIS_LIKE_LARGE_2,
-			WING_TYPE_MANTICORE_LIKE_LARGE,
-			WING_TYPE_GARGOYLE_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2,
+			AppearanceDefs.WING_TYPE_FEATHERED_LARGE,
+			AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX,
+			AppearanceDefs.WING_TYPE_DRACONIC_LARGE,
+			AppearanceDefs.WING_TYPE_DRACONIC_HUGE,
+			AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY,
+			AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2,
+			AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2493,7 +2488,7 @@ import classes.internals.Utils;
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gillType != GILLS_NONE)
+			if (gillType != AppearanceDefs.GILLS_NONE)
 				return true;	//dodać jeszcze trzeba bdzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
 		}
@@ -2589,7 +2584,7 @@ import classes.internals.Utils;
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(SKIN_BASE_STONE))
+			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE))
 				return true;
 			return false;
 		}
@@ -2706,12 +2701,12 @@ import classes.internals.Utils;
 		public function looksFemale():Boolean {
 			var tits:Number = biggestTitSize();
 			switch(gender) {
-				case GENDER_HERM:
-                case GENDER_NONE:
+				case AppearanceDefs.GENDER_HERM:
+                case AppearanceDefs.GENDER_NONE:
                     return ((tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				case GENDER_MALE:
+				case AppearanceDefs.GENDER_MALE:
                     return ((tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-                case GENDER_FEMALE:
+                case AppearanceDefs.GENDER_FEMALE:
                     return ((tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
 				default: return false;
 			}
@@ -2725,10 +2720,10 @@ import classes.internals.Utils;
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
 			switch (gender) {
-				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
-				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
-				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
+				case AppearanceDefs.GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
+				case AppearanceDefs.GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > AppearanceDefs.BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > AppearanceDefs.BREAST_CUP_A ? "shemale" : "femboy");
+				case AppearanceDefs.GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
+				case AppearanceDefs.GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
 			}
 		}
@@ -2738,7 +2733,7 @@ import classes.internals.Utils;
 		 */
 		public function isMale():Boolean
 		{
-			return gender == GENDER_MALE;
+			return gender == AppearanceDefs.GENDER_MALE;
 		}
 		
 		/**
@@ -2746,7 +2741,7 @@ import classes.internals.Utils;
 		 */
 		public function isFemale():Boolean
 		{
-			return gender == GENDER_FEMALE;
+			return gender == AppearanceDefs.GENDER_FEMALE;
 					}
 
 		/**
@@ -2754,7 +2749,7 @@ import classes.internals.Utils;
 		 */
 		public function isHerm():Boolean
 					{
-			return gender == GENDER_HERM;
+			return gender == AppearanceDefs.GENDER_HERM;
 					}
 
 		/**
@@ -2762,7 +2757,7 @@ import classes.internals.Utils;
 		 */
 		public function isGenderless():Boolean
 				{
-			return gender == GENDER_NONE;
+			return gender == AppearanceDefs.GENDER_NONE;
 				}
 
 		/**
@@ -2770,7 +2765,7 @@ import classes.internals.Utils;
 		 */
 		public function isMaleOrHerm():Boolean
 			{
-			return (gender & GENDER_MALE) != 0;
+			return (gender & AppearanceDefs.GENDER_MALE) != 0;
 				}
 
 		/**
@@ -2778,7 +2773,7 @@ import classes.internals.Utils;
 		 */
 		public function isFemaleOrHerm():Boolean
 				{
-			return (gender & GENDER_FEMALE) != 0;
+			return (gender & AppearanceDefs.GENDER_FEMALE) != 0;
 					}
 
 		//Create a cock. Default type is HUMAN
@@ -2982,10 +2977,10 @@ import classes.internals.Utils;
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
 			if(vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if(cArea >= vaginalCapacity()) {
-				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+				if(vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
 				else vaginas[0].vaginalLooseness++;
 				stretched = true;
 			}
@@ -3064,7 +3059,7 @@ import classes.internals.Utils;
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function isGargoyle():Boolean { return skin.hasBaseOnly(SKIN_BASE_STONE); }
+		public function isGargoyle():Boolean { return skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE); }
 		public function skinDescript():String { return skin.describe('basic'); }
 		public function skinFurScales():String { return skin.describe('cover'); }
 
@@ -3090,14 +3085,14 @@ import classes.internals.Utils;
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == TAIL_TYPE_SPIDER_ADBOMEN)
+			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)
 				return true;
 			return false;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == TAIL_TYPE_BEE_ABDOMEN)
+			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN)
 				return true;
 			return false;
 		}
@@ -3631,7 +3626,7 @@ import classes.internals.Utils;
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
+			return tongueType == AppearanceDefs.TONGUE_DEMONIC || tongueType == AppearanceDefs.TONGUE_DRACONIC || tongueType == AppearanceDefs.TONGUE_ECHIDNA;
 		}
 		
 		public function hairOrFur():String

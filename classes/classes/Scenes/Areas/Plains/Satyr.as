@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class Satyr extends Monster
+public class Satyr extends Monster
 	{
 		//Attacks (Z)
 		private function satyrAttack():void {
@@ -146,17 +146,17 @@ package classes.Scenes.Areas.Plains
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(37) + 64;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3+rand(20);
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(75, 70, 110, 70);
 			initLibSensCor(60, 35, 45);
 			this.weaponName = "fist";
@@ -172,7 +172,7 @@ package classes.Scenes.Areas.Plains
 			this.level = 19;
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

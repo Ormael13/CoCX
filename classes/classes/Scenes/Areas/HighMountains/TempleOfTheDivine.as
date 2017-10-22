@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.*;
-	import classes.Items.WeaponLib;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.WeaponLib;
+
+use namespace kGAMECLASS;
 	
 	public class TempleOfTheDivine extends BaseContent
 	{
@@ -506,7 +506,7 @@ package classes.Scenes.Areas.HighMountains
 				menu();
 				if (player.lust > 33) {
 					if (player.isGargoyle() && player.hasVagina()) addButton(0,"Gargoyle double tailfuck", SapphireGargoyleDoubleTailfuck).hint("Let's put these tails to use.");
-					if ((player.isGargoyle() || player.isNaga() || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_SALAMANDER) && flags[kFLAGS.ONYX_PATH] > 0) addButton(1,"Triple Tail Ouroboros", SapphireTripleTailOuroboros).hint("How about you all uses your tails to get eachother off?");
+					if ((player.isGargoyle() || player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD || player.tailType == AppearanceDefs.TAIL_TYPE_DRACONIC || player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER) && flags[kFLAGS.ONYX_PATH] > 0) addButton(1,"Triple Tail Ouroboros", SapphireTripleTailOuroboros).hint("How about you all uses your tails to get eachother off?");
 					addButton(2,"MutualMasturbarion", SapphireMutualMasturbation).hint("Help both you and her soothe that itch.");
 					if (player.hasCock()) addButton(3,"FuckHer", SapphireFuckHer).hint("Let's plunder that stony cavern of hers.");
 				}

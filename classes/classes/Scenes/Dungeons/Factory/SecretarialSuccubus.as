@@ -1,12 +1,12 @@
 package classes.Scenes.Dungeons.Factory
 {
-	import classes.*;
-	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.Dungeons.Factory;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.Factory;
+import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.internals.*;
 
-	public class SecretarialSuccubus extends AbstractSuccubus 
+public class SecretarialSuccubus extends AbstractSuccubus
 	{
 		public var factory:Factory = new Factory()
 		
@@ -49,15 +49,15 @@ package classes.Scenes.Dungeons.Factory
 			this.imageName = "secretarialsuccubus";
 			this.long = "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 60;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "blue";
 			this.hairColor = "blond";
 			this.hairLength = 13;
@@ -78,9 +78,9 @@ package classes.Scenes.Dungeons.Factory
 			this.gems = rand(25) + 20;
 			this.additionalXP = 75;
 			this.drop = new WeightedDrop(consumables.LACTAID, 1);
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;

@@ -5,12 +5,11 @@
 package classes.Scenes.Dungeons.HiddenCave 
 {
 
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class LoliBatGolem extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class LoliBatGolem extends Monster
 	{
 		public function clawstrike():void {
 			outputText("The golem's visage twists into a grimace of irritation, and she thrust her hand at you in a vicious strike.");
@@ -49,16 +48,16 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.imageName = "loli bat golem";
 			this.long = "You're currently fighting loli bat golem. It's four feet tall bat that looks like twelves years old girl, her stone body is smooth and polished and she's using bare stone claws to fight. In the middle of her forehead there is tatto'd a big letter A.";
 			this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);
 			initStrTouSpeInte(30, 30, 50, 10);
 			initLibSensCor(10, 10, 50);
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "light grey";
 			this.lustVuln = .2;
 			this.tallness = 48;

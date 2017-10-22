@@ -1264,11 +1264,11 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
 			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
@@ -1278,11 +1278,11 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
 			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ");
+				if(player.vaginas[vIndex].vaginalLooseness == classes.AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}

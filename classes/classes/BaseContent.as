@@ -1,18 +1,18 @@
 ﻿package classes 
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.*;
-	import classes.Scenes.Camp;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.*;
+import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
-	import classes.Scenes.Places.Prison;
-	import classes.Scenes.Dungeons.D3.D3;
-	import classes.Scenes.Inventory;
+import classes.Scenes.Places.Prison;
 import classes.internals.RootCounters;
 import classes.internals.Utils;
 
-	import coc.model.GameModel;
-	import coc.model.TimeModel;
+import coc.model.GameModel;
+import coc.model.TimeModel;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -29,10 +29,7 @@ import coc.xxc.StoryContext;
 	 */
 	public class BaseContent extends Utils
 	{
-		// TODO remove when we have proper enums for this
-		include "../../includes/appearanceDefs.as";
-
-		public function BaseContent()
+        public function BaseContent()
 		{
 			
 		}

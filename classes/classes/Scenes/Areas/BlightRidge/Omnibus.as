@@ -4,14 +4,13 @@
  */
 package classes.Scenes.Areas.BlightRidge
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Omnibus extends AbstractSuccubus
 	{
@@ -40,15 +39,15 @@ package classes.Scenes.Areas.BlightRidge
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "purple";
 			this.hairColor = "black";
 			this.hairLength = 13;
@@ -75,9 +74,9 @@ package classes.Scenes.Areas.BlightRidge
 					add(weapons.WHIP, 2).
 					add(consumables.SUCMILK, 12).
 					add(consumables.INCUBID, 12);
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;

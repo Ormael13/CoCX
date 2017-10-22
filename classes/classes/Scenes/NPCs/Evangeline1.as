@@ -4,12 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Evangeline1 extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class Evangeline1 extends Monster
 	{
 		/*
 		Perki jakie Evangeline powinna zdobyć:
@@ -466,12 +464,12 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.createVagina(false, VAGINA_WETNESS_DRY, VAGINA_LOOSENESS_TIGHT);
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 90;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});
 			this.hairColor = "red";
 			this.hairLength = 6;
