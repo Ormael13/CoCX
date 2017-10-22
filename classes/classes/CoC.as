@@ -452,7 +452,7 @@ public class CoC extends MovieClip
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
-        include "../../includes/ControlBindings.as";
+        new ControlBindings().run(inputManager);
 
         this.monkey = new ChaosMonkey(this);
 
