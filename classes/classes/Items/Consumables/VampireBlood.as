@@ -83,11 +83,11 @@ public class VampireBlood extends Consumable {
         for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (rand(tf.Chance? tf.Chance : 3) == 0) {
-                if (tf.Check) {
-                    tf.Override();
-                    changes++;
-                }
                 if (tf.ChangeTo != -1 && player[tf.BodyPart] != tf.ChangeTo) {
+                    if (tf.Check) {
+                        tf.Override();
+                        changes++;
+                    }
                     story.display(tf.BodyPart, {$pure: pure});
                     outputText("\n\n");
                     player[tf.BodyPart] = tf.ChangeTo;
