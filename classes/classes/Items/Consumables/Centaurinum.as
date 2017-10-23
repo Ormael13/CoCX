@@ -42,7 +42,7 @@ public class Centaurinum extends Consumable{
 		}
 		//Increase player's breast size, if they are big FF or smaller
 		if (player.smallestTitSize() <= 14 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
-			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + game.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
+			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
 			player.breastRows[player.smallestTitRow()].breastRating++;
 			changes++;
 		}
@@ -90,7 +90,7 @@ public class Centaurinum extends Consumable{
 				else {
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 					temp = player.addHorseCock();
-					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + game.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
+					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
 					if (temp == -1) {
 						CoC_Settings.error("");
 						clearOutput();
@@ -98,7 +98,7 @@ public class Centaurinum extends Consumable{
 					}
 					//Already have a sheath
 					if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
-					else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + game.cockDescript(temp) + "'s root, tightening and pulling your " + game.cockDescript(temp) + " inside its depths.");
+					else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + player.cockDescript(temp) + "'s root, tightening and pulling your " + player.cockDescript(temp) + " inside its depths.");
 					temp2 = player.increaseCock(temp, rand(4) + 4);
 					outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
 					outputText("  <b>You now have a horse-cock.</b>");
@@ -136,9 +136,9 @@ public class Centaurinum extends Consumable{
 					dynStats("sen", 1, "lus", 10);
 				}
 				outputText("\n\n");
-				if (temp2 > 2) outputText("Your " + game.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
-				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + game.cockDescript(temp) + " from the pleasure of the growth.");
-				if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + game.cockDescript(temp) + " pushes a bit further out of your sheath.");
+				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
+				if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
 				changes++;
 			}
 			//Chance of thickness + daydream
@@ -175,8 +175,8 @@ public class Centaurinum extends Consumable{
 				}
 				else {
 					player.ballSize++;
-					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + game.simpleBallsDescript() + " have grown larger than a human's.");
-					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + game.simpleBallsDescript() + " have enlarged again.");
+					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
 					dynStats("lib", 1, "lus", 3);
 				}
 				changes++;
@@ -214,7 +214,7 @@ public class Centaurinum extends Consumable{
 					}
 				}
 				if (player.vaginas[temp].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nOne of your " + game.vaginaDescript(temp) + " moistens perceptably, giving off an animalistic scent.");
+					outputText("\n\nOne of your " + Appearance.vaginaDescript(player,temp) + " moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[temp].vaginalWetness++;
 					changes++;
 				}
@@ -233,7 +233,7 @@ public class Centaurinum extends Consumable{
 					}
 				}
 				if (player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize one of your " + game.vaginaDescript(temp) + " has grown larger, in depth AND size.");
+					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize one of your " + Appearance.vaginaDescript(player,temp) + " has grown larger, in depth AND size.");
 					player.vaginas[temp].vaginalLooseness++;
 					changes++;
 				}

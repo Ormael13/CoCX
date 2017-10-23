@@ -2,6 +2,7 @@
  * Coded by aimozg on 01.06.2017.
  */
 package classes.Items.Consumables {
+import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.Items.Consumable;
 import classes.PerkLib;
@@ -28,8 +29,8 @@ public class Scorpinum extends Consumable {
 		}
 		//gain scorpion tail
 		if (changes < changeLimit && player.tailType != AppearanceDefs.TAIL_TYPE_SCORPION && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE && rand(2) == 0) {
-			if (player.tailType != AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
-			else outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
+			if (player.tailType != AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
+			else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
 			mutations.setTailType(AppearanceDefs.TAIL_TYPE_SCORPION);
 			player.tailVenom = 15;
 			player.tailRecharge = 3;

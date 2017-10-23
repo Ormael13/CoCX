@@ -73,7 +73,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) { //Tit removal
-					outputText("\n<b>Black milk dribbles from your " + getGame().nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
+					outputText("\n<b>Black milk dribbles from your " + Appearance.nippleDescription(player, 0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
 					player.removeStatusEffect(StatusEffects.Exgartuan);
 					needNext = true;
 				}		
@@ -138,9 +138,9 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 								else if (rand(3) == 0) {
 									outputText("\n<b>");
 									if (rand(2) == 0)
-										outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + getGame().breastDescript(0) + ".  You yank your hands away, but it only makes Exgartuan laugh with demonic pleasure!");
+										outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + player.breastDescript(0) + ".  You yank your hands away, but it only makes Exgartuan laugh with demonic pleasure!");
 									else {
-										outputText("Your hands knead and caress your " + getGame().breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away");
+										outputText("Your hands knead and caress your " + player.breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away");
 										if (player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions");
 										outputText(".");
 										dynStats("lus", 5 + player.sens / 10);

@@ -335,15 +335,15 @@ public function giveKamiTheChristmasRooAnal():void {
 	classes.EngineCore.outputText("\n\nKami squeals between each of your dominating thrusts");
 	//[If player has balls]
 	if(player.balls > 0) classes.EngineCore.outputText(", your balls slapping against her with every push");
-	classes.EngineCore.outputText(".  \"<i>Anh! No! Ah!</i>\"  She winces between each thrust, your [hips] doing little to help as they pick up the pace.  You continue pounding her ass for as long as you can, briefly releasing her wrists to give her bubble-butt a hard smack.  Kami's passage is warm and moist with your pre, and it isn't long before you find your cock sliding in and out of your slut's snug ass-tunnel as if it was made for you.  Eventually, Kami's vice-like grip on your " + cockDescript(x) + " loosens, and she begins lose herself to your dominating display.  Swaying her head side to side in enjoyment, you fuck her raw and hard - her hat bobbing up and down in a manner as hypnotising as her jiggling flesh.  You pull her to the ground to give her your final few thrusts before you churn out your spunk, falling over her and weakly bucking like some manner of beast.");
+	classes.EngineCore.outputText(".  \"<i>Anh! No! Ah!</i>\"  She winces between each thrust, your [hips] doing little to help as they pick up the pace.  You continue pounding her ass for as long as you can, briefly releasing her wrists to give her bubble-butt a hard smack.  Kami's passage is warm and moist with your pre, and it isn't long before you find your cock sliding in and out of your slut's snug ass-tunnel as if it was made for you.  Eventually, Kami's vice-like grip on your " + player.cockDescript(x) + " loosens, and she begins lose herself to your dominating display.  Swaying her head side to side in enjoyment, you fuck her raw and hard - her hat bobbing up and down in a manner as hypnotising as her jiggling flesh.  You pull her to the ground to give her your final few thrusts before you churn out your spunk, falling over her and weakly bucking like some manner of beast.");
 
 	classes.EngineCore.outputText("\n\n\Kami squeals excitedly as she reaches her own climax underneath you, tugging rapidly on her precum-soaked herm cock, milking it like crazy onto the ground beneath her.  You can feel her dripping fem-sex mesh against your own [sack] as you empty into her tight passage.");
 
 	//{If cum quantity = light, medium}
-	if(player.cumQ() < 1000) classes.EngineCore.outputText("  \"<i>Mmm... just like that, babe,</i>\" Kami moans submissively, her asshole clenching one last time before you pull out and climb off your satiated conquest, your " + cockDescript(x) + " still dripping creamy white spunk.");
+	if(player.cumQ() < 1000) classes.EngineCore.outputText("  \"<i>Mmm... just like that, babe,</i>\" Kami moans submissively, her asshole clenching one last time before you pull out and climb off your satiated conquest, your " + player.cockDescript(x) + " still dripping creamy white spunk.");
 	//{if cum quantity ≧ heavy}
 	else
-		classes.EngineCore.outputText("  One of Kami's hands flies from her dick to her suddenly swollen belly as your mighty seed gushes forth.  The unexpectedly heavy girl sinks further into the ground, your load swishing back up and loosening her tunnel around you and forcing you to remove your still-spewing " + cockDescript(x) + " before something unfortunate happens.  Semen starts tumbling out as soon as you dismount your kangaroo conquest, but judging by the slow pace, she's going to look heavily pregnant for a while.");
+		classes.EngineCore.outputText("  One of Kami's hands flies from her dick to her suddenly swollen belly as your mighty seed gushes forth.  The unexpectedly heavy girl sinks further into the ground, your load swishing back up and loosening her tunnel around you and forcing you to remove your still-spewing " + player.cockDescript(x) + " before something unfortunate happens.  Semen starts tumbling out as soon as you dismount your kangaroo conquest, but judging by the slow pace, she's going to look heavily pregnant for a while.");
 	
 	classes.EngineCore.outputText("\n\n\Replacing your clothes, you give Kami one last glance over before you leave.  She's lying happily encumbered on the floor, covered in a combination of your fluids.  She'll probably be good to head home later - that is, if she can still walk.");
 	//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
@@ -418,7 +418,7 @@ public function KamiDoubleDickFuck():void {
 	classes.EngineCore.outputText("You chuckle heartily - of course you're going to ravish her!  How ridiculous to assume otherwise.  In a split second, you've already grabbed her by her arms, forcing her back against the wall.  Kami passionately yelps, but her eagerness to grind against your growing package reveals her true intentions.");
 	classes.EngineCore.outputText("\n\nTaking the initiative, you hold the waitress by the throat whilst you free room in your [armor] for your succulent snatch-hungry sausages.  Wasting no time at all, you align your rock-hard rods underneath her huge phallus and directly at her needy orifices, moving your hands underneath her legs and lifting her slightly to add leverage for yourself.  Kami pants in anticipation, gently pressing herself against your cockheads in an attempt to entice you.  Ever the tease, you notice the waitress gasp between her delectable lips.  \"<i>Are you gonna put those fine-ass rods to use, or do I have to do it myself?</i>\"  Not about to disappoint, you push into her, penetrating the soft confines of her pussy before reaching into her tight little ass, slowly but steadily plunging further and further inside until your needy tools can't reach any further.  \"<i>F-Fuck!  Drill me hard!</i>\" she cries desperately.");
 	classes.EngineCore.outputText("\n\nRearing out slower than you had entered, her hips support yourself as you dive your way back in, slowly speeding up the frequency of your thrusts each time.  As you aggressively pump into your new kanga-slut, you force the waitress to press further against the alleyway wall behind her, her arms spreading out while her pillowy chest is squished against the brick.");
-	classes.EngineCore.outputText("\n\n\"<i>I could do this all goddamn day!</i>\"  Kami screams, your wicked thrashing leaving her pelvis moist with sheer bliss.  You can already feel your own orgasm approaching, so with due haste you grab Kami's ample bust and pick up your thrusts energetically, ramming your cocks home with as much speed as you can muster.  Your ass-engorged " + cockDescript(x) + " cums first, packing Kami's tight hole with your sticky seed, shortly followed by your other " + cockDescript(y) + " giving her delicate-yet-punished pussy the same treatment.");
+	classes.EngineCore.outputText("\n\n\"<i>I could do this all goddamn day!</i>\"  Kami screams, your wicked thrashing leaving her pelvis moist with sheer bliss.  You can already feel your own orgasm approaching, so with due haste you grab Kami's ample bust and pick up your thrusts energetically, ramming your cocks home with as much speed as you can muster.  Your ass-engorged " + player.cockDescript(x) + " cums first, packing Kami's tight hole with your sticky seed, shortly followed by your other " + player.cockDescript(y) + " giving her delicate-yet-punished pussy the same treatment.");
 	
 	classes.EngineCore.outputText("\n\nKami is only seconds behind, her figure leaning forward into your arms and spasming up against you in a sexual seizure.  \"<i>Oh my god!</i>\"  The 'roo girl squeals, her tongue lolling out in intense arousal as her 14 inch cock spurts its pent-up frustration all over your abdomen.  You can feel the fur on her thighs standing briefly on end as she coils them around you, the sensation gradually fading away slowly as her frantic panting slows down.");
 	
@@ -998,7 +998,7 @@ public function fuckNieve():void {
 	classes.EngineCore.outputText(".  With a smirk, you tell her it's not over yet.  That was just the appetizer.");
 
 	classes.EngineCore.outputText("\n\nWith a command Nieve falls backwards into the white, glittering powder and spreads her legs, revealing her deep blue nethers, wet and slick despite the intense cold of her body.  With a smile spreading across your face, you get down onto your knees between hers, and rub the head of your " + cockClit(x) + " against her icy cavern.  A chill runs down it and up your spine, but you ignore it. You tease and taunt Nieve's cunt, flicking her joy buzzer ");
-	if(x >= 0) classes.EngineCore.outputText("with your " + cockDescript(x) + "");
+	if(x >= 0) classes.EngineCore.outputText("with your " + player.cockDescript(x) + "");
 	else classes.EngineCore.outputText("with yours");
 	classes.EngineCore.outputText(", and just slipping the tip in before pulling out.  You do this until your snowbound lover is biting her lip, squirming with barely contained pleasure.");
 	
@@ -1240,7 +1240,10 @@ private function nieveReturnsPartII():void {
 	flags[kFLAGS.NIEVE_STAGE] = 5;
 	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
 }
-
+public function cockClit(number:int = 0):String {
+    if(player.hasCock() && number >= 0 && number < player.cockTotal()) return player.cockDescript(number);
+    else return Appearance.clitDescription(player);
+}
 /*Credits
 Fenoxo- for providing the game in which this scene might go into
 Kinathis - The \"<i>Suck Him</i>\" scene

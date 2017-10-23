@@ -79,10 +79,31 @@ public class CoC extends MovieClip
     }
 
     // Include the functions. ALL THE FUNCTIONS
+    //FIXME @OXDECEPTION
 
-    include "../../includes/descriptors.as";
-    include "../../includes/input.as";
-    include "../../includes/OnLoadVariables.as";
+    //Used when save/loading
+    public var notes:String = "";
+
+    //System time
+    public var date:Date = new Date();
+
+    //Mod save version.
+    public var modSaveVersion:Number = 19;
+    public var levelCap:Number = 150;
+
+    //dungeoneering variables (If it ain't broke, don't fix it)
+    //Setting dungeonLoc = 0 handles this:
+    public var inDungeon:Boolean = false; //Re-enabled for sake.
+    public var dungeonLoc:int = 0;
+
+    // To save shitting up a lot of code...
+    public var inRoomedDungeon:Boolean = false;
+    public var inRoomedDungeonResume:Function = null;
+
+    //Used to restrict random drops from overlapping uniques
+    public var plotFight:Boolean = false;
+    public var timeQ:Number = 0;
+    //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
 
 
     //Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
@@ -232,10 +253,7 @@ public class CoC extends MovieClip
     // Other scenes
 
     include "../../includes/april_fools.as";
-    include "../../includes/dreams.as";
     include "../../includes/fera.as";
-    include "../../includes/pregnancy.as";
-    include "../../includes/runa.as";
     include "../../includes/tamaniDildo.as";
     include "../../includes/thanksgiving.as";
     include "../../includes/valentines.as";

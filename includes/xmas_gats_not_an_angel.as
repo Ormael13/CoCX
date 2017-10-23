@@ -224,14 +224,14 @@ public function fuckTheAngelBadEnd():void {
 	else classes.EngineCore.outputText("\n\nCaressing your cunt");
 	classes.EngineCore.outputText(", you wander your way towards the giant's mouth-muscle, climbing on top of her warm, pink bed. There's gotta be some kinda magic involved - her mint saliva sends tingles through your body, while dragging your ");
 	if(player.hasCock()) classes.EngineCore.outputText(player.multiCockDescriptLight());
-	else classes.EngineCore.outputText(vaginaDescript());
+	else classes.EngineCore.outputText(Appearance.vaginaDescript(player,0));
 	classes.EngineCore.outputText(" against each bump and curve is beginning to get you hard.  She winces at the taste of your crotch against her tongue, though she's obviously never given oral to something with a heartbeat before.  Well, there's a first time for everything.");
 	classes.EngineCore.outputText("\n\nHer mouth is already lubricated with what appears to be chocolatey saliva, a sweet syrup coating your genitals with a cool, arousing fluid.  It's not hard to guess that her tongue might be incredibly sensitive, and every hump against it seems to be getting the giantess unconsciously excitable.  Her eyes begin to flutter and a groan escapes her lips, while you hug against each wave of her warm breath.  The hypersensitivity of her mouth-muscle begins to take control of her movements, the grinding of your ");
 	if(player.hasCock()) {
 		classes.EngineCore.outputText("member");
 		if(player.cockTotal() > 1) classes.EngineCore.outputText("s");
 	}
-	else classes.EngineCore.outputText(vaginaDescript());
+	else classes.EngineCore.outputText(Appearance.vaginaDescript(player,0));
 	classes.EngineCore.outputText(" along the softness of her maw causing her to twitch and drool uncomfortably.  You're beginning to fuck along her slowly, chuckling at every wince and moan she makes from the taste of your genitals.");
 	
 	classes.EngineCore.outputText("\n\nOne of the giantess' hands moves slowly towards the top of her head - what could she possibly be planning, you wonder.  Your query is answered almost instantly as the tips of her fingers start to caress the lengths of her striped horns, and her unused hand drifts slowly beneath to pet the increasingly wet problem below.  It didn't take her long to forget that pathetic bin of a man!  If anything, the taste of your ");
@@ -254,7 +254,7 @@ public function fuckTheAngelBadEnd():void {
 		if(player.cockTotal() == 1) classes.EngineCore.outputText("throbs");
 		else classes.EngineCore.outputText("throb");
 	}
-	else classes.EngineCore.outputText(vaginaDescript() + " throbs");
+	else classes.EngineCore.outputText(Appearance.vaginaDescript(player,0) + " throbs");
 	classes.EngineCore.outputText(", painting the giantess while she pants and moans, legs almost buckling from her own joy along with the taste of your mess inside of her.  She struggles to remove the makeshift dildo from her ass, resting her cheek against the size of the mountain let your concoction drool out.  Slipping out, you take the opportunity to grind up against her ruby lips, before cumming on her face.  She lets out a weathered smile, before her giant eyes focus once more on the mechanical soldier.");
 	//[Next]
 	classes.EngineCore.menu();

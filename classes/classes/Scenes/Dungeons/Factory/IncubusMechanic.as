@@ -89,7 +89,7 @@ public class IncubusMechanic extends Monster {
 				game.combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your [legs] out from under you.");
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
 			if ((player.spe-30) > rand(60)) {
 				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
 			}

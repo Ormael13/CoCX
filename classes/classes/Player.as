@@ -19,6 +19,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Pregnancy;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -91,8 +92,9 @@ use namespace kGAMECLASS;
 		public var exploredLake:Number = 0;
 
 		//Player pregnancy variables and functions
+		private var pregnancy:Pregnancy = new Pregnancy();
 		override public function pregnancyUpdate():Boolean {
-			return game.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
+			return pregnancy.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
 		}
 
 		// Inventory

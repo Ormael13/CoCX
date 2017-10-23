@@ -1,7 +1,6 @@
 package classes {
 import classes.GlobalFlags.*;
 
-
 import coc.view.MainView;
 import coc.view.StatsView;
 
@@ -30,7 +29,7 @@ public class GameSettings extends BaseContent {
 		addButton(0, "Gameplay", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", getGame().displayControls);
+		addButton(4, "Controls", displayControls);
 
 		addButton(14, "Back", getGame().mainMenu.mainMenu);
 
@@ -610,6 +609,63 @@ public class GameSettings extends BaseContent {
 		mainView.mainText.setTextFormat(fmt);
 		flags[kFLAGS.CUSTOM_FONT_SIZE] = 0;
 	}
+
+    private function displayControls():void
+    {
+        mainView.hideAllMenuButtons();
+        getGame().inputManager.DisplayBindingPane();
+        EngineCore.menu();
+        EngineCore.addButton(0, "Reset Ctrls", resetControls);
+        EngineCore.addButton(1, "Clear Ctrls", clearControls);
+        EngineCore.addButton(4, "Back", hideControls);
+    }
+
+    private function hideControls():void
+    {
+        getGame().inputManager.HideBindingPane();
+
+        getGame().gameSettings.settingsScreenMain();
+    }
+
+    private function resetControls():void
+    {
+        getGame().inputManager.HideBindingPane();
+
+        EngineCore.clearOutput();
+        EngineCore.outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
+
+        EngineCore.doYesNo(resetControlsYes, displayControls);
+    }
+
+    private function resetControlsYes():void
+    {
+        getGame().inputManager.ResetToDefaults();
+
+        EngineCore.clearOutput();
+        EngineCore.outputText("Controls have been reset to defaults!\n\n");
+
+        EngineCore.doNext(displayControls);
+    }
+
+    private function clearControls():void
+    {
+        getGame().inputManager.HideBindingPane();
+
+        EngineCore.clearOutput();
+        EngineCore.outputText("Are you sure you want to clear all of the currently bound controls?");
+
+        EngineCore.doYesNo(clearControlsYes, displayControls);
+    }
+
+    private function clearControlsYes():void
+    {
+        getGame().inputManager.ClearAllBinds();
+
+        EngineCore.clearOutput();
+        EngineCore.outputText("Controls have been cleared!");
+
+        EngineCore.doNext(displayControls);
+    }
 }
 
 }

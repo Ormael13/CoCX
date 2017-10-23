@@ -20,15 +20,7 @@ use namespace kGAMECLASS;
 		{
 			kGAMECLASS.timeQ = value;
 		}
-
-		private function get campQ():Boolean
-		{
-			return kGAMECLASS.campQ;
-		}
-		private function set campQ(value:Boolean):void
-		{
-			kGAMECLASS.campQ = value;
-		}
+		private var campQ:Boolean = false;
 
 		protected function hasItemInStorage(itype:ItemType):Boolean
 		{

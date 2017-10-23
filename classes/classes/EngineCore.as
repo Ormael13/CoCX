@@ -370,7 +370,7 @@ public class EngineCore {
         itype = ItemType.lookupItemByShort(buttonText);
         if (itype != null) temp = itype.longName;
         if (temp != "") {
-            temp = kGAMECLASS.capitalizeFirstLetter(temp);
+            temp = Utils.capitalizeFirstLetter(temp);
             toolTipHeader = temp;
         }
 
@@ -1001,7 +1001,7 @@ public class EngineCore {
     public static function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
         //Virginity check
         if (kGAMECLASS.player.vaginas[vIndex].virgin) {
-            if (display) outputText("\nYour " + kGAMECLASS.vaginaDescript(vIndex) + " loses its virginity!");
+            if (display) outputText("\nYour " + Appearance.vaginaDescript(kGAMECLASS.player,vIndex) + " loses its virginity!");
             kGAMECLASS.player.vaginas[vIndex].virgin = false;
         }
         //If cock is bigger than unmodified vagina can hold - 100% stretch!
@@ -1009,11 +1009,11 @@ public class EngineCore {
             if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock larger than it's total capacity.");
                 if (display) {
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is now very loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is now loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now very loose.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now loose.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
                 kGAMECLASS.player.vaginas[vIndex].vaginalLooseness++;
             }
@@ -1023,11 +1023,11 @@ public class EngineCore {
             if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock @ 75% of capacity.");
                 if (display) {
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is now very loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " is now loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + kGAMECLASS.vaginaDescript(0) + " loses its virgin-like tightness.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now very loose.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now loose.</b>  ");
+                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
                 kGAMECLASS.player.vaginas[vIndex].vaginalLooseness++;
             }

@@ -6,7 +6,8 @@
 		// tags not present in the singleArgConverters object return an error message.
 		//
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
-		import classes.GlobalFlags.kFLAGS;
+        import classes.Appearance;
+        import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
 		
 		public var singleArgConverters:Object =
@@ -77,7 +78,7 @@
 				"pg"						: function(thisPtr:*):* { return "\n\n";},
 				"pussy"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
 				"race"						: function(thisPtr:*):* { return kGAMECLASS.player.race(); },
-				"sack"						: function(thisPtr:*):* { return kGAMECLASS.sackDescript(); },
+				"sack"						: function(thisPtr:*):* { return Appearance.sackDescript(kGAMECLASS.player); },
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* {
@@ -109,7 +110,7 @@
 				},
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.combat.teaseText(); },
-				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.tongueDescript(); },
+				"tongue"					: function(thisPtr:*):* { return Appearance.tongueDescription(kGAMECLASS.player); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
 				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
 				"vagina"					: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },

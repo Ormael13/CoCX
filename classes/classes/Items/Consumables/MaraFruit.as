@@ -119,7 +119,7 @@ public class MaraFruit extends Consumable{
 					temp++;
 				}
 				temp = choices[rand(choices.length)];
-				outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + game.cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
+				outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + player.cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
 				if(player.tentacleCocks() > 0) outputText("nother");
 				outputText(" tentacle-cock!</b>");
 				player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
@@ -139,7 +139,7 @@ public class MaraFruit extends Consumable{
 							player.breastRows[0].breastRating--;
 						}
 						//Talk about shrinkage
-						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + game.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
 						if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
 						changes++;
 					}
@@ -160,7 +160,7 @@ public class MaraFruit extends Consumable{
 							//If this isn't the first change...
 							if (temp2 > 1) outputText("...and y");
 							else outputText("Y");
-							outputText("our " + game.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+							outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
 						}
 						temp3++;
 					}

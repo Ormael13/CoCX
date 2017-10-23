@@ -11,7 +11,9 @@ internal class ControlBindings {
     public function ControlBindings() {
 
     }
-
+    public function executeButtonClick(button:int = 0):void {
+        kGAMECLASS.mainView.clickButton( button );
+    }
     internal function run(inputManager:InputManager):void {
         inputManager.AddBindableControl(
                 "Show Stats",
@@ -219,7 +221,7 @@ internal class ControlBindings {
                     "Respond no to any available prompt",
                     function ():void {
                         if (kGAMECLASS.mainView.getButtonText(1) == "No" && kGAMECLASS.mainView.buttonIsVisible(1)) {
-                            kGAMECLASS.executeButtonClick(1);
+                            executeButtonClick(1);
                         }
                     });
 
@@ -228,7 +230,7 @@ internal class ControlBindings {
                     "Respond yes to any available prompt",
                     function ():void {
                         if (kGAMECLASS.mainView.getButtonText(0) == "Yes" && kGAMECLASS.mainView.buttonIsVisible(0)) {
-                            kGAMECLASS.executeButtonClick(0);
+                            executeButtonClick(0);
                         }
                     });
 
@@ -251,7 +253,7 @@ internal class ControlBindings {
                             //	kGAMECLASS.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
                             //	kGAMECLASS.mainView.getButtonText( 9 ) );
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(9);
+                            executeButtonClick(9);
                             return;
                         }
                         // Button 14
@@ -260,7 +262,7 @@ internal class ControlBindings {
                             //	kGAMECLASS.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
                             //	kGAMECLASS.mainView.getButtonText( 9 ) );
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(14);
+                            executeButtonClick(14);
                             return;
                         }
                         // Button 0
@@ -269,7 +271,7 @@ internal class ControlBindings {
                             //	kGAMECLASS.mainView.buttonIsVisible( 0 ) ? "(visible)" : "(hidden)",
                             //	kGAMECLASS.mainView.getButtonText( 0 ) );
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(0);
+                            executeButtonClick(0);
                             return;
                         }
 
@@ -279,7 +281,7 @@ internal class ControlBindings {
                             //	kGAMECLASS.mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
                             //	kGAMECLASS.mainView.getButtonText( 4 ) );
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(4);
+                            executeButtonClick(4);
                             return;
                         }
 
@@ -289,7 +291,7 @@ internal class ControlBindings {
                             //	kGAMECLASS.mainView.buttonIsVisible( 5 ) ? "(visible)" : "(hidden)",
                             //	kGAMECLASS.mainView.getButtonText( 5 ) );
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(5);
+                            executeButtonClick(5);
                             //return;
                         }
                     });
@@ -317,7 +319,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(0)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(0);
+                            executeButtonClick(0);
                         }
                     });
 
@@ -327,7 +329,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(1)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(1);
+                            executeButtonClick(1);
                         }
                     });
 
@@ -337,7 +339,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(2)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(2);
+                            executeButtonClick(2);
                         }
                     });
 
@@ -347,7 +349,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(3)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(3);
+                            executeButtonClick(3);
                         }
                     });
 
@@ -357,7 +359,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(4)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(4);
+                            executeButtonClick(4);
                         }
                     });
 
@@ -367,7 +369,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(5)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(5);
+                            executeButtonClick(5);
                         }
                     });
 
@@ -377,7 +379,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(6)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(6);
+                            executeButtonClick(6);
                         }
                     });
 
@@ -387,7 +389,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(7)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(7);
+                            executeButtonClick(7);
                         }
                     });
 
@@ -397,7 +399,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(8)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(8);
+                            executeButtonClick(8);
                         }
                     });
 
@@ -407,7 +409,7 @@ internal class ControlBindings {
                     function ():void {
                         if (kGAMECLASS.mainView.buttonIsVisible(9)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(9);
+                            executeButtonClick(9);
                         }
                     });
 
@@ -418,7 +420,7 @@ internal class ControlBindings {
                     function ():void {
                         if (EngineCore.buttonIsVisible(10)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(10);
+                            executeButtonClick(10);
                         }
                     });
             inputManager.AddBindableControl(
@@ -427,7 +429,7 @@ internal class ControlBindings {
                     function ():void {
                         if (EngineCore.buttonIsVisible(11)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(11);
+                            executeButtonClick(11);
                         }
                     });
             inputManager.AddBindableControl(
@@ -436,7 +438,7 @@ internal class ControlBindings {
                     function ():void {
                         if (EngineCore.buttonIsVisible(12)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(12);
+                            executeButtonClick(12);
                         }
                     });
             inputManager.AddBindableControl(
@@ -445,7 +447,7 @@ internal class ControlBindings {
                     function ():void {
                         if (EngineCore.buttonIsVisible(13)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(13);
+                            executeButtonClick(13);
                         }
                     });
             inputManager.AddBindableControl(
@@ -454,7 +456,7 @@ internal class ControlBindings {
                     function ():void {
                         if (EngineCore.buttonIsVisible(14)) {
                             kGAMECLASS.mainView.toolTipView.hide();
-                            kGAMECLASS.executeButtonClick(14);
+                            executeButtonClick(14);
                         }
                     });
             inputManager.AddBindableControl(

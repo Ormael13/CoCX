@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.DesertCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.internals.Utils;
 
 public class SandWitchMob extends Monster
 	{
@@ -82,7 +83,7 @@ public class SandWitchMob extends Monster
 						outputText("  A small set of stones settle on your [balls].");
 						bonus++;
 					}
-					outputText("  " + game.num2Text(player.totalNipples()) + " crawl up to your chest and over your top [nipple]s");
+					outputText("  " + Utils.num2Text(player.totalNipples()) + " crawl up to your chest and over your top [nipple]s");
 					if(player.bRows() > 1) {
 						if(player.bRows() == 2) outputText(" and");
 						else outputText(",");

@@ -3,6 +3,7 @@
  */
 package classes.Items.Consumables
 {
+import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.BodyParts.Skin;
 import classes.CockTypesEnum;
@@ -125,16 +126,16 @@ public class BeeHoney extends Consumable
 			if (changes < changeLimit && player.hairLength < 25 && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && Utils.rand(3) == 0) {
 				outputText("\n\nFeeling a bit off-balance, you discover your hair has lengthened, ");
 				player.hairLength += Utils.rand(4) + 1;
-				outputText("becoming " + getGame().hairDescript() + ".");
+				outputText("becoming " + Appearance.hairDescription(player) + ".");
 				changes++;
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !getGame().flags[kFLAGS.HYPER_HAPPY]) {
 				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + getGame().breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
 				if (player.bRows() >= 3) outputText("abdomen");
 				else outputText("chest");
-				outputText(". The " + getGame().nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+				outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but ");
 				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
 				else outputText(player.skinTone + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
@@ -144,7 +145,7 @@ public class BeeHoney extends Consumable
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && (player.antennae == AppearanceDefs.ANTENNAE_NONE || player.antennae == AppearanceDefs.ANTENNAE_MANTIS) && player.horns == 0 && Utils.rand(3) == 0) {
 				if (player.antennae == AppearanceDefs.ANTENNAE_MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
-				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + getGame().hairDescript() + ".");
+				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + Appearance.hairDescription(player) + ".");
 				mutations.setAntennae(AppearanceDefs.ANTENNAE_BEE);
 				changes++;
 			}
@@ -193,7 +194,7 @@ public class BeeHoney extends Consumable
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && Utils.rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + getGame().allBreastsDescript() + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
+				outputText("\n\nA chill runs over your " + Appearance.allBreastsDescript(player) + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
 				if (player.biggestTitSize() < 1) outputText("'breast'.");
 				else outputText("breast.");
 				changes++;
@@ -211,8 +212,8 @@ public class BeeHoney extends Consumable
 			}
 			//Bee butt - 66% lower chance if already has a tail
 			if (changes < changeLimit && player.tailType != AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && (player.tailType == AppearanceDefs.TAIL_TYPE_NONE || Utils.rand(1.5) == 0) && Utils.rand(4) == 0) {
-				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
-				else outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
+				else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
 				mutations.setTailType(AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN,1);
 				player.tailVenom = 10;
 				player.tailRecharge = 2;
@@ -313,7 +314,7 @@ public class BeeHoney extends Consumable
 						player.cocks[0].cockThickness += (0.1 * Utils.rand(2) + 0.1) * mult;
 					}
 					else {
-						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + getGame().cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
+						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + player.cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
 					}
 					game.player.dynStats("sen", 3);
 				}

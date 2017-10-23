@@ -389,7 +389,8 @@ import coc.xxc.StoryContext;
 		
 		protected function cockClit(value:int = 0):String
 		{
-			return kGAMECLASS.cockClit(value);
+			if(player.hasCock() && value >= 0 && value < player.cockTotal()) return player.cockDescript(value);
+			else return clitDescript();
 		}
 		
 /* Was only used in Scylla's code. Replaced with conditionals
@@ -417,7 +418,7 @@ import coc.xxc.StoryContext;
 		
 		protected function allBreastsDescript():String
 		{
-			return kGAMECLASS.allBreastsDescript();
+			return Appearance.allBreastsDescript(player);
 		}
 		
 		protected function sMultiCockDesc():String
@@ -442,15 +443,15 @@ import coc.xxc.StoryContext;
 		
 		protected function tongueDescript():String
 		{
-			return kGAMECLASS.tongueDescript();
+            return Appearance.tongueDescription(player);
 		}
 		
 		protected function ballsDescriptLight(forcedSize:Boolean = true):String {
-			return kGAMECLASS.ballsDescriptLight(forcedSize);
+            return Appearance.ballsDescription(forcedSize, true, player);
 		}
 
 		protected function ballDescript():String {
-			return kGAMECLASS.ballDescript();
+            return Appearance.ballsDescription(false, false, player);
 		}
 
 		/* All calls changed to monster.ballsDescriptLight
@@ -466,15 +467,15 @@ import coc.xxc.StoryContext;
 		*/
 
 		protected function ballsDescript():String {
-			return kGAMECLASS.ballsDescript();
+            return Appearance.ballsDescription(false, true, player, true);
 		}
 		
 		protected function simpleBallsDescript():String {
-			return kGAMECLASS.simpleBallsDescript();
+            return Appearance.ballsDescription(false, true, player);
 		}
 
 		protected function assholeDescript():String {
-			return kGAMECLASS.assholeDescript();
+			return Appearance.assholeDescript(player)
 		}
 		
 		protected function eAssholeDescript():String {
@@ -482,15 +483,15 @@ import coc.xxc.StoryContext;
 		}
 				
 		protected function hipDescript():String {
-			return kGAMECLASS.hipDescript();
+			return Appearance.hipDescription(player);
 		}
 		
 		protected function assDescript():String {
-			return kGAMECLASS.assDescript();
+			return Appearance.buttDescription(player);
 		}
 		
 		protected  function buttDescript():String {
-			return kGAMECLASS.buttDescript();
+			return Appearance.buttDescription(player);
 		}
 
 		protected function assholeOrPussy():String {
@@ -529,7 +530,7 @@ import coc.xxc.StoryContext;
 		
 		protected function nippleDescript(rowNum:Number):String
 		{
-			return kGAMECLASS.nippleDescript(rowNum);
+			return Appearance.nippleDescription(player, rowNum)
 		}
 		
 		protected function cockDescript(cockNum:int = 0):String
@@ -595,32 +596,36 @@ import coc.xxc.StoryContext;
 		
 		protected function hairDescript():String
 		{
-			return kGAMECLASS.hairDescript();
+			return Appearance.hairDescription(player);
 		}
 		
 		protected function beardDescript():String
 		{
-			return kGAMECLASS.beardDescript();
+			return Appearance.beardDescription(player);
 		}
 		
 		protected function hairOrFur():String
 		{
-			return kGAMECLASS.hairOrFur();
+            return Appearance.hairOrFur(player);
 		}
 		
 		protected function clitDescript():String
 		{
-			return kGAMECLASS.clitDescript();
+            return Appearance.clitDescription(player);
 		}
 		
 		protected function vaginaDescript(vaginaNum:Number = 0):String
 		{
-			return kGAMECLASS.vaginaDescript(vaginaNum);
+            return Appearance.vaginaDescript(player, vaginaNum);
 		}
 		
 		protected function allVaginaDescript():String
 		{
-			return kGAMECLASS.allVaginaDescript();
+            if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
+            if (player.vaginas.length > 1) return (vaginaDescript(rand(player.vaginas.length - 1)) + "s");
+
+            CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
+            return "ERROR: allVaginaDescript called with no vaginas.";
 		}
 		
 /* Now called directly
