@@ -116,7 +116,7 @@ public class StoryCompiler extends Compiler {
 		var expr:String,op:String;
 		if ('value' in attrs) expr = attrs['value'];
 		else expr = "'"+Eval.escapeString(x.text().toString())+"'";
-		if ('op' in attrs) op = attrs[op];
+		if ('op' in attrs) op = attrs['op'];
 		else op = '=';
 		return new SetStmt(attrs['var'],expr,op);
 	}

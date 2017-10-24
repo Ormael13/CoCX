@@ -17,7 +17,7 @@ package classes.Scenes.Places.Prison
 			var scruffyMet:* = undefined;
 			var happiness:* = prisonCaptorScruffyHappiness();
 			scruffyMet = prisonCaptorScruffyMet();
-			scruffyMet < 1;
+			//scruffyMet < 1;
 		}
 		
 		public function prisonCaptorScruffyOptedOut():Boolean
@@ -28,11 +28,8 @@ package classes.Scenes.Places.Prison
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
 			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyScruffy);
-			if(testVal < 0)
-			{
-				return true;
-			}
-			return false;
+			return testVal < 0;
+
 		}
 		
 		public function prisonCaptorScruffyMet():Number

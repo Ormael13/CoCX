@@ -155,10 +155,10 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == 4) description += "tentacley ";
 			else if (i_creature.hairType == 7) description += "moss ";
 			
-			if (i_creature.beardStyle == 0) description += "beard"
-			else if (i_creature.beardStyle == 1) description += "goatee"
-			else if (i_creature.beardStyle == 2) description += "clean-cut beard"
-			else if (i_creature.beardStyle == 3) description += "mountain-man beard"
+			if (i_creature.beardStyle == 0) description += "beard";
+			else if (i_creature.beardStyle == 1) description += "goatee";
+			else if (i_creature.beardStyle == 2) description += "clean-cut beard";
+			else if (i_creature.beardStyle == 3) description += "mountain-man beard";
 
 			return description;
 		}

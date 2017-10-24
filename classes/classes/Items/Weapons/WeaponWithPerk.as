@@ -36,7 +36,7 @@ package classes.Items.Weapons
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon "
+			desc += "\n\nType: Weapon ";
 			if (perk == "Large") desc += "(Large)";
 			else if (name.indexOf("staff") >= 0) desc += "(Staff)";
 			else if (verb.indexOf("whip") >= 0) desc += "(Whip)";

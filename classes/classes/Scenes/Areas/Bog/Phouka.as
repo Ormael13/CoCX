@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class Phouka extends Monster
@@ -145,7 +146,7 @@ public class Phouka extends Monster
         
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.bog.phoukaScene.phoukaPlayerWins(hpVictory);
+			SceneLib.bog.phoukaScene.phoukaPlayerWins(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -160,10 +161,10 @@ public class Phouka extends Monster
 			else {
 				if (player.hasVagina()) { //Phouka prefer vaginal if they can get it
 					if (player.isTaur() || rand(2) == 0)
-						game.bog.phoukaScene.phoukaSexHorse(true, !hpVictory); //And they love mating with female or herm centaurs in their horse form
-					else game.bog.phoukaScene.phoukaSexBunny(true, !hpVictory);
+						SceneLib.bog.phoukaScene.phoukaSexHorse(true, !hpVictory); //And they love mating with female or herm centaurs in their horse form
+					else SceneLib.bog.phoukaScene.phoukaSexBunny(true, !hpVictory);
 				}
-				else game.bog.phoukaScene.phoukaSexGoat(true, !hpVictory);
+				else SceneLib.bog.phoukaScene.phoukaSexGoat(true, !hpVictory);
 			}
 		}
 
@@ -279,7 +280,7 @@ public class Phouka extends Monster
 			this.tallness = 5;
 			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
 			this.armType = AppearanceDefs.ARM_TYPE_HUMAN;
 			this.skinTone = "black";
 			this.hairColor = "black";

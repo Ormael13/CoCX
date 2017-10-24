@@ -2,6 +2,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -130,7 +131,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.minotaurMobScene.victoryMinotaurGang();
+			SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -139,7 +140,7 @@ import classes.GlobalFlags.kFLAGS;
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
 				doNext(game.endLustLoss);
 			} else {
-				game.highMountains.minotaurMobScene.minotaurDeFeet();
+				SceneLib.highMountains.minotaurMobScene.minotaurDeFeet();
 			}
 		}
 
@@ -195,7 +196,7 @@ import classes.GlobalFlags.kFLAGS;
 			this.level = level;
 			this.gems = rand(50) + 100;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

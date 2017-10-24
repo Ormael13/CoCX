@@ -2,6 +2,7 @@ package classes.Items.Consumables
 {
 import classes.EngineCore;
 import classes.Items.Consumable;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public final class KitsuneGift extends Consumable {
@@ -19,7 +20,7 @@ public final class KitsuneGift extends Consumable {
 				case 0: 
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-				game.inventory.takeItem(game.consumables.FOXJEWL, game.inventory.inventoryMenu);
+				SceneLib.inventory.takeItem(game.consumables.FOXJEWL, SceneLib.inventory.inventoryMenu);
 				return(true);
 
 			//[Fox Berries]
@@ -27,7 +28,7 @@ public final class KitsuneGift extends Consumable {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
 				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 				//add Fox Berries to inventory
-				game.inventory.takeItem(game.consumables.FOXBERY, game.inventory.inventoryMenu);
+				SceneLib.inventory.takeItem(game.consumables.FOXBERY, SceneLib.inventory.inventoryMenu);
 				return(true);
 
 			//[Gems]
@@ -45,7 +46,7 @@ public final class KitsuneGift extends Consumable {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
 				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
 				//add Kitsune Tea/Scholar's Tea to inventory
-				game.inventory.takeItem(game.consumables.SMART_T, game.inventory.inventoryMenu);
+				SceneLib.inventory.takeItem(game.consumables.SMART_T, SceneLib.inventory.inventoryMenu);
 				return(true);
 
 			//[Hair Dye]
@@ -60,7 +61,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
 				//add <color> Dye to inventory
-				game.inventory.takeItem(itype, game.inventory.inventoryMenu);
+				SceneLib.inventory.takeItem(itype, SceneLib.inventory.inventoryMenu);
 				return(true);
 
 			//[Knowledge Spell]
@@ -116,7 +117,7 @@ public final class KitsuneGift extends Consumable {
 				case 11:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 					outputText("\n\n<b>At least you managed to salvage a shard of black chitin from it...</b>  ");
-				game.inventory.takeItem(game.useables.B_CHITN, game.inventory.inventoryMenu);
+				SceneLib.inventory.takeItem(game.useables.B_CHITN, SceneLib.inventory.inventoryMenu);
 				return(true);
 
 				default: trace("Kitsune's gift roll foobar...");

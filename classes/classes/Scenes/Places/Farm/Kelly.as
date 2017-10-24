@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.Farm{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
@@ -381,7 +381,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nShe bursts into tears again, any attempt at a reply breaking off into another sob. You cockslap her repeatedly as you roar, \"<i>Do you think I have time to waste on whiny bitches like you?  You're even lucky I'm taking care of finding you a proper name.  I should call you Cumbucket or Sugarcunt because that's exactly what you are.  So what do you think?  Do you want to be called Cumbucket, Cumbucket?</i>\"");
 	
 	//(Silly:)
-	if(silly() && kGAMECLASS.amilyScene.amilyFollower() && kGAMECLASS.amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
+	if(silly() && SceneLib.amilyScene.amilyFollower() && SceneLib.amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
 	
 	outputText("\n\nThe broken centauress manages to shake her head convulsively.  Satisfied, you stop slapping her.");
 	

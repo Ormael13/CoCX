@@ -2,6 +2,7 @@ package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class Yeti extends Monster
@@ -25,7 +26,7 @@ public class Yeti extends Monster
 					combatRoundOver();
 					return;
 				}
-				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ")
+				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
 				var damage:Number = str + 25 + rand(50);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
@@ -76,7 +77,7 @@ public class Yeti extends Monster
 		public function yetiTease():void {
 			//lust increased
 			if (rand(player.lib + player.cor) >= 30 && rand(3) > 0) {
-				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.")
+				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.");
 				player.dynStats("lust", 20 + rand(10));
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
@@ -97,13 +98,13 @@ public class Yeti extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			game.glacialRift.yetiScene.winAgainstYeti();
+			SceneLib.glacialRift.yetiScene.winAgainstYeti();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			game.glacialRift.yetiScene.loseToYeti();
+			SceneLib.glacialRift.yetiScene.loseToYeti();
 		}
 		
 		public function Yeti() 

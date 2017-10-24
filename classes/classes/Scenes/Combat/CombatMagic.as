@@ -17,6 +17,7 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -1585,7 +1586,7 @@ public class CombatMagic extends BaseCombatContent {
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
                 if(monster is Diva){(monster as Diva).handlePlayerSpell("blind");}
 				if(monster.short == "Isabella")
-					if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
+					if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
 					else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.");
 				if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.");
 				if(monster.short == "plain girl") {

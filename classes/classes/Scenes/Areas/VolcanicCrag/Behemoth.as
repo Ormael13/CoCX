@@ -2,6 +2,7 @@ package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Behemoth extends Monster
 	{
@@ -15,7 +16,7 @@ public class Behemoth extends Monster
 			else {
 				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
 				var damage:int = str + level;
-				damage = player.reduceDamage(damage)
+				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
@@ -30,7 +31,7 @@ public class Behemoth extends Monster
 		}
 		
 		override public function defeated(hpVictory:Boolean):void {
-			game.volcanicCrag.behemothScene.winAgainstBehemoth();
+			SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
@@ -38,7 +39,7 @@ public class Behemoth extends Monster
 				outputText("\n\nYour opponent doesn't seem to care.");
 				doNext(game.endLustLoss);
 			} else {
-				game.volcanicCrag.behemothScene.loseToBehemoth();
+				SceneLib.volcanicCrag.behemothScene.loseToBehemoth();
 			}
 		}
 		
@@ -66,9 +67,9 @@ public class Behemoth extends Monster
 			this.earType = AppearanceDefs.EARS_ELFIN;
 			this.faceType = AppearanceDefs.FACE_CAT;
 			this.horns = 7;
-			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT
-			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT;
+			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH;
 			initStrTouSpeInte(180, 130, 100, 115);
 			initLibSensCor(35, 15, 15);
 			this.weaponName = "claws";

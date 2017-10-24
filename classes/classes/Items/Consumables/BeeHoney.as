@@ -35,16 +35,16 @@ public class BeeHoney extends Consumable
         }
 		
 		override public function canUse():Boolean {
-			if (value == SPECIAL_HONEY_VALUE && getGame().player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
-				outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
+            if (value == SPECIAL_HONEY_VALUE && kGAMECLASS.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
+                outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
 			return true;
 		}
 		
 		override public function useItem():Boolean {
-			var player:Player = getGame().player;
-			var pure:Boolean = (value == PURE_HONEY_VALUE);
+            var player:Player = kGAMECLASS.player;
+            var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
@@ -66,17 +66,17 @@ public class BeeHoney extends Consumable
 			}
 			player.refillHunger(15);
 			if ((pure || special) && player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) { //Pure or special honey can reduce the corruption of a phouka baby
-				if (getGame().flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
-					outputText("\n\nYou feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
+                if (kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
+                    outputText("\n\nYou feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
 				}
-				else if (getGame().flags[kFLAGS.PREGNANCY_CORRUPTION] < 1) { //Child is faerie, loves pure honey
-					outputText("\n\nA warm sensation starts in your belly and runs all through your body.  It's almost as if you're feeling music and you guess your passenger enjoyed the meal.");
+                else if (kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION] < 1) { //Child is faerie, loves pure honey
+                    outputText("\n\nA warm sensation starts in your belly and runs all through your body.  It's almost as if you're feeling music and you guess your passenger enjoyed the meal.");
 				}
 				else { //Child is on the line, will become a faerie with this drink
 					outputText("\n\nAt first you feel your baby struggle against the honey, then it seems to grow content and enjoy it.");
 				}
-				getGame().flags[kFLAGS.PREGNANCY_CORRUPTION]--;
-				if (pure) return(false); //No transformative effects for the player because the pure honey was absorbed by the baby - Special honey will keep on giving
+                kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION]--;
+                if (pure) return(false); //No transformative effects for the player because the pure honey was absorbed by the baby - Special honey will keep on giving
 			}
 			//Corruption reduction
 			if (changes < changeLimit && pure) { //Special honey will also reduce corruption, but uses different text and is handled separately
@@ -130,8 +130,8 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//-Remove extra breast rows
-			if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !getGame().flags[kFLAGS.HYPER_HAPPY]) {
-				changes++;
+            if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !kGAMECLASS.flags[kFLAGS.HYPER_HAPPY]) {
+                changes++;
 				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
 				if (player.bRows() >= 3) outputText("abdomen");
 				else outputText("chest");

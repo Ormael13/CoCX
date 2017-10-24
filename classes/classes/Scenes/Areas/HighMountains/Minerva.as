@@ -2,6 +2,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Minerva extends Monster
@@ -191,12 +192,12 @@ public class Minerva extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.minervaScene.beatUpDatSharpie();
+			SceneLib.highMountains.minervaScene.beatUpDatSharpie();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.highMountains.minervaScene.loseToMinerva();
+			SceneLib.highMountains.minervaScene.loseToMinerva();
 		}
 
 		public function Minerva()

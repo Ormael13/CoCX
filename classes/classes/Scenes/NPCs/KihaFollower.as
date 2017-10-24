@@ -107,8 +107,7 @@ private function kihaAffection(changes:Number = 0):Boolean {
 }
 
 private function canKihaGetPregnant():Boolean {
-	if (model.time.days % 15 == 0 && flags[kFLAGS.KIHA_PREGNANCY_POTENTIAL] > 0 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] <= 0 && !pregnancy.isPregnant) return true;
-	else return false;
+	return model.time.days % 15 == 0 && flags[kFLAGS.KIHA_PREGNANCY_POTENTIAL] > 0 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] <= 0 && !pregnancy.isPregnant;
 }
 
 private function kihaKnockUpAttempt():void {

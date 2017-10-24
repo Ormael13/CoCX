@@ -1,20 +1,13 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.Items.Consumables.SimpleConsumable;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.room;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.CockTypesEnum;
-	import classes.PregnancyStore;
-	
-	/**
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Consumables.SimpleConsumable;
+import classes.Items.Weapon;
+import classes.Scenes.SceneLib;
+import classes.room;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -262,7 +255,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function enterD3():void
 		{
-			kGAMECLASS.dungeons.setDungeonButtons(); //Ensures the top buttons are visible.
+			SceneLib.dungeons.setDungeonButtons(); //Ensures the top buttons are visible.
 			menu(); //Clear bottom buttons
 			inRoomedDungeon = true;
 			inRoomedDungeonResume = resumeFromFight;
@@ -286,7 +279,7 @@ package classes.Scenes.Dungeons.D3
 			statScreenRefresh();
 			hideUpDown();
 			spriteSelect(-1);
-			kGAMECLASS.dungeons.setTopButtons();
+			SceneLib.dungeons.setTopButtons();
 			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
 			{
 				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())
@@ -325,9 +318,9 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			addButton(13, "Inventory", inventory.inventoryMenu);
-			addButton(14, "Map", kGAMECLASS.dungeons.map.displayMap);
-			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
-		}
+			addButton(14, "Map", SceneLib.dungeons.map.displayMap);
+            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+        }
 		
 		public function move(roomName:String, timeToPass:Number = 0):void
 		{
@@ -417,8 +410,8 @@ package classes.Scenes.Dungeons.D3
 					flags[kFLAGS.D3_ENTERED_MAGPIEHALL] = 1;
 					outputText("You creep through the archway. The sound of movement and bustle is closer here; it seems to be coming from directly below you. Ahead is the screen, a large window made from tinted glass. Cautiously you peer through it. You have entered a vast hall, near the very top of it; this seems to be some sort of observation booth set high in the stone wall. It’s designed in the grand, classical tradition, fluted balustrades flanking the walls, each decorated at the top by a carved magpie in flight. Below is - well. You blink, trying to take it all in.");
 					outputText("\n\nMany feet below the hall swarms with activity: tall, thin, grey-green reptiles sliding sinuously around each other and the long tables that run the length of the room. There must be hundreds, no, at least a thousand basilisks down there, carrying, analyzing, sorting the vast amount of junk the tables are heaped with.");
-					if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that " + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " once worked in."); 
-					outputText("  You get the fright of your life when you think you see a number of depthless pools of grey revolve up to meet yours- but they don’t freeze you, you note as you reflexively turn away. The tinted glass must carry some sort of anti-petrifying charm, and further it must be reflective on the other side, because no one below seems to realize you’re standing there. Relaxing a bit, you continue to absorb the massive room. At the end furthest away from you two huge piles have been created- one of eggs, a massed assortment of every color and size imaginable, and one of pure junk, presumably everything the basilisks have found whilst scavenging and considered worth keeping. The detritus of a dozen collapsed civilizations must be down there, collected for the demons’ perusal by their scaly custodians. Directly below you, you can see archways like the one you just passed under, through which the basilisks ebb and flow.");
+                    if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that " + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " once worked in.");
+                    outputText("  You get the fright of your life when you think you see a number of depthless pools of grey revolve up to meet yours- but they don’t freeze you, you note as you reflexively turn away. The tinted glass must carry some sort of anti-petrifying charm, and further it must be reflective on the other side, because no one below seems to realize you’re standing there. Relaxing a bit, you continue to absorb the massive room. At the end furthest away from you two huge piles have been created- one of eggs, a massed assortment of every color and size imaginable, and one of pure junk, presumably everything the basilisks have found whilst scavenging and considered worth keeping. The detritus of a dozen collapsed civilizations must be down there, collected for the demons’ perusal by their scaly custodians. Directly below you, you can see archways like the one you just passed under, through which the basilisks ebb and flow.");
 					outputText("\n\nYour heartbeat quickens as you consider. There is a grid gantry running from where you are right around the room to the other side, where you can see a matching observation booth, presumably containing another exit. But it’s quite a distance, there are stairs leading down to the ground level, and outside the protective glass you would surely be spotted and apprehended");
 					if (player.canFly()) outputText(", even if you tried to fly it"); 
 					outputText(". Wouldn’t you? You can’t outrun the gaze of a thousand basilisks... could you?"); 
@@ -658,7 +651,7 @@ package classes.Scenes.Dungeons.D3
 		private function northcourtyardRoomFunc():Boolean
 		{
 			outputText("<b><u>North Courtyard</u></b>\n");
-			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. ") 
+			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. ");
 			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0)
 			{
 				outputText("The seal appears to be broken. You could move north and attempt to defeat Lethice for once and for all. Or you can move east and west through the courtyard, if you like.");

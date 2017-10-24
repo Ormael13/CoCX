@@ -1,13 +1,13 @@
 package classes.Scenes.Combat {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.SceneLib;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -1123,8 +1123,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;;
-		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+        if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
 		damage = Math.round(damage);
 		//Shell
@@ -1357,7 +1357,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
-			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
+			if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
 			enemyAI();
 			return;
@@ -1488,7 +1488,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
-			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
+			if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
 			enemyAI();
 			return;
@@ -3223,7 +3223,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp = doDamage(temp);
 		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.ImmolationSpell);
-		kGAMECLASS.arianScene.clearTalisman();
+		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
@@ -3238,7 +3238,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
 		player.createStatusEffect(StatusEffects.Shielding,0,0,0,0);
 		player.removeStatusEffect(StatusEffects.ShieldingSpell);
-		kGAMECLASS.arianScene.clearTalisman();
+		SceneLib.arianScene.clearTalisman();
 		enemyAI();
 	}
 
@@ -3258,7 +3258,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp = doDamage(temp);
 		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
-		kGAMECLASS.arianScene.clearTalisman();
+		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));

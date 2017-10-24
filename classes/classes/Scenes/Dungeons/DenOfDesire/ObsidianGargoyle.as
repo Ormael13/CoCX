@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractGargoyle;
+import classes.Scenes.SceneLib;
 
 public class ObsidianGargoyle extends AbstractGargoyle
 	{
@@ -112,12 +113,12 @@ public class ObsidianGargoyle extends AbstractGargoyle
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedObsidianGargoyle();
+			SceneLib.dungeons.denofdesire.defeatedObsidianGargoyle();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedByObsidianGargoyle();
+			SceneLib.dungeons.denofdesire.defeatedByObsidianGargoyle();
 		}
 		
 		public function ObsidianGargoyle() 

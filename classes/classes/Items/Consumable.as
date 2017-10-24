@@ -9,6 +9,7 @@ import classes.GlobalFlags.*;
 import classes.Player;
 import classes.Scenes.Camp;
 import classes.Scenes.Places.Prison;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 /**
@@ -25,9 +26,9 @@ import classes.internals.Utils;
 		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		protected function get player():Player { return kGAMECLASS.player; }
-		protected function get prison():Prison { return kGAMECLASS.prison; }
+		protected function get prison():Prison { return SceneLib.prison; }
 		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
-		protected function get camp():Camp { return kGAMECLASS.camp; }
+		protected function get camp():Camp { return SceneLib.camp; }
 		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
 		protected function rand(n:Number):int { return Utils.rand(n); }
 		

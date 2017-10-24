@@ -5,12 +5,13 @@ import classes.AppearanceDefs;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Scenes.SceneLib;
 
 public class HairDye extends Consumable
 	{
 		private var _color:String;
-		
-		public function HairDye(id:String, color:String, value:int = ConsumableLib.DEFAULT_VALUE) 
+
+		public function HairDye(id:String, color:String, value:int = 6)
 		{
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
@@ -66,7 +67,7 @@ public class HairDye extends Consumable
 					game.player.dynStats("lus", -15);
 				}
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function dyeFur():void {
@@ -78,13 +79,13 @@ public class HairDye extends Consumable
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function dyeCancel():void {
 			clearOutput();
 			outputText("You put the dye away.\n\n");
-			game.inventory.returnItemToInventory(this);
+			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
 

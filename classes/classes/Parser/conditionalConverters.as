@@ -37,7 +37,6 @@
 				"analcapacity"		: function(thisPtr:*):* {return  kGAMECLASS.player.analCapacity();},
 				"balls"				: function(thisPtr:*):* {return  kGAMECLASS.player.balls;},
 				"cumquantity"		: function(thisPtr:*):* {return  kGAMECLASS.player.cumQ();},
-				"biggesttitsize"	: function(thisPtr:*):* {return  kGAMECLASS.player.biggestTitSize();},
 				"milkquantity"		: function(thisPtr:*):* {return  kGAMECLASS.player.lactationQ();},
 				"hasvagina"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasVagina();},
 				"istaur"			: function(thisPtr:*):* {return  kGAMECLASS.player.isTaur();},
@@ -67,4 +66,4 @@
 				"esteem"			: function(thisPtr:*):* {return  kGAMECLASS.player.esteem; },
 				"obey"				: function(thisPtr:*):* {return  kGAMECLASS.player.obey; },
 				"will"				: function(thisPtr:*):* {return  kGAMECLASS.player.will; }
-			}
+			};

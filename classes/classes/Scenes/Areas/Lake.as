@@ -3,12 +3,13 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Lake.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Lake extends BaseContent
 	{
@@ -31,13 +32,13 @@ package classes.Scenes.Areas
 			if (kGAMECLASS.poniesYN()) return;
 
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				kGAMECLASS.etnaScene.repeatYandereEnc();
+				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			if (player.exploredLake % 20 == 0) {
@@ -85,7 +86,7 @@ package classes.Scenes.Areas
 			//UNCOMMON EVENTS
 			//Goo finding!
 			if (rand(30) == 0 && flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0) {
-				kGAMECLASS.latexGirl.encounterLeftBehindGooSlave();
+				SceneLib.latexGirl.encounterLeftBehindGooSlave();
 				return;
 			}
 			//Chance of dick-dragging! OLD:10% + 10% per two foot up to 30%
@@ -116,7 +117,7 @@ package classes.Scenes.Areas
 			//==============================
 			//Pre-emptive chance of discovering Amily the stupidshit mouse
 			if (select == 9) {
-				kGAMECLASS.amilyScene.discoverAmilyVillage();
+				SceneLib.amilyScene.discoverAmilyVillage();
 			}
 			//Pre-emptive chance of discovering the Beautiful Sword
 			else if (select == 10) {
@@ -124,16 +125,16 @@ package classes.Scenes.Areas
 			}
 			//Pre-emptive chance of finding the boat
 			else if (select == 11) {
-				kGAMECLASS.boat.discoverBoat();
+				SceneLib.boat.discoverBoat();
 			}
 			//Meet Izma every 8 attempts
 			else if (select == 5) {
-				kGAMECLASS.izmaScene.meetIzmaAtLake();
+				SceneLib.izmaScene.meetIzmaAtLake();
 			}
 			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
 			else if (select == 8) {
 				//True sets to use lake scene!
-				kGAMECLASS.forest.bigJunkForestScene(true);
+				SceneLib.forest.bigJunkForestScene(true);
 			}
 			else if (select == 4) {
 				//Chance of seeing ooze convert goo!
@@ -245,10 +246,10 @@ package classes.Scenes.Areas
 							findLakeLoot();
 						}
 						//If you havent met whitney enough to know the farm....
-						else kGAMECLASS.farm.farmExploreEncounter();
+						else SceneLib.farm.farmExploreEncounter();
 					}
 					//If you havent met whitney, you can find the farm....
-					else kGAMECLASS.farm.farmExploreEncounter();
+					else SceneLib.farm.farmExploreEncounter();
 				}
 			}
 			else if (select == 3) {
@@ -265,10 +266,10 @@ package classes.Scenes.Areas
 				fetishCultistScene.fetishCultistEncounter();
 			}
 			else if (select == 6) {
-				kGAMECLASS.rathazul.encounterRathazul();
+				SceneLib.rathazul.encounterRathazul();
 			}
 			else if (select == 12) {
-				kGAMECLASS.exploration.genericGolGobImpEncounters();
+				SceneLib.exploration.genericGolGobImpEncounters();
 			}
 			else {
 				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen (or Kitteh6660 since he makes the mod) about it.");

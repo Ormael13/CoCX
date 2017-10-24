@@ -3927,29 +3927,20 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestOptedOut():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingExists():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingIsTimeUp():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingStatusText():void

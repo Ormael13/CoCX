@@ -1,18 +1,19 @@
 package classes.Scenes.Camp 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class ScarredBlade extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+public class ScarredBlade extends Monster
 	{
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void {
-			game.sheilaScene.badEndScarredBlade();
+			SceneLib.sheilaScene.badEndScarredBlade();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.sheilaScene.breakScarredBlade();
+			SceneLib.sheilaScene.breakScarredBlade();
 		}
 		
 		public function ScarredBlade() 
@@ -25,7 +26,7 @@ package classes.Scenes.Camp
 			this.ballSize = 0;
 			this.tallness = 36;
 			this.skinTone = "metallic";
-			this.long = "The sword you're fighting is a no ordinary sword. It's a lethicite-infused metal curved saber etched with scars. It seems to eagerly seek flesh."
+			this.long = "The sword you're fighting is a no ordinary sword. It's a lethicite-infused metal curved saber etched with scars. It seems to eagerly seek flesh.";
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class ChameleonGirl extends Monster
 	{
@@ -80,7 +81,7 @@ public class ChameleonGirl extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.bog.chameleonGirlScene.defeatChameleonGirl();
+			SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
 		}
 
 
@@ -90,7 +91,7 @@ public class ChameleonGirl extends Monster
 				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
 				game.cleanupAfterCombat();
 			} else {
-				game.bog.chameleonGirlScene.loseToChameleonGirl();
+				SceneLib.bog.chameleonGirlScene.loseToChameleonGirl();
 			}
 		}
 

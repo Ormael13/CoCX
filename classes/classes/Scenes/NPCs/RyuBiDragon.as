@@ -95,7 +95,7 @@ public class RyuBiDragon extends Monster
 				this.lustVuln = .9;
 				this.bonusHP = 150;
 				this.bonusLust = 30;
-				this.level = 9
+				this.level = 9;
 				this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -1,9 +1,10 @@
 package classes.Scenes.Places.Prison 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	
-	public class PrisonLetters extends BaseContent
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+
+public class PrisonLetters extends BaseContent
 	{
 		
 		public function PrisonLetters() {}
@@ -64,7 +65,7 @@ package classes.Scenes.Places.Prison
 			else if (flags[kFLAGS.HELSPAWN_DADDY] == 2) outputText("\n\nLooking at the drawing, you notice that " + name + " isn't <b>quite</b> a salamander, though. The little girl looks mostly like her mother, with a full body of red scales and pale flesh, and a brightly flaming tail; but atop her head, rather than finned reptilian ears are a pair of perky, puppy-dog like ears.");
 			outputText(" You chuckle and scratch your head. If only you've went there to witness the birth. Oh well!");
 			flags[kFLAGS.HELSPAWN_NAME] = name;
-			kGAMECLASS.helSpawnScene.helSpawnsSetup();
+			SceneLib.helSpawnScene.helSpawnsSetup();
 		}
 		//No choices for you!
 		public function noControlOverHelspawn():void {

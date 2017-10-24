@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GreenSlime extends Monster
@@ -15,18 +16,18 @@ public class GreenSlime extends Monster
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
-					EngineCore.simpleChoices("B.Feed",game.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",game.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.cleanupAfterCombat);
+					EngineCore.simpleChoices("B.Feed",SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.cleanupAfterCombat);
 				}
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?");
-					EngineCore.doYesNo(game.lake.greenSlimeScene.rapeOozeWithMilk,game.cleanupAfterCombat);
+					EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,game.cleanupAfterCombat);
 				}
 			}
 			//Not a breastfeeder
 			else if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
-				EngineCore.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
+				EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
 			}
 			else game.cleanupAfterCombat();
 		}
@@ -36,7 +37,7 @@ public class GreenSlime extends Monster
 			if (pcCameWorms) {
 				outputText("\n\nThe slime doesn't even seem to notice.\n\n");
 			}
-			doNext(game.lake.greenSlimeScene.slimeLoss);
+			doNext(SceneLib.lake.greenSlimeScene.slimeLoss);
 		}
 		
 		private function lustAttack():void {

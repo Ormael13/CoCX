@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 /**
@@ -224,7 +225,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.amilyScene.conquerThatMouseBitch();
+			SceneLib.amilyScene.conquerThatMouseBitch();
 		}
 
 		public function Amily()

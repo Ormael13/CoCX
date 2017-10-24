@@ -3,39 +3,26 @@
 import classes.EngineCore;to start understanding the structure of CoC,
  this is the place to start.
  First, we import all the classes from many different files across the codebase. It would be wise not to alter the
- order of these imports until more is known about what needs to load and when.
+ order of th
+import classes.Scenes.SceneLib;ese imports until more is known about what needs to load and when.
 */
 
 package classes
 {
 // BREAKING ALL THE RULES.
-import classes.CoC_Settings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.InputManager;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Parser.Parser;
 import classes.PerkLib;
 import classes.Scenes.*;
-import classes.Scenes.Areas.*;
-import classes.Scenes.Areas.Forest.*;
-import classes.Scenes.Combat.Combat;
-import classes.Scenes.Dungeons.D3.D3;
-import classes.Scenes.Dungeons.DungeonEngine;
-import classes.Scenes.Dungeons.HelDungeon.*;
-import classes.Scenes.Explore.*;
-import classes.Scenes.Monsters.*;
-import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.*;
-import classes.Scenes.Quests.*;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
-
-import classes.GlobalFlags.kGAMECLASS;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -47,7 +34,6 @@ import coc.xxc.StoryContext;
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.*;
-import flash.net.SharedObject;
 import flash.net.registerClassAlias;
 import flash.text.TextFormat;
 import flash.utils.setTimeout;
@@ -137,104 +123,6 @@ public class CoC extends MovieClip
     public var jewelries:JewelryLib = new JewelryLib();
     public var shields:ShieldLib = new ShieldLib();
     public var miscItems:MiscItemLib = new MiscItemLib();
-    // Scenes/
-    public var camp:Camp = new Camp(/*campInitialize*/);
-    public var combat:Combat = new Combat();
-    public var exploration:Exploration = new Exploration();
-    public var followerInteractions:FollowerInteractions = new FollowerInteractions();
-    public var inventory:Inventory = new Inventory(saves);
-    public var masturbation:Masturbation = new Masturbation();
-    // Scenes/Areas/
-    public var beach:Beach = new Beach();
-    public var blightridge:BlightRidge = new BlightRidge();
-    public var bog:Bog = new Bog();
-    public var deepsea:DeepSea = new DeepSea();
-    public var desert:Desert = new Desert();
-    public var forest:Forest = new Forest();
-    public var glacialRift:GlacialRift = new GlacialRift();
-    public var highMountains:HighMountains = new HighMountains();
-    public var lake:Lake = new Lake();
-    public var mountain:Mountain = new Mountain();
-    public var ocean:Ocean = new Ocean();
-    public var plains:Plains = new Plains();
-    public var swamp:Swamp = new Swamp();
-    public var volcanicCrag:VolcanicCrag = new VolcanicCrag();
-    // Scenes/Dungeons
-    public var brigidScene:BrigidScene = new BrigidScene();
-    public var d3:D3 = new D3();
-    // Scenes/Explore/
-    public var gargoyle:Gargoyle = new Gargoyle();
-    public var lumi:Lumi = new Lumi();
-    public var giacomoShop:Giacomo = new Giacomo();
-    // Scenes/Monsters/
-    public var goblinScene:GoblinScene = new GoblinScene();
-    public var impScene:ImpScene = new ImpScene();
-    public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
-    public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
-    public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
-    public var goblinElderScene:GoblinElderScene = new GoblinElderScene();
-    // Scenes/NPC/
-    public var amilyScene:AmilyScene = new AmilyScene();
-    public var anemoneScene:AnemoneScene = new AnemoneScene();
-    public var arianScene:ArianScene = new ArianScene();
-    public var ayaneFollower:AyaneFollower = new AyaneFollower();
-    public var ceraphScene:CeraphScene = new CeraphScene();
-    public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
-    public var chichiScene:ChiChiFollower = new ChiChiFollower();
-    public var electraScene:ElectraFollower = new ElectraFollower();
-    public var emberScene:EmberScene = new EmberScene();
-    public var etnaScene:EtnaFollower = new EtnaFollower();
-    public var evangelineFollower:EvangelineFollower = new EvangelineFollower();
-    public var exgartuan:Exgartuan = new Exgartuan();
-    public var helFollower:HelFollower = new HelFollower();
-    public var helScene:HelScene = new HelScene();
-    public var helSpawnScene:HelSpawnScene = new HelSpawnScene();
-    public var holliScene:HolliScene = new HolliScene();
-    public var isabellaScene:IsabellaScene = new IsabellaScene();
-    public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
-    public var izmaScene:IzmaScene = new IzmaScene();
-    public var jojoScene:JojoScene = new JojoScene();
-    public var joyScene:JoyScene = new JoyScene();
-    public var kihaFollower:KihaFollower = new KihaFollower();
-    public var kihaScene:KihaScene = new KihaScene();
-    public var kindraFollower:KindraFollower = new KindraFollower();
-    public var latexGirl:LatexGirl = new LatexGirl();
-    public var marbleScene:MarbleScene = new MarbleScene();
-    public var marblePurification:MarblePurification = new MarblePurification();
-    public var milkWaifu:MilkWaifu = new MilkWaifu();
-    public var raphael:Raphael = new Raphael();
-    public var rathazul:Rathazul = new Rathazul();
-    public var sheilaScene:SheilaScene = new SheilaScene();
-    public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
-    public var shouldraScene:ShouldraScene = new ShouldraScene();
-    public var sophieBimbo:SophieBimbo = new SophieBimbo();
-    public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
-    public var sophieScene:SophieScene = new SophieScene();
-    public var tedScene:TedScenes = new TedScenes();
-    public var urta:Urta = new Urta();
-    public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
-    public var urtaPregs:UrtaPregs = new UrtaPregs();
-    public var valeria:Valeria = new Valeria();
-    public var vapula:Vapula = new Vapula();
-    // Scenes/Places/
-    public var bazaar:Bazaar = new Bazaar();
-    public var boat:Boat = new Boat();
-    public var farm:Farm = new Farm();
-    public var owca:Owca = new Owca();
-    public var telAdre:TelAdre = new TelAdre();
-    public var dungeons:DungeonEngine = new DungeonEngine();
-    public var ingnam:Ingnam = new Ingnam();
-    public var prison:Prison = new Prison();
-    public var hexindao:HeXinDao = new HeXinDao();
-    public var kitsuneScene:KitsuneScene = new KitsuneScene();
-    // Scenes/Quests/
-    public var urtaQuest:UrtaQuest = new UrtaQuest();
-
-    public var debugMenu:DebugMenu = new DebugMenu();
-
-    public var soulforce:Soulforce = new Soulforce();
-    public var metamorph:Metamorph = new Metamorph();
-    public var crafting:Crafting = new Crafting();
 
     // Force updates in Pepper Flash ahuehue
     private var _updateHack:Sprite = new Sprite();
@@ -298,11 +186,6 @@ public class CoC extends MovieClip
     public var time :TimeModel;
     public var textHistory:Array;
     public var currentText:String;
-    public var explored:Boolean;
-    public var foundForest:Boolean;
-    public var foundDesert:Boolean;
-    public var foundMountain:Boolean;
-    public var foundLake:Boolean;
     public var whitney:Number;
     public var monk:Number;
     public var sand:Number;
@@ -328,34 +211,34 @@ public class CoC extends MovieClip
     }
 
     public function cleanupAfterCombat(nextFunc:Function = null):void {
-        combat.cleanupAfterCombatImpl(nextFunc);
+        SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
     }
 
     public function combatRoundOver():Boolean {
-        return combat.combatRoundOverImpl();
+        return SceneLib.combat.combatRoundOverImpl();
     }
 
     public function enemyAI():void {
-        combat.enemyAIImpl();
+        SceneLib.combat.enemyAIImpl();
     }
     public function endHpLoss():void {
-        combat.endHpLoss();
+        SceneLib.combat.endHpLoss();
     }
     public function endLustLoss():void {
-        combat.endLustLoss();
+        SceneLib.combat.endLustLoss();
     }
     public function endHpVictory():void {
-        combat.endHpVictory();
+        SceneLib.combat.endHpVictory();
     }
     public function endLustVictory():void {
-        combat.endLustVictory();
+        SceneLib.combat.endLustVictory();
     }
     public function clearStatuses(visibility: Boolean):void
     {
         player.clearStatuses(visibility);
     }
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-        return combat.doDamage(damage,apply,display);
+        return SceneLib.combat.doDamage(damage,apply,display);
     }
 
     private function gameStateDirectGet():int { return _gameState; }
@@ -369,7 +252,7 @@ public class CoC extends MovieClip
 
     // holidayz
     public function isEaster():Boolean {
-        return plains.bunnyGirl.isItEaster();
+        return SceneLib.plains.bunnyGirl.isItEaster();
     }
     public function isHalloween():Boolean {
         return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
@@ -542,12 +425,6 @@ public class CoC extends MovieClip
          */
         //{ region PlotVariables
 
-        //Plot variables
-        explored = false;
-        foundForest = false;
-        foundDesert = false;
-        foundMountain = false;
-        foundLake = false;
         whitney = 0;
         monk = 0;
         sand = 0;

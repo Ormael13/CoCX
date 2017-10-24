@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class HellHound extends Monster
@@ -108,7 +109,7 @@ public class HellHound extends Monster
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
-					EngineCore.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}
@@ -120,10 +121,10 @@ public class HellHound extends Monster
 					//Rape if not naga, turned on, and girl that can fit!
 					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 						outputText(" or make it fuck you");
-						temp2 = game.mountain.hellHoundScene.hellHoundPropahRape;
+						temp2 = SceneLib.mountain.hellHoundScene.hellHoundPropahRape;
 					}
 					outputText(".  What do you do?");
-					EngineCore.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Lick", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.");
@@ -138,7 +139,7 @@ public class HellHound extends Monster
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.");
 				doNext(game.cleanupAfterCombat);
 			} else {
-				game.mountain.hellHoundScene.hellhoundRapesPlayer();
+				SceneLib.mountain.hellHoundScene.hellhoundRapesPlayer();
 			}
 		}
 

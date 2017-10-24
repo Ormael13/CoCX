@@ -7,7 +7,7 @@ import classes.internals.*;
 
 public class OmnibusOverseer extends Monster
 	{
-		public var factory:Factory = new Factory()
+		public var factory:Factory = new Factory();
 		private var temp:Number = 0;
 		
 		override public function defeated(hpVictory:Boolean):void

@@ -38,7 +38,7 @@ import classes.StatusEffects;
 		{
 			clearOutput();
 			
-			outputText("You breathe deep, steel yourself")
+			outputText("You breathe deep, steel yourself");
 			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
 			if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");

@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Frosty extends TelAdreAbstractContent {
+public class Frosty extends TelAdreAbstractContent {
 
 public function Frosty(){
 
@@ -73,7 +73,7 @@ public function frostyMainMenu():void
 	if(player.gems >= 200) addButton(3,"x20",cupcakeBuy,20);
 	if(flags[kFLAGS.SIGNED_FROSTYS_CONTRACT] == 0) addButton(8,"Contract",getAFuckingFuckContractFromFucks);
 	else addButton(8,"Specials",frostysLimitedSpecialMenu);
-	addButton(14,"Leave",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(14,"Leave",SceneLib.telAdre.telAdreMenu);
 	
 }
 
@@ -82,8 +82,8 @@ public function frostySpecialsMenu(free:Boolean = false):void
 	//1. Hand – 5. points
 	//2. Mouth-15. Points
 	menu();
-	if(!free && flags[kFLAGS.FROSTY_POINTS] < 5) outputText("\n\nYou don't have enough points for any services.")
-	else if(!free && flags[kFLAGS.FROSTY_POINTS] < 15) outputText("\n\nYou don't have enough points for mouth service.")
+	if(!free && flags[kFLAGS.FROSTY_POINTS] < 5) outputText("\n\nYou don't have enough points for any services.");
+	else if(!free && flags[kFLAGS.FROSTY_POINTS] < 15) outputText("\n\nYou don't have enough points for mouth service.");
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 5) addButton(0,"Hand",frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp);
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 15) addButton(1,"Mouth",useFrostysMouth);
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 1) addButton(8,"EatHerOut",cunnilingateFrosty);
@@ -137,7 +137,7 @@ public function noIDontWantAFreebieDiseaseYouSlut():void {
 	clearOutput();
 	outputText("You’re too busy right now, so you deny the free service. “<i>Okeydokey, see you around, [name]!</i>” Frosty does a twirl on one foot and runs back to her stand. Such a nice girl.");
 	menu();
-	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(0,"Next",SceneLib.telAdre.telAdreMenu);
 }
 
 //[No](for the contract)
@@ -147,7 +147,7 @@ public function noContractForMeSloot():void {
 	outputText("\n\n“<i>Well, you can still buy my tasty cupcakes. You just won’t get any perks for buying them, but eating them is a benefit in its own way. Join the BETA if you change your mind on the whole thing.</i>”");
 	outputText("\n\nYou nod at her suggestion and make your way back to the main street.");
 	menu();
-	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(0,"Next",SceneLib.telAdre.telAdreMenu);
 }
 
 //[Choosing Buttons 1-4]

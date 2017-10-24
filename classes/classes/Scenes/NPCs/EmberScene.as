@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.Consumables.EmberTF;
+import classes.Scenes.SceneLib;
 
 public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -166,7 +167,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 		public function emberGroinDesc(cock:String, pussy:String, herm:String = " and "):String
 		{
-			var strText:String = ""
+			var strText:String = "";
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) strText += cock;
 			if (flags[kFLAGS.EMBER_GENDER] == 3) strText += herm;
 			if (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3) strText += pussy;
@@ -1170,7 +1171,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  You should have more pride than to let some brainless cunt like that have her way with you!");
 				}
 				//(If player has not yet impregnated Tamani)
-				else if (subChoice == 3 && !kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) outputText("one goblin being teased by a bunch of pregnant goblins for not being pregnant yet.  She just spat back that she wanted a 'better catch' to be her baby-maker than a mere imp and wandered off.");
+				else if (subChoice == 3 && !SceneLib.forest.tamaniScene.pregnancy.isPregnant) outputText("one goblin being teased by a bunch of pregnant goblins for not being pregnant yet.  She just spat back that she wanted a 'better catch' to be her baby-maker than a mere imp and wandered off.");
 				//(If Jojo isn't in the camp & not corrupt)
 				else if (rand(2) == 0 && monk <= 1 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
 				else outputText("one glade I touched down in to catch myself a nice brace of plump coneys, when all of a sudden this... this thing made out of flailing vines and fruit attacks me.  It went up in a puff of smoke once I torched it, of course.");
@@ -4548,7 +4549,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nYou return the dragon's sentiment, repositioning yourself to hug " + emberMF("him", "her") + " even as " + emberMF("his", "her") + " wing drapes itself over the pair of you like a blanket.");
 				}
 				outputText("\n\nYou plan to sleep for " + num2Text(timeQ) + " hours.");
-				flags[kFLAGS.SLEEP_WITH] = "Ember"
+				flags[kFLAGS.SLEEP_WITH] = "Ember";
 				flags[kFLAGS.TIMES_SLEPT_WITH_EMBER]++;
 				flags[kFLAGS.EMBER_MORNING] = 1;
 			}

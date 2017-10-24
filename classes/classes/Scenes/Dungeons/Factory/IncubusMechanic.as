@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.Factory
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class IncubusMechanic extends Monster {
@@ -28,8 +29,8 @@ public class IncubusMechanic extends Monster {
 			if (player.gender == 0) {
 				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				EngineCore.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				EngineCore.addButton(1, "Orally", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
+				EngineCore.addButton(0, "Anally", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
+				EngineCore.addButton(1, "Orally", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
 				EngineCore.addButton(4, "Leave", game.cleanupAfterCombat);
 			}
 			else {
@@ -43,16 +44,16 @@ public class IncubusMechanic extends Monster {
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) EngineCore.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 				}
-				EngineCore.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
-				EngineCore.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				EngineCore.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
+				EngineCore.addButton(0, "Rape", SceneLib.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				EngineCore.addButton(1, "Service Him", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
+				EngineCore.addButton(2, "Anal", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
 				EngineCore.addButton(4, "Nothing", game.cleanupAfterCombat);
 			}
 		}
 		
 		private function defeatedInDungeon3(hpVictory:Boolean):void
 		{
-			game.d3.incubusMechanic.beatDaMechanic(hpVictory);
+			SceneLib.d3.incubusMechanic.beatDaMechanic(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -73,14 +74,14 @@ public class IncubusMechanic extends Monster {
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.dungeons.factory.doLossIncubus();
+				SceneLib.dungeons.factory.doLossIncubus();
 			}
 		}
 		
 		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) game.dungeons.factory.doLossIncubus();
-			else game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) SceneLib.dungeons.factory.doLossIncubus();
+			else SceneLib.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 		
 		private function cockTripAttack():void {
@@ -107,7 +108,7 @@ public class IncubusMechanic extends Monster {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 5 + player.cor / 20);
 				}
-				game.combat.takeDamage(5);
+				SceneLib.combat.takeDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
 			game.combatRoundOver();
@@ -122,7 +123,7 @@ public class IncubusMechanic extends Monster {
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
 			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
 			{
-				outputText("Your shield managed to absorb the attack!")
+				outputText("Your shield managed to absorb the attack!");
 				combatRoundOver();
 				return;
 			}

@@ -5,6 +5,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.WeaponLib;
 import classes.Scenes.NPCs.Kindra;
 import classes.Scenes.Places.Owca.*;
+import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
 
@@ -350,8 +351,8 @@ private function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
 }
@@ -533,7 +534,7 @@ private function rapeZeVapula():void {
 private function owcaMainScreenOn():void {
 	clearOutput();
 	
-	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !kGAMECLASS.vapula.vapulaSlave()) {
+	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !SceneLib.vapula.vapulaSlave()) {
 		rebeccsLastPlea();
 		return;
 	}
@@ -824,9 +825,9 @@ private function rapeRebecc(outside:Boolean = false):void {
 	player.orgasm();
 	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
-	
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+
+if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -936,8 +937,8 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-	if (getGame().inCombat)
-		cleanupAfterCombat(gangbangVillageStuff);
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat(gangbangVillageStuff);
 	else doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
@@ -945,8 +946,8 @@ private function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 //Rebecc's Last Plea (Z)

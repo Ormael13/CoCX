@@ -87,7 +87,7 @@ package classes.Scenes.Monsters
 						}
 						if (player.gender == 3) {
 							outputText("groin, dealing painful damage to your [cocks] and " + player.vaginaDescript(0) + ", doubling you over in agony");
-							damage = int((player.maxHP()) / 3)
+							damage = int((player.maxHP()) / 3);
 							if (groinProtection > 0) {
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
 								damage = int(damage / (groinProtection + 1));

@@ -920,7 +920,7 @@ import classes.Items.JewelryLib;
 		
 		public function maxHunger():Number
 		{
-			var max:Number = 100
+			var max:Number = 100;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 10;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) max += 10;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 20;

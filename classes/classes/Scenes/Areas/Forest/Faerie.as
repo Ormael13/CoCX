@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Faerie extends BaseContent{
 
@@ -286,8 +287,8 @@ private function faerieCaptureHJ():void {
 		if(!player.hasStatusEffect(StatusEffects.Jizzpants) && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusEffect(StatusEffects.Jizzpants,1,0,0,0);
 		if (player.armor == armors.GOOARMR) {
 			outputText("\n\nFortunately, your jizz gets absorbed into the blue goo covering your body.");
-			getGame().valeria.feedValeria(player.cumQ() / 10);
-		}
+            SceneLib.valeria.feedValeria(player.cumQ() / 10);
+        }
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -130,7 +131,7 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.swamp.corruptedDriderScene.defeatDriderIntro();
+			SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -139,7 +140,7 @@ import classes.internals.*;
 				outputText("\n\nThe drider licks her lips in anticipation...");
 				doNext(game.endLustLoss);
 			} else {
-				game.swamp.corruptedDriderScene.loseToDrider();
+				SceneLib.swamp.corruptedDriderScene.loseToDrider();
 			}
 		}
 

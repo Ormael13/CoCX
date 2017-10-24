@@ -6,6 +6,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class HeroslayerOmnibus extends Monster
 	{
@@ -139,12 +140,12 @@ public class HeroslayerOmnibus extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedHeroslayerOmnibus();
+			SceneLib.dungeons.denofdesire.defeatedHeroslayerOmnibus();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedByHeroslayerOmnibus();
+			SceneLib.dungeons.denofdesire.defeatedByHeroslayerOmnibus();
 		}
 		
 		public function HeroslayerOmnibus() 

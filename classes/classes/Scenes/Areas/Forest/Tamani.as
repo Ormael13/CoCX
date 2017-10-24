@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Goblin;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Tamani extends Goblin
@@ -88,12 +89,12 @@ public class Tamani extends Goblin
 				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
 				var temp:Function = null;
 				var temp2:Function = null;
-				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = game.forest.tamaniScene.tamaniAnalShits;
+				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
 				//NOT PREGGERS
-				if (!game.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
-					temp2 = game.forest.tamaniScene.tamaniBeaten;
+				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
+					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;
 				}
-				EngineCore.simpleChoices("Fuck", game.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", game.cleanupAfterCombat);
+				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", game.cleanupAfterCombat);
 			}
 			else game.cleanupAfterCombat();
 		}
@@ -102,8 +103,8 @@ public class Tamani extends Goblin
 		{
 			if (hpVictory){
 				if(player.totalCocks() > 0) {
-					if(rand(2) == 0) game.forest.tamaniScene.tamaniSexLost();
-					else game.forest.tamaniScene.tamaniSexLetHer();
+					if(rand(2) == 0) SceneLib.forest.tamaniScene.tamaniSexLost();
+					else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				}else {
 					outputText("Tamani sighs as you begin to lose conscious, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
 					game.cleanupAfterCombat();
@@ -112,12 +113,12 @@ public class Tamani extends Goblin
 				if(player.totalCocks() > 0) {
 				//hypnoslut loss scene
 				if(game.flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
-					game.forest.tamaniScene.getRapedByTamaniYouHypnoSlut();
-				} else if(rand(2) == 0) game.forest.tamaniScene.tamaniSexLost();
-				else game.forest.tamaniScene.tamaniSexLetHer();
+					SceneLib.forest.tamaniScene.getRapedByTamaniYouHypnoSlut();
+				} else if(rand(2) == 0) SceneLib.forest.tamaniScene.tamaniSexLost();
+				else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-					game.combat.takeDamage(10000);
+					SceneLib.combat.takeDamage(10000);
 					game.cleanupAfterCombat();
 				}
 			}
@@ -129,7 +130,7 @@ public class Tamani extends Goblin
 			this.a = "";
 			this.short = "Tamani";
 			this.imageName = "tamani";
-			this.long = "She keeps her arms folded across her " + game.forest.tamaniScene.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.";
+			this.long = "She keeps her arms folded across her " + SceneLib.forest.tamaniScene.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.";
 			// this.plural = false;
 			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 55, 0, 0, 0);

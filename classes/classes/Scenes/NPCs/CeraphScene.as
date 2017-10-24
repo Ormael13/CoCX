@@ -5,6 +5,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armors.LustyMaidensArmor;
 
 public class CeraphScene extends NPCAwareContent
@@ -193,8 +194,8 @@ public class CeraphScene extends NPCAwareContent
 			}
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -250,8 +251,8 @@ public class CeraphScene extends NPCAwareContent
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3,"cor", 1);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -635,13 +636,13 @@ public class CeraphScene extends NPCAwareContent
 		{
 			//FOLLOWER CHANCE:
 			var leave:Function = cleanupAfterCombat;
-			if (!getGame().inCombat) {
-				//Load ceraph and set up win conditions
+            if (!kGAMECLASS.inCombat) {
+                //Load ceraph and set up win conditions
 				startCombat(new Ceraph());
 				leave = ceraphFollowerScene.ceraphFollowerAppearance;
 				//Exit combat
-				getGame().inCombat = false;
-				monster.lust = 100;
+                kGAMECLASS.inCombat = false;
+                monster.lust = 100;
 				monster.HP = 2;
 				if (player.lust < 34) player.lust = 34;
 			}
@@ -678,8 +679,8 @@ public class CeraphScene extends NPCAwareContent
 				 */
 			}
 			else {
-				if (getGame().inCombat)
-					cleanupAfterCombat();
+                if (kGAMECLASS.inCombat)
+                    cleanupAfterCombat();
 				else doNext(ceraphFollowerScene.ceraphFollowerAppearance);
 			}
 		}
@@ -702,8 +703,8 @@ public class CeraphScene extends NPCAwareContent
 			player.slimeFeed();
 			spriteSelect(7);
 			clearOutput();
-			if ((!getGame().inCombat) && flags[kFLAGS.PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ");
-			outputText("Ceraph throws her head back and laughs as you ");
+            if ((!kGAMECLASS.inCombat) && flags[kFLAGS.PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ");
+            outputText("Ceraph throws her head back and laughs as you ");
 			if (player.HP < 1) outputText("slump down, defeated");
 			else outputText("give up and start masturbating");
 			outputText(", \"<i>Really?  Is that it?  After being under my magic for so long, you try to make a stand and fail, like this?!  Pathetic.</i>\"\n\n");
@@ -739,8 +740,8 @@ public class CeraphScene extends NPCAwareContent
 
 			outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.");
 			dynStats("lus", 200);
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -806,8 +807,8 @@ public class CeraphScene extends NPCAwareContent
 			outputText(".  Ceraph's pussy gapes at least " + num2Text(int(player.cocks[x].cockThickness + 1)) + " inches wide, pushing her hips so far apart as to make it difficult to walk.  She shudders, drooling spit, pussy-juice, and sperm as her mouth, neck, and chest tighten up.  Her lower body doesn't change one iota; your magics are still overpowering her natural abilities below the waist.  The abused dom twitches a few more times before her eyes reappear and she pulls her tongue back into her mouth.\n\n");
 
 			outputText("Ceraph gasps, \"<i>Ohhhhkay.  That felt goooooooood.</i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i>You've shown me a good time, mortal.");
-			if (!getGame().inCombat) {
-				outputText("</i>\"");
+            if (!kGAMECLASS.inCombat) {
+                outputText("</i>\"");
 				player.orgasm();
 				dynStats("lib", 3, "sen", 3, "cor", 1);
 				doNext(camp.returnToCampUseOneHour);
@@ -882,7 +883,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("</i>\"\n\n");
 
 			outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissomelegs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"");
-			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0)
+			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0);
 			//[Fight] [Trade] [Run]
 			simpleChoices("Fight", startAFightWithCeraph, "Trade", tradeCeraphSomething, "", null, "", null, "Run", runFromCeraphsNiceDeal);
 		}
@@ -1447,8 +1448,8 @@ public class CeraphScene extends NPCAwareContent
 			if (player.cor < 33) outputText(" and a little bit by yourself");
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!");
 			player.orgasm();
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 

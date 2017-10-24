@@ -3,6 +3,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
 public class Kiha extends Monster
@@ -38,7 +39,7 @@ public class Kiha extends Monster
 				}
 				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
-				if(!game.kihaFollower.followerKiha()) outputText("the swamp");
+				if(!SceneLib.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
 				damage = player.takeDamage(damage, true);
@@ -158,28 +159,28 @@ public class Kiha extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(hasStatusEffect(StatusEffects.spiderfight))
-				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
+				SceneLib.kihaFollower.playerBeatsUpKihaPreSpiderFight();
 			else if(hasStatusEffect(StatusEffects.DomFight))
-				game.kihaFollower.pcWinsDomFight();
+				SceneLib.kihaFollower.pcWinsDomFight();
 			else if(hasStatusEffect(StatusEffects.Spar))
-				game.kihaFollower.winSparWithKiha();
-			else game.kihaScene.kihaVictoryIntroduction();
+				SceneLib.kihaFollower.winSparWithKiha();
+			else SceneLib.kihaScene.kihaVictoryIntroduction();
 		}
 
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(hasStatusEffect(StatusEffects.spiderfight))
-				game.kihaFollower.loseKihaPreSpiderFight();
+				SceneLib.kihaFollower.loseKihaPreSpiderFight();
 			else if(hasStatusEffect(StatusEffects.DomFight))
-				game.kihaFollower.pcLosesDomFight();
+				SceneLib.kihaFollower.pcLosesDomFight();
 			else if(hasStatusEffect(StatusEffects.Spar))
-				game.kihaFollower.sparWithFriendlyKihaLose();
+				SceneLib.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
 				doNext(game.endLustLoss);
 			} else {
-				game.kihaScene.kihaLossIntro();
+				SceneLib.kihaScene.kihaLossIntro();
 			}
 		}
 

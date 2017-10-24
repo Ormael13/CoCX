@@ -2,6 +2,7 @@ package classes.Scenes.Places.TelAdre{
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.Urta;
+import classes.Scenes.SceneLib;
 
 public class KatherineEmployment extends TelAdreAbstractContent {
 		//This class holds all the employment quest specific content for Katherine. It's split off to reduce the size of Katherine.as
@@ -19,7 +20,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 
 		public function get threesome():KatherineThreesome { return telAdre.katherineThreesome; }
 
-		public function get urta():Urta { return kGAMECLASS.urta; }
+		public function get urta():Urta { return SceneLib.urta; }
 
 		public function employmentTalk():void
 		{
@@ -658,7 +659,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			if (silly()) {
 				outputText("You joke that maybe you should get your ghostbusting gear?  Just in case?\n\n");
 				outputText("“<i>There’s no such thing as ghosts!</i>” Urta snaps.");
-				if (kGAMECLASS.shouldraFollower.followerShouldra()) {
+				if (SceneLib.shouldraFollower.followerShouldra()) {
 					outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
 					outputText("“<i>Oh? So why doesn’t he come out and say hello, huh?</i>” Urta snarks, clearly feeling very put out.\n\n");
 					outputText("“<i>Don’t mind if I do!</i>” an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  “<i>Boo,</i>” Shouldra states, simply.\n\n");

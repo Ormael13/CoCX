@@ -5,6 +5,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
@@ -60,7 +61,7 @@ public class Lethice extends Monster
 			}
 			else if (_fightPhase == 2)
 			{
-				str += "You're completely surrounded by demons! The members of Lethice's corrupted court have flooded the throne hall like a sea of tainted flesh, crushing in on you with the sheer weight of bodies being thrown against you. Incubi, succubi, and forms between and combining them all grasp and thrust at you, trying to overwhelm you with desire for their inhuman bodies and the unspeakable pleasures only demons command."
+				str += "You're completely surrounded by demons! The members of Lethice's corrupted court have flooded the throne hall like a sea of tainted flesh, crushing in on you with the sheer weight of bodies being thrown against you. Incubi, succubi, and forms between and combining them all grasp and thrust at you, trying to overwhelm you with desire for their inhuman bodies and the unspeakable pleasures only demons command.";
 				if (hasStatusEffect(StatusEffects.Blind))
 				{
 					str += " The demons have relented somewhat, clutching at their eyes and screaming in frustration and panic thanks to your potent spell!";
@@ -122,12 +123,12 @@ public class Lethice extends Monster
 				return;
 			}
 
-			game.d3.lethice.defeated(hpVictory);
+			SceneLib.d3.lethice.defeated(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.lethice.won(hpVictory, pcCameWorms);
+			SceneLib.d3.lethice.won(hpVictory, pcCameWorms);
 		}
 		
 		private var _roundCount:int = 0;
@@ -211,11 +212,11 @@ public class Lethice extends Monster
 			}
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 
-			EngineCore.doNext(game.combat.combatMenu);
+			EngineCore.doNext(SceneLib.combat.combatMenu);
 			game.player.mana -= 30;
 			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			game.combat.spellPerkUnlock();
+			SceneLib.combat.spellPerkUnlock();
 			EngineCore.statScreenRefresh();
 			game.enemyAI();
 		}
@@ -381,7 +382,7 @@ public class Lethice extends Monster
 			else
 			{
 				outputText("\n\nYou don't even try to resist anymore -- your mind is already a cornucopia of lustful thoughts, mixed together with desire that burns in your veins and swells in your loins, all but crippling your ability to resist. The demons only add to it, fueling your wanton imagination with images of hedonistic submission, of all the wondrous things they could do to you if you only gave them the chance. It's damn hard not to.");
-				l = player.lib / 10 + player.cor / 10 + 10
+				l = player.lib / 10 + player.cor / 10 + 10;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.dynStats("lus", l);
 			}
@@ -595,7 +596,7 @@ public class Lethice extends Monster
 		{
 			clearOutput();
 			outputText("Drawing on your magic, you use the opportunity to mend your wounds. No foe dares challenge you during the brief lull in battle, enabling you to maintain perfect concentration. With your flesh freshly knit and ready for battle, you look to Lethice.");
-			var temp:Number = int((player.inte / (2 + rand(3)) * game.combat.spellMod()) * (player.maxHP() / 150));
+			var temp:Number = int((player.inte / (2 + rand(3)) * SceneLib.combat.spellMod()) * (player.maxHP() / 150));
 			if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
 			EngineCore.HPChange(temp,false);
 
@@ -663,7 +664,7 @@ public class Lethice extends Monster
 				lustVuln = 0.0;
 			}
 
-			if (_roundCount == 5) gropehands()
+			if (_roundCount == 5) gropehands();
 			else
 			{
 				var atks:Array = [parasiteThrowingStars, whiptrip, sonicwhip];
@@ -695,7 +696,7 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				var l:Number = player.lib / 10 + player.cor / 10 + 10
+				var l:Number = player.lib / 10 + player.cor / 10 + 10;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.dynStats("lus", l);
 				

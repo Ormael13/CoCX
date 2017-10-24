@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 public class TentacleBeastScene extends BaseContent{
 
@@ -238,8 +239,8 @@ internal function tentacleLossRape():void {
 			outputText("\n\nAt a loss for words, you meekly offer the creature some of your food. The creature slaps it out of your hand, almost breaking your wrist.\n\n\"<i>I can't eat that shit!</i>\" roars the abomination. \"<i>Do I look like I have a fucking mouth to chew that with?! NOOOOOO! I feed off dicks and wayward women! Futa cum and tit milk! YOU have NEITHER!!!</i>\"");
 			outputText("\n\nThe beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams.  \"<i>Get lost so I can hunt me a REAL meal!!!</i>\"  ");
 			outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...");
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 	}
@@ -264,8 +265,8 @@ internal function tentacleLossRape():void {
 		dynStats("str", 0.5,"spe", -.5, "int", -1, "lib", 5, "sen", 1, "cor", 1);
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
-		if (getGame().inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        else doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Bad end + counter here
@@ -349,8 +350,8 @@ internal function tentacleLossRape():void {
 			player.boostLactation(.5);
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//has cock:
@@ -373,8 +374,8 @@ internal function tentacleLossRape():void {
 			//end (loss)
 			player.orgasm();
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseTwoHours);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		// has cock, normal cum amount, anus == gaping: 
@@ -383,8 +384,8 @@ internal function tentacleLossRape():void {
 			//end (loss)
 			player.orgasm();
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseTwoHours);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseTwoHours);
 			return;
 		}		
 		//{ has vagina, anus < gaping: 
@@ -395,8 +396,8 @@ internal function tentacleLossRape():void {
 			//end (loss)
 			player.orgasm();
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseTwoHours);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		//{ has cock, huge cum amount: 
@@ -413,15 +414,15 @@ internal function tentacleLossRape():void {
 			dynStats("tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "cor", 1);
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//end (loss)
 		player.orgasm();
 		dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
-		if (getGame().inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseTwoHours);
+        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        else doNext(camp.returnToCampUseTwoHours);
 		return;
 	}
 	//Milk surprise!
@@ -478,8 +479,8 @@ internal function tentacleLossRape():void {
 		player.boostLactation(.5);
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
-		if (getGame().inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        else doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(player.gender == 1) 
@@ -602,8 +603,8 @@ private function tentacleRapeContinuation():void {
 		//lactate more from the encounter.
 		player.boostLactation(.3);
 	}
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -647,8 +648,8 @@ private function tentacleRapeContinuationForFemales():void {
 	else outputText("In time it returns to its normal size, losing all the extra volume.");
 	if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_NORMAL;
 	player.slimeFeed();
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -715,8 +716,8 @@ private function centaurGenderlessRetardation():void {
 		outputText("\"<i>Q.E.D., MOTHERFUCKER!</i>\" it shouts, gesticulating in the air wildly with its tentacles as it turns and clumps back into the dense brush.");
 	}
 	player.takeDamage(5);
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 //Naga v. Tentacle Monster:
@@ -735,8 +736,8 @@ private function genderlessHilarityForNagaKenDolls():void {
 
 	outputText("\"<i>Fucking tourists.</i>\"  It slams its tentacles down in a brutal blow, knocking you out.");
 	player.takeDamage(15);
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 //Goo v. Tentacle Monster:
@@ -764,8 +765,8 @@ private function tentacularGenderGooTimes():void {
 	outputText("\"<i>FUCK!</i>\" comes the voice again.  \"<i>You're sour apple!  I fucking HATE sour apple!</i>\"\n\n");
 
 	outputText("It slams its tentacles down in a brutal blow, knocking you out.");
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 }
 }

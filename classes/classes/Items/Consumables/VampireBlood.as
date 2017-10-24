@@ -31,7 +31,7 @@ public class VampireBlood extends Consumable {
     }
     override public function useItem():Boolean{
         clearOutput();
-        var story:BoundStory = getGame().rootStory.locate("diva/item").bind(kGAMECLASS.context);
+        var story:BoundStory = kGAMECLASS.rootStory.locate("diva/item").bind(kGAMECLASS.context);
         if(first){
             story.display("useText/first");
             first = false;

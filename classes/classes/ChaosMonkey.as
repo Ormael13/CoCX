@@ -21,7 +21,7 @@ CONFIG::debug
 		Utility to randomly hammer buttons in the hope of generating a crash
 
 		*/
-		public var run:Boolean
+		public var run:Boolean;
 		private var _excludeMenuKeys:Boolean;
 		private var _catchOutputTextErrors:Boolean;
 		private var _mainClassPtr:CoC;

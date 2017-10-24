@@ -2,6 +2,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Izumi extends Monster
@@ -55,7 +56,7 @@ public class Izumi extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			this.cleanup();
-			game.highMountains.izumiScenes.touchThatFluffyHorn();
+			SceneLib.highMountains.izumiScenes.touchThatFluffyHorn();
 		}
 		
 		// Monster won, not player, gg for descriptive method names
@@ -65,13 +66,13 @@ public class Izumi extends Monster
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
+				SceneLib.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
 				return;
 			}
 			else
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
+				SceneLib.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
 				return;
 			}
 		}
@@ -298,7 +299,7 @@ public class Izumi extends Monster
 			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			cleanupChokeslam();
 			
 			this.HP -= damage;

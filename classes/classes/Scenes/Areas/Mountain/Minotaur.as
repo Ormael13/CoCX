@@ -3,6 +3,7 @@
 
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -21,9 +22,9 @@ import classes.internals.*;
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
-				game.desert.antsScene.phyllaBeatAMino();
+				SceneLib.desert.antsScene.phyllaBeatAMino();
 			} else {
-				game.mountain.minotaurScene.minoVictoryRapeChoices();
+				SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
 			}
 		}
 
@@ -31,12 +32,12 @@ import classes.internals.*;
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaPCLostToMino();
+				SceneLib.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
 				game.cleanupAfterCombat();
 			} else
-				game.mountain.minotaurScene.getRapedByMinotaur();
+				SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
 		override public function get long():String
@@ -98,7 +99,7 @@ import classes.internals.*;
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
 			}
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += (hasAxe ? 20 : 15) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

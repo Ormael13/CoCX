@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class ImpLord extends Imp
@@ -70,12 +71,12 @@ public class ImpLord extends Imp
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpLord();
+			SceneLib.impScene.defeatImpLord();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpLord();
+			SceneLib.impScene.loseToAnImpLord();
 		}
 
 		public function ImpLord()

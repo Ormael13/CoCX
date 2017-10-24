@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class FetishCultist extends Monster
@@ -83,7 +84,7 @@ public class FetishCultist extends Monster
 			player.dynStats("lus", (player.lib/10 + player.cor/20)+4);
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.combat.combatMenu);
+			else doNext(SceneLib.combat.combatMenu);
 		}
 		private function cultistLustTransfer():void {
 			if(lust <= 30 || rand(2) == 0) {
@@ -109,14 +110,14 @@ public class FetishCultist extends Monster
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.combat.combatMenu);
+			else doNext(SceneLib.combat.combatMenu);
 		}
 		
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if(player.hasStatusEffect(StatusEffects.Feeder)) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if(player.hasStatusEffect(StatusEffects.Feeder)) temp2 = SceneLib.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {
@@ -124,7 +125,7 @@ public class FetishCultist extends Monster
 			}
 			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?");
-				EngineCore.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.cleanupAfterCombat);
+				EngineCore.simpleChoices("Sex", SceneLib.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.cleanupAfterCombat);
 			}
 			else {
 				if(temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
@@ -143,7 +144,7 @@ public class FetishCultist extends Monster
 				if (pcCameWorms){
 					outputText("\n\nThe cultist giggles as she watches you struggling.\n\n");
 				}
-				game.lake.fetishCultistScene.cultistRapesYou();
+				SceneLib.lake.fetishCultistScene.cultistRapesYou();
 			}
 		}
 

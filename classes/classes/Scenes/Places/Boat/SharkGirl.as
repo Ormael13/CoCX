@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class SharkGirl extends Monster
@@ -25,7 +26,7 @@ public class SharkGirl extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.boat.sharkGirlScene.sharkWinChoices();
+			SceneLib.boat.sharkGirlScene.sharkWinChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -34,7 +35,7 @@ public class SharkGirl extends Monster
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.boat.sharkGirlScene.sharkLossRape();
+				SceneLib.boat.sharkGirlScene.sharkLossRape();
 			}
 		}
 

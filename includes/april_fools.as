@@ -21,7 +21,7 @@ public function poniesYN():Boolean {
 public function leavePonies():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("Deciding it must be some demonic trick, you decide to retreat from the scene before they notice your presence.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 public function approachPonies():void {
 	classes.EngineCore.clearOutput();
@@ -53,7 +53,7 @@ public function approachPonies():void {
 public function derpPolitely():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("You hold out your arms and stop the ponies.  Once you have their attention you let them know you have something important you need to do for now, but will come back soon.  With a wave you turn and walk back into the trees to a chorus of disappointed \"<i>ahhhs</i>\", mostly from the pink one.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 	
 public function derpCreepy():void {
@@ -61,7 +61,7 @@ public function derpCreepy():void {
 	classes.EngineCore.outputText("Cocks, horns and slavering vaginas is one thing, but this is almost too much cute to process.  You determine to leave this grove and never EVER come back again.  Still disturbed by the mental images running through your head, as you make your way back to camp, you callously slaughter an imp. Yeah, that feels better.\n\n(+10 XP!  +5 Gems!)");
 	player.XP += 10;
 	player.gems += 5;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 public function derpyParty():void {
 	classes.EngineCore.clearOutput();
@@ -72,7 +72,7 @@ public function derpyParty():void {
 	classes.EngineCore.outputText("Your strong lower body has shrunk, the firm musculature replaced by an oddly cartoonish looking form.  In fact, from the waist down you look just like one of the ponies!  Everything looks to still be in the same general place, and a quick test of your new lower body proves it still functions somewhat the same. The new shape of your hooves takes a little while to get used to, but other than that you get used to your new lower body almost with no effort\n\n(<i>*Note:You should really check the character viewer</i>)");
 	player.lowerBody = classes.AppearanceDefs.LOWER_BODY_TYPE_PONY;
 	player.legCount = 4;
-	classes.EngineCore.doNext(camp.returnToCampUseEightHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseEightHours);
 }
 
 //DLC April Fools

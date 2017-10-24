@@ -8,9 +8,9 @@
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
         import classes.Appearance;
         import classes.GlobalFlags.kFLAGS;
-		import classes.GlobalFlags.kGAMECLASS;
-		
-		public var singleArgConverters:Object =
+        import classes.GlobalFlags.kGAMECLASS;
+
+        public var singleArgConverters:Object =
 		{
 				// all the errors related to trying to parse stuff if not present are
 				// already handled in the various *Descript() functions.
@@ -109,7 +109,7 @@
 					return kGAMECLASS.player.skinTone;
 				},
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
-				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.combat.teaseText(); },
+				"teasetext"					: function(thisPtr:*):* { return SceneLib.combat.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return Appearance.tongueDescription(kGAMECLASS.player); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
 				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
@@ -131,10 +131,10 @@
 				"onetail"					: function(thisPtr:*):* { return kGAMECLASS.player.oneTailDescript(); },
 
 				//Prisoner
-				"captortitle"				: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorTitle; },
-				"captorname"				: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorName; },
-				"captorhe"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun1; },
-				"captorhim"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun2; },
-				"captorhis"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun3; }
+				"captortitle"				: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorTitle; },
+				"captorname"				: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorName; },
+				"captorhe"					: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorPronoun1; },
+				"captorhim"					: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorPronoun2; },
+				"captorhis"					: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorPronoun3; }
 				
-		}
+		};

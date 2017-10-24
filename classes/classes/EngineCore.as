@@ -1,6 +1,7 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 import coc.view.CoCButton;
@@ -896,7 +897,7 @@ public class EngineCore {
     }
 
     public static function fatigue(mod:Number, type:Number = 0):void {
-        kGAMECLASS.combat.fatigueImpl(mod, type);
+        SceneLib.combat.fatigueImpl(mod, type);
     }
 
     public static function changeFatigue(changeF:Number):void {
@@ -1043,7 +1044,7 @@ public class EngineCore {
             if (kGAMECLASS.player.HP <= 0) outputText("You collapse from your injuries.");
             else outputText("You collapse from your overwhelming desires.");
             if (kGAMECLASS.inCombat) kGAMECLASS.cleanupAfterCombat();
-            else doNext(kGAMECLASS.camp.returnToCampUseOneHour);
+            else doNext(SceneLib.camp.returnToCampUseOneHour);
             return true;
         }
         else return false;

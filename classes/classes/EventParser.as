@@ -6,6 +6,7 @@ import classes.Items.ArmorLib;
 import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 import coc.view.MainView;
@@ -28,14 +29,14 @@ public class EventParser {
         kGAMECLASS.mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", kGAMECLASS.charCreation.newGameGo);
         kGAMECLASS.mainView.nameBox.visible = false;
         if (kGAMECLASS.gameState == 1 || kGAMECLASS.gameState == 2) {
-            kGAMECLASS.combat.combatMenu();
+            SceneLib.combat.combatMenu();
             return;
         }
         //Clear restriction on item overlaps if not in combat
         kGAMECLASS.plotFight = false;
         if (kGAMECLASS.inDungeon) {
             //dungeonMenu();
-            kGAMECLASS.dungeons.checkRoom();
+            SceneLib.dungeons.checkRoom();
             return;
         }
         else if (kGAMECLASS.inRoomedDungeon) {
@@ -48,12 +49,12 @@ public class EventParser {
 
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
         if (kGAMECLASS.testingBlockExiting) {
-            EngineCore.doNext(kGAMECLASS.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
+            EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         }
         else {
             var textChoices:Number = kGAMECLASS.rand(4);
             if (clear) EngineCore.clearOutput();
-            EngineCore.outputText("\n\n<font color=\"#800000\">")
+            EngineCore.outputText("\n\n<font color=\"#800000\">");
             if (textChoices == 0) EngineCore.outputText("<b>GAME OVER</b>");
             if (textChoices == 1) EngineCore.outputText("<b>Game over, man! Game over!</b>");
             if (textChoices == 2) EngineCore.outputText("<b>You just got Bad-Ended!</b>");
@@ -73,7 +74,7 @@ public class EventParser {
             EngineCore.awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
             EngineCore.menu();
             EngineCore.addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
-            if (kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", kGAMECLASS.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
+            if (kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", SceneLib.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (kGAMECLASS.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || kGAMECLASS.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
@@ -116,7 +117,7 @@ public class EventParser {
             EngineCore.rawOutputText(" (including the above stack trace copy&pasted into the details),");
         EngineCore.rawOutputText(" to make tracking the issue down easier. Thanks!");
 
-        EngineCore.doNext(kGAMECLASS.camp.returnToCampUseOneHour);
+        EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
     }
 
     public static function goNext(time:Number, needNext:Boolean):Boolean {
@@ -148,10 +149,10 @@ public class EventParser {
         while (kGAMECLASS.timeQ > 0) {
             kGAMECLASS.timeQ--;
             kGAMECLASS.model.time.hours++;
-            kGAMECLASS.combat.regeneration(false);
-            if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) kGAMECLASS.combat.soulforceregeneration(false);
-            if (player.findPerk(PerkLib.JobSorcerer) >= 0) kGAMECLASS.combat.manaregeneration(false);
-            kGAMECLASS.combat.wrathregeneration(false);
+            SceneLib.combat.regeneration(false);
+            if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
+            if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
+            SceneLib.combat.wrathregeneration(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
                 item = _timeAwareClassList[tac];
@@ -211,12 +212,12 @@ public class EventParser {
         }
 
         // Hanging the Uma massage update here, I think it should work...
-        kGAMECLASS.telAdre.umasShop.updateBonusDuration(time);
+        SceneLib.telAdre.umasShop.updateBonusDuration(time);
         if (player.hasStatusEffect(StatusEffects.UmasMassage)) {
             trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
         }
 
-        kGAMECLASS.highMountains.izumiScenes.updateSmokeDuration(time);
+        SceneLib.highMountains.izumiScenes.updateSmokeDuration(time);
         if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke)) {
             trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
         }
@@ -224,17 +225,17 @@ public class EventParser {
         //Drop axe if too short!
         if (player.tallness < 78 && player.weapon == kGAMECLASS.weapons.L__AXE) {
             EngineCore.outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");
-            kGAMECLASS.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         if (player.tallness < 78 && player.weapon == kGAMECLASS.weapons.DL_AXE_) {
             EngineCore.outputText("<b>\nThis dual axes are too large for someone of your stature to use, though you can keep them in your inventory until you are big enough.</b>\n");
-            kGAMECLASS.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         if (player.tallness < 60 && player.weapon == kGAMECLASS.weapons.L_HAMMR) {
             EngineCore.outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n");
-            kGAMECLASS.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
 //	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
@@ -250,22 +251,22 @@ public class EventParser {
         //Drop beautiful sword if corrupted!
         if (player.weaponPerk == "holySword" && player.cor >= (33 + player.corruptionTolerance())) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-            kGAMECLASS.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         //Drop Excalibur if corrupted!
         if (player.weaponPerk == "Excalibur" && player.cor >= (33 + player.corruptionTolerance())) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-            kGAMECLASS.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         //Drop scarred blade if not corrupted enough!
         if (player.weapon == kGAMECLASS.weapons.SCARBLD && player.cor < (66 - player.corruptionTolerance()) && kGAMECLASS.flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
-            kGAMECLASS.sheilaScene.rebellingScarredBlade();
+            SceneLib.sheilaScene.rebellingScarredBlade();
             return true;
         }
         if (kGAMECLASS.flags[kFLAGS.SCARRED_BLADE_STATUS] == 1 && player.cor >= 70) {
-            kGAMECLASS.sheilaScene.findScarredBlade();
+            SceneLib.sheilaScene.findScarredBlade();
             return true;
         }
         //Unequip Lusty maiden armor
@@ -277,19 +278,19 @@ public class EventParser {
                 if (player.hasCock()) EngineCore.outputText("maleness");
                 else EngineCore.outputText("bulgy balls");
                 EngineCore.outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-                kGAMECLASS.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
                 return true;
             }
             //Lost pussy
             else if (!player.hasVagina()) {
                 EngineCore.outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-                kGAMECLASS.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
                 return true;
             }
             //Tits gone or too small
             else if (player.biggestTitSize() < 4) {
                 EngineCore.outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-                kGAMECLASS.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
                 return true;
             }
         }
@@ -297,14 +298,14 @@ public class EventParser {
         if (player.lowerGarment != UndergarmentLib.NOTHING) {
             if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
                 EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
-                kGAMECLASS.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+                SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
                 return true;
             }
         }
         //Unequip shield if you're wielding a large weapon.
         if (((player.weaponPerk == "Large" && player.findPerk(PerkLib.TitanGrip) < 0) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
-            kGAMECLASS.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
         }
         // update cock type as dog/fox depending on whether the player resembles one more then the other.
@@ -323,8 +324,8 @@ public class EventParser {
             }
 
         }
-        if (kGAMECLASS.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && kGAMECLASS.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && kGAMECLASS.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !kGAMECLASS.inDungeon && !kGAMECLASS.inRoomedDungeon && !kGAMECLASS.prison.inPrison && !kGAMECLASS.ingnam.inIngnam) {
-            kGAMECLASS.prison.goBackToPrisonBecauseQuestTimeIsUp();
+        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && kGAMECLASS.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !kGAMECLASS.inDungeon && !kGAMECLASS.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
+            SceneLib.prison.goBackToPrisonBecauseQuestTimeIsUp();
             return true;
         }
         EngineCore.statScreenRefresh();
@@ -386,7 +387,7 @@ public class EventParser {
             player.removeStatusEffect(StatusEffects.LootEgg);
             player.removeStatusEffect(StatusEffects.Eggs);
             trace("TAKEY NAU");
-            kGAMECLASS.inventory.takeItem(sEgg, playerMenu);
+            SceneLib.inventory.takeItem(sEgg, playerMenu);
             return 2;
         }
         // Benoit preggers update
@@ -505,7 +506,7 @@ public class EventParser {
         if (kGAMECLASS.temp > 7) kGAMECLASS.temp = 7;
         if (player.findPerk(PerkLib.PiercedLethite) >= 0) kGAMECLASS.temp += 4;
         if (player.inHeat) kGAMECLASS.temp += 2;
-        if (kGAMECLASS.vapula.vapulaSlave()) kGAMECLASS.temp += 7;
+        if (SceneLib.vapula.vapulaSlave()) kGAMECLASS.temp += 7;
         //Reduce chance
         var flags:DefaultDict = kGAMECLASS.flags;
         if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) kGAMECLASS.temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
@@ -513,20 +514,20 @@ public class EventParser {
         if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) kGAMECLASS.temp *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
         if (kGAMECLASS.model.time.hours == 2) {
             if (kGAMECLASS.model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
-                kGAMECLASS.anemoneScene.goblinNightAnemone();
+                SceneLib.anemoneScene.goblinNightAnemone();
                 return 1;
             } else if (kGAMECLASS.temp > kGAMECLASS.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
-                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !kGAMECLASS.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kGAMECLASS.kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) &&
+                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) &&
                         (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0) || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
-                    kGAMECLASS.impScene.impGangabangaEXPLOSIONS();
+                    SceneLib.impScene.impGangabangaEXPLOSIONS();
                     EngineCore.doNext(playerMenu);
                     return 2;
                 }
-                else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kGAMECLASS.kihaFollower.followerKiha()) {
+                else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && SceneLib.kihaFollower.followerKiha()) {
                     EngineCore.outputText("\n<b>You find charred imp carcasses all around the camp once you wake.  It looks like Kiha repelled a swarm of the little bastards.</b>\n");
                     return 1;
                 }
-                else if (flags[kFLAGS.HEL_GUARDING] > 0 && kGAMECLASS.helFollower.followerHel()) {
+                else if (flags[kFLAGS.HEL_GUARDING] > 0 && SceneLib.helFollower.followerHel()) {
                     EngineCore.outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
                     return 1;
                 }
@@ -557,15 +558,15 @@ public class EventParser {
             }
             //wormgasms
             else if (flags[kFLAGS.EVER_INFESTED] == 1 && kGAMECLASS.rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
-                if (player.hasCock() && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !kGAMECLASS.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
-                    kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
+                if (player.hasCock() && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+                    SceneLib.mountain.wormsScene.nightTimeInfestation();
                     return 2;
                 }
                 else if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") {
                     EngineCore.outputText("\n<b>You hear the sound of a horde of worms banging against the door. Good thing you locked it before you went to sleep!</b>\n");
                     return 1;
                 }
-                else if (flags[kFLAGS.HEL_GUARDING] > 0 && kGAMECLASS.helFollower.followerHel()) {
+                else if (flags[kFLAGS.HEL_GUARDING] > 0 && SceneLib.helFollower.followerHel()) {
                     EngineCore.outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
                     return 1;
                 }
@@ -585,7 +586,7 @@ public class EventParser {
     public static function cheatTime(time:Number, needNext:Boolean = false):void {
         //Advance minutes
         var minutesToPass:Number = (time -= Math.floor(time)) * 60;
-        minutesToPass = Math.round(minutesToPass)
+        minutesToPass = Math.round(minutesToPass);
         kGAMECLASS.model.time.minutes += minutesToPass;
         if (kGAMECLASS.model.time.minutes > 59) {
             kGAMECLASS.timeQ++;
@@ -675,7 +676,7 @@ public class EventParser {
 
     public static function growBeard(amount:Number = .1):Boolean {
         //Grow beard!
-        var player = kGAMECLASS.player;
+        var player:Player = kGAMECLASS.player;
         var tempBeard:Number = player.beardLength;
         player.beardLength += amount;
 

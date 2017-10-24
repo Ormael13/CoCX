@@ -3,23 +3,19 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.API.Encounter;
-	import classes.Scenes.API.Encounters;
-	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.API.GroupEncounter;
-	import classes.Scenes.Areas.Desert.*;
-	import classes.Scenes.NPCs.Etna;
-	import classes.Scenes.NPCs.EtnaFollower;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Desert.*;
+import classes.Scenes.SceneLib;
 
-	import coc.xlogic.Statement;
-	import coc.xxc.BoundStory;
-	import coc.xxc.Story;
-	import coc.xxc.stmts.ZoneStmt;
+import coc.xxc.BoundStory;
+import coc.xxc.stmts.ZoneStmt;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{
@@ -40,8 +36,8 @@ package classes.Scenes.Areas
 			return _desertEncounter;
 		}
 		private function init():void {
-			const game:CoC     = getGame();
-			const fn:FnHelpers = Encounters.fn;
+            const game:CoC = kGAMECLASS;
+            const fn:FnHelpers = Encounters.fn;
 			_desertEncounter = Encounters.group("desert",
 					//game.commonEncounters,
 					{
@@ -62,7 +58,7 @@ package classes.Scenes.Areas
 						when: function ():Boolean {
 							return flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0;
 						},
-						call: game.dungeons.desertcave.fightCumWitch
+						call: SceneLib.dungeons.desertcave.fightCumWitch
 					}, {
 						name  : "wanderer",
 						chance: 0.2,
@@ -80,7 +76,7 @@ package classes.Scenes.Areas
 							return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 5);
 						},
 						chance: 2,
-						call: game.telAdre.discoverTelAdre
+						call: SceneLib.telAdre.discoverTelAdre
 					}, {
 						name: "teladreEncounter",
 						when: function ():Boolean
@@ -88,7 +84,7 @@ package classes.Scenes.Areas
 							return player.statusEffectv1(StatusEffects.TelAdre) == 0;
 						},
 						chance: 0.5,
-						call: game.telAdre.discoverTelAdre
+						call: SceneLib.telAdre.discoverTelAdre
 					}, {
 						name  : "ants",
 						when  : function ():Boolean {
@@ -102,7 +98,7 @@ package classes.Scenes.Areas
 							return (player.level >= 4 || player.exploredDesert > 45)
 								   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 						},
-						call: game.dungeons.desertcave.enterDungeon
+						call: SceneLib.dungeons.desertcave.enterDungeon
 					}, {
 						name: "wstaff",
 						when: function ():Boolean {
@@ -129,11 +125,11 @@ package classes.Scenes.Areas
 							if ( temp > 30){temp = 30; }
 							return (temp > rand(100) && player.longestCockLength() >= player.tallness && player.totalCockThickness() >= 12)
 						},
-						call  : game.exploration.bigJunkDesertScene
+						call  : SceneLib.exploration.bigJunkDesertScene
 					}, {
 						name  : "exgartuan",
 						chance: 0.25,
-						call  : game.exgartuan.fountainEncounter
+						call  : SceneLib.exgartuan.fountainEncounter
 					}, {
 						name  : "mirage",
 						chance: 0.25,
@@ -151,13 +147,13 @@ package classes.Scenes.Areas
 						{
 							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2);
 						},
-						call: game.etnaScene.repeatYandereEnc
+						call: SceneLib.etnaScene.repeatYandereEnc
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
-						call  : game.helScene.helSexualAmbush,
+						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
-						when  : game.helScene.helSexualAmbushCondition
+						when  : SceneLib.helScene.helSexualAmbushCondition
 					});
 			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}

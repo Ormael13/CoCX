@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -389,7 +389,7 @@ public class Katherine extends TelAdreAbstractContent implements TimeAwareInterf
 			switch (breasts.cupSize) {
 				case AppearanceDefs.BREAST_CUP_FLAT:
 				case AppearanceDefs.BREAST_CUP_A:
-				case AppearanceDefs.BREAST_CUP_B: outputText("tight enough to showcase even her small breasts"); break
+				case AppearanceDefs.BREAST_CUP_B: outputText("tight enough to showcase even her small breasts"); break;
 				case AppearanceDefs.BREAST_CUP_C:
 				case AppearanceDefs.BREAST_CUP_D:
 				case AppearanceDefs.BREAST_CUP_DD: outputText("just able to hold her bountiful breasts in check"); break;
@@ -729,7 +729,7 @@ public function katherineAtUrtas():void {
 				break;
 			default:
 				outputText("house.  You step inside and find Kath sitting on the floor with ");
-				var kids:int = kGAMECLASS.urtaPregs.urtaKids();
+				var kids:int = SceneLib.urtaPregs.urtaKids();
 				if (kids == 1)
 					outputText("your child.  " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "He" : "She") + "'s sitting in Katherine's lap, head mashed against her breasts like " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "he" : "she") + " hasn't got a care in the world.\n\n");
 				else outputText((kids > 5 ? "a few of your kids" : "a pile of your children") + ".  They're lying all over Kath, playing with her ears and tail while she scratches their heads and gives them little kisses.");
@@ -761,7 +761,7 @@ private function urtaPlusKathCuddle():void {
 			outputText("yank her knot right out of me.</i>”\n\n");
 		else outputText("dig her " + catGirl("nails", "claws") + " in.</i>”\n\n");
 		outputText("Kath looks sheepish and says, “<i>Sorry, sorry, I thought it was ");
-		if (kGAMECLASS.urtaPregs.urtaKids() == 1) 
+		if (SceneLib.urtaPregs.urtaKids() == 1)
 			outputText(flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "your son" : "your daughter");
 		else outputText("one of your kids");
 		outputText(",</i>” while gently stroking Urta's ears.\n\n");
@@ -1389,8 +1389,8 @@ private function playerLovers():int {
 	if (flags[kFLAGS.AMILY_FOLLOWER] == 1) loverSet |= KBIT_LOVER_AMILY; //Not > 0; probably don’t want to admit having corrupt Amily follower to Katherine
 	if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2) loverSet |= KBIT_LOVER_COTTON;
 	if ((flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0) && (player.statusEffectv1(StatusEffects.Edryn) > 3)) loverSet |= KBIT_LOVER_EDRYN;
-	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && kGAMECLASS.helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
-	if (kGAMECLASS.urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
+	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && SceneLib.helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
+	if (SceneLib.urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
 	if (flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX] > 0) loverSet |= KBIT_LOVER_VALA;
 	return loverSet;
 }
@@ -1495,7 +1495,7 @@ private function talkLoversHelia():void {
 private function talkLoversUrta():void {
 	clearOutput();
 	if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 0) { //She doesn’t know about you and Urta
-		var urtaKids:int = kGAMECLASS.urtaPregs.urtaKids();
+		var urtaKids:int = SceneLib.urtaPregs.urtaKids();
 		outputText("You decide to tell Katherine about Urta.  It’s amazing it hasn’t come up since they work together.  After you explain things Katherine " + (knownLovers() > 2 ? "laughs and says, “<i>You took Urta as a lover too?  You are one busy champion.  Don’t worry about it, I’m certainly not going to leave you.</i>”" : "gives you a worried look and asks what this means for the two of you.  When you tell her you have no intention of leaving she jumps into your arms and squeezes most of the air out of your lungs.") + "\n\n");
 		outputText("You tell Kath the story of how Urta met you coming into Tel’Adre that first day and how later on the two of you ‘met’ in the alley behind this bar.  Once she’s heard the story Kath says, “<i>I know how she felt.  It really hurts when you think no one wants you.</i>”");
 		if (urtaKids > 0)
@@ -1920,7 +1920,7 @@ public function dateKathBath():void {
 		outputText("She hops up off her crate in a way that causes her breasts to bounce.  She");
 	else if (isAt(KLOC_URTAS_APT) || isAt(KLOC_URTAS_HOME))
 		outputText("She goes outside with you and");
-	else ((isAt(KLOC_KATHS_APT) ? "She jumps up off the bed" : "She sucks up the last of her drink and hops out of her seat") + " in a way that causes her breasts to bounce.  She");
+	else outputText((isAt(KLOC_KATHS_APT) ? "She jumps up off the bed" : "She sucks up the last of her drink and hops out of her seat") + " in a way that causes her breasts to bounce.  She");
 	outputText(" gets up close to you before adding, “<i>But I bet you knew that.  I’d love a naked swim, especially if it’s with you.</i>”");
 	flags[kFLAGS.KATHERINE_LOCATION] = KLOC_LAKE;
 	doNext(bathTime);
@@ -2396,7 +2396,7 @@ private function giveKatAOverlyLargePepper():void {
 	else if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
 		outputText("She looks at the pepper eagerly, then visibly reins herself in.  “<i>I'm sorry...  I really would like to eat it, but I have to be practical.  I'm nearly a foot and a half long already!  Momma didn't raise me to be a size queen, and I’m almost as long as Urta.  I mean I like Urta, I just don’t think I need a cock quite that big,</i>” she says.\n\n");
 		outputText("“<i>It is nice to know you’re thinking of me,</i>” she adds, quickly trying to make nice with you.");
-		if (kGAMECLASS.urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
+		if (SceneLib.urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
 		katherineMenu();
 	}
 	else {
@@ -2798,7 +2798,7 @@ private function giveKatTheGiftOFMilk():void {
 		milkOptionClear(KBIT_MILK_TOLD_PLAYER_SHES_DRY); //This resets the out of milk notification. If Kath runs out of milk she'll appologize to the player.
 		if (breasts.lactationLevel == BreastStore.LACTATION_LIGHT && breasts.preventLactationIncrease == BreastStore.LACTATION_LIGHT) breasts.preventLactationIncrease = 0;
 			//You're handing her the Lactaid, so obviously you want more milk
-		if (!doneSubmissive(KBIT_SUB_HIGH_LACTATION)) breasts.preventLactationIncrease == BreastStore.LACTATION_MODERATE;
+		if (!doneSubmissive(KBIT_SUB_HIGH_LACTATION)) breasts.preventLactationIncrease = BreastStore.LACTATION_MODERATE;
 			//This limit will remain in place until you are able to feed her enough Lactaid to push her up to strong lactation.
 		breasts.lactationLevel++;
 		player.consumeItem(consumables.LACTAID);
@@ -3268,8 +3268,8 @@ private function giveKatDyeGreen():void {
 //Sex
 public function katherineSex():void {
 	clearOutput();
-	if (getGame().urta.drainedByKath) {
-			outputText("There are certainly a few things you can think to do with your horny kitten, especially after that display, so you lead her toward the rear exit.  Katherine paws at your belt, but you keep her under control until you're both out of sight of the other patrons.  You give Kath a quick kiss and realize you have only a moment to decide what you want to do with her before she takes matters into her own hands.");
+    if (SceneLib.urta.drainedByKath) {
+        outputText("There are certainly a few things you can think to do with your horny kitten, especially after that display, so you lead her toward the rear exit.  Katherine paws at your belt, but you keep her under control until you're both out of sight of the other patrons.  You give Kath a quick kiss and realize you have only a moment to decide what you want to do with her before she takes matters into her own hands.");
 	}
 	else if (isAt(KLOC_BAR)) {
 		outputText("You ask Kath if she’s in the mood to have a little fun.\n\n");
@@ -3315,14 +3315,14 @@ private function katSexMenu():void {
 		var seeVala:Function = null;
 		var backOpt:Function = katherineMenu;
 		if (isAt(KLOC_BAR)) { //Check to see if her partners are comfortable fucking her sober
-			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex()) seeUrta = katherineSeeUrta;
-			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) seeVala = katherineSeeVala;
+            if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && SceneLib.urta.urtaAtBar() && SceneLib.urta.urtaAvailableForSex()) seeUrta = katherineSeeUrta;
+            if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) seeVala = katherineSeeVala;
 		}
 		else if (isAt(KLOC_BAR_DRUNK)) {
 			suckle = null; //If she's drunk she wants sex, not suckling
-			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
-			backOpt = null; //Kath won't take no for an answer if she's sauced
+            if (SceneLib.urta.urtaAtBar() && SceneLib.urta.urtaAvailableForSex() && !SceneLib.urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
+            if (isValaAtBar() && !SceneLib.urta.drainedByKath) seeVala = katherineSeeVala;
+            backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
 			if (isValaAtBar()) seeVala = katherineSeeVala;
@@ -3338,8 +3338,8 @@ private function katherineDrunkSeeUrta():void {
 	outputText("Now that you’ve lowered Kath’s inhibitions you suggest the two of you should go and talk to Urta.\n\n");
 	outputText("“<i>Yeah, the captain looks like she could use some company.</i>”\n\n");
 	outputText("You have to help Katherine get to Urta’s table, but once there Kath plops down into the seat next to Urta and gives her a big hug.\n\n");
-	if (getGame().urta.urtaDrunk()) {
-		outputText("Urta hugs Kath back and says, “<i>Hey there cutie,</i>” before groping Kath’s behind.\n\n");
+    if (SceneLib.urta.urtaDrunk()) {
+        outputText("Urta hugs Kath back and says, “<i>Hey there cutie,</i>” before groping Kath’s behind.\n\n");
 		outputText("Kath purrs and buries her head in Urta’s bosom.\n\n");
 		outputText("You get the feeling you are going to have to intervene quickly if you don’t want them to fuck right here and now.");
 		var button:int = 0;
@@ -3368,8 +3368,8 @@ private function katherineDrunkSeeUrta():void {
 	else { //Not willing to bang Kath (while sober) just yet
 		outputText("Urta pushes Kath back gently.  “<i>Whoa - [name] I think someone’s had a bit much.</i>”\n\n");
 		outputText("Kath smiles and her eyes wander downward, clearly checking out Urta’s chest and then her cock.  Her voice slightly slurred Kath says, “<i>I like you cap'n,</i>” before Urta can lift her up, haul her back to her booth and dump Katherine in her usual seat.\n\n");
-		outputText("Urta turns to you and whispers, “<i>You’d better do something about her.  She’s going to start humping a table leg if you don’t give her some relief.  It’s a real shame, 'cause I could go for some relief from you too.</i>”" + (getGame().urta.pregnancy.isPregnant ? "  She rubs her pregnant belly absentmindedly as she stares at you and Kath." : "") + "\n\n");
-		outputText("As she walks away Kath props her head up on her hands and looks at you dreamily.");
+        outputText("Urta turns to you and whispers, “<i>You’d better do something about her.  She’s going to start humping a table leg if you don’t give her some relief.  It’s a real shame, 'cause I could go for some relief from you too.</i>”" + (SceneLib.urta.pregnancy.isPregnant ? "  She rubs her pregnant belly absentmindedly as she stares at you and Kath." : "") + "\n\n");
+        outputText("As she walks away Kath props her head up on her hands and looks at you dreamily.");
 		flags[kFLAGS.KATHERINE_LOCATION] = KLOC_BAR_URTA_REFUSED; //Shows the same options as when you get her drunk, except no option to see Urta
 		katSexMenu();
 	}
@@ -3377,7 +3377,7 @@ private function katherineDrunkSeeUrta():void {
 
 private function katherineSeeUrta():void {
 	clearOutput();
-	if (kGAMECLASS.urta.urtaDrunk()) {
+	if (SceneLib.urta.urtaDrunk()) {
 		outputText("Katherine looks over at Urta’s table and sees that the captain is obviously sloshed.  She finishes off her drink and whispers, “<i>Now " + playerText() + ", I think we both know that if I go over there Urta is going to pound me into the floor.</i>”\n\n");
 		outputText("You smile and say, “<i>Only if you ask nicely.</i>”\n\n");
 		outputText("Kath stands up and offers you her hand.  “<i>I guess I’d better bring you along.  I might need help and besides, you always have some fun ideas.</i>”\n\n");

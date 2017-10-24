@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.DeepCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class Vala extends Monster
@@ -84,7 +85,7 @@ public class Vala extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.fightValaVictory();
+			SceneLib.dungeons.deepcave.fightValaVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -93,7 +94,7 @@ public class Vala extends Monster
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToVala();
+				SceneLib.dungeons.deepcave.loseToVala();
 			}
 		}
 

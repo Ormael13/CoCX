@@ -2496,97 +2496,85 @@ import flash.errors.IllegalOperationError;
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{
-			if (game.player.weaponRange == game.weaponsrange.BOWGUID)
-				return true;
-			return false;
+			return game.player.weaponRange == game.weaponsrange.BOWGUID;
+
 		}
 
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP;
+
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.DBFSWO)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.DBFSWO;
+
 		}
 
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO)
-				return true;
-			return false;
+			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO;
+
 		}
 
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
-			 || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
+                    || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_;
+
 		}
 
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
-			 || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
+                    || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON;
+
 		}
 
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
-			if (game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook")
-				return true;
-			return false;
+			return game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook";
+
 		}
 
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-			 || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
-				return true;
-			return false;
+			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+                    || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-			 || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
-				return true;
-			return false;
+			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+                    || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+
 		}
 
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			if (game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large")
-				return true;
-			return false;
+			return game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large";
+
 		}
 
 		//Naked
 		public function isNaked():Boolean
 		{
-			if (game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing")
-				return true;
-			return false;
+			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
+
 		}
 
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE))
-				return true;
-			return false;
+			return game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE);
+
 		}
 
 		//Crit immunity
@@ -2600,25 +2588,22 @@ import flash.errors.IllegalOperationError;
 		//Eyes of the Hunter
 		public function whenEyesOfTheHunterActivates():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
+
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+
 		}
 
 		//check for vagoo
@@ -3085,23 +3070,20 @@ import flash.errors.IllegalOperationError;
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)
-				return true;
-			return false;
+			return eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
+
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN)
-				return true;
-			return false;
+			return eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN;
+
 		}
 
 		public function canOviposit():Boolean
 		{
-			if (canOvipositSpider() || canOvipositBee())
-				return true;
-			return false;
+			return canOvipositSpider() || canOvipositBee();
+
 		}
 
 		public function eggs():int
@@ -3345,9 +3327,8 @@ import flash.errors.IllegalOperationError;
 				if (breastRows[index].breasts < breastRows[counter].breasts && breastRows[counter].breastRating > 3)
 					index = counter;
 			}
-			if (breastRows[index].breasts >= 2 && breastRows[index].breastRating > 3)
-				return true;
-			return false;
+			return breastRows[index].breasts >= 2 && breastRows[index].breastRating > 3;
+
 		}
 
 		public function mostBreastsPerRow():Number

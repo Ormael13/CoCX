@@ -12,6 +12,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
@@ -80,18 +81,18 @@ use namespace kGAMECLASS;
 		private var forestStory:BoundStory;
 		private var deepwoodsStory:BoundStory;
 		private function init():void {
-			const game:CoC     = getGame();
-			const fn:FnHelpers = Encounters.fn;
+            const game:CoC = kGAMECLASS;
+            const fn:FnHelpers = Encounters.fn;
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
-						call: game.exploration.genericGolGobImpEncounters
+						call: SceneLib.exploration.genericGolGobImpEncounters
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
-						call  : game.helScene.helSexualAmbush,
+						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
-						when  : game.helScene.helSexualAmbushCondition
+						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
@@ -236,23 +237,23 @@ use namespace kGAMECLASS;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
-				call  : game.helScene.helSexualAmbush,
+				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
-				when  : game.helScene.helSexualAmbushCondition
+				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
 				},
-				call  : kGAMECLASS.etnaScene.repeatYandereEnc
+				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name  : "electra",
 				when  : function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
 				},
-				call  : kGAMECLASS.electraScene.repeatDeepwoodsEnc
+				call  : SceneLib.electraScene.repeatDeepwoodsEnc
 			}, {
 				name: "kitsune",
 				when: function():Boolean {
@@ -337,8 +338,8 @@ use namespace kGAMECLASS;
 				chance: 0.8
 			}, {
 				name: "dungeon",
-				call: getGame().dungeons.enterDeepCave,
-				when: getGame().dungeons.canFindDeepCave
+				call: SceneLib.dungeons.enterDeepCave,
+				when: SceneLib.dungeons.canFindDeepCave
 			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
@@ -603,13 +604,13 @@ use namespace kGAMECLASS;
 			if (kGAMECLASS.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
 					kGAMECLASS.monk = 1;
-					kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
+					SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				}
-				else kGAMECLASS.jojoScene.highCorruptionJojoEncounter();
+				else SceneLib.jojoScene.highCorruptionJojoEncounter();
 			} else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.
-				kGAMECLASS.jojoScene.repeatJojoEncounter();
+				SceneLib.jojoScene.repeatJojoEncounter();
 			} else if (kGAMECLASS.monk >= 2) { //Angry/Horny Jojo
-				kGAMECLASS.jojoScene.corruptJojoEncounter();
+				SceneLib.jojoScene.corruptJojoEncounter();
 			}
 		}
 		private function tentacleBeastEncounterFn():void {

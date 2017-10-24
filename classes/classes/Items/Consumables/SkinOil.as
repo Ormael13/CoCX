@@ -3,6 +3,7 @@ package classes.Items.Consumables
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Scenes.SceneLib;
 
 /**
 	 * Skin oils, courtesy of Foxxling.
@@ -16,9 +17,9 @@ import classes.Items.ConsumableLib;
 		{
 			this._color = color.toLowerCase();
 			var shortName:String = color + " Oil";
-			var longName:String = "a bottle of " + this._color + " oil"
+			var longName:String = "a bottle of " + this._color + " oil";
 			var value:int = ConsumableLib.DEFAULT_VALUE;
-			var description:String = "A small glass bottle filled with a smooth clear liquid. A label across the front says, \"" + color + " Skin Oil.\""
+			var description:String = "A small glass bottle filled with a smooth clear liquid. A label across the front says, \"" + color + " Skin Oil.\"";
 			super(id, shortName, longName, value, description);
 		}
 		
@@ -47,7 +48,7 @@ import classes.Items.ConsumableLib;
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
 				}
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 			return true;
 		}
 		

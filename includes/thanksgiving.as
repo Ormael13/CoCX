@@ -80,7 +80,7 @@ public function letZeTurkeyApproach():void {
 public function noThanksTurkeyGal():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("You reluctantly push her away.  You've no need to ram your dick down some new monstrosity's gullet.  The girl forlornly gobbles one last time, then prances off into the fading evening light, globular ass jiggling.");
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 //Baste Her -McGirt, reluctantly
 public function basteThatTurkeyBooty():void {
@@ -185,7 +185,7 @@ public function thatllDoTurkey():void {
 		player.createPerk(PerkLib.PilgrimsBounty,0,0,0,0);
 		classes.EngineCore.outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
 	}
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //Let her Approach:
@@ -301,7 +301,7 @@ public function haveTurkeyGirlDesertInYourCunt():void {
 	//HP set to full, fatigue to 0?
 	classes.EngineCore.fatigue(-100);
 	classes.EngineCore.HPChange(3000,false);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //Turkey Girl II: Return of the Cockgobbler (Cockwielders)
@@ -482,7 +482,7 @@ public function turkeyDesertBitches():void {
 	
 	classes.EngineCore.outputText("\n\n“<i>That’ll do, turkey,</i>” you say, patting her jiggling tit and scraping some of the excess gravy out of your lunch.  “<i>That’ll do.</i>”");
 	player.orgasm();
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //Ham Roast: Getting All Up In A Honey Pot (Female and Genderless only)
@@ -504,7 +504,7 @@ public function pigSlutRoastingGreet():void {
 	player.dynStats("lus", 5);
 	classes.EngineCore.menu();
 	if(player.gems >= 1) classes.EngineCore.addButton(0,"Throw gem",getARoastPiggueOinkOinkOinkMotherfucker);
-	classes.EngineCore.addButton(1, "Nah", telAdre.barTelAdre);
+	classes.EngineCore.addButton(1, "Nah", classes.Scenes.SceneLib.telAdre.barTelAdre);
 	classes.EngineCore.addButton(2, "Never", disablePigSlut);
 }
 //[ In For A Gem... ] [ Not My Style ]
@@ -513,7 +513,7 @@ public function disablePigSlut():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("Pig sluts are not really your thing. You tell her that you have no interest in her. She seems to be a bit heartbroken.");
 	flags[kFLAGS.PIG_SLUT_DISABLED] = 1;
-	classes.EngineCore.doNext(telAdre.barTelAdre);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.telAdre.barTelAdre);
 }
 
 //{Return to The Wet Bitch menu}
@@ -730,5 +730,5 @@ public function getDoneEatingOutPigSlut():void {
 	classes.EngineCore.outputText("\n\nYou sigh");
 	if(changed) classes.EngineCore.outputText(", feeling your body expand as you waddle out back towards camp with belly full of sweet syrup");
 	classes.EngineCore.outputText(". For only one gem, that was a pretty good time...");
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }

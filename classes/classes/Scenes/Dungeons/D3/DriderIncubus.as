@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkLib;
 import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 public class DriderIncubus extends AbstractSpiderMorph
@@ -55,12 +56,12 @@ public class DriderIncubus extends AbstractSpiderMorph
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.driderIncubus.beatTheSpooderbutt(hpVictory);
+			SceneLib.d3.driderIncubus.beatTheSpooderbutt(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
+			SceneLib.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
 		}
 		
 		private var _goblinFree:Boolean = false;

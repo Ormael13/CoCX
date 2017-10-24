@@ -88,7 +88,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 		protected function phoukaFaerieFireLeave():void
 		{
 			if (flags[kFLAGS.PHOUKA_ENCOUNTER_STATUS] == 0)
-			outputText("\n\nYou decide it's best not to mess with weird floating lights out in the bog and return to your camp.")
+			outputText("\n\nYou decide it's best not to mess with weird floating lights out in the bog and return to your camp.");
 			else outputText("\n\nAt the moment you don't feel the need to meet one of those " + phoukaNameText("phouka", "creatures") + " again.");
 			doNext(camp.returnToCampUseOneHour);  //Return to camp, 1 hour used
 		}
@@ -150,16 +150,16 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			outputText("You ask the " + phoukaName());
 			if (player.level < 10)
-				outputText(" if perhaps there's some way he could release you.")
+				outputText(" if perhaps there's some way he could release you.");
 			else outputText(" if he really wants a taste of what you're going to give him.");
 
 			if (player.cor + rand(125) <= 110) { //Players with 0% corruption have a 12% chance that the Phouka is willing to talk, players with 100% corruption have a 92% chance
 				//The phouka is not in the mood for talk, start the fight gagged as punishment for trying to talk
 				outputText("  You open your mouth to say something more to the ");
 				if (player.cor < 34)
-					outputText("vile little monster")
+					outputText("vile little monster");
 				else if (player.cor < 67)
-					outputText("perverted " + phoukaName())
+					outputText("perverted " + phoukaName());
 				else outputText("fuckable little " + phoukaName());
 				outputText(" but he must not feel like listening.  He launches a ball of black mud at your face, sealing your mouth with sticky and [if (corruption <= 50)ewww -][if (corruption > 50)mmmm -] salty muck.");
 				startCombat(new Phouka(phoukaName()));
@@ -348,9 +348,9 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				else {
 					outputText("\n\nYou look at the sleeping phouka");
 					if (player.hasCock())
-						outputText(", [eachCock] beginning to swell" + (player.hasVagina() ? " and your [vagina] starting to moisten" : "") + ".")
+						outputText(", [eachCock] beginning to swell" + (player.hasVagina() ? " and your [vagina] starting to moisten" : "") + ".");
 					else if (player.hasVagina())
-						outputText(", your [vagina] starting to moisten.")
+						outputText(", your [vagina] starting to moisten.");
 					else outputText("and you feel your sphincter twitch as your brain thinks about what you could do with this phouka now."); //Genderless
 				}
 				menu();

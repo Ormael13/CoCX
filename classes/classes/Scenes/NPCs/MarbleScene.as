@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 
 public class MarbleScene extends NPCAwareContent implements TimeAwareInterface {
 		
@@ -229,7 +230,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-						if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+						if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 						//if amily is there, tag it for freakout
 						if (flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 							flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -271,7 +272,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						outputText("\n");
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-						if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+						if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 						//if amily is there, tag it for freakout
 						if (flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 							flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -335,7 +336,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-						if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+						if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 						//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 						//if amily is there, tag it for freakout
@@ -374,7 +375,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						//(Marble now appears at the camp)
 						player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
 						flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-						if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+						if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 						//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 						//if amily is there, tag it for freakout
@@ -431,8 +432,7 @@ public function marbleAtCamp():Boolean
 {
 	if(marbleFollower())
 	{
-		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] > 0) return false;
-		else return true;
+		return flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] <= 0;
 	}
 	return false;
 }
@@ -2305,16 +2305,16 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 8;
 	}
 	else if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 && flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] == 0) {
-		outputText("You tell Marble about how you've managed to slay Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to kill a goddess, didn't you?</i>\" You tell her that you did manage to defeat the corrupted goddess for real. She says, \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n")
+		outputText("You tell Marble about how you've managed to slay Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to kill a goddess, didn't you?</i>\" You tell her that you did manage to defeat the corrupted goddess for real. She says, \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n");
 		if (player.armorName == "tentacled bark armor")
 		{
-			outputText("You tell her about how you've brought the bark platings infested with tentacles and got Rathazul to shape it into armor. The cowgirl takes a glance at your bizarre armour. \"<i>That armour you're wearing... There are tentacles in there. Are you okay with having tentacles, sweetie?</i>\" she says. ")
+			outputText("You tell her about how you've brought the bark platings infested with tentacles and got Rathazul to shape it into armor. The cowgirl takes a glance at your bizarre armour. \"<i>That armour you're wearing... There are tentacles in there. Are you okay with having tentacles, sweetie?</i>\" she says. ");
 			outputText("You assure her that it's entirely up to you. \"<i>Thanks for telling me the story, sweetie,</i>\" she says.")
 		}
 		flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] = 1;
 	}
 	else if (flags[kFLAGS.PURE_MARAE_ENDGAME] > 0 && flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] == 0) {
-		outputText("You tell Marble about how you've managed to best Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to beat a goddess in a duel, didn't you?</i>\" You tell her that you did manage to defeat the goddess for real and she rewarded you with bark platings. She says, \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n")
+		outputText("You tell Marble about how you've managed to best Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to beat a goddess in a duel, didn't you?</i>\" You tell her that you did manage to defeat the goddess for real and she rewarded you with bark platings. She says, \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n");
 		if (player.armorName == "divine bark armor")
 		{
 			outputText("You tell her about how you've brought the bark platings and got Rathazul to shape it into armor. The cowgirl takes a glance at your armor. ");

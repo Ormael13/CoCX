@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Marble extends Monster
@@ -70,12 +71,12 @@ public class Marble extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.marbleScene.marbleFightWin();
+			SceneLib.marbleScene.marbleFightWin();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.marbleScene.marbleFightLose();
+			SceneLib.marbleScene.marbleFightLose();
 		}
 
 		public function Marble()

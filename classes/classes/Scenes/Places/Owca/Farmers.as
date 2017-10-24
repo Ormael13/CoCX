@@ -2,6 +2,7 @@ package classes.Scenes.Places.Owca
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Farmers extends Monster
 	{
@@ -15,12 +16,12 @@ public class Farmers extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.owca.beatUpOwca();
+			SceneLib.owca.beatUpOwca();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.owca.loseToOwca();
+			SceneLib.owca.loseToOwca();
 		}
 
 		public function Farmers()

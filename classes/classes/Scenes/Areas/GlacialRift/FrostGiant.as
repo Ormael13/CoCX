@@ -2,6 +2,7 @@ package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
@@ -16,7 +17,7 @@ public class FrostGiant extends Monster
 			else {
 				if (rand(player.spe + 40) < spe) {
 					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
-					damage = ((str + 150) + rand(100))
+					damage = ((str + 150) + rand(100));
 					damage = player.reduceDamage(damage);
 					if (damage < 40) damage = 40;
 					player.takeDamage(damage, true);
@@ -55,7 +56,7 @@ public class FrostGiant extends Monster
 			else giantGrabSuccess();
 		}
 		public function giantGrabFail(struggle:Boolean = true):void {
-			var damage:int = 0
+			var damage:int = 0;
 			if (struggle) {
 				clearOutput();
 				if (player.str >= 80) {
@@ -82,14 +83,14 @@ public class FrostGiant extends Monster
 					}
 				}
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
-					outputText("The thought of being constricted turns you on a bit. ")
+					outputText("The thought of being constricted turns you on a bit. ");
 					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
 			}
 			else {
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
-					outputText("The thought of being constricted turns you on a bit. ")
+					outputText("The thought of being constricted turns you on a bit. ");
 					player.dynStats("lust", 5);
 				}
 				outputText("\n\n");
@@ -98,7 +99,7 @@ public class FrostGiant extends Monster
 				case 0:
 				case 1:
 				case 2: //Taunt
-					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
+					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 50 + rand(str * 0.4);
 					damage = player.reduceDamage(damage);
@@ -133,7 +134,7 @@ public class FrostGiant extends Monster
 			clearOutput();
 			if (player.str >= 200) outputText("You roar and force the giant's hand open. He gasps in surprise, using his other hand to close you in, but it's too late by then. You jump to the ground and roll away, readying for your next attack. ");
 			if (player.str >= 160 && player.str < 200) outputText("You push, pull, squeeze, squirm and finally you escape the giant's grasp. You drop and roll and make distance before readying your weapon. ");
-			if (player.str >= 120 && player.str < 160) outputText("With no small effort, you  pop out from the giant's clench. You run up his arm and jump down his back, making distance. ")
+			if (player.str >= 120 && player.str < 160) outputText("With no small effort, you  pop out from the giant's clench. You run up his arm and jump down his back, making distance. ");
 			if (player.str >= 80 && player.str < 120) outputText("Despite the cold, hard confines of the giant's hand, you manage to slip out of his hand and fall to the ground before scrambling up and running from the angry giant. ");
 			if (player.str >= 40 && player.str < 80) outputText("Body aching, you exploit a light grip for a moment and drop to the ground with a hard thud. Forcing yourself to get up and MOVE, you run as quickly as your throbbing [ass] can handle. ");
 			if (player.str < 40) {
@@ -145,7 +146,7 @@ public class FrostGiant extends Monster
 		
 		public function giantBoulderThrow():void {
 			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad. ");
-			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>")
+			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>");
 			if (!player.hasStatusEffect(StatusEffects.GiantBoulder)) player.createStatusEffect(StatusEffects.GiantBoulder, 0, 0, 0, 0);
 			combatRoundOver();
 		}
@@ -202,7 +203,7 @@ public class FrostGiant extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.glacialRift.giantScene.winAgainstGiant();
+			SceneLib.glacialRift.giantScene.winAgainstGiant();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

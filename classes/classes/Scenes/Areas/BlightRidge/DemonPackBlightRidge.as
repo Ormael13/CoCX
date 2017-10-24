@@ -6,6 +6,7 @@ package classes.Scenes.Areas.BlightRidge
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class DemonPackBlightRidge extends Monster
@@ -107,8 +108,8 @@ public class DemonPackBlightRidge extends Monster
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = game.combat.packAttack;
-			this.special2 = game.combat.lustAttack;
+			this.special1 = SceneLib.combat.packAttack;
+			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.hornType = AppearanceDefs.HORNS_DEMON;
 			this.horns = 2;

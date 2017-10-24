@@ -8,7 +8,7 @@ import classes.internals.*;
 
 public class SecretarialSuccubus extends AbstractSuccubus
 	{
-		public var factory:Factory = new Factory()
+		public var factory:Factory = new Factory();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{

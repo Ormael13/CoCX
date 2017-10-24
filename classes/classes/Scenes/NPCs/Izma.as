@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -126,7 +127,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.izmaScene.defeatIzma();
+			SceneLib.izmaScene.defeatIzma();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -135,7 +136,7 @@ import classes.GlobalFlags.kFLAGS;
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
 				game.cleanupAfterCombat();
 			} else {
-				game.izmaScene.IzmaWins();
+				SceneLib.izmaScene.IzmaWins();
 			}
 		}
 

@@ -4,13 +4,13 @@
  */
 package classes.Scenes.Dungeons.HiddenCave 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.Scenes.Monsters.AbstractGargoyle;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class BossGolems extends AbstractGargoyle
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.AbstractGargoyle;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+public class BossGolems extends AbstractGargoyle
 	{
 		override protected function performCombatAction():void
 		{
@@ -66,7 +66,7 @@ package classes.Scenes.Dungeons.HiddenCave
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.hiddencave.defeatedByBossGolems();
+			SceneLib.dungeons.hiddencave.defeatedByBossGolems();
 		}
 		
 		public function BossGolems() 

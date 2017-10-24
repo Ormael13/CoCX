@@ -2,6 +2,7 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GoblinElder extends Goblin
@@ -157,7 +158,7 @@ public class GoblinElder extends Goblin
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinElderScene.goblinElderRapeIntro();
+			SceneLib.goblinElderScene.goblinElderRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -166,7 +167,7 @@ public class GoblinElder extends Goblin
 				game.cleanupAfterCombat();
 			} 
 			else {
-				game.goblinElderScene.goblinElderBeatYaUp();
+				SceneLib.goblinElderScene.goblinElderBeatYaUp();
 			}
 		}
 		

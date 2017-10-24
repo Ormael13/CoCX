@@ -1,6 +1,7 @@
 //The code that is responsible for managing MainView.
 package classes {
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 import coc.view.BitmapDataSprite;
 import coc.view.MainView;
@@ -80,8 +81,8 @@ public class MainViewManager extends BaseContent {
 		}
 		//Set theme!
 		setTheme();
-		mainView.statsView.refreshStats(getGame());
-	}
+        mainView.statsView.refreshStats(kGAMECLASS);
+    }
 	public function showPlayerDoll(reload:Boolean=false):void {
 			tweenOutStats();
 		if (reload) mainView.charView.reload("external");
@@ -243,8 +244,8 @@ public class MainViewManager extends BaseContent {
 				return "\n" + s;
 			}
 		}
-		var obj:Stage = getGame().stage;
-		return chdump(obj, 0, obj.alpha, obj.visible, obj.scaleX, obj.scaleY);
+        var obj:Stage = kGAMECLASS.stage;
+        return chdump(obj, 0, obj.alpha, obj.visible, obj.scaleX, obj.scaleY);
 	}
 }
 }

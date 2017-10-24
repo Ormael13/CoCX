@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armor;
 import classes.Scenes.Areas.Lake.GooGirl;
 
@@ -31,8 +32,7 @@ public class Valeria extends NPCAwareContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	
 		public function valeriaFluidsEnabled():Boolean {
-			if ((flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] > 0)) return true;
-			else return false;
+			return (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] > 0);
 		}
 		
 //const VELARIA_FUTA:int = 499;
@@ -407,8 +407,8 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 	feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
 	player.orgasm();
 	dynStats("sen", 1);
-	if (offCamp || !getGame().inCombat)
-		doNext(camp.returnToCampUseOneHour);
+    if (offCamp || !kGAMECLASS.inCombat)
+        doNext(camp.returnToCampUseOneHour);
 	else cleanupAfterCombat();
 }
 

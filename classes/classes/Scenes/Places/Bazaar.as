@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Places{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Plains.BazaarGatekeeper;
-	import classes.Scenes.Places.Bazaar.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Plains.BazaarGatekeeper;
+import classes.Scenes.Places.Bazaar.*;
+import classes.Scenes.SceneLib;
 
-	public class Bazaar extends BaseContent {
+public class Bazaar extends BaseContent {
 // JOEY_OFFERED_MILKER:int = 466;
 // OWN_MAIDEN_BIKINI:int = 770;
 // COUNTDOWN_TO_NIGHT_RAPE:int = 872;
@@ -119,8 +120,8 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	//Bimbo Niamh
 	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
 		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
-	}
+        addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
+    }
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -816,7 +817,7 @@ private function yesPutDatSockOnMe(target:int):void {
 	}
 	else { // Conflict! NOOOOO! Pull up! Pull up!
 
-		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"")
+		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"");
 		menu();
 		addButton(0,"Next",gretasGarments);		
 	}
@@ -1313,8 +1314,8 @@ private function finalGayFinallee(road:int = 0):void {
 	private function investigateBackAlley():void {
 		clearOutput();
 		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
-		doYesNo(getGame().prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
-	}
+        doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
+    }
 
 }
 }

@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GoblinAssassin extends Monster
@@ -104,7 +105,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinAssassinScene.gobboAssassinRapeIntro();
+			SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
 			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -114,7 +115,7 @@ public class GoblinAssassin extends Monster
 				game.cleanupAfterCombat();
 			} 
 			else {
-				game.goblinAssassinScene.gobboAssassinBeatYaUp();
+				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp();
 			}
 		}
 		public function GoblinAssassin(noInit:Boolean=false)

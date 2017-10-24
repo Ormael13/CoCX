@@ -1,6 +1,7 @@
 package classes{
-import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
 
@@ -498,7 +499,7 @@ internal class ControlBindings {
                         else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 3) {
                             if (keyCode == 39) {
                                 if (kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1) {
-                                    kGAMECLASS.inventory.giveHumanizer();
+                                    SceneLib.inventory.giveHumanizer();
                                 }
                             }
                             else {
@@ -547,7 +548,7 @@ internal class ControlBindings {
                         else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
                             if (keyCode == 71) {
                                 if (kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1 && (kGAMECLASS.debug && kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
-                                    kGAMECLASS.debugMenu.accessDebugMenu();
+                                    SceneLib.debugMenu.accessDebugMenu();
                                 }
                             }
                             else {

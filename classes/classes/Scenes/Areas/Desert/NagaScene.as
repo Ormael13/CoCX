@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class NagaScene extends BaseContent{
         private var gorgonOrNaga:String = "naga";
@@ -896,7 +897,7 @@ public function nagaPlayerConstrict():void {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	//Cannot be used on plural enemies
@@ -910,7 +911,7 @@ public function nagaPlayerConstrict():void {
 		outputText("You can't constrict something you're trapped inside of!");
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	fatigue(10, USEFATG_PHYSICAL);
@@ -937,7 +938,7 @@ public function nagaPlayerConstrict():void {
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 		player.takeDamage(5, true);
 		if(player.HP <= 0) {
-			doNext(kGAMECLASS.combat.endHpLoss);
+			doNext(SceneLib.combat.endHpLoss);
 			return;
 		}
 	}
@@ -949,7 +950,7 @@ public function naggaSqueeze():void {
 	clearOutput();
 	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	//Squeeze -
@@ -963,7 +964,7 @@ public function naggaSqueeze():void {
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 		outputText("\n\n");
-		doNext(kGAMECLASS.combat.endHpVictory);
+		doNext(SceneLib.combat.endHpVictory);
 		return;
 	}
 	outputText("\n\n");
@@ -986,7 +987,7 @@ public function naggaTease():void {
         enemyAI();
         return;
     }
-    kGAMECLASS.combat.fatigueRecovery();
+    SceneLib.combat.fatigueRecovery();
     var damage:Number;
     var chance:Number = 60;
     var bimbo:Boolean = false;
@@ -1091,18 +1092,18 @@ public function naggaTease():void {
         }
         monster.teased(monster.lustVuln * damage);
         if (crit == true) outputText(" <b>Critical!</b>");
-        kGAMECLASS.combat.teaseXP(1);
+        SceneLib.combat.teaseXP(1);
     }
     //Nuttin honey
     else {
-        kGAMECLASS.combat.teaseXP(5);
+        SceneLib.combat.teaseXP(5);
         outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
     }
     outputText("\n\n");
     //OLD
     //monster.lust += 5 + rand(15);
     if (monster.lust >= monster.maxLust()) {
-        doNext(kGAMECLASS.combat.endLustVictory);
+        doNext(SceneLib.combat.endLustVictory);
         return;
     }
 	kGAMECLASS.enemyAI();

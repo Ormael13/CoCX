@@ -20,6 +20,7 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -482,8 +483,8 @@ use namespace kGAMECLASS;
 				if (findPerk(PerkLib.MightyFist) >= 0) {
 					attack += (5 * newGamePlusMod);
 				}
-				if (kGAMECLASS.combat.unarmedAttack() > 0) {
-					attack += kGAMECLASS.combat.unarmedAttack();
+				if (SceneLib.combat.unarmedAttack() > 0) {
+					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
 			if (armType == AppearanceDefs.ARM_TYPE_MANTIS && weaponName == "fists") {
@@ -4014,7 +4015,7 @@ use namespace kGAMECLASS;
 				hunger += amnt;
 				if (hunger > maxHunger())
 				{
-					while (hunger > (maxHunger() + 10) && !game.prison.inPrison) {
+					while (hunger > (maxHunger() + 10) && !SceneLib.prison.inPrison) {
 						weightChange++;
 						hunger -= 10;
 					}

@@ -4,6 +4,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.WeaponLib;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
@@ -147,19 +148,19 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
 				outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
 				EngineCore.menu();
-				EngineCore.addButton(0,"Fuck",game.urtaQuest.winRapeAMinoLordAsUrta);
-				EngineCore.addButton(4, "Leave", game.urtaQuest.beatMinoLordOnToSuccubi);
+				EngineCore.addButton(0,"Fuck",SceneLib.urtaQuest.winRapeAMinoLordAsUrta);
+				EngineCore.addButton(4, "Leave", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
 			}
-			else game.mountain.minotaurScene.minoVictoryRapeChoices();
+			else SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
-				if (hpVictory) game.urtaQuest.urtaLosesToMinotaurRoughVersion();
-				else game.urtaQuest.urtaSubmitsToMinotaurBadEnd();
+				if (hpVictory) SceneLib.urtaQuest.urtaLosesToMinotaurRoughVersion();
+				else SceneLib.urtaQuest.urtaSubmitsToMinotaurBadEnd();
 			}
-			else game.mountain.minotaurScene.getRapedByMinotaur();
+			else SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
 		public function MinotaurLord()
@@ -210,7 +211,7 @@ use namespace kGAMECLASS;
 			}
 			else this.drop = NO_DROP;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

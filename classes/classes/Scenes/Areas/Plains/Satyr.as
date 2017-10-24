@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Satyr extends Monster
@@ -119,7 +120,7 @@ public class Satyr extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.plains.satyrScene.defeatASatyr();
+			SceneLib.plains.satyrScene.defeatASatyr();
 		}
 
 
@@ -129,7 +130,7 @@ public class Satyr extends Monster
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
 				doNext(game.endLustLoss);
 			} else {
-				game.plains.satyrScene.loseToSatyr();
+				SceneLib.plains.satyrScene.loseToSatyr();
 			}
 		}
 

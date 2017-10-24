@@ -2,10 +2,7 @@
  * Coded by aimozg on 27.09.2017.
  */
 package classes.Scenes.Combat {
-import classes.BaseContent;
-import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkLib;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -14,12 +11,11 @@ import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
+import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 
-import coc.view.ButtonData;
 import coc.view.ButtonDataList;
-
 import coc.view.CoCButton;
 
 public class CombatUI extends BaseCombatContent {
@@ -150,9 +146,9 @@ public class CombatUI extends BaseCombatContent {
 			}
 		} else if (monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
-			addButton(0, "Squeeze", kGAMECLASS.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
-			addButton(1, "Tease", kGAMECLASS.desert.nagaScene.naggaTease);
-			addButton(4, "Release", kGAMECLASS.desert.nagaScene.nagaLeggoMyEggo);
+			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
+			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 			menu();
 			addButton(0, "Squeeze", combat.ScyllaSqueeze);

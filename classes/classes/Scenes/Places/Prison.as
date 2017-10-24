@@ -5,6 +5,7 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Places.Prison.*;
+import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
 
@@ -455,11 +456,8 @@ public class Prison extends BaseContent implements TimeAwareInterface
 		
 		public function prisonIsRestrained():Boolean
 		{
-			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0)
-			{
-				return true;
-			}
-			return false;
+			return player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0;
+
 		}
 		
 		public function prisonCanMasturbate(verbose:Boolean = true):Boolean
@@ -1314,9 +1312,9 @@ public class Prison extends BaseContent implements TimeAwareInterface
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
-			}
+                addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
+                if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+            }
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
 				menu();
@@ -1346,14 +1344,14 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", camp.doWait);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) {
+            if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", SceneLib.camp.rest);
+            if (model.time.hours >= 21 || model.time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
 				removeButton(3);
-				addButton(9, "Sleep", getGame().camp.doSleep);
-			}
+                addButton(9, "Sleep", SceneLib.camp.doSleep);
+            }
 		}
 		
 		//------------

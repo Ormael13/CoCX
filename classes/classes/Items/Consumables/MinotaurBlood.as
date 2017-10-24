@@ -275,7 +275,7 @@ public class MinotaurBlood extends Consumable {
 				player.increaseCock(selectedCockValue, 4);
 				dynStats("lib", 5, "sen", 4, "lus", 35);
 				outputText("<b>  You now have a");
-				if (player.horseCocks() > 1) outputText("nother")
+				if (player.horseCocks() > 1) outputText("nother");
 				outputText(" horse-penis.</b>");
 				changes++;
 			}

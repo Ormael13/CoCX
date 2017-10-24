@@ -7,13 +7,14 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
 	
 	public class Etna extends Monster
 	{
-		public var etnaScene:EtnaFollower = game.etnaScene;
+		public var etnaScene:EtnaFollower = SceneLib.etnaScene;
 
 		public function moveClawCombo():void {
 			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);

@@ -1,7 +1,8 @@
 package classes.Items.Other 
 {
+import classes.Scenes.SceneLib;
 
-	public class DebugWand extends SimpleUseable
+public class DebugWand extends SimpleUseable
 	{
 		
 		public function DebugWand() 
@@ -14,8 +15,8 @@ package classes.Items.Other
 		}
 		
 		override public function useItem():Boolean {
-			if (!game.debug) game.inventory.takeItem(this, game.debugMenu.accessDebugMenu);
-			game.debugMenu.accessDebugMenu();
+			if (!game.debug) SceneLib.inventory.takeItem(this, SceneLib.debugMenu.accessDebugMenu);
+			SceneLib.debugMenu.accessDebugMenu();
 			return true;
 		}
 		

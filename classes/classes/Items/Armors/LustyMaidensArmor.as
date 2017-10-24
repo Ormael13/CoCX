@@ -12,6 +12,7 @@ import classes.PerkLib;
 import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.SceneLib;
 
 public final class LustyMaidensArmor extends Armor {
 		
@@ -139,7 +140,7 @@ public final class LustyMaidensArmor extends Armor {
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
 				game.cleanupAfterCombat();
-			else EngineCore.doNext(game.camp.returnToCampUseOneHour);
+			else EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
 		}
 	}
 }

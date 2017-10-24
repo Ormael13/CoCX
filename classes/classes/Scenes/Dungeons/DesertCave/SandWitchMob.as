@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.DesertCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class SandWitchMob extends Monster
@@ -141,12 +142,12 @@ public class SandWitchMob extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER();
+			SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.loseToSammitchMob();
+			SceneLib.dungeons.desertcave.loseToSammitchMob();
 		}
 		
 		public function SandWitchMob()

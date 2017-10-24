@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.NPCs.XXCNPC;
+import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
@@ -63,21 +64,6 @@ public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f
 public var savedGameDir:String = "data/com.fenoxo.coc";
 
 public var notes:String = "";
-
-public function cloneObj(obj:Object):Object
-{
-	var temp:ByteArray = new ByteArray();
-	temp.writeObject(obj);
-	temp.position = 0;
-	return temp.readObject();
-}
-
-public function getClass(obj:Object):Class
-{
-	return Class(getDefinitionByName(getQualifiedClassName(obj)));
-}
-
-//ASSetPropFlags(Object.prototype, ["clone"], 1);
 
 public function loadSaveDisplay(saveFile:Object, slotName:String):String
 {
@@ -651,9 +637,9 @@ public function savePermObject(isFile:Boolean):void {
 				saveFile.data.achievements[i] = achievements[i];
 			}
 		}
-		if (getGame().permObjVersionID != 0)
-			saveFile.data.permObjVersionID = getGame().permObjVersionID;
-	}
+        if (kGAMECLASS.permObjVersionID != 0)
+            saveFile.data.permObjVersionID = kGAMECLASS.permObjVersionID;
+    }
 	catch (error:Error)
 	{
 		processingError = true;
@@ -699,20 +685,20 @@ public function loadPermObject():void {
 		}
 
 		if (saveFile.data.permObjVersionID != undefined) {
-			getGame().permObjVersionID = saveFile.data.permObjVersionID;
-			trace("Found internal permObjVersionID:", getGame().permObjVersionID);
-		}
+            kGAMECLASS.permObjVersionID = saveFile.data.permObjVersionID;
+            trace("Found internal permObjVersionID:", kGAMECLASS.permObjVersionID);
+        }
 
-		if (getGame().permObjVersionID < 1039900) {
-			// apply fix for issue #337 (Wrong IDs in kACHIEVEMENTS conflicting with other achievements)
+if (kGAMECLASS.permObjVersionID < 1039900) {
+            // apply fix for issue #337 (Wrong IDs in kACHIEVEMENTS conflicting with other achievements)
 			achievements[kACHIEVEMENTS.ZONE_EXPLORER] = 0;
 			achievements[kACHIEVEMENTS.ZONE_SIGHTSEER] = 0;
 			achievements[kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER] = 0;
 			achievements[kACHIEVEMENTS.GENERAL_BAD_ENDER] = 0;
-			getGame().permObjVersionID = 1039900;
-			savePermObject(false);
-			trace("PermObj internal versionID updated:", getGame().permObjVersionID);
-		}
+            kGAMECLASS.permObjVersionID = 1039900;
+            savePermObject(false);
+            trace("PermObj internal versionID updated:", kGAMECLASS.permObjVersionID);
+        }
 	}
 }
 
@@ -729,9 +715,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		player.slotName = slot;
 		
 	var backupAborted:Boolean = false;
-	
-	CoC.saveAllAwareClasses(getGame()); //Informs each saveAwareClass that it must save its values in the flags array
-	var counter:Number = player.cocks.length;
+
+CoC.saveAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must save its values in the flags array
+    var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
 	var backup:SharedObject;
@@ -1099,10 +1085,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.exploredForest = player.exploredForest;
 		saveFile.data.exploredDesert = player.exploredDesert;
 		saveFile.data.explored = player.explored;
-		saveFile.data.foundForest = getGame().foundForest;
-		saveFile.data.foundDesert = getGame().foundDesert;
-		saveFile.data.foundMountain = getGame().foundMountain;
-		saveFile.data.foundLake = getGame().foundLake;
 		saveFile.data.gameState = gameStateGet();
 		
 		//Time and Items
@@ -1112,15 +1094,15 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
-		saveFile.data.whitney = getGame().whitney;
-		saveFile.data.monk = getGame().monk;
-		saveFile.data.sand = getGame().sand;
-		saveFile.data.giacomo = getGame().giacomo;
-		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
+        saveFile.data.whitney = kGAMECLASS.whitney;
+        saveFile.data.monk = kGAMECLASS.monk;
+        saveFile.data.sand = kGAMECLASS.sand;
+        saveFile.data.giacomo = kGAMECLASS.giacomo;
+        saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 
 		saveFile.data.isabellaOffspringData = [];
-		for (i = 0; i < kGAMECLASS.isabellaScene.isabellaOffspringData.length; i++) {
-			saveFile.data.isabellaOffspringData.push(kGAMECLASS.isabellaScene.isabellaOffspringData[i]);
+		for (i = 0; i < SceneLib.isabellaScene.isabellaOffspringData.length; i++) {
+			saveFile.data.isabellaOffspringData.push(SceneLib.isabellaScene.isabellaOffspringData[i]);
 		}
 		
 		//ITEMZ. Item1s
@@ -1176,9 +1158,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 		
 		// Keybinds
-		saveFile.data.controls = getGame().inputManager.SaveBindsToObj();
-		
-		// TODO @Oxdeception recheck
+        saveFile.data.controls = kGAMECLASS.inputManager.SaveBindsToObj();
+        // TODO @Oxdeception recheck
 		saveFile.data.world = [];
 		saveFile.data.world.x = [];
 		for each(var npc:XXCNPC in XXCNPC.SavedNPCs){
@@ -1446,8 +1427,8 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 }
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
-	var game:CoC = getGame();
-	game.dungeonLoc = 0;
+    var game:CoC = kGAMECLASS;
+    game.dungeonLoc = 0;
 	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
 	game.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
 	game.inRoomedDungeon = false;
@@ -2224,10 +2205,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.exploredForest = saveFile.data.exploredForest;
 		player.exploredDesert = saveFile.data.exploredDesert;
 		player.explored = saveFile.data.explored;
-		game.foundForest = saveFile.data.foundForest;
-		game.foundDesert = saveFile.data.foundDesert;
-		game.foundMountain = saveFile.data.foundMountain;
-		game.foundLake = saveFile.data.foundLake;
 		
 		//Days
 		//Time and Items
@@ -2247,16 +2224,16 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.giacomo = 0;
 		else
 			game.giacomo = saveFile.data.giacomo;
-		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) game.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
+		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) SceneLib.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
 			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
 			
-		kGAMECLASS.isabellaScene.isabellaOffspringData = [];
+		SceneLib.isabellaScene.isabellaOffspringData = [];
 		if (saveFile.data.isabellaOffspringData == undefined) {
 			//NOPE
 		}
 		else {
 			for (i = 0; i < saveFile.data.isabellaOffspringData.length; i += 2) {
-				kGAMECLASS.isabellaScene.isabellaOffspringData.push(saveFile.data.isabellaOffspringData[i], saveFile.data.isabellaOffspringData[i+1])
+				SceneLib.isabellaScene.isabellaOffspringData.push(saveFile.data.isabellaOffspringData[i], saveFile.data.isabellaOffspringData[i+1])
 			}
 		}
 			
@@ -2340,9 +2317,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot10.id || saveFile.data.itemSlot10.shortName),
 				saveFile.data.itemSlot10.quantity);
 		}
-		
-		CoC.loadAllAwareClasses(getGame()); //Informs each saveAwareClass that it must load its values from the flags array
-		unFuckSave();
+
+CoC.loadAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must load its values from the flags array
+        unFuckSave();
 		
 		// Control Bindings
 		if (saveFile.data.controls != undefined)
@@ -2430,9 +2407,9 @@ public function unFuckSave():void
 
 	var flagData:Array = String(flags[kFLAGS.KATHERINE_BREAST_SIZE]).split("^");
 	if (flagData.length < 7 && flags[kFLAGS.KATHERINE_BREAST_SIZE] > 0) { //Older format only stored breast size or zero if not yet initialized
-		getGame().telAdre.katherine.breasts.cupSize			= flags[kFLAGS.KATHERINE_BREAST_SIZE];
-		getGame().telAdre.katherine.breasts.lactationLevel	= BreastStore.LACTATION_DISABLED;
-	}
+        SceneLib.telAdre.katherine.breasts.cupSize = flags[kFLAGS.KATHERINE_BREAST_SIZE];
+        SceneLib.telAdre.katherine.breasts.lactationLevel = BreastStore.LACTATION_DISABLED;
+    }
 	
 	if (flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] < 816) {
 		//Older saves don't have pregnancy types for all impregnable NPCs. Have to correct this.
@@ -2465,7 +2442,7 @@ public function unFuckSave():void
 		}
 
 		if (flags[kFLAGS.HELSPAWN_AGE] > 0) {
-			kGAMECLASS.helScene.pregnancy.knockUpForce(); //Clear Pregnancy, also removed any old value from HEL_PREGNANCY_NOTICES
+			SceneLib.helScene.pregnancy.knockUpForce(); //Clear Pregnancy, also removed any old value from HEL_PREGNANCY_NOTICES
 		}
 		else if (flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0) {
 			if (flags[kFLAGS.HELIA_PREGNANCY_TYPE] > 3) return; //Must be a new format save
@@ -2607,162 +2584,5 @@ public function unFuckSave():void
 		// TODO init counters from flags
 	}
 }
-
-//This is just the save/load code - from it you can get 
-//strings from the save objects, and load games from strings. 
-//What you do with the strings, and where you get them from 
-//is not handled here. For this to work right, you'll need to
-//modify saveGameObject() to use an int or something instead 
-//of a boolean to identify the save type (0 = normal, 
-//1 = file, 2 = text and so on), and modify the if/else at the 
-//bottom, which currently checks if a boolean is true for 
-//using the file saving code, else it uses slot saving.
-
-//Arrays for converting a byte array into a string
-public static const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'];
-public static const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
-
-//ByteArray > String
-public function b64e(data:ByteArray):String
-{
-	var out:Array = [];
-	var i:int = 0;
-	var j:int = 0;
-	var r:int = data.length % 3;
-	var len:int = data.length - r;
-	var c:int;
-	while (i < len)
-	{
-		c = data[i++] << 16 | data[i++] << 8 | data[i++];
-		out[j++] = encodeChars[c >> 18] + encodeChars[c >> 12 & 0x3f] + encodeChars[c >> 6 & 0x3f] + encodeChars[c & 0x3f];
-	}
-	if (r == 1)
-	{
-		c = data[i++];
-		out[j++] = encodeChars[c >> 2] + encodeChars[(c & 0x03) << 4] + "==";
-	}
-	else if (r == 2)
-	{
-		c = data[i++] << 8 | data[i++];
-		out[j++] = encodeChars[c >> 10] + encodeChars[c >> 4 & 0x3f] + encodeChars[(c & 0x0f) << 2] + "=";
-	}
-	return out.join('');
-}
-
-//String > ByteArray
-public function b64d(str:String):ByteArray
-{
-	var c1:int;
-	var c2:int;
-	var c3:int;
-	var c4:int;
-	var i:int;
-	var len:int;
-	var out:ByteArray;
-	len = str.length;
-	i = 0;
-	out = new ByteArray();
-	while (i < len)
-	{
-		// c1  
-		do
-		{
-			c1 = decodeChars[str.charCodeAt(i++) & 0xff];
-		} while (i < len && c1 == -1);
-		if (c1 == -1)
-		{
-			break;
-		}
-		// c2      
-		do
-		{
-			c2 = decodeChars[str.charCodeAt(i++) & 0xff];
-		} while (i < len && c2 == -1);
-		if (c2 == -1)
-		{
-			break;
-		}
-		
-		out.writeByte((c1 << 2) | ((c2 & 0x30) >> 4));
-		
-		// c3  
-		do
-		{
-			c3 = str.charCodeAt(i++) & 0xff;
-			if (c3 == 61)
-			{
-				return out;
-			}
-			c3 = decodeChars[c3];
-		} while (i < len && c3 == -1);
-		if (c3 == -1)
-		{
-			break;
-		}
-		
-		out.writeByte(((c2 & 0x0f) << 4) | ((c3 & 0x3c) >> 2));
-		
-		// c4  
-		do
-		{
-			c4 = str.charCodeAt(i++) & 0xff;
-			if (c4 == 61)
-			{
-				return out;
-			}
-			c4 = decodeChars[c4];
-		} while (i < len && c4 == -1);
-		if (c4 == -1)
-		{
-			break;
-		}
-		out.writeByte(((c3 & 0x03) << 6) | c4);
-	}
-	return out;
-}
-
-//This loads the game from the string
-public function loadText(saveText:String):void
-{
-	//Get the byte array from the string
-	var rawSave:ByteArray = b64d(saveText);
-	
-	//Inflate
-	rawSave.inflate();
-	
-	//Read the object
-	var obj:Object = rawSave.readObject();
-	
-	//Load the object
-	loadGameObject(obj);
-}
-
-//*******
-//This is the modified if for initialising saveFile in saveGameObject(). It assumes the save type parameter passed is an int, that 0 means a slot-save, and is called saveType.
-/*
-   if (saveType != 0)
-   {
-   saveFile = new Object();
-
-   saveFile.data = new Object();
-   }
-   else
-   {
-   saveFile = SharedObject.getLocal(slot,"/");
-   }
-   //*******
-   //This stuff is for converting the save object into a string, should go down in saveGameObject(), as an else-if (if saveType == 2, etc)
-   var rawSave:ByteArray = new ByteArray;
-
-   //Write the object to the byte array
-   rawSave.writeObject(saveFile);
-
-   //Deflate
-   rawSave.deflate();
-
-   //Convert to a Base64 string
-   var saveString:String = b64e(rawSave);
- */
-//*******
 }
 }

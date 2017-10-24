@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
 import classes.internals.*;
 
@@ -67,12 +68,12 @@ public class LizanRogue extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.bog.lizanScene.winAgainstLizan();
+			SceneLib.bog.lizanScene.winAgainstLizan();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.bog.lizanScene.loseToLizan();
+			SceneLib.bog.lizanScene.loseToLizan();
 		}
 		
 		private const SKIN_VARIATIONS:Array = ["emerald", "azure", "scarlet", "violet", "obsidian", "amber", "silver"];

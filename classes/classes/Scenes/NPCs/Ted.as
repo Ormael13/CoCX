@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
 	
@@ -88,12 +89,12 @@ use namespace kGAMECLASS;
 			outputText("A dragon-boy fall on his knees ");
 			if (this.HP < 1)outputText("beaten up");
 			else outputText("too horny to fight back");
-			game.tedScene.defeatedTed();
+			SceneLib.tedScene.defeatedTed();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.tedScene.lostToTed();
+			SceneLib.tedScene.lostToTed();
 		}
 		
 		public function Ted() 

@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Naga extends Monster
@@ -79,7 +80,7 @@ public class Naga extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.desert.nagaScene.nagaRapeChoice();
+			SceneLib.desert.nagaScene.nagaRapeChoice();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -89,7 +90,7 @@ public class Naga extends Monster
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {
-				game.desert.nagaScene.nagaFUCKSJOOOOOO();
+				SceneLib.desert.nagaScene.nagaFUCKSJOOOOOO();
 			}
 		}
 

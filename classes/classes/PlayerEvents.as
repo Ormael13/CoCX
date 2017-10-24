@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Dreams;
+import classes.Scenes.SceneLib;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
@@ -96,7 +97,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] == 1) flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE]++
 			}
 			//Decrement Valeria's fluid in New Game+.
-			if (kGAMECLASS.valeria.valeriaFluidsEnabled()) {
+			if (SceneLib.valeria.valeriaFluidsEnabled()) {
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 0) {
 					flags[kFLAGS.VALERIA_FLUIDS]--;
 				}
@@ -125,8 +126,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-					if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && getGame().model.time.hours == 14) {
-						outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
+                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && kGAMECLASS.model.time.hours == 14) {
+                        outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						player.dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;
 					}
@@ -266,9 +267,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
-					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + getGame().player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
-	
-					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
+                    outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + kGAMECLASS.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+                    outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
 					player.removePerk(PerkLib.SlimeCore);
 					needNext = true;
@@ -380,16 +380,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
-				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
+            if (kGAMECLASS.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+                outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				player.dynStats("lus", 10);
 				needNext = true;
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (player.armorName == "lusty maiden's armor") {
-					if (getGame().model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
-					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
+                    if (kGAMECLASS.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+                    if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
@@ -398,9 +398,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
-			
-			if (getGame().model.time.hours > 23) { //Once per day
-				if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
+
+if (kGAMECLASS.model.time.hours > 23) { //Once per day
+                if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
 					if (player.level > player.statPoints) {
 						if (player.level < 6) player.statPoints = 15;
 						else if (player.level >= 6 && player.level < 12) player.statPoints = 18;
@@ -411,8 +411,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
-				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
-					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
+                if (kGAMECLASS.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
+                    flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
 				if (flags[kFLAGS.GILDED_JERKED] > 0) flags[kFLAGS.GILDED_JERKED] = 0;
@@ -420,8 +420,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] != 0) flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
 				if (flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 				flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
-				getGame().bazaar.benoit.updateBenoitInventory();
-				flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
+                SceneLib.bazaar.benoit.updateBenoitInventory();
+                flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285]--; //Reduce lust-stick resistance building
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] > 0) { //Dominika fellatrix countdown
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155]--;
@@ -435,17 +435,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
 					if (flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 				}
-				if (getGame().model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
-				if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
-				if (getGame().latexGirl.latexGooFollower()) { //Latex goo follower daily updates
-					getGame().latexGirl.gooFluid(-2, false);
-					if (getGame().latexGirl.gooFluid() < 50) getGame().latexGirl.gooHappiness(-1, false);
-					if (getGame().latexGirl.gooFluid() < 25) getGame().latexGirl.gooHappiness(-1, false);
-					if (getGame().latexGirl.gooHappiness() < 75) getGame().latexGirl.gooObedience(-1, false);
-					if (getGame().latexGirl.gooHappiness() >= 90) getGame().latexGirl.gooObedience(1, false);
-				}
-				getGame().farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
-				if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
+                if (kGAMECLASS.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
+                if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
+                if (SceneLib.latexGirl.latexGooFollower()) { //Latex goo follower daily updates
+                    SceneLib.latexGirl.gooFluid(-2, false);
+                    if (SceneLib.latexGirl.gooFluid() < 50) SceneLib.latexGirl.gooHappiness(-1, false);
+                    if (SceneLib.latexGirl.gooFluid() < 25) SceneLib.latexGirl.gooHappiness(-1, false);
+                    if (SceneLib.latexGirl.gooHappiness() < 75) SceneLib.latexGirl.gooObedience(-1, false);
+                    if (SceneLib.latexGirl.gooHappiness() >= 90) SceneLib.latexGirl.gooObedience(1, false);
+                }
+                SceneLib.farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
+                if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
 					if (player.statusEffectv1(StatusEffects.Contraceptives) == 1) {
 						player.addStatusValue(StatusEffects.Contraceptives, 2, -1);
 						if (player.statusEffectv1(StatusEffects.Contraceptives) < 0) player.removeStatusEffect(StatusEffects.Contraceptives);
@@ -552,7 +552,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hunger <= 0)
 				{
 					if (prison.inPrison) {
-						kGAMECLASS.prison.changeWill(-1, prison.inPrison);
+						SceneLib.prison.changeWill(-1, prison.inPrison);
 						fatigue(2);
 					}
 					else {
@@ -571,7 +571,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else {
 					if (prison.inPrison) {
-						kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+						SceneLib.prison.changeWill((player.esteem / 50) + 1);
 					}
 				}
 				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
@@ -935,16 +935,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
-				getGame().sophieBimbo.unlockResistance();
-				if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
+                SceneLib.sophieBimbo.unlockResistance();
+                if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;
 			}
 			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
 				flags[kFLAGS.DICK_EGG_INCUBATION]--;
 				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
 				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
-					getGame().masturbation.birthBeeEggsOutYourWang();
-					needNext = true;
+                    SceneLib.masturbation.birthBeeEggsOutYourWang();
+                    needNext = true;
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
@@ -978,11 +978,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (prevEggs < 10) {
 						player.addEggs(2);
 					}
-					else if (prevEggs < 20 && getGame().model.time.hours % 2 == 0) {
-						player.addEggs(1);
+                    else if (prevEggs < 20 && kGAMECLASS.model.time.hours % 2 == 0) {
+                        player.addEggs(1);
 					}
-					else if (getGame().model.time.hours % 4 == 0) {
-						player.addEggs(1);
+                    else if (kGAMECLASS.model.time.hours % 4 == 0) {
+                        player.addEggs(1);
 					}
 					if (prevEggs < 10 && player.eggs() >= 10) { //Stage 1 egg message
 						if (player.findPerk(PerkLib.SpiderOvipositor) >= 0) {
@@ -1033,9 +1033,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-				else if (player.pregnancyIncubation < 1 && player.hasVagina() && getGame().model.time.hours == 1) { //Otherwise pregger check, once every morning
-					if ((player.totalFertility() > 50 && getGame().model.time.days % 15 == 0) || getGame().model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
-						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
+                else if (player.pregnancyIncubation < 1 && player.hasVagina() && kGAMECLASS.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                    if ((player.totalFertility() > 50 && kGAMECLASS.model.time.days % 15 == 0) || kGAMECLASS.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
+                        outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
 						player.addPerkValue(PerkLib.Oviposition, 1, 1); //Count times eggpregged this way in perk.
@@ -1130,11 +1130,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv2(StatusEffects.Kelt) > 0) player.addStatusValue(StatusEffects.Kelt, 2, -0.15); //Reduce kelt submissiveness by 1 every 5 hours
 			//Mino cum update.
-			if (getGame().mountain.minotaurScene.minoCumUpdate()) {
-				needNext = true;
+            if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
+                needNext = true;
 			}
-			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
+            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && kGAMECLASS.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
+                if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
 					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
@@ -1255,21 +1255,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (rand(4) == 0 && getGame().isHolidays() && player.gender > 0 && getGame().model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < getGame().date.fullYear) {
-				getGame().getAChristmasChicken();
-				return true;
+            if (rand(4) == 0 && kGAMECLASS.isHolidays() && player.gender > 0 && kGAMECLASS.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < kGAMECLASS.date.fullYear) {
+                kGAMECLASS.getAChristmasChicken();
+                return true;
 			}
-			if (getGame().model.time.hours == 1 && getGame().isHolidays() && getGame().date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
-				getGame().xmasBitchEncounter(); //Set it to remember the last year encountered
-				return true;
+            if (kGAMECLASS.model.time.hours == 1 && kGAMECLASS.isHolidays() && kGAMECLASS.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+                kGAMECLASS.xmasBitchEncounter(); //Set it to remember the last year encountered
+                return true;
 			}
-			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().model.time.hours == 18 || getGame().model.time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && getGame().isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
-				getGame().datTurkeyRumpMeeting(); //TURKEY SURPRISE
-				return true;
+            if (checkedTurkey++ == 0 && (rand(5) == 0 && (kGAMECLASS.model.time.hours == 18 || kGAMECLASS.model.time.hours == 19)) && (kGAMECLASS.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && kGAMECLASS.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                kGAMECLASS.datTurkeyRumpMeeting(); //TURKEY SURPRISE
+                return true;
 			}
-			if (checkedDream++ == 0 && getGame().model.time.hours == 3) { //You can only have one dream each night
-				if (player.gender > 0 && getGame().model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
-					dreams.dayTenDreams();
+            if (checkedDream++ == 0 && kGAMECLASS.model.time.hours == 3) { //You can only have one dream each night
+                if (player.gender > 0 && kGAMECLASS.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
+                    dreams.dayTenDreams();
 					return true;
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.BeeOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Bee dreams proc
@@ -1341,18 +1341,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					case  4: ceraph =  4; break;
 					default: ceraph =  3;
 				}
-				if (ceraph > 0 && getGame().model.time.days % ceraph == 0) {
-					getGame().ceraphScene.ceraphBodyPartDreams();
-					return true;
+                if (ceraph > 0 && kGAMECLASS.model.time.days % ceraph == 0) {
+                    SceneLib.ceraphScene.ceraphBodyPartDreams();
+                    return true;
 				}
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] < 4) { //Dominika Dream
 					outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n");
-					getGame().telAdre.dominika.fellatrixDream();
-					return true;
+                    SceneLib.telAdre.dominika.fellatrixDream();
+                    return true;
 				}
-				if (getGame().anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-					getGame().anemoneScene.kidADreams();
-					flags[kFLAGS.HAD_KID_A_DREAM] = 1;
+                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.anemoneScene.kidADreams();
+                    flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}
 				if (player.viridianChange()) {
@@ -1370,19 +1370,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18 && player.str <= 1) { //Bad end!
-				getGame().lake.gooGirlScene.slimeBadEnd();
-				return true;
+                SceneLib.lake.gooGirlScene.slimeBadEnd();
+                return true;
 			}
 			//Bee cocks
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");
-					doNext(getGame().masturbation.masturbateGo);
-					return true;
+                    doNext(SceneLib.masturbation.masturbateGo);
+                    return true;
 				}
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
-				getGame().forest.beeGirlScene.beeSexForCocks(false);
-				return true;
+                SceneLib.forest.beeGirlScene.beeSexForCocks(false);
+                return true;
 			}
 			return false;
 		}

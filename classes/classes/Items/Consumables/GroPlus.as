@@ -5,6 +5,7 @@ package classes.Items.Consumables
 {
 import classes.EngineCore;
 import classes.Items.Consumable;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public final class GroPlus extends Consumable {
@@ -47,7 +48,7 @@ public final class GroPlus extends Consumable {
 			}
 			if (game.player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
 			game.player.dynStats("lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusBreasts():void {
@@ -59,7 +60,7 @@ public final class GroPlus extends Consumable {
 			else
 				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 1);
 			game.player.dynStats("lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusClit():void {
@@ -69,7 +70,7 @@ public final class GroPlus extends Consumable {
 			game.player.clitLength++;
 			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
 			game.player.dynStats("sen", 2, "lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusCock():void {
@@ -95,7 +96,7 @@ public final class GroPlus extends Consumable {
 				outputText("sheath.");
 			else outputText("crotch.");
 			game.player.dynStats("sen", 2, "lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusNipples():void {
@@ -118,13 +119,13 @@ public final class GroPlus extends Consumable {
 				//Talk about if anything was changed.
 				if (nowFuckable) outputText("Your " + game.player.allBreastsDescript() + " tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>\n\n");
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusCancel():void {
 			clearOutput();
 			outputText("You put the vial away.\n\n");
-			game.inventory.returnItemToInventory(this);
+			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
 }

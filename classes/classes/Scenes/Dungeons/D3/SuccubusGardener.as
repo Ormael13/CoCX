@@ -5,6 +5,7 @@ import classes.AppearanceDefs;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 
@@ -63,13 +64,13 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.fuckUpTheGardener(hpVictory);
+			SceneLib.d3.succubusGardener.fuckUpTheGardener(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.surrenderToTheGardener(hpVictory);
+			SceneLib.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		
 		override protected function performCombatAction():void

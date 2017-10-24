@@ -129,7 +129,7 @@ public class ErlKingScene extends BaseContent
 
 			if (player.isTaur())
 			{
-				baseVal -= 10
+				baseVal -= 10;
 				trace("-10 for Taur");
 			}
 
@@ -808,7 +808,7 @@ public class ErlKingScene extends BaseContent
 			outputText("“<i>What can I do to repay you?</i>” Gwynn chirps cutely, kissing your cheek.  ");
 
 			if (player.hasCock()) outputText("“<i>I could suck your dick, or you could fuck my princess pussy, or ");
-			else outputText("“<i>")
+			else outputText("“<i>");
 			if (player.hasVagina()) outputText("I could eat your pussy, ");
 			outputText(" or I could share some of my special potion with you,</i>” she counts the options off on her slim fingers.\n\n");
 

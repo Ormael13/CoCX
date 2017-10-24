@@ -3,13 +3,14 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.HighMountains.*;
-	import classes.Scenes.Monsters.DarkElfScene;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.HighMountains.*;
+import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class HighMountains extends BaseContent
 	{
@@ -32,7 +33,7 @@ package classes.Scenes.Areas
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(playerMenu);
 			
-			if (kGAMECLASS.d3.discoverD3() == true)
+			if (SceneLib.d3.discoverD3() == true)
 			{
 				return;
 			}
@@ -43,8 +44,8 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Gats xmas adventure!
@@ -62,8 +63,8 @@ package classes.Scenes.Areas
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && rand(3) == 0 && player.level >= 25) {
-				if (flags[kFLAGS.ETNA_AFFECTION] < 5) kGAMECLASS.etnaScene.firstEnc();
-				else kGAMECLASS.etnaScene.repeatEnc();
+				if (flags[kFLAGS.ETNA_AFFECTION] < 5) SceneLib.etnaScene.firstEnc();
+				else SceneLib.etnaScene.repeatEnc();
 				return;
 			}
 			//Temple of the Divine
@@ -102,11 +103,11 @@ package classes.Scenes.Areas
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
-					getGame().mountain.minotaurScene.minoAddictionFuck();
-					return;
+                    SceneLib.mountain.minotaurScene.minoAddictionFuck();
+                    return;
 				}
-				getGame().mountain.minotaurScene.getRapedByMinotaur(true);
-				spriteSelect(44);
+                SceneLib.mountain.minotaurScene.getRapedByMinotaur(true);
+                spriteSelect(44);
 				return;
 			}
 			trace("Chooser goin for" + chooser);
@@ -130,15 +131,15 @@ package classes.Scenes.Areas
 			}
 			//Sophie
 			if (chooser == 2) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || kGAMECLASS.sophieFollowerScene.sophieFollower()) {
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || SceneLib.sophieFollowerScene.sophieFollower()) {
 					clearOutput();
 					outputText("A harpy wings out of the sky and attacks!");
 					startCombat(new Harpy());
 					spriteSelect(26);
 				}
 				else {
-					if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) kGAMECLASS.sophieScene.meetSophie();
-					else kGAMECLASS.sophieScene.meetSophieRepeat();
+					if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) SceneLib.sophieScene.meetSophie();
+					else SceneLib.sophieScene.meetSophieRepeat();
 				}
 			}
 			if (chooser == 3) 

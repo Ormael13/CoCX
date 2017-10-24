@@ -6,14 +6,13 @@
 
 package classes.Scenes.Areas 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.BlightRidge.*;
-	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.Monsters.ImpPack;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.BlightRidge.*;
+import classes.Scenes.SceneLib;
+
+use namespace kGAMECLASS;
 	
 	public class BlightRidge extends BaseContent
 	{
@@ -22,7 +21,7 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreBlightRidge():void {
-			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++
+			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
 			if (player.cor < 66) dynStats("cor", 1);
 			
 			var choice:Array = [];
@@ -51,25 +50,25 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Den of Desire
-			if (getGame().dungeons.canFindDenOfDesire() && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && ((rand(10) == 0) || (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 && rand(2) == 0))) {
-				clearOutput();
+            if (SceneLib.dungeons.canFindDenOfDesire() && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && ((rand(10) == 0) || (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 && rand(2) == 0))) {
+                clearOutput();
 				outputText("You come across a set of old ruins, their grounds littered with statues, with an underground entrance leading deeper inside. ");
 				if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0) outputText("This looks to be the lair of the golemancer Rathazul mentioned. ");
 				outputText("Do you enter?");
 				flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 				menu();
-				addButton(0, "Yes", getGame().dungeons.enterDenOfDesire);
-				addButton(1, "No", camp.returnToCampUseOneHour);
+                addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
+                addButton(1, "No", camp.returnToCampUseOneHour);
 				return;
 			}
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
-					kGAMECLASS.exploration.genericImpEncounters2();
+					SceneLib.exploration.genericImpEncounters2();
 					break;
 				case 1:
-					kGAMECLASS.exploration.genericDemonsEncounters1();
+					SceneLib.exploration.genericDemonsEncounters1();
 					break;
 				case 2:
 					clearOutput();

@@ -10,7 +10,7 @@ package classes.Scenes.Camp
 	
 	public class HclassHeavenTribulation extends Monster
 	{
-		public var campscene:CampScenes = new CampScenes()
+		public var campscene:CampScenes = new CampScenes();
 		
 	//	override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void {
 	//		game.impScene.impGangabangaEXPLOSIONS(true);

@@ -102,7 +102,7 @@ public class Dreams {
             choices[choices.length] = 14;
             choices[choices.length] = 14;
         }
-        if(kGAMECLASS.anemoneScene.kidAXP() >= 40 && kGAMECLASS.player.lust >= 70 && kGAMECLASS.player.gender > 0) {
+        if(SceneLib.anemoneScene.kidAXP() >= 40 && kGAMECLASS.player.lust >= 70 && kGAMECLASS.player.gender > 0) {
             choices[choices.length] = 15;
             choices[choices.length] = 15;
             choices[choices.length] = 15;
@@ -312,7 +312,7 @@ public class Dreams {
             }
             else if(daydream == 15) {
                 EngineCore.outputText("something unusual...\n");
-                kGAMECLASS.anemoneScene.kidADreams();
+                SceneLib.anemoneScene.kidADreams();
             }
             else if(daydream == 16) {
                 if(kGAMECLASS.player.gender <= 1) {

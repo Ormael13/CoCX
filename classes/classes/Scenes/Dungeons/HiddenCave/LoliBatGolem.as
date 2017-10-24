@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons.HiddenCave
 
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class LoliBatGolem extends Monster
@@ -38,7 +39,7 @@ public class LoliBatGolem extends Monster
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.hiddencave.defeatedByLoliBatGolem();
+			SceneLib.dungeons.hiddencave.defeatedByLoliBatGolem();
 		}
 		
 		public function LoliBatGolem() 

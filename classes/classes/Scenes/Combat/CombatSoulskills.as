@@ -646,7 +646,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.str += player.statusEffectv1(StatusEffects.TranceTransformation);
 			player.tou += player.statusEffectv1(StatusEffects.TranceTransformation);
 			statScreenRefresh();
-		}
+		};
 		var tempStrTou:Number = 0;
 		var tempSpe:Number = 0;
 		var tempInt:Number = 0;

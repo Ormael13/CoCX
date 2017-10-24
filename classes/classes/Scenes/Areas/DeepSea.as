@@ -21,7 +21,7 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreDeepSea():void {
-			flags[kFLAGS.DISCOVERED_DEEP_SEA]++
+			flags[kFLAGS.DISCOVERED_DEEP_SEA]++;
 			
 			var choice:Array = [];
 			var select:int;

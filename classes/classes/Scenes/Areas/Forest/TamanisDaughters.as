@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Goblin;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class TamanisDaughters extends Goblin
@@ -80,7 +81,7 @@ public class TamanisDaughters extends Goblin
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.tamaniDaughtersScene.combatWinAgainstDaughters();
+			SceneLib.forest.tamaniDaughtersScene.combatWinAgainstDaughters();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -89,7 +90,7 @@ public class TamanisDaughters extends Goblin
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
 				game.cleanupAfterCombat();
 			} else {
-				game.forest.tamaniDaughtersScene.loseToDaughters();
+				SceneLib.forest.tamaniDaughtersScene.loseToDaughters();
 			}
 		}
 

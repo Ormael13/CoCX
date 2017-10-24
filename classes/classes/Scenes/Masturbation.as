@@ -305,9 +305,9 @@ public class Masturbation extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				if (player.isNaga() && rand(2) == 0 && player.statusEffectv1(StatusEffects.Exgartuan) == 1)
-					getGame().exgartuan.exgartuanNagaStoleMyMasturbation();
-				else getGame().exgartuan.exgartuanMasturbation();
-				return;
+                    SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
+                else SceneLib.exgartuan.exgartuanMasturbation();
+                return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
@@ -352,7 +352,7 @@ public class Masturbation extends BaseContent {
 					if (player.lib < 45)
 						outputText("You touch and play with your [vagina], ");
 					else if (player.lib < 70)
-						outputText("You slap your pussy softly, ")
+						outputText("You slap your pussy softly, ");
 					else outputText("You touch your enflamed and aroused [vagina], ");
 					switch (player.vaginas[0].vaginalWetness) {
 						case AppearanceDefs.VAGINA_WETNESS_DRY:
@@ -373,7 +373,7 @@ public class Masturbation extends BaseContent {
 					if (player.lib < 45)
 						outputText("You touch and play with your many folds, ");
 					else if (player.lib < 70)
-						outputText("You slap your pussies softly, ")
+						outputText("You slap your pussies softly, ");
 					else outputText("Touch your enflamed and aroused [vagina]s, ");
 					switch (player.vaginas[0].vaginalWetness) {
 						case AppearanceDefs.VAGINA_WETNESS_DRY:
@@ -1661,8 +1661,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			//if your dog cocks wouldnt fit, or you had enough holes for all your dicks (potentailly doubled up) then there are no dicks left for you to suck. Return false
-			if ((!doubleUp && fittableCocks <= holeTotal) || (doubleUp && fittableCocks <= holeTotal * 2)) return false;
-			return true;
+			return !((!doubleUp && fittableCocks <= holeTotal) || (doubleUp && fittableCocks <= holeTotal * 2));
 		}
 		
 		private function multiNippleFuckPrep(randomCock:Number):void {
@@ -1890,7 +1889,7 @@ public class Masturbation extends BaseContent {
 					else if (player.cumQ() >= 3500) valeriaFluids += 100;
 				}
 				valeriaFluids += Math.sqrt(player.lactationQ());
-				kGAMECLASS.valeria.feedValeria(valeriaFluids);
+				SceneLib.valeria.feedValeria(valeriaFluids);
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
 			}
 			//DONE!
@@ -2013,8 +2012,8 @@ public class Masturbation extends BaseContent {
 					//(+sensitivity by 3 & intellect -2 & libido +1	)
 				}
 				//Option Jojo veyeurism?
-				if (getGame().monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
-					outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
+                if (kGAMECLASS.monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+                    outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
 					if (player.hasStatusEffect(StatusEffects.TentacleJojo))
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
@@ -2331,7 +2330,7 @@ public class Masturbation extends BaseContent {
 				outputText("A very familiar feeling of pleasure rushes through your body, causing you to shudder. You pull your cock out and begin to stroke it as you suck on the tip, practically drinking your pre-cum. You can feel your cum building up as it gets ready to be released. After flicking your tongue against the tip of your [cock], you feel the flood of cum flowing up your dick");
 				
 				if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
-					flags[kFLAGS.GILDED_JERKED]++
+					flags[kFLAGS.GILDED_JERKED]++;
 					
 					var gems:int = midasCockJackingGemsRoll();
 					
@@ -2800,7 +2799,7 @@ public class Masturbation extends BaseContent {
 			
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 				
-				flags[kFLAGS.GILDED_JERKED]++
+				flags[kFLAGS.GILDED_JERKED]++;
 				
 				var gems:int = midasCockJackingGemsRoll();
 				
@@ -2891,8 +2890,8 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nYou grin, flexing your muscles, and the slit next to your stinger opens; your ovipositor slides out freely, the flaccid tube hardening as your lust rises even further thanks to the visions of debauchery flowing through your mind.  You take your [cockHead 1] in hand and bend it toward your ovipositor, intending to bring the two together and see if it's really possible for you to lay your eggs down your own massive length.");
 				
 				outputText("\n\nThe demon within you, realizing just what's going on and wanting no part in it, begins to fight back.  Thus begins a struggle for your own body, as he attempts to both tug your [cock 1] away from your bee-half, and stimulate your length with his own magic and your hand so that you orgasm and feel no need to continue anyway.  You");
-				if (getGame().shouldraFollower.followerShouldra()) outputText(", with Shouldra's assistance,");
-				outputText(" manage to fight him, keeping your cock in place.  With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
+                if (SceneLib.shouldraFollower.followerShouldra()) outputText(", with Shouldra's assistance,");
+                outputText(" manage to fight him, keeping your cock in place.  With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
 				
 				outputText("\n\nYou feel your slit stretching with a feeling unlike anything you've ever experienced, being both the penetrated and the penetrating at the same time.  A lewd moan rolls from your lungs, and your back arches from the sheer pleasure of the sensation; unbidden, an egg attempts to push down into your cock, spreading the slit further.");
 				
@@ -2905,8 +2904,8 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nMore eggs begin to rise up from your abdomen, one after the other beginning to shove its way down your poor stretched length.  The first is nearly halfway down your " + num2Text(player.cocks[player.biggestCockIndex()].cockLength) + " inches, and you feel another entering your slit.  Then you feel something else deep within, something that drops your jaw.  Your cock begins to lurch, as if beginning to orgasm, and you realize what Exartuan is doing. He's trying to make you climax to force the eggs out!");
 				
 				outputText("\n\nYou struggle, ");
-				if (getGame().shouldraFollower.followerShouldra()) outputText("ghost-assisted ");
-				outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing.  The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak.  Your eyes roll back up into your head, lids beginning to close, when you see your salvation.  Your stinger!  It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion.  You steel yourself for what must be done.");
+                if (SceneLib.shouldraFollower.followerShouldra()) outputText("ghost-assisted ");
+                outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing.  The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak.  Your eyes roll back up into your head, lids beginning to close, when you see your salvation.  Your stinger!  It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion.  You steel yourself for what must be done.");
 				
 				outputText("\n\nFlexing and clenching up as you anticipate what's to come, you drive your stinger toward your own [cockHead].  You nearly cry out from the pain as your venomous needle stabs into your length, piercing it, but your bee parts autonomously drive their lust-and-pleasure-inducing venom directly into your cock.  The combined pleasure and pain draw a fog over your eyes, but within moments the pleasure begins to mask everything else, and you find yourself a panting heap, tongue hanging from your [face] as you pour all the venom you can manage directly into your poor abused cock.");
 				
@@ -3612,7 +3611,7 @@ public class Masturbation extends BaseContent {
 				dynStats("sen", -1);
 			}
 			player.gems += gems;
-			flags[kFLAGS.GILDED_JERKED]++
+			flags[kFLAGS.GILDED_JERKED]++;
 			statScreenRefresh();
 			doNext(camp.returnToCampUseOneHour);
 		}

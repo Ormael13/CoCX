@@ -82,8 +82,7 @@ import classes.Items.*;
 		}
 		
 		public function joyHasCock():Boolean {
-			if (flags[kFLAGS.JOY_COCK_SIZE] > 0) return true;
-			else return false;
+			return flags[kFLAGS.JOY_COCK_SIZE] > 0;
 		}
 		public function joyHasCockText(text:String):String {
 			if (joyHasCock()) return text;
@@ -213,7 +212,7 @@ import classes.Items.*;
 			var text:String = "";
 			if (flags[kFLAGS.JOJO_ANAL_XP] == 0) text += "virgin ";
 			else if (flags[kFLAGS.JOJO_ANAL_XP] < 5) text += "tight ";
-			else "loose ";
+			else text+="loose ";
 			switch(rand(6)) {
 				case 0:
 					text += "ass";
@@ -795,7 +794,7 @@ import classes.Items.*;
 						if (player.hasCock()) outputText(player.cockDescript() + " is already hard ");
 						if (player.hasCock() && player.hasVagina()) outputText("and");
 						if (player.hasVagina()) outputText(player.vaginaDescript() + " is already moist");
-						outputText(". Somehow Joy's not noticing or ignoring your squirming, but you can smell her even if your nose is not that good to begin with... she smells so nice... you can barely suppress your urge to hug her and give her a big wet kiss... then ask her to help you with your... needs... but as you think of doing this to her, you wonder if she's sitting on your " + joySitLoc() + " as some kind of test... she also seems so peaceful sitting atop your " + joySitLoc() + "; it inspires you to regain a bit of control and mentally force your ")
+						outputText(". Somehow Joy's not noticing or ignoring your squirming, but you can smell her even if your nose is not that good to begin with... she smells so nice... you can barely suppress your urge to hug her and give her a big wet kiss... then ask her to help you with your... needs... but as you think of doing this to her, you wonder if she's sitting on your " + joySitLoc() + " as some kind of test... she also seems so peaceful sitting atop your " + joySitLoc() + "; it inspires you to regain a bit of control and mentally force your ");
 						if (player.hasCock()) outputText(player.cockDescript());
 						if (player.hasCock() && player.hasVagina()) outputText("and");
 						if (player.hasVagina()) outputText(player.vaginaDescript());
@@ -992,7 +991,7 @@ import classes.Items.*;
 				outputText("\n\nYou can't help but smile back and ask what she has in mind.");
 				outputText("\n\nShe holds your cheeks gently and gives you a big kiss on the lips. \"<i>There. Now you, like, have some incentive to try again.</i>\" She grins, getting off you.");
 				outputText("\n\nWith a smirk");
-				if (player.cor > 66) outputText(", and privately feeling somewhat ripped off")
+				if (player.cor > 66) outputText(", and privately feeling somewhat ripped off");
 				outputText(", you thank her, redress yourself and start heading back to your part of the camp.");
 				outputText("\n\nJoy hugs you from behind and says, \"<i>I'm, like, really proud of you [name]. If you keep trying you'll, like, be able to withstand the pain and become even tougher.</i>\" Then she releases you and sashays away.");
 				player.takeDamage(20);
@@ -1313,7 +1312,7 @@ import classes.Items.*;
 				else outputText("really");
 				outputText(" big, didn't they? They feel sort of funny, too.</i>\" She states, and, before you can say anything, squeezes them, causing milk to spurt out of her nipples. \"<i>...Wow! I'm full of milk... I'm a mouse-cow.</i>\" She giggles.");
 			}
-			else outputText("\"<i>Never better, [name]. Don't you think my boobies look so nice all fat and full with milk?</i>\" She laughs;")
+			else outputText("\"<i>Never better, [name]. Don't you think my boobies look so nice all fat and full with milk?</i>\" She laughs;");
 			outputText("; then she pouts. \"<i>But my milky titties are sooo heavy now. I don't think I can get up. [name]? Won't you help me? Please?</i>\" She asks.");
 			if (player.cor <= 33) outputText("\n\nWell... she can barely stand as it is, so you agree.");
 			else if (player.cor <= 66) outputText("\n\nHer milk tasted really good and you're eager to try more, so you agree.");

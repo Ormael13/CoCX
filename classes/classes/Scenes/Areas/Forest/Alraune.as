@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
 public class Alraune extends Monster
@@ -130,12 +131,12 @@ public class Alraune extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.alrauneScene.alrauneDeepwoodsWon();
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.forest.alrauneScene.alrauneDeepwoodsLost();
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
 		public function Alraune() 
@@ -179,7 +180,7 @@ public class Alraune extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(20) + 5;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6)
+			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);

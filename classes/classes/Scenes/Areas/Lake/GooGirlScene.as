@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Lake
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class GooGirlScene extends AbstractLakeContent
 	{
@@ -306,7 +306,7 @@ public class GooGirlScene extends AbstractLakeContent
 				var sex3N:Function =null;
 				var sex4S:String = "";
 				var sex4N:Function =null;
-				var valeria:Function = kGAMECLASS.valeria.valeriaAndGooThreeStuff;
+				var valeria:Function = SceneLib.valeria.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
@@ -340,7 +340,7 @@ public class GooGirlScene extends AbstractLakeContent
 				//corrupt chances
 				if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
 					if (player.cor < 50 && (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
-						kGAMECLASS.latexGirl.pureGooRecruitmentStart();
+						SceneLib.latexGirl.pureGooRecruitmentStart();
 						return;
 					}
 					else if (flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
@@ -356,7 +356,7 @@ public class GooGirlScene extends AbstractLakeContent
 						}
 						if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
 							outputText("  Good thing you have those handy!");
-							gooTF = kGAMECLASS.latexGirl.meanGooGirlRecruitment;
+							gooTF = SceneLib.latexGirl.meanGooGirlRecruitment;
 						}
 					}
 				}

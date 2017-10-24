@@ -5,7 +5,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class BasiliskScene extends BaseContent
 	{
@@ -434,7 +434,7 @@ public class BasiliskScene extends BaseContent
 				
 				//(add harpy lipstick effect, add 20 fatigue and lose 100 lust if M/H, or add 100 lust if F/U)
 				fatigue(20);
-				kGAMECLASS.sophieScene.luststickApplication(20);
+				SceneLib.sophieScene.luststickApplication(20);
 				player.orgasm();
 			}
 			//Female: 

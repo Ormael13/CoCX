@@ -2,12 +2,13 @@ package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class Valkyrie extends Monster
 	{
 		public function spearAttack():void {
-			outputText("The valkyrie lunges at you, jabbing with her longspear.  You dodge the first attack easily, ")
+			outputText("The valkyrie lunges at you, jabbing with her longspear.  You dodge the first attack easily, ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming spear strikes, dodging her attacks thanks to your incredible evasive ability!");
@@ -38,9 +39,9 @@ public class Valkyrie extends Monster
 			{
 				outputText("but she follows through with a rapid flurry of spear strikes, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
 				var attacks:int = 1 + rand(3);
-				var damage:int = 0
+				var damage:int = 0;
 				while (attacks > 0) {
-					damage += ((str) + rand(50))
+					damage += ((str) + rand(50));
 					damage = player.reduceDamage(damage);
 					attacks--
 				}
@@ -50,7 +51,7 @@ public class Valkyrie extends Monster
 		}
 		
 		public function shieldBash():void {
-			outputText("The valkyrie feints at you with her longspear; you dodge the blow, ")
+			outputText("The valkyrie feints at you with her longspear; you dodge the blow, ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming shield bash, dodging her thanks to your incredible evasive ability!");
@@ -86,7 +87,7 @@ public class Valkyrie extends Monster
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
 				else outputText("backwards. ");
-				var damage:int = ((str + 50) + rand(50))
+				var damage:int = ((str + 50) + rand(50));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
@@ -95,10 +96,10 @@ public class Valkyrie extends Monster
 		
 		public function aerialRave():void {
 			if (rand(2) == 0 || player.canFly() /* it would be stupid to do this with someone winged */) {
-				spearAttack()
+				spearAttack();
 				return;
 			}
-			outputText("The valkyrie charges right at you!  You manage to dodge her spear-thrust, but she spins gracefully out of the attack and grabs you by the waist.  ")
+			outputText("The valkyrie charges right at you!  You manage to dodge her spear-thrust, but she spins gracefully out of the attack and grabs you by the waist.  ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("You manage to shake her hand off thanks to evasion.  ");
@@ -123,7 +124,7 @@ public class Valkyrie extends Monster
 			else
 			{
 				outputText("Before you can react, she launches into the air, propelling the two of you upwards with her powerful wings.  You struggle, but it’s no use -- until she lets go.  You cry out in terror as you fall back to the earth, crashing painfully into a convenient snowbank, while your opponent lands gracefully a few feet away. ");
-				var damage:int = ((str + 200) + rand(100))
+				var damage:int = ((str + 200) + rand(100));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
@@ -132,12 +133,12 @@ public class Valkyrie extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.glacialRift.valkyrieScene.winAgainstValkyrie();
+			SceneLib.glacialRift.valkyrieScene.winAgainstValkyrie();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.glacialRift.valkyrieScene.loseToValkyrie();
+			SceneLib.glacialRift.valkyrieScene.loseToValkyrie();
 		}
 		
 		public function Valkyrie() 
@@ -176,8 +177,8 @@ public class Valkyrie extends Monster
 					.add(shields.GREATSH, 3)
 					.add(consumables.G__BOOK, 5)					
 					.add(null, 15);
-			this.wingType = AppearanceDefs.WING_TYPE_HARPY
-			this.wingDesc = "fluffy feathery"
+			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
+			this.wingDesc = "fluffy feathery";
 			this.special1 = spearAttack;
 			this.special2 = shieldBash;
 			this.special3 = aerialRave;

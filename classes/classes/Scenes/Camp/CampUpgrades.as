@@ -102,15 +102,15 @@ public function materialgatheringstorageupgrade():void {
 	if (player.fatigue <= player.maxFatigue() - 150)
 	{
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) { 
-			neednailsbox() 
+			neednailsbox();
 			return; 
 		}
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) { 
-			startWoodStorage() 
+			startWoodStorage();
 			return; 
 		}
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) { 
-			startStoneStorage() 
+			startStoneStorage();
 			return; 
 		}
 	}
@@ -265,27 +265,27 @@ public function warehousegranary():void {
 	if (player.fatigue <= player.maxFatigue() - 250)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) { 
-			start1stWarehouse1() 
+			start1stWarehouse1();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) { 
-			start1stWarehouse2() 
+			start1stWarehouse2();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) { 
-			startGranary1() 
+			startGranary1();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) { 
-			startGranary2() 
+			startGranary2();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) { 
-			start2ndWarehouse1() 
+			start2ndWarehouse1();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) { 
-			start2ndWarehouse2() 
+			start2ndWarehouse2();
 			return; 
 		}
 	}
@@ -721,15 +721,15 @@ private function do2ndWarehouse2Work():void {
 public function kitsuneshrine():void {
 	clearOutput();
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) { 
-		findSpotForShrine() 
+		findSpotForShrine();
 		return;
 	}
 	if (player.fatigue <= player.maxFatigue() - 300 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) { 
-		buildStructure() 
+		buildStructure();
 		return; 
 	}
 	if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) { 
-		buildAltair() 
+		buildAltair();
 		return; 
 	}
 	else
@@ -891,11 +891,11 @@ public function hotspring():void {
 	if (player.fatigue <= player.maxFatigue() - 100)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) { 
-			digApool() 
+			digApool();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) { 
-			addAWoodenWalls() 
+			addAWoodenWalls();
 			return; 
 		}
 	}
@@ -1041,7 +1041,7 @@ public function sparringRing():void {
 	if (player.fatigue <= player.maxFatigue() - 50)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1) { 
-			buildSmallRing() 
+			buildSmallRing();
 			return; 
 		}/*
 		if (flags[kFLAGS.] == 2) { 
@@ -1091,7 +1091,7 @@ public function magicWard():void {
 	if (player.fatigue <= player.maxFatigue() - 200)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) { 
-			setUpMagicWard() 
+			setUpMagicWard();
 			return;
 		}
 	}

@@ -170,7 +170,7 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zmniejszania fatigue w stosunku 1:1 a fatigue do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
-			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", kGAMECLASS.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.")//używanie metamorfowania z użyciem soulforce
+			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
@@ -829,7 +829,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			StatsMenuSens();
 		}
 		public function AddCor1():void {
-			player.cor = player.cor + 1
+			player.cor = player.cor + 1;
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -2199,7 +2199,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			if (player.soulforce >= 90) {
 				player.soulforce -= 90;
 				statScreenRefresh();
-				kGAMECLASS.kitsuneScene.enterTheTrickster();
+				SceneLib.kitsuneScene.enterTheTrickster();
 			}
 			else {
 				outputText("Your current soulforce is too low.");

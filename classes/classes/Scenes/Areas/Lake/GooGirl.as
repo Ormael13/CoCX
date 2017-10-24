@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Lake
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GooGirl extends Monster
@@ -120,7 +121,7 @@ public class GooGirl extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.lake.gooGirlScene.beatUpGoo();
+			SceneLib.lake.gooGirlScene.beatUpGoo();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -129,7 +130,7 @@ public class GooGirl extends Monster
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
 				doNext(game.endLustLoss);
 			} else {
-				game.lake.gooGirlScene.getBeatByGooGirl();
+				SceneLib.lake.gooGirlScene.getBeatByGooGirl();
 			}
 		}
 

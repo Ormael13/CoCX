@@ -2,7 +2,7 @@ package classes.Scenes.Dungeons.DeepCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class ValaScene extends BaseContent
 	{
@@ -236,7 +236,7 @@ public class ValaScene extends BaseContent
 			if(player.gender > 0) Use = useValaOHYEAHSNAPINTOASLIMJIM;
 			if(player.gender > 0) Wake = wakeValaUpBeforeYouGoGo;
 			var shouldra:Function = null;
-			if(player.lust >= 33 && kGAMECLASS.shouldraFollower.followerShouldra()) shouldra = kGAMECLASS.shouldraFollower.shouldraMeetsCorruptVala;
+			if(player.lust >= 33 && SceneLib.shouldraFollower.followerShouldra()) shouldra = SceneLib.shouldraFollower.shouldraMeetsCorruptVala;
 			simpleChoices("Fix Her", tryToHealVala, "Use", Use, "Wake", Wake, "ShouldraVala", shouldra, "Leave", playerMenu);
 		}
 		
@@ -276,9 +276,8 @@ public class ValaScene extends BaseContent
 		public function tryToHealValaWHoney2():void {
 			spriteSelect(85);
 			clearOutput();
-			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");;
-
-			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n");
+            outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
+            outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n");
 			//(Vala unlocked in The Wet Bitch)
 			flags[kFLAGS.FREED_VALA] = 1;
 			//[End Encounter]
@@ -601,8 +600,8 @@ public class ValaScene extends BaseContent
 			}
 			addButton(1,"You",cleansedValaRepeatBrainFucking);
 			if (cumBath != null) addButton(2, "Cum Bath", cumBath);
-			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && kGAMECLASS.shouldraFollower.followerShouldra()) addButton(3, "Big You", valaBigYou);
-			addButton(4,"Leave",kGAMECLASS.telAdre.barTelAdre);
+			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && SceneLib.shouldraFollower.followerShouldra()) addButton(3, "Big You", valaBigYou);
+			addButton(4,"Leave",SceneLib.telAdre.barTelAdre);
 		}
 
 		public function cleansedFirstRemeet():void {
@@ -618,7 +617,7 @@ public class ValaScene extends BaseContent
 
 			outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"");
 			//[You][Leave]
-			simpleChoices("You",cleansedValaFuckHerBrainsOut,"", null,"", null,"", null,"Leave",kGAMECLASS.telAdre.barTelAdre);
+			simpleChoices("You",cleansedValaFuckHerBrainsOut,"", null,"", null,"", null,"Leave",SceneLib.telAdre.barTelAdre);
 		}
 
 		//[You] 
@@ -744,7 +743,7 @@ public class ValaScene extends BaseContent
 			}
 			//[End Encounter]
 			cheatTime(1);
-			doNext(kGAMECLASS.telAdre.barTelAdre);
+			doNext(SceneLib.telAdre.barTelAdre);
 		}
 		//[You]
 		public function cleansedValaRepeatBrainFucking():void {
@@ -910,7 +909,7 @@ public class ValaScene extends BaseContent
 			menu();
 			addButton(0,"Dom Me",bigValaDomsPC);
 			if(player.hasCock()) addButton(1,"Lick Me",bigValaLicksOffDudes);
-			if(kGAMECLASS.vapula.vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
+			if(SceneLib.vapula.vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
 				addButton(2,"Dom Vapula",valaDommyVapula3Some);
 				addButton(3,"Vapula3Some",valaLoveyVapula3Some);
 			}

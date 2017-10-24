@@ -6,18 +6,19 @@ package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class WinterWolf extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.glacialRift.winterwolfScene.winAgainstWinterWolf();
+			SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.glacialRift.winterwolfScene.loseToWinterWolf();
+			SceneLib.glacialRift.winterwolfScene.loseToWinterWolf();
 		}
 		
 		override protected function performCombatAction():void

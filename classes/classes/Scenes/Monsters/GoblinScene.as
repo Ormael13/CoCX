@@ -18,8 +18,8 @@ public class GoblinScene extends BaseContent
 		}
 		private var story:BoundStory;
 		private function init():void {
-			story = new Story("story",getGame().rootStory.locate("monsters"),"goblin").bind(getGame().context);
-		}
+            story = new Story("story", kGAMECLASS.rootStory.locate("monsters"), "goblin").bind(kGAMECLASS.context);
+        }
 
 		/*Goblins
 		 Gender: Female

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class SpiderMorphMob extends Monster
 	{
@@ -81,7 +82,7 @@ public class SpiderMorphMob extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.kihaFollower.beatSpiderMob();
+			SceneLib.kihaFollower.beatSpiderMob();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -90,7 +91,7 @@ public class SpiderMorphMob extends Monster
 				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
 				doNext(game.endLustLoss);
 			} else {
-				game.kihaFollower.loseToSpiderMob();
+				SceneLib.kihaFollower.loseToSpiderMob();
 			}
 		}
 
@@ -132,8 +133,8 @@ public class SpiderMorphMob extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 23;
 			this.gems = rand(50)+100;
-			this.special1 = game.combat.packAttack;
-			this.special2 = game.combat.lustAttack;
+			this.special1 = SceneLib.combat.packAttack;
+			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

@@ -386,7 +386,7 @@
 		 */
 		public function GetControlMethods():Array
 		{
-			var buttons:Array = new Array();
+			var buttons:Array = [];
 			for (var key:* in _keysToControlMethods)
 			{
 				buttons.push(key);

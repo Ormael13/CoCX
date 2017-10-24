@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
 import classes.Scenes.Changelog;
+import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
 
@@ -15,27 +16,21 @@ public class MainMenu extends BaseContent {
 	//------------
 	//MainMenu - kicks player out to the main menu
 	public function mainMenu():void {
-		getGame().stage.focus = (mainView as MainView).mainText;
-
-		if (CONFIG::debug) {
-			CoC_Settings.debugBuild = true;
-		}
-		else {
-			CoC_Settings.debugBuild = false;
-		}
+        kGAMECLASS.stage.focus = (mainView as MainView).mainText;
+        CoC_Settings.debugBuild = CONFIG::debug;
 
 		mainView.hideComboBox();
-		getGame().mainViewManager.registerShiftKeys();
-		mainView.eventTestInput.x = -10207.5;
+        kGAMECLASS.mainViewManager.registerShiftKeys();
+        mainView.eventTestInput.x = -10207.5;
 		mainView.eventTestInput.y = -1055.1;
 		hideStats();
-		getGame().mainViewManager.startUpButtons();
-		kGAMECLASS.saves.loadPermObject();
-		if (getGame().gameSettings.charviewEnabled) mainView.charView.reload();
-		getGame().mainViewManager.setTheme();
-		//Reset newgame buttons
-		mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", getGame().charCreation.newGameFromScratch);
-		mainView.hideAllMenuButtons();
+        kGAMECLASS.mainViewManager.startUpButtons();
+        kGAMECLASS.saves.loadPermObject();
+        if (kGAMECLASS.gameSettings.charviewEnabled) mainView.charView.reload();
+        kGAMECLASS.mainViewManager.setTheme();
+        //Reset newgame buttons
+        mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", kGAMECLASS.charCreation.newGameFromScratch);
+        mainView.hideAllMenuButtons();
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 
@@ -50,16 +45,14 @@ public class MainMenu extends BaseContent {
 		mainView.appearanceButton.toolTipText   = "View your appearance.";
 		mainView.appearanceButton.toolTipHeader = "Appearance";
 		//Sets game state to 3, used for determining back functionality of save/load menu.
-		getGame().resetGameState();
-		clearOutput();
+        kGAMECLASS.resetGameState();
+        clearOutput();
 		//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-		outputText("<b>Corruption of Champions (" + getGame().version + ")</b>");
-
-		if (CoC_Settings.debugBuild)
+        outputText("<b>Corruption of Champions (" + kGAMECLASS.version + ")</b>");
+        if (CoC_Settings.debugBuild)
 			outputText(" Debug Build");
 		else
 			outputText(" Release Build");
-		//doThatTestingThang();
 
 		startupScreenBody();
 
@@ -78,16 +71,16 @@ public class MainMenu extends BaseContent {
 		menu();
 		if (resume != null) addButton(0, "Resume", resume).hint("Get back to gameplay?");
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
-		addButton(1, "Settings", getGame().gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
-		addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
+        addButton(1, "Settings", kGAMECLASS.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+        addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 		addButton(3, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 
 		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
 		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
 		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It have many pages already.</i>");
-		if (CoC_Settings.debugBuild) addButton(8, "Debug Info", getGame().debugInfoMenu.debugPane).hint("View debug information.");
-	}
+        if (CoC_Settings.debugBuild) addButton(8, "Debug Info", kGAMECLASS.debugInfoMenu.debugPane).hint("View debug information.");
+    }
 
 	public function startupScreenBody():void {
 		// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
@@ -113,7 +106,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ")
+		outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ");
 		outputText("\n\nCheck out Trials in Tainted Space as well!");
 		outputText("\n\nFall of Eden is worth a try too ^^");
 
@@ -133,7 +126,7 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
 			outputText("\n\n<b>It's Halloween!</b>");
-		if (getGame().helFollower.isHeliaBirthday())
+		if (SceneLib.helFollower.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 	}
@@ -183,10 +176,9 @@ public class MainMenu extends BaseContent {
 		 outputText("<li> Prisoner416</li>");
 		 outputText("<li> Chibodee</li>");
 		 outputText("");*/
-		outputText("<b>Graphical Prettiness:</b>")
+		outputText("<b>Graphical Prettiness:</b>");
 		outputText("<ul>");
-		;
-		outputText("<li> Dasutin (Background Images)</li>");
+        outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");

@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.D3
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -25,12 +26,12 @@ import classes.Items.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
+			SceneLib.d3.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
+			SceneLib.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
 		}
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void

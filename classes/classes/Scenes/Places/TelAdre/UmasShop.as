@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	/**
+/**
 	 * Whee!
 	 * (No @ tag for coder)
 	 * @author Gedan
@@ -681,14 +681,7 @@
 		public function hasNeedleworkPerk():Boolean
 		{
 			var pType:PerkType = this.getNeedleworkPerk();
-			if (pType != null)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return pType != null;
 		}
 		
 		/**
@@ -1596,7 +1589,7 @@
 			outputText("The milf mare smiles at you.  \"<i>Very well, dear.  Follow me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment.\"\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more fluid generous clientele, ");
 
-			if (kGAMECLASS.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			if (SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>If you're done examining your surroundings, you'd better get those [armorname] off, unless you want them to get dirty dear,</i>\" Uma says, pointing at your garments.  \"<i>You can put them inside the cupboard,</i>\" she motions over to the cupboard and begins undoing her kimono, with practiced moves and elegant grace, careful not to wrinkle the fabric and ensuring it's all neatly folded.\n\n");
@@ -1667,7 +1660,7 @@
 			outputText("\"<i>Very well, dear.  Come with me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment\".\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, ");
 
-			if (kGAMECLASS.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			if (SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>Now, dear.  I can't quite get my hands where they need to be if you're still wearing your [armorname].  So why don't you strip down and put them in the cupboard over in the corner,</i>\"  she instructs, beginning to strip herself.  You nod your head in understanding and promptly strip down, ");
@@ -1777,7 +1770,7 @@
 			outputText("\"<i>Hmm, I suppose I could, come with me,</i>\" the mare leads you away, out her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"<i>special treatment</i>\".\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, ");
 
-			if (kGAMECLASS.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			if (SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("She starts stripping and motions for you to do the same.  \"<i>As talented as I am with my hands, I still haven't figured a way to properly take care of you while dressed, dear,</i>\" she giggles.  You nod your head in understanding and promptly strip down, ");
@@ -1865,7 +1858,7 @@
 			outputText(" grinding and growing is well-worth the obvious discomfort.");
 			
 			outputText("\n\nThe room she leads you to is quite simple: wooden walls and floor, a couple of drains set in the boards that are probably for the more... fluid generous clientele, ");
-			if(kGAMECLASS.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			if(SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 			outputText("and a sizable bamboo table.  It's covered in a white cloth and has an upraised board with a hole in it that looks like it’s big enough to fit your head through.  It is the only piece of furniture in the room apart from a small cupboard in the corner. Though spartan in its layout, this odd chamber is quite comfortably warm.");
 			
 			outputText("\n\n\"<i>Strip, dear,</i>\" Uma says cheerfully while beginning to strip herself.  You need no further encouragement, eagerly getting naked ");
@@ -2036,7 +2029,7 @@
 			outputText("The mare leads you away, out her office and down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment\".\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more fluid generous clientele, ");
 
-			if (kGAMECLASS.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			if (SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("Uma begins stripping while you watch the older mare's beautifully sculpted body.  You wonder how old she is?  With a body like hers, she could probably pass for Loppe's sister, although she does have a few signs of being more mature.  Rather than making her look less beautiful, they make her even more stunning.  \"<i>Dear?  Hello, dear?</i>\" Uma waves a hand in front of you,  \"<i>Still there, dear?</i>\"  You shake your wandering thoughts out of your head and turn to look at her.  The seductive mare giggles.  \"<i>You should undress.  That is, unless you want your [armorname] to smell like horny mare.</i>\"  You nod in understanding, stripping yourself down and storing your things carefully in the nearby cupboard, beside Uma's own clothing.\n\n");

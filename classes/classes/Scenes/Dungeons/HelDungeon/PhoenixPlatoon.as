@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class PhoenixPlatoon extends Monster
@@ -52,7 +53,7 @@ public class PhoenixPlatoon extends Monster
 				addStatusValue(StatusEffects.Platoon,1,1);
 			}
 			else {
-				phoenixPlatoonLustbang()
+				phoenixPlatoonLustbang();
 				removeStatusEffect(StatusEffects.Platoon);
 			}
 		}
@@ -64,12 +65,12 @@ public class PhoenixPlatoon extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.heltower.phoenixPlatoonLosesToPC();
+			SceneLib.dungeons.heltower.phoenixPlatoonLosesToPC();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.heltower.phoenixPlatoonMurdersPC();
+			SceneLib.dungeons.heltower.phoenixPlatoonMurdersPC();
 		}
 		
 		public function PhoenixPlatoon()

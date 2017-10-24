@@ -4,6 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -34,7 +35,7 @@ import classes.PregnancyStore;
 		public function beatThePony(hpVictory:Boolean):void
 		{
 			clearOutput();
-			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully")
+			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully");
 			if (hpVictory) outputText(" as she tries to rise");
 			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
 			outputText(", but it's a futile gesture.  She doesn't have the power to face you on her own terms anymore, and she watches you with a");
@@ -61,8 +62,8 @@ import classes.PregnancyStore;
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function letHerGo():void
 		{
@@ -71,8 +72,8 @@ import classes.PregnancyStore;
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function maleFuckHer():void
 		{
@@ -119,8 +120,8 @@ import classes.PregnancyStore;
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight)
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight)
+        }
 
 		private const HORZGOG:int = 0;
 		private const DOGGECOCK:int = 1;
@@ -248,8 +249,8 @@ import classes.PregnancyStore;
 			dynStats("cor+", 5);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{

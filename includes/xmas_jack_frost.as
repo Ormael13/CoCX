@@ -82,7 +82,7 @@ public function noJizzingInMyCampPlease():void {
 	
 	classes.EngineCore.outputText("\n\nSeeing no reason to linger, you return to your camp.");
 	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //[=Yes=]
@@ -93,7 +93,7 @@ public function jizzSnowOnMyCampPlease():void {
 	classes.EngineCore.outputText("\n\nYou thank him for the surprisingly kind gesture, and start to head back down to camp.  Even as you go, you can see the first huge jet of snow arcing its way across the sky...");
 	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 1;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Back in camp
@@ -109,14 +109,14 @@ public function processJackFrostEvent():void {
 		classes.EngineCore.addButton(0,"Next",processJackFrostEvent);
 	}
 	//No followers
-	else if(camp.companionsCount() == 0) {
+	else if(classes.Scenes.SceneLib.camp.companionsCount() == 0) {
 		//Only if PC really has NO ONE to be with. aka: ForeverAlone.gif
 		classes.EngineCore.outputText("You sigh... this really reminds you of back home... you only wish you had someone to share this feeling with... Well, there is no reason you shouldn't enjoy yourself while it snows, so you set about rolling a big ball of snow to make a snowman out of...");
 		//Skip to next day...
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 		classes.EngineCore.HPChange(classes.EngineCore.maxHP(),false);
 		classes.EngineCore.fatigue(-100);
-		classes.EngineCore.doNext(camp.returnToCampUseEightHours);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseEightHours);
 	}
 	//Rathazul
 	else if(player.hasStatusEffect(StatusEffects.CampRathazul) && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
@@ -160,7 +160,7 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Jojo
-	else if((player.hasStatusEffect(StatusEffects.PureCampJojo) || jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
+	else if((player.hasStatusEffect(StatusEffects.PureCampJojo) || classes.Scenes.SceneLib.jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
 		//Pure
 		if(player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 			classes.EngineCore.outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
@@ -196,10 +196,10 @@ public function processJackFrostEvent():void {
 	}
 	//Amily
 	//less than 5!
-	else if(amilyScene.amilyFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 5) {
+	else if(classes.Scenes.SceneLib.amilyScene.amilyFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 5) {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 6;
 		//Pure
-		if(!amilyScene.amilyCorrupt()) {
+		if(!classes.Scenes.SceneLib.amilyScene.amilyCorrupt()) {
 			classes.EngineCore.outputText("Amily is warily prowling across the icy surface, occasionally glancing all around as if trying to spot an ambush.  Other times, she suddenly leaps up in a flurry, whirling around in mid-air as something catches her over-large ears.  All in all, it's quite obvious she's scared.");
 			classes.EngineCore.outputText("\n\nApproaching her, you ask what's gotten her so worried?");
 			classes.EngineCore.outputText("\n\n\"<i>Can't you see all this snow?  There hasn't been snow in Mareth since I was a little baby girl - the demons must have something to do with this!</i>\"  Amily hisses, clearly expecting an attack to come at any moment.");
@@ -213,7 +213,7 @@ public function processJackFrostEvent():void {
 			
 			classes.EngineCore.outputText("\n\nYou laugh and hug her back, telling Amily to take it easy.  With all the friction the two of you are making, hugging together and nuzzling, you might just end up melting all the snow.  The mouse looks into your eyes. \"<i>Oooh, you little tempter, you,</i>\" she trills, tail looping around your wrist.  \"<i>Maybe I wouldn't mind that...?</i>\" she suggests mischievously.");
 			classes.EngineCore.outputText("\n\nYou grin at her then envelop her lips into a kiss... sounds like a plan, you're feeling a bit cold and this would be a nice way to warm you right up...");
-			classes.EngineCore.outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your " + camp.homeDesc() + ".  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
+			classes.EngineCore.outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your " + classes.Scenes.SceneLib.camp.homeDesc() + ".  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
 			//[Penetrate Her] [Make out]
 			classes.EngineCore.menu();
 			if(player.hasCock()) classes.EngineCore.addButton(0,"Penetrate",penetradePureMouseWaifu);
@@ -260,37 +260,37 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Tainted Ember
-	else if(emberScene.followerEmber() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 6) {
+	else if(classes.Scenes.SceneLib.emberScene.followerEmber() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 6) {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 7;
-		classes.EngineCore.outputText("The dragon is wandering your camp in open fascination.  \"<i>What is this weird white stuff?  It's cold and wet... but soft and fluffy, too,</i>\" " + emberScene.emberMF("he","she") + " says, gently catching a snowflake.");
-		classes.EngineCore.outputText("\n\nHaving heard " + emberScene.emberMF("his","her") + " question, you approach Ember and tell " + emberScene.emberMF("him","her") + " that's just snow.");
-		classes.EngineCore.outputText("\n\n\"<i>Snow...?</i>\" " + emberScene.emberMF("He","She") + " repeats in a curious, blatantly awed voice.  \"<i>...It's so pretty.</i>\" " + emberScene.emberMF("he","she") + " tells you.");
-		classes.EngineCore.outputText("\n\nYou ask if this is " + emberScene.emberMF("his","her") + " first time seeing snow.  It always snowed back home around this time of the year.  Why... back when you were a child, you used to play all the time in the snow.");
+		classes.EngineCore.outputText("The dragon is wandering your camp in open fascination.  \"<i>What is this weird white stuff?  It's cold and wet... but soft and fluffy, too,</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " says, gently catching a snowflake.");
+		classes.EngineCore.outputText("\n\nHaving heard " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " question, you approach Ember and tell " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " that's just snow.");
+		classes.EngineCore.outputText("\n\n\"<i>Snow...?</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("He","She") + " repeats in a curious, blatantly awed voice.  \"<i>...It's so pretty.</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " tells you.");
+		classes.EngineCore.outputText("\n\nYou ask if this is " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " first time seeing snow.  It always snowed back home around this time of the year.  Why... back when you were a child, you used to play all the time in the snow.");
 		
 		classes.EngineCore.outputText("\n\n\"<i>So it's for kids,</i>\" Ember notes, sounding kind of depressed - and a little envious, especially given the way she still looks so eagerly at the snow all around you.");
-		classes.EngineCore.outputText("\n\nPerhaps... would " + emberScene.emberMF("he","she") + " like to play in the snow with you?");
+		classes.EngineCore.outputText("\n\nPerhaps... would " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " like to play in the snow with you?");
 		classes.EngineCore.outputText("\n\n\"<i>I thought you said this was for little kids?  I'm no baby!</i>\" Ember protests.");
-		classes.EngineCore.outputText("\n\nWho said it was just for kids?  You just said you used to play all the time when you were a child, there is no reason why you couldn't play now that you're grown up either... after all, back in your village, even adults played in the snow.  Unless... " + emberScene.emberMF("he","she") + " doesn't like the idea of spending the day playing with you?  That would be a pity, since it's " + emberScene.emberMF("his","her") + " first time seeing snow...");
+		classes.EngineCore.outputText("\n\nWho said it was just for kids?  You just said you used to play all the time when you were a child, there is no reason why you couldn't play now that you're grown up either... after all, back in your village, even adults played in the snow.  Unless... " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " doesn't like the idea of spending the day playing with you?  That would be a pity, since it's " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " first time seeing snow...");
 		classes.EngineCore.outputText("\n\n\"<i>What?  I... ooh, very well.  Teach me how you play with this stuff,</i>\" Ember says, blowing a thin trail of steam out of each nostril.");
-		classes.EngineCore.outputText("\n\nYou smile and begin explaining to the dragon all about the games you used to play when it snowed back home.  Ember listens attentively with a gleam in " + emberScene.emberMF("his","her") + " eyes.");
+		classes.EngineCore.outputText("\n\nYou smile and begin explaining to the dragon all about the games you used to play when it snowed back home.  Ember listens attentively with a gleam in " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " eyes.");
 		classes.EngineCore.outputText("\n\nBy the time you're done Ember's tail is waving excitedly behind her.  You ask how she'd feel about a snowball fight?");
-		classes.EngineCore.outputText("\n\n\"<i>All right, let's try it!</i>\" " + emberScene.emberMF("he","she") + " agrees, as eager as any kid back in Ingnam.");
+		classes.EngineCore.outputText("\n\n\"<i>All right, let's try it!</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " agrees, as eager as any kid back in Ingnam.");
 		
-		classes.EngineCore.outputText("\n\nYou explain to " + emberScene.emberMF("him","her") + " the rules and walk a short distance away... then declare the match started!  Ember is pretty good... but being " + emberScene.emberMF("his","her") + " first time doing this, " + emberScene.emberMF("he","she") + " ends up not being able to hit you as many times as you hit " + emberScene.emberMF("him","her") + ", while you expertly dodge and roll her snowballs.");
+		classes.EngineCore.outputText("\n\nYou explain to " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " the rules and walk a short distance away... then declare the match started!  Ember is pretty good... but being " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " first time doing this, " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " ends up not being able to hit you as many times as you hit " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + ", while you expertly dodge and roll her snowballs.");
 		classes.EngineCore.outputText("\n\n\"<i>Damn it, stand still, [name]!  You're slippier than the rabbits I go catching in the mornings!</i>\" the irate dragon complains.");
 		
-		classes.EngineCore.outputText("\n\nRather than complaining " + emberScene.emberMF("he","she") + " should be focusing on hitting you, otherwise you're going to end up crushing " + emberScene.emberMF("him","her") + " in this match!  You tease " + emberScene.emberMF("him","her") + ", throwing another snowball right on " + emberScene.emberMF("his","her") + " belly.");
+		classes.EngineCore.outputText("\n\nRather than complaining " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " should be focusing on hitting you, otherwise you're going to end up crushing " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " in this match!  You tease " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + ", throwing another snowball right on " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " belly.");
 		
-		classes.EngineCore.outputText("\n\nThe dragon promptly drops to " + emberScene.emberMF("him","her") + " knees and starts sweeping together huge armfuls of snow, crushing and melding them together until " + emberScene.emberMF("he","she") + " has made a snowball the size of a small boulder, which " + emberScene.emberMF("he","she") + " promptly hurls at you.");
+		classes.EngineCore.outputText("\n\nThe dragon promptly drops to " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " knees and starts sweeping together huge armfuls of snow, crushing and melding them together until " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " has made a snowball the size of a small boulder, which " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " promptly hurls at you.");
 		
 		classes.EngineCore.outputText("\n\nWoah!  The large ball of snow connects squarely with your face, bowling you over and burying you under the snow.  Having the air knocked out of you, you scramble to dig yourself off the snow.");
 		
-		classes.EngineCore.outputText("\n\nA pair of claw-fingered hands promptly come clawing their way through the snow, grabbing you by the shoulders and pulling you bodily out of the snow.  \"<i>Well?  I think I won that round,</i>\" " + emberScene.emberMF("he","she") + " gloats, a twinkle of delight in " + emberScene.emberMF("his","her") + " eye.");
+		classes.EngineCore.outputText("\n\nA pair of claw-fingered hands promptly come clawing their way through the snow, grabbing you by the shoulders and pulling you bodily out of the snow.  \"<i>Well?  I think I won that round,</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " gloats, a twinkle of delight in " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " eye.");
 		
-		classes.EngineCore.outputText("\n\nCoughing up some snow, you concede defeat, congratulating Ember on winning " + emberScene.emberMF("his","her") + " first snowball fight... but then, you smirk and tell " + emberScene.emberMF("him","her") + " this was all beginner's luck... and next time you'll beat " + emberScene.emberMF("him","her") + " for sure.");
+		classes.EngineCore.outputText("\n\nCoughing up some snow, you concede defeat, congratulating Ember on winning " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " first snowball fight... but then, you smirk and tell " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " this was all beginner's luck... and next time you'll beat " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " for sure.");
 		
-		classes.EngineCore.outputText("\n\n\"<i>So you say, but the truth is you know you'll never beat me,</i>\" Ember brags.  Then " + emberScene.emberMF("he","she") + " lowers her eyelids and gives you a coy look.  \"<i>And now, for the victor, a prize,</i>\" " + emberScene.emberMF("he","she") + " growls, then swoops in to kiss you passionately.  Several minutes pass before " + emberScene.emberMF("he","she") + " breaks the kiss, a somewhat goofy smile on " + emberScene.emberMF("his","her") + " face.  \"<i>I'm going to go and play in the snow some more.  See you, [name].</i>\"  " + emberScene.emberMF("He","She") + " giggles, then ambles off.");
-		classes.EngineCore.outputText("\n\nYou wave " + emberScene.emberMF("him","her") + " away - maybe being beaten isn't so bad.  Your thoughts turn to Ember's passionate kiss...  It certainly is a nice sight, to see " + emberScene.emberMF("him","her") + " so happy.  Having it snow on your camp was a great idea after all.");
+		classes.EngineCore.outputText("\n\n\"<i>So you say, but the truth is you know you'll never beat me,</i>\" Ember brags.  Then " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " lowers her eyelids and gives you a coy look.  \"<i>And now, for the victor, a prize,</i>\" " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " growls, then swoops in to kiss you passionately.  Several minutes pass before " + classes.Scenes.SceneLib.emberScene.emberMF("he","she") + " breaks the kiss, a somewhat goofy smile on " + classes.Scenes.SceneLib.emberScene.emberMF("his","her") + " face.  \"<i>I'm going to go and play in the snow some more.  See you, [name].</i>\"  " + classes.Scenes.SceneLib.emberScene.emberMF("He","She") + " giggles, then ambles off.");
+		classes.EngineCore.outputText("\n\nYou wave " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " away - maybe being beaten isn't so bad.  Your thoughts turn to Ember's passionate kiss...  It certainly is a nice sight, to see " + classes.Scenes.SceneLib.emberScene.emberMF("him","her") + " so happy.  Having it snow on your camp was a great idea after all.");
 		classes.EngineCore.menu();
 		classes.EngineCore.addButton(0,"Next",processJackFrostEvent);
 	}
@@ -382,7 +382,7 @@ public function processJackFrostEvent():void {
 	}
 	//Helia
 	//if she ain't a follower and is a lover, just have her visit.
-	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (helScene.fuckBuddyHel() || helFollower.followerHel())) {
+	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (classes.Scenes.SceneLib.helScene.fuckBuddyHel() || classes.Scenes.SceneLib.helFollower.followerHel())) {
 		
 		classes.EngineCore.outputText("\"<i>Hey, champ, what's going on here?</i>\"  Helia calls as she sees you approach.  Gentle trails of steam are wafting from the salamander's body as her own internal heat melts any snow that builds up on her.");
 		classes.EngineCore.outputText("\n\nYou greet your salamander lover, telling her you found a way to make it snow on your camp... so you were just planning on having a snow-day play-day on your camp, while it lasts.");
@@ -448,50 +448,50 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Isabella
-	else if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 10) {
+	else if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 10) {
 		classes.EngineCore.outputText("The bovine adventurer Isabella is staring at the snow around her with a sad look on her face, one hand gently raised to catch snowflakes.  She watches them gather in her palm and heaves a huge sigh.  You quietly approach her and ask what's wrong; is she homesick?");
 		classes.EngineCore.outputText("\n\n\"<i>");
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("Da, [name], I am,");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("Da, [name], I am,");
 		else classes.EngineCore.outputText("Yes, [name], I am,");
 		classes.EngineCore.outputText("</i>\" she replies.  ");
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\"<i>Back home, in mine land, it vould be snowing all over at this time of year, and ve vould be having big vinter festival to celebrate ze ending of old year and coming of new year.  This land, it is so dry and hot...  I had forgotten it, but seeing zis snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\"<i>Back home, in mine land, it vould be snowing all over at this time of year, and ve vould be having big vinter festival to celebrate ze ending of old year and coming of new year.  This land, it is so dry and hot...  I had forgotten it, but seeing zis snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
 		else classes.EngineCore.outputText("\"<i>Back home, in my old land, it would be snowing all over at this time of year, and we would be having a big winter festival to celebrate the ending of the old year and the coming of the new one.  This land, it's so dry and hot...  I had forgotten it, but seeing this snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
 
 		classes.EngineCore.outputText("\n\nYes, you agree.  It does bring back memories.  Though you don't know if you've been in this world quite as long as Isabella has.  You chuckle to yourself.  If you were back in your village, you and your family would be gathering for a big feast, playing in the snow, drinking, laughing... all the jolly good stuff.  Still, at least you're not alone here in Mareth.  You look at Isabella with a smile.");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>So, you are having a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, da, it is good zat ve have found each other and so must not be lonely at zis time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>So, you are having a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, da, it is good zat ve have found each other and so must not be lonely at zis time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
 		else classes.EngineCore.outputText("\n\n\"<i>So, you have a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, yeah, it's good that we have found each other and have each other's company at this time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
 		classes.EngineCore.outputText("\n\nYochalot?  You ask in curiosity.");
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>Da, yochalot.  It is very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year, ja?</i>\"");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>Da, yochalot.  It is very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year, ja?</i>\"");
 		else classes.EngineCore.outputText("\n\n\"<i>Yep! Yochalot.  It's a very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year.</i>\"");
 		classes.EngineCore.outputText("\n\nYochalot... sounds a lot like chocolate...  Still, you'd like to try it sometime.  You tell the cow-girl as much.");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, mein little sweety, but I am having no yochalot on me - I drank ze last of mine some time ago, and I do not think zey have such thing in this vorld any more.  At least, none that has not been tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, mein little sweety, but I am having no yochalot on me - I drank ze last of mine some time ago, and I do not think zey have such thing in this vorld any more.  At least, none that has not been tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
 		else classes.EngineCore.outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, my little sweet, but I don't have any yochalot on me - I drank the last of mine some time ago, and I don't think they have such thing in this world any more.  At least, none that have not been doubtlessly tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
 		
 		classes.EngineCore.outputText("\n\nPity, but then again, Isabella's milk is pretty tasty.  You confess you're feeling at least a bit chilly, so, you ask the cow-girl if she wouldn't mind warming you up with some of her sweet-tasting milk?");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, mein sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I vill give you all ze milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you are wanting to drink mein milk, zen you are not needing zis subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, mein sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I vill give you all ze milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you are wanting to drink mein milk, zen you are not needing zis subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
 		else classes.EngineCore.outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I will give you all the milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you want to drink my milk, then you don't need this subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
 
 		classes.EngineCore.outputText("\n\nSeeing as you're already so conveniently positioned, you waste no time in opening your mouth and taking her four nipples into your mouth, suckling in earnest, as the cow-girl's tasty milk fills your mouth and belly.  You momentarily stop your nursing to lick a stray drop of milk that has escaped your mouth, smiling to Isabella, you tell her that her milk truly hits the spot.  You can already feel yourself getting warmer.");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you vere not vanting mein milk, you vere wanting to be cheering me up, da?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you vere not vanting mein milk, you vere wanting to be cheering me up, da?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
 		else classes.EngineCore.outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you weren't wanting my milk, you wanted to cheer me up, huh?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>You are just ze sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Vell, if you are liking mein milk so much, perhaps you should have some more, da?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\n\"<i>You are just ze sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Vell, if you are liking mein milk so much, perhaps you should have some more, da?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
 		else classes.EngineCore.outputText("\n\n\"<i>You are just the sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Well, if you are liking my milk so much, perhaps you should have some more, yeah?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
 		
 		classes.EngineCore.outputText("\n\nSounds like a plan, you tell the cow-girl.  You take the offered tit in your hands and proceed to bury yourself into the pillowy mound, latching onto her nipples and draining them of all its contents as fast as you can without choking.");
 		
-		if(isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Da, zat ist good, [name].  I love to empty zese big boobs of mine, but I am loving you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
+		if(classes.Scenes.SceneLib.isabellaFollowerScene.isabellaAccent()) classes.EngineCore.outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Da, zat ist good, [name].  I love to empty zese big boobs of mine, but I am loving you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
 		else classes.EngineCore.outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Yeah, that's good, [name].  I love to empty these big boobs of mine, but I think I love you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 11;
 		classes.EngineCore.menu();
 		classes.EngineCore.addButton(0,"Next",processJackFrostEvent);
 	}
 	//Kiha
-	else if(kihaFollower.followerKiha() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 11) {
+	else if(classes.Scenes.SceneLib.kihaFollower.followerKiha() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 11) {
 		classes.EngineCore.outputText("\"<i>Ah-ah-ahchoo!</i>\"");
 		classes.EngineCore.outputText("\n\n\"<i>Bless you,</i>\" you say to Kiha as you approach the dragon-girl.");
 		classes.EngineCore.outputText("\n\nKiha sniffles and wipes her nose on her arm when she sees you.  \"<i>[name], what is this weird white stuff?  It's cold and wet and - achoo!</i>\"  She sneezes again, spraying a gout of flame across the camp.  \"<i>And the flakes keep flying up my nose,</i>\" she snuffles.");
@@ -516,15 +516,15 @@ public function processJackFrostEvent():void {
 		classes.EngineCore.outputText("This small holiday of yours was much needed.  You feel reinvigorated and even more determined to put an end to this struggle with demons.");
 		classes.EngineCore.outputText("\n\nThe only thing left to end this day is a feast.  Though your family is not here to join you, at least you won't be dining alone.");
 		//(if One sexable follower)
-		if(camp.loversCount() + camp.slavesCount() == 1) {
+		if(classes.Scenes.SceneLib.camp.loversCount() + classes.Scenes.SceneLib.camp.slavesCount() == 1) {
 			classes.EngineCore.outputText("\n\nYou take care of the preparations and cooking, whipping up a delightful meal for you and your companion.  You can tell that you were not the only one needing this break, and judging by the way your companions eyes you as the two of you eat... it seems the day is not over yet...");
 		}
 		//(if no sexable follower)
-		else if(camp.loversCount() + camp.slavesCount() == 0) {
+		else if(classes.Scenes.SceneLib.camp.loversCount() + classes.Scenes.SceneLib.camp.slavesCount() == 0) {
 			classes.EngineCore.outputText("\n\nYou take care of the preparations and cooking, whipping up a delightful meal for you and your companion");
-			if(camp.companionsCount() > 1) classes.EngineCore.outputText("s");
+			if(classes.Scenes.SceneLib.camp.companionsCount() > 1) classes.EngineCore.outputText("s");
 			classes.EngineCore.outputText(".  You can tell that you were not the only one needing this break... but unfortunately all good things must come to an end, and so you bid your companion");
-			if(camp.companionsCount() > 1) classes.EngineCore.outputText("s");
+			if(classes.Scenes.SceneLib.camp.companionsCount() > 1) classes.EngineCore.outputText("s");
 			classes.EngineCore.outputText(" good night and retire for the night.");
 		}
 		////more than one sexable follower.
@@ -535,7 +535,7 @@ public function processJackFrostEvent():void {
 		classes.EngineCore.HPChange(classes.EngineCore.maxHP(),false);
 		classes.EngineCore.fatigue(-100);
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
-		classes.EngineCore.doNext(camp.returnToCampUseEightHours);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseEightHours);
 	}
 }
 
@@ -586,7 +586,7 @@ public function penetradePureMouseWaifu():void {
 	classes.EngineCore.outputText(".");
 	
 	classes.EngineCore.outputText("\n\nSitting down on your bedroll, you open your arms, inviting Amily over.  The mouse promptly approaches");
-	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) classes.EngineCore.outputText(", her own " + amilyScene.amilyCock() + " jutting out in anticipation");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) classes.EngineCore.outputText(", her own " + classes.Scenes.SceneLib.amilyScene.amilyCock() + " jutting out in anticipation");
 	classes.EngineCore.outputText(", wriggling into your arms and angling her pussy over your " + player.cockDescript(x) + ".  With the ease of long practice, she slides smoothly down its length, her warm, wet depths greedily inhaling your masculinity.  \"<i>Ah, nothing like a nice hard cock in your cunt to make you feel warmer,</i>\" she coos.");
 	
 	classes.EngineCore.outputText("\n\nYou simply grin and begin bucking your hips against her, suppressing your moans by kissing her, hugging her tightly against you, holding your bodies flush together.  The mouse hugs you as tightly as she can, smothering you with kisses as her hands roam nimbly across your back, slinking down to squeeze your ass with an obvious hunger to molest you.");

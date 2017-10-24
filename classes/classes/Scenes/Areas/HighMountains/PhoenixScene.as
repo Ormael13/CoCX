@@ -40,7 +40,7 @@ public class PhoenixScene extends BaseContent
 			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++
+			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
 			startCombat(new Phoenix());
 		}
 		
@@ -64,7 +64,7 @@ public class PhoenixScene extends BaseContent
 			outputText("Strolling along the vulcanic crag, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++
+			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
 			startCombat(new Phoenix());
 		}
 		
@@ -132,7 +132,7 @@ public class PhoenixScene extends BaseContent
 		
 		public function fuckPhoenixsButt():void {
 			clearOutput();
-			var x:int = player.cockThatFits(monster.analCapacity())
+			var x:int = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			outputText("With your mind made up, you're definitely in control. You tell the phoenix that you're going to fuck her ass. You quickly yank her scimitar away so she's defenseless and loincloth off to expose her tailhole and firm butt-cheeks. You give her a hard shove on the grounds and step on her back like you're dominating. She gives you a glare and yells, \"<i>I'll never submit to you! I never will!</i>\"");
 			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your " + player.cockDescript(x) + ". ");

@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.AnemoneVenomDebuff;
 import classes.internals.WeightedDrop;
 
@@ -32,7 +33,7 @@ public class Anemone extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.anemoneScene.defeatAnemone();
+			SceneLib.anemoneScene.defeatAnemone();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -41,7 +42,7 @@ public class Anemone extends Monster
 				outputText("\n\nYour foe doesn't seem to mind at all...");
 				doNext(game.endLustLoss);
 			} else {
-				game.anemoneScene.loseToAnemone();
+				SceneLib.anemoneScene.loseToAnemone();
 			}
 		}
 

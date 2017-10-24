@@ -55,10 +55,10 @@ public class Pregnancy extends NPCAwareContent {
         //IF INCUBATION IS VAGINAL
         if (player.pregnancyIncubation > 1) {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) {
-                displayedUpdate = kGAMECLASS.bog.phoukaScene.phoukaPregUpdate();
+                displayedUpdate = SceneLib.bog.phoukaScene.phoukaPregUpdate();
             }
             if (player.pregnancyType == PregnancyStore.PREGNANCY_SAND_WITCH) {
-                displayedUpdate = kGAMECLASS.dungeons.desertcave.sandPregUpdate();
+                displayedUpdate = SceneLib.dungeons.desertcave.sandPregUpdate();
             }
             if (player.pregnancyType == PregnancyStore.PREGNANCY_URTA) {
                 displayedUpdate = urtaPregs.urtaPregooUpdates();
@@ -1432,19 +1432,19 @@ public class Pregnancy extends NPCAwareContent {
         }
         //Give birth to either a faerie or a phouka
         if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) {
-            kGAMECLASS.bog.phoukaScene.phoukaPregBirth();
+            SceneLib.bog.phoukaScene.phoukaPregBirth();
             displayedUpdate = true;
             player.knockUpForce(); //Clear Pregnancy
         }
         //Give birf if its time... to ANAL EGGS
         if (player.buttPregnancyIncubation == 1 && player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
-            kGAMECLASS.bog.frogGirlScene.birthFrogEggsAnal();
+            SceneLib.bog.frogGirlScene.birthFrogEggsAnal();
             displayedUpdate = true;
             player.buttKnockUpForce(); //Clear Butt Pregnancy
         }
         //Give birf if its time... to ANAL EGGS
         if (player.buttPregnancyIncubation == 1 && player.buttPregnancyType == PregnancyStore.PREGNANCY_DRIDER_EGGS) {
-            kGAMECLASS.swamp.corruptedDriderScene.birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
+            SceneLib.swamp.corruptedDriderScene.birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
             displayedUpdate = true;
             player.buttKnockUpForce(); //Clear Butt Pregnancy
         }
@@ -1456,7 +1456,7 @@ public class Pregnancy extends NPCAwareContent {
         }
         //GIVE BIRF TO TRAPS
         if (player.buttPregnancyIncubation == 1 && player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP_FERTILE) {
-            kGAMECLASS.desert.sandTrapScene.birfSandTarps();
+            SceneLib.desert.sandTrapScene.birfSandTarps();
             player.buttKnockUpForce(); //Clear Butt Pregnancy
             if(player.buttRating < 17) {
                 //Guaranteed increase up to level 10
@@ -1513,7 +1513,7 @@ public class Pregnancy extends NPCAwareContent {
         }
         if (player.pregnancyType == PregnancyStore.PREGNANCY_SAND_WITCH && player.pregnancyIncubation == 1) {
             displayedUpdate = true;
-            kGAMECLASS.dungeons.desertcave.birthAWitch();
+            SceneLib.dungeons.desertcave.birthAWitch();
             player.knockUpForce(); //Clear Pregnancy
         }
         if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA && player.pregnancyIncubation == 1) {
@@ -1526,13 +1526,13 @@ public class Pregnancy extends NPCAwareContent {
         if (player.pregnancyType == PregnancyStore.PREGNANCY_SPIDER && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.swamp.maleSpiderMorphScene.spiderPregVagBirth();
+            SceneLib.swamp.maleSpiderMorphScene.spiderPregVagBirth();
         }
         //DRIDER BIRF
         if (player.pregnancyType == PregnancyStore.PREGNANCY_DRIDER_EGGS && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.swamp.corruptedDriderScene.driderPregVagBirth();
+            SceneLib.swamp.corruptedDriderScene.driderPregVagBirth();
         }
         if (player.pregnancyType == PregnancyStore.PREGNANCY_COTTON && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
@@ -1543,24 +1543,24 @@ public class Pregnancy extends NPCAwareContent {
         if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_GIRL && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.lake.gooGirlScene.gooPregVagBirth();
+            SceneLib.lake.gooGirlScene.gooPregVagBirth();
         }
         if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.highMountains.basiliskScene.basiliskBirth();
+            SceneLib.highMountains.basiliskScene.basiliskBirth();
         }
         //Satyr vag preg
         if (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR && player.pregnancyIncubation == 1) {
             player.knockUpForce(); //Clear Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.plains.satyrScene.satyrBirth(true);
+            SceneLib.plains.satyrScene.satyrBirth(true);
         }
         //Satyr butt preg
         if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && player.buttPregnancyIncubation == 1) {
             player.buttKnockUpForce(); //Clear Butt Pregnancy
             displayedUpdate = true;
-            kGAMECLASS.plains.satyrScene.satyrBirth(false);
+            SceneLib.plains.satyrScene.satyrBirth(false);
         }
         if (player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT && player.pregnancyIncubation <= 2) {
             if(model.time.hours != 5 && model.time.hours != 6) {
@@ -1569,12 +1569,12 @@ public class Pregnancy extends NPCAwareContent {
             else {
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
-                kGAMECLASS.bazaar.benoit.popOutBenoitEggs();
+                SceneLib.bazaar.benoit.popOutBenoitEggs();
             }
         }
         //Give birf if its time... to FROG EGGS
         if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
-            kGAMECLASS.bog.frogGirlScene.layFrogEggs();
+            SceneLib.bog.frogGirlScene.layFrogEggs();
             displayedUpdate = true;
             player.knockUpForce(); //Clear Pregnancy
         }
@@ -1912,10 +1912,10 @@ public class Pregnancy extends NPCAwareContent {
             //Main Text here
             if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) && !prison.inPrison) {
                 if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
-                    kGAMECLASS.joyScene.playerGivesBirthToJoyBabies();
+                    SceneLib.joyScene.playerGivesBirthToJoyBabies();
                     return true;
                 }
-                else kGAMECLASS.jojoScene.giveBirthToPureJojoBabies();
+                else SceneLib.jojoScene.giveBirthToPureJojoBabies();
             }
             else {
                 EngineCore.outputText("Pain shoots through you as they pull open your cervix forcefully. You grip the ground and pant and push as the pains of labor overwhelm you. You feel your hips being forceably widened by the collective mass of the creatures moving down your birth canal. You spread your legs wide, laying your head back with groans and cries of agony as little white figures begin to emerge from between the lips of your abused pussy. Large innocent eyes, even larger ears, cute little muzzles, long slender pink tails all appear as the figures emerge. Each could be no larger than six inches tall, but they seem as active and curious as if they were already developed children. \n\n");
@@ -2028,7 +2028,7 @@ public class Pregnancy extends NPCAwareContent {
                 EngineCore.outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
                 player.createVagina();
             }
-            kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+            SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
             if(player.hipRating < 10) {
                 player.hipRating++;
                 EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
@@ -2064,7 +2064,7 @@ public class Pregnancy extends NPCAwareContent {
                 EngineCore.outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
                 player.createVagina();
             }
-            kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
+            SceneLib.volcanicCrag.behemothScene.giveBirthToBehemoth();
             if(player.hipRating < 10) {
                 player.hipRating++;
                 EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");

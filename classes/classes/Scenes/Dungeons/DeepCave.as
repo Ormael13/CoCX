@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.NPCs.ShouldraFollower;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -33,7 +34,7 @@ use namespace kGAMECLASS;
 				
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.");
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>");
-				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1
+				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1;
 				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
 			}
 			else 
@@ -113,7 +114,7 @@ use namespace kGAMECLASS;
 		public function incubusShop():void {
 			spriteSelect(52);
 			if(flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
-				kGAMECLASS.telAdre.niamh.getBimboozeFromSean();
+				SceneLib.telAdre.niamh.getBimboozeFromSean();
 				return;
 			}
 			clearOutput();
@@ -122,7 +123,7 @@ use namespace kGAMECLASS;
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(10, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(10, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
 					outputText("  Luckily, you do!");
 				}
 			}

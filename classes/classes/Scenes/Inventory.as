@@ -65,8 +65,8 @@ use namespace kGAMECLASS;
 		public function inventoryMenu():void {
 			var x:int;
 			var foundItem:Boolean = false;
-			if (getGame().inCombat) {
-				callNext = inventoryCombatHandler; //Player will return to combat after item use
+            if (kGAMECLASS.inCombat) {
+                callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
 				spriteSelect(-1);
@@ -96,9 +96,9 @@ use namespace kGAMECLASS;
 				}
 			}
 
-			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-				var miscNieve:Boolean = getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
-				var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
+if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+                var miscNieve:Boolean = kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
+                var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
 					|| miscHolli
 					|| player.hasKeyItem("Dragon Egg") >= 0
@@ -107,13 +107,13 @@ use namespace kGAMECLASS;
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
-						else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-					}
+                        else outputText("\nYou have a snow" + kGAMECLASS.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+                    }
 					if (player.hasKeyItem("Dragon Egg") >= 0) {
-						getGame().emberScene.emberCampDesc();
+                        SceneLib.emberScene.emberCampDesc();
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						kGAMECLASS.anemoneScene.anemoneBarrelDescription();
+						SceneLib.anemoneScene.anemoneBarrelDescription();
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
@@ -123,8 +123,8 @@ use namespace kGAMECLASS;
 					addButton(13, "Misc.", miscitemsMenu);
 				}
 			}
-			if (!getGame().inCombat) {
-				addButton(10, "Unequip", manageEquipment);
+            if (!kGAMECLASS.inCombat) {
+                addButton(10, "Unequip", manageEquipment);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
 					addButton(11, "Bag of Cosmos", BagOfCosmosMenu);
 				}
@@ -133,16 +133,16 @@ use namespace kGAMECLASS;
 				}
 			}
 			if (foundItem) {
-				if (getGame().inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
-					outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-					getGame().enemyAI();
-					return;
+                if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
+                    outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
+                    kGAMECLASS.enemyAI();
+                    return;
 				}
 				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			}
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
-			if (getGame().inCombat)
-				addButton(14, "Back", kGAMECLASS.combat.combatMenu, false); //Player returns to the combat menu on cancel
+            if (kGAMECLASS.inCombat)
+                addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}
@@ -150,12 +150,12 @@ use namespace kGAMECLASS;
 		public function miscitemsMenu():void {
 			var foundItem:Boolean = false;
 			menu();
-			if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					addButton(0, "Snow", getGame().nieveBuilding);
-					foundItem = true;
+            if (kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+                addButton(0, "Snow", kGAMECLASS.nieveBuilding);
+                foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
-					addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
+					addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
@@ -163,12 +163,12 @@ use namespace kGAMECLASS;
 					foundItem = true;
 				}
 				if (player.hasKeyItem("Dragon Egg") >= 0) {
-					addButton(3, "Egg", getGame().emberScene.emberEggInteraction);
+					addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.ANEMONE_KID] > 0) {
 					//kGAMECLASS.anemoneScene.anemoneBarrelDescription();
-					if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
+					if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
@@ -384,8 +384,8 @@ use namespace kGAMECLASS;
 					currentItemSlot.setItemAndQty(item, 1);
 				}
 			}
-			if (getGame().inCombat) {
-				enemyAI();
+            if (kGAMECLASS.inCombat) {
+                enemyAI();
 				return;
 			}
 			if (showNext)

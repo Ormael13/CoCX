@@ -2,6 +2,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
 public class Phoenix extends Monster
@@ -105,7 +106,7 @@ public class Phoenix extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.phoenixScene.winAgainstPhoenix();
+			SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -114,7 +115,7 @@ public class Phoenix extends Monster
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.highMountains.phoenixScene.loseToPhoenix();
+				SceneLib.highMountains.phoenixScene.loseToPhoenix();
 			}
 		}
 		

@@ -208,9 +208,9 @@ public function talkHer():void
 public function talkHunger():void
 {
 	clearOutput();
-	outputText("Ok, so how come is she constantly hungry anyway?\n\n")
+	outputText("Ok, so how come is she constantly hungry anyway?\n\n");
 	outputText("\"<i>Well, truth be told, I’m a big eater and my size doesn’t help, so I have to constantly stay on the hunt to maintain my strength. I can spend up to 3 or 4 hours without eating if needs be but the rest of the time I eat every catch I find right away.</i>\"\n\n");
-	outputText("Well this is an issue. You decide to change the subject before said hunger catches back to her.\n\n")
+	outputText("Well this is an issue. You decide to change the subject before said hunger catches back to her.\n\n");
 	ceaniAffection(3);
 	doNext(camp.returnToCampUseOneHour);
 }

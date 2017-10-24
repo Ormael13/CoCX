@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class ImpHorde extends Monster
@@ -176,7 +177,7 @@ public class ImpHorde extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.impGangVICTORY();
+			SceneLib.dungeons.deepcave.impGangVICTORY();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -185,7 +186,7 @@ public class ImpHorde extends Monster
 				outputText("\n\nYour foes don't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToImpMob();
+				SceneLib.dungeons.deepcave.loseToImpMob();
 			}
 		}
 

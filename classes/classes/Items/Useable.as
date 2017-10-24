@@ -3,10 +3,10 @@
  */
 package classes.Items
 {
-	import classes.CoC_Settings;
-	import classes.Player;
+import classes.CoC_Settings;
+import classes.Scenes.SceneLib;
 
-	/**
+/**
 	 * Represent item that can be used but does not necessarily disappears on use. Direct subclasses should overrride
 	 * "useItem" method.
 	 */
@@ -28,7 +28,7 @@ package classes.Items
 			return desc;
 		}
 		
-		public function canUse():Boolean { return game.prison.prisonCanUseItem(this); } //If an item cannot be used it should provide some description of why not
+		public function canUse():Boolean { return SceneLib.prison.prisonCanUseItem(this); } //If an item cannot be used it should provide some description of why not
 		
 //		public function hasSubMenu():Boolean { return false; } //Only GroPlus and Reducto use this. //Replaced with a return
 		

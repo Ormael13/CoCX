@@ -3,6 +3,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedDrop;
 
@@ -69,7 +70,7 @@ import classes.internals.ChainedDrop;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.basiliskScene.defeatBasilisk();
+			SceneLib.highMountains.basiliskScene.defeatBasilisk();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -78,7 +79,7 @@ import classes.internals.ChainedDrop;
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
 				doNext(game.endLustLoss);
 			} else {
-				game.highMountains.basiliskScene.loseToBasilisk();
+				SceneLib.highMountains.basiliskScene.loseToBasilisk();
 			}
 		}
 

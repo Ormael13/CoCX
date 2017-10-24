@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Hel extends Monster
@@ -153,8 +154,8 @@ public class Hel extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusEffect(StatusEffects.Sparring)) game.helFollower.PCBeatsUpSalamanderSparring();
-			else game.helScene.beatUpHel();
+			if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.PCBeatsUpSalamanderSparring();
+			else SceneLib.helScene.beatUpHel();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -163,8 +164,8 @@ public class Hel extends Monster
 				outputText("\n\nHelia waits it out in stoic silence...");
 				doNext(game.endLustLoss);
 			} else {
-				if(hasStatusEffect(StatusEffects.Sparring)) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
-				else game.helScene.loseToSalamander();
+				if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.loseToSparringHeliaLikeAButtRapedChump();
+				else SceneLib.helScene.loseToSalamander();
 			}
 		}
 

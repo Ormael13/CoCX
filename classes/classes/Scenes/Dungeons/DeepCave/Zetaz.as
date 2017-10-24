@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.DeepCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Zetaz extends Monster
@@ -31,7 +32,7 @@ public class Zetaz extends Monster
 			var rando:Number=1;
 			//Exgartuan gets to do stuff!
 			if(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				game.exgartuan.exgartuanCombatUpdate();
+				SceneLib.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Constricted)) {
@@ -113,7 +114,7 @@ public class Zetaz extends Monster
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
-			if(player.lust >= player.maxLust()) doNext(game.endLustLoss)
+			if(player.lust >= player.maxLust()) doNext(game.endLustLoss);
 			else combatRoundOver();
 		}
 
@@ -146,7 +147,7 @@ public class Zetaz extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.defeatZetaz();
+			SceneLib.dungeons.deepcave.defeatZetaz();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -155,7 +156,7 @@ public class Zetaz extends Monster
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToZetaz();
+				SceneLib.dungeons.deepcave.loseToZetaz();
 			}
 		}
 

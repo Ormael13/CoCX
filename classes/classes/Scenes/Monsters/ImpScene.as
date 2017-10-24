@@ -616,7 +616,7 @@ use namespace kGAMECLASS;
 			}
 			if ((Math.sqrt(player.inte + player.spe) >= rand(16) || rand(3) == 0) && !loss) {
 				outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescript(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescript(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n");
-				outputText("You quickly get up in time to ready your [weapon]! It's a fight!")
+				outputText("You quickly get up in time to ready your [weapon]! It's a fight!");
 				startCombat(monster, true);
 				return;
 			}
@@ -1280,8 +1280,8 @@ use namespace kGAMECLASS;
 					}
 				}
 			}
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(playerMenu);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(playerMenu);
 		}
 		
 		public function impRapesYou():void {

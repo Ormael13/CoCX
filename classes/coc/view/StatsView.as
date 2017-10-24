@@ -3,6 +3,7 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 import flash.text.TextField;
@@ -318,7 +319,7 @@ public class StatsView extends Block {
 		} else {
 			hungerBar.statName = 'Satiety:';
 		}
-		var inPrison:Boolean          = game.prison.inPrison;
+		var inPrison:Boolean          = SceneLib.prison.inPrison;
 		esteemBar.visible     		  = inPrison;
 		willBar.visible      		  = inPrison;
 		obeyBar.visible       		  = inPrison;

@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.NPCs.MarbleScene;
 import classes.Scenes.Places.Farm.*;
+import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
 
@@ -11,7 +12,7 @@ use namespace kGAMECLASS;
 	public var keltScene:KeltScene = new KeltScene();
 	public var kelly:Kelly = new Kelly();
 	private function get marbleScene():MarbleScene {
-		return kGAMECLASS.marbleScene;
+		return SceneLib.marbleScene;
 	}
 	public var farmCorruption:FarmCorruption = new FarmCorruption();
 
@@ -514,8 +515,8 @@ public function exploreFarm():void {
 		return;
 	}
 	//Free Isabella Milkings!
-	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
-		kGAMECLASS.isabellaFollowerScene.findIzzyMilking();
+	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
+		SceneLib.isabellaFollowerScene.findIzzyMilking();
 		return;
 	}
 	//Meet Marble First Time

@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Brigid extends Monster
 	{
@@ -52,12 +53,12 @@ public class Brigid extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.brigidScene.pcDefeatsBrigid();
+			SceneLib.brigidScene.pcDefeatsBrigid();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.brigidScene.pcDefeatedByBrigid();
+			SceneLib.brigidScene.pcDefeatedByBrigid();
 		}
 
 		public function Brigid()

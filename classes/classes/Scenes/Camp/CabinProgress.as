@@ -1,17 +1,12 @@
 package classes.Scenes.Camp 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.BaseContent;
-	
-	import classes.Scenes.NPCs.*;
-	import classes.Scenes.Camp;
-	
-	import coc.model.GameModel;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp;
+import classes.Scenes.SceneLib;
+
+/**
 	 * Lovely and comfortable cabin for you to sleep in peace.
 	 * @author Kitteh6660
 	 */
@@ -40,7 +35,7 @@ package classes.Scenes.Camp
 			}
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) 
 			{
-				kGAMECLASS.dungeons.cabin.enterCabin();
+				SceneLib.dungeons.cabin.enterCabin();
 				return;
 			}
 			if (player.fatigue <= player.maxFatigue() - 50)
@@ -454,7 +449,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("You enter your newly-constructed cabin. You are proud of what you've built. Except that your cabin is empty.\n\n");
 			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
-			doNext(kGAMECLASS.dungeons.cabin.enterCabin);
+			doNext(SceneLib.dungeons.cabin.enterCabin);
 		}
 
 	}

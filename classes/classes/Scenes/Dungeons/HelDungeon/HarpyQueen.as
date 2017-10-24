@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class HarpyQueen extends Monster
 	{
@@ -97,12 +98,12 @@ public class HarpyQueen extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.heltower.harpyQueenDefeatedByPC();
+			SceneLib.dungeons.heltower.harpyQueenDefeatedByPC();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.heltower.harpyQueenBeatsUpPCBadEnd();
+			SceneLib.dungeons.heltower.harpyQueenBeatsUpPCBadEnd();
 		}
 
 		public function HarpyQueen()

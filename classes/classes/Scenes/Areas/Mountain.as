@@ -10,6 +10,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.SceneLib;
 
 public class Mountain extends BaseContent
 	{
@@ -30,19 +31,19 @@ public class Mountain extends BaseContent
 			player.exploredMountain++;
 			var chooser:Number = rand(5);
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				kGAMECLASS.etnaScene.repeatYandereEnc();
+				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Electra
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15 && rand(5) == 0) {
-				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) kGAMECLASS.electraScene.firstEnc();
-				else kGAMECLASS.electraScene.repeatMountainEnc();
+				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
+				else SceneLib.electraScene.repeatMountainEnc();
 				return;
 			}
 			//Diva
@@ -90,20 +91,20 @@ public class Mountain extends BaseContent
 			}
 			//Rarer 'nice' Ceraph encounter
 			//Overlaps half the old encounters once pierced.
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
-				kGAMECLASS.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
+			if (!SceneLib.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
+				SceneLib.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
 				return;
 			}
 			//15% chance of Ceraph
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
-				kGAMECLASS.ceraphScene.encounterCeraph();
+			if (!SceneLib.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
+				SceneLib.ceraphScene.encounterCeraph();
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
 			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 5;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
-				trace("Dungeon start!")
-				kGAMECLASS.dungeons.enterFactory();
+				trace("Dungeon start!");
+				SceneLib.dungeons.enterFactory();
 				return;
 			}
 			//Boosts mino and hellhound rates!
@@ -127,7 +128,7 @@ public class Mountain extends BaseContent
 			}
 			if (chooser == 0) {
 				//Generic Goblin/Imp encounter
-				kGAMECLASS.exploration.genericGolGobImpEncounters();
+				SceneLib.exploration.genericGolGobImpEncounters();
 			}
 			//Minotauuuuur
 			if (chooser == 1) {

@@ -5,7 +5,7 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class HarpyScene extends BaseContent
 	{
@@ -209,7 +209,7 @@ public class HarpyScene extends BaseContent
 					outputText(".\n\n");
 				}
 				//Apply harpy status.
-				kGAMECLASS.sophieScene.luststickApplication(8);
+				SceneLib.sophieScene.luststickApplication(8);
 			}
 			//[(Female) 
 			else {
@@ -512,7 +512,7 @@ public class HarpyScene extends BaseContent
 				if (player.gender == 3) outputText("  Her fingers never stop their sweet teasing of your " + vaginaDescript(0) + ", using all four fingers on her hand to plumb your velvet depths.");
 				outputText("  For one last time, you feel the rising intensity of the pleasure, galloping headlong towards an explosive final orgasm.  Reaching down, you plant both your hands on the back of her head and violently thrust your " + hipDescript() + " forward to cram the full length of your cocks into her gagging, clenching throat. A final detonation of seed escapes down her esophagus and into her already-swollen belly.  You shiver, biting on your lower lip, as your orgasm gradually subsides and you collapse backwards as your leg muscles give way, wrenching your [cocks] away from the breathless bird-girl. Your vision becomes hazy as her beautiful face comes into view above you, descending to softly smooch across your lips, giving a last dose of those drugs into your brain. You black out, catching one final glimpse of her fine, feathered rear before you do.\n\n");
 				//Apply harpy status.
-				kGAMECLASS.sophieScene.luststickApplication(8);
+				SceneLib.sophieScene.luststickApplication(8);
 			}
 			monster.lust = 98;
 			monster.HP = 2;

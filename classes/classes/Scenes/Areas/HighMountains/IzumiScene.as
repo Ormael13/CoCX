@@ -870,7 +870,7 @@ import classes.GlobalFlags.kFLAGS;
 				if (player.isNaga()) outputText(" wriggling atop your [legs]");
 				else outputText(" subtly parting your [legs] and even ");
 				if (player.isTaur()) outputText(" rolling your butt upward");
-				else (" tilting your hips forwards");
+				else outputText(" tilting your hips forwards");
 				outputText(" a little, to ensure that Izumi gets a really <b>good</b> look at you down there.  The shameless act sends a flush of embarrassed warmth through you, making you tremble in pleasure.  You’re unable to keep yourself from smiling a little - you can barely manage to stop yourself from moaning aloud.  You place your hands above your breasts, hoping that Izumi will stop to look at them... which she does, looking up a moment later to say something, then pausing as her eyes linger at the sight of your [chest].\n\n");
 
 				if (!player.isNaga()) outputText("You rub your thighs together in delight");

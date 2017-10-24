@@ -183,8 +183,8 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualGetFucked():void {
 			clearOutput();
@@ -237,8 +237,8 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualGetButtFucked():void {
 			clearOutput();
@@ -287,8 +287,8 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualDoublePenetration():void {
 			clearOutput();
@@ -348,8 +348,8 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualWatersports():void { //Yay watersports!
 			clearOutput();
@@ -381,8 +381,8 @@ public class LizanRogueScene extends BaseContent
 			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();

@@ -28,6 +28,7 @@ import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 
@@ -44,11 +45,11 @@ public class Combat extends BaseContent {
 	public var ui:CombatUI                 = new CombatUI();
 
 	public function get inCombat():Boolean {
-		return getGame().inCombat;
-	}
+        return kGAMECLASS.inCombat;
+    }
 	public function set inCombat(value:Boolean):void {
-		getGame().inCombat = value;
-	}
+        kGAMECLASS.inCombat = value;
+    }
 
 	public function physicalCost(mod:Number):Number {
 		var costPercent:Number = 100;
@@ -153,8 +154,8 @@ public function endLustLoss():void
 {
 	if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-		getGame().mountain.wormsScene.infestOrgasm();
-		monster.won_(false,true);
+        SceneLib.mountain.wormsScene.infestOrgasm();
+        monster.won_(false,true);
 	} else {
 		monster.won_(false,false);
 	}
@@ -399,10 +400,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (combatRoundOver()) return;
 	ui.mainMenu();
 	//Modify menus.
-	if (kGAMECLASS.urtaQuest.isUrta()) {
+	if (SceneLib.urtaQuest.isUrta()) {
 		addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
-		addButton(1, "P. Specials", kGAMECLASS.urtaQuest.urtaSpecials).hint("Physical special attack menu.", "Physical Specials");
-		addButton(2, "M. Specials", kGAMECLASS.urtaQuest.urtaMSpecials).hint("Mental and supernatural special attack menu.", "Magical Specials");
+		addButton(1, "P. Specials", SceneLib.urtaQuest.urtaSpecials).hint("Physical special attack menu.", "Physical Specials");
+		addButton(2, "M. Specials", SceneLib.urtaQuest.urtaMSpecials).hint("Mental and supernatural special attack menu.", "Magical Specials");
 		addButton(3, "Tease", teaseAttack);
 		addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
@@ -527,7 +528,7 @@ public function basemeleeattacks():void {
 		return;
 	}
 	clearOutput();
-	if (kGAMECLASS.urtaQuest.isUrta()) {
+	if (SceneLib.urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
 	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
@@ -1147,8 +1148,8 @@ internal function wait():void {
 		player.addStatusValue(StatusEffects.GooArmorBind, 1, 1);
 		if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
 			if (monster.hasStatusEffect(StatusEffects.Spar))
-				kGAMECLASS.valeria.pcWinsValeriaSparDefeat();
-			else kGAMECLASS.dungeons.heltower.gooArmorBeatsUpPC();
+				SceneLib.valeria.pcWinsValeriaSparDefeat();
+			else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
 			return;
 		}
 		combatRoundOver();
@@ -1532,7 +1533,7 @@ public function fireBow():void {
 			if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");
 			outputText(" thunks into Isabella's shield, completely blocked by the wall of steel.\n\n");
 		}
-		if (kGAMECLASS.isabellaFollowerScene.isabellaAccent())
+		if (SceneLib.isabellaFollowerScene.isabellaAccent())
 			outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n");
 		else outputText("\"<i>You remind me of the horse-people.  They cannot deal with my shield either!</i>\" cheers Isabella.\n\n");
 		enemyAI();
@@ -2545,7 +2546,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !kGAMECLASS.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attack impossible!  Maybe you could try something else?\n\n");
 		enemyAI();
 		return;
@@ -2578,7 +2579,7 @@ public function attack():void {
 	}*/
 	//"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
 	//Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
-	else if(kGAMECLASS.urtaQuest.isUrta()) {
+	else if(SceneLib.urtaQuest.isUrta()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			player.removeStatusEffect(StatusEffects.FirstAttack);
 		}
@@ -3250,8 +3251,7 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	else return false;
 }
 public function isWieldingRangedWeapon():Boolean {
-	if (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0) return true;
-	else return false;
+	return player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0;
 }
 
 //DEAL DAMAGE
@@ -3531,7 +3531,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 	}
 	//Chance of armor if at level 1 pierce fetish
 	if(!kGAMECLASS.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
-	   && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !kGAMECLASS.ceraphFollowerScene.ceraphIsFollower()) {
+	   && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 		itype = armors.SEDUCTA;
 	}
 	
@@ -4522,7 +4522,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 0.5;
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
-		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
@@ -4552,7 +4552,7 @@ public function regeneration(combat:Boolean = true):void {
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
-		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
@@ -4711,9 +4711,9 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	inCombat = true;
 	monster = monster_;
 	if(monster.short == "Ember") {
-		monster.pronoun1 = kGAMECLASS.emberScene.emberMF("he","she");
-		monster.pronoun2 = kGAMECLASS.emberScene.emberMF("him","her");
-		monster.pronoun3 = kGAMECLASS.emberScene.emberMF("his","her");
+		monster.pronoun1 = SceneLib.emberScene.emberMF("he","she");
+		monster.pronoun2 = SceneLib.emberScene.emberMF("him","her");
+		monster.pronoun3 = SceneLib.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
 	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
@@ -4844,9 +4844,9 @@ public function startCombatImmediateImpl(monster_:Monster, _plotFight:Boolean):v
 	inCombat = true;
 	monster = monster_;
 	if(monster.short == "Ember") {
-		monster.pronoun1 = kGAMECLASS.emberScene.emberMF("he","she");
-		monster.pronoun2 = kGAMECLASS.emberScene.emberMF("him","her");
-		monster.pronoun3 = kGAMECLASS.emberScene.emberMF("his","her");
+		monster.pronoun1 = SceneLib.emberScene.emberMF("he","she");
+		monster.pronoun2 = SceneLib.emberScene.emberMF("him","her");
+		monster.pronoun3 = SceneLib.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
 	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
@@ -5221,10 +5221,10 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 	}
 	if(monster.hasStatusEffect(StatusEffects.Level)) {
 		if(monster is SandTrap && (monster as SandTrap).trapLevel() <= 1) {
-			kGAMECLASS.desert.sandTrapScene.sandtrapmentLoss();
+			SceneLib.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
 		} else if(monster is Alraune &&(monster as Alraune).trapLevel() <= 1) {
-			kGAMECLASS.forest.alrauneScene.alrauneDeepwoodsLost();
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 			return true;
 		}
 	}
@@ -5658,7 +5658,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.GenericRunDisabled) || kGAMECLASS.urtaQuest.isUrta()) {
+	if(monster.hasStatusEffect(StatusEffects.GenericRunDisabled) || SceneLib.urtaQuest.isUrta()) {
 		outputText("You can't escape from this fight!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -5847,7 +5847,7 @@ public function runAway(callHook:Boolean = true):void {
 		}
 		//Fail: 
 		else {
-			outputText("Despite some impressive jinking, " + kGAMECLASS.emberScene.emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
+			outputText("Despite some impressive jinking, " + SceneLib.emberScene.emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
 			enemyAI();
 		}
 		return;

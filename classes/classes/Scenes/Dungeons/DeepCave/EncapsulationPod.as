@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -128,7 +129,7 @@ import classes.internals.*;
 					else outputText("thickening your fluid-filled prison with nutrients.");
 				}
 				//[NEXT – CHOOSE APPRORIATE]
-				doNext(game.dungeons.deepcave.loseToThisShitPartII);
+				doNext(SceneLib.dungeons.deepcave.loseToThisShitPartII);
 				return;
 			}
 			//Set flags for rounds
@@ -146,7 +147,7 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.encapsulationVictory();
+			SceneLib.dungeons.deepcave.encapsulationVictory();
 		}
 
 		override public function get long():String {

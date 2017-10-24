@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Desert
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class CumWitch extends Monster
@@ -160,12 +161,12 @@ public class CumWitch extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.cumWitchDefeated();
+			SceneLib.dungeons.desertcave.cumWitchDefeated();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.defeatedByCumWitch();
+			SceneLib.dungeons.desertcave.defeatedByCumWitch();
 		}
 		
 		public function CumWitch()

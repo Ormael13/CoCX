@@ -5,7 +5,6 @@ package classes.Scenes.Combat {
 import classes.AppearanceDefs;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
@@ -14,6 +13,7 @@ import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Anemone;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -58,7 +58,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Constrict
 		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
-			buttons.add("Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
+			buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 		}
 		//Grapple
 		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA) {
@@ -89,7 +89,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Infest if infested
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-			buttons.add("Infest", kGAMECLASS.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+			buttons.add("Infest", SceneLib.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 		}
 		//Kiss supercedes bite.
 		if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
@@ -1290,7 +1290,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
-		monster.armorDef == 0;
+		//monster.armorDef == 0;
 		outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
 			outputText(" The attack is so devastating your target is stunned by the crushing blow!");

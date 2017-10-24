@@ -18,6 +18,7 @@ import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 import classes.internals.MonsterCounters;
 import classes.internals.RandomDrop;
@@ -58,13 +59,13 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
-			return game.combat.combatMiss();
+			return SceneLib.combat.combatMiss();
 		}
 		protected final function combatParry():Boolean {
-			return game.combat.combatParry();
+			return SceneLib.combat.combatParry();
 		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
-			return game.combat.combatBlock(doFatigue);
+			return SceneLib.combat.combatBlock(doFatigue);
 		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
@@ -1168,7 +1169,7 @@ import flash.utils.getQualifiedClassName;
 			//Block with shield
 			if (combatBlock(true)) {
 				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
-				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) game.combat.pspecials.shieldBash();
+				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) SceneLib.combat.pspecials.shieldBash();
 				return true;
 			}
 			return false;
@@ -1184,7 +1185,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (game.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
+				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
 				if (!handleConstricted()) return;
@@ -1327,7 +1328,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
-			game.combat.finishCombat();
+			SceneLib.combat.finishCombat();
 		}
 
 		/**
@@ -1349,7 +1350,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			EngineCore.doNext(game.camp.returnToCampUseEightHours);
+			EngineCore.doNext(SceneLib.camp.returnToCampUseEightHours);
 		}
 
 		/**
@@ -1571,7 +1572,7 @@ import flash.utils.getQualifiedClassName;
 		public function combatRoundUpdate():void
 		{
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
-				game.urtaQuest.milkyUrtaTic();
+				SceneLib.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.TentacleCoolDown);
@@ -1869,7 +1870,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store6:Number = (player.spe + player.inte) * game.combat.soulskillMod() * 0.5;
+					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
 					store6 = game.doDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
@@ -1920,12 +1921,12 @@ import flash.utils.getQualifiedClassName;
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
-			if (game.prison.inPrison) {
-				game.prison.doPrisonEscapeFightLoss();
+			if (SceneLib.prison.inPrison) {
+				SceneLib.prison.doPrisonEscapeFightLoss();
 				return 8;
 			}
 			if (!inDungeon) {
-				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
+				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
 						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
 						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
@@ -1933,7 +1934,7 @@ import flash.utils.getQualifiedClassName;
 						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
 						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
 						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
-						game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
+						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
 				outputText("\n\nYou'll probably come to your senses in eight hours or so");

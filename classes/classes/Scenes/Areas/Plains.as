@@ -3,12 +3,13 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Plains.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Plains.*;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Plains extends BaseContent
 	{
@@ -26,7 +27,7 @@ package classes.Scenes.Areas
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 			//Dem Kangasluts!  Force Sheila relationship phase!
 			if (flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {
-				kGAMECLASS.sheilaScene.sheilaXPThreeSexyTime();
+				SceneLib.sheilaScene.sheilaXPThreeSexyTime();
 				return;
 			}
 			//Add some holiday cheer
@@ -40,45 +41,45 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				kGAMECLASS.etnaScene.repeatYandereEnc();
+				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Electra
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && rand(5) == 0) {
-				kGAMECLASS.electraScene.repeatPlainsEnc();
+				SceneLib.electraScene.repeatPlainsEnc();
 				return;
 			}
 			//Find Niamh
 			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
-				kGAMECLASS.telAdre.niamh.niamhPostTelAdreMoveOut();
+				SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut();
 				return;
 			}
 			//Find Owca
 			if ((player.level >= 24 || flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 50) && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
-				kGAMECLASS.owca.gangbangVillageStuff();
+				SceneLib.owca.gangbangVillageStuff();
 				return;
 			}
 			//Bazaar!
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[kFLAGS.BAZAAR_ENTERED] == 0) {
-				kGAMECLASS.bazaar.findBazaar();
+				SceneLib.bazaar.findBazaar();
 				return;
 			}
 			//Chance of threesomes!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
 				//Hell/Izzy threesome intro
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-					kGAMECLASS.helScene.salamanderXIsabellaPlainsIntro();
+					SceneLib.helScene.salamanderXIsabellaPlainsIntro();
 					return;
 				}
 				//Propah threesomes here!
 				else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-					kGAMECLASS.helScene.isabellaXHelThreeSomePlainsStart();
+					SceneLib.helScene.isabellaXHelThreeSomePlainsStart();
 					return;
 				}
 			}
@@ -89,18 +90,18 @@ package classes.Scenes.Areas
 				bunnyGirl.bunnbunbunMeet, bunnyGirl.bunnbunbunMeet];
 
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) {
-				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
-				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
+				choices[choices.length] = SceneLib.isabellaScene.isabellaGreeting;
+				choices[choices.length] = SceneLib.isabellaScene.isabellaGreeting;
 			}
-			if (!kGAMECLASS.helScene.followerHel() && (flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 || rand(2) == 0)) {
-				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
-				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
+			if (!SceneLib.helScene.followerHel() && (flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 || rand(2) == 0)) {
+				choices[choices.length] = SceneLib.helScene.encounterAJerkInThePlains;
+				choices[choices.length] = SceneLib.helScene.encounterAJerkInThePlains;
 			}
 			choices[choices.length] = satyrScene.satyrEncounter;
 			choices[choices.length] = satyrScene.satyrEncounter;
 			if (flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0) { //Aparently Sheila was supposed to be disabled after certain events - now fixed
-				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
-				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
+				choices[choices.length] = SceneLib.sheilaScene.sheilaEncounterRouter;
+				choices[choices.length] = SceneLib.sheilaScene.sheilaEncounterRouter;
 			}
 			//Pick one
 			choices[rand(choices.length)]();

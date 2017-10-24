@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -310,23 +311,23 @@ import classes.internals.*;
 				EngineCore.clearOutput();
 				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
 				EngineCore.menu();
-				EngineCore.addButton(0,"Fuck",	game.urtaQuest.winRapeHyenaPrincess);
-				EngineCore.addButton(1,"Succ Milk", game.urtaQuest.useSuccubiMilkOnGnollPrincesses);
-				EngineCore.addButton(4,"Leave",game.urtaQuest.urtaNightSleep);
+				EngineCore.addButton(0,"Fuck",	SceneLib.urtaQuest.winRapeHyenaPrincess);
+				EngineCore.addButton(1,"Succ Milk", SceneLib.urtaQuest.useSuccubiMilkOnGnollPrincesses);
+				EngineCore.addButton(4,"Leave",SceneLib.urtaQuest.urtaNightSleep);
 			} else {
-				game.plains.gnollSpearThrowerScene.hyenaVictory();
+				SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
 			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (short == "alpha gnoll"){
-				game.urtaQuest.loseToGnollPrincessAndGetGangBanged();
+				SceneLib.urtaQuest.loseToGnollPrincessAndGetGangBanged();
 			} else if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.plains.gnollSpearThrowerScene.hyenaSpearLossAnal();
+				SceneLib.plains.gnollSpearThrowerScene.hyenaSpearLossAnal();
 			}
 		}
 

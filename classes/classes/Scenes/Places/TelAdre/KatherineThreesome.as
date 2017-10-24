@@ -3,6 +3,7 @@
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.Urta;
+import classes.Scenes.SceneLib;
 
 public class KatherineThreesome extends TelAdreAbstractContent
 	{
@@ -13,7 +14,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 
 		public function get katherine():Katherine { return telAdre.katherine; }
 
-		public function get urta():Urta { return kGAMECLASS.urta; }
+		public function get urta():Urta { return SceneLib.urta; }
 
 		/*
 		Contains the following scenes:

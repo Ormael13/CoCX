@@ -5,6 +5,7 @@ import classes.BaseContent;
 import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -24,26 +25,26 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function gardenerDefeated():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] > 0;
+
 		}
 
 		public function gardenerKilled():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 3;
+
 		}
 
 		public function gardenerFucked():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 2) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 2;
+
 		}
 
 		public function gardenerLeft():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 1) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 1;
+
 		}
 
 		public function fuckUpTheGardener(hpVictory:Boolean):void
@@ -67,8 +68,8 @@ import classes.GlobalFlags.kFLAGS;
 			outputText(" like those are one in a million.");
 			
 			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) outputText(" Perhaps Scylla's ruby mouth could give her a run for her money, but there's only one way to be sure.");
-			else if (getGame().telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
-			outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
+            else if (SceneLib.telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
+            outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
 			if (player.hasCock()) outputText(" [oneCock]");
 			else if (player.hasVagina()) outputText(" your [vagina]");
 			else outputText(" the sensitive skin of your groin");
@@ -189,8 +190,8 @@ import classes.GlobalFlags.kFLAGS;
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function leaveHer():void
 		{
@@ -200,8 +201,8 @@ import classes.GlobalFlags.kFLAGS;
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		public function surrenderToTheGardener(hpVictory:Boolean = false):void
 		{

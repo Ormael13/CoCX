@@ -17,7 +17,7 @@ package classes.Scenes.Places.Prison
 			var billieMet:* = undefined;
 			var happiness:* = prisonCaptorBillieHappiness();
 			billieMet = prisonCaptorBillieMet();
-			billieMet < 1;
+			//billieMet < 1;
 		}
 		
 		public function prisonCaptorBillieOptedOut():Boolean
@@ -28,11 +28,8 @@ package classes.Scenes.Places.Prison
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
 			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyBillie);
-			if(testVal < 0)
-			{
-				return true;
-			}
-			return false;
+			return testVal < 0;
+
 		}
 		
 		public function prisonCaptorBillieMet():Number

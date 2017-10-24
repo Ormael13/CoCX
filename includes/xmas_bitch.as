@@ -36,7 +36,7 @@ public function xmasBitchEncounter():void
 	}
 	classes.EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
 	classes.EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
-	if (player.cor >= 90 || monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
+	if (player.cor >= 90 || monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || classes.Scenes.SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
 	{
 		classes.EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
 		if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) classes.EngineCore.outputText("Here we go again...\n\n");
@@ -70,33 +70,33 @@ public function openXmasPresent():void {
 	spriteSelect(9);
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-	if(player.cor >= 90 || monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+	if(player.cor >= 90 || monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || classes.Scenes.SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 		//[Bad Present]
 		classes.EngineCore.outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n");
 		
 		classes.EngineCore.outputText("Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n");
 		
 		classes.EngineCore.outputText("The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n");
-		inventory.takeItem(consumables.COAL___, classes.EventParser.playerMenu);
+		classes.Scenes.SceneLib.inventory.takeItem(consumables.COAL___, classes.EventParser.playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor <= 33) {
 		//Great present!
 		classes.EngineCore.outputText("surprise at the box's contents - there's a careful arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE, classes.EventParser.playerMenu);
-		else inventory.takeItem(armors.SSARMOR, classes.EventParser.playerMenu);
+		if(rand(2) == 0) classes.Scenes.SceneLib.inventory.takeItem(armors.SS_ROBE, classes.EventParser.playerMenu);
+		else classes.Scenes.SceneLib.inventory.takeItem(armors.SSARMOR, classes.EventParser.playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor < 60) {
 		//[Good present]
 		classes.EngineCore.outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n");
-		inventory.takeItem(consumables.GROPLUS, classes.EventParser.playerMenu);
+		classes.Scenes.SceneLib.inventory.takeItem(consumables.GROPLUS, classes.EventParser.playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else {
 		//[Mediocre Present]
 		classes.EngineCore.outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n");
-		inventory.takeItem(consumables.SDELITE, classes.EventParser.playerMenu);
+		classes.Scenes.SceneLib.inventory.takeItem(consumables.SDELITE, classes.EventParser.playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 }

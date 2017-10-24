@@ -5,6 +5,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
@@ -81,7 +82,7 @@ public class MinotaurKing extends Monster
 				if (_milkDrinks == 0)
 				{
 				}
-				else if (_milkDrinks == 1) str += "\n\n<b>The King has been glancing appreciatively in your direction ever since he took a drink from his slave-slut’s nipples. Perhaps he’s more vulnerable to baser needs...</b>"
+				else if (_milkDrinks == 1) str += "\n\n<b>The King has been glancing appreciatively in your direction ever since he took a drink from his slave-slut’s nipples. Perhaps he’s more vulnerable to baser needs...</b>";
 				else str += "\n\n<b>The King’s nostrils flare as he stares at you. It’s clear that with every drink he takes from his slave-slut’s nipples, he becomes more receptive to your advances.</b>";
 				
 				return str;
@@ -104,12 +105,12 @@ public class MinotaurKing extends Monster
 				return;
 			}
 			
-			game.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
+			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
+			SceneLib.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
 		}
 
 		private var _milkDrinks:int = 0;

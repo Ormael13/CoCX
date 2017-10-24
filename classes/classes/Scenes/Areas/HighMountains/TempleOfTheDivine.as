@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.WeaponLib;
+import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
 	
@@ -37,7 +38,7 @@ use namespace kGAMECLASS;
 			outputText("prayer to whichever gods may be listening. This has a surprising effect on the gargoyle, stilling her almost instantly.");
 			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
 			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well being, merely in order to thoroughly examine you. You tell her that you ");
-			if (kGAMECLASS.dungeons.checkFactoryClear()) {
+			if (SceneLib.dungeons.checkFactoryClear()) {
 				if (player.humanScore() < 14) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village as tribute to the demons under the guise of being a hero.");
@@ -99,9 +100,8 @@ use namespace kGAMECLASS;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function anyOfAltairsRepaired():Boolean {
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1)
-				return true;
-			return false;
+			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
+
 		}
 		public function loosingMaraeBlessing():void {
 			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
@@ -239,7 +239,7 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
 				clearOutput();
 				outputText("Would you like to repair something in the temple?\n\n");
-				kGAMECLASS.camp.cabinProgress.checkMaterials();
+				SceneLib.camp.cabinProgress.checkMaterials();
 				menu();
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
@@ -369,7 +369,7 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 8) {
 				outputText(", many decorative gargoyles are displayed.");
 				if (flags[kFLAGS.ONYX_PATH] < 1) outputText(" While Sapphire is the last living stony guardian of the temple, this still gives off the illusion of a platoon of guardians watching faithfully over this divine place.");
-				if (player.isGargoyle()) outputText(" Your own pedestal stands right next to Sapphire's, allowing you to keep close to her when you need to rest (using your pedestal allows you to sleep with Sapphire if your relation is high enough).")
+				if (player.isGargoyle()) outputText(" Your own pedestal stands right next to Sapphire's, allowing you to keep close to her when you need to rest (using your pedestal allows you to sleep with Sapphire if your relation is high enough).");
 				if (flags[kFLAGS.ONYX_PATH] > 0) {
 					outputText(" On the opposite side stands " + flags[kFLAGS.ONYX_NAME] + "'s pedestal. ");
 					if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
@@ -408,9 +408,8 @@ use namespace kGAMECLASS;
 			inventory.takeItem(weapons.EXCALIB, templemainmenu);
 		}
 		private function havingOrUsingBSwordOrExcalibur():Boolean {
-			if (player.weapon == weapons.B_SWORD || player.weapon == weapons.EXCALIB || player.hasItem(weapons.B_SWORD, 1) || player.hasItem(weapons.EXCALIB, 1))
-				return true;
-			return false;
+			return player.weapon == weapons.B_SWORD || player.weapon == weapons.EXCALIB || player.hasItem(weapons.B_SWORD, 1) || player.hasItem(weapons.EXCALIB, 1);
+
 		}
 		public function puttingPurePearlOnAltair():void {
 			clearOutput();

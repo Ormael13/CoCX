@@ -5,6 +5,7 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Places.Ingnam.*;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
 
 import coc.view.MainView;
@@ -27,9 +28,9 @@ public class Ingnam extends BaseContent
 			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
 			{
 				trace("Autosaving to slot: " + player.slotName);
-				
-				getGame().saves.saveGame(player.slotName);
-			}
+
+kGAMECLASS.saves.saveGame(player.slotName);
+            }
 			//Banished to Mareth.
 			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
 				getBanishedToMareth();
@@ -66,19 +67,19 @@ public class Ingnam extends BaseContent
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+				addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
+				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
-			addButton(9, "Wait", kGAMECLASS.camp.doWait);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) {
+			addButton(9, "Wait", SceneLib.camp.doWait);
+            if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", SceneLib.camp.rest);
+            if (model.time.hours >= 21 || model.time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
 				removeButton(4);
-				addButton(9, "Sleep", getGame().camp.doSleep);
-			}
+                addButton(9, "Sleep", SceneLib.camp.doSleep);
+            }
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
 		}
 		
@@ -292,13 +293,13 @@ public class Ingnam extends BaseContent
 			}
 			else {
 				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-				menu()
+				menu();
 				addButton(0, "Next", transactionNo, shop);
 			}
 		}
 		public function transactionYes(item:ItemType, price:int, shop:int):void {
 			//Determine shop
-			var shopToGo:Function = null
+			var shopToGo:Function = null;
 			if (shop == 1) shopToGo = shopBlacksmith;
 			else if (shop == 2) shopToGo = shopBlacksmith;
 			else if (shop == 3) shopToGo = shopTailor;
@@ -348,7 +349,7 @@ public class Ingnam extends BaseContent
 			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
 			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
 			menu();
-			addButton(0, "Meditate", kGAMECLASS.masturbation.meditate);
+			addButton(0, "Meditate", SceneLib.masturbation.meditate);
 			addButton(14, "Leave", menuIngnam);
 		}
 		
@@ -466,7 +467,7 @@ public class Ingnam extends BaseContent
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
 				if (player.statusEffectv2(StatusEffects.Drunk) >= 3) {
-					outputText("\n\nYou feel so drunk. Your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the back door and go outside. ")
+					outputText("\n\nYou feel so drunk. Your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the back door and go outside. ");
 					if (player.hasVagina() && !player.hasCock()) outputText("You open up your [armor] and squat down while you release your pressure onto the ground. ");
 					else outputText("You open up your [armor] and lean against the wall using one of your arms for support while you release your pressure onto the wall. ");
 					outputText("It's like as if the floodgate has opened! ");

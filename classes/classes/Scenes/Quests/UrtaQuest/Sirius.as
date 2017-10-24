@@ -3,6 +3,7 @@ package classes.Scenes.Quests.UrtaQuest
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Desert.Naga;
+import classes.Scenes.SceneLib;
 
 public class Sirius extends Naga
 	{
@@ -89,12 +90,12 @@ public class Sirius extends Naga
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.urtaQuest.urtaBeatsUpSiriusRadio();
+			SceneLib.urtaQuest.urtaBeatsUpSiriusRadio();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.urtaQuest.urtaLosesToSirriusSnakeRadio();
+			SceneLib.urtaQuest.urtaLosesToSirriusSnakeRadio();
 		}
 
 		public function Sirius()

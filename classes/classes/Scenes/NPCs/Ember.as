@@ -2,12 +2,13 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
 public class Ember extends Monster
 	{
 		private function emberMF(male:String,female:String):String{
-			return game.emberScene.emberMF(male,female);
+			return SceneLib.emberScene.emberMF(male,female);
 		}
 		//The Actual Ember Fight (Z)
 		//PC can't use any sexual moves in this battle. This means anything that deals or affects Ember's lust in any way.
@@ -142,14 +143,14 @@ public class Ember extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			//Hackers gonna hate. Tested and working as intended.
-			if (hpVictory) game.emberScene.beatEmberSpar();
+			if (hpVictory) SceneLib.emberScene.beatEmberSpar();
 			else emberReactsToLustiness();
 		}
 
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.emberScene.loseToEmberSpar();
+			SceneLib.emberScene.loseToEmberSpar();
 		}
 
 		public function Ember()

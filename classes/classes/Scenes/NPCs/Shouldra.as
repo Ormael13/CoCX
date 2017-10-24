@@ -2,7 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -86,12 +86,12 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.shouldraScene.defeatDannyPhantom();
+			SceneLib.shouldraScene.defeatDannyPhantom();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.shouldraScene.loseToShouldra();
+			SceneLib.shouldraScene.loseToShouldra();
 		}
 
 		public function Shouldra()

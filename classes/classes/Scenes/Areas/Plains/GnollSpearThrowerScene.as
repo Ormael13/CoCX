@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class GnollSpearThrowerScene extends BaseContent
 	{
@@ -68,7 +68,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
-				kGAMECLASS.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
+				SceneLib.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
 			clearOutput();

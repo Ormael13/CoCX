@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Kitsune extends Monster
@@ -181,7 +182,7 @@ public class Kitsune extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.kitsuneScene.defeatTheKitsunes();
+			SceneLib.forest.kitsuneScene.defeatTheKitsunes();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
@@ -190,7 +191,7 @@ public class Kitsune extends Monster
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
 				game.cleanupAfterCombat();
 			} else {
-				game.forest.kitsuneScene.loseToKitsunes();
+				SceneLib.forest.kitsuneScene.loseToKitsunes();
 			}
 		}
 

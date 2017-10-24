@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class DemonPackDesert extends Monster
@@ -25,7 +26,7 @@ public class DemonPackDesert extends Monster
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
 			if(hasStatusEffect(StatusEffects.phyllafight)) {
-				doNext(game.desert.antsScene.consolePhylla);
+				doNext(SceneLib.desert.antsScene.consolePhylla);
 			} else if (hpVictory || flags[kFLAGS.SFW_MODE] > 0){
 				game.cleanupAfterCombat();
 			} else {
@@ -36,7 +37,7 @@ public class DemonPackDesert extends Monster
 
 		private function rapeDemons():void{
 			outputText("You open your arms and step into the throng of eager demons. They jump eagerly to touch you, becoming more and more lust-frenzied every second. You take the nearest demon and throw it to the ground and without a moment's thought the rest of the group leap to join you in a thoughtless madness of lust...", true);
-			doNext(game.desert.oasis.oasisSexing);
+			doNext(SceneLib.desert.oasis.oasisSexing);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -53,7 +54,7 @@ public class DemonPackDesert extends Monster
 				game.cleanupAfterCombat();
 			} else if (hpVictory){
 				outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
-				doNext(game.desert.oasis.oasisSexing);
+				doNext(SceneLib.desert.oasis.oasisSexing);
 			} else {
 				outputText("You struggle to keep your mind on the fight and fail to do so. ", true);
 				if (pcCameWorms){
@@ -70,7 +71,7 @@ public class DemonPackDesert extends Monster
 					outputText(Appearance.vaginaDescript(player,0) + " burns ");
 				}
 				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.");
-				doNext(game.desert.oasis.oasisSexing);
+				doNext(SceneLib.desert.oasis.oasisSexing);
 			}
 		}
 
@@ -130,8 +131,8 @@ public class DemonPackDesert extends Monster
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = game.combat.packAttack;
-			this.special2 = game.combat.lustAttack;
+			this.special1 = SceneLib.combat.packAttack;
+			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.hornType = AppearanceDefs.HORNS_DEMON;
 			this.horns = 2;

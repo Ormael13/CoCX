@@ -1058,7 +1058,7 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 	clearOutput();
 	if (!divine) {
 		outputText(images.showImage("rathazul-craft-barkarmor-corrupt"));
-		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n")
+		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n");
 		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n");
 		outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You realize the armor is missing pants. \n\n");
 		outputText("\"<i>Something wrong? Nothing to protect your modesty? Surprise!</i>\"  He hands you a silken loincloth");
@@ -1071,7 +1071,7 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 	}
 	else {
 		outputText(images.showImage("rathazul-craft-barkarmor-pure"));
-		outputText("You show him the pieces of glowing white thick bark attached. \n\n \"<i>My, my. I heard a voice from Marae instructing me to make the armor for you,</i>\" the old rat says. He takes the pile of bark and works on his bench for an hour while you wait. \n\n")
+		outputText("You show him the pieces of glowing white thick bark attached. \n\n \"<i>My, my. I heard a voice from Marae instructing me to make the armor for you,</i>\" the old rat says. He takes the pile of bark and works on his bench for an hour while you wait. \n\n");
 		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. It took me many attempts to bend the bark plates to get them right.</i>\"\n\nHe hands you the armor. \n\n");
 		outputText("The plates are white like snow. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth");
 		if (player.mf("m", "f") == "f") outputText(" with stockings and garters");
@@ -1086,7 +1086,7 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 private function craftWorldTreeWeapon():void {
 	spriteSelect(49);
 	clearOutput();
-	outputText("You show Rathazul the branch from Yggdrasil and ask for his opinion. He gives you a tired look. \"<i>With the right treatment, i could make a regal looking show piece, but if you want me to make you a <b>weapon</b>, i will need something more. A branch from a mageboon trent, perhaps?</i>\" You assure him that the wood is suitable. When you see his doubt, you give him a quick explanation on where the wood comes from. That Yggdrasil’s wood is every bit as suitable as mageboon wood. When mention that the branch has soulforce, you get his full attention at once. ")
+	outputText("You show Rathazul the branch from Yggdrasil and ask for his opinion. He gives you a tired look. \"<i>With the right treatment, i could make a regal looking show piece, but if you want me to make you a <b>weapon</b>, i will need something more. A branch from a mageboon trent, perhaps?</i>\" You assure him that the wood is suitable. When you see his doubt, you give him a quick explanation on where the wood comes from. That Yggdrasil’s wood is every bit as suitable as mageboon wood. When mention that the branch has soulforce, you get his full attention at once. ");
 	outputText("\"<i>Well, why didn’t you say so? There are few materials that possess natural soulforce, it usually dissipates on its former owner’s...  demise...  and needs to be artificially infused. And natural soulforce in wood? Why that is simply unheard of. I have a few ideas for how to use this. With the right treatments-</i>\"\n\n");
 	outputText("You grimace at his words as the old rat runs his hands over the wood eagerly. \"<i>Don’t give me that look! I mean real, weaponizing treatments. With those we can turn this into a conduit for your own soulforce. I could even mold this into a <b>sword</b>, if you want me to.</i>\" Well, damn. Looks like you have plenty of options to choose from. Decisions, decisions...\n\n");
 	menu();

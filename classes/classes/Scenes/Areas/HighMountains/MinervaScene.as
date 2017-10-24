@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class MinervaScene extends BaseContent implements TimeAwareInterface {
 
@@ -131,7 +132,7 @@ private function firstMinervaEncounter():void {
 	clearOutput();
 	outputText("Returning to the mountains, you begin to climb; the usual search for loot and, perhaps, some harpies driving your upward efforts.  Perhaps you'll run into");
 	//If Sophie Bimbo=0:
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !kGAMECLASS.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !SceneLib.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:
@@ -845,8 +846,8 @@ private function fuckMinervasAsshole():void {
 	flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -951,8 +952,8 @@ private function minervaCowgirlSex():void {
 	flags[kFLAGS.TIMES_MINERVA_COWGIRLED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1041,8 +1042,8 @@ private function minervaLapSex():void {
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1122,8 +1123,8 @@ private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 	
 	dynStats("lus", 20);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1200,8 +1201,8 @@ private function letMinervaSuckYouOff():void {
 	//PC returns to camp.
 	player.orgasm();
 
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1269,8 +1270,8 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	//PC returns to camp
 	dynStats("sen", -1);
 	player.orgasm();
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1348,8 +1349,8 @@ private function pcGetsEatenOutByMinerva():void {
 	// PC returns to camp
 	dynStats("sen", -2);
 	player.orgasm();
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1452,8 +1453,8 @@ private function getButtFuckedYouSlut():void {
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if(getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 internal function loseToMinerva():void {

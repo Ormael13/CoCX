@@ -19,6 +19,7 @@ package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class MarblePurification extends NPCAwareContent{
 
@@ -189,7 +190,7 @@ public class MarblePurification extends NPCAwareContent{
 		clearOutput();
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 0;
 	 	outputText("When you wake and join Marble ");
-		if(kGAMECLASS.camp.companionsCount() > 2) outputText("and your other followers ");
+		if(SceneLib.camp.companionsCount() > 2) outputText("and your other followers ");
 	 	outputText("for breakfast this morning, you find a bleary-eyed Rathazul waiting at the campfire. Marble clucks her tongue and gives him a mug of something strong, which he accepts gratefully, noisily slurping down a mouthful. He takes a seat, staring into his mug, and then sighs softly.");
 	 	outputText("\n\n\"<i>I’m afraid I have some bad news... while that one sample you gave me was very useful and I do have a prototype formula finished, I’m not entirely sure it is safe for Marble to drink.  I’d like some milk from another lacta bovine, preferably one who hasn’t been purified the way you have, so I can complete my work.</i>\" he tells Marble, who looks thoughtful.");
 	 	outputText("\n\n\"<i>Hmm... I have two sisters; would milk from one of them work?</i>\" she asks.");
@@ -276,7 +277,7 @@ public class MarblePurification extends NPCAwareContent{
 		//Set a temp integer variable that will track the number of followers agreeing to come for tea.
 		//if (any of the following followers are in camp)
 		var teaDrinkers:int = 0;
-		if(kGAMECLASS.camp.companionsCount() >= 3)
+		if(SceneLib.camp.companionsCount() >= 3)
 		{
 		 	outputText("\n\nMarble suggests that you should gather up the others while Clara is still making it, it shouldn’t take too long.  You nod, and head off, leaving Clara and Marble at the campfire.");
 			//Go to each of the followers you have in turn, and ask them if they want some morning tea.  All followers capable of fighting must agree to the tea, non-fighters can agree or refuse.  Remember that this scene cannot come up if the PC is very corrupted, and scenes for the very corrupt followers don’t necessarily need to be written.
@@ -471,7 +472,7 @@ public class MarblePurification extends NPCAwareContent{
 		clearOutput();
 	 	outputText("You can’t shake the feeling that there is something wrong with this tea, and just consider it for a few moments.  \"<i>Uh, aren’t you going to drink your tea, charmer?  It is really goood,</i>\" your server says slowly, looking over at you with a nervous expression on her face.  You start to say something, but are interrupted when you hear Marble suddenly gasp and cry out, \"<i>Clara, what the hell did you put in this stuff?</i>\" before gasping for breath a few more times and falling over.");
 
-		if(kGAMECLASS.camp.companionsCount()) outputText("\n\nYou rush over to your fallen companion");
+		if(SceneLib.camp.companionsCount()) outputText("\n\nYou rush over to your fallen companion");
 		else outputText("\n\nYou rush over to one of your fallen companions");
 	 	outputText(" to see what has happened, only to find that she has passed out.  Noticing the tea cup again, you turn around to face the person who prepared it.  Clara stands behind you with a disturbing smile on her face.  You demand to know what was in the tea, like Marble did before.");
 
@@ -628,7 +629,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("This woman is nothing like her sister, she loves the power she has over you, and loves to show you just how much she has.");
 
 	 	outputText("\n\nClara leans down and puts her face right in front of yours.  \"<i>I think that if you want to drink some of my milk, you’re going to have to do some things for me.</i>  Her voice is soft, but the meaning couldn’t be harder.  \"<i>From now on, you aren’t allowed to go anywhere without my say so, and I’m the only one you’re allowed to love.  Either emotionally or physically.  Understand?</i>\"  You shudder, and think of ");
-		if(kGAMECLASS.camp.loversCount() == 1) outputText("Marble");
+		if(SceneLib.camp.loversCount() == 1) outputText("Marble");
 		else outputText("the others");
 	 	outputText(".  Then your eyes drop down to Clara’s chest, and you think of your need.");
 
@@ -860,7 +861,7 @@ public class MarblePurification extends NPCAwareContent{
 			else
 			{
 				//if (PC either stopped Clara from drugging everyone, or Marble was the only one drugged)
-				if(kGAMECLASS.camp.companionsCount() <= 2)
+				if(SceneLib.camp.companionsCount() <= 2)
 				{
 				 	outputText("With Clara incapacitated for now, you go to check on Marble and make sure she is all right.  Thankfully she seems to be fine.  You don't plan on underestimating a bovine's fortitude again in the near future.  Since her sister won't be going anywhere soon, you wait for a while to let her recover.  This doesn't take too long, and soon you and your lover are standing over the defeated form of the young bovine.");
 				}
@@ -890,7 +891,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nYour cow-girl companion continues to shake in anger, but also fear and frustration.  \"<i>I, I, YES!  I want to addict [name] to my milk!  I want to so much!  I'm so afraid that " + player.mf("he","she") + " won't stay by my side, but I also feel so bottled up.  "); //no new paragraph
 
 		//if (PC has another lover in camp)
-		if(kGAMECLASS.camp.loversCount() > 1)
+		if(SceneLib.camp.loversCount() > 1)
 		{
 		 	outputText("I'm not even [name]'s only mate.  " + player.mf("He","She") + " can satisfy their needs, but can't satisfy mine?  "); //no new paragraph
 		}
@@ -1350,8 +1351,8 @@ public class MarblePurification extends NPCAwareContent{
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
 		player.changeStatusValue(StatusEffects.Marble,4,10);
-		getGame().inCombat = false;
-		player.clearStatuses(false);
+        kGAMECLASS.inCombat = false;
+        player.clearStatuses(false);
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
 		//advance time of day by 4 hours
 		//end event
@@ -1377,10 +1378,10 @@ public class MarblePurification extends NPCAwareContent{
 		//if (Marble's breast size < 3)
 		if(flags[kFLAGS.MARBLE_BREAST_SIZE] < 3)
 		{
-		 	outputText("\n\n\"<i>Alright, if you say so.</i>\"  Marble lifts the bottle to her mouth, and drinks the substance down.  She lets out a soft sigh and starts massaging her bouncy tit flesh as it expands outwards.  Through her shirt, you can see her " + kGAMECLASS.marbleScene.marbleBreastSize() + " breasts balloon into ");
+		 	outputText("\n\n\"<i>Alright, if you say so.</i>\"  Marble lifts the bottle to her mouth, and drinks the substance down.  She lets out a soft sigh and starts massaging her bouncy tit flesh as it expands outwards.  Through her shirt, you can see her " + SceneLib.marbleScene.marbleBreastSize() + " breasts balloon into ");
 			//increase Marble's breast size by 1
 			flags[kFLAGS.MARBLE_BREAST_SIZE]++;
-			outputText(kGAMECLASS.marbleScene.marbleBreastSize() + " melons!");
+			outputText(SceneLib.marbleScene.marbleBreastSize() + " melons!");
 			//if (Marble's breast size == 1)
 			if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 1)
 			{
@@ -1427,10 +1428,10 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("You offer Marble a jar of reducto and tell her you'd like her to reduce her bust's size a bit.");
 		if (flags[kFLAGS.MARBLE_BREAST_SIZE] > 0)
 		{
-		 	outputText("\n\n\"<i>Alright, if you say so.</i>\"  Marble opens the jar of reducto, lifts up her top, and slathers the green gel onto her breasts.  She lets out a soft sigh as the substance takes effect, and her tremendous " + kGAMECLASS.marbleScene.marbleBreastSize() + " tits slowly shrink in size, becoming a pair of more modest ");
+		 	outputText("\n\n\"<i>Alright, if you say so.</i>\"  Marble opens the jar of reducto, lifts up her top, and slathers the green gel onto her breasts.  She lets out a soft sigh as the substance takes effect, and her tremendous " + SceneLib.marbleScene.marbleBreastSize() + " tits slowly shrink in size, becoming a pair of more modest ");
 			//decrease Marble's breast size by 1
 			flags[kFLAGS.MARBLE_BREAST_SIZE]--;
-			outputText(kGAMECLASS.marbleScene.marbleBreastSize() + " sized breasts.");
+			outputText(SceneLib.marbleScene.marbleBreastSize() + " sized breasts.");
 			if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 0)
 			{
 			 	outputText("\n\nYour mate grips one of her sizable DDs, and gives an exaggerated sigh.  \"<i>This is just so tiny.  Remember that I'm only doing this because I care about you sweetie.  I'm not going to shrink them any further.</i>\"");
@@ -1485,7 +1486,7 @@ public class MarblePurification extends NPCAwareContent{
 		else
 		{
 		 	outputText("Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She smiles at you and tells you she was worried you'd never ask, then leads you to a familiar, secluded part of the rocks around the camp.");
-		 	outputText("\n\nOnce you arrive, your lover teases you a bit by grabbing her " + kGAMECLASS.marbleScene.marbleBreastSize() + " breasts through her top and playing around with them for a moment.  The bouncy flesh rolls around her hands in a very pleasant manner, and you feel your mouth water in anticipation of the delicious milk hidden within.");
+		 	outputText("\n\nOnce you arrive, your lover teases you a bit by grabbing her " + SceneLib.marbleScene.marbleBreastSize() + " breasts through her top and playing around with them for a moment.  The bouncy flesh rolls around her hands in a very pleasant manner, and you feel your mouth water in anticipation of the delicious milk hidden within.");
 		 	outputText("\n\nYou're given a sultry smile, and Marble hooks her shirt with her thumb pulling it up over her chest, letting her bovine bust spill forth.  The invitation to partake in her revitalizing and rich fluids comes not long after, and you waste no time in doing just that.  ");
 			if (player.tallness < 65)
 			{

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -102,7 +103,7 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You manage to knock the guard off his feet. With the guard unconscious, you manage to check for loot before you head in.", true);
-			doNext(game.bazaar.winAgainstGuard);
+			doNext(SceneLib.bazaar.winAgainstGuard);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -121,7 +122,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "guard";
 			this.imageName = "bazaarguard";
-			this.long = "This crimson-skinned demon-morph guarding the entrance to Bizarre Bazaar stands ten feet tall. He has red skin and is wearing almost sky-blue turban on his head. He has solid black eyes. He is wearing a simple tunic and loose-fitting pants. He is wielding a pair of scimitars."
+			this.long = "This crimson-skinned demon-morph guarding the entrance to Bizarre Bazaar stands ten feet tall. He has red skin and is wearing almost sky-blue turban on his head. He has solid black eyes. He is wearing a simple tunic and loose-fitting pants. He is wielding a pair of scimitars.";
 			this.createCock(8, 1.5, CockTypesEnum.DEMON);
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.ass.analLooseness = 1;

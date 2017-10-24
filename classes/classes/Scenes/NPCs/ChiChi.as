@@ -7,13 +7,14 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
 	
 	public class ChiChi extends Monster
 	{
-		public var chichiScene:ChiChiFollower = game.chichiScene;
+		public var chichiScene:ChiChiFollower = SceneLib.chichiScene;
 		
 		public function PentaStrike():void {
 			outputText("Chi Chi unleashes a devastating combo at you. ");

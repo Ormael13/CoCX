@@ -192,7 +192,7 @@ public class GoblinAssassinScene extends BaseContent
 		{
 			spriteSelect(24);
 			clearOutput();
-			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.")
+			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.");
 				dynStats("lus", 20);
 			//If cant rape or breastfeed
 			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
@@ -253,7 +253,7 @@ public class GoblinAssassinScene extends BaseContent
 			}
 			else 
 			{
-				trace("falling through gobboAssassinRapeIntro")
+				trace("falling through gobboAssassinRapeIntro");
 				cleanupAfterCombat();
 			}
 		}

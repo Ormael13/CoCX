@@ -4,6 +4,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class TentacleBeast extends Monster
@@ -62,12 +63,12 @@ public class TentacleBeast extends Monster
 			}
 			else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaTentacleDefeat();
+				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					EngineCore.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
+					EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}
@@ -81,17 +82,17 @@ public class TentacleBeast extends Monster
 				if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 					removeStatusEffect(StatusEffects.PhyllaFight);
 					outputText("...and make it into the nearby tunnel.  ");
-					game.desert.antsScene.phyllaTentaclePCLoss();
+					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					game.forest.tentacleBeastScene.tentacleLossRape();
+					SceneLib.forest.tentacleBeastScene.tentacleLossRape();
 			} else {
 				outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
 				if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 					removeStatusEffect(StatusEffects.PhyllaFight);
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
-					game.desert.antsScene.phyllaTentaclePCLoss();
+					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					doNext(game.forest.tentacleBeastScene.tentacleLossRape);
+					doNext(SceneLib.forest.tentacleBeastScene.tentacleLossRape);
 			}
 		}
 

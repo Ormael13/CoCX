@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class IsabellaFollowerScene extends NPCAwareContent {
 		
@@ -222,7 +222,7 @@ public function callForFollowerIsabella():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(10, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(10, "Go Camp", backToCamp);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 	else addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -255,7 +255,7 @@ private function backToCamp():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function isabellasAppearance():void {
@@ -668,8 +668,7 @@ private function izzyTentacleRapeBool():Boolean {
 			counter++;
 		}
 	}
-	if(counter >= 3) return true;
-	else return false;
+	return counter >= 3;
 }
 
 //Tentacle Rape (edited, but see notes -Z)

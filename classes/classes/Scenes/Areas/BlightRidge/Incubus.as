@@ -7,6 +7,7 @@ package classes.Scenes.Areas.BlightRidge
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
@@ -50,7 +51,7 @@ use namespace kGAMECLASS;
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 5 + player.cor / 20);
 				}
-				game.combat.takeDamage(5);
+				SceneLib.combat.takeDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
 			game.combatRoundOver();
@@ -80,7 +81,7 @@ use namespace kGAMECLASS;
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 4 + player.cor / 25);
 				}
-				game.combat.takeDamage(4);
+				SceneLib.combat.takeDamage(4);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
 			game.combatRoundOver();
@@ -95,7 +96,7 @@ use namespace kGAMECLASS;
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
 			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
 			{
-				outputText("Your shield managed to absorb the attack!")
+				outputText("Your shield managed to absorb the attack!");
 				combatRoundOver();
 				return;
 			}

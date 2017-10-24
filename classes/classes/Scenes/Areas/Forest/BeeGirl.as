@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
 
@@ -18,7 +19,7 @@ public class BeeGirl extends Monster {
 				}
 				player.lust = 98;
 				player.dynStats("lus", 1);
-				game.forest.beeGirlScene.afterfightoptionswithBeeGirl();
+				SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
 			}
 			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (hpVictory) {
@@ -27,10 +28,10 @@ public class BeeGirl extends Monster {
 				else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
 				}
-				game.forest.beeGirlScene.afterfightoptionswithBeeGirl();
+				SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
 			}
 			else {
-                game.combat.finishCombat();
+                SceneLib.combat.finishCombat();
             }
 		}
 
@@ -41,7 +42,7 @@ public class BeeGirl extends Monster {
 				game.cleanupAfterCombat();
 			}
 			else {
-				game.forest.beeGirlScene.beeRapesYou();
+				SceneLib.forest.beeGirlScene.beeRapesYou();
 			}
 		}
 		

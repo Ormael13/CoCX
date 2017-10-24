@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class HelSpawnScene extends NPCAwareContent {
 
@@ -61,7 +62,7 @@ override public function helspawnFollower():Boolean {
 }
 
 override public function helPregnant():Boolean {
-	return (kGAMECLASS.helScene.pregnancy.isPregnant);
+	return (SceneLib.helScene.pregnancy.isPregnant);
 }
 
 //Hel’s New Appearance Screen: Taking Things Into Account
@@ -80,7 +81,7 @@ internal function heliasAppearanceScreen():void {
 		outputText("  A dark trio of scars run down Hel’s thighs, left by " + flags[kFLAGS.HELSPAWN_NAME] + "’s youthful claws.");
 	}
 	else {
-		switch (kGAMECLASS.helScene.pregnancy.event) {
+		switch (SceneLib.helScene.pregnancy.event) {
 			case 1: //She's pregnant, but no special text yet
 					break;
 			case 2: outputText("  Hel's just starting to show a little bulge of pregnancy.");
@@ -207,7 +208,7 @@ private function heliaLoveFollowup():void {
 internal function haveAKid():void {
 	clearOutput();
 	spriteSelect(68);
-	kGAMECLASS.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER);
+	SceneLib.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER);
 	outputText("You tell Hel that you're in this with her, that you want to give her that child she seems so desperate for.  She beams at you, smiling from eye to eye before leaping into your arms, pressing her lips hard to yours.  You kiss her back, wrapping your arms around her hips to support her as her powerful legs wrap around your waist; you push her up against the ruined wall, hands searching across her taut, hot flesh until you toss her bikini top aside, letting her hefty tits free.  \"<i>Oh god yes,</i>\" she moans as you trail kisses from her lips, down her neck to her stiffening nipple.  \"<i>I want this so much, more than anything.  Give it to me, [name].  Don't hold back!</i>\"  Your fingers sink into her pliant flesh as you suckle on her exposed teat, groping her other tit and soft ass as she moans and squirms in your arms.  Clumsily, Hel's claws brush down your body, peeling off your [armor] until your [cock] flops into her lap.  She locks her scaled fingers around your manhood, roughly stroking you until you're stiff as diamonds in her grasp.");
 	
 	outputText("\n\nYou shudder as her fingers work your [cock], but don't let up on your end for a second.  You brush and knead Hel's nipple between your teeth, letting your hands drift down to her wide hips and gropable ass, slowly stripping her of her scale bottom and pulling it off her legs.  With your lover bare and naked, you slip down between her legs, letting her hook them over your shoulder to give you a good view of her dripping cunt.  Your tongue laps across her labia, drawing a long, lewd moan from Hel.  She runs her fingers through your [hair], urging you onward; at her lusty moans, you dig in, sucking on her prominent clit and drilling your tongue between her inner folds.  You gasp into her when Hel's lengthy tail wraps around your shoulders, the pale flame soothingly warm on your " + player.skinFurScales() + " as her leathery appendage works its way down to the [cock] dangling between your [legs].  You groan with sudden need as the tip of her tail brushes your most sensitive flesh, tickling ");
@@ -313,7 +314,7 @@ private function maiWouldBeTheBestInseminator():void {
 	spriteSelect(68);
 	outputText("You tell Hel that you think Mai would make a lovely father.  Helia nods her agreement, saying, \"<i>Yeah, I agree.  She's a beauty, and I'm sure our child will be stunning... you wouldn't mind if she visited, right?  I mean, you and I will be raising our kid - and he'll be ours for sure - but I'm sure Mai will want to at least visit her kid.</i>\"");
 	outputText("\n\nYou nod, and say that's fine.  Hel beams at you, giving you a peck on the cheek before running back to camp, saying she's going to go track down the foxy sisters as soon as she can.  You suppose the next time you see her, Hel's probably going to be pregnant with the child you'll be helping to raise.");
-	kGAMECLASS.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's Mai's baby, but that's already tracked separately
+	SceneLib.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's Mai's baby, but that's already tracked separately
 	flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 	flags[kFLAGS.HELSPAWN_DADDY] = 2;
 	doNext(playerMenu);
@@ -323,7 +324,7 @@ private function spiderboyWouldBeBestDad():void {
 	clearOutput();
 	spriteSelect(68);
 	outputText("You tell Helia to go find a spider boy to jump.  She beams at you, and skips off toward the swamp calling, \"<i>Thank you, thank you thank you, [name]!</i>\" over her shoulder as she goes.  You suppose the next time you see her, Hel's probably going to be pregnant with the child you'll be helping to raise.");
-	kGAMECLASS.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's the spider's baby, but that's already tracked separately
+	SceneLib.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's the spider's baby, but that's already tracked separately
 	flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 	flags[kFLAGS.HELSPAWN_DADDY] = 1;
 	doNext(playerMenu);
@@ -739,7 +740,7 @@ public function helSpawnsSetup():void {
 	}
 	flags[kFLAGS.HELSPAWN_AGE] = 1;
 	flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] = 1;
-	kGAMECLASS.helScene.pregnancy.knockUpForce(); //Clear Pregnancy
+	SceneLib.helScene.pregnancy.knockUpForce(); //Clear Pregnancy
 	//>If the two scores tie at the end somehow, Sluttymandergirl prevails!
 }
 

@@ -3,6 +3,7 @@ package classes.Items.Consumables
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 /**
@@ -17,9 +18,9 @@ import classes.internals.Utils;
 		{
 			this._adj = adj.toLowerCase();
 			var shortName:String = adj + " Ltn";
-			var longName:String = "a flask of " + this._adj + " lotion"
+			var longName:String = "a flask of " + this._adj + " lotion";
 			var value:int = ConsumableLib.DEFAULT_VALUE;
-			var description:String = "A small wooden flask filled with a " + longAdj + " . A label across the front says, \"" + adj + " Lotion.\""
+			var description:String = "A small wooden flask filled with a " + longAdj + " . A label across the front says, \"" + adj + " Lotion.\"";
 			super(id, shortName, longName, value, description);
 		}
 		
@@ -153,7 +154,7 @@ import classes.internals.Utils;
 					outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _adj + " skin.");
 				}
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 			return true;
 		}
 	}

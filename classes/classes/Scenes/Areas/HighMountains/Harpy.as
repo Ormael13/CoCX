@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Harpy extends Monster
@@ -61,7 +62,7 @@ public class Harpy extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.harpyScene.harpyVictoryuuuuu();
+			SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
 		}
 
 
@@ -71,7 +72,7 @@ public class Harpy extends Monster
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.highMountains.harpyScene.harpyLossU();
+				SceneLib.highMountains.harpyScene.harpyLossU();
 			}
 		}
 

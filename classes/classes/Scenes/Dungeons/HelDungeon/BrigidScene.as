@@ -5,6 +5,7 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class BrigidScene extends BaseContent
 	{
@@ -32,8 +33,8 @@ public class BrigidScene extends BaseContent
 			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
 				outputText("\"<i>Tsk tsk tsk,</i>\" the harpy jailer croons, looming over you as you slump to the ground. \"<i>You shouldn't have messed with me, bitch!</i>\" she snaps, giving you a rough kick to the side. \"<i>Now, let's see what Mother has to say about this...</i>\"");
 				//(Go to \"<i>Harpy Breeding Slut</i>\" Bad End)
-				doNext(getGame().dungeons.heltower.harpyQueenBeatsUpPCBadEnd);
-			}
+                doNext(SceneLib.dungeons.heltower.harpyQueenBeatsUpPCBadEnd);
+            }
 			else {
 				outputText("\"<i>That's it?!</i>\" Brigid screams, as you collapse in front of her.  \"<i>A weak little piece of trash like you took out our queen?</i>\"");
 
@@ -88,8 +89,8 @@ public class BrigidScene extends BaseContent
 				outputText("\n\nKiri frowns unhappily as she slips your cock from her pussy, then kisses you.  \"<i>Remember, [name]... just hold on!  And... save some of your seed for me!</i>\"  She lingers for a while, looking in your eyes affectionately, but Brigid grabs her by the hair and, swearing filthily, pulls her away.  A sadistic-looking phoenix takes her place, straddling you and slipping your sore prick into her cunt... the last thing you manage to do before your head is filled with the agony and ecstasy of having your raw shaft ridden again right after orgasm is to wonder exactly how long salamander-harpy half-breeds gestate...");
 				//[GAME THE FUCK OVER, SON; WHERE IS MY MONEY?]
 				EventParser.gameOver();
-				if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", getGame().dungeons.heltower.retryDungeonFromBadEndPrompt);
-			}
+                if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", SceneLib.dungeons.heltower.retryDungeonFromBadEndPrompt);
+            }
 			//(else if not visibly pregnant F or H)
 			else {
 				//hymen check]
@@ -115,8 +116,8 @@ public class BrigidScene extends BaseContent
 				outputText(".  Brigid makes her way up the stairs, leaving you and the others at the mercy of the assorted horde.  The harpy rides your mouth greedily, knocking your head into the hard stone floor, and the last thing you can see around her feathery thighs before you slip into unconsciousness again is Kiri being pulled roughly from her resting place atop Hel by a mean-looking, wide-hipped harpy matron who takes her place, sitting sideways and drawing her talons sadistically across Hel's vulnerable chest to smear Kiri's seed around...");
 				//[GAME OVER, MOTHERFUCKER]
 				EventParser.gameOver();
-				if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", getGame().dungeons.heltower.retryDungeonFromBadEndPrompt);
-			}
+                if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", SceneLib.dungeons.heltower.retryDungeonFromBadEndPrompt);
+            }
 		}
 
 	}

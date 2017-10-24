@@ -2,6 +2,7 @@ package classes.Scenes.Places.Ingnam
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Thief extends Monster
@@ -10,7 +11,7 @@ public class Thief extends Monster
 				
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.ingnam.thiefScene.winAgainstThief();
+			SceneLib.ingnam.thiefScene.winAgainstThief();
 		}
 		
 		public function Thief() 

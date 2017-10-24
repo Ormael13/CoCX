@@ -1,8 +1,10 @@
 ﻿package classes.Scenes.Places.Boat{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.SceneLib;
 
 public class SharkGirlScene extends AbstractBoatContent{
 
@@ -112,8 +114,8 @@ internal function sharkWinChoices():void {
 	}
 	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Do you have your way with her or leave?");
-		var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? getGame().sharkGirlGetsDildoed : null);
-		if (player.gender == 1)
+        var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? kGAMECLASS.sharkGirlGetsDildoed : null);
+        if (player.gender == 1)
 			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
 			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);

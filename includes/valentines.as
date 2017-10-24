@@ -86,7 +86,7 @@ public function helpValentinesDay():void {
 public function leaveValentinesDayForever():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("Ultimately, this is not worth your time.  You wish Scylla good luck, but tell her you won't help her make the holiday more popular in Tel'Adre, as you have other things to do.  Her expression turns sad and she nods in understanding as you turn away and go back into the streets of Tel'Adre.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //[next]
@@ -140,7 +140,7 @@ public function goHomeFromVDay():void {
 	//With no other things to do, you go back to camp to rest.
 	//{Small Lust Increase, return to camp, go to sleep}
 	player.dynStats("lus", 10);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //([Scylla])
@@ -203,7 +203,7 @@ public function cuddleWithScyllaVDay():void {
 		classes.EngineCore.outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
 		player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
 	}
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //[Make out]
@@ -262,7 +262,7 @@ public function makeOutWithScyllaVDayII():void {
 		player.createPerk(PerkLib.SensualLover,0,0,0,0);
 	}
 	
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //[Feed Her!]
@@ -276,7 +276,7 @@ public function feedScyllaVDay():void {
 		classes.EngineCore.outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
 		player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 	}
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 
@@ -362,7 +362,7 @@ public function fuckAbbyVDay():void {
 	
 	player.orgasm();
 	player.dynStats("sen", -3);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //{PLEASURE HER}
@@ -395,7 +395,7 @@ public function pleasureAbbyVDay():void {
 	}
 	
 	player.dynStats("lus", 80);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //([Pastie])
@@ -415,7 +415,7 @@ public function goVisitPastyVDay():void {
 	}
 	else {
 		classes.EngineCore.outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.");
-		classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 	}
 }
 
@@ -526,7 +526,7 @@ public function fuckPastieForVDay():void {
 	}
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //[RubDick]
@@ -564,7 +564,7 @@ public function rubPastieOnYourWangDawg():void {
 	}
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 //[Pussy Dive]
@@ -601,7 +601,7 @@ public function goForAPushayDivePasty():void {
 	
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseTwoHours);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseTwoHours);
 }
 
 /*END!

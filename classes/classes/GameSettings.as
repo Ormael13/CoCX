@@ -19,8 +19,8 @@ public class GameSettings extends BaseContent {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
 	}
 	public function settingsScreenMain():void {
-		getGame().saves.savePermObject(false);
-		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+        kGAMECLASS.saves.savePermObject(false);
+        mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
 		displayHeader("Settings");
@@ -31,9 +31,8 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);
 
-		addButton(14, "Back", getGame().mainMenu.mainMenu);
-
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+        if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
 			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 			flags[kFLAGS.HYPER_HAPPY]           = 0;
@@ -527,10 +526,10 @@ public class GameSettings extends BaseContent {
 	}
 
 	public function cycleQuality():void {
-		if (getGame().stage.quality == StageQuality.LOW) getGame().stage.quality = StageQuality.MEDIUM;
-		else if (getGame().stage.quality == StageQuality.MEDIUM) getGame().stage.quality = StageQuality.HIGH;
-		else if (getGame().stage.quality == StageQuality.HIGH) getGame().stage.quality = StageQuality.LOW;
-		settingsScreenInterfaceSettings();
+        if (kGAMECLASS.stage.quality == StageQuality.LOW) kGAMECLASS.stage.quality = StageQuality.MEDIUM;
+        else if (kGAMECLASS.stage.quality == StageQuality.MEDIUM) kGAMECLASS.stage.quality = StageQuality.HIGH;
+        else if (kGAMECLASS.stage.quality == StageQuality.HIGH) kGAMECLASS.stage.quality = StageQuality.LOW;
+        settingsScreenInterfaceSettings();
 	}
 
 	public function toggleImages():void {
@@ -613,7 +612,7 @@ public class GameSettings extends BaseContent {
     private function displayControls():void
     {
         mainView.hideAllMenuButtons();
-        getGame().inputManager.DisplayBindingPane();
+        kGAMECLASS.inputManager.DisplayBindingPane();
         EngineCore.menu();
         EngineCore.addButton(0, "Reset Ctrls", resetControls);
         EngineCore.addButton(1, "Clear Ctrls", clearControls);
@@ -622,15 +621,13 @@ public class GameSettings extends BaseContent {
 
     private function hideControls():void
     {
-        getGame().inputManager.HideBindingPane();
-
-        getGame().gameSettings.settingsScreenMain();
+        kGAMECLASS.inputManager.HideBindingPane();
+        kGAMECLASS.gameSettings.settingsScreenMain();
     }
 
     private function resetControls():void
     {
-        getGame().inputManager.HideBindingPane();
-
+        kGAMECLASS.inputManager.HideBindingPane();
         EngineCore.clearOutput();
         EngineCore.outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
 
@@ -639,8 +636,7 @@ public class GameSettings extends BaseContent {
 
     private function resetControlsYes():void
     {
-        getGame().inputManager.ResetToDefaults();
-
+        kGAMECLASS.inputManager.ResetToDefaults();
         EngineCore.clearOutput();
         EngineCore.outputText("Controls have been reset to defaults!\n\n");
 
@@ -649,8 +645,7 @@ public class GameSettings extends BaseContent {
 
     private function clearControls():void
     {
-        getGame().inputManager.HideBindingPane();
-
+        kGAMECLASS.inputManager.HideBindingPane();
         EngineCore.clearOutput();
         EngineCore.outputText("Are you sure you want to clear all of the currently bound controls?");
 
@@ -659,8 +654,7 @@ public class GameSettings extends BaseContent {
 
     private function clearControlsYes():void
     {
-        getGame().inputManager.ClearAllBinds();
-
+        kGAMECLASS.inputManager.ClearAllBinds();
         EngineCore.clearOutput();
         EngineCore.outputText("Controls have been cleared!");
 

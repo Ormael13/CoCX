@@ -97,7 +97,7 @@ import flash.display.Loader;
 				{
 					fileLoaded(e, key);
 				}
-			}
+			};
 
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, f(imPath));
 			imgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, fileNotFound);
@@ -114,7 +114,7 @@ import flash.display.Loader;
 				// split the image name out from the image path.
 
 				// trace("ImageFile - ", _allImagePaths[imPath], imPath);
-				var imId:String = _allImagePaths[imPath]
+				var imId:String = _allImagePaths[imPath];
 				extImage = new Image(imId, imPath, e.target.width, e.target.height);
 
 				// Store the fully-qualified<->image mapping for later use.

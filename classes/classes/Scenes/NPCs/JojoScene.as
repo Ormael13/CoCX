@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 
 public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -143,16 +144,16 @@ public function corruptCampJojo():void {
 		outputText("\n\nJojo is an anthropomorphic mouse with immaculate white fur. His brown eyes stare at you with a mixture of despair and unrequited need. Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed. He’s naked, with a large tainted throbbing member bouncing at attention. A fuzzy sack with painfully large looking balls dangles between his legs.");
 		if (tentacleJojo()) outputText(" A number of tentacles vaugley resembling cocks have sprouted from his back and groin. They sway restlessly around him, oozing thick, fragrant pre from their tips.");
 		
-		if (kGAMECLASS.farm.farmCorruption.hasTattoo("jojo"))
+		if (SceneLib.farm.farmCorruption.hasTattoo("jojo"))
 		{
 			outputText("\n\n");
-			if (kGAMECLASS.farm.farmCorruption.jojoFullTribalTats())
+			if (SceneLib.farm.farmCorruption.jojoFullTribalTats())
 			{
 				outputText("He is covered from head to tail in tribal tattoos, erotic lines snaking all over his naked frame, giving him the look of a barely tamed savage.")
 			}
 			else
 			{
-				if (kGAMECLASS.farm.farmCorruption.numTattoos("jojo") > 1) outputText("He has the following tattoos emblazoned across his body:\n");
+				if (SceneLib.farm.farmCorruption.numTattoos("jojo") > 1) outputText("He has the following tattoos emblazoned across his body:\n");
 				else outputText("He has ");
 
 				if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.JOJO_TATTOO_COLLARBONE] + "\n");
@@ -206,7 +207,7 @@ public function corruptCampJojo():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 0) addButton(7, "Harvest Draft", harvestJojoDraft);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1) addButton(7, "Stop Harvest", stopHarvestJojoDraft);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function harvestJojoDraft():void
@@ -223,7 +224,7 @@ private function harvestJojoDraft():void
 	
 	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] = 1;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function stopHarvestJojoDraft():void
@@ -239,7 +240,7 @@ private function stopHarvestJojoDraft():void
 
 	flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -271,7 +272,7 @@ private function backToCamp():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function jojoMutationOfferYes():void {
@@ -903,7 +904,7 @@ private function jojoPaysForPerms():void {
 	else if(jojoCumQ() >= 4000) 
 		outputText(" with a dazed, crazy-looking smile");
 	outputText(", \"<i>What'll it be today?</i>\"\n\n");
-	kGAMECLASS.mountain.salon.salonPurchaseMenu();
+	SceneLib.mountain.salon.salonPurchaseMenu();
 }
 
 //Scene 1: Amily Teaches Jojo How To Give Blowjobs. (Z)
@@ -1089,8 +1090,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			if (player.lust > 33 && player.gender > 0) {
 				clearOutput();
 				outputText("You smile in satisfaction as Jojo" + (hpVictory ? " collapses, unable to continue fighting" :" collapses and begins masturbating feverishly") + ".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?");
-				doYesNo(postCombatRape, getGame().cleanupAfterCombat);
-			}
+                doYesNo(postCombatRape, kGAMECLASS.cleanupAfterCombat);
+            }
 			else {
 				combat.finishCombat();
 			}
@@ -1132,8 +1133,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					jojosFifthRape();
 			}
 			doNext(camp.returnToCampUseOneHour);
-			if (postCombat) getGame().cleanupAfterCombat();
-		}
+            if (postCombat) kGAMECLASS.cleanupAfterCombat();
+        }
 		
 		private function jojosFirstRape():void {
 			clearOutput();
@@ -2312,43 +2313,43 @@ public function lowCorruptionIntro():void
 
 public function highCorruptionJojoEncounter():void {
 	kGAMECLASS.monk = 1;
-	kGAMECLASS.jojoScene.jojoSprite();
+	SceneLib.jojoScene.jojoSprite();
 	outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your [feet] being swept out from under you, and land hard on your back.\n\n");
 	outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.");
 	outputText("\n\n\"<i>I'm sorry, I sensed a great deal of corruption, and thought a demon or monster had come to my woods,</i>\" says the mouse, \"<i>Oh, where are my manners!</i>\"\n\nHe helps you to your feet and introduces himself as Jojo.  Now that you have a good look at him, it is obvious this mouse is some kind of monk, dressed in robes, holy symbols, and draped with prayer beads.\n\nHe smiles knowingly, \"<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>\"");
 	outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?</i>\"");
 	//Choices time!
 	menu();
-	addButton(0, "Accept", getGame().jojoScene.meditateInForest);
-	addButton(1, "Decline", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
+    addButton(0, "Accept", SceneLib.jojoScene.meditateInForest);
+    addButton(1, "Decline", camp.returnToCampUseOneHour);
+    if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?" : ""));
 }
 
 //Repeat encounter
 public function repeatJojoEncounter():void {
 	if (player.hasStatusEffect(StatusEffects.Infested)) {
-		kGAMECLASS.jojoScene.jojoSprite();
+		SceneLib.jojoScene.jojoSprite();
 		clearOutput();
 		outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n");
 		outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n");
 		//Choices time!
 		menu();
-		addButton(0, "Meditate", getGame().jojoScene.meditateInForest);
-		addButton(1, "Purge", getGame().jojoScene.wormRemoval).hint("Request him to purge the worms from your body.");
-		if (player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0 && player.lust >= 33) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
-		addButton(4, "Leave", camp.returnToCampUseOneHour);
+        addButton(0, "Meditate", SceneLib.jojoScene.meditateInForest);
+        addButton(1, "Purge", SceneLib.jojoScene.wormRemoval).hint("Request him to purge the worms from your body.");
+        if (player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0 && player.lust >= 33) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?" : ""));
+        addButton(4, "Leave", camp.returnToCampUseOneHour);
 		return;
 	}
-	kGAMECLASS.jojoScene.jojoSprite();
+	SceneLib.jojoScene.jojoSprite();
 	outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"");
 	//Choices time!
 	menu();
-	doYesNo(getGame().jojoScene.meditateInForest, camp.returnToCampUseOneHour);
-	if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0) addButton(2, "Rape", getGame().jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
+    doYesNo(SceneLib.jojoScene.meditateInForest, camp.returnToCampUseOneHour);
+    if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?" : ""));
 }
 
 public function corruptJojoEncounter():void {
-	kGAMECLASS.jojoScene.jojoSprite();
+	SceneLib.jojoScene.jojoSprite();
 	clearOutput();
 	outputText("You are enjoying a peaceful walk through the woods when Jojo drops out of the trees ahead, ");
 	if (kGAMECLASS.monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.");
@@ -2444,12 +2445,12 @@ public function jojoCamp():void {
 	clearOutput();
 	jojoSprite();
 	if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
-		getGame().followerInteractions.amilyMeetsPureJojo();
-		return;
+        SceneLib.followerInteractions.amilyMeetsPureJojo();
+        return;
 	}
 	if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0) {
-		getGame().followerInteractions.catchRathazulNapping();
-		return;
+        SceneLib.followerInteractions.catchRathazulNapping();
+        return;
 	}
 	if (player.hasStatusEffect(StatusEffects.Infested)) { // Worms overrides everything else
 		outputText("As you approach the serene monk, you see his nose twitch.\n\n");
@@ -2534,7 +2535,7 @@ public function talkMenu():void
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory).hint("Tell him about how you've shut down the factory.");
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave).hint("Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift).hint("Ask him if he's willing to train you.");
-	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
+	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", SceneLib.highMountains.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
 	//Sex button
 	if (player.cor <= 10 && player.lust >= 33) {
 		addButton(9, "Sex?", offerSexFirstTime).hint("Ask him if he's willing to have sex with you.");
@@ -2970,7 +2971,7 @@ public function apparantlyJojoDOESlift():void
 			outputText("The repeated movements are slowly starting to sink in, your muscles becoming accustomed to Jojo’s training.\n\n");
 			outputText("By the end of the training session with the mouse, you think that you may have picked up something that might help against the denizens of this world.\n\n");
 
-			outputText("<b>(Ability Gained: Cleansing Palm -</b> A ranged fighting technique of Jojo’s order, allows you to blast your enemies with waves of pure spiritual energy, weakening them and hurting the corrupt.<b>)</b>")
+			outputText("<b>(Ability Gained: Cleansing Palm -</b> A ranged fighting technique of Jojo’s order, allows you to blast your enemies with waves of pure spiritual energy, weakening them and hurting the corrupt.<b>)</b>");
 			player.createPerk(PerkLib.CleansingPalm, 0, 0, 0, 0);
 		}
 	}
@@ -3007,16 +3008,16 @@ public function apparantlyJojoDOESlift():void
 		//{each scene only shows if the follower is there}
 		var enlightenedBlurbs:Array = new Array();
 
-		enlightenedBlurbs.push("You can hear Jojo’s feet move through the campsite as he heads toward his rock, seeking rest after your training session.")
+		enlightenedBlurbs.push("You can hear Jojo’s feet move through the campsite as he heads toward his rock, seeking rest after your training session.");
 
 		// Lookit all these different ways followers are tracked! fml.
 		if (player.hasStatusEffect(StatusEffects.CampMarble)) enlightenedBlurbs.push("You can hear Marble humming a song to herself you can’t place.");
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
-		if (kGAMECLASS.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
+		if (SceneLib.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
-		if (kGAMECLASS.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
+		if (SceneLib.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
 
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}

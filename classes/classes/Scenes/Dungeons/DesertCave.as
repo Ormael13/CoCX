@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
+import classes.Scenes.SceneLib;
 
 public class DesertCave extends DungeonAbstractContent
 	{
@@ -1100,9 +1101,9 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.tentacleCocks() >= 3 || player.stamenCocks() > 2) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch).hint("Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
-			
-			if(getGame().inCombat) {
-				if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
+
+if (kGAMECLASS.inCombat) {
+                if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
 			}
 			else addButton(14,"Back",playerMenu);
@@ -1112,8 +1113,8 @@ public class DesertCave extends DungeonAbstractContent
 		public function declineSandWitch():void {
 			clearOutput();
 			outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-			if(getGame().inCombat) cleanupAfterCombat();
-			else doNext(playerMenu);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(playerMenu);
 		}
 
 		//*Male Victory Sex
@@ -1205,12 +1206,13 @@ public class DesertCave extends DungeonAbstractContent
 				player.orgasm();
 			}
 			if(kGAMECLASS.inDungeon) {
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(playerMenu);
+                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(playerMenu);
 			}
-			else { 
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(camp.returnToCampUseOneHour);
+			else {
+
+if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		//*Male "Too Big" Victory Sex
@@ -1248,12 +1250,13 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the [skin] you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(playerMenu);
+                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(playerMenu);
 			}
-			else { 
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(camp.returnToCampUseOneHour);
+			else {
+
+if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1287,12 +1290,13 @@ public class DesertCave extends DungeonAbstractContent
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(playerMenu);
+                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(playerMenu);
 			}
-			else { 
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(camp.returnToCampUseOneHour);
+			else {
+
+if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 			
@@ -1327,12 +1331,13 @@ public class DesertCave extends DungeonAbstractContent
 			
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(playerMenu);
+                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(playerMenu);
 			}
-			else { 
-				if(getGame().inCombat) cleanupAfterCombat();
-				else doNext(camp.returnToCampUseOneHour);
+			else {
+
+if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2118,7 +2123,7 @@ public class DesertCave extends DungeonAbstractContent
 
 		public function slavesDiscussion():void {
 			menu();
-			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
+			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
 			if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves).hint("Request the Sand Mother to release the milk slave you've found in the bathroom.");
 		}
 		//Getting a Milk Slut, Purity Style
@@ -2218,7 +2223,7 @@ public class DesertCave extends DungeonAbstractContent
 
 			//[Next] (To Arriving At Camp)
 			menu();
-			addButton(0,"Next",kGAMECLASS.milkWaifu.arriveWithLacticWaifuAtCamp);
+			addButton(0,"Next",SceneLib.milkWaifu.arriveWithLacticWaifuAtCamp);
 		}
 
 		public function sexWithFriendlySandMother():void {
@@ -2253,7 +2258,7 @@ public class DesertCave extends DungeonAbstractContent
 				addButton(5,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
-			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
+			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
 			addButton(14,"Leave",playerMenu);
 		}
 
@@ -2304,7 +2309,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe Queen Witch listens with rapt attention to your tale, but when you finish, all she does is close her eyes, seemingly lost in thought.  You pause, awaiting her reply.  Seconds tick by, then merge into minutes.  You idly tap your [foot].  Will she ever get done mulling over your words?");
 			outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 			//(No new PG.  Corrupt version)
-			if(player.cor > player.inte || kGAMECLASS.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || kGAMECLASS.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+			if(player.cor > player.inte || kGAMECLASS.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 				outputText("  \"<i>There is some truth to your tale, [name], but I am a Sand Mother.  We are schooled in the art of sussing out the corrupt or unclean.  If we could not detect disguised demons and demonic agents, we would not flourish as we do now, and this great desert would not be on the cusp of resurrection.</i>\"");
 				outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 				outputText("\n\nThere's no way out, it's a fight!");
@@ -2434,16 +2439,16 @@ public class DesertCave extends DungeonAbstractContent
 			flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            else cleanupAfterCombat();
 		}
 		//*Fuck Her Cunt
 		//>Sets to resisting with options for repeat rapes.
 		public function fuckTheSandMothersCunt():void {
 			clearOutput();
 			startCombat(new SandMother(), true);
-			getGame().inCombat = false;
-			var x:int = player.cockThatFits(monster.vaginalCapacity());
+            kGAMECLASS.inCombat = false;
+            var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You admire your prize for a moment, reveling triumphantly in your victory as you hastily disrobe.  The Sand Mother, defeated and weak, declares, \"<i>Fine then, do as you will.  You won't break me.</i>\"  The venom in her voice takes you off-guard - she still thinks you're a demonic agent!  You shrug and roll her over, pulling her up onto her hands and knees.  She can think what she wants, but you're going to tap her super-curvy body regardless.  You smack the weakened Queen through her sheer robes and admire the ripple that moves from one side of her well-endowed tush to the other.");
 			if(silly()) outputText("  Dat booty be poppin', yo!");
@@ -2509,8 +2514,8 @@ public class DesertCave extends DungeonAbstractContent
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            else cleanupAfterCombat();
 		}
 
 		//*ScissorAnDrink
@@ -2559,8 +2564,8 @@ public class DesertCave extends DungeonAbstractContent
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            else cleanupAfterCombat();
 		}
 			
 		//*Lose Male Loss
@@ -2780,8 +2785,8 @@ public class DesertCave extends DungeonAbstractContent
 		public function friendlySandMotherFuck():void {
 			clearOutput();
 			startCombat(new SandMother(), true);
-			getGame().inCombat = false;
-			var x:int = player.cockThatFits(monster.vaginalCapacity());
+            kGAMECLASS.inCombat = false;
+            var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			//First Time:
 			if(flags[kFLAGS.TIMES_FRIENDLY_FUCKED_SAND_MOTHER] == 0) {
@@ -4070,7 +4075,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Cavernous Commons</u></b>\n");
 			outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
-			dungeons.setDungeonButtons(null, checkExit, roomWestHall1, roomEastHall1)
+			dungeons.setDungeonButtons(null, checkExit, roomWestHall1, roomEastHall1);
 			if(flags[kFLAGS.SANDWITCH_MOB_DEFEATED] == 0) {
 				outputText("Worst of all, a huge assortment of spellcasters is assembling into a mob, obviously hostile.");
 				outputText("\n\n<b>A magical barrier appears at the exit, preventing your escape!</b>");
@@ -4128,12 +4133,12 @@ public class DesertCave extends DungeonAbstractContent
 				if(flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] > 0) {
 					outputText("\n\n<b>Your attention is immediately drawn to Essrayle...</b>");
 					menu();
-					addButton(0,"Next",kGAMECLASS.forest.essrayle.essyWitchVictory);
+					addButton(0,"Next",SceneLib.forest.essrayle.essyWitchVictory);
 					flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] = 1;
 					return;
 				}
 				outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
-				addButton(0, "Essrayle", kGAMECLASS.forest.essrayle.approachTrappedEssy).hint("Approach Essrayle the plant-girl.");
+				addButton(0, "Essrayle", SceneLib.forest.essrayle.approachTrappedEssy).hint("Approach Essrayle the plant-girl.");
 			}
 		}
 		public function roomNursery():void {

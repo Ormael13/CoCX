@@ -16,9 +16,6 @@ use namespace kGAMECLASS;
 		public function get game():CoC{
 			return kGAMECLASS;
 		}
-		public function getGame():CoC{
-			return kGAMECLASS;
-		}
 
 		public function clearOutput():void{
 			EngineCore.clearOutput();

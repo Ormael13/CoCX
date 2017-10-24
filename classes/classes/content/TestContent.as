@@ -23,7 +23,7 @@ package classes.content
 			outputText("\nsackDescript " + sackDescript());
 			outputText("\ncockClit " + cockClit);
 //			outputText("\nballs " + balls(0, 0));
-			outputText("\nsheathDesc " + player.sheathDesc());
+			//outputText("\nsheathDesc " + player.sheathDesc());
 			outputText("\nchestDesc " + chestDesc());
 			outputText("\nallChestDesc " + allChestDesc());
 			outputText("\nsMultiCockDesc " + player.sMultiCockDesc());
@@ -53,7 +53,7 @@ package classes.content
 			outputText("\nbreaseSize 5" + breastSize(5));
 			outputText("\nbreastDescript " + breastDescript(0));
 			outputText("\ncockHead " + player.cockHead());
-			outputText("\nbreastCup 5 " + breastCup(5));
+			//outputText("\nbreastCup 5 " + breastCup(5));
 			
 			outputText("\n\nParser Tags (Single)L\n");
 			outputText("\naagility [agility]");

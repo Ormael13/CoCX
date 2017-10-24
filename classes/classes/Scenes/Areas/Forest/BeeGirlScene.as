@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class BeeGirlScene extends BaseContent
 	{
@@ -379,8 +380,8 @@ public class BeeGirlScene extends BaseContent
 				outputText("Your [cock] wriggles free of your [armor], as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n");
 				outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your [cock].  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, [name]?  I need some honeyyy!</i>\"\n\n");
 				outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?");
-				doYesNo(getGame().exgartuan.exgartuanBeeRape, camp.returnToCampUseOneHour);
-			}
+                doYesNo(SceneLib.exgartuan.exgartuanBeeRape, camp.returnToCampUseOneHour);
+            }
 			else {
 				outputText("The bee-girl's eyes widen at the sight,  shocked by your over-endowed form being dragged towards her as if there were a magnet in your [cock].   She flutters into the air and aims her stinger towards you, ready to fight!");
 				//start combat

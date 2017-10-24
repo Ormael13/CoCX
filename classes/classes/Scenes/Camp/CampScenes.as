@@ -4,18 +4,13 @@
  */
 package classes.Scenes.Camp 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Camp;
-	import classes.Scenes.Camp.*;
-	import classes.Scenes.NPCs.*;
-	import classes.StatusEffects;
-	
-	import coc.view.MainView;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.NPCs.*;
+import classes.Scenes.SceneLib;
+
+use namespace kGAMECLASS;
 	
 	public class CampScenes extends NPCAwareContent
 {
@@ -23,8 +18,8 @@ package classes.Scenes.Camp
 public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
 
 public function KitsuneShrine():void {
-	var tailz:int = getGame().kitsuneScene.meditateAtKitsuneShrine();
-	if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER == 0]) {
+    var tailz:int = SceneLib.kitsuneScene.meditateAtKitsuneShrine();
+    if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER == 0]) {
 		outputText("\n\nYou see a form surging from the shadow of the shrine. It’s Ayane and you ponder how she found your camp.");
 		outputText("\n\nThe kitsune approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 		outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");

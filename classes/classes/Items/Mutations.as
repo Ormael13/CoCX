@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Consumables.EmberTF;
 import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Scenes.SceneLib;
 
 public final class Mutations extends MutationsHelper
 	{
@@ -2517,7 +2518,7 @@ public final class Mutations extends MutationsHelper
 				}
 			}
 			//Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
-			kGAMECLASS.marbleScene.marbleStatusChange(0, 5);
+			SceneLib.marbleScene.marbleStatusChange(0, 5);
 			//Does not apply the 'Marble's Milk' effect
 			//Purge withdrawl
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
@@ -8530,8 +8531,8 @@ public final class Mutations extends MutationsHelper
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
-			if (!getGame().inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
-			//(In combat?)
+            if (!kGAMECLASS.inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
+            //(In combat?)
 			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
 
 			//Increase HP by quite a bit!)
@@ -9813,7 +9814,7 @@ public final class Mutations extends MutationsHelper
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			if (returnToBakery) {
-				doNext(kGAMECLASS.telAdre.bakeryScene.bakeryuuuuuu);
+				doNext(SceneLib.telAdre.bakeryScene.bakeryuuuuuu);
 			}
 		}
 		

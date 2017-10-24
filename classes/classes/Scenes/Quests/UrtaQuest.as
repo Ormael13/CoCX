@@ -5,6 +5,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Plains.GnollSpearThrower;
 import classes.Scenes.NPCs.NPCAwareContent;
 import classes.Scenes.Quests.UrtaQuest.*;
+import classes.Scenes.SceneLib;
 
 public class UrtaQuest extends NPCAwareContent
 	{
@@ -929,8 +930,8 @@ private function loseToGoblinsPartIVAsUrta():void {
 private function urtaGameOver():void {
 	clearOutput();
 	outputText("<b>Urta has been lost to her fate...  Meanwhile, back at camp...</b>");
-	getGame().inCombat = false;
-	flags[kFLAGS.URTA_QUEST_STATUS] = -1;
+    kGAMECLASS.inCombat = false;
+    flags[kFLAGS.URTA_QUEST_STATUS] = -1;
 	model.time.days++;
 	resetToPC();
 	model.time.hours = 6;
@@ -964,11 +965,11 @@ private function urtaGameOver():void {
 
 public function urtaSpecials():void {
 //Gone	menuLoc = 3;
-	if (getGame().inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
-		clearOutput();
+    if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
+        clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-		getGame().enemyAI();
-		return;
+        kGAMECLASS.enemyAI();
+        return;
 	}
 	menu();
 	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 40");
@@ -981,8 +982,8 @@ public function urtaSpecials():void {
 }
 
 public function urtaMSpecials():void {
-	if (getGame().inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 6) {
-		clearOutput();
+    if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 6) {
+        clearOutput();
 		outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
 		return;
@@ -2389,8 +2390,8 @@ private function preggedUrtaWithGodChildEpilogue():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, " + player2.short + ".  I'm so exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	outputText("\n\nYou help her leave the tower, arm in arm, saying goodbye to her only after she's tucked tightly into her bed at home, to rest.  Urta gives you a teary kiss before you leave with a little swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	getGame().inCombat = false;
-	doNext(camp.returnToCampUseOneHour);
+    kGAMECLASS.inCombat = false;
+    doNext(camp.returnToCampUseOneHour);
 }
 
 //Urta Knocks Up PC with God Child
@@ -2536,8 +2537,8 @@ private function getKnockedUpByUrtaEpilogueII():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, [name].  I bet you're exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	outputText("\n\nShe helps leave the tower, arm in arm, saying her goodbye only after she's tucked you in to take a rest.  Urta gives you a teary kiss and trots back towards the city with a swagger in her step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	getGame().inCombat = false;
-	doNext(camp.returnToCampUseOneHour);
+    kGAMECLASS.inCombat = false;
+    doNext(camp.returnToCampUseOneHour);
 }
 
 //Urta Goes to Knock Up Edryn with God Child*
@@ -2548,8 +2549,8 @@ private function urtaAndEdrynGodChild():void {
 	flags[kFLAGS.URTA_FERTILE]        = telAdre.edryn.pregnancy.type;       //Use these two flags to store the pregnancy that Taoth is overriding.
 	flags[kFLAGS.URTA_PREG_EVERYBODY] = telAdre.edryn.pregnancy.incubation; //Since they can't be in use prior to Taoth being born this is fine.
 	telAdre.edryn.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_TAOTH, 24);
-	getGame().inCombat = false;
-	doNext(camp.returnToCampUseOneHour);
+    kGAMECLASS.inCombat = false;
+    doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -2571,15 +2572,15 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("As the double doors open, you hear a painful moan from the ");
 	//{pre-pregnant }
 	outputText("horse-girl.");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
 	outputText("  Urta leads you around a bend, squeezing your hand for comfort.  \"<i>Thank you for everything, [name], most of all being so understanding.</i>\"  The gray-furred fox pushes past the sixth pair of guards you've seen since entering the tower, just inside to see Edryn splayed on the floor, groaning and heaving, her ");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("massively ");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("massively ");
 	outputText("pregnant flanks rippling with muscular contractions.   Something is bulging against her nether-lips, stretching the massive horse-cunt wider and wider with each passing moment.");
 	outputText("\n\nSlick with birthing fluids, a ball of fur, skin, and bones rolls out onto a mat placed there a moment before by a nearby centaur.  You squint at it, wondering just what everybody is so excited about - it looks little and messy, like any other newborn.");
 	outputText("\n\nThe ball unfolds itself, one spindly leg at a time, each covered in a short layer of fuzz.  The limbs seem too tiny, too frail, even for a creature new to this world.  A hand disengages itself from the rest of the mass, stringing the clear birthing fluids behind it, revealing an equally frail-looking arm.  You can see its head now, fox-like, with a long vulpine muzzle and large, luminous eyes.  The newborn rises on it's newly revealed limbs and stretches, standing almost five feet tall when fully unfolded.");
 	outputText("\n\n<i>I live.</i>");
 	outputText("\n\nThe voice isn't spoken aloud but inside, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving Edryn's ass a familiar pat.");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
 	outputText("  Edryn's eyes immediately close, sinking into a deep, restful sleep.");
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It strides confidently forward, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You step back, reluctantly");
 	if(player.cor > 66) outputText(", what do you care, anyway?");
@@ -2591,8 +2592,8 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\nYou leave the tower arm in arm, saying your goodbye when Urta stops at her place to rest.  She gives you a teary kiss and sends you on your way with a swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	//set completed tags!
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	getGame().inCombat = false;
-	doNext(camp.returnToCampUseOneHour);
+    kGAMECLASS.inCombat = false;
+    doNext(camp.returnToCampUseOneHour);
 }
 }
 }

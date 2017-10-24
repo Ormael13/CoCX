@@ -2,6 +2,7 @@ package classes.Scenes.Places.Boat
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 
 public class Marae extends Monster
 	{
@@ -21,7 +22,7 @@ public class Marae extends Monster
 			else
 			{
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
-				var damage:int = ((str + 100) + rand(50))
+				var damage:int = ((str + 100) + rand(50));
 				player.dynStats("lust", rand(5) + 5);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
@@ -75,12 +76,12 @@ public class Marae extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.boat.marae.winAgainstMarae();
+			SceneLib.boat.marae.winAgainstMarae();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.boat.marae.loseAgainstMarae();
+			SceneLib.boat.marae.loseAgainstMarae();
 		}
 		
 		override public function doAI():void {
@@ -124,12 +125,12 @@ public class Marae extends Monster
 			this.short = "Marae";
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
+				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion.";
 				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 			}
 			else {
-				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
+				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
 				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 			}

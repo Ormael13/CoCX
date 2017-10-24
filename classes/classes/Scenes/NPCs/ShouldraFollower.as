@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class ShouldraFollower extends NPCAwareContent {
 
@@ -36,8 +36,8 @@ private function shouldraSleeping(changes:int = 0, reset:Boolean = false):Boolea
 	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < 0) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 0;
 	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] > 48) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 48;
 	//Is she sleeping?
-	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] > 0) return true;
-	return false;	
+	return flags[kFLAGS.SHOULDRA_SLEEP_TIMER] > 0;
+
 }
 
 
@@ -1432,7 +1432,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//13 (is Naga)
 	if(player.isNaga()) choices[choices.length] = 13;
 	//14 (Amily is a follower)
-	if(kGAMECLASS.amilyScene.amilyFollower()) choices[choices.length] = 14;
+	if(SceneLib.amilyScene.amilyFollower()) choices[choices.length] = 14;
 	//15 (Pure Jojo is a follower)
 	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) choices[choices.length] = 15;
 	//16 (has any of Marae's gift perks)

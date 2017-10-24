@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
@@ -16,12 +17,12 @@ use namespace kGAMECLASS;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpPack();
+			SceneLib.impScene.defeatImpPack();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpPack();
+			SceneLib.impScene.loseToAnImpPack();
 		}
 		
 		public function ImpPack()
@@ -46,7 +47,7 @@ use namespace kGAMECLASS;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.skinTone = "green";
-			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies."
+			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies.";
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";

@@ -2,6 +2,7 @@
 import classes.AppearanceDefs;
 import classes.GlobalFlags.*;
 import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
 
 public class UrtaPregs extends NPCAwareContent {
 
@@ -42,7 +43,7 @@ URTA_LATESTBORN_GENDER
 URTA_LATESTBORN_COCKTYPE
 */
 
-		private function get pregnancy():PregnancyStore { return kGAMECLASS.urta.pregnancy; }
+		private function get pregnancy():PregnancyStore { return SceneLib.urta.pregnancy; }
 
 //Urta Pregnancy Stages
 //Urta takes 2 days to progress from one pregnancy stage to the next
@@ -792,7 +793,7 @@ public function urtaIsHappyAboutPregnancyAtTheBar():void {
 public function urtaIsAPregnantCopScene():void {
 	clearOutput();
 	outputText("As you enter the main square and start looking around to decide where to go next, a commotion erupts across the square.  \"<i>Stop in the name of the law!</i>\"  Edryn's voice rings out as a young, raggedy-looking dog-morph erupts from the crowd, Edryn in hot pursuit.  Unfortunately for the centauress, the smaller biped is quicker, more nimble, and better suited for making his way through the crowd.");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  Edryn's pregnant belly isn't helping her, either.");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("  Edryn's pregnant belly isn't helping her, either.");
 	
 	outputText("\n\nAs you contemplate whether or not to get involved, you realize that the thief's path is taking him right to a certain pregnant fox-morph, who watches him approach with a cool expression.  The moment he gets close enough, she pounces - in a startlingly quick display of bone-crunching violence, she has him face down on the cobblestones and body pinned.  As you meander over, she speaks up.");
 	
@@ -813,11 +814,11 @@ public function urtaSpecialDeliveries():void {
 	clearOutput();
 	
 	outputText("As you enter through the gates, Edryn clops up to you, a small basket swinging from the crook of one arm");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText(" and her pregnant belly jiggling from the motions");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText(" and her pregnant belly jiggling from the motions");
 	outputText(", a faint smile on her face.  \"<i>Hey there, [name]; can you do me a favor, please?  Urta's been getting deliveries to her place, but I got an unexpected call, so I'm too busy to take her groceries to her today - you're her " + player.mf("boyfriend","girlfriend") + "; can you please take this for me?</i>\"  The centauress asks.");
 	
 	outputText("\n\nReasoning that it shouldn't take you too long, and Urta's likely to appreciate the action, you agree to do so and she hands it over with a rather knowing smile.  She then gallops off, ");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("as quickly as a pregnant mare can, anyway,");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("as quickly as a pregnant mare can, anyway,");
 	outputText(" leaving you to head on to Urta's house.");
 	
 	outputText("\n\nYou follow the familiar path to Urta's new house.  Along the way you wonder if she'll be there; usually she's out and only Lianna and the kids are in.  Once you arrive, you rap your knuckles on the door and wait.  Lianna opens the door.  \"<i>Hello [name], come in.</i>\"  She steps aside to let you in.");
@@ -2267,7 +2268,7 @@ private function takeTheKidsForWalk():void {
 	outputText(" don't bother waiting or savouring their ice cream and neither do you, it's damned hot walking around this desert.  There's less cause for mischief too, " + urtaKidsText("his","her","their") + " face");
 	if(urtaKids() == 1) outputText("buried in cone");
 	else outputText("s buried in their cones");
-	outputText(" along with your own, greedily licking up melting droplets.  ")
+	outputText(" along with your own, greedily licking up melting droplets.  ");
 	player.refillHunger(20, false);
 	outputText("  There's just a bit of cone left as you return to Urta's house, and you quickly polish that off, upon entering.  \"<i>Oh, hey.  You're back.</i>\"  Lianna greets you in her usual inexpressive fashion.");
 	

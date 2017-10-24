@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Clara extends Monster
 	{
@@ -128,11 +129,11 @@ public class Clara extends Monster
 				//PC wins via lust
 				else outputText("The fury and anger finally give out to the overwhelming lust that you’ve help Clara feel.  She can’t fight anymore, and falls onto her backside.  She starts feeling herself up, and desperately asks you to fuck her.\n\n");
 			}
-			game.marblePurification.defeatClaraCuntInAFight();
+			SceneLib.marblePurification.defeatClaraCuntInAFight();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.marblePurification.loseToClara();
+			SceneLib.marblePurification.loseToClara();
 		}
 
 		public function Clara()

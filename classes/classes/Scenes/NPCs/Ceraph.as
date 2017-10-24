@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Ceraph extends Monster
 	{
@@ -274,7 +275,7 @@ public class Ceraph extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.ceraphScene.winRapeChoices();
+			SceneLib.ceraphScene.winRapeChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -283,7 +284,7 @@ public class Ceraph extends Monster
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.ceraphScene.loseFUCKME();
+				SceneLib.ceraphScene.loseFUCKME();
 			}
 		}
 

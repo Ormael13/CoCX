@@ -16,8 +16,8 @@ public class OnikiriSake extends Consumable {
 	
 	override public function get description():String {
 		var desc:String = _description;
-		if (flags[kFLAGS.IZUMI_MET] > 0) desc += " Izumi kept a full stock of this in her camp. A strong beverage just like the people who drinks it."
-		desc += "\n\nType: Consumable "
+		if (flags[kFLAGS.IZUMI_MET] > 0) desc += " Izumi kept a full stock of this in her camp. A strong beverage just like the people who drinks it.";
+		desc += "\n\nType: Consumable ";
 		desc += "\nBase value: " + String(value);
 		return desc;
 	}

@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Holli extends Monster
 	{
@@ -211,12 +212,12 @@ public class Holli extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.holliScene.defeatHolli();
+			SceneLib.holliScene.defeatHolli();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.holliScene.enjoyYourBadEndBIYAAAATCH();
+			SceneLib.holliScene.enjoyYourBadEndBIYAAAATCH();
 		}
 
 

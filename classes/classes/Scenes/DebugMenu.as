@@ -42,8 +42,8 @@ public class DebugMenu extends BaseContent
 		public function accessDebugMenu():void {
 			LogProfilingReport();
 			//buildArray();
-			if (!getGame().inCombat) {
-				hideMenus();
+            if (!kGAMECLASS.inCombat) {
+                hideMenus();
 				mainView.nameBox.visible = false;
 				mainView.nameBox.text = "";
 				mainView.nameBox.maxChars = 16;
@@ -63,8 +63,8 @@ public class DebugMenu extends BaseContent
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
-			if (getGame().inCombat) {
-				clearOutput();
+            if (kGAMECLASS.inCombat) {
+                clearOutput();
 				outputText("You raise the wand and give it a twirl but nothing happens. Seems like it only works when you're not in the middle of a battle.");
 				doNext(playerMenu);
 			}
@@ -516,7 +516,7 @@ public class DebugMenu extends BaseContent
 			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", EngineCore.doNothing).hint("Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
-			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
+			addButton(7, "Isabella Birth", SceneLib.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
 			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
 			addButton(9, "Color Picker", colorPickerRoot).hint("HSL picker for skin/hair color");
 			addButton(14, "Back", accessDebugMenu);
@@ -524,8 +524,8 @@ public class DebugMenu extends BaseContent
 		private function generateTagDemos(...tags:Array):String {
 			return tags.map(function(tag:String,index:int,array:Array):String {
 				return "\\["+tag+"\\] = " +
-					   getGame().parser.recursiveParser("["+tag+"]").replace(' ','\xA0')
-			}).join(",\t");
+                        kGAMECLASS.parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
+            }).join(",\t");
 		}
 		private function showChangeOptions(backFn:Function, page:int, constants:Array, functionPageIndex:Function):void {
 			var N:int = 12;
@@ -651,8 +651,8 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-			var pa:PlayerAppearance = getGame().playerAppearance;
-			pa.describeRace();
+            var pa:PlayerAppearance = kGAMECLASS.playerAppearance;
+            pa.describeRace();
 			pa.describeFaceShape();
 			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 			pa.describeEyes();
@@ -1391,7 +1391,7 @@ public class DebugMenu extends BaseContent
 		
 		private function eventTriggerMenu():void {
 			menu();
-			addButton(0, "Anemone", kGAMECLASS.anemoneScene.anemoneKidBirthPtII);
+			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
 			//addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
 			//addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
 			//addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
@@ -1605,7 +1605,7 @@ public class DebugMenu extends BaseContent
 		
 		public function toggleSlot(slot:int):void
 		{
-			lightsArray[slot] = !lightsArray[slot]
+			lightsArray[slot] = !lightsArray[slot];
 			
 			if (lightsArray[slot]) 
 			{

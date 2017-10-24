@@ -6,6 +6,7 @@ package classes.Items.Consumables
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.Items.Consumable;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public final class Reducto extends Consumable {
@@ -43,7 +44,7 @@ public final class Reducto extends Consumable {
 			if (game.player.ballSize < 1) game.player.ballSize = 1;
 			outputText("You feel your scrotum shift, shrinking down along with your " + game.player.ballsDescriptLight() + ".  Within a few seconds the paste has been totally absorbed and the shrinking stops.");
 			game.player.dynStats("lib", -2, "lus", -10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoBreasts():void {
@@ -56,7 +57,7 @@ public final class Reducto extends Consumable {
 			}
 			outputText("\nThe last of it wicks away into your skin, completing the changes.");
 			game.player.dynStats("sen", -2, "lus", -5);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoButt():void {
@@ -76,7 +77,7 @@ public final class Reducto extends Consumable {
 				outputText("After a few seconds your " + game.player.buttDescript() + " has shrunk to a much smaller size!");
 			}
 			game.player.dynStats("lib", -2, "lus", -10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoClit():void {
@@ -87,7 +88,7 @@ public final class Reducto extends Consumable {
 			game.player.clitLength = int(game.player.clitLength * 100) / 100;
 			outputText("Your " + game.player.clitDescript() + " shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.");
 			game.player.dynStats("sen", 2, "lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoCock():void {
@@ -112,7 +113,7 @@ public final class Reducto extends Consumable {
 				}
 			}
 			game.player.dynStats("sen", -2, "lus", -10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoHips():void {
@@ -132,7 +133,7 @@ public final class Reducto extends Consumable {
 				outputText("After a few seconds your [hips] have shrunk to a much smaller size!");
 			}
 			game.player.dynStats("lib", -2, "lus", -10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoNipples():void {
@@ -148,20 +149,20 @@ public final class Reducto extends Consumable {
 				game.player.nippleLength /= 2;
 			}
 			game.player.dynStats("sen", -5, "lus", -5);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		public function shrinkHorns():void {
 			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n");
-			outputText("Incredibly, it works and you can feel your horns receding by an inch.")
+			outputText("Incredibly, it works and you can feel your horns receding by an inch.");
 			game.player.horns -= 1;
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function reductoCancel():void {
 			clearOutput();
 			outputText("You put the salve away.\n\n");
-			game.inventory.returnItemToInventory(this);
+			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
 }

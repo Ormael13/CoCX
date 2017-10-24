@@ -7,6 +7,7 @@ import classes.Cock;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -103,7 +104,7 @@ import classes.VaginaClass;
 					outputText("\n\n[He] goes on in a dull croon as [he] continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. “<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>”");
 					outputText("\n\nA weird fluttering feeling runs up your arm, and with a cold chill you look down to see it shimmer slightly, as if you were looking at it through running water.");
 					outputText("\n\n<b>You need to finish this as fast as you can.</b>");
-					break
+					break;
 					
 				case 1:
 					outputText("\n\n“<i>Do you know, I can’t even remember what gender I was before I got stuck in that mirror?</i>” the doppelganger says, as [he] slides a hand between your thighs’ mirror counterparts thoughtfully. “<i>I loved changing all the time. Being stuck as one gender seemed so boring when the tools to shift from one shape to the next were always there. That’s why this was my punishment. Forced to change all the time, at the unthinking behest of whoever happened to look into this cursed thing. You have to give Lethice credit, she’s not just cruel, she’s got imagination too. It’s a hell of a combination. I’d hate to see what she had in store for you.</i>”");
@@ -148,12 +149,12 @@ import classes.VaginaClass;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.doppleganger.punchYourselfInTheBalls();
+			SceneLib.d3.doppleganger.punchYourselfInTheBalls();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.doppleganger.inSovietCoCSelfFucksYou();
+			SceneLib.d3.doppleganger.inSovietCoCSelfFucksYou();
 		}
 		
 		public function handleSpellResistance(spell:String):void
@@ -164,7 +165,7 @@ import classes.VaginaClass;
 			
 			if (spell == "fireball")
 			{
-				var damage:Number = player.level * 10 + 45 + rand(10)
+				var damage:Number = player.level * 10 + 45 + rand(10);
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
@@ -172,7 +173,7 @@ import classes.VaginaClass;
 			}
 			else if (spell == "whitefire")
 			{
-				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2))
+				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 				damage2 = Math.round(damage2);

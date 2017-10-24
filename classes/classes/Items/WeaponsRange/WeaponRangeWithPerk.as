@@ -40,7 +40,7 @@ package classes.Items.WeaponsRange
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Range Weapon "
+			desc += "\n\nType: Range Weapon ";
 			if (perk == "Bow") desc += "(Bow)";
 			else if (perk == "Crossbow") desc += "(Crossbow)";
 			else if (perk == "Pistol") desc += "(Pistol)";

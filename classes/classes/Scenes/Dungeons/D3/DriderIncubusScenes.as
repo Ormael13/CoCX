@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 public class DriderIncubusScenes extends BaseContent
@@ -289,9 +290,9 @@ public class DriderIncubusScenes extends BaseContent
 
 		public function afterDriderbuttFight():void
 		{
-			
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		public function killDrider():void
 		{
@@ -356,11 +357,10 @@ public class DriderIncubusScenes extends BaseContent
 			outputText("\n\nJust looking at the goblin’s smiling face as you smear it back and forth through puddles of demon-cum has you almost ready to go off. You swat her cushy heiny in between rapid-fire thrusts, wondering if you should keep her while your orgasm rises up like a slumbering beast.");
 
 			//Followers
-			if (getGame().camp.companionsCount() > 0)
-			{
+            if (SceneLib.camp.companionsCount() > 0) {
 				outputText("\n\nYour other follower");
-				if (getGame().camp.companionsCount() > 1) outputText("s");
-				outputText(" wouldn’t mind having a well-practiced goblin cooze around, would they? You certainly wouldn’t.");
+                if (SceneLib.camp.companionsCount() > 1) outputText("s");
+                outputText(" wouldn’t mind having a well-practiced goblin cooze around, would they? You certainly wouldn’t.");
 			}
 			//No Followers
 			else

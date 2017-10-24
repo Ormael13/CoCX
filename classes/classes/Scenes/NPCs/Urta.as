@@ -2,9 +2,9 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Places.TelAdre.Katherine;
 import classes.Scenes.Places.TelAdre.Scylla;
+import classes.Scenes.SceneLib;
 
 public class Urta extends NPCAwareContent implements TimeAwareInterface {
 
@@ -134,7 +134,7 @@ override public function urtaLove(love:Number = 0):Boolean {
 public function urtaAvailableForSex():Boolean { return urtaFuckbuddy() && telAdre.scylla.action != Scylla.SCYLLA_ACTION_FUCKING_URTA && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] == 0; }
 
 public function urtaFuckbuddy():Boolean { //Returns true if Urta is either the player's fuckbuddy or lover
-	if (kGAMECLASS.urtaQuest.urtaBusy() || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) return false;
+	if (SceneLib.urtaQuest.urtaBusy() || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) return false;
 	if (urtaJustFriends()) return false;
 	return (flags[kFLAGS.TIMES_FUCKED_URTA] > 0);
 }
@@ -142,7 +142,7 @@ public function urtaFuckbuddy():Boolean { //Returns true if Urta is either the p
 public function urtaJustFriends():Boolean { return flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == 0 && flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1; }
 
 public function urtaAtBar():Boolean { //Is Urta physically at the Wet Bitch?
-	return (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15 && flags[kFLAGS.KATHERINE_UNLOCKED] != 3);
+	return (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15 && flags[kFLAGS.KATHERINE_UNLOCKED] != 3);
 }
 
 public function urtaDrunk():Boolean {
@@ -2810,7 +2810,7 @@ private function urtaDiscussesSelf():void {
 	if (urtaJustFriends())
 		simpleChoices("Flirt", flirtWithUrta, "Employment", urtaDiscussesEmployment, "Prejudice", urtaDiscussesPrejudice, "", null, "Back", urtaDialogueMenu);
 	else if (flags[kFLAGS.URTA_QUEST_STATUS] == .5)
-		simpleChoices("Infertility",kGAMECLASS.urtaQuest.infertilityQuestions,
+		simpleChoices("Infertility",SceneLib.urtaQuest.infertilityQuestions,
 				"Romance&Sex",urtaDiscussesSexAndRomance,
 				"Employment",urtaDiscussesEmployment,
 				"Prejudice",urtaDiscussesPrejudice,
@@ -3073,7 +3073,7 @@ private function urtaDiscussesFamily():void {
 		urtaDialogueMenu();
 	}
 	else {
-		kGAMECLASS.urtaQuest.talkWithUrtaAboutFamFam();
+		SceneLib.urtaQuest.talkWithUrtaAboutFamFam();
 	}
 }
 
@@ -3128,7 +3128,7 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	outputText("\n\nThe table suddenly jolts visibly as Urta's erection slams into it, the engorged flesh audibly crashing against the wood.  She gives you a flat look.  \"<i>Now look what you've gone and done,</i>\" she says, trying to sound stern, but coming off as a little amused.  \"<i>I hope you're going to take responsibility for this...</i>\"");
 	urtaLove(1);
 	//Appropriate sex scene options are given; Hidden Blowjob and Urta's Place for regular Urta and Urta's Place, Suck Off and Eat Out for lover mode Urta
-	menu()
+	menu();
 	if (!urtaLove()) {
 		addButton(0, "Urta's Place", goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
 		addButton(1, "Hidden BJ", blowUrtaUnderTable).hint("Suck Urta's dick until she cums!");
@@ -4573,7 +4573,7 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	outputText("\n\nYour mind reels, how many times have you gone through this?  Twelve?  Fifteen?  Hours upon hours lost within these two balls.  Anything either of you try to do simply doesn't work.  Urta's tried masturbating with either hand, then both.  She's tried it in the shower, and though the warm water felt good running over your cage, it was no more useful.  She's tried every possible position, every possible method...");
 
 	outputText("\n\nThere's a knock at the door and you hear a ");
-	var edrynAvailable:Boolean = !kGAMECLASS.telAdre.edryn.pregnancy.isPregnant;
+	var edrynAvailable:Boolean = !SceneLib.telAdre.edryn.pregnancy.isPregnant;
 	if (edrynAvailable) outputText("set of hoofsteps");
 	else outputText("pair of footsteps");
 	outputText(" enter whatever room you're in. \"<i>Hey, Urta, you haven't shown up for your shift today so...  Great googily moogily!  What happened to you?!</i>\" a voice you ");

@@ -102,8 +102,8 @@ public class PerkMenu extends BaseContent {
 			else addButton(11, "All Hexe", hexaAttack);
 		}
 
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function hexaAttack():void {
@@ -199,8 +199,8 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 
 		var e:MouseEvent;
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function darknessArrows():void {
@@ -383,8 +383,8 @@ public class PerkMenu extends BaseContent {
 	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
 
 		var e:MouseEvent;
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function elementalNotAttacking():void {

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -14,7 +15,7 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
+			SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -23,7 +24,7 @@ import classes.internals.*;
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
 				doNext(game.endLustLoss);
 			} else {
-				game.swamp.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
+				SceneLib.swamp.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
 			}
 		}
 

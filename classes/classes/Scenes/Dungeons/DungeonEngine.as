@@ -1,13 +1,13 @@
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	
-	import coc.view.MainView;
-	
-	public class DungeonEngine extends BaseContent
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+
+import coc.view.MainView;
+
+public class DungeonEngine extends BaseContent
 	{
 		//Dungeon constants
 		private static const DUNGEON_FACTORY_FOYER:int				= 0;
@@ -229,7 +229,7 @@ package classes.Scenes.Dungeons
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.hideMenuButton( MainView.MENU_DATA );
-			kGAMECLASS.camp.setLevelButton(true);
+			SceneLib.camp.setLevelButton(true);
 		}
 		
 		/**
@@ -248,8 +248,8 @@ package classes.Scenes.Dungeons
 			if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
-			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
-			addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+            addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
 			setTopButtons();
 		}

@@ -1,14 +1,18 @@
 ﻿
 package classes.Parser
 {
-	// import classes.CoC;
+import classes.CoC_Settings;
+import classes.EngineCore;
+import classes.display.DebugInfo;
+
+// import classes.CoC;
 
 	public class Parser
 	{
 		//import showdown.Showdown;
 
-		private var _ownerClass:*;			// main game class. Variables are looked-up in this class.
-		private var _settingsClass:*;		// global static class used for shoving conf vars around
+		private var _ownerClass:CoC;			// main game class. Variables are looked-up in this class.
+		private var _settingsClass:CoC_Settings;		// global static class used for shoving conf vars around
 
 		public var sceneParserDebug:Boolean = false;
 
@@ -89,7 +93,7 @@ package classes.Parser
 			var capitalize:Boolean = isUpperCase(arg.charAt(0));
 
 			var argLower:String;
-			argLower = arg.toLowerCase()
+			argLower = arg.toLowerCase();
 			if (argLower in singleArgConverters)
 			{
 				//if (logErrors) trace("WARNING: Found corresponding anonymous function");
@@ -218,7 +222,7 @@ package classes.Parser
 
 
 
-			if (lookupParserDebug) trace("WARNING: trying to look-up two-word tag in parent")
+			if (lookupParserDebug) trace("WARNING: trying to look-up two-word tag in parent");
 
 			// ---------------------------------------------------------------------------------
 			// TODO: Get rid of this shit.
@@ -269,10 +273,10 @@ package classes.Parser
 				{
 
 					if (thing.hasOwnProperty(aspectLookup))
-						return thing[aspectLookup]
+						return thing[aspectLookup];
 
 					else if (thing.hasOwnProperty(aspect))
-						return thing[aspect]
+						return thing[aspect];
 					else
 					{
 						if (logErrors) trace("WARNING: Object does not have aspect as a member. Arg: " + inputArg + " Subject: " + subject + " Aspect:" + aspect + " or " + aspectLookup);
@@ -322,7 +326,7 @@ package classes.Parser
 			// Try to cast to a number. If it fails, go on with the switch/case statement.
 			if (!isNaN(Number(arg)))
 			{
-				if (printConditionalEvalDebug) trace("WARNING: Converted to float. Number = ", Number(arg))
+				if (printConditionalEvalDebug) trace("WARNING: Converted to float. Number = ", Number(arg));
 				return Number(arg);
 			}
 			if (argLower in conditionalOptions)
@@ -395,13 +399,13 @@ package classes.Parser
 				var condArg:* = convertConditionalArgumentFromStr(textCond);
 				if (condArg != null)
 				{
-					if (printConditionalEvalDebug) trace("WARNING: Conditional \"", textCond, "\" Evalueated to: \"", condArg, "\"")
+					if (printConditionalEvalDebug) trace("WARNING: Conditional \"", textCond, "\" Evalueated to: \"", condArg, "\"");
 					return condArg
 				}
 				else
 				{
-					if (logErrors) trace("WARNING: Invalid conditional! \"(", textCond, ")\" Conditionals must be in format:")
-					if (logErrors) trace("WARNING:  \"({statment1} (==|=|!=|<|>|<=|>=) {statement2})\" or \"({valid variable/function name})\". ")
+					if (logErrors) trace("WARNING: Invalid conditional! \"(", textCond, ")\" Conditionals must be in format:");
+					if (logErrors) trace("WARNING:  \"({statment1} (==|=|!=|<|>|<=|>=) {statement2})\" or \"({valid variable/function name})\". ");
 					return false
 				}
 			}
@@ -451,9 +455,9 @@ package classes.Parser
 			// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 			//                 ^          This Bit            ^
 			// If there is no OUTPUT_IF_FALSE, returns an empty string for the second option.
-			if (conditionalDebug) trace("WARNING: ------------------4444444444444444444444444444444444444444444444444444444444-----------------------")
-			if (conditionalDebug) trace("WARNING: Split Conditional input string: ", textCtnt)
-			if (conditionalDebug) trace("WARNING: ------------------4444444444444444444444444444444444444444444444444444444444-----------------------")
+			if (conditionalDebug) trace("WARNING: ------------------4444444444444444444444444444444444444444444444444444444444-----------------------");
+			if (conditionalDebug) trace("WARNING: Split Conditional input string: ", textCtnt);
+			if (conditionalDebug) trace("WARNING: ------------------4444444444444444444444444444444444444444444444444444444444-----------------------");
 
 
 			var ret:Array = new Array("", "");
@@ -482,14 +486,14 @@ package classes.Parser
 						{
 							if (section == 1)  // barf if we hit a second "|" that's not in brackets
 							{
-								if (this._settingsClass.haltOnErrors) throw new Error("Nested IF statements still a WIP")
+								if (CoC_Settings.haltOnErrors) throw new Error("Nested IF statements still a WIP");
 								ret = ["<b>Error! Too many options in if statement!</b>",
 									"<b>Error! Too many options in if statement!</b>"];
 							}
 							else
 							{
 								ret[section] = textCtnt.substring(sectionStart, i);
-								sectionStart = i + 1
+								sectionStart = i + 1;
 								section += 1
 							}
 						}
@@ -503,9 +507,9 @@ package classes.Parser
 			ret[section] = textCtnt.substring(sectionStart, textCtnt.length);
 
 
-			if (conditionalDebug) trace("WARNING: ------------------5555555555555555555555555555555555555555555555555555555555-----------------------")
-			if (conditionalDebug) trace("WARNING: Outputs: ", ret)
-			if (conditionalDebug) trace("WARNING: ------------------5555555555555555555555555555555555555555555555555555555555-----------------------")
+			if (conditionalDebug) trace("WARNING: ------------------5555555555555555555555555555555555555555555555555555555555-----------------------");
+			if (conditionalDebug) trace("WARNING: Outputs: ", ret);
+			if (conditionalDebug) trace("WARNING: ------------------5555555555555555555555555555555555555555555555555555555555-----------------------");
 
 			return ret;
 		}
@@ -543,9 +547,9 @@ package classes.Parser
 			// ~~~~Fake-Name
 
 
-			if (conditionalDebug) trace("WARNING: ------------------2222222222222222222222222222222222222222222222222222222222-----------------------")
-			if (conditionalDebug) trace("WARNING: If input string: ", textCtnt)
-			if (conditionalDebug) trace("WARNING: ------------------2222222222222222222222222222222222222222222222222222222222-----------------------")
+			if (conditionalDebug) trace("WARNING: ------------------2222222222222222222222222222222222222222222222222222222222-----------------------");
+			if (conditionalDebug) trace("WARNING: If input string: ", textCtnt);
+			if (conditionalDebug) trace("WARNING: ------------------2222222222222222222222222222222222222222222222222222222222-----------------------");
 
 
 			var ret:Array = new Array("", "", "");	// first string is conditional, second string is the output
@@ -579,7 +583,7 @@ package classes.Parser
 
 						// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to
 						// split the base-level if-statement on the "|"
-						output = textCtnt.substring(i+1, textCtnt.length)
+						output = textCtnt.substring(i+1, textCtnt.length);
 
 						// And now do the actual splitting.
 						output = splitConditionalResult(output);
@@ -587,7 +591,7 @@ package classes.Parser
 						// LOTS of debugging
 						if (conditionalDebug) trace("WARNING: prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
 						if (conditionalDebug) trace("WARNING: -0--------------------------------------------------");
-						if (conditionalDebug) trace("WARNING: Content Item 1 = ", output[0])
+						if (conditionalDebug) trace("WARNING: Content Item 1 = ", output[0]);
 						if (conditionalDebug) trace("WARNING: -1--------------------------------------------------");
 						if (conditionalDebug) trace("WARNING: Item 2 = ", output[1]);
 						if (conditionalDebug) trace("WARNING: -2--------------------------------------------------");
@@ -602,7 +606,7 @@ package classes.Parser
 			}
 			else
 			{
-				if (this._settingsClass.haltOnErrors) throw new Error("Invalid if statement!", textCtnt);
+				if (CoC_Settings.haltOnErrors) throw new Error("Invalid if statement!", textCtnt);
 				return "<b>Invalid IF Statement<b/>" + textCtnt;
 			}
 			return "";
@@ -741,7 +745,7 @@ package classes.Parser
 			var ret:String = "";
 
 			if (sceneParserDebug) trace("WARNING: Entering parser scene: \""+sceneName+"\"");
-			if (sceneParserDebug) trace("WARNING: Do we have the scene name? ", sceneName in this.parserState)
+			if (sceneParserDebug) trace("WARNING: Do we have the scene name? ", sceneName in this.parserState);
 			if (sceneName == "exit")
 			{
 				if (sceneParserDebug) trace("WARNING: Enter scene called to exit");
@@ -750,13 +754,13 @@ package classes.Parser
 				// TODO:
 				// This needs to change to something else anyways. I need to add the ability to
 				// tell the parser where to exit to at some point
-				_ownerClass.debugPane();
+				new DebugInfo().debugPane();
 
 			}
 			else if (sceneName in this.parserState)
 			{
 				if (sceneParserDebug) trace("WARNING: Have scene \""+sceneName+"\". Parsing and setting up menu");
-				_ownerClass.menu();
+				EngineCore.menu();
 
 				buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
 
@@ -779,7 +783,7 @@ package classes.Parser
 			else
 			{
 				trace("WARNING: Enter scene called with unknown arg/function \""+sceneName+"\". falling back to the debug pane");
-				_ownerClass.doNext(_ownerClass.debugPane);
+				EngineCore.doNext(new DebugInfo().debugPane);
 
 			}
 			return ret
@@ -804,7 +808,7 @@ package classes.Parser
 			sceneCont = textCtnt.substr(textCtnt.indexOf('|')+1);
 
 			sceneName = stripStr(sceneName);
-			if (sceneParserDebug) trace("WARNING: Adding scene with name \"" + sceneName + "\"")
+			if (sceneParserDebug) trace("WARNING: Adding scene with name \"" + sceneName + "\"");
 
 			// Cleanup the scene content from spurious leading and trailing space.
 			sceneCont = trimStr(sceneCont, "\n");
@@ -827,17 +831,17 @@ package classes.Parser
 		{
 			// TODO: Allow button positioning!
 
-			var arr:Array = textCtnt.split("|")
+			var arr:Array = textCtnt.split("|");
 			if (arr.len > 2)
 			{
-				if (this._settingsClass.haltOnErrors) throw new Error("");
+				if (CoC_Settings.haltOnErrors) throw new Error("");
 				throw new Error("Too many items in button")
 			}
 
 			var buttonName:String = stripStr(arr[1]);
 			var buttonFunc:String = stripStr(arr[0].substring(arr[0].indexOf(' ')));
 			//trace("WARNING: adding a button with name\"" + buttonName + "\" and function \"" + buttonFunc + "\"");
-			_ownerClass.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
+			EngineCore.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
 			buttonNum += 1;
 		}
 
@@ -867,10 +871,7 @@ package classes.Parser
 
 		private function isIfStatement(textCtnt:String):Boolean
 		{
-			if (textCtnt.toLowerCase().indexOf("if") == 0)
-				return true;
-			else
-				return false;
+			return textCtnt.toLowerCase().indexOf("if") == 0;
 		}
 
 		// Called to determine if the contents of a bracket are a parseable statement or not
@@ -883,7 +884,7 @@ package classes.Parser
 			if (printCcntentDebug) trace("WARNING: Parsing content string: ", textCtnt);
 
 
-			if (mainParserDebug) trace("WARNING: Not an if statement")
+			if (mainParserDebug) trace("WARNING: Not an if statement");
 				// Match a single word, with no leading or trailing space
 			var singleWordTagRegExp:RegExp = /^[\w\.]+$/;
 			var doubleWordTagRegExp:RegExp = /^[\w\.]+\s[\w\.]+$/;
@@ -902,12 +903,12 @@ package classes.Parser
 			}
 			else if (doubleWordTagRegExp.exec(textCtnt))
 			{
-				if (mainParserDebug) trace("WARNING: Two-word tag!")
+				if (mainParserDebug) trace("WARNING: Two-word tag!");
 				retStr += convertDoubleArg(textCtnt);
 			}
 			else
 			{
-				if (mainParserDebug) trace("WARNING: Cannot parse content. What?", textCtnt)
+				if (mainParserDebug) trace("WARNING: Cannot parse content. What?", textCtnt);
 				retStr += "<b>!Unknown multi-word tag \"" + retStr + "\"!</b>";
 			}
 
@@ -922,8 +923,8 @@ package classes.Parser
 		// You pass in the string you want parsed, and the parsed result is returned as a string.
 		private function recParser(textCtnt:String, depth:Number):String
 		{
-			if (mainParserDebug) trace("WARNING: Recursion call", depth, "---------------------------------------------+++++++++++++++++++++")
-			if (printIntermediateParseStateDebug) trace("WARNING: Parsing contents = ", textCtnt)
+			if (mainParserDebug) trace("WARNING: Recursion call", depth, "---------------------------------------------+++++++++++++++++++++");
+			if (printIntermediateParseStateDebug) trace("WARNING: Parsing contents = ", textCtnt);
 			// Depth tracks our recursion depth
 			// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for
 			// a tag. Therefore, every call of recParser increments depth by 1
@@ -954,7 +955,7 @@ package classes.Parser
 					break;
 				}
 
-			} while (lastBracket != -1)
+			} while (lastBracket != -1);
 
 
 			if (lastBracket != -1)		// If we have any open brackets
@@ -985,7 +986,7 @@ package classes.Parser
 						prefixTmp = textCtnt.substring(0, lastBracket);
 						if (mainParserDebug) trace("WARNING: prefix content = ", prefixTmp);
 						if (prefixTmp)
-							retStr += prefixTmp
+							retStr += prefixTmp;
 						// We know there aren't any brackets in the section before the first opening bracket.
 						// therefore, we just add it to the returned string
 
@@ -997,8 +998,8 @@ package classes.Parser
 
 						if (isIfStatement(tmpStr))
 						{
-							if (conditionalDebug) trace("WARNING: early eval as if")
-							retStr += parseConditional(tmpStr, depth)
+							if (conditionalDebug) trace("WARNING: early eval as if");
+							retStr += parseConditional(tmpStr, depth);
 							if (conditionalDebug) trace("WARNING: ------------------0000000000000000000000000000000000000000000000000000000000000000-----------------------")
 							//trace("WARNING: Parsed Ccnditional - ", retStr)
 						}
@@ -1022,7 +1023,7 @@ package classes.Parser
 						postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 						if (postfixTmp.indexOf("[") != -1)
 						{
-							if (printCcntentDebug) trace("WARNING: Need to parse trailing text", postfixTmp)
+							if (printCcntentDebug) trace("WARNING: Need to parse trailing text", postfixTmp);
 							retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
 							// Note: This leads to LOTS of recursion. Since we basically call recParser once per
 							// tag, it means that if a body of text has 30 tags, we'll end up recursing at least
@@ -1032,7 +1033,7 @@ package classes.Parser
 						}
 						else
 						{
-							if (printCcntentDebug) trace("WARNING: No brackets in trailing text", postfixTmp)
+							if (printCcntentDebug) trace("WARNING: No brackets in trailing text", postfixTmp);
 							retStr += postfixTmp;
 						}
 
@@ -1073,9 +1074,9 @@ package classes.Parser
 
 			var ret:String = "";
 			// Run through the parser
-			contents = contents.replace(/\\n/g, "\n")
+			contents = contents.replace(/\\n/g, "\n");
 			ret = recParser(contents, 0);
-			if (printIntermediateParseStateDebug) trace("WARNING: Parser intermediate contents = ", ret)
+			if (printIntermediateParseStateDebug) trace("WARNING: Parser intermediate contents = ", ret);
 			// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
 
 			if (prettyQuotes)
@@ -1098,8 +1099,8 @@ package classes.Parser
 			}
 
 			// cleanup escaped brackets
-			ret = ret.replace(/\\\]/g, "]")
-			ret = ret.replace(/\\\[/g, "[")
+			ret = ret.replace(/\\\]/g, "]");
+			ret = ret.replace(/\\\[/g, "[");
 
 			// And repeated spaces (this has to be done after markdown processing)
 			ret = ret.replace(/  +/g, " ");

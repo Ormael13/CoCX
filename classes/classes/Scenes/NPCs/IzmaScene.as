@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -498,7 +498,7 @@ internal function IzmaWins():void {
 	clearOutput();
 	//(if Worms)
 	if(player.hasStatusEffect(StatusEffects.Infested)) {
-		kGAMECLASS.mountain.wormsScene.infestOrgasm();
+		SceneLib.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>[name], that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.");
 		flags[kFLAGS.IZMA_WORMS_SCARED] = 1;
 		player.orgasm();
@@ -1732,7 +1732,7 @@ public function izmaFollowerMenu():void {
 	}
 	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
 	addButton(14, "Back", camp.campLoversMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -1764,7 +1764,7 @@ private function backToCamp():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 //Get a tiger shark tooth

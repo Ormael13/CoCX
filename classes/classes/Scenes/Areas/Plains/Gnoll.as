@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -233,7 +234,7 @@ import classes.internals.*;
 			var rando:Number = 1;
 //Exgartuan gets to do stuff!
 			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				game.exgartuan.exgartuanCombatUpdate();
+				SceneLib.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted)) {
@@ -334,22 +335,22 @@ import classes.internals.*;
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaPCBeatsGnoll();
+				SceneLib.desert.antsScene.phyllaPCBeatsGnoll();
 				return;
 			}
-			game.plains.gnollScene.defeatHyena();
+			SceneLib.plains.gnollScene.defeatHyena();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaGnollBeatsPC();
+				SceneLib.desert.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.plains.gnollScene.getRapedByGnoll();
+				SceneLib.plains.gnollScene.getRapedByGnoll();
 			}
 		}
 

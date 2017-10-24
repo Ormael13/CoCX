@@ -57,8 +57,8 @@ package classes.Scenes.Camp
 			outputText("Stored golem cores for future reuse when making new golems: " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
 			if (player.findPerk(PerkLib.JobGolemancer) >= 0) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
 		//	if (player.findPerk(PerkLib.) >= 0) outputText("Pernament Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " golems\n");
-			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: " + temporalGolemMakingCost() + "")
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.")
+			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: " + temporalGolemMakingCost() + "");
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);
 		}
 		

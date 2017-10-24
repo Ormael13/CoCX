@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class SandTrap extends Monster
@@ -94,7 +95,7 @@ public class SandTrap extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.desert.sandTrapScene.pcBeatsATrap();
+			SceneLib.desert.sandTrapScene.pcBeatsATrap();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
@@ -103,7 +104,7 @@ public class SandTrap extends Monster
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
 				doNext(game.endLustLoss);
 			} else {
-				game.desert.sandTrapScene.sandtrapmentLoss(true);
+				SceneLib.desert.sandTrapScene.sandtrapmentLoss(true);
 			}
 		}
 

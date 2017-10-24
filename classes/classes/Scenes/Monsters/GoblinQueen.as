@@ -43,7 +43,7 @@ public class GoblinQueen extends Goblin
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
 					add(weapons.W_STAFF,1).
-					add(armors.FURLOIN,1).
+					//add(armors.FURLOIN,1).
 					add(jewelries.MYSTRNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
@@ -53,7 +53,7 @@ public class GoblinQueen extends Goblin
 							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
-			this.special3 = castSpell;
+			//this.special3 = castSpell;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

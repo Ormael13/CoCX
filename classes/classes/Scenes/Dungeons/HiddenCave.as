@@ -488,35 +488,35 @@ public class HiddenCave extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		private function takeSoulPill():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]++;
 			inventory.takeItem(consumables.LG_SFRP, roomSStorage);
 		}
 		private function takeSoulPill2():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_2]++;
 			inventory.takeItem(consumables.MG_SFRP, roomSmallCaveW);
 		}
 		private function takeSoulPill3():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_3]++;
 			inventory.takeItem(consumables.MG_SFRP, roomSmallCaveE);
 		}
 		private function takeSoulPill4():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_4]++;
 			inventory.takeItem(consumables.MG_SFRP, roomSmallCaveN);
 		}
 		private function takeTSharkTooth():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]++;
 			inventory.takeItem(consumables.TSTOOTH, roomLStorageE);
 		}
 		private function takeGoldenSeed():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]++;
 			inventory.takeItem(consumables.GLDSEED, roomLStorageE);
 		}
 		private function takeMaraFruit():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]++;
 			inventory.takeItem(consumables.MARAFRU, roomLStorageE);
 		}
 		private function takeSalamFireWat():void {
-			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]++
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]++;
 			inventory.takeItem(consumables.SALAMFW, roomLStorageE);
 		}
 		private function takeAmetist():void {

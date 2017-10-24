@@ -504,8 +504,8 @@ private function rideTheWalrusP3():void {
 	player.orgasm();
 	dynStats("lib", 1, "sen", -5);
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
-	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;;
-	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
+    flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
+    flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 

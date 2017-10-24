@@ -8,6 +8,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armor;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
+import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
 	
@@ -103,7 +104,7 @@ use namespace kGAMECLASS;
 			flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] = 1;
 			flags[kFLAGS.HEL_FUCKBUDDY] = 0;
 			flags[kFLAGS.HEL_AFFECTION] = 0;
-			kGAMECLASS.helFollower.helAffection(-70);
+			SceneLib.helFollower.helAffection(-70);
 			doNext(playerMenu);
 		}
 
@@ -218,7 +219,7 @@ use namespace kGAMECLASS;
 			doNext(playerMenu);
 		}
 		public function exitHelTower():void {
-			clearOutput()
+			clearOutput();
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
 			kGAMECLASS.dungeonLoc = -1;
 			kGAMECLASS.inDungeon = false;
@@ -405,8 +406,8 @@ use namespace kGAMECLASS;
 			//(\"<i>You gained ValeriaArmor!</i>\")
 			cleanupAfterCombat();
 			//(\"<i>You put a (previous armorName) in your X pouch)
-			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead.\n\n");
-			//Set flags
+            outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
+            //Set flags
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.VALERIA_FLUIDS] = 80;
 			HPChange(player.maxHP(),false);
@@ -453,7 +454,7 @@ use namespace kGAMECLASS;
 		
 		//Kiri Interactions
 		public function kiriInteraction():void {
-			menu()
+			menu();
 			addButton(0, "Talk", talkToKiri).hint("Have some talk with Kiri.");
 			addButton(1, "Sex", kiriSexIntro).hint("Use Kiri to sate your lusts. After all, your lust can make a difference between your success and failure.");
 			addButton(4, "Back", playerMenu);

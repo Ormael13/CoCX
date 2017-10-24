@@ -7,13 +7,14 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace kGAMECLASS;
 	
 	public class Electra extends Monster
 	{
-		public var electraScene:ElectraFollower = game.electraScene;
+		public var electraScene:ElectraFollower = SceneLib.electraScene;
 		
 		public function moveLightningClaw():void {
 			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");

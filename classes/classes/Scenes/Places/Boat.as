@@ -3,13 +3,13 @@
  */
 package classes.Scenes.Places
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Lake.*;
-	import classes.Scenes.Places.Boat.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.Places.Boat.*;
+import classes.Scenes.SceneLib;
 
-	public class Boat extends AbstractLakeContent
+public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
@@ -29,13 +29,13 @@ package classes.Scenes.Places
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				kGAMECLASS.etnaScene.repeatYandereEnc();
+				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			clearOutput();
@@ -45,8 +45,8 @@ package classes.Scenes.Places
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ");
 			}
 			//3% chance of finding lost daughters
-			if (rand(100) <= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412] > 0 && kGAMECLASS.izmaScene.izmaFollower()) {
-				kGAMECLASS.izmaScene.findLostIzmaKids();
+			if (rand(100) <= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412] > 0 && SceneLib.izmaScene.izmaFollower()) {
+				SceneLib.izmaScene.findLostIzmaKids();
 				return;
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
@@ -112,7 +112,7 @@ package classes.Scenes.Places
 					return;
 				case 5:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
-					kGAMECLASS.anemoneScene.mortalAnemoneeeeee();
+					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;
 			}
 

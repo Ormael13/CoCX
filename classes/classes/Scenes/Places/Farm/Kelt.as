@@ -2,6 +2,7 @@ package classes.Scenes.Places.Farm
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Kelt extends Monster
 	{
@@ -112,14 +113,14 @@ public class Kelt extends Monster
 		{
 			if (game.flags[kFLAGS.KELT_KILL_PLAN] == 1) {
 				if (hpVictory) {
-					game.farm.keltScene.fightToBeatKeltVictoryHP();
+					SceneLib.farm.keltScene.fightToBeatKeltVictoryHP();
 				} else {
-					game.farm.keltScene.fightToBeatKeltVictoryLust();
+					SceneLib.farm.keltScene.fightToBeatKeltVictoryLust();
 				}
 			}
 			else{
-				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
-				else game.farm.kelly.breakingKeltNumeroThree();
+				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) SceneLib.farm.kelly.defeatKellyNDBREAKHIM();
+				else SceneLib.farm.kelly.breakingKeltNumeroThree();
 			}
 		}
 
@@ -129,7 +130,7 @@ public class Kelt extends Monster
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
 				doNext(game.endLustLoss);
 			} else {
-				game.farm.kelly.keltFucksShitUp();
+				SceneLib.farm.kelly.keltFucksShitUp();
 			}
 		}
 

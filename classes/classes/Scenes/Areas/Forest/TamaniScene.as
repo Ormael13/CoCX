@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 public class TamaniScene extends BaseContent implements TimeAwareInterface {
 
@@ -250,8 +251,8 @@ internal function tamaniSexLetHer():void {
 	tamaniKnockUp();
 	clearOutput();
 	//[lost combat]
-	if (getGame().inCombat) {
-		//Taurs
+    if (kGAMECLASS.inCombat) {
+        //Taurs
 		if(player.isTaur()) {
 			if(player.HP < 1) outputText("You stumble, legs weaving drunkenly as you try to keep your feet.  ");
 			else outputText("You stumble, legs weaving drunkenly as " + sMultiCockDesc() + " ache and drool with need.  ");
@@ -343,8 +344,9 @@ internal function tamaniSexLetHer():void {
 		}
 		outputText("After a little while you redress, but the scent of horny goblin stays with you for hours.");
 		//Combat end: 
-		if (getGame().inCombat) {
-			outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.");
+
+        if (kGAMECLASS.inCombat) {
+            outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.");
 			cleanupAfterCombat();
 			player.orgasm();
 		}
@@ -386,8 +388,9 @@ internal function tamaniSexLetHer():void {
 			}
 			outputText("</i>\"\n\n");
 			//Combat end: 
-			if (getGame().inCombat) {
-				outputText("You black out, exhausted from the ordeal.");
+
+            if (kGAMECLASS.inCombat) {
+                outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
 				player.orgasm();
 			}
@@ -438,8 +441,9 @@ internal function tamaniSexLetHer():void {
 			outputText("Tamani eases up off of you, dripping a mixture of sexual fluids and stretching as if she had just completed a long workout.  The slutty goblin winks at you and waves, \"<i>Thanks for the cum.  Be sure and take some time to refill.  I wanna be soaked again next time!</i>\"\n\n");
 			
 			//Combat end: 
-			if (getGame().inCombat) {
-				outputText("You black out, exhausted from the ordeal.");
+
+            if (kGAMECLASS.inCombat) {
+                outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
 				player.orgasm();
 			}
@@ -541,8 +545,8 @@ internal function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n");
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n");
 		player.orgasm();
-		if (getGame().inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        else doNext(camp.returnToCampUseOneHour);
 	}
 	//Too big? Jerk off with feet and bukkake
 	else {
@@ -569,8 +573,8 @@ internal function tamaniSexWon():void {
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...");
 		player.orgasm();
 		dynStats("lus", 35);
-		if (getGame().inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        else doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -836,12 +840,12 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		outputText("Tamani smiles as she pulls the tube out and stands up.  White jism and clear feminine fluids drool down her thighs, and your mistress couldn't be happier.  She peels her device off your still-dripping [cock], pats it affectionately, and says, \"<i>You're such a wonderful husband.  I can't wait to see how you get along with your new daughters!</i>\"\n\n");
 		
 		outputText("A surge of pride spreads through you at her praise, and you get up to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!");
-		tamaniKnockUp()
+		tamaniKnockUp();
 		player.orgasm();
 		dynStats("int", -.5, "sen", -1);
 	}
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 internal function tamaniAnalShits():void {

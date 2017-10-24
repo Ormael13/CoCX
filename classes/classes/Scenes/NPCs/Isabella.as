@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Isabella extends Monster
 	{
@@ -161,7 +162,7 @@ public class Isabella extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.isabellaScene.defeatIsabella();
+			SceneLib.isabellaScene.defeatIsabella();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -170,7 +171,7 @@ public class Isabella extends Monster
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
 				game.cleanupAfterCombat();
 			} else {
-				game.isabellaScene.isabellaDefeats();
+				SceneLib.isabellaScene.isabellaDefeats();
 			}
 		}
 

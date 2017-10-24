@@ -6,6 +6,7 @@ package classes.Scenes.Quests.UrtaQuest
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Goblin;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GoblinBroodmother extends Goblin
@@ -16,13 +17,13 @@ public class GoblinBroodmother extends Goblin
 			outputText("The goblin broodmother is defeated!  You find a bottle of succubi milk on her.  That stuff is banned in Tel'Adre - and for good reason, but it might come in handy.  You pocket the foul fluid for now.");
 			outputText("  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Do you?");
 			EngineCore.menu();
-			EngineCore.addButton(0,"Fuck",game.urtaQuest.winFuckAGoblinBroodmotherAsUrta);
-			EngineCore.addButton(4,"Leave",game.urtaQuest.nagaPleaseNagaStoleMyDick);
+			EngineCore.addButton(0,"Fuck",SceneLib.urtaQuest.winFuckAGoblinBroodmotherAsUrta);
+			EngineCore.addButton(4,"Leave",SceneLib.urtaQuest.nagaPleaseNagaStoleMyDick);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.urtaQuest.urtaLosesToGoblin();
+			SceneLib.urtaQuest.urtaLosesToGoblin();
 		}
 
 		public function GoblinBroodmother()

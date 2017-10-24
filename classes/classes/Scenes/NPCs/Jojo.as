@@ -2,18 +2,19 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Jojo extends Monster
 	{
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.jojoScene.defeatedJojo(hpVictory);
+			SceneLib.jojoScene.defeatedJojo(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.jojoScene.loseToJojo();
+			SceneLib.jojoScene.loseToJojo();
 		}
 		
 		override protected function performCombatAction():void {

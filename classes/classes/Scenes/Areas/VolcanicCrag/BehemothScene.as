@@ -4,6 +4,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 
 public class BehemothScene extends BaseContent
@@ -355,7 +356,7 @@ public class BehemothScene extends BaseContent
 		}
 		
 		private function vagCatchBehemoth():void {
-			var isVirgin:Boolean = player.hasVirginVagina()
+			var isVirgin:Boolean = player.hasVirginVagina();
 			clearOutput();
 			outputText(images.showImage("behemoth-vag-catch"));
 			//Sorry, no centaur variant.
@@ -437,7 +438,7 @@ public class BehemothScene extends BaseContent
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
 			HPChange(player.maxHP() / 2, false);
 			fatigue(-50);
-			if (player.armor == armors.GOOARMR) kGAMECLASS.valeria.feedValeria(100);
+			if (player.armor == armors.GOOARMR) SceneLib.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
 			if (kGAMECLASS.inCombat) cleanupAfterCombat();

@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class FetishZealot extends Monster
@@ -127,7 +128,7 @@ public class FetishZealot extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.lake.fetishZealotScene.zealotDefeated();
+			SceneLib.lake.fetishZealotScene.zealotDefeated();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -135,9 +136,9 @@ public class FetishZealot extends Monster
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...");
 				player.orgasm();
-				doNext(game.lake.fetishZealotScene.zealotLossRape);
+				doNext(SceneLib.lake.fetishZealotScene.zealotLossRape);
 			} else {
-				game.lake.fetishZealotScene.zealotLossRape();
+				SceneLib.lake.fetishZealotScene.zealotLossRape();
 			}
 		}
 

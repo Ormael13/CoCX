@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 
 public class MinotaurScene extends BaseContent {
@@ -531,8 +532,8 @@ public function minoPheromones():void {
 	}
 	//YOU LOSE!
 	if (player.lust >= player.maxLust())
-		doNext(getGame().combat.endLustLoss);
-	else doNext(getGame().combat.combatMenu);
+        doNext(SceneLib.combat.endLustLoss);
+    else doNext(SceneLib.combat.combatMenu);
 }
 public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	spriteSelect(44);
@@ -598,9 +599,9 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		}
 	
 	}
-	
-	if (doSFWloss() && getGame().inCombat) { //No rape in SFW mode.
-		cleanupAfterCombat();
+
+if (doSFWloss() && kGAMECLASS.inCombat) { //No rape in SFW mode.
+        cleanupAfterCombat();
 		return;
 	}
 	//Normal RAEP
@@ -663,8 +664,8 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You pass out as a strange sense of euphoria washes over you while copious quantities of monstrous cum escape your distended ");
 	if(player.hasVagina()) outputText("pussy.");
 	else outputText("asshole.");
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseFourHours);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseFourHours);
 }
 
 
@@ -701,8 +702,8 @@ private function getOralRapedByMinotaur():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	minoCumAddiction(10);
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseFourHours);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseFourHours);
 }
 
 private function minoGetsTitFucked():void {
@@ -891,7 +892,7 @@ public function minoAddictionFuck():void {
 	//(Max lust, load minotaur dicks & balls into monster stats and throw to rape-scenes.)
 	dynStats("lus", 3000);
 	monster = new Minotaur();
-	doNext(kGAMECLASS.combat.endLustLoss);
+	doNext(SceneLib.combat.endLustLoss);
 }
 
 

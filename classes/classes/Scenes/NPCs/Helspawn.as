@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.CalledShotDebuff;
 
 public class Helspawn extends Monster
@@ -120,13 +121,13 @@ private function calledShot():void {
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.helSpawnScene.beatUpYourDaughter();
+			SceneLib.helSpawnScene.beatUpYourDaughter();
 		}
 
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.helSpawnScene.loseSparringToDaughter();
+			SceneLib.helSpawnScene.loseSparringToDaughter();
 		}
 
 		public function Helspawn()

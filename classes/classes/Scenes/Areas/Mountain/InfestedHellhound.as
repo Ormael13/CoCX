@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 /**
@@ -72,7 +73,7 @@ import classes.internals.*;
 				outputText("Unable to bear its unnatural arousal, the infested hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
 				if (player.gender > 0 && player.lust >= 33) {
 					outputText("You realize your desires aren't quite sated.  You could let it please you.  Do you?");
-					EngineCore.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundGetsRaped, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer from such a beast.");
@@ -85,11 +86,11 @@ import classes.internals.*;
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe infested hellhound's heads both grin happily as it advances towards you...");
-				doNext(game.mountain.infestedHellhoundScene.infestedHellhoundLossRape);
+				doNext(SceneLib.mountain.infestedHellhoundScene.infestedHellhoundLossRape);
 			} else if (hpVictory) {
-				game.mountain.infestedHellhoundScene.infestedHellhoundLossRape();
+				SceneLib.mountain.infestedHellhoundScene.infestedHellhoundLossRape();
 			} else {
-				game.mountain.infestedHellhoundScene.infestedHellhoundLossRape();
+				SceneLib.mountain.infestedHellhoundScene.infestedHellhoundLossRape();
 			}
 		}
 

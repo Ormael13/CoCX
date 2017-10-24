@@ -7,6 +7,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
+import classes.Scenes.SceneLib;
 
 public final class GooArmor extends Armor {
 		
@@ -25,8 +26,8 @@ public final class GooArmor extends Armor {
 			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
 			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
 			if (game.flags[kFLAGS.MET_VALERIA] == 0) {
-				outputText("  As you ready yourself for the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
-				game.flags[kFLAGS.MET_VALERIA]++;
+                outputText("  As you ready yourself for the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
+                game.flags[kFLAGS.MET_VALERIA]++;
 			}
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");
 			EngineCore.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
@@ -42,7 +43,7 @@ public final class GooArmor extends Armor {
 		}
 		
 		override public function get def():Number { 
-			if (game.valeria.valeriaFluidsEnabled()) {
+			if (SceneLib.valeria.valeriaFluidsEnabled()) {
 				if (game.flags[kFLAGS.VALERIA_FLUIDS] < 50) {
 					return 15 + int(game.flags[kFLAGS.VALERIA_FLUIDS] / 5);
 				}

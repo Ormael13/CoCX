@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.Swamp{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Places.TelAdre;
+import classes.Scenes.SceneLib;
 
 public class Rogar extends BaseContent{
 
@@ -11,7 +11,7 @@ public class Rogar extends BaseContent{
 	}
 
 	private function get telAdre():TelAdre{
-		return kGAMECLASS.telAdre;
+		return SceneLib.telAdre;
 	}
 
 	/*Ro'gar encounter in the swamp; Ro'gar phase flag = 0 (edited)

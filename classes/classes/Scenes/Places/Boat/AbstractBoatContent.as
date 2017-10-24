@@ -3,14 +3,14 @@
  */
 package classes.Scenes.Places.Boat
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Places.Boat;
+import classes.*;
+import classes.Scenes.Places.Boat;
+import classes.Scenes.SceneLib;
 
-	public class AbstractBoatContent extends BaseContent
+public class AbstractBoatContent extends BaseContent
 	{
 		protected function get boat():Boat {
-			return kGAMECLASS.boat;
+			return SceneLib.boat;
 		}
 		public function AbstractBoatContent()
 		{

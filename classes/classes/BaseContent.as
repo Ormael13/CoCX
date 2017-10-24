@@ -8,6 +8,7 @@ import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
+import classes.Scenes.SceneLib;
 import classes.internals.RootCounters;
 import classes.internals.Utils;
 
@@ -33,10 +34,6 @@ import coc.xxc.StoryContext;
 		{
 			
 		}
-		protected function getGame():CoC
-		{
-			return kGAMECLASS;
-		}
 
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
@@ -57,19 +54,19 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function get camp():Camp {
-			return kGAMECLASS.camp;
+			return SceneLib.camp;
 		}
 		
 		protected function get ingnam():Ingnam {
-			return kGAMECLASS.ingnam;
+			return SceneLib.ingnam;
 		}
 		
 		protected function get prison():Prison {
-			return kGAMECLASS.prison;
+			return SceneLib.prison;
 		}
 		
 		protected function get d3():D3 {
-			return kGAMECLASS.d3;
+			return SceneLib.d3;
 		}
 
 		public function goNext(time:Number,defNext:Boolean):Boolean
@@ -175,22 +172,22 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function get combat():Combat {
-			return kGAMECLASS.combat;
+			return SceneLib.combat;
 		}
 
 		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
-			kGAMECLASS.combat.cleanupAfterCombatImpl(nextFunc);
+			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
 		protected function combatRoundOver():Boolean
 		{
-			return kGAMECLASS.combat.combatRoundOverImpl();
+			return SceneLib.combat.combatRoundOverImpl();
 		}
 
 		protected function enemyAI():void
 		{
-			kGAMECLASS.combat.enemyAIImpl();
+			SceneLib.combat.enemyAIImpl();
 		}
 
 		protected function clearStatuses(visibility: Boolean):void
@@ -245,7 +242,7 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
-			kGAMECLASS.combat.startCombatImpl(monster_,plotFight_);
+			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 
 		protected function doSFWloss():Boolean {
@@ -255,7 +252,7 @@ import coc.xxc.StoryContext;
 		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
-			kGAMECLASS.combat.startCombatImmediateImpl(monster, _plotFight);
+			SceneLib.combat.startCombatImmediateImpl(monster, _plotFight);
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
@@ -689,7 +686,7 @@ import coc.xxc.StoryContext;
 
 		protected function useMana(mod:Number,type:Number=0):void
 		{
-			kGAMECLASS.combat.useManaImpl(mod,type);
+			SceneLib.combat.useManaImpl(mod,type);
 		}
 
 
@@ -787,7 +784,7 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.undergarments;
 		}
 		protected function get inventory():Inventory{
-			return kGAMECLASS.inventory;
+			return SceneLib.inventory;
 		}
 
 /* No longer used

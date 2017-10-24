@@ -34,7 +34,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.bonusHP = 200;
 			this.level = 40;
 			this.gems = rand(25) + 15;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6)
+			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);

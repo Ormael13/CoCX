@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.Bazaar {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 //  TIMES_IN_BENOITS:int = 562;
 //  BENOIT_AFFECTION:int = 563;
@@ -103,8 +104,8 @@ public function benoitInClutch():Boolean
 	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
-	var currDay:int = this.getGame().model.time.days;
-	var diffDays:int = (currDay - startDay) % 28;
+    var currDay:int = kGAMECLASS.model.time.days;
+    var diffDays:int = (currDay - startDay) % 28;
 
 	if (diffDays >= 21) return true;
 	return false;
@@ -132,9 +133,9 @@ public function benoitKnockUp():Boolean
 	// Calc the number of eggs
 	var cumQ:int = player.cumQ();
 	
-	var bounty:Boolean = (player.findPerk(PerkLib.ElvenBounty) >= 0) ? true : false;
-	var stud:Boolean = (player.findPerk(PerkLib.MaraesGiftStud) >= 0) ? true : false;
-	var alpha:Boolean = (player.findPerk(PerkLib.FerasBoonAlpha) >= 0) ? true : false;
+	var bounty:Boolean = (player.findPerk(PerkLib.ElvenBounty) >= 0);
+	var stud:Boolean = (player.findPerk(PerkLib.MaraesGiftStud) >= 0);
+	var alpha:Boolean = (player.findPerk(PerkLib.FerasBoonAlpha) >= 0);
 
 	var eggMod:int = 0;
 	if (bounty) eggMod += 1;
@@ -161,14 +162,13 @@ public function clearBenoitPreggers():void
 		flags[kFLAGS.FEMOIT_EGGS_LAID] += flags[kFLAGS.FEMOIT_EGGS];
 		flags[kFLAGS.FEMOIT_EGGS] = 0;
 		flags[kFLAGS.FEMOIT_INCUBATION] = 0;
-		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days; // Cycle "resets" based off birth day.
-	}
+        flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = kGAMECLASS.model.time.days; // Cycle "resets" based off birth day.
+    }
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17) {
-		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
-		{
+        if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && kGAMECLASS.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1) {
 			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) 
 			{
 				if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
@@ -201,8 +201,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= this.getGame().model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0)
-	{
+    else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= kGAMECLASS.model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0) {
 		femoitNextDayEvent();
 	}
 	else if (benoitInClutch() && flags[kFLAGS.FEMOIT_READY_FOR_EGGS] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2))
@@ -237,8 +236,7 @@ public function benoitIntro():void {
 			return;
 		}
 	}
-	else if (!benoitInClutch() && !benoitPreggers() && (this.getGame().model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0))
-	{
+    else if (!benoitInClutch() && !benoitPreggers() && (kGAMECLASS.model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0)) {
 		if (flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED] == 0)
 		{
 			flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED]++;
@@ -283,7 +281,7 @@ public function benoitIntro():void {
 			if (benoitInClutch() && !benoitPreggers()) outputText("\n\nAn obvious bulge in the female basilisk's apron-clad belly signals the presence of new eggs. If you were to have sex with her in this state then there's a good chance she'll end up with a belly full of fertilized eggs.");
 			else if (benoitRegularPreggers()) outputText("\n\nThe basilisk's belly bulges out, big as any pregnant woman back home. Her apron merely highlights the fact she's carrying the eggs you fathered.");
 			else if (benoitHeavyPreggers()) outputText("\n\nBenoite's pregnancy is unmistakable, and the number of eggs she's carrying is quite impressive. Her apron is strained to the limit to contain her distended belly, and you wonder how she manages to tie it up each morning.");
-			else if (benoitVeryHeavyPreggers()) outputText("\n\nThe basilisk's belly is hugely swollen with fertilized eggs, and you notice that she tries to avoid moving unless she has to. She's so bloated that she has given up trying to tie her apron on, and instead lets it flap idly on her engorged midriff.")
+			else if (benoitVeryHeavyPreggers()) outputText("\n\nThe basilisk's belly is hugely swollen with fertilized eggs, and you notice that she tries to avoid moving unless she has to. She's so bloated that she has given up trying to tie her apron on, and instead lets it flap idly on her engorged midriff.");
 			else if (benoitExtremePreggers()) outputText("\n\nYou can hardly believe just how pregnant Benoite is - you wouldn't have imagined it was possible to carry that many fertilized eggs. She's practically immobile, and when she does get up and shuffle along, her belly nearly drags along the ground; it's that swollen with your young. Needless to say, practicality demands she goes around naked.");
 		}
 	}
@@ -1390,8 +1388,8 @@ public function benoitFeminise():void
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
 		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
-		this.getGame().flushOutputTextToGUI();
-	}
+        kGAMECLASS.flushOutputTextToGUI();
+    }
 	else
 	{
 		player.destroyItems(consumables.P_S_MLK, 2);
@@ -1413,8 +1411,8 @@ public function benoitFeminise():void
 
 		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says " + benoitMF("Benoit","Benoite") + " unevenly.  \"<i>Zis is... I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
-		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days + 1;
-		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
+flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = kGAMECLASS.model.time.days + 1;
+        flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
 
 		menu();
 		doNext(camp.returnToCampUseOneHour);
@@ -1468,7 +1466,7 @@ public function femoitFirstTimeYes():void
 
 	if (player.isTaur()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"");
 	else if (player.isDrider()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"");
-	else if (player.demonScore() > 4) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"")
+	else if (player.demonScore() > 4) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"");
 	else if (player.dogScore() >= 4 && player.earType == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
 	else if ((player.bunnyScore() >= 4 && player.earType == 7 && player.tailType == 10) || (player.catScore() >= 4 && player.earType == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
 	else if (player.harpyScore() >= 4 && player.wingType != 0 && player.armType == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");
@@ -1744,8 +1742,8 @@ public function femoitSexIntro():void
 		{
 			outputText("You don't have the necessary ingredients to attempt this yet.");
 			outputText("\n\n<b>(Requires 2x Purified Incubi Draft, 1x Purified Succubi's Delight, 1x Reptilium.)</b>");
-			this.getGame().flushOutputTextToGUI();
-		}
+            kGAMECLASS.flushOutputTextToGUI();
+        }
 		else
 		{
 			player.destroyItems(consumables.P_DRAFT, 2);

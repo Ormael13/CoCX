@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class SandWitch extends Monster
@@ -16,9 +17,9 @@ public class SandWitch extends Monster
 			}
 			
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
-				game.desert.sandWitchScene.beatSandwitch();
+				SceneLib.desert.sandWitchScene.beatSandwitch();
 			} else {
-				game.combat.finishCombat();
+				SceneLib.combat.finishCombat();
 			}
 		}
 
@@ -28,7 +29,7 @@ public class SandWitch extends Monster
 				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.");
 				game.cleanupAfterCombat();
 			} else {
-				game.desert.sandWitchScene.sandwitchRape();
+				SceneLib.desert.sandWitchScene.sandwitchRape();
 			}
 		}
 		

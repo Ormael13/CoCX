@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class Akbal extends Monster
@@ -72,12 +73,12 @@ public class Akbal extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.akbalScene.akbalDefeated(hpVictory);
+			SceneLib.forest.akbalScene.akbalDefeated(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
+			SceneLib.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
 			game.cleanupAfterCombat();
 		}
 		

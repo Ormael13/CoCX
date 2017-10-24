@@ -183,7 +183,7 @@ public class GoblinWarriorScene extends BaseContent
 		{
 			spriteSelect(123);
 			clearOutput();
-			outputText("The warrior falls to her feet, smashing her titties against the confines of her breastplate. She looks up at you and sniffles.")
+			outputText("The warrior falls to her feet, smashing her titties against the confines of her breastplate. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
 			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
 				cleanupAfterCombat();

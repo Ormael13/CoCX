@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Mountain
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 public class InfestedHellhoundScene extends BaseContent
 	{
@@ -33,8 +34,8 @@ public class InfestedHellhoundScene extends BaseContent
 
 		public function infestedHellhoundLossRape():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
-				clearOutput();
+            if (flags[kFLAGS.SFW_MODE] > 0 && kGAMECLASS.inCombat) { //No rape in SFW mode.
+                clearOutput();
 				cleanupAfterCombat();
 				return;
 			}

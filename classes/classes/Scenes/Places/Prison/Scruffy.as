@@ -3,17 +3,18 @@ package classes.Scenes.Places.Prison
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Imp;
+import classes.Scenes.SceneLib;
 
 public class Scruffy extends Imp
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorBeatenUp();
+			SceneLib.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorBeatenUp();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorLoss();
+			SceneLib.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorLoss();
 		}
 		
 		public function Scruffy() 

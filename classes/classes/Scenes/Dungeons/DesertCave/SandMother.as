@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.DesertCave
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class SandMother extends Monster
 	{
@@ -121,12 +122,12 @@ public class SandMother extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.defeatTheSandMother();
+			SceneLib.dungeons.desertcave.defeatTheSandMother();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.loseToTheSandMother();
+			SceneLib.dungeons.desertcave.loseToTheSandMother();
 		}
 		
 		public function SandMother()

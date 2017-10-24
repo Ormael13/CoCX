@@ -33,8 +33,8 @@ package classes.Items.Weapons
 				base += 4;
 				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 4;
 			}
-			return (base + boost);; 
-		}
+            return (base + boost);
+        }
 		
 		override public function canUse():Boolean {
 			if (game.player.findPerk(PerkLib.TitanGrip) >= 0) return true;

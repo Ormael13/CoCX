@@ -5,6 +5,7 @@ package classes.Scenes.Places.Owca
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class LustyDemons extends Monster
@@ -24,7 +25,7 @@ public class LustyDemons extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.owca.defeetVapulasHorde();
+			SceneLib.owca.defeetVapulasHorde();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -33,7 +34,7 @@ public class LustyDemons extends Monster
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
 				doNext(game.endLustLoss);
 			} else {
-				game.owca.loseOrSubmitToVapula();
+				SceneLib.owca.loseOrSubmitToVapula();
 			}
 		}
 
@@ -86,8 +87,8 @@ public class LustyDemons extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = 500 + rand(250);
-			this.special1 = game.combat.packAttack;
-			this.special2 = game.combat.lustAttack;
+			this.special1 = SceneLib.combat.packAttack;
+			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.hornType = AppearanceDefs.HORNS_DEMON;
 			this.horns = 2;

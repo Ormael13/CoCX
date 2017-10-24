@@ -3,42 +3,43 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Imp extends Monster
 	{
-		public var Evangeline:EvangelineFollower = new EvangelineFollower()
+		public var Evangeline:EvangelineFollower = new EvangelineFollower();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
-				game.forest.kitsuneScene.winKitsuneImpFight();
+				SceneLib.forest.kitsuneScene.winKitsuneImpFight();
 			}
 			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
 				Evangeline.winEvangelineImpFight();
 			}
 			else {
-				game.impScene.impVictory();
+				SceneLib.impScene.impVictory();
 			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
-				game.forest.kitsuneScene.loseKitsuneImpFight();
+				SceneLib.forest.kitsuneScene.loseKitsuneImpFight();
 			}
 			else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...");
 				player.lust = player.maxLust();
-				doNext(game.impScene.impRapesYou);
+				doNext(SceneLib.impScene.impRapesYou);
 			}
 			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
 				flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
-				game.impScene.impRapesYou();
+				SceneLib.impScene.impRapesYou();
 			}
 			else {
-				game.impScene.impRapesYou();
+				SceneLib.impScene.impRapesYou();
 			}
 		}
 		

@@ -14,11 +14,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	private var story:BoundStory;
 	private function init():void {
-		story = new Story("story",getGame().rootStory,"appearance").bind(getGame().context);
-	}
+        story = new Story("story", kGAMECLASS.rootStory, "appearance").bind(kGAMECLASS.context);
+    }
 	public function appearance():void {
-		if (getGame().gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
-		//Temp vars
+        if (kGAMECLASS.gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
+        //Temp vars
 		var temp:Number  = 0;
 		var rando:Number = 0;
 		//Determine race type:

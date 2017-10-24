@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
 import classes.EventParser;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -17,7 +18,7 @@ import classes.EventParser;
 		public function encounter():void
 		{
 			clearOutput();
-			outputText("The immense statue gives a mighty groan as you near and shudders, shaking loose years of dust and grime. A few ravens cry in distress as they're shaken loose from their roosts. Taking a step back, you watch as the mammoth figure pushes itself up to a standing position. It towers above, at least thirty feet tall, and easily lifts a hammer carved from the same marble as its gleaming muscles.")
+			outputText("The immense statue gives a mighty groan as you near and shudders, shaking loose years of dust and grime. A few ravens cry in distress as they're shaken loose from their roosts. Taking a step back, you watch as the mammoth figure pushes itself up to a standing position. It towers above, at least thirty feet tall, and easily lifts a hammer carved from the same marble as its gleaming muscles.");
 			if (silly()) outputText(" On the plus side, it seems to lack knees. That should make dodging its attacks a bit easier.");
 			outputText( "Moss clings to its chin an age-gifted beard. Bits of it shake loose as it speaks. <i>\"Tresspasser!\"</i>");
 
@@ -49,8 +50,8 @@ import classes.EventParser;
 			
 			player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		public function fuckinMarbleOP(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{

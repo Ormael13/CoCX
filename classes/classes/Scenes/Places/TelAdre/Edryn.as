@@ -1,7 +1,7 @@
 package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface {
 //VARS
@@ -32,7 +32,7 @@ public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface 
 		public function timeChangeLarge():Boolean {
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				if (pregnancy.type == PregnancyStore.PREGNANCY_TAOTH) {
-					kGAMECLASS.urtaQuest.urtaAndEdrynGodChildEpilogue();
+					SceneLib.urtaQuest.urtaAndEdrynGodChildEpilogue();
 					//Since these flag can't be in use prior to Taoth's arrival I abused them to store Edryn's previous pregnancy type and incubation
 					//Did it so that if Edryn is someday made able to carry someone else's baby this will still work properly
 					pregnancy.knockUpForce(flags[kFLAGS.URTA_FERTILE], flags[kFLAGS.URTA_PREG_EVERYBODY]);
@@ -499,9 +499,8 @@ private function fuckEdrynNonTaur():void {
 }
 
 public function edrynBar():Boolean {
-	if(flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0))
-		return true;
-	return false;
+	return flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0);
+
 }
 //Hel x Edryn Threesome
 /*Sahvin
@@ -523,7 +522,7 @@ public function edrynHeliaThreesomePossible():Boolean {
 	if (model.time.totalTime == edrynHeliaLastThreesomeCheck || model.time.totalTime == -edrynHeliaLastThreesomeCheck) //Only choose action once per visit to the bar
 		return edrynHeliaLastThreesomeCheck > 0;
 	edrynHeliaLastThreesomeCheck = model.time.totalTime;
-	if (player.gender == 0 || model.time.hours < 14 || model.time.hours >= 20 || rand(2) == 0 || (flags[kFLAGS.HEL_FUCKBUDDY] == 0 && !kGAMECLASS.helFollower.followerHel())
+	if (player.gender == 0 || model.time.hours < 14 || model.time.hours >= 20 || rand(2) == 0 || (flags[kFLAGS.HEL_FUCKBUDDY] == 0 && !SceneLib.helFollower.followerHel())
 	|| (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0)) {
 		edrynHeliaLastThreesomeCheck = -edrynHeliaLastThreesomeCheck; //Make the saved time negative to indicate Helia is not at the bar right now
 		return false;
@@ -570,7 +569,7 @@ public function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n");
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some", edryn, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs, "", null, "", null, "Leave", leaveHelInZeBitch);
+	simpleChoices("Edryn3Some", edryn, "Fox Girls", SceneLib.helScene.heliaPlusFoxyFluffs, "", null, "", null, "Leave", leaveHelInZeBitch);
 }
 
 //First Time - Leave
@@ -646,7 +645,7 @@ private function threesomeEdrynAndHel():void {
 
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your [armor] and walking off back to camp.\n\n");
 	player.orgasm();
-	kGAMECLASS.helFollower.helAffection(5);
+	SceneLib.helFollower.helAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 

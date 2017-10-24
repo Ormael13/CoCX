@@ -682,7 +682,7 @@ public function rubisFuckingHouseYouPervert():void {
 	}
 	if(player.isNaga() && flags[kFLAGS.RUBI_BIMBO] == 0 && flags[kFLAGS.RUBI_COCK_SIZE] < player.biggestCockLength() && player.hasCock() && flags[kFLAGS.RUBI_SHE] == 0 && player.cor >= 85 && flags[kFLAGS.RUBI_BREAST_SIZE] <= 2)
 	{
-		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>")
+		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>");
 		addButton(5,"Hypno",hypnoBimboficationForRubiSloots);
 	}
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
@@ -2446,7 +2446,7 @@ private function getFuckedByRubi():void {
 	else if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("blunted, musky tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.CAT) outputText("spiked tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.ANEMONE) outputText("tentacle-ringed crown");
-	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ")
+	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ");
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");

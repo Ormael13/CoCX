@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -140,8 +141,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
-				kGAMECLASS.followerInteractions.amilyUrtaMorningAfter();
+			if (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
+				SceneLib.followerInteractions.amilyUrtaMorningAfter();
 				return true;
 			}
 			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0) {
@@ -2653,7 +2654,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addButton(3, "Give Present", giveAmilyAPresent);
 				addButton(4, (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Defur" : "Refuzz"), (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? amilyDefurryOfferAtCamp: refuzzAmily));
 				//If no fight yet, have option to introduce Urta and Amily
-				if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !kGAMECLASS.urtaQuest.urtaBusy())
+				if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !SceneLib.urtaQuest.urtaBusy())
 				{
 					if (output) outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n");
 					addButton(5, "Date", dateNightFirstTime).hint("Take Amily on a date to Tel'Adre?");
@@ -2685,7 +2686,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					addButton(5, "Go Camp", backToCamp).hint("Send Amily back to your camp.");
 					if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(6, "Harvest Milk", harvestMilk);
 					else addButton(6, "Stop Harvest", stopHarvestingMilk);
-					addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+					addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 				}
 			}
 			//Core tooltips
@@ -2723,7 +2724,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("As she collapses onto the ground, crying her heart out, you silently redress yourself and slink away. All this blubbering has turned you off, and it's obvious that nothing can be done until you've grown a cock, a pussy, or both.");
 				dynStats("lus", -20);
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(playerMenu);
-				else doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+				else doNext(SceneLib.farm.farmCorruption.rootScene);
 			}
 		}
 
@@ -2807,16 +2808,16 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				// [Horsecock]
 				outputText("pink pussy in between her legs; "+stopSayingNetherlipsFuck+".\n");
 
-				if (kGAMECLASS.farm.farmCorruption.hasTattoo("amily"))
+				if (SceneLib.farm.farmCorruption.hasTattoo("amily"))
 				{
 					outputText("\n");
-					if (kGAMECLASS.farm.farmCorruption.amilyFullTribalTats())
+					if (SceneLib.farm.farmCorruption.amilyFullTribalTats())
 					{
 						outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.\n")
 					}
 					else
 					{
-						if (kGAMECLASS.farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+						if (SceneLib.farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 						else outputText("\nShe has ");
 
 						if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_COLLARBONE] + "\n");
@@ -2912,8 +2913,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			addButton(0, "Take Charge", amilyTakesChargeSex).hint("Take charge and decide how you should have your way with Amily.");
 			addButton(1, "Amily Leads", letAmilyLead).hint("Let Amily choose how she's going to have sex with you.");
 			addButton(2, bText, babies).hint(bTooltip);
-			if (flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !getGame().urtaQuest.urtaBusy()) addButton(3, "Urta", getGame().followerInteractions.amilyUrtaSex).hint("Take Amily for a visit to Urta in Tel'Adre for some threesome sexy times.");
-			if (flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) addButton(4, "Swim", amilySwimFuckIntro).hint("What's a better pleasure than to take Amily for a swim and do some fuck?");
+            if (flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !SceneLib.urtaQuest.urtaBusy()) addButton(3, "Urta", SceneLib.followerInteractions.amilyUrtaSex).hint("Take Amily for a visit to Urta in Tel'Adre for some threesome sexy times.");
+            if (flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) addButton(4, "Swim", amilySwimFuckIntro).hint("What's a better pleasure than to take Amily for a swim and do some fuck?");
 			if (izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] > 0 && player.hasCock()) {
 				outputText("You could see if Amily and Izma are up for another round of Amily's fertility potion, though contraceptives won't matter at all once she takes that.\n");
 				addButton(5, "Izma3Some", drinkThePotion).hint("Get into a threesome with Amily and Izma. This will pretty much get them pregnant.");
@@ -3155,7 +3156,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//Too big
 				if(x == -1) outputText("Amily glances down at the beast between your legs and says, \"<i>I was going to ride you, but since you're SOOO big I think I'll have to get creative...</i>\"\n\n");
 				//Add 'get ridden' if it fits.
-				else choices[choices.length] = 3
+				else choices[choices.length] = 3;
 				//All males get tailjobs
 				choices[choices.length] = 0;
 				//HJs
@@ -5836,7 +5837,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			
 			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 0;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 		
 		private function harvestMilk():void
@@ -5853,7 +5854,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 		
 		private function stopHarvestingMilk():void
@@ -5867,7 +5868,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			
 			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 0;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 		
 		private function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
@@ -6296,8 +6297,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.");
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseOneHour);
 		}
 		//[Female]
 		private function rapeCorruptAmily1Female():void {
@@ -6334,8 +6335,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...");
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(camp.returnToCampUseOneHour);
 		}
 
 		//[Raping Amily 2]

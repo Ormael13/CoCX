@@ -40,7 +40,7 @@ public function leaveBeforeMeetingCandyCaneBun():void {
 	classes.EngineCore.outputText("You're not willing to run the risk of getting a foreign cock stuffed up your [butt].");
 	//(If corruption or libido>50) 
 	if(player.cor > 50 || player.lib > 50) classes.EngineCore.outputText("  At least not right now.  You turn back, navigating your way back to your camp.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //INVESTIGATE
@@ -80,7 +80,7 @@ public function investigateCandyCaneBun():void {
 public function declineCandyCaneCawks():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("Turning around a tad awkwardly, you stumble out of the glade.  Tempting as he is, you don't have time to help the random bunny orgasm.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //YES
@@ -106,7 +106,7 @@ public function helpWithTheCandyCane():void {
 	else classes.EngineCore.outputText("  Despite your rising urge to take advantage of the unknowing bunny, you decide to retire and return to camp.");
 	//(Lust set to 100, hour passes.)
 	player.dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "scale", false);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 
@@ -125,7 +125,7 @@ public function getAChristmasChicken():void {
 public function leaveXmasChicken():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("Too exasperated by the plain absurdity of the situation to deal with it, you bury your face in your hands and decide to leave her to it.  Maybe some imps will shut her up for you.  You head back to camp with her piercing cries following you all the way, and prepare for the day ahead.  Her cries fade a while later; the snow thaws and the air warms soon after.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //[Talk]
@@ -298,7 +298,7 @@ public function skipOutAfterOpeningKamisBox():void {
 	classes.EngineCore.outputText("You politely decline Kami's sexual advances, apologizing before making a turn for the door. You begin to wonder why you didn't buy anything at the bakery.");
 	//[Return to Tel Adre, KamiEnc = 1]
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //[Player chooses 'Let's go!']
@@ -350,7 +350,7 @@ public function giveKamiTheChristmasRooAnal():void {
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //[Player selects 'Receive Anal']
@@ -386,7 +386,7 @@ public function takeItRooButtStyle():void {
 	//[Player heads back to camp, An hour passes, Asshole tightness is reduced, Lust is reduced to zero and KamiEnc = 1]
 	player.orgasm();
 	player.dynStats("sen", 1);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 }
 
@@ -406,7 +406,7 @@ public function KamiBlowJob():void {
 	player.dynStats("lus", 20+player.lib/10+player.sens/10);
 	//[Player heads back to camp, An hour passes, Lust = + 40 and KamiEnc = 1]
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 
@@ -427,7 +427,7 @@ public function KamiDoubleDickFuck():void {
 	player.orgasm();
 	player.dynStats("sen", -3);
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 
@@ -436,7 +436,7 @@ public function getWinterPudding():void {
 	classes.EngineCore.clearOutput();
 	if(player.gems < 35) {
 		classes.EngineCore.outputText("Sadly, the pudding isn't free, and it looks like you don't have the 35 gems you'd need to try a bite!");
-		classes.EngineCore.doNext(telAdre.bakeryScene.bakeryuuuuuu);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.telAdre.bakeryScene.bakeryuuuuuu);
 		return;
 	}
 	player.gems -= 35;
@@ -444,7 +444,7 @@ public function getWinterPudding():void {
 	classes.EngineCore.outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!  Do you eat the treat or save it for later?\n\n");
 	classes.EngineCore.menu();
 	classes.EngineCore.addButton(0, "Eat", mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
-	classes.EngineCore.addButton(1, "Take", inventory.takeItem, consumables.W_PDDNG, telAdre.bakeryScene.bakeryuuuuuu, null, "Bring the pudding with you.");
+	classes.EngineCore.addButton(1, "Take", classes.Scenes.SceneLib.inventory.takeItem, consumables.W_PDDNG, classes.Scenes.SceneLib.telAdre.bakeryScene.bakeryuuuuuu, null, "Bring the pudding with you.");
 	//doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }
 
@@ -519,7 +519,7 @@ public function unwrapPolarPete():void {
 	//end encounter
 	//Receive \"<i>Peppermint White</i>\"
 	player.orgasm();
-	inventory.takeItem(consumables.PEPPWHT, camp.returnToCampUseOneHour);
+	classes.Scenes.SceneLib.inventory.takeItem(consumables.PEPPWHT, classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Leave
@@ -528,7 +528,7 @@ public function leaveDisFukkinPolarBear():void {
 	classes.EngineCore.outputText("You've decided not to trust the stranger, with a nod of your head you walk away from the man.  \"<i>Wait!  Before you go...</i>\" he speaks as he moves his massive sack in front of himself with a huff.  He leans forward, his upper body rummaging through the sack before reappearing.  He hands you a brightly wrapped gift.");
 	classes.EngineCore.outputText("\n\n\"<i>A little something from me,</i>\" he says with a bright smile.  Despite your hesitation, something about this gesture seems genuine.  You nod your head taking the gift from him and leaving after a simple word of thanks.  You unwrap the gift after returning to a normal climate, inside you find a small crystal bottle filled with a white liquid that looks strangely familiar.  Popping the cork and smelling the contents fills your nose with the refreshing scent of mint. It smells delicious, though you resist the temptation and cork the bottle again.  You take it with you back to camp.\n\n");
 	//Receive \"<i>Peppermint White</i>\"
-	inventory.takeItem(consumables.PEPPWHT, camp.returnToCampUseOneHour);
+	classes.Scenes.SceneLib.inventory.takeItem(consumables.PEPPWHT, classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Sell \"<i>Peppermint White</i>\" for 50 gems or Drink it
@@ -598,7 +598,7 @@ public function nieveBuilding():void {
 		classes.EngineCore.menu();
 		if(player.hasItem(consumables.COAL___)) classes.EngineCore.addButton(0,"Coal",nieveCoalEyes);
 		classes.EngineCore.addButton(1,"Gems",nieveGemEyes);
-		classes.EngineCore.addButton(4,"Back",camp.returnToCampUseOneHour);
+		classes.EngineCore.addButton(4,"Back",classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	}
 	//Fourth Step: The Nose
 	else if(flags[kFLAGS.NIEVE_STAGE] == 3) {
@@ -615,11 +615,11 @@ public function nieveBuilding():void {
 		else {
 			classes.EngineCore.outputText("Unfortunately, you've yet to find one in your adventures.  You suppose you'll have to look more carefully.  Who knows, there might be a farm right under your nose.");
 		}
-		classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	}
 	else {
 		classes.EngineCore.outputText("Your snowman is done!  There's nothing more to add to it.  It looks mighty fine however, and just looking at it brings a nostalgia-fueled smile to your lips.");
-		classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+		classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	}
 }
 //Coal
@@ -631,7 +631,7 @@ public function nieveCoalEyes():void {
 	classes.EngineCore.outputText("\n\nYou split the coal into smaller chunks, and place them evenly around the Snowman's face, creating a nice, vacant smile.  It still needs a nose, however, and for that, you'll need a carrot.  Perhaps there's a farm nearby, or maybe you could buy one somewhere?");
 	flags[kFLAGS.NIEVE_MOUTH] = "coal";
 	flags[kFLAGS.NIEVE_STAGE] = 3;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 //Gems
 //Add to previous text if possible?
@@ -648,7 +648,7 @@ public function nieveGemEyes():void {
 	else {
 		classes.EngineCore.outputText("You open up your pouch, and frown.  Unfortunately, you don't have enough gems to create the eyes and mouth. With a sigh you march your broke ass back to camp.");
 	}
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Snowwoman
@@ -657,7 +657,7 @@ public function nieveSnowWoman():void {
 	//Add to existing text if possible, rather than a new window?
 	classes.EngineCore.outputText("You grin mischievously to yourself and set about making two more balls of powdery snow.  It takes less time than any of the others, and before you know it you've attached two icy-breasts to the snowman.  They aren't terribly big, any heavier and you're sure they'd fall off, but they get the point across.");
 	classes.EngineCore.outputText("\n\nYour snowwoman still needs a face, of course, but you'll leave that until later.  For now, you head back into the main part of camp.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	flags[kFLAGS.NIEVE_STAGE] = 2;
 	flags[kFLAGS.NIEVE_GENDER] = 2;
 }
@@ -667,7 +667,7 @@ public function nieveSnowMan():void {
 	classes.EngineCore.clearOutput();
 	classes.EngineCore.outputText("You decide to leave it as is. Not everything has to have breasts, of course, even in Mareth.");
 	classes.EngineCore.outputText("\n\nYour snowman still needs a face, of course, but you'll leave that until later.  For now, you head back into the main part of camp.");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 	flags[kFLAGS.NIEVE_STAGE] = 2;
 	flags[kFLAGS.NIEVE_GENDER] = 1;
 }
@@ -682,7 +682,7 @@ public function findACarrot():void {
 	classes.EngineCore.outputText("\n\nYou stash the carrot away with a smile.  You've got a nose for your snowman!");
 	classes.EngineCore.outputText("\n\n(Gained Key Item: Carrot)");
 	player.createKeyItem("Carrot",0,0,0,0);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 public function nieveMF(Man:String = "",Woman:String = ""):String {
@@ -736,7 +736,7 @@ public function yesKeepNieve():void {
 	classes.EngineCore.outputText("  " + nieveMF("He","She") + " doesn't seem to be a threat, and indeed seems sincere in the fact that " + nieveMF("he","she") + " was sent here to be your lover.");
 	classes.EngineCore.outputText("\n\nNieve beams at you, \"<i>You won't regret it, [name]!  Just give me a little while to set up a cozy place here... then we can get cozy.</i>\"");
 	classes.EngineCore.outputText("\n\nYou return to your camp proper with a goofy smirk on your face.\n\n(<b>Nieve is now available in the Lovers menu.</b>)");
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //No, because I'm an idiot.
@@ -748,7 +748,7 @@ public function noNoKeepNieve():void {
 	flags[kFLAGS.NIEVE_STAGE] = -1;
 	flags[kFLAGS.NIEVE_GENDER] = 0;
 	flags[kFLAGS.NIEVE_MOUTH] = "";
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Followers Menu
@@ -803,7 +803,7 @@ public function approachNieve():void {
 	classes.EngineCore.outputText("\n\nNieve stops, gives you a friendly hug, and asks, \"<i>What can I do for you, [Master]?</i>\"");
 	classes.EngineCore.menu();
 	classes.EngineCore.addButton(0,"Sex",nieveSexMenu);
-	classes.EngineCore.addButton(4,"Back",camp.campLoversMenu);
+	classes.EngineCore.addButton(4,"Back",classes.Scenes.SceneLib.camp.campLoversMenu);
 }
 
 //Sex Menu
@@ -826,7 +826,7 @@ public function nieveSexMenu():void {
 	//Any Gender
 	//Nieve's cock is 9x1.5
 	if(flags[kFLAGS.NIEVE_GENDER] == 1 && player.lust >= 33) classes.EngineCore.addButton(1,"Get Fucked",nieveFucksYou);
-	classes.EngineCore.addButton(14,"Back",camp.campLoversMenu);
+	classes.EngineCore.addButton(14,"Back",classes.Scenes.SceneLib.camp.campLoversMenu);
 }
 
 //Lick Her
@@ -877,7 +877,7 @@ public function lickNieve():void {
 		classes.EngineCore.outputText("\n\nThe both of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
 		player.dynStats("lus", -5-player.sens/5);
 	}
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Suck Him by Kinathis
@@ -900,7 +900,7 @@ public function suckNieveOff():void {
 	
 	classes.EngineCore.outputText("\n\nLetting out a deep sigh you grin and look up, wanting to see the look on Nieve's face.  The iceborn man looks like he couldn't be happier, a silly smile on his face as he looks down at you.  \"<i>Oh [Master]... that was amazing, I've never met someone so skilled before.  I hope you're not too cold now,</i>\" he says with a hint of worry, knowing that his body and by extension, his cum, must be quite cold.  Reassuring him you tell your frosty friend you're fine and that he actually tasted pretty good. Looking quite pleased Nieve helps you up before sweeping you up into a squeezing hug.  \"<i>Thank you so much for this, but next time let me do you though, you need to be pleasured as well,</i>\" the elemental spirit says gently before helping you get cleaned up and ready for your adventures.");
 	player.dynStats("lus", 10+player.lib/10, "scale", false);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Fuck Her
@@ -1046,7 +1046,7 @@ public function fuckNieve():void {
 	classes.EngineCore.outputText("\n\n\"<i>So messy, [Master],</i>\" she notes with a smile.  \"<i>Allow me to clean you up.</i>\"  Her cool mouth descends on your member, licking and sucking away all of your juices and hers, leaving you spotless.  She seems to delight in the flavor, and once she's done, she leans in and gives you a big, sloppy kiss that tastes more like mint than anything else.  She then cuddles up next to you, her cold body somehow comforting, until you've recuperated enough to head back to the camp proper.");
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Get Fucked by Gurumash
@@ -1110,7 +1110,7 @@ public function takeNieveAnal():void {
 	classes.EngineCore.outputText("\n\nYou both rest in that position, Nieve still trickling cum into you even though he stopped moving minutes ago.  You turn your head to look at him and notice his face a few inches from yours.  It's clear that at the moment he's barely conscious, and you shift a bit to kiss him, thanking him for a job well done.  After a little while you both recover, redress, and silently go back to business.  Looking back at him as you leave, you know you want to do it again real soon.");
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Vaginal
@@ -1141,7 +1141,7 @@ public function takeNieveVaginal():void {
 	classes.EngineCore.outputText("\n\nAnother hour passes and you wake up clean and dressed, laying next to Nieve.  You noticed he's probably been watching you for the last several minutes.  You get up, pat yourself off, then with one hand tussle his snow-white hair, while uttering the words, \"<i>Good boy.</i>\"");
 	player.orgasm();
 	player.dynStats("sen", -2);
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 
 //Goodbye (Outline by PyroJenkins)
@@ -1238,7 +1238,7 @@ private function nieveReturnsPartII():void {
 	classes.EngineCore.outputText("\n\n\"<i>I... I can still only stay the winter, at least for now, but it's something, right?</i>\" the snow spirit says, clasping your hand in theirs.");
 	classes.EngineCore.outputText("\n\nYou nod.  You'll take what you can get, even if it is such a brief moment.  The two of you share stories, well, you share stories while Nieve listens with rapt attention, for the next hour or so.  It's been a long time since you've seen each other, and there's a lot to catch up on...");
 	flags[kFLAGS.NIEVE_STAGE] = 5;
-	classes.EngineCore.doNext(camp.returnToCampUseOneHour);
+	classes.EngineCore.doNext(classes.Scenes.SceneLib.camp.returnToCampUseOneHour);
 }
 public function cockClit(number:int = 0):String {
     if(player.hasCock() && number >= 0 && number < player.cockTotal()) return player.cockDescript(number);

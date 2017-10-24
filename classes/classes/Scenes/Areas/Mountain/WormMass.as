@@ -2,6 +2,7 @@
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class WormMass extends Monster
 	{
@@ -48,7 +49,7 @@ public class WormMass extends Monster
 				//Chance of insta-loss if infested twice
 				if(player.hasStatusEffect(StatusEffects.InfestAttempted)) {
 					outputText("  Struggle as you might, the creatures overwhelm your body and prevent you from any conceivable opportunity to get them off you, Your head quickly becomes visible, allowing you to breathe as you stare helplessly at the cocoon of worms trapping you.\n\n");
-					game.mountain.wormsScene.infest1();
+					SceneLib.mountain.wormsScene.infest1();
 					return;
 				}
 				//Escaped!
@@ -71,7 +72,7 @@ public class WormMass extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			outputText("Overcome by your "+(hpVictory?"wounds":"lust")+", you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
-			game.mountain.wormsScene.infest1();
+			SceneLib.mountain.wormsScene.infest1();
 		}
 		
 		override public function maxHP():Number

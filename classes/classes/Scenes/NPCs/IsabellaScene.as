@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface {
 //Isabella Flags:
@@ -65,7 +66,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 0;
-				if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
+				if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 					flags[kFLAGS.ISABELLA_MILKED_YET]++;
 				}
 			}
@@ -401,7 +402,7 @@ public function nomOnMommaIzzysTits():void {
 		{
 			outputText("Isabella pants as she pulls you back, giving you your first glimpse of just how rosy her tanned skin has gotten, but then you're moving across her chest towards an untapped reservoir of pale nectar.  You start to mention that you've had enough, but Isabella shushes you in between low, lurid moans.  \"<i>No, drink up my friend.  We don't want you to suffer heat-stroke");
 			
-			if (!isabellaFollower()) outputText(" on the way back!")
+			if (!isabellaFollower()) outputText(" on the way back!");
 			else outputText(" while you're out and about!");
 			
 			outputText(" Ooooh...</i>\" she groans as she presses your mouth into the milk-dripping waterfall that is her other breast.  You mumble a reply, but it turns into a messy burble as nipples and milk fill your opened mouth.  Immediately you begin to suckle anew, your protests washed away in syrupy-sweetness.\n\n");
@@ -973,7 +974,7 @@ public function IsabellaPostSpankFeedSex():void {
 	
 	outputText("Once you've emptied the last of your submission into Isabella, she rolls off of you, panting heavily.");
 	if (isabellaAccent()) outputText("\"<i>Das vas a very good [boy]!  I hope I taught you some manners.  Maybe come visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"");
-	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"")
+	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"");
 	outputText(" She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n");
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	player.orgasm();
@@ -1348,8 +1349,8 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	player.slimeFeed();
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 //['Too Big' Victory Titfucking Funtimes With Milk]

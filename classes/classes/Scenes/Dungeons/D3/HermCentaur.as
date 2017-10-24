@@ -6,6 +6,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -58,12 +59,12 @@ import classes.PerkLib;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.hermCentaur.beatThePony(hpVictory);
+			SceneLib.d3.hermCentaur.beatThePony(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
+			SceneLib.d3.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
 		}
 		
 		// Gonna handle this a little differently than usual.

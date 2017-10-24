@@ -2,6 +2,7 @@ package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -27,7 +28,7 @@ public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 				if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
 			}
 			if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-				kGAMECLASS.helFollower.sleepyNightMareHel();
+				SceneLib.helFollower.sleepyNightMareHel();
 				return true;
 			}
 			return false;
@@ -35,8 +36,8 @@ public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 	
 		public function timeChangeLarge():Boolean {
 			//Helia's morning surprise!
-			if (getGame().model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
-				helSpawnScene.heliaBonusPointsAward();
+            if (kGAMECLASS.model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+                helSpawnScene.heliaBonusPointsAward();
 				return true;
 			}
 			if (model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
@@ -49,7 +50,7 @@ public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 				return true;   
 			}
 			if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-				kGAMECLASS.dungeons.heltower.morningAfterHeliaDungeonAgreements();
+				SceneLib.dungeons.heltower.morningAfterHeliaDungeonAgreements();
 				return true;
 			}
 			//Helspawn night smex!
@@ -58,8 +59,8 @@ public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 				return true;
 			}
 			//Chance of threesomes!
-			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-				trace("ISABELLA/HELL TEST");
+            if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && SceneLib.isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+                trace("ISABELLA/HELL TEST");
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
 					spriteSelect(31);
 					followrIzzyxSallyThreesomePretext();
@@ -187,7 +188,7 @@ internal function loseToSalamander():void {
 	else outputText(".\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a glistening cunt.  \"<i>You're a worthy opponent, you know that?  C'mon, there's no shame in losing,</i>\" she says, offering a hand up.  Shakily, you take it – and she pulls you right into a rough kiss.\n\n\"<i>But, to the victor go the spoils,</i>\" she says, pushing her chest into you.  Well, you might as well enjoy yourself...");
 	var x:Number = 0;
 	if (rand(4) == 0 && player.gender > 0) {
-		trace("Peg scene GO!")
+		trace("Peg scene GO!");
 		menu();
 		addButton(0, "Next", helTailPegging, true);
 		return;
@@ -353,8 +354,8 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 		outputText("\n\n<b>Helia DLC is required!</b>");
 		menu();
-		addButton(0, "Get DLC", getGame().DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
-		addButton(4, "Leave", declineHelSexings);
+        addButton(0, "Get DLC", kGAMECLASS.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+        addButton(4, "Leave", declineHelSexings);
 		return;
 	}
 	if(player.hasCock()) {
@@ -435,13 +436,13 @@ private function declineHelSexings():void {
 	clearOutput();
 	outputText("You thank her for the offer, but politely decline.\n\n");
 
-	if (getGame().inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking up her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ");
-	outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n");
+if (kGAMECLASS.inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking up her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ");
+    outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n");
 
 	outputText("You nod, and return the wave before heading back to your camp.");
 	helFollower.helAffection(1);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -471,8 +472,8 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -508,8 +509,8 @@ internal function fuckHelsAss():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -538,8 +539,8 @@ internal function helBlowsYou():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -573,8 +574,8 @@ internal function dpHel():void {
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -603,8 +604,8 @@ internal function getLickedByHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -633,8 +634,8 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -644,7 +645,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 	clearOutput();
 	outputText(images.showImage("helia-tailpeg"));
 	if (!loss) outputText("You agree to her proposition and, after a moment of thought, strip out of your [armor] and ask her if she could fuck you with that long, prehensile tail.  \"<i>Oh, now that's an idea I can get behind!</i>\"  She laughs at her own wit.  \"<i>Well, go on then.  Get on your hands and knees, and spread those ass cheeks.</i>\"\n\n");
-	else outputText("\"<i>Get on your hands and knees, and spread those ass cheeks,</i>\" she says.\n\n")
+	else outputText("\"<i>Get on your hands and knees, and spread those ass cheeks,</i>\" she says.\n\n");
 	outputText("You do as she asks, getting on all fours and giving her a good views of your vulnerable " + buttDescript() + ".  Looking over your shoulder, you can see her smile wolfishly as she brings her tail to bear, now doused of its previous flames, and gives its tip a little suckle, moistening it up as she straddles your hips to fuck you doggy style.  Her tail slips down from her mouth and winds between her legs like a cock as she lines herself up with your " + assholeDescript() + ".\n\n");
 
 	outputText("You grit your teeth and clench your fists in preparation for the coming fucking.  Soon, you feel the tip of her tail pressing against your backdoor, looking for entrance.  You do your best to relax yourself, but she only needs a second to force herself inside you, eliciting a gasp of pain and pleasure from you as inches of her tail sink in, widening and stretching your hole.");
@@ -672,8 +673,8 @@ internal function helTailPegging(loss:Boolean = false):void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -715,8 +716,8 @@ private function nagaCoilsUpHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -747,8 +748,8 @@ private function nagaCoilsUpAnalNaga():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -797,8 +798,8 @@ private function mountHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -850,8 +851,8 @@ private function helVaginaTaur69():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -908,8 +909,8 @@ private function helPossessionShitPoopCock():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -946,8 +947,8 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
 	helFollower.helAffection(-15);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -976,8 +977,8 @@ private function receiveCorruptRimjobsFromHel():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(-15);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -1892,7 +1893,7 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
 			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
 			   && player.gender > 0
-			   && !kGAMECLASS.helScene.followerHel();
+			   && !SceneLib.helScene.followerHel();
 	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)

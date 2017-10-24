@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.Scenes.SceneLib;
 
 public class SophieScene extends BaseContent implements TimeAwareInterface {
 
@@ -160,11 +161,11 @@ Lasts 4-8 hours.
 //Forces minimum lust to be at least 50.
 
 		private function get sophieBimbo():SophieBimbo {
-			return kGAMECLASS.sophieBimbo;
+			return SceneLib.sophieBimbo;
 		}
 		
 		private function get sophieFollowerScene():SophieFollowerScene {
-			return kGAMECLASS.sophieFollowerScene;
+			return SceneLib.sophieFollowerScene;
 		}
 		
 		public function sophieAtCamp():Boolean { //Whether she's a bimbo or not
@@ -486,8 +487,8 @@ private function cramANippleInIt():void {
 	player.boostLactation(.01);
 	clearOutput();
 	//Not a combat win
-	if (!getGame().inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
-	//COMBAT
+    if (!kGAMECLASS.inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
+    //COMBAT
 	else {
 		//(Lust Win)
 		if(monster.lust >= monster.maxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
@@ -543,8 +544,8 @@ private function cramANippleInIt():void {
 	else if(player.biggestLactation() >= 2) outputText("a satisfied burp.");
 	else outputText("a satisfied 'ahhh'.");
 	outputText("  She wipes a bit of milk from her lips and says, \"<i>");
-	if (getGame().inCombat) {
-		//(Fought HP won:
+    if (kGAMECLASS.inCombat) {
+        //(Fought HP won:
 		if(monster.HP < 1) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n");
 		//(Fought Lust won:
 		else {
@@ -580,8 +581,8 @@ private function cramANippleInIt():void {
 	dynStats("lus", -50);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusEffect(StatusEffects.Feeder)) {
@@ -601,16 +602,16 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.");
 		doNext(playerMenu);
-		getGame().inCombat = false;
-		return;
+        kGAMECLASS.inCombat = false;
+        return;
 	}
 	else if(x > player.cocks.length-1) 
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.");
 		doNext(playerMenu);
-		getGame().inCombat = false;
-		return;
+        kGAMECLASS.inCombat = false;
+        return;
 	}
 
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your [armor] and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ");

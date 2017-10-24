@@ -4,6 +4,7 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.SceneLib;
 
 public class CombatTeases extends BaseContent {
 	public function CombatTeases() {}
@@ -541,7 +542,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 41;
 		}
 		//42 Urta teases!
-		if (kGAMECLASS.urtaQuest.isUrta()) {
+		if (SceneLib.urtaQuest.isUrta()) {
 			choices[choices.length] = 42;
 			choices[choices.length] = 42;
 			choices[choices.length] = 42;
@@ -1492,17 +1493,17 @@ public class CombatTeases extends BaseContent {
 				monster.teased(damage);
 				if (crit == true) outputText(" <b>Critical!</b>");
 			}
-			if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta()) {
+			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
-			if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(1);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1);
 		}
 		//Nuttin honey
 		else {
-			if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(5);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(5);
 
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
 			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);

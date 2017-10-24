@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 
@@ -98,10 +99,10 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 					dynStats("lib", .5, "sen", 1, "lus", 10);
 				}
 				outputText("The sand-witch smiles and thanks you for your offering.  You notice her dress is damp in four spots on the front.  ");
-				if (getGame().sand == 0)
-					outputText("You wonder at what her robes conceal as she vanishes into the dunes.");
-				if (getGame().sand == 1) {
-					if (player.cor <= 33)
+                if (kGAMECLASS.sand == 0)
+                    outputText("You wonder at what her robes conceal as she vanishes into the dunes.");
+                if (kGAMECLASS.sand == 1) {
+                    if (player.cor <= 33)
 						outputText("You are glad to avoid servicing her again as she vanishes into the dunes.");
 					else if (player.cor <= 66)
 						outputText("You wonder if you should've resisted and tried for some sex as she departs.");
@@ -620,9 +621,9 @@ internal function beatSandwitch():void {
 	var temp2:Function = null;
 	var temp3:Function = null;
 	if(silly()) temp3 = missingoSex;
-	if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = getGame().sandwitchGetsDildoed;
-	var shouldra:Function = null;
-	if(kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = kGAMECLASS.shouldraFollower.sandWitchGetsGhostly;
+    if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.sandwitchGetsDildoed;
+    var shouldra:Function = null;
+	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = SceneLib.shouldraFollower.sandWitchGetsGhostly;
 	//doYesNo(sandwitchRaped, cleanupAfterCombat);
 	var ovi:Function = null;
 	if(player.gender > 0 && player.canOviposit()) ovi = ovipositSandWitches;
@@ -743,7 +744,7 @@ private function ovipositSandWitches():void {
 	else outputText("an uneasy curiosity to see what exactly you have planned.");
 	
 	//PC won through HP victory: 
-	if(monster.HP < 1) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ")
+	if(monster.HP < 1) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
 	outputText("The sand witch slows to a dead stop as she assesses your intentions, which are made all the more clear as you disrobe and toss your [armor] aside, exposing your ");
 	if(player.hasCock()) outputText("hardened  " + multiCockDescriptLight());
 	if(player.gender == 3) outputText(" and ");

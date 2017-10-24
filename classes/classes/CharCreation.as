@@ -5,6 +5,7 @@ import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
+import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
@@ -236,7 +237,7 @@ import coc.view.MainView;
 			kGAMECLASS.sand = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
 			kGAMECLASS.giacomo = 0;
-			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
+			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
 			kGAMECLASS.inDungeon = false;
@@ -1507,8 +1508,8 @@ import coc.view.MainView;
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
-				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
-			}
+                kGAMECLASS.saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+            }
 			kGAMECLASS.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 			statScreenRefresh();
@@ -1559,7 +1560,7 @@ import coc.view.MainView;
 			model.time.days = -(1 * (1 + player.newGamePlusMod()));
 			model.time.hours = 8;
 			flags[kFLAGS.IN_INGNAM] = 1;
-			kGAMECLASS.ingnam.menuIngnam();
+			SceneLib.ingnam.menuIngnam();
 		}
 
 		//-----------------

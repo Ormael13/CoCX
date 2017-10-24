@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
 public class SophieFollowerScene extends NPCAwareContent {
 
@@ -9,7 +10,7 @@ public class SophieFollowerScene extends NPCAwareContent {
 		{
 		}
 
-		private function get pregnancy():PregnancyStore { return kGAMECLASS.sophieScene.pregnancy; } //Quick way to access sophie's pregnancyStore
+		private function get pregnancy():PregnancyStore { return SceneLib.sophieScene.pregnancy; } //Quick way to access sophie's pregnancyStore
 
 //Make Sophie \"smart\" again: Doing the Deed
 //Visit Rathazul and he bitches.
@@ -39,7 +40,7 @@ override public function sophieFollower():Boolean {
 
 public function sophieSprite():void
 {
-	kGAMECLASS.sophieBimbo.sophieSprite();
+	SceneLib.sophieBimbo.sophieSprite();
 }
 
 //Un-Bimbo*
@@ -99,8 +100,8 @@ private function bimboSophieAgain():void {
 	flags[kFLAGS.SOPHIE_DEBIMBOED] = 0;
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
 	player.consumeItem(consumables.BIMBOLQ);
-	if (getGame().inCombat)
-		cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
 	else sophieBimbo.approachBimboSophieInCamp(false);
 }
 
@@ -177,8 +178,8 @@ private function letDebimboSophieGo():void {
 		}
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -199,8 +200,8 @@ private function whyIDidItToDebimboSophie():void {
 	
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -224,8 +225,8 @@ private function apologizeToDebimboSophie():void {
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	//{Sophie has been moved to the \"Followers\" tab!}
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -307,7 +308,7 @@ public function followerSophieMainScreen():void {
 		addButton(7,"Daughter",sophieBimbo.daughterCheckup);
 	}
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(14, "Back", camp.campFollowers);
-	else addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	else addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(2, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(2, "Go Camp", backToCamp);
@@ -348,7 +349,7 @@ private function backToCamp():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function harvestEggs():void
@@ -370,9 +371,9 @@ public var eggColors:Array = [
 "Pink",
 "Purple",
 "White",
-]
+];
 
-private var _eggTypes:Array
+private var _eggTypes:Array;
 
 public function get eggTypes():Array
 {
@@ -413,7 +414,7 @@ private function postEggSelector(selected:String):void
 		flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 	}
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function stopHarvest():void
@@ -429,7 +430,7 @@ private function stopHarvest():void
 
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function changeEggs():void
@@ -480,16 +481,16 @@ private function sophieAppearance():void {
 	
 	outputText("\n\nSophie's arms are covered in feathers as well, and are somewhat wing-like in appearance, though she has human hands at the ends of them.  Her primary wings are larger and sprout out above her shoulder blades.  She often keeps them folded out of the way behind her, but she can kick up a huge dust-storm with them when she wants.");
 
-	if (kGAMECLASS.farm.farmCorruption.hasTattoo("sophie"))
+	if (SceneLib.farm.farmCorruption.hasTattoo("sophie"))
 	{
 		outputText("\n\n");
-		if (kGAMECLASS.farm.farmCorruption.sophieFullTribalTats())
+		if (SceneLib.farm.farmCorruption.sophieFullTribalTats())
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
 		else
 		{
-			if (kGAMECLASS.farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			if (SceneLib.farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
 			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] + "\n");

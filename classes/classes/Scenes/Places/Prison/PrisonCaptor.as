@@ -141,8 +141,7 @@ package classes.Scenes.Places.Prison
 		
 		public function timeForWaitRandomEvent(hours:int, days:int, goal:int):Boolean {
 			var timesPassed:int = model.time.totalTime;
-			if (timesPassed % goal == 0) return true;
-			else return false;
+			return timesPassed % goal == 0;
 		}
 	}
 

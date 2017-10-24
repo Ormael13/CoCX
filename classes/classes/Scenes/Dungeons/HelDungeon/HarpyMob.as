@@ -2,12 +2,13 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class HarpyMob extends Monster
 	{
 		public function harpyHordeAI():void {
 			if(rand(3) == 0) harpyHordeLustAttack();
-			else if(rand(3) > 0) harpyHordeClawFlurry()
+			else if(rand(3) > 0) harpyHordeClawFlurry();
 			else harpyHordeGangBangAttack();
 		}
 		
@@ -66,12 +67,12 @@ public class HarpyMob extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.heltower.pcDefeatsHarpyHorde();
+			SceneLib.dungeons.heltower.pcDefeatsHarpyHorde();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.heltower.pcLosesToHarpyHorde();
+			SceneLib.dungeons.heltower.pcLosesToHarpyHorde();
 		}
 		
 		public function HarpyMob()
