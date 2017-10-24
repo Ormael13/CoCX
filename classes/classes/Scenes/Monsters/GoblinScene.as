@@ -299,13 +299,13 @@ public class GoblinScene extends BaseContent
 			//Goblin victory rape, female naga:
 			else if (player.isNaga()) {
 				outputText(images.showImage("goblin-win-female-naga-rapedfem"));
-				outputText("strings/RapeFemNaga");
+				story.display("strings/RapeFemNaga");
 				cleanupAfterCombat();
 				player.orgasm();
 			}
 			else {
 				outputText(images.showImage("goblin-win-female-rapedfem"));
-				outputText("strings/RapeFem");
+				story.display("strings/RapeFem");
 				cleanupAfterCombat();
 				player.orgasm();
 			}
