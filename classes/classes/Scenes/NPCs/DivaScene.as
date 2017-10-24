@@ -114,10 +114,12 @@ public class DivaScene extends XXCNPC{
     public function moonlightSonata(fromCombat:Boolean=false):void{
         if(status == 0){status = 1;}
         clearOutput();
-        if(!fromCombat){
-            doNext(camp.returnToCampUseOneHour);
+        if(fromCombat){
+            display("camp/sexMenu/moonlightSonata/intro/combat");
+        } else {
+            display("camp/sexMenu/moonlightSonata/intro/camp");
         }
-        display("camp/sexMenu/moonlightSonata/intro"+fromCombat?"combat":"regular");
+
         if( player.biggestCockLength() > 24) {
             display("camp/sexMenu/moonlightSonata/male/tooBig");
             player.cocks[player.biggestCockIndex()].cockLength = 18;
@@ -129,16 +131,25 @@ public class DivaScene extends XXCNPC{
                 display("camp/sexMenu/moonlightSonata/female/bat");
                 display("camp/sexMenu/moonlightSonata/male/regular",{$combat:fromCombat})
             }
+        } else if(player.isMaleOrHerm()){
+            display("camp/sexMenu/moonlightSonata/male/regular",{$combat:fromCombat});
         } else {
-            display("camp/sexMenu/moonlightSonata/"+player.isFemale()?"fe":""+"male/regular",{$combat:fromCombat});
+            display("camp/sexMenu/moonlightSonata/female/regular",{$combat:fromCombat});
         }
         if(fromCombat){
-            display("camp/sexMenu/moonlightSonata/outro/combat/"+firstLoss?"initial":"regular");
+            if(firstLoss){
+                display("camp/sexMenu/moonlightSonata/outro/combat/initial");
+            } else {
+                display("camp/sexMenu/moonlightSonata/outro/combat/regular");
+            }
             firstLoss=false;
         } else{
             display("camp/sexMenu/moonlightSonata/outro/camp");
         }
-        flushOutputTextToGUI();
+        if(!fromCombat){
+            doNext(camp.returnToCampUseOneHour);
+            flushOutputTextToGUI();
+        }
     }
     public function encounter():void{
         if(status == 2){
