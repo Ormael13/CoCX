@@ -45,16 +45,16 @@ package classes.Scenes.NPCs
 		public function moveStaticDischarge():void {
 			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
-			outputText(" touches you with her claw and you feel ");
+			outputText(" touches you with her claw and you feel some of her electricity rush and course through your body slowly building your arousal. This is very bad; there is no telling how long you will be able to stand it.");
 			if (player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
-				outputText("(probably smth Lia want to write when Raiju/Electra hit PC when it already have static discharge on it).\n\n");
+				outputText(" Her repeated touches increase the voltage!!!!");
 				player.dynStats("lus", 8 + int(player.sens) / 8);
 			}
 			else {
-				outputText("some of her electricity rush and course through your body slowly building your arousal. This is very bad; there is no telling how long you will be able to stand it.\n\n");
 				player.createStatusEffect(StatusEffects.RaijuStaticDischarge, 0, 0, 0, 0);
 				player.dynStats("lus", 4 + int(player.sens) / 8);
 			}
+			outputText("\n\n");
 		}
 		
 		public function moveMasturbate():void {

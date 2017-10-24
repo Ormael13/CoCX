@@ -758,6 +758,7 @@ import fl.controls.ComboBox;
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 			outputText("Skin tone: " + player.skinTone + "\n");
 			outputText("Hair color: [haircolor]\n");
+			outputText("Eyes color: [eyecolor]\n");
 			if (player.hasCock()) {
 				outputText("Cock size: " + player.cocks[0].cockLength + "\" long, " + player.cocks[0].cockThickness + "\" thick\n");
 			}
@@ -880,9 +881,9 @@ import fl.controls.ComboBox;
 			addButton(5, "Brown", pickEyesColor, "brown");
 			addButton(6, "Yellow", pickEyesColor, "yellow");
 			addButton(7, "Grey", pickEyesColor, "grey");
-			addButton(10, "Purple", pickEyesColor, "purple");
-			addButton(11, "Golden", pickEyesColor, "golden");
-			addButton(13, "Silver", pickEyesColor, "silver");
+			addButton(8, "Purple", pickEyesColor, "purple");
+			addButton(10, "Golden", pickEyesColor, "golden");
+			addButton(11, "Silver", pickEyesColor, "silver");
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 

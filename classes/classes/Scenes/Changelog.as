@@ -27,7 +27,7 @@ package classes.Scenes
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
 			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");// or new enemy to fight at Soul Arena. If PC will not force her into suicide she can teach PC few soulskills
-			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP reeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
+			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP regeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
 			outputText("-New perk for weapons: Body Cultivator's Focus. It increase by x% all dmg done with physical based soulskills.\n");
 			outputText("-Perks Daoist's Focus and Seer’s Insight would now only boost magical soulskills instead of all soulskills.\n");
 			outputText("-New enemy in Mountains / Deepwoods / Plains: Raiju/Electra. As first encounter with her will be always in Mountains and afer it she can be encountered in any of those 3 locations. It even come with brand new and shiny codex entry to unlock about Raiju race.\n");

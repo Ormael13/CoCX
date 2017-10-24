@@ -28,22 +28,14 @@ public class PlayerInfo extends BaseContent {
 		var combatStats:String = "";
 
 		combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
-
 		combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(getGame().lustPercent())) + "% (Higher is better.)\n";
 
 		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
-
 		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
-
 		combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
-
 		combatStats += "<b>White Spell Cost:</b> " + combat.spellCostWhite(100) + "%\n";
-
 		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
-
 		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
-
-		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
@@ -51,24 +43,20 @@ public class PlayerInfo extends BaseContent {
 			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
 				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
 		}
-
 		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
-
 		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-
 		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
-
 		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
-
 		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
-
 		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
 
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
-
+		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
+		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
+
+		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 
 		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
@@ -146,7 +134,6 @@ public class PlayerInfo extends BaseContent {
 				childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
 			childStats += "<b>Total Children With Isabella:</b> " + getGame().isabellaScene.totalIsabellaChildren() + "\n"
 		}
-
 
 		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
 			childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
@@ -270,7 +257,6 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 				bodyStats += " (Too long! Sensitivity Increasing!)";
-
 			bodyStats += "\n";
 		}
 
@@ -336,14 +322,12 @@ public class PlayerInfo extends BaseContent {
 			else
 				miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200" + "\n";
 		}
-
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)
 				miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900" + "\n";
 			else
 				miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300" + "\n";
 		}
-
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)
 				miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900" + "\n";
@@ -654,7 +638,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Eating in 'Shira of the east' restaurant effect - " + player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) + " hours remaining. (Increased stats and elemental resistance)\n";
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
-			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by 1 day)\n";
+			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
 
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";

@@ -7351,19 +7351,21 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
-		public function voltageTopaz(player:Player):void
+		public function voltageTopaz(itemused:Boolean,player:Player):void
 		{
 			player.slimeFeed();
-			clearOutput();
+			if (itemused == true) clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			var temp2:Number = 0;
-			if (rand(2) == 0) changeLimit++;
-			if (rand(3) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
-			outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+			if (itemused == true) {
+				if (rand(2) == 0) changeLimit++;
+				if (rand(3) == 0) changeLimit++;
+				if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+				if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+				if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+				outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+			}
 			//Stats
 			if (player.lib < 100 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");

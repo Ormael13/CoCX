@@ -722,10 +722,11 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//Magic Ward
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the warding stones. ");
-		else outputText("Right before the ring of traps are your warding stones. ");
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) outputText("They are currently inactive.");
-		else outputText("They are glowing with power, protecting your camp from intruders.");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the");
+		else outputText("Right before the ring of traps are your");
+		outputText(" warding stones. They are ");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) outputText("currently inactive.");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3)  outputText("glowing with power, protecting your camp from intruders.");
 		outputText("\n\n");
 	}
 	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ");
@@ -1541,17 +1542,19 @@ private function campWinionsArmySim():void {
 }
 
 private function MagicWardMenu():void {
+	clearOutput();
+	outputText("You touch one of the warding stones");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
-		clearOutput();
-		outputText("You touch one of the warding stones, and feel a surge of power as every stone comes alive with power.  The ward is up, and your camp should be safe.");
+		outputText(", and feel a surge of power as every stone comes alive with power.  The ward is up, and your camp should be safe.");
 		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 3;
 		doNext(campActions);
+		return;
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3) {
-		clearOutput();
-		outputText("You touch one of the warding stones and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
+		outputText(" and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
 		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
 		doNext(campActions);
+		return;
 	}
 }
 

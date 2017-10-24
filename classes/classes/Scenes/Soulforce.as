@@ -9,23 +9,26 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Places.Boat;
-	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
 	import classes.Scenes.Areas.Forest.TamaniScene;
 	import classes.Scenes.Areas.Forest.TamanisDaughters;
 	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 	import classes.Scenes.Areas.Forest.WorldTree;
 	import classes.Scenes.Areas.HighMountains.IzumiScene;
-	import classes.Scenes.NPCs.Electra;
-	import classes.Scenes.NPCs.Sonya;
-	import classes.Scenes.NPCs.RyuBiDragon;
+	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Areas.Forest.Alraune;
+	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+	import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Monsters.DarkElfScout;
 	import classes.Scenes.Monsters.DarkElfSlaver;
 	import classes.Scenes.Monsters.DarkElfRanger;
 	import classes.Scenes.Monsters.DarkElfSniper;
+	import classes.Scenes.Monsters.DarkElfSniper;
+	import classes.Scenes.NPCs.Electra;
+	import classes.Scenes.NPCs.Sonya;
+	import classes.Scenes.NPCs.RyuBiDragon;
 	
 	use namespace kGAMECLASS;
 	
@@ -585,6 +588,8 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
+			addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AscensionMenu():void {
@@ -1123,6 +1128,16 @@ private function resetHeroslayerOmnibusFlag():void {
 			clearOutput();
 			outputText("Entering battle with Electra! Enjoy ^^");
 			startCombat(new Electra());
+		}
+		public function FightObsidianGargoyle():void {
+			clearOutput();
+			outputText("Entering battle with Obsidian Gargoyle! Enjoy ^^");
+			startCombat(new ObsidianGargoyle());
+		}
+		public function FightHeroslayerOmnibus():void {
+			clearOutput();
+			outputText("Entering battle with Heroslayer Omnibus! Enjoy ^^");
+			startCombat(new HeroslayerOmnibus());
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");

@@ -83,9 +83,9 @@ public function ElectraSexPlayer():void
 	outputText("You wake up in a pool of your own fluids. After such mind wracking pleasure, your entire body feels sensitive and aches to be touched from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
 	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+		player.createStatusEffect(StatusEffects.RaijuLightningStatus,25,0,0,0);
 	}
-	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,25,0,0,0);
 	electraAffection(5);
 	player.orgasm();
 	cleanupAfterCombat();
