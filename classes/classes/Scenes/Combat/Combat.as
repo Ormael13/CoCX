@@ -4508,6 +4508,24 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 		else player.addStatusValue(StatusEffects.EarthStance,1,-1);
 	}
+	//Eclipsing shadow
+	if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
+		if (player.statusEffectv1(StatusEffects.CooldownEclipsingShadow) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownEclipsingShadow);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownEclipsingShadow,1,-1);
+		}
+	}
+	//Sonic scream
+	if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSonicScream) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSonicScream);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSonicScream,1,-1);
+		}
+	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
 	if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);

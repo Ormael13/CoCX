@@ -164,12 +164,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasVagina() && player.cowScore() >= 9) {
 			bd = buttons.add("Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
 			bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) bd.disable("You can't use it more than once during fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.hasCock() && player.minotaurScore() >= 9) {
 			bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
 			bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) bd.disable("You can't use it more than once during fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.canFly()) {
 			buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -943,7 +943,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function milkBlask():void {
 		clearOutput();
-		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownMilkBlast, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing " + monster.a + monster.short + " with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
 		var damage:Number = 0;
 		damage += player.lactationQ();
@@ -970,7 +970,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function cumCannon():void {
 		clearOutput();
-		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownCumCannon, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting " + monster.a + monster.short + " away and knocking it prone. ");
 		var damage:Number = 0;
 		damage += player.cumQ();
