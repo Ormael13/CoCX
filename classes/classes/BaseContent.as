@@ -5,6 +5,7 @@ import classes.Items.*;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
@@ -124,7 +125,7 @@ import coc.xxc.StoryContext;
 		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
-			return kGAMECLASS.inDungeon;
+			return DungeonAbstractContent.inDungeon;
 		}
 /* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
@@ -135,20 +136,20 @@ import coc.xxc.StoryContext;
 		
 		protected function get inRoomedDungeon():Boolean
 		{
-			return kGAMECLASS.inRoomedDungeon;
+			return DungeonAbstractContent.inRoomedDungeon;
 		}
 		protected function set inRoomedDungeon(v:Boolean):void
 		{
-			kGAMECLASS.inRoomedDungeon = v;
+			DungeonAbstractContent.inRoomedDungeon = v;
 		}
 		
 		protected function get inRoomedDungeonResume():Function
 		{
-			return kGAMECLASS.inRoomedDungeonResume;
+			return DungeonAbstractContent.inRoomedDungeonResume;
 		}
 		protected function set inRoomedDungeonResume(v:Function):void
 		{
-			kGAMECLASS.inRoomedDungeonResume = v;
+			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
 		
 /*

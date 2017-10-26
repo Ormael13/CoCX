@@ -64,10 +64,6 @@ public class CoC extends MovieClip
         CoC.setUpLogging();
     }
 
-
-    //Used when save/loading
-    public var notes:String = "";
-
     //System time
     public var date:Date = new Date();
 
@@ -75,32 +71,11 @@ public class CoC extends MovieClip
     public var modSaveVersion:Number = 19;
     public var levelCap:Number = 150;
 
-    //dungeoneering variables (If it ain't broke, don't fix it)
-    //Setting dungeonLoc = 0 handles this:
-    public var inDungeon:Boolean = false; //Re-enabled for sake.
-    public var dungeonLoc:int = 0;
-
-    // To save shitting up a lot of code...
-    public var inRoomedDungeon:Boolean = false;
-    public var inRoomedDungeonResume:Function = null;
-
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
     public var timeQ:Number = 0;
     //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
 
-
-    //Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
-    //	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
-    private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
-
-    //Called by the saveGameObject function in Saves
-    public static function saveAllAwareClasses(game:CoC):void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateBeforeSave(game); }
-
-    //Called by the loadGameObject function in Saves
-    public static function loadAllAwareClasses(game:CoC):void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateAfterLoad(game); }
-
-    public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void { _saveAwareClassList.push(newEntry); }
 
     private var playerEvent:PlayerEvents;
 
@@ -136,9 +111,7 @@ public class CoC extends MovieClip
     public var context:StoryContext;
 
     public var perkTree:PerkTree = new PerkTree();
-//FIXME @OXDECEPTION INCLUDES BELOW THIS LINE -------------------------------------------
-    include "../../includes/tamaniDildo.as";
-    //FIXME @OXDECEPTION INCLUDES ABOVE THIS LINE -------------------------------------------
+
     public var measurements:Measurements = Measurements.init();
     /****
      This is used purely for bodges while we get things cleaned up.

@@ -1,7 +1,6 @@
 package classes.Scenes.Dungeons 
 {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.SceneLib;
 
 public class YourCabin extends DungeonAbstractContent
@@ -12,8 +11,8 @@ public class YourCabin extends DungeonAbstractContent
 		}
 		
 		public function enterCabin():void {
-			kGAMECLASS.inDungeon = true;
-			kGAMECLASS.dungeonLoc = -10;
+			inDungeon = true;
+			dungeonLoc = -10;
 			menu();
 			clearOutput();
 			outputText("<b><u>Your Cabin</u></b>\n");
@@ -98,8 +97,8 @@ public class YourCabin extends DungeonAbstractContent
 		}
 		
 		private function exitCabin():void {
-			kGAMECLASS.inDungeon = false;
-			kGAMECLASS.dungeonLoc = -1;
+			inDungeon = false;
+			dungeonLoc = -1;
 			playerMenu();
 		}
 		

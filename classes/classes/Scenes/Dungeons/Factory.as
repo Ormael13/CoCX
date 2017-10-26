@@ -27,7 +27,7 @@ use namespace kGAMECLASS;
 		public function enterDungeon():void {
 			clearOutput();
 			outputText(images.showImage("dungeon-entrance-factory"));
-			kGAMECLASS.inDungeon = true;
+			inDungeon = true;
 			//Shutdown state
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("Rounding a bend in the mountainous foothills, you stumble upon a large, rusted and eerily silent iron structure with a number of tall gray smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside toward a jagged hole in its face.  Most of these are cracked open along their seams and both the pipes and mountainside are glazed with pink tinted runoff.");
 			else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("Rounding a bend in the mountainous foothills, you stumble upon a large, rusted and eerily silent iron structure with a number of tall gray smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.");
@@ -44,7 +44,7 @@ use namespace kGAMECLASS;
 		}
 		
 		private function exitDungeon():void {
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			clearOutput();
 			outputText("You slip out the door and disappear, heading back towards your camp, leaving the hellish factory behind.");
 			doNext(camp.returnToCampUseOneHour);	
@@ -1589,7 +1589,7 @@ use namespace kGAMECLASS;
 		
 		//ROOMS
 		public function roomLobby():void {
-			kGAMECLASS.dungeonLoc = 0;
+			dungeonLoc = 0;
 			clearOutput();
 			outputText("<b><u>The Factory Foyer</u></b>\n");
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.");
@@ -1598,7 +1598,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomBreakRoom():void {
-			kGAMECLASS.dungeonLoc = 1;
+			dungeonLoc = 1;
 			clearOutput();
 			outputText("<b><u>Break Room</u></b>\n");
 			outputText("Stepping through the dark red doorway, you wander into an expansive break room. Tables surrounded by crude wooden chairs fill most of the floor space. Along the far eastern wall sits a small counter, complete with a strange ebony sculpture of a busty woman with 'Mrs. Coffee' printed on the side. Below the sculpture is a pot of steaming hot coffee, giving off an invigoratingly rich smell.");
@@ -1660,7 +1660,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomPumpRoom():void {
-			kGAMECLASS.dungeonLoc = 2;
+			dungeonLoc = 2;
 			clearOutput();
 			outputText("<u><b>Pump Room</b></u>\n");
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] < 1) {
@@ -1671,7 +1671,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomFurnaceRoom():void {
-			kGAMECLASS.dungeonLoc = 3;
+			dungeonLoc = 3;
 			clearOutput();
 			outputText("<b><u>Furnace Room</u></b>\n");
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
@@ -1699,7 +1699,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomRepairCloset():void {
-			kGAMECLASS.dungeonLoc = 4;
+			dungeonLoc = 4;
 			clearOutput();
 			outputText("<b><u>Repair Closet</u></b>\n");
 			outputText("As you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ");
@@ -1723,7 +1723,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomMainChamber():void {
-			kGAMECLASS.dungeonLoc = 5;
+			dungeonLoc = 5;
 			clearOutput();
 			outputText("<b><u>Main Chamber</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, roomPumpRoom);
@@ -1743,7 +1743,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomForemanOffice():void {
-			kGAMECLASS.dungeonLoc = 6;
+			dungeonLoc = 6;
 			//Foreman's Office
 			clearOutput();
 			outputText("<b><u>Foreman's Office</u></b>\n");
@@ -1768,7 +1768,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomControlRoom():void {
-			kGAMECLASS.dungeonLoc = 7;
+			dungeonLoc = 7;
 			clearOutput();
 			outputText("<b><u>Pump Control Room</u></b>\n");
 			outputText("This room is little more than a closet in reality.  There is a simple set of mechanical controls on a finely crafted terminal against the far wall.  ");
@@ -1792,7 +1792,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomPremiumStorage():void {
-			kGAMECLASS.dungeonLoc = 8;
+			dungeonLoc = 8;
 			clearOutput();
 			outputText("<b><u>Premium Products</u></b>\n");
 			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n");
@@ -1821,7 +1821,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomBathroom():void {
-			kGAMECLASS.dungeonLoc = 9;
+			dungeonLoc = 9;
 			clearOutput();
 			outputText("<b><u>Washroom</u></b>\n");
 			outputText("This room is fairly clean. At one of the walls, there is a row of four sinks. Opposite side, there are few bathroom stalls. Three urinals are mounted against one of the walls. You'd guess even the demons need to use the bathroom.");

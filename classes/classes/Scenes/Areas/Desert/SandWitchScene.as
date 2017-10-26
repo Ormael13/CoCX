@@ -621,7 +621,7 @@ internal function beatSandwitch():void {
 	var temp2:Function = null;
 	var temp3:Function = null;
 	if(silly()) temp3 = missingoSex;
-    if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.sandwitchGetsDildoed;
+    if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = sandwitchGetsDildoed;
     var shouldra:Function = null;
 	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = SceneLib.shouldraFollower.sandWitchGetsGhostly;
 	//doYesNo(sandwitchRaped, cleanupAfterCombat);
@@ -631,6 +631,21 @@ internal function beatSandwitch():void {
 	choices("Yes", sandwitchRaped, "Dildo Rape", temp2, "Use 3i@-", temp3, "Use Shouldra", shouldra, "Lay Eggs", ovi,
 		"Taunt Her", sandwitchSpanking, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 }
+    //RAEP SAND-WITCH!
+    private function sandwitchGetsDildoed():void {
+        EngineCore.clearOutput();
+        EngineCore.outputText("You pull out Tamani's dildo, advancing on the helpless witch.   Her derriere makes an enticing target as you advance upon her, and the simple brown robe she wears does nothing to protect her body from your unusual attentions.\n\n");
+        EngineCore.outputText("Pushing her legs apart, you take the toy and shove it up one of her moistened fuck-holes.   She cries out, noisily screaming into the dunes, though you're unsure whether from pain or pleasure.  Whatever the case, she'll think twice about sending her vibrating stones after you now.  You shove the dildo further into her, hard enough to lift her knees out of the sand. She slams back down once you've crammed it the whole way inside her, wiggling her supple ass back and forth as if it would somehow assuage the pain of the rapid insertion.\n\n");
+        EngineCore.outputText("\"<i>This isn't what I wanted,</i>\" cries the defeated witch, but you can see the sand under her four tits darkening with moisture.  You roll her over, exposing the soaked, sand-covered front of her robe.  You tear it off savagely, exposing her quartette of glistening, tanned orbs.   Her sweaty bronze skin isn't marred by tan lines, and she glistens as she dribbles milk, as if she oiled up before coming out into the desert.\n\n");
+        EngineCore.outputText("After giving her a chance to adjust to the intrusion, you begin working the dildo faster and faster, watching her milk-bloated jugs wobble back in forth.  One handed, you grab her lower left-most tit and squeeze, feeling the soft flesh yield in your hand.  A geyser of milk bursts from her nipple, surprising you with the quantity and force of the stream, though it quickly tapers off.  Delighted with the perverse display, you move your hand onwards to the next swollen mound, squeezing each in turn until the sand witch's body is drizzled with white and her prominent nipples are hard as rocks.\n\n");
+        EngineCore.outputText("You can feel the toy slowly starting to puff up, like one of the fishes from the sea near your village, inflating as if to scare off a predator.  Only this is one growing for an entirely different purpose.  The witch's cunt fills with growing jiggly pinkness, and her hands move to her nipples, assisting you in your rather forceful milking.  Her legs open wide, as if it would somehow help her with the increasing pressure spreading her cunt.   Moaning and twisting under you like a bitch in heat, she's started to fall under the spell of the aphrodisiacs leaking from the twisted toy.\n\n");
+        EngineCore.outputText("Releasing her over-sized tits, you begin to play with her love-button with your free hand while maneuvering the toy with your other.   She cries out and begins thrashing underneath you, her shining nipples erupting with a torrent of milk.   Twitching in your hand, you feel the dildo convulsing as it unloads a potent dose of aphrodisiac into her cunt.  Before it can finish, you yank it out and jam it back into her second, neglected cunt, stretching it as wide as the first in one smooth motion while she's too doped up by orgasm to feel it.  Her eyes roll back, then close, her conscious mind totally wiped out by the powerful orgasm.\n\n");
+        EngineCore.outputText("You wiggle the toy about, enjoying having taken such advantage of your now-unconscious foe.  But you have places to be, and you pull out your toy, ");
+        if(player.cor > 50) EngineCore.outputText("lick it clean, ");
+        EngineCore.outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.");
+        player.dynStats("lus", (20+player.lib/5+player.cor/10));
+        cleanupAfterCombat();
+    }
 
 //This is a bonus scene for those who are playing Corruption of Champions with Silly Mode activated and defeat the Sand Witch by dropping her hit points and have the option of having their way with her. A special third(?) option appears that begins the encounter. The idea is that it breaks the 4th wall and gives the player the impression that they've stumbled upon a glitchy, incomplete scene. As a special note to anyone who does coding: all code tags (anything like \" + cockDescript(0) + \" but not my usual {code brackets} for example) are meant to be printed in game exactly as they were written on this document, pushing the idea that the player \"broke the game\".
 //{Player defeats Sand Witch and has enough Lust}

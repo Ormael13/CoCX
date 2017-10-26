@@ -29,7 +29,7 @@ use namespace kGAMECLASS;
 		public function enterDungeon():void {
 			clearOutput();
 			outputText(images.showImage("dungeon-entrance-deepcave"));
-			kGAMECLASS.inDungeon = true;
+			inDungeon = true;
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 1) {
 				
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.");
@@ -45,7 +45,7 @@ use namespace kGAMECLASS;
 		}
 		
 		private function exitDungeon():void {
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			clearOutput();
 			outputText("You leave the cave behind and take off through the deepwoods back towards camp.");
 			doNext(camp.returnToCampUseOneHour);	
@@ -1034,7 +1034,7 @@ use namespace kGAMECLASS;
 		}
 		//ROOMS
 		public function roomEntrance():void {
-			kGAMECLASS.dungeonLoc = 10;
+			dungeonLoc = 10;
 			clearOutput();
 			outputText("<b><u>The Cave Entrance</u></b>\n");
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.");
@@ -1054,7 +1054,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomTunnel():void {
-			kGAMECLASS.dungeonLoc = 11;
+			dungeonLoc = 11;
 			clearOutput();
 			outputText("<b><u>Cave Tunnel</u></b>\n");
 			outputText("This cave tunnel slants downwards to the north, and upwards to the south.  You can see sunlight and feel a fresh breeze from the latter direction, though the walls and air around you are damp with moisture.  You realize that the floor of this cave is fairly smooth and even, as if some attempt had been made to level it out.  You can see a bricked up wall along the north end of the tunnel.  It has a crudely fashioned wooden door in the center of it.");
@@ -1062,7 +1062,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomGatheringHall():void {
-			kGAMECLASS.dungeonLoc = 12;
+			dungeonLoc = 12;
 			clearOutput();
 			outputText("<b><u>Gathering Hall</u></b>\n");
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
@@ -1078,7 +1078,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomFungusCavern():void {
-			kGAMECLASS.dungeonLoc = 13;
+			dungeonLoc = 13;
 			clearOutput();
 			outputText("<b><u>Fungus Cavern</u></b>\n");
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  ");
@@ -1100,7 +1100,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomTortureRoom():void {
-			kGAMECLASS.dungeonLoc = 14;
+			dungeonLoc = 14;
 			clearOutput();
 			outputText("<b><u>Filthy Torture Room</u></b>\n");
 			outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ");
@@ -1136,7 +1136,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomSecretPassage():void {
-			kGAMECLASS.dungeonLoc = 15;
+			dungeonLoc = 15;
 			clearOutput();
 			outputText("<b><u>Secret Tunnel</u></b>\n");
 			outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ");
@@ -1153,7 +1153,7 @@ use namespace kGAMECLASS;
 		}
 		
 		public function roomZetazChamber():void {
-			kGAMECLASS.dungeonLoc = 16;
+			dungeonLoc = 16;
 			clearOutput();
 			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.");

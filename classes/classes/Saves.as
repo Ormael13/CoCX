@@ -1,11 +1,11 @@
 ﻿package classes
 {
-
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
@@ -21,7 +21,6 @@ import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
 import flash.utils.getDefinitionByName;
-import flash.utils.getQualifiedClassName;
 
 CONFIG::AIR
 {
@@ -41,8 +40,13 @@ public class Saves extends BaseContent {
 	private var itemStorageGet:Function;
 	private var pearlStorageGet:Function;
 	private var gearStorageGet:Function;
-	
-	public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
+
+
+    //Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
+    //	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
+	private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
+
+    public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
 		gameStateGet = gameStateDirectGet; //This is so that the save game functions (and nothing else) get direct access to the gameState variable
 		gameStateSet = gameStateDirectSet;
 	}
@@ -716,7 +720,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 	var backupAborted:Boolean = false;
 
-CoC.saveAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must save its values in the flags array
+	saveAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must save its values in the flags array
     var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
@@ -1428,11 +1432,11 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = kGAMECLASS;
-    game.dungeonLoc = 0;
+    DungeonAbstractContent.dungeonLoc = 0;
 	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
-	game.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
-	game.inRoomedDungeon = false;
-	game.inRoomedDungeonResume = null;
+	DungeonAbstractContent.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
+	DungeonAbstractContent.inRoomedDungeon = false;
+	DungeonAbstractContent.inRoomedDungeonResume = null;
 
 	//Autosave stuff
 	player.slotName = slot;
@@ -2318,7 +2322,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot10.quantity);
 		}
 
-CoC.loadAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must load its values from the flags array
+		loadAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must load its values from the flags array
         unFuckSave();
 		
 		// Control Bindings
@@ -2584,5 +2588,17 @@ public function unFuckSave():void
 		// TODO init counters from flags
 	}
 }
+
+    private function saveAllAwareClasses(game:CoC):void {
+        for (var sac:int = 0; sac < _saveAwareClassList.length; sac++) _saveAwareClassList[sac].updateBeforeSave(game);
+    }
+
+    private function loadAllAwareClasses(game:CoC):void {
+        for (var sac:int = 0; sac < _saveAwareClassList.length; sac++) _saveAwareClassList[sac].updateAfterLoad(game);
+    }
+
+    public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void {
+        _saveAwareClassList.push(newEntry);
+    }
 }
 }

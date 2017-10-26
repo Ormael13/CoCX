@@ -6,6 +6,7 @@ import classes.Items.ArmorLib;
 import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -34,13 +35,13 @@ public class EventParser {
         }
         //Clear restriction on item overlaps if not in combat
         kGAMECLASS.plotFight = false;
-        if (kGAMECLASS.inDungeon) {
+        if (DungeonAbstractContent.inDungeon) {
             //dungeonMenu();
             SceneLib.dungeons.checkRoom();
             return;
         }
-        else if (kGAMECLASS.inRoomedDungeon) {
-            if (kGAMECLASS.inRoomedDungeonResume != null) kGAMECLASS.inRoomedDungeonResume();
+        else if (DungeonAbstractContent.inRoomedDungeon) {
+            if (DungeonAbstractContent.inRoomedDungeonResume != null) DungeonAbstractContent.inRoomedDungeonResume();
             return;
         }
         kGAMECLASS.flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
@@ -81,7 +82,7 @@ public class EventParser {
 
         }
         kGAMECLASS.inCombat = false;
-        kGAMECLASS.dungeonLoc = 0; //Replaces inDungeon = false;
+        DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
     }
 
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
@@ -324,7 +325,7 @@ public class EventParser {
             }
 
         }
-        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && kGAMECLASS.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !kGAMECLASS.inDungeon && !kGAMECLASS.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
+        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && kGAMECLASS.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !DungeonAbstractContent.inDungeon && !DungeonAbstractContent.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
             SceneLib.prison.goBackToPrisonBecauseQuestTimeIsUp();
             return true;
         }

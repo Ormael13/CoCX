@@ -176,8 +176,8 @@ use namespace kGAMECLASS;
 			outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
 			outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
 			//(NEXT)
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
-			kGAMECLASS.inDungeon = true;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			inDungeon = true;
 			doNext(playerMenu);
 		}
 		
@@ -214,15 +214,15 @@ use namespace kGAMECLASS;
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("You make your way back to the high mountains. Next, you hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
 			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
-			kGAMECLASS.inDungeon = true;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			inDungeon = true;
 			doNext(playerMenu);
 		}
 		public function exitHelTower():void {
 			clearOutput();
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
-			kGAMECLASS.dungeonLoc = -1;
-			kGAMECLASS.inDungeon = false;
+			dungeonLoc = -1;
+			inDungeon = false;
 			doNext(camp.returnToCampUseOneHour);			
 		}
 		
@@ -1187,12 +1187,12 @@ use namespace kGAMECLASS;
 			//(PC returns to Camp)
 			//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//ROOMS
 		public function roomGuardHall():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
 			clearOutput();
 			outputText("<b><u>Guard Hall</u></b>\n");
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
@@ -1215,7 +1215,7 @@ use namespace kGAMECLASS;
 
 		}
 		public function roomCellar():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
+			dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
 			clearOutput();
 			outputText("<b><u>Wine Cellar</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1236,7 +1236,7 @@ use namespace kGAMECLASS;
 			addButton(5, "Climb Up", roomGuardHall);
 		}
 		public function roomStairwell():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_STAIR_WELL;
+			dungeonLoc = DUNGEON_HEL_STAIR_WELL;
 			clearOutput();
 			outputText("<b><u>Stair Well</u></b>\n");
 			dungeons.setDungeonButtons(null, roomGuardHall, null, null);
@@ -1268,7 +1268,7 @@ use namespace kGAMECLASS;
 			}
 		}
 		public function roomDungeon():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_DUNGEON;
+			dungeonLoc = DUNGEON_HEL_DUNGEON;
 			clearOutput();
 			outputText("<b><u>Dungeon</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1305,7 +1305,7 @@ use namespace kGAMECLASS;
 			}
 		}
 		public function roomMezzanine():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_MEZZANINE;
+			dungeonLoc = DUNGEON_HEL_MEZZANINE;
 			clearOutput();
 			outputText("<b><u>Mezzanine</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1328,7 +1328,7 @@ use namespace kGAMECLASS;
 			}
 		}
 		public function roomThroneRoom():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
+			dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
 			clearOutput();
 			outputText("<b><u>Throne Room</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);

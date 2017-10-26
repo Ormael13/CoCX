@@ -99,7 +99,7 @@ public class Katherine extends TelAdreAbstractContent implements TimeAwareInterf
 		public function Katherine()
 		{
 			_breasts = new BreastStore(kFLAGS.KATHERINE_BREAST_SIZE);
-			CoC.saveAwareClassAdd(_breasts);
+			Saves.saveAwareClassAdd(_breasts);
 			EventParser.timeAwareClassAdd(this);
 		}
 		

@@ -2,7 +2,6 @@ package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Dungeons.DenOfDesire.*;
 
 //import classes.Scenes.NPCs.;
@@ -16,12 +15,12 @@ public class DenOfDesire extends DungeonAbstractContent
 		public function DenOfDesire() { }
 		
 		public function enterDungeon():void {
-			kGAMECLASS.inDungeon = true;
-			kGAMECLASS.dungeonLoc = 64;
+			inDungeon = true;
+			dungeonLoc = 64;
 			playerMenu();
 		}
 		public function exitDungeon():void {
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			clearOutput();
 			outputText("You leave the den behind and take off through the ridge back towards camp.");
 			doNext(camp.returnToCampUseOneHour);
@@ -84,7 +83,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		
 		//Rooms
 		public function roomEntrance():void {
-			kGAMECLASS.dungeonLoc = 64;
+			dungeonLoc = 64;
 			clearOutput();
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You stand in what looks like the entrance to some very old ruins, yet for some reason it's uncharacteristically tidy and clean. Likely something lives here, and not something friendly either.");
@@ -92,7 +91,7 @@ public class DenOfDesire extends DungeonAbstractContent
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomGreatHallArea():void {
-			kGAMECLASS.dungeonLoc = 65;
+			dungeonLoc = 65;
 			clearOutput();
 			outputText("<b><u>Great Hall</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 2) {
@@ -108,14 +107,14 @@ public class DenOfDesire extends DungeonAbstractContent
 			dungeons.setDungeonButtons(roomLaboratory, roomEntrance, null, null);
 		}
 		public function roomLaboratory():void {
-			kGAMECLASS.dungeonLoc = 66;
+			dungeonLoc = 66;
 			clearOutput();
 			outputText("<b><u>Laboratory</u></b>\n");
 			outputText("This room seems to have served as a laboratory used to perform magical experiments on not so willing test subjects. Many lifeless corpses are stockpiled in a container, likely the bodies of failed experiments.");
 			dungeons.setDungeonButtons(roomHeroSlayerOmnibusRoom, roomGreatHallArea, null, null);
 		}
 		public function roomHeroSlayerOmnibusRoom():void {
-			kGAMECLASS.dungeonLoc = 67;
+			dungeonLoc = 67;
 			clearOutput();
 			outputText("<b><u>Hero slayer omnibus room</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 3) {

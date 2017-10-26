@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.Places.Boat{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
-import classes.Scenes.SceneLib;
 
 public class SharkGirlScene extends AbstractBoatContent{
 
@@ -114,7 +112,7 @@ internal function sharkWinChoices():void {
 	}
 	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Do you have your way with her or leave?");
-        var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? kGAMECLASS.sharkGirlGetsDildoed : null);
+        var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
         if (player.gender == 1)
 			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
@@ -349,5 +347,35 @@ internal function sharkLossRape():void {
 	}
 	doNext(playerMenu);
 }
+    //RAEP SOME FUKKIN SHARKGIRLZ NIGGA
+    private function sharkGirlGetsDildoed():void {
+        EngineCore.clearOutput();
+        EngineCore.outputText("You grin from ear to ear, revealing enough teeth to make even the defeated shark-girl shiver.  Advancing upon the prone monster-woman, you ");
+        if(player.weaponName != "fists") EngineCore.outputText("put away your [weapon] and ");
+        EngineCore.outputText("draw out a glistening pink dildo from your pouches, as if it were a weapon.   She looks up at you, at once knowing your intent.  ");
+        if(monster.lust >= monster.maxLust()) EngineCore.outputText("Her legs spread invitingly wide and she tears off her bikini bottom in a lusty frenzy.  You hold the dildo over her and give it a tiny squeeze, wringing out a few drops of pink fluid from the special dildo.  They land on her exposed cunt and in seconds she's writhing underneath you, humping the air.");
+        else EngineCore.outputText("She holds her legs together defiantly, but you pry them open, tear off her bikini bottom and expose her bald nether-lips.   You hold the dildo over her and squeeze, squirting a gush of pink fluid onto her exposed cunt.  The effect is immediate, and in moments she's humping the air and wet with her own fluids.");
+        EngineCore.outputText("\n\n");
+
+        EngineCore.outputText("'<i>What a wonderful toy</i>,' you muse as you kneel between your ");
+        if(player.cor > 50) EngineCore.outputText("latest ");
+        EngineCore.outputText("victim's legs, inhaling her scent.  It smells surprisingly salty, reminding you of the sea.   Sand-papery skin brushes against your ankle.  You don't even have to look down to recognize the feeling of her tail curling around your leg and thigh.  Before she can use it to her advantage, you gently part her outer folds with one hand and insert the artificial member with the other.  The shark-girl's tail immediately drops away as her body shivers and relaxes, barely managing a few twitches.\n\n");
+
+        EngineCore.outputText("The sea-smell from her groin intensifies and you feel the dildo bloat up in your hand.  She's orgasmed already!\n\n");
+
+        EngineCore.outputText("You slap her left ass-cheek hard, the rough texture of her skin giving the perfect *crack* of skin on skin as you scold her, \"<i>You're not supposed to cum so hard!  Now you're really going to get stretched, skank!</i>\"\n\n");
+
+        EngineCore.outputText("The aquatic monster-woman whimpers, feeling herself getting stretched wider and wider by the growing toy.   Intent on punishing her for trying to rape you AND for cumming too soon, you grab the dildo in a double-handed grip and force it in to the hilt.   Her tail flops and thrashes as the dildo sinks in until you bottom out.  She flops about like a dying fish, though perhaps the only thing about her 'dying' is a few brain cells from the bliss her cunny's feeling.  Satisfied with the degree of penetration, you grab it around the base and yank back on it, struggling with how tightly it's lodged in her cunt.\n\n");
+
+        EngineCore.outputText("You wiggle it back and forth, working it partway out before ramming it back in.  Moaning and rocking underneath you, the shark-girl's eyes cross as she tries to fuck your hands.  Both her hands climb up under the thin black fabric of her top and wrap around her modest breasts, squeezing and caressing them.  She gasps when her fingers find her nipples, and starts drooling down her chin.\n\n");
+        EngineCore.outputText("Her salty pussy clamps down hard, but the slick juices pouring from her hole makes it easier and easier to work the bloated sex-toy in and out of her love-hole.   Tired of the slut's moans and gasps of pleasure, you decide to finish her off.   You pull the dildo out, and let out a gasp of surprise when her twitching cunt gapes open obscenely, allowing you to see the entire depth of her love-tunnel, all the way to her cervix.   She groans at the sudden loss of sensation, but before she has a chance to jam a finger into her needy hole, you squeeze the perverted toy HARD, wringing a thick gush of pinkish fluid directly into her baby-maker.\n\n");
+
+        EngineCore.outputText("You plunge the jiggling sex-toy back into her stretched cunt, pistoning the fluid directly into her womb and setting off an orgiastic cry with enough volume to make you cringe.  She trembles madly and you have to sit down on her tail to keep the tip of it from cracking you upside your head.  The dildo in your hands puffs up wider and wider until it pops itself out, exposing the pink-coated inner flesh of the shark-woman's cunt.  You can watch the muscles rippling and squeezing, though thanks to her stretching, you don't think she'll be able to squeeze anything smaller than a minotaur.  After a few more seconds her body goes still, save for the occasional twitch, and you realize she's passed out.\n\n");
+
+        EngineCore.outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.");
+
+        player.dynStats("lus", (20+player.lib/5+player.cor/10));
+        cleanupAfterCombat();
+    }
 }
 }

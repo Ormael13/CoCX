@@ -2497,7 +2497,7 @@ public function wakeFromBadEnd():void {
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
-	kGAMECLASS.inDungeon = false;
+	DungeonAbstractContent.inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     kGAMECLASS.inCombat = false;

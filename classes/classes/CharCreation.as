@@ -5,6 +5,7 @@ import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
@@ -123,10 +124,10 @@ import coc.view.MainView;
 				player.autoSave = false;
 			}
 			//RESET DUNGEON
-			kGAMECLASS.inDungeon = false;
-			kGAMECLASS.dungeonLoc = 0;
-			kGAMECLASS.inRoomedDungeon = false;
-			kGAMECLASS.inRoomedDungeonResume = null;
+			DungeonAbstractContent.inDungeon = false;
+			DungeonAbstractContent.dungeonLoc = 0;
+			DungeonAbstractContent.inRoomedDungeon = false;
+			DungeonAbstractContent.inRoomedDungeonResume = null;
 			//Hold onto old data for NG+
 			var oldPlayer:Player = player;
 			//Reset all standard stats
@@ -147,7 +148,6 @@ import coc.view.MainView;
 			player.obey = 10;
 			player.esteem = 50;
 			player.will = 80;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) kGAMECLASS.notes = "No Notes Available.";
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
@@ -240,7 +240,7 @@ import coc.view.MainView;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
-			kGAMECLASS.inDungeon = false;
+			DungeonAbstractContent.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
 				player.setArmor(armors.C_CLOTH);

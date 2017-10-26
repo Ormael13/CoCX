@@ -9,7 +9,15 @@ import classes.Scenes.SceneLib;
 	 */
 	public class DungeonAbstractContent extends BaseContent
 	{
-		protected function get dungeons():DungeonEngine {
+        public static var inDungeon:Boolean = false;
+
+        public static var dungeonLoc:int = 0;
+
+        public static var inRoomedDungeon:Boolean = false;
+
+        public static var inRoomedDungeonResume:Function = null;
+
+        protected function get dungeons():DungeonEngine {
 			return SceneLib.dungeons;
 		}
 		public function DungeonAbstractContent() 
