@@ -255,7 +255,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 	}
 	if(flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
 		hideMenus();
-		kGAMECLASS.processJackFrostEvent();
+		Holidays.processJackFrostEvent();
 		return;
 	}
 	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
@@ -263,21 +263,21 @@ kGAMECLASS.saves.saveGame(player.slotName);
 		milkWaifu.ratducto();
 		return;
 	}
-	if(kGAMECLASS.nieveHoliday() && model.time.hours == 6) {
+	if(Holidays.nieveHoliday() && model.time.hours == 6) {
 		if(player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5)
 		{
-			kGAMECLASS.returnOfNieve();
+			Holidays.returnOfNieve();
 			hideMenus();
 			return;
 		}
 		else if(flags[kFLAGS.NIEVE_STAGE] == 0) {
 			hideMenus();
-			kGAMECLASS.snowLadyActive();
+			Holidays.snowLadyActive();
 			return;
 		}
 		else if(flags[kFLAGS.NIEVE_STAGE] == 4) {
 			hideMenus();
-			kGAMECLASS.nieveComesToLife();
+			Holidays.nieveComesToLife();
 			return;
 		}
 	}
@@ -355,8 +355,8 @@ kGAMECLASS.saves.saveGame(player.slotName);
 		sophieBimbo.sophieMoveInAttempt();
 		return;
 	}
-	if(!kGAMECLASS.nieveHoliday() && model.time.hours == 6 && flags[kFLAGS.NIEVE_STAGE] > 0) {
-		kGAMECLASS.nieveIsOver();
+	if(!Holidays.nieveHoliday() && model.time.hours == 6 && flags[kFLAGS.NIEVE_STAGE] > 0) {
+		Holidays.nieveIsOver();
 		return;
 	}
 	//Amily followup!
@@ -1010,7 +1010,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
         menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-        kGAMECLASS.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
+        Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
         return;
 	}
 	//AMILY
@@ -1269,9 +1269,9 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 //	addButtonDisabled(10, "???", "We have been entangled since the beginning.");
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
-		kGAMECLASS.nieveCampDescs();
+		Holidays.nieveCampDescs();
 		outputText("\n\n");
-        addButton(11, "Nieve", kGAMECLASS.approachNieve);
+        addButton(11, "Nieve", Holidays.approachNieve);
     }
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(XXCNPC.LOVER,descOnly);
@@ -1288,7 +1288,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
         menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-        kGAMECLASS.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
+        Holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
         return;
 	}
 	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) {

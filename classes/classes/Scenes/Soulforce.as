@@ -13,6 +13,8 @@ import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;

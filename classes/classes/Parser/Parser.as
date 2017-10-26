@@ -12,7 +12,7 @@ import classes.display.DebugInfo;
 		//import showdown.Showdown;
 
 		private var _ownerClass:CoC;			// main game class. Variables are looked-up in this class.
-		private var _settingsClass:CoC_Settings;		// global static class used for shoving conf vars around
+		private var _settingsClass:Class;		// global static class used for shoving conf vars around
 
 		public var sceneParserDebug:Boolean = false;
 

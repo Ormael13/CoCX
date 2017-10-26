@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Plains.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
@@ -32,11 +33,11 @@ use namespace kGAMECLASS;
 			}
 			//Add some holiday cheer
 			if (isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET] && rand(5) == 0) {
-				kGAMECLASS.candyCaneTrapDiscovery();
+				Holidays.candyCaneTrapDiscovery();
 				return;
 			}
 			if (isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
-				kGAMECLASS.polarPete();
+				Holidays.polarPete();
 				flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
 				return;
 			}

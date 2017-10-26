@@ -9,10 +9,10 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 public class VolcanicCrag extends BaseContent
@@ -42,7 +42,7 @@ public class VolcanicCrag extends BaseContent
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-                kGAMECLASS.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
+                Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
                 return;
 			}
 			//Helia monogamy fucks

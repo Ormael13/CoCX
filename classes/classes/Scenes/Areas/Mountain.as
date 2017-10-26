@@ -5,8 +5,8 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Mountain.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
@@ -62,11 +62,11 @@ public class Mountain extends BaseContent
 			if (isHolidays()) {
 				//Gats xmas adventure!
 				if (rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
-					kGAMECLASS.gatsSpectacularRouter();
+					Holidays.gatsSpectacularRouter();
 					return;
 				}
 				if (rand(6) == 0 && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly()) {
-					kGAMECLASS.meetJackFrostInTheMountains();
+					Holidays.meetJackFrostInTheMountains();
 					return;
 				}
 			}

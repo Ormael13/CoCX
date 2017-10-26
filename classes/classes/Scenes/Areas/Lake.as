@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 use namespace kGAMECLASS;
@@ -29,7 +30,7 @@ use namespace kGAMECLASS;
 		{
 			//Increment exploration count
 			player.exploredLake++;
-			if (kGAMECLASS.poniesYN()) return;
+			if (Holidays.poniesYN()) return;
 
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {

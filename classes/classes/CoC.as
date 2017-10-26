@@ -16,13 +16,13 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Parser.Parser;
-import classes.PerkLib;
 import classes.Scenes.*;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
+import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -64,8 +64,6 @@ public class CoC extends MovieClip
         CoC.setUpLogging();
     }
 
-    // Include the functions. ALL THE FUNCTIONS
-    //FIXME @OXDECEPTION
 
     //Used when save/loading
     public var notes:String = "";
@@ -138,18 +136,9 @@ public class CoC extends MovieClip
     public var context:StoryContext;
 
     public var perkTree:PerkTree = new PerkTree();
-    // Other scenes
-
-    include "../../includes/april_fools.as";
-    include "../../includes/fera.as";
+//FIXME @OXDECEPTION INCLUDES BELOW THIS LINE -------------------------------------------
     include "../../includes/tamaniDildo.as";
-    include "../../includes/thanksgiving.as";
-    include "../../includes/valentines.as";
-    include "../../includes/xmas_bitch.as";
-    include "../../includes/xmas_gats_not_an_angel.as";
-    include "../../includes/xmas_jack_frost.as";
-    include "../../includes/xmas_misc.as";
-
+    //FIXME @OXDECEPTION INCLUDES ABOVE THIS LINE -------------------------------------------
     public var measurements:Measurements = Measurements.init();
     /****
      This is used purely for bodges while we get things cleaned up.

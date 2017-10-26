@@ -5,6 +5,7 @@ import classes.Items.*;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
@@ -86,12 +87,12 @@ import coc.xxc.StoryContext;
 
 		protected function isValentine():Boolean
 		{
-			return kGAMECLASS.isValentine();
+			return Holidays.isValentine();
 		}
 
 		protected function isHolidays():Boolean
 		{
-			return kGAMECLASS.isHolidays();
+			return Holidays.isHolidays();
 		}
 
 		public function isEaster():Boolean
@@ -101,12 +102,12 @@ import coc.xxc.StoryContext;
 
 		protected function isThanksgiving():Boolean
 		{
-			return kGAMECLASS.isThanksgiving();
+			return Holidays.isThanksgiving();
 		}
 
 		protected function isAprilFools():Boolean
 		{
-			return kGAMECLASS.isAprilFools();
+			return Holidays.isAprilFools();
 		}
 		
 		protected function get date():Date

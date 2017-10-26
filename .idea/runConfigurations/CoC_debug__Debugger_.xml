@@ -6,7 +6,7 @@
     <option name="airProgramParameters" value="" />
     <option name="appDescriptorForEmulator" value="Android" />
     <option name="debugTransport" value="USB" />
-    <option name="debuggerSdkRaw" value="Flash" />
+    <option name="debuggerSdkRaw" value="BC SDK" />
     <option name="emulator" value="NexusOne" />
     <option name="emulatorAdlOptions" value="" />
     <option name="fastPackaging" value="true" />

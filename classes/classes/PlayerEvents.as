@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Dreams;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
@@ -1255,16 +1256,16 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 		}
 
 		public function timeChangeLarge():Boolean {
-            if (rand(4) == 0 && kGAMECLASS.isHolidays() && player.gender > 0 && kGAMECLASS.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < kGAMECLASS.date.fullYear) {
-                kGAMECLASS.getAChristmasChicken();
+            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && kGAMECLASS.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < kGAMECLASS.date.fullYear) {
+                Holidays.getAChristmasChicken();
                 return true;
 			}
-            if (kGAMECLASS.model.time.hours == 1 && kGAMECLASS.isHolidays() && kGAMECLASS.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
-                kGAMECLASS.xmasBitchEncounter(); //Set it to remember the last year encountered
+            if (kGAMECLASS.model.time.hours == 1 && Holidays.isHolidays() && kGAMECLASS.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+                Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                 return true;
 			}
-            if (checkedTurkey++ == 0 && (rand(5) == 0 && (kGAMECLASS.model.time.hours == 18 || kGAMECLASS.model.time.hours == 19)) && (kGAMECLASS.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && kGAMECLASS.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
-                kGAMECLASS.datTurkeyRumpMeeting(); //TURKEY SURPRISE
+            if (checkedTurkey++ == 0 && (rand(5) == 0 && (kGAMECLASS.model.time.hours == 18 || kGAMECLASS.model.time.hours == 19)) && (kGAMECLASS.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                 return true;
 			}
             if (checkedDream++ == 0 && kGAMECLASS.model.time.hours == 3) { //You can only have one dream each night

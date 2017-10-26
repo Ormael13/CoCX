@@ -5,6 +5,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Armor;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
+import classes.Scenes.Holidays;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 
@@ -159,7 +160,7 @@ private function telAdreTour():void {
 
 public function telAdreMenu():void {
 	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
-		kGAMECLASS.crazyVDayShenanigansByVenithil();
+		Holidays.crazyVDayShenanigansByVenithil();
 		return;
 	}
 	if(!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
@@ -1132,7 +1133,7 @@ private function anotherButton(button:int, nam:String, func:Function, arg:* = -9
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) kGAMECLASS.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) Holidays.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 

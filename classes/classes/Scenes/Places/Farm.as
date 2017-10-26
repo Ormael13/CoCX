@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.MarbleScene;
 import classes.Scenes.Places.Farm.*;
 import classes.Scenes.SceneLib;
@@ -510,8 +511,8 @@ public function exploreFarm():void {
 		return;
 	}
 	//FIND CARROT!
-	if(kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
-		kGAMECLASS.findACarrot();
+	if(Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
+		Holidays.findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!

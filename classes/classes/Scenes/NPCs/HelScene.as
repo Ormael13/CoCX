@@ -2,6 +2,7 @@ package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 public class HelScene extends NPCAwareContent implements TimeAwareInterface {
@@ -354,7 +355,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 		outputText("\n\n<b>Helia DLC is required!</b>");
 		menu();
-        addButton(0, "Get DLC", kGAMECLASS.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+        addButton(0, "Get DLC", Holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
         addButton(4, "Leave", declineHelSexings);
 		return;
 	}

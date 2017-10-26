@@ -10,6 +10,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.SceneLib;
@@ -301,7 +302,7 @@ use namespace kGAMECLASS;
 						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
-				call: game.pumpkinFuckEncounter
+				call: Holidays.pumpkinFuckEncounter
 			}, {
 				name: "fera_2",
 				when: function():Boolean {
@@ -309,7 +310,7 @@ use namespace kGAMECLASS;
 						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
 						   && date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR];
 				},
-				call: game.feraSceneTwoIntroduction
+				call: Holidays.feraSceneTwoIntroduction
 			},{
 				name  : "woods",
 				call  : camp.cabinProgress.gatherWoods,

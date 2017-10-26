@@ -3513,10 +3513,5 @@ public class PerkLib
 					 .requireTou(160)
 					 .requirePerk(CycloneStage4);
 	}
-	try {
-		initDependencies();
-	} catch (e:Error) {
-		trace(e.getStackTrace());
-	}
 }
 }

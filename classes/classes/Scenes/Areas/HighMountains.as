@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.Areas.HighMountains.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
 
@@ -50,7 +51,7 @@ use namespace kGAMECLASS;
 			}
 			//Gats xmas adventure!
 			if (rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0 || player.hasKeyItem("North Star Key") >= 0)) {
-				kGAMECLASS.gatsSpectacularRouter();
+				Holidays.gatsSpectacularRouter();
 				return;
 			}
 			//Minerva

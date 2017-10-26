@@ -97,7 +97,7 @@ use namespace kGAMECLASS;
 			}
 
 if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-                var miscNieve:Boolean = kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
+                var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
 					|| miscHolli
@@ -107,7 +107,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
-                        else outputText("\nYou have a snow" + kGAMECLASS.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
                     }
 					if (player.hasKeyItem("Dragon Egg") >= 0) {
                         SceneLib.emberScene.emberCampDesc();
@@ -150,8 +150,8 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 		public function miscitemsMenu():void {
 			var foundItem:Boolean = false;
 			menu();
-            if (kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-                addButton(0, "Snow", kGAMECLASS.nieveBuilding);
+            if (Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+                addButton(0, "Snow", Holidays.nieveBuilding);
                 foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
