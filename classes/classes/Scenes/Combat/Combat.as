@@ -5654,6 +5654,54 @@ public function GooLeggoMyEggo():void {
 	enemyAI();
 }
 
+//Vampiric bite
+public function VampiricBite():void {
+	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
+		outputText("You are too tired to bite " + monster.a + " " + monster.short + ".");
+		addButton(0, "Next", combat.combatMenu, false);
+		return;
+	}
+	fatigue(20, USEFATG_PHYSICAL);
+	outputText("You bite " + monster.a + monster.short + " drinking deep of " + monster.pronoun1 + " blood ");
+	var damage:int = player.maxHP() * 0.05;
+	damage = Math.round(damage);
+	doDamage(damage, true, true);
+	player.HP += damage;
+	if (player.HP > player.maxHP()) player.HP = player.maxHP();
+	outputText(" damage. You feel yourself grow stronger with each drop. ");
+	if (player.statusEffectv1(StatusEffects.VampireThirst) < 30) player.addStatusValue(StatusEffects.VampireThirst, 1, 1);
+	if (player.statusEffectv1(StatusEffects.VampireThirst) > 0 && player.statusEffectv2(StatusEffects.VampireThirst) < 60) {
+		player.addStatusValue(StatusEffects.VampireThirst, 2, 2);
+		dynStats("str", 2);
+		dynStats("spe", 2);
+		dynStats("int", 2);
+		dynStats("lib", 2);
+	}
+	if (monster.gender != 0 && monster.lustVuln != 0) {
+		var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
+		outputText(" " + monster.Pronoun1 + " can’t help but moan, aroused from the aphrodisiac in your saliva for ");
+		monster.teased(lustDmg);
+		outputText(".");
+	}
+	//Enemy faints -
+	if(monster.HP < 1) {
+		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+		if(monster.short == "demons")
+			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
+		outputText("\n\n");
+		doNext(combat.endHpVictory);
+		return;
+	}
+	outputText("\n\n");
+	enemyAI();
+}
+public function VampireLeggoMyEggo():void {
+	clearOutput();
+	outputText("You let your opponent free ending your embrace.");
+	outputText("\n\n");
+	monster.removeStatusEffect(StatusEffects.EmbraceVampire);
+	enemyAI();
+}
 
 public function runAway(callHook:Boolean = true):void {
 	if (callHook && monster.onPcRunAttempt != null){

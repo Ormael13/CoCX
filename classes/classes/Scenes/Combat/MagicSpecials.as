@@ -137,16 +137,14 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n");
 			bd.requireMana(spellCost(40),true);
 		}
-		if (player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) {
+		if (player.statusEffectv1(StatusEffects.VampireThirst) >= 20) {
 			// Eclipsing shadow
-			bd = buttons.add("Eclipsing shadow",EclipsingShadow, "Plunge the area in complete darkness denying vision to your opponent. \n");
-			bd.requireFatigue(spellCost(30), true);
+			buttons.add("Eclipsing shadow", EclipsingShadow, "Plunge the area in complete darkness denying vision to your opponent. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
 				bd.disable("<b>You need more time before you can use Eclipsing shadow again.</b>\n\n");
 			}
 			// Sonic scream
-			bd = buttons.add("Sonic scream",SonicScream, "Draw on your tainted blood power to unleash a powerful sonic shockwave. \n");
-			bd.requireFatigue(spellCost(30), true);
+			buttons.add("Sonic scream", SonicScream, "Draw on your tainted blood power to unleash a powerful sonic shockwave. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
 				bd.disable("<b>You need more time before you can use Sonic scream again.</b>\n\n");
 			}
@@ -2742,7 +2740,12 @@ public class MagicSpecials extends BaseCombatContent {
 //Eclipsing shadow
 	public function EclipsingShadow():void {
 		clearOutput();
-		fatigue(30, USEFATG_PHYSICAL);
+		player.addStatusValue(StatusEffects.VampireThirst, 1, -20);
+		player.addStatusValue(StatusEffects.VampireThirst, 2, -40);
+		dynStats("str", -40);
+		dynStats("spe", -40);
+		dynStats("int", -40);
+		dynStats("lib", -40);
 		player.createStatusEffect(StatusEffects.CooldownEclipsingShadow,20,0,0,0);
 		outputText("You open your wings wide and call upon the power of your tainted blood a pair of black orbs forming at your fingertips. You shatter them on the ground plunging the area in complete darkness and extinguishing all light. While your opponent will be hard pressed to see anything your ability to echolocate allows you to navigate with perfect clarity.");
 		monster.createStatusEffect(StatusEffects.Blind, 10, 0, 0, 0);
@@ -2752,7 +2755,12 @@ public class MagicSpecials extends BaseCombatContent {
 //Sonic scream
 	public function SonicScream():void {
 		clearOutput();
-		fatigue(30, USEFATG_PHYSICAL);
+		player.addStatusValue(StatusEffects.VampireThirst, 1, -20);
+		player.addStatusValue(StatusEffects.VampireThirst, 2, -40);
+		dynStats("str", -40);
+		dynStats("spe", -40);
+		dynStats("int", -40);
+		dynStats("lib", -40);
 		player.createStatusEffect(StatusEffects.CooldownSonicScream, 15, 0, 0, 0);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");

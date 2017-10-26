@@ -522,6 +522,18 @@ package classes {
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
+			if (getGame().model.time.hours > 6) {
+				if (player.hasStatusEffect(StatusEffects.VampireThirst) && player.statusEffectv1(StatusEffects.VampireThirst) > -10) {
+					player.addStatusValue(StatusEffects.VampireThirst, 1, -1);
+					if (player.statusEffectv2(StatusEffects.VampireThirst) > 0) {
+						player.addStatusValue(StatusEffects.VampireThirst, 2, -2);
+						dynStats("str", -2);
+						dynStats("spe", -2);
+						dynStats("int", -2);
+						dynStats("lib", -2);
+					}
+				}
+			}
 			return needNext;
 		}
 
@@ -800,6 +812,21 @@ package classes {
 			if (player.tailType != TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
+				needNext = true;
+			}
+			//Vampire Thirst
+			if (player.faceType == FACE_VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
+				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood… how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
+				player.createStatusEffect(StatusEffects.VampireThirst, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.faceType != FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
+				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
+				dynStats("str", -(player.statusEffectv2(StatusEffects.VampireThirst)));
+				dynStats("spe", -(player.statusEffectv2(StatusEffects.VampireThirst)));
+				dynStats("int", -(player.statusEffectv2(StatusEffects.VampireThirst)));
+				dynStats("lib", -(player.statusEffectv2(StatusEffects.VampireThirst)));
+				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}
 			//Reset bad end warning

@@ -201,6 +201,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TookBlessedSword:StatusEffectType               = mk("Took Blessed Sword");
+		public static const VampireThirst:StatusEffectType                  = mk("Vampire Thirst");
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");
@@ -261,6 +262,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const DrankMinoCum2:StatusEffectType      = mk("drank mino cum2")
 		public static const Drunk:StatusEffectType              = mk("Drunk");
 		public static const Earthshield:StatusEffectType        = mk("Earthshield");
+		public static const EmbraceVampire:StatusEffectType     = mk("Embrace (Vampire)");
 		public static const Fear:StatusEffectType               = mk("Fear");
 		public static const FearCounter:StatusEffectType        = mk("FearCounter");
 		public static const GenericRunDisabled:StatusEffectType = mk("Generic Run Disabled");

@@ -415,8 +415,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
 		damage += unarmedAttack();
-		damage += strenghtscalingbonus() * 0.2;
-		damage += wisdomscalingbonus() * 0.2;
+		damage += strenghtscalingbonus() * 0.5;
+		damage += wisdomscalingbonus() * 0.5;
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -481,8 +481,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
 		damage += unarmedAttack();
-		damage += strenghtscalingbonus() * 0.2;
-		damage += wisdomscalingbonus() * 0.2;
+		damage += strenghtscalingbonus() * 0.5;
+		damage += wisdomscalingbonus() * 0.5;
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -539,8 +539,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
 		damage += unarmedAttack();
-		damage += strenghtscalingbonus() * 0.2;
-		damage += wisdomscalingbonus() * 0.2;
+		damage += strenghtscalingbonus() * 0.5;
+		damage += wisdomscalingbonus() * 0.5;
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;

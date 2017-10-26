@@ -67,6 +67,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
+		//Embrace
+		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && player.hasStatusEffect(StatusEffects.Flying) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+		}
 		//Kick attackuuuu
 		if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 			bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
@@ -1506,6 +1510,40 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function vampireEmbrace():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You're too tired to wrap your wings around enemy!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't wrap your wings around something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		monster.createStatusEffect(StatusEffects.EmbraceVampire, 3 + rand(3),0,0,0);
+		if (player.hasStatusEffect(StatusEffects.Flying)) {
+			outputText("You dive down at your target, wrapping your wings around " + monster.a + monster.short + " embracing " + monster.pronoun1 + " as you prepare to feast.");
+			player.removeStatusEffect(StatusEffects.Flying);
+			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+				player.removeStatusEffect(StatusEffects.FlyingNoStun);
+				player.removePerk(PerkLib.Resolute);
+			}
+		}
+		else outputText("You leap and box in " + monster.a + monster.short + " with your wings, embracing " + monster.pronoun1 + " as you prepare to feast.");
 		outputText("\n\n");
 		enemyAI();
 	}

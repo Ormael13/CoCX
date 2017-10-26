@@ -5470,6 +5470,12 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
 				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
 			}
+			if (hasStatusEffect(StatusEffects.VampireThirst)) {
+				maxStr += statusEffectv2(StatusEffects.VampireThirst);
+				maxSpe += statusEffectv2(StatusEffects.VampireThirst);
+				maxInt += statusEffectv2(StatusEffects.VampireThirst);
+				maxLib += statusEffectv2(StatusEffects.VampireThirst);
+			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
 				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);

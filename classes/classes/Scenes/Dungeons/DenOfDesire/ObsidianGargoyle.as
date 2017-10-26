@@ -14,8 +14,8 @@ package classes.Scenes.Dungeons.DenOfDesire
 	{
 		public function moveLustBlast():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
-					outputText("Liadri would write text for this situation... eventualy.");
+				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
+					outputText("Your interruption cause the gargoyle to choke in disbelief on whatever ability it was readying!");
 					removeStatusEffect(StatusEffects.Uber);
 				}
 				else {

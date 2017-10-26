@@ -175,6 +175,11 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Tease", combat.GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(4, "Release", combat.GooLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			menu();
+			if (player.faceType == FACE_VAMPIRE) addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+			else (0, "Bite", "If only you had vampire fangs...");
+			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		}
 		
 		// Modifications - monster-special actions

@@ -640,6 +640,12 @@ public class PlayerInfo extends BaseContent {
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
 			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
 
+		if (player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			statEffects += "Vampire Thirst: " + player.statusEffectv1(StatusEffects.VampireThirst) + " ";
+			if (player.statusEffectv2(StatusEffects.VampireThirst) > 0) statEffects += "(+" + player.statusEffectv2(StatusEffects.VampireThirst) + " to str / spe / int / lib)";
+			statEffects += "\n";
+		}
+
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
