@@ -109,7 +109,8 @@ public class CombatUI extends BaseCombatContent {
 		// Submenus
 		
 		// Submenu - Physical Specials
-		combat.pspecials.buildMenu(physpButtons);
+		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
+		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
 			btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
@@ -178,7 +179,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
 			if (player.faceType == FACE_VAMPIRE) addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-			else (0, "Bite", "If only you had vampire fangs...");
+			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		}
 		

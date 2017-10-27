@@ -522,15 +522,13 @@ package classes {
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
-			if (getGame().model.time.hours > 6) {
+			if (getGame().model.time.hours == 6) {
 				if (player.hasStatusEffect(StatusEffects.VampireThirst) && player.statusEffectv1(StatusEffects.VampireThirst) > -10) {
 					player.addStatusValue(StatusEffects.VampireThirst, 1, -1);
 					if (player.statusEffectv2(StatusEffects.VampireThirst) > 0) {
-						player.addStatusValue(StatusEffects.VampireThirst, 2, -2);
-						dynStats("str", -2);
-						dynStats("spe", -2);
-						dynStats("int", -2);
-						dynStats("lib", -2);
+						var singlestackboost:Number = 2 + (player.newGamePlusMod());
+						player.addStatusValue(StatusEffects.VampireThirst, 2, -singlestackboost);
+						dynStats("str", -singlestackboost, "spe", -singlestackboost, "int", -singlestackboost, "lib", -singlestackboost, "scale", false);
 					}
 				}
 			}

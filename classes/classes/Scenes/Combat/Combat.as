@@ -4190,7 +4190,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
 		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
-			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage), "scale", false);
 			player.removeStatusEffect(StatusEffects.DwarfRage);
 			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
 		}
@@ -4227,9 +4227,9 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Might)) {
 		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might), "scale", false);
+			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might), "scale", false);
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might), "scale", false);
 			player.removeStatusEffect(StatusEffects.Might);
 		//	statScreenRefresh();
 			outputText("<b>Might effect wore off!</b>\n\n");
@@ -4238,7 +4238,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Blink)) {
 		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink), "scale", false);
 			player.removeStatusEffect(StatusEffects.Blink);
 		//	statScreenRefresh();
 			outputText("<b>Blink effect wore off!</b>\n\n");
@@ -5663,6 +5663,8 @@ public function VampiricBite():void {
 	}
 	fatigue(20, USEFATG_PHYSICAL);
 	outputText("You bite " + monster.a + monster.short + " drinking deep of " + monster.pronoun1 + " blood ");
+	var maxstacksboost:Number = 60 + (30 * player.newGamePlusMod());
+	var singlestackboost:Number = 2 + (player.newGamePlusMod());
 	var damage:int = player.maxHP() * 0.05;
 	damage = Math.round(damage);
 	doDamage(damage, true, true);
@@ -5670,12 +5672,9 @@ public function VampiricBite():void {
 	if (player.HP > player.maxHP()) player.HP = player.maxHP();
 	outputText(" damage. You feel yourself grow stronger with each drop. ");
 	if (player.statusEffectv1(StatusEffects.VampireThirst) < 30) player.addStatusValue(StatusEffects.VampireThirst, 1, 1);
-	if (player.statusEffectv1(StatusEffects.VampireThirst) > 0 && player.statusEffectv2(StatusEffects.VampireThirst) < 60) {
-		player.addStatusValue(StatusEffects.VampireThirst, 2, 2);
-		dynStats("str", 2);
-		dynStats("spe", 2);
-		dynStats("int", 2);
-		dynStats("lib", 2);
+	if (player.statusEffectv1(StatusEffects.VampireThirst) > 0 && player.statusEffectv2(StatusEffects.VampireThirst) < maxstacksboost) {
+		player.addStatusValue(StatusEffects.VampireThirst, 2, singlestackboost);
+		dynStats("str", singlestackboost, "spe", singlestackboost, "int", singlestackboost, "lib", singlestackboost, "scale", false);
 	}
 	if (monster.gender != 0 && monster.lustVuln != 0) {
 		var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;

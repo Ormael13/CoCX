@@ -247,6 +247,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 	}
+	internal function buildMenuForFlying(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+		//Embrace
+		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+		}
+	}
 	
 	public function powerAttackMenu():void {
 		menu();

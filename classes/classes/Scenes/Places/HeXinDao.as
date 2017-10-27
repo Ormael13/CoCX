@@ -306,7 +306,6 @@ public function exchangeGemsToSpiritStonesorReverse():void {
 	clearOutput();
 	outputText("When you ask about this exchange that was mentioned on the sign over the entrance Moga  think for a moment before reaching to the desk near him. After handing you over a piece of paper he adds.");
 	outputText("\n\n\"<i>Here are my exchange rates. Pick the one you want and let me know. If you don't like those rates you can go and try to find someone else... not like there is anyone else here that want to deal with those exchanges aside me.</i>\"");
-	outputText("\n\n\<b>Spirit Stones: </b>" + flags[kFLAGS.SPIRIT_STONES] + "\n");
 	menu();
 	if (player.gems >= 20) addButton(0, "20 Gems", gems20).hint("Exchange 20 gems to 1 spirit stone.");
 	if (player.gems >= 100) addButton(1, "100 Gems", gems100).hint("Exchange 100 gems to 5 spirit stones.");
@@ -1572,15 +1571,15 @@ public function soularenaChallenge():void {
 	//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 	//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 	//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-	addButton(5, "Golemancer", golemancer);
-	addButton(6, "AyotechManiac", ayotechmaniac);
-	addButton(7, "MachoSalamander", machosalamander);
-	addButton(8, "MissSalamander", misssalamander);
-	addButton(9, "LvL 24 Gargoyle", basicgargoyle);
+	//addButton(5, "Golemancer", golemancer);
+	//addButton(6, "AyotechManiac", ayotechmaniac);
+	//addButton(7, "MachoSalamander", machosalamander);
+	//addButton(8, "MissSalamander", misssalamander);
+	//addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
+	//if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
 	addButton(14, "Back", soularena);
 }
 
