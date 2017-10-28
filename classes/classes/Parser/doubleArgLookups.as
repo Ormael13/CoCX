@@ -41,7 +41,7 @@
 		}
 
 		public var monsterLookups:Object = {
-			"agility"					: function(thisPtr:*):* { return "[Agility]"; },
+			"a"							: function(thisPtr:*):* { return kGAMECLASS.monster.a; },
 			"allbreasts"				: function(thisPtr:*):* { return kGAMECLASS.monster.allBreastsDescript(); },
 			"alltits"				    : function(thisPtr:*):* { return kGAMECLASS.monster.allBreastsDescript(); },
 			"armor"						: function(thisPtr:*):* { return kGAMECLASS.monster.armorName;},
@@ -71,14 +71,14 @@
 			"hair"						: function(thisPtr:*):* { return kGAMECLASS.monster.hairDescript(); },
 			"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.monster.hairColor; },
 			"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.monster.hairOrFur(); },
-			"he"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("he", "she"); },
-			"him"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("him", "her"); },
-			"himher"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("him", "her"); },
+			"he"						: function(thisPtr:*):* { return kGAMECLASS.monster.pronoun1; },
+			"him"						: function(thisPtr:*):* { return kGAMECLASS.monster.pronoun2; },
+			"himher"					: function(thisPtr:*):* { return kGAMECLASS.monster.pronoun2; },
 			"himself"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("himself", "herself"); },
 			"herself"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("himself", "herself"); },
 			"hips"						: function(thisPtr:*):* { return kGAMECLASS.monster.hipDescript();},
-			"his"						: function(thisPtr:*):* { return kGAMECLASS.monster.mf("his", "her"); },
-			"hisher"					: function(thisPtr:*):* { return kGAMECLASS.monster.mf("his", "her"); },
+			"his"						: function(thisPtr:*):* { return kGAMECLASS.monster.pronoun3; },
+			"hisher"					: function(thisPtr:*):* { return kGAMECLASS.monster.pronoun3; },
 			"horns"						: function(thisPtr:*):* { return kGAMECLASS.monster.hornDescript(); },
 			"leg"						: function(thisPtr:*):* { return kGAMECLASS.monster.leg(); },
 			"legs"						: function(thisPtr:*):* { return kGAMECLASS.monster.legs(); },

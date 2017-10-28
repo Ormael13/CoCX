@@ -19,6 +19,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -5470,11 +5471,12 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
 				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
 			}
-			if (hasStatusEffect(StatusEffects.VampireThirst)) {
-				maxStr += statusEffectv2(StatusEffects.VampireThirst);
-				maxSpe += statusEffectv2(StatusEffects.VampireThirst);
-				maxInt += statusEffectv2(StatusEffects.VampireThirst);
-				maxLib += statusEffectv2(StatusEffects.VampireThirst);
+			var vthirst:VampireThirstEffect = statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			if (vthirst != null) {
+				maxStr += vthirst.value2;
+				maxSpe += vthirst.value2;
+				maxInt += vthirst.value2;
+				maxLib += vthirst.value2;
 			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
