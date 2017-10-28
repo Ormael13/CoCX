@@ -8,6 +8,7 @@ import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.GooArmor;
 	import classes.Items.*;
 	import classes.Saves;
+import classes.Scenes.NPCs.XXCNPC;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
@@ -61,6 +62,7 @@ import fl.controls.ComboBox;
 		}
 		
 		public function newGameGo():void {
+			XXCNPC.unloadSavedNPCs();
 			funcs = [];
 			args = [];
 			mainView.eventTestInput.x = -10207.5;
