@@ -68,7 +68,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Embrace
-		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && player.hasStatusEffect(StatusEffects.Flying) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
 		//Kick attackuuuu
@@ -258,21 +258,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function powerAttackMenu():void {
 		menu();
-		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 5,"You are too calm to use this special.");
+		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special.");
 		if (player.level >= 6) {
-			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 10,"You are too calm to use this special.");
+			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special.");
 		} else addButtonDisabled(1, "???");
 		if (player.level >= 12) {
-			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 20,"You are too calm to use this special.");
+			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special.");
 		} else addButtonDisabled(2, "???");
 		if (player.level >= 18) {
-			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 45,"You are too calm to use this special.");
+			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special.");
 		} else addButtonDisabled(3, "???");
 		if (player.level >= 24) {
-			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 100,"You are too calm to use this special.");
+			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special.");
 		} else addButtonDisabled(4, "???");
 		if (player.level >= 30) {
-			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 250,"You are too calm to use this special.");
+			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special.");
 		} else addButtonDisabled(5, "???");
 		if (player.level >= 36) {
 			addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
@@ -281,7 +281,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		player.wrath -= 5;
+		player.wrath -= 50;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -322,7 +322,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack3x():void {
 		clearOutput();
-		player.wrath -= 10;
+		player.wrath -= 100;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -363,7 +363,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack4x():void {
 		clearOutput();
-		player.wrath -= 20;
+		player.wrath -= 200;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -404,7 +404,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack5x():void {
 		clearOutput();
-		player.wrath -= 45;
+		player.wrath -= 300;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -445,7 +445,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack6x():void {
 		clearOutput();
-		player.wrath -= 100;
+		player.wrath -= 400;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -486,7 +486,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack7x():void {
 		clearOutput();
-		player.wrath -= 250;
+		player.wrath -= 500;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();

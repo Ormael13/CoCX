@@ -27,11 +27,19 @@ package classes.Scenes
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
 			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");// or new enemy to fight at Soul Arena. If PC will not force her into suicide she can teach PC few soulskills
+			outputText("-After 10 fights on Soul Arena next time PC enter Arena will be facing Chi Chi. She's near impossible to beat enemy. If somehow PC win she will be killed closing any potential future content for her leaving behind her gloves. If PC loose she will then be accesable form main He'Xin'Dao menu allowing to undergone training sessions or selling five newly added soulskills.\n");
+			outputText("-Training with Chi Chi will teach after meeting req. (similar like with Kindra after reaching specific milestones) new soulskill Overlimit and then perk Mighty Fists.\n");
+			outputText("-Overlimit is constant sustain soulskill (Like Violent Pupil Transformation). Activating it will make PC lust resistance rise by 10%, increase physical attacks / physical specials / physical soulskills dmg 2x and draining HP at rate of 10% max HP per turn.\n");
+			outputText("-New physical soulskill: Ice Fist. Req. buying manual from Chi Chi for 5 spirit stones. Deal damage, stunning for 2 turns and freeze enemy decreasing their speed. Attacking frozen enemy with Triple Trust soulskill will deal bonus dmg and ends frozen status.\n");
+			outputText("-New physical soulskill: Fire Punch. Req. buying manual from Chi Chi for 5 spirit stones. Deal damage, apply Fire DoT for 15 rounds.\n");
+			outputText("-New physical soulskill: Hurricane Dance. Req. buying manual from Chi Chi for 5 spirit stones. Increase PC evasion for 4 rounds.\n");
+			outputText("-New physical soulskill: Earth Stance. Req. buying manual from Chi Chi for 5 spirit stones. Increase PC physical damage reduction by 30% for 2 rounds.\n");
+			outputText("-New physical soulskill: Punishing Kick. Req. buying manual from Chi Chi for 5 spirit stones. Deal damage and decrease enemies damage by 50% for 4 rounds.\n");
 			outputText("-New type of perks for enemies: Monster Regeneration -> it would give monster variable % of max HP regeneration per turn (it may be only 1% or maybe even 90%. Who know how high regeneration some monsters may get in the future...).\n");
 			outputText("-New perk for weapons: Body Cultivator's Focus. It increase by x% all dmg done with physical based soulskills.\n");
 			outputText("-Perks Daoist's Focus and Seer’s Insight would now only boost magical soulskills instead of all soulskills.\n");
-			outputText("-New enemy in Mountains / Deepwoods / Plains: Raiju/Electra. As first encounter with her will be always in Mountains and afer it she can be encountered in any of those 3 locations. It even come with brand new and shiny codex entry to unlock about Raiju race.\n");
-			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Raiju/Electra fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
+			outputText("-New enemy in Mountains / Deepwoods / Plains: Raiju / Electra. As first encounter with her will be always in Mountains and afer it she can be encountered in any of those 3 locations. It even come with brand new and shiny codex entry to unlock about Raiju race.\n");
+			outputText("-New TF item: Voltage Topaz. Can be gained as a drop from Raiju / Electra fight. Using it will turn PC into Raiju. Half Raiju/Raiju (scalable): +35/70 to max Spe, +25/50 to max Int, +40/80 to max Lib, +25/50 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Raiju Legs No Req.\n");
 			outputText("-New body part - arms: Raiu Arms Req. Raiju Legs\n");
 			outputText("-New body part - tail: Raiju Horn Req. Raiju Arms\n");
@@ -41,9 +49,28 @@ package classes.Scenes
 			outputText("-New body part - eyes: Raiju Eyes Req. Raiju Ears\n");
 			outputText("-New body part - hair type: Raiju Storm Hair No Req.\n");
 			outputText("-New body part - pattern: Lightning Shaped Tattoo No Req.\n");
+			outputText("-New event related perk: Electrified Desire. Req.: Raiju score 7+. Effect: Masturbating only makes you hornier (only sex scene with any npc will lower it). Furthermore, your ability to entice, tease and zap thing is enhanced the more horny you are (lust dmg with those attacks is increased up to 100% based on how high PC lust is atm - for ex. PC is at 50% max lust that will mean 50% boost).\n");
+			outputText("-New event related perk: Lightning Affinity. Req.: Raiju score 7+. Effect: Increase all damage dealt with lightning spells by 100% and reduce lightning damage taken by 50%.\n");
+			outputText("-New magical special: Orgasmic Lightning Strike. Req. to have Electrified Desire perk and 7+ Raiju score. Similary to Compelling Aria special it's channeled for 3 round to deal massive lust damage.\n");
+			outputText("-New TF item: Vial of ominous red liquid (coded by Oxdeception). Gained from defeating Diva. Using this item will turn PC into bat. Half batgirl/batboy//Batgirl/batboy (scalable): +20/35 to max Str, +20/35 to max Spe, +20/35 to max Int, +30/45 to max Lib.\n");
+			outputText("-New TF item: Vial of vampire blood (coded by Oxdeception). Gained by bringing Vial of ominous red liquid to Lumi for enhancing. Using this item will turn PC into vampire.  Dhampir/Vampire (scalable): +20/35 to max Str, +20/35 to max Spe, +20/35 to max Int, +30/45 to max Lib.\n");
+			outputText("-New body part - ears: Bat Ears No Req. (coded by Oxdeception)\n");
+			outputText("-New body part - ears: Vampire Ears No Req. (coded by Oxdeception)\n");
+			outputText("-New body part - wings: Bat Wings No Req. This bodypart will cause arm type change to human due to been used as part of bat wings. (coded by Oxdeception)\n");
+			outputText("-New body part - wings: Vampire Wings No Req. (coded by Oxdeception)\n");
+			outputText("-New body part - face: Vampire Fangs No Req. (coded by Oxdeception)\n");
+			outputText("-New body part - rear body: Furry Collar No Req. (coded by Oxdeception)\n");
+			outputText("-Having Vampire Fangs bodypart unlock Vampire Thirst. It lower by 1 at each morning (6 am) to max -10. Can be rised by feeding on enemies in combat using Bite up to 30 stacks. Each stack above 0 will also increase PC str/spe/int/lib by 2 (+1 for each NG tier above NG). Can be used to cast some fo vampire specials.\n");
+			outputText("-New magical special: Eclipsing shadow. Req. to spend 20 stacks of Vampire Thirst to cast blind on enemy(ies). It cooldown is 20 turns.\n");
+			outputText("-New magical special: Sonic scream. Req. to spend 20 stacks of Vampire Thirst to deal AoE damage and stun for 2 rounds. It cooldown is 15 turns.\n");
+			outputText("-New physical special: Embrace. Req. to have Bat or vampire wings. It work similary to naga / scylla / goo bind abilities. Can't be used on group enemies.\n");
+			outputText("-New special: Bite. Req. to use Embrace on enemy before and having vampire fangs. It deal dmg to enemy equal to 5% of PC max HP and at the same time healing PC by that amount. Aside adding 1 stack to Vampire Thirst it additional deal lust dmg to any non-lust resistant enemy.\n");
 			outputText("-New build option: Sparring Ring. It cost 50 wood, 50 fatigue and 1 hour to construct. Req. 2+ sparrable npc's and before it's not build will lock out spar options. Completing it will add also 2 ascension points.\n");
+			outputText("-New build option: Arcane Circle. It cost 4 stones, 50 fatigue, 75 HP, 100 mana and 8 hour to construct. Then PC can summon elementals and rank up them to rank 3. After getting Elemental Contract (Rank 4) / Elemental Contract (Rank 8) can add another circle to it (each have cost increased by 100% of base cost) and it allow to rank up elementals from rank 3 to 7 / 7 to elder. Due to adding ");
+			outputText("Arcane Circle summoning even rank 0 elemental requite it to been summoned. Also any elemental rank up can now ends up in failure causing PC not only loose spent mana and fatigue but also some HP due to forcibly bringing elemental back under control. Elementals base attacks and mana sustain costs during combat was also slight adjusted to make them more atractive to simple melee attacks.\n");
 			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Sense Wrath. Req. 25+ sens. Effect: Show in combat enemy current wrath\n");
+			outputText("-New event perk: Mighty Fist. Gained form finshing second part of training sessions with Chi Chi. Increase fists and gaunlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
 			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished.\n");
 			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
@@ -52,12 +79,25 @@ package classes.Scenes
 			outputText("-Aside Krystal/Onyx Sapphire herself also gained few new sex scenes and talk scene that allow to unlock options to slowly rebuild/restore Temple back to it old glory.\n");
 			outputText("-New melee weapon (by Liadri): Master Gloves - obtainable for beating Chi Chi in first match against her or after making her PC waifu (3600 gems, Large type, 0 base atk). It boost by 40% physical soulskills power.\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -105,9 +145,19 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Few more perks and achievements.\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			addButton(0, "Next", Changelog16);
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
@@ -324,19 +374,7 @@ package classes.Scenes
 			outputText("-Added few more wing types to check if PC can fly in scenes.\n");
 			outputText("-Block chance bonus from Shield Mastery caps at 100 tou as it should orginaly giving only max 10% to block chance.\n");
 			outputText("-Game will now keep track on PC eyes color. At save update player will be able to pick it. And during creation stage it will be another step that would allow picking it. Some races getting points now for having specific eye color.\n");
-			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses\n\n\n\n\n\n\n\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Few more perks and achievements.\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses");
 			addButton(0, "Next", Changelog14);
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}

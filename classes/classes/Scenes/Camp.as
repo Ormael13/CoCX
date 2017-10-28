@@ -648,6 +648,7 @@ private function doCamp():void { //Only called by playerMenu
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your camp.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) outputText("A large arcane circle is written at the edge of your camp. Its runes regularly glow with impulse of power.\n\n");
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -1538,7 +1539,8 @@ private function campBuildingSim():void {
 private function campWinionsArmySim():void {
 	menu();
 	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
-	addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
+	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle.");
 	addButton(14, "Back", campActions);
 }
 
@@ -2815,7 +2817,7 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
-	//if (flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE] > ) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
 	//Children
 	var childPerformance:int = 0;

@@ -36,7 +36,7 @@ public class MagicSpecials extends BaseCombatContent {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
 		}
 		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-			bd = buttons.add("OrgasmicLightningStrike", OrgasmicLightningStrike, "Sorry Liadri not wrote tooltip for this yet.");
+			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 		}
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			bd = buttons.add("F.FoxFire", fusedFoxFire, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n");
@@ -662,7 +662,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
-			lustDmgF = 6 + rand(3);
+			lustDmgF = 25 + rand(10);
 			if (player.findPerk(PerkLib.SensualLover) >= 0) {
 				lustDmgF += 2;
 			}

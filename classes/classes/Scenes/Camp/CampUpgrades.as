@@ -59,8 +59,11 @@ flags[kFLAGS.CAMP_UPGRADES_SPARING_RING]:
 1 - unlocking building ring
 2 - ring build (small)
 
-flags[kFLAGS.CAMP_UPGRADES_SUMMONING_CIRCLE]:
-1 - 
+flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]:
+1 - first arcane circle
+2 - second arcane circle
+3 - third arcane circle
+?4 - 4th?
 
 flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD]:
 1 - readed Warding Tome
@@ -92,7 +95,7 @@ public function buildmiscMenu():void {
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. 100 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
-	//summoning circle
+	if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 3) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough mana and blood)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(6, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
 	addButton(14, "Back", playerMenu);
 }
@@ -1075,6 +1078,7 @@ public function buildSmallRing():void {
 }
 
 private function doBuildSmallRing():void {
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
 	clearOutput();
 	outputText("You consider the many people who reside in the camp and realise you could spar with them if you had a ring for it. You proceed to get a rope and some wooden sticks, then build a small provisory ring for your daily sparring matches.");
 	flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
@@ -1084,6 +1088,120 @@ private function doBuildSmallRing():void {
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseFourHours);
+}
+
+public function arcaneCircle():void {
+	clearOutput();
+	if (player.fatigue <= player.maxFatigue() - 50)
+	{
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1) { 
+			buildFirstArcaneCircle() 
+			return; 
+		}
+		if (player.findPerk(PerkLib.ElementalContractRank4) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
+			buildSecondArcaneCircle() 
+			return; 
+		}
+		if (player.findPerk(PerkLib.ElementalContractRank8) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
+			buildThirdArcaneCircle() 
+			return; 
+		}/*
+		if (flags[kFLAGS.] == 3) { 
+			addAWoodenWalls() 
+			return; 
+		}*/
+	}
+	else
+	{	
+		outputText("You are too exhausted or you lack the proper knowledge and skill to work on this new ritual circle yet!");
+		doNext(playerMenu);
+	}
+}
+
+public function buildFirstArcaneCircle():void {
+	outputText("Do you start work on making first arcane circle? (Cost: 4 stones, 75 HP and 100 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 4 && player.HP >= 75 && player.mana >= 100)
+	{
+		doYesNo(doBuildFirstArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+
+private function doBuildFirstArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 4;
+	clearOutput();
+	outputText("You get to building your arcane circle. You set a stone at each of the four cardinal point and draw a perfect circle with the blood. That done you inscribe the runes meant to facilitate the chosen entity passage to mareth punctuating each scribing with a word of power. After several hours of hard work your arcane circle is finally done ready to be used to summon various entity to mareth.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] = 1;
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigue(fatigueAmount);
+	player.HP -= 75;
+	player.mana -= 100;
+	doNext(camp.returnToCampUseEightHours);
+}
+
+public function buildSecondArcaneCircle():void {
+	outputText("Do you start work on making second arcane circle? (Cost: 8 stones, 150 HP and 200 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 8 && player.HP >= 150 && player.mana >= 200)
+	{
+		doYesNo(doBuildSecondArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+
+private function doBuildSecondArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 8;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a second larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigue(fatigueAmount);
+	player.HP -= 150;
+	player.mana -= 200;
+	doNext(camp.returnToCampUseEightHours);
+}
+
+public function buildThirdArcaneCircle():void {
+	outputText("Do you start work on making third arcane circle? (Cost: 12 stones, 225 HP and 300 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 12 && player.HP >= 225 && player.mana >= 300)
+	{
+		doYesNo(doBuildThirdArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+
+private function doBuildThirdArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 12;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a third larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigue(fatigueAmount);
+	player.HP -= 225;
+	player.mana -= 300;
+	doNext(camp.returnToCampUseEightHours);
 }
 
 public function magicWard():void {
@@ -1143,7 +1261,7 @@ private function setUpMagicWard2():void {
 
 
 public function errorNotEnough():void {
-	outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, stones from the carpentry shop in Tel'Adre or find other sources of this materials.</b>")		
+	outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, stones from the carpentry shop in Tel'Adre or find other sources of this materials. It's also possible you lack some of more exotic things.</b>")		
 }
 
 public function noThanks():void {

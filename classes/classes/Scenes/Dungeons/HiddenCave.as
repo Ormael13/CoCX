@@ -77,7 +77,7 @@ package classes.Scenes.Dungeons
 		}
 		public function defeatedBossGolems():void {
 			clearOutput();
-			outputText("For now PLACEHOLDER text.\n\n");
+			outputText("You sigh in relief as the last guardian statue fall to rubble. Its arm tries to grab your leg but you step on it and smash the fingers. All that's left of the squad of golden is a piles of rocks.\n\n");
 			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
 			cleanupAfterCombat();
 		}

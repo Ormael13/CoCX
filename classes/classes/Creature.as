@@ -367,7 +367,7 @@ import classes.internals.Utils;
 			return 100;
 		}
 		public function maxSoulforce():Number {
-			return 100;
+			return 50;
 		}
 		public function maxMana():Number {
 			return 100;

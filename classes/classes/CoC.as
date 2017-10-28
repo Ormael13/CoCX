@@ -548,7 +548,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8g";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Den of Desire dungeon, new npc's: Electra, Krystal/Onyx; pre-follower Chi Chi, new camp lover Diva; new physical soulskills, new TF's: Raiju, Bat, Vampire</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
