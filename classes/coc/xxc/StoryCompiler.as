@@ -140,7 +140,6 @@ public class StoryCompiler extends Compiler {
 			trimStyle  = TextStmt.TRIM_SQUEEZE | TextStmt.TRIM_UNINDENT;
 			var ptn:XMLList = x.parent().text();
 			if (x==ptn[0]) trimStyle |= TextStmt.TRIM_LEFT;
-			if (x==ptn[ptn.length()-1]) trimStyle |= TextStmt.TRIM_RIGHT;
 		}
 		return new TextStmt(s, trimStyle);
 	}

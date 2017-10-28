@@ -537,20 +537,17 @@
             <text name="first">
                 Ew! This thing is indeed blood. It tastes awful, a strong, coppery taste, the liquid is thick from the iron content.
                 As you try to get the taste out of your mouth, you feel something begin to change in you.
-
             </text>
             <text name="vampire">
                 The blood tastes wonderful, as always.
                 You have downed the whole vial much sooner than you would have liked.
                 <if test="silly()">You filthy druggie.</if>
                 Leaving you wishing for more even as the vampiric blood starts changing your body further.
-
             </text>
             <text name="pure">
                 The blood tastes awful, a strong, coppery taste, and is thick from the iron content.
                 Yet, under the blood’s metallic aftertaste, there's a hint of sweetness to it that you can’t really put your finger on.
                 As you try to get the taste out of your mouth, you feel your body starting to change.
-
             </text>
             <text name="normal">
                 You uncork the vial and down it’s contents.
@@ -558,7 +555,6 @@
                 <if test="silly()">What else were you expecting with that label and smell? Tomato juice with iron shavings?</if>
                 With some effort, you force down the blood and swallow it.
                 A rush of heat flows through your veins as your body starts to react to the new blood.
-
             </text>
         </lib>
         <lib name="tfText">
