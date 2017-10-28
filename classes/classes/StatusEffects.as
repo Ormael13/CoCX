@@ -2,8 +2,9 @@ package classes
 {
 import classes.StatusEffects.Combat.*;
 import classes.StatusEffects.CombatStatusEffect;
+import classes.StatusEffects.VampireThirstEffect;
 
-	/**
+/**
 	 * IMPORTANT NOTE:
 	 * You can rename the constants BUT NOT the string ids (they are stored in saves).
 	 */
@@ -201,7 +202,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TookBlessedSword:StatusEffectType               = mk("Took Blessed Sword");
-		public static const VampireThirst:StatusEffectType                  = mk("Vampire Thirst");
+		public static const VampireThirst:StatusEffectType                  = VampireThirstEffect.TYPE;
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");

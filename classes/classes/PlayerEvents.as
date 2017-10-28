@@ -5,8 +5,9 @@ package classes {
 	import classes.Items.*;
 	import classes.Scenes.Camp;
 	import classes.Scenes.Camp.HclassHeavenTribulation;
-	
-	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
+import classes.StatusEffects.VampireThirstEffect;
+
+public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
 		public function PlayerEvents():void {
@@ -523,13 +524,9 @@ package classes {
 				}
 			}
 			if (getGame().model.time.hours == 6) {
-				if (player.hasStatusEffect(StatusEffects.VampireThirst) && player.statusEffectv1(StatusEffects.VampireThirst) > -10) {
-					player.addStatusValue(StatusEffects.VampireThirst, 1, -1);
-					if (player.statusEffectv2(StatusEffects.VampireThirst) > 0) {
-						var singlestackboost:Number = 2 + (player.newGamePlusMod());
-						player.addStatusValue(StatusEffects.VampireThirst, 2, -singlestackboost);
-						dynStats("str", -singlestackboost, "spe", -singlestackboost, "int", -singlestackboost, "lib", -singlestackboost, "scale", false);
-					}
+				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+				if (vthirst != null) {
+					vthirst.modSatiety(-1);
 				}
 			}
 			return needNext;
@@ -820,10 +817,6 @@ package classes {
 			}
 			if (player.faceType != FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
-				dynStats("str", -(player.statusEffectv2(StatusEffects.VampireThirst)));
-				dynStats("spe", -(player.statusEffectv2(StatusEffects.VampireThirst)));
-				dynStats("int", -(player.statusEffectv2(StatusEffects.VampireThirst)));
-				dynStats("lib", -(player.statusEffectv2(StatusEffects.VampireThirst)));
 				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}

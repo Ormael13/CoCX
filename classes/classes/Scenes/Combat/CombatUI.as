@@ -178,7 +178,12 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.GooLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
-			if (player.faceType == FACE_VAMPIRE) addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+			if (player.faceType == FACE_VAMPIRE) {
+				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		}

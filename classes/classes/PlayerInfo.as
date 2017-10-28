@@ -1,5 +1,7 @@
 package classes {
 
+import classes.StatusEffects.VampireThirstEffect;
+
 import coc.view.MainView;
 
 import flash.events.Event;
@@ -639,10 +641,10 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
 			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
-
-		if (player.hasStatusEffect(StatusEffects.VampireThirst)) {
-			statEffects += "Vampire Thirst: " + player.statusEffectv1(StatusEffects.VampireThirst) + " ";
-			if (player.statusEffectv2(StatusEffects.VampireThirst) > 0) statEffects += "(+" + player.statusEffectv2(StatusEffects.VampireThirst) + " to str / spe / int / lib)";
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			statEffects += "Vampire Thirst: " + vthirst.value1 + " ";
+			if (vthirst.value2 > 0) statEffects += "(+" + vthirst.value2 + " to str / spe / int / lib)";
 			statEffects += "\n";
 		}
 
