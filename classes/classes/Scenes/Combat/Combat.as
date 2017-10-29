@@ -299,7 +299,7 @@ public function checkAchievementDamage(damage:Number):void
 public function approachAfterKnockback1():void
 {
 	clearOutput();
-	outputText("You close the distance between you and [monster a] [ monster name] as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
 	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
 	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
@@ -320,7 +320,7 @@ public function approachAfterKnockback1():void
 public function approachAfterKnockback2():void
 {
 	clearOutput();
-	outputText("You close the distance between you and [monster a] [ monster name] as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
 	outputText("At the same time, you fire a round at [monster name]. ");
 	fireBow();
@@ -329,7 +329,7 @@ public function approachAfterKnockback2():void
 public function approachAfterKnockback3():void
 {
 	clearOutput();
-	outputText("You close the distance between you and [monster a] [ monster name] as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
 	enemyAI();
 	return;
@@ -878,7 +878,7 @@ public function elementalattacks():void {
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 10) damageelemental *= (monster.damagePercent(false, true) / 100);
 	damageelemental = Math.round(damageelemental);
-	outputText("Your elemental hit [monster a] [ monster name]! ");
+	outputText("Your elemental hit [monster a] [monster name]! ");
 	if (crit == true) {
 		outputText("<b>Critical! </b>");
 	}
@@ -905,27 +905,27 @@ public function packAttack():void {
 	}
 	//Determine if evaded
 	else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-		outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [ monster name]' attacks.");
+		outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//("Misdirection"
 	else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings, you anticipate and sidestep [monster a] [ monster name]' attacks.");
+		outputText("Using Raphael's teachings, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//Determine if cat'ed
 	else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-		outputText("With your incredible flexibility, you squeeze out of the way of [monster a] [ monster name]' attacks.");
+		outputText("With your incredible flexibility, you squeeze out of the way of [monster a] [monster name]' attacks.");
 	}
 	else {
 		temp = int((monster.str + monster.weaponAttack) * (player.damagePercent() / 100)); //Determine damage - str modified by enemy toughness!
 		if (temp <= 0) {
 			temp = 0;
 			if (!monster.plural)
-				outputText("You deflect and block every " + monster.weaponVerb + " [monster a] [ monster name] throw at you.");
-			else outputText("You deflect [monster a] [ monster name] " + monster.weaponVerb + ".");
+				outputText("You deflect and block every " + monster.weaponVerb + " [monster a] [monster name] throw at you.");
+			else outputText("You deflect [monster a] [monster name] " + monster.weaponVerb + ".");
 		}
 		else {
 			if (temp <= 5)
-				outputText("You are struck a glancing blow by [monster a] [ monster name]! ");
+				outputText("You are struck a glancing blow by [monster a] [monster name]! ");
 			else if (temp <= 10)
 				outputText(monster.capitalA + monster.short + " wound you! ");
 			else if (temp <= 20)
@@ -1150,7 +1150,7 @@ internal function wait():void {
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
 		if (rand(3) == 0 || rand(80) < player.str / 1.5) {
-			outputText("You wriggle and squirm violently, tearing yourself out from within [monster a] [ monster name]'s coils.");
+			outputText("You wriggle and squirm violently, tearing yourself out from within [monster a] [monster name]'s coils.");
 			player.removeStatusEffect(StatusEffects.NagaBind);
 		}
 		else {
@@ -1503,7 +1503,7 @@ public function multiArrowsStrike():void {
 				outputText("The ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" bounces harmlessly off [monster a] [ monster name].\n\n");
+				outputText(" bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 			flags[kFLAGS.ARROWS_SHOT]++;
 			bowPerkUnlock();
@@ -1526,7 +1526,7 @@ public function multiArrowsStrike():void {
 				outputText("You pull an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at one of [monster a] [ monster name]");
+				outputText(" and fire it at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you draw, nock, and fire your deadly ");
@@ -1538,7 +1538,7 @@ public function multiArrowsStrike():void {
 				outputText("You casually fire an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at one of [monster a] [ monster name] with supreme skill");
+				outputText(" at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -1552,7 +1552,7 @@ public function multiArrowsStrike():void {
 				outputText("You pull an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at [monster a] [ monster name]");
+				outputText(" and fire it at [monster a] [monster name]");
 			} else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you draw, nock, and fire your deadly ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
@@ -1562,7 +1562,7 @@ public function multiArrowsStrike():void {
 				outputText("You casually fire an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at [monster a] [ monster name] with supreme skill");
+				outputText(" at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -1884,7 +1884,7 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The [weaponrangename] bounces harmlessly off [monster a] [ monster name].\n\n");
+				outputText("The [weaponrangename] bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 		}
 		if (monster.short == "pod") {
@@ -1896,13 +1896,13 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " look down at the mark left by the [weaponrangename] on one of their bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You grasps firmly [weaponrangename] and then throws it at one of [monster a] [ monster name]");
+				outputText("You grasps firmly [weaponrangename] and then throws it at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you aim and throws your [weaponrangename] at one of your opponents");
 			}
 			else {
-				outputText("You casually throws [weaponrangename] at one of [monster a] [ monster name] with supreme skill");
+				outputText("You casually throws [weaponrangename] at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -1911,13 +1911,13 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " looks down at the mark left by the [weaponrangename] on it body");
 			}
 			else if (textChooser2 >= 6) {
-				outputText("You grasps firmly [weaponrangename] and then throws it at [monster a] [ monster name]");
+				outputText("You grasps firmly [weaponrangename] and then throws it at [monster a] [monster name]");
 			}
 			else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you aim and throw your [weaponrangename] at your opponent");
 			}
 			else {
-				outputText("You casually throws [weaponrangename] at [monster a] [ monster name] with supreme skill");
+				outputText("You casually throws [weaponrangename] at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -2042,7 +2042,7 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " shrugs as the bullet bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The bullet bounces harmlessly off [monster a] [ monster name].\n\n");
+				outputText("The bullet bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 		}
 		if (monster.short == "pod") {
@@ -2054,13 +2054,13 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " look down at the mark left by the bullet on one of their bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You pull the trigger and fire the bullet at one of [monster a] [ monster name]");
+				outputText("You pull the trigger and fire the bullet at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you aim and fire your deadly bullet at one of your opponents");
 			}
 			else {
-				outputText("You casually fire an bullet at one of [monster a] [ monster name] with supreme skill");
+				outputText("You casually fire an bullet at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -2069,13 +2069,13 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " looks down at the mark left by the bullet on it body");
 			}
 			else if (textChooser2 >= 6) {
-				outputText("You pull the trigger and fire the bullet at [monster a] [ monster name]");
+				outputText("You pull the trigger and fire the bullet at [monster a] [monster name]");
 			}
 			else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you aim and fire your deadly bullet at your opponent");
 			}
 			else {
-				outputText("You casually fire an bullet at [monster a] [ monster name] with supreme skill");
+				outputText("You casually fire an bullet at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -2212,25 +2212,25 @@ public function fantasize():void {
 		temp2 = 25 + rand(player.lib/8+player.cor/8)
 	}	
 	else if(player.balls > 0 && player.ballSize >= 10 && rand(2) == 0) {
-		outputText("You daydream about fucking [monster a] [ monster name], feeling your balls swell with seed as you prepare to fuck [monster him] full of cum.\n");
+		outputText("You daydream about fucking [monster a] [monster name], feeling your balls swell with seed as you prepare to fuck [monster him] full of cum.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8);
 		outputText("You aren't sure if it's just the fantasy, but your [balls] do feel fuller than before...\n");
 		player.hoursSinceCum += 50;
 	}
 	else if(player.biggestTitSize() >= 6 && rand(2) == 0) {
-		outputText("You fantasize about grabbing [monster a] [ monster name] and shoving [monster him] in between your jiggling mammaries, nearly suffocating [monster him] as you have your way.\n");
+		outputText("You fantasize about grabbing [monster a] [monster name] and shoving [monster him] in between your jiggling mammaries, nearly suffocating [monster him] as you have your way.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8)
 	}
 	else if(player.biggestLactation() >= 6 && rand(2) == 0) {
-		outputText("You fantasize about grabbing [monster a] [ monster name] and forcing [monster him] against a " + nippleDescript(0) + ", and feeling your milk let down.  The desire to forcefeed SOMETHING makes your nipples hard and moist with milk.\n");
+		outputText("You fantasize about grabbing [monster a] [monster name] and forcing [monster him] against a " + nippleDescript(0) + ", and feeling your milk let down.  The desire to forcefeed SOMETHING makes your nipples hard and moist with milk.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8)
 	}
 	else {
 		clearOutput();
-		outputText("You fill your mind with perverted thoughts about [monster a] [ monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
+		outputText("You fill your mind with perverted thoughts about [monster a] [monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
 		temp2 = 10+rand(player.lib/5+player.cor/8);		
 	}
-	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if [monster a] [ monster name] can tell what you were thinking.\n\n");
+	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if [monster a] [monster name] can tell what you were thinking.\n\n");
 	else outputText("\n");
 	dynStats("lus", temp2, "scale", false);
 	if(player.lust >= player.maxLust()) {
@@ -2248,7 +2248,7 @@ public function fantasize():void {
 }
 public function defendpose():void {
 	clearOutput();
-	outputText("You decide not to take any offensive action this round preparing for [monster a] [ monster name] attack assuming defensive pose.\n\n");
+	outputText("You decide not to take any offensive action this round preparing for [monster a] [monster name] attack assuming defensive pose.\n\n");
 	player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
 	if (player.findPerk(PerkLib.DefenceStance) >= 0) {
 		wrathregeneration();
@@ -2264,7 +2264,7 @@ public function surrender():void {
 	clearOutput();
 	temp3 += (player.maxLust() - player.lust);
 	clearOutput();
-	outputText("You fill your mind with perverted thoughts about [monster a] [ monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
+	outputText("You fill your mind with perverted thoughts about [monster a] [monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
 	dynStats("lus", temp3, "scale", false);
 	doNext(endLustLoss);
 }
@@ -2714,10 +2714,10 @@ public function attack():void {
 	}
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by [monster a] [ monster name].");
+		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
 	}
 	else {
-		outputText("You hit [monster a] [ monster name]! ");
+		outputText("You hit [monster a] [monster name]! ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -2729,7 +2729,7 @@ public function attack():void {
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [ monster name]'s defenses!");
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
 		if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
 		else monster.armorDef = 0;
 	}
@@ -2821,7 +2821,7 @@ public function attack():void {
 				{
 					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
 				}
-				else outputText("Despite the rents you've torn in its exterior, [monster a] [ monster name] does not bleed.");
+				else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
 			}
 			else
 			{
@@ -3062,7 +3062,7 @@ public function WrathWeaponsProc():void {
 public function HeroBaneProc():void {
 	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) {
-			outputText("\nYou feel [monster a] [ monster name] wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
+			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
 			takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
 		}
 		if (player.HP < 1) {
@@ -3340,9 +3340,9 @@ public function finishCombat():void
 	var hpVictory:Boolean = monster.HP < 1;
 	clearOutput();
 	if (hpVictory) {
-		outputText("You defeat [monster a] [ monster name].\n");
+		outputText("You defeat [monster a] [monster name].\n");
 	} else {
-		outputText("You smile as [monster a] [ monster name] collapses and begins masturbating feverishly.");
+		outputText("You smile as [monster a] [monster name] collapses and begins masturbating feverishly.");
 	}
 	cleanupAfterCombat();
 }
@@ -3762,19 +3762,19 @@ private function combatStatusesUpdate():void {
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
 	}
 	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
-		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [ monster name] but does not have any visible effects just yet.\n\n");
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [monster name] but does not have any visible effects just yet.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.6)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your unholy presence.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your unholy presence.\n\n");
 		}
-		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting [monster a] [ monster name], making [monster him] squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.85)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your presence.\n\n");
 			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your presence.\n\n");
 		}
 		else {
-			if(!monster.plural) outputText("The effects of your aura are quite pronounced on [monster a] [ monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
-			else outputText("The effects of your aura are quite pronounced on [monster a] [ monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+			if(!monster.plural) outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
@@ -3785,14 +3785,14 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
 		}
-		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [monster a] [ monster name], making [monster him] squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.85)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
 			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
 		}
 		else {
-			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [ monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
-			else outputText("The effects of your pollen are quite pronounced on [monster a] [ monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
@@ -3816,7 +3816,7 @@ private function combatStatusesUpdate():void {
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
 if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
-		outputText("Coiled tightly by [monster a] [ monster name] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
+		outputText("Coiled tightly by [monster a] [monster name] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
 		dynStats("lus", 5);
 	}
 	if(player.hasStatusEffect(StatusEffects.TentacleBind)) {
@@ -3894,13 +3894,13 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		if(player.totalCocks() > 1) outputText("Each of y");
 		else outputText("Y");
-		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [ monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
-		else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [ monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
+		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
+		else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.NagaVenom)) {
 		//Chance to cleanse!
 		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
-			outputText("You manage to cleanse [monster a] [ monster name] venom from your system with your knowledge of medicine!\n\n");
+			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.spe += player.statusEffectv1(StatusEffects.NagaVenom);
 			mainView.statsView.showStatUp( 'spe' );
 			// speUp.visible = true;
@@ -3912,13 +3912,13 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.spe -= 2;
 		}
 		else takeDamage(5);
-		outputText("You wince in pain and try to collect yourself, [monster a] [ monster name]'s venom still plaguing you.\n\n");
+		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
 		takeDamage(2);
 	}
 	if(player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 		//Chance to cleanse!
 		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
-			outputText("You manage to cleanse [monster a] [ monster name] venom from your system with your knowledge of medicine!\n\n");
+			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.str += player.statusEffectv1(StatusEffects.MedusaVenom);
 			player.tou += player.statusEffectv2(StatusEffects.MedusaVenom);
 			player.spe += player.statusEffectv3(StatusEffects.MedusaVenom);
@@ -3948,7 +3948,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.inte -= 1;
 			}
 		}
-		outputText("You wince in pain and try to collect yourself, [monster a] [ monster name]'s venom still plaguing you.\n\n");
+		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
 		takeDamage(2);
 	}
 	else if(player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
@@ -5178,7 +5178,7 @@ public function ScyllaSqueeze():void {
 	outputText("\n\n" + monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 	//Enemy faints -
 	if(monster.HP < 1) {
-		outputText("\n\nYou can feel [monster a] [ monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+		outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 		outputText("\n\n");
@@ -5197,7 +5197,7 @@ public function ScyllaTease():void {
 	}
 	else if(monster.gender == 0)
 	{
-		outputText("You look over [monster a] [ monster name], but can't figure out how to tease such an unusual foe.\n\n");
+		outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
 	}
 	if(monster.lustVuln == 0) {
 		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -5349,7 +5349,7 @@ public function ScyllaTease():void {
 }
 public function ScyllaLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release [monster a] [ monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
+	outputText("You release [monster a] [monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
 	enemyAI();
@@ -5364,7 +5364,7 @@ public function GooTease():void {
 	}
 	else if(monster.gender == 0)
 	{
-		outputText("You look over [monster a] [ monster name], but can't figure out how to tease such an unusual foe.\n\n");
+		outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
 	}
 	if(monster.lustVuln == 0) {
 		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -5457,7 +5457,7 @@ public function GooTease():void {
 		chance += 2;
 		//Land the hit!
 		if(rand(100) <= chance) {
-			outputText("You start to play with [monster a] [ monster name] body ");
+			outputText("You start to play with [monster a] [monster name] body ");
 			if(monster.gender == 1)
 			{
 				outputText("stroking his " + monster.cockDescriptShort(0) + " from inside of you to feast on his precum.");
@@ -5510,7 +5510,7 @@ public function GooTease():void {
 }
 public function GooLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release [monster a] [ monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
+	outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.GooEngulf);
 	enemyAI();
