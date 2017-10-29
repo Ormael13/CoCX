@@ -362,7 +362,7 @@ import flash.errors.IllegalOperationError;
 			return 100;
 		}
 		public function maxSoulforce():Number {
-			return 100;
+			return 50;
 		}
 		public function maxMana():Number {
 			return 100;
@@ -2472,6 +2472,8 @@ import flash.errors.IllegalOperationError;
 			AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2,
 			AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE,
 			AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE,
+            AppearanceDefs.WING_TYPE_BAT_ARM,
+            AppearanceDefs.WING_TYPE_VAMPIRE,
 			//WING_TYPE_IMP_LARGE,
 		];
 

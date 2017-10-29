@@ -89,8 +89,8 @@ public class VampireBlood extends Consumable {
                         tf.Override();
                         changes++;
                     }
-                    story.display(tf.BodyPart, {$pure: pure});
                     outputText("\n\n");
+                    story.display(tf.BodyPart, {$pure: pure});
                     player[tf.BodyPart] = tf.ChangeTo;
                     for each(var extra:Object in tf.Addition){
                         player[extra.BodyPart] = extra.ChangeTo;
@@ -99,7 +99,7 @@ public class VampireBlood extends Consumable {
                 }
             }
         }
-        if(changes == 0){story.display("noChange");}
+        if(changes == 0){outputText("\n\n");story.display("noChange");}
         return false;
     }
 }

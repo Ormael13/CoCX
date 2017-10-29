@@ -31,6 +31,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
+import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -290,7 +291,7 @@ public function checkAchievementDamage(damage:Number):void
 public function approachAfterKnockback1():void
 {
 	clearOutput();
-	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
 	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
 	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
@@ -311,16 +312,16 @@ public function approachAfterKnockback1():void
 public function approachAfterKnockback2():void
 {
 	clearOutput();
-	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
-	outputText("At the same time, you fire a round at " + monster.short + ". ");
+	outputText("At the same time, you fire a round at [monster name]. ");
 	fireBow();
 	return;
 }
 public function approachAfterKnockback3():void
 {
 	clearOutput();
-	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
+	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
 	enemyAI();
 	return;
@@ -705,134 +706,54 @@ public function baseelementalattacks():void {
 	manacostofelementalattacking += player.wis / 25;
 	manacostofelementalattacking = Math.round(manacostofelementalattacking);
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1 && manacostofelementalattacking > 0) manacostofelementalattacking = 0;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2 && manacostofelementalattacking > 5) manacostofelementalattacking = 5;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3 && manacostofelementalattacking > 10) manacostofelementalattacking = 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4 && manacostofelementalattacking > 20) manacostofelementalattacking = 20;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5 && manacostofelementalattacking > 40) manacostofelementalattacking = 40;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6 && manacostofelementalattacking > 80) manacostofelementalattacking = 80;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7 && manacostofelementalattacking > 120) manacostofelementalattacking = 120;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8 && manacostofelementalattacking > 160) manacostofelementalattacking = 160;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 8 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
 	}
 	if (player.mana < manacostofelementalattacking) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
@@ -846,124 +767,63 @@ public function baseelementalattacks():void {
 }
 public function intwisscaling():Number {
 	var intwisscalingvar:Number = 0;
-	intwisscalingvar += inteligencescalingbonus() * 0.25;
-	intwisscalingvar += wisdomscalingbonus() * 0.5;//1750*0.5=875
+	intwisscalingvar += inteligencescalingbonus();
+	intwisscalingvar += wisdomscalingbonus();
 	return intwisscalingvar;
 }
 public function elementalattacks():void {
 	var damageelemental:Number = 0;
-	damageelemental += intwisscaling();
-	if (damageelemental < 10) damageelemental = 10;
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1 && damageelemental > 50) damageelemental = 50;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2 && damageelemental > 150) damageelemental = 150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3 && damageelemental > 300) damageelemental = 300;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) > 3) damageelemental += intwisscaling();
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4 && damageelemental > 600) damageelemental = 600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5 && damageelemental > 1150) damageelemental = 1150;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6 && damageelemental > 1600) damageelemental = 1600;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7 && damageelemental > 2100) damageelemental = 2100;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8 && damageelemental > 2700) damageelemental = 2700;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 1) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) damageelemental += intwisscaling() * 0.5;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 9) damageelemental += intwisscaling() * 0.5;
 	}
+	if (damageelemental < 10) damageelemental = 10;
 	if (player.findPerk(PerkLib.ElementalConjurerResolve) >= 0) damageelemental *= (1 + (0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 	if (player.findPerk(PerkLib.ElementalConjurerDedication) >= 0) damageelemental *= (1 + (0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 	if (player.findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) damageelemental *= (1 + (0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -1010,7 +870,7 @@ public function elementalattacks():void {
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1 || flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 10) damageelemental *= (monster.damagePercent(false, true) / 100);
 	damageelemental = Math.round(damageelemental);
-	outputText("Your elemental hit " + monster.a + monster.short + "! ");
+	outputText("Your elemental hit [monster a] [monster name]! ");
 	if (crit == true) {
 		outputText("<b>Critical! </b>");
 	}
@@ -1037,31 +897,31 @@ public function packAttack():void {
 	}
 	//Determine if evaded
 	else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-		outputText("Using your skills at evading attacks, you anticipate and sidestep " + monster.a + monster.short + "' attacks.");
+		outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//("Misdirection"
 	else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings, you anticipate and sidestep " + monster.a + monster.short + "' attacks.");
+		outputText("Using Raphael's teachings, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//Determine if cat'ed
 	else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-		outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "' attacks.");
+		outputText("With your incredible flexibility, you squeeze out of the way of [monster a] [monster name]' attacks.");
 	}
 	else {
 		temp = int((monster.str + monster.weaponAttack) * (player.damagePercent() / 100)); //Determine damage - str modified by enemy toughness!
 		if (temp <= 0) {
 			temp = 0;
 			if (!monster.plural)
-				outputText("You deflect and block every " + monster.weaponVerb + " " + monster.a + monster.short + " throw at you.");
-			else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ".");
+				outputText("You deflect and block every " + monster.weaponVerb + " [monster a] [monster name] throw at you.");
+			else outputText("You deflect [monster a] [monster name] " + monster.weaponVerb + ".");
 		}
 		else {
 			if (temp <= 5)
-				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! ");
+				outputText("You are struck a glancing blow by [monster a] [monster name]! ");
 			else if (temp <= 10)
 				outputText(monster.capitalA + monster.short + " wound you! ");
 			else if (temp <= 20)
-				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! ");
+				outputText(monster.capitalA + monster.short + " stagger you with the force of [monster his] " + monster.weaponVerb + "s! ");
 			else outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ");
 			takeDamage(temp, true);
 		}
@@ -1074,17 +934,17 @@ public function packAttack():void {
 public function lustAttack():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 	if (player.lust < (player.maxLust() * 0.35)) {
-		outputText("The " + monster.short + " press in close against you and although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.");
+		outputText("The [monster name] press in close against you and although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.");
 	}
 	else if (player.lust < (player.maxLust() * 0.65)) {
-		outputText("The push of the " + monster.short + "' sweaty, seductive bodies sliding over yours is deliciously arousing and you feel your ");
+		outputText("The push of the [monster name]' sweaty, seductive bodies sliding over yours is deliciously arousing and you feel your ");
 		if (player.cocks.length > 0)
 			outputText(player.multiCockDescriptLight() + " hardening ");
 		else if (player.vaginas.length > 0) outputText(vaginaDescript(0) + " get wetter ");
 		outputText("in response to all the friction.");
 	}
 	else {
-		outputText("As the " + monster.short + " mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ");
+		outputText("As the [monster name] mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ");
 		if (player.gender == 1) outputText(player.multiCockDescriptLight() + " towards the nearest inviting hole.");
 		if (player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.");
 		if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.");
@@ -1158,7 +1018,7 @@ internal function wait():void {
 		clearOutput();
 		if(monster is Diva){(monster as Diva).moveBite();}
 		if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
-		else outputText("The " + monster.short + "");
+		else outputText("The [monster name]");
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
 		dynStats("lus", player.sens / 5 + 5);
 		takeDamage(5 + rand(5));
@@ -1282,12 +1142,12 @@ internal function wait():void {
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
 		if (rand(3) == 0 || rand(80) < player.str / 1.5) {
-			outputText("You wriggle and squirm violently, tearing yourself out from within " + monster.a + monster.short + "'s coils.");
+			outputText("You wriggle and squirm violently, tearing yourself out from within [monster a] [monster name]'s coils.");
 			player.removeStatusEffect(StatusEffects.NagaBind);
 		}
 		else {
 			if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
-			else outputText("The " + monster.short + "");
+			else outputText("The [monster name]");
 			outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
 			dynStats("lus", player.sens / 10 + 2);
 			if (monster is Naga) takeDamage(7 + rand(5));
@@ -1299,7 +1159,7 @@ internal function wait():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
-		outputText("You struggle to get free from the " + monster.short + " mighty tentacles. ");
+		outputText("You struggle to get free from the [monster name] mighty tentacles. ");
 		if (rand(3) == 0 || rand(120) < player.str / 1.5) {
 			outputText("As force alone seems ineffective, you bite one of her tentacles and she screams in surprise, releasing you.");
 			player.removeStatusEffect(StatusEffects.ScyllaBind);
@@ -1512,7 +1372,7 @@ public function fireBow():void {
 		return;
 	}
 	//[Bow Response]
-	if (monster.short == "Isabella") {
+	if (monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 		if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 			outputText("Isabella hears the shot");
 			if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");
@@ -1587,7 +1447,7 @@ public function fireBow():void {
 		return;
 	}
 	if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
-		if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at " + monster.short + ".\n\n");
+		if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at [monster name].\n\n");
 		multiArrowsStrike();
 	}
 	if (player.weaponRangePerk == "Throwing") {
@@ -1635,7 +1495,7 @@ public function multiArrowsStrike():void {
 				outputText("The ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" bounces harmlessly off " + monster.a + monster.short + ".\n\n");
+				outputText(" bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 			flags[kFLAGS.ARROWS_SHOT]++;
 			bowPerkUnlock();
@@ -1652,13 +1512,13 @@ public function multiArrowsStrike():void {
 				outputText(monster.capitalA + monster.short + " look down at the ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" that now protrudes from one of " + monster.pronoun3 + " bodies");
+				outputText(" that now protrudes from one of [monster his] bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
 				outputText("You pull an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at one of " + monster.a + monster.short + "");
+				outputText(" and fire it at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you draw, nock, and fire your deadly ");
@@ -1670,7 +1530,7 @@ public function multiArrowsStrike():void {
 				outputText("You casually fire an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at one of " + monster.a + monster.short + " with supreme skill");
+				outputText(" at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -1679,12 +1539,12 @@ public function multiArrowsStrike():void {
 				outputText(monster.capitalA + monster.short + " looks down at the ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" that now protrudes from " + monster.pronoun3 + " body");
+				outputText(" that now protrudes from [monster his] body");
 			} else if (textChooser2 >= 6) {
 				outputText("You pull an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at " + monster.a + monster.short + "");
+				outputText(" and fire it at [monster a] [monster name]");
 			} else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you draw, nock, and fire your deadly ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
@@ -1694,7 +1554,7 @@ public function multiArrowsStrike():void {
 				outputText("You casually fire an ");
 				if (player.weaponRangePerk == "Bow") outputText("arrow");
 				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at " + monster.a + monster.short + " with supreme skill");
+				outputText(" at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -1755,8 +1615,8 @@ public function multiArrowsStrike():void {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
-				outputText(" and " + monster.pronoun1 + " stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ". ");
-			else outputText(" and " + monster.pronoun1 + " staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ". ");
+				outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
+			else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
 			outputText("<b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
@@ -1777,7 +1637,7 @@ public function multiArrowsStrike():void {
 			}
 			else {
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 					if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 					else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -1800,7 +1660,7 @@ public function multiArrowsStrike():void {
 				outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 			}
 			if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
-				outputText("  " + monster.pronoun1 + " seems to be affected by the poison, showing increasing sign of arousal.");
+				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var damageB:Number = 35 + rand(player.lib/10);
 				if (player.level < 10) damageB += 20 + (player.level * 3);
 				else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
@@ -1816,7 +1676,7 @@ public function multiArrowsStrike():void {
 				player.tailVenom -= 5;
 			}
 			if (player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION) {
-				outputText("  " + monster.pronoun1 + " seems to be effected by the poison, its movement turning sluggish.");
+				outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 				monster.spe -= 2;
 				if (monster.spe < 1) monster.spe = 1;
 				if (monster.hasStatusEffect(StatusEffects.NagaVenom))
@@ -1827,7 +1687,7 @@ public function multiArrowsStrike():void {
 				player.tailVenom -= 5;
 			}
 			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
-				outputText("  " + monster.pronoun1 + " seems to be affected by the poison, showing increasing sign of arousal.");
+				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var lustdamage:Number = 35 + rand(player.lib / 10);
 				if (player.level < 10) damage += 20 + (player.level * 3);
 				else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
@@ -1845,7 +1705,7 @@ public function multiArrowsStrike():void {
 				player.tailVenom -= 5;
 			}
 			if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
-				outputText("  " + monster.pronoun1 + " seems to be effected by the poison, its movement turning sluggish.");
+				outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 				monster.spe -= 0.4;
 				monster.spe -= 0.4;
 				if (monster.spe < 1) monster.spe = 1;
@@ -1859,7 +1719,7 @@ public function multiArrowsStrike():void {
 				player.tailVenom -= 5;
 			}
 			if (player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
-				outputText("  " + monster.pronoun1 + " seems to be affected by the poison, showing increasing sign of arousal.");
+				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var lustDmg:int = 6 * monster.lustVuln;
 				monster.teased(lustDmg);
 				if (monster.lustVuln > 0) {
@@ -2016,7 +1876,7 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The [weaponrangename] bounces harmlessly off " + monster.a + monster.short + ".\n\n");
+				outputText("The [weaponrangename] bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 		}
 		if (monster.short == "pod") {
@@ -2028,13 +1888,13 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " look down at the mark left by the [weaponrangename] on one of their bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You grasps firmly [weaponrangename] and then throws it at one of " + monster.a + monster.short + "");
+				outputText("You grasps firmly [weaponrangename] and then throws it at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you aim and throws your [weaponrangename] at one of your opponents");
 			}
 			else {
-				outputText("You casually throws [weaponrangename] at one of " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually throws [weaponrangename] at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -2043,13 +1903,13 @@ public function throwWeapon():void {
 				outputText(monster.capitalA + monster.short + " looks down at the mark left by the [weaponrangename] on it body");
 			}
 			else if (textChooser2 >= 6) {
-				outputText("You grasps firmly [weaponrangename] and then throws it at " + monster.a + monster.short + "");
+				outputText("You grasps firmly [weaponrangename] and then throws it at [monster a] [monster name]");
 			}
 			else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you aim and throw your [weaponrangename] at your opponent");
 			}
 			else {
-				outputText("You casually throws [weaponrangename] at " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually throws [weaponrangename] at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -2112,8 +1972,8 @@ public function throwWeapon():void {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
-				outputText(" and " + monster.pronoun1 + " stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ". ");
-			else outputText(" and " + monster.pronoun1 + " staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ". ");
+				outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
+			else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
 			outputText("<b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
@@ -2174,7 +2034,7 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " shrugs as the bullet bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The bullet bounces harmlessly off " + monster.a + monster.short + ".\n\n");
+				outputText("The bullet bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 		}
 		if (monster.short == "pod") {
@@ -2186,13 +2046,13 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " look down at the mark left by the bullet on one of their bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You pull the trigger and fire the bullet at one of " + monster.a + monster.short + "");
+				outputText("You pull the trigger and fire the bullet at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
 				outputText("With one smooth motion you aim and fire your deadly bullet at one of your opponents");
 			}
 			else {
-				outputText("You casually fire an bullet at one of " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually fire an bullet at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
@@ -2201,13 +2061,13 @@ public function shootWeapon():void {
 				outputText(monster.capitalA + monster.short + " looks down at the mark left by the bullet on it body");
 			}
 			else if (textChooser2 >= 6) {
-				outputText("You pull the trigger and fire the bullet at " + monster.a + monster.short + "");
+				outputText("You pull the trigger and fire the bullet at [monster a] [monster name]");
 			}
 			else if (textChooser2 >= 3) {
 				outputText("With one smooth motion you aim and fire your deadly bullet at your opponent");
 			}
 			else {
-				outputText("You casually fire an bullet at " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually fire an bullet at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -2267,8 +2127,8 @@ public function shootWeapon():void {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
-				outputText(" and " + monster.pronoun1 + " stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ". ");
-			else outputText(" and " + monster.pronoun1 + " staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ". ");
+				outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
+			else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
 			outputText("<b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
@@ -2344,25 +2204,25 @@ public function fantasize():void {
 		temp2 = 25 + rand(player.lib/8+player.cor/8)
 	}	
 	else if(player.balls > 0 && player.ballSize >= 10 && rand(2) == 0) {
-		outputText("You daydream about fucking " + monster.a + monster.short + ", feeling your balls swell with seed as you prepare to fuck " + monster.pronoun2 + " full of cum.\n");
+		outputText("You daydream about fucking [monster a] [monster name], feeling your balls swell with seed as you prepare to fuck [monster him] full of cum.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8);
 		outputText("You aren't sure if it's just the fantasy, but your [balls] do feel fuller than before...\n");
 		player.hoursSinceCum += 50;
 	}
 	else if(player.biggestTitSize() >= 6 && rand(2) == 0) {
-		outputText("You fantasize about grabbing " + monster.a + monster.short + " and shoving " + monster.pronoun2 + " in between your jiggling mammaries, nearly suffocating " + monster.pronoun2 + " as you have your way.\n");
+		outputText("You fantasize about grabbing [monster a] [monster name] and shoving [monster him] in between your jiggling mammaries, nearly suffocating [monster him] as you have your way.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8)
 	}
 	else if(player.biggestLactation() >= 6 && rand(2) == 0) {
-		outputText("You fantasize about grabbing " + monster.a + monster.short + " and forcing " + monster.pronoun2 + " against a " + nippleDescript(0) + ", and feeling your milk let down.  The desire to forcefeed SOMETHING makes your nipples hard and moist with milk.\n");
+		outputText("You fantasize about grabbing [monster a] [monster name] and forcing [monster him] against a " + nippleDescript(0) + ", and feeling your milk let down.  The desire to forcefeed SOMETHING makes your nipples hard and moist with milk.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8)
 	}
 	else {
 		clearOutput();
-		outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n");
+		outputText("You fill your mind with perverted thoughts about [monster a] [monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
 		temp2 = 10+rand(player.lib/5+player.cor/8);		
 	}
-	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if " + monster.a + monster.short + " can tell what you were thinking.\n\n");
+	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if [monster a] [monster name] can tell what you were thinking.\n\n");
 	else outputText("\n");
 	dynStats("lus", temp2, "scale", false);
 	if(player.lust >= player.maxLust()) {
@@ -2380,7 +2240,7 @@ public function fantasize():void {
 }
 public function defendpose():void {
 	clearOutput();
-	outputText("You decide not to take any offensive action this round preparing for " + monster.a + monster.short + " attack assuming defensive pose.\n\n");
+	outputText("You decide not to take any offensive action this round preparing for [monster a] [monster name] attack assuming defensive pose.\n\n");
 	player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
 	if (player.findPerk(PerkLib.DefenceStance) >= 0) {
 		wrathregeneration();
@@ -2396,7 +2256,7 @@ public function surrender():void {
 	clearOutput();
 	temp3 += (player.maxLust() - player.lust);
 	clearOutput();
-	outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n");
+	outputText("You fill your mind with perverted thoughts about [monster a] [monster name], picturing [monster him] in all kinds of perverse situations with you.\n");
 	dynStats("lus", temp3, "scale", false);
 	doNext(endLustLoss);
 }
@@ -2846,10 +2706,10 @@ public function attack():void {
 	}
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
+		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! ");
+		outputText("You hit [monster a] [monster name]! ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -2861,7 +2721,7 @@ public function attack():void {
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
 		if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
 		else monster.armorDef = 0;
 	}
@@ -2953,7 +2813,7 @@ public function attack():void {
 				{
 					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
 				}
-				else outputText("Despite the rents you've torn in its exterior, " + monster.a + monster.short + " does not bleed.");
+				else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
 			}
 			else
 			{
@@ -3194,7 +3054,7 @@ public function WrathWeaponsProc():void {
 public function HeroBaneProc():void {
 	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) {
-			outputText("\nYou feel " + monster.a + monster.short + " wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
+			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
 			takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
 		}
 		if (player.HP < 1) {
@@ -3290,9 +3150,9 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + temp + "</font>)</b>"); //Damage
-		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + temp + "</font>)</b>"); //Miss/block
-		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + temp + "</font>)</b>"); //Heal
+		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
 	//Isabella gets mad
 	if (monster.short == "Isabella") {
@@ -3471,9 +3331,9 @@ public function finishCombat():void
 	var hpVictory:Boolean = monster.HP < 1;
 	clearOutput();
 	if (hpVictory) {
-		outputText("You defeat " + monster.a + monster.short + ".\n");
+		outputText("You defeat [monster a] [monster name].\n");
 	} else {
-		outputText("You smile as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+		outputText("You smile as [monster a] [monster name] collapses and begins masturbating feverishly.");
 	}
 	cleanupAfterCombat();
 }
@@ -3893,19 +3753,19 @@ private function combatStatusesUpdate():void {
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
 	}
 	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
-		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into " + monster.a + monster.short + " but does not have any visible effects just yet.\n\n");
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [monster name] but does not have any visible effects just yet.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.6)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your unholy presence.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your unholy presence.\n\n");
 		}
-		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your arousing aura seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.85)) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently basks in your presence.\n\n");
-			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently bask in your presence.\n\n");
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your presence.\n\n");
+			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your presence.\n\n");
 		}
 		else {
-			if(!monster.plural) outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
-			else outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
+			if(!monster.plural) outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
@@ -3916,14 +3776,14 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
 			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
 		}
-		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n");
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.85)) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
-			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently breths in your pollen.\n\n");
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
+			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
 		}
 		else {
-			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n");
-			else outputText("The effects of your pollen are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n");
+			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
@@ -3947,7 +3807,7 @@ private function combatStatusesUpdate():void {
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
 if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
-		outputText("Coiled tightly by " + monster.a + monster.short + " and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
+		outputText("Coiled tightly by [monster a] [monster name] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
 		dynStats("lus", 5);
 	}
 	if(player.hasStatusEffect(StatusEffects.TentacleBind)) {
@@ -4025,13 +3885,13 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		if(player.totalCocks() > 1) outputText("Each of y");
 		else outputText("Y");
-		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
-		else outputText("our [cocks] dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
+		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
+		else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.NagaVenom)) {
 		//Chance to cleanse!
 		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
-			outputText("You manage to cleanse " + monster.a + monster.short + " venom from your system with your knowledge of medicine!\n\n");
+			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.spe += player.statusEffectv1(StatusEffects.NagaVenom);
 			mainView.statsView.showStatUp( 'spe' );
 			// speUp.visible = true;
@@ -4043,13 +3903,13 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.spe -= 2;
 		}
 		else takeDamage(5);
-		outputText("You wince in pain and try to collect yourself, " + monster.a + monster.short + "'s venom still plaguing you.\n\n");
+		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
 		takeDamage(2);
 	}
 	if(player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 		//Chance to cleanse!
 		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
-			outputText("You manage to cleanse " + monster.a + monster.short + " venom from your system with your knowledge of medicine!\n\n");
+			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.str += player.statusEffectv1(StatusEffects.MedusaVenom);
 			player.tou += player.statusEffectv2(StatusEffects.MedusaVenom);
 			player.spe += player.statusEffectv3(StatusEffects.MedusaVenom);
@@ -4079,7 +3939,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.inte -= 1;
 			}
 		}
-		outputText("You wince in pain and try to collect yourself, " + monster.a + monster.short + "'s venom still plaguing you.\n\n");
+		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
 		takeDamage(2);
 	}
 	else if(player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
@@ -4181,7 +4041,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.DwarfRage)) {
 		if (player.statusEffectv3(StatusEffects.DwarfRage) <= 0) {
-			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage));
+			player.dynStats("str", -player.statusEffectv1(StatusEffects.DwarfRage),"tou", -player.statusEffectv2(StatusEffects.DwarfRage),"spe", -player.statusEffectv2(StatusEffects.DwarfRage), "scale", false);
 			player.removeStatusEffect(StatusEffects.DwarfRage);
 			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
 		}
@@ -4218,9 +4078,9 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Might)) {
 		if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might), "scale", false);
+			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might), "scale", false);
+			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might), "scale", false);
 			player.removeStatusEffect(StatusEffects.Might);
 		//	statScreenRefresh();
 			outputText("<b>Might effect wore off!</b>\n\n");
@@ -4229,7 +4089,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 	}
 	if (player.hasStatusEffect(StatusEffects.Blink)) {
 		if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
+			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink), "scale", false);
 			player.removeStatusEffect(StatusEffects.Blink);
 		//	statScreenRefresh();
 			outputText("<b>Blink effect wore off!</b>\n\n");
@@ -4498,6 +4358,24 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			outputText("<b>Earth Stance effect wore off!</b>\n\n");
 		}
 		else player.addStatusValue(StatusEffects.EarthStance,1,-1);
+	}
+	//Eclipsing shadow
+	if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
+		if (player.statusEffectv1(StatusEffects.CooldownEclipsingShadow) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownEclipsingShadow);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownEclipsingShadow,1,-1);
+		}
+	}
+	//Sonic scream
+	if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSonicScream) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSonicScream);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSonicScream,1,-1);
+		}
 	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
@@ -4819,6 +4697,8 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
 	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
 	monster.HP = monster.maxHP();
+	monster.mana = monster.maxMana();
+	//monster.soulforce = monster.maxSoulforce(); - later work solution for demons that can't have any soulforce
 	monster.XP = monster.totalXP();
 	if (player.weaponRangeName == "gnoll throwing spear") player.ammo = 20;
 	if (player.weaponRangeName == "gnoll throwing axes") player.ammo = 10;
@@ -4907,10 +4787,10 @@ public function display():void {
 				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
 			}
 			if (monster is Alraune) {
-				if (temp == 5|| temp == 6) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
-				else if(temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
+				if (temp == 5|| temp == 6) outputText("The [monster name] keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
+				else if(temp == 4) outputText("The [monster name] keeps pulling you ever closer. You are getting dangerously close to her.");
 				else {
-					outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the ");
+					outputText("The [monster name] keeps pulling you ever closer. You are almost in the pitcher, the ");
 					if (isHalloween()) outputText("pumpkin");
 					else outputText("plant");
 					outputText(" woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
@@ -4920,18 +4800,18 @@ public function display():void {
 			outputText("\n\n");
 		}
 		if(monster.plural) {
-			if(math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ");
-			else if(math > .75) outputText("You see " + monster.pronoun1 + " aren't very hurt.  ");
-			else if(math > .5) outputText("You see " + monster.pronoun1 + " are slightly wounded.  ");
-			else if(math > .25) outputText("You see " + monster.pronoun1 + " are seriously hurt.  ");
-			else outputText("You see " + monster.pronoun1 + " are unsteady and close to death.  ");
+			if(math >= 1) outputText("You see [monster he] are in perfect health.  ");
+			else if(math > .75) outputText("You see [monster he] aren't very hurt.  ");
+			else if(math > .5) outputText("You see [monster he] are slightly wounded.  ");
+			else if(math > .25) outputText("You see [monster he] are seriously hurt.  ");
+			else outputText("You see [monster he] are unsteady and close to death.  ");
 		}
 		else {
-			if(math >= 1) outputText("You see " + monster.pronoun1 + " is in perfect health.  ");
-			else if(math > .75) outputText("You see " + monster.pronoun1 + " isn't very hurt.  ");
-			else if(math > .5) outputText("You see " + monster.pronoun1 + " is slightly wounded.  ");
-			else if(math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.  ");
-			else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ");
+			if(math >= 1) outputText("You see [monster he] is in perfect health.  ");
+			else if(math > .75) outputText("You see [monster he] isn't very hurt.  ");
+			else if(math > .5) outputText("You see [monster he] is slightly wounded.  ");
+			else if(math > .25) outputText("You see [monster he] is seriously hurt.  ");
+			else outputText("You see [monster he] is unsteady and close to death.  ");
 		}
 		showMonsterLust();		
 		// haha literally fuck organising this shit properly any more
@@ -5048,19 +4928,19 @@ public function showMonsterLust():void {
 	if(monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 		if(monster.plural) {
 			if(monster.statusEffectv1(StatusEffects.NagaVenom) <= 1) {
-				outputText("You notice " + monster.pronoun1 + " are beginning to show signs of weakening, but there still appears to be plenty of fight left in " + monster.pronoun2 + ".  ");
+				outputText("You notice [monster he] are beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
 			}
 			else {
-				outputText("You notice " + monster.pronoun1 + " are obviously affected by your venom, " + monster.pronoun3 + " movements become unsure, and " + monster.pronoun3 + " balance begins to fade. Sweat begins to roll on " + monster.pronoun3 + " skin. You wager " + monster.pronoun1 + " are probably beginning to regret provoking you.  ");
+				outputText("You notice [monster he] are obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat begins to roll on [monster his] skin. You wager [monster he] are probably beginning to regret provoking you.  ");
 			}
 		}
 		//Not plural
 		else {
 			if(monster.statusEffectv1(StatusEffects.NagaVenom) <= 1) {
-				outputText("You notice " + monster.pronoun1 + " is beginning to show signs of weakening, but there still appears to be plenty of fight left in " + monster.pronoun2 + ".  ");
+				outputText("You notice [monster he] is beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
 			}
 			else {
-				outputText("You notice " + monster.pronoun1 + " is obviously affected by your venom, " + monster.pronoun3 + " movements become unsure, and " + monster.pronoun3 + " balance begins to fade. Sweat is beginning to roll on " + monster.pronoun3 + " skin. You wager " + monster.pronoun1 + " is probably beginning to regret provoking you.  ");
+				outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
 			}
 		}
 		monster.spe -= monster.statusEffectv1(StatusEffects.NagaVenom);
@@ -5164,25 +5044,25 @@ public function showMonsterLust():void {
 	else {
 		if(monster.plural) {
 			if(monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText(monster.capitalA + monster.short + "' skin remains flushed with the beginnings of arousal.  ");
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "' eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "' eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
 			if(monster.cocks.length > 0) {
-				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groins.  ");
-				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulges more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are having trouble moving due to the rigid protrusion in [monster his] groins.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make [monster his] bulges more pronounced.  You don't think [monster he] can hold out much longer.  ");
 			}
 			if(monster.vaginas.length > 0) {
-				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell [monster his] arousal in the air.  ");
 				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
 			}
 		}
 		else {
 			if(monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText(monster.capitalA + monster.short + "'s skin remains flushed with the beginnings of arousal.  ");
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "'s eyes constantly dart over your most sexual parts, betraying " + monster.pronoun3 + " lust.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "'s eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
 			if(monster.cocks.length > 0) {
-				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is having trouble moving due to the rigid protrusion in " + monster.pronoun3 + " groin.  ");
-				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make " + monster.pronoun3 + " bulge more pronounced.  You don't think " + monster.pronoun1 + " can hold out much longer.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is having trouble moving due to the rigid protrusion in [monster his] groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make [monster his] bulge more pronounced.  You don't think [monster he] can hold out much longer.  ");
 			}
 			if(monster.vaginas.length > 0) {
-				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ");
+				if(monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell [monster his] arousal in the air.  ");
 				if(monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
 			}
 		}
@@ -5249,14 +5129,14 @@ public function ScyllaSqueeze():void {
 	clearOutput();
 	if (monster.plural) {
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to squeeze [monster a] [monster name].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
 	}
 	else {
 		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
-			outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to squeeze [monster a] [monster name].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
@@ -5284,12 +5164,12 @@ public function ScyllaSqueeze():void {
 	else {
 		outputText(" tentacle");
 	}
-	outputText(", leaving " + monster.pronoun2 + " short of breath. You can feel it in your tentacles as " + monster.pronoun3 + " struggles are briefly intensified. ");
+	outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles are briefly intensified. ");
 	damage = doDamage(damage);
 	outputText("\n\n" + monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 	//Enemy faints -
 	if(monster.HP < 1) {
-		outputText("\n\nYou can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+		outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 		outputText("\n\n");
@@ -5308,7 +5188,7 @@ public function ScyllaTease():void {
 	}
 	else if(monster.gender == 0)
 	{
-		outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n");
+		outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
 	}
 	if(monster.lustVuln == 0) {
 		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -5418,7 +5298,7 @@ public function ScyllaTease():void {
 			}
 			if(monster.gender == 3)
 			{
-				outputText("Your nimble tentacle manages to work its way between " + monster.pronoun3 + " legs, gaining access to both sets of genitals. As your slippery skin rubs past " + monster.pronoun3 + " clit, your tentacle gently begins to stroke " + monster.pronoun3 + " cock. The repressed expression on " + monster.pronoun3 + " face betrays " + monster.pronoun3 + " own enjoyment of this kind of treatment.");
+				outputText("Your nimble tentacle manages to work its way between [monster his] legs, gaining access to both sets of genitals. As your slippery skin rubs past [monster his] clit, your tentacle gently begins to stroke [monster his] cock. The repressed expression on [monster his] face betrays [monster his] own enjoyment of this kind of treatment.");
 			}
 		}
 		//Land the hit!
@@ -5460,7 +5340,7 @@ public function ScyllaTease():void {
 }
 public function ScyllaLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
+	outputText("You release [monster a] [monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
 	enemyAI();
@@ -5475,7 +5355,7 @@ public function GooTease():void {
 	}
 	else if(monster.gender == 0)
 	{
-		outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n");
+		outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
 	}
 	if(monster.lustVuln == 0) {
 		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -5568,7 +5448,7 @@ public function GooTease():void {
 		chance += 2;
 		//Land the hit!
 		if(rand(100) <= chance) {
-			outputText("You start to play with " + monster.a + monster.short + " body ");
+			outputText("You start to play with [monster a] [monster name] body ");
 			if(monster.gender == 1)
 			{
 				outputText("stroking his " + monster.cockDescriptShort(0) + " from inside of you to feast on his precum.");
@@ -5621,12 +5501,49 @@ public function GooTease():void {
 }
 public function GooLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release " + monster.a + monster.short + " from your body and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
+	outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.GooEngulf);
 	enemyAI();
 }
 
+//Vampiric bite
+public function VampiricBite():void {
+	fatigue(20, USEFATG_PHYSICAL);
+	outputText("You bite [monster a] [monster name] drinking deep of [monster his] blood ");
+	var damage:int = player.maxHP() * 0.05;
+	damage = Math.round(damage);
+	doDamage(damage, true, true);
+	player.HP += damage;
+	if (player.HP > player.maxHP()) player.HP = player.maxHP();
+	outputText(" damage. You feel yourself grow stronger with each drop. ");
+	var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+	thirst.drink(1);
+	if (monster.gender != 0 && monster.lustVuln != 0) {
+		var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
+		outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
+		monster.teased(lustDmg);
+		outputText(".");
+	}
+	//Enemy faints -
+	if(monster.HP < 1) {
+		outputText("You can feel [monster a] [monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his] eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+		if(monster.short == "demons")
+			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
+		outputText("\n\n");
+		doNext(combat.endHpVictory);
+		return;
+	}
+	outputText("\n\n");
+	enemyAI();
+}
+public function VampireLeggoMyEggo():void {
+	clearOutput();
+	outputText("You let your opponent free ending your embrace.");
+	outputText("\n\n");
+	monster.removeStatusEffect(StatusEffects.EmbraceVampire);
+	enemyAI();
+}
 
 public function runAway(callHook:Boolean = true):void {
 	if (callHook && monster.onPcRunAttempt != null){
@@ -5856,7 +5773,7 @@ public function runAway(callHook:Boolean = true):void {
 	if (player.spe > rand(monster.spe + escapeMod)) {
 		//Escape prison
 		if (prison.inPrison) {
-			outputText("You quickly bolt out of the main entrance and after hiding for a good while, there's no sign of " + monster.a + " " + monster.short + ". You sneak back inside to retrieve whatever you had before you were captured. ");
+			outputText("You quickly bolt out of the main entrance and after hiding for a good while, there's no sign of [monster a] [monster name]. You sneak back inside to retrieve whatever you had before you were captured. ");
 			inCombat = false;
 			clearStatuses(false);
 			prison.prisonEscapeSuccessText();
@@ -5867,7 +5784,7 @@ public function runAway(callHook:Boolean = true):void {
 		else if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.");
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
 		else if(player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON && player.earType == AppearanceDefs.EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) {
-			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best " + monster.pronoun1 + " can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave " + monster.pronoun2 + " behind with your clumsy, jerky, short-range flight.");
+			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
 		}
 		//Non-fliers flee
 		else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");

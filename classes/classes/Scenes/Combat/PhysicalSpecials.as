@@ -68,6 +68,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
+		//Embrace
+		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+		}
 		//Kick attackuuuu
 		if (player.isTaur() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BUNNY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO) {
 			bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
@@ -165,12 +169,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasVagina() && player.cowScore() >= 9) {
 			bd = buttons.add("Milk Blast", milkBlask).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
 			bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.MilkBlastCooldown)) bd.disable("You can't use it more than once during fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.hasCock() && player.minotaurScore() >= 9) {
 			bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. \n");
 			bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.CumCannonCooldown)) bd.disable("You can't use it more than once during fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) bd.disable("You can't use it more than once during fight.");
 		}
 		if (player.canFly()) {
 			buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -244,24 +248,32 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 	}
+	internal function buildMenuForFlying(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+		//Embrace
+		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+		}
+	}
 	
 	public function powerAttackMenu():void {
 		menu();
-		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 5,"You are too calm to use this special.");
+		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special.");
 		if (player.level >= 6) {
-			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 10,"You are too calm to use this special.");
+			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special.");
 		} else addButtonDisabled(1, "???");
 		if (player.level >= 12) {
-			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 20,"You are too calm to use this special.");
+			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special.");
 		} else addButtonDisabled(2, "???");
 		if (player.level >= 18) {
-			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 45,"You are too calm to use this special.");
+			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special.");
 		} else addButtonDisabled(3, "???");
 		if (player.level >= 24) {
-			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 100,"You are too calm to use this special.");
+			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special.");
 		} else addButtonDisabled(4, "???");
 		if (player.level >= 30) {
-			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 250,"You are too calm to use this special.");
+			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special.");
 		} else addButtonDisabled(5, "???");
 		if (player.level >= 36) {
 			addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
@@ -270,7 +282,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		player.wrath -= 5;
+		player.wrath -= 50;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -311,7 +323,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack3x():void {
 		clearOutput();
-		player.wrath -= 10;
+		player.wrath -= 100;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -352,7 +364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack4x():void {
 		clearOutput();
-		player.wrath -= 20;
+		player.wrath -= 200;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -393,7 +405,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack5x():void {
 		clearOutput();
-		player.wrath -= 45;
+		player.wrath -= 300;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -434,7 +446,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack6x():void {
 		clearOutput();
-		player.wrath -= 100;
+		player.wrath -= 400;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -475,7 +487,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack7x():void {
 		clearOutput();
-		player.wrath -= 250;
+		player.wrath -= 500;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -944,7 +956,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function milkBlask():void {
 		clearOutput();
-		player.createStatusEffect(StatusEffects.MilkBlastCooldown, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownMilkBlast, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing " + monster.a + monster.short + " with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
 		var damage:Number = 0;
 		damage += player.lactationQ();
@@ -971,7 +983,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function cumCannon():void {
 		clearOutput();
-		player.createStatusEffect(StatusEffects.CumCannonCooldown, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownCumCannon, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting " + monster.a + monster.short + " away and knocking it prone. ");
 		var damage:Number = 0;
 		damage += player.cumQ();
@@ -1507,6 +1519,40 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function vampireEmbrace():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You're too tired to wrap your wings around enemy!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't wrap your wings around something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		monster.createStatusEffect(StatusEffects.EmbraceVampire, 3 + rand(3),0,0,0);
+		if (player.hasStatusEffect(StatusEffects.Flying)) {
+			outputText("You dive down at your target, wrapping your wings around " + monster.a + monster.short + " embracing " + monster.pronoun1 + " as you prepare to feast.");
+			player.removeStatusEffect(StatusEffects.Flying);
+			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+				player.removeStatusEffect(StatusEffects.FlyingNoStun);
+				player.removePerk(PerkLib.Resolute);
+			}
+		}
+		else outputText("You leap and box in " + monster.a + monster.short + " with your wings, embracing " + monster.pronoun1 + " as you prepare to feast.");
 		outputText("\n\n");
 		enemyAI();
 	}

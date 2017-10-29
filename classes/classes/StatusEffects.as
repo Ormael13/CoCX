@@ -2,8 +2,9 @@ package classes
 {
 import classes.StatusEffects.Combat.*;
 import classes.StatusEffects.CombatStatusEffect;
+import classes.StatusEffects.VampireThirstEffect;
 
-	/**
+/**
 	 * IMPORTANT NOTE:
 	 * You can rename the constants BUT NOT the string ids (they are stored in saves).
 	 */
@@ -201,6 +202,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TookBlessedSword:StatusEffectType               = mk("Took Blessed Sword");
+		public static const VampireThirst:StatusEffectType                  = VampireThirstEffect.TYPE;
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");
@@ -261,6 +263,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const DrankMinoCum2:StatusEffectType      = mk("drank mino cum2");
 		public static const Drunk:StatusEffectType              = mk("Drunk");
 		public static const Earthshield:StatusEffectType        = mk("Earthshield");
+		public static const EmbraceVampire:StatusEffectType     = mk("Embrace (Vampire)");
 		public static const Fear:StatusEffectType               = mk("Fear");
 		public static const FearCounter:StatusEffectType        = mk("FearCounter");
 		public static const GenericRunDisabled:StatusEffectType = mk("Generic Run Disabled");
@@ -538,6 +541,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
 		
 		public static const CooldownCompellingAria:StatusEffectType     = mkCombat("Cooldown Compelling Aria");
+		public static const CooldownCumCannon:StatusEffectType          = mkCombat("Cooldown Cum Cannon");
 		public static const CooldownEarthStance:StatusEffectType        = mkCombat("Cooldown Earth Stance");
 		public static const CooldownEAspectAir:StatusEffectType         = mkCombat("Cooldown Elemental Aspect Air");
 		public static const CooldownEAspectEarth:StatusEffectType       = mkCombat("Cooldown Elemental Aspect Earth");
@@ -549,6 +553,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const CooldownEAspectWood:StatusEffectType        = mkCombat("Cooldown Elemental Aspect Wood");
 		public static const CooldownEAspectMetal:StatusEffectType       = mkCombat("Cooldown Elemental Aspect Metal");
 		public static const CooldownEAspectEther:StatusEffectType       = mkCombat("Cooldown Elemental Aspect Ether");
+		public static const CooldownEclipsingShadow:StatusEffectType    = mkCombat("Cooldown Eclipsing shadow");
 		public static const CooldownFascinate:StatusEffectType          = mkCombat("Cooldown Fascinate");
 		public static const CooldownFreezingBreath:StatusEffectType     = mkCombat("Cooldown Freezing Breath (F)");
 		public static const CooldownFreezingBreathYeti:StatusEffectType = mkCombat("Cooldown Freezing Breath (Y)");
@@ -556,16 +561,16 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const CooldownIllusion:StatusEffectType           = mkCombat("Cooldown Illusion");
 		public static const CooldownInkSpray:StatusEffectType           = mkCombat("Cooldown Ink Spray");
 		public static const CooldownKick:StatusEffectType               = mkCombat("Cooldown Kick");
+		public static const CooldownMilkBlast:StatusEffectType          = mkCombat("Cooldown Milk Blast");
 		public static const CooldownOniRampage:StatusEffectType         = mkCombat("Cooldown Oni Rampage");
 		public static const CooldownPhoenixFireBreath:StatusEffectType  = mkCombat("Cooldown Phoenix Fire Breath");
 		public static const CooldownPunishingKick:StatusEffectType      = mkCombat("Cooldown Punishing Kick");
+		public static const CooldownSonicScream:StatusEffectType        = mkCombat("Cooldown Sonic scream");
 		public static const CooldownStoneClaw:StatusEffectType          = mkCombat("Cooldown Stone Claw");
 		public static const CooldownTailSlam:StatusEffectType           = mkCombat("Cooldown Tail Slam");
 		public static const CooldownTailSmack:StatusEffectType          = mkCombat("Cooldown Tail Smack");
 		public static const CooldownTerror:StatusEffectType             = mkCombat("Cooldown Terror");
 		public static const CooldownWingBuffet:StatusEffectType         = mkCombat("Cooldown Wing Buffet");
-		public static const CumCannonCooldown:StatusEffectType          = mkCombat("Cum Cannon Cooldown");
-		public static const MilkBlastCooldown:StatusEffectType          = mkCombat("Milk Blast Cooldown");
 		
 		public static const RemovedArmor:StatusEffectType          = mkCombat("Removed Armor");
 		public static const JCLustLevel:StatusEffectType           = mkCombat("JC Lust Level");

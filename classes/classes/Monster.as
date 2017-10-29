@@ -1187,7 +1187,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -1242,6 +1242,16 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
+			game.combatRoundOver();
+			return false;
+			}
+			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
+				game.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
+				removeStatusEffect(StatusEffects.EmbraceVampire);
+			}
+			else game.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
+			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
 			game.combatRoundOver();
 			return false;
 			}

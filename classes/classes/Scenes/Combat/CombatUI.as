@@ -64,9 +64,13 @@ public class CombatUI extends BaseCombatContent {
 			btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your "+player.weaponName+".  Damage done is determined by your strength and weapon.");
 			if (!player.isFlying() && monster.isFlying()) {
 				btnMelee.disable("No way you could reach enemy in air with melee attacks.");
-			} else if (player.isFlying()
-					   && player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE) {
-				btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
+			} else if (player.isFlying()) {
+				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE) {
+					btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
+				}
+				else if (player.wingType == WING_TYPE_BAT_ARM) {
+					btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+				}
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
 			}
@@ -74,20 +78,24 @@ public class CombatUI extends BaseCombatContent {
 		// Ranged
 		switch (player.weaponRangePerk) {
 			case "Bow":
-				btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
+				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
 				break;
 			case "Crossbow":
-				btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
+				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
 				break;
 			case "Throwing":
-				btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
-				if ( player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
+				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) {
+					btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
+					if ( player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
+				}
 				break;
 			case "Pistol":
 			case "Rifle":
-				if (player.ammo <= 0)
-					btnRanged.show("Reload", combat.reloadWeapon, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) {
+					if (player.ammo <= 0)
+						btnRanged.show("Reload", combat.reloadWeapon, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
+					else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				}
 				break;
 			default:
 				btnRanged.showDisabled("Shoot");
@@ -97,7 +105,8 @@ public class CombatUI extends BaseCombatContent {
 		// Submenus
 		
 		// Submenu - Physical Specials
-		combat.pspecials.buildMenu(physpButtons);
+		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
+		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
 			btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
@@ -163,6 +172,16 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Tease", combat.GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(4, "Release", combat.GooLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			menu();
+			if (player.faceType == FACE_VAMPIRE) {
+				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		}
 		
 		// Modifications - monster-special actions

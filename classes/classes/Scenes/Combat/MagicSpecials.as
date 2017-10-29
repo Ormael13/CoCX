@@ -35,7 +35,7 @@ public class MagicSpecials extends BaseCombatContent {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
 		}
 		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-			bd = buttons.add("OrgasmicLightningStrike", OrgasmicLightningStrike, "Sorry Liadri not wrote tooltip for this yet.");
+			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 		}
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == AppearanceDefs.TAIL_TYPE_FOX && player.tailCount >= 7) {
 			bd = buttons.add("F.FoxFire", fusedFoxFire, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n");
@@ -136,6 +136,18 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.devilkinScore() >= 10) {
 			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n");
 			bd.requireMana(spellCost(40),true);
+		}
+		if (player.statusEffectv1(StatusEffects.VampireThirst) >= 20) {
+			// Eclipsing shadow
+			bd = buttons.add("Eclipsing shadow", EclipsingShadow, "Plunge the area in complete darkness denying vision to your opponent. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
+				bd.disable("<b>You need more time before you can use Eclipsing shadow again.</b>\n\n");
+			}
+			// Sonic scream
+			bd = buttons.add("Sonic scream", SonicScream, "Draw on your tainted blood power to unleash a powerful sonic shockwave. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
+				bd.disable("<b>You need more time before you can use Sonic scream again.</b>\n\n");
+			}
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
@@ -649,7 +661,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
-			lustDmgF = 6 + rand(3);
+			lustDmgF = 25 + rand(10);
 			if (player.findPerk(PerkLib.SensualLover) >= 0) {
 				lustDmgF += 2;
 			}
@@ -2723,6 +2735,49 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.\n\n");
 		}
 		if(!combatRoundOver()) enemyAI();
+	}
+
+//Eclipsing shadow
+	public function EclipsingShadow():void {
+		clearOutput();
+		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		thirst.modSatiety(-20);
+		player.createStatusEffect(StatusEffects.CooldownEclipsingShadow,20,0,0,0);
+		outputText("You open your wings wide and call upon the power of your tainted blood a pair of black orbs forming at your fingertips. You shatter them on the ground plunging the area in complete darkness and extinguishing all light. While your opponent will be hard pressed to see anything your ability to echolocate allows you to navigate with perfect clarity.");
+		monster.createStatusEffect(StatusEffects.Blind, 10, 0, 0, 0);
+		enemyAI();
+	}
+
+//Sonic scream
+	public function SonicScream():void {
+		clearOutput();
+		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		thirst.modSatiety(-20);
+		player.createStatusEffect(StatusEffects.CooldownSonicScream, 15, 0, 0, 0);
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		var damage:Number = 0;
+		damage += toughnessscalingbonus();
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
+		damage = Math.round(damage);
+		monster.HP -= damage;
+		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending " + monster.a + monster.short + " flying. " + monster.Pronoun1 + " will be shaken from the glass shattering blast for a moment " + damage + " damage.");
+		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
+			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
+		doNext(playerMenu);
+		if (monster.HP <= 0) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function ElementalAspectAir():void {

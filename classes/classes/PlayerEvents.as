@@ -1,12 +1,12 @@
 package classes {
-
-import classes.GlobalFlags.*;
-import classes.Items.*;
-import classes.Scenes.Dreams;
-import classes.Scenes.Holidays;
-import classes.Scenes.SceneLib;
-
-public class PlayerEvents extends BaseContent implements TimeAwareInterface {
+	
+	import classes.GlobalFlags.*;
+	import classes.Items.*;
+	import classes.Scenes.Dreams;
+	import classes.Scenes.Holidays;
+	import classes.Scenes.SceneLib;
+	import classes.StatusEffects.VampireThirstEffect;
+	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
 		public function PlayerEvents():void {
@@ -17,7 +17,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
 		private var dreams:Dreams = new Dreams();
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
@@ -522,6 +522,12 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
+			if (kGAMECLASS.model.time.hours == 6) {
+				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+				if (vthirst != null) {
+					vthirst.modSatiety(-1);
+				}
+			}
 			return needNext;
 		}
 
@@ -800,6 +806,17 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 			if (player.tailType != AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
+				needNext = true;
+			}
+			//Vampire Thirst
+			if (player.faceType == AppearanceDefs.FACE_VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
+				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood… how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
+				player.createStatusEffect(StatusEffects.VampireThirst, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.faceType != AppearanceDefs.FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
+				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
+				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}
 			//Reset bad end warning

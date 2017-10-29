@@ -7,6 +7,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
+import classes.Scenes.NPCs.XXCNPC;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
@@ -56,6 +57,7 @@ import coc.view.MainView;
 		}
 		
 		public function newGameGo():void {
+			XXCNPC.unloadSavedNPCs();
 			funcs = [];
 			args = [];
 			mainView.eventTestInput.x = -10207.5;

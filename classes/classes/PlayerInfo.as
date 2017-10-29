@@ -1,5 +1,6 @@
 package classes {
 
+import classes.StatusEffects.VampireThirstEffect;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.SceneLib;
@@ -625,6 +626,12 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
 			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			statEffects += "Vampire Thirst: " + vthirst.value1 + " ";
+			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
+			statEffects += "\n";
+		}
 
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";

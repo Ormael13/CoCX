@@ -21,6 +21,7 @@ import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -5472,6 +5473,13 @@ use namespace kGAMECLASS;
 			}
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
 				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			}
+			var vthirst:VampireThirstEffect = statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			if (vthirst != null) {
+				maxStr += vthirst.currentBoost;
+				maxSpe += vthirst.currentBoost;
+				maxInt += vthirst.currentBoost;
+				maxLib += vthirst.currentBoost;
 			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);

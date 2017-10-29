@@ -18,7 +18,7 @@ public class StoryContext extends ExecContext{
 			game,
 			CoC,
 			{
-				Appeearance:Appearance,
+				Appearance:Appearance,
 				CockTypesEnum:CockTypesEnum,
 				kFLAGS:kFLAGS,
 				kGAMECLASS:kGAMECLASS,
