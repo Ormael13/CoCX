@@ -1380,7 +1380,7 @@ public function fireBow():void {
 		return;
 	}
 	//[Bow Response]
-	if (monster.short == "Isabella") {
+	if (monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 		if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 			outputText("Isabella hears the shot");
 			if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");

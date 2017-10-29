@@ -78,8 +78,8 @@ package classes.Scenes
 			outputText("-One of the enemies in new dungeon will give PC Key Item called Black Soul Gem. It's needed item to make and then 'bring back to life' second gargoye in Temple of Divine calling itself either Krystal (female/herm version) or Onyx (male version). It have only sex secene eithr with PC alone or in treesome with Sapphire and PC.\n");
 			outputText("-Aside Krystal/Onyx Sapphire herself also gained few new sex scenes and talk scene that allow to unlock options to slowly rebuild/restore Temple back to it old glory.\n");
 			outputText("-New melee weapon (by Liadri): Master Gloves - obtainable for beating Chi Chi in first match against her or after making her PC waifu (3600 gems, Large type, 0 base atk). It boost by 40% physical soulskills power.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//opisać opcje odbudowy w Temple i efekty buffów z Altars
+			outputText("-\n");//opisać możliwość zrekrutowania Divy
 			outputText("-\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");

@@ -5473,10 +5473,10 @@ use namespace kGAMECLASS;
 			}
 			var vthirst:VampireThirstEffect = statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 			if (vthirst != null) {
-				maxStr += vthirst.value2;
-				maxSpe += vthirst.value2;
-				maxInt += vthirst.value2;
-				maxLib += vthirst.value2;
+				maxStr += vthirst.currentBoost;
+				maxSpe += vthirst.currentBoost;
+				maxInt += vthirst.currentBoost;
+				maxLib += vthirst.currentBoost;
 			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);

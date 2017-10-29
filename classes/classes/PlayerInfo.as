@@ -644,7 +644,7 @@ public class PlayerInfo extends BaseContent {
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + " ";
-			if (vthirst.value2 > 0) statEffects += "(+" + vthirst.value2 + " to str / spe / int / lib)";
+			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
 		}
 
