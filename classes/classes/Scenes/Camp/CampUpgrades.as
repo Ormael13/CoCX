@@ -1098,13 +1098,25 @@ public function arcaneCircle():void {
 			buildFirstArcaneCircle() 
 			return; 
 		}
-		if (player.findPerk(PerkLib.ElementalContractRank4) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
-			buildSecondArcaneCircle() 
-			return; 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
+			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) {
+				buildSecondArcaneCircle() 
+				return; 
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			}
 		}
-		if (player.findPerk(PerkLib.ElementalContractRank8) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
-			buildThirdArcaneCircle() 
-			return; 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
+			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) {
+				buildThirdArcaneCircle() 
+				return; 
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			}
 		}/*
 		if (flags[kFLAGS.] == 3) { 
 			addAWoodenWalls() 
@@ -1113,7 +1125,7 @@ public function arcaneCircle():void {
 	}
 	else
 	{	
-		outputText("You are too exhausted or you lack the proper knowledge and skill to work on this new ritual circle yet!");
+		outputText("You are too exhausted to work on this new ritual circle yet!");
 		doNext(playerMenu);
 	}
 }
