@@ -1247,10 +1247,10 @@ import flash.utils.getQualifiedClassName;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
-				game.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
+				EngineCore.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
 				removeStatusEffect(StatusEffects.EmbraceVampire);
 			}
-			else game.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
+			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
 			game.combatRoundOver();
 			return false;

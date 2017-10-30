@@ -69,7 +69,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Embrace
-		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+		if ((player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM || player.wingType == AppearanceDefs.WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
 		//Kick attackuuuu
@@ -252,7 +252,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var bd:ButtonData;
 		buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
 		//Embrace
-		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+		if ((player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM || player.wingType == AppearanceDefs.WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
 	}
