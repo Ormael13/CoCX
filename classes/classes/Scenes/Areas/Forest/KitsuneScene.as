@@ -10,7 +10,9 @@ package classes.Scenes.Areas.Forest
 	import classes.Items.Useable;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.NPCs.AyaneFollower;
-	public class KitsuneScene extends BaseContent
+import classes.display.SpriteDb;
+
+public class KitsuneScene extends BaseContent
 	{
 		public function KitsuneScene()
 		{
@@ -2265,6 +2267,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
 				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailCount >= 2) {
+					spriteSelect(SpriteDb.s_ayane);
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
 					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");

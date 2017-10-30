@@ -201,7 +201,7 @@ import coc.xxc.StoryContext;
 			player.clearStatuses(visibility);
 		}
 
-		protected function spriteSelect(choice:Number = 0):void
+		protected function spriteSelect(choice:Object = 0):void
 		{
 			kGAMECLASS.spriteSelect(choice);
 		}

@@ -6,14 +6,16 @@ package classes.Scenes.Areas.Beach
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	
-	public class PinchousWaterwearAndTools extends BaseContent
+import classes.display.SpriteDb;
+
+public class PinchousWaterwearAndTools extends BaseContent
 	{
 		public function PinchousWaterwearAndTools() 
 		{
 		}
 		
 		public function encounteringPinchouFirst():void {
+			spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
 			outputText("As you wander the beach you come upon a weird stall with clothes on it. As you touch the items ,out of curiosity, a small voice grabs your attention.\n\n");
 			outputText("\"<i>Hey! No taking things from the shop without paying! Stealing is bad, " + player.mf("mister", "miss") + ".</i>\"\n\n");
@@ -25,6 +27,7 @@ package classes.Scenes.Areas.Beach
 			PinchousWaterwearAndToolsShopMenu();
 		}
 		public function encounteringPinchouRepeat():void {
+			spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
 			outputText("You spot the Cancer lazily sleeping at her stall. She wakes up just in time to give you her usual greeting, somewhat void of emotions as always.\n\n");
 			outputText("\"<i>This is my shop: ‘Pinchou’s waterwear and tools’, my name is... oh it’s you again... well? Stop gawking, are you here to buy something or not?</i>\"\n\n");

@@ -7,8 +7,9 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Useable;
-	
-	public class AyaneFollower extends NPCAwareContent
+import classes.display.SpriteDb;
+
+public class AyaneFollower extends NPCAwareContent
 	{
 		
 		public function AyaneFollower() 
@@ -16,6 +17,7 @@ package classes.Scenes.NPCs
 
 public function ayaneCampMenu():void
 {
+	spriteSelect(SpriteDb.s_ayane);
 	clearOutput();
 	outputText("\"<i>Anything I can do for you " + player.mf("lord", "lady") + " [name]?</i>\"");
 	menu();
@@ -184,6 +186,7 @@ public function ayaneSexMenu():void
 
 public function ayaneWorship():void
 {
+	spriteSelect(SpriteDb.s_ayane_nude);
 	clearOutput();
 	outputText("You tell Ayane you could use some relief. She quickly takes the hint, helping you to remove any clothes you might be wearing and kneeling down, her face level with your hips as she whispers holy prayers.\n\n");
 	if (player.hasCock()) {
@@ -205,6 +208,7 @@ public function ayaneWorship():void
 
 public function ayaneAnal():void
 {
+	spriteSelect(SpriteDb.s_ayane_nude);
 	clearOutput();
 	outputText("Ayane's well shaped ass draws your attention today; the way she swings her tails around it is such a tease. You resolve to teach her what happens when one flaunts such a sweet backside around, telling the foxy girl to bend over and give you a good look at her backside. Ayane smiles, undresses, and bends over, giving you a full display before obscuring it again with a tail. You yank the thing away and align yourself as you proceed to insert your [cock] through her inviting pucker.\n\n");
 	outputText("Ayane moans as you proceed to explore the depths of her ass, her tails moving wildly behind her as you pump in and out of the lusty shrine priestess.\n\n");
