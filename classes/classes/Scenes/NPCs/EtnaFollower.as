@@ -6,8 +6,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	
-	public class EtnaFollower extends NPCAwareContent
+import classes.display.SpriteDb;
+
+public class EtnaFollower extends NPCAwareContent
 	{
 		
 		public function EtnaFollower() 
@@ -24,6 +25,7 @@ public function etnaAffection(changes:Number = 0):Number
 
 public function firstEnc():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("You casually take a stroll in the mountains, passing through a tunnel. Weirdly, in the middle of the tunnel you find several unconscious minotaurs. You examine them and discover they all fainted from...sexual exhaustion? Out of nowhere, something scrapes your skin, missing you by a mere inch. You look down to see what looks like a bony spike burrowed in the ground a few feet ahead of you. A menacing growl echoes in the tunnel as another spike flies right by you, barely missing your arm this time. Figuring you've been ambushed, you run to the other end to confront your invisible assailant in broad daylight. ");
 	outputText("As soon as you're out, your opponent surges after you. At first glance it looks like a catgirl, however, the shape of her paws and ears hint at being more like a lion’s, especially with the large mane around her neck. She could pass for having a human face if not for her malicious red, cat-like eyes and sharp canines. The comparison to a cat ends there, due to the pair of large leathery wings that rest on her back.  Where you would have expected a cat tail, a scorpion-like chitin covered tail grows. It ends in a bulbous tip crowned with sharp bony spikes, akin to those that nearly hit you earlier. She smirks sadistically, dropping down on all fours to point her tail at you.");
@@ -38,6 +40,7 @@ public function firstEnc():void
 
 public function repeatEnc():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
@@ -54,6 +57,7 @@ public function repeatEnc():void
 
 public function repeatYandereEnc():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("You take a stroll in the area when a spike passes a few inches away from your side.\n\n");
 	outputText("Etna surge out of nowhere, adopting a predatory stance. \"<i>Why won't you just stay still and get shot like everyone else? Well whatever! I’m gonna make you mine whether you like it or not! You can’t run away from love forever [name]!</i>\"\n\n");
@@ -64,6 +68,7 @@ public function repeatYandereEnc():void
 
 public function etnaRapesPlayer():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	etnaRapesPlayer2();
 }
@@ -229,6 +234,7 @@ public function etnaRapeNo():void
 
 public function etnaRape3rdWin():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("She falls on the ground, eyeing you with surprise and incredulity.\n\n\"<i>Whoa, you're a tough one, aren’t you? Each time I try and get you on my dinner plate, you appear on top instead of on the bottom.</i>\"\n\nShe dusts herself off a little, somewhat amused yet it’s obvious her pride took a hit.\n\n\"<i>My name is Etna. I think you ought to know it now since you've defeated me a few times. I must admit that I’m somewhat interested in you now. Anyway you have won yet again and therefore you get to do whatever you want with me. So... what will it be?</i>\"\n\n");
 	outputText("Do you rape her?");
@@ -241,6 +247,7 @@ public function etnaRape3rdWin():void
 
 public function etnaReady2Come2Camp():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("Etna falls to the ground defeated yet again her expression of desire and admiration obvious. This time however she swoons on you making her intentions clear.\n\n");
 	outputText("\"<i>You're stronger than I am in so many ways, that I can barely hold in my desire... Would you please accept me as your lover? I could join your pride, if you would please allow me to.</i>\"\n\n");
@@ -253,6 +260,7 @@ public function etnaReady2Come2Camp():void
 
 private function etnaRapesYesCome2Camp():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	flags[kFLAGS.ETNA_FOLLOWER] = 1;
 	if (player.hasCock()) {
@@ -310,6 +318,7 @@ public function etnaRapeNoCamp():void
 
 public function etnaRapeYandere():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("Defeated, you barely register as Etna joyfully takes a nearby rock and knocks it against your head making you lose consciousness.\n\n");
 	outputText("You wake up in what looks like a dark room underground. The only source of light is a candle on a table in the corner. To your surprise it's filled with various sex toys and the cave like walls are covered drawings and paintings depicting you. This is getting creepier by the second. A voice you know all too well start speaking to you at first in hushed tone then hysterical notes.\n\n");
@@ -352,6 +361,7 @@ public function etnaRapeYandereBadEnd():void
 
 public function etnaRapeIntro2():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("Etna is laying on the ground ");
 	if (monster.HP < 1)outputText("defeated");
@@ -368,6 +378,7 @@ public function etnaRapeIntro2():void
 
 public function etnaCampMenu():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her.\n\n\"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk with me? I must admit, my tail is itching, you already know how hungry I am.</i>\"\n\nShe gives you a naughty expression that tells everything. Obviously a manticore is always ready.");
 	menu();

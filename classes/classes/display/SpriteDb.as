@@ -20,6 +20,8 @@ public class SpriteDb {
 	public static function get s_akbal(): Class {
 		return is8bit ? s_akbal_8bit : s_akbal_16bit;
 	}
+	[Embed(source="../../../res/sprites/alraune.png")]
+	public static var s_alraune:Class;
 	[Embed(source="../../../res/sprites/amily.png")]
 	public static var s_amily_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/amily-old.png")]
@@ -46,6 +48,10 @@ public class SpriteDb {
 	public static function get s_assmole(): Class {
 		return s_assmole_8bit;
 	}
+	[Embed(source="../../../res/sprites/ayane.png")]
+	public static var s_ayane:Class;
+	[Embed(source="../../../res/sprites/ayane_nude.png")]
+	public static var s_ayane_nude:Class;
 	[Embed(source="../../../res/sprites/basilisk.png")]
 	public static var s_basilisk_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/basilisk-old.png")]
@@ -60,6 +66,8 @@ public class SpriteDb {
 	public static function get s_bee_girl(): Class {
 		return is8bit ? s_bee_girl_8bit : s_bee_girl_16bit;
 	}
+	[Embed(source="../../../res/sprites/ceani.png")]
+	public static var s_ceani:Class;
 	[Embed(source="../../../res/sprites/ceraph.png")]
 	public static var s_ceraph_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/ceraph-old.png")]
@@ -132,6 +140,8 @@ public class SpriteDb {
 	public static function get s_cotton(): Class {
 		return is8bit ? s_cotton_8bit : s_cotton_16bit;
 	}
+	[Embed(source="../../../res/sprites/crabgirl.png")]
+	public static var s_crabgirl:Class;
 	[Embed(source="../../../res/sprites/dickworms.png")]
 	public static var s_dickworms_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/worms-old.png")]
@@ -160,6 +170,8 @@ public class SpriteDb {
 	public static function get s_edryn(): Class {
 		return is8bit ? s_edryn_8bit : s_edryn_16bit;
 	}
+	[Embed(source="../../../res/sprites/etna.png")]
+	public static var s_etna:Class;
 	[Embed(source="../../../res/sprites/exgartuan.png")]
 	public static var s_exgartuan_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/exgartuan-old.png")]

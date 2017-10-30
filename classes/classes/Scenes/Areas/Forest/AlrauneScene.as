@@ -9,8 +9,9 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.GlacialRift.SnowLily;
 	import classes.Scenes.Areas.VolcanicCrag.Cinderbloom;
+import classes.display.SpriteDb;
 
-	public class AlrauneScene extends BaseContent
+public class AlrauneScene extends BaseContent
 	{
 		
 		public function AlrauneScene() 
@@ -19,6 +20,7 @@ package classes.Scenes.Areas.Forest
 		}
 		
 	public function alrauneDeepwoods():void {
+		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
 		if (isHalloween()) {
 			outputText("As you wander the area you come across a rather large pumpkin growing in the forest. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
@@ -34,6 +36,7 @@ package classes.Scenes.Areas.Forest
 	}
 	
 	public function alrauneVolcanicCrag():void {
+		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
 		if (isHalloween()) {
 			outputText("As you wander the area you come across a rather large pumpkin growing in the crag. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
@@ -49,6 +52,7 @@ package classes.Scenes.Areas.Forest
 	}
 	
 	public function alrauneGlacialRift():void {
+		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
 		if (isHalloween()) {
 			outputText("As you wander the area you come across a rather large pumpkin growing in the rift. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
@@ -64,6 +68,7 @@ package classes.Scenes.Areas.Forest
 	}
 	
 	public function alrauneDeepwoodsWon():void {
+		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
 		if (isHalloween()) outputText("The Jack-O-Raune, unable to fight any longer, retreat in her pumpkin in self defence, her vines unwrapping from you. Well, you are free, but the god damn plant woman left you horny and frustrated, what a tease! Guess it's time to head back to camp.\n\n");
 		else outputText("The alraune, unable to fight any longer, closes her petals in self defence, her vines unwrapping from you. Well, you are free, but the god damn plant woman left you horny and frustrated, what a tease! Guess it's time to head back to camp.\n\n");
@@ -71,6 +76,7 @@ package classes.Scenes.Areas.Forest
 	}
 	
 	public function alrauneDeepwoodsLost():void {
+		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
 		if (player.gender == 1) {
 			if (monster.statusEffectv1(StatusEffects.Level) > 2) outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
