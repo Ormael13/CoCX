@@ -368,8 +368,8 @@ public function etnaRapeIntro2():void
 	else outputText("too horny to fight back");
 	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand. \"<i>So strong... so powerful! If you would only let me taste you I promise I will make it feel sooooo good.</i>\"\n\n");
 	outputText("Do you grant her request?");
-	if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ETNA_DEFEATS_COUNTER]++;
-	else flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 1;
+	//if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ETNA_DEFEATS_COUNTER]++;
+	//else flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 1;
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);

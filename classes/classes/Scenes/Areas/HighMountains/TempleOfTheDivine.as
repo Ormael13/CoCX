@@ -72,10 +72,12 @@ package classes.Scenes.Areas.HighMountains
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");
 				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
 			}
-			if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
-			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takingExcaliburFromAltair);
-			if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
-			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
+				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
+				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takingExcaliburFromAltair);
+				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
+				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
+			}
 			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
 			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "" + flags[kFLAGS.ONYX_NAME] + "", krystalonyxmenu).hint("Have a sex with " + flags[kFLAGS.ONYX_NAME] + ".");
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
@@ -85,7 +87,6 @@ package classes.Scenes.Areas.HighMountains
 		public function PlayerPrayAtTemple():void {
 			clearOutput();
 			if (anyOfAltairsRepaired()) {
-				outputText("I think Lia would write here nice text to let pick which Altar to use for prayer.");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");

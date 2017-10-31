@@ -1153,8 +1153,8 @@ private function doBuildFirstArcaneCircle():void {
 	var fatigueAmount:int = 50;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigue(fatigueAmount);
-	player.HP -= 75;
-	player.mana -= 100;
+	HPChange(-75, true);
+	useMana(100);
 	doNext(camp.returnToCampUseEightHours);
 }
 
@@ -1182,8 +1182,8 @@ private function doBuildSecondArcaneCircle():void {
 	var fatigueAmount:int = 50;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigue(fatigueAmount);
-	player.HP -= 150;
-	player.mana -= 200;
+	HPChange(-150, true);
+	useMana(200);
 	doNext(camp.returnToCampUseEightHours);
 }
 
@@ -1211,8 +1211,8 @@ private function doBuildThirdArcaneCircle():void {
 	var fatigueAmount:int = 50;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigue(fatigueAmount);
-	player.HP -= 225;
-	player.mana -= 300;
+	HPChange(-225, true);
+	useMana(300);
 	doNext(camp.returnToCampUseEightHours);
 }
 

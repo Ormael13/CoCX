@@ -68,32 +68,36 @@ package classes.Scenes
 			outputText("-New build option: Sparring Ring. It cost 50 wood, 50 fatigue and 1 hour to construct. Req. 2+ sparrable npc's and before it's not build will lock out spar options. Completing it will add also 2 ascension points.\n");
 			outputText("-New build option: Arcane Circle. It cost 4 stones, 50 fatigue, 75 HP, 100 mana and 8 hour to construct. Then PC can summon elementals and rank up them to rank 3. After getting Elemental Contract (Rank 4) / Elemental Contract (Rank 8) can add another circle to it (each have cost increased by 100% of base cost) and it allow to rank up elementals from rank 3 to 7 / 7 to elder. Due to adding ");
 			outputText("Arcane Circle summoning even rank 0 elemental requite it to been summoned. Also any elemental rank up can now ends up in failure causing PC not only loose spent mana and fatigue but also some HP due to forcibly bringing elemental back under control. Elementals base attacks and mana sustain costs during combat was also slight adjusted to make them more atractive to simple melee attacks.\n");
+			outputText("-New item (by Zavos): Warding Tome - can be found in one of factory rooms by intelligent enough PC. Reading it can teach PC how to make magic wards and Charge Armor spell if it still not learned. It would open option to build such ward in camp. It function like any camp guarding npc.\n");
 			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Sense Wrath. Req. 25+ sens. Effect: Show in combat enemy current wrath\n");
 			outputText("-New event perk: Mighty Fist. Gained form finshing second part of training sessions with Chi Chi. Increase fists and gaunlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
-			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished.\n");
+			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished. Description of finished statue can be a little...off in some areas but all choices will be properly carried over to new PC body at time last step in quest would be added (it 'may be' in 0.8h if all went good).\n");
 			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
 			outputText("-New Dungeon added called Den of Desire located in Blihht Ridge with two enemies and achievment for completing it (also reward in Questlog like for any of other 6 dungeons). It's location on diffulty similar to Phoenix Tower for PC at lvl 25 or higher to proceed smooth.\n");
 			outputText("-One of the enemies in new dungeon will give PC Key Item called Black Soul Gem. It's needed item to make and then 'bring back to life' second gargoye in Temple of Divine calling itself either Krystal (female/herm version) or Onyx (male version). It have only sex secene eithr with PC alone or in treesome with Sapphire and PC.\n");
 			outputText("-Aside Krystal/Onyx Sapphire herself also gained few new sex scenes and talk scene that allow to unlock options to slowly rebuild/restore Temple back to it old glory.\n");
+			outputText("-Temple of the Divine can be partialy restored to previous state. After using Sapphire talk option 'This place' new option named...Reapir will show in main Temple menu. Using wood, stones, nails PC will be able to rebuild some of ruined Altars for various gods to unlock option to pray to them.\n");
+			outputText("-Currently PC can rebuild Marae, Taoth, Fenrir and Fera altars. For each or god/ess must be alive not demoninzed (Marae), finished some quest (Taoth and Urta Quest), or set free god (wearing Fenrir collar or setting free Fera). Also Beautiful sword and Pure Pearl can be put on altar for Marae or taken back if PC wish for it. But taking back B. Sword... will actualy return it upgrded version.\n");
+			outputText("-New melee weapon (by Liadri): Excalibur - obtainable by putting Beautiful Sword on restored Marae Altar and then taking it back. It's pure counterpart of Scarred Blade.\n");
 			outputText("-New melee weapon (by Liadri): Master Gloves - obtainable for beating Chi Chi in first match against her or after making her PC waifu (3600 gems, Large type, 0 base atk). It boost by 40% physical soulskills power.\n");
-			outputText("-\n");//opisać opcje odbudowy w Temple i efekty buffów z Altars
-			outputText("-\n");//opisać możliwość zrekrutowania Divy
-			outputText("-\n");
+			outputText("-Praying to gods will give 1 week long buff that can only be overwritten by diffrent one. So if PC have Marae buff either PC need to wait till it expire to get the same buff once again for week or can pick to pray to diff god to get different one buff.\n");
+			outputText("-Buffs are as follow: Fenrir (strength and toughness is empowered by ~10%), Fera (lust resistance and corruption gains are empowered by 15% and 100%), Marae (white magic is empowered by 10-40%), Taoth(speed is empowered by ~10%)\n");
+			outputText("-Marae buff power base is 10% but with leaving B.Sword/Excalibur and Pure Pearl on Altar can be rised by 5% for each. Rebuilding Statur will increase it by an0other 10%. Rebuilding Gdecorative gargoyles or making all benches will add 5% for each of those task completed.\n");
+			outputText("-Aimozg worked many days on... new combat menu layout. Some muscle memory would be changed but that for good as it would be easier to handle any future new combat options.\n");
+			outputText("-New npc that can be recruited to camp: Diva. All her content coded entirely by Oxdeception. Diva is... vampire... well sort of, whcih can be meet in Mountains after PC deal with Factory. PC need to let her keep winning till 3rd and final fight when PC would need to get serious and beat her to cme back to camp with new bloodsucke...waifu. She's source of bat tf item aside Mog Hen shop.\n");
+			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finaly showing up.");
+			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -133,6 +137,15 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

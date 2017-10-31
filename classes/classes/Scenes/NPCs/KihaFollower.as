@@ -413,10 +413,10 @@ internal function winSparWithKiha():void {
 		outputText("[pg]\"<i>W-what are you doing!?</i>\"  she starts, pushing away.  \"<i>You - you dumbass!</i>\"  Face as red as her scales, she storms off to the other side of camp.");
 		outputText("[pg]You sigh and head back towards your stuff.");
 		kihaAffection(20);
-		if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+		/*if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
 			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
 			else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
-		}
+		}*/
 	}
 	cleanupAfterCombat();
 }
@@ -1853,10 +1853,10 @@ internal function pcLosesDomFight():void {
 //[PC wins the fight]
 internal function pcWinsDomFight():void {
 	clearOutput();
-	if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+	/*if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
 		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
-	}
+	}*/
 	outputText(images.showImage("kiha-dom-win"));
 	spriteSelect(72);
 	var x:Number = player.cockThatFits(67);

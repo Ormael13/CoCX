@@ -994,10 +994,10 @@ public function isabellaDefeats():void {
 //[VICTORY!]
 public function defeatIsabella():void {
 	clearOutput();
-	if(flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
+	/*if(flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ISABELLA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
-	}
+	}*/
 	if(monster.statusEffectv1(StatusEffects.Sparring) == 2) {
 		outputText("You give the ");
 		if(monster.HP < 1) outputText("damage-dazed");

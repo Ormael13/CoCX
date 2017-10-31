@@ -598,10 +598,10 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) > 0)
-			statEffects += "Blessing of Divine Agency - Fenrir: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) + " hours remaining (Your strength and Toughness is empowered by ~10% under the guidance of Fenrir)\n";
+			statEffects += "Blessing of Divine Agency - Fenrir: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) + " hours remaining (Your strength and toughness is empowered by ~10% under the guidance of Fenrir)\n";
 
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) > 0)
-			statEffects += "Blessing of Divine Agency - Fera: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFera) + " hours remaining (Your lust resistance and corruption gain is empowered by 15% and 100% under the guidance of Fera)\n";
+			statEffects += "Blessing of Divine Agency - Fera: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFera) + " hours remaining (Your lust resistance and corruption gains are empowered by 15% and 100% under the guidance of Fera)\n";
 
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) > 0)
 			statEffects += "Blessing of Divine Agency - Marae: " + player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) + " hours remaining (Your white magic is empowered by " + player.statusEffectv2(StatusEffects.BlessingOfDivineMarae) + "% under the guidance of Marae)\n";
