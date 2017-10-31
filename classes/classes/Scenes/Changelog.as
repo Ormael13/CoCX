@@ -97,11 +97,11 @@ package classes.Scenes
 			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n");
 			outputText("<b>Version 0.8g2:</b>\n\n");
+			outputText("-Diva similary to Etna would be giving PC once per day a vial of red liquid (bat TF).\n");
+			outputText("-Using Vampiric Bite on Construct type or Plant type enemies will cause it to fail, ends Embrace and allow enemy to slight damage PC.\n");
 			outputText("-Fixed bugs: Unable to use range weapons without flying, Satyr scene parser bug\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -510,7 +510,6 @@ public function Tier5():void {
 	addButton(1, "DryTent", DryTent).hint("Buy a shriveled tentacle.");
 	addButton(2, "EctoPls", Ectopls).hint("Buy a bottle of ectoplasm.");
 	addButton(3, "TrapOil", TrapOil).hint("Buy a vial of trap oil.");
-	addButton(4, "RedLiquid", VialOfRedLiquid).hint("Buy a vial of ominous red liquid.");
 	addButton(14, "Back", mogahenmerchant);
 	statScreenRefresh();
 }
@@ -1397,26 +1396,6 @@ public function buyTrapOil():void {
 		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
 		player.gems -= 18;
 		inventory.takeItem(consumables.TRAPOIL, mogahenmerchant);
-		statScreenRefresh();
-	}
-}
-
-public function VialOfRedLiquid():void {
-	clearOutput();
-	outputText("While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace bat in you.  Interested?  It is merely <b>45 gems</b></i>.\"");
-	doYesNo(buyVialOfRedLiquid, mogahenmerchant);
-}
-
-public function buyVialOfRedLiquid():void {
-	if (player.gems < 45) {
-		clearOutput();
-		outputText("\n\nMoga shakes his head, indicating you need " + String(45 - player.gems) + " more gems to purchase this item.");
-		doNext(mogahenmerchant);
-	}
-	else {
-		outputText("\n\nAfter you give Hen gems he hand over to you purchased transformative item. ");
-		player.gems -= 45;
-		inventory.takeItem(consumables.REDVIAL, mogahenmerchant);
 		statScreenRefresh();
 	}
 }
