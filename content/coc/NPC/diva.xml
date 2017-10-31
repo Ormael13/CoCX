@@ -554,7 +554,7 @@
                 <if test="player.batScore() gt 6 or player.vampireScore() gt 6">
 				She blush with embarrassment and reply <i>“Thy know thou could've just asked to drink straight from the tap I wouldn’t had minded. Perhaps another time.”</i>
 				<else>
-				<i>“I wouldn’t mind pc name but be warned that it is highly infectious.”</i>
+				<i>“I wouldn’t mind [name] but be warned that it is highly infectious.”</i>
 				</else>
 				</if>
 

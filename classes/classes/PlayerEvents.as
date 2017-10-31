@@ -5,6 +5,7 @@ package classes {
 	import classes.Items.*;
 	import classes.Scenes.Camp;
 	import classes.Scenes.Camp.HclassHeavenTribulation;
+import classes.Scenes.NPCs.DivaScene;
 import classes.StatusEffects.VampireThirstEffect;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
@@ -513,7 +514,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Diva Red Vial daiy limit
-				if (flags[kFLAGS.DIVA_DAILY_RED_VIAL] > 0) flags[kFLAGS.DIVA_DAILY_RED_VIAL] = 0;
+				DivaScene.getInstance().tookVialToday = false;
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;

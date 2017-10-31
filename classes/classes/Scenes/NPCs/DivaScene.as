@@ -1,7 +1,6 @@
 package classes.Scenes.NPCs {
 import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
-import classes.GlobalFlags.kFLAGS;
 
 import coc.view.ButtonDataList;
 
@@ -12,6 +11,7 @@ public class DivaScene extends XXCNPC{
 
     public var status:int;
     private var firstLoss:Boolean=true;
+    public var tookVialToday:Boolean=false; // true if took her vial today
     private var timesReduced:int = 0;
     private var _talkMenu:ButtonDataList = new ButtonDataList();
     private var _sexMenu:ButtonDataList = new ButtonDataList();
@@ -44,6 +44,7 @@ public class DivaScene extends XXCNPC{
             myClass:getQualifiedClassName(this),
             status:status,
             firstLoss:firstLoss,
+            tookVialToday:tookVialToday,
             timesReduced:timesReduced,
             bloodUsed:VampireBlood.first
         }
@@ -56,6 +57,7 @@ public class DivaScene extends XXCNPC{
             status = loadfrom.diva.status;
             firstLoss = loadfrom.diva.firstLoss;
             timesReduced = loadfrom.diva.timesReduced;
+            tookVialToday = loadfrom.diva.tookVialToday;
             VampireBlood.first = loadfrom.diva.bloodUsed;
         }
     }
@@ -112,14 +114,14 @@ public class DivaScene extends XXCNPC{
             _talkMenu.add("Vampirism",vampirism);
             _talkMenu.add("Sunlight",sunlight);
             _talkMenu.add("Her",her);
-            _talkMenu.add("Vial",vialofliquid).disableIf(flags[kFLAGS.DIVA_DAILY_RED_VIAL] == 1,"You asked for blood already, wait for tomorrow.");
+            _talkMenu.add("Vial",vialofliquid).disableIf(tookVialToday,"You asked for blood already, wait for tomorrow.");
 
             function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
             function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
             function her():void{scene("camp/talkMenu/her",talkMenu);}
             function vialofliquid():void {
 				scene("camp/talkMenu/vialofliquid");
-				if (flags[kFLAGS.DIVA_DAILY_RED_VIAL] != 1) flags[kFLAGS.DIVA_DAILY_RED_VIAL] = 1;
+				tookVialToday = true;
 				inventory.takeItem(consumables.REDVIAL, talkMenu);
 			}
         }
