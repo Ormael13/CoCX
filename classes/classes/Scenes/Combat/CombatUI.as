@@ -82,28 +82,25 @@ public class CombatUI extends BaseCombatContent {
 		// Ranged
 		switch (player.weaponRangePerk) {
 			case "Bow":
-				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
+				btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
 				break;
 			case "Crossbow":
-				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
+				btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
 				break;
 			case "Throwing":
-				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) {
-					btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
-					if ( player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
-				}
+                btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
+                if ( player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
 				break;
 			case "Pistol":
 			case "Rifle":
-				if (player.isFlying() && player.wingType != WING_TYPE_BAT_ARM) {
-					if (player.ammo <= 0)
-						btnRanged.show("Reload", combat.reloadWeapon, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-					else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
-				}
+                if (player.ammo <= 0)
+                    btnRanged.show("Reload", combat.reloadWeapon, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
+                else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
 				break;
 			default:
 				btnRanged.showDisabled("Shoot");
 		}
+		if(player.isFlying() && player.wingType == WING_TYPE_BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus
