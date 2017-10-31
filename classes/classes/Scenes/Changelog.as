@@ -20,13 +20,19 @@ package classes.Scenes
 			Changelog17();
 		}
 		
+		private function Changelog18():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog17);
+			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+		}
 		private function Changelog17():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8g:</b>\n\n");
+			outputText("<b>Version 0.8g (Den of Desire dungeon, SimCamp (part 3), new npc's: Electra, Krystal/Onyx; pre-follower Chi Chi, new camp lover Diva; new physical soulskills, new TF's: Raiju, Bat, Vampire):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
-			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");// or new enemy to fight at Soul Arena. If PC will not force her into suicide she can teach PC few soulskills
+			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");
 			outputText("-After 10 fights on Soul Arena next time PC enter Arena will be facing Chi Chi. She's near impossible to beat enemy. If somehow PC win she will be killed closing any potential future content for her leaving behind her gloves. If PC loose she will then be accesable form main He'Xin'Dao menu allowing to undergone training sessions or selling five newly added soulskills.\n");
 			outputText("-Training with Chi Chi will teach after meeting req. (similar like with Kindra after reaching specific milestones) new soulskill Overlimit and then perk Mighty Fists.\n");
 			outputText("-Overlimit is constant sustain soulskill (Like Violent Pupil Transformation). Activating it will make PC lust resistance rise by 10%, increase physical attacks / physical specials / physical soulskills dmg 2x and draining HP at rate of 10% max HP per turn.\n");
@@ -89,7 +95,9 @@ package classes.Scenes
 			outputText("-New npc that can be recruited to camp: Diva. All her content coded entirely by Oxdeception. Diva is... vampire... well sort of, whcih can be meet in Mountains after PC deal with Factory. PC need to let her keep winning till 3rd and final fight when PC would need to get serious and beat her to cme back to camp with new bloodsucke...waifu. She's source of bat tf item aside Mog Hen shop.\n");
 			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finaly showing up.");
 			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
-			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n");
+			outputText("<b>Version 0.8g2:</b>\n\n");
+			outputText("-Fixed bugs: Unable to use range weapons without flying, Satyr scene parser bug\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -98,6 +106,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -137,9 +146,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs {
 import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
+import classes.GlobalFlags.kFLAGS;
 
 import coc.view.ButtonDataList;
 
@@ -111,10 +112,16 @@ public class DivaScene extends XXCNPC{
             _talkMenu.add("Vampirism",vampirism);
             _talkMenu.add("Sunlight",sunlight);
             _talkMenu.add("Her",her);
+            _talkMenu.add("Vial",vialofliquid).disableIf(flags[kFLAGS.DIVA_DAILY_RED_VIAL] == 1,"You asked for blood already, wait for tomorrow.");
 
             function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
             function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
             function her():void{scene("camp/talkMenu/her",talkMenu);}
+            function vialofliquid():void {
+				scene("camp/talkMenu/vialofliquid");
+				if (flags[kFLAGS.DIVA_DAILY_RED_VIAL] != 1) flags[kFLAGS.DIVA_DAILY_RED_VIAL] = 1;
+				inventory.takeItem(consumables.REDVIAL, talkMenu);
+			}
         }
         function setupSexMenu():void{
             _sexMenu.clear();

@@ -88,15 +88,27 @@ public class Diva extends Monster {
         }
     }
     public function moveBite():void{
-        addHP(maxHP()* .2);
-        var dam:int = 10;
-        for(var i:int = 0; i < _biteCounter;i++){
-            dam += dam*.10;
-        }
-        _biteCounter++;
-        display("moves/bite");
-        player.takeDamage(dam);
-        player.takeLustDamage(rand(5));
+        if (player.isGargoyle()) {
+			display("moves/biteGargoyle");
+			var dam1:int = 10;
+			takeDamage(dam1);
+		}
+		else if (player.isAlraune()) {
+			display("moves/bitePlant");
+			var dam2:int = 10;
+			takeDamage(dam2);
+		}
+		else{
+			addHP(maxHP()* .2);
+			var dam:int = 10;
+			for(var i:int = 0; i < _biteCounter;i++){
+				dam += dam*.10;
+			}
+			_biteCounter++;
+			display("moves/bite");
+			player.takeDamage(dam);
+			player.takeLustDamage(rand(5));
+		}
     }
     private function moveSwoopToss():void{
         display("moves/swoopToss");
@@ -128,9 +140,15 @@ public class Diva extends Monster {
             game.addButton(2,"Never",finalChoice,2);
         }
         else{
-            display("scenes/defeated/normal");
-            DivaScene.getInstance().status++;
-            cleanupAfterCombat();
+            if (player.isGargoyle() || player.isAlraune()) {
+				display("scenes/defeated/combatGargPlant");
+				cleanupAfterCombat();
+			}
+			else{
+				display("scenes/defeated/normal");
+				DivaScene.getInstance().status++;
+				cleanupAfterCombat();
+			}
         }
         game.flushOutputTextToGUI();
         function finalChoice(choice:int):void{

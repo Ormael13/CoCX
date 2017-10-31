@@ -547,8 +547,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8g";
-			version = ver + " (<b>Den of Desire dungeon, SimCamp (part 3), new npc's: Electra, Krystal/Onyx; pre-follower Chi Chi, new camp lover Diva; new physical soulskills, new TF's: Raiju, Bat, Vampire</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8g2";
+			version = ver + " (<b>Bugfixing</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

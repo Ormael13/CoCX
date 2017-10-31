@@ -512,6 +512,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
+				//Reset Diva Red Vial daiy limit
+				if (flags[kFLAGS.DIVA_DAILY_RED_VIAL] > 0) flags[kFLAGS.DIVA_DAILY_RED_VIAL] = 0;
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;

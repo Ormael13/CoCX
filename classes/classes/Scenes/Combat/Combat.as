@@ -5521,6 +5521,20 @@ public function GooLeggoMyEggo():void {
 //Vampiric bite
 public function VampiricBite():void {
 	fatigue(20, USEFATG_PHYSICAL);
+	if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType)) {
+		outputText("You gleefully bite in your foe but ");
+		if (monster.hasPerk(PerkLib.EnemyConstructType)) {
+			outputText("yelp in pain. This thing skin is hard as rock which comes as true since golems do are made of solid stones.");
+		}
+		if (monster.hasPerk(PerkLib.EnemyPlantType)) {
+			outputText("almost instantly spit it out. Ewwww what manner of disgusting blood is this? Saps?");
+		}
+		outputText(" Your opponent makes use of your confusion to free itself.");
+		HPChange((-100 * (1 + player.newGamePlusMod())),false);
+		monster.removeStatusEffect(StatusEffects.EmbraceVampire);
+		enemyAI();
+		return;
+	}
 	outputText("You bite [monster a] [monster name] drinking deep of [monster his] blood ");
 	var damage:int = player.maxHP() * 0.05;
 	damage = Math.round(damage);
