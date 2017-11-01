@@ -17,12 +17,89 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog17();
+			Changelog18();
 		}
 		
 		private function Changelog18():void {
 			clearOutput();
 			menu();
+			outputText("<b>Version 0.8h:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can became pregnant with unicorn-taur: Celess\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
+			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
+			outputText("\n");
+			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
+			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");
+			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("<b>Version 0.8j:</b>\n\n");
+			outputText("\n");
+			outputText("\n");cel na 0.8h: dodać siren TF
+			outputText("\n");cel na 0.8h: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8h: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8h: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8h: dodać nekomanta TF
+			outputText("\n");cel na 0.8h: dodać kitsune/salamander TF
+			outputText("\n");cel na 0.8h: dodać kitsune/nekomanta TF
+			outputText("\n");cel na 0.8h: dodać yuki-onna TF
+			outputText("\n");cel na 0.8h: pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8h: dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Few more perks and achievements.\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			addButton(0, "Next", Changelog17);
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
@@ -96,87 +173,10 @@ package classes.Scenes
 			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finaly showing up.");
 			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n");
-			outputText("<b>Version 0.8g2:</b>\n\n");
+			outputText("<b>Version 0.8g2 (Bugfixing):</b>\n\n");
 			outputText("-Diva similary to Etna would be giving PC once per day a vial of red liquid (bat TF).\n");
 			outputText("-Using Vampiric Bite on Construct type or Plant type enemies will cause it to fail, ends Embrace and allow enemy to slight damage PC.\n");
-			outputText("-Fixed bugs: Unable to use range weapons without flying, Satyr scene parser bug\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
-			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
-			outputText("\n");
-			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
-			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
-			outputText("\n");
-			outputText("<b>Version 0.8h:</b>\n\n");
-			outputText("<b>Version 0.8i:</b>\n\n");
-			outputText("<b>Version 0.8j:</b>\n\n");
-			outputText("\n");
-			outputText("\n");cel na 0.8f: dodać siren TF
-			outputText("\n");cel na 0.8f: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8f: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8f: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8f: dodać nekomanta TF
-			outputText("\n");cel na 0.8f: dodać kitsune/salamander TF
-			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
-			outputText("\n");cel na 0.8f: dodać yuki-onna TF
-			outputText("\n");cel na 0.8f: pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8f: dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
-			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");*/
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Few more perks and achievements.\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("-Fixed bugs: Unable to use range weapons without flying, Satyr scene parser bug");
 			addButton(0, "Next", Changelog16);
 			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
