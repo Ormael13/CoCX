@@ -413,6 +413,10 @@ internal function winSparWithKiha():void {
 		outputText("[pg]\"<i>W-what are you doing!?</i>\"  she starts, pushing away.  \"<i>You - you dumbass!</i>\"  Face as red as her scales, she storms off to the other side of camp.");
 		outputText("[pg]You sigh and head back towards your stuff.");
 		kihaAffection(20);
+		/*if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
+		}*/
 	}
 	cleanupAfterCombat();
 }
@@ -843,7 +847,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
 			addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
 			addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
-			addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle).hint("Request Kiha to destroy any corrupted glades she can find.");
 				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle).hint("Request Kiha to stop destroying the corrupted glades.");
@@ -1849,6 +1853,10 @@ internal function pcLosesDomFight():void {
 //[PC wins the fight]
 internal function pcWinsDomFight():void {
 	clearOutput();
+	/*if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
+	}*/
 	outputText(images.showImage("kiha-dom-win"));
 	spriteSelect(72);
 	var x:Number = player.cockThatFits(67);
@@ -2186,7 +2194,7 @@ private function guardMyCampKiha():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\nYou tell about how you've defeated Lethice and put an end to the demonic threats. Kiha and her young " + (totalKihaChildren() == 1 ? "dragon-morph" : "dragon-morphs") + " look at you, amazed about your victory.");
 			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice for once and for all.");
 			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
-			dynStats("lib", -2, "cor", -2, "lus", -50, "resisted", false, "noBimbo", true);
+			dynStats("lib", -2, "cor", -2, "lus", -50, "scale", false);
 			
 			menu();
 			doNext(camp.returnToCampUseOneHour);

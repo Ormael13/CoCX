@@ -119,6 +119,7 @@ package classes.Scenes.Areas
 					} else {
 						alrauneScene.alrauneGlacialRift();
 					}
+					break;
 				case 6: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);
 					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;

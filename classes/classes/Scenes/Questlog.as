@@ -47,6 +47,11 @@ package classes.Scenes
 			else if (kGAMECLASS.dungeons.checkHiddenCaveClear()) outputText("Completed");
 			else if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n<b>Slain the Heroslayer:</b> ");
+			if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] == 2) outputText("Completed (Reward taken)");
+			else if (kGAMECLASS.dungeons.checkDenOfDesireClear()) outputText("Completed");
+			else if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 1) outputText("In Progress");
+			else outputText("Not Started");
 			menu();
 			if (kGAMECLASS.dungeons.checkFactoryClear() && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] < 2) addButton(0, "Factory", takeRewardForFactory);
 			if (kGAMECLASS.dungeons.checkDeepCaveClear() && flags[kFLAGS.DEFEATED_ZETAZ] < 2) addButton(1, "Deep Cave", takeRewardForDeepCave);
@@ -54,6 +59,8 @@ package classes.Scenes
 			if (kGAMECLASS.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			if (kGAMECLASS.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
+			// (kGAMECLASS.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
+			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -115,6 +122,16 @@ package classes.Scenes
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
 			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 3;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForDenOfDesire():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 2 perk points and 10 stat points</b>");
+			player.perkPoints = player.perkPoints + 2;
+			player.statPoints = player.statPoints + 10;
+			statScreenRefresh();
+			flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 2;
 			doNext(accessQuestlogMainMenu);
 		}
 	}

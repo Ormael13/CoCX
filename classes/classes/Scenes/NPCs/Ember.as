@@ -61,13 +61,13 @@ package classes.Scenes.NPCs
 					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 						outputText("  The pain as the deadly combination washes over you is indescribable.  Despite it wasn't pure fire attack surrounding you blizzard still managed to block prt of it power and you endure it somehow making even Ember looks amazed to see you still standing. ");
-						var damage2:Number = 70 + rand(70);
+						var damage2:Number = 140 + (this.inte * 1.5) + rand(140);
 						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
 						damage2 = player.takeDamage(damage2, true);
 					}
 					else {
 						outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
-						var damage:Number = 100 + rand(100);
+						var damage:Number = 200 + (this.inte * 2) + rand(200);
 						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
 						damage = player.takeDamage(damage, true);
 					}
@@ -122,7 +122,7 @@ package classes.Scenes.NPCs
 		
 		override protected function performCombatAction():void
 		{
-			if (lust >= (eMaxLust() * 0.4)) {
+			if (lust >= (maxLust() * 0.4)) {
 				emberReactsToLustiness();
 				return;
 			}
@@ -178,6 +178,76 @@ package classes.Scenes.NPCs
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
 			}
+			if (flags[kFLAGS.EMBER_LVL_UP] < 1) {
+				initStrTouSpeInte(120, 90, 100, 90);
+				initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 800;
+				this.level = 20;
+				this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 2700;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 1) {
+				initStrTouSpeInte(130, 100, 120, 100);
+				initLibSensCor(60, 40, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 43 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 74 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 900;
+				this.level = 30;
+				this.str += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 6120;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 2) {
+				initStrTouSpeInte(140, 110, 140, 110);
+				initLibSensCor(70, 45, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 49 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 94 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1000;
+				this.level = 40;
+				this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 8550;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 3) {
+				initStrTouSpeInte(150, 120, 160, 120);
+				initLibSensCor(80, 50, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 114 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1100;
+				this.level = 50;
+				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 11340;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 4) {
+				initStrTouSpeInte(250, 200, 210, 200);
+				initLibSensCor(100, 55, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 150 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1500;
+				this.level = 60;
+				this.str += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 26880;
+			}
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
@@ -186,30 +256,20 @@ package classes.Scenes.NPCs
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(100 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90, 80 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90);
-			initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
-			this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.bonusHP = 600 + (game.flags[kFLAGS.EMBER_AFFECTION] * 2);
 			this.bonusLust = 10 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 			this.lust = 20;
-			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 20 + Math.round(game.flags[kFLAGS.EMBER_AFFECTION] / 20);
 			this.gems = 0;
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
 			this.tailType = TAIL_TYPE_DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2700;
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

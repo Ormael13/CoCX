@@ -13,7 +13,7 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;false" />
+            <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;true" />
             <entry key="compiler.keep-generated-actionscript" value="true" />
           </map>
           <option name="resourceFilesMode" value="None" />
@@ -22,7 +22,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$" skip-build="true">
+      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$">
         <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
@@ -33,7 +33,8 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::debug&#9;false&#10;CONFIG::release&#9;true&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;false" />
+            <entry key="compiler.debug.swf" value="false" />
+            <entry key="compiler.define" value="CONFIG::debug&#9;false&#10;CONFIG::release&#9;true&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;true" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>

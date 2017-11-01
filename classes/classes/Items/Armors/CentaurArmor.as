@@ -1,6 +1,7 @@
 package classes.Items.Armors 
 {
 	import classes.Items.Armor;
+	import classes.Scenes.NPCs.CelessScene;
 	/**
 	 * ...
 	 * @author 
@@ -19,11 +20,11 @@ package classes.Items.Armors
 		}
 		
 		override public function useText():void{
-			outputText(game.celessScene.getName+" helps you put on the barding and horseshoes. Wow, taking a look at yourself, you look like those knights of legend. Fighting the wicked with this armor should be quite easy.");
+			outputText(CelessScene.getInstance().Name+" helps you put on the barding and horseshoes. Wow, taking a look at yourself, you look like those knights of legend. Fighting the wicked with this armor should be quite easy.");
 		}
 		
 		override public function removeText():void{
-			outputText(game.celessScene.getName+ "helps you remove the centaur armor. Whoa, you were starting to forget what not being weighted down by heavy armor felt like.");
+			outputText(CelessScene.getInstance().Name+ "helps you remove the centaur armor. Whoa, you were starting to forget what not being weighted down by heavy armor felt like.");
 		}
 		
 		override public function get def():Number{

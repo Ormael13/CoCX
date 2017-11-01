@@ -527,7 +527,7 @@ private function sheilaPologyFight():void {
 //requires PC has mastered the spell and has enough fatigue/lust to use it
 private function sheilaPologyCastArouse():void {
 	clearOutput();
-	fatigue(15,1);
+	fatigue(15, USEFATG_MAGIC);
 	outputText("You nod at the woman and tell her that you forgive her, even as the gears of revenge turn in the dark corners of your mind.  As she smiles and begins to babble in relief, you focus on her slender body and recite under your breath the first of the formulae that will leave her a gibbering, begging mess.");
 	
 	outputText("\n\n\"<i>-wanna thank you for not taking it personally.  I mean... it was a rough day, yeah, but I had no idea that it was that close to the surface, that I'd lose control after just a little teasing from you, y'know?</i>\"  You nod again in mock understanding as your eyes move to the woman's crotch and your litany to its second phase.");
@@ -549,7 +549,7 @@ private function sheilaPologyCastArouse():void {
 	outputText("\n\n\"<i>Please... let me fuck you!</i>\" she blurts, and then colors bright red.  \"<i>If I can't work this off and a demon finds me, I'm as good as dead!</i>\"");
 	
 	outputText("\n\nBetter and better.");
-	dynStats("lus", (player.lib/5), "resisted", false);
+	dynStats("lus", (player.lib/5), "scale", false);
 	//[Let Her][Leave]
 	menu();
 	addButton(0,"Let Her",castArouseAndLetHer);
@@ -1648,7 +1648,7 @@ private function fuckBuddySheilaMeetingChatKids():void {
 			
 			outputText("\n\n\"<i>[name], trust you to never change.  Do... you really want to make love?</i>\"  Her care-worn eyes look into yours, regaining a bit of their former enthusiasm, and her skin heats up under your fingers.");
 			//apply small lib-based lust damage and display [Sex] choices with [Rest For Now] instead of [Back]
-			dynStats("lus", player.lib/10+5, "resisted", false);
+			dynStats("lus", player.lib/10+5, "scale", false);
 			sheilaXP4Sex(false);
 			addButton(9,"RestForNow",fuckBuddySheilaMeetingChatKidsRest4Now);
 			return;
@@ -2835,7 +2835,7 @@ private function sheilaGetsRapedWithADildont():void {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
 	}
-	dynStats("lus", player.lib/3, "resisted", false);
+	dynStats("lus", player.lib/3, "scale", false);
 	cleanupAfterCombat();
 }
 
@@ -2982,7 +2982,7 @@ private function sheilaCowgirlRapesYou():void {
 			//[(HP loss)
 			if(player.HP < 1) outputText("\n\nFatigue and desire contest in your head, but eventually you slip into unconsciousness, tormented by memories of soft, wet skin.");
 			//huge sens-based lust damage and lose 8 hrs if HP loss or plus med libido and return to camp if lust loss
-			dynStats("sen", 3, "lus", 50+player.lib/10, "resisted", false);
+			dynStats("sen", 3, "lus", 50+player.lib/10, "scale", false);
 			//end cock don't fit branch
 			cleanupAfterCombat();
 		}
@@ -3162,7 +3162,7 @@ private function sheilaForcedOralGeneric():void {
 	
 	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 	if(player.tongueType > TONGUE_HUMAN) fatigue(15);
-	dynStats("lus", player.lib/3+30, "resisted", false);
+	dynStats("lus", player.lib/3+30, "scale", false);
 	if(player.lust >= player.maxLust()) dynStats("lib", 1);
 	sheilaCorruptionUpdate();
 	/*
@@ -3474,7 +3474,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		
 		outputText("\n\nSheila's blush deepens, but she nods and finishes undressing, pulling down her shorts and panties to expose her smooth pussy, then puts the clothing in a pile.  She turns her back to you and scoots in once more, leaving a tingle that spurs you to hold her closer when her flushed, embarrassed skin touches yours. \"<i>This feels good,</i>\" she says, \"<i>like a warm bath.</i>\"  Sheila giggles nervously as you instinctively pull her naked body deeper into your own.  \"<i>H-hey, [name].  Don't swallow me, mate.</i>\"  You bubble happily as you relax around her, covering most of the exposed skin below her collarbone with a thin layer of yourself.");
 		//(apply libido AND sens-based lust damage)
-		dynStats("lus", player.lib/5+player.sens/3, "resisted", false);
+		dynStats("lus", player.lib/5+player.sens/3, "scale", false);
 	}
 	//(naga)
 	else if(player.isNaga()) {
@@ -3482,7 +3482,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		if(player.lib >= 40) outputText(" - but tighten the one sliding across her breasts just slightly.  Sheila's neck turns red and her ears twitch as you rub her nipples, and you plant a kiss on her nape");
 		outputText(".  \"<i>Ahh,</i>\" she sighs, shifting in your coils.  \"<i>Hold it right there...</i>\"");
 		//(apply libido-based lust damage if lib >= 40)
-		if(player.lib >= 40) dynStats("lus", player.lib/4, "resisted", false);
+		if(player.lib >= 40) dynStats("lus", player.lib/4, "scale", false);
 	}
 	//(horse and >=5ft)
 	else if(player.isTaur() && player.tallness >= 60) {
@@ -3496,7 +3496,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		if(player.sens >= 40) outputText("... or would be, if you weren't distracted by the nipples poking into you and the thighs squeezing your flank");
 		outputText(".");
 		//(apply sens-based lust damage if sens >=40)
-		if(player.sens >= 40) dynStats("lus", player.sens/4, "resisted", false);
+		if(player.sens >= 40) dynStats("lus", player.sens/4, "scale", false);
 	}
 	//(harpy - minimum score for birdlegs at least)
 	else if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY) {
@@ -3579,7 +3579,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE2():void
 		outputText("\n\n\"<i>Well,</i>\" you answer, \"<i>perhaps that's why it's called 'making' love.</i>\"  Sheila doesn't answer, but smiles shyly.");
 		
 		//end scene if lust <30, else add minor lib-based lust damage and display choices for consensual sex plus [Leave Her Be]
-		dynStats("lus", player.lib / 10 + 5, "resisted", false);
+		dynStats("lus", player.lib / 10 + 5, "scale", false);
 		menu();
 		sheilaXP4Sex(false);
 		addButton(9,"LeaveHerBe",normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDEREBUTLEAVEHERBE);
@@ -3745,7 +3745,7 @@ private function demonSheilaTalk():void {
 	if(player.lib < 20) outputText(", giggling as your expression petrifies");
 	outputText(".  \"<i>Anything for you; I'll just find something to occupy my attention.  What's on your mind, love?</i>\"");
 	//plus lust depending on sens
-	dynStats("lus", 2+player.sens/5, "resisted", false);
+	dynStats("lus", 2+player.sens/5, "scale", false);
 	//[The Change][Her Colony][What Now?][Fuck Off]
 	menu();
 	addButton(0,"The Change",askDemonSheilaAboutDahChange);
@@ -3793,7 +3793,7 @@ private function askDemonSheilaAboutDahChange():void {
 		outputText("\n\nThe girl leans in and lowers her voice.  \"<i>I feel most rapt, you know, when a bloke ejaculates in me.  It feels... pure, and right, like he's admitting his purpose in life is to give me babies.  Without pretense or bullshit.  I love it, and if you come inside me, I love you too.</i>\"  Sheila blushes again.  \"<i>That sounds sappy, but... would you like to be loved?</i>\"");
 	}
 	//plus lust, present choices [Another Question][Let Her Fuck(req lust >=30)][Resist]
-	dynStats("lus", 12, "resisted", false);
+	dynStats("lus", 12, "scale", false);
 	menu();
 	addButton(0,"Another Q.",demonSheilaTalkAnotherQuestion);
 	if(player.lust >= 33) addButton(1,"LetHerFuck",sheilaLetHerFuckYou);
@@ -3831,7 +3831,7 @@ private function askDemonSheilaAboutHerColony():void {
 	outputText("\n\n\"<i>Did you like my idea, lover?</i>\" she laughs.");
 	
 	//plus lots of libido-based lust, display choices [Another Question][Let Her Fuck(req lust >=30)][Resist]
-	dynStats("lus", player.lib/3+5, "resisted", false);
+	dynStats("lus", player.lib/3+5, "scale", false);
 	menu();
 	
 	addButton(0,"Another Q.",demonSheilaTalkAnotherQuestion);
@@ -3880,7 +3880,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 	outputText(".  Feel like flying your colors for a while?</i>\"");
 	
 	//plus libido-based lust damage, output choices [Another Question][Let Her Fuck(req lust >=30)][Resist]
-	dynStats("lus", player.lib/15, "resisted", false);
+	dynStats("lus", player.lib/15, "scale", false);
 	menu();
 	addButton(0,"Another Q.",demonSheilaTalkAnotherQuestion);
 	if(player.lust >= 33) addButton(1,"LetHerFuck",sheilaLetHerFuckYou);
@@ -3956,7 +3956,7 @@ private function demonImpChildren():void {
 	pregnancy.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.SHEILA_IMPS]++;
 	//plus lust if PC has cock
-	if(player.hasCock()) dynStats("lus", 10+player.lib/10, "resisted", false);
+	if(player.hasCock()) dynStats("lus", 10+player.lib/10, "scale", false);
 	//[Other Sex][Knock Up(cock only)][Leave]
 	menu();
 	addButton(0,"Other Sex",pregDemonSheilaOtherSex);
@@ -4405,7 +4405,7 @@ private function aintGotNoGenderAndKangarooRaped():void {
 	outputText("\n\n\"<i>I'll see you later, [name]... think about me.</i>\"  You slip into a brief, tired doze as her lingering magic guarantees fulfillment of her request.");
 	
 	//big lib-based lust gain, med lib gain if lust hits 100, pass 1 hour
-	dynStats("lus", 20+player.lib/4, "resisted", false);
+	dynStats("lus", 20+player.lib/4, "scale", false);
 	if (getGame().inCombat)
 		cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -4802,7 +4802,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	outputText("\n\nSmiling grimly, you leave the wet sounds of sex behind you, wondering if Jojo will ever come when you call again.");
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
-	dynStats("lus=", player.maxLust(), "cor", 10, "resisted", false);
+	dynStats("lus=", player.maxLust(), "cor", 10, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
 	if (getGame().inCombat)

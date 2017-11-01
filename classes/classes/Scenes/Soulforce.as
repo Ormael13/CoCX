@@ -9,22 +9,26 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Places.Boat;
-	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Areas.Forest.Tamani;
 	import classes.Scenes.Areas.Forest.TamaniScene;
 	import classes.Scenes.Areas.Forest.TamanisDaughters;
 	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 	import classes.Scenes.Areas.Forest.WorldTree;
 	import classes.Scenes.Areas.HighMountains.IzumiScene;
-	import classes.Scenes.NPCs.Sonya;
-	import classes.Scenes.NPCs.RyuBiDragon;
+	import classes.Scenes.Areas.DeepSea.Kraken;
 	import classes.Scenes.Areas.Forest.Alraune;
+	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+	import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Monsters.DarkElfScout;
 	import classes.Scenes.Monsters.DarkElfSlaver;
 	import classes.Scenes.Monsters.DarkElfRanger;
 	import classes.Scenes.Monsters.DarkElfSniper;
+	import classes.Scenes.Monsters.DarkElfSniper;
+	import classes.Scenes.NPCs.Electra;
+	import classes.Scenes.NPCs.Sonya;
+	import classes.Scenes.NPCs.RyuBiDragon;
 	
 	use namespace kGAMECLASS;
 	
@@ -197,8 +201,10 @@ package classes.Scenes
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
 			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
 			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
-			addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
-			addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
+			//addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
+			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
+			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
+			//addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 private function eyesColorSelection():void {
@@ -206,6 +212,20 @@ private function eyesColorSelection():void {
 	player.eyeColor = "brown";
 	outputText("You now have brown eyes.");
 	doNext(SoulforceCheats);
+}
+private function resetObsydianGargoyleFlag():void {
+	clearOutput();
+	outputText("You can now go fight Obsydian Gargoyle again.... for test!!!");
+	if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_NAME] != 0) player.removeKeyItem("Black Soul Gem");
+	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
+	doNext(SoulforceCheats);
+}
+private function resetHeroslayerOmnibusFlag():void {
+	clearOutput();
+	outputText("You can now go fight Heroslayer Omnibus again.... for test!!!");
+	player.removeKeyItem("Gargoyle demonic researches");
+	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
+	doNext(resetObsydianGargoyleFlag);
 }
 		public function StatsMenu():void {
 			menu();
@@ -311,11 +331,163 @@ private function eyesColorSelection():void {
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(9, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
-			if (player.findPerk(PerkLib.SoulElder) < 0 && player.findPerk(PerkLib.SoulExalt) >= 0) addButton(10, "Rep.S.Perks", ReplacingSoulPerks).hint("Add Soul Scholar and/or Soul Elder perks plus adjusting stages of cultivation to accomodate for this change.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function FasterOrInstantCampNPCRecruitment():void {
+			menu();
+			if (flags[kFLAGS.EMBER_HATCHED] < 1 && flags[kFLAGS.TOOK_EMBER_EGG] < 1) addButton(0, "Ember", InstaEmberEggInCamp);
+			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] < 1) addButton(1, "Isabella", LilCocksLoverSummoning);
+			if (flags[kFLAGS.KIHA_FOLLOWER] < 1) addButton(2, "Kiha", ResidentCampDragonishTsundere);
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(3, "Etna", SuccubusishMantioreOnLeash);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] < 1) addButton(5, "Ember 1UP", Ember1stLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 4 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) addButton(6, "Isabella 1UP", Isabella1stLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) addButton(6, "Isabella 2UP", Isabella2ndLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) addButton(6, "Isabella 3UP", Isabella3rdLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] < 1) addButton(7, "Kiha 1UP", Kiha1stLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.KIHA_LVL_UP] == 1) addButton(7, "Kiha 2UP", Kiha2ndLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.KIHA_LVL_UP] == 2) addButton(7, "Kiha 3UP", Kiha3rdLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] < 1) addButton(8, "Etna 1UP", Etna1stLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ETNA_LVL_UP] == 2) addButton(8, "Etna 3UP", Etna3rdLvLUp);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) addButton(10, "Ember DeLvL", EmberTestDeLvL);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) addButton(11, "Isabella DeLvL", IsabellaTestDeLvL);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) addButton(12, "Kiha DeLvL", KihaTestDeLvL);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) addButton(13, "Etna DeLvL", EtnaTestDeLvL);
+			addButton(14, "Back", SoulforceCheats);
+		}
+		public function InstaEmberEggInCamp():void {
+			player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
+			flags[kFLAGS.TOOK_EMBER_EGG] = 1;
+			flags[kFLAGS.EMBER_COR] = 50;
+			outputText("\n\n<b>Ember Egg put in camp.</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function LilCocksLoverSummoning():void {
+			flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] = 240;
+			flags[kFLAGS.ISABELLA_AFFECTION] = 100;
+			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
+			flags[kFLAGS.ISABELLA_PLAINS_DISABLED] = 1;
+			outputText("\n\n<b>I heard you love cows loving small cocks...so here you will get Isabella *wink wink*</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function ResidentCampDragonishTsundere():void {
+			flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 2;
+			flags[kFLAGS.KIHA_AFFECTION] = 100;
+			flags[kFLAGS.KIHA_MOVE_IN_OFFER] = 1;
+			flags[kFLAGS.KIHA_FOLLOWER] = 1;
+			outputText("\n\n<b>We need more...yandered dragon-like waifu. Or was it only more of Kiha?</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function SuccubusishMantioreOnLeash():void {
+			flags[kFLAGS.ETNA_AFFECTION] = 80;
+			flags[kFLAGS.ETNA_FOLLOWER] = 2;
+			flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
+			outputText("\n\n<b>Watch for Etna is in da hous... err camp.</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember1stLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 1;
+			outputText("\n\n<b>Ember 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember2ndLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 2;
+			outputText("\n\n<b>Ember 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember3rdLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 3;
+			outputText("\n\n<b>Ember 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember4thLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 4;
+			outputText("\n\n<b>Ember 4th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function EmberTestDeLvL():void {
+			flags[kFLAGS.EMBER_LVL_UP]--;
+			outputText("\n\n<b>Ember been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella1stLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 1;
+			outputText("\n\n<b>Isabella 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella2ndLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 2;
+			outputText("\n\n<b>Isabella 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella3rdLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 3;
+			outputText("\n\n<b>Isabella 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function IsabellaTestDeLvL():void {
+			flags[kFLAGS.ISABELLA_LVL_UP]--;
+			outputText("\n\n<b>Isabella been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha1stLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 1;
+			outputText("\n\n<b>Kiha 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha2ndLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 2;
+			outputText("\n\n<b>Kiha 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha3rdLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 32;
+			outputText("\n\n<b>Kiha 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function KihaTestDeLvL():void {
+			flags[kFLAGS.KIHA_LVL_UP]--;
+			outputText("\n\n<b>Kiha been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna1stLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 1;
+			outputText("\n\n<b>Etna 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna2ndLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 2;
+			outputText("\n\n<b>Etna 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna3rdLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 3;
+			outputText("\n\n<b>Etna 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function EtnaTestDeLvL():void {
+			flags[kFLAGS.ETNA_LVL_UP]--;
+			outputText("\n\n<b>Etna been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function AyaneWrongSettingUpFollowerFlagFix():void {
 			flags[kFLAGS.AYANE_FOLLOWER] = 0;
@@ -330,44 +502,6 @@ private function eyesColorSelection():void {
 			if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) < 0) {
 				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
-		public function ReplacingSoulPerks():void {
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) {
-				player.removePerk(PerkLib.SoulEmperor);
-				player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Emperor, Gained Perk: Soul Tyrant!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulKing) >= 0) {
-				player.removePerk(PerkLib.SoulKing);
-				player.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul King, Gained Perk: Soul Overlord!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) {
-				player.removePerk(PerkLib.SoulTyrant);
-				player.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Tyrant, Gained Perk: Soul Exalt!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
-				player.removePerk(PerkLib.SoulOverlord);
-				player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Overlord, Gained Perk: Soul Elder!)</b>");
-			}
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) {
-				player.removePerk(PerkLib.SoulExalt);
-				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Soul Exalt, Gained Perk: Soul Scholar!)</b>");
-			}
-			if (player.findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				player.removePerk(PerkLib.FleshBodyOverlordStage);
-				player.createPerk(PerkLib.FleshBodyElderStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage, Gained Perk: Flesh Body Elder Stage!)</b>");
-			}
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-				player.removePerk(PerkLib.DaoistOverlordStage);
-				player.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage, Gained Perk: Daoist Elder Stage!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
@@ -400,7 +534,7 @@ private function eyesColorSelection():void {
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
 			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-		//	addButton(4, "", ).hint("Add 1 .");
+			addButton(4, "MasterGloves", AddMasterGloves).hint("Add 1 master Gloves.");
 			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
@@ -417,8 +551,9 @@ private function eyesColorSelection():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "OnikiriSake", AddOnikiriSake).hint("Add 1 Onikiri Sake. (1st iteration - still incomplete TF)");
-			addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
+			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
+			addButton(4, "Red Blood", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
+			//addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
@@ -450,8 +585,11 @@ private function eyesColorSelection():void {
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
 			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
+			addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AscensionMenu():void {
@@ -462,7 +600,11 @@ private function eyesColorSelection():void {
 			addButton(3, "AscenPerks10", AddAscensionPerkPoints3).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
 			addButton(4, "AscenPerks50", AddAscensionPerkPoints4).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
 			addButton(14, "Back", SoulforceCheats);
-		}
+		}/*
+		public function AddBladeGrass():void {
+			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
+			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
+		}*/
 		public function AddStaff():void {
 			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
 			inventory.takeItem(weapons.E_STAFF, EquipmentMenu);
@@ -479,13 +621,13 @@ private function eyesColorSelection():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, NonEquipmentMenu);
 		}
-		public function AddOnikiriSake():void {
-			outputText("\n\n<b>(Gained 1 bottle of Onikiri Sake!)</b>\n\n");
-			inventory.takeItem(consumables.ONISAKE, SoulforceCheats);
+		public function AddVoltageTopaz():void {
+			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
+			inventory.takeItem(consumables.VOLTTOP, SoulforceCheats);
 		}
-		public function AddBladeGrass():void {
-			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
-			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
+		public function AddRedBlood():void {
+			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
+			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
@@ -531,10 +673,6 @@ private function eyesColorSelection():void {
 			outputText("\n\n");
 			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
 		}
-		public function AddYetiCum():void {
-			outputText("\n\n<b>(Gained 1 Yeti Cum!)</b>\n\n");
-			inventory.takeItem(consumables.YETICUM, EquipmentMenu);
-		}
 		public function AddCatONineTailWhip():void {
 			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
 			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
@@ -543,9 +681,9 @@ private function eyesColorSelection():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
 		}
-		public function AddEldritchRibbon():void {
-			outputText("\n\n<b>(Gained 1 Eldritch Ribbon!)</b>\n\n");
-			inventory.takeItem(weapons.ERIBBON, EquipmentMenu);
+		public function AddMasterGloves():void {
+			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
+			inventory.takeItem(weapons.MASTGLO, EquipmentMenu);
 		}
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
@@ -564,11 +702,13 @@ private function eyesColorSelection():void {
 			inventory.takeItem(weaponsrange.I_TOME_, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
-			if (flags[kFLAGS.LETHICE_DEFEATED] < 1) {
+			if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
+				outputText("\n\n<b>You already used this cheat code!</b>");
+			}
+			else {
 				flags[kFLAGS.LETHICE_DEFEATED] = 1;
 				outputText("\n\n<b>You can Ascend now even if you not beaten Lethice yet!</b>");
 			}
-			else outputText("\n\n<b>You already used this cheat code!</b>");
 			doNext(AscensionMenu);
 		}
 		public function AddAscensionPerkPoints1():void {
@@ -983,6 +1123,21 @@ private function eyesColorSelection():void {
 			clearOutput();
 			outputText("Entering battle with Dark Elf Sniper! Enjoy ^^");
 			startCombat(new DarkElfSniper());
+		}
+		public function FightElectra():void {
+			clearOutput();
+			outputText("Entering battle with Electra! Enjoy ^^");
+			startCombat(new Electra());
+		}
+		public function FightObsidianGargoyle():void {
+			clearOutput();
+			outputText("Entering battle with Obsidian Gargoyle! Enjoy ^^");
+			startCombat(new ObsidianGargoyle());
+		}
+		public function FightHeroslayerOmnibus():void {
+			clearOutput();
+			outputText("Entering battle with Heroslayer Omnibus! Enjoy ^^");
+			startCombat(new HeroslayerOmnibus());
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");

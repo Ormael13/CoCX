@@ -286,7 +286,7 @@ public function fuckPlantGrowsToLevel2():void {
 	outputText("  Is this Marae's idea of a gift?");
 	if(player.gender > 0) outputText("  Well, you could give it a whirl... just being around it seems to slowly turn you on.");
 	outputText("  Of course, destroying it would be the safest option.");
-	dynStats("lus", 33, "resisted", false);
+	dynStats("lus", 33, "scale", false);
 	if(silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
@@ -1057,7 +1057,7 @@ private function threatenHolli():void {
 	else outputText("Marae is likely beyond your power yet, but... you feel like she might not pressure you too hard if you can make a suitably credible threat.");
 	outputText("\n\n\"<i>Now, I hope you rest well in the knowledge that I'm going to stay firmly in my tree, no matter what.  Watching the vermin of this land walk over your bedroll while you try to sleep will be suitable recompense for your rudeness.</i>\"");
 	//[(kid a, thorn canopy, or other non-jojo watch is on)
-	if((player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) || flags[kFLAGS.ANEMONE_WATCH] > 0) {
+	if((player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) || flags[kFLAGS.ANEMONE_WATCH] > 0 || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 2) {
 		outputText("\n\nYeah, whatever.  She'll be waiting a while for that; you've got your back covered.  With a dismissive, pointed gesture, you leave the smug arboreal demon behind.");
 	}
 	//{No option to beg for night watch till PC has been imp raped}

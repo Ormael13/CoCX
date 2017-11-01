@@ -1,25 +1,25 @@
 ﻿package classes
 {
 import classes.BodyParts.ISexyPart;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
-import classes.Items.Mutations;
-import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.Mutations;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib
+import classes.Items.UndergarmentLib;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Scenes.Areas.Forest;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 
 use namespace kGAMECLASS;
@@ -295,7 +295,7 @@ use namespace kGAMECLASS;
 			return _armor.name;
 		}
 		override public function get armorDef():Number {
-			var newGamePlusMod:int = this.newGamePlusMod();
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var armorDef:Number = _armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
@@ -306,69 +306,69 @@ use namespace kGAMECLASS;
 			}
 			//Skin armor perk
 			if (findPerk(PerkLib.ThickSkin) >= 0) {
-				armorDef += (2 * (1 + newGamePlusMod));
+				armorDef += (2 * newGamePlusMod);
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if (skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod);
-			if (skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod);
-			if (skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
-			if (skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (10 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasFur()) armorDef += (p?1:2)*newGamePlusMod;
+			if (skin.hasChitin()) armorDef += (p?2:4)*newGamePlusMod;
+			if (skin.hasScales()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod; //może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (10 * newGamePlusMod);//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
-			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod));
+			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Plant score bonuses
 			if (plantScore() >= 4) {
-				if (plantScore() >= 7) armorDef += (10 * (1 + newGamePlusMod));
-				else if (plantScore() == 6) armorDef += (8 * (1 + newGamePlusMod));
-				else if (plantScore() == 5) armorDef += (4 * (1 + newGamePlusMod));
-				else armorDef += (2 * (1 + newGamePlusMod));
+				if (plantScore() >= 7) armorDef += (10 * newGamePlusMod);
+				else if (plantScore() == 6) armorDef += (8 * newGamePlusMod);
+				else if (plantScore() == 5) armorDef += (4 * newGamePlusMod);
+				else armorDef += (2 * newGamePlusMod);
 			}
-			if (yggdrasilScore() >= 10) armorDef += (10 * (1 + newGamePlusMod));
+			if (yggdrasilScore() >= 10) armorDef += (10 * newGamePlusMod);
 			//Dragon score bonuses
 			if (dragonScore() >= 10) {
-				if (dragonScore() >= 28) armorDef += (10 * (1 + newGamePlusMod));
-				else if (dragonScore() >= 20) armorDef += (4 * (1 + newGamePlusMod));
-				else armorDef += (1 * (1 + newGamePlusMod));
+				if (dragonScore() >= 28) armorDef += (10 * newGamePlusMod);
+				else if (dragonScore() >= 20) armorDef += (4 * newGamePlusMod);
+				else armorDef += (1 * newGamePlusMod);
 			}
 			//Bonus defense
-			if (armType == ARM_TYPE_YETI) armorDef += (1 * (1 + newGamePlusMod));
-			if (armType == ARM_TYPE_SPIDER || armType == ARM_TYPE_MANTIS || armType == ARM_TYPE_BEE || armType == ARM_TYPE_SALAMANDER) armorDef += (2 * (1 + newGamePlusMod));
-			if (armType == ARM_TYPE_GARGOYLE) armorDef += (8 * (1 + newGamePlusMod));
-			if (tailType == TAIL_TYPE_SPIDER_ADBOMEN || tailType == TAIL_TYPE_MANTIS_ABDOMEN || tailType == TAIL_TYPE_BEE_ABDOMEN) armorDef += (2 * (1 + newGamePlusMod));
-			if (tailType == TAIL_TYPE_GARGOYLE) armorDef += (8 * (1 + newGamePlusMod));
-			if (wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) armorDef += (8 * (1 + newGamePlusMod));
-			if (lowerBody == LOWER_BODY_TYPE_YETI) armorDef += (1 * (1 + newGamePlusMod));
-			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE || lowerBody == LOWER_BODY_TYPE_MANTIS || lowerBody == LOWER_BODY_TYPE_SALAMANDER) armorDef += (2 * (1 + newGamePlusMod));
-			if (lowerBody == LOWER_BODY_TYPE_DRAGON) armorDef += (3 * (1 + newGamePlusMod));
-			if (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) armorDef += (4 * (1 + newGamePlusMod));
-			if (lowerBody == LOWER_BODY_TYPE_GARGOYLE) armorDef += (8 * (1 + newGamePlusMod));
+			if (armType == ARM_TYPE_YETI) armorDef += (1 * newGamePlusMod);
+			if (armType == ARM_TYPE_SPIDER || armType == ARM_TYPE_MANTIS || armType == ARM_TYPE_BEE || armType == ARM_TYPE_SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (armType == ARM_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (tailType == TAIL_TYPE_SPIDER_ADBOMEN || tailType == TAIL_TYPE_MANTIS_ABDOMEN || tailType == TAIL_TYPE_BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
+			if (tailType == TAIL_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) armorDef += (8 * newGamePlusMod);
+			if (lowerBody == LOWER_BODY_TYPE_YETI) armorDef += (1 * newGamePlusMod);
+			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE || lowerBody == LOWER_BODY_TYPE_MANTIS || lowerBody == LOWER_BODY_TYPE_SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (lowerBody == LOWER_BODY_TYPE_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) armorDef += (4 * newGamePlusMod);
+			if (lowerBody == LOWER_BODY_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
 			//Soul Cultivators bonuses
 			if (findPerk(PerkLib.BodyCultivator) >= 0) {
-				armorDef += (1 * (1 + newGamePlusMod));
+				armorDef += (1 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) armorDef += 2 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulPersonage) >= 0) armorDef += 2 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulWarrior) >= 0) armorDef += 2 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulApprentice) >= 0) armorDef += 2 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) armorDef += 2 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) armorDef += 2 * newGamePlusMod;
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) armorDef += 3 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulScholar) >= 0) armorDef += 3 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulElder) >= 0) armorDef += 3 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulSprite) >= 0) armorDef += 3 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulScholar) >= 0) armorDef += 3 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulElder) >= 0) armorDef += 3 * newGamePlusMod;
 			}
 			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
-				if (findPerk(PerkLib.SoulExalt) >= 0) armorDef += 4 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulOverlord) >= 0) armorDef += 4 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulTyrant) >= 0) armorDef += 4 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulExalt) >= 0) armorDef += 4 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) armorDef += 4 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) armorDef += 4 * newGamePlusMod;
 			}
 			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulKing) >= 0) armorDef += 5 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulEmperor) >= 0) armorDef += 5 * (1 + newGamePlusMod);
-				if (findPerk(PerkLib.SoulAncestor) >= 0) armorDef += 5 * (1 + newGamePlusMod);
+				if (findPerk(PerkLib.SoulKing) >= 0) armorDef += 5 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) armorDef += 5 * newGamePlusMod;
+				if (findPerk(PerkLib.SoulAncestor) >= 0) armorDef += 5 * newGamePlusMod;
 			}
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) armorDef += 6 * (1 + newGamePlusMod);
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorDef += 9 * (1 + newGamePlusMod);
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) armorDef += 6 * newGamePlusMod;
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorDef += 9 * newGamePlusMod;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (findPerk(PerkLib.Agility) >= 0) {
@@ -432,7 +432,7 @@ use namespace kGAMECLASS;
 			return _weapon.verb;
 		}
 		override public function get weaponAttack():Number {
-			var newGamePlusMod:int = this.newGamePlusMod();
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = _weapon.attack;
 			if (findPerk(PerkLib.JobBarbarian) >= 0 && weaponPerk == "Large") {
 				if (findPerk(PerkLib.WeaponMastery) >= 0 && str >= 100) {
@@ -474,22 +474,25 @@ use namespace kGAMECLASS;
 				}
 				if (findPerk(PerkLib.IronFistsVI) >= 0 && str >= 125) {
 					attack += 10;
-				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				}
 				if (findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
-					attack += (5 * (1 + newGamePlusMod));
-				}		// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+					attack += (5 * newGamePlusMod);
+				}		// && (weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				if (findPerk(PerkLib.MightyFist) >= 0) {
+					attack += (5 * newGamePlusMod);
+				}
 				if (kGAMECLASS.combat.unarmedAttack() > 0) {
 					attack += kGAMECLASS.combat.unarmedAttack();
 				}
 			}
 			if (armType == ARM_TYPE_MANTIS && weaponName == "fists") {
-				attack += (15 * (1 + newGamePlusMod));
+				attack += (15 * newGamePlusMod);
 			}
 			if (armType == ARM_TYPE_YETI && weaponName == "fists") {
-				attack += (5 * (1 + newGamePlusMod));
+				attack += (5 * newGamePlusMod);
 			}
-			if (hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			if (hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
+			if (hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * newGamePlusMod));
+			if (hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * newGamePlusMod));
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (((weaponName == "fists" && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) || weaponName != "fists") && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 				if (weaponPerk == "Large" || weaponPerk == "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
@@ -514,7 +517,7 @@ use namespace kGAMECLASS;
 			return _weaponRange.verb;
 		}
 		override public function get weaponRangeAttack():Number {
-			var newGamePlusMod:int = this.newGamePlusMod();
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var rangeattack:Number = _weaponRange.attack;
 			if (findPerk(PerkLib.Sharpshooter) >= 0 && weaponRangePerk != "Bow") {
 				if (inte < 201) rangeattack *= (1 + (inte / 200));
@@ -539,10 +542,10 @@ use namespace kGAMECLASS;
 				rangeattack += 10;
 			}
 			if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60 && weaponRangeName == "fists") {
-				rangeattack += (5 * (1 + newGamePlusMod));
+				rangeattack += (5 * newGamePlusMod);
 			}
 			if(armType == ARM_TYPE_MANTIS && weaponRangeName == "fists") {
-				rangeattack += (15 * (1 + newGamePlusMod));
+				rangeattack += (15 * newGamePlusMod);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
@@ -558,6 +561,12 @@ use namespace kGAMECLASS;
 		}
 		override public function get weaponRangeValue():Number {
 			return _weaponRange.value;
+		}
+		public function get ammo():int {
+			return flags[kFLAGS.FLINTLOCK_PISTOL_AMMO];
+		}
+		public function set ammo(value:int):void {
+			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
 		}
 		
 		//override public function get jewelries.
@@ -822,8 +831,82 @@ use namespace kGAMECLASS;
 			if (damageMultiplier < 0.2) damageMultiplier = 0;
 			return int(damage * damageMultiplier);
 		}
+		
+		public override function lustPercent():Number {
+			var lust:Number = 100;
+			var minLustCap:Number = 25;
+			
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//ADDITIVE REDUCTIONS
+			//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
+			//TOTAL IS LIMITED TO 75%!
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Corrupted Libido reduces lust gain by 10%!
+			if(findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
+			//Acclimation reduces by 15%
+			if(findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
+			//Purity blessing reduces lust gain
+			if(findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
+			//Resistance = 10%
+			if(findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+			if(findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+			if(lust < minLustCap) lust = minLustCap;
+			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
+				if(lust >= 80) lust = 100;
+				else lust += 20;
+			}
+			lust += Math.round(perkv1(PerkLib.PentUp)/2);
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//MULTIPLICATIVE REDUCTIONS
+			//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER
+			//DRAWBACKS TO JUSTIFY IT.
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Bimbo body slows lust gains!
+			if((hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+			if(findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
+			if(findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
+			//Omnibus' Gift reduces lust gain by 15%
+			if(findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+			//Fera Blessing reduces lust gain by 15%
+			if(hasStatusEffect(StatusEffects.BlessingOfDivineFera)) lust *= .85;
+			//Luststick reduces lust gain by 10% to match increased min lust
+			if(findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
+			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
+			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
+			//Berseking reduces lust gains by 10%
+			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
+			if (hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
 
-		public function takeDamage(damage:Number, display:Boolean = false):Number{
+			//Items
+			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
+			if (armor == game.armors.DBARMOR) lust *= 0.9;
+			if (weapon == game.weapons.HNTCANE) lust *= 0.75;
+			if ((weapon == game.weapons.PURITAS) || (weapon == game.weapons.ASCENSU)) lust *= 0.9;
+			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
+			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (sac)
+			{
+				if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
+				{
+					lust *= sac.value2;
+				}
+			}
+			if(statusEffectv1(StatusEffects.Maleficium) > 0) {
+				if(lust >= 50) lust = 100;
+				else lust += 50;
+			}
+			lust = Math.round(lust);
+			if (hasStatusEffect(StatusEffects.Lustzerking) && findPerk(PerkLib.ColdLust) < 1) lust = 100;
+			return lust;
+		}
+
+		public override function takeDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -836,7 +919,7 @@ use namespace kGAMECLASS;
 						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('mana');
-					game.dynStats("lus", 0); //Force display arrow.
+					dynStats("lus", 0); //Force display arrow.
 				}
 				else {
 					//Wrath
@@ -852,10 +935,10 @@ use namespace kGAMECLASS;
 						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('hp');
-					game.dynStats("lus", 0); //Force display arrow.
+					dynStats("lus", 0); //Force display arrow.
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					game.dynStats("lus", int(damage / 2));
+					dynStats("lus", int(damage / 2));
 				}
 				//Prevent negatives
 				if (HP<=0){
@@ -1445,6 +1528,17 @@ use namespace kGAMECLASS;
 					else race = "half elf";
 				}
 			}
+			if (raijuScore() >= 5)
+			{
+				if (raijuScore() >= 10) {
+					if (isTaur()) race = "raiju-taur";
+					else race = "raiju";
+				}
+				else {
+					if (isTaur()) race = "half raiju-taur";
+					else race = "half raiju";
+				}
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -1507,6 +1601,13 @@ use namespace kGAMECLASS;
 			if (gargoyleScore() >= 6)
 			{
 				race = "gargoyle";
+			}
+			if (batScore() >= 6){
+				race = batScore() >= 10? "bat":"half bat";
+				race += mf("boy","girl");
+			}
+			if (vampireScore() >= 6){
+				race = vampireScore() >= 10 ? "vampire" : "dhampir"
 			}
 			//</mod>
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur() && wingType == WING_TYPE_FEATHERED_LARGE) {
@@ -1646,6 +1747,8 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (elfScore() >= 5)
 				chimeraCounter++;
+			if (raijuScore() >= 5)
+				chimeraCounter++;
 			if (bunnyScore() >= 4)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
@@ -1685,6 +1788,10 @@ use namespace kGAMECLASS;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
 			if (yetiScore() >= 6)
+				chimeraCounter++;
+			if (batScore() >= 6)
+				chimeraCounter++;
+			if (vampireScore() >= 6)
 				chimeraCounter++;
 			if (gargoyleScore() >= 6)
 				chimeraCounter++;
@@ -1745,6 +1852,8 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (elfScore() >= 11)
 				grandchimeraCounter++;
+			if (raijuScore() >= 10)
+				grandchimeraCounter++;
 //			if (bunnyScore() >= 4)
 //				grandchimeraCounter++;
 			if (harpyScore() >= 8)
@@ -1794,6 +1903,10 @@ use namespace kGAMECLASS;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
 			if (yetiScore() >= 12)
+				grandchimeraCounter++;
+			if (batScore() >= 10)
+				grandchimeraCounter++;
+			if (vampireScore() >= 10)
 				grandchimeraCounter++;
 //			if (gargoyleScore() >= 6)
 //				grandchimeraCounter++;
@@ -2916,7 +3029,7 @@ use namespace kGAMECLASS;
 				elfCounter++;
 			if (hairType == HAIR_SILKEN)
 				elfCounter++;
-			if (hairColor == "black" && hairColor == "leaf green" && hairColor == "golden blonde" && hairColor == "silver")
+			if (hairColor == "black" || hairColor == "leaf green" || hairColor == "golden blonde" || hairColor == "silver")
 				elfCounter++;
 			if (skinTone == "dark" || skinTone == "light" || skinTone == "tan")
 				elfCounter++;
@@ -2933,6 +3046,39 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return elfCounter;
+		}
+
+		//Elf score
+		public function raijuScore():Number {
+			Begin("Player","racialScore","raiju");
+			var raijuCounter:Number = 0;
+			if (earType == EARS_WEASEL)
+				raijuCounter++;
+			if (eyeType == EYES_RAIJU)
+				raijuCounter++;
+			if (faceType == FACE_RAIJU_FANGS)
+				raijuCounter++;
+			if (armType == ARM_TYPE_RAIJU)
+				raijuCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_RAIJU)
+				raijuCounter++;
+			if (tailType == TAIL_TYPE_RAIJU)
+				raijuCounter++;
+			if (rearBody == REAR_BODY_RAIJU_MANE)
+				raijuCounter++;
+			if (skin.base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO)
+				raijuCounter++;
+			if (hairType == HAIR_STORM)
+				raijuCounter++;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
+				raijuCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				raijuCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && raijuCounter >= 3)
+				raijuCounter += 1;
+			
+			End("Player","racialScore");
+			return raijuCounter;
 		}
 
 		//Determine Mutant Rating
@@ -3725,6 +3871,34 @@ use namespace kGAMECLASS;
 			End("Player","racialScore");
 			return gargoyleCounter;
 		}
+		//Bat
+		public function batScore():int{
+            Begin("Player","racialScore","bat");
+			var counter:int = 0;
+			if(earType == EARS_BAT){ counter++;}
+			else if(earType == EARS_ELFIN){ counter -= 10;}
+			if(wingType == WING_TYPE_BAT_ARM) {counter += 5;}
+			if(lowerBody == LOWER_BODY_TYPE_HUMAN) {counter++;}
+			if(faceType == FACE_VAMPIRE){counter +=2;}
+			if(eyeType == EYES_VAMPIRE){counter++;}
+			if(rearBody == REAR_BODY_BAT_COLLAR){counter++;}
+            End("Player","racialScore");
+			return counter < 0? 0:counter;
+		}
+		//Vampire
+		public function vampireScore():int{
+            Begin("Player","racialScore","vampire");
+            var counter:int = 0;
+            if(earType == EARS_BAT){ counter-=10;}
+            else if(earType == EARS_VAMPIRE){ counter++;}
+			if(wingType == WING_TYPE_VAMPIRE){counter += 4;}
+            if(lowerBody == LOWER_BODY_TYPE_HUMAN) {counter++;}
+			if(armType == ARM_TYPE_HUMAN){counter++;}
+            if(faceType == FACE_VAMPIRE){counter +=2;}
+			if(eyeType == EYES_VAMPIRE){counter++;}
+            End("Player","racialScore");
+			return counter < 0? 0:counter;
+		}
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
 
@@ -3778,8 +3952,8 @@ use namespace kGAMECLASS;
 		
 		public function isLactating():Boolean
 		{
-			if (lactationQ() > 0) return true;
-			return false;
+			return lactationQ() > 0;
+
 		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
@@ -3847,7 +4021,7 @@ use namespace kGAMECLASS;
 					hunger = maxHunger();
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatUp('hunger');
-				//game.dynStats("lus", 0, "resisted", false);
+				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n");
 				//Messages
 				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
@@ -3861,7 +4035,7 @@ use namespace kGAMECLASS;
 				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				if (oldHunger >= 90) kGAMECLASS.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
-				game.dynStats("lus", 0, "resisted", false);
+				dynStats("lus", 0, "scale", false);
 				kGAMECLASS.statScreenRefresh();
 			}
 		}
@@ -3875,7 +4049,7 @@ use namespace kGAMECLASS;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
 			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatDown('hunger');
-			game.dynStats("lus", 0, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 		}
 		
 		public function corruptionTolerance():int {
@@ -4228,7 +4402,7 @@ use namespace kGAMECLASS;
 			}
 		}
 
-		public function getAllMinStats():Object {
+		public override function getAllMinStats():Object {
 			var minStr:int = 1;
 			var minTou:int = 1;
 			var minSpe:int = 1;
@@ -4237,7 +4411,6 @@ use namespace kGAMECLASS;
 			var minLib:int = 0;
 			var minSen:int = 10;
 			var minCor:int = 0;
-			var newGamePlusMod:int = this.newGamePlusMod();
 			//Minimum Libido
 			if (this.gender > 0) minLib = 15;
 			else minLib = 10;
@@ -4269,6 +4442,8 @@ use namespace kGAMECLASS;
 			if(this.devilkinScore() >= 14) minSen += 30;
 			if(this.elfScore() >= 5) minSen += 15;
 			if(this.elfScore() >= 11) minSen += 15;
+			if(this.raijuScore() >= 5) minSen += 25;
+			if(this.raijuScore() >= 10) minSen += 25;
 
 			return {
 				str:minStr,
@@ -4283,14 +4458,16 @@ use namespace kGAMECLASS;
 		}
 
 		//Determine minimum lust
-		public function minLust():Number
+		public override function minLust():Number
 		{
 			var min:Number = 0;
 			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
 			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) min += 40;
 			//Omnibus' Gift
-			if(findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
+			if (findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
+			//Fera Blessing
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
 			//Nymph perk raises to 30
 			if(findPerk(PerkLib.Nymphomania) >= 0) min += 30;
 			//Oh noes anemone!
@@ -4356,17 +4533,7 @@ use namespace kGAMECLASS;
 			return min;
 		}
 		
-		public function getMaxStats(stats:String):int {
-			var obj:Object = getAllMaxStats();
-			if (stats == "str" || stats == "strength") return obj.str;
-			else if (stats == "tou" || stats == "toughness") return obj.tou;
-			else if (stats == "spe" || stats == "speed") return obj.spe;
-			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
-			else if (stats == "wis" || stats == "wisdom") return obj.wis;
-			else if (stats == "lib" || stats == "libido") return obj.lib;
-			else return 100;
-		}
-		public function getAllMaxStats():Object {
+		public override function getAllMaxStats():Object {
 			Begin("Player","getAllMaxStats");
 			var maxStr:int = 100;
 			var maxTou:int = 100;
@@ -4376,7 +4543,7 @@ use namespace kGAMECLASS;
 			var maxLib:int = 100;
 			var maxSen:int = 100;
 			var maxCor:int = 100;
-			var newGamePlusMod:int = this.newGamePlusMod();
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
@@ -4404,7 +4571,7 @@ use namespace kGAMECLASS;
 			Begin("Player","getAllMaxStats.perks");
 			if (findPerk(PerkLib.BasiliskResistance) >= 0 && findPerk(PerkLib.GorgonsEyes) >= 0)
 			{
-				maxSpe -= (5 * (1 + newGamePlusMod));
+				maxSpe -= (5 * newGamePlusMod);
 			}
 			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
 			//Caps strength from Uma's needlework. 
@@ -4428,559 +4595,587 @@ use namespace kGAMECLASS;
 			//Alter max stats depending on race (+15 za pkt)
 			if (minotaurScore() >= 4) {
 				if (minotaurScore() >= 10) {
-					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (45 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
-					maxInt -= (40 * (1 + newGamePlusMod));
-					maxLib += (45 * (1 + newGamePlusMod));
+					maxStr += (120 * newGamePlusMod);
+					maxTou += (45 * newGamePlusMod);
+					maxSpe -= (20 * newGamePlusMod);
+					maxInt -= (40 * newGamePlusMod);
+					maxLib += (45 * newGamePlusMod);
 				}
 				else {
-					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (10 * (1 + newGamePlusMod));
-					maxSpe -= (10 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
-					maxLib += (20 * (1 + newGamePlusMod));
+					maxStr += (60 * newGamePlusMod);
+					maxTou += (10 * newGamePlusMod);
+					maxSpe -= (10 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
 				}
 			}//+20/10-20
 			if (cowScore() >= 4) {
 				if (cowScore() >= 10) {
-					maxStr += (120 * (1 + newGamePlusMod));
-					maxTou += (45 * (1 + newGamePlusMod));
-					maxSpe -= (40 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
-					maxLib += (45 * (1 + newGamePlusMod));
+					maxStr += (120 * newGamePlusMod);
+					maxTou += (45 * newGamePlusMod);
+					maxSpe -= (40 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+					maxLib += (45 * newGamePlusMod);
 				}
 				else {
-					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (10 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
-					maxLib += (20 * (1 + newGamePlusMod));
+					maxStr += (60 * newGamePlusMod);
+					maxTou += (10 * newGamePlusMod);
+					maxSpe -= (20 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
 				}
 			}//+20/10-20
 			if (lizardScore() >= 4) {
 				if (lizardScore() >= 8) {
-					maxTou += (70 * (1 + newGamePlusMod));
-					maxInt += (50 * (1 + newGamePlusMod));
+					maxTou += (70 * newGamePlusMod);
+					maxInt += (50 * newGamePlusMod);
 				}
 				else {
-					maxTou += (40 * (1 + newGamePlusMod));
-					maxInt += (20 * (1 + newGamePlusMod));
+					maxTou += (40 * newGamePlusMod);
+					maxInt += (20 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (dragonScore() >= 4) {
 				if (dragonScore() >= 28) {
-				maxStr += (100 * (1 + newGamePlusMod));
-				maxTou += (100 * (1 + newGamePlusMod));
-				maxSpe += (40 * (1 + newGamePlusMod));
-				maxInt += (50 * (1 + newGamePlusMod));
-				maxWis += (50 * (1 + newGamePlusMod));
-				maxLib += (20 * (1 + newGamePlusMod));
+				maxStr += (100 * newGamePlusMod);
+				maxTou += (100 * newGamePlusMod);
+				maxSpe += (40 * newGamePlusMod);
+				maxInt += (50 * newGamePlusMod);
+				maxWis += (50 * newGamePlusMod);
+				maxLib += (20 * newGamePlusMod);
 				}//+60
 				else if (dragonScore() >= 20 && dragonScore() < 28) {
-				maxStr += (95 * (1 + newGamePlusMod));
-				maxTou += (95 * (1 + newGamePlusMod));
-				maxSpe += (20 * (1 + newGamePlusMod));
-				maxInt += (40 * (1 + newGamePlusMod));
-				maxWis += (40 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
+				maxStr += (95 * newGamePlusMod);
+				maxTou += (95 * newGamePlusMod);
+				maxSpe += (20 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
+				maxWis += (40 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
 				}
 				else if (dragonScore() >= 10 && dragonScore() < 20) {
-				maxStr += (50 * (1 + newGamePlusMod));
-				maxTou += (40 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (20 * (1 + newGamePlusMod));
-				maxWis += (20 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
+				maxStr += (50 * newGamePlusMod);
+				maxTou += (40 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (20 * newGamePlusMod);
+				maxWis += (20 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
 				}
 				else {
-				maxStr += (15 * (1 + newGamePlusMod));
-				maxTou += (15 * (1 + newGamePlusMod));
-				maxInt += (15 * (1 + newGamePlusMod));
-				maxWis += (15 * (1 + newGamePlusMod));
+				maxStr += (15 * newGamePlusMod);
+				maxTou += (15 * newGamePlusMod);
+				maxInt += (15 * newGamePlusMod);
+				maxWis += (15 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (dogScore() >= 4) {
-				maxSpe += (15 * (1 + newGamePlusMod));
-				maxInt -= (5 * (1 + newGamePlusMod));
+				maxSpe += (15 * newGamePlusMod);
+				maxInt -= (5 * newGamePlusMod);
 			}//+10/10-20
 			if (wolfScore() >= 4) {
 				if (wolfScore() >= 10) {
-					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxSpe += (60 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
+					maxStr += (60 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
 				}
 				else if (wolfScore() >= 7 && hasFur() && coatColor == "glacial white") {
-					maxStr += (30 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
-					maxSpe += (30 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
+					maxStr += (30 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
 				}
 				else if (wolfScore() >= 6) {
-					maxStr += (30 * (1 + newGamePlusMod));
-					maxTou += (10 * (1 + newGamePlusMod));
-					maxSpe += (30 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
+					maxStr += (30 * newGamePlusMod);
+					maxTou += (10 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
 				}
 				else {
-					maxStr += (15 * (1 + newGamePlusMod));
-					maxSpe += (10 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
+					maxStr += (15 * newGamePlusMod);
+					maxSpe += (10 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
 				}
 			}//+15(60)((70))(((140)))/10-20(50-60)((70-80))(((130-140)))
 			if (foxScore() >= 4) {
 				if (foxScore() >= 7) {
-					maxStr -= (30 * (1 + newGamePlusMod));
-					maxSpe += (80 * (1 + newGamePlusMod));
-					maxInt += (55 * (1 + newGamePlusMod));
+					maxStr -= (30 * newGamePlusMod);
+					maxSpe += (80 * newGamePlusMod);
+					maxInt += (55 * newGamePlusMod);
 				}
 				else {
-					maxStr -= (5 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxInt += (25 * (1 + newGamePlusMod));
+					maxStr -= (5 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+					maxInt += (25 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (catScore() >= 4) {
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (20 * (1 + newGamePlusMod));
-				else maxSpe += (10 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (20 * newGamePlusMod);
+				else maxSpe += (10 * newGamePlusMod);
 			}//+10/10-20
 			if (bunnyScore() >= 4) {
-				maxSpe += (10 * (1 + newGamePlusMod));
+				maxSpe += (10 * newGamePlusMod);
 			}//+10/10-20
 			if (raccoonScore() >= 4) {
-				maxSpe += (15 * (1 + newGamePlusMod));
+				maxSpe += (15 * newGamePlusMod);
 			}//+15/10-20
 			if (horseScore() >= 4) {
 				if (horseScore() >= 7) {
-					maxSpe += (70 * (1 + newGamePlusMod));
-					maxTou += (35 * (1 + newGamePlusMod));
+					maxSpe += (70 * newGamePlusMod);
+					maxTou += (35 * newGamePlusMod);
 				}
 				else {
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
+					maxSpe += (40 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
 				}
 			}//+15/10-20
 			if (goblinScore() >= 4) {
-				maxInt += (20 * (1 + newGamePlusMod));
+				maxInt += (20 * newGamePlusMod);
 			}//+20/10-20
 			if (gooScore() >= 4) {
 				if (gooScore() >= 8) {
-					maxTou += (80 * (1 + newGamePlusMod));
-					maxSpe -= (40 * (1 + newGamePlusMod));
-					maxLib += (80 * (1 + newGamePlusMod));
+					maxTou += (80 * newGamePlusMod);
+					maxSpe -= (40 * newGamePlusMod);
+					maxLib += (80 * newGamePlusMod);
 				}
 				else {
-					maxTou += (40 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
-					maxLib += (40 * (1 + newGamePlusMod));
+					maxTou += (40 * newGamePlusMod);
+					maxSpe -= (20 * newGamePlusMod);
+					maxLib += (40 * newGamePlusMod);
 				}
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
-					maxStr -= (50 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxInt += (70 * (1 + newGamePlusMod));
-					maxWis += (100 * (1 + newGamePlusMod));
-					maxLib += (20 * (1 + newGamePlusMod));
+					maxStr -= (50 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+					maxInt += (70 * newGamePlusMod);
+					maxWis += (100 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
 				}
 				else {
-					maxStr -= (35 * (1 + newGamePlusMod));
-					maxSpe += (20 * (1 + newGamePlusMod));
-					maxInt += (30 * (1 + newGamePlusMod));
-					maxWis += (40 * (1 + newGamePlusMod));
-					maxLib += (20 * (1 + newGamePlusMod));
+					maxStr -= (35 * newGamePlusMod);
+					maxSpe += (20 * newGamePlusMod);
+					maxInt += (30 * newGamePlusMod);
+					maxWis += (40 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
 				}
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
 				if (tailType == 26) {
 					if (tailCount == 1) {
-						maxStr -= (2 * (1 + newGamePlusMod));
-						maxSpe += (2 * (1 + newGamePlusMod));
-						maxInt += (4 * (1 + newGamePlusMod));
+						maxStr -= (2 * newGamePlusMod);
+						maxSpe += (2 * newGamePlusMod);
+						maxInt += (4 * newGamePlusMod);
 					}
 					else if (tailCount >= 2 && tailCount < 9) {
-						maxStr -= ((tailCount + 1) * (1 + newGamePlusMod));
-						maxSpe += ((tailCount + 1) * (1 + newGamePlusMod));
-						maxInt += (((tailCount/2) + 2) * (1 + newGamePlusMod));
+						maxStr -= ((tailCount + 1) * newGamePlusMod);
+						maxSpe += ((tailCount + 1) * newGamePlusMod);
+						maxInt += (((tailCount/2) + 2) * newGamePlusMod);
 					}
 					else if (tailCount >= 9) {
-						maxStr -= (10 * (1 + newGamePlusMod));;
-						maxSpe += (10 * (1 + newGamePlusMod));;
-						maxInt += (20 * (1 + newGamePlusMod));;
+						maxStr -= (10 * newGamePlusMod);;
+						maxSpe += (10 * newGamePlusMod);;
+						maxInt += (20 * newGamePlusMod);;
 					}
 				}
 			}
 		*/	if (beeScore() >= 5) {
 				if (beeScore() >= 9) {
-					maxTou += (50 * (1 + newGamePlusMod));
-					maxSpe += (50 * (1 + newGamePlusMod));
-					maxInt += (35 * (1 + newGamePlusMod));
+					maxTou += (50 * newGamePlusMod);
+					maxSpe += (50 * newGamePlusMod);
+					maxInt += (35 * newGamePlusMod);
 				}
 				else {
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxSpe += (30 * (1 + newGamePlusMod));
-					maxInt += (15 * (1 + newGamePlusMod));
+					maxTou += (30 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt += (15 * newGamePlusMod);
 				}
 			}//+40/30-40
 			if (spiderScore() >= 4) {
 				if (spiderScore() >= 7) {
-					maxStr -= (20 * (1 + newGamePlusMod));
-					maxTou += (50 * (1 + newGamePlusMod));
-					maxInt += (75 * (1 + newGamePlusMod));
+					maxStr -= (20 * newGamePlusMod);
+					maxTou += (50 * newGamePlusMod);
+					maxInt += (75 * newGamePlusMod);
 				}
 				else {
-					maxStr -= (10 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxInt += (40 * (1 + newGamePlusMod));
+					maxStr -= (10 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxInt += (40 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (kangaScore() >= 4) {
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxSpe += (15 * (1 + newGamePlusMod));
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (15 * newGamePlusMod);
 			}//+20/10-20
 			if (sharkScore() >= 4) {
 				if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) {
-					maxStr += (60 * (1 + newGamePlusMod));
-					maxSpe += (70 * (1 + newGamePlusMod));
-					maxLib += (20 * (1 + newGamePlusMod));
+					maxStr += (60 * newGamePlusMod);
+					maxSpe += (70 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
 				}
 				else if (sharkScore() >= 8) {
-					maxStr += (40 * (1 + newGamePlusMod));
-					maxSpe += (70 * (1 + newGamePlusMod));
-					maxLib += (10 * (1 + newGamePlusMod));
+					maxStr += (40 * newGamePlusMod);
+					maxSpe += (70 * newGamePlusMod);
+					maxLib += (10 * newGamePlusMod);
 				}
 				else {
-					maxStr += (20 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
+					maxStr += (20 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (harpyScore() >= 4) {
 				if (harpyScore() >= 8) {
-					maxTou -= (20 * (1 + newGamePlusMod));
-					maxSpe += (80 * (1 + newGamePlusMod));
-					maxLib += (60 * (1 + newGamePlusMod));
+					maxTou -= (20 * newGamePlusMod);
+					maxSpe += (80 * newGamePlusMod);
+					maxLib += (60 * newGamePlusMod);
 				}
 				else {
-					maxTou -= (10 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxLib += (30 * (1 + newGamePlusMod));
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+					maxLib += (30 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (sirenScore() >= 10) {
-				maxStr += (40 * (1 + newGamePlusMod));
-				maxSpe += (70 * (1 + newGamePlusMod));
-				maxInt += (40 * (1 + newGamePlusMod));
+				maxStr += (40 * newGamePlusMod);
+				maxSpe += (70 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
 			}//+20/10-20
 			if (orcaScore() >= 6) {
 				if (orcaScore() >= 12) {
-					maxStr += (70 * (1 + newGamePlusMod));
-					maxTou += (40 * (1 + newGamePlusMod));
-					maxSpe += (70 * (1 + newGamePlusMod));
+					maxStr += (70 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (70 * newGamePlusMod);
 				}
 				else {
-					maxStr += (35 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
-					maxSpe += (35 * (1 + newGamePlusMod));
+					maxStr += (35 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (35 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (oniScore() >= 6) {
 				if (oniScore() >= 12) {
-					maxStr += (100 * (1 + newGamePlusMod));
-					maxTou += (60 * (1 + newGamePlusMod));
-					maxInt -= (20 * (1 + newGamePlusMod));
-					maxWis += (40 * (1 + newGamePlusMod));
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (60 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+					maxWis += (40 * newGamePlusMod);
 				}
 				else {
-					maxStr += (50 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxInt -= (10 * (1 + newGamePlusMod));
-					maxWis += (20 * (1 + newGamePlusMod));
+					maxStr += (50 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
+					maxWis += (20 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (elfScore() >= 5) {
 				if (elfScore() >= 11) {
-					maxStr -= (10 * (1 + newGamePlusMod));
-					maxTou -= (15 * (1 + newGamePlusMod));
-					maxSpe += (80 * (1 + newGamePlusMod));
-					maxInt += (80 * (1 + newGamePlusMod));
-					maxWis += (60 * (1 + newGamePlusMod));
-					maxSen += (30 * (1 + newGamePlusMod));
+					maxStr -= (10 * newGamePlusMod);
+					maxTou -= (15 * newGamePlusMod);
+					maxSpe += (80 * newGamePlusMod);
+					maxInt += (80 * newGamePlusMod);
+					maxWis += (60 * newGamePlusMod);
+					maxSen += (30 * newGamePlusMod);
 				}
 				else {
-					maxStr -= (10 * (1 + newGamePlusMod));
-					maxTou -= (10 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxInt += (40 * (1 + newGamePlusMod));
-					maxWis += (30 * (1 + newGamePlusMod));
-					maxSen += (15 * (1 + newGamePlusMod));
+					maxStr -= (10 * newGamePlusMod);
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+					maxInt += (40 * newGamePlusMod);
+					maxWis += (30 * newGamePlusMod);
+					maxSen += (15 * newGamePlusMod);
+				}
+			}//+10/10-20
+			if (raijuScore() >= 5) {
+				if (raijuScore() >= 10) {
+					maxSpe += (70 * newGamePlusMod);
+					maxInt += (50 * newGamePlusMod);
+					maxLib += (80 * newGamePlusMod);
+					maxSen += (50 * newGamePlusMod);
+				}
+				else {
+					maxSpe += (35 * newGamePlusMod);
+					maxInt += (25 * newGamePlusMod);
+					maxLib += (40 * newGamePlusMod);
+					maxSen += (25 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (demonScore() >= 5) {
 				if (demonScore() >= 11) {
-					maxSpe += (30 * (1 + newGamePlusMod));
-					maxInt += (35 * (1 + newGamePlusMod));
-					maxLib += (100 * (1 + newGamePlusMod));
+					maxSpe += (30 * newGamePlusMod);
+					maxInt += (35 * newGamePlusMod);
+					maxLib += (100 * newGamePlusMod);
 				}
 				else {
-					maxSpe += (15 * (1 + newGamePlusMod));
-					maxInt += (15 * (1 + newGamePlusMod));
-					maxLib += (45 * (1 + newGamePlusMod));
+					maxSpe += (15 * newGamePlusMod);
+					maxInt += (15 * newGamePlusMod);
+					maxLib += (45 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (devilkinScore() >= 7) {
 				if (devilkinScore() >= 14) {
-					maxSpe += (30 * (1 + newGamePlusMod));
-					maxInt += (35 * (1 + newGamePlusMod));
-					maxLib += (100 * (1 + newGamePlusMod));
+					maxSpe += (30 * newGamePlusMod);
+					maxInt += (35 * newGamePlusMod);
+					maxLib += (100 * newGamePlusMod);
 				}
 				else if (devilkinScore() >= 11 && devilkinScore() < 14) {
-					maxStr += (50 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
-					maxInt += (60 * (1 + newGamePlusMod));
-					maxLib += (75 * (1 + newGamePlusMod));
-					maxSen += (15 * (1 + newGamePlusMod));
+					maxStr += (50 * newGamePlusMod);
+					maxSpe -= (20 * newGamePlusMod);
+					maxInt += (60 * newGamePlusMod);
+					maxLib += (75 * newGamePlusMod);
+					maxSen += (15 * newGamePlusMod);
 				}
 				else {
-					maxStr += (35 * (1 + newGamePlusMod));
-					maxSpe -= (10 * (1 + newGamePlusMod));
-					maxInt += (40 * (1 + newGamePlusMod));
-					maxLib += (50 * (1 + newGamePlusMod));
-					maxSen += (10 * (1 + newGamePlusMod));
+					maxStr += (35 * newGamePlusMod);
+					maxSpe -= (10 * newGamePlusMod);
+					maxInt += (40 * newGamePlusMod);
+					maxLib += (50 * newGamePlusMod);
+					maxSen += (10 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
-				maxStr += (15 * (1 + newGamePlusMod));
-				maxTou += (15 * (1 + newGamePlusMod));
-				maxSpe -= (10 * (1 + newGamePlusMod));
-				maxInt -= (10 * (1 + newGamePlusMod));
+				maxStr += (15 * newGamePlusMod);
+				maxTou += (15 * newGamePlusMod);
+				maxSpe -= (10 * newGamePlusMod);
+				maxInt -= (10 * newGamePlusMod);
 			}//+10/10-20
 			if (satyrScore() >= 4) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
+				maxStr += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
 			}//+10/10-20
 			if (manticoreScore() >= 5) {
 				if (manticoreScore() >= 10) {
-					maxSpe += (80 * (1 + newGamePlusMod));
-					maxInt += (20 * (1 + newGamePlusMod));
-					maxLib += (50 * (1 + newGamePlusMod));
+					maxSpe += (80 * newGamePlusMod);
+					maxInt += (20 * newGamePlusMod);
+					maxLib += (50 * newGamePlusMod);
 				}
 				else {
-					maxSpe += (40 * (1 + newGamePlusMod));
-					maxInt += (10 * (1 + newGamePlusMod));
-					maxLib += (25 * (1 + newGamePlusMod));
+					maxSpe += (40 * newGamePlusMod);
+					maxInt += (10 * newGamePlusMod);
+					maxLib += (25 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (mantisScore() >= 6) {
 				if (mantisScore() >= 12) {
-					maxStr -= (40 * (1 + newGamePlusMod));
-					maxTou += (60 * (1 + newGamePlusMod));
-					maxSpe += (140 * (1 + newGamePlusMod));
-					maxInt += (20 * (1 + newGamePlusMod));
+					maxStr -= (40 * newGamePlusMod);
+					maxTou += (60 * newGamePlusMod);
+					maxSpe += (140 * newGamePlusMod);
+					maxInt += (20 * newGamePlusMod);
 				}
 				else {
-					maxStr -= (20 * (1 + newGamePlusMod));
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxSpe += (70 * (1 + newGamePlusMod));
-					maxInt += (10 * (1 + newGamePlusMod));
+					maxStr -= (20 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxSpe += (70 * newGamePlusMod);
+					maxInt += (10 * newGamePlusMod);
 				}
 			}//+35/30-40
 			if (salamanderScore() >= 4) {
 				if (salamanderScore() >= 7) {
-					maxStr += (25 * (1 + newGamePlusMod));
-					maxTou += (25 * (1 + newGamePlusMod));
-					maxLib += (40 * (1 + newGamePlusMod));
+					maxStr += (25 * newGamePlusMod);
+					maxTou += (25 * newGamePlusMod);
+					maxLib += (40 * newGamePlusMod);
 				}
 				else {
-					maxStr += (15 * (1 + newGamePlusMod));
-					maxTou += (15 * (1 + newGamePlusMod));
-					maxLib += (30 * (1 + newGamePlusMod));
+					maxStr += (15 * newGamePlusMod);
+					maxTou += (15 * newGamePlusMod);
+					maxLib += (30 * newGamePlusMod);
 				}
 			}//+15/10-20
 			if (unicornScore() >= 9) {
-				maxTou += (20 * (1 + newGamePlusMod));
-				maxSpe += (40 * (1 + newGamePlusMod));
-				maxInt += (75 * (1 + newGamePlusMod));
+				maxTou += (20 * newGamePlusMod);
+				maxSpe += (40 * newGamePlusMod);
+				maxInt += (75 * newGamePlusMod);
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 11) {
-				maxTou += (25 * (1 + newGamePlusMod));
-				maxSpe += (50 * (1 + newGamePlusMod));
-				maxInt += (90 * (1 + newGamePlusMod));
+				maxTou += (25 * newGamePlusMod);
+				maxSpe += (50 * newGamePlusMod);
+				maxInt += (90 * newGamePlusMod);
 			}//+(30)55/(30-40)50-60
 			if (phoenixScore() >= 10) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxTou += (20 * (1 + newGamePlusMod));
-				maxSpe += (70 * (1 + newGamePlusMod));
-				maxLib += (40 * (1 + newGamePlusMod));
+				maxStr += (20 * newGamePlusMod);
+				maxTou += (20 * newGamePlusMod);
+				maxSpe += (70 * newGamePlusMod);
+				maxLib += (40 * newGamePlusMod);
 			}//+30/30-40
 			if (scyllaScore() >= 4) {
 				if (scyllaScore() >= 12) {
-					maxStr += (120 * (1 + newGamePlusMod));
-					maxInt += (60 * (1 + newGamePlusMod));
+					maxStr += (120 * newGamePlusMod);
+					maxInt += (60 * newGamePlusMod);
 				}
 				else if (scyllaScore() >= 7 && scyllaScore() < 12) {
-					maxStr += (65 * (1 + newGamePlusMod));
-					maxInt += (40 * (1 + newGamePlusMod));
+					maxStr += (65 * newGamePlusMod);
+					maxInt += (40 * newGamePlusMod);
 				}
 				else {
-					maxStr += (40 * (1 + newGamePlusMod));
-					maxInt += (20 * (1 + newGamePlusMod));
+					maxStr += (40 * newGamePlusMod);
+					maxInt += (20 * newGamePlusMod);
 				}
 			}//+30/30-40
 			if (plantScore() >= 4) {
 				if (plantScore() >= 7) {
-					maxStr += (25 * (1 + newGamePlusMod));
-					maxTou += (100 * (1 + newGamePlusMod));
-					maxSpe -= (50 * (1 + newGamePlusMod));
+					maxStr += (25 * newGamePlusMod);
+					maxTou += (100 * newGamePlusMod);
+					maxSpe -= (50 * newGamePlusMod);
 				}
 				else if (plantScore() == 6) {
-					maxStr += (20 * (1 + newGamePlusMod));
-					maxTou += (80 * (1 + newGamePlusMod));
-					maxSpe -= (40 * (1 + newGamePlusMod));
+					maxStr += (20 * newGamePlusMod);
+					maxTou += (80 * newGamePlusMod);
+					maxSpe -= (40 * newGamePlusMod);
 				}
 				else if (plantScore() == 5) {
-					maxStr += (10 * (1 + newGamePlusMod));
-					maxTou += (50 * (1 + newGamePlusMod));
-					maxSpe -= (20 * (1 + newGamePlusMod));
+					maxStr += (10 * newGamePlusMod);
+					maxTou += (50 * newGamePlusMod);
+					maxSpe -= (20 * newGamePlusMod);
 				}
 				else {
-					maxTou += (30 * (1 + newGamePlusMod));
-					maxSpe -= (10 * (1 + newGamePlusMod));
+					maxTou += (30 * newGamePlusMod);
+					maxSpe -= (10 * newGamePlusMod);
 				}
 			}//+20(40)(60)(75)/10-20(30-40)(50-60)(70-80)
 			if (alrauneScore() >= 10) {
-				maxTou += (100 * (1 + newGamePlusMod));
-				maxSpe -= (50 * (1 + newGamePlusMod));
-				maxLib += (100 * (1 + newGamePlusMod));
+				maxTou += (100 * newGamePlusMod);
+				maxSpe -= (50 * newGamePlusMod);
+				maxLib += (100 * newGamePlusMod);
 			}
 			if (yggdrasilScore() >= 10) {
-				maxStr += (50 * (1 + newGamePlusMod));
-				maxTou += (70 * (1 + newGamePlusMod));
-				maxSpe -= (50 * (1 + newGamePlusMod));
-				maxInt += (50 * (1 + newGamePlusMod));
-				maxWis += (80 * (1 + newGamePlusMod));
-				maxLib -= (50 * (1 + newGamePlusMod));
+				maxStr += (50 * newGamePlusMod);
+				maxTou += (70 * newGamePlusMod);
+				maxSpe -= (50 * newGamePlusMod);
+				maxInt += (50 * newGamePlusMod);
+				maxWis += (80 * newGamePlusMod);
+				maxLib -= (50 * newGamePlusMod);
 			}//+150
 			if (deerScore() >= 4) {
-				maxSpe += (20 * (1 + newGamePlusMod));
+				maxSpe += (20 * newGamePlusMod);
 			}//+20/10-20
 			if (yetiScore() >= 6) {
 				if (yetiScore() >= 12) {
-					maxStr += (60 * (1 + newGamePlusMod));
-					maxTou += (80 * (1 + newGamePlusMod));
-					maxSpe += (50 * (1 + newGamePlusMod));
-					maxInt -= (60 * (1 + newGamePlusMod));
-					maxLib += (50 * (1 + newGamePlusMod));
+					maxStr += (60 * newGamePlusMod);
+					maxTou += (80 * newGamePlusMod);
+					maxSpe += (50 * newGamePlusMod);
+					maxInt -= (60 * newGamePlusMod);
+					maxLib += (50 * newGamePlusMod);
 				}
 				else {
-					maxStr += (30 * (1 + newGamePlusMod));
-					maxTou += (40 * (1 + newGamePlusMod));
-					maxSpe += (25 * (1 + newGamePlusMod));
-					maxInt -= (30 * (1 + newGamePlusMod));
-					maxLib += (25 * (1 + newGamePlusMod));
+					maxStr += (30 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (25 * newGamePlusMod);
+					maxInt -= (30 * newGamePlusMod);
+					maxLib += (25 * newGamePlusMod);
 				}
 			}
 			if (couatlScore() >= 11) {
-				maxStr += (40 * (1 + newGamePlusMod));
-				maxTou += (25 * (1 + newGamePlusMod));
-				maxSpe += (100 * (1 + newGamePlusMod));
+				maxStr += (40 * newGamePlusMod);
+				maxTou += (25 * newGamePlusMod);
+				maxSpe += (100 * newGamePlusMod);
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou -= (10 * (1 + newGamePlusMod));
-				maxSpe += (35 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis -= (20 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou -= (10 * newGamePlusMod);
+				maxSpe += (35 * newGamePlusMod);
+				maxInt += (10 * newGamePlusMod);
+				maxWis -= (20 * newGamePlusMod);
 			}//+30/30-40
 			if (gorgonScore() >= 11) {
-				maxStr += (50 * (1 + newGamePlusMod));
-				maxTou += (45 * (1 + newGamePlusMod));
-				maxSpe += (70 * (1 + newGamePlusMod));
+				maxStr += (50 * newGamePlusMod);
+				maxTou += (45 * newGamePlusMod);
+				maxSpe += (70 * newGamePlusMod);
 			}//+30/30-40
 			if (nagaScore() >= 4)
 			{
 				if (nagaScore() >= 8) {
-					maxStr += (40 * (1 + newGamePlusMod));
-					maxTou += (20 * (1 + newGamePlusMod));
-					maxSpe += (60 * (1 + newGamePlusMod));
+					maxStr += (40 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
 				}
 				else {
-					maxStr += (20 * (1 + newGamePlusMod));
-					maxSpe += (40 * (1 + newGamePlusMod));
+					maxStr += (20 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
 				}
 			}
 			if (centaurScore() >= 8) {
-				maxTou += (80 * (1 + newGamePlusMod));
-				maxSpe += (40 * (1 + newGamePlusMod));
+				maxTou += (80 * newGamePlusMod);
+				maxSpe += (40 * newGamePlusMod);
 			}//+40/30-40
 			if (isNaga()) {
-				maxStr += (15 * (1 + newGamePlusMod));
-				maxSpe += (15 * (1 + newGamePlusMod));
+				maxStr += (15 * newGamePlusMod);
+				maxSpe += (15 * newGamePlusMod);
 			}
 			if (isTaur()) {
-				maxSpe += (20 * (1 + newGamePlusMod));
+				maxSpe += (20 * newGamePlusMod);
 			}
 			if (isDrider()) {
-				maxTou += (15 * (1 + newGamePlusMod));
-				maxSpe += (15 * (1 + newGamePlusMod));
+				maxTou += (15 * newGamePlusMod);
+				maxSpe += (15 * newGamePlusMod);
 			}
 			if (isScylla()) {
-				maxStr += (30 * (1 + newGamePlusMod));
+				maxStr += (30 * newGamePlusMod);
 			}
 			if (gargoyleScore() >= 6) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStr += (80 * (1 + newGamePlusMod));
-					maxTou += (80 * (1 + newGamePlusMod));
+					maxStr += (80 * newGamePlusMod);
+					maxTou += (80 * newGamePlusMod);
 				}
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-					maxTou += (80 * (1 + newGamePlusMod));
-					maxInt += (80 * (1 + newGamePlusMod));
+					maxTou += (80 * newGamePlusMod);
+					maxInt += (80 * newGamePlusMod);
 				}
 			}
+			if (batScore() >= 6){
+                var mod:int = batScore() >= 10 ? 35:20;
+                maxStr += mod * newGamePlusMod;
+                maxSpe += mod * newGamePlusMod;
+                maxInt += mod * newGamePlusMod;
+                maxLib += (10+mod) * newGamePlusMod;
+			}
+			if (vampireScore() >= 6){
+                mod = vampireScore() >= 10 ? 35:20;
+				maxStr += mod * newGamePlusMod;
+				maxSpe += mod * newGamePlusMod;
+				maxInt += mod * newGamePlusMod;
+				maxLib += (10 + mod) * newGamePlusMod;
+			}
 			if (humanScore() == 25) {
-				maxStr += (40 * (1 + newGamePlusMod));
-				maxTou += (40 * (1 + newGamePlusMod));
-				maxSpe += (40 * (1 + newGamePlusMod));
-				maxInt += (40 * (1 + newGamePlusMod));
-				maxWis += (40 * (1 + newGamePlusMod));
-				maxLib += (40 * (1 + newGamePlusMod));
-				maxSen += (40 * (1 + newGamePlusMod));
+				maxStr += (40 * newGamePlusMod);
+				maxTou += (40 * newGamePlusMod);
+				maxSpe += (40 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
+				maxWis += (40 * newGamePlusMod);
+				maxLib += (40 * newGamePlusMod);
+				maxSen += (40 * newGamePlusMod);
 			}
 			if (humanScore() == 24) {
-				maxStr += (30 * (1 + newGamePlusMod));
-				maxTou += (30 * (1 + newGamePlusMod));
-				maxSpe += (30 * (1 + newGamePlusMod));
-				maxInt += (30 * (1 + newGamePlusMod));
-				maxWis += (30 * (1 + newGamePlusMod));
-				maxLib += (30 * (1 + newGamePlusMod));
-				maxSen += (30 * (1 + newGamePlusMod));
+				maxStr += (30 * newGamePlusMod);
+				maxTou += (30 * newGamePlusMod);
+				maxSpe += (30 * newGamePlusMod);
+				maxInt += (30 * newGamePlusMod);
+				maxWis += (30 * newGamePlusMod);
+				maxLib += (30 * newGamePlusMod);
+				maxSen += (30 * newGamePlusMod);
 			}
 			if (humanScore() == 23) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxTou += (20 * (1 + newGamePlusMod));
-				maxSpe += (20 * (1 + newGamePlusMod));
-				maxInt += (20 * (1 + newGamePlusMod));
-				maxWis += (20 * (1 + newGamePlusMod));
-				maxLib += (20 * (1 + newGamePlusMod));
-				maxSen += (20 * (1 + newGamePlusMod));
+				maxStr += (20 * newGamePlusMod);
+				maxTou += (20 * newGamePlusMod);
+				maxSpe += (20 * newGamePlusMod);
+				maxInt += (20 * newGamePlusMod);
+				maxWis += (20 * newGamePlusMod);
+				maxLib += (20 * newGamePlusMod);
+				maxSen += (20 * newGamePlusMod);
 			}
 			if (humanScore() == 22) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis += (10 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
-				maxSen += (10 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (10 * newGamePlusMod);
+				maxWis += (10 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
+				maxSen += (10 * newGamePlusMod);
 			}
 			if (internalChimeraScore() >= 1) {
-				maxStr += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxTou += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxSpe += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxInt += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxWis += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxLib += (5 * internalChimeraScore() * (1 + newGamePlusMod));
-				maxSen += (5 * internalChimeraScore() * (1 + newGamePlusMod));
+				maxStr += (5 * internalChimeraScore() * newGamePlusMod);
+				maxTou += (5 * internalChimeraScore() * newGamePlusMod);
+				maxSpe += (5 * internalChimeraScore() * newGamePlusMod);
+				maxInt += (5 * internalChimeraScore() * newGamePlusMod);
+				maxWis += (5 * internalChimeraScore() * newGamePlusMod);
+				maxLib += (5 * internalChimeraScore() * newGamePlusMod);
+				maxSen += (5 * internalChimeraScore() * newGamePlusMod);
 			}
 			if (maxStr < 25) maxStr = 25;
 			if (maxTou < 25) maxTou = 25;
@@ -4992,214 +5187,214 @@ use namespace kGAMECLASS;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) > 0) {
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyBasicStage) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
+				maxStr += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) > 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) > 0) {
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis += (10 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
+				maxInt += (10 * newGamePlusMod);
+				maxWis += (10 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) > 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis += (10 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (10 * newGamePlusMod);
+				maxWis += (10 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.SalamanderAdrenalGlands) > 0) {
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
+				maxStr += (5 * newGamePlusMod);
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ScyllaInkGlands) > 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.MantislikeAgility) > 0) {
-				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
-				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
-				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
+				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * newGamePlusMod);
+				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * newGamePlusMod);
+				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * newGamePlusMod);
+				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.MantislikeAgilityEvolved) > 0) {
-				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
-				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
-				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
+				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * newGamePlusMod);
+				if ((skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * newGamePlusMod);
+				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * newGamePlusMod);
+				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.DraconicLungs) >= 0) {
-				maxSpe += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
-				maxSpe += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
+				maxSpe += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
 			}
 			/*if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) {
-				maxSpe += (10 * (1 + newGamePlusMod));
+				maxSpe += (10 * newGamePlusMod);
 			}*/
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
-				maxSen += (5 * (1 + newGamePlusMod));
+				maxStr += (5 * newGamePlusMod);
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
+				maxSen += (5 * newGamePlusMod);
 			}
 			//Perks
 			if (findPerk(PerkLib.JobAllRounder) >= 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis += (10 * (1 + newGamePlusMod));
-				maxLib += (6 * (1 + newGamePlusMod));
-				maxSen += (6 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (10 * newGamePlusMod);
+				maxWis += (10 * newGamePlusMod);
+				maxLib += (6 * newGamePlusMod);
+				maxSen += (6 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
+				maxStr += (5 * newGamePlusMod);
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
 				if (findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
-					maxInt += (5 * (1 + newGamePlusMod));
-					maxWis += (5 * (1 + newGamePlusMod));
+					maxInt += (5 * newGamePlusMod);
+					maxWis += (5 * newGamePlusMod);
 				}
 				else {
-					maxInt -= (5 * (1 + newGamePlusMod));
-					maxWis -= (5 * (1 + newGamePlusMod));
+					maxInt -= (5 * newGamePlusMod);
+					maxWis -= (5 * newGamePlusMod);
 				}
 			}
-			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWis += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobEnchanter) >= 0) maxInt += (15 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWis += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobEnchanter) >= 0) maxInt += (15 * newGamePlusMod);
 			if (findPerk(PerkLib.JobEromancer) >= 0) {
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
+				maxInt += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.JobGolemancer) >= 0) {
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.JobHunter) >= 0) {
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (5 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWis += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobWarlord) >= 0) maxTou += (20 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.JobWarrior) >= 0) maxStr += (5 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWis += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobWarlord) >= 0) maxTou += (20 * newGamePlusMod);
+			if (findPerk(PerkLib.JobWarrior) >= 0) maxStr += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
-				maxSpe += (40 * (1 + newGamePlusMod));
-				maxInt += (40 * (1 + newGamePlusMod));
+				maxSpe += (40 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) {
-				maxStr += (60 * (1 + newGamePlusMod));
-				maxTou += (20 * (1 + newGamePlusMod));
+				maxStr += (60 * newGamePlusMod);
+				maxTou += (20 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) {
-				maxInt += (60 * (1 + newGamePlusMod));
-				maxWis += (20 * (1 + newGamePlusMod));
+				maxInt += (60 * newGamePlusMod);
+				maxWis += (20 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
-				maxStr += (20 * (1 + newGamePlusMod));
-				maxTou += (60 * (1 + newGamePlusMod));
+				maxStr += (20 * newGamePlusMod);
+				maxTou += (60 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
-				maxSpe += (40 * (1 + newGamePlusMod));
-				maxWis += (40 * (1 + newGamePlusMod));
+				maxSpe += (40 * newGamePlusMod);
+				maxWis += (40 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
-				maxStr += (40 * (1 + newGamePlusMod));
-				maxWis += (40 * (1 + newGamePlusMod));
+				maxStr += (40 * newGamePlusMod);
+				maxWis += (40 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
-				maxStr += (25 * (1 + newGamePlusMod));
-				maxTou += (25 * (1 + newGamePlusMod));
-				maxSpe += (25 * (1 + newGamePlusMod));
-				maxInt += (25 * (1 + newGamePlusMod));
-				maxWis += (25 * (1 + newGamePlusMod));
-				maxLib += (15 * (1 + newGamePlusMod));
-				maxSen += (15 * (1 + newGamePlusMod));
+				maxStr += (25 * newGamePlusMod);
+				maxTou += (25 * newGamePlusMod);
+				maxSpe += (25 * newGamePlusMod);
+				maxInt += (25 * newGamePlusMod);
+				maxWis += (25 * newGamePlusMod);
+				maxLib += (15 * newGamePlusMod);
+				maxSen += (15 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * (1 + newGamePlusMod));
-			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
 				if (findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) {
-					maxStr -= (15 * (1 + newGamePlusMod));
-					maxTou -= (15 * (1 + newGamePlusMod));
-					maxSpe -= (15 * (1 + newGamePlusMod));
+					maxStr -= (15 * newGamePlusMod);
+					maxTou -= (15 * newGamePlusMod);
+					maxSpe -= (15 * newGamePlusMod);
 				}
-				maxInt += (20 * (1 + newGamePlusMod));
-				maxWis += (30 * (1 + newGamePlusMod));
+				maxInt += (20 * newGamePlusMod);
+				maxWis += (30 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
 				//if (findPerk(PerkLib.) < 0) {
-					maxStr -= (30 * (1 + newGamePlusMod));
-					maxTou -= (30 * (1 + newGamePlusMod));
-					maxSpe -= (30 * (1 + newGamePlusMod));
+					maxStr -= (30 * newGamePlusMod);
+					maxTou -= (30 * newGamePlusMod);
+					maxSpe -= (30 * newGamePlusMod);
 				//}
-				maxInt += (40 * (1 + newGamePlusMod));
-				maxWis += (60 * (1 + newGamePlusMod));
+				maxInt += (40 * newGamePlusMod);
+				maxWis += (60 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
 				//if (findPerk(PerkLib.) < 0) {
-					maxStr -= (45 * (1 + newGamePlusMod));
-					maxTou -= (45 * (1 + newGamePlusMod));
-					maxSpe -= (45 * (1 + newGamePlusMod));
+					maxStr -= (45 * newGamePlusMod);
+					maxTou -= (45 * newGamePlusMod);
+					maxSpe -= (45 * newGamePlusMod);
 				//}
-				maxInt += (60 * (1 + newGamePlusMod));
-				maxWis += (90 * (1 + newGamePlusMod));
+				maxInt += (60 * newGamePlusMod);
+				maxWis += (90 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
-				maxTou += (10 * (1 + newGamePlusMod));
-				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (10 * (1 + newGamePlusMod));
-				maxWis += (10 * (1 + newGamePlusMod));
-				maxLib += (10 * (1 + newGamePlusMod));
-				maxSen += (10 * (1 + newGamePlusMod));
+				maxStr += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+				maxSpe += (10 * newGamePlusMod);
+				maxInt += (10 * newGamePlusMod);
+				maxWis += (10 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
+				maxSen += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
-				maxStr += (15 * (1 + newGamePlusMod));
-				maxTou += (15 * (1 + newGamePlusMod));
-				maxSpe += (15 * (1 + newGamePlusMod));
-				maxInt += (15 * (1 + newGamePlusMod));
-				maxWis += (15 * (1 + newGamePlusMod));
-				maxLib += (15 * (1 + newGamePlusMod));
-				maxSen += (15 * (1 + newGamePlusMod));
+				maxStr += (15 * newGamePlusMod);
+				maxTou += (15 * newGamePlusMod);
+				maxSpe += (15 * newGamePlusMod);
+				maxInt += (15 * newGamePlusMod);
+				maxWis += (15 * newGamePlusMod);
+				maxLib += (15 * newGamePlusMod);
+				maxSen += (15 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.SoulApprentice) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWis += 5;
@@ -5213,7 +5408,7 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * (1 + newGamePlusMod));
+			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
 			//Apply New Game+
@@ -5251,6 +5446,13 @@ use namespace kGAMECLASS;
 				maxTou += statusEffectv2(StatusEffects.CrinosShape);
 				maxSpe += statusEffectv3(StatusEffects.CrinosShape);
 			}
+			//
+			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+				if (statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxStr += statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+				maxTou += statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+				if (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxSpe += statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+				if (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxInt += statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+			}
 			//Beat of War
 			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
 				maxStr += statusEffectv1(StatusEffects.BeatOfWar);
@@ -5261,6 +5463,20 @@ use namespace kGAMECLASS;
 			}
 			if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
 				maxSpe += statusEffectv2(StatusEffects.FeedingEuphoria);
+			}
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+				maxStr += statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
+				maxTou += statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
+			}
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			}
+			var vthirst:VampireThirstEffect = statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			if (vthirst != null) {
+				maxStr += vthirst.currentBoost;
+				maxSpe += vthirst.currentBoost;
+				maxInt += vthirst.currentBoost;
+				maxLib += vthirst.currentBoost;
 			}
 			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
@@ -5301,25 +5517,9 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 				kGAMECLASS.mainView.statsView.showStatUp('str');
 			}
-			while(hasStatusEffect(StatusEffects.Web)) {
-				spe += statusEffectv1(StatusEffects.Web);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.Web);
-			}
-			if(hasStatusEffect(StatusEffects.Shielding)) removeStatusEffect(StatusEffects.Shielding);
-			if(hasStatusEffect(StatusEffects.HolliConstrict)) removeStatusEffect(StatusEffects.HolliConstrict);
-			if(hasStatusEffect(StatusEffects.LustStones)) removeStatusEffect(StatusEffects.LustStones);
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
-			if(hasStatusEffect(StatusEffects.Sealed)) {
-				removeStatusEffect(StatusEffects.Sealed);
-			}
-			if(hasStatusEffect(StatusEffects.Sealed2)) {
-				removeStatusEffect(StatusEffects.Sealed2);
-			}
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
+				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
@@ -5328,33 +5528,8 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
 			}
-			if(hasStatusEffect(StatusEffects.Maleficium)) {
-				removeStatusEffect(StatusEffects.Maleficium);
-			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
-			}
-			if(hasStatusEffect(StatusEffects.UBERWEB)) removeStatusEffect(StatusEffects.UBERWEB);
-			if(hasStatusEffect(StatusEffects.DriderKiss)) removeStatusEffect(StatusEffects.DriderKiss);
-			if(hasStatusEffect(StatusEffects.WebSilence)) removeStatusEffect(StatusEffects.WebSilence);
-			if(hasStatusEffect(StatusEffects.GooArmorSilence)) removeStatusEffect(StatusEffects.GooArmorSilence);
-			if(hasStatusEffect(StatusEffects.Bound)) removeStatusEffect(StatusEffects.Bound);
-			if(hasStatusEffect(StatusEffects.GooArmorBind)) removeStatusEffect(StatusEffects.GooArmorBind);
-			if(hasStatusEffect(StatusEffects.WolfHold)) removeStatusEffect(StatusEffects.WolfHold);
-			if(hasStatusEffect(StatusEffects.Whispered)) removeStatusEffect(StatusEffects.Whispered);
-			if(hasStatusEffect(StatusEffects.AkbalSpeed)) {
-				kGAMECLASS.dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
-				removeStatusEffect(StatusEffects.AkbalSpeed);
-			}
-			if(hasStatusEffect(StatusEffects.AmilyVenom)) {
-				kGAMECLASS.dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
-				removeStatusEffect(StatusEffects.AmilyVenom);
-			}
-			while(hasStatusEffect(StatusEffects.Blind)) {
-				removeStatusEffect(StatusEffects.Blind);
-			}
-			if(hasStatusEffect(StatusEffects.SheilaOil)) {
-				removeStatusEffect(StatusEffects.SheilaOil);
 			}
 			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
@@ -5382,45 +5557,6 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
-			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
-			if(hasStatusEffect(StatusEffects.NagaBind)) removeStatusEffect(StatusEffects.NagaBind);
-			if(hasStatusEffect(StatusEffects.ScyllaBind)) removeStatusEffect(StatusEffects.ScyllaBind);
-			if(hasStatusEffect(StatusEffects.StoneLust)) {
-				removeStatusEffect(StatusEffects.StoneLust);
-			}
-			removeStatusEffect(StatusEffects.FirstAttack);
-			if(hasStatusEffect(StatusEffects.TemporaryHeat)) removeStatusEffect(StatusEffects.TemporaryHeat);
-			if(hasStatusEffect(StatusEffects.NoFlee)) removeStatusEffect(StatusEffects.NoFlee);
-			if(hasStatusEffect(StatusEffects.Poison)) removeStatusEffect(StatusEffects.Poison);
-			if(hasStatusEffect(StatusEffects.IsabellaStunned)) removeStatusEffect(StatusEffects.IsabellaStunned);
-			if(hasStatusEffect(StatusEffects.Stunned)) removeStatusEffect(StatusEffects.Stunned);
-			if(hasStatusEffect(StatusEffects.Confusion)) removeStatusEffect(StatusEffects.Confusion);
-			if(hasStatusEffect(StatusEffects.ThroatPunch)) removeStatusEffect(StatusEffects.ThroatPunch);
-			if(hasStatusEffect(StatusEffects.KissOfDeath)) removeStatusEffect(StatusEffects.KissOfDeath);
-			if(hasStatusEffect(StatusEffects.AcidSlap)) removeStatusEffect(StatusEffects.AcidSlap);
-			if(hasStatusEffect(StatusEffects.GooBind)) removeStatusEffect(StatusEffects.GooBind);
-			if(hasStatusEffect(StatusEffects.HarpyBind)) removeStatusEffect(StatusEffects.HarpyBind);
-			if(hasStatusEffect(StatusEffects.CalledShot)) {
-				spe += statusEffectv1(StatusEffects.CalledShot);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speDown.visible = false;
-				// speUp.visible = true;
-				removeStatusEffect(StatusEffects.CalledShot);
-			}
-			if(hasStatusEffect(StatusEffects.DemonSeed)) {
-				removeStatusEffect(StatusEffects.DemonSeed);
-			}
-			if(hasStatusEffect(StatusEffects.ParalyzeVenom)) {
-				str += statusEffectv1(StatusEffects.ParalyzeVenom);
-				spe += statusEffectv2(StatusEffects.ParalyzeVenom);
-				removeStatusEffect(StatusEffects.ParalyzeVenom);
-			}
-			if(hasStatusEffect(StatusEffects.lustvenom)) {
-				removeStatusEffect(StatusEffects.lustvenom);
-			}
-			if(hasStatusEffect(StatusEffects.InfestAttempted)) {
-				removeStatusEffect(StatusEffects.InfestAttempted);
-			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				removeStatusEffect(StatusEffects.Flying);
 				if(hasStatusEffect(StatusEffects.FlyingNoStun)) {
@@ -5428,64 +5564,34 @@ use namespace kGAMECLASS;
 					removePerk(PerkLib.Resolute);
 				}
 			}
-			if(hasStatusEffect(StatusEffects.ChanneledAttack)) {
-				removeStatusEffect(StatusEffects.ChanneledAttack);
-			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) kGAMECLASS.dynStats("int", -statusEffectv1(StatusEffects.Might));
-				else kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might));
-				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might));
+				else dynStats("str", -statusEffectv1(StatusEffects.Might));
+				dynStats("tou", -statusEffectv2(StatusEffects.Might));
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {
-				kGAMECLASS.dynStats("spe", -statusEffectv1(StatusEffects.Blink));
+				dynStats("spe", -statusEffectv1(StatusEffects.Blink));
 				removeStatusEffect(StatusEffects.Blink);
 			}
-			if(hasStatusEffect(StatusEffects.ChargeWeapon)) {
-				removeStatusEffect(StatusEffects.ChargeWeapon);
-			}
-			if(hasStatusEffect(StatusEffects.ChargeArmor)) {
-				removeStatusEffect(StatusEffects.ChargeArmor);
-			}
-			if(hasStatusEffect(StatusEffects.Blizzard)) {
-				removeStatusEffect(StatusEffects.Blizzard);
-			}
 			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
+				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
 				removeStatusEffect(StatusEffects.BeatOfWar);
 			}
-			if(hasStatusEffect(StatusEffects.CastedSpell)) {
-				removeStatusEffect(StatusEffects.CastedSpell);
-			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
+				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
-			if(hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
-				removeStatusEffect(StatusEffects.UnderwaterOutOfAir);
-			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
-				kGAMECLASS.dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
+				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
+				dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
 				removeStatusEffect(StatusEffects.TranceTransformation);
 			}
 			if(hasStatusEffect(StatusEffects.CrinosShape)) {
-				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
-				kGAMECLASS.dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
-				kGAMECLASS.dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
+				dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
+				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
+				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
 				removeStatusEffect(StatusEffects.CrinosShape);
-			}
-			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-				removeStatusEffect(StatusEffects.VioletPupilTransformation);
-			}
-			if(hasStatusEffect(StatusEffects.ManaShield)) {
-				removeStatusEffect(StatusEffects.ManaShield);
-			}
-			if(hasStatusEffect(StatusEffects.AlraunePollen)) {
-				removeStatusEffect(StatusEffects.AlraunePollen);
-			}
-			if(hasStatusEffect(StatusEffects.AlrauneEntangle)) {
-				removeStatusEffect(StatusEffects.AlrauneEntangle);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
@@ -5505,71 +5611,8 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 			}
-			if(hasStatusEffect(StatusEffects.CooldownInkSpray)) {
-				removeStatusEffect(StatusEffects.CooldownInkSpray);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				removeStatusEffect(StatusEffects.CooldownTailSmack);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				removeStatusEffect(StatusEffects.CooldownStoneClaw);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				removeStatusEffect(StatusEffects.CooldownTailSlam);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				removeStatusEffect(StatusEffects.CooldownWingBuffet);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownIllusion)) {
-				removeStatusEffect(StatusEffects.CooldownIllusion);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownTerror)) {
-				removeStatusEffect(StatusEffects.CooldownTerror);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownFascinate)) {
-				removeStatusEffect(StatusEffects.CooldownFascinate);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-				removeStatusEffect(StatusEffects.CooldownCompellingAria);
-			}
-			if(hasStatusEffect(StatusEffects.MilkBlastCooldown)) {
-				removeStatusEffect(StatusEffects.MilkBlastCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.CumCannonCooldown)) {
-				removeStatusEffect(StatusEffects.CumCannonCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownKick)) {
-				removeStatusEffect(StatusEffects.CooldownKick);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectAir);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectEarth);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectFire);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectWater);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectIce);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectLightning);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectDarkness);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectWood)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectWood);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectMetal)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectMetal);
-			}
-			if(hasStatusEffect(StatusEffects.CooldownEAspectEther)) {
-				removeStatusEffect(StatusEffects.CooldownEAspectEther);
+			if(hasStatusEffect(StatusEffects.HeroBane)) {
+				removeStatusEffect(StatusEffects.HeroBane);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
@@ -5582,77 +5625,17 @@ use namespace kGAMECLASS;
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
 			}
-			if(hasStatusEffect(StatusEffects.AnemoneVenom)) {
-				str += statusEffectv1(StatusEffects.AnemoneVenom);
-				spe += statusEffectv2(StatusEffects.AnemoneVenom);
-				//Make sure nothing got out of bounds
-				kGAMECLASS.dynStats("cor", 0);
-
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				// speUp.visible = true;
-				// strUp.visible = true;
-				removeStatusEffect(StatusEffects.AnemoneVenom);
-			}
-			if(hasStatusEffect(StatusEffects.GnollSpear)) {
-				spe += statusEffectv1(StatusEffects.GnollSpear);
-				//Make sure nothing got out of bounds
-				kGAMECLASS.dynStats("cor", 0);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.GnollSpear);
-			}
-			if(hasStatusEffect(StatusEffects.BasiliskCompulsion)) removeStatusEffect(StatusEffects.BasiliskCompulsion);
-			if(hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				spe += statusEffectv1(StatusEffects.BasiliskSlow);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				removeStatusEffect(StatusEffects.BasiliskSlow);
-			}
-			if (hasStatusEffect(StatusEffects.GiantGrabbed)) removeStatusEffect(StatusEffects.GiantGrabbed);
-			if (hasStatusEffect(StatusEffects.GiantBoulder)) removeStatusEffect(StatusEffects.GiantBoulder);
-			if (hasStatusEffect(StatusEffects.GiantStrLoss)) {
-				str += statusEffectv1(StatusEffects.GiantStrLoss);
-				removeStatusEffect(StatusEffects.GiantStrLoss);
-			}
-			if (hasStatusEffect(StatusEffects.LizanBlowpipe)) {
-				str += statusEffectv1(StatusEffects.LizanBlowpipe);
-				tou += statusEffectv2(StatusEffects.LizanBlowpipe);
-				spe += statusEffectv3(StatusEffects.LizanBlowpipe);
-				sens -= statusEffectv4(StatusEffects.LizanBlowpipe);
-				removeStatusEffect(StatusEffects.LizanBlowpipe);
-			}
-			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
-			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
-			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.RemovedArmor);
-			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
-			if (hasStatusEffect(StatusEffects.MirroredAttack)) removeStatusEffect(StatusEffects.MirroredAttack);
-			if (hasStatusEffect(StatusEffects.Tentagrappled)) removeStatusEffect(StatusEffects.Tentagrappled);
-			if (hasStatusEffect(StatusEffects.TentagrappleCooldown)) removeStatusEffect(StatusEffects.TentagrappleCooldown);
-			if (hasStatusEffect(StatusEffects.ShowerDotEffect)) removeStatusEffect(StatusEffects.ShowerDotEffect);
-			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
-			{
-				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				removeStatusEffect(StatusEffects.GardenerSapSpeed);
-			}
-			if (hasStatusEffect(StatusEffects.VineHealUsed)) removeStatusEffect(StatusEffects.VineHealUsed);
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
-			if (hasStatusEffect(StatusEffects.TaintedMind)) removeStatusEffect(StatusEffects.TaintedMind);
-			if (hasStatusEffect(StatusEffects.PurpleHaze)) removeStatusEffect(StatusEffects.PurpleHaze);
-			if (hasStatusEffect(StatusEffects.MinotaurKingMusk)) removeStatusEffect(StatusEffects.MinotaurKingMusk);
-			if (hasStatusEffect(StatusEffects.MinotaurKingsTouch)) removeStatusEffect(StatusEffects.MinotaurKingsTouch);
-			if (hasStatusEffect(StatusEffects.LethicesRapeTentacles)) removeStatusEffect(StatusEffects.LethicesRapeTentacles);
-			if (hasStatusEffect(StatusEffects.OnFire)) removeStatusEffect(StatusEffects.OnFire);
-			if (hasStatusEffect(StatusEffects.LethicesShell)) removeStatusEffect(StatusEffects.LethicesShell);
-			if (hasStatusEffect(StatusEffects.WhipSilence)) removeStatusEffect(StatusEffects.WhipSilence);
-			if (hasStatusEffect(StatusEffects.PigbysHands)) removeStatusEffect(StatusEffects.PigbysHands);
+			
+			// All CombatStatusEffects are removed here
+			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
+				// Using a copy of array in case effects are removed/added in handler
+				if (statusEffects.indexOf(a[i])>=0) a[i].onCombatEnd();
+			}
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
@@ -5995,7 +5978,7 @@ use namespace kGAMECLASS;
 				sac.value1 += 5 * intensity;
 				sac.value2 += 5 * intensity;
 				sac.value3 += 48 * intensity;
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			else {
@@ -6003,7 +5986,7 @@ use namespace kGAMECLASS;
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>");
 				}
 				createStatusEffect(StatusEffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
-				game.dynStats("lib", 15 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 15 * intensity, "scale", false);
 			}
 			return true;
 		}
@@ -6030,7 +6013,7 @@ use namespace kGAMECLASS;
 				addStatusValue(StatusEffects.Rut, 1, 100 * intensity);
 				addStatusValue(StatusEffects.Rut, 2, 5 * intensity);
 				addStatusValue(StatusEffects.Rut, 3, 48 * intensity);
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			else {
 				if(output) {
@@ -6041,21 +6024,21 @@ use namespace kGAMECLASS;
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
-				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			
 			return true;
 		}
 		public function orgasmReal():void
 		{
-			game.dynStats("lus=", 0, "res", false);
+			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 
 			if (countCockSocks("gilded") > 0) {
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
+				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 				gems += bonusGems;
 			}
 		}
@@ -6105,6 +6088,21 @@ use namespace kGAMECLASS;
 
 			if (real) orgasmReal();
 		}
+		public function orgasmRaijuStyle():void
+		{
+			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				game.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
+				dynStats("lus", (60 + rand(20)), "sca", false);
+				game.mutations.voltageTopaz(false,kGAMECLASS.player);
+			}
+			else {
+				game.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				dynStats("lus", (maxLust() * 0.1), "sca", false);
+			}
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+		}
 		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
 			options = Utils.extend({
 				display:true,
@@ -6132,6 +6130,137 @@ use namespace kGAMECLASS;
 				orgasm(otype);
 			}
 		}
-
+		
+		protected override function maxHP_base():Number {
+			var max:Number = super.maxHP_base();
+			if (alicornScore() >= 11) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 10) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (unicornScore() >= 9) max += (120 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			
+			return max;
+		}
+		protected override function maxLust_base():Number {
+			var max:Number = super.maxLust_base();
+			if (cowScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (cowScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (demonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 10) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (minotaurScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (phoenixScore() >= 5) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (salamanderScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			
+			return max;
+		}
+		
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number,dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+			//Easy mode cuts lust gains!
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 2;
+			
+			//Set original values to begin tracking for up/down values if
+			//they aren't set yet.
+			//These are reset when up/down arrows are hidden with
+			//hideUpDown();
+			//Just check str because they are either all 0 or real values
+			if(game.oldStats.oldStr == 0) {
+				game.oldStats.oldStr = str;
+				game.oldStats.oldTou = tou;
+				game.oldStats.oldSpe = spe;
+				game.oldStats.oldInte = inte;
+				game.oldStats.oldWis = wis;
+				game.oldStats.oldLib = lib;
+				game.oldStats.oldSens = sens;
+				game.oldStats.oldCor = cor;
+				game.oldStats.oldHP = HP;
+				game.oldStats.oldLust = lust;
+				game.oldStats.oldFatigue = fatigue;
+				game.oldStats.oldSoulforce = soulforce;
+				game.oldStats.oldHunger = hunger;
+			}
+			if (scale) {
+				//MOD CHANGES FOR PERKS
+				//Bimbos learn slower
+				if (findPerk(PerkLib.FutaFaculties) >= 0 || findPerk(PerkLib.BimboBrains) >= 0 || findPerk(PerkLib.BroBrains) >= 0) {
+					if (dinte > 0) dinte /= 2;
+					if (dinte < 0) dinte *= 2;
+				}
+				if (findPerk(PerkLib.FutaForm) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0) {
+					if (dlib > 0) dlib *= 2;
+					if (dlib < 0) dlib /= 2;
+				}
+				
+				// Uma's Perkshit
+				if (findPerk(PerkLib.ChiReflowSpeed) >= 0 && dspe < 0) dspe *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
+				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+				
+				//Apply lust changes in NG+.
+				dlust *= 1 + (newGamePlusMod() * 0.2);
+				
+				//lust resistance
+				if (dlust > 0 && scale) dlust *= game.lustPercent() / 100;
+				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
+				if (dcor > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dcor *= 0.5;
+				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
+				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
+				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
+				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
+				
+				if (sens > 50 && dsens > 0) dsens /= 2;
+				if (sens > 75 && dsens > 0) dsens /= 2;
+				if (sens > 90 && dsens > 0) dsens /= 2;
+				if (sens > 50 && dsens < 0) dsens *= 2;
+				if (sens > 75 && dsens < 0) dsens *= 2;
+				if (sens > 90 && dsens < 0) dsens *= 2;
+				
+				
+				//Bonus gain for perks!
+				if (findPerk(PerkLib.Strong) >= 0) dstr += dstr * perk(findPerk(PerkLib.Strong)).value1;
+				if (findPerk(PerkLib.Tough) >= 0) dtou += dtou * perk(findPerk(PerkLib.Tough)).value1;
+				if (findPerk(PerkLib.Fast) >= 0) dspe += dspe * perk(findPerk(PerkLib.Fast)).value1;
+				if (findPerk(PerkLib.Smart) >= 0) dinte += dinte * perk(findPerk(PerkLib.Smart)).value1;
+				if (findPerk(PerkLib.Lusty) >= 0) dlib += dlib * perk(findPerk(PerkLib.Lusty)).value1;
+				if (findPerk(PerkLib.Sensitive) >= 0) dsens += dsens * perk(findPerk(PerkLib.Sensitive)).value1;
+				
+				// Uma's Str Cap from Perks (Moved to max stats)
+				/*if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
+				{
+					if (str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
+					{
+						str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
+					}
+				}
+				if (findPerk(PerkLib.ChiReflowDefense) >= 0)
+				{
+					if (spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
+					{
+						spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
+					}
+				}*/
+			}
+			//Change original stats
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
+			//Refresh the stat pane with updated values
+			//mainView.statsView.showUpDown();
+			game.showUpDown();
+			game.statScreenRefresh();
+		}
 	}
 }

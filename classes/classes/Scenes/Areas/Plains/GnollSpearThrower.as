@@ -1,7 +1,7 @@
 package classes.Scenes.Areas.Plains
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	/**
@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Plains
 					outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound");
 					if(player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?");
 					else outputText(".");
-					game.dynStats("lus", (player.lib/20 + rand(4)+1));
+					player.dynStats("lus", (player.lib/20 + rand(4)+1));
 				}
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 					if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
@@ -140,16 +140,7 @@ package classes.Scenes.Areas.Plains
 			//<Hyena Attack 2 – Javelin – Successful – Player Entangled>
 			else if(rand(3) >= 1) {
 				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your [armor].  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
-				if(!player.hasStatusEffect(StatusEffects.GnollSpear)) player.createStatusEffect(StatusEffects.GnollSpear,0,0,0,0);
-				slow = 15;
-				while(slow > 0 && player.spe > 2) {
-					slow--;
-					player.addStatusValue(StatusEffects.GnollSpear,1,1);
-					player.spe--;
-					showStatDown( 'spe' );
-					// speDown.visible = true;
-					// speUp.visible = false;
-				}
+				player.addCombatBuff('spe',-15);
 				damage = player.takeDamage(25+rand(20), true);
 			}
 			//<Hyena Attack 2 – Javelin – Successful – Player Not Entangled>
@@ -198,7 +189,7 @@ package classes.Scenes.Areas.Plains
 					outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + chestDesc());
 					if(player.biggestTitSize() >= 1) outputText(", sending a wave of pain through the sensitive flesh");
 					outputText(".  A small, traitorous part of you can't help but notice a flash of long, dark flesh beneath her loincloth even as you stagger back from the impact. ");
-					game.dynStats("lus", 2);
+					player.dynStats("lus", 2);
 					player.takeDamage(damage, true);
 				}
 			}
@@ -211,12 +202,12 @@ package classes.Scenes.Areas.Plains
 			//<Hyena Attack 4 – Arousal Attack – Highly Successful>
 			if(player.cor + player.lib > chance + 50) {
 				outputText("A wry grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  She holds you there, pressed against her groin for several moments, desire growing deep within your body, before you find the strength and will to pull away.  The amazon grins, letting you stumble back as you try to fight off the feel of her body.\n\n");
-				game.dynStats("lus", (25 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (25 + player.lib/20 + player.sens/5));
 			}
 			//<Hyena Attack 4 – Arousal Attack – Mildly Successful>
 			else if(20 + player.cor + player.lib > chance) {
 				outputText("A lazy grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  Instinctively, you tear away from the hold, stumbling away from the sensations filling your mind, though some desire remains kindled within you.");
-				game.dynStats("lus", (15 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (15 + player.lib/20 + player.sens/5));
 			}
 			//<Hyena Attack 4 – Arousal Attack – Unsuccessful>
 			else {
@@ -298,7 +289,7 @@ package classes.Scenes.Areas.Plains
 					outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound");
 					if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?");
 					else outputText(".");
-					game.dynStats("lus", (player.lib / 20 + rand(4) + 1));
+					player.dynStats("lus", (player.lib / 20 + rand(4) + 1));
 				}
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");

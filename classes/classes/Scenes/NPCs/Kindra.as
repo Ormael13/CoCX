@@ -99,7 +99,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 6))) KindraFireBow06();
+				if (fatigue < (maxFatigue() - (bowShooting() * 6))) KindraFireBow06();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -107,7 +107,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 5))) KindraFireBow05();
+				if (fatigue < (maxFatigue() - (bowShooting() * 5))) KindraFireBow05();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -115,7 +115,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 4))) KindraFireBow04();
+				if (fatigue < (maxFatigue() - (bowShooting() * 4))) KindraFireBow04();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -123,7 +123,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 3))) KindraFireBow03();
+				if (fatigue < (maxFatigue() - (bowShooting() * 3))) KindraFireBow03();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -131,7 +131,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
-				if (fatigue < (eMaxFatigue() - (bowShooting() * 2))) KindraFireBow02();
+				if (fatigue < (maxFatigue() - (bowShooting() * 2))) KindraFireBow02();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
@@ -139,7 +139,7 @@ package classes.Scenes.NPCs
 				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
-				if (fatigue < (eMaxFatigue() - bowShooting())) KindraFireBow01();
+				if (fatigue < (maxFatigue() - bowShooting())) KindraFireBow01();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();

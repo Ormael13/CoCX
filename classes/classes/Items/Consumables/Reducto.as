@@ -44,7 +44,7 @@ package classes.Items.Consumables
 			game.player.ballSize -= Utils.rand(4) + 2;
 			if (game.player.ballSize < 1) game.player.ballSize = 1;
 			outputText("You feel your scrotum shift, shrinking down along with your " + game.player.ballsDescriptLight() + ".  Within a few seconds the paste has been totally absorbed and the shrinking stops.");
-			game.dynStats("lib", -2, "lus", -10);
+			game.player.dynStats("lib", -2, "lus", -10);
 			game.inventory.itemGoNext();
 		}
 		
@@ -57,7 +57,7 @@ package classes.Items.Consumables
 				game.player.shrinkTits(true);
 			}
 			outputText("\nThe last of it wicks away into your skin, completing the changes.");
-			game.dynStats("sen", -2, "lus", -5);
+			game.player.dynStats("sen", -2, "lus", -5);
 			game.inventory.itemGoNext();
 		}
 		
@@ -77,7 +77,7 @@ package classes.Items.Consumables
 				if (game.player.buttRating < 1) game.player.buttRating = 1;
 				outputText("After a few seconds your " + game.player.buttDescript() + " has shrunk to a much smaller size!");
 			}
-			game.dynStats("lib", -2, "lus", -10);
+			game.player.dynStats("lib", -2, "lus", -10);
 			game.inventory.itemGoNext();
 		}
 		
@@ -88,7 +88,7 @@ package classes.Items.Consumables
 			//Set clitlength down to 2 digits in length
 			game.player.clitLength = int(game.player.clitLength * 100) / 100;
 			outputText("Your " + game.player.clitDescript() + " shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.");
-			game.dynStats("sen", 2, "lus", 10);
+			game.player.dynStats("sen", 2, "lus", 10);
 			game.inventory.itemGoNext();
 		}
 		
@@ -113,7 +113,7 @@ package classes.Items.Consumables
 					}
 				}
 			}
-			game.dynStats("sen", -2, "lus", -10);
+			game.player.dynStats("sen", -2, "lus", -10);
 			game.inventory.itemGoNext();
 		}
 		
@@ -133,7 +133,7 @@ package classes.Items.Consumables
 				if (game.player.hipRating < 1) game.player.hipRating = 1;
 				outputText("After a few seconds your [hips] have shrunk to a much smaller size!");
 			}
-			game.dynStats("lib", -2, "lus", -10);
+			game.player.dynStats("lib", -2, "lus", -10);
 			game.inventory.itemGoNext();
 		}
 		
@@ -149,7 +149,7 @@ package classes.Items.Consumables
 				outputText("Your " + game.player.nippleDescript(0) + "s get smaller and smaller, stopping when they are roughly half their previous size.");
 				game.player.nippleLength /= 2;
 			}
-			game.dynStats("sen", -5, "lus", -5);
+			game.player.dynStats("sen", -5, "lus", -5);
 			game.inventory.itemGoNext();
 		}
 		

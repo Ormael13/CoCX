@@ -207,7 +207,7 @@ public function callForFollowerIsabella():void {
 	addButton(0, "Appearance", isabellasAppearance).hint("Examine Isabella's detailed appearance.");
 	addButton(1, "Talk", isabellaTalkMenu).hint("Ask Isabella about something.");
 	addButton(2, "Sex", campIzzySexMenu).hint("Have some sex with the cow-girl.");
-	addButton(3, "Spar", isabellaSparMenu).hint("Get into a quick battle with Isabella!");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", isabellaSparMenu).hint("Get into a quick battle with Isabella!");
 	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(4, "Accent Coach", isabellasAccentCoaching).hint("Teach Isabella to talk in normal accent.");
 	else addButton(4, "Accent Uncoach", isabellaAccentUncoaching).hint("Let Isabella talk the way she wants. This will pretty much throw away all the coaching progress you've made.");
 	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(5, "Get Milk", getMilk).hint("Get a bottle of Isabella's milk.");

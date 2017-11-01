@@ -544,7 +544,7 @@ private function gretasGarments():void {
 		if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
 	}
 	outputText(".");
-	dynStats("lus", 2, "resisted", false);
+	dynStats("lus", 2, "scale", false);
 	menu();
 	if(flags[kFLAGS.FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
 	else {

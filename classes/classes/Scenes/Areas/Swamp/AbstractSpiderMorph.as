@@ -6,8 +6,9 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
+import classes.StatusEffects.Combat.WebDebuff;
 
-	public class AbstractSpiderMorph extends Monster
+public class AbstractSpiderMorph extends Monster
 	{
 		public function AbstractSpiderMorph()
 		{
@@ -56,26 +57,18 @@ package classes.Scenes.Areas.Swamp
 			}
 			//Got hit
 			else {
-				if (!player.hasStatusEffect(StatusEffects.Web)) {
+				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
+				if (web == null) {
 					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.");
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
 					outputText("\n");
-					player.createStatusEffect(StatusEffects.Web, 0, 0, 0, 0);
+					web = new WebDebuff();
+					player.addStatusEffect(web);
 				}
 				else {
 					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
 				}
-				//Only apply as much speed slow as necessary.
-				var amount:Number = 25;
-				if (player.spe - amount < 1) {
-					amount = player.spe - 1;
-				}
-				//Apply changes, display arrows, and track speed lost
-				player.spe -= amount;
-				showStatDown('spe');
-				// speUp.visible = false;
-				// speDown.visible = true;
-				player.addStatusValue(StatusEffects.Web, 1, amount);
+				web.increase();
 
 			}
 			combatRoundOver();
@@ -96,7 +89,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("While " + mf("his", "her") + " venom pours into you, the spider-" + mf("boy", "girl") + " reaches into your gear to play with your [nipple], and you moan like a whore from the dual stimulation of " + mf("his", "her") + " venom and nipple-play.\n\n");
 				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ");
 				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ");
-				game.dynStats("lus", 60);
+				player.dynStats("lus", 60);
 				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
 				else outputText("struggle not to fall down and start masturbating on the spot.");
 				outputText("\n");
@@ -129,11 +122,11 @@ package classes.Scenes.Areas.Swamp
 					outputText("You react far too slowly, and before you can even think to dodge, " + mf("he", "she") + "'s bitten deep into you, pumping large squirts of venom deep into your body.  Unnatural heat rolls through you, pooling in your groin until you're lewdly bucking your hips against the spider-morph's thigh.  " + mf("He", "She") + " pulls out and steps back, ");
 					if (hasVagina()) outputText("casually cupping her breasts while you watch with venom-dilated eyes, slowly touching yourself.  Once she stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + mf("boy", "girl") + "!\n");
 					else outputText("casually tugging on his relatively short, girthy dick as you watch with venom-dilated eyes, slowly touching yourself.  Once he stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + mf("boy", "girl") + "!\n");
-					game.dynStats("lus", 50);
+					player.dynStats("lus", 50);
 				}
 				else {
 					outputText("You react too slowly, and before you can dodge, " + mf("he", "she") + "'s bitten you, leaving behind a burning venom that warms your blood and stokes your lust.\n");
-					game.dynStats("lus", 30);
+					player.dynStats("lus", 30);
 				}
 			}
 			combatRoundOver();

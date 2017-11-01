@@ -123,7 +123,7 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+	player.dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
 	statScreenRefresh();
 	return player.HP - before;
 }
@@ -182,7 +182,7 @@ public function SoulforceChange(changeNum:Number, display:Boolean):Number
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+	dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
 */	statScreenRefresh();
 	return player.soulforce - before;
 }
@@ -222,7 +222,7 @@ public function ManaChange(changeNum:Number, display:Boolean):Number
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+	dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
 */	statScreenRefresh();
 	return player.mana - before;
 }
@@ -262,7 +262,7 @@ public function WrathChange(changeNum:Number, display:Boolean):Number
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+	dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
 */	statScreenRefresh();
 	return player.wrath - before;
 }
@@ -1131,7 +1131,9 @@ public function hideUpDown():void {
 	oldStats.oldCor = 0;  
 	oldStats.oldHP = 0;
 	oldStats.oldLust = 0;
+	oldStats.oldWrath = 0;
 	oldStats.oldFatigue = 0;
+	oldStats.oldMana = 0;
 	oldStats.oldSoulforce = 0;
 	oldStats.oldHunger = 0;
 }
@@ -1186,76 +1188,8 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 }
 
 public function lustPercent():Number {
-	var lust:Number = 100;
-	var minLustCap:Number = 25;
-	
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//ADDITIVE REDUCTIONS
-	//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
-	//TOTAL IS LIMITED TO 75%!
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//Corrupted Libido reduces lust gain by 10%!
-	if(player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
-	//Acclimation reduces by 15%
-	if(player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
-	//Purity blessing reduces lust gain
-	if(player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
-	//Resistance = 10%
-	if(player.findPerk(PerkLib.ResistanceI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIII) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
-	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
-	if(lust < minLustCap) lust = minLustCap;
-	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
-		if(lust >= 80) lust = 100;
-		else lust += 20;
-	}
-	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//MULTIPLICATIVE REDUCTIONS
-	//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER
-	//DRAWBACKS TO JUSTIFY IT.
-	//++++++++++++++++++++++++++++++++++++++++++++++++++
-	//Bimbo body slows lust gains!
-	if((player.hasStatusEffect(StatusEffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
-	//Omnibus' Gift reduces lust gain by 15%
-	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
-	//Luststick reduces lust gain by 10% to match increased min lust
-	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
-	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
-	//Berseking reduces lust gains by 10%
-	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-	
-	//Items
-	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
-	if (player.armor == armors.DBARMOR) lust *= 0.9;
-	if (player.weapon == weapons.HNTCANE) lust *= 0.75;
-	if ((player.weapon == weapons.PURITAS) || (player.weapon == weapons.ASCENSU)) lust *= 0.9;
-	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
-	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
-	if (sac)
-	{
-		if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
-		{
-			lust *= sac.value2;
-		}
-	}
-	if(player.statusEffectv1(StatusEffects.Maleficium) > 0) {
-		if(lust >= 50) lust = 100;
-		else lust += 50;
-	}
-	lust = Math.round(lust);
-	if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
-	return lust;
+	return player.lustPercent();
 }
-
 // returns OLD OP VAL
 public function applyOperator(old:Number, op:String, val:Number):Number {
 	switch(op) {
@@ -1278,249 +1212,12 @@ public function applyOperator(old:Number, op:String, val:Number):Number {
 public function testDynStatsEvent():void {
 	clearOutput();
 	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
-	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
+	player.dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
 	doNext(playerMenu);
 }
 
-/**
- * Modify stats.
- *
- * Arguments should come in pairs nameOp:String, value:Number/Boolean <br/>
- * where nameOp is ( stat_name + [operator] ) and value is operator argument<br/>
- * valid operators are "=" (set), "+", "-", "*", "/", add is default.<br/>
- * valid stat_names are "str", "tou", "spe", "int", "lib", "wis", "sen", "lus", "cor" or their full names; also "resisted"/"res" (apply lust resistance, default true) and "noBimbo"/"bim" (do not apply bimbo int gain reduction, default false)
- */
-public function dynStats(... args):void
-{
-	// Check num of args, we should have a multiple of 2
-	if ((args.length % 2) != 0)
-	{
-		trace("dynStats aborted. Keys->Arguments could not be matched");
-		return;
-	}
-
-	var argDefs:Object = { //[value, operator]
-		str: [ 0, "+"],
-		tou: [ 0, "+"],
-		spe: [ 0, "+"],
-		int: [ 0, "+"],
-		lib: [ 0, "+"],
-		sen: [ 0, "+"],
-		lus: [ 0, "+"],
-		cor: [ 0, "+"],
-		res: [ true, "="],
-		bim: [ false, "="],
-		wis: [ 0, "+"]
-	};
-	var aliases:Object = {
-		"strength":"str",
-		"toughness": "tou",
-		"speed": "spe",
-		"intellect": "int",
-		"inte": "int",
-		"libido": "lib",
-		"sensitivity": "sen",
-		"sens": "sen",
-		"lust": "lus",
-		"corruption": "cor",
-		"resisted": "res",
-		"noBimbo": "bim",
-		"wisdom": "wis"
-	};
-
-	for (var i:int = 0; i < args.length; i += 2)
-	{
-		if (typeof(args[i]) == "string")
-		{
-			// Make sure the next arg has the POSSIBILITY of being correct
-			if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
-			{
-				trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
-				continue;
-			}
-			var argOp:String = "";
-			// Figure out which array to search
-			var argsi:String = (args[i] as String);
-			if ("+-*/=".indexOf(argsi.charAt(argsi.length - 1)) != -1) {
-				argOp = argsi.charAt(argsi.length - 1);
-				argsi = argsi.slice(0, argsi.length - 1);
-			}
-			if (argsi in aliases) argsi = aliases[argsi];
-
-			if (argsi in argDefs) {
-				argDefs[argsi][0] = args[i + 1];
-				if (argOp) argDefs[argsi][1] = argOp;
-			} else {
-				trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
-			}
-		}
-		else
-		{
-			trace("dynStats aborted. Expected a key and got SHIT");
-			return;
-		}
-	}
-	// Got this far, we have values to statsify
-	var newStr:Number = applyOperator(player.str, argDefs.str[1], argDefs.str[0]);
-	var newTou:Number = applyOperator(player.tou, argDefs.tou[1], argDefs.tou[0]);
-	var newSpe:Number = applyOperator(player.spe, argDefs.spe[1], argDefs.spe[0]);
-	var newInte:Number = applyOperator(player.inte, argDefs.int[1], argDefs.int[0]);
-	var newWis:Number = applyOperator(player.wis, argDefs.wis[1], argDefs.wis[0]);
-	var newLib:Number = applyOperator(player.lib, argDefs.lib[1], argDefs.lib[0]);
-	var newSens:Number = applyOperator(player.sens, argDefs.sen[1], argDefs.sen[0]);
-	var newLust:Number = applyOperator(player.lust, argDefs.lus[1], argDefs.lus[0]);
-	var newCor:Number = applyOperator(player.cor, argDefs.cor[1], argDefs.cor[0]);
-	var modStr:Number = newStr - player.str;
-	var modTou:Number = newTou - player.tou;
-	var modSpe:Number = newSpe - player.spe;
-	var modInte:Number = newInte - player.inte;
-	var modWis:Number = newWis - player.wis;
-	var modLib:Number = newLib - player.lib;
-	var modSens:Number = newSens - player.sens;
-	var modLust:Number = newLust - player.lust;
-	var modCorr:Number = newCor - player.cor;
-	var resisted:Boolean= argDefs.res;
-	var noBimbo:Boolean = argDefs.noBimbo;
-	//Easy mode cuts lust gains!
-	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && modLust > 0 && resisted) modLust /= 2;
-
-	//Set original values to begin tracking for up/down values if
-	//they aren't set yet.
-	//These are reset when up/down arrows are hidden with 
-	//hideUpDown();
-	//Just check str because they are either all 0 or real values
-	if(oldStats.oldStr == 0) {
-		oldStats.oldStr = player.str;
-		oldStats.oldTou = player.tou;
-		oldStats.oldSpe = player.spe;
-		oldStats.oldInte = player.inte;
-		oldStats.oldWis = player.wis;
-		oldStats.oldLib = player.lib;
-		oldStats.oldSens = player.sens;
-		oldStats.oldCor = player.cor;
-		oldStats.oldHP = player.HP;
-		oldStats.oldLust = player.lust;
-		oldStats.oldFatigue = player.fatigue;
-		oldStats.oldSoulforce = player.soulforce;
-		oldStats.oldHunger = player.hunger;
-	}
-	//MOD CHANGES FOR PERKS
-	//Bimbos learn slower
-	if(!noBimbo)
-	{
-		if(player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0  || player.findPerk(PerkLib.BroBrains) >= 0) {
-			if(modInte > 0) modInte /= 2;
-			if(modInte < 0) modInte *= 2;
-		}
-		if(player.findPerk(PerkLib.FutaForm) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0  || player.findPerk(PerkLib.BroBody) >= 0) {
-			if(modLib > 0) modLib *= 2;
-			if(modLib < 0) modLib /= 2;
-		}
-	}
-
-	// Uma's Perkshit
-	if (player.findPerk(PerkLib.ChiReflowSpeed)>=0 && modSpe < 0) modSpe *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
-	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && modLib > 0) modLib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && modSens > 0) modSens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-
-	//Apply lust changes in NG+.
-	if (resisted) modLust *= 1 + (player.newGamePlusMod() * 0.2);
-
-	//lust resistance
-	if(modLust > 0 && resisted) modLust *= lustPercent()/100;
-	if(modLib > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) modLib *= 0.75;
-	if(modCorr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) modCorr *= 0.5;
-	if(modCorr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) modCorr *= 0.75;
-	if (modCorr > 0 && player.weapon == weapons.HNTCANE) modCorr *= 0.5;
-	if (player.findPerk(PerkLib.AscensionMoralShifter) >= 0) modCorr *= 1 + (player.perkv1(PerkLib.AscensionMoralShifter) * 0.2);
-	//Change original stats
-	player.str+=modStr;
-	player.tou+=modTou;
-	player.spe+=modSpe;
-	player.inte+=modInte;
-	player.lib+=modLib;
-	player.wis+=modWis;
-
-	if(player.sens > 50 && modSens > 0) modSens/=2;
-	if(player.sens > 75 && modSens > 0) modSens/=2;
-	if(player.sens > 90 && modSens > 0) modSens/=2;
-	if(player.sens > 50 && modSens < 0) modSens*=2;
-	if(player.sens > 75 && modSens < 0) modSens*=2;
-	if(player.sens > 90 && modSens < 0) modSens*=2;
-
-	player.sens+=modSens;
-	player.lust+=modLust;
-	player.cor += modCorr;
-
-	//Bonus gain for perks!
-	if(player.findPerk(PerkLib.Strong) >= 0 && modStr >= 0) player.str+=modStr*player.perk(player.findPerk(PerkLib.Strong)).value1;
-	if(player.findPerk(PerkLib.Tough) >= 0 && modTou >= 0) player.tou+=modTou*player.perk(player.findPerk(PerkLib.Tough)).value1;
-	if(player.findPerk(PerkLib.Fast) >= 0 && modSpe >= 0) player.spe+=modSpe*player.perk(player.findPerk(PerkLib.Fast)).value1;
-	if(player.findPerk(PerkLib.Smart) >= 0 && modInte >= 0) player.inte+=modInte*player.perk(player.findPerk(PerkLib.Smart)).value1;
-	if(player.findPerk(PerkLib.Lusty) >= 0 && modLib >= 0) player.lib+=modLib*player.perk(player.findPerk(PerkLib.Lusty)).value1;
-	if (player.findPerk(PerkLib.Sensitive) >= 0 && modSens >= 0) player.sens += modSens * player.perk(player.findPerk(PerkLib.Sensitive)).value1;
-
-	// Uma's Str Cap from Perks (Moved to max stats)
-	/*if (player.findPerk(PerkLib.ChiReflowSpeed) >= 0)
-	{
-		if (player.str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
-		{
-			player.str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
-		}
-	}
-	if (player.findPerk(PerkLib.ChiReflowDefense) >= 0)
-	{
-		if (player.spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
-		{
-			player.spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
-		}
-	}*/
-	
-	//Keep stats in bounds
-	var maxes:Object = player.getAllMaxStats();
-	var mins:Object = player.getAllMinStats();
-	if(player.str > maxes.str) player.str = maxes.str;
-	if(player.str < mins.str) player.str = mins.str;
-	if(player.tou > maxes.tou) player.tou = maxes.tou;
-	if(player.tou < mins.tou) player.tou = mins.tou;
-	if(player.spe > maxes.spe) player.spe = maxes.spe;
-	if(player.spe < mins.spe) player.spe = mins.spe;
-	if(player.inte > maxes.inte) player.inte = maxes.inte;
-	if(player.inte < mins.inte) player.inte = mins.inte;
-	if(player.wis > maxes.wis) player.wis = maxes.wis;
-	if(player.wis < mins.wis) player.wis = mins.wis;
-	if(player.lib > maxes.lib) player.lib = maxes.lib;
-	if(player.lib < mins.lib) player.lib = mins.lib;
-	if(player.sens > maxes.sens) player.sens = maxes.sens;
-	if(player.sens < mins.sens) player.sens = mins.sens;
-	if(player.cor > maxes.cor) player.cor = maxes.cor;
-	if(player.cor < mins.cor) player.cor = mins.cor;
-
-	//Add HP for toughness change.
-	if (modTou > 0) HPChange(modTou*2, false);
-	//Reduce hp if over max
-	if(player.HP > maxHP()) player.HP = maxHP();
-	
-	//Update to minimum lust if lust falls below it.
-	if(player.lust < minLust()) player.lust = minLust();
-	//worms moved to minLust() in Player.as.
-	if(player.lust > player.maxLust()) player.lust = player.maxLust();
-	
-	//Reduce soulforce if over max
-	if(player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-	//Reduce wrath if over max
-	if(player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
-	//Reduce mana if over max
-	if(player.mana > player.maxMana()) player.mana = player.maxMana();
-	
-	//Refresh the stat pane with updated values
-	//mainView.statsView.showUpDown();
-	showUpDown();
-	statScreenRefresh();
-}
-	
 public function showUpDown():void { //Moved from StatsView.
 	Utils.Begin("engineCore","showUpDown");
 	function _oldStatNameFor(statName:String):String {

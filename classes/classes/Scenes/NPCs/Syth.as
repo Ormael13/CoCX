@@ -11,16 +11,23 @@ package classes.Scenes.NPCs
 	public class Syth extends Monster
 	{
 		private function sythBaseAttack():void {
-			if (hasStatusEffect(StatusEffects.Lustzerking)) createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
-			else createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+			if (hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 20) {
+				wrath -= 20;
+				createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
+			}
+			else if (wrath >= 10) {
+				wrath -= 10;
+				createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+			}
 			eAttack();
 		}
 		
 		private function sythAttack1():void {
+			wrath -= 30;
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
 			damage *= 2;
-			outputText(capitalA + short + " lift it weapon with all his strenght and smash it on your head.");
+			outputText(capitalA + short + " lift it weapon with all his strenght and smash it on your head. ");
 			if(damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
@@ -84,11 +91,12 @@ package classes.Scenes.NPCs
 			outputText("Salamander start drawing symbols in the air toward you.");
 			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10;
 			lustDmg = Math.round(lustDmg);
-			game.dynStats("lus", lustDmg, "resisted", false);
+			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
 		}
 		
 		private function sythBerserk():void {
+			wrath -= 50;
 			outputText("Salamander roar and unleash his lustful fury in order to destroy you!\n\n");
 			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
@@ -101,7 +109,9 @@ package classes.Scenes.NPCs
 		
 		override protected function performCombatAction():void
 		{
+			wrath += 5;
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
+				wrath += 5;
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
 				else {
 					this.weaponAttack -= (40 + (40 * (1 + player.newGamePlusMod)));
@@ -110,10 +120,13 @@ package classes.Scenes.NPCs
 			}
 			var choice:Number = rand(6);
 			if (choice == 0) {
-				if (hasStatusEffect(StatusEffects.Lustzerking)) sythBaseAttack();
-				else sythBerserk();
+				if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) sythBerserk();
+				else sythBaseAttack();
 			}
-			if (choice == 1) sythAttack1();
+			if (choice == 1) {
+				if (wrath >= 30) sythAttack1();
+				else sythBaseAttack();
+			}
 			if (choice == 2) sythAttack2();
 			if (choice == 3) sythAttack3();
 			//if (choice == 4) sythUltimateAttack();//some super cool channeled or not super attack that will be his ace - smth to mix salamanders and demons style xD
@@ -124,7 +137,7 @@ package classes.Scenes.NPCs
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting a (literally) smoking hot salamander – a eight foot tall man with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his amber eyes, while his body covers leather armor.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
+			str += "You are fighting an eight foot tall corrupted salamander with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his amber eyes, while his body covers leather armor and two pairs of large bat-like demon-wings fold behind his shoulders.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
 			if (hasStatusEffect(StatusEffects.Lustzerking))
 			{
 				str += "\n\n<b>Looking at his posture and gaze indicates that he's currently under effect of some sort of berserking state.</b>";
@@ -160,8 +173,6 @@ package classes.Scenes.NPCs
 			this.weaponAttack = 56 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
 			this.armorDef = 27 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			this.armorPerk = "";
-			this.armorValue = 50;
 			this.bonusHP = 300;
 			this.additionalXP = 300;
 			this.bonusLust = 20;
@@ -177,12 +188,13 @@ package classes.Scenes.NPCs
 			this.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
-			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -142,7 +142,7 @@ public class OnikiriSake extends Consumable {
 			var colorEyes:String;
 			colorEyes = randomChoice(Mutations.oniEyeColors);
 			mutations.setEyeTypeAndColor(EYES_ONI,colorEyes);
-			outputText("\n\n You feel something fundamental change in your sight when you go check yourself in a puddle you notice your pupil now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
+			outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
 			changes++;
 		}
 		//Ears

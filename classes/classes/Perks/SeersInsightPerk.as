@@ -12,13 +12,13 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Increase spell/soulskills power and lower specials fatigue/soulforce cost by " + (params.value1 * 100) + "%.";
+			return "Increase spell/magical soulskills power and lower specials fatigue/soulforce cost by " + (params.value1 * 100) + "%.";
 		}
 
 		public function SeersInsightPerk() 
 		{
 			super("Seer’s Insight", "Seer’s Insight",
-					"Your equipment boost your spells/soulskills power and lowering costs of specials/soulskills!");
+					"Your equipment boost your spells/magical soulskills power and lowering costs of specials/soulskills!");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

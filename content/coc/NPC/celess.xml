@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extend-story name="celess" xmlns="xxc-story">
+<story name="celess" xmlns="xxc-story">
 	<lib name="strings">
 		<lib name="birth">
 			<text name="intro">
@@ -330,4 +330,4 @@
 			</text>
 		</lib>
 	</lib>	
-</extend-story>
+</story>

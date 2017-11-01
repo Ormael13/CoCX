@@ -188,13 +188,7 @@ package classes.Scenes.Areas.HighMountains
 		
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
-			if(player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				player.spe += player.statusEffectv1(StatusEffects.BasiliskSlow);
-				mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				player.removeStatusEffect(StatusEffects.BasiliskSlow);
-			}
+			player.removeStatusEffect(StatusEffects.BasiliskSlow);
 			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
 			//Bad end
 			if(player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0) {

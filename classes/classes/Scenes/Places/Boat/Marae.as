@@ -23,7 +23,7 @@ package classes.Scenes.Places.Boat
 			{
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
 				var damage:int = ((str + 100) + rand(50))
-				game.dynStats("lust", rand(5) + 5);
+				player.dynStats("lust", rand(5) + 5);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
@@ -46,7 +46,7 @@ package classes.Scenes.Places.Boat
 			{
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
 				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
-				game.dynStats("lust", lustDmg, "resisted", false);
+				player.dynStats("lust", lustDmg, "scale", false);
 				outputText("(+" + lustDmg + " lust)");
 				
 			}

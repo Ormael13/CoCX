@@ -6,9 +6,7 @@ package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.DarkElfScene;
 	import classes.Scenes.Places.HeXinDao;
 	
 	public class DarkElfScout extends Monster
@@ -62,15 +60,7 @@ package classes.Scenes.Monsters
 				outputText("An arrow hit you for ");
 				player.takeDamage(damage, true);
 				outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
-				if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-					player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
-					player.spe -= 2;
-				}
-				else {
-					player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
-					player.spe -= 3;
-				}
-				showStatDown( 'spe' );
+				player.addCombatBuff('spe', -3);
 			}
 		}
 		
@@ -113,7 +103,7 @@ package classes.Scenes.Monsters
 				else DarkElfBowShooting();
 			}
 			if (choice == 2) {
-				if (player.hasStatusEffect(StatusEffects.Flying) && rand(4) == 0) WingClip();
+				if (player.isFlying() && rand(4) == 0) WingClip();
 				else DarkElfBowShooting();
 			}
 			combatRoundOver();

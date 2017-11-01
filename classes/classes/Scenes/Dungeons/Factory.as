@@ -123,6 +123,18 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.FACTORY_TAKEN_LACTAID]++;
 			inventory.takeItem(consumables.LACTAID, roomPremiumStorage);
 		}
+		private function takeWardTome():void {
+			clearOutput();
+			outputText("These drugs aside, maybe there is something else here that can be of use?  A quick search becomes a not so quick search as you realize how much junk is in these boxes.");
+			if (player.inte < 50) {
+				outputText(" Sadly, everything is either useless, corruptive or both.");
+				doNext(roomPremiumStorage);
+			}
+			else {
+				outputText(" While most of this stuff is either dangerous to use or just plain junk, you stumble on a book of spells.  This appears to be a tome on the theories behind magical wards.  This could be useful!");
+				inventory.takeItem(consumables.WARDTOM, roomPremiumStorage);
+			}
+		}
 		
 		private function drinkCoffee():void {
 			spriteSelect(96);
@@ -418,7 +430,7 @@ package classes.Scenes.Dungeons
 			//MALE
 			if(player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
 				//(LUSTY) 
-				if(monster.lust >= monster.eMaxLust()) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
+				if(monster.lust >= monster.maxLust()) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
 				//(HP) 
 				else outputText("The succubus collapses on the floor, groaning in pain.  Most of her clothes have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
 				//START ZE RAEP CANNONZ
@@ -911,7 +923,7 @@ package classes.Scenes.Dungeons
 		//Choose your poison
 		public function winAgainstOmnibus():void {
 			clearOutput();
-			if(monster.lust >= monster.eMaxLust()) {
+			if(monster.lust >= monster.maxLust()) {
 				outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n");
 				outputText("\"<i>Ooooh no.  You can't tell the other demons I got off so easily!  I'll never live it down,</i>\" she cries, \"<i>You've beaten me, please if you let me go and promise not to tell the other demons I'll use my magic to give you a gift!  My magic is powerful, I can do nearly ANYTHING with it when the subject desires the changes.</i>\"\n\n");
 			}
@@ -1810,6 +1822,7 @@ package classes.Scenes.Dungeons
 				outputText("There is an unopened crate with five bottles of something called 'Gro+' inside.\n\n");
 				addButton(1, "GroPlus", takeGroPlus);
 			}
+			if(flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] < 1) addButton(2, "Search", takeWardTome);
 		}
 		
 		public function roomBathroom():void {

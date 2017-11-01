@@ -56,6 +56,7 @@ package classes.Scenes.NPCs
 			if (choice == 0) jinxBaseAttack();
 			if (choice == 1) jinxAyotechCanon();
 			//if (choice == 2) sythAttack1();
+			combatRoundOver();
 		}
 		
 		public function Jinx() 

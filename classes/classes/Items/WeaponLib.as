@@ -9,9 +9,12 @@ package classes.Items
 
 	public final class WeaponLib
 	{
+		//1 atk for dual weapons = 80 lub 160 jeśli z dodatkowym perkiem
+		//40 za 1 atk normalnie lub za wrath weapon lub 80 za 1 atk broni z perkiem/dod. efektem
+		//200 za 1 atk broni typu gaunlet (bo każda ma jakiś efekt lub perk dodany) lub 400 za 1 atk jeśli ma 2 efekty/perki lub 600 jak ma 3 itd.
 		public static const DEFAULT_VALUE:Number = 6;
-//1 atk for dual weapons = 80 lub 160 jeśli z dodatkowym perkiem
-		public static const FISTS:Fists = new Fists();//40 za 1 atk normalnie lub za wrath weapon i 80 za 1 atk broni z perkiem/dod. efektem
+
+		public static const FISTS:Fists = new Fists();
 
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_SWORD:Weapon = new BeautifulSword();
@@ -34,9 +37,10 @@ package classes.Items
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
 		public const EBNYBLD:EbonyDestroyer = new EbonyDestroyer();
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
+		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
-		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 21, 1680, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
+		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 4, 1600, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,400,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
@@ -50,6 +54,7 @@ package classes.Items
 		public const LANCE  :Lance = new Lance();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.");
 		public const MASAMUN:Masamune = new Masamune();
+		public const MASTGLO:MasterGloves = new MasterGloves();
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
 		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Weapon = new Weapon("Nodachi","Nodachi","nodachi","a nodachi","keen cut",17,680,"A curved over 1,7 m long bladed weapon that cuts through flesh with the greatest of ease.", "Large");
@@ -66,7 +71,7 @@ package classes.Items
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
 		public const RCLAYMO:RubyClaymore = new RubyClaymore();
 		public const S_BLADE:Spellblade = new Spellblade();
-		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",5,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.");
+		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",1,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.");
 		public const SCARBLD:Weapon = new ScarredBlade();
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.");

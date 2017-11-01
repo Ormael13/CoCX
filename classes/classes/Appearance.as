@@ -91,6 +91,7 @@
 				else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 				else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 				description += "mane";
+				if (i_creature.hairType == HAIR_STORM) description += " that ends with glowing lightning shaped locks";
 				return description;
 			}
 			//if medium length refer to as locks sometimes
@@ -111,7 +112,7 @@
 			else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 			else if (i_creature.hairType == HAIR_SILKEN) description += "silk-like ";
 			description += "hair";
-
+			if (i_creature.hairType == HAIR_STORM) description += " that ends with glowing lightning shaped locks";
 			return description;
 		}
 		
@@ -174,7 +175,7 @@
 		 * @param    i_character Either Player or NonPlayer
 		 * @return    A beautiful description of a tongue.
 		 */
-		public static function tongueDescription(i_character:Character):String
+		public static function tongueDescription(i_character:Creature):String
 		{
 			if (i_character.tongueType == 1) return "serpentine tongue";
 			else if (i_character.tongueType == 2) return "demonic tongue";
@@ -388,57 +389,60 @@
 			 */
 		}
 
-		public static function hipDescription(i_character:Character):String
+		public static function hipDescription(i_creature:Creature):String
 		{
-			var description:String = "";
+			var description:String    = "";
 			var options:Array;
-			if (i_character.hipRating <= 1) {
+			var i_character:Character = i_creature as Character;
+			var hipRating:Number      = i_creature.hipRating;
+			var thickness:Number      = i_character ? i_character.thickness : 50;
+			if (hipRating <= 1) {
 				options = ["tiny ",
 					"narrow ",
 					"boyish "];
 				description = randomChoice(options);
 			}
-			else if (i_character.hipRating > 1 && i_character.hipRating < 4) {
+			else if (hipRating > 1 && hipRating < 4) {
 				options = ["slender ",
 					"narrow ",
 					"thin "];
 				description = randomChoice(options);
-				if (i_character.thickness < 30) {
+				if (thickness < 30) {
 					if (rand(2) == 0) description = "slightly-flared ";
 					else description = "curved ";
 				}
 			}
-			else if (i_character.hipRating >= 4 && i_character.hipRating < 6) {
+			else if (hipRating >= 4 && hipRating < 6) {
 				options = ["well-formed ",
 					"pleasant "];
 				description = randomChoice(options);
-				if (i_character.thickness < 30) {
+				if (thickness < 30) {
 					if (rand(2) == 0) description = "flared ";
 					else description = "curvy ";
 				}
 			}
-			else if (i_character.hipRating >= 6 && i_character.hipRating < 10) {
+			else if (hipRating >= 6 && hipRating < 10) {
 				options = ["ample ",
 					"noticeable ",
 					"girly "];
 				description = randomChoice(options);
-				if (i_character.thickness < 30) {
+				if (thickness < 30) {
 					if (rand(2) == 0) description = "flared ";
 					else description = "waspish ";
 				}
 			}
-			else if (i_character.hipRating >= 10 && i_character.hipRating < 15) {
+			else if (hipRating >= 10 && hipRating < 15) {
 				options = ["flared ",
 					"curvy ",
 					"wide "];
 				description = randomChoice(options);
-				if (i_character.thickness < 30) {
+				if (thickness < 30) {
 					if (rand(2) == 0) description = "flared ";
 					else description = "waspish ";
 				}
 			}
-			else if (i_character.hipRating >= 15 && i_character.hipRating < 20) {
-				if (i_character.thickness < 40) {
+			else if (hipRating >= 15 && hipRating < 20) {
+				if (thickness < 40) {
 					if (rand(2) == 0) description = "flared, ";
 					else description = "waspish, ";
 				}
@@ -447,8 +451,8 @@
 					"voluptuous "];
 				description += randomChoice(options);
 			}
-			else if (i_character.hipRating >= 20) {
-				if (i_character.thickness < 40) {
+			else if (hipRating >= 20) {
+				if (thickness < 40) {
 					if (rand(2) == 0) description = "flaring, ";
 					else description = "incredibly waspish, ";
 				}
@@ -458,9 +462,9 @@
 				description += randomChoice(options);
 			}
 			//Taurs
-			if (i_character.isTaur() && rand(3) == 0) description += "flanks";
+			if (i_creature.isTaur() && rand(3) == 0) description += "flanks";
 			//Nagas have sides, right?
-			else if (i_character.isNaga() && rand(3) == 0) description += "sides";
+			else if (i_creature.isNaga() && rand(3) == 0) description += "sides";
 			//Non taurs or taurs who didn't roll flanks
 			else {
 				options = ["hips",
@@ -1763,15 +1767,18 @@
 		/**
 		 * Gives a full description of a Character's butt.
 		 * Be aware that it only supports Characters, not all Creatures.
-		 * @param    i_character
+		 * @param    i_creature
 		 * @return    A full description of a Character's butt.
 		 */
-		public static function buttDescription(i_character:Character):String
+		public static function buttDescription(i_creature:Creature):String
 		{
-			var description:String = "";
+			var description:String    = "";
 			var options:Array;
-			if (i_character.buttRating <= 1) {
-				if (i_character.tone >= 60)
+			var i_character:Character = i_creature as Character;
+			var tone:Number           = i_character ? i_character.tone : 50;
+			var buttRating:Number     = i_creature.buttRating;
+			if (buttRating <= 1) {
+				if (tone >= 60)
 					description += "incredibly tight, perky ";
 				else {
 					options = ["tiny",
@@ -1779,12 +1786,12 @@
 						"dainty"];
 					description = randomChoice(options);
 					//Soft PC's buns!
-					if (i_character.tone <= 30 && rand(3) == 0) description += " yet soft";
+					if (tone <= 30 && rand(3) == 0) description += " yet soft";
 					description += " ";
 				}
 			}
-			if (i_character.buttRating > 1 && i_character.buttRating < 4) {
-				if (i_character.tone >= 65) {
+			if (buttRating > 1 && buttRating < 4) {
+				if (tone >= 65) {
 					options = ["perky, muscular ",
 						"tight, toned ",
 						"compact, muscular ",
@@ -1793,7 +1800,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["tight ",
 						"firm ",
 						"compact ",
@@ -1812,9 +1819,9 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 4 && i_character.buttRating < 6) {
+			if (buttRating >= 4 && buttRating < 6) {
 				//TOIGHT LIKE A TIGER
-				if (i_character.tone >= 65) {
+				if (tone >= 65) {
 					options = ["nicely muscled ",
 						"nice, toned ",
 						"muscly ",
@@ -1824,7 +1831,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["nice ",
 						"fair "];
 					description = randomChoice(options);
@@ -1839,9 +1846,9 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 6 && i_character.buttRating < 8) {
+			if (buttRating >= 6 && buttRating < 8) {
 				//TOIGHT LIKE A TIGER
-				if (i_character.tone >= 65) {
+				if (tone >= 65) {
 					options = ["full, toned ",
 								"muscly handful of ",
 								"shapely, toned ",
@@ -1852,7 +1859,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["handful of ",
 						"full ",
 						"shapely ",
@@ -1872,9 +1879,9 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 8 && i_character.buttRating < 10) {
+			if (buttRating >= 8 && buttRating < 10) {
 				//TOIGHT LIKE A TIGER
-				if (i_character.tone >= 65) {
+				if (tone >= 65) {
 					options = ["large, muscular ",
 						"substantial, toned ",
 						"big-but-tight ",
@@ -1886,7 +1893,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["squeezable ",
 						"large ",
 						"substantial "];
@@ -1906,9 +1913,9 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 10 && i_character.buttRating < 13) {
+			if (buttRating >= 10 && buttRating < 13) {
 				//TOIGHT LIKE A TIGER
-				if (i_character.tone >= 65) {
+				if (tone >= 65) {
 					options = ["thick, muscular ",
 						"big, burly ",
 						"heavy, powerful ",
@@ -1919,7 +1926,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["jiggling ",
 						"spacious ",
 						"heavy ",
@@ -1941,9 +1948,9 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 13 && i_character.buttRating < 16) {
+			if (buttRating >= 13 && buttRating < 16) {
 				//TOIGHT LIKE A TIGER
-				if (i_character.tone >= 65) {
+				if (tone >= 65) {
 					options = ["expansive, muscled ",
 						"voluminous, rippling ",
 						"generous, powerful ",
@@ -1955,7 +1962,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["expansive ",
 						"generous ",
 						"voluminous ",
@@ -1978,8 +1985,8 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 16 && i_character.buttRating < 20) {
-				if (i_character.tone >= 65) {
+			if (buttRating >= 16 && buttRating < 20) {
+				if (tone >= 65) {
 					options = ["huge, toned ",
 						"vast, muscular ",
 						"vast, well-built ",
@@ -1989,7 +1996,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					if (rand(5) == 0) return "jiggling expanse of ass";
 					if (rand(5) == 0) return "copious ass-flesh";
 					options = ["huge ",
@@ -2013,8 +2020,8 @@
 					description = randomChoice(options);
 				}
 			}
-			if (i_character.buttRating >= 20) {
-				if (i_character.tone >= 65) {
+			if (buttRating >= 20) {
+				if (tone >= 65) {
 					if (rand(7) == 0) return "colossal, muscly ass";
 					options = ["ginormous, muscle-bound ",
 						"colossal yet toned ",
@@ -2025,7 +2032,7 @@
 					description = randomChoice(options);
 				}
 				//Nondescript
-				else if (i_character.tone >= 30) {
+				else if (tone >= 30) {
 					options = ["ginormous ",
 						"colossal ",
 						"tremendous ",
@@ -2402,7 +2409,8 @@
 					[HAIR_LEAF, "leaf"],
 					[HAIR_FLUFFY, "fluffy"],
 					[HAIR_GRASS, "grass"],
-					[HAIR_SILKEN, "silk-like"]
+					[HAIR_SILKEN, "silk-like"],
+					[HAIR_STORM, "glowing lightning shaped"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2446,7 +2454,8 @@
 					[FACE_ORCA, "orca"],
 					[FACE_PLANT_DRAGON, "plant dragon"],
 					[FACE_DRAGON_FANGS, "dragon fangs"],
-					[FACE_DEVIL_FANGS, "devil fangs"]
+					[FACE_DEVIL_FANGS, "devil fangs"],
+					[FACE_RAIJU_FANGS, "raiju"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2475,7 +2484,8 @@
 					[EYES_DRAGON, "dragon"],
 					[EYES_DEVIL, "devil"],
 					[EYES_ONI, "oni"],
-					[EYES_ELF, "elf"]
+					[EYES_ELF, "elf"],
+					[EYES_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2505,7 +2515,8 @@
 					[EARS_SNAKE, "snake"],
 					[EARS_GOAT, "goat"],
 					[EARS_ONI, "oni"],
-					[EARS_ELVEN, "elven"]
+					[EARS_ELVEN, "elven"],
+					[EARS_WEASEL, "weasel"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2556,7 +2567,8 @@
 					[ARM_TYPE_PLANT2, "tentacle-covered"],
 					[ARM_TYPE_DEVIL, "devil"],
 					[ARM_TYPE_ONI, "oni"],
-					[ARM_TYPE_ELF, "elf"]
+					[ARM_TYPE_ELF, "elf"],
+					[ARM_TYPE_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2592,7 +2604,8 @@
 					[TAIL_TYPE_GARGOYLE, "gargoyle"],
 					[TAIL_TYPE_MANTICORE_PUSSYTAIL, "manticore pussytail"],
 					[TAIL_TYPE_ORCA, "orca"],
-					[TAIL_TYPE_YGGDRASIL, "yggdrasil"]
+					[TAIL_TYPE_YGGDRASIL, "yggdrasil"],
+					[TAIL_TYPE_RAIJU, "raiju"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2689,7 +2702,8 @@
 					[LOWER_BODY_TYPE_ORCA, "orca"],
 					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
 					[LOWER_BODY_TYPE_ONI, "oni"],
-					[LOWER_BODY_TYPE_ELF, "elf"]
+					[LOWER_BODY_TYPE_ELF, "elf"],
+					[LOWER_BODY_TYPE_RAIJU, "raiju"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2702,7 +2716,8 @@
 					[REAR_BODY_BEHEMOTH, "behemoth spikes"],
 					[REAR_BODY_LION_MANE, "lion mane"],
 					[REAR_BODY_SHARK_FIN, "shark fin"],
-					[REAR_BODY_ORCA_BLOWHOLE, "orca blowhole"]
+					[REAR_BODY_ORCA_BLOWHOLE, "orca blowhole"],
+					[REAR_BODY_RAIJU_MANE, "raiju mane"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

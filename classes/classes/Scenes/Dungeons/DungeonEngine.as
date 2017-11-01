@@ -79,6 +79,11 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E:int  	= 62;
 		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N:int  	= 63;
 		
+		private static const DUNGEON_DEN_OF_DESIRE_ENTRANCE:int  			= 64;
+		private static const DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:int  	= 65;
+		private static const DUNGEON_DEN_OF_DESIRE_LABORATORY:int  			= 66;
+		private static const DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS:int  = 67;
+		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -86,6 +91,7 @@ package classes.Scenes.Dungeons
 		public var heltower:HelDungeon = new HelDungeon;
 		public var cabin:YourCabin = new YourCabin;
 		public var hiddencave:HiddenCave = new HiddenCave();
+		public var denofdesire:DenOfDesire = new DenOfDesire();
 		
 		public var map:DungeonMap = new DungeonMap;
 		
@@ -164,6 +170,11 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE) hiddencave.roomMediumCave();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E) hiddencave.roomSmallCaveE();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N) hiddencave.roomSmallCaveN();
+			//Den of Desire
+			if (kGAMECLASS.dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) denofdesire.roomEntrance();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) denofdesire.roomGreatHallArea();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_DEN_OF_DESIRE_LABORATORY) denofdesire.roomLaboratory();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS) denofdesire.roomHeroSlayerOmnibusRoom();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -184,6 +195,9 @@ package classes.Scenes.Dungeons
 		public function checkHiddenCaveClear():Boolean {
 			return (flags[kFLAGS.HIDDEN_CAVE_BOSSES] > 1 && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 7);
 		}
+		public function checkDenOfDesireClear():Boolean {
+			return (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 1 && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
+		}
 		
 		public function enterFactory():void {
 			factory.enterDungeon();
@@ -194,6 +208,12 @@ package classes.Scenes.Dungeons
 		}
 		public function enterDeepCave():void {
 			deepcave.enterDungeon();
+		}
+		public function canFindDenOfDesire():Boolean {
+			return flags[kFLAGS.GAR_NAME] != 0;
+		}
+		public function enterDenOfDesire():void {
+			denofdesire.enterDungeon();
 		}
 		
 		public function navigateToRoom(room:Function = null, timeToPass:Number = 1/12):void {

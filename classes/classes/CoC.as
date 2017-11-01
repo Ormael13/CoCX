@@ -176,6 +176,10 @@ the text from being too boring.
 		private var playerEvent:PlayerEvents;
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
+		public static function timeAwareClassRemove(toRemove:TimeAwareInterface):void{
+			var i:int = _timeAwareClassList.indexOf(toRemove);
+			if(i>=0){_timeAwareClassList.splice(i,1);}
+		}
 		
 		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
@@ -238,9 +242,10 @@ the text from being too boring.
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ayaneFollower:AyaneFollower = new AyaneFollower();
-		public var celessScene:CelessScene = new CelessScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
+		public var chichiScene:ChiChiFollower = new ChiChiFollower();
+		public var electraScene:ElectraFollower = new ElectraFollower();
 		public var emberScene:EmberScene = new EmberScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public var evangelineFollower:EvangelineFollower = new EvangelineFollower();
@@ -333,7 +338,7 @@ the text from being too boring.
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
 
-
+		public var measurements:Measurements = Measurements.init();
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -449,9 +454,11 @@ the text from being too boring.
 		}
 
 		// holidayz
-		public function isEaster():Boolean
-		{
+		public function isEaster():Boolean {
 			return plains.bunnyGirl.isItEaster();
+		}
+		public function isHalloween():Boolean {
+			return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 		}
 
 		private static var traceTarget:TraceTarget;
@@ -540,8 +547,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8f";
-			version = ver + " (<b>Perk-o-calipse 2 (~180 new ones of diff types), Metamorph (part 4), Race rebalancing (part 6), Temple of the Divine (part 1), Soul Tyrant (9th stage plus changes to previous stages), Hidden Cave dungeon and TF's: Devil, Oni and Elf</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8g2";
+			version = ver + " (<b>Bugfixing</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -690,6 +697,7 @@ the text from being too boring.
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
+			new Story("lib",rootStory,"monsters",true);
 			execPostInit();
 			loadStory();
 			this.addFrameScript( 0, this.run );
@@ -697,7 +705,7 @@ the text from being too boring.
 		}
 
 		private function loadStory():void {
-			compiler.includeFile("coc.xml");
+			compiler.includeFile("coc.xml", true);
 		}
 
 		public function run():void

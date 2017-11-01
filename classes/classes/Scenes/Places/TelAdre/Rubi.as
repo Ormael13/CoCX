@@ -2293,7 +2293,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		outputText(" that [rubi ey] should keep that in for a few hours, just to make sure this training takes hold.  Rubi gives you a small smile in response along with a small peck on the cheek before slipping under the sheets for a quick nap.");
 
 		outputText("\n\nYou decide this is the best time to head out as well, and make your way out of the apartment and back to camp.");
-		dynStats("lus", 20+player.lib/5, "resisted", false);
+		dynStats("lus", 20+player.lib/5, "scale", false);
 	}
 	//Repeatable
 	//Must have a cock greater than Rubi's capacity.
@@ -2567,7 +2567,7 @@ private function rubiHotdogging():void {
 	outputText(".");
 
 	outputText("\n\nYou think to yourself.  You could keep teasing [rubi em] like this, without letting [rubi em] cum, as [rubi ey] obviously delights in the feelings.  Or you could be generous and let [rubi em] pop [rubi eir] load right now... Which will it be?");
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 	menu();
 	//[Tease] [Pop]
 	addButton(0,"Tease Rubi",teaseButtjobs);

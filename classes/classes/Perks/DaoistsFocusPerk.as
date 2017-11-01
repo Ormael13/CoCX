@@ -11,13 +11,13 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Increases your soulskill effect modifier by " + params.value1 * 100 + "%.";
+			return "Increases your magical soulskill effect modifier by " + params.value1 * 100 + "%.";
 		}
 		
 		public function DaoistsFocusPerk() 
 		{
 			super("Daoist's Focus", "Daoist's Focus",
-					"Your daoist's weapon grants you additional focus, reducing the use of soulforce for soulskills.");
+					"Your daoist's weapon grants you additional focus, increasing your soulskills power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

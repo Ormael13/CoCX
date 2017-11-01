@@ -23,7 +23,7 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Seer’s Insight (+20% spell effect/soulpower multiplier, 20% fatigue/soulforce costs reduction)";
+			desc += "\nSpecial: Seer’s Insight (+20% spell effect/magical soulspell power multiplier, 20% fatigue/soulforce costs reduction)";
 			return desc;
 		}
 		

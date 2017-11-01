@@ -55,7 +55,7 @@ import classes.internals.Utils;
 		 * @param	... args stat change parameters
 		 */
 		protected function dynStats(... args):void {
-			game.dynStats.apply(null, args);
+			game.player.dynStats.apply(game.player, args);
 		}
 
 /*

@@ -25,12 +25,15 @@ package classes.Items.Weapons
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Daoist's Focus (+40% Soulskill Power)";
+			desc += "\nSpecial: Daoist's Focus (+40% Magical Soulskill Power)";
+			desc += "\nSpecial: Body Cultivator's Focus (+40% Physical Soulskill Power)";
 			desc += "\nSpecial: Blade-Warden (enables Blade Dance soul skill)";
 			return desc;
 		}
 		
 		override public function playerEquip():Weapon {
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
 			while (game.player.findPerk(PerkLib.BladeWarden) >= 0) game.player.removePerk(PerkLib.BladeWarden);
 			game.player.createPerk(PerkLib.BladeWarden,0,0,0,0);
 			return super.playerEquip();
@@ -38,6 +41,7 @@ package classes.Items.Weapons
 		
 		override public function playerRemove():Weapon {
 			while (game.player.findPerk(PerkLib.BladeWarden) >= 0) game.player.removePerk(PerkLib.BladeWarden);
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			return super.playerRemove();
 		}
 	}

@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Lake
 		private function gooPlay():void
 		{
 			outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
-			game.dynStats("lus", 3 + rand(3) + player.sens / 10);
+			player.dynStats("lus", 3 + rand(3) + player.sens / 10);
 			combatRoundOver();
 		}
 
@@ -96,7 +96,7 @@ package classes.Scenes.Areas.Lake
 			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
 			var damage:Number = 1;
 			player.takeDamage(damage, true);
-			game.dynStats("lus", 5 + rand(3) + player.sens / 10);
+			player.dynStats("lus", 5 + rand(3) + player.sens / 10);
 			combatRoundOver();
 		}
 

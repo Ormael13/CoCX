@@ -13,8 +13,10 @@
 	import classes.Scenes.Areas.Forest.Alraune;
 	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+	import classes.Scenes.NPCs.ChiChi;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.internals.ChainedDrop;
@@ -164,8 +166,7 @@
 			initedDrop = true;
 		}
 
-		public function eMaxHP():Number
-		{
+		protected override function maxHP_base():Number {
 			//Base HP
 			var temp:Number = 100 + this.level * 15 + this.bonusHP;
 			temp += (this.tou);
@@ -218,6 +219,10 @@
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + player.newGamePlusMod()));
+			return temp;
+		}
+		protected override function maxHP_mult():Number {
+			var temp:Number = 1.0;
 			if (findPerk(PerkLib.ShieldWielder) >= 0) temp *= 1.5;
 			if (findPerk(PerkLib.EnemyBossType) >= 0) temp *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) temp *= 3;
@@ -228,18 +233,16 @@
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 2.0;
 			else temp *= 3.0;
-			temp = Math.round(temp);
 			return temp;
 		}
 
 		public function addHP(hp:Number):void{
 			this.HP += hp;
 			if (this.HP<0) this.HP = 0;
-			else if (this.HP>eMaxHP()) this.HP = eMaxHP();
+			else if (this.HP > maxHP()) this.HP = maxHP();
 		}
 
-		public function eMaxLust():Number
-		{
+		protected override function maxLust_base():Number {
 			//Base lust
 			var temp:Number = 100 + this.bonusLust;
 			//Apply perks
@@ -268,7 +271,7 @@
 			return temp;
 		}
 		
-		public function eMaxFatigue():Number
+		public override function maxFatigue():Number
 		{
 			//Base fatigue
 			var temp:Number = 100 + this.level * 5;
@@ -299,7 +302,7 @@
 			return temp;
 		}
 		
-		public function eMaxSoulforce():Number
+		public override function maxSoulforce():Number
 		{
 			//Base soulforce
 			var temp:Number = 50;
@@ -322,7 +325,7 @@
 			return temp;
 		}
 		
-		public function eMaxWrath():Number
+		public override function maxWrath():Number
 		{
 			//Base wrath
 			var temp:Number = 100;
@@ -363,7 +366,7 @@
 			return temp;
 		}
 		
-		public function eMaxMana():Number
+		public override function maxMana():Number
 		{
 			//Base mana
 			var temp:Number = 100 + this.level * 10;
@@ -409,7 +412,7 @@
 		 * @return HP/eMaxHP()
 		 */
 		public function HPRatio():Number{
-			return HP/eMaxHP();
+			return HP / maxHP();
 		}
 
 		/**
@@ -452,6 +455,7 @@
 			else if (weaponAttack >= 101 && weaponAttack < 151) damage *= (3.75 + ((weaponAttack - 100) * 0.02));
 			else if (weaponAttack >= 151 && weaponAttack < 201) damage *= (4.75 + ((weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((weaponAttack - 200) * 0.01));
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -491,6 +495,7 @@
 			if (str >= 1101) damage += (str - 1100);
 			if (str >= 1151) damage += (str - 1150);
 			if (str >= 1201) damage += (str - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -528,6 +533,7 @@
 			if (tou >= 1101) damage += (tou - 1100);
 			if (tou >= 1151) damage += (tou - 1150);
 			if (tou >= 1201) damage += (tou - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -565,6 +571,7 @@
 			if (spe >= 1101) damage += (spe - 1100);
 			if (spe >= 1151) damage += (spe - 1150);
 			if (spe >= 1201) damage += (spe - 1200);
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
@@ -966,7 +973,7 @@
 			if (!isFullyInit()) {
 				error += "Missing phases: "+missingInits()+". ";
 			}
-			this.HP = eMaxHP();
+			this.HP = maxHP();
 			this.XP = totalXP();
 			error += super.validate();
 			error += Utils.validateNonNegativeNumberFields(this, "Monster.validate",[
@@ -1180,7 +1187,7 @@
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -1235,6 +1242,16 @@
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
+			game.combatRoundOver();
+			return false;
+			}
+			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
+				game.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
+				removeStatusEffect(StatusEffects.EmbraceVampire);
+			}
+			else game.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
+			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
 			game.combatRoundOver();
 			return false;
 			}
@@ -1538,7 +1555,7 @@
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue + "/" + eMaxFatigue() + " fatigue, " + mana + "/" + eMaxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";		//, " + soulforce + "/" + eMaxSoulforce() + " soulforce
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
@@ -1637,6 +1654,13 @@
 					removeStatusEffect(StatusEffects.Flying);
 				}
 			}
+			if(hasStatusEffect(StatusEffects.PunishingKick)) {
+				addStatusValue(StatusEffects.PunishingKick,1,-1);
+				if(statusEffectv1(StatusEffects.PunishingKick) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer under Punishing Kick effect!</b>\n\n");
+					removeStatusEffect(StatusEffects.PunishingKick);
+				}
+			}
 			if(hasStatusEffect(StatusEffects.Sandstorm)) {
 				//Blinded:
 				if(player.hasStatusEffect(StatusEffects.Blind)) {
@@ -1679,7 +1703,7 @@
 				}
 				//Deal damage if still wounded.
 				else {
-					var store:Number = eMaxHP() * (4 + rand(7)) / 100;
+					var store:Number = maxHP() * (4 + rand(7)) / 100;
 					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
 					store = game.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
@@ -1777,22 +1801,22 @@
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
-				game.dynStats("lus", 5+player.sens/10);
+				player.dynStats("lus", 5+player.sens/10);
 			}
 			if(hasStatusEffect(StatusEffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
+				if(flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus", 3);
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
 				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
 				if(player.lust >= (player.maxLust() * 0.45) && player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
 				if(player.lust >= (player.maxLust() * 0.70) && player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
 				if(player.lust >= (player.maxLust() * 0.90)) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
-				game.dynStats("lus", 1+rand(8));
+				player.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
-				if(this is OmnibusOverseer) {
+				if (this is OmnibusOverseer || this is HeroslayerOmnibus) {
 					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) {
@@ -1809,7 +1833,7 @@
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
 				}
-				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
+				player.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {
@@ -1845,9 +1869,26 @@
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
 			}
+			//Fire Punch Burn DoT
+			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
+					outputText("Flames left by Fire Punch " + a + short + " finally stop burning.\n\n");
+					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store6:Number = (player.spe + player.inte) * game.combat.soulskillMod() * 0.5;
+					store6 = game.doDamage(store6);
+					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
+				}
+			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
@@ -1859,11 +1900,17 @@
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
-				temp2 = Math.round(eMaxHP() * healingPercent / 100);
-				outputText("Due to natural regeneration " + short + " recover");
-				if (plural) outputText("s");
-				else outputText("ed");
-				outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
+				temp2 = Math.round(maxHP() * healingPercent / 100);
+				if (this is ChiChi) {
+					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				}
+				else {
+					outputText("Due to natural regeneration " + short + " recover");
+					if (plural) outputText("s");
+					else outputText("ed");
+					outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				}
 				addHP(temp2);
 			}
 		}

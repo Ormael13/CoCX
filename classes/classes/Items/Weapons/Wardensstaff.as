@@ -25,7 +25,8 @@ package classes.Items.Weapons
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Wizard's and Daoists's Focus (+60% Spell Power and +40% Soulskill Power)";
+			desc += "\nSpecial: Wizard's and Daoists's Focus (+60% Spell Power and +40% Magical Soulskill Power)";
+			desc += "\nSpecial: Body Cultivator's Focus (+40% Physical Soulskill Power)";
 			desc += "\nSpecial: Mage-Warden (enables Avatar of the Song soul skill)";
 			return desc;
 		}
@@ -35,12 +36,15 @@ package classes.Items.Weapons
 		}
 		
 		override public function playerEquip():Weapon {
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
 			while (game.player.findPerk(PerkLib.MageWarden) >= 0) game.player.removePerk(PerkLib.MageWarden);
 			game.player.createPerk(PerkLib.MageWarden,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Weapon {
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			while (game.player.findPerk(PerkLib.MageWarden) >= 0) game.player.removePerk(PerkLib.MageWarden);
 			return super.playerRemove();
 		}

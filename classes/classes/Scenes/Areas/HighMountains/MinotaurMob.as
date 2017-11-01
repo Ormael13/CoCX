@@ -52,7 +52,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("The smallest of the beastmen, the minitaur, moans and begs, \"<i>Please Mom, can we please fuck you?  I... I need it so bad.</i>\"  He raises the edge of his loincloth to show exactly what he's talking about.  His member is limp but leaking.  What really catches your eyes sits behind that drizzling shaft - a pair of balls looking swollen and pent up beyond belief.  A sticky web of his leavings hangs between his genitals and his loincloth, showing you just how much he's been leaking at the thought of fucking you.  Fanning the sopping garment, he inadvertently blows a wave of his pheromones your way.\n");
 				damage = 9 + player.lib/20;
 			}
-			game.dynStats("lus", damage);
+			player.dynStats("lus", damage);
 			damage = player.lust - oldLust;
 			//UNIVERSAL pre-cum RESULT:
 			//(Low damage taken)
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" in need.");
 				if(player.minotaurNeed()) {
 					outputText("  You need a fix so bad!");
-					game.dynStats("lus", 5);
+					player.dynStats("lus", 5);
 				}
 				else {
 					outputText("  You can understand firsthand just how potent and addictive that fluid is...");
@@ -98,14 +98,14 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
-			game.dynStats("lus", (5 + player.sens/10));
+			player.dynStats("lus", (5 + player.sens/10));
 			combatRoundOver();
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(94);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
-			game.dynStats("lus", (15 + player.sens/10));
+			player.dynStats("lus", (15 + player.sens/10));
 			combatRoundOver();
 		}
 		//Waste  a turn

@@ -241,7 +241,7 @@ package classes.Scenes.NPCs
 				var x:Number = player.cockThatFits(36);
 				outputText("Rubbing yourself through your [armor], you look over the anemone; your attention wanders down her torso to the blue slit between her legs");
 				//[(lust victory)
-				if (monster.lust >= monster.eMaxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
+				if (monster.lust >= monster.maxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand over her, she leans forward and opens her mouth invitingly.\n\n");
 
 				outputText("You smile at how eager she is for you, but shake your head.  The anemone closes her mouth and looks at you quizzically.  <i>\"No?\"</i> she asks.  Only then does she follow your gaze down to her pussy.  The skin on her face darkens a bit as she realizes your intention... which turns out to be a blush, by the looks of the shy glance she gives you next!  <i>\"Umm.\"</i>  The anemone's fingers");
@@ -349,7 +349,7 @@ package classes.Scenes.NPCs
 
 			outputText("The anemone looks vacantly up at you as you approach.  Reaching forward, you take her cock in your hand");
 			//[(lust victory)
-			if (monster.lust >= monster.eMaxLust()) outputText(" after brushing hers aside");
+			if (monster.lust >= monster.maxLust()) outputText(" after brushing hers aside");
 			outputText(" and begin to fondle the crown, with its slippery tentacles.  As expected, her venom flows into your hand, imparting a sensation of heat that slides up your arm and diffuses into a gentle warmth.  After a few rubs, you lean down and carefully take her penis into your mouth.  It tastes of the ");
 			if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) outputText("lake");
 			if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
@@ -714,7 +714,7 @@ package classes.Scenes.NPCs
 			//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
 			//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
 			outputText("Imagining your climax already, you look over the anemone.  Your gaze lingers on her breasts; she sticks them out enticingly, trying to catch your interest");
-			if (monster.lust >= monster.eMaxLust()) outputText(" as she plays with herself");
+			if (monster.lust >= monster.maxLust()) outputText(" as she plays with herself");
 			outputText(".  Nice, but not what you're looking for...  ");
 			if (!player.isTaur()) {
 				outputText("Opening your [armor] a bit, you stroke ");
@@ -1375,7 +1375,7 @@ package classes.Scenes.NPCs
 				outputText(" enough to keep you from thinking dirty thoughts about grabbing her naughty, teasing face and mashing it into your crotch.");
 				//(HP - 5, lust +5 if lib>=50, KidXP + 2)
 				HPChange(-5, false);
-				if (player.lib >= 50) dynStats("lus", 5, "resisted", false);
+				if (player.lib >= 50) dynStats("lus", 5, "scale", false);
 				kidAXP(6);
 			}
 			//[Lust Dagger]
@@ -1383,7 +1383,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe enchanted dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
 				//(HP -5, lust +10, KidXP + 3)
 				HPChange(-5, false);
-				dynStats("lus", 10, "resisted", false);
+				dynStats("lus", 10, "scale", false);
 				kidAXP(5);
 			}
 			//[Dagger]
@@ -1391,7 +1391,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
 				//(HP -5, lust +5, KidXP + 3)
 				HPChange(-5, false);
-				dynStats("lus", 5, "resisted", false);
+				dynStats("lus", 5, "scale", false);
 				kidAXP(5);
 			}
 			//[Beautiful Sword]
@@ -1442,8 +1442,8 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) outputText("  The demonic enchantment chooses then to activate, and her color deepens as her lust peaks, as does your own.");
 				outputText("  You feel a point digging into your groin as her prick hardens and her struggles cease; she begins to moan openly in arousal.  As she relaxes, the coils of the whip finally loosen enough for you to extricate yourself.");
 				//(HP -0, lust +10 if normal whip or +20 if succubus, KidXP + 3)
-				dynStats("lus", 10, "resisted", false);
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) dynStats("lus", 10, "resisted", false);
+				dynStats("lus", 10, "scale", false);
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) dynStats("lus", 10, "scale", false);
 				kidAXP(6);
 			}
 			//[Spiked Gauntlets] or [Hooked Gauntlets]
@@ -1466,7 +1466,7 @@ package classes.Scenes.NPCs
 				//(lust + 5, temp str/spd down, KidXP + 5)
 				//str/spd loss reverts after clicking Next button
 				kidAXP(5);
-				dynStats("lus", 10, "resisted", false);
+				dynStats("lus", 10, "scale", false);
 			}
 			//[White Book]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == consumables.W__BOOK.id) {
@@ -1803,7 +1803,7 @@ package classes.Scenes.NPCs
 				else outputText(" and neither of you says a word as she backs away slowly on her knees.");
 				outputText("  Sighing, you turn over and attempt to return to sleep despite the pervading smell of semen.");
 			}
-			dynStats("lus", 50 + player.sens / 2, "resisted", false);
+			dynStats("lus", 50 + player.sens / 2, "scale", false);
 			doNext(playerMenu);
 		}
 

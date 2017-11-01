@@ -104,7 +104,7 @@ package classes.Scenes.Dungeons.DesertCave
 					
 				}
 				player.createStatusEffect(StatusEffects.LustStones,bonus,0,0,0);
-				game.dynStats("lus", bonus * 2 + 5 + player.sens/7);
+				player.dynStats("lus", bonus * 2 + 5 + player.sens/7);
 			}
 			//[If attack misses]
 			else {
@@ -119,7 +119,7 @@ package classes.Scenes.Dungeons.DesertCave
 		public function drankSomeMialk():void {
 			outputText("One of the blonde beauties turns to another and asks, \"<i>A drink, sister?  Fighting this intruder has given me a powerful thirst.</i>\"  The other woman wordlessly opens her robe, baring her breasts, exposing four heaving, milk-fueled mounds to the air before the other woman claims a nipple for herself.  Three others crowd in on the exposed teats, their rumps shaking contentedly as they grab a quick snack.");
 			outputText("\n\nAfter wiping the excess from their lips, they close their robes and resume a fighting stance, seeming healthier than before.");
-			game.dynStats("lus", 4 + player.lib/10);
+			player.dynStats("lus", 4 + player.lib/10);
 			//+ 30 HP, +light lust damage to PC and mob
 			addHP(30);
 			combatRoundOver();

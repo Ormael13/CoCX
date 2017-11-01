@@ -51,12 +51,12 @@ package classes.Scenes.Quests.UrtaQuest
 //Hit (Blind):
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("  Though your vision is still blurry, you feel yourself being sucked into the golden depths of those pupils, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
-				kGAMECLASS.dynStats("lus", (5 + player.lib / 10 - player.inte / 20));
+				player.dynStats("lus", (5 + player.lib / 10 - player.inte / 20));
 			}
 			//Hit:
 			else {
 				outputText("  Those pools of yellow suck you into their golden depths, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
-				kGAMECLASS.dynStats("lus", (10 + player.lib / 7 - player.inte / 20));
+				player.dynStats("lus", (10 + player.lib / 7 - player.inte / 20));
 			}
 			combatRoundOver();
 		}

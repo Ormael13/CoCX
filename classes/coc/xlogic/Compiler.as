@@ -56,7 +56,10 @@ public class Compiler {
 	}
 	public function compileIf(x:XML):IfStmt {
 		var item:XML;
-		var iff:IfStmt = new IfStmt(x.@test.toString());
+		var attrs:* = attrMap(x);
+		var iff:IfStmt = new IfStmt(attrs['test']);
+		if ('then' in attrs) iff.thenBlock.push(compileText(x.@then[0]));
+		if ('else' in attrs) iff.elseBlock = compileText(x.attribute('else')[0]);
 		for each(item in x.*) {
 			switch (item.localName()) {
 				case 'else':
@@ -76,21 +79,27 @@ public class Compiler {
 		var sattrs:Object = attrMap(x);
 		var hasval:Boolean           = 'value' in sattrs;
 		var zwitch:SwitchStmt = new SwitchStmt(sattrs['value']);
-		for each(var xcase:XML in x.elements("case")) {
-			var cattrs:Object = attrMap(xcase);
-			var caze:CaseStmt = new CaseStmt();
-			caze.testAttr = cattrs['test'];
-			caze.valueAttr = cattrs['value'];
-			caze.valuesAttr = cattrs['values'];
-			caze.ltAttr = cattrs['lt'];
-			caze.lteAttr = cattrs['lte'];
-			caze.gtAttr = cattrs['gt'];
-			caze.gteAttr = cattrs['gte'];
-			caze.neAttr = cattrs['ne'];
-			compileChildrenInto(xcase,caze.thenBlock.stmts);
-			zwitch.cases.push(caze);
+		for each(var xcase:XML in x.elements()) {
+			switch(xcase.localName()) {
+				case 'case':
+					var cattrs:Object = attrMap(xcase);
+					var caze:CaseStmt = new CaseStmt();
+					caze.testAttr = cattrs['test'];
+					caze.valueAttr = cattrs['value'];
+					caze.valuesAttr = cattrs['values'];
+					caze.ltAttr = cattrs['lt'];
+					caze.lteAttr = cattrs['lte'];
+					caze.gtAttr = cattrs['gt'];
+					caze.gteAttr = cattrs['gte'];
+					caze.neAttr = cattrs['ne'];
+					compileChildrenInto(xcase,caze.thenBlock.stmts);
+					zwitch.cases.push(caze);
+					break;
+				case 'default':
+					compileChildrenInto(xcase,zwitch.defaults.stmts);
+					break;
+			}
 		}
-		compileXMLListInto(x.elements("default").*,zwitch.defaults.stmts);
 		return zwitch;
 	}
 	public static function attrMap(x:XML):Object {

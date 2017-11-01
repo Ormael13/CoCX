@@ -39,10 +39,11 @@
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n");
 						outputText("Ceraph sighs and asks, \"<i>Why would you move?  It would make you feel soooo good!</i>\"");
 					}
-					//(AUTO-LOSE)
+					//(Direct Hit)
 					else {
-						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
-						game.dynStats("lus", 1000);
+						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].");
+						player.dynStats("lus", 1000);
+						if (player.lust >= player.maxLust()) outputText("  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 					}
 				}
 			}
@@ -56,7 +57,7 @@
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!");
-					game.dynStats("lus", 5);
+					player.dynStats("lus", 5);
 				}
 				player.createStatusEffect(StatusEffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
@@ -64,16 +65,16 @@
 			else {
 				if (rand(2) == 0) {
 					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your [skin.type], smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your [armor] to caress you more intimately while you're at her mercy.");
-					game.dynStats("lus", 9 + player.sens / 10);
+					player.dynStats("lus", 9 + player.sens / 10);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {
 					outputText("Ceraph blows hot kisses in your ear and slides and rubs against you as she slips over to embrace your front.  She holds up a finger, licks it, and wiggles it back and forth.  It begins to glow pink, dimly at first and then with increasing luminosity.  Once it's reached a brilliant intensity, the sparkling digit is roughly inserted into your mouth.  You can feel the dark magic soaking into your body just like water soaks into a sponge.  ");
-					if (player.lust < 33) outputText("It makes you feel warm and flushed.");
-					else if (player.lust < 60) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
-					else if (player.lust < 80) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
+					if (player.lust < .33*player.maxLust()) outputText("It makes you feel warm and flushed.");
+					else if (player.lust < .6*player.maxLust()) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
+					else if (player.lust < .8*player.maxLust()) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
 					else outputText("It makes you ache and tremble with need, practically begging for another touch.");
-					game.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
+					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
 				}
 			}
 			combatRoundOver();
@@ -117,9 +118,9 @@
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your [skin.type], is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
-				game.dynStats("lus", 5);
+				player.dynStats("lus", 5);
 			}
-			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
+			player.dynStats("lus", player.lib / 20 + 5 + rand(5));
 			outputText("\n\n");
 			doAI();
 		}
@@ -129,17 +130,17 @@
 		private function ceraphSpecial3():void
 		{
 			//[Mini-cum] – takes place of double-attack if very horny
-			if (lust >= 75) {
+			if (lust >= (maxLust() * 0.75)) {
 				outputText("Ceraph spreads her legs and buries three fingers in her sopping twat, her thumb vigorously rubbing against the base of her bumpy prick.  Her other hand wraps around the meaty pole and begins jerking it rapidly.  In one practiced movement she stops jerking long enough to wrap the whip around her nodule-studded demon-cock, using it like a cockring.  The organ swells thanks to the forced blood-flow, and after a few more seconds of intense masturbation, the demoness cums hard.  Her cunny squirts all over her hand, dripping clear feminine drool down her thighs.  Ceraph's masculine endowment pulses and twitches, blasting out two big squirts of jizm before it slows to a trickle.\n");
 				outputText("Letting out a throaty sigh, the demon unties her self-induced binding and gives you a wink.  Did you really just stand there and watch the whole thing?  Amazingly Ceraph actually seems stronger after such a crude display...");
 				//(+10 str/toughness, 1 level, and 10 xp reward.)
-				XP += 10;
-				level += 1;
-				str += 10;
-				tou += 10;
-				HP += 20;
-				lust = 33;
-				game.dynStats("lus", 3);
+				XP += 20;
+				level += 2;
+				str += 15;
+				tou += 15;
+				HP += 100;
+				lust = (maxLust() * 0.33);
+				player.dynStats("lus", 30);
 				outputText("\n");
 				combatRoundOver();
 				return;
@@ -167,7 +168,7 @@
 			}
 			//Determine damage - str modified by enemy toughness!
 			else {
-				damage = int((str + weaponAttack) - Math.random() * (player.tou + player.armorDef));
+				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
 					damage = player.takeDamage(damage);
 				}
@@ -177,16 +178,16 @@
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				if (damage > 0 && damage < 6) {
+				if (damage > 0 && damage < 61) {
 					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
-				if (damage > 5 && damage < 11) {
+				if (damage > 60 && damage < 121) {
 					outputText(capitalA + short + " wounds you! ");
 				}
-				if (damage > 10 && damage < 21) {
+				if (damage > 120 && damage < 201) {
 					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
-				if (damage > 20) {
+				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -214,7 +215,7 @@
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!
-				damage = int((str + weaponAttack) - Math.random() * (player.tou + player.armorDef));
+				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
 					damage = player.takeDamage(damage);
 				}
@@ -224,16 +225,16 @@
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
-				if (damage > 0 && damage < 6) {
+				if (damage > 0 && damage < 61) {
 					outputText("You are struck a glancing blow by " + a + short + "! ");
 				}
-				if (damage > 5 && damage < 11) {
+				if (damage > 60 && damage < 121) {
 					outputText(capitalA + short + " wounds you! ");
 				}
-				if (damage > 10 && damage < 21) {
+				if (damage > 120 && damage < 201) {
 					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 				}
-				if (damage > 20) {
+				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");

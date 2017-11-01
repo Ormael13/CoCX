@@ -92,6 +92,27 @@
 			player.refillHunger(10);
 		}
 
+//Warding Tome
+		public function wardingTome(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the tome and begin to read.  The first chapter is a primer on white magic, while most of it is already familiar to you it briefly goes over a handful of theories that are new to you.");
+			if (player.inte < 100) {
+				outputText(" You feel yourself smarter for this.");
+				dynStats("int", 1 + rand(4));
+			}
+			else outputText(" However, this does little for your already considerable intellect.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+				outputText(" After rereading the chapter a few times and a few experiments, you’ve worked out how to put these theories to use in combat.  <b>You have learned a new spell: Charged Armor</b>");
+				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
+			}
+			else outputText(" As interesting as the theory is, you already have mastered the practical applications");
+			outputText(".  The final few chapters...  After a quick skim, you believe that with enough stone and some time, you could set up a ward around your camp.");
+			if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("  Sort of like Tel’Adre’s defences in miniature.");
+			player.createKeyItem("Warding Tome", 0, 0, 0, 0);
+			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 1;
+		}
+
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
@@ -895,7 +916,7 @@
 			//Wolf paws
 			if (rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && changes < changeLimit) {
 				if (player.isBiped() && player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-					outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paw.</b>");
+					outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>");
 					setLowerBody(LOWER_BODY_TYPE_WOLF);
 					player.legCount = 2;
 					changes++;
@@ -3119,7 +3140,7 @@
 			if (fuck) outputText("red");
 			else outputText("pink");
 			outputText(" potion, and its unnatural warmth immediately flows to your groin.");
-			dynStats("lus", (30 + rand(player.lib / 10)), "resisted", false);
+			dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
 
 			//Heat/Rut for those that can have them if "fuck draft"
 			if (fuck) {
@@ -3132,19 +3153,21 @@
 			if (player.lust >= player.maxLust() && !kGAMECLASS.inCombat) {
 				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ");
 				if (player.cocks.length > 0) {
-					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you.  ");
+					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
 				}
 				if (player.cocks.length > 0 && player.vaginas.length > 0) {
 					outputText("At the same time your ");
 				}
 				if (player.vaginas.length > 0) {
-					outputText(vaginaDescript(0) + " soaks your thighs.  ");
+					outputText(vaginaDescript(0) + " soaks your thighs");
 				}
-				if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss.  ");
-				outputText("Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
+				if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss");
+				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
+				outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
 				//increase player libido, and maybe sensitivity too?
 				player.orgasm();
 				dynStats("lib", 2, "sen", 1);
+				if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus,1,24);
 			}
 			if (player.lust > player.maxLust()) player.lust = player.maxLust();
 			outputText("\n\n");
@@ -7328,6 +7351,140 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
+		public function voltageTopaz(itemused:Boolean,player:Player):void
+		{
+			player.slimeFeed();
+			if (itemused == true) clearOutput();
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			var temp2:Number = 0;
+			if (itemused == true) {
+				if (rand(2) == 0) changeLimit++;
+				if (rand(3) == 0) changeLimit++;
+				if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+				if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+				if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+				outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+			}
+			//Stats
+			if (player.lib < 100 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
+				dynStats("lib", 2);
+				if (player.lib < 60) dynStats("lib", 2);
+				changes++;
+			}
+			if (player.sens < 70 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYour skin tingles with delight as every slight movement of the wind feels more distinct. Thoughts about how it would feel against your sexual spots slip into your mind before you can even stop them, and you start idly ");
+					if (player.gender == 1 || player.gender == 3) outputText("stroking your [cock]");
+					if (player.gender == 3) outputText(" and ");
+					if (player.gender > 1) outputText("fingering your [clit]");
+					outputText(". This is going to be fun.");
+				dynStats("sen", 1);
+				if (player.sens < 40) dynStats("sen", 1);
+				changes++;
+			}
+			//Sexual
+			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+				player.growTits(1 + rand(2), 1, false, 3);
+				outputText("\n\nYou feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
+				if (player.breastRows.length == 0) {
+					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 2;
+					outputText("\n");
+				}
+			}
+			//Physical
+			var raiju_hair:Array = ["purple", "light blue", "yellow", "white"];
+			if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(raiju_hair);
+				outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+			}
+			if (player.lowerBody != LOWER_BODY_TYPE_RAIJU && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
+					outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidently hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
+					setLowerBody(LOWER_BODY_TYPE_RAIJU);
+				}
+				else humanizeLowerBody();
+				changes++;	
+			}
+			if (player.lowerBody == LOWER_BODY_TYPE_RAIJU && player.armType != ARM_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
+				if (player.armType == ARM_TYPE_HUMAN) {
+					outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
+					if (player.gender == 1 || player.gender == 3) outputText("[cock]");
+					if (player.gender == 3) outputText(" and ");
+					if (player.gender > 1) outputText("[clit]");
+					outputText(". ");
+					if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
+					else outputText("You scowl, shaking away the impure thoughts.");
+					setArmType(ARM_TYPE_RAIJU);
+				}
+				else humanizeArms();
+				changes++;	
+			}
+			if (player.armType == ARM_TYPE_RAIJU && player.tailType != TAIL_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
+				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
+				else outputText("\n\nYou nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
+				setTailType(TAIL_TYPE_RAIJU);
+				changes++;
+			}
+			if (player.tailType == TAIL_TYPE_RAIJU && player.rearBody != REAR_BODY_RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
+				setRearBody(REAR_BODY_RAIJU_MANE);
+				changes++;
+			}
+			if (player.rearBody == REAR_BODY_RAIJU_MANE && player.faceType != FACE_RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nY");
+				if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+				outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
+				setFaceType(FACE_RAIJU_FANGS);
+				changes++;
+			}
+			if (player.faceType == FACE_RAIJU_FANGS && player.earType != EARS_WEASEL && changes < changeLimit && rand(3) == 0) {
+				if (player.earType == EARS_HUMAN) {
+					outputText("\n\nYour ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>");
+					setEarType(EARS_WEASEL);
+				}
+				else humanizeEars();
+				changes++;
+			}
+			var raiju_eyes_color:Array = ["blue", "green", "teal"];
+			if (player.earType == EARS_WEASEL && player.eyeType != EYES_RAIJU && changes < changeLimit && rand(3) == 0) {
+				if (player.eyeType == EYES_HUMAN) {
+					player.eyeColor = randomChoice(raiju_eyes_color);
+					outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
+					setEyeType(EYES_RAIJU);
+				}
+				else humanizeEyes();
+				changes++;
+			}
+			if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
+				setHairType(HAIR_STORM);
+				changes++;
+			}
+			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {//player.skin.base.type == SKIN_TYPE_PLAIN && 
+				outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
+			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
+			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
+			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
+			//	}
+				player.skin.base.pattern = PATTERN_LIGHTNING_SHAPED_TATTOO;
+				player.skin.base.adj = "lightning shaped tattooed";
+				changes++;
+			}
+			if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				temp2 += 1 + rand(3);
+				outputText("\n\nYour hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
+				player.hairLength += temp2;
+				changes++;
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		public function isabellaMilk(player:Player):void
 		{
 			player.slimeFeed();
@@ -7864,7 +8021,7 @@
 			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
 			//-30 fatigue, -2 libido, -10 lust]
 			fatigue(-10);
-			dynStats("lus", -25, "cor", (-3 - rand(2)), "resisted", false);
+			dynStats("lus", -25, "cor", (-3 - rand(2)), "scale", false);
 			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
 			player.refillHunger(10);
 			if(player.cor > 50) dynStats("cor", -1);
@@ -8157,7 +8314,6 @@
 			//	}
 				player.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
 				player.skin.base.adj = "sexy tattooed";
-
 			});
 			//Nipples Turn Back:
 			mutationStep(player.hasStatusEffect(StatusEffects.BlackNipples), 3, function(): void {
@@ -8266,7 +8422,7 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
 				//+100 LUST
-				dynStats("lus=", player.maxLust(), "resisted", false);
+				dynStats("lus=", player.maxLust(), "scale", false);
 				break;
 
 			//[Wither]
@@ -9642,7 +9798,7 @@
 			}
 			outputText("\n\nYou lick your lips clean, savoring the taste of the Winter Pudding.  You feel kinda antsy...");
 			//[Decrease player tone by 5, Increase Lust by 20, Destroy item.]
-			dynStats("lus", (10+player.lib/10), "resisted", false);
+			dynStats("lus", (10+player.lib/10), "scale", false);
 			
 			//[Optional, give the player antlers! (30% chance) Show this description if the player doesn't have horns already.]
 			if(player.horns == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {

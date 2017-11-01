@@ -26,7 +26,8 @@ package classes.Items.WeaponsRange
 			desc += "\nBase value: " + String(value);
 			//Perk
 			desc += "\nSpecial: Accuracy (+5% Accuracy)";
-			desc += "\nSpecial: Daoist's Focus (+40% Soulskill Power)";
+			desc += "\nSpecial: Daoist's Focus (+40% Magical Soulskill Power)";
+			desc += "\nSpecial: Body Cultivator's Focus (+40% Physical Soulskill Power)";
 			desc += "\nSpecial: Wild-Warden (enables Resonance Volley soul skill)";
 			return desc;
 		}
@@ -34,6 +35,8 @@ package classes.Items.WeaponsRange
 		override public function playerEquip():WeaponRange {
 			while (game.player.findPerk(PerkLib.DaoistsFocus) >= 0) game.player.removePerk(PerkLib.DaoistsFocus);
 			game.player.createPerk(PerkLib.DaoistsFocus,0.4,0,0,0);
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
 			while (game.player.findPerk(PerkLib.WildWarden) >= 0) game.player.removePerk(PerkLib.WildWarden);
 			game.player.createPerk(PerkLib.WildWarden,0,0,0,0);
 			return super.playerEquip();
@@ -41,6 +44,7 @@ package classes.Items.WeaponsRange
 		
 		override public function playerRemove():WeaponRange {
 			while (game.player.findPerk(PerkLib.DaoistsFocus) >= 0) game.player.removePerk(PerkLib.DaoistsFocus);
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			while (game.player.findPerk(PerkLib.WildWarden) >= 0) game.player.removePerk(PerkLib.WildWarden);
 			return super.playerRemove();
 		}

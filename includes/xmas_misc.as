@@ -73,7 +73,7 @@ public function investigateCandyCaneBun():void {
 	addButton(0,"Yes",helpWithTheCandyCane);
 	addButton(1,"No",declineCandyCaneCawks);
 	//simpleChoices("Yes",9999,"No",9999,"",0,"",0,"",0);
-	dynStats("lus", 10+player.lib/10, "resisted", false);
+	player.dynStats("lus", 10+player.lib/10, "scale", false);
 }
 
 //NO
@@ -105,7 +105,7 @@ public function helpWithTheCandyCane():void {
 	//(If corruption>50) 
 	else outputText("  Despite your rising urge to take advantage of the unknowing bunny, you decide to retire and return to camp.");
 	//(Lust set to 100, hour passes.)
-	dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "resisted", false);
+	player.dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -183,7 +183,7 @@ public function acceptChristmasManBJ():void {
 	if(player.cockArea(x) >= 80) {
 		outputText("You free your [cock " + (x+1) + "] from your [armor], signaling your acceptance.  Your monster flops free, and the harpy grabs at her throat reflexively when she looks at it.  She glances up to you with wide eyes and back down at it.  \"<i>A-a promise is a promise, but...</i>\"");
 		outputText("\n\nShe turns and flees with a few terrified flaps of her wings.  You sigh, covering your enormous prick once more.  At least you won't have to deal with her pesky shrieking any more.  The air warms and the snow thaws soon after you return, leaving no trace of its presence but a few spots of slushy mud.");
-		dynStats("lus", 10);
+		player.dynStats("lus", 10);
 		doNext(playerMenu);
 		return;
 	}
@@ -349,7 +349,7 @@ public function giveKamiTheChristmasRooAnal():void {
 	//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -385,7 +385,7 @@ public function takeItRooButtStyle():void {
 	outputText("\n\nKami, on the other hand, needs a tad more encouragement.  She desperately diddles her unused slit for as long as she can take it, her own belated orgasm finally erupting messily into your asshole moments later.  \"<i>Oh doll, I - ungh - needed that more than anything.  If you come back before the end of winter, we should definitely try this again.</i>\"  You give a thumbs up in approval of Kami's idea, turning around to head back to camp. Before you go, however, you take the opportunity to get a good squeeze of her ample tits, quickly taking off with complete satisfaction.");
 	//[Player heads back to camp, An hour passes, Asshole tightness is reduced, Lust is reduced to zero and KamiEnc = 1]
 	player.orgasm();
-	dynStats("sen", 1);
+	player.dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 }
@@ -403,7 +403,7 @@ public function KamiBlowJob():void {
 
 	outputText("\n\nYou gulp down her load without a sweat, pulling your fingers free from Kami's wetness. You allow Kami's soft, delicate lips to envelope and smother your own, giving her a taste of her man-milk in return.  You give her a seductive wink before finally pulling away to put on your garments, but Kami insists on your attention to apologize.  \"<i>Hey, uh, sorry for cumming so early there - if it's any consolation, that was amazing!  Next time you should be the one taking charge, doll.</i>\"  You beam at Kami, the waitress pecking you on the cheek before you head back to camp.");
 	if(player.hasCock()) outputText("  You think you might still need to find an outlet for that itch of yours, with [eachCock] still erect and needing release.");
-	dynStats("lus", 20+player.lib/10+player.sens/10);
+	player.dynStats("lus", 20+player.lib/10+player.sens/10);
 	//[Player heads back to camp, An hour passes, Lust = + 40 and KamiEnc = 1]
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	doNext(camp.returnToCampUseOneHour);
@@ -425,7 +425,7 @@ public function KamiDoubleDickFuck():void {
 	outputText("\n\nYou gather your thoughts for a second, exhausted from the actual ordeal.  You slowly put back your [armor] while sharing an appreciative farewell to the now-satiated waitress - of who is panting so profusely she can't even return the gesture.");
 	//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
 	player.orgasm();
-	dynStats("sen", -3);
+	player.dynStats("sen", -3);
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -862,7 +862,7 @@ public function lickNieve():void {
 		outputText("\n\nTo top it all off, at the same time a gush of glacial girl-spunk spills out onto your face.  You can't help but taste some of it, and you are pleasantly surprised to find it has a strong minty flavor.  You lap at the juices, at least until Nieve finally falls forward, completely spent.  Gratefully, you inhale properly, getting a good whiff of fem-cum and spearmint mingling in the air.");
 		
 		outputText("\n\nWith a smirk, you get to your feet and survey the situation.  Nieve has collapsed, face down in the icy powder, and there are two rather oddly shaped snow angels.  The smirk turns into a grin as you wipe the juices from your face and head back to camp, leaving Nieve to recover.");
-		dynStats("lus", 10+player.lib/10, "resisted", false);
+		player.dynStats("lus", 10+player.lib/10, "scale", false);
 	}
 	//Silly Mode:
 	else {
@@ -875,7 +875,7 @@ public function lickNieve():void {
 		else outputText(", your little anemone spawn giggles and laughs at your predicament before finally ladling some water onto your lover's snatch");
 		outputText(", effectively allowing you to pull your tongue away.");
 		outputText("\n\nThe both of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
-		dynStats("lus", -5-player.sens/5);
+		player.dynStats("lus", -5-player.sens/5);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -899,7 +899,7 @@ public function suckNieveOff():void {
 	outputText("\n\nSucking as hard as you can, you slither your tongue around the length inside your mouth, licking everywhere you can in spite of having your mouth full already.  Cupping those swollen balls in your hands you gently fondle them, massaging them tenderly even as they lurch and swell, their icy payload ready to burst and gush into your mouth already.  Giving you only seconds notice, the pleasure filed gasps warn you of the impending orgasm.  Letting out a long moan of pure ecstasy Nieve blows his minty load inside your mouth.  Pulse after pulse, burst after thick burst of creamy minty cum flows over your tongue and down your throat.  With each gush your tongue is overwhelmed by the strong minty flavor, the thick stuff gushing down your throat to pool inside your stomach.  With his body presumably made from ice and snow, you're unsure as to where he is keeping all this minty cream, more and more gushing until your belly swells just a little under the chilling amount.  Shivering from the icy cum in your tummy you slowly pull back, sucking the last streams of pearly seed from your wintery lover before popping off.");
 	
 	outputText("\n\nLetting out a deep sigh you grin and look up, wanting to see the look on Nieve's face.  The iceborn man looks like he couldn't be happier, a silly smile on his face as he looks down at you.  \"<i>Oh [Master]... that was amazing, I've never met someone so skilled before.  I hope you're not too cold now,</i>\" he says with a hint of worry, knowing that his body and by extension, his cum, must be quite cold.  Reassuring him you tell your frosty friend you're fine and that he actually tasted pretty good. Looking quite pleased Nieve helps you up before sweeping you up into a squeezing hug.  \"<i>Thank you so much for this, but next time let me do you though, you need to be pleasured as well,</i>\" the elemental spirit says gently before helping you get cleaned up and ready for your adventures.");
-	dynStats("lus", 10+player.lib/10, "resisted", false);
+	player.dynStats("lus", 10+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1045,7 +1045,7 @@ public function fuckNieve():void {
 	
 	outputText("\n\n\"<i>So messy, [Master],</i>\" she notes with a smile.  \"<i>Allow me to clean you up.</i>\"  Her cool mouth descends on your member, licking and sucking away all of your juices and hers, leaving you spotless.  She seems to delight in the flavor, and once she's done, she leans in and gives you a big, sloppy kiss that tastes more like mint than anything else.  She then cuddles up next to you, her cold body somehow comforting, until you've recuperated enough to head back to the camp proper.");
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1109,7 +1109,7 @@ public function takeNieveAnal():void {
 	
 	outputText("\n\nYou both rest in that position, Nieve still trickling cum into you even though he stopped moving minutes ago.  You turn your head to look at him and notice his face a few inches from yours.  It's clear that at the moment he's barely conscious, and you shift a bit to kiss him, thanking him for a job well done.  After a little while you both recover, redress, and silently go back to business.  Looking back at him as you leave, you know you want to do it again real soon.");
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1140,7 +1140,7 @@ public function takeNieveVaginal():void {
 	
 	outputText("\n\nAnother hour passes and you wake up clean and dressed, laying next to Nieve.  You noticed he's probably been watching you for the last several minutes.  You get up, pat yourself off, then with one hand tussle his snow-white hair, while uttering the words, \"<i>Good boy.</i>\"");
 	player.orgasm();
-	dynStats("sen", -2);
+	player.dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
 

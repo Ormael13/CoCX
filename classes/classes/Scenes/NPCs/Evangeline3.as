@@ -130,7 +130,7 @@ package classes.Scenes.NPCs
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg = Math.round(lustDmg);
-			game.dynStats("lus", lustDmg, "resisted", false);
+			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
 			fatigue += spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
@@ -192,10 +192,10 @@ package classes.Scenes.NPCs
 					var choice1:Number = rand(2);
 					if (choice1 == 0) eAttack();
 					if (choice1 == 1) {
-						if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						//else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();miejsce na ice spike spell w AI
 						else eAttack();
 					}

@@ -4,7 +4,7 @@ public function sharkGirlGetsDildoed():void {
 	outputText("You grin from ear to ear, revealing enough teeth to make even the defeated shark-girl shiver.  Advancing upon the prone monster-woman, you ");
 	if(player.weaponName != "fists") outputText("put away your [weapon] and ");
 	outputText("draw out a glistening pink dildo from your pouches, as if it were a weapon.   She looks up at you, at once knowing your intent.  ");
-	if(monster.lust >= monster.eMaxLust()) outputText("Her legs spread invitingly wide and she tears off her bikini bottom in a lusty frenzy.  You hold the dildo over her and give it a tiny squeeze, wringing out a few drops of pink fluid from the special dildo.  They land on her exposed cunt and in seconds she's writhing underneath you, humping the air.");
+	if(monster.lust >= monster.maxLust()) outputText("Her legs spread invitingly wide and she tears off her bikini bottom in a lusty frenzy.  You hold the dildo over her and give it a tiny squeeze, wringing out a few drops of pink fluid from the special dildo.  They land on her exposed cunt and in seconds she's writhing underneath you, humping the air.");
 	else outputText("She holds her legs together defiantly, but you pry them open, tear off her bikini bottom and expose her bald nether-lips.   You hold the dildo over her and squeeze, squirting a gush of pink fluid onto her exposed cunt.  The effect is immediate, and in moments she's humping the air and wet with her own fluids.");
 	outputText("\n\n");
 	
@@ -25,7 +25,7 @@ public function sharkGirlGetsDildoed():void {
 	
 	outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.");
 	
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }
 
@@ -43,7 +43,7 @@ public function sandwitchGetsDildoed():void {
 	outputText("You wiggle the toy about, enjoying having taken such advantage of your now-unconscious foe.  But you have places to be, and you pull out your toy, ");
 	if(player.cor > 50) outputText("lick it clean, ");
 	outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.");
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }
 
@@ -61,6 +61,6 @@ public function succubusGetsDildoed():void {
 	outputText("Good.  You pick up the toy ");
 	if(player.cor > 75) outputText("giving it a long lick to taste the succubi's delicious flavor ");
 	outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...");
-	dynStats("lus", (20+player.lib/5+player.cor/10));
+	player.dynStats("lus", (20+player.lib/5+player.cor/10));
 	cleanupAfterCombat();
 }

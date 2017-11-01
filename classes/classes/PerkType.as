@@ -270,6 +270,17 @@ import flash.utils.Dictionary;
 			});
 			return this;
 		}
+		public function requireMinSens(value:int):PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return kGAMECLASS.player.minSens() >= value;
+				},
+				text: "Min. Sensitivity "+value,
+				type: "minsensitivity",
+				value: value
+			});
+			return this;
+		}
 		public function requireMaxSoulforce(value:int):PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

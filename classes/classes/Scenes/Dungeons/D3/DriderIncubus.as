@@ -91,16 +91,14 @@ package classes.Scenes.Dungeons.D3
 			// Because fuck having arguments with status effects :^)
 			_combatRound++;
 			
-			if (this.lust < .65*this.eMaxLust() && this.HP < .33*this.eMaxHP())
-			{
+if (this.lust < .65 * this.maxLust() && this.HP < .33 * this.maxHP()) {
 				gainHpAndLust();
 			}
-			else if (this.lust >= .65*this.eMaxLust() && this.HP >= .33*this.eMaxHP())
-			{
+			else if (this.lust >= .65 * this.maxLust() && this.HP >= .33 * this.maxHP()) {
 				dropHpAndLust();
 			}
 			
-			if (rand(this.eMaxLust()) > lust + 10)
+			if (rand(this.maxLust()) > lust + 10)
 			{
 				spearStrike();
 				outputText("\n\n");
@@ -155,7 +153,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			//Heals 10% of HP but raises lust by 8.
 			
-			this.addHP(this.eMaxHP() * 0.1);
+this.addHP(this.maxHP() * 0.1);
 			this.lust += 8;
 			
 			if (_hpGains == 0) outputText("<i>“You won’t defeat me so easily!”</i>");
@@ -166,7 +164,7 @@ package classes.Scenes.Dungeons.D3
 			_hpGains++;
 			
 			outputText(" The demon gestures wildly, drawing a rune across his own chest. It flares, blood red and pulsing. Your foe’s wounds slowly edge close, fueled by magic. When the luminous symbol fades, the drider pants, his black skin flushing purple in places.");
-			if (this.lust > .65*this.eMaxLust())
+			if (this.lust > .65*this.maxLust())
 			{
 				if (_goblinFree) outputText(" His dick is rigid and bouncing, so hard it looks like it could go off at any moment.");
 				else outputText(" His balls are tensing underneath the goblin, and he keeps moaning under his breath.");
@@ -180,7 +178,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			//-8% of max HP, -10 lust.
 			
-			this.HP -= (this.eMaxHP() * 0.08);
+this.HP -= (this.maxHP() * 0.08);
 			this.lust -= 10;
 			
 			outputText("The demon snarls and draws his spear back, placing it blade down against his arm. Grinning malevolently, he slides the razor-sharp edge along his skin, leaving a trail of glittering ruby on his wounded flesh. <i>“Pain brings clarity of mind - something you couldn’t understand.”</i> He grins wider, mastering his baser emotions. <i>“Let me teach you.”</i>\n\n");
@@ -408,7 +406,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" ache to be touched");
 			}
 			
-			game.dynStats("lus", (player.lib / 10 + player.cor / 10) + 15);
+			player.dynStats("lus", (player.lib / 10 + player.cor / 10) + 15);
 			
 			outputText(". Your body rebels against you under the unholy influence");
 			if (player.lust < player.maxLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
@@ -430,7 +428,7 @@ package classes.Scenes.Dungeons.D3
 		public function taintedMindAttackAttempt():void
 		{
 			outputText("You ready an attack, but find your hands groping your own body instead. Somehow the demon’s magic has made it impossible to strike at him, crossing wires that weren’t meant to be crossed. Frowning, you look down at your more aroused form, determined not to fall for this a second time.");
-			game.dynStats("lus", 15);
+			player.dynStats("lus", 15);
 		}
 		
 		//On same round timer as physical stun
@@ -449,7 +447,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				outputText(" The intensity overwhelms your ability to act, arousing and stunning you.");
-				game.dynStats("lus", (player.lib / 15 + player.cor / 15) + 15);
+				player.dynStats("lus", (player.lib / 15 + player.cor / 15) + 15);
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 		}
@@ -472,7 +470,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				//Fail
 				outputText(" You concentrate to try and throw it off, but he overwhelms your mental defenses. Clouds of swirling pink filled with unsubtle erotic silhouettes fill your vision, effectively blinding you!");
-				game.dynStats("lus", 25);
+				player.dynStats("lus", 25);
 				player.createStatusEffect(StatusEffects.PurpleHaze, 2 + rand(2), 0, 0, 0);
 				player.createStatusEffect(StatusEffects.Blind, player.statusEffectv1(StatusEffects.PurpleHaze), 0, 0, 0);
 			}
@@ -536,7 +534,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nShe dances and spins to the side, cooing, <i>“Don’t you want me anymore, baby? Look how ready I am”</i> Her nipples are taut and stiff, and the junction between her thighs absolutely drenched. Neither you nor your foe can keep from sparing lusty glances her way.");
 			
 			lust += 7;
-			game.dynStats("lus", 7);
+			player.dynStats("lus", 7);
 		}
 		
 		public function freeGoblin():void

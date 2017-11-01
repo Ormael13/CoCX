@@ -65,6 +65,7 @@ package classes.Items
 		public const LTHRPNT:Armor = new Armor("LthrPnt","T.Lthr Pants","white silk shirt and tight leather pants","a pair of leather pants and a white silk shirt",0,20,"A flowing silk shirt and tight black leather pants.  Suave!","Light");
 		public const LTHRROB:Armor = new Armor("LthrRob","Lthr Robes","black leather armor surrounded by voluminous robes","a suit of black leather armor with voluminous robes",6,150,"This is a suit of flexible leather armor with a voluminous set of concealing black robes.","Light");
 		public const M_ROBES:Armor = new Armor("M.Robes","Robes","modest robes","a set of modest robes",0,25,"A set of modest robes, not dissimilar from what the monks back home would wear.","Light");
+		public const NAGASLK:NagaSilkDress = new NagaSilkDress();
 		public const NURSECL:ArmorWithPerk = new ArmorWithPerk("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,100,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.  It would grant a small regeneration to your HP.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 25, "A simple white shirt and overalls.", "Light", true);

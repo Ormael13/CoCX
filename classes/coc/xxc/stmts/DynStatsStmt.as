@@ -3,6 +3,7 @@
  */
 package coc.xxc.stmts {
 import classes.CoC;
+import classes.internals.Utils;
 
 import coc.script.Eval;
 
@@ -24,13 +25,13 @@ public class DynStatsStmt extends Statement{
 		var arr:Array = [];
 		for (var name:String in args) {
 			var value:* = (args[name] as Eval).vcall(context.scopes);
-			if (name == 'scale') {
-				arr.push('resisted',value,'noBimbo',!value);
-			} else {
-				arr.push(name,value);
-			}
+			arr.push(name,value);
 		}
-		game.dynStats.apply(game,arr);
+		game.player.dynStats.apply(game,arr);
+	}
+
+	public function toString():String {
+		return '<dynStats '+Utils.keys(args)+'/>';
 	}
 }
 }

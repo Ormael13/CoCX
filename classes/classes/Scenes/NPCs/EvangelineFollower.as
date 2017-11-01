@@ -124,11 +124,11 @@ public function meetEvangeline():void {
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
+	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
-	if (player.hasKeyItem("Soul Gem Research") >= 0) {
+	if (player.hasKeyItem("Soul Gem Research") >= 0 && flags[kFLAGS.GARGOYLE_QUEST] >= 3) {
 		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
 		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
 	}
@@ -703,7 +703,8 @@ private function recivingCraftedSoulGem():void {
 	clearOutput();
 	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
 	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
-	outputText("<b>Acquired Soul Gem<\b>");
+	outputText("<b>Acquired Soul Gem</b>");
+	if (flags[kFLAGS.GARGOYLE_QUEST] == 3) flags[kFLAGS.GARGOYLE_QUEST]++;
 	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
 	inventory.takeItem(useables.SOULGEM, meetEvangeline);
 }

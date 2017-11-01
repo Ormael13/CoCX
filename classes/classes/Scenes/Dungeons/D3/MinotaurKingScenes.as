@@ -150,17 +150,17 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nHow perfect. You shed your [armor], intent on a little relief yourself. Normally a brute like this might take offense to the forceful claiming of his backdoor. Now, when he’s writhing and bleating, begging the demons in the audience to mount him and provide relief? He’ll accept anything you give him, even if it’s a thorough prostate pounding. Your [cocks] swell");
 			if (player.cocks.length == 1) outputText("s");
 			outputText(" at the thought, growing hard and firm, ready to batter through the bull’s clenching ring. This is going to be fun.");
-			outputText("\n\nYou kick the minotaur King’s legs apart for better access and sidle in close, one hand idly pumping at [cockBiggest] while you do your damnedest not to give in to the delicious scent. No matter how pernicious the desire to indulge in his aroma, how wonderful it would be to press your cheek against that pillar of masculinity and lick, you know you have to resist it or you’ll forget all about getting yourself off and taking down Lethice.");
-			outputText("\n\nShe’s watching you too. Her hungry, soulless eyes are watching you stroke your cock, watching you line it up with the angry pucker of the minotaur King’s asshole. The corrupt Queen licks her lips when you push forward. You rub your [cockHeadBiggest] against her most trusted servant’s entrance, slowly splitting his derriere, reshaping it into a vessel for your pleasure. He’s tight, tighter than you would expect from such a massive creature. His asshole clutches at every inch of cock you feed it, almost like it wants to squeeze you off, to massage you with rapt enthusiasm.");
+			outputText("\n\nYou kick the minotaur King’s legs apart for better access and sidle in close, one hand idly pumping at [cock biggest] while you do your damnedest not to give in to the delicious scent. No matter how pernicious the desire to indulge in his aroma, how wonderful it would be to press your cheek against that pillar of masculinity and lick, you know you have to resist it or you’ll forget all about getting yourself off and taking down Lethice.");
+			outputText("\n\nShe’s watching you too. Her hungry, soulless eyes are watching you stroke your cock, watching you line it up with the angry pucker of the minotaur King’s asshole. The corrupt Queen licks her lips when you push forward. You rub your [cockHead biggest] against her most trusted servant’s entrance, slowly splitting his derriere, reshaping it into a vessel for your pleasure. He’s tight, tighter than you would expect from such a massive creature. His asshole clutches at every inch of cock you feed it, almost like it wants to squeeze you off, to massage you with rapt enthusiasm.");
 			outputText("\n\nThe royal minotaur’s pained moo tells quite the different story. His horned visage stares down at you in disbelief, but his cock perceptibly plumps between his fingers, displaying a network of bulging veins all too happy to have you stimulate him from behind. Slapping his ass, you give him more of what his body so unsubtly craves. You thrust");
-			if (player.biggestCockLength() >= 24) outputText(" until his belly bulges with the clear outline of your [cockBiggest], displaying just how fully he has been taken to the entire assemblage. You’ve claimed this once noble beast, turned his body into a fuzzy, pleasant-smelling condom for your excessively-large cock.");
+			if (player.biggestCockLength() >= 24) outputText(" until his belly bulges with the clear outline of your [cock biggest], displaying just how fully he has been taken to the entire assemblage. You’ve claimed this once noble beast, turned his body into a fuzzy, pleasant-smelling condom for your excessively-large cock.");
 			else if (player.biggestCockLength() >= 12)
 			{
 				outputText(" until you’ve fed his ass the whole of your girthy rod");
 				if (player.hasKnot()) outputText(", knot and all");
 				outputText(". A visible bulge presents itself on the once-noble beast’s belly, declaring your dominion over him for all to see. Whatever he was before, he’s your cock-sleeve now.");
 			}
-			else outputText(" until you’ve buried the entirety of your [cockBiggest] inside his snugly squeezing intestines, repurposing his digestive system into your own personal, phallus playground.");
+			else outputText(" until you’ve buried the entirety of your [cock biggest] inside his snugly squeezing intestines, repurposing his digestive system into your own personal, phallus playground.");
 			outputText("\n\nThis really is a first class asshole. It’s elastic enough to take anything you could offer it and strong enough to provide the perfect amount of friction. Whenever that friction flags, you can just slap him on the ass, and he tightens right up. Best of all, his constantly-dribbling pre-spunk inevitably drips down onto your member as you saw it between his buttcheeks, lubricating you with enough of the sticky to stuff to making fucking him an absolute breeze.");
 			outputText("\n\nWhat a waste of perfectly good muscle. All this time, this big, slutty minotaur has been free to wander around ramming his cock inside of everyone else when he had a treasure like this packed between his tight, toned buttcheeks. Grabbing hold of his thighs, you snarl and pound his ass harder. Your heartbeat is hammering in your ears. Your dick is hard enough to chisel stone, and you’re having a really hard time seeing anything past the swaying horse-cock a few inches in front of you.");
 			outputText("\n\nThe King’s cock stands straight upright, three feet of heavenly member with a flare that seems wider by the second. You delight in drilling into him, humping inward and upward to rub against the edge of his prostate. Whenever you hit it, his dick’s dribbles turn into squirts. Some falls on your [hair] and nose, but you wear it as a badge of honor, proof of just how much you’re making this once-proud minotaur a slave to the anal pleasures you’ve given him.");
@@ -227,7 +227,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.cocks.length > 1) outputText("s");
 				outputText(" twitch");
 				if (player.cocks.length == 1) outputText("es");
-				outputText(" along with the eager beats of your heart, and in a moment of weakness, you lean down to drag your [cockHeadBiggest] along the Minotaur King’s length. It is but a brief dalliance - foreplay before you put him where he belongs. With a regretful sigh, you stop frotting and line him back up.");
+				outputText(" along with the eager beats of your heart, and in a moment of weakness, you lean down to drag your [cockHead biggest] along the Minotaur King’s length. It is but a brief dalliance - foreplay before you put him where he belongs. With a regretful sigh, you stop frotting and line him back up.");
 			}
 
 			if (player.averageVaginalLooseness() >= 5)
@@ -288,7 +288,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
 			player.orgasm();
-			dynStats("lus", 5, "resisted", false);
+			dynStats("lus", 5, "scale", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			cleanupAfterCombat(getGame().d3.resumeFromFight);

@@ -79,7 +79,6 @@
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.NAGA_OR_GORGON] = 1;
 			game.desert.nagaScene.nagaRapeChoice();
 		}
 
@@ -90,7 +89,6 @@
 				player.orgasm();
 				doNext(game.cleanupAfterCombat);
 			} else {
-				flags[kFLAGS.NAGA_OR_GORGON] = 1;
 				game.desert.nagaScene.nagaFUCKSJOOOOOO();
 			}
 		}

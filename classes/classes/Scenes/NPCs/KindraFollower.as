@@ -96,7 +96,7 @@ public function meet2Kindra():void {
 	outputText("\"<i>What is it you wanted exactly [name]?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", kindraAppearance).hint("Examine Kindra's detailed appearance.");
-	addButton(1, "Fight", fight2Kindra).hint("Fight her");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(1, "Fight", fight2Kindra).hint("Fight her");
 	if (player.statusEffectv1(StatusEffects.Kindra) < 150) addButton(2, "Training", trainingArcheryWithKindra).hint("Train your archery skills with her.");
 	else addButtonDisabled(2, "Training", "You finished advanced archery training.");
 	addButton(14, "Back", camp.campFollowers);
@@ -156,12 +156,10 @@ public function trainingArcheryWithKindra():void {
 			outputText("Your aim is true but no matter how you do it your arrows tend to only shoot around the absolute center rather than in it. At least you improved your accuracy a little today.\n\n");
 			outputText("Kindra watch passively all the while but eventually calling it off for the day you both head back to camp.\n\n");
 			if (player.spe < 200) {
-				player.spe += 5;
-				statScreenRefresh();
+				dynStats("spe", 5);
 			}
 			if (player.inte < 200) {
-				player.inte += 5;
-				statScreenRefresh();
+				dynStats("inte", 5);
 			}
 			if (player.spe >= 150 && player.inte >= 120) flags[kFLAGS.KINDRA_ADV_ARCHERY] = 5;
 			bowSkill(5);
@@ -180,12 +178,10 @@ public function trainingArcheryWithKindra():void {
 			outputText("This training is somewhat harder than anything you’ve tried so far. You shoot those targets for a while missing quite a few shots. After a few hour you indeed gain in accuracy and fluidity your arrows hitting the targets more often. ");
 			outputText("This doesn’t prevent Kindra mocking you when you fail at hitting targets entirely but strangely her taunts helps you push yourself harder and harder. Perhaps because you want to prove the sheep morph wrong.\n\n");
 			if (player.spe < 150) {
-				player.spe += 5;
-				statScreenRefresh();
+				dynStats("spe", 5);
 			}
 			if (player.inte < 120) {
-				player.inte += 5;
-				statScreenRefresh();
+				dynStats("inte", 5);
 			}
 			if (player.statusEffectv1(StatusEffects.Kindra) >= 95 && player.spe >= 150 && player.inte >= 120) {
 				outputText("Kindra watch satisfied as your arrows hits the five consecutives targets right in their centers.\n\n");
@@ -212,9 +208,8 @@ public function trainingArcheryWithKindra():void {
 			outputText("You get at it for several hours until you're so tired you can no longer pull your bowstring.\n\n");
 			if (player.inte < 100) {
 				outputText("\"<i>That will do for today pup ask me tomorrow to resume training.</i>\"\n\n");
-				player.spe += 5;
-				player.inte += 5;
-				statScreenRefresh();
+				dynStats("spe", 5);
+				dynStats("inte", 5);
 			}
 			if (player.statusEffectv1(StatusEffects.Kindra) > 40) {
 				outputText("\"<i>Not bad you're hitting the center as you should. We can move on to step two tomorrow, I expect you to be ready.</i>\"\n\n");

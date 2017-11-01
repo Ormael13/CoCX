@@ -577,17 +577,17 @@ package classes
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
 		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
-				"Increases maximum fatigue by 700.",
-				"You choose the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 700!");
+				"Increases maximum fatigue by 4500.",
+				"You choose the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
-				"Increases maximum lust by 350.",
-				"You choose the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 350!");
+				"Increases maximum lust by 2250.",
+				"You choose the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 2250!");
 		public static const EpicSpirituality:PerkType = mk("Epic Spirituality", "Epic Spirituality",
-				"Increases maximum mana by 1050.",
-				"You choose the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
+				"Increases maximum mana by 6750.",
+				"You choose the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 6750!");
 		public static const EpicTranquilness:PerkType = mk("Epic Tranquilness", "Epic Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 2250.",
+				"You choose the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 2250!");
 		public static const EternalyLastingBuffs:PerkType = mk("(Eternaly) Lasting Buffs", "(Eternaly) Lasting Buffs",
 				"Buff spells last another 5 turns longer at another 2x increase of their costs.",
 				"You choose the '(Eternaly) Lasting Buffs' perk. Your mastery over buffs reached (eternaly) lasting level.");
@@ -706,17 +706,17 @@ package classes
 				"Increases maximum wrath by 60.",
 				"You choose the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 60!");	
 		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
-				"Increases maximum fatigue by 700.",
-				"You choose the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 700!");
+				"Increases maximum fatigue by 3500.",
+				"You choose the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3500!");
 		public static const HalfStepToEpicSelfControl:PerkType = mk("Half-step-to Epic Self-Control", "Half-step-to Epic Self-Control",
-				"Increases maximum lust by 350.",
-				"You choose the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 350!");
+				"Increases maximum lust by 1500.",
+				"You choose the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 1500!");
 		public static const HalfStepToEpicSpirituality:PerkType = mk("Half-step-to Epic Spirituality", "Half-step-to Epic Spirituality",
-				"Increases maximum mana by 1050.",
-				"You choose the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 1050!");
+				"Increases maximum mana by 4500.",
+				"You choose the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 4500!");
 		public static const HalfStepToEpicTranquilness:PerkType = mk("Half-step-to Epic Tranquilness", "Half-step-to Epic Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 1500.",
+				"You choose the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 1500!");
 		public static const HalfStepToImprovedEndurance:PerkType = mk("Half-step-to Improved Endurance", "Half-step-to Improved Endurance",
 				"Increases maximum fatigue by 50.",
 				"You choose the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!");
@@ -730,17 +730,17 @@ package classes
 				"Increases maximum wrath by 25.",
 				"You choose the 'Half-step-to Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 25!");
 		public static const HalfStepToInhumanEndurance:PerkType = mk("Half-step-to Inhuman Endurance", "Half-step-to Inhuman Endurance",
-				"Increases maximum fatigue by 700.",
-				"You choose the 'Half-step-to Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 700!");
+				"Increases maximum fatigue by 1500.",
+				"You choose the 'Half-step-to Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 1500!");
 		public static const HalfStepToInhumanSelfControl:PerkType = mk("Half-step-to Inhuman Self-Control", "Half-step-to Inhuman Self-Control",
-				"Increases maximum lust by 350.",
-				"You choose the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 350!");
+				"Increases maximum lust by 750.",
+				"You choose the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 750!");
 		public static const HalfStepToInhumanSpirituality:PerkType = mk("Half-step-to Inhuman Spirituality", "Half-step-to Inhuman Spirituality",
-				"Increases maximum mana by 1050.",
-				"You choose the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
+				"Increases maximum mana by 2250.",
+				"You choose the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 2250!");
 		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 750.",
+				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 750!");
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
 				"You choose the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
@@ -778,8 +778,8 @@ package classes
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
 		public static const HotBlooded:PerkType = mk("Hot Blooded", "Hot Blooded",
-				"Raises minimum lust by up to 20.",
-				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20! (If you already have some minimum lust, it will be increased by 10)");
+				"Raises minimum lust by 20.",
+				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20!");
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
 				"[if(player.tou>=75)" +
 						"Grants 10% physical damage reduction.</b>" +
@@ -833,17 +833,17 @@ package classes
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire VI' perk, giving you an additional 20 LP!");
 		public static const InhumanEndurance:PerkType = mk("Inhuman Endurance", "Inhuman Endurance",
-				"Increases maximum fatigue by 700.",
-				"You choose the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 700!");
+				"Increases maximum fatigue by 2000.",
+				"You choose the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 2000!");
 		public static const InhumanSelfControl:PerkType = mk("Inhuman Self-Control", "Inhuman Self-Control",
-				"Increases maximum lust by 350.",
-				"You choose the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 350!");
+				"Increases maximum lust by 1000.",
+				"You choose the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 1000!");
 		public static const InhumanSpirituality:PerkType = mk("Inhuman Spirituality", "Inhuman Spirituality",
-				"Increases maximum mana by 1050.",
-				"You choose the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 1050!");
+				"Increases maximum mana by 3000.",
+				"You choose the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 3000!");
 		public static const InhumanTranquilness:PerkType = mk("Inhuman Tranquilness", "Inhuman Tranquilness",
-				"Increases maximum wrath by 350.",
-				"You choose the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 350!");
+				"Increases maximum wrath by 1000.",
+				"You choose the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 1000!");
 		public static const InsightfulResourcesI:PerkType = mk("Insightful Resources I", "Insightful Resources I",
 				"+5 extra soulforce per point of wisdom.",
 				"You choose the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.");
@@ -1116,7 +1116,7 @@ package classes
 				"You choose the 'Nature's Spring VI' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
 				"Raises minimum lust by up to 30.",
-				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by as much as 30 (If you already have minimum lust, the increase is 10-15).");
+				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 30.");
 		public static const Parry:PerkType = mk("Parry", "Parry",
 				"[if(player.spe>=50)" +
 						"Increases deflect chance by up to 10% while wielding a weapon. (Speed-based)." +
@@ -1266,6 +1266,9 @@ package classes
 		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
 				"Allow to determine how corrupted or pure is enemy.",
 				"You choose the 'Sense Corruption' perk, allowing to determine how corrupted or pure is enemy.");
+		public static const SenseWrath:PerkType = mk("Sense Wrath", "Sense Wrath",
+				"Allow to determine how much wrath enemy have.",
+				"You choose the 'Sense Wrath' perk, allowing to determine how much angry is enemy.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
@@ -1588,6 +1591,7 @@ package classes
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
+		public static const BodyCultivatorsFocus:BodyCultivatorsFocusPerk = new BodyCultivatorsFocusPerk();
 		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
@@ -1647,6 +1651,8 @@ package classes
 				"Allows access to a dragon ice breath attack.");
 		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
 				"Allows access to a dragon lightning breath attack.");
+		public static const ElectrifiedDesire:PerkType = mk("Electrified Desire", "Electrified Desire",
+				"Masturbating only makes you hornier. Furthermore, your ability to entice, tease and zap thing is enhanced the more horny you are.");
 		public static const ElementalConjurerMindAndBodyDedication:PerkType = mk("Elemental Conjurer Mind and Body Dedication", "Elemental Conjurer Mind and Body Dedication",
 				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Dedication.");
 		public static const ElementalConjurerMindAndBodyResolve:PerkType = mk("Elemental Conjurer Mind and Body Resolve", "Elemental Conjurer Mind and Body Resolve",
@@ -1687,6 +1693,8 @@ package classes
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
+		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
+				"Increase all damage dealt with lightning spells by 100% and reduce lightning damage taken by 50%.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",
 				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour and additional slightly increasing maximal attainable natural healing rate.");
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
@@ -1763,6 +1771,8 @@ package classes
 				"Provides resistance to the addictive effects of bottled LaBova milk.");
 		public static const MarblesMilk:PerkType = mk("Marble's Milk", "Marble's Milk",
 				"Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.");
+		public static const MightyFist:PerkType = mk("Mighty Fist", "Mighty Fist",
+				"Regular fist attacks now have a chance to cause stun and fist damage is increased by 5 (x NG tier).");
 		public static const Misdirection:PerkType = mk("Misdirection", "Misdirection",
 				"Grants additional evasion chances while wearing Raphael's red bodysuit.");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
@@ -1805,12 +1815,12 @@ package classes
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
+		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
 		//public static const EnemyGooType:PerkType = mk("", "", "");
 		//public static const EnemyPlantType:PerkType = mk("", "", "");
 		//public static const Enemy:PerkType = mk("", "", "");undead/ghost?
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
@@ -2981,29 +2991,31 @@ package classes
 						   .requireLevel(48);
 		//Tier 9 Libido Perks
 		HalfStepToInhumanSelfControl.requireLib(300)
-									 .requireInt(200)
-									 .requirePerk(PeerlessSelfControl)
-									 .requireLevel(54);
+									.requireInt(200)
+									.requirePerk(PeerlessSelfControl)
+									.requireLevel(54);
 		//Tier 10 Libido Perks
 		InhumanSelfControl.requireLib(330)
-						   .requireInt(220)
-						   .requirePerk(HalfStepToInhumanSelfControl)
-						   .requireLevel(60);
+						  .requireInt(220)
+						  .requirePerk(HalfStepToInhumanSelfControl)
+						  .requireLevel(60);
 		//Tier 11 Libido Perks
 		HalfStepToEpicSelfControl.requireLib(360)
-									 .requireInt(240)
-									 .requirePerk(InhumanSelfControl)
-									 .requireLevel(66);
+								 .requireInt(240)
+								 .requirePerk(InhumanSelfControl)
+								 .requireLevel(66);
 		//Tier 12 Libido Perks
 		EpicSelfControl.requireLib(390)
-						   .requireInt(260)
-						   .requirePerk(HalfStepToEpicSelfControl)
-						   .requireLevel(72);
+					   .requireInt(260)
+					   .requirePerk(HalfStepToEpicSelfControl)
+					   .requireLevel(72);
 		//------------
 		// SENSITIVITY
 		//------------
 		//Slot 6 - Tier 0
 		EyesOfTheHunterNovice.requireSen(25);
+		SenseWrath.requireSen(25);
+		//.requireMinSens(15);
 		//Tier 1
 		EyesOfTheHunterAdept.requireSen(50)
 							.requirePerk(EyesOfTheHunterNovice)

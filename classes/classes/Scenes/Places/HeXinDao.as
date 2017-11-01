@@ -15,8 +15,10 @@ package classes.Scenes.Places {
 	import classes.Scenes.Places.HeXinDao.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.Jeniffer;
+	import classes.Scenes.NPCs.ChiChiFollower;
 	import classes.Scenes.NPCs.Jinx;
 	import classes.Scenes.NPCs.Syth;
+	import classes.Scenes.NPCs.Rangiku;
 	//import classes.Scenes.Places.HeXinDao.*;
 	//import classes.Items.Armor;
 	//import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -25,7 +27,7 @@ package classes.Scenes.Places {
 {
 	
 	public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-	//public var vala:ValaScene = new ValaScene();
+	public var chichiScene:ChiChiFollower = new ChiChiFollower();
 	//public var TFmerch:MogaHen = new MogaHen();
 	
 	public function HeXinDao() 
@@ -52,6 +54,8 @@ public function riverislandMenuShow():void {
 	//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
 	//addButton(6, "", ); jakies miejsce aby zdobywac gems lub/i EXP - moze jakies zadania tu zlecane czy cos w tym stylu?
 	addButton(7, "Arena", soularena);
+	addButton(8, "Restaurant", restaurantShiraOfTheEast);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 3) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function golemmerchant():void {
@@ -302,7 +306,6 @@ public function exchangeGemsToSpiritStonesorReverse():void {
 	clearOutput();
 	outputText("When you ask about this exchange that was mentioned on the sign over the entrance Moga  think for a moment before reaching to the desk near him. After handing you over a piece of paper he adds.");
 	outputText("\n\n\"<i>Here are my exchange rates. Pick the one you want and let me know. If you don't like those rates you can go and try to find someone else... not like there is anyone else here that want to deal with those exchanges aside me.</i>\"");
-	outputText("\n\n\<b>Spirit Stones: </b>" + flags[kFLAGS.SPIRIT_STONES] + "\n");
 	menu();
 	if (player.gems >= 20) addButton(0, "20 Gems", gems20).hint("Exchange 20 gems to 1 spirit stone.");
 	if (player.gems >= 100) addButton(1, "100 Gems", gems100).hint("Exchange 100 gems to 5 spirit stones.");
@@ -1512,17 +1515,21 @@ private function debitWeaponRange(itype:ItemType):void {
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: dummy golem, grupa dummy golems, true golem, ?group of true golems, weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, which only briefly glance at you the moment you pass by them. Inside after few a moment a tall slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
-	outputText("\n\n\"<i>Greeting to the Soul Arena. Don't pick up fights outside of the proper place or you will be thrown out. If you break any rule here you will be kicked out. Knowing this go pick the area where you want to train or maybe go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains you all that is needed and walk away.");
-	outputText("\n\nSo which one of the three possible sub areas you gonna visit this time?");
-	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) ("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes as he does so.");
-	menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosuku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
-	addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
-	addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
-	addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
-	if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
-	addButton(14, "Back", riverislandVillageStuff);
-	statScreenRefresh();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15) chichiScene.EnterOfTheChiChi();
+	else {
+		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, which only briefly glance at you the moment you pass by them. Inside after few a moment a tall slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
+		outputText("\n\n\"<i>Greeting to the Soul Arena. Don't pick up fights outside of the proper place or you will be thrown out. If you break any rule here you will be kicked out. Knowing this go pick the area where you want to train or maybe go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains you all that is needed and walk away.");
+		outputText("\n\nSo which one of the three possible sub areas you gonna visit this time?");
+		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) ("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes as he does so.");
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 1) flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
+		menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosuku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
+		addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
+		addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
+		addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what reward you may get after winning any of the challenges there...)");
+		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
+		addButton(14, "Back", riverislandVillageStuff);
+		statScreenRefresh();
+	}
 }
 
 public function soularenaSolo():void {
@@ -1567,92 +1574,108 @@ public function soularenaChallenge():void {
 	//addButton(5, "Golemancer", golemancer);
 	//addButton(6, "AyotechManiac", ayotechmaniac);
 	//addButton(7, "MachoSalamander", machosalamander);
+	//addButton(8, "MissSalamander", misssalamander);
 	//addButton(9, "LvL 24 Gargoyle", basicgargoyle);
 	addButton(10, "LvL 33 Golems", basicgolems);
 	addButton(11, "LvL 42 Golems", improvedgolems);
 	addButton(12, "LvL 51 Golems", advancedgolems);
+	//if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
 	addButton(14, "Back", soularena);
 }
 
 public function dummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummy());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummyImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummyAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemDummySuperior());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolem():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemTrueAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function dummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummy());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummyImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummyAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummySuperior());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueBasic());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueImproved());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolems():void {
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsTrueAdvanced());
 	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
@@ -1666,6 +1689,7 @@ public function gaunletchallange1fight1():void {
 	outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
 	outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
 	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsDummy());
 }
 public function gaunletchallange1fight2():void {
@@ -1698,44 +1722,213 @@ public function gaunletchallange1postfight():void {
 }
 
 public function golemancer():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Jeniffer());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function ayotechmaniac():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Jinx());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function machosalamander():void {
-	outputText("Not yet finished fight with things to finish/flesh up later on.");
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new Syth());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+}
+
+public function misssalamander():void {
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+	startCombat(new Rangiku());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgargoyle():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	outputText("\n\nNot yet finished fight with things to finish/flesh up later on.");
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GargoyleBasic());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function basicgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsBasic());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function improvedgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsImproved());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
 public function advancedgolems():void {
-	player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 	startCombat(new GolemsAdvanced());
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 }
 
+public function restaurantShiraOfTheEast():void {
+	clearOutput();
+	outputText("You enter the exotic food restaurant ‘Shira of the east’ and check up the menu. Would you like to eat there?");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+	menu();
+	addButton(0, "Yes", restaurantYes);
+	addButton(1, "No", restaurantNo);
+}
 
+public function restaurantYes():void {
+	if (flags[kFLAGS.SPIRIT_STONES] >= 1) restaurantYesGems();
+	else restaurantYesNoGems();
+}
+
+public function restaurantYesGems():void {
+	clearOutput();
+	outputText("You take a seat and look at the menu. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("A dog morph that looks like a pekinese comes over to take your order.");
+	else outputText("A literally blazing mouse girl come over to take your order. Blazing is actually an understatement as her arms, legs and even her tail are on fire. ");
+	outputText("\n\n\"<i>Hello my name is ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("Rin");
+	else outputText("Chi Chi");
+	outputText(" and I will be your waitress today. We have dumplings, Won ton soups and ramen offered in mild, spicy and inferno version of the dishes. What will it be?</i>\"");
+	menu();
+	addButton(0, "Dumpling", restaurantDumpling).hint("Effects: +Spe, +Tou", "Dumpling");
+	addButton(1, "Soup", restaurantSoup).hint("Effects: +Int, +Tou", "Soup");
+	addButton(2, "Ramen", restaurantRamen).hint("Effects: +Str, +Tou", "Ramen");
+}
+
+public function restaurantDumpling():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 5, 0, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 5, 0, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+public function restaurantSoup():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 0, 5, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 0, 0, 5, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+public function restaurantRamen():void {
+	FoodBuffDuration();
+	if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
+		ResetFoodBuffStats();
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 5, 0, 0, 5);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, 5, 0, 0, 5);
+	menu();
+	addButton(0, "Mild", restaurantMild);
+	addButton(1, "Spicy", restaurantSpicy);
+	addButton(2, "Inferno", restaurantInferno);
+}
+private function FoodBuffDuration():void {
+	outputText("\n\nShe note your order on a paper.");
+	outputText("\n\n\"<i>What spicing will it be?</i>\"");
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) < 25) {
+		player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+		player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+	}
+	else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+}
+private function ResetFoodBuffStats():void {
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("str", -tempStrength);
+	}
+	if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("spe", -tempSpeed);
+	}
+	if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("inte", -tempIntelligence);
+	}
+	var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	dynStats("tou", -tempToughness);
+	player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
+}
+
+public function restaurantMild():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minutes later.");
+	outputText("\n\nThe meal is comforting and its refreshing nature will likely help you resist hot temperature today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-50);
+	restaurantEndOfEating();
+}
+public function restaurantSpicy():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minutes later.");
+	outputText("\n\nThe meal is a little spicy but regardless leaves you feeling fortified. The weather won’t feel as harsh to you today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 10-30);
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-30);
+	restaurantEndOfEating();
+}
+public function restaurantInferno():void {
+	outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+	else outputText("Chi Chi");
+	outputText(" comes back with your order a few minutes later.");
+	outputText("\n\nWow, the meal is so spicy you almost breathe smoke and fire. You gulp down several glasses of water but still start to sweat as your inner temperature rises. It’s likely you won’t have much to fear of the cold today.");
+	//player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 10-50);
+	restaurantEndOfEating();
+}
+
+public function restaurantEndOfEating():void {
+	outputText("\n\nRegardless the food is excellent and you leave in high spirits for the rest of the day.");
+	//if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) player.inte += player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+	//player.tou += player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("str", tempStrength);
+	}
+	if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("spe", tempSpeed);
+	}
+	if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+		var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
+		dynStats("inte", tempIntelligence);
+	}
+	var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
+	dynStats("tou", tempToughness);
+	flags[kFLAGS.SPIRIT_STONES]--;
+	statScreenRefresh();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function restaurantYesNoGems():void {
+	clearOutput();
+	outputText("You would like to eat but you don’t have enough spirit stones to afford the food.");
+	doNext(riverislandVillageStuff);
+}
+
+public function restaurantNo():void {
+	clearOutput();
+	outputText("You aren’t hungry at the time maybe you will eat later.");
+	doNext(riverislandVillageStuff);
+}
 
 }
 }

@@ -124,6 +124,9 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_ORCS] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_RAIJU] > 0) {
+				num++;
+			}
 			if (flags[kFLAGS.CODEX_ENTRY_RHINOS] > 0) {
 				num++;
 			}
@@ -159,7 +162,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] > 0) {
 				num++;
 			}
-			if (num >= 26) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 27) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		
@@ -170,7 +173,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/26");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/27");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -232,12 +235,13 @@ package classes.Scenes
 			addCodexButton("Orcs", "Orcs", codexEntryOrcs, kFLAGS.CODEX_ENTRY_ORCS);
 			
 			//2nd row
+			addCodexButton("Raijus", "Raiju", codexEntryRaijus, kFLAGS.CODEX_ENTRY_RAIJU);
 			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
-			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
 			
 			//3rd row
+			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
@@ -603,14 +607,14 @@ package classes.Scenes
 			outputText("<b>Eye color:</b> Red\n");
 			outputText("<b>Notable feature:</b> Tailpussy\n");
 			headerSub("Appearance");
-			outputText("Manticores typically have the chimeric features of a human crossblooded with a lion, a scorpion and a bat. Their scorpion tail tip is covered with spikes which can be shot with as much power as an arrow and, on demand, removed to be used like a dagger. Those bony spikes are constantly dripping with their poison and they have the habits of impaling their victims with them during sex to make sure the flow of cum doesn't end.");
+			outputText("Manticores typically have the chimeric features of a human crossed with a lion, scorpion and bat. Their scorpion tail tip is covered with spikes which can be shot with as much power as an arrow and on demand, removed to be used like a dagger. Those bony spikes are constantly dripping with their poison and they have a habit of impaling their victims with them during sex to make sure the flow of cum doesn't end.");
 			headerSub("Behavior");
-			outputText("Manticores prefer mountainous areas where they can lie hidden for days in order to ambush their prey. They are notoriously known for singing while milking their victim dry. The reasons for this behavior was never confirmed, but it's assumed they simply feel as much stimulation from their tail as the man feels from his dick. Thus, they sing to express it. Sadistic to the extreme, they delight in the pain and torment of their victims, thus making them natural dominatrixes. However, they show signs of vulnerability when the table is turned even bowing down to a superior male in a way that is not so different from lions prides and wolf pack hierarchy. Some manticores have actually been seen living happily in civilized areas as consorts to powerful Marethian heroes in the past. Though, anyone strong enough to defeat a manticore in battle should be considered mighty indeed.");
+			outputText("Manticores prefer mountainous areas where they can lie hidden for days in order to ambush their prey. They are notoriously known for singing while milking their victim dry. The reasons for this behavior was never confirmed, but it's assumed they simply feel as much stimulation from their tail as the man feels from his dick. Thus, they sing to express it. Sadistic to the extreme, they delight in the pain and torment of their victims, thus making them natural dominatrixes. However, they show signs of vulnerability when the table is turned, even bowing down to a superior male in a way that is not so different from lions prides and wolf pack hierarchy. Some manticores have actually been seen living happily in civilized areas as consorts to powerful Marethian heroes in the past. Though, anyone strong enough to defeat a manticore in battle should be considered mighty indeed.");
 			headerSub("History");
-			outputText("The manticore, also called man-eater, is an all female species original from Mareth although one could say the current variant could trace its origin to the demonic invasion.\n")
-			outputText("Out of all races they likely struck out the best deal when the demons came as even back then they were already notorious sexual predators feeding solely from cum. As one could see, despite the small additions to their tail, their succubus like behavior hasn't changed at all since the early days of Mareth. While it is unclear when the manticore tails evolved into the nightmarish semen drinking tools they have now, the demons are clearly responsible for it. Their flower-shaped tail pussy can easily milk any penis at a pace of several milliliters per second, making them the worst nightmare of any unlucky male that crosses their path.");			
+			outputText("The manticore, also called man-eater, is an all female species originally from Mareth, although one could say the current variant could trace its origin to the demonic invasion.\n")
+			outputText("Out of all races, they likely struck out the best deal when the demons came, as even back then they were already notorious sexual predators feeding solely from cum. As one could see, despite the small additions to their tail, their succubus like behavior hasn't changed at all since the early days of Mareth. While it is unclear when the manticore’s tails evolved into the nightmarish semen drinking tools they have now, the demons are clearly responsible for it. Their flower-shaped tail pussy can easily milk any penis at a pace of several milliliters per second, making them the worst nightmare of any unlucky male that crosses their path.");			
 			headerSub("Venom Effects");
-			outputText("Their venom is a powerful aphrodisiac which causes the body to grow more sluggish and aroused with each intake.  Furthermore it has the property of massively increasing one's cum production for a short time. If ingested through the mouth it can be used as a transformative.");			
+			outputText("Their venom is a powerful aphrodisiac which causes the body to grow more sluggish and aroused with each intake. Furthermore it has the property of massively increasing one's cum production for a short time.  If ingested through the mouth, it can be used as a transformative.");			
 			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}
@@ -678,6 +682,29 @@ package classes.Scenes
 			headerSub("Courtship");
 			outputText("Men and women are on equal ground socially. It is equally common to see a female dominate a male as it is to see vise versa. When the dominatrix is in question usually the pair (or party) will decide through a wrestling match or various other forms of physical combat. The most common relationship practiced is two men with one female. The female serves as a means of reproduction while the two men compete with each other over her affections. The only notable difference between Orcish men and women is when weakness is taken into account. It is looked down upon within Orcish culture to breed with a weak female, or letting a weak male breed with a female. Even in their peaceful culture, breeding with partners that increase the chances of weak offspring is looked down upon. There seem to be no moral trappings for a dominate male to take a weaker, submissive male or two for himself. since the possibility of breeding is impossible. Without a potentially weak offspring there is no fear of cultural backlash.");
 			outputText("\n\n(By: Donto) ")
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryRaijus():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Raijus";
+			clearOutput();
+			headerMain("Raijus");
+			outputText("<b>Genders:</b> Male, Female\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall\n");
+			outputText("<b>Build:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Light\n");
+			outputText("<b>Hair:</b> Fur and hair color is generally the same color as lightning ranging between purple teal and yellow.\n");
+			outputText("<b>Eye color:</b> Generally in all shades of greens and teals\n");
+			outputText("<b>Notable feature:</b> Lightning shaped hairs\n");
+			headerSub("Appearance");
+			outputText("The raiju or storm weasel is a species of animal morph especially attuned to lightning, its body is constantly building up electricity. While it is not harmful to the raiju itself this static electricity cause its arousal to constantly increase in proportion to the voltage stored. Unable to achieve orgasm on its own a raiju will seek a partner to discharge its electricity and achieve release. A raiju can cause massive pleasure from a simple touch and its electricity is unstable by nature. Creature who were jolted by a raiju would be well advised to avoid masturbating until the discharge is gone for the electricity build up on pleasure and will only increase as a result of self indulging.");
+			headerSub("Behavior");
+			outputText("The Raiju prefers to live in mountainous area where they are closer to the sky. Generally hunting alone, a raiju presence will cause the wildlife to flee in panic. Raiju feeds from ambient static therefore they do not need to hunt save for a partner to discharge their flux.");
+			headerSub("History");
+			outputText("Raiju’s are a natural Marethian species. And have been recorded to exist since the appearance of animal morphs. Its unknown which gods created them but it's clear the god of storms had a hand in it.");
+			headerSub("Storm jewels");
+			outputText("Sometime raiju electricity will somehow coalesce into a crystal known as a storm jewel. Storm jewels can be used as a potent energy source if well handled but its volatility makes it hazardous to uses as it can accidentally dissolve back into lightning and discharge itself on whatever unsuspecting individuals holds it.");
+			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}
 		

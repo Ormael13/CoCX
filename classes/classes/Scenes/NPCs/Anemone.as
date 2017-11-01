@@ -1,7 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
-	import classes.internals.WeightedDrop;
+import classes.StatusEffects.Combat.AnemoneVenomDebuff;
+import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class Anemone extends Monster
@@ -24,36 +25,8 @@ package classes.Scenes.NPCs
 		//Apply the effects of AnemoneVenom()
 		public function applyVenom(amt:Number = 1):void
 		{
-			//First application
-			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
-			//Gain some lust
-			game.dynStats("lus", (2 * str));
-
-			//Loop through applying 1 point of venom at a time.
-			while (amt > 0) {
-				amt--;
-				//Str bottommed out, convert to lust
-				if (player.str < 2) game.dynStats("lus", 2);
-				//Lose a point of str.
-				else {
-					showStatDown("str");
-					// strDown.visible = true;
-					// strUp.visible = false;
-					player.str--;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 1);
-				}
-				//Spe bottomed out, convert to lust
-				if (player.spe < 2) game.dynStats("lus", 2);
-				//Lose a point of spe.
-				else {
-					showStatDown("spe");
-					// speDown.visible = true;
-					// speUp.visible = false;
-					player.spe--;
-					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 1);
-				}
-			}
-			game.statScreenRefresh();
+			var ave:AnemoneVenomDebuff = player.createOrFindStatusEffect(StatusEffects.AnemoneVenom) as AnemoneVenomDebuff;
+			ave.applyEffect(amt);
 		}
 
 

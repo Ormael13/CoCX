@@ -37,7 +37,7 @@ public class Face extends SaveableBodyPart {
 		return isAny(FACE_HUMAN,
 				FACE_MANTICORE, FACE_BUCKTEETH, FACE_BUNNY, FACE_SHARK_TEETH,
 				FACE_SNAKE_FANGS, FACE_SPIDER_FANGS, FACE_YETI_FANGS, FACE_SALAMANDER_FANGS,
-				FACE_FERRET_MASK);
+				FACE_FERRET_MASK,FACE_VAMPIRE);
 	}
 	public function nounPhrase():String {
 		var stringo:String = "";

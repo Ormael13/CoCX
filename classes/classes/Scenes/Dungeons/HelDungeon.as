@@ -192,7 +192,7 @@ package classes.Scenes.Dungeons
 			doYesNo(reallyRetry, declineRetry);
 		}
 		public function reallyRetry():void {
-			dynStats("lus", -100, "resisted", false);
+			dynStats("lus", 0, "scale", false);
 			player.fatigue = 0;
 			player.HP = player.maxHP();
 			statScreenRefresh();
@@ -347,7 +347,7 @@ package classes.Scenes.Dungeons
 			spriteSelect(79);
 			clearOutput();
 			outputText("Succumbing to your ");
-			if(monster.lust >= monster.eMaxLust()) outputText("erotic abilities");
+			if(monster.lust >= monster.maxLust()) outputText("erotic abilities");
 			else outputText("skill in battle");
 			outputText(", the armored goo slumps backwards against the wall, unable to stand.  You loom over her, grinning as you contemplate what to do with your helpless opponent.");
 			outputText("\n\n\"<i>Hey... hey wait!</i>\" the goo gasps, waving a hand emphatically to ward you off.  \"<i>It... it doesn't have to be like this.  I think... Hey, yeah, I think we can come to an understanding.  You're a reasonable sort, right? No need to get violent...</i>\"");

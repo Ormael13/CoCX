@@ -25,7 +25,8 @@ package classes.Items.Weapons
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Daoist's Focus (+40% Soulskill Power)";
+			desc += "\nSpecial: Daoist's Focus (+40% Magical Soulskill Power)";
+			desc += "\nSpecial: Body Cultivator's Focus (+40% Physical Soulskill Power)";
 			desc += "\nSpecial: Strife-Warden (enables Beat of War soul skill)";
 			return desc;
 		}
@@ -38,12 +39,15 @@ package classes.Items.Weapons
 		}
 		
 		override public function playerEquip():Weapon {
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
 			while (game.player.findPerk(PerkLib.StrifeWarden) >= 0) game.player.removePerk(PerkLib.StrifeWarden);
 			game.player.createPerk(PerkLib.StrifeWarden,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Weapon {
+			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			while (game.player.findPerk(PerkLib.StrifeWarden) >= 0) game.player.removePerk(PerkLib.StrifeWarden);
 			return super.playerRemove();
 		}
