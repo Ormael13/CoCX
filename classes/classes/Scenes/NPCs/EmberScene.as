@@ -7,8 +7,9 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.*;
 	import classes.Items.Consumables.EmberTF;
+import classes.Scenes.Places.TelAdre.YvonneArmorShop;
 
-	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
+public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
 
 //import flash.media.Video;
@@ -408,7 +409,7 @@ package classes.Scenes.NPCs
 			player.gems -= 200;
 			statScreenRefresh();
 			player.removeKeyItem("Dragon Eggshell");
-			inventory.takeItem(shields.DRGNSHL, telAdre.armorShop);
+			inventory.takeItem(shields.DRGNSHL, new YvonneArmorShop().enter);
 		}
 
 //Suggested Reward:
