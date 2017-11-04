@@ -21,11 +21,8 @@ package classes.Scenes.NPCs
 		}
 		
 		public function moveTailSpike():void {
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) TailSpike();
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 4) TailSpike();
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 6) TailSpike();
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) TailSpike();
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) TailSpike();
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) TailSpike();
 			TailSpike();
 		}
 		public function TailSpike():void {
@@ -51,7 +48,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("misses its mark.");
 			}
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) outputText("\n\n");
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) outputText("\n\n");
 		}
 		
 		public function moveTakeFlight():void {
@@ -162,12 +159,12 @@ package classes.Scenes.NPCs
 				this.newgamebonusHP = 9960;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
-				initStrTouSpeInte(110, 170, 280, 180);
-				initLibSensCor(200, 90, 80);
+				initStrTouSpeInte(110, 165, 270, 180);
+				initLibSensCor(190, 90, 80);
 				this.weaponAttack = 42 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 150;
-				this.level = 40;
+				this.level = 36;
 				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -176,12 +173,26 @@ package classes.Scenes.NPCs
 				this.newgamebonusHP = 14100;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
-				initStrTouSpeInte(120, 190, 320, 190);
-				initLibSensCor(230, 100, 80);
-				this.weaponAttack = 48 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(120, 180, 300, 190);
+				initLibSensCor(210, 100, 80);
+				this.weaponAttack = 48 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 150;
+				this.level = 42;
+				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 14100;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
+				initStrTouSpeInte(130, 195, 330, 200);
+				initLibSensCor(230, 110, 80);
+				this.weaponAttack = 54 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 200;
-				this.level = 50;
+				this.level = 48;
 				this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -189,13 +200,55 @@ package classes.Scenes.NPCs
 				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 18900;
 			}
-			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
-				initStrTouSpeInte(130, 210, 360, 200);
-				initLibSensCor(260, 110, 80);
-				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			if (flags[kFLAGS.ETNA_LVL_UP] == 4) {
+				initStrTouSpeInte(140, 210, 360, 210);
+				initLibSensCor(250, 120, 80);
+				this.weaponAttack = 60 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 200;
+				this.level = 54;
+				this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 18900;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 5) {
+				initStrTouSpeInte(150, 225, 390, 220);
+				initLibSensCor(270, 130, 80);
+				this.weaponAttack = 66 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 20 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 250;
 				this.level = 60;
+				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 32480;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 6) {
+				initStrTouSpeInte(160, 240, 420, 230);
+				initLibSensCor(290, 140, 80);
+				this.weaponAttack = 72 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 22 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 250;
+				this.level = 66;
+				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 32480;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 7) {
+				initStrTouSpeInte(170, 255, 450, 240);
+				initLibSensCor(310, 150, 80);
+				this.weaponAttack = 78 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 24 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 250;
+				this.level = 72;
 				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -237,6 +290,13 @@ package classes.Scenes.NPCs
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 4) this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 6) this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 7) this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

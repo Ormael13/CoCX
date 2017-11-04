@@ -98,7 +98,7 @@ package classes.Scenes.NPCs
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) KindraFireBow06();
 				else {
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();

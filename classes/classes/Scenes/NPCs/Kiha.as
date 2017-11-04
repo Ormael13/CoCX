@@ -30,6 +30,7 @@ package classes.Scenes.NPCs
 				damage += 5;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
@@ -73,6 +74,7 @@ package classes.Scenes.NPCs
 				var damage:int = int((str) - (player.armorDef));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
 				damage = player.takeDamage(damage, true);
@@ -103,6 +105,7 @@ package classes.Scenes.NPCs
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
 				damage = player.takeDamage(damage, true);
@@ -138,6 +141,7 @@ package classes.Scenes.NPCs
 			var flame:int = level + rand(6);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) flame *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) flame *= 0.3;
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 			flame = Math.round(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
 			flame = player.takeDamage(flame, true);
@@ -146,13 +150,13 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			var select:Number = rand(5);
-			if (select <= 1) eAttack();
-			else if (select == 2) {
+			if (select == 0) kihaTimeWaster();
+			if (select == 1) kihaFireBreath();
+			if (select == 2) {
 				if (game.silly()) sillyModeKihaAttack();
 				else kihaFirePunch();
 			}
-			else if (select == 3) kihaFireBreath();
-			else kihaTimeWaster();
+			if (select > 2) eAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -225,12 +229,12 @@ package classes.Scenes.NPCs
 				this.newgamebonusHP = 2160;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
-				initStrTouSpeInte(115, 110, 115, 80);
-				initLibSensCor(75, 65, 66);
+				initStrTouSpeInte(110, 105, 110, 70);
+				initLibSensCor(70, 55, 66);
 				this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.armorDef = 50 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 600;
-				this.level = 31;
+				this.level = 27;
 				this.str += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -239,12 +243,26 @@ package classes.Scenes.NPCs
 				this.newgamebonusHP = 5840;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
-				initStrTouSpeInte(165, 150, 160, 100);
-				initLibSensCor(100, 85, 66);
-				this.weaponAttack = 48 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 65 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(135, 130, 135, 80);
+				initLibSensCor(90, 65, 66);
+				this.weaponAttack = 48 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 65 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 700;
-				this.level = 41;
+				this.level = 33;
+				this.str += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 5840;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
+				initStrTouSpeInte(160, 155, 160, 90);
+				initLibSensCor(110, 75, 66);
+				this.weaponAttack = 58 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 80 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 800;
+				this.level = 39;
 				this.str += 49 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -252,13 +270,55 @@ package classes.Scenes.NPCs
 				this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.newgamebonusHP = 10100;
 			}
-			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
-				initStrTouSpeInte(230, 210, 220, 120);
-				initLibSensCor(125, 105, 66);
-				this.weaponAttack = 58 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 80 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 800;
+			if (flags[kFLAGS.KIHA_LVL_UP] == 4) {
+				initStrTouSpeInte(185, 180, 185, 100);
+				initLibSensCor(130, 85, 66);
+				this.weaponAttack = 68 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 95 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 900;
+				this.level = 45;
+				this.str += 49 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 10100;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 5) {
+				initStrTouSpeInte(210, 205, 210, 110);
+				initLibSensCor(150, 95, 66);
+				this.weaponAttack = 78 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 110 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1000;
 				this.level = 51;
+				this.str += 92 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 88 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 50 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 21720;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 6) {
+				initStrTouSpeInte(235, 230, 235, 120);
+				initLibSensCor(170, 105, 66);
+				this.weaponAttack = 88 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 125 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1200;
+				this.level = 57;
+				this.str += 92 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.spe += 88 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.inte += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+				this.lib += 50 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 21720;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 7) {
+				initStrTouSpeInte(260, 255, 260, 130);
+				initLibSensCor(190, 115, 66);
+				this.weaponAttack = 98 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 140 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusHP = 1400;
+				this.level = 63;
 				this.str += 92 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 88 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -270,7 +330,7 @@ package classes.Scenes.NPCs
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
-				this.armorDef += 2;
+				this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.4;
@@ -280,9 +340,31 @@ package classes.Scenes.NPCs
 			this.wingType = WING_TYPE_DRACONIC_LARGE;
 			this.wingDesc = "huge";
 			this.tailType = TAIL_TYPE_LIZARD;
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BasicTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
+			}
+			//if (flags[kFLAGS.KIHA_LVL_UP] >= 7) this.createPerk(PerkLib., 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+			//if (flags[kFLAGS.KIHA_LVL_UP] >= 9) this.createPerk(PerkLib., 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -38,6 +38,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampAnemoneTrigger:StatusEffectType             = mk("Camp Anemone Trigger");
 		public static const CampMarble:StatusEffectType                     = mk("Camp Marble");
 		public static const CampRathazul:StatusEffectType                   = mk("Camp Rathazul");
+		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");
+		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");

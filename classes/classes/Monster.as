@@ -461,6 +461,20 @@
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
 			//other
 			if (hasStatusEffect(StatusEffects.Bloodlust)) damage *= (1 + (0.1 * statusEffectv2(StatusEffects.Bloodlust)));
+			if (findPerk(PerkLib.JobWarrior) < 0 && wrath >= 100) {
+				wrath -= 100;
+				damage *= 2;
+			}
+			if (findPerk(PerkLib.JobWarrior) >= 0 && wrath >= 100) {
+				if (rand(2) == 0) {
+					wrath -= 100;
+					damage *= 3;
+				}
+				else {
+					wrath -= 50;
+					damage *= 2;
+				}
+			}
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -1888,7 +1902,7 @@
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0) && (this.HP < maxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
@@ -1902,6 +1916,7 @@
 				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
+				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + player.newGamePlusMod()));
 				if (this is ChiChi) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}

@@ -1052,7 +1052,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		addButton(4, "Etna", kGAMECLASS.etnaScene.etnaCampMenu);
+		if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(4, "Etna", "Training.");
+		else addButton(4, "Etna", kGAMECLASS.etnaScene.etnaCampMenu);
 	}
 	//Helia
 	if(kGAMECLASS.helScene.followerHel()) {
@@ -1146,7 +1147,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
 		}
 		outputText("\n\n");
-		addButton(6, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
+		if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(6, "Isabella", "Training.");
+		else addButton(6, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
 	}
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
@@ -1194,7 +1196,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		addButton(8, "Kiha", kihaScene.encounterKiha);
+		if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(8, "Kiha", "Training.");
+		else addButton(8, "Kiha", kihaScene.encounterKiha);
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1352,7 +1355,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		addButton(0, "Ember", emberScene.emberCampMenu).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "");
+		if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(0, "Ember", "Training.");
+		else addButton(0, "Ember", emberScene.emberCampMenu).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "");
 	}
 	//Sophie
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -1404,7 +1408,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 		addButton(5, "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
 	}
 	else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
-		outputText("Evangeline isn't in the camp as she went to buy some items. She should be out no longer than a few hours.\n\n");
+		/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/ outputText("Evangeline isn't in the camp as she went to buy some items. She should be out no longer than a few hours.\n\n");
+		//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
 	}
 	//Kindra
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
@@ -1519,12 +1524,13 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(13, "NPC's Training", SparrableNPCsMenu);
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1561,6 +1567,28 @@ private function MagicWardMenu():void {
 		doNext(campActions);
 		return;
 	}
+}
+
+private function SparrableNPCsMenu():void {
+	clearOutput();
+	outputText("Placeholder text about deciding if sparrable npc's in camp should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
+	outputText("\n\nPlaceholder text about current mode camp combat NPC's are in: ");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode");
+	menu();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(0, "Train", NPCsTrain);
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(1, "Relax", NPCsRelax);
+	addButton(14, "Back", campActions);
+}
+private function NPCsTrain():void {
+	outputText("\n\nPlaceholder text about telling NPC's to train.");
+	flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 2;
+	doNext(SparrableNPCsMenu);
+}
+private function NPCsRelax():void {
+	outputText("\n\nPlaceholder text about telling NPC's to relax.");
+	flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
+	doNext(SparrableNPCsMenu);
 }
 
 public function spellHealcamp():void {

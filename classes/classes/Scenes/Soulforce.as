@@ -342,19 +342,35 @@ private function resetHeroslayerOmnibusFlag():void {
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] < 1) addButton(1, "Isabella", LilCocksLoverSummoning);
 			if (flags[kFLAGS.KIHA_FOLLOWER] < 1) addButton(2, "Kiha", ResidentCampDragonishTsundere);
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(3, "Etna", SuccubusishMantioreOnLeash);
+			//Kindra lvl-up testing next
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] < 1) addButton(5, "Ember 1UP", Ember1stLvLUp);
-			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
-			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
-			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 4 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 3) addButton(5, "Ember 4UP", Ember4thLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 4) addButton(5, "Ember 5UP", Ember5thLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 5) addButton(5, "Ember 6UP", Ember6thLvLUp);
+			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 6) addButton(5, "Ember 7UP", Ember7thLvLUp);
 			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) addButton(6, "Isabella 1UP", Isabella1stLvLUp);
-			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) addButton(6, "Isabella 2UP", Isabella2ndLvLUp);
-			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) addButton(6, "Isabella 3UP", Isabella3rdLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) addButton(6, "Isabella 2UP", Isabella2ndLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) addButton(6, "Isabella 3UP", Isabella3rdLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 3) addButton(6, "Isabella 4UP", Isabella4thLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 4) addButton(6, "Isabella 5UP", Isabella5thLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 5) addButton(6, "Isabella 6UP", Isabella6thLvLUp);
+			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ISABELLA_LVL_UP] == 6) addButton(6, "Isabella 7UP", Isabella7thLvLUp);
 			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] < 1) addButton(7, "Kiha 1UP", Kiha1stLvLUp);
-			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.KIHA_LVL_UP] == 1) addButton(7, "Kiha 2UP", Kiha2ndLvLUp);
-			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.KIHA_LVL_UP] == 2) addButton(7, "Kiha 3UP", Kiha3rdLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 1) addButton(7, "Kiha 2UP", Kiha2ndLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 2) addButton(7, "Kiha 3UP", Kiha3rdLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 3) addButton(7, "Kiha 4UP", Kiha4thLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 4) addButton(7, "Kiha 5UP", Kiha5thLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 5) addButton(7, "Kiha 6UP", Kiha6thLvLUp);
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KIHA_LVL_UP] == 6) addButton(7, "Kiha 7UP", Kiha7thLvLUp);
 			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] < 1) addButton(8, "Etna 1UP", Etna1stLvLUp);
-			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 2 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
-			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.ETNA_LVL_UP] == 2) addButton(8, "Etna 3UP", Etna3rdLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 1) addButton(8, "Etna 2UP", Etna2ndLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 2) addButton(8, "Etna 3UP", Etna3rdLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 3) addButton(8, "Etna 4UP", Etna4thLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 4) addButton(8, "Etna 5UP", Etna5thLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 5) addButton(8, "Etna 6UP", Etna6thLvLUp);
+			if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.ETNA_LVL_UP] == 6) addButton(8, "Etna 7UP", Etna7thLvLUp);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) addButton(10, "Ember DeLvL", EmberTestDeLvL);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) addButton(11, "Isabella DeLvL", IsabellaTestDeLvL);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) addButton(12, "Kiha DeLvL", KihaTestDeLvL);
@@ -415,6 +431,24 @@ private function resetHeroslayerOmnibusFlag():void {
 			outputText("\n\n<b>Ember 4th LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
+		public function Ember5thLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 5;
+			outputText("\n\n<b>Ember 5th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember6thLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 6;
+			outputText("\n\n<b>Ember 6th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Ember7thLvLUp():void {
+			flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.EMBER_LVL_UP] = 7;
+			outputText("\n\n<b>Ember 7th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
 		public function EmberTestDeLvL():void {
 			flags[kFLAGS.EMBER_LVL_UP]--;
 			outputText("\n\n<b>Ember been De-LvL'd!!!</b>");
@@ -438,6 +472,30 @@ private function resetHeroslayerOmnibusFlag():void {
 			outputText("\n\n<b>Isabella 3rd LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
+		public function Isabella4thLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 4;
+			outputText("\n\n<b>Isabella 4th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella5thLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 5;
+			outputText("\n\n<b>Isabella 5th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella6thLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 6;
+			outputText("\n\n<b>Isabella 6th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Isabella7thLvLUp():void {
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 7;
+			outputText("\n\n<b>Isabella 7th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
 		public function IsabellaTestDeLvL():void {
 			flags[kFLAGS.ISABELLA_LVL_UP]--;
 			outputText("\n\n<b>Isabella been De-LvL'd!!!</b>");
@@ -457,8 +515,32 @@ private function resetHeroslayerOmnibusFlag():void {
 		}
 		public function Kiha3rdLvLUp():void {
 			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KIHA_LVL_UP] = 32;
+			flags[kFLAGS.KIHA_LVL_UP] = 3;
 			outputText("\n\n<b>Kiha 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha4thLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 4;
+			outputText("\n\n<b>Kiha 4th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha5thLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 5;
+			outputText("\n\n<b>Kiha 5th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha6thLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 6;
+			outputText("\n\n<b>Kiha 6th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kiha7thLvLUp():void {
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 7;
+			outputText("\n\n<b>Kiha 7th LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function KihaTestDeLvL():void {
@@ -482,6 +564,30 @@ private function resetHeroslayerOmnibusFlag():void {
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 3;
 			outputText("\n\n<b>Etna 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna4thLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 4;
+			outputText("\n\n<b>Etna 4th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna5thLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 5;
+			outputText("\n\n<b>Etna 5th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna6thLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 6;
+			outputText("\n\n<b>Etna 6th LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Etna7thLvLUp():void {
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 7;
+			outputText("\n\n<b>Etna 7th LvL-Up!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function EtnaTestDeLvL():void {

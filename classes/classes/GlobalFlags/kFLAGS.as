@@ -2979,7 +2979,7 @@ public static const UNKNOWN_FLAG_NUMBER_02970:int                               
 public static const UNKNOWN_FLAG_NUMBER_02971:int                                   = 2971;
 public static const UNKNOWN_FLAG_NUMBER_02972:int                                   = 2972;
 public static const UNKNOWN_FLAG_NUMBER_02973:int                                   = 2973;
-public static const UNKNOWN_FLAG_NUMBER_02974:int                                   = 2974;
+public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
 public static const UNKNOWN_FLAG_NUMBER_02976:int                                   = 2976;
 public static const UNKNOWN_FLAG_NUMBER_02977:int                                   = 2977;

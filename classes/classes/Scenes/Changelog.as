@@ -25,20 +25,44 @@ package classes.Scenes
 			menu();
 			outputText("<b>Version 0.8h:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can became pregnant with unicorn-taur: Celess\n");
+			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can get item and loose chance to get new npc or became pregnant with unicorn-taur: Celess\n");
+			outputText("-Pregnancy last 30 days and at PC current corruption at the birth momrnt will decide if Celess would be pure or corrupted. She would alo need to be named even if player decide to name her Celess.\n");
+			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
+			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
+			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");
+			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
+			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
+			outputText("'leave me alon I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
+			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Etna.\n");
+			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Etna (lvl 72)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -77,6 +101,10 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
