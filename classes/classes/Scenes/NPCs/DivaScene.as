@@ -12,6 +12,7 @@ public class DivaScene extends XXCNPC{
 
     public var status:int;
     private var firstLoss:Boolean=true;
+    public var tookVialToday:Boolean=false; // true if took her vial today
     private var timesReduced:int = 0;
     private var _talkMenu:ButtonDataList = new ButtonDataList();
     private var _sexMenu:ButtonDataList = new ButtonDataList();
@@ -44,6 +45,7 @@ public class DivaScene extends XXCNPC{
             myClass:getQualifiedClassName(this),
             status:status,
             firstLoss:firstLoss,
+            tookVialToday:tookVialToday,
             timesReduced:timesReduced,
             bloodUsed:VampireBlood.first
         }
@@ -56,6 +58,7 @@ public class DivaScene extends XXCNPC{
             status = loadfrom.diva.status;
             firstLoss = loadfrom.diva.firstLoss;
             timesReduced = loadfrom.diva.timesReduced;
+            tookVialToday = loadfrom.diva.tookVialToday;
             VampireBlood.first = loadfrom.diva.bloodUsed;
         }
     }
@@ -79,39 +82,61 @@ public class DivaScene extends XXCNPC{
     }
     override public function campInteraction():void{
         clearOutput();
+        menu();
         if(time.hours > 20){
             display("camp/campInteraction/dusk");
         } else {
             display("camp/campInteraction/night");
         }
-        function subTalk():void{talkMenu();submenu(_talkMenu,campInteraction);}
-        function subSex():void{sexMenu();submenu(_sexMenu,campInteraction);}
 
-        addButton(0,"Talk",subTalk);
-        addButton(1,"Sex",subSex);
+        addButton(0,"Talk",talkMenu);
+        addButton(1,"Sex",sexMenu);
         addButton(14,"Back",camp.campLoversMenu);
 
         flushOutputTextToGUI();
-    }
-    private function talkMenu():void{
-        _talkMenu.clear();
-        _talkMenu.add("vampirism",vampirism);
-        _talkMenu.add("sunlight",sunlight);
-        _talkMenu.add("Her",her);
+        function talkMenu():void
+        {
+            clearOutput();
+            display("camp/talkMenu/menu");
+            setupTalkMenu();
+            submenu(_talkMenu,campInteraction);
+            flushOutputTextToGUI();
+        }
+        function sexMenu():void
+        {
+            clearOutput();
+            display("camp/sexMenu/menu");
+            setupSexMenu();
+            submenu(_sexMenu,campInteraction);
+            flushOutputTextToGUI();
+        }
+        function setupTalkMenu():void{
+            _talkMenu.clear();
+            _talkMenu.add("Vampirism",vampirism);
+            _talkMenu.add("Sunlight",sunlight);
+            _talkMenu.add("Her",her);
+            _talkMenu.add("Vial",vialofliquid).disableIf(tookVialToday,"You asked for blood already, wait for tomorrow.");
 
-        function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
-        function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
-        function her():void{scene("camp/talkMenu/her",talkMenu);}
-    }
-    private function sexMenu():void{
-        _sexMenu.clear();
-        _sexMenu.add("Moonlight Sonata",moonlightSonata);
-        _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| (!player.faceType == AppearanceDefs.FACE_VAMPIRE));
-        _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || (!player.faceType == AppearanceDefs.FACE_VAMPIRE));
+            function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
+            function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
+            function her():void{scene("camp/talkMenu/her",talkMenu);}
+            function vialofliquid():void {
+				scene("camp/talkMenu/vialofliquid");
+				tookVialToday = true;
+				inventory.takeItem(consumables.REDVIAL, talkMenu);
+			}
+        }
+        function setupSexMenu():void{
+            _sexMenu.clear();
+            _sexMenu.add("Moonlight Sonata",moonlightSonata);
+            _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == FACE_VAMPIRE));
+            _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == FACE_VAMPIRE));
 
-        function shareAMeal():void{scene("camp/sexMenu/shareAMeal");}
-        function bloodyRose():void{scene("camp/sexMenu/bloodyRose");}
+            function shareAMeal():void{scene("camp/sexMenu/shareAMeal");}
+            function bloodyRose():void{scene("camp/sexMenu/bloodyRose");}
+        }
     }
+
     public function moonlightSonata(fromCombat:Boolean=false):void{
         if(status == 0){status = 1;}
         clearOutput();

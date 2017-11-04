@@ -16,6 +16,18 @@
                 Diva bites into your neck and begins drinking her fill. The rather loud slurping noises she makes kind of ruin the mood, though. Weirdly enough you feel aroused from this despite the pain.
                 <if test="silly()">You masochist, you.</if>
             </text>
+            <text name="biteGargoyle">
+                Diva tries to bite you but quickly step back holding a hand to her mouth with a surprised yelp of clear pain. You smirk amused... did she seriously try to bite in your stone skin?
+            </text>
+            <text name="bitePlant">
+                Diva tries to bite you but just as her fang pierce her skin she shove you off and start spitting.
+
+				<i>
+                    “Puaaah what the hell did I taste just now! Your blood taste like saps and flower nectar. How disgusting!”
+
+                </i>
+                Well now you're kind of offended by her reaction... guess plant sap really tastes bad for her.
+            </text>
             <text name="swoopToss">
                 Diva makes a pass bare inches above your head, using her momentum to snatch
                 <if test="$final">
@@ -172,7 +184,14 @@
                     You decide to head back to camp before the weird bat woman show up again.
 
                 </text>
-                <lib name="final">
+                <text name="combatGargPlant">
+                    You fall to the ground unable to fight further as Diva declare.
+
+                    <i>“Look I will be honest with thee thou are completely inedible! Do me a favor and get out. I’m not interested into something I can’t drink from.”</i>
+
+                    Well you can’t believe your luck guess you might as well get going.
+                </text>
+				<lib name="final">
                     <text name="intro">
                         Diva recoils defeated and falls to the ground on her knee.
 
@@ -528,6 +547,18 @@
                 <i>“The demons happened, some crazed freak with horns caught me while I was sleeping and brought me to his laboratory to experiment on me. Said something along the line of creating a new variety of demonic servant for Lethice and that he did as he toyed with my body for an entire month using both corruptive material and modified transformative items. Regardless, the incubus messed up badly because not only I awoke in a bloodcrazed rage, but I pretty much drank him dry along with his other test subjects. He had three orgasms by the time I was done and I was not going to hold back after being starved from food for an entire month.”</i>
 
                 This explains the aphrodisiacs in her bite and her fleeting magical talents if not absurd strength. Well at least she didn’t get her vampirism out of nowhere.
+            </text>
+            <text name="vialofliquid">
+                You ask Diva if she would mind giving you some blood.
+
+                <if test="player.batScore() gt 6 or player.vampireScore() gt 6">
+				She blush with embarrassment and reply <i>“Thy know thou could've just asked to drink straight from the tap I wouldn’t had minded. Perhaps another time.”</i>
+				<else>
+				<i>“I wouldn’t mind [name] but be warned that it is highly infectious.”</i>
+				</else>
+				</if>
+
+                She hands to you a vial right away.
             </text>
         </lib>
     </lib>

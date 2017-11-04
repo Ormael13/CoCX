@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponRangeLib;
+import classes.display.SpriteDb;
 
 public class CeaniScene extends NPCAwareContent
 	{
@@ -29,6 +30,7 @@ private function bowSkill(diff:Number):Number {
 
 public function firstmeetingCeani():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("As you wander the beach you suddenly spot a weird fish like creature diving in and out of the water. At first you mistake it for some kind of local fish until you realise no fish actually has bright pink hair! Out of nowhere the figure jump out of the water with a harpoon at hand as it throws the weapon at what looks to be a decently sized tuna. You watch in stupor as the humanoid chase the Tuna throwing more and more harpoons ");
 	outputText("until the fish is finally unable to swim anymore. As you try to ponder what is happening, the figure jump out of the water carrying the freshly impaled Tuna. It's a woman... a eleven feet tall monster of a woman with a white underbelly and pitch black glossy skin. You're still looking at her with wide eye when she drop the tuna on the ground with a loud thump, her face has a large whale nose, she is smiling as she finally takes notice of you.\n\n");
@@ -47,6 +49,7 @@ public function firstmeetingCeani():void
 
 public function basicarcherytraining():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You spot Ceani in the distance. Do you wish to spend 50 gem to train with ranged weapon?\n\n");
 	menu();

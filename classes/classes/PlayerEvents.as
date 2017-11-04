@@ -1,11 +1,12 @@
 package classes {
-	
+
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
 	import classes.Scenes.Dreams;
 	import classes.Scenes.Holidays;
 	import classes.Scenes.SceneLib;
-	import classes.StatusEffects.VampireThirstEffect;
+	import classes.Scenes.NPCs.DivaScene;
+import classes.StatusEffects.VampireThirstEffect;
 	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
@@ -511,6 +512,8 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
+				//Reset Diva Red Vial daiy limit
+				DivaScene.getInstance().tookVialToday = false;
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;

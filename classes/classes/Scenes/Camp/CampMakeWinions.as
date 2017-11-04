@@ -81,7 +81,7 @@ package classes.Scenes.Camp
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
-			player.mana -= 50;
+			useMana(temporalGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
@@ -256,7 +256,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", playerMenu);
 		}
 		private function summoningElementalsSubmenu():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to summon any elementals.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to summon any elementals.\n\n");
 			menu();
 			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir);
@@ -277,7 +277,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu1st():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) addButton(0, "Air", rankUpElementalAir);
@@ -294,7 +294,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu2nd():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 200 && (player.fatigue + 100 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir);
@@ -311,7 +311,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu3rd():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 300 && (player.fatigue + 150 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir);
@@ -328,7 +328,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu4th():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 400 && (player.fatigue + 200 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir);
@@ -345,7 +345,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu5th():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 500 && (player.fatigue + 250 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir);
@@ -362,7 +362,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu6th():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 600 && (player.fatigue + 300 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir);
@@ -379,7 +379,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu7th():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 700 && (player.fatigue + 350 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir);
@@ -396,7 +396,7 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function rankUpSubmenu8th():void {
-			outputText("If you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= 800 && (player.fatigue + 400 <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) addButton(0, "Air", rankUpElementalAir);
@@ -415,7 +415,7 @@ package classes.Scenes.Camp
 		
 		private function summonElementalAir():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an air elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The air elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -428,7 +428,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalEarth():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an earth elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The earth elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -441,7 +441,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalFire():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an fire elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The fire elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -454,7 +454,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalWater():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an water elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The water elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -467,7 +467,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalIce():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an ice elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The ice elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -480,7 +480,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalLightning():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an lightning elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The lightning elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -493,7 +493,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalDarkness():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an darkness elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The darkness elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -506,7 +506,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalWood():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an wood elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The wood elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -519,7 +519,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalMetal():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an metal elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The metal elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -532,7 +532,7 @@ package classes.Scenes.Camp
 		}
 		private function summonElementalEther():void {
 			clearOutput();
-			player.mana -= 100;
+			useMana(100);
 			fatigue(50);
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an ether elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The ether elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
@@ -546,17 +546,24 @@ package classes.Scenes.Camp
 		
 		private function rankUpElementalAir():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			statScreenRefresh();
-			outputText("You decide to reinforce your pact with your elemental drawing a few runic circles on the ground. As the ritual near its end the runes fly upward and merge into the elemental body increasing its power and the strength of your bound.");
-			player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
+			rankUpElementalPart1();
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsAir) * 25) summmast += 25;
+			else summmast += player.wis / player.statusEffectv2(StatusEffects.SummonedElementalsAir);
+			if (rand(summmast) > 5) {
+				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
+			}
+			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime(1/2);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -573,7 +580,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -590,7 +597,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -607,7 +614,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -624,7 +631,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -641,7 +648,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -658,7 +665,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -675,7 +682,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -692,7 +699,7 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
-			player.mana -= (100 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
+			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
 			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
 			statScreenRefresh();
 			rankUpElementalPart1();
@@ -720,7 +727,7 @@ package classes.Scenes.Camp
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
 			outputText("Its final curse is silenced as its power are sealed again reducing it back to its former size. \"<b>Well this ritual is a failure you will have to try again when you achieved better control.</b>\"");
-			player.HP -= Math.round(player.HP * 0.5);
+			HPChange(-(Math.round(player.HP * 0.5)), true);
 		}
 	}
 

@@ -39,7 +39,7 @@ public class ButtonData {
 		return this;
 	}
 	public function disableIf(condition:Boolean,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
-		if (this.enabled && !condition) {
+		if (this.enabled && condition) {
 			disable(toolTipText,toolTipHeader);
 		}
 		return this;
