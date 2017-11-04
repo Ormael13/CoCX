@@ -2605,7 +2605,6 @@
 					else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
 					dynStats("tou", temp / 10);
 					changes++;
-
 				}
 			}
 			//Decrease player spd if it is over 30:
@@ -2666,7 +2665,6 @@
 					player.vaginas[0].virgin = true;
 					player.clitLength = .25;
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
-
 					changes++;
 					dynStats("lus", 10);
 				}

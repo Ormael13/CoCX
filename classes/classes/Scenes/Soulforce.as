@@ -338,11 +338,13 @@ private function resetHeroslayerOmnibusFlag():void {
 		}
 		public function FasterOrInstantCampNPCRecruitment():void {
 			menu();
-			if (flags[kFLAGS.EMBER_HATCHED] < 1 && flags[kFLAGS.TOOK_EMBER_EGG] < 1) addButton(0, "Ember", InstaEmberEggInCamp);
-			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] < 1) addButton(1, "Isabella", LilCocksLoverSummoning);
-			if (flags[kFLAGS.KIHA_FOLLOWER] < 1) addButton(2, "Kiha", ResidentCampDragonishTsundere);
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(3, "Etna", SuccubusishMantioreOnLeash);
-			//Kindra lvl-up testing next
+			addButton(0, "E.I.K.", EmberIsabellaKiha).hint("Ember / Isabella / Kiha (If PC have all 3 nothing will happen after choosing this option.)");
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 2) addButton(1, "Etna", SuccubusishMantioreOnLeash);
+			if (flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(2, "Kindra", KindraMemory5);
+			if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KINDRA_LVL_UP] == 6) addButton(3, "Kindra 1UP", Kindra1stLvLUp);
+			if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KINDRA_LVL_UP] == 7) addButton(3, "Kindra 2UP", Kindra2ndLvLUp);
+			if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.KINDRA_LVL_UP] == 8) addButton(3, "Kindra 3UP", Kindra3rdLvLUp);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) addButton(4, "Kindra DeLvL", KindraTestDeLvL);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] < 1) addButton(5, "Ember 1UP", Ember1stLvLUp);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 1) addButton(5, "Ember 2UP", Ember2ndLvLUp);
 			if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1 && flags[kFLAGS.EMBER_LVL_UP] == 2) addButton(5, "Ember 3UP", Ember3rdLvLUp);
@@ -377,12 +379,17 @@ private function resetHeroslayerOmnibusFlag():void {
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) addButton(13, "Etna DeLvL", EtnaTestDeLvL);
 			addButton(14, "Back", SoulforceCheats);
 		}
+		public function EmberIsabellaKiha():void {
+			if (flags[kFLAGS.EMBER_HATCHED] < 1 && flags[kFLAGS.TOOK_EMBER_EGG] < 1) InstaEmberEggInCamp();
+			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] < 1) LilCocksLoverSummoning();
+			if (flags[kFLAGS.KIHA_FOLLOWER] < 1) ResidentCampDragonishTsundere();
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
 		public function InstaEmberEggInCamp():void {
 			player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
 			flags[kFLAGS.TOOK_EMBER_EGG] = 1;
 			flags[kFLAGS.EMBER_COR] = 50;
 			outputText("\n\n<b>Ember Egg put in camp.</b>");
-			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function LilCocksLoverSummoning():void {
 			flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] = 240;
@@ -390,7 +397,6 @@ private function resetHeroslayerOmnibusFlag():void {
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
 			flags[kFLAGS.ISABELLA_PLAINS_DISABLED] = 1;
 			outputText("\n\n<b>I heard you love cows loving small cocks...so here you will get Isabella *wink wink*</b>");
-			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function ResidentCampDragonishTsundere():void {
 			flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 2;
@@ -398,6 +404,12 @@ private function resetHeroslayerOmnibusFlag():void {
 			flags[kFLAGS.KIHA_MOVE_IN_OFFER] = 1;
 			flags[kFLAGS.KIHA_FOLLOWER] = 1;
 			outputText("\n\n<b>We need more...yandered dragon-like waifu. Or was it only more of Kiha?</b>");
+		}
+		public function KindraMemory5():void {
+			flags[kFLAGS.KINDRA_LVL_UP] = 6;
+			flags[kFLAGS.KINDRA_FOLLOWER] = 1;
+			flags[kFLAGS.KINDRA_AFFECTION] = 5;
+			outputText("\n\n<b>Kindra... and everything is clear.</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function SuccubusishMantioreOnLeash():void {
@@ -546,6 +558,29 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function KihaTestDeLvL():void {
 			flags[kFLAGS.KIHA_LVL_UP]--;
 			outputText("\n\n<b>Kiha been De-LvL'd!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kindra1stLvLUp():void {
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 7;
+			outputText("\n\n<b>Kindra 1st LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kindra2ndLvLUp():void {
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 8;
+			outputText("\n\n<b>Kindra 2nd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function Kindra3rdLvLUp():void {
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 9;
+			outputText("\n\n<b>Kindra 3rd LvL-Up!!!</b>");
+			doNext(FasterOrInstantCampNPCRecruitment);
+		}
+		public function KindraTestDeLvL():void {
+			flags[kFLAGS.KINDRA_LVL_UP]--;
+			outputText("\n\n<b>Kindra been De-LvL'd!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function Etna1stLvLUp():void {

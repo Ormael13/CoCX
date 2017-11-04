@@ -24,7 +24,7 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8h:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: Cow, Minotaur, Devil\n");
 			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can get item and loose chance to get new npc or became pregnant with unicorn-taur: Celess\n");
 			outputText("-Pregnancy last 30 days and at PC current corruption at the birth momrnt will decide if Celess would be pure or corrupted. She would alo need to be named even if player decide to name her Celess.\n");
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
@@ -33,8 +33,8 @@ package classes.Scenes
 			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
 			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
 			outputText("'leave me alon I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
-			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Etna.\n");
-			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Etna (lvl 72)\n");
+			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Kindra, Etna.\n");
+			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Etna (lvl 72)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -60,7 +60,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, , Cow, Minotaur, Devil, Mantis, Elf, Oni
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Mantis, Elf, Oni, Raiju, Bat, Vampire, 
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -135,7 +136,6 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8g (Den of Desire dungeon, SimCamp (part 3), new npc's: Electra, Krystal/Onyx; pre-follower Chi Chi, new camp lover Diva; new physical soulskills, new TF's: Raiju, Bat, Vampire):</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New place to visit in He'Xin'Dao: exotic food restaurant ‘Shira of the east’.\n");
 			outputText("-Chi Chi was added into the game with showing up as waitress in Shir of the east restaurant.\n");
 			outputText("-After 10 fights on Soul Arena next time PC enter Arena will be facing Chi Chi. She's near impossible to beat enemy. If somehow PC win she will be killed closing any potential future content for her leaving behind her gloves. If PC loose she will then be accesable form main He'Xin'Dao menu allowing to undergone training sessions or selling five newly added soulskills.\n");
