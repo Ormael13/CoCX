@@ -83,7 +83,7 @@ import coc.xxc.StoryContext;
 		
 		protected function isHalloween():Boolean
 		{
-			return kGAMECLASS.isHalloween();
+			return Holidays.isHalloween();
 		}
 
 		protected function isValentine():Boolean
@@ -98,7 +98,7 @@ import coc.xxc.StoryContext;
 
 		public function isEaster():Boolean
 		{
-			return kGAMECLASS.isEaster();
+			return Holidays.isEaster();
 		}
 
 		protected function isThanksgiving():Boolean

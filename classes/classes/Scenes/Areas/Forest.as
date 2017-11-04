@@ -13,6 +13,7 @@ import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
@@ -124,14 +125,14 @@ use namespace kGAMECLASS;
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (kGAMECLASS.monk < 2 || rand(2) == 0);
+								   && (JojoScene.monk < 2 || rand(2) == 0);
 						},
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
 							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
 									&& rand(5) == 0
-									&& (player.cor > 25 || kGAMECLASS.monk > 0)) ? 1.2 : 1;
+									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
 						},
 						call  : jojoEncounter
 					}, {
@@ -602,15 +603,15 @@ use namespace kGAMECLASS;
 		}
 		private function jojoEncounter():void {
 			clearOutput();
-			if (kGAMECLASS.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
-					kGAMECLASS.monk = 1;
+					JojoScene.monk = 1;
 					SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				}
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
-			} else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.
+			} else if (JojoScene.monk == 1 || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
 				SceneLib.jojoScene.repeatJojoEncounter();
-			} else if (kGAMECLASS.monk >= 2) { //Angry/Horny Jojo
+			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
 				SceneLib.jojoScene.corruptJojoEncounter();
 			}
 		}

@@ -53,7 +53,7 @@ public class EventParser {
             EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         }
         else {
-            var textChoices:Number = kGAMECLASS.rand(4);
+            var textChoices:Number = Utils.rand(4);
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
             if (textChoices == 0) EngineCore.outputText("<b>GAME OVER</b>");
@@ -325,7 +325,7 @@ public class EventParser {
             }
 
         }
-        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && kGAMECLASS.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !DungeonAbstractContent.inDungeon && !DungeonAbstractContent.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
+        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && Utils.rand(100) < (kGAMECLASS.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !DungeonAbstractContent.inDungeon && !DungeonAbstractContent.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
             SceneLib.prison.goBackToPrisonBecauseQuestTimeIsUp();
             return true;
         }
@@ -374,12 +374,14 @@ public class EventParser {
             if (player.hasStatusEffect(StatusEffects.Eggs)) {
                 var size:int = player.statusEffectv2(StatusEffects.Eggs);
 
-                if (size < 0 || size > 1) size = kGAMECLASS.rand(2);
-
+                if (size < 0 || size > 1) {
+                    size = Utils.rand(2);
+                }
                 var col:int = player.statusEffectv1(StatusEffects.Eggs);
 
-                if (col < 0 || col > 5) col = kGAMECLASS.rand(6);
-
+                if (col < 0 || col > 5) {
+                    col = Utils.rand(6);
+                }
                 sEgg = itypes[size][col];
             }
             else {
@@ -517,7 +519,7 @@ public class EventParser {
             if (kGAMECLASS.model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
                 SceneLib.anemoneScene.goblinNightAnemone();
                 return 1;
-            } else if (kGAMECLASS.temp > kGAMECLASS.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
+            } else if (kGAMECLASS.temp > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
                 if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) &&
                         (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0) || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
@@ -548,7 +550,7 @@ public class EventParser {
                     EngineCore.outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
                     return 1;
                 }
-                else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= kGAMECLASS.rand(15)) {
+                else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= Utils.rand(15)) {
                     EngineCore.outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
                     return 1;
                 }
@@ -558,7 +560,7 @@ public class EventParser {
                 }
             }
             //wormgasms
-            else if (flags[kFLAGS.EVER_INFESTED] == 1 && kGAMECLASS.rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
+            else if (flags[kFLAGS.EVER_INFESTED] == 1 && Utils.rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
                 if (player.hasCock() && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
                     SceneLib.mountain.wormsScene.nightTimeInfestation();
                     return 2;

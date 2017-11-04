@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
@@ -24,9 +25,6 @@ import flash.utils.getDefinitionByName;
 
 CONFIG::AIR
 {
-    import flash.filesystem.File;
-    import flash.filesystem.FileMode;
-    import flash.filesystem.FileStream;
 }
 
 public class Saves extends BaseContent {
@@ -1103,7 +1101,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		//PLOTZ
         saveFile.data.whitney = kGAMECLASS.whitney;
-        saveFile.data.monk = kGAMECLASS.monk;
+        saveFile.data.monk = JojoScene.monk;
         saveFile.data.sand = kGAMECLASS.sand;
         saveFile.data.giacomo = kGAMECLASS.giacomo;
         saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
@@ -2225,9 +2223,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.whitney = saveFile.data.whitney;
-		game.monk = saveFile.data.monk;
-		game.sand = saveFile.data.sand;
+		game.whitney   = saveFile.data.whitney;
+		JojoScene.monk = saveFile.data.monk;
+		game.sand      = saveFile.data.sand;
 		if (saveFile.data.giacomo == undefined)
 			game.giacomo = 0;
 		else

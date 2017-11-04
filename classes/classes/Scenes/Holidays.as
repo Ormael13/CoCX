@@ -13,6 +13,7 @@ import classes.Items.ConsumableLib;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 import classes.internals.Utils;
 
@@ -797,7 +798,7 @@ public class Holidays {
 
         //Let her Approach
         function letZeTurkeyApproach():void {
-            if (player.gender == 2 || (player.gender == 3 && kGAMECLASS.rand(2) == 0)) {
+            if (player.gender == 2 || (player.gender == 3 && Utils.rand(2) == 0)) {
                 femaleLetZeTurkeyGalApproach();
                 return;
             }
@@ -1901,7 +1902,7 @@ public class Holidays {
         }
         EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
-        if (player.cor >= 90 || kGAMECLASS.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+        if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
             EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) EngineCore.outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -1932,7 +1933,7 @@ public class Holidays {
             kGAMECLASS.spriteSelect(9);
             EngineCore.clearOutput();
             EngineCore.outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-            if (player.cor >= 90 || kGAMECLASS.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+            if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
                 //[Bad Present]
                 EngineCore.outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n"
                         +"Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n"
@@ -1943,8 +1944,9 @@ public class Holidays {
             else if (player.cor <= 33) {
                 //Great present!
                 EngineCore.outputText("surprise at the box's contents - there's a careful arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-                if (kGAMECLASS.rand(2) == 0) SceneLib.inventory.takeItem(kGAMECLASS.armors.SS_ROBE, EventParser.playerMenu);
-                else SceneLib.inventory.takeItem(kGAMECLASS.armors.SSARMOR, EventParser.playerMenu);
+                if (Utils.rand(2) == 0) {
+                    SceneLib.inventory.takeItem(kGAMECLASS.armors.SS_ROBE, EventParser.playerMenu);
+                } else SceneLib.inventory.takeItem(kGAMECLASS.armors.SSARMOR, EventParser.playerMenu);
                 flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
             }
             else if (player.cor < 60) {
@@ -2877,7 +2879,7 @@ public class Holidays {
                     +"\n\nYou wipe the snow off your face and ask her what she has in mind, if not that?");
             EngineCore.outputText("\n\nWithout words, the fiery lizard-woman shucks off her clothes until she is standing naked in the snow before you, striking a pose that shows off her muscles (and also, by sheer coincidence, her boobs and ass), allowing flakes of snow to fall upon her and sizzle into steam.  \"<i>Why, a good hard wrestle, lover!</i>\"  She grins, and then suddenly she springs at you!");
             //(Speed check)
-            if (player.spe / 20 + kGAMECLASS.rand(20) > 11) {
+            if (player.spe / 20 + Utils.rand(20) > 11) {
                 EngineCore.outputText("\n\nYou're surprised by the sudden lunge, but thankfully your well trained reflexes means you quickly duck under the pouncing salamander and watch as she falls face-first into the snow behind you with an audible \"<i>Oof!</i>\""
                         +"\n\nShe laughs as she surfaces amidst a spray of slush, whipping her long hair around.  \"<i>That's the way to do it, lover-" + player.mf("boy", "girl") + "!</i>\" she crows.");
             }
@@ -3993,8 +3995,9 @@ public class Holidays {
                 var x:int = -1;
                 if (player.hasCock()) {
                     x = player.cockThatFits(130);
-                    if (x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && kGAMECLASS.rand(2) == 0) x = -1;
-                    else x = player.smallestCockIndex();
+                    if (x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && Utils.rand(2) == 0) {
+                        x = -1;
+                    } else x = player.smallestCockIndex();
                 }
                 EngineCore.outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
 
@@ -4316,6 +4319,15 @@ public class Holidays {
             }
         }
     }
+
+    public static function isEaster():Boolean {
+        return SceneLib.plains.bunnyGirl.isItEaster();
+    }
+
+    public static function isHalloween():Boolean {
+        return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
+    }
+
     /*Credits
     Fenoxo- for providing the game in which this scene might go into
     Kinathis - The \"<i>Suck Him</i>\" scene

@@ -2,7 +2,8 @@
  CoC Main File - This is what loads when the game begins. If you want
 import classes.EngineCore;to start understanding the structure of CoC,
  this is the place to start.
- First, we import all the classes from many different files across the codebase. It would be wise not to alter the
+ First, we import all the classes from many different files across the codebase. It would be wise not t
+import classes.Scenes.NPCs.JojoScene;o alter the
  order of th
 import classes.Scenes.SceneLib;ese imports until more is known about what needs to load and when.
 */
@@ -17,12 +18,12 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Parser.Parser;
 import classes.Scenes.*;
+import classes.Scenes.NPCs.JojoScene;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
-import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -75,9 +76,6 @@ public class CoC extends MovieClip
     public var plotFight:Boolean = false;
     public var timeQ:Number = 0;
     //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
-
-
-    private var playerEvent:PlayerEvents;
 
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
     private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }*/
@@ -135,7 +133,6 @@ public class CoC extends MovieClip
     public var version:String;
     public var versionID:uint = 0;
     public var permObjVersionID:uint = 0;
-    public var mobile:Boolean;
     public var images:ImageManager;
     public var player:Player;
     public var player2:Player;
@@ -148,7 +145,6 @@ public class CoC extends MovieClip
     public var textHistory:Array;
     public var currentText:String;
     public var whitney:Number;
-    public var monk:Number;
     public var sand:Number;
     public var giacomo:int;
     public var temp:int;
@@ -171,27 +167,27 @@ public class CoC extends MovieClip
         _gameState = 3;
     }
 
-    public function cleanupAfterCombat(nextFunc:Function = null):void {
+    public static function cleanupAfterCombat(nextFunc:Function = null):void {
         SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
     }
 
-    public function combatRoundOver():Boolean {
+    public static function combatRoundOver():Boolean {
         return SceneLib.combat.combatRoundOverImpl();
     }
 
-    public function enemyAI():void {
+    public static function enemyAI():void {
         SceneLib.combat.enemyAIImpl();
     }
-    public function endHpLoss():void {
+    public static function endHpLoss():void {
         SceneLib.combat.endHpLoss();
     }
-    public function endLustLoss():void {
+    public static function endLustLoss():void {
         SceneLib.combat.endLustLoss();
     }
-    public function endHpVictory():void {
+    public static function endHpVictory():void {
         SceneLib.combat.endHpVictory();
     }
-    public function endLustVictory():void {
+    public static function endLustVictory():void {
         SceneLib.combat.endLustVictory();
     }
     public function clearStatuses(visibility: Boolean):void
@@ -206,23 +202,8 @@ public class CoC extends MovieClip
 
     private function gameStateDirectSet(value:int):void { _gameState = value; }
 
-    public function rand(max:int):int
-    {
-        return Utils.rand(max);
-    }
-
-    // holidayz
-    public function isEaster():Boolean {
-        return SceneLib.plains.bunnyGirl.isItEaster();
-    }
-    public function isHalloween():Boolean {
-        return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
-    private static var traceTarget:TraceTarget;
-
     private static function setUpLogging():void {
-        traceTarget = new TraceTarget();
+        var traceTarget:TraceTarget = new TraceTarget();
 
         traceTarget.level = LogEventLevel.WARN;
 
@@ -270,7 +251,7 @@ public class CoC extends MovieClip
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
     }
-    private function _postInit(e:Event):void{
+    private function _postInit(e:Event):void {
         // Hooking things to MainView.
         this.mainView.onNewGameClick = charCreation.newGameGo;
         this.mainView.onAppearanceClick = playerAppearance.appearance;
@@ -308,10 +289,6 @@ public class CoC extends MovieClip
 			ver = "1.0.2_mod_Xianxia_0.8g2";
 			version = ver + " (<b>Bugfixing</b>)";
 
-        //Indicates if building for mobile?
-        mobile = false;
-        model.mobile = mobile;
-
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
         new ControlBindings().run(inputManager);
@@ -330,7 +307,7 @@ public class CoC extends MovieClip
         player = new Player();
         model.player = player;
         player2 = new Player();
-        playerEvent = new PlayerEvents();
+        new PlayerEvents();
 
         //Used in perk selection, mainly eventParser, input and engineCore
         //tempPerk = null;
@@ -387,9 +364,9 @@ public class CoC extends MovieClip
         //{ region PlotVariables
 
         whitney = 0;
-        monk = 0;
-        sand = 0;
-        giacomo = 0;
+        JojoScene.monk = 0;
+        sand           = 0;
+        giacomo        = 0;
 
         //}endregion
 

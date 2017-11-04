@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
@@ -24,7 +25,7 @@ public class Alraune extends Monster
 		public function alrauneWait():void {
 			clearOutput();
 			outputText("You struggle against ");
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("the alraune");
 			outputText(" vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
@@ -34,7 +35,7 @@ public class Alraune extends Monster
 		
 		public function alraunePollenCloud():void {
 			clearOutput();
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("The alraune");
 			outputText(" giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
 			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
@@ -44,10 +45,10 @@ public class Alraune extends Monster
 		
 		public function alrauneStrangulate():void {
 			clearOutput();
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("The alraune");
 			outputText("’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The ");
-			if (game.isHalloween()) outputText("pumpkin");
+			if (Holidays.isHalloween()) outputText("pumpkin");
 			else outputText("plant");
 			outputText(" woman gives you an annoyed glare.");
 			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
@@ -58,13 +59,13 @@ public class Alraune extends Monster
 		public function alrauneTeaseAttack():void {
 			clearOutput();
 			if (rand(2) == 1) {
-				if (game.isHalloween()) outputText("Jack-O-Raune");
+				if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 				else outputText("The alraune");
 				outputText(" parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n");
 				outputText("\"<i>Don’t you want a taste of what my lovely body can offer? It is all yours to play with, all you need to do is give in to me.</i>\"\n\n");
 			}
 			else {
-				if (game.isHalloween()) outputText("Jack-O-Raune");
+				if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 				else outputText("The alraune");
 				outputText(" grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n");
 				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n");
@@ -101,7 +102,7 @@ public class Alraune extends Monster
 			if (hasStatusEffect(StatusEffects.Level)) {
 				if (!hasStatusEffect(StatusEffects.Stunned) && player.hasStatusEffect(StatusEffects.CastedSpell)) alrauneStrangulate();
 				else {
-					if (game.isHalloween()) {
+					if (Holidays.isHalloween()) {
 						var choice1:Number = rand(3);
 						if (choice1 == 0) alrauneTeaseAttack();
 						if (choice1 == 1) {
@@ -142,7 +143,7 @@ public class Alraune extends Monster
 		public function Alraune() 
 		{
 			super();
-			if (game.isHalloween()) {
+			if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";

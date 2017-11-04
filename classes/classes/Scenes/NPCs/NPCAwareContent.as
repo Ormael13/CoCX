@@ -4,7 +4,6 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.FollowerInteractions;
 import classes.Scenes.Places.TelAdre;
 import classes.Scenes.SceneLib;
@@ -161,7 +160,7 @@ import classes.Scenes.SceneLib;
 			return SceneLib.joyScene;
 		}
 		protected function get monk():Number {
-			return kGAMECLASS.monk;
+			return JojoScene.monk;
 		}
 		public function campCorruptJojo():Boolean
 		{

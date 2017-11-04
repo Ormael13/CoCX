@@ -4,7 +4,6 @@
 package classes.Scenes.Combat {
 import classes.AppearanceDefs;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.JewelryLib;
 import classes.Monster;
 import classes.PerkLib;
@@ -16,6 +15,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -1827,7 +1827,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.short == "Jojo")
 		{
 			// Not a completely corrupted monkmouse
-			if (kGAMECLASS.monk < 2)
+			if (JojoScene.monk < 2)
 			{
 				outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
 				flags[kFLAGS.SPELLS_CAST]++;

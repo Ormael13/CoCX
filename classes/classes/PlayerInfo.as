@@ -446,7 +446,7 @@ if (SceneLib.helFollower.helAffection() > 0)
 		if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 			interpersonStats += "<b>Isabella Affection:</b> ";
             if (!SceneLib.isabellaFollowerScene.isabellaFollower())
-                interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false;
+                interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) interpersonStats += "<b>Isabella lvl:</b> 60\n";

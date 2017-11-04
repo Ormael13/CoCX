@@ -3379,7 +3379,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
 		}
 	}
-	if(monster is Jojo && kGAMECLASS.monk > 4) {
+	if(monster is Jojo && JojoScene.monk > 4) {
 		if(rand(2) == 0) itype = consumables.INCUBID;
 		else {
 			if(rand(2) == 0) itype = consumables.B__BOOK;

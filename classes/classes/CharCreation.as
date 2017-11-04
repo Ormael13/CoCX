@@ -6,8 +6,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
-import classes.Scenes.SceneLib;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
+import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
@@ -234,11 +235,11 @@ import coc.view.MainView;
 				player.nosePLong = "";
 			}
 			//PLOTZ
-			kGAMECLASS.monk = 0;
-			kGAMECLASS.whitney = 0;
-			kGAMECLASS.sand = 0;
+			JojoScene.monk                               = 0;
+			kGAMECLASS.whitney                           = 0;
+			kGAMECLASS.sand                              = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
-			kGAMECLASS.giacomo = 0;
+			kGAMECLASS.giacomo                           = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;

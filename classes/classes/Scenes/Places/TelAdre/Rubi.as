@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.JojoScene;
 
-	public class Rubi extends TelAdreAbstractContent {
+public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
 
 }
@@ -3629,7 +3629,7 @@ public function hypnoBimboficationForRubiSloots():void
 	outputText("\n\nRubi is watching you in open mouthed fascination. His lips move, stammering, trying to talk, but he just can't get the words out. It's no wonder, really - you've got your big, hard tool");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" whipped out and swaying with your sinuous movements, and all he has is his comparatively undersized little pecker. You rock your whole body with the snake-like grace given to you by your naga body, swaying rhythmically as you meet his eyes. Knowing full well just what kinds of depravity you'd like to force him into, you feel a ");
-	if(kGAMECLASS.monk >= 5) outputText("familiar ");
+	if(JojoScene.monk >= 5) outputText("familiar ");
 	else outputText("strange ");
 	outputText("dark power welling up within you.");
 	outputText("\n\nRubi is powerless to resist your hypnotic gaze. Your very eyes seem alight with wisps of dark, almost-demonic power, beginning to entrance the vulnerable ");

@@ -1,9 +1,9 @@
 package classes.Scenes {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.JojoScene;
 
 //	import classes.Scenes.NPCs.*;
 public class Masturbation extends BaseContent {
@@ -2013,7 +2013,7 @@ public class Masturbation extends BaseContent {
 					//(+sensitivity by 3 & intellect -2 & libido +1	)
 				}
 				//Option Jojo veyeurism?
-                if (kGAMECLASS.monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+                if (JojoScene.monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
                     outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
 					if (player.hasStatusEffect(StatusEffects.TentacleJojo))
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");

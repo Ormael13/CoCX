@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.internals.Utils;
 
 public class Dreams {
     public function Dreams() {
@@ -17,8 +18,7 @@ public class Dreams {
         var choices:Array = [];
         //dream quantity
         var dreamtemp:Number = 0;
-        dreamtemp = kGAMECLASS.rand(kGAMECLASS.player.lib/10 + kGAMECLASS.player.cor/20) + kGAMECLASS.player.cor/20;
-
+        dreamtemp = Utils.rand(kGAMECLASS.player.lib / 10 + kGAMECLASS.player.cor / 20) + kGAMECLASS.player.cor / 20;
         //BUILD UP CHOICES ARRAY
         kGAMECLASS.temp = kGAMECLASS.player.humanScore();
         //Add human numbers to choices
@@ -97,7 +97,7 @@ public class Dreams {
             }
         }
         //Halloween
-        if(kGAMECLASS.isHalloween()) {
+        if(Holidays.isHalloween()) {
             choices[choices.length] = 14;
             choices[choices.length] = 14;
             choices[choices.length] = 14;
@@ -140,16 +140,18 @@ public class Dreams {
         //ACTUAL DREAM TEXTS
         if(dreamtemp > 5) {
             //Roll for dream!
-            daydream = choices[kGAMECLASS.rand(choices.length)];
+            daydream = choices[Utils.rand(choices.length)];
             //normal fantasies...
             if(daydream == 0) {
                 if(kGAMECLASS.player.cor <= 33) {
                     //randomly 1 of two simple fantasies.
-                    if(kGAMECLASS.rand(2) == 0) EngineCore.outputText("tender sex with a sweetheart back home.  ");
-                    else {
+                    if (Utils.rand(2) == 0) {
+                        EngineCore.outputText("tender sex with a sweetheart back home.  ");
+                    } else {
                         EngineCore.outputText("beautiful nude ");
-                        if(kGAMECLASS.player.gender <= 1 || (kGAMECLASS.player.gender == 3 && kGAMECLASS.rand(2) == 0)) EngineCore.outputText("women ");
-                        else EngineCore.outputText("men ");
+                        if (kGAMECLASS.player.gender <= 1 || (kGAMECLASS.player.gender == 3 && Utils.rand(2) == 0)) {
+                            EngineCore.outputText("women ");
+                        } else EngineCore.outputText("men ");
                         EngineCore.outputText("massaging you, slowly moving their hands over your most intimate places.  ");
                     }
                 }
@@ -157,7 +159,7 @@ public class Dreams {
                     EngineCore.outputText("being violently raped and used by demons.  ");
                 }
                 if(kGAMECLASS.player.cor > 66) {
-                    dreamtemp = kGAMECLASS.rand(5);
+                    dreamtemp = Utils.rand(5);
                     if(dreamtemp <= 3) EngineCore.outputText("giving yourself to the demons fully, allowing yourself to be tied down and owned as your body is warped for their twisted pleasures.  ");
                     else EngineCore.outputText("being captured and taken to a rusted building with dark smokestacks that belch sweet purplish smoke.  Inside are rows of multi-dicked, huge breasted humans, approximately thirty of them.  Each is shackled with their legs spread and torso bent over, and each has tight fitting suction tubes fitting over their tits and cocks.  Every set of tubes is pulsing with suction, drawing rivers of sticky white fluids from its slave's over-endowed breasts and balls.  You shudder in horror and arousal as you realize the victims seem to be arranged by age, ending with an empty machine next to the youngest slut-cow.  The inhuman strength of your captors easily overpowers your struggles as you are forced into your shackles, the metal locks clicking with finality.  A funnel is forced into your mouth, force-feeding you slick corrupted fluids that taste like sex and make your head swim.  Your vision fades as you feel heat in your chest and groin, making you swoon from the drugged cocktail and pleasure of your new best friends – the suction tubes. All you can hear is your own desperate moans... no, wait... that was a dream... but it was so twisted and hot that you're still panting with lust.  ");
                 }
@@ -165,9 +167,10 @@ public class Dreams {
             //canine
             else if(daydream == 2) {
                 //Male-ish dreams
-                if(kGAMECLASS.player.gender <= 1 || (kGAMECLASS.player.gender == 3 && kGAMECLASS.rand(2) == 0)) {
-                    if(kGAMECLASS.rand(2) == 0) EngineCore.outputText("locking a thick knotted cock inside a female, the pheromones of her heat making your maleness twitch and flex, the knot bulging obscenely as you begin to impregnate her.  ");
-                    else EngineCore.outputText("stroking a knotted doggie-prick, gently stroking and squeezing it, yipping in pleasure as your pointed dog-cock leaks steady streams of fluids.  ");
+                if (kGAMECLASS.player.gender <= 1 || (kGAMECLASS.player.gender == 3 && Utils.rand(2) == 0)) {
+                    if (Utils.rand(2) == 0) {
+                        EngineCore.outputText("locking a thick knotted cock inside a female, the pheromones of her heat making your maleness twitch and flex, the knot bulging obscenely as you begin to impregnate her.  ");
+                    } else EngineCore.outputText("stroking a knotted doggie-prick, gently stroking and squeezing it, yipping in pleasure as your pointed dog-cock leaks steady streams of fluids.  ");
                 }
                 //female
                 else {
@@ -184,12 +187,13 @@ public class Dreams {
             }
             //horse
             else if(daydream == 1) {
-                if(kGAMECLASS.player.gender == 1 || (kGAMECLASS.player.gender == 3 && kGAMECLASS.rand(2)==0)) EngineCore.outputText(" running the plains with a harem of beautiful centaur fillies.  Your bloated equine endowments swelling with blood at the sight of their fertile backsides and potent pheromones.   You dream of staying up half the night to service your animalistic brides insatiable desires, plugging them over and over until your baby-batter is running in steady streams from their backsides.  ");
-                else EngineCore.outputText("running your own farm, complete with a stable of docile, horse-morphed studs.   Of course each had to be captured as he came through the portal, until you had enough studs to keep your cunny happy and your womb filled with equine-spunk.  You saunter out to the barn and smile at the immediate reaction your presence has on your livestock, their leering eyes glued to every curve of your nude body.   Each of them lines up, guiding their rapidly hardening shafts through specially crafted holes in the stalls.  You giggle as your oldest acquisition struggles, trying to get the massive flare of his head through the hole before it gets any bigger.  You dream of walking down the aisle, granting each stud the release he so desires, taking the largest and most worthy to feed your tainted womb's thirst for hot spunk.  ");
+                if (kGAMECLASS.player.gender == 1 || (kGAMECLASS.player.gender == 3 && Utils.rand(2) == 0)) {
+                    EngineCore.outputText(" running the plains with a harem of beautiful centaur fillies.  Your bloated equine endowments swelling with blood at the sight of their fertile backsides and potent pheromones.   You dream of staying up half the night to service your animalistic brides insatiable desires, plugging them over and over until your baby-batter is running in steady streams from their backsides.  ");
+                } else EngineCore.outputText("running your own farm, complete with a stable of docile, horse-morphed studs.   Of course each had to be captured as he came through the portal, until you had enough studs to keep your cunny happy and your womb filled with equine-spunk.  You saunter out to the barn and smile at the immediate reaction your presence has on your livestock, their leering eyes glued to every curve of your nude body.   Each of them lines up, guiding their rapidly hardening shafts through specially crafted holes in the stalls.  You giggle as your oldest acquisition struggles, trying to get the massive flare of his head through the hole before it gets any bigger.  You dream of walking down the aisle, granting each stud the release he so desires, taking the largest and most worthy to feed your tainted womb's thirst for hot spunk.  ");
             }
             //cow
             else if(daydream == 3) {
-                if((kGAMECLASS.player.gender == 1 && kGAMECLASS.player.biggestTitSize() >= 5) || (kGAMECLASS.player.gender == 3 && kGAMECLASS.rand(2) == 0)) {
+                if ((kGAMECLASS.player.gender == 1 && kGAMECLASS.player.biggestTitSize() >= 5) || (kGAMECLASS.player.gender == 3 && Utils.rand(2) == 0)) {
                     EngineCore.outputText("having full and lactating breasts, searching for the right person to give your milk to.  You come across a pretty human girl and invite her to your breast.  She eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide your erect [cock] into her waiting lower lips.  The two of you stand there in eternal bliss as she suckles on your chest and you thrust into her womanhood, until you wake from the dream.  ");
                 }
                 else if(kGAMECLASS.player.gender >= 2) {
@@ -203,7 +207,7 @@ public class Dreams {
             //cat
             else if(daydream == 4) {
                 //FEMALE
-                if(kGAMECLASS.player.hasVagina() && (!kGAMECLASS.player.hasCock() || kGAMECLASS.rand(2) == 0))
+                if (kGAMECLASS.player.hasVagina() && (!kGAMECLASS.player.hasCock() || Utils.rand(2) == 0))
                     EngineCore.outputText("being a full cat and getting pounded by another as you mewl with pleasure.  He comes and pulls out, the barbs on his cock rake your insides as you yowl from the sensation. You clean yourself before searching for another cat to pound you, then another, and another...  ");
                 //MALE
                 else
@@ -316,8 +320,9 @@ public class Dreams {
             }
             else if(daydream == 16) {
                 if(kGAMECLASS.player.gender <= 1) {
-                    if(kGAMECLASS.rand(2) == 0) EngineCore.outputText("something truly unusual...\nIt is difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at the extremities of your nubile, boy-whore body.  You dream of silk against your skin, of wearing gowns, petticoats and dresses which reveal your thin, smooth arms, of girl's underwear tight against your groin, of moving through parties and bars and blushing whenever a man, a real man, looks at you.  Do they know?  Do they guess?  The thoughts and images are powerfully, shamefully erotic and there is no escaping them; each time you flee or turn away from one you open a door into an even more sexually charged dream.");
-                    //Male Trap Dream #2:
+                    if (Utils.rand(2) == 0) {
+                        EngineCore.outputText("something truly unusual...\nIt is difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at the extremities of your nubile, boy-whore body.  You dream of silk against your skin, of wearing gowns, petticoats and dresses which reveal your thin, smooth arms, of girl's underwear tight against your groin, of moving through parties and bars and blushing whenever a man, a real man, looks at you.  Do they know?  Do they guess?  The thoughts and images are powerfully, shamefully erotic and there is no escaping them; each time you flee or turn away from one you open a door into an even more sexually charged dream.");
+                    }//Male Trap Dream #2:
                     else {
                         EngineCore.outputText("something unreal...\nYour eyes slowly open as someone is shaking you, their high pitched voice rings in your ears.  \"<i>Wake up big sis!</i>\"  You turn your head to see a youthful looking little lady shaking you with her small hands.  \"<i>They are going to be upset!  You have to get out of bed!</i>\"  Her eyes seemed moist as if extremely distressed and desperate for you to get up.  With a strangely cute sigh escaping your lips you hop off of the bed. You glance down to realize you are fully dressed in a long frilly dress with cute little ribbons and lace. Your tiny shoes click on the finely polished floor.  Everything seems so much... bigger, or are you... small?");
                         EngineCore.outputText("\n\n\"<i>Come on sis, hurry!</i>\"  The young girl pulls on you with surprising strength; you don't have any time to collect yourself as you are tugged along through some sort of mansion.  Various elaborately decorated hallways and rooms flash by you, and you are only able to catch glimpses of each room's contents.  You try not to stumble and trip over your lovely dress as you follow the strange girl.  \"<i>They set everything up nearly an hour ago, but they have been waiting for you, of course.  I reminded you to set the alarm.</i>\" You say something of an apology to the young girl, she seemed so distressed at everything.  You couldn't help but feel guilty.");
@@ -348,7 +353,7 @@ public class Dreams {
                 //Predator/prey dream is always chosen if the PC is genderless, if they are gendered, 50/50 shot of predator/prey dream or the brood dream.
                 //Predator and prey
                 //Dream about running from a sexy predator.  Emphasize that you're the prey, they are the predator.  You almost want to be caught, but you're also afraid of being caught.  When you finally are caught, you wake up.
-                if(kGAMECLASS.player.gender == 0 || kGAMECLASS.rand(2) == 0) {
+                if (kGAMECLASS.player.gender == 0 || Utils.rand(2) == 0) {
                     EngineCore.outputText("running in the forest with something on your tail.  Fear courses through your veins as you hurry around the trees, desperately trying to lose your pursuer.  At the same time, a strange excitement fills you; you almost feel like you want to be caught.  That majestic predator wants you, it desires you, and a shiver passes through your body as the thought of what it might do to you if it manages to catch you crosses your mind.");
                     EngineCore.outputText("You fight back the strange desire, and scramble into a thick grove of trees, hoping that you've managed to evade the strangely erotic creature.  You try to catch your breath while straining your large ears, trying to detect any possible sounds of danger.  The rapid beat of your little heart rings in your ears, and it seems impossible that you could hear anything.\n\n");
                     EngineCore.outputText("You feel strange, and look down at your body.  Much to your surprise, you find yourself fully aroused right now, and ready for sex, your desire to be caught almost overpowering your fear now.  You look up, and see the eyes of your predator staring down at you, the prey that wants to be caught and used...\n");
@@ -360,7 +365,7 @@ public class Dreams {
                     EngineCore.outputText("finding yourself in an underground burrow, with many small furred bodies with large ears scurrying around all over.  The place is warm and cozy, while also filled with the smell of mice and sex.  You love it down here, and you love seeing all your energetic children running around and having fun.\n\n");
                     EngineCore.outputText("You have a great larder, able to feed everyone as much as they need.  It has never been a problem to keep it full.  It's a veritable paradise for a rodent such as yourself.  Then you find your way into the master bedroom and see its massive bed, the site where your great family was brought into existence.\n\n");
 
-                    if(kGAMECLASS.player.gender == 1 || (kGAMECLASS.player.gender ==3 && kGAMECLASS.rand(2)==0)) {
+                    if (kGAMECLASS.player.gender == 1 || (kGAMECLASS.player.gender == 3 && Utils.rand(2) == 0)) {
                         EngineCore.outputText("Things blur for a moment, and you find your head resting against a pregnant belly, covered in fine fur.  The results of your virility as a father, and soon to be added to the great brood that you helped bring into this world...\n\n");
                     } else {
                         EngineCore.outputText("Things blur for a moment, and you find yourself laying on the bed with your hands wrapped around your heavily pregnant belly.  The product of your fertility and the virility of your great mate, and soon to be added to the great brood you've already brought into the world...\n");

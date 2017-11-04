@@ -2,7 +2,7 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.NPCs.JojoScene;
 
 public class GoblinShamanScene extends BaseContent
 	{
@@ -205,7 +205,7 @@ public class GoblinShamanScene extends BaseContent
 			//Dick stuff:
 			if (player.hasCock()) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && kGAMECLASS.monk > 2)
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && JojoScene.monk > 2)
 					corruptTooBig = rapeAGoblinCorruptTooBig;
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())

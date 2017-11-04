@@ -7,7 +7,9 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
 
-		public function JojoScene()
+    public static var monk:Number;
+
+    public function JojoScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.JOY_PREGNANCY_TYPE, kFLAGS.JOY_PREGNANCY_INCUBATION, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 96, 72, 48);
@@ -45,7 +47,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 		//End of Interface Implementation
 
 	protected function set monk(value:Number):void{
-		kGAMECLASS.monk = value;
+		monk = value;
 	}
 
 //const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
@@ -2312,7 +2314,7 @@ public function lowCorruptionIntro():void
 }
 
 public function highCorruptionJojoEncounter():void {
-	kGAMECLASS.monk = 1;
+	monk = 1;
 	SceneLib.jojoScene.jojoSprite();
 	outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your [feet] being swept out from under you, and land hard on your back.\n\n");
 	outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.");
@@ -2352,10 +2354,10 @@ public function corruptJojoEncounter():void {
 	SceneLib.jojoScene.jojoSprite();
 	clearOutput();
 	outputText("You are enjoying a peaceful walk through the woods when Jojo drops out of the trees ahead, ");
-	if (kGAMECLASS.monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.");
-	if (kGAMECLASS.monk == 3) outputText("unsteady on his feet, but looking for a fight!");
-	if (kGAMECLASS.monk == 4) outputText("visibly tenting his robes, but intent on fighting you.");
-	if (kGAMECLASS.monk == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.");
+	if (monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.");
+	if (monk == 3) outputText("unsteady on his feet, but looking for a fight!");
+	if (monk == 4) outputText("visibly tenting his robes, but intent on fighting you.");
+	if (monk == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.");
 	startCombat(new Jojo());
 }
 

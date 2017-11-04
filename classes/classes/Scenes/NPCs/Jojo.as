@@ -18,13 +18,13 @@ public class Jojo extends Monster
 		}
 		
 		override protected function performCombatAction():void {
-			if (game.monk > 1 && rand(2) == 0)
+			if (JojoScene.monk > 1 && rand(2) == 0)
 				selfCorruption(); //Shouldn't do any self corruption at monk one. Otherwise a 50/50 chance
 			else eAttack();
 		}
 		
 		private function selfCorruption():void {
-			switch (game.monk) {
+			switch (JojoScene.monk) {
 				case 2:
 					outputText("Jojo looks lost in thought for a moment, and fails to attack.  ");
 					lust += 4;
@@ -81,7 +81,7 @@ public class Jojo extends Monster
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(45, 50, 75, 64);
-			initLibSensCor(15, 40, game.monk * 15);
+			initLibSensCor(15, 40, JojoScene.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
 			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -95,21 +95,21 @@ public class Jojo extends Monster
 			this.special1 = selfCorruption;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
-			if(game.monk == 3) {
+			if(JojoScene.monk == 3) {
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
 				this.bonusLust = 10;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
-			if(game.monk == 4) {
+			if(JojoScene.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
 				this.bonusLust = 20;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
-			if(game.monk == 5) {
+			if(JojoScene.monk == 5) {
 				this.lust += 50;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
