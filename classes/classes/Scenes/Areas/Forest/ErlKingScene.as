@@ -515,7 +515,7 @@ public class ErlKingScene extends BaseContent
 			}
 			else if (player.hasCock() && !player.hasVagina())
 			{
-				if (player.totalCocks() > 1)
+				if (player.cockTotal() > 1)
 				{
 					outputText("  Your stomach lurches as your cocks slap together and begin melding into one swollen form.  It pulses and throbs, swelling at the base, pointing at the tip, becoming a single dog cock.");
 				}
@@ -530,7 +530,7 @@ public class ErlKingScene extends BaseContent
 			}
 			else if (player.hasVagina() && player.hasCock())
 			{
-				if (player.totalCocks() > 1)
+				if (player.cockTotal() > 1)
 				{
 					outputText("  You pant heavily, your tongue hanging out of your mouth, as your pussy closes, sealing as if it were never there, only to be occluded a moment later with the curve of your swelling, massive testicles.  Your stomach lurches as your cocks slap together and begin melding into one swollen form.  It pulses and throbs, swelling at the case, pointing at the tip, becoming a single dog cock.");
 				}

@@ -1,6 +1,5 @@
 package classes 
 {
-	import classes.GlobalFlags.kFLAGS;
 	/**
 	 * Class to make the measurement methods taken from PlayerAppearance globally accessible
 	 * @since  19.08.2016
@@ -8,33 +7,23 @@ package classes
 	 */
 	public class Measurements extends BaseContent
 	{
-		private static var _instance:Measurements = new Measurements();
+		public static var useMetrics:Boolean=false;
 
-		public function Measurements()
+		public static function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
-			if (_instance != null)
-			{
-				throw new Error("Measurements can only be accessed through Measurements.init()");
-			}
-		}
-
-		public static function init():Measurements { return _instance; }
-
-		public function footInchOrMetres(inches:Number, precision:int = 2):String
-		{
-			if (flags[kFLAGS.USE_METRICS])
+			if (useMetrics)
 				return (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
 
 			return Math.floor(inches / 12) + " foot " + inches % 12 + " inch";
 		}
 
-		public function numInchesOrCentimetres(inches:Number):String
+		public static function numInchesOrCentimetres(inches:Number):String
 		{
 			if (inches < 1) return inchesOrCentimetres(inches);
 
 			var value:int = Math.round(inches);
 
-			if (flags[kFLAGS.USE_METRICS]) {
+			if (useMetrics) {
 				value = Math.round(inches * 2.54);
 				return num2Text(value) + (value == 1 ? " centimetre" : " centimetres");
 			}
@@ -45,25 +34,25 @@ package classes
 			return num2Text(value) + (value == 1 ? " inch" : " inches");
 		}
 
-		public function inchesOrCentimetres(inches:Number, precision:int = 1):String
+		public static function inchesOrCentimetres(inches:Number, precision:int = 1):String
 		{
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			var text:String = value + ""+(flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
+			var text:String = value + ""+(useMetrics ? " centimetre" : " inch");
 
 			if (value == 1) return text;
 
-			return text + (flags[kFLAGS.USE_METRICS] ? "s" : "es");
+			return text + (useMetrics ? "s" : "es");
 		}
 
-		public function shortSuffix(inches:Number, precision:int = 1):String
+		public static function shortSuffix(inches:Number, precision:int = 1):String
 		{
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			return value + ""+(flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
+			return value + ""+(useMetrics ? "-cm" : "-inch");
 		}
 
-		public function inchToCm(inches:Number):Number
+		public static function inchToCm(inches:Number):Number
 		{
-			return flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
+			return useMetrics ? inches * 2.54 : inches;
 		}
 	}
 }

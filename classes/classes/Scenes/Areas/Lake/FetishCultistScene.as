@@ -48,7 +48,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			//ZOOKEEPER RAEPS.  WEIRDOZ
 			if (player.isTaur() || player.isNaga()) {
 				//Special centaur version by Astronomy
-				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.balls > 0 && player.totalCocks() > 0 && rand(4) < 3) {
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.balls > 0 && player.cockTotal() > 0 && rand(4) < 3) {
 					if (player.cocks[0].cockType == CockTypesEnum.HORSE) {
 						outputText("The entrance door to the stables swings open. Standing there is the familiar sight of your favorite zookeeper.  She's wearing overalls and a plain, dirt marked t-shirt, but you notice the overalls have the familiar logo of the zoo – your home.  You can make out a part of the logo says  \"Featsy's Slutty Beast Zoo - Zoo Keeper\" on it. As she walks into the stables, you see she's carrying a small stool with her, a sight that fills you with anticipation. You watch her walk down the aisle in between all the stable stands, glancing between all the zoo's pet centaurs, yourself included.  Most of them are male and you can even see the odd herm going by her big pair of tits and large set of balls with a dangling cock. The zookeeper smiles lustfully as she looks from side to side at the different centaurs available. As she slowly walks towards you, you can't help but hope that she'll choose you for today's 'treatment'.  To your immense delight, you see that the girl has stopped in front of you.  You try to move but the ropes holding you in place arrest your movement.  The omnipresent weight of your cock as it dangles between your legs grows heavier and heavier as your body remembers the zookeeper.  The girl steps into your stand, closing the door behind her.  As you look at her, you can see her face is blushing red, and her eyes are clearly fixated on your [cock] and [balls].\n\n");
 
@@ -150,9 +150,9 @@ public class FetishCultistScene extends AbstractLakeContent
 					//boy's surprise
 					else if (player.gender == 1) {
 						outputText("and to your shame, you feel ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks] poke out of your pelvic slit, growing to full erectness.  You strain against your bonds, desperate to bring release to ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks], but there is nothing you can do and you keeper laughs at you.  \"<i>Oh so eager to bury that eager cock of yours inside my snatch?  Too bad, I'm the one who gets to choose what goes in there, and it's not your cock.</i>\" she says to you, clearly enjoying the frustration you're going through.\n\n");
 					}
 					//girl's surprise
@@ -162,7 +162,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					//herm's frustrations
 					else {
 						outputText("and with a shudder you feel your pelvic slit open up so that your " + vaginaDescript(0) + " is exposed and ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks] can thrust up into the air.  You make a few futile thrusts into the air, desperate to find some way to get release from your mixed genitals.  \"<i>Hmm, sorry snakey, but I can't pick one of those to play with, maybe if you had only one...</i>\" she says to you with a snark, but you know she is lying and is clearly enjoying your frustration.\n\n");
 					}
 

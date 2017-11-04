@@ -513,23 +513,23 @@ internal function tamaniSexWon():void {
 	if(player.cockArea(x) <= 90) {
 		outputText("You grab hold of the insensate goblin by her pink-dyed hair and shove her into the mud, irritated with her constant demands and rape attempts.  The horny slut doesn't even have the grace to be ashamed of her defeat.  She just lies in the mud, wiggling her exposed ass back and forth in the air, trying to tempt you with it.\n\n");
 		outputText("It's too tempting of a target to resist.  You open your [armor] and allow your [cocks] to flop free.  You're already hard from the enticing display, and in a moment you're pressing against her lust-slicked pussy");
-		if(player.totalCocks() > 1) outputText(" and tight asshole");
+		if(player.cockTotal() > 1) outputText(" and tight asshole");
 		outputText(".  You don't allow her any say in the matter, pushing forward as you feel the small girl's flesh yield around ");
-		if(player.totalCocks() > 1) outputText("each of ");
+		if(player.cockTotal() > 1) outputText("each of ");
 		outputText("your girth");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(".  She squeals happily, clearly getting what she desires.  For a moment you feel disappointed in yourself, but the sensations of her tight hole");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" clenching and squeezing around you quickly washes it away.\n\n");
 		
 		outputText("You rock back and forth methodically, treating Tamani like a tight cock-sleeve.  The goblin slut's hands rub her belly, not even attempting to pull her face out of the mud as she moans and giggles like a whore.  You keep working her cunt like a ");
 		if(player.gender == 1) outputText("man");
 		else outputText("herm");
 		outputText(" possessed, sawing in and out with brutal efficiency, the wet squelches of the slut's juices driving you to piston back and forth with even greater force.  She gurgles happily, her ");
-		if(player.totalCocks() == 1) outputText("pussy squeezing tightly as she cums hard.\n\n");
+		if(player.cockTotal() == 1) outputText("pussy squeezing tightly as she cums hard.\n\n");
 		else outputText("holes squeezing tightly as she cums hard.\n\n");
 	
-		if(player.totalCocks() > 1) {
+		if(player.cockTotal() > 1) {
 			outputText("Each of your [cocks] pulsates, spasming inside your goblin-flesh prison, spraying a bit of sticky goo into the happy slut.   You can hear her babbling, pleasure-drunk as she quivers around you, \"<i>Fuck yes! Cu-ah-ahm in me!  Fuck fuckfuckfucKFUCKYEAH!  Oooh, that's it, put me in the dirt and show me who's boss!</i>\"  The words seem to have the desired effect, helping you empty every ounce of cock-cream into the slut's tight holes.");
 			if(player.cumQ() >= 250) outputText("  She pants, turning her head in the mud to watch as her belly visibly inflates, stuffed totally full of cum. ");
 			if(player.cumQ() >= 500) outputText("  In no time at all a river of jism pours from her, pooling below as you overwhelm her body's capacity to store spunk.");
@@ -551,7 +551,7 @@ internal function tamaniSexWon():void {
 	//Too big? Jerk off with feet and bukkake
 	else {
 		outputText("You throw Tamani on her back, too drunk on desire to care how it feels for the tiny slut.  There's no way she could ever take ");
-		if(player.totalCocks() > 1) outputText("any of your massive members");
+		if(player.cockTotal() > 1) outputText("any of your massive members");
 		else outputText("your massive member");
 		outputText(", so you grab her by the ankles and wrap her soft-soled feet about yourself.   You start jerking yourself off, using Tamani as a cute but expendable masturbation aid.  She chews a fingernail and massages her " + tamaniChest() + " as she watches you, doing her best to put on a show.  The little slut seems to like it.\n\n");
 		outputText("Her feet start to grow slick with your sweat and pre-cum, sliding effortlessly along the length of your shaft as you continue to bring yourself towards orgasm.  You watch while Tamani dips her fingers into the slick folds of her hungry cunt, getting off on being used in such a perverse manner.  She coos, \"<i>How do my feet feel " + player.mf("stud","slut") + "?  Are they soft and slick when they slide on your cock?  Are you going to cum for Tamani and paint her white?  You are.  You know you are.  Cum for Tamani.</i>\"\n\n");
@@ -696,7 +696,7 @@ internal function tamaniKnockUp():void {
 
 public function encounterTamani():void {
 	//Fems:
-	if (player.totalCocks() <= 0) {
+	if (player.cockTotal() <= 0) {
 		tamaniFemaleEncounter();
 	}
 	//Dudezillaz:
@@ -720,7 +720,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(65);	
 	var secondary:Number = 0;
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	
 	outputText("Tamani crooks her finger and you come running, already feeling yourself straining against your [armor] for a chance to fuck your wife and mistress.  She giggles, \"<i>Ohhh, how sweet, you're so ready to do your duty.</i>\"\n\n");
 	

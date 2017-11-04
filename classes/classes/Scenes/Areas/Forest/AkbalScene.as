@@ -148,7 +148,7 @@ public class AkbalScene extends BaseContent
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
 				//(If player has a dick)
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 				{
 					outputText(images.showImage("akbal-deepwoods-male-naga-rapeakbal"));
 					//(Sm Penis: 7 inches or less)
@@ -224,7 +224,7 @@ public class AkbalScene extends BaseContent
 				outputText("\"<i>Who's gonna submit now... bitch?</i>\"\n\n");
 
 				//(If player has a dick)
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 				{
 					outputText(images.showImage("akbal-deepwoods-male-taur-rapeakbal"));
 					//(Sm Penis: 7 inches or less)
@@ -308,7 +308,7 @@ public class AkbalScene extends BaseContent
 			outputText("You roughly grab the scruff of the demon's neck and give a gut-crushing blow to his stomach, causing him to call out in pain.");
 			outputText("\n\n\"<i>Who's gonna submit now, bitch?</i>\"\n\n");
 			//[Player has a dick]
-			if (player.totalCocks() > 0)
+			if (player.cockTotal() > 0)
 			{
 				outputText(images.showImage("akbal-deepwoods-male-rapeakbal"));
 				outputText("Akbal grunts as you smash his face into the ground.  At your command he raises his hind quarters, allowing you a perfect view of his tight pucker.  From the looks of it, his tightly sealed rim would look at home on a virgin.\n\n");
@@ -927,7 +927,7 @@ public class AkbalScene extends BaseContent
 				outputText("After a few moments you realize Akbal isn't slowing down.  His piston pumping hips drive right through his orgasm and never stop slamming into your " + buttDescript() + ".  He continues until he's erupted no less than eight times, masterfully working your hole the entire time.\n\n");
 
 				outputText("After his last massive eruption you feel the jaguar demon pull out, releasing even more of his copious load from your happy hole in an oddly satisfying cascade of thick white cream that rushes like a waterfall down your legs");
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 					outputText(" to join your own");
 				outputText(".\n\n");
 
@@ -998,7 +998,7 @@ public class AkbalScene extends BaseContent
 			}
 
 			outputText("Akbal works his hips fast, piston-pumping his long demon cat-dick in and out of your " + assholeDescript() + ".  The rampant babbling coming from your mouth breaks with his every thrust, and your body is racked by orgasm after orgasm. You're soon on your chest and knees ");
-			if (player.hasVagina() || player.totalCocks() > 0)
+			if (player.hasVagina() || player.cockTotal() > 0)
 				outputText("in a pool of your own love juices");
 			else
 				outputText("in sexual bliss");

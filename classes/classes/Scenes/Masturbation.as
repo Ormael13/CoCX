@@ -1990,9 +1990,9 @@ public class Masturbation extends BaseContent {
 					outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your [vagina], gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ");
 					if (player.cocks.length > 0) {
 						outputText("Even your " + player.multiCockDescript() + " ache");
-						if (player.totalCocks() == 1) outputText("s");
+						if (player.cockTotal() == 1) outputText("s");
 						outputText(" and pulse");
-						if (player.totalCocks() == 1) outputText("s");
+						if (player.cockTotal() == 1) outputText("s");
 						outputText(", bouncing on your belly.  ");
 					}
 					outputText("You answer that need by pistoning the fat juicy dick even harder into your tightly stretched box, cooing as tiny squirts of fluid erupt with every thrust.\n\n");
@@ -2525,15 +2525,15 @@ public class Masturbation extends BaseContent {
 						outputText(player.multiCockDescriptLight() + " and " + player.vaginaDescript());
 					else outputText(player.cockDescript());
 					//Set as plural if multi dick or dick and vag.
-					if (player.hasVagina() || player.totalCocks() > 1) plural = true;
+					if (player.hasVagina() || player.cockTotal() > 1) plural = true;
 				}
 				else outputText(player.vaginaDescript());
 				if (plural)
 					outputText(" leak their own fluid, quivering with ache and need that you can't reach to satisfy.");
 				else outputText(" leaks its own fluids, quivering with ache and need that you can't reach to satisfy.");
-				if (player.totalCocks() > 1)
+				if (player.cockTotal() > 1)
 					outputText("  You feel each of your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowments.");
-				else if (player.totalCocks() == 1)
+				else if (player.cockTotal() == 1)
 					outputText("  You feel your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowment.");
 				if (player.balls > 0) outputText("  Rocking slightly inside your sack, your [balls] repeatedly clench up against your body, ready to release.");
 				outputText("\n\n");
@@ -2633,9 +2633,9 @@ public class Masturbation extends BaseContent {
 				outputText(".  It feels so good that you close your eyes and whinny with delight.\n\n");
 			
 				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is busy fondling the underside, stroking what little of your length you can reach.  Even with the limited access, you can feel your " + player.cockDescript(primary) + " pulsing in your grip, growing harder with every touch and caress.");
-				if (player.totalCocks() == 2)
+				if (player.cockTotal() == 2)
 					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
-				else if (player.totalCocks() > 2)
+				else if (player.cockTotal() > 2)
 					outputText("  Your other [cocks] mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
 				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}	
@@ -2658,9 +2658,9 @@ public class Masturbation extends BaseContent {
 				
 				//STROKE (long)
 				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is making great use of your incredible length, jacking you off with long fluid strokes.  In no time flat, you can feel your [cock] pulsing in your grip, growing harder in time with your fevered stroking.");
-				if (player.totalCocks() == 2)
+				if (player.cockTotal() == 2)
 					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
-				else if (player.totalCocks() > 2)
+				else if (player.cockTotal() > 2)
 					outputText("  Your other [cocks] mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
 				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}

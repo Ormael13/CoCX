@@ -1635,7 +1635,7 @@ use namespace kGAMECLASS;
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
 					outputText("!  You haven't seen a confused human about calling itself a champion have you?</i>\"\n\nShe shakes her more-than-ample bosom from side to side as she licks her lips and offers, \"<i>If you do, be sure and bring them back here ok?  We've got their spot all ready for them, but that little prick Zetaz fucked up the pickup.  Tell you what – if you bring me the 'champion' I'll ");
-					if(player.totalCocks() > 0) outputText("give you the blowjob of a lifetime");
+					if(player.cockTotal() > 0) outputText("give you the blowjob of a lifetime");
 					else if(player.hasVagina()) outputText("lick your honeypot 'til you soak my face");
 					else outputText("give you a new addition and show you how to use it");
 					outputText(".</i>\"\n\nThe succubus turns away from you and makes a show of tweaking her make-up, ignoring you for the moment.");

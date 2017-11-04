@@ -487,7 +487,7 @@ public function valeriaAndGooThreeStuff():void {
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
 	var list:Array = ["[hips]"];
 	if(player.balls > 0) list.push("[balls]");
-	if(player.totalCocks() > 0) list.push("[multiCockDescriptLight]");
+	if(player.cockTotal() > 0) list.push("[multiCockDescriptLight]");
 	if(player.hasVagina()) list.push("[vagina]");
 	list.push("[asshole]");
 	list.push("[nipples]");
@@ -584,17 +584,17 @@ private function valeriaGooRapeII():void {
 		if(player.biggestCockArea() >= 50) outputText("...Maybe big guy is a bit more appropriate. Whatever. ");
 		outputText("I was just saving the best for last. Hold on tight, tiger.</i>\"");
 		outputText("\n\nThe sleeve of squishy ecstasy surrounding [eachCock] tightens up a little to hold your twitching, ecstatic boner");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" in place, and something even warmer than the slippery container");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" pushes at your head");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(", circling your urethra");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(". You inadvertantly clench your muscles in a way that makes your [cocks] so very swollen, in turn making it that much easier for the gelatinous fiend to have her way with your cumslit");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(". You feel that warm, wet fluid slowly peel it open and push inside. It doesn't hurt at all, but it is a little weird having your [cocks] slowly stuffed in such a way. The warmth travels the whole way down your dick");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" to your middle, where you can feel it travel a bit further before it finally stops at your [balls].");
 	}
 	//Merge
@@ -621,29 +621,29 @@ private function valeriaGooRapeII():void {
 	//{cocks!}
 	if(player.hasCock()) {
 		outputText("\n\nThe sealed, cock-plugging tube");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" in [eachCock] ");
-		if(player.totalCocks() > 1) outputText("do not");
+		if(player.cockTotal() > 1) outputText("do not");
 		else outputText("does not");
 		outputText(" differ greatly from Valeria's other liquid attentions. ");
-		if(player.totalCocks() > 1) outputText("They start");
+		if(player.cockTotal() > 1) outputText("They start");
 		else outputText("It starts");
 		outputText(" by thickening, stretching your cumvein");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" as wide as ");
-		if(player.totalCocks() > 1) outputText("they");
+		if(player.cockTotal() > 1) outputText("they");
 		else outputText("it");
 		outputText("'ll go without pain and then rolling thick pulses of gelatinous matter into your urethra");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText("s");
 		outputText(". The sleeve");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" squeeze");
-		if(player.totalCocks() == 1) outputText("s");
+		if(player.cockTotal() == 1) outputText("s");
 		outputText(" down on your length");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(" harder, starting to slide around in ways that would be impossible for a vagina, and you find yourself helplessly blowing your load straight into the dick-plug");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(", spurting bliss that can't even hope to escape from your loins. You feel ");
 		if(player.balls == 0) outputText("something expanding as you cum, filling up with spunk or slime or some mixture of the two");
 		else outputText("your [balls] expanding as you cum, filling up with spunk or slime or some mixture of the two, weighing down your sack with ever-increasing heaviness. Tender licks of tongue roll across the surface as you fill beyond completely");

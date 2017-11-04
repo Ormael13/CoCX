@@ -126,7 +126,7 @@ public class GoblinScene extends BaseContent
 			else outputText("twisting and tweaking");
 			outputText(", torturing you with pain and pleasure.\n\n");
 			//[DICK VERSION]
-			if (player.totalCocks() > 0 && (!player.hasVagina() || rand(2) == 0)) {
+			if (player.cockTotal() > 0 && (!player.hasVagina() || rand(2) == 0)) {
 				//[TOO BIG]
 				if (player.cockArea(0) > monster.vaginalCapacity()) {
 					outputText("She lifts her body up high, grabbing your [cock] with both her petite hands.  Your mind somehow makes note of the shiny black of her fingernails as she struggles to part her dripping wet womanhood around your massive member.  Though her body stretches to an absurd degree, she just can't get you inside. She pouts and drops your tool back onto you, promising you, \"<i>I'll find a way to get every ounce of your cum inside me, don't you worry.</i>\"\n\n");

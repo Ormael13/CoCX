@@ -268,7 +268,7 @@ private function bunbunFucksPCInAss():void {
 	outputText("\n\n");
 	
 	outputText("Your partner gasps in surprise as you pull yourself up, dragging her cock slowly through the tight ring of your pucker until she's about to slip out, and then dropping back down to envelop her again.  She involuntarily grunts wordless pleasure noises, thrilled with the sensation your warm body provides.  Her hands grab her nipples as you repeat your actions, working her with a slow, smooth rhythm that should bring her to orgasm... eventually.  ");
-	if(player.totalCocks() > 0) outputText("Each time she bumps and slides past your prostate a dollop of your pre-cum spurts from " + sMultiCockDesc() + " onto the ground, and you have a hard time not using your new lover like an anal toy and masturbating yourself.  ");
+	if(player.cockTotal() > 0) outputText("Each time she bumps and slides past your prostate a dollop of your pre-cum spurts from " + sMultiCockDesc() + " onto the ground, and you have a hard time not using your new lover like an anal toy and masturbating yourself.  ");
 	outputText("The long-eared slut makes a display of touching her nipples, pulling and twisting on them as you watch her over your shoulder.\n\n");
 	
 	outputText("Without meaning to, you begin to pick up the speed of your up and down strokes.  Your body is feeling horny and warm from all the sex, and having such a strange, attractive lover mating with your backside isn't helping.  ");

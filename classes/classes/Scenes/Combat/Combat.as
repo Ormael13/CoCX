@@ -3878,14 +3878,14 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
 		dynStats("lus", (player.statusEffectv1(StatusEffects.DemonSeed) + int(player.sens / 30) + int(player.lib / 30) + int(player.cor / 30)));
 	}
-	if(player.inHeat && player.vaginas.length > 0 && monster.totalCocks() > 0) {
+	if(player.inHeat && player.vaginas.length > 0 && monster.cockTotal() > 0) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
 		outputText("If you don't end this quickly you'll give in to your heat.\n\n");
 	}
-	if(player.inRut && player.totalCocks() > 0 && monster.hasVagina()) {
+	if(player.inRut && player.cockTotal() > 0 && monster.hasVagina()) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
-		if(player.totalCocks() > 1) outputText("Each of y");
+		if(player.cockTotal() > 1) outputText("Each of y");
 		else outputText("Y");
 		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
 		else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
@@ -3955,7 +3955,7 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			if(player.hasVagina()) {
 				outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
 			}
-			else if(player.totalCocks() > 0) {
+			else if(player.cockTotal() > 0) {
 				outputText("Your [cock] pulses and twitches, overwhelmed with the desire to breed.  ");
 			}
 			if(player.gender == 0) {
@@ -5574,7 +5574,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Rut doesnt let you run from dicks.
-	if(player.inRut && monster.totalCocks() > 0) {
+	if(player.inRut && monster.cockTotal() > 0) {
 		clearOutput();
 		outputText("The thought of another male in your area competing for all the pussy infuriates you!  No way will you run!");
 //Pass false to combatMenu instead:		menuLoc = 3;

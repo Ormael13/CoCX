@@ -1936,18 +1936,6 @@ import flash.errors.IllegalOperationError;
 			return biggestLactation() * biggestTitSize() * 10;
 		}
 
-		//Hacky code till I can figure out how to move appearance code out.
-		//TODO: Get rid of this
-		public virtual function dogScore():Number {
-			throw new Error("Not implemented. BAD");
-		}
-
-		//Hacky code till I can figure out how to move appearance code out.
-		//TODO: Get rid of this
-		public virtual function foxScore():Number {
-			throw new Error("Not implemented. BAD");
-		}
-
 		public function biggestLactation():Number
 		{
 			if (breastRows.length == 0)
@@ -2390,16 +2378,8 @@ import flash.errors.IllegalOperationError;
 			}
 			return -1;
 		}
-
-		//TODO Seriously wtf. 1500+ calls to cockTotal, 340+ call to totalCocks. I'm scared to touch either.
 		//How many cocks?
 		public function cockTotal():Number
-		{
-			return (cocks.length);
-		}
-
-		//Alternate
-		public function totalCocks():Number
 		{
 			return (cocks.length);
 		}
@@ -2638,7 +2618,7 @@ import flash.errors.IllegalOperationError;
 		public function manWoman(caps:Boolean = false):String
 		{
 			//Dicks?
-			if (totalCocks() > 0)
+			if (cockTotal() > 0)
 			{
 				if (hasVagina())
 				{

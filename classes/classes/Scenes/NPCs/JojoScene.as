@@ -373,7 +373,7 @@ public function useTentacleJojo():void {
 	if(player.hasVagina()) outputText(" and " + vaginaDescript(0));
 	outputText(".\n\n");
 	//REAL SECKS STARTS HERE
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		outputText("Upside down, you're forced to watch as his tail-tentacles curl out from between his legs, and extend towards your vulnerable [cocks].  All three of them pause a few inches away for what seems an eternity, revealing circular dripping orifices filled with slimy wriggling cilia.\n\n");
 		if(player.cockTotal() == 1) {
 			//(1dick+balls = 
@@ -440,7 +440,7 @@ public function useTentacleJojo():void {
 		}
 	}
 	//(0 dicks but clit)
-	if(player.totalCocks() == 0 && player.hasVagina()) {
+	if(player.cockTotal() == 0 && player.hasVagina()) {
 		outputText("One of Jojo's tail-tentacles slides underneath his body, shooting forwards to seek out your " + clitDescript() + ".  It pauses an inch or two away and opens up a horrific orifice full of wriggling tentacles and slick fluids.  The next moment it lunges forwards and sucks it inside.");
 		//(If big clit – 
 		if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.");
@@ -487,7 +487,7 @@ public function useTentacleJojo():void {
 	if(player.hasVagina()) outputText("s begin");
 	else outputText(" begins");
 	outputText(" thoroughly violating you, pistoning in and out relentlessly.");
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		outputText("  You feel a strange pleasure every time it plunges deep into your ass, smacking into your prostate.  ");
 		if(player.cockTotal() == 1) outputText("  The tentacle on your [cocks] seems appreciative, and begins sucking to swallow down all your pre.");
 		if(player.cockTotal() > 1) outputText("  The tentacles on your [cocks] seem appreciative, and begin sucking to swallow down all your pre.");

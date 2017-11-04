@@ -3049,7 +3049,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			var hands:String = (flags[kFLAGS.AMILY_NOT_FURRY] == 0) ? "paws":"hands"; // [Horsecocks]
 			clearOutput();
 			outputText("You stand up and undo your clothes, allowing ");
-			if(player.totalCocks() > 1) outputText("each of ");
+			if(player.cockTotal() > 1) outputText("each of ");
 			outputText("your [cocks] to expose itself to the outer world. Amily starts reaching for her pants, but you shake your head and she stops, confused. Her confusion quickly evaporates as you straddle her, giving her the chance to sit up, but ensuring that she'll be on a level with your crotch.\n\n");
 
 			outputText("You can't say that she looks too eager to do so, but she diligently sits up and takes hold of your ");
@@ -3231,7 +3231,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else if(scene == 3) {
 
 				outputText("Once you are at the nest, Amily pushes you down onto your back. You lay there in the soft, sweet-smelling vegetation as she strips off. Then she starts tugging insistently at your pants, and you wriggle to help her. Soon, ");
-				if(player.totalCocks() > 1) outputText("each of ");
+				if(player.cockTotal() > 1) outputText("each of ");
 				outputText("your [cocks] is exposed, rapidly growing erect. She strokes it with one hand. \"<i>Oh, you're eager for this, aren't you?</i>\" she teases.\n\n");
 
 				outputText("You don't deny it, groaning with longing and nodding your head.\n\n");

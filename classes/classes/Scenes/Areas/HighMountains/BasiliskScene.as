@@ -647,9 +647,9 @@ public class BasiliskScene extends BaseContent
 			
 			else if(player.hasCock()) {
 				outputText("\n\nYou remove just enough of your [armor] to expose yourself and grab hold of your increasing length");
-				if(player.totalCocks()) outputText("s");
+				if(player.cockTotal()) outputText("s");
 				outputText("; rubbing enthusiastically, you start at the base but end in a gentle stroke at the sensitive tip.  With you doing your best to milk as much pre as you can, the viscous ooze that dribbles out of your dong");
-				if(player.totalCocks()) outputText("s");
+				if(player.cockTotal()) outputText("s");
 				outputText(" lands with soft pitters on the overgrown lizard's back, the intense mountain sun baking the gunk onto the scales.  You sigh in languor, but remember you're doing this for a reason.");
 			}
 			//(else if pc has vag:

@@ -245,7 +245,7 @@ public class HellHoundScene extends BaseContent
 
 				//make sure that the PC will fit in the bitch
 				//(PC's dog cocks are not each of an area of 20 to 60 OR PC has more than two cocks)
-				if (player.totalCocks() > 2 || player.cockThatFits(60) < 0) {
+				if (player.cockTotal() > 2 || player.cockThatFits(60) < 0) {
 					outputText("He then reaches around your waist and takes a hold of your [cocks].  \"<i>Before we get started, let's make sure you're just right for Cremera.</i>\"  He then reforms your body to have twin doggy pricks of appropriately sized.  \"<i>Now.</i>\"\n\n");
 					//PC's dicks become two 14 by 3 inch dog dicks, all other dicks are removed
 					player.cocks[0].cockType = CockTypesEnum.DOG;
@@ -342,7 +342,7 @@ public class HellHoundScene extends BaseContent
 				if (player.hasCock()) {
 					outputText("His canine cock in your anus stimulates your prostate perfectly. His exotic black dong applies pressure in parts of your body you wouldn't expect to get such pleasure from.");
 					//--- IF ONE PENIS ---
-					if (player.totalCocks() == 1) outputText("  Soon your own [cock] reacts, quickly growing into a full throbbing erection. You leave your member alone, and it keeps flapping against the hellhound's belly while you ride him.");
+					if (player.cockTotal() == 1) outputText("  Soon your own [cock] reacts, quickly growing into a full throbbing erection. You leave your member alone, and it keeps flapping against the hellhound's belly while you ride him.");
 					//--- ELSE ---
 					else outputText("  Soon " + sMultiCockDesc() + " reacts, quickly growing into a throbbing erection.  You leave your members alone, and they flap against the hellhound's belly while you ride him.");
 				}
@@ -354,7 +354,7 @@ public class HellHoundScene extends BaseContent
 
 				outputText("Slowly but steadily you bring yourself to the verge of orgasm. The hellhound under you squirms and tries to get free, his hind legs flailing through the air behind your back. You keep riding his magnificent member, grinding it up and down in your moist cave. Finally you feel the familiar rippling of your vaginal walls, milking his cock and intensifying your pleasant sensations. Clamping down on his members, you keep moving your hips in a circling motion, working your clit, vagina and butt in equal measure. The sensations eventually grant you an intense orgasm while the hellhound's still-distended members apply the perfect pressure to all of your sensitive spots and prolong your bliss.");
 				//--- IF PC HAS PENIS ---
-				if (player.totalCocks() > 0) {
+				if (player.cockTotal() > 0) {
 					// --- IF ONE PENIS ---
 					if (player.cockTotal() == 1) outputText("Your [cock] twitches as it ejects its sticky load.");
 					//--- ELSE ---

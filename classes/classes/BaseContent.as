@@ -50,10 +50,10 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.timeQ;
 		}
 
-		protected function get measurements():Measurements
+		/*protected function get measurements():Class
 		{
-			return kGAMECLASS.measurements;
-		}
+			return Measurements;
+		}*/
 
 		protected function get camp():Camp {
 			return SceneLib.camp;

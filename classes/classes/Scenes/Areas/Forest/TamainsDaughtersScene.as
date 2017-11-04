@@ -185,7 +185,7 @@ private function fightTamanisDaughters():void {
 private function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	
 	clearOutput();
@@ -365,7 +365,7 @@ private function fuckYoDaughtersHomie():void {
 private function legTamanisDaughtersRAEPYou():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(50);	
@@ -721,7 +721,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	clearOutput();
 	
 	//Vars
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 
 	outputText("Your efforts to resist were in vain – there's simply too many of your slutty daughters to fight off.  The crowd flows over your ");
@@ -872,7 +872,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
 	clearOutput();
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your [cocks] spew");
-	if(player.totalCocks() == 1) outputText("s");
+	if(player.cockTotal() == 1) outputText("s");
 	outputText(" cum into the tubes.\n\n");
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n");
 	
@@ -929,7 +929,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	if(player.HP < 1) outputText("Lying in the dirt, too hurt to fight back, you can only tremble in anticipation of what pleasures they're going to force upon you this time.");
 	else {
 		outputText("Lying back in the dirt, you're too hard to fight back.  You stroke ");
-		if(player.totalCocks() > 1) outputText("one of ");
+		if(player.cockTotal() > 1) outputText("one of ");
 		outputText("your trembling [cocks], feeling it leak pre-cum in anticipation of getting to knock up some of these beautiful curvy women.");
 	}
 	outputText("  Tamani pushes her way to the front of the pack, her daughters looking disappointed but yielding to their mother's authority for the time being.  She walks over to you, stepping over your fallen form and uncorking a a potion.  You grunt as she drops her jiggling ass down on your ");
@@ -945,7 +945,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Tamani rubs your temples soothingly as your [face] creases with worry and reassures you, \"<i>Don't worry, this will wear off soon.  This drug just shuts down your mind so it'll be nice and open to suggestion.  You can feel how hard it is to think, can't you?  Every time you muster up a thought it gets caught up in the little pink clouds and whisked away.  Don't bother, just relax and listen to Tamani's voice.</i>\"\n\n");
 	
 	outputText("She reaches into your [armor] to rub ");
-	if(player.totalCocks() > 1) outputText("one of ");
+	if(player.cockTotal() > 1) outputText("one of ");
 	outputText("your [cocks], casually stroking the hard member as she pivots around to explain, \"<i>You get so hard for Mistress Tamani, don't you?  ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 10) outputText("Your body must remember how much it loves being my pussy-hungry husband.");
 	else outputText("That's because your body knows how hot and moist Tamani's pussy is and how much you want to service it.");
@@ -1002,7 +1002,7 @@ private function loseToDaughtersWithTamaniThere():void {
 		outputText("Thankfully, the hungry goblin twat is able to devour your [cock] with ease.  Those pliable, fluid-slicked cunt-walls clench ever-so-tightly around you");
 		if(player.biggestCockArea() < 30) outputText(" in spite of the large sizes they usually handle.");
 		else outputText("r large size.");
-		if(player.totalCocks() > 1) {
+		if(player.cockTotal() > 1) {
 			outputText("  You grunt happily as your daughters begin to slide up and down your lengths, moaning lewdly with every wet squelch that escapes their drooling pussies.  Thanks to the drugs, the writhing form of your sexy daughters, and the desire to be a good patriarch for your family, you get off in no time.  You cry out and twitch, seeding your daughters' womb with spunk, treating them just like their mother now that they're all grown up.");
 			if(player.cumQ() > 700) outputText("  It gets everywhere as their wombs fail to contain your massive load, even after you've bloated their bellies with the stuff.");
 			if(player.cumQ() > 2000) outputText("  After a few more seconds the puddle from before gets even deeper, and your daughters kindly prop up your head to keep you from drowning in the jism pool.");

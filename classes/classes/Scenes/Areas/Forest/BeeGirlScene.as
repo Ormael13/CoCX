@@ -1905,14 +1905,14 @@ public class BeeGirlScene extends BaseContent
 				if (player.cocks.length == 1) outputText(" is");
 				else outputText(" are");
 				outputText(" aching for release, and you tear off your [armor] just in time as ");
-				if (player.totalCocks() > 1) outputText("they free themselves from ");
+				if (player.cockTotal() > 1) outputText("they free themselves from ");
 				else outputText("it frees itself from ");
 				outputText("the slit between your legs.  Without needing to say a word, the message is transferred across some unknown medium: Suck my cock");
-				if (player.totalCocks() > 1) outputText("s");
+				if (player.cockTotal() > 1) outputText("s");
 				outputText(".\n\n");
 
 				outputText("The bee-girl drops to her knees and stares up at you vacantly. Your eyes never break contact: not while she wraps her tongue around ");
-				if (player.totalCocks() > 1) outputText("one of ");
+				if (player.cockTotal() > 1) outputText("one of ");
 				outputText("your [cocks], slurping soundly and driving you wild; ");
 				//[if player has testicles] 
 				if (player.balls > 0) outputText("Not while her hands cup your " + sackDescript() + " and knead tenderly, infusing you with the craving for release; ");
@@ -1973,7 +1973,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.cocks[0].cockLength > 12) outputText(", surprising you with its elasticity");
 				outputText(".");
 				//[if Player has multiple cocks]
-				if (player.totalCocks() > 1) {
+				if (player.cockTotal() > 1) {
 					outputText("  Letting go once it is fitted neatly inside, she uses her free hand to stroke your other cock");
 					//[three or more]
 					if (player.cockTotal() > 2) outputText("s, giving each a few pumps before moving on to the next");

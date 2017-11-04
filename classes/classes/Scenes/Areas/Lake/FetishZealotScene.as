@@ -167,11 +167,11 @@ public class FetishZealotScene extends AbstractLakeContent
 					//jerking off contest
 					outputText("He eagerly stands up and wraps his hands around his fine cock, you quickly try to do the same with your " + multiCockDescript() + ".  \"<i>I won't lose to you so easily, professor!</i>\" he declares to you, \"<i>Don't act so confidently on your first time.</i>\" you reply.  Then the two of you are madly jerking yourselves off in a mad effort to get off before the other, your respective cocks already moist from the blowjobs they just received.  ");
 					//just one cock
-					if (player.totalCocks() == 1) {
+					if (player.cockTotal() == 1) {
 						outputText("You piston your hands on your [cock], ");
 					}
 					//nope two
-					else if (player.totalCocks() == 2) {
+					else if (player.cockTotal() == 2) {
 						outputText("With one hand on each of your [cocks], you piston them like mad, ");
 					}
 					//oh no, is more than that

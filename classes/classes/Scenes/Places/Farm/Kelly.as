@@ -933,7 +933,7 @@ private function tentaFuckKelly():void {
 	var four:int = -4;
 	var five:int = -5;
 	var temp:int = 0;
-	while(temp < player.totalCocks()) {
+	while(temp < player.cockTotal()) {
 		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			if(one < 0) one = temp;
 			else if(two < 0) two = temp;

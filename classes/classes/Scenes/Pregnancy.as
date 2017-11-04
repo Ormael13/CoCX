@@ -1656,7 +1656,7 @@ public class Pregnancy extends NPCAwareContent {
                 player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
                 EngineCore.outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure");
                 //[(if no dick1 and no balls)
-                if(player.totalCocks() == 1 && player.balls == 0) EngineCore.outputText("; you feel a pressure build below the shaft, near your asshole");
+                if(player.cockTotal() == 1 && player.balls == 0) EngineCore.outputText("; you feel a pressure build below the shaft, near your asshole");
                 EngineCore.outputText(".  As the venom and the rubbing work you to the edge of climax, your muscles clench and a ");
                 if(player.cumQ() < 100) EngineCore.outputText("glob");
                 else if(player.cumQ() < 500) EngineCore.outputText("squirt");

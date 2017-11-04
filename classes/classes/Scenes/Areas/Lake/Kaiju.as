@@ -360,10 +360,10 @@ private function fuckThisGiantYouDumbCunt():void {
 	//[If PC has cock]
 	if(player.hasCock()) {
 		outputText("\n\nYour hard cock");
-		if(player.totalCocks() > 1) outputText("s are");
+		if(player.cockTotal() > 1) outputText("s are");
 		else outputText(" is");
 		outputText(" throbbing from the sexual stimulants of her aphrodisiac moisture and the pressing walls of her cunt flesh, pre forming at your tip");
-		if(player.totalCocks() > 1) outputText("s");
+		if(player.cockTotal() > 1) outputText("s");
 		outputText(".");
 	}
 	

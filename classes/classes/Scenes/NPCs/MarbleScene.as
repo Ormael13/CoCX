@@ -1667,7 +1667,7 @@ private function standardSex(newpage:Boolean = true):void {
 		   player.armorName == "maid's clothes" || player.armorName == "servant's clothes") {
 			outputText("You smirk at her and demonstrate just how easy it is to get at your genitals while wearing this outfit.  But you decide to not disappoint her, making a show of removing your [armor] and pretending to have some modestly when you show off your ");
 			//[player has at least one dick]
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText(multiCockDescriptLight());
 				//player has at least one dick and a vagina]
 				if(player.vaginas.length > 0) outputText(" and your ");
@@ -1684,7 +1684,7 @@ private function standardSex(newpage:Boolean = true):void {
 			//[player has small or no breasts]
 			else outputText("running one of your hands over them before continuing on.");
 			outputText("  You slip open the lower half of your clothes, revealing your ");
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText(multiCockDescriptLight());
 				//player has at least one dick and a vagina]
 				if(player.vaginas.length > 0) outputText(" and your ");
@@ -1742,7 +1742,7 @@ public function marbleSex2Continued(genders:int):void {
 		else outputText("pulls you securely against her.  ");
 		outputText("Marble shudders with pleasure and redoubles her efforts at moving the dildo, quickly pushing you over the edge as well");
 		//[player has at least one dick]
-		if(player.totalCocks() > 0) outputText(".  Your [cocks] erupts while clamped between your bodies");
+		if(player.cockTotal() > 0) outputText(".  Your [cocks] erupts while clamped between your bodies");
 		outputText(".  Her grip soon relents and the two of you lay there panting, the dildo still connecting you.  You can hear Marble say under her breath \"<i>That was way better than on my own...</i>\"\n\n");
 		//(remove vaginal virginity?  "Your hymen is torn...")
 		player.cuntChange(8,true);
@@ -1871,7 +1871,7 @@ public function marbleAddictionSex(newpage:Boolean = true):void {
 	//[player is over 6.5 feet in height]
 	else outputText("Marble grabs a hold of your head and pulls your mouth to hers for a passionate kiss.  You are only too eager to comply and join in.  Even without her vice grip on your head, it feels like you couldn't possibly leave her wonderful mouth. But you eventually push back and look into her eyes intensely.\n\n");
 	//[player has at least one dick]
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		outputText("The feeling of need is almost palpable within the two of you, and when the time comes, neither of you hesitate. You and Marble push yourselves together, forcing your [cock] deep into the soft folds of Marble's sex.  The two of you shudder and bask for a moment in the wonderful feeling of being connected, before gently starting to rock against one another.  Little else matters to you right now other than the warm, loving body that your arms are wrapped tightly around");
 		//[player height is between 4 feet and 5 feet]
 		if(player.tallness >= 48 && player.tallness <= 60) outputText(", the breasts your head is clamped between,");
@@ -3463,10 +3463,10 @@ private function marbleNightSexDudes():void {
 		outputText("Marble gasps in both pleasure and pain as you fill up her insides to almost bursting, and large amounts of your jizz spill out around her slit.  ");
 	}
 	//Now, does the PC have more than one cock?  Cum comes out of those too.
-	if(player.totalCocks() > 1) 
+	if(player.cockTotal() > 1) 
 	{
 		outputText("Of course, ");
-		if(player.totalCocks() > 2) { 
+		if(player.cockTotal() > 2) { 
 			outputText("the rest of your " + multiCockDescriptLight());
 		} 
 		else { 
@@ -3521,7 +3521,7 @@ private function marbleNightSexChicks():void {
 		outputText("The two of you cry out in orgasm as your " + vaginaDescript(0) + " clamps down on one end of her dildo and her womanhood clamps down on the other end.  ");
 		//Does this PC have a cock too?
 		//If (PC has at least 1 cock)
-		if(player.totalCocks() > 0) {
+		if(player.cockTotal() > 0) {
 			outputText("At the same time, your [cocks] sprays its own load onto Marble's chest and stomach.  ");
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
@@ -3568,9 +3568,9 @@ private function marbleNightSexChicks():void {
 		}
 		outputText("The two of you cry out in orgasm as your " + vaginaDescript(0) + " clamps down on her " + marbleCock() + " as it fills you with its seed.  ");
 		//Does this PC have a cock too?
-		if(player.totalCocks() > 0) {
+		if(player.cockTotal() > 0) {
 			outputText("At the same time, ");
-			if(player.totalCocks() > 1) outputText("each of ");
+			if(player.cockTotal() > 1) outputText("each of ");
 			outputText("your [cocks] sprays its own load onto Marble's chest and stomach.  ");
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");

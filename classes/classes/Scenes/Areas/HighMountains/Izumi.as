@@ -417,15 +417,15 @@ public class Izumi extends Monster
 					if (player.hasCock())
 					{
 						outputText("Assaulted by the sensation of being pressed against such warm flesh, you can already feel [eachCock] starting to stiffen against your will.  Your hardening erection");
-						if (player.totalCocks() > 1) outputText("s");
+						if (player.cockTotal() > 1) outputText("s");
 						outputText(" just makes things even more unbearable, as the harder");
-						if (player.totalCocks() > 1) outputText(" they get");
+						if (player.cockTotal() > 1) outputText(" they get");
 						else outputText(" it gets");
 						outputText(", the more insistently your");
-						if (player.totalCocks() > 1) outputText(" erections throb");
+						if (player.cockTotal() > 1) outputText(" erections throb");
 						else outputText(" erection throbs");
 						outputText(", pressed up against Izumi’s stomach muscles.  Her muscles ripple and undulate as she struggles to keep you in her grip, abs flexing, bumping, encircling your insistent erection");
-						if (player.totalCocks() > 1) outputText("s");
+						if (player.cockTotal() > 1) outputText("s");
 						outputText(", stimulating you even further.  You realize in a flash of panic that if you don’t get out of this soon, you may actually... ");
 					}
 					else

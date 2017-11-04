@@ -629,7 +629,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			if (player.balls > 0) outputText("balls and massages your ");
 			outputText(buttDescript() + ".");
 			//[if third cock]
-			if (player.totalCocks() > 2) outputText("  Using her extra flexibility, she bends over and start jerking your third pole, the sweet handjob adding to your pure cocktail of pleasure.");
+			if (player.cockTotal() > 2) outputText("  Using her extra flexibility, she bends over and start jerking your third pole, the sweet handjob adding to your pure cocktail of pleasure.");
 			outputText("  You can feel her hard nipples poke at your skin as they gently scrape across your torso.  Vapula hardly ever interrupts her embrace, only pulling back from your lips to take care of other intimate parts of your body.  You keep riding the bimbo senseless, making her squirm and squawk in ecstasy as your own cries of pleasure are muffled by Vapula's voracious lips.");
 			outputText("\n\nVapula's expert stimulation as well as Sophie's uncontrollably hot ass eventually drain your stamina and you feel [eachCock] flutter and twinge as it releases its milky load.  Sophie climaxes and squirts a copious amount of her juice as you deliver rope after rope of jism into her tight confines.  Remembering your succubus slut, you ");
 			if (player.cockTotal() < 3) outputText("hastily pull out and ");

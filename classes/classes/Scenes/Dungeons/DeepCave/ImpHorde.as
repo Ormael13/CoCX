@@ -37,7 +37,7 @@ public class ImpHorde extends Monster
 				outputText(".  The lower portions of your coverings ");
 				if(player.cockTotal() > 0) {
 					outputText("are pulled tight by your " + multiCockDescript() + ", ");
-					if(player.totalCocks() > 1) outputText("each ");
+					if(player.cockTotal() > 1) outputText("each ");
 					outputText("beading a drop of pre-cum at the tip");
 					if(player.hasVagina()) outputText(", and in addition, the clothes around your groin ");
 				}

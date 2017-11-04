@@ -641,13 +641,13 @@ public function getMilked():void {
 	else {
 		outputText("You walk over to the barn, eagerly anticipating the opportunity to get milked.");
 		//If ilk withdrawl or high lactation no dicks
-		if(player.hasStatusEffect(StatusEffects.LactationReduction) && player.totalCocks() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.");
+		if(player.hasStatusEffect(StatusEffects.LactationReduction) && player.cockTotal() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.");
 		//If cocks
-		else if(player.totalCocks() > 0) {
+		else if(player.cockTotal() > 0) {
 			outputText("Your [cocks] erect");
-			if(player.totalCocks() > 1) outputText("s");
+			if(player.cockTotal() > 1) outputText("s");
 			outputText(" and throb");
-			if(player.totalCocks() == 1) outputText("s");
+			if(player.cockTotal() == 1) outputText("s");
 			outputText(" with desire.");
 		}
 		//If both
@@ -733,7 +733,7 @@ public function getMilked():void {
 		//Medium 3
 		if(milksplosion == 2) {
 			outputText("Fat drops of milk pour out of your " + nippleDescript(0) + "s, pooling in the milking-cups as the machine begins to extract your creamy breast-milk.   The milk flow begins streaming out of you it bursts of fluid as the machinery switches to a pulsating suction.  You groan happily as your [allbreasts] empty, relieving you of pent up pressure.   The feeling is enjoyable in more than just that way, and you feel yourself getting ");
-			if(player.totalCocks() == 0) {
+			if(player.cockTotal() == 0) {
 				if(player.hasVagina()) outputText("wet");
 				else outputText("horny");
 			}
@@ -754,7 +754,7 @@ public function getMilked():void {
 		//High Output2
 		if(milksplosion == 1) {
 			outputText("Your " + nippleDescript(0) + " swell up like tiny balloons for a moment before they unleash a torrent of your milk.  The nipple-cylinders instantly flood to capacity, and the milking machinery chugs loudly as it tries to suck it all down the tubes, barely keeping up with you.  You pant and writhe in the harness, each pulse of milk sending a growing sensation of your warmth to your groin that makes you ");
-			if(player.totalCocks() == 0) {
+			if(player.cockTotal() == 0) {
 				if(player.hasVagina()) outputText("wet");
 				else outputText("horny");
 			}
@@ -1269,7 +1269,7 @@ private function milkerBadEnd1():void {
 		//(multi)
 		else outputText("multiple gigantic, erect penises bobbing in front of you and dragging between your legs, head pinned against the floor");
 		outputText(".  Just in time she backs up and pulls a pitchfork down from the wall. \"<i>I expect I was wrong about you when we met, [name].  Get on out of here now and never come back or I'll make sure you never go anywhere again.</i>\"  Scowling, you break off your advance and head toward the door.  Though you definitely want to fuck her, giving yourself a chance to adjust to your magnificent new body might not be a bad idea either.  After all, no matter what she says you can always come back... meanwhile you vow to find something or someone to rape or turn into your personal cock-milker.  With an amazing ");
-		if(player.totalCocks() == 1) outputText("dick");
+		if(player.cockTotal() == 1) outputText("dick");
 		else outputText("set of dicks");
 		outputText(" like yours, why worry about anything else for the moment?");
 		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 100);

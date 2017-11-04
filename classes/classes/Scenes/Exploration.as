@@ -112,7 +112,7 @@ public class Exploration extends BaseContent
 		public function genericGolGobImpEncounters(even:Boolean = false):void {
 			var impGobGol:Number = 5;
 			if (!even) {
-				if (player.totalCocks() > 0) impGobGol--;
+				if (player.cockTotal() > 0) impGobGol--;
 				if (player.hasVagina()) impGobGol++;
 				if (player.totalFertility() >= 30) impGobGol++;
 				if (player.cumQ() >= 200) impGobGol--;

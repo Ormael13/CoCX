@@ -9,6 +9,7 @@
         import classes.Appearance;
         import classes.GlobalFlags.kFLAGS;
         import classes.GlobalFlags.kGAMECLASS;
+        import classes.Measurements;
 
         public var singleArgConverters:Object =
 		{
@@ -108,7 +109,7 @@
 				"skintone"					: function(thisPtr:*):* {
 					return kGAMECLASS.player.skinTone;
 				},
-				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
+				"tallness"					: function(thisPtr:*):* { return Measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"teasetext"					: function(thisPtr:*):* { return SceneLib.combat.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return Appearance.tongueDescription(kGAMECLASS.player); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },

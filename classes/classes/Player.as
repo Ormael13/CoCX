@@ -2246,7 +2246,7 @@ use namespace kGAMECLASS;
 			return counter;
 		}
 		//Determine Dog Rating
-		public override function dogScore():Number {
+		public function dogScore():Number {
 			Begin("Player","racialScore","dog");
 			var dogCounter:Number = 0;
 			if (faceType == AppearanceDefs.FACE_DOG)
@@ -2327,7 +2327,7 @@ use namespace kGAMECLASS;
 		}
 
 		//Determine Fox Rating
-		public override function foxScore():Number {
+		public function foxScore():Number {
 			Begin("Player","racialScore","fox");
 			var foxCounter:Number = 0;
 			if (faceType == AppearanceDefs.FACE_FOX)

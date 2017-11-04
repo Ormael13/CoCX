@@ -186,7 +186,7 @@ private function PCCarriedGooBackHome():void {
 	outputText("You set the once-goo down in a secluded section of your camp");
 	if(camp.companionsCount() > 0) outputText(", away from prying eyes");
 	outputText(".  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
-	if(player.totalCocks() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your [cocks] with her juices.");
+	if(player.cockTotal() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your [cocks] with her juices.");
 	outputText("\n\nSurprisingly, she has hair, or what passes for hair for a woman made entirely of supple, inorganic semi-solids.  Her tresses hang down past her shoulders, slender strands that are as reflective as her skin.  Unlike her skin, the latex-goo's hair seems perpetually oily, slippery and lubricated.  Hesitantly, you extend a hand to touch, carefully caressing a few of the rubbery strands.  Their texture is smooth and slick, unlike any hair you've ever had the pleasure of touching.");
 	outputText("\n\n\"<i>I can feel that, you know.</i>\"");
 	outputText("\n\nYou backpedal wildly, surprised at the sudden statement to such a degree that you nearly fall flat on your [butt].  Giggling laughter bubbles up in response, \"<i>Sorry, I didn't mean to scare you.</i>\"");

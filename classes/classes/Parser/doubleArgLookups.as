@@ -124,7 +124,7 @@
 			"skintone"					: function(thisPtr:*):* {
 				return kGAMECLASS.monster.skinTone;
 			},
-			"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.monster.tallness); },
+			"tallness"					: function(thisPtr:*):* { return Measurements.footInchOrMetres(kGAMECLASS.monster.tallness); },
 			"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.monster.upperGarmentName; },
 			"vag"						: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
 			"vagina"					: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },

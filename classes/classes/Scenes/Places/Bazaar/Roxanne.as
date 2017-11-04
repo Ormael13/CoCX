@@ -374,7 +374,7 @@ private function roxanneRimjob():void {
 	//(Optional cock milking)
 	if(player.hasCock()) {
 		outputText("Surprisingly, one of the pirate's hands comes off your " + buttDescript() + " to tug on ");
-		if(player.totalCocks() > 1) outputText("one of ");
+		if(player.cockTotal() > 1) outputText("one of ");
 		outputText("your member");
 		if(player.cockTotal() > 1) outputText("s");
 		outputText(", milking the shaft like a cow's teat.  Smooth, scaled fingers circle it at the base and slowly slide down, tugging at your skin and squeezing out thick dollops of pre-cum with every pull.\n\n");

@@ -41,7 +41,7 @@ public class InfestedHellhoundScene extends BaseContent
 			}
 			clearOutput();
 			//[BOTH INFESTED]
-			if (player.totalCocks() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
+			if (player.cockTotal() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
 				//(LUST)
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
@@ -75,7 +75,7 @@ public class InfestedHellhoundScene extends BaseContent
 				else {
 					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your [armor] before tearing it off, exposing your " + assDescript() + " and [cocks].  A cold mountain breeze blows across your now exposed [skin.type], reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your [feet] and onto your back.\n\n");
 				}
-				if (player.totalCocks() > 1) {
+				if (player.cockTotal() > 1) {
 					outputText("The infested hound repositions itself, blocking out the sun with its dark fur, leaving you with only the pale flames surrounding its fuzzy sack to look at.   The warm wetness of its smooth tongue starts sliding over ");
 					outputText("each of your [cocks].  It feels good, better than it has any right to.  ");
 					outputText("Every single one of your [cocks] hardens under the stimulation, happy to be so well-treated.\n\n");

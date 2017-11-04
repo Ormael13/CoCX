@@ -2269,7 +2269,7 @@ private function followerIzmaTakesIt69():void {
 	if(player.hasCock()) {
 		outputText(" fire loads into Izma's cheeks");
 		//[(multi)
-		if(player.totalCocks() > 1) outputText(" and hair");
+		if(player.cockTotal() > 1) outputText(" and hair");
 		outputText(".");
 		//[(big/mega skeet)
 		if(player.cumQ() >= 750) outputText("  You continue to shoot off stroke after stroke long after her mouth has filled up and she's pulled away.  \"<i>For the love of Marae, [name], I can't swallow all that!</i>\"");

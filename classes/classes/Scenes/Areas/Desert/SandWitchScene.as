@@ -365,11 +365,11 @@ private function sandwitchCentaurBoning():void {
 		//[has breasts]
 		if(player.biggestTitSize() > 0) outputText("; your " + nippleDescript(0) + "s  become stiff");
 		//[cock only]
-		if(player.totalCocks() > 0 && !player.hasVagina()) outputText(" and your [cock] hardens.");
+		if(player.cockTotal() > 0 && !player.hasVagina()) outputText(" and your [cock] hardens.");
 		//[cunt only]
-		if(player.hasVagina() && player.totalCocks() == 0) outputText(" and your " + vaginaDescript(0) + " begins to drip with moisture.");
+		if(player.hasVagina() && player.cockTotal() == 0) outputText(" and your " + vaginaDescript(0) + " begins to drip with moisture.");
 		//[cock and cunt]
-		if(player.hasVagina() && player.totalCocks() > 0) outputText(" and your [cock] hardens as your " + vaginaDescript(0) + " begins to drip with moisture.");
+		if(player.hasVagina() && player.cockTotal() > 0) outputText(" and your [cock] hardens as your " + vaginaDescript(0) + " begins to drip with moisture.");
 		if(player.gender == 0) outputText(" her.");
 		outputText(" She seems hesitant at first, but soon approaches and begins to run her hands along your stomach and your " + hipDescript());
 		//[has breasts]
@@ -765,7 +765,7 @@ private function ovipositSandWitches():void {
 	if(player.gender == 3) outputText(" and ");
 	if(player.hasVagina()) outputText(clitDescript());
 	outputText(" for her viewing consumption.  Making quite the persuasive argument of non-hostility as you do, the sand witch finally relents, removing her cloak and exposing her four-breasted, ");
-	if(player.totalCocks() > 1) outputText(num2Text(player.cockTotal() + 1));
+	if(player.cockTotal() > 1) outputText(num2Text(player.cockTotal() + 1));
 	else outputText("two");
 	outputText("-sexed form, allowing the sun to glisten off her bare body.");
 	
@@ -782,7 +782,7 @@ private function ovipositSandWitches():void {
 private function eggwitchForeplay():void {
 	clearOutput();
 	outputText("Knowing how the desert witch feels at this moment, you decide to help ease her into receiving your young.  Slowly, you slide your fingers up the uneasy woman's legs, the sensation of your hands along her delicate frame soliciting a pitiful gasp from the sand witch as she receives the caress.  Gradually working upwards, your palms curve and twist along the blonde beauty's thighs, all the while causing her to shudder from the stimulus, her ");
-	if(player.totalCocks() > 1) outputText(num2Text(player.cockTotal() + 1));
+	if(player.cockTotal() > 1) outputText(num2Text(player.cockTotal() + 1));
 	else outputText("two");
 	outputText(" clits all hard from the apparent promise of your carnal attentions.  Positioned between her thighs, your hands rest and you wait for the eager gaze of her eyes, the imploring of your continued progress.  The sand witch doesn't disappoint; her needy eyes beseech you to splay her legs open and get intimately acquainted with her naughty bits.");
 	

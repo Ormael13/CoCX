@@ -745,7 +745,7 @@ use namespace kGAMECLASS;
 					if(player.cockTotal() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
 					outputText("The big imp's snake tongue flicks out and slides around your " + vaginaDescript(0) + ", pulling at your pussy lips. He moves his tongue back and forth along the sides of your steaming cunt, alternating between stretching and flicking the lips. ");
 					//(If the character has a dick)
-					if(player.totalCocks() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.  ");
+					if(player.cockTotal() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.  ");
 					outputText("You gasp in time to the big imp's thrusts, whimpering when his cock or tongue hit a sensitive point. ");
 					//(Low Corruption)
 					if(player.cor < 50) outputText("You're being raped by a demon, milked like a cow, and you're about to cum hard. This corrupted land has left its mark on you.");
@@ -1055,7 +1055,7 @@ use namespace kGAMECLASS;
 					//(If the character has breasts)
 					if(player.biggestTitSize() >= 3) outputText("Your [allbreasts] bounce and jiggle back and forth as the master imp roughly fucks you.  ");
 					//(If the character has a dick)
-					if(player.totalCocks() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
+					if(player.cockTotal() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
 					outputText("The big imp's snake tongue lashes out to incredible length and wraps around one of your " + nippleDescript(0) + "s, pulling at it and stretching the flesh under it. He moves his tongue back and forth between your nipples, alternating between stretching and flicking them. ");
 					//(If the character has a dick)
 					if(player.cockTotal() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.");
@@ -2227,7 +2227,7 @@ use namespace kGAMECLASS;
 				outputText("\n\n");
 			}
 			//(DICK!)
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText("Some of the other imps, feeling left out, fish out your " + multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n");
 			}
 			//(ORGAZMO)

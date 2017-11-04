@@ -109,7 +109,7 @@ public function edrynBarTalk():void {
 		outputText("Edryn gestures for you to take a seat, and motions for a waitress to bring you a drink.  You sit with the busty centaur and chat her up for a little bit, recounting your latest adventures and sexual exploits.  She laughs at some, blushes at others, and comforts you at times, but by the time you've finished her child-birth-enlarged nipples are like two hard bullets under her tunic and her face is flushed.  Edryn picks at her food for a moment and excuses herself, \"<i>Sorry dear, but I'm feeling a little flushed.  I'm going to head back to my room and lie down a while...</i>\"\n\n");
 
 		//(NO WANGUUU)
-		if(player.totalCocks() == 0) {
+		if(player.cockTotal() == 0) {
 			outputText("She looks down, eyes fixing on your crotch for a moment before she sighs, \"<i>Why did you get rid of your dick?  I like you a lot, but I don't really want to have sex with you like you are now.</i>\"\n\nIt looks like you won't get to have any fun with her right now.");
 			cheatTime(1);
 			doNext(telAdre.barTelAdre);
@@ -172,7 +172,7 @@ public function edrynBarTalk():void {
 	outputText("  Despite the oddity of the situation, you stay and enjoy a light conversation with her.  You find the conversation to be interesting, and the pair of you stay there to munch on a light meal of breads, cheeses, and a glass of wine.  While you find the time pleasant, you have a feeling that something is 'off'.\n\n");
 	//New PG
 	outputText("You take a close look at your dinner companion, trying to puzzle out what you're picking up on, but you just can't place it.  Edryn burps quietly, apologizing for her rudeness, and excuses herself to the girl's room.  As she turns away to leave, you get a good look at her backside.  Her horse-like sex is huge and puffy, and glistening with moisture.  The gentle flicking of her tail from side to side pushes her musky scent into you like a wave, ");
-	if(player.isTaur() && player.totalCocks() > 0) {
+	if(player.isTaur() && player.cockTotal() > 0) {
 		outputText("and the potent female scent works its way into your blood, making you dizzy as your [cock] ");
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pours out of its sheath");
 		else outputText("fills near instantaneously");
@@ -183,7 +183,7 @@ public function edrynBarTalk():void {
 		edrynOffer();
 		return;
 	}
-	else if(player.totalCocks() > 0) {
+	else if(player.cockTotal() > 0) {
 		if(player.horseCocks() > 0) {
 			outputText("and the potent female scent makes you feel a bit dizzy and dazed.  ");
 			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + Appearance.cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n");
@@ -261,7 +261,7 @@ private function edrynOffer():void {
 	if(x < 0) x = 0;
 
 	//(cont centaur)
-	if(player.isTaur() && player.totalCocks() > 0) {
+	if(player.isTaur() && player.cockTotal() > 0) {
 		//Too small
 		if(player.cockArea(x) < 24) {
 			outputText("Oh my, you're a little bit small for my tastes love.  Maybe you should try some of the local delicacies and trot back here so I can help you out, ok?</i>\"\n\n");
@@ -661,7 +661,7 @@ public function findOutEdrynIsPregnant():void {
 
 	outputText("<b>How do you react?</b>");
 
-	var aroused:Function = (player.totalCocks() > 0 ? arousedByPregdryn : null);
+	var aroused:Function = (player.cockTotal() > 0 ? arousedByPregdryn : null);
 	//[Shocked] [Pleased] [Aroused (Requires Wang)]
 	simpleChoices("Shocked", shockedByEdrynsPregnancy, "Pleased", pleasedbyPregdryn, "Aroused", aroused, "", null, "", null);
 }
@@ -947,7 +947,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("You're so lost in desperate need that your hurried steps get you in trouble.  Your [foot] catches on something, and you fall inexorably forwards.  In a panic, you windmill your arms.  One slaps into fur-covered flesh with a loud 'SLAP', the other disappears into a mass of soft, yielding fabrics.  The pillows catch you, absorbing the fall, but your face splats directly into something warm, wet and aroused.  Edryn gasps and exclaims, \"<i>No need to be so rough about it!  I thought you might like some hide and seek... your dick seemed to like it, and I needed a moment to catch my breath.  It's not easy carrying your child around!</i>\"\n\n");
 
 	outputText("Her words fall on deaf ears.  You push yourself up onto your elbows and lean forward, feeling strands of female lubricant hanging from your face as you inhale deep lungfuls of her scent.  ");
-	if(player.totalCocks() > 1) outputText("Each of y");
+	if(player.cockTotal() > 1) outputText("Each of y");
 	else outputText("Y");
 	outputText("our [cocks] ");
 	if(player.cumQ() < 100) outputText("drips pre-cum onto the pillows.");
@@ -976,7 +976,7 @@ private function jizzFromEatingPregdrynOut():void {
 	}
 
 	outputText("Cum begins to ooze from ");
-	if(player.totalCocks() > 1) outputText("each of ");
+	if(player.cockTotal() > 1) outputText("each of ");
 	outputText("your [cocks] in a steady stream.  Your urethra bulges and flexes, forcing you to waste your seed all over Edryn's pillows.");
 	if(player.cumQ() < 1000) {
 		outputText("  The flow gets thicker and thicker.  Edryn even remarks, \"<i>Oh my, my baby's daddy is just full of cum!  Let it all out for me dear, you did such a good job on my clit that you deserve release.</i>\" You squirt and dribble, breathing airborne orgasm and squirting ");

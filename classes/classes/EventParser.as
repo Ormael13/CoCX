@@ -311,8 +311,8 @@ public class EventParser {
         }
         // update cock type as dog/fox depending on whether the player resembles one more then the other.
         // Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
-        if (player.totalCocks() != 0) {
-            var counter:Number = player.totalCocks() - 1;
+        if (player.cockTotal() != 0) {
+            var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
                     if (player.dogScore() >= player.foxScore())

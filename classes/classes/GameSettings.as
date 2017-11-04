@@ -422,7 +422,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 
 		outputText("\n\n");
 
-		if (flags[kFLAGS.USE_METRICS] > 0)
+		if (Measurements.useMetrics)
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 		else
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
@@ -556,8 +556,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 	 }
 	 */
 	public function toggleMeasurements():void {
-		if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
-		else flags[kFLAGS.USE_METRICS] = 0;
+		Measurements.useMetrics = !Measurements.useMetrics;
 		settingsScreenInterfaceSettings();
 	}
 

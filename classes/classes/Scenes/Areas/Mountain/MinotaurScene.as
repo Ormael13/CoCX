@@ -722,7 +722,7 @@ private function minoGetsTitFucked():void {
 	if(monster.lust >= monster.maxLust()) outputText("You push his hands away and y");
 	else outputText("Y");
 	outputText("ou lean over him, feeling your generous breast-flesh jiggle, your " + nippleDescript(0) + "s tingling with desire as they rub across the horse-like minotaur dong.   The beast's pre starts forming into large drops along his flared head, and you waste no time smearing it through your cleavage, lubricating the space between your tits and breathing deeply of its perfect scent.");
-	if(player.totalCocks() > 0) outputText("  Your [cock] grows harder and more aroused than ever before while your ");
+	if(player.cockTotal() > 0) outputText("  Your [cock] grows harder and more aroused than ever before while your ");
 	else outputText("  Your body aches with arousal while your ");
 	if(player.hasVagina()) outputText(vaginaDescript(0) + " grows hotter and hotter, begging to be taken.");
 	else outputText(assholeDescript() + " puckers slightly, as if begging to be taken by another monstrous beast.");

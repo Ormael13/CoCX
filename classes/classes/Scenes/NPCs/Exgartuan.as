@@ -230,7 +230,7 @@ private function drinkFountainEndowment():void {
 		changed = true;
 	}
 	//(+Big dick)
-	if(rand(3) == 0 && player.totalCocks() > 0) {
+	if(rand(3) == 0 && player.cockTotal() > 0) {
 		outputText("\n\nYour [cocks] feels tighter inside your [armor], even when flaccid.  You shudder and realize you've probably gained more than a few inches in total length, and who knows how your thickness has changed.");
 		temp = player.cocks.length;
 		while(temp > 0) {
@@ -380,10 +380,10 @@ public function exgartuanMasturbation():void {
 		outputText("At last, fingers wrap themselves about your " + nippleDescript(0) + "s, squeezing them gently and forcing happy gasps from your mouth.  ");
 		if(player.hasVagina()) {
 			outputText("Juice");
-			if(player.totalCocks() > 0) outputText(" and pre-cum");
+			if(player.cockTotal() > 0) outputText(" and pre-cum");
 			outputText(" soaks your groin");
 		}
-		else if(player.totalCocks() > 0) outputText("pre-cum soaks your groin");
+		else if(player.cockTotal() > 0) outputText("pre-cum soaks your groin");
 		else outputText("Warmth radiates through your body");
 		outputText(" as you're more and more turned on by the feelings coming from your chest.  Fingertips ");
 		if(player.nippleLength < 2) outputText("pinch together and pull, and it's too much for you.");
@@ -544,7 +544,7 @@ public function exgartuanCombatUpdate():Boolean {
 			return true;
 		}
 		//(Taunts Male Foes -enemy lust)
-		else if(monster.totalCocks() > 0) {
+		else if(monster.cockTotal() > 0) {
 			select = rand(8);
 			switch(select) {
 				case 0:
@@ -578,7 +578,7 @@ public function exgartuanCombatUpdate():Boolean {
 	}
 	//Exgartuan in tittays!
 	else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
-		if(monster.totalCocks() > 0) {
+		if(monster.cockTotal() > 0) {
 			select = rand(8);
 			switch(select) {
 				case 0:

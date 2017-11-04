@@ -39,7 +39,7 @@ public class YetiScene extends BaseContent
 			outputText("The sound of flesh smacking flesh bounces off the ice walls of the cavern as the yeti beats your ass into oblivion, his giant huge member impaling you fully over and over, each savage thrust making your limbs ache from the strain of your bindings. Moans slip past your lips despite your discomforts, the furred beast wrapped around you like a heated fur sweater, the brutal thrusts against your ass making it burn up in all the right ways. You can feel his prespunk dripping out of your pucker and leaving warm trails down your taint and legs.  ");
 			if (player.hasCock()) {
 				outputText("Some gets onto your fully erect [cocks], making ");
-				if (player.totalCocks() == 1) outputText("it");
+				if (player.cockTotal() == 1) outputText("it");
 				else outputText("them");
 				outputText(" ache all the more.");
 			}

@@ -439,7 +439,7 @@ use namespace kGAMECLASS;
 				outputText("\n\n");
 			}
 			//(DICK!)
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText("Some of the other imps, feeling left out, fish out your " + multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n");
 			}
 			//(ORGAZMO)

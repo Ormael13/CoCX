@@ -413,16 +413,16 @@ public class CeraphFollowerScene extends NPCAwareContent
 				outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock peeking out of her panties, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You realize you're not even going to be able to lift a hand against your foes after this?  You really love a challenge, don't you " + player.mf("Master", "Mistress") + "?</i>\"\n\n");
 
 				outputText("The idea of facing the denizens of this land without even so much as the ability to throw a punch turns you on immensely, and you pant and gasp as ");
-				if (player.totalCocks() > 0) {
+				if (player.cockTotal() > 0) {
 					outputText("pre-cum oozes from ");
-					if (player.totalCocks() > 1) outputText("each of ");
+					if (player.cockTotal() > 1) outputText("each of ");
 					outputText("your [cocks].");
 				}
 				else if (player.hasVagina()) outputText("feminine moisture drools from between your lips and your " + clitDescript() + " turns into a hard button.");
 				else outputText("your body aches for release.");
 				outputText("  With an amused grin, Ceraph yanks down your gear and ");
 				//[dicks]
-				if (player.totalCocks() > 0) {
+				if (player.cockTotal() > 0) {
 					outputText("grabs your " + cockDescript(0));
 					if (player.cocks[0].pierced > 0) outputText(", the old piercing clattering to the ground as it slides out, ");
 					outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.\n\n");
@@ -2149,7 +2149,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 				outputText(" could go off at any second.  The journey is murder for your poor, ");
 				if (player.hasCock()) outputText("over-inflated maleness");
 				else outputText("puffy, aching cleft");
-				if (player.totalCocks() > 1) outputText("es");
+				if (player.cockTotal() > 1) outputText("es");
 				outputText(", but you somehow make the whole way home without ");
 				if (player.hasCock()) outputText("popping");
 				else outputText("tipping over the edge");

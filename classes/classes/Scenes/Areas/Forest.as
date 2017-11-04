@@ -115,7 +115,7 @@ use namespace kGAMECLASS;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
@@ -281,7 +281,7 @@ use namespace kGAMECLASS;
 				when  : function ():Boolean {
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
-						   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+						   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 				}
 			}, {

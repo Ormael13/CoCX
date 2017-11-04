@@ -115,7 +115,7 @@ public class CeraphScene extends NPCAwareContent
 					outputText("getting an exhibitionist thrill ");
 				}
 				outputText("and begin stroking ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
 
 				outputText("Ceraph squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");
@@ -320,16 +320,16 @@ public class CeraphScene extends NPCAwareContent
 			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
 
 			outputText("The idea turns you on immensely, and you pant and gasp as ");
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("pre-cum oozes from ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your [cocks].");
 			}
 			else if (player.hasVagina()) outputText("feminine moisture drools from between your lips and your " + clitDescript() + " turns into a hard button.");
 			else outputText("your body aches for release.");
 			outputText("  With an amused grin, Ceraph yanks down your gear and ");
 			//[dicks]
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("grabs your " + cockDescript(0));
 				if (player.cocks[0].pierced > 0) outputText(", the old piercing clattering to the ground as it slides out of your flesh, ");
 				outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.\n\n");
@@ -548,9 +548,9 @@ public class CeraphScene extends NPCAwareContent
 			spriteSelect(7);
 			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.  The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
 			outputText("The idea turns you on immensely, and you pant and gasp as ");
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("pre-cum oozes from ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your [cocks].");
 			}
 			else if (player.hasVagina()) {
@@ -727,8 +727,8 @@ public class CeraphScene extends NPCAwareContent
 
 			outputText("You start to black out as you feel her release a wave of seed onto your " + hairDescript() + ".  Though you're too far gone to realize it, your eyes are slowly rolling back as your vision goes black.  Copious demonic fluids fill your mouth while Ceraph gets off on riding your face.  You're nearly gone when she finally pulls herself off of you, jacking her cock off and splattering a few ropes of thick male cum onto your chest and neck.  Coughing and sputtering out her sexual fluids, you fight back to consciousness, humiliated and aroused beyond measure.\n\n");
 
-			if (player.totalCocks() > 0) {
-				if (player.totalCocks() > 1) outputText("Each of y");
+			if (player.cockTotal() > 0) {
+				if (player.cockTotal() > 1) outputText("Each of y");
 				else outputText("Y");
 				outputText("our " + multiCockDescript() + " is twitching and dripping pre-cum, on the edge of orgasm.  ");
 			}
@@ -994,7 +994,7 @@ public class CeraphScene extends NPCAwareContent
 			var temp2:Number = 0;
 			//1 = wang, 2 = cunt, 3 = tits.
 			//Add dicks
-			temp = player.totalCocks();
+			temp = player.cockTotal();
 			while (temp > 0) {
 				temp--;
 				choices[choices.length] = 1;

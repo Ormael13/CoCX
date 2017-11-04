@@ -1481,9 +1481,9 @@ public function vaginalProdNPokeIsabella():void {
 	outputText("You smirk and slap at one of the cow-girl's breasts in response, setting off a geyser of lactic fluid that rains down on both of you.  Now that Isabella's tits have started to let down her milk, there's no stopping the alabaster flow.  Her spray of lactation covers her, you, and her belongings, unfettered by the sopping-wet shirt plastered tightly to her chocolate-toned mounds.  You lick a few droplets from your lips and marvel at the sweetness.  She's absolutely delicious.\n\n");
 	
 	outputText("In spite of the distracting milk-fountains, your main focus remains on her cunt, and how wonderful that hot little box feels around your " + cockDescript(x) + ".  ");
-	if(player.totalCocks() > 1) {
+	if(player.cockTotal() > 1) {
 		outputText("You wish you had room for ");
-		if(player.totalCocks() > 2) outputText("another " + oMultiCockDesc());
+		if(player.cockTotal() > 2) outputText("another " + oMultiCockDesc());
 		else outputText("your other penis");
 		outputText(" inside her, but her arousal-slicked lips are squeezing too tightly on you for you to cram anything else into that hole, and at this angle, anal sex would be nigh impossible.  ");
 	}

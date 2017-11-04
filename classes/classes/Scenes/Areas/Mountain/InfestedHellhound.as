@@ -22,13 +22,13 @@ import classes.internals.*;
 				//Get hit – 10+ lust
 				player.dynStats("lus", 5 + player.lib / 20);
 				outputText("Taken off-guard by the unexpected sexual display, you fail to move out of the way, and the wormy jism splatters you from the chest down.");
-				if (player.hasStatusEffect(StatusEffects.Infested) && player.totalCocks() > 0) {
+				if (player.hasStatusEffect(StatusEffects.Infested) && player.cockTotal() > 0) {
 					outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering [cocks] as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your [cocks].");
 					if (player.balls > 0) outputText("  Your [balls] grow weightier as the worms settle into their new home, arousing you beyond measure.");
 					else outputText("  You can feel them shifting around inside you as they adjust to their new home, arousing you beyond measure.");
 					player.dynStats("lus", 10);
 				}
-				else if (player.totalCocks() > 0) {
+				else if (player.cockTotal() > 0) {
 					outputText("  The worms wriggle and squirm all over you, working their way towards your groin.  It tickles pleasantly, but you brush them away before they can get inside you.  The thought of being turned into a worm-dispensing cum fountain is horrifying, but it leaves you hard.");
 					player.dynStats("lus", (5 + Math.round(player.cor / 20)));
 				}

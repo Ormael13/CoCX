@@ -266,7 +266,7 @@ private function auntNancyPoonPartII():void {
 			if(player.cocks[y].cockLength >= 22) {
 				titFucked = true;
 				outputText("As Aunt Nancy rides you enthusiastically, the spider-lady lifts ");
-				if(player.totalCocks() > 2) outputText("another one of ");
+				if(player.cockTotal() > 2) outputText("another one of ");
 				outputText("your ");
 				if(player.cockTotal() == 2) outputText("other cock ");
 				else outputText("cocks ");

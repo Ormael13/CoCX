@@ -332,7 +332,7 @@ import classes.Scenes.UniqueSexScenes;
 				else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
 				outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
 				outputText("and begin stroking ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
 
 				outputText("Omnibus squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");

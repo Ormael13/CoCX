@@ -332,7 +332,7 @@ private function pierceMenu():void {
 		clit = clitPierce;
 	}
 	var dick:Function = null;
-	if(player.totalCocks() > 0)
+	if(player.cockTotal() > 0)
 	{
 		if(player.cocks[0].pierced == 0)
 			dick = dickPierce;
@@ -374,7 +374,7 @@ private function pierceMenu():void {
 private function dickPierce():void {
 	spriteSelect(63);
 	clearOutput();
-	if(player.totalCocks() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.");
+	if(player.cockTotal() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.");
 	else {
 		outputText("You realize you don't have a dick to pierce.  Whoops!  Better pick something else...");
 		doNext(pierceMenu);
@@ -863,7 +863,7 @@ private function piercingRemove():void {
 		if(player.vaginas[0].clitPierced > 0) clit = removeClitPierce;
 	}
 	var dick:Function = null;
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		if(player.cocks[0].pierced > 0) dick = removeCockPierce;
 	}
 	var ears:Function = null;
@@ -1557,7 +1557,7 @@ private function buyClothes(itype:ItemType):void {
 	clearOutput();
 	spriteSelect(61);
 	outputText("Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to ");
-	if(player.biggestCockArea() > 30 || player.totalCocks() > 1) outputText("fondle your bulging package");
+	if(player.biggestCockArea() > 30 || player.cockTotal() > 1) outputText("fondle your bulging package");
 	else if(player.hasVagina()) outputText("rub against your outer lips");
 	else outputText("slip a finger along your crotch");
 	outputText(" more than a few times.  You could swear you catch her licking her lips when she stands up, but she quickly turns away, saying, \"<i>I've got one in the back that should fit perfectly!  Be right with you!</i>\"\n\n");

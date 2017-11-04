@@ -207,7 +207,7 @@ public class GnollSpearThrowerScene extends BaseContent
 				outputText("\n\n");
 			}
 			//Three or More Cocks>
-			if (player.totalCocks() > 2) {
+			if (player.cockTotal() > 2) {
 				outputText("Even as the most incredible sensations flow through you from the feel of her muzzle, a spotted hand leaves one pendulous breast to wrap around your unattended " + cockDescript(y) + ".  Soon, her second hand slides along ");
 				if (player.cockTotal() == 3) outputText("your other ");
 				else outputText("another ");
@@ -232,7 +232,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			else {
 				outputText("Orgasm crashes through your body and mind as time loses its meaning.  The gnolls's cheeks sink in as she starts to suck as hard as she can, increasing the glorious pressure on your trapped member.  The powerful muscles of her muzzle ripple as she swallows, milking your " + cockDescript(x) + " as each spurt of your potent seed splashes across her tongue.");
 				//<Two Cocks> 
-				if (player.totalCocks() == 2) outputText("  Your " + cockDescript(y) + " throbs in her hand, spraying her face and throat with thick ropes of cum.");
+				if (player.cockTotal() == 2) outputText("  Your " + cockDescript(y) + " throbs in her hand, spraying her face and throat with thick ropes of cum.");
 				//<Three or More Cocks>
 				if (player.cockTotal() >= 3) outputText("  Your [cocks] throb in her paws, coating her muzzle, neck, and breasts with thick ropes of cum.");
 				outputText("  You feel your knees weaken as her muzzle works harder and faster, trying to drain you of every drop.  He paws wrap around your waist and powerful arms lift you and lay you on the ground as that talented muzzle continues to milk you dry.\n\n");
