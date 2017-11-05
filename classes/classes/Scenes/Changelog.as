@@ -35,8 +35,27 @@ package classes.Scenes
 			outputText("'leave me alon I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
 			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Kindra, Etna.\n");
 			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Etna (lvl 72)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Enemy monsters now would be able to make use of gathered wrath. Any monster when using base attack and having 100 or more wrath would use power attack version that would deal 2x more dmg. There will be no diff in text of attack aside enemy wrath dropping by 100. If some enemy would have perk Job: Warrior it will then use either 2x or 3x power attack using 50 or 100 wrath.\n");
+			outputText("-Any PC can now use in limited form Power Attack. Namely just like monsters PC that not have perk Job: Warrior will be still able to use 100 wrath to make 2x stronger melee attack.\n");
+			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
+			outputText("-New tier 4 misc lvl-up perk: Master Golem Maker. Req. Expert Golem Maker perk, 100+ int and 100+ wis. Effect: allow to make pernament golems using golem core and stones (those stones that PC using for constructing structures). Allows to store 1 pernament golem. Lower chance of shattering core after using temporal golem by another 4%\n");
+			outputText("-New tier 5 misc lvl-up perk: Golem Army Lieutenant. Req. Master Golem Maker perk, 110+ int and 110+ wis. Effect: allow to store 1 more pernament/temporal golem and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 6 misc lvl-up perk: Grand-Master Golem Maker. Req. Master Golem Maker perk, 125+ int and 125+ wis. Effect: allow to make pernament golems capable to attack flying enemies too and increase pernament golems atk power by 10% of base value but each pernament golem attack will now use a little bit of mana. PC can store additional pernament golem\n");
+			outputText("-New tier 7 misc lvl-up perk: Golem Army Captain. Req. Grand-Master Golem Maker perk, Golem Army Lieutenant perk, 135+ int and 135+ wis. Effect: allow to store 2 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 8 misc lvl-up perk: Epic Golem Maker. Req. Grand-Master Golem Maker perk, 150+ int and 150+ wis. Effect: increase pernament golems atk power by 20% of base value but increase a bit amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +10 (non scalable) to max Int and Wis\n");
+			outputText("-New tier 9 misc lvl-up perk: Golem Army Major. Req. Epic Golem Maker perk, Golem Army Captain perk, 160+ int and 160+ wis. Effect: allow to store 3 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 10 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker perk, 175+ int and 175+ wis. Effect: increase pernament golems atk power by 30% of base value but increase a bit amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +20 (non scalable) to max Int and Wis\n");
+			outputText("-New tier 11 misc lvl-up perk: Golem Army Colonel. Req. Legendary Golem Maker perk, Golem Army Lieutenant perk, 185+ int and 185+ wis. Effect: allow to store 4 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 12 misc lvl-up perk: Mythical Golem Maker. Req. Legendary Golem Maker perk, 200+ int and 200+ wis. Effect: increase pernament golems atk power by 40% of base value but increase a bit amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +30 (non scalable) to max Int and Wis\n");
+			outputText("-New tier 13 misc lvl-up perk: Golem Army General. Req. Mythical Golem Maker perk, Golem Army Colonel perk, 210+ int and 210+ wis. Effect: allow to store 5 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 13 strength lvl-up perk: Half-step-to Mythic Tranquilness. Req. Epic Tranquilness perk, 420+ str, 140+ tou and 140+ spe. Effect: Inrease max Wrath by 3500\n");
+			outputText("-New tier 13 toughness lvl-up perk: Half-step-to Mythic Endurance. Req. Epic Endurance perk, 420+ str and 280+ str. Effect: Inrease max Fatigue by 7000\n");
+			outputText("-New tier 13 intelligence lvl-up perk: Half-step-to Mythic Spirituality. Req. Epic Spirituality perk, 420+ int and 280+ wis. Effect: Inrease max Mana by 10500\n");
+			outputText("-New tier 13 libido lvl-up perk: Half-step-to Mythic Self-Control. Req. Epic Self-Control perk, 420+ lib and 280+ int. Effect: Inrease max Lust by 3500\n");
+			outputText("-New tier 14 strength lvl-up perk: Mythic Tranquilness. Req. Half-step-to Mythic Tranquilness perk, 450+ str, 150+ tou and 150+ spe. Effect: Inrease max Wrath by 5000\n");
+			outputText("-New tier 14 toughness lvl-up perk: Mythic Endurance. Req. Half-step-to Mythic Endurance perk, 450+ tou and 300+ str. Effect: Inrease max Fatigue by 10000\n");
+			outputText("-New tier 14 intelligence lvl-up perk: Mythic Spirituality. Req. Half-step-to Mythic Spirituality perk, 450+ int and 300+ wis. Effect: Inrease max Mana by 15000\n");
+			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -44,27 +63,16 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: \n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Mantis, Elf, Oni, Raiju, Bat, Vampire, 
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -88,20 +96,27 @@ package classes.Scenes
 			outputText("\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("<b>Version 0.8j:</b>\n\n");
-			outputText("\n");
-			outputText("\n");cel na 0.8h: dodać siren TF
-			outputText("\n");cel na 0.8h: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8h: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8h: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8h: dodać nekomanta TF
-			outputText("\n");cel na 0.8h: dodać kitsune/salamander TF
-			outputText("\n");cel na 0.8h: dodać kitsune/nekomanta TF
-			outputText("\n");cel na 0.8h: dodać yuki-onna TF
-			outputText("\n");cel na 0.8h: pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8h: dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");cel na 0.8(/9): dodać siren TF
+			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8(/9): dodać nekomanta TF
+			outputText("\n");cel na 0.8(/9): dodać kitsune/salamander TF
+			outputText("\n");cel na 0.8(/9): dodać kitsune/nekomanta TF
+			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
+			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -259,6 +259,8 @@
 			if (findPerk(PerkLib.InhumanSelfControl) >= 0) temp += 1000;
 			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) temp += 1500;
 			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 2250;
+			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) temp += 3500;
+			if (findPerk(PerkLib.MythicalSelfControl) >= 0) temp += 5000;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
@@ -289,6 +291,8 @@
 			if (findPerk(PerkLib.InhumanEndurance) >= 0) temp += 2000;
 			if (findPerk(PerkLib.HalfStepToEpicEndurance) >= 0) temp += 3000;
 			if (findPerk(PerkLib.EpicEndurance) >= 0) temp += 4500;
+			if (findPerk(PerkLib.HalfStepToMythicalEndurance) >= 0) temp += 7000;
+			if (findPerk(PerkLib.MythicalEndurance) >= 0) temp += 10000;
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
@@ -350,6 +354,8 @@
 			if (findPerk(PerkLib.InhumanTranquilness) >= 0) temp += 1000;
 			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) temp += 1500;
 			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
+			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) temp += 3500;
+			if (findPerk(PerkLib.MythicalTranquilness) >= 0) temp += 5000;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
@@ -383,6 +389,8 @@
 			if (findPerk(PerkLib.InhumanSpirituality) >= 0) temp += 3000;
 			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) temp += 4500;
 			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 6750;
+			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) temp += 10500;
+			if (findPerk(PerkLib.MythicalSpirituality) >= 0) temp += 15000;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {

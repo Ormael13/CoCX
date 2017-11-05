@@ -14,13 +14,13 @@ package classes
 	import classes.PerkType;
 	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
-import classes.StatusEffects.Combat.CombatInteBuff;
-import classes.StatusEffects.Combat.CombatSpeBuff;
-import classes.StatusEffects.Combat.CombatStrBuff;
-import classes.StatusEffects.Combat.CombatTouBuff;
-import classes.StatusEffects.Combat.CombatWisBuff;
-import classes.StatusEffects.TemporaryBuff;
-import classes.internals.Utils;
+	import classes.StatusEffects.Combat.CombatInteBuff;
+	import classes.StatusEffects.Combat.CombatSpeBuff;
+	import classes.StatusEffects.Combat.CombatStrBuff;
+	import classes.StatusEffects.Combat.CombatTouBuff;
+	import classes.StatusEffects.Combat.CombatWisBuff;
+	import classes.StatusEffects.TemporaryBuff;
+	import classes.internals.Utils;
 	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
@@ -322,6 +322,8 @@ import classes.internals.Utils;
 			if (findPerk(PerkLib.InhumanSelfControl) >= 0) max += 1000;
 			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) max += 1500;
 			if (findPerk(PerkLib.EpicSelfControl) >= 0) max += 2250;
+			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) max += 3500;
+			if (findPerk(PerkLib.MythicalSelfControl) >= 0) max += 5000;
 			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -358,7 +360,7 @@ import classes.internals.Utils;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(15999,max);
+			return Math.min(24499,max);
 		}
 		public function maxFatigue():Number {
 			return 100;

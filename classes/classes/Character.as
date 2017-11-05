@@ -645,6 +645,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.InhumanEndurance) >= 0) max += 2000;
 			if (findPerk(PerkLib.HalfStepToEpicEndurance) >= 0) max += 3000;
 			if (findPerk(PerkLib.EpicEndurance) >= 0) max += 4500;
+			if (findPerk(PerkLib.HalfStepToMythicalEndurance) >= 0) max += 7000;
+			if (findPerk(PerkLib.MythicalEndurance) >= 0) max += 10000;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
@@ -658,7 +660,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 40999) max = 40999;
+			if (max > 74999) max = 74999;
 			return max;
 		}
 		
@@ -770,7 +772,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.UnlockMind2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
 			max = Math.round(max);
-			if (max > 79999) max = 79999;
+			if (max > 81999) max = 81999;
 			return max;
 		}
 		
@@ -803,6 +805,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.InhumanTranquilness) >= 0) max += 1000;
 			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) max += 1500;
 			if (findPerk(PerkLib.EpicTranquilness) >= 0) max += 2250;
+			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) max += 4000;
+			if (findPerk(PerkLib.MythicalTranquilness) >= 0) max += 7000;
 			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
@@ -819,7 +823,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 8799) max = 8799;//obecnie max to 8720
+			if (max > 20599) max = 20599;//obecnie max to 20520
 			return max;
 		}
 		
@@ -875,6 +879,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 3000;
 			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 4500;
 			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 6750;
+			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) max += 10500;
+			if (findPerk(PerkLib.MythicalSpirituality) >= 0) max += 15000;
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
@@ -896,7 +902,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
 			max = Math.round(max);
-			if (max > 99999) max = 99999;
+			if (max > 149999) max = 149999;
 			return max;
 		}
 		

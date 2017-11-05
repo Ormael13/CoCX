@@ -22,6 +22,11 @@ package classes.Scenes.Camp
 			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
 			if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
 			if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.GolemArmyLieutenant) >= 0) maxTemporalGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.GolemArmyCaptain) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.GolemArmyMajor) >= 0) maxTemporalGolemsBagSizeCounter += 3;
+			if (player.findPerk(PerkLib.GolemArmyColonel) >= 0) maxTemporalGolemsBagSizeCounter += 4;
+			if (player.findPerk(PerkLib.GolemArmyGeneral) >= 0) maxTemporalGolemsBagSizeCounter += 5;
 			if (player.findPerk(PerkLib.BiggerGolemBag1) >= 0) maxTemporalGolemsBagSizeCounter += 2;
 			if (player.findPerk(PerkLib.BiggerGolemBag2) >= 0) maxTemporalGolemsBagSizeCounter += 2;
 			if (player.findPerk(PerkLib.BiggerGolemBag3) >= 0) maxTemporalGolemsBagSizeCounter += 2;
@@ -32,6 +37,24 @@ package classes.Scenes.Camp
 		}
 		public function maxPernamentGolemsBagSize():Number {
 			var maxPernamentGolemsBagSizeCounter:Number = 0;
+			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.GolemArmyLieutenant) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			if (player.findPerk(PerkLib.GolemArmyCaptain) >= 0) maxPernamentGolemsBagSizeCounter += 2;
+			if (player.findPerk(PerkLib.GolemArmyMajor) >= 0) maxPernamentGolemsBagSizeCounter += 3;
+			if (player.findPerk(PerkLib.GolemArmyColonel) >= 0) maxPernamentGolemsBagSizeCounter += 4;
+			if (player.findPerk(PerkLib.GolemArmyGeneral) >= 0) maxPernamentGolemsBagSizeCounter += 5;
+			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) {
+				if (player.findPerk(PerkLib.BiggerGolemBag1) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+				if (player.findPerk(PerkLib.BiggerGolemBag2) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+				if (player.findPerk(PerkLib.BiggerGolemBag3) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+				if (player.findPerk(PerkLib.BiggerGolemBag4) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+				if (player.findPerk(PerkLib.BiggerGolemBag5) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+				if (player.findPerk(PerkLib.BiggerGolemBag6) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+			}
 			return maxPernamentGolemsBagSizeCounter;
 		}
 		public function maxReusableGolemCoresBagSize():Number {
@@ -49,16 +72,25 @@ package classes.Scenes.Camp
 			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) tempGolemCost += 20;
 			return tempGolemCost;
 		}
+		public function pernamentGolemMakingCost():Number {
+			var permGolemCost:Number = 100;
+			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) permGolemCost += 50;
+			if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permGolemCost += 50;
+			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) permGolemCost += 50;
+			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) permGolemCost += 50;
+			return permGolemCost;
+		}
 		
 		public function accessMakeWinionsMainMenu():void {
 			clearOutput();
-			menu();
-			outputText("What helper would you like to make?\n");
+			outputText("What helper would you like to make?\n\n");
 			outputText("Stored golem cores for future reuse when making new golems: " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
 			if (player.findPerk(PerkLib.JobGolemancer) >= 0) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
-		//	if (player.findPerk(PerkLib.) >= 0) outputText("Pernament Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " golems\n");
-			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: " + temporalGolemMakingCost() + "")
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.")
+			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) outputText("Pernament Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentGolemsBagSize() + " golems\n");
+			menu();
+			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
+			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) addButton(1, "P.S.Golem", makePernamentStoneGolem).hint("Make simply stone golem.</b>\n\nCost: 1 Golem Core, 10 Stones, " + pernamentGolemMakingCost() + " Mana");
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -89,10 +121,42 @@ package classes.Scenes.Camp
 			doNext(accessMakeWinionsMainMenu);
 			cheatTime(1/4);
 		}
+		public function makePernamentStoneGolem():void {
+			clearOutput();
+			if (player.mana < pernamentGolemMakingCost()) {
+				outputText("Your mana is too low to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 1)) {
+				outputText("You lack golem core to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
+				outputText("You lack high quality stones to use as body for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] == maxPernamentGolemsBagSize()) {
+				outputText("You not having enough space to store another one.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
+			else player.destroyItems(useables.GOLCORE, 1);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
+			useMana(pernamentGolemMakingCost());
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the pile of high quality stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] < 1) flags[kFLAGS.PERNAMENT_GOLEMS_BAG] = 1;
+			else flags[kFLAGS.PERNAMENT_GOLEMS_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+		}
 		
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
-			outputText("In order to not overload your bad ofr reusable golem cores you took one of them.\n\n");
+			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}

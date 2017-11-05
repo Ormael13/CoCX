@@ -27,9 +27,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	//------------
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		if (player.hasPerk(PerkLib.JobWarrior)) {
-			buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
-		}
+		buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
 		if (player.hairType == 4) {
 			buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 		}
@@ -195,6 +193,23 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
 			}
 		}
+		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
+			bd = buttons.add("Send P.Gol/1", sendPernamentGolem1)
+			  .hint("Send one golem from your bag to attack enemy.");
+			if (monster.plural) {
+				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) {
+					bd = buttons.add("Send P.Gol/3", sendPernamentGolem3)
+					  .hint("Send three golem from your bag to attack enemy.");
+				}
+				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) {
+					bd = buttons.add("Send P.Gol/5", sendPernamentGolem5)
+					  .hint("Send five golem from your bag to attack enemy.");
+				}
+			}
+			if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
+				bd.disable("Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
+			}
+		}
 		if (player.shield != ShieldLib.NOTHING) {
 			bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 			bd.requireFatigue(physicalCost(20));
@@ -258,30 +273,34 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function powerAttackMenu():void {
 		menu();
-		addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special.");
-		if (player.level >= 6) {
-			addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special.");
-		} else addButtonDisabled(1, "???");
-		if (player.level >= 12) {
-			addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special.");
-		} else addButtonDisabled(2, "???");
-		if (player.level >= 18) {
-			addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special.");
-		} else addButtonDisabled(3, "???");
-		if (player.level >= 24) {
-			addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special.");
-		} else addButtonDisabled(4, "???");
-		if (player.level >= 30) {
-			addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special.");
-		} else addButtonDisabled(5, "???");
-		if (player.level >= 36) {
-			addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
-		} else addButtonDisabled(6, "???");
+		if (player.hasPerk(PerkLib.JobWarrior)) {
+			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special.");
+			if (player.level >= 6) {
+				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special.");
+			} else addButtonDisabled(1, "???");
+			if (player.level >= 12) {
+				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special.");
+			} else addButtonDisabled(2, "???");
+			if (player.level >= 18) {
+				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special.");
+			} else addButtonDisabled(3, "???");
+			if (player.level >= 24) {
+				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special.");
+			} else addButtonDisabled(4, "???");
+			if (player.level >= 30) {
+				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special.");
+			} else addButtonDisabled(5, "???");
+			if (player.level >= 36) {
+				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
+			} else addButtonDisabled(6, "???");
+		}
+		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 100,"You are too calm to use this special.");
 		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		player.wrath -= 50;
+		if (player.hasPerk(PerkLib.JobWarrior)) player.wrath -= 50;
+		else player.wrath -= 100;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();
@@ -1028,6 +1047,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 4;
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
@@ -1037,6 +1057,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else overloadedGolemCoresBag = true;
 		}
 		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		damage += 300 + rand(121);
 		if (player.hasPerk(PerkLib.ChargedCore)) {
 			if (player.hasPerk(PerkLib.SuperChargedCore)) {
@@ -1048,6 +1069,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= 1.2;
 			}
 		}
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
@@ -1064,6 +1091,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 4;
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
@@ -1080,6 +1108,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		damage += 300 + rand(121);
 		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 3;
 		if (player.hasPerk(PerkLib.ChargedCore)) {
@@ -1092,6 +1121,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= 4;
 			}
 		}
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
@@ -1109,6 +1144,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 5;
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 4;
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
@@ -1125,6 +1161,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		damage += 300 + rand(121);
 		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 5;
 		if (player.hasPerk(PerkLib.ChargedCore)) {
@@ -1137,6 +1174,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= 7.5;
 			}
 		}
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
@@ -1144,6 +1187,103 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag == true) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag == true) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		enemyAI();
+	}
+	
+	private function pernamentgolemsendcost():Number {
+		var pernamentgolemsendcost:Number = 10;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) pernamentgolemsendcost += 10;
+		if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) pernamentgolemsendcost += 10;
+		if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) pernamentgolemsendcost += 10;
+		return pernamentgolemsendcost;
+	}
+	public function sendPernamentGolem1():void {
+		clearOutput();
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
+			if (player.mana < pernamentgolemsendcost()) {
+				outputText("Your mana is too low to make your golem attack.");
+				menu();
+				addButton(0, "Next", combatMenu, false);
+				return;
+			}
+			else useMana(pernamentgolemsendcost());
+		}
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		damage += 500 + rand(201);
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.3;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) dmgamp += 0.4;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		enemyAI();
+	}
+	public function sendPernamentGolem3():void {
+		clearOutput();
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
+			if (player.mana < pernamentgolemsendcost() * 3) {
+				outputText("Your mana is too low to make your golems attack.");
+				menu();
+				addButton(0, "Next", combatMenu, false);
+				return;
+			}
+			else useMana(pernamentgolemsendcost() * 3);
+		}
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		damage += 500 + rand(201);
+		damage *= 5;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.3;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) dmgamp += 0.4;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		enemyAI();
+	}
+	public function sendPernamentGolem5():void {
+		clearOutput();
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
+			if (player.mana < pernamentgolemsendcost() * 5) {
+				outputText("Your mana is too low to make your golems attack.");
+				menu();
+				addButton(0, "Next", combatMenu, false);
+				return;
+			}
+			else useMana(pernamentgolemsendcost() * 5);
+		}
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		damage += 500 + rand(201);
+		damage *= 10;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.3;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) dmgamp += 0.4;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		enemyAI();//make it not loose turn instead or with some additional perk do this?
 	}
 
 	public function AlraunePollen():void {

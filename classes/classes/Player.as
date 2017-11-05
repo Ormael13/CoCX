@@ -5408,6 +5408,18 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.EpicGolemMaker) >= 0) {
+				maxInt += 10;
+				maxWis += 10;
+			}
+			if (findPerk(PerkLib.LegendaryGolemMaker) >= 0) {
+				maxInt += 20;
+				maxWis += 20;
+			}
+			if (findPerk(PerkLib.MythicalGolemMaker) >= 0) {
+				maxInt += 30;
+				maxWis += 30;
+			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");

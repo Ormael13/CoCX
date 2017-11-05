@@ -4581,8 +4581,8 @@ public function maximumRegeneration():Number {
 
 public function nonPercentBasedRegeneration():Number {
 	var maxNonPercentRegen:Number = 0;
-	if (player.findPerk(PerkLib.Lifeline) >= 0) maxNonPercentRegen += 50;
-	if (player.findPerk(PerkLib.Lifeline) >= 0 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50;
+	if (player.findPerk(PerkLib.Lifeline) >= 0) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	if (player.findPerk(PerkLib.Lifeline) >= 0 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
 	return maxNonPercentRegen;
 }
 
