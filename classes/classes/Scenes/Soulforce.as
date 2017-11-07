@@ -703,6 +703,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
 			addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(13, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function MaterialMenu():void {
@@ -1201,6 +1202,18 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddGreyBook():void {
 			outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
 			inventory.takeItem(consumables.G__BOOK, NonEquipmentMenu);
+		}
+		public function AddThePearls():void {
+			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");
+			inventory.takeItem(consumables.E3PEARL, AddThePearls1);
+		}
+		public function AddThePearls1():void {
+			outputText("\n\n");
+			inventory.takeItem(consumables.E_PEARL, AddThePearls2);
+		}
+		public function AddThePearls2():void {
+			outputText("\n\n");
+			inventory.takeItem(consumables.E7PEARL, NonEquipmentMenu);
 		}
 		public function AddWood():void {
 			outputText("\n\n<b>(Gained 100 Wood!)</b>");

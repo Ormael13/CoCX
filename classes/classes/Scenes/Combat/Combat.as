@@ -399,6 +399,10 @@ public function canUseMagic():Boolean {
 public function combatMenu(newRound:Boolean = true):void { //If returning from a sub menu set newRound to false
 	clearOutput();
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
+	if (newRound) {
+		flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
+		flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
+	}
 	mainView.hideMenuButton(MainView.MENU_DATA);
 	mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 	mainView.hideMenuButton(MainView.MENU_PERKS);
@@ -462,6 +466,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			buttons.add("Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions,"You can adjust your elemental summons behaviour during combat.");
+		}
+		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
+			buttons.add("P.Golems",kGAMECLASS.perkMenu.golemsbehaviourOptions,"You can adjust your pernament golems behaviour during combat.");
 		}
 		if (CoC_Settings.debugBuild && !debug) {
 			buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
@@ -707,6 +714,46 @@ public function basemeleeattacks():void {
 	attack();
 }
 
+public function baseelementalattacksAir():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 1;
+	baseelementalattacks();
+}
+public function baseelementalattacksEarth():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 2;
+	baseelementalattacks();
+}
+public function baseelementalattacksFire():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 3;
+	baseelementalattacks();
+}
+public function baseelementalattacksWater():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 4;
+	baseelementalattacks();
+}
+public function baseelementalattacksIce():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 5;
+	baseelementalattacks();
+}
+public function baseelementalattacksLightning():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 6;
+	baseelementalattacks();
+}
+public function baseelementalattacksDarkness():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 7;
+	baseelementalattacks();
+}
+public function baseelementalattacksWood():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 8;
+	baseelementalattacks();
+}
+public function baseelementalattacksMetal():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 9;
+	baseelementalattacks();
+}
+public function baseelementalattacksEther():void {
+	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 10;
+	baseelementalattacks();
+}
 public function baseelementalattacks():void {
 	clearOutput();
 	var manacostofelementalattacking:Number = 1;
@@ -892,7 +939,12 @@ public function elementalattacks():void {
 		fatigueRecovery();
 		manaregeneration();
 		soulforceregeneration();
-		enemyAI();
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
 	}
 	else {
 		if(monster.HP <= 0) doNext(endHpVictory);

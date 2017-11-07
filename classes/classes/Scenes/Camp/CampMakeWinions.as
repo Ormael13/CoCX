@@ -329,8 +329,8 @@ package classes.Scenes.Camp
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
 				if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(5, "Wood", summonElementalWood);
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(6, "Metal", summonElementalMetal);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
 				}
 				if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);

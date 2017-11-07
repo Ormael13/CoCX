@@ -772,7 +772,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.UnlockMind2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
 			max = Math.round(max);
-			if (max > 81999) max = 81999;
+			if (max > 139999) max = 139999;
 			return max;
 		}
 		
@@ -902,7 +902,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 12;
 			max = Math.round(max);
-			if (max > 149999) max = 149999;
+			if (max > 184999) max = 184999;
 			return max;
 		}
 		

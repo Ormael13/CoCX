@@ -3292,13 +3292,24 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
+		if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) >= 0) {
+			player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
+			player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		}
 		clearOutput();
-		outputText("Text.");
+		outputText("Switching one perk...if needed.");
 		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);

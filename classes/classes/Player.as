@@ -5361,20 +5361,20 @@ use namespace kGAMECLASS;
 				maxWis += (30 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				//if (findPerk(PerkLib.) < 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) {
 					maxStr -= (30 * newGamePlusMod);
 					maxTou -= (30 * newGamePlusMod);
 					maxSpe -= (30 * newGamePlusMod);
-				//}
+				}
 				maxInt += (40 * newGamePlusMod);
 				maxWis += (60 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
-				//if (findPerk(PerkLib.) < 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) {
 					maxStr -= (45 * newGamePlusMod);
 					maxTou -= (45 * newGamePlusMod);
 					maxSpe -= (45 * newGamePlusMod);
-				//}
+				}
 				maxInt += (60 * newGamePlusMod);
 				maxWis += (90 * newGamePlusMod);
 			}

@@ -1077,9 +1077,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
 		if (shatter == true) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag == true) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
 		enemyAI();
 	}
 	public function sendTemporalGolem3():void {
@@ -1129,10 +1130,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
 		if (shatter == true) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag == true) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag == true) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
 		enemyAI();
 	}
 	public function sendTemporalGolem5():void {
@@ -1182,10 +1184,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
 		if (shatter == true) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag == true) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag == true) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
 		enemyAI();
 	}
 	
@@ -1222,8 +1225,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing " + damage + " damage.");
-		enemyAI();
+		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
 	}
 	public function sendPernamentGolem3():void {
 		clearOutput();
@@ -1252,8 +1260,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
-		enemyAI();
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
 	}
 	public function sendPernamentGolem5():void {
 		clearOutput();
@@ -1282,8 +1295,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing " + damage + " damage.");
-		enemyAI();//make it not loose turn instead or with some additional perk do this?
+		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
 	}
 
 	public function AlraunePollen():void {

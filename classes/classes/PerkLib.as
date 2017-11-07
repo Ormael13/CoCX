@@ -618,6 +618,12 @@ package classes
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
+		public static const FirstAttackElementals:PerkType = mk("First Attack: Elementals", "First Attack: Elementals",
+				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon.",
+				"You choose the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
+		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
+				"Before your actions one or more of your golems will attack.",
+				"You choose the 'First Attack: Golems' perk, allowing some of your pernament golems strike before you.");
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating.",
 				"You choose the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body.");
@@ -2843,11 +2849,7 @@ package classes
 		ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
 							  .requireWis(35);
 		//Tier 1 Wisdom perks
-		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
-								   .requireWis(40)
-								   .requireLevel(6);
-		ElementalContractRank2.requirePerk(ElementalConjurerDedication)
-							  .requirePerk(ElementalContractRank1)
+		ElementalContractRank2.requirePerk(ElementalContractRank1)
 							  .requireWis(50)
 							  .requireLevel(6);
 		ElementalBondFlesh.requirePerk(ElementalContractRank1)
@@ -2873,14 +2875,18 @@ package classes
 						   .requireWis(75)
 						   .requireLevel(12);
 		//Tier 3 Wisdom perks
-		ElementalContractRank4.requirePerk(ElementalContractRank3)
+		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+								   .requireWis(85)
+								   .requireLevel(18);
+		ElementalContractRank4.requirePerk(ElementalConjurerDedication)
+							  .requirePerk(ElementalContractRank3)
 							  .requireWis(100)
 							  .requireLevel(18);
 		CatchTheBlade.requirePerk(JobMonk)
 					 .requireWis(80)
 					 .requireSpe(100)
 					 .requireLevel(18);
-		//
+		
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)
@@ -2892,6 +2898,9 @@ package classes
 		StrongerElementalBond.requirePerk(StrongElementalBond)
 							 .requirePerk(ElementalContractRank5)
 							 .requireWis(125)
+							 .requireLevel(24);
+		FirstAttackElementals.requirePerk(StrongElementalBond)
+							 .requirePerk(ElementalContractRank4)
 							 .requireLevel(24);
 		//Tier 5 Wisdom perks
 		UnlockMind2ndStage.requirePerk(UnlockMind)
@@ -2923,6 +2932,7 @@ package classes
 							  .requireLevel(42);
 		//Tier 8 Wisdom perks
 		//Tier 9 Wisdom perks
+		//Tier 10 Wisdom perks
 		//------------
 		// LIBIDO
 		//------------
@@ -3548,6 +3558,8 @@ package classes
 						  .requireTou(80)
 						  .requireSpe(80)
 						  .requireLevel(24);
+		FirstAttackGolems.requireLevel(24)
+						 .requirePerk(MasterGolemMaker);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
