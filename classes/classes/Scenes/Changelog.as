@@ -24,7 +24,7 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8h:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Cow, Minotaur, Devil\n");
+			outputText("-Added in current version race effects to Metamorph perk: Cow, Minotaur, Devil, Mantis, Elf\n");
 			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can get item and loose chance to get new npc or became pregnant with unicorn-taur: Celess\n");
 			outputText("-Pregnancy last 30 days and at PC current corruption at the birth momrnt will decide if Celess would be pure or corrupted. She would alo need to be named even if player decide to name her Celess.\n");
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
@@ -85,7 +85,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Mantis, Elf, Oni, Raiju, Bat, Vampire, 
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Oni, Raiju, Bat, Vampire, 
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

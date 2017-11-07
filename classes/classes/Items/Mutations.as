@@ -10726,7 +10726,7 @@
 			if (changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (player.antennae == ANTENNAE_NONE || player.antennae == ANTENNAE_BEE) && player.horns == 0 && rand(3) == 0) {
 				if (player.antennae == ANTENNAE_BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
 				else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
-				player.antennae = ANTENNAE_MANTIS;
+				setAntennae(ANTENNAE_MANTIS);
 				changes++;
 			}
 			//Horns

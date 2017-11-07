@@ -328,6 +328,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 		public static const UnlockedTattoed:StatusEffectType			 = mk("Unlocked Tattoed");
+		public static const UnlockedBattleTattoed:StatusEffectType		 = mk("Unlocked Battle Tattoed");
 		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");
 		
 		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");
@@ -430,6 +431,24 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedDevilArms:StatusEffectType			 = mk("Unlocked Devil Arms");
 		public static const UnlockedDevilFangs:StatusEffectType			 = mk("Unlocked Devil Fangs");
 		public static const UnlockedDevilEyes:StatusEffectType			 = mk("Unlocked Devil Eyes");
+		public static const UnlockedMantisAntennae:StatusEffectType		 = mk("Unlocked Mantis Antennae");
+		public static const UnlockedMantisLegs:StatusEffectType			 = mk("Unlocked Mantis Legs");
+		public static const UnlockedMantisArms:StatusEffectType			 = mk("Unlocked Mantis Arms");
+		public static const UnlockedMantisTail:StatusEffectType			 = mk("Unlocked Mantis Tail");
+		public static const UnlockedMantisWingsSmall:StatusEffectType	 = mk("Unlocked Mantis Wings Small");
+		public static const UnlockedMantisWingsLarge:StatusEffectType	 = mk("Unlocked Mantis Wings Large");
+		public static const UnlockedElfLegs:StatusEffectType			 = mk("Unlocked Elf Legs");
+		public static const UnlockedElfArms:StatusEffectType			 = mk("Unlocked Elf Arms");
+		public static const UnlockedElfEars:StatusEffectType			 = mk("Unlocked Elf Ears");
+		public static const UnlockedElfEyes:StatusEffectType			 = mk("Unlocked Elf Eyes");
+		public static const UnlockedElfHair:StatusEffectType			 = mk("Unlocked Elf Hair");
+		public static const UnlockedElfTongue:StatusEffectType			 = mk("Unlocked Elf Tongue");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");

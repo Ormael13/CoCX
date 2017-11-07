@@ -275,6 +275,7 @@ package classes.Items {
 	}
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
 		[ANTENNAE_BEE, StatusEffects.UnlockedBeeAntennae],
+		[ANTENNAE_MANTIS, StatusEffects.UnlockedMantisAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
 		return setBodyPartType("armType", METAMORPH_ARMS, armType);
@@ -283,7 +284,7 @@ package classes.Items {
 		[ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
 		[ARM_TYPE_DRAGON, StatusEffects.UnlockedDraconicArms],
 		[ARM_TYPE_DEVIL, StatusEffects.UnlockedDevilArms],
-		[ARM_TYPE_ELF, null],
+		[ARM_TYPE_ELF, StatusEffects.UnlockedElfArms],
 		[ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[ARM_TYPE_GARGOYLE, null],
 		[ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
@@ -291,7 +292,7 @@ package classes.Items {
 		[ARM_TYPE_KITSUNE, StatusEffects.UnlockedKitsuneArms],
 		[ARM_TYPE_LION, null],
 		[ARM_TYPE_LIZARD, StatusEffects.UnlockedLizardArms],
-		[ARM_TYPE_MANTIS, null],
+		[ARM_TYPE_MANTIS, StatusEffects.UnlockedMantisArms],
 		[ARM_TYPE_ONI, null],
 		[ARM_TYPE_ORCA, StatusEffects.UnlockedOrcaArms],
 		[ARM_TYPE_PHOENIX, StatusEffects.UnlockedPhoenixArms],
@@ -317,7 +318,7 @@ package classes.Items {
 		[EARS_DRAGON, StatusEffects.UnlockedDraconicEars],
 		[EARS_ECHIDNA, null],
 		[EARS_ELFIN, StatusEffects.UnlockedElfinEars],
-		[EARS_ELVEN, null],
+		[EARS_ELVEN, StatusEffects.UnlockedElfEars],
 		[EARS_FERRET, null],
 		[EARS_FOX, StatusEffects.UnlockedFoxEars],
 		[EARS_GOAT, StatusEffects.UnlockedGoatEars],
@@ -350,7 +351,7 @@ package classes.Items {
 		[EYES_CAT_SLITS, null],
 		[EYES_DRAGON, StatusEffects.UnlockedDraconicEyes],
 		[EYES_DEVIL, StatusEffects.UnlockedDevilEyes],
-		[EYES_ELF, null],
+		[EYES_ELF, StatusEffects.UnlockedElfEyes],
 		[EYES_FENRIR, null],
 		[EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
 		[EYES_FOX, StatusEffects.UnlockedFoxEyes],
@@ -427,7 +428,7 @@ package classes.Items {
 		[HAIR_LEAF, null],
 		[HAIR_NORMAL, null],
 		[HAIR_QUILL, null],
-		[HAIR_SILKEN, null],
+		[HAIR_SILKEN, StatusEffects.UnlockedElfHair],
 		[HAIR_STORM, null],
 	]);
 
@@ -474,7 +475,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_DRAGON, StatusEffects.UnlockedDraconicLegs],
 		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusEffects.UnlockedDriderLegs],
 		[LOWER_BODY_TYPE_ECHIDNA, null],
-		[LOWER_BODY_TYPE_ELF, null],
+		[LOWER_BODY_TYPE_ELF, StatusEffects.UnlockedElfLegs],
 		[LOWER_BODY_TYPE_FERRET, null],
 		[LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
 		[LOWER_BODY_TYPE_GARGOYLE, null],
@@ -485,7 +486,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_KANGAROO, null],
 		[LOWER_BODY_TYPE_LION, null],
 		[LOWER_BODY_TYPE_LIZARD, StatusEffects.UnlockedLizardLegs],
-		[LOWER_BODY_TYPE_MANTIS, null],
+		[LOWER_BODY_TYPE_MANTIS, StatusEffects.UnlockedMantisLegs],
 		[LOWER_BODY_TYPE_NAGA, StatusEffects.UnlockedSnakeLowerBody],
 		[LOWER_BODY_TYPE_ONI, null],
 		[LOWER_BODY_TYPE_ORCA, StatusEffects.UnlockedOrcaLegs],
@@ -529,7 +530,7 @@ package classes.Items {
 		[TONGUE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
 		[TONGUE_ECHIDNA, [null, "Echidna Tongue"]],
 		[TONGUE_HUMAN, [null, "Human Tongue"]],
-		[TONGUE_ELF, [null, "Elf Tongue"]],
+		[TONGUE_ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
 		[TONGUE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 
@@ -568,7 +569,7 @@ package classes.Items {
 		[TAIL_TYPE_KITSHOO, null],
 		[TAIL_TYPE_LIZARD, StatusEffects.UnlockedLizardTail],
 		[TAIL_TYPE_MANTICORE_PUSSYTAIL, null],
-		[TAIL_TYPE_MANTIS_ABDOMEN, null],
+		[TAIL_TYPE_MANTIS_ABDOMEN, StatusEffects.UnlockedMantisTail],
 		[TAIL_TYPE_MOUSE, null],
 		[TAIL_TYPE_NONE, null],
 		[TAIL_TYPE_ORCA, StatusEffects.UnlockedOrcaTail],
@@ -616,9 +617,9 @@ package classes.Items {
 		[WING_TYPE_IMP, null],
 		[WING_TYPE_MANTICORE_LIKE_LARGE, null],
 		[WING_TYPE_MANTICORE_LIKE_SMALL, null],
-		[WING_TYPE_MANTIS_LIKE_LARGE, null],
+		[WING_TYPE_MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
 		[WING_TYPE_MANTIS_LIKE_LARGE_2, null],
-		[WING_TYPE_MANTIS_LIKE_SMALL, null],
+		[WING_TYPE_MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
 		[WING_TYPE_NONE, null],
 		[WING_TYPE_PLANT, null],
 		[WING_TYPE_SHARK_FIN, null],
