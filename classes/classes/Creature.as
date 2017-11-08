@@ -571,8 +571,8 @@ import classes.internals.Utils;
 		 * @return -1 if hasCoat(), skin.coat.type otherwise
 		 */
 		public function coatType():int { return skin.coatType(); }
-		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType(types); }
-		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType(types); }
+		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType.apply(skin,types); }
+		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType.apply(skin,types); }
 	//	[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");

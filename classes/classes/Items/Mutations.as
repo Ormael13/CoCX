@@ -5169,7 +5169,7 @@
 				changes++;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.hasFullCoatOfType(SKIN_TYPE_SCALES) && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasFullCoatOfType(SKIN_TYPE_SCALES) && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				var color:String;
 				if (rand(10) == 0) {
 					color = randomChoice("purple","silver");
