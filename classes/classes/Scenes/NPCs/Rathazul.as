@@ -161,17 +161,23 @@ public function campRathazul():void {
 
 }
 
+private function get philters():Boolean {
+	return player.gems >= 100;
+}
+private function get reductos():Boolean {
+	return player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4;
+}
+private function get dyes():Boolean {
+	return player.gems >= 50;
+}
 private function rathazulWorkOffer():Boolean {
 	spriteSelect(49);
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
 	var showArmorMenu:Boolean = false;
 	var purify:Boolean = false;
-	var philters:Boolean = false;
 	var debimbo:Boolean = false;
-	var reductos:Boolean = false;
 	var lethiciteDefense:Function = null;
-	var dyes:Boolean = false;
 	if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 10) {
 		collectRathazulArmor();
 		return true;
@@ -270,18 +276,16 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers += pCounter;
 	}
 	//Offer dyes if offering something else.
-	if(player.gems >= 50) {
+	if(dyes) {
 		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  ");
 		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
 		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
-		dyes = true;
 		spoken = true;
 		totalOffers++;
 	}
 	//Offer purity philter and numbing oil.
-	if (player.gems >= 100) {
+	if (philters) {
 		outputText("Rathazul offers, \"<i>I can make something for you. Something to counter the corruption of this realm and if you're feeling too sensitive, I have these oils. I'll need 100 gems up-front.</i>\"");
-		philters = true;
 		spoken = true;
 		totalOffers++;
 	}
@@ -294,14 +298,13 @@ private function rathazulWorkOffer():Boolean {
 		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or two vials of Bee Honey, two vials of Snake Oil and 100 gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
 	}
 	//Reducto
-	if(player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
+	if(reductos) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
 		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50");
 		else outputText("100");
 		outputText(" gems for each jar of ointment you want. And if you're, ah, not feeling big enough, I've also developed a liquid that you inject. The materials are expensive too so it's the same price for each needle.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
-		reductos = true;
 	}
 
 	
@@ -348,7 +351,7 @@ private function rathazulWorkOffer():Boolean {
 		if (showArmorMenu) addButton(0, "Armor&Weap", rathazulArmorMenu).hint("Ask Rathazul to make an armour or weapon for you.");
 		//Shop sub-menu
 		if (dyes || philters || reductos)
-			addButton(1, "Shop", rathazulShopMenu, dyes, philters, reductos, "Check Rathazul's wares.");
+			addButton(1, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
 		else
 			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
 		addButton(4, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
@@ -1138,7 +1141,7 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 //------------
 // SHOP
 //------------
-private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false, reductos:Boolean = false):void {
+private function rathazulShopMenu():void {
 	menu();
 	//Dyes
 	if (dyes) {
