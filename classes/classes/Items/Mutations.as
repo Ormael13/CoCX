@@ -441,7 +441,6 @@
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -5148,7 +5147,7 @@
 				changes++;
 			}
 			//Arms
-			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_LIZARD) && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+			if (!InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_LIZARD) && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
 				setArmType(ARM_TYPE_LIZARD);
 				changes++;
@@ -5180,7 +5179,7 @@
 				changes++;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.hasFullCoatOfType(SKIN_TYPE_SCALES) && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasFullCoatOfType(SKIN_TYPE_SCALES) && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				var color:String;
 				if (rand(10) == 0) {
 					color = randomChoice("purple","silver");
@@ -5699,7 +5698,7 @@
 				changes++;
 			}
 			//Arms
-			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_PHOENIX) && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && rand(4) == 0) {
+			if (!InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_PHOENIX) && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the crimson colored avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
 				changes++;
 				setArmType(ARM_TYPE_PHOENIX);
@@ -6892,7 +6891,7 @@
 				changes++;
 			}
 			//(Arms to carapace-covered arms)
-			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_SPIDER) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (!InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_SPIDER) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\n");
 				if (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_HUMAN) {
 					//(Bird pretext)
@@ -7284,7 +7283,6 @@
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -7297,7 +7295,7 @@
 					setLowerBody(LOWER_BODY_TYPE_ELF);
 				}
 				else humanizeLowerBody();
-				changes++;	
+				changes++;
 			}
 			if (player.lowerBody == LOWER_BODY_TYPE_ELF && player.armType != ARM_TYPE_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == ARM_TYPE_HUMAN) {
@@ -7305,7 +7303,7 @@
 					setArmType(ARM_TYPE_ELF);
 				}
 				else humanizeArms();
-				changes++;	
+				changes++;
 			}
 			if (player.armType == ARM_TYPE_ELF && player.earType != EARS_ELVEN && changes < changeLimit && rand(3) == 0) {
 				if (player.earType == EARS_HUMAN) {
@@ -7401,7 +7399,6 @@
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");
@@ -7419,7 +7416,7 @@
 					setLowerBody(LOWER_BODY_TYPE_RAIJU);
 				}
 				else humanizeLowerBody();
-				changes++;	
+				changes++;
 			}
 			if (player.lowerBody == LOWER_BODY_TYPE_RAIJU && player.armType != ARM_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == ARM_TYPE_HUMAN) {
@@ -7433,7 +7430,7 @@
 					setArmType(ARM_TYPE_RAIJU);
 				}
 				else humanizeArms();
-				changes++;	
+				changes++;
 			}
 			if (player.armType == ARM_TYPE_RAIJU && player.tailType != TAIL_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
@@ -7476,7 +7473,7 @@
 				setHairType(HAIR_STORM);
 				changes++;
 			}
-			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {//player.skin.base.type == SKIN_TYPE_PLAIN && 
+			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {//player.skin.base.type == SKIN_TYPE_PLAIN &&
 				outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
@@ -8352,7 +8349,7 @@
 			
 			switch(rand(12)) {
 			//[Fox Jewel]
-				case 0: 
+				case 0:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
 				inventory.takeItem(consumables.FOXJEWL, inventory.inventoryMenu);
@@ -8531,7 +8528,7 @@
 			else if (player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Futa Faculties - Your intelligence and speech patterns are no longer limited to that of a futanari bimbo.</b>)");
 				player.removePerk(PerkLib.FutaFaculties);
-			}			
+			}
 			else if (player.findPerk(PerkLib.BroBrains) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Bro Brains - Your intelligence gains are no longer hampered. You now gain intelligence at a normal pace.</b>)");
 				player.removePerk(PerkLib.BroBrains);
@@ -9740,7 +9737,7 @@
 			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG) {
 				if (player.tailType > 0) //If you have non-pig tail.
 					outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
-				else //If you don't have a tail. 
+				else //If you don't have a tail.
 					outputText("\n\nYou feel a tug at the base of your spine as it lengthens ever so slightly. Looking over your shoulder, <b>you find that you have sprouted a small, curly pig tail.</b>");
 				setTailType(TAIL_TYPE_PIG);
 				changes++;
@@ -9817,7 +9814,7 @@
 				setHornType(HORNS_ANTLERS, 4 + rand(12));
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
-			//[Show this description instead if the player already had horns when the transformation occurred.] 
+			//[Show this description instead if the player already had horns when the transformation occurred.]
 			else if(player.horns > 0 && player.hornType != HORNS_ANTLERS && player.hornType != HORNS_ORCHID && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
 				//[Player horn type changed to Antlers.]
@@ -10107,7 +10104,7 @@
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
 			}
-			//Change one prick to a vine-like tentacle cock. 
+			//Change one prick to a vine-like tentacle cock.
 			if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
 				if (player.tentacleCocks() < player.cockTotal()) {
 					if (player.cocks.length == 1) { //Single cawks
@@ -10240,7 +10237,7 @@
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-	/*	
+	/*
 		public function krakenInk(type:Number, player:Player):void
 		{
 			//'type' refers to the variety of ink.
@@ -10267,7 +10264,7 @@
 			
 			
 		}
-	*/	
+	*/
 		public function yetiCum(player:Player):void
 		{
 			player.slimeFeed();
@@ -10846,7 +10843,6 @@
 					outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 1;
 					outputText("\n");
