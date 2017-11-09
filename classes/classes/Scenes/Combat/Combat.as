@@ -757,8 +757,8 @@ public function baseelementalattacksEther():void {
 public function baseelementalattacks():void {
 	clearOutput();
 	var manacostofelementalattacking:Number = 1;
-	manacostofelementalattacking += player.inte / 25;
-	manacostofelementalattacking += player.wis / 25;
+	manacostofelementalattacking += player.inte / 10;
+	manacostofelementalattacking += player.wis / 10;
 	manacostofelementalattacking = Math.round(manacostofelementalattacking);
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
@@ -935,16 +935,18 @@ public function elementalattacks():void {
 	damageelemental = doDamage(damageelemental);
 	//checkMinionsAchievementDamage(damageelemental);
 	if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
-		wrathregeneration();
-		fatigueRecovery();
-		manaregeneration();
-		soulforceregeneration();
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		else enemyAI();
+		else {
+			wrathregeneration();
+			fatigueRecovery();
+			manaregeneration();
+			soulforceregeneration();
+			enemyAI();
+		}
 	}
 	else {
 		if(monster.HP <= 0) doNext(endHpVictory);

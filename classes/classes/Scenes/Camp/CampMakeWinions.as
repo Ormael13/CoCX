@@ -73,11 +73,11 @@ package classes.Scenes.Camp
 			return tempGolemCost;
 		}
 		public function pernamentGolemMakingCost():Number {
-			var permGolemCost:Number = 100;
-			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) permGolemCost += 50;
+			var permGolemCost:Number = 90;
+			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) permGolemCost += 10;
 			if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permGolemCost += 50;
-			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) permGolemCost += 50;
-			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) permGolemCost += 50;
+			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) permGolemCost += 150;
+			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) permGolemCost += 400;
 			return permGolemCost;
 		}
 		

@@ -580,7 +580,7 @@ package classes
 				"Increases maximum fatigue by 4500.",
 				"You choose the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!");
 		public static const EpicGolemMaker:PerkType = mk("Epic Golem Maker", "Epic Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make stronger golems and slightly rise your intelligence and wisdom.",
 				"You choose 'Epic Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
 				"Increases maximum lust by 2250.",
@@ -1001,7 +1001,7 @@ package classes
 				"Kitsune Thyroid Gland (Evolved) increase speed of the recovery after using magic, boost PC speed and wisdom. And make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).",
 				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Continued using of kitsune powers caused your thyroid gland to evolve.");
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make stronger than before golems and slightly rise your intelligence and wisdom.",
 				"You choose 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
 				"Increases self heling by 100 out of combat and by 50 in combat (using defend option will double it).",
@@ -1127,7 +1127,7 @@ package classes
 				"Increases maximum fatigue by 14000.",
 				"You choose the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 10000!");
 		public static const MythicalGolemMaker:PerkType = mk("Mythical Golem Maker", "Mythical Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly rise your intelligence and wisdom.",
 				"You choose 'Mythical Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const MythicalSelfControl:PerkType = mk("Mythical Self-Control", "Mythical Self-Control",
 				"Increases maximum lust by 7000.",
@@ -3560,6 +3560,8 @@ package classes
 						  .requireLevel(24);
 		FirstAttackGolems.requireLevel(24)
 						 .requirePerk(MasterGolemMaker);
+		//.requireLevel(24)
+		//				 .requirePerk(MasterGolemMaker);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {

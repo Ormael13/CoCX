@@ -19,7 +19,7 @@ package classes.Scenes.Monsters
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
 			{
-				outputText(" It chits you square in the chest. ");
+				outputText(" It hits you square in the chest. ");
 				damage = player.takeDamage(damage, true);
 			}
 		}
