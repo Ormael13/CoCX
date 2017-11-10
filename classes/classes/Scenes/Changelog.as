@@ -38,7 +38,8 @@ package classes.Scenes
 			outputText("-Enemy monsters now would be able to make use of gathered wrath. Any monster when using base attack and having 100 or more wrath would use power attack version that would deal 2x more dmg. There will be no diff in text of attack aside enemy wrath dropping by 100. If some enemy would have perk Job: Warrior it will then use either 2x or 3x power attack using 50 or 100 wrath.\n");
 			outputText("-Any PC can now use in limited form Power Attack. Namely just like monsters PC that not have perk Job: Warrior will be still able to use 100 wrath to make 2x stronger melee attack.\n");
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
-			outputText("-Elemental Conjurer Dedication perk was moved form tier 1 to tier 3. Perk Elemental Contract Rank 2 no longer req. this perk and it was moved as one of req. perks to perk Elemental Contract Rank 4.\n");
+			outputText("-Elemental Conjurer Dedication perk was moved from tier 1 to tier 4 increasing wisdom req. for it to 120. Perk Elemental Contract Rank 2 no longer req. this perk and it was moved as one of req. perks to perk Elemental Contract Rank 5. Elemental Conjurer Sacrifice perk was moved from tier 4 to tier 6 increasing wisdom req. for it to 220.");
+			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90.\n");
 			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: First Attack: Elementals. Req. Strong Elemental Bond and Elemental Contract Rank 4 perks. Effect: Opens new possible options for elementals help - attacking alongside PC instead of replacing his/her melee attack. They will also attack first and PC would be able to pick which of current summoned elementals will attack\n");
@@ -47,11 +48,14 @@ package classes.Scenes
 			outputText("-New tier 5 misc lvl-up perk: Golem Army Lieutenant. Req. Master Golem Maker perk, 110+ int and 110+ wis. Effect: allow to store 1 more pernament/temporal golem and increase by 10% of base value all golems atk power\n");
 			outputText("-New tier 6 misc lvl-up perk: Grand-Master Golem Maker. Req. Master Golem Maker perk, 125+ int and 125+ wis. Effect: allow to make pernament golems capable to attack flying enemies too and increase pernament golems atk power by 10% of base value but each pernament golem attack will now use a little bit of mana. PC can store additional pernament golem\n");
 			outputText("-New tier 7 misc lvl-up perk: Golem Army Captain. Req. Grand-Master Golem Maker perk, Golem Army Lieutenant perk, 135+ int and 135+ wis. Effect: allow to store 2 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 8 wisdom lvl-up perk: Elemental Contract Rank 9. Req. perk Elemental Contract Rank 8, perk Elemental Conjurer Sacrifice and 225+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 2nd elder rank\n");
 			outputText("-New tier 8 misc lvl-up perk: Epic Golem Maker. Req. Grand-Master Golem Maker perk, 150+ int and 150+ wis. Effect: increase pernament golems atk power by 25% of base value but increase a bit amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +10 (non scalable) to max Int and Wis\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Elemental Contract Rank 10. Req. perk Elemental Contract Rank 9 and 250+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 1st elder rank\n");
 			outputText("-New tier 9 misc lvl-up perk: Golem Army Major. Req. Epic Golem Maker perk, Golem Army Captain perk, 160+ int and 160+ wis. Effect: allow to store 3 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 10 wisdom lvl-up perk: Elemental Contract Rank 11. Req. perk Elemental Contract Rank 10 and 275+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to grand elder rank\n");
 			outputText("-New tier 10 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker perk, 175+ int and 175+ wis. Effect: increase pernament golems atk power by 65% of base value but increase amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +20 (non scalable) to max Int and Wis\n");
 			outputText("-New tier 11 misc lvl-up perk: Golem Army Colonel. Req. Legendary Golem Maker perk, Golem Army Lieutenant perk, 185+ int and 185+ wis. Effect: allow to store 4 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
-			outputText("-New tier 12 misc lvl-up perk: Mythical Golem Maker. Req. Legendary Golem Maker perk, 200+ int and 200+ wis. Effect: increase pernament golems atk power based on PC str/tou/spe stats but increase much more amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +30 (non scalable) to max Int and Wis\n");
+			outputText("-New tier 12 misc lvl-up perk: Mythical Golem Maker. Req. Legendary Golem Maker perk, 200+ int and 200+ wis. Effect: increase pernament golems atk power based on PC int/wis stats but increase much more amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +30 (non scalable) to max Int and Wis\n");
 			outputText("-New tier 13 misc lvl-up perk: Golem Army General. Req. Mythical Golem Maker perk, Golem Army Colonel perk, 210+ int and 210+ wis. Effect: allow to store 5 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
 			outputText("-New tier 13 strength lvl-up perk: Half-step-to Mythic Tranquilness. Req. Epic Tranquilness perk, 420+ str, 140+ tou and 140+ spe. Effect: Inrease max Wrath by 3500\n");
 			outputText("-New tier 13 toughness lvl-up perk: Half-step-to Mythic Endurance. Req. Epic Endurance perk, 420+ str and 280+ str. Effect: Inrease max Fatigue by 7000\n");
@@ -66,17 +70,20 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-Fixed bugs: \n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -86,6 +93,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Oni, Raiju, Bat, Vampire, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -125,6 +133,8 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -339,7 +349,7 @@ package classes.Scenes
 			outputText("-New tier 6 wisdom lvl-up perk: Strongest Elemental Bond. Req. Elemental Contract Rank 7, Stronger Elemental Bond perks and 175+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat\n");
 			outputText("-New tier 6 wisdom lvl-up perk: Elemental Conjurer Sacrifice. Req. Elemental Conjurer Dedication perk and 160+ wis. Effect: +90 max Wis, +60 max Int, -45 max Str/Tou/Spe (scalable), +30% of elementals attacks dmg\n");
 			outputText("-New tier 6 wisdom lvl-up perk: Elemental Contract Rank 7. Req. perk Elemental Contract Rank 6 and 175+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 7\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Elemental Contract Rank 8. Req. perk Elemental Contract Rank 7 and 200+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to elder rank\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Contract Rank 8. Req. perk Elemental Contract Rank 7 and 200+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 3rd elder rank\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Soul Art Master. Req. Job: Monk and Flesh Body: Apprentice Stage perks and 200+ in wis. Effect: +60 to max str and +20 to max tou (scalable with NG tiers), +10 to unarmed atk (scalable with NG tiers and req. 200+ wis to be added to unarmed atk value)\n");
 			outputText("-New tier 7 misc lvl-up perk: Cyclone (Stage 5). Req. Cyclone (Stage 4) perk and 160+ in str and tou. Effect: Increase crit chance for aoe specials like whirlwind by 25% and dmg multiplier for aoe specials like whirlwind by 150%\n");
 			outputText("-New tier 7 soulforce lvl-up perk: Flesh Body: Elder Stage. Req. Flesh Body: Warrior Stage perk. Effects: +4 armor, +8 unarmed, +100 max HP (all scalable and gained each time PC gets one of these perks: Soul Exalt, Soul Overlord, Soul Tyrant)\n");

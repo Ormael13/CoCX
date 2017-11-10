@@ -762,53 +762,53 @@ public function baseelementalattacks():void {
 	manacostofelementalattacking = Math.round(manacostofelementalattacking);
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6 && manacostofelementalattacking > 35 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 30;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 8 && manacostofelementalattacking > 95 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 90;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6 && manacostofelementalattacking > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manacostofelementalattacking -= 20;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 8 && manacostofelementalattacking > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manacostofelementalattacking -= 40;
 	}
 	if (player.mana < manacostofelementalattacking) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");

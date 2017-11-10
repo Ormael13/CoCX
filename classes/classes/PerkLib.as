@@ -562,8 +562,17 @@ package classes
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 7.",
 				"You choose 'Elemental Contract Rank 7' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank8:PerkType = mk("Elemental Contract Rank 8", "Elemental Contract Rank 8",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 3rd elder rank.",
 				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank9:PerkType = mk("Elemental Contract Rank 9", "Elemental Contract Rank 9",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 2nd elder rank.",
+				"You choose 'Elemental Contract Rank 9' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank10:PerkType = mk("Elemental Contract Rank 10", "Elemental Contract Rank 10",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 1st elder rank.",
+				"You choose 'Elemental Contract Rank 10' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank11:PerkType = mk("Elemental Contract Rank 11", "Elemental Contract Rank 11",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to grand elder rank.",
+				"You choose 'Elemental Contract Rank 11' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elements that aren't classified as one of four traditional.");
@@ -2875,11 +2884,7 @@ package classes
 						   .requireWis(75)
 						   .requireLevel(12);
 		//Tier 3 Wisdom perks
-		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
-								   .requireWis(85)
-								   .requireLevel(18);
-		ElementalContractRank4.requirePerk(ElementalConjurerDedication)
-							  .requirePerk(ElementalContractRank3)
+		ElementalContractRank4.requirePerk(ElementalContractRank3)
 							  .requireWis(100)
 							  .requireLevel(18);
 		CatchTheBlade.requirePerk(JobMonk)
@@ -2893,12 +2898,16 @@ package classes
 				   .requireStr(100)
 				   .requireLevel(24);
 		ElementalContractRank5.requirePerk(ElementalContractRank4)
+							  .requirePerk(ElementalConjurerDedication)
 							  .requireWis(125)
 							  .requireLevel(24);
 		StrongerElementalBond.requirePerk(StrongElementalBond)
 							 .requirePerk(ElementalContractRank5)
 							 .requireWis(125)
 							 .requireLevel(24);
+		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+								   .requireWis(120)
+								   .requireLevel(24);
 		FirstAttackElementals.requirePerk(StrongElementalBond)
 							 .requirePerk(ElementalContractRank4)
 							 .requireLevel(24);
@@ -2911,28 +2920,38 @@ package classes
 							  .requireLevel(30);
 		//Tier 6 Wisdom perks
 		ElementalContractRank7.requirePerk(ElementalContractRank6)
+							  .requirePerk(ElementalConjurerSacrifice)
 							  .requireWis(175)
 							  .requireLevel(36);
 		StrongestElementalBond.requirePerk(StrongerElementalBond)
 							  .requirePerk(ElementalContractRank7)
 							  .requireWis(175)
 							  .requireLevel(36);
-		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
-								  .requireWis(160)
-								  .requireLevel(36);
 		//Tier 7 Wisdom perks
 		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
 								.requirePerk(FleshBodyApprenticeStage)
 								.requirePerk(JobMonk)
 								.requireWis(200)
 								.requireLevel(42);
-		ElementalContractRank8.requirePerk(ElementalConjurerSacrifice)
-							  .requirePerk(ElementalContractRank7)
+		ElementalContractRank8.requirePerk(ElementalContractRank7)
 							  .requireWis(200)
 							  .requireLevel(42);
 		//Tier 8 Wisdom perks
+		ElementalContractRank9.requirePerk(ElementalContractRank8)
+							  .requirePerk(ElementalConjurerSacrifice)
+							  .requireWis(225)
+							  .requireLevel(42);
+		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+								  .requireWis(220)
+								  .requireLevel(48);
 		//Tier 9 Wisdom perks
+		ElementalContractRank10.requirePerk(ElementalContractRank9)
+							   .requireWis(250)
+							   .requireLevel(54);
 		//Tier 10 Wisdom perks
+		ElementalContractRank11.requirePerk(ElementalContractRank10)
+							   .requireWis(275)
+							   .requireLevel(60);
 		//------------
 		// LIBIDO
 		//------------

@@ -1213,7 +1213,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
 		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.str + player.tou + player.spe;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.inte + player.wis;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
@@ -1247,7 +1247,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
 		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.str + player.tou + player.spe;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.inte + player.wis;
 		damage *= 5;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
@@ -1282,7 +1282,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
 		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.str + player.tou + player.spe;
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) damage += player.inte + player.wis;
 		damage *= 10;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;

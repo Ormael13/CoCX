@@ -172,6 +172,9 @@ package classes.Scenes.Camp
 			if (player.findPerk(PerkLib.ElementalContractRank6) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank7) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) maxSizeOfElementalsArmyCounter += 2;
+			if (player.findPerk(PerkLib.ElementalContractRank9) >= 0) maxSizeOfElementalsArmyCounter += 2;
+			if (player.findPerk(PerkLib.ElementalContractRank10) >= 0) maxSizeOfElementalsArmyCounter += 2;
+			if (player.findPerk(PerkLib.ElementalContractRank11) >= 0) maxSizeOfElementalsArmyCounter += 2;
 			if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			return maxSizeOfElementalsArmyCounter;
@@ -193,7 +196,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
 				outputText("\nEarth");
@@ -205,7 +211,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
 				outputText("\nFire");
@@ -217,7 +226,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
 				outputText("\nWater");
@@ -229,7 +241,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 				outputText("\nIce");
@@ -241,7 +256,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
 				outputText("\nLightning");
@@ -253,7 +271,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
 				outputText("\nDarkness");
@@ -265,7 +286,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
 				outputText("\nWood");
@@ -277,7 +301,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
 				outputText("\nMetal");
@@ -289,7 +316,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) outputText(" (Grand Elder Rank)");
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
 				outputText("\nEther");
@@ -301,7 +331,10 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) outputText(" (Rank 5)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) outputText(" (Rank 6)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) outputText(" (Grand Elder Rank)");
 			}
 			outputText("</i>");
 			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
@@ -316,6 +349,9 @@ package classes.Scenes.Camp
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
 				if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) addButton(8, "RankUp(8)", rankUpSubmenu8th);
+				if (player.findPerk(PerkLib.ElementalContractRank9) >= 0) addButton(9, "RankUp(9)", rankUpSubmenu9th);
+				if (player.findPerk(PerkLib.ElementalContractRank10) >= 0) addButton(10, "RankUp(10)", rankUpSubmenu10th);
+				if (player.findPerk(PerkLib.ElementalContractRank11) >= 0) addButton(11, "RankUp(11)", rankUpSubmenu11th);
 			}
 			addButton(14, "Back", playerMenu);
 		}
@@ -473,6 +509,57 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) addButton(7, "Ice", rankUpElementalIce);
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) addButton(8, "Lightning", rankUpElementalLightning);
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) addButton(9, "Darkness", rankUpElementalDarkness);
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu9th():void {
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			menu();
+			if (player.mana >= 900 && (player.fatigue + 450 <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) addButton(9, "Darkness", rankUpElementalDarkness);
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu10th():void {
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			menu();
+			if (player.mana >= 1000 && (player.fatigue + 500 <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 10) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 10) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 10) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 10) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 10) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) addButton(9, "Darkness", rankUpElementalDarkness);
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function rankUpSubmenu11th():void {
+			outputText("\n\nIf you not have enough mana and fatigue it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			menu();
+			if (player.mana >= 1100 && (player.fatigue + 550 <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 11) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 11) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 11) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 11) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) addButton(9, "Darkness", rankUpElementalDarkness);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
