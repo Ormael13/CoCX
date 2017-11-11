@@ -1,16 +1,10 @@
 package classes {
 
+import classes.GlobalFlags.*;
+import classes.Scenes.NPCs.IsabellaScene;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;
-
-import flash.events.Event;
-
-import fl.controls.ComboBox;
-import fl.data.DataProvider;
-
-import classes.Scenes.NPCs.IsabellaScene;
-import classes.GlobalFlags.*;
 
 /**
  * The new home of Stats and Perks
@@ -463,7 +457,7 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 			interpersonStats += "<b>Isabella Affection:</b> ";
 			if (!getGame().isabellaFollowerScene.isabellaFollower())
-				interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false;
+				interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
@@ -478,7 +472,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
 			interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
-			if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)"
+			if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)";
 			interpersonStats += "\n";
 		}
 
@@ -852,7 +846,7 @@ public class PlayerInfo extends BaseContent {
 				break;
 			case "lib":
 				if (player.tempLib < n) n = player.tempLib;
-				player.tempLib--;
+				player.tempLib-=n;
 				break;
 			default:
 				n=0; //Failsafe
@@ -879,7 +873,7 @@ public class PlayerInfo extends BaseContent {
 		attributeMenu();
 	}
 	private function finishAttributes():void {
-		clearOutput()
+		clearOutput();
 		if (player.tempStr > 0) {
 			if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n");
 			else outputText("Your muscles feel slightly stronger from your time adventuring.\n");
