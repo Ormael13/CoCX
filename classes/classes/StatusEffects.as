@@ -329,6 +329,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 		public static const UnlockedTattoed:StatusEffectType			 = mk("Unlocked Tattoed");
 		public static const UnlockedBattleTattoed:StatusEffectType		 = mk("Unlocked Battle Tattoed");
+		public static const UnlockedLightningTattoed:StatusEffectType	 = mk("Unlocked Lightning Tattoed");
 		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");
 		
 		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");
@@ -443,12 +444,13 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedElfEyes:StatusEffectType			 = mk("Unlocked Elf Eyes");
 		public static const UnlockedElfHair:StatusEffectType			 = mk("Unlocked Elf Hair");
 		public static const UnlockedElfTongue:StatusEffectType			 = mk("Unlocked Elf Tongue");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
-	//	public static const UnlockedOni:StatusEffectType = mk("Unlocked ");
+		public static const UnlockedOniLegs:StatusEffectType			 = mk("Unlocked Oni Legs");
+		public static const UnlockedOniArms:StatusEffectType			 = mk("Unlocked Oni Arms");
+		public static const UnlockedOniEyes:StatusEffectType			 = mk("Unlocked Oni Eyes");
+		public static const UnlockedOniEars:StatusEffectType			 = mk("Unlocked Oni Ears");
+		public static const UnlockedOniFace:StatusEffectType			 = mk("Unlocked Oni Face");
+		public static const UnlockedOniSingleHorn:StatusEffectType		 = mk("Unlocked Oni Single Horn");
+		public static const UnlockedOniTwinHorns:StatusEffectType		 = mk("Unlocked Oni Twin Horns");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");

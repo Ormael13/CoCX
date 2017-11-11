@@ -356,7 +356,7 @@ package classes
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(149999,max);
+			return Math.min(199999,max);
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());

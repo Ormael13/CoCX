@@ -235,6 +235,9 @@
 			else temp *= 3.0;
 			return temp;
 		}
+		public override function maxHP():Number {
+            return Math.round(maxHP_base()*maxHP_mult());
+        }
 
 		public function addHP(hp:Number):void{
 			this.HP += hp;

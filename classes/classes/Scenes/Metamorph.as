@@ -139,6 +139,10 @@ private function accessPage3FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilFangs) && player.faceType == FACE_DEVIL_FANGS) addButtonDisabled(2, "Devil", "You already have devil fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilFangs) && player.faceType != FACE_DEVIL_FANGS && player.soulforce < 100) addButtonDisabled(2, "Devil", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType != FACE_ONI_TEETH && player.soulforce >= 100) addButton(3, "Oni", metamorphOniFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType == FACE_ONI_TEETH) addButtonDisabled(3, "Oni", "You already have oni fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType != FACE_ONI_TEETH && player.soulforce < 100) addButtonDisabled(3, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
@@ -191,6 +195,10 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.eyeType == EYES_DEVIL) addButtonDisabled(10, "Devil", "You already have devil eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.eyeType != EYES_DEVIL && player.soulforce < 100) addButtonDisabled(10, "Devil", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyeType != EYES_ONI && player.soulforce >= 100) addButton(11, "Oni", metamorphOniEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyeType == EYES_ONI) addButtonDisabled(11, "Oni", "You already have oni eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyeType != EYES_ONI && player.soulforce < 100) addButtonDisabled(11, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyeType != EYES_ELF && player.soulforce >= 100) addButton(12, "Elf", metamorphElfEyes);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyeType == EYES_ELF) addButtonDisabled(12, "Elf", "You already have elf eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyeType != EYES_ELF && player.soulforce < 100) addButtonDisabled(12, "Elf", "You not have enough Soulforce for this metamorphosis.");
@@ -235,6 +243,10 @@ private function accessPage2EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.earType == EARS_GOAT) addButtonDisabled(9, "Goat", "You already have goat ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.earType != EARS_GOAT && player.soulforce < 100) addButtonDisabled(9, "Goat", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.earType != EARS_ONI && player.soulforce >= 100) addButton(10, "Oni", metamorphOniEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.earType == EARS_ONI) addButtonDisabled(10, "Oni", "You already have oni ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.earType != EARS_ONI && player.soulforce < 100) addButtonDisabled(10, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.earType != EARS_ELVEN && player.soulforce >= 100) addButton(11, "Elf", metamorphElfEars);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.earType == EARS_ELVEN) addButtonDisabled(11, "Elf", "You already have elf ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.earType != EARS_ELVEN && player.soulforce < 100) addButtonDisabled(11, "Elf", "You not have enough Soulforce for this metamorphosis.");
@@ -264,6 +276,14 @@ private function accessHornsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.hornType == HORNS_GOAT) addButtonDisabled(5, "Goat", "You already have goat horns.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.hornType != HORNS_GOAT && player.soulforce < 100) addButtonDisabled(5, "Goat", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.hornType != HORNS_ONI && player.soulforce >= 100) addButton(11, "Oni", metamorphOniSingleHorn);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.hornType == HORNS_ONI) addButtonDisabled(11, "Oni", "You already have oni horn.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.hornType != HORNS_ONI && player.soulforce < 100) addButtonDisabled(11, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.hornType != HORNS_ONI_X2 && player.soulforce >= 100) addButton(12, "OniX2", metamorphOniDualHorns);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.hornType == HORNS_ONI_X2) addButtonDisabled(12, "OniX2", "You already have oni horns.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.hornType != HORNS_ONI_X2 && player.soulforce < 100) addButtonDisabled(12, "OniX2", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessAntennaeMenu():void {
@@ -344,6 +364,10 @@ private function accessPage2ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.armType == ARM_TYPE_DEVIL) addButtonDisabled(4, "Devil", "You already have devil arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.armType != ARM_TYPE_DEVIL && player.soulforce < 100) addButtonDisabled(4, "Devil", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.armType != ARM_TYPE_ONI && player.soulforce >= 100) addButton(5, "Oni", metamorphOniArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.armType == ARM_TYPE_ONI) addButtonDisabled(5, "Oni", "You already have oni arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.armType != ARM_TYPE_ONI && player.soulforce < 100) addButtonDisabled(5, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.armType != ARM_TYPE_ELF && player.soulforce >= 100) addButton(6, "Elf", metamorphElfArms);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.armType == ARM_TYPE_ELF) addButtonDisabled(6, "Elf", "You already have elf arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.armType != ARM_TYPE_ELF && player.soulforce < 100) addButtonDisabled(6, "Elf", "You not have enough Soulforce for this metamorphosis.");
@@ -611,6 +635,10 @@ private function accessPage3LegsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.lowerBody == LOWER_BODY_TYPE_ORCA) addButtonDisabled(4, "Orca", "You already have orca lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(4, "Orca", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs) && player.lowerBody != LOWER_BODY_TYPE_ONI && player.soulforce >= 100) addButton(6, "Oni", metamorphOniLegs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs) && player.lowerBody == LOWER_BODY_TYPE_ONI) addButtonDisabled(6, "Oni", "You already have oni lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs) && player.lowerBody != LOWER_BODY_TYPE_ONI && player.soulforce < 100) addButtonDisabled(6, "Oni", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.lowerBody != LOWER_BODY_TYPE_ELF && player.soulforce >= 100) addButton(7, "Elf", metamorphElfLegs);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.lowerBody == LOWER_BODY_TYPE_ELF) addButtonDisabled(7, "Elf", "You already have elf lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.lowerBody != LOWER_BODY_TYPE_ELF && player.soulforce < 100) addButtonDisabled(7, "Elf", "You not have enough Soulforce for this metamorphosis.");
@@ -741,6 +769,87 @@ private function metamorphGoo():void {
 	
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphRaiju():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nY");
+	if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+	outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");
+	player.faceType = FACE_ONI_TEETH;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
+	player.earType = EARS_ONI;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	player.eyeType = EYES_ONI;
+	if (rand(2) == 0) player.eyeColor = "red";
+	else {
+		if (rand(2) == 0) player.eyeColor = "orange";
+		else player.eyeColor = "yellow";
+	}
+	outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniDualHorns():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.hornType == HORNS_NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
+	else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");
+	outputText(" the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,");
+	if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
+	if (player.gender == 3) outputText(" and");
+	if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
+	outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
+	player.horns = 1;
+	player.hornType = HORNS_ONI_X2;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniSingleHorn():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.hornType == HORNS_NONE) outputText("You moan in pleasure as a single bony horn push forward out of your forehead,");
+	else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,");
+	outputText(" the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,");
+	if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
+	if (player.gender == 3) outputText(" and");
+	if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
+	outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horn just like an oni.</b>");
+	player.horns = 1;
+	player.hornType = HORNS_ONI;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\n");
+	if (player.armType != ARM_TYPE_HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
+	outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
+	player.armType = ARM_TYPE_ONI;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphOniLegs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
+	outputText("\n\nNot again! Now it's the skin on your legs that is burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your");
+	outputText(" <b>war tattooed legs and feet topped with sharp nails.</b>");
+	player.lowerBody = LOWER_BODY_TYPE_ONI;
+	player.legCount = 2;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphElfHair():void {
 	clearOutput();
 	player.soulforce -= 100;

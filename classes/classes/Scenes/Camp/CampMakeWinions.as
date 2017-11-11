@@ -246,6 +246,51 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) outputText(" (1st Elder Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 12) outputText(" (Grand Elder Rank)");
 			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
+				outputText("\nEther");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) outputText(" (Rank 0)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) outputText(" (Rank 7)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) outputText(" (Grand Elder Rank)");
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
+				outputText("\nWood");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) outputText(" (Rank 0)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) outputText(" (Rank 7)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) outputText(" (Grand Elder Rank)");
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
+				outputText("\nMetal");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) outputText(" (Rank 0)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) outputText(" (Rank 5)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) outputText(" (Rank 6)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) outputText(" (Rank 7)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) outputText(" (3rd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) outputText(" (2nd Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) outputText(" (1st Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) outputText(" (Grand Elder Rank)");
+			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 				outputText("\nIce");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) outputText(" (Rank 0)");
@@ -290,51 +335,6 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) outputText(" (2nd Elder Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) outputText(" (1st Elder Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 12) outputText(" (Grand Elder Rank)");
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
-				outputText("\nWood");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) outputText(" (Rank 0)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) outputText(" (Rank 1)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) outputText(" (Rank 2)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4) outputText(" (Rank 3)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5) outputText(" (Rank 4)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) outputText(" (Rank 5)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) outputText(" (Rank 6)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) outputText(" (3rd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) outputText(" (2nd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) outputText(" (1st Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) outputText(" (Grand Elder Rank)");
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
-				outputText("\nMetal");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) outputText(" (Rank 0)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) outputText(" (Rank 1)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) outputText(" (Rank 2)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4) outputText(" (Rank 3)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5) outputText(" (Rank 4)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) outputText(" (Rank 5)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) outputText(" (Rank 6)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) outputText(" (3rd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) outputText(" (2nd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) outputText(" (1st Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) outputText(" (Grand Elder Rank)");
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
-				outputText("\nEther");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) outputText(" (Rank 0)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) outputText(" (Rank 1)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) outputText(" (Rank 2)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4) outputText(" (Rank 3)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5) outputText(" (Rank 4)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) outputText(" (Rank 5)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) outputText(" (Rank 6)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) outputText(" (Rank 7)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) outputText(" (3rd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) outputText(" (2nd Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) outputText(" (1st Elder Rank)");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) outputText(" (Grand Elder Rank)");
 			}
 			outputText("</i>");
 			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
