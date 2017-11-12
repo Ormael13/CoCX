@@ -829,54 +829,54 @@ public function intwisscaling():Number {
 public function elementalattacks():void {
 	var damageelemental:Number = 0;
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsAir) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEarth) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsFire) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWater) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsIce) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsLightning) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsWood) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * intwisscaling() * 0.02;
 	}
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) {
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 1) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.02;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 9) damageelemental += player.statusEffectv2(StatusEffects.SummonedElementalsEther) * intwisscaling() * 0.02;
 	}
 	if (damageelemental < 10) damageelemental = 10;
 	var elementalamplification:Number = 1;

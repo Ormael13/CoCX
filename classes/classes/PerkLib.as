@@ -3300,7 +3300,7 @@ package classes
 				return player.lizardScore() >= 4
 			}, "Lizan race");
 		ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
-			return player.manticoreScore() >= 10 && player.tailType == Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL
+			return player.manticoreScore() >= 6 && player.tailType == Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL
 		}, "Manticore race and tail");
 		MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 			return player.mantisScore() >= 6

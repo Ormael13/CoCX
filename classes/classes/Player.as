@@ -1580,15 +1580,15 @@ use namespace kGAMECLASS;
 						race = "dragonne-" + mf("man", "girl");
 				}
 			}
-			if (manticoreScore() >= 5)
+			if (manticoreScore() >= 6)
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LION) {
-					if (manticoreScore() < 10)
+					if (manticoreScore() < 12)
 						race = "half manticore-taur";
-					if (manticoreScore() >= 10)	
+					if (manticoreScore() >= 12)	
 						race = "manticore-taur";
 				}
-				else if (manticoreScore() >= 10)
+				else if (manticoreScore() >= 12)
 					race = "manticore";
 				else
 					race = "half manticore";
@@ -1783,7 +1783,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (deerScore() >= 4)
 				chimeraCounter++;
-			if (manticoreScore() >= 5)
+			if (manticoreScore() >= 6)
 				chimeraCounter++;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
@@ -1898,7 +1898,7 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (deerScore() >= 4)
 				grandchimeraCounter++;
-*/			if (manticoreScore() >= 10)
+*/			if (manticoreScore() >= 12)
 				grandchimeraCounter += 2;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
@@ -3822,23 +3822,18 @@ use namespace kGAMECLASS;
 				manticoreCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_LION)
 				manticoreCounter++;
-		//	if (manticoreCounter >= 4) {
-		//		if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
-		//			manticoreCounter++;
+			if (tongueType == TONGUE_CAT)
+				manticoreCounter++;
 			if (wingType == WING_TYPE_MANTICORE_LIKE_SMALL)
-					manticoreCounter++;
+				manticoreCounter++;
 			if (wingType == WING_TYPE_MANTICORE_LIKE_LARGE)
-					manticoreCounter += 2;
-		//		if (wingType == WING_TYPE_BAT_LIKE_LARGE_2 || wingType == WING_TYPE_DRACONIC_HUGE)
-		//			manticoreCounter += 3;
-		//	}
-			//Fur only counts if some canine features are present
-		//	if (hasFur() && manticoreCounter > 2)
-		//		manticoreCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				manticoreCounter += 2;
+			if (!hasCock())
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
+			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				manticoreCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && manticoreCounter >= 3)
 				manticoreCounter += 1;
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0)
@@ -4437,6 +4432,8 @@ use namespace kGAMECLASS;
 			if(this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=this.perkv2(PerkLib.ProductivityDrugs);}
 
 			//Minimum Sensitivity
+			if(this.manticoreScore() >= 6) minSen += 30;
+			if(this.manticoreScore() >= 12) minSen += 15;
 			if(this.devilkinScore() >= 7) minSen += 10;
 			if(this.devilkinScore() >= 10) minSen += 15;
 			if(this.devilkinScore() >= 14) minSen += 30;
@@ -4940,16 +4937,16 @@ use namespace kGAMECLASS;
 				maxStr += (5 * newGamePlusMod);
 				maxSpe += (5 * newGamePlusMod);
 			}//+10/10-20
-			if (manticoreScore() >= 5) {
-				if (manticoreScore() >= 10) {
-					maxSpe += (80 * newGamePlusMod);
-					maxInt += (20 * newGamePlusMod);
-					maxLib += (50 * newGamePlusMod);
+			if (manticoreScore() >= 6) {
+				if (manticoreScore() >= 12) {
+					maxSpe += (100 * newGamePlusMod);
+					maxInt += (50 * newGamePlusMod);
+					maxLib += (60 * newGamePlusMod);
 				}
 				else {
-					maxSpe += (40 * newGamePlusMod);
-					maxInt += (10 * newGamePlusMod);
-					maxLib += (25 * newGamePlusMod);
+					maxSpe += (50 * newGamePlusMod);
+					maxInt += (25 * newGamePlusMod);
+					maxLib += (30 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (mantisScore() >= 6) {
@@ -6154,7 +6151,7 @@ use namespace kGAMECLASS;
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

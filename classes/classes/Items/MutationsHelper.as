@@ -298,7 +298,7 @@ package classes.Items {
 		[ARM_TYPE_PHOENIX, StatusEffects.UnlockedPhoenixArms],
 		[ARM_TYPE_PLANT, null],
 		[ARM_TYPE_PLANT2, null],
-		[ARM_TYPE_RAIJU, null],
+		[ARM_TYPE_RAIJU, StatusEffects.UnlockedRaijuArms],
 		[ARM_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderArms],
 		[ARM_TYPE_SHARK, StatusEffects.UnlockedSharkArms],
 		[ARM_TYPE_SPIDER, StatusEffects.UnlockedSpiderArms],
@@ -334,7 +334,7 @@ package classes.Items {
 		[EARS_RACCOON, null],
 		[EARS_RHINO, null],
 		[EARS_SNAKE, StatusEffects.UnlockedSnakeEars],
-		[EARS_WEASEL, null],
+		[EARS_WEASEL, StatusEffects.UnlockedRaijuEars],
 		[EARS_WOLF, null],
 		[EARS_YETI, null],
 	]);
@@ -359,7 +359,7 @@ package classes.Items {
 		[EYES_HUMAN, null],
 		[EYES_MANTICORE, null],
 		[EYES_ONI, StatusEffects.UnlockedOniEyes],
-		[EYES_RAIJU, null],
+		[EYES_RAIJU, StatusEffects.UnlockedRaijuEyes],
 		[EYES_REPTILIAN, StatusEffects.UnlockedLizardEyes],
 		[EYES_SNAKE, StatusEffects.UnlockedSnakeEyes],
 	]);
@@ -394,7 +394,7 @@ package classes.Items {
 		[FACE_PLANT_DRAGON, null],
 		[FACE_RACCOON, null],
 		[FACE_RACCOON_MASK, null],
-		[FACE_RAIJU_FANGS, null],
+		[FACE_RAIJU_FANGS, StatusEffects.UnlockedRaijuFace],
 		[FACE_RHINO, null],
 		[FACE_SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
 		[FACE_SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
@@ -429,7 +429,7 @@ package classes.Items {
 		[HAIR_NORMAL, null],
 		[HAIR_QUILL, null],
 		[HAIR_SILKEN, StatusEffects.UnlockedElfHair],
-		[HAIR_STORM, null],
+		[HAIR_STORM, StatusEffects.UnlockedRaijuHair],
 	]);
 
 	/**
@@ -495,7 +495,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, null],
 		[LOWER_BODY_TYPE_PONY, null],
 		[LOWER_BODY_TYPE_RACCOON, null],
-		[LOWER_BODY_TYPE_RAIJU, null],
+		[LOWER_BODY_TYPE_RAIJU, StatusEffects.UnlockedRaijuLegs],
 		[LOWER_BODY_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
 		[LOWER_BODY_TYPE_SCYLLA, null],
 		[LOWER_BODY_TYPE_SHARK, StatusEffects.UnlockedSharkLegs],
@@ -515,7 +515,7 @@ package classes.Items {
 		[REAR_BODY_LION_MANE, null],
 		[REAR_BODY_NONE, null],
 		[REAR_BODY_ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
-		[REAR_BODY_RAIJU_MANE, null],
+		[REAR_BODY_RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
 		[REAR_BODY_SHARK_FIN, StatusEffects.UnlockedSharkFin],
 	]);
 
@@ -576,7 +576,7 @@ package classes.Items {
 		[TAIL_TYPE_PIG, null],
 		[TAIL_TYPE_RABBIT, null],
 		[TAIL_TYPE_RACCOON, null],
-		[TAIL_TYPE_RAIJU, null],
+		[TAIL_TYPE_RAIJU, StatusEffects.UnlockedRaijuTail],
 		[TAIL_TYPE_RHINO, null],
 		[TAIL_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderTail],
 		[TAIL_TYPE_SCORPION, null],

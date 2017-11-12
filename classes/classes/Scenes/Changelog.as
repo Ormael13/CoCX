@@ -24,7 +24,7 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8h:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Cow, Minotaur, Devil, Mantis, Elf, Oni\n");
+			outputText("-Added in current version race effects to Metamorph perk: Cow, Minotaur, Devil, Mantis, Elf, Oni, Raiju\n");
 			outputText("-When PC is lvl 20+, is female with virgin vagina or male or genderless a new encounter can proc when exploring deepwoods. As result of this encounter PC can get item and loose chance to get new npc or became pregnant with unicorn-taur: Celess\n");
 			outputText("-Pregnancy last 30 days and at PC current corruption at the birth momrnt will decide if Celess would be pure or corrupted. She would alo need to be named even if player decide to name her Celess.\n");
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
@@ -65,7 +65,7 @@ package classes.Scenes
 			outputText("-New tier 14 toughness lvl-up perk: Mythic Endurance. Req. Half-step-to Mythic Endurance perk, 450+ tou and 300+ str. Effect: Inrease max Fatigue by 10000\n");
 			outputText("-New tier 14 intelligence lvl-up perk: Mythic Spirituality. Req. Half-step-to Mythic Spirituality perk, 450+ int and 300+ wis. Effect: Inrease max Mana by 15000\n");
 			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
-			outputText("-\n");
+			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to maticore score.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -92,7 +92,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Raiju, Bat, Vampire, 
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

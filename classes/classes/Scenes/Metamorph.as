@@ -83,6 +83,10 @@ private function accessHairMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.hairType == HAIR_SILKEN) addButtonDisabled(9, "Elf", "You already have elf silken hair.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.hairType != HAIR_SILKEN && player.soulforce < 100) addButtonDisabled(9, "Elf", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType != HAIR_STORM && player.soulforce >= 100) addButton(10, "Raiju", metamorphRaijuHair);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType == HAIR_STORM) addButtonDisabled(10, "Raiju", "You already have raiju stormy hair.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType != HAIR_STORM && player.soulforce < 100) addButtonDisabled(10, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1FaceMenu():void {
@@ -143,6 +147,10 @@ private function accessPage3FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType == FACE_ONI_TEETH) addButtonDisabled(3, "Oni", "You already have oni fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType != FACE_ONI_TEETH && player.soulforce < 100) addButtonDisabled(3, "Oni", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != FACE_RAIJU_FANGS && player.soulforce >= 100) addButton(4, "Raiju", metamorphRaijuFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType == FACE_RAIJU_FANGS) addButtonDisabled(4, "Raiju", "You already have raiju fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != FACE_RAIJU_FANGS && player.soulforce < 100) addButtonDisabled(4, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
@@ -203,6 +211,10 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyeType == EYES_ELF) addButtonDisabled(12, "Elf", "You already have elf eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyeType != EYES_ELF && player.soulforce < 100) addButtonDisabled(12, "Elf", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyeType != EYES_RAIJU && player.soulforce >= 100) addButton(13, "Raiju", metamorphRaijuEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyeType == EYES_RAIJU) addButtonDisabled(13, "Raiju", "You already have raiju eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyeType != EYES_RAIJU && player.soulforce < 100) addButtonDisabled(13, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
@@ -251,6 +263,10 @@ private function accessPage2EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.earType == EARS_ELVEN) addButtonDisabled(11, "Elf", "You already have elf ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.earType != EARS_ELVEN && player.soulforce < 100) addButtonDisabled(11, "Elf", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.earType != EARS_WEASEL && player.soulforce >= 100) addButton(12, "Raiju", metamorphRaijuEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.earType == EARS_WEASEL) addButtonDisabled(12, "Raiju", "You already have raiju ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.earType != EARS_WEASEL && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessHornsMenu():void {
@@ -372,6 +388,10 @@ private function accessPage2ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.armType == ARM_TYPE_ELF) addButtonDisabled(6, "Elf", "You already have elf arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.armType != ARM_TYPE_ELF && player.soulforce < 100) addButtonDisabled(6, "Elf", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.armType != ARM_TYPE_RAIJU && player.soulforce >= 100) addButton(7, "Raiju", metamorphRaijuArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.armType == ARM_TYPE_RAIJU) addButtonDisabled(7, "Raiju", "You already have raiju arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.armType != ARM_TYPE_RAIJU && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 
@@ -491,10 +511,14 @@ private function accessPage3TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType == TAIL_TYPE_MANTIS_ABDOMEN) addButtonDisabled(7, "Mantis", "You already have mantis abdomen.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType != TAIL_TYPE_MANTIS_ABDOMEN && player.soulforce < 100) addButtonDisabled(7, "Mantis", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce >= 100) addButton(5, "Orca", metamorphOrcaTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType == TAIL_TYPE_ORCA) addButtonDisabled(5, "Orca", "You already have orca tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(5, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce >= 100) addButton(10, "Orca", metamorphOrcaTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType == TAIL_TYPE_ORCA) addButtonDisabled(10, "Orca", "You already have orca tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != TAIL_TYPE_ORCA && player.soulforce < 100) addButtonDisabled(10, "Orca", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != TAIL_TYPE_RAIJU && player.soulforce >= 100) addButton(12, "Raiju", metamorphRaijuTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType == TAIL_TYPE_RAIJU) addButtonDisabled(12, "Raiju", "You already have raiju tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != TAIL_TYPE_RAIJU && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
@@ -643,6 +667,10 @@ private function accessPage3LegsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.lowerBody == LOWER_BODY_TYPE_ELF) addButtonDisabled(7, "Elf", "You already have elf lower body.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.lowerBody != LOWER_BODY_TYPE_ELF && player.soulforce < 100) addButtonDisabled(7, "Elf", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs) && player.lowerBody != LOWER_BODY_TYPE_RAIJU && player.soulforce >= 100) addButton(8, "Raiju", metamorphRaijuLegs);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs) && player.lowerBody == LOWER_BODY_TYPE_RAIJU) addButtonDisabled(8, "Raiju", "You already have raiju lower body.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs) && player.lowerBody != LOWER_BODY_TYPE_RAIJU && player.soulforce < 100) addButtonDisabled(8, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage4LegsMenu():void {
@@ -658,6 +686,10 @@ private function accessRearBodyMenu():void {
 	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody != REAR_BODY_ORCA_BLOWHOLE && player.soulforce >= 100) addButton(6, "Orca", metamorphOrcaBlowhole);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody == REAR_BODY_ORCA_BLOWHOLE) addButtonDisabled(6, "Orca", "You already have orca blowhole.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.rearBody != REAR_BODY_ORCA_BLOWHOLE && player.soulforce < 100) addButtonDisabled(6, "Shark", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody != REAR_BODY_RAIJU_MANE && player.soulforce >= 100) addButton(7, "Raiju", metamorphRaijuMane);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody == REAR_BODY_RAIJU_MANE) addButtonDisabled(7, "Raiju", "You already have raiju mane.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody != REAR_BODY_RAIJU_MANE && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }/*
@@ -749,30 +781,102 @@ private function metamorphFur():void {
 	clearOutput();
 	player.soulforce -= 100;
 	
+	
 	doNext(accessMetamorphMenu);
 }
 private function metamorphFur():void {
 	clearOutput();
 	player.soulforce -= 100;
 	
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
 	
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorphGoo():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
 	
 	doNext(accessMetamorphMenu);
 }*/
-private function metamorphRaiju():void {
+private function metamorphRaijuHair():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
+	outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");
+	player.hairType = HAIR_STORM;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.eyeType != EYES_HUMAN) removeOddEyes();
+	player.eyeType = EYES_RAIJU;
+	if (rand(2) == 0) player.eyeColor = "blue";
+	else {
+		if (rand(2) == 0) player.eyeColor = "green";
+		else player.eyeColor = "teal";
+	}
+	outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.earType != EARS_HUMAN) restoreHumanEars();
+	outputText("\n\nYour ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>");
+	player.earType = EARS_WEASEL;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+	outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
+	player.faceType = FACE_RAIJU_FANGS;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuMane():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
+	player.rearBody = REAR_BODY_RAIJU_MANE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuTail():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
+	else outputText("\n\nYou nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
+	player.tailType = TAIL_TYPE_RAIJU;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.armType != ARM_TYPE_HUMAN) restoreHumanArms();
+	outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
+	if (player.gender == 1 || player.gender == 3) outputText("[cock]");
+	if (player.gender == 3) outputText(" and ");
+	if (player.gender > 1) outputText("[clit]");
+	outputText(". ");
+	if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
+	else outputText("You scowl, shaking away the impure thoughts.");
+	player.armType = ARM_TYPE_RAIJU;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphRaijuLegs():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) restoreHumanLegs();
+	outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidently hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
+	player.lowerBody = LOWER_BODY_TYPE_RAIJU;
+	player.legCount = 2;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphOniFace():void {
