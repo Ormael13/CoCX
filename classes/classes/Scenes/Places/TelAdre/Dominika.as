@@ -93,7 +93,7 @@ public function fellatrixBarApproach():void {
 		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
 		return;
 	}
-	outputText("ERROR, ERROR, ALERT THE FENFEN!", true);
+	outputText("ERROR, ERROR, ALERT THE FENFEN!");
 	doNext(camp.returnToCampUseOneHour);
 }
 //[\"<i>No thanks</i>\"]

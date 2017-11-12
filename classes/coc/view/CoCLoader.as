@@ -62,6 +62,10 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc/NPC/samirah.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_NPC_SAMIRAH_XML:Class;
 	bundleText("content/coc/NPC/samirah.xml", BUNDLE_CONTENT_COC_NPC_SAMIRAH_XML);
+
+    [Embed(source="../../../content/coc/NPC/teladreshops.xml", mimeType="application/octet-stream")]
+    public static var BUNDLE_CONTENT_COC_NPC_TELADRESHOPS_XML:Class;
+    bundleText("content/coc/NPC/teladreshops.xml", BUNDLE_CONTENT_COC_NPC_TELADRESHOPS_XML);
 	
 	public static function bundleText(key:String,c:Class):void {
 		if (c) TEXT_BUNDLE[key] = new c();

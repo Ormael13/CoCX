@@ -19,6 +19,7 @@
     <include path="coc/NPC/celess.xml"/>
     <include path="coc/NPC/samirah.xml"/>
     <include path="coc/NPC/diva.xml"/>
+    <include path="coc/NPC/teladreshops.xml"/>
 
     <!--Other-->
     <include path="coc/appearance.xml"/>
