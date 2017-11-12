@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<story xmlns="xxc-story" name="teladreshops">
+    <lib name="JewelryShop">
+        <text name="enter">
+            <if test="firstEntry">
+                Among the many markets of Tel'Adre, one oddity manages to snare 
+                your attention. A simple stall with an askew sign reading 'Jewels!' in calamitous cursive. Its wares are 
+                mostly shrouded by a hole-riddled awning, though small rays of desert sun make use of the tears to 
+                playfully dazzle a collection of tarnished treasures. Metal-laced glassware, necklaces, rings, baubles, 
+                clasps and more are haphazardly hung from the latticed walls.
+
+                In the uneven glow of glinting glassware sits a short figure, no more than 4 feet tall. His appearance is 
+                shrouded by the hood and wraps of an all-concealing shawl, the opaque fabric patterned with distant 
+                dunes and trimmed in a glimmer of gold-threaded tassles.
+
+                Your staring is interrupted by a passerby eclipsing your vision, and before you can even consider the 
+                interruption you notice the one manning the stall is gone. Not a blink of the eye later and your wrist is 
+                grasped by spindly fingers covered in a ratty, dirty gauze, the slightest hint of emerald scales revealing 
+                themselves through cracks and tears. Despite the initial urge to stand your ground, the cloaked figure's 
+                two-handed grip is surprisingly overbearing for such a short man. "<i>Ah! Don't be ssshy! Don't be ssshy... 
+                I could sssee your interesst, a [man] with a sssharp eye for beauty!</i>" He waffles disarmingly as he 
+                drags you to the stall, his short, strained movements causing his impressive collection of bangles to 
+                clatter together noisily. Once getting you off the street, he hops onto the rackety counter, which 
+                miraculously doesn't fall apart.
+
+                He gestures around to the multitude of adornments hanging in the stall. "<i>Beautiful baubless and 
+                gleaming gemstoness, only the finesst jewelry for the presstigious patron! Keheh!</i>" The merchant 
+                cackles as he grinds his gauzy gloves together, creating a rather discomforting, scratchy sound
+                <else>
+                    The jewelry merchant perks his head up a little as he sees you approach, hailing your visit with a welcoming wave. 
+                    "<i>Kehehehe! Greetingss again, traveler. Ssscrounged up the gemss to adorn yoursself with my waress? Let uss hope sso...</i>" 
+                    He goes silent, knitting his gauzed fingers together as he observes your perusal.
+                </else>
+            </if>
+        </text>
+        <text name="inside">
+            "<i>So what will it be?</i>"
+        </text>
+        <text name="confirmBuy">
+            <if test="keyItem eq 'Equipment Storage - Jewelry Box'">
+                Your eyes rest on the shelf beyond the merchant, this one stocked with small
+                wooden boxes. The merchant, following your eyes with greed in his own, snatches a box off the shelf
+                and strokes its surface gently, producing a light hum "<i>Ah! Keen again, what proud jewelry owner
+                would be without ssafe sstorage for their pricelesss gemss? Not you, not for a ssmall fee! Yess, with
+                one of thesse lockboxess, no marauder or ssilly fox in tightss wielding a kebab will ssnatch from you
+                your preciouss accesssoriess. If only chasstity beltss were as sstrong as my boxess... Ah, wouldn't be
+                much fun, though, would it? Keheheheh! 500 gemss!</i>"
+                <else>
+                    The merchant stares at your hands as you point out the item with an almost
+                    palpable excitement. "<i>Ah, excellent choice!</i>" He scoops up the accessory and hefts it a couple times in
+                    his palm, "<i>Keheh, I'd be willing to part with it for, ssay, <output>itype.value</output> gems?</i>"
+                </else>
+            </if>
+        </text>
+        <text name="noBuyOption">
+            <if test="keyItem eq 'Equipment Storage - Jewelry Box'">
+                You decline with a firm hand and a shake of your head, prompting the
+                merchant to whisper a growl. "<i>Bah, fine! You'd besst have a good hiding place, then.</i>" He leans a little
+                beyond the counter on his spindly arms, taking a look at your [butt]. He's stoic at first,
+                but he settles down to the tune of a chuckle.
+                <else>
+                    You decline the offer, causing the merchant to scoff and cross his arms.
+                    "<i>Mmn, dissappointing. Kehehehe, ssuit yourself!</i>"
+                </else>
+            </if>
+        </text>
+        <text name="debit">
+            <if test="keyItem eq 'Equipment Storage - Jewelry Box'">
+                You nod a bit skeptically, but hand over the 500 gems. It's worth the
+                organizational value. You reach out to take the box from the counter, but he hisses rather alarmingly,
+                moving an arm to block you. Taken aback, you watch on as the odd little merchant checks the gem's
+                authenticity with dice-rolling and tapping. "<i>Sseemsss all's in order. Thank you kindly! Keheheh...</i>"
+
+                More carefully, you pick up the box without hassle and stow it away as the merchant does the same
+                with your gems
+                <else>
+                    The minute you finish counting out your gems, he snatches them from
+                    your hand and replaces it with your purchase, quietly snickering to himself as he cradles the gems in
+                    both hands.
+                </else>
+            </if>
+        </text>
+        <text name="normalRings">
+            A standard collection of jewelry hangs from small pegs on the left side of the
+            stall, gemmed and set in all manner of colors. The merchant taps his fingers together impatiently as you
+            peruse, giddily whispering to himself. "
+        </text>
+        <text name="specialRings">
+            On the far wall is a shelf of rings hidden behind an out of place cabinet of
+            glass. Tags of papyrus paper stricken with odd arcane symbols are plastered all over the transparent
+            surface, almost concealing the collection within.
+
+            The merchant notices your staring and cackles, motioning to the display. "<i>Ahh! An eye as sssharp as a
+            blade! You've picked the most intriguing dissplay in my sstore! Not that the resst of my waress aren't
+            intriguing. Thiss little duo hass a different story, however.</i>" He taps the glass on the side before one of
+            the rings, a familiar dark stone stricken with cracks of red. "<i>They're part of a sset, remnantss of a
+            tragedy you ssee. Legend hass it thesse rings were once beautiful maidenss! Thiss one here, jealouss of
+            itss counterpart, a bride to be. Before the ceremony, the lecherouss and jealouss maiden asssailed the
+            groom and sstole hiss purity. The bride to be, obsesssed with purity, sssacrificed hersself for a cursse,
+            turning both of their sssoulss to sstone. And so, this one here is the bride.</i>" His hand moves a few
+            inches and taps the glass again, a contrastingly smooth stone of pearly white just beside it.
+            "<i>Keheheheh... I wouldn't sssell a sssoul for cheap, would you? Let's start at 3,000.</i>"
+        </text>
+        <text name="enchantedRings">
+            Frankly, it's just a collection of tarnished silver and scratchy
+            gold. You'd probably find better jewelry on corpses. The peddler catches on, swatting a hanging
+            necklace away from his wrapped snout. "<i>Bah! Of coursse, of coursse... Nothing in the dissplay ssstock
+            would sssuit you!</i>" He reaches beneath the counter and pauses for a dramatic speech. "<i>You're a traveler
+            of much mysstery and power, I can smell it on you. Sssorceriess sssurely ressonate with your sssoul!</i>"
+            He delivers a small wooden box to the surface.
+
+            The box actually looks better than the jewelry you saw before. The wood is stained a brilliant color, and
+            laquered smooth like glass. The golden hinges are outlined in silver and shine brilliantly, the matching
+            locks in the front forming three identical sundials. With a single wrapped finger, the peculiar merchant
+            adjusts the dials, and with a subtle 'click' the box opens on its own. All the tiny drawers within unfold
+            like a pop-up book, revealing a small collection of rings. Their craftsmanship and elegance alone are
+            jaw-dropping, but there's something less tangibly appealing about them.
+
+            Seeing your expression, the shrouded man wheezes and glides a hand over the specialty wares. "<i>The
+            powerful are invigorated by thesse ssstoness, but do not be brassh! Thesse jewelss compliment their
+            bearer in wayss you may not be expecting! Kehehehehe...</i>" He fades into a bit of a cough, his reptillian
+            eyes revealed for but a moment.
+
+        </text>
+    </lib>
+    <lib name="VictoriaTailorShop">
+        <text name="inside">
+            "The inside of the tailor's shop is far cleaner than anything else you've seen in the city.
+            The walls are painted muted gray, and the floor is carpeted with a sprawling, royal blue rug.
+            After glancing around, you realize WHY the walls and floor are so muted – the quiet backdrop makes the merchandise look even more amazing.
+            There are racks and racks of clothing, but much of it is plain comfortable clothing, and not worth spending much time investigating.
+            A high-pitched voice pipes up, "<i>Can I help you?</i>"
+
+            <if test="metVictoria">
+                You turn around to look <if test="player.tallness gt 60">down</if> at Victoria the Corgi Tailor.
+                As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.
+                <else>
+                    You turn around,
+                    <if test="player.tallness gt 60">
+                        looking for the source, eventually looking down and at a short but busty Corgi dog-girl.
+                        <else>
+                            coming face to face with a busty Corgi dog-girl.
+                        </else>
+                    </if>
+                    She's clearly the tailor judging by her stylish, low-cut clothing and poofy hat.
+                    A monocle perches on her nose, giving her a rather distinguished appearance.
+                    The fashionable wench arches her back, showing off what she's got as she introduces herself,
+                    "<i>Ello love, welcome to my shop.  My name's Victoria, though if you like, you can call me Vicky.
+                    You'll find my clothing to be a cut above the rubbish sold elsewhere.</i>"
+                </else>
+            </if>
+
+            (What do you want to buy?)
+        </text>
+        <text name="confirmBuy">
+            Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to
+            <if test="(player.biggestCockArea() gt 30) || (player.totalCocks() > 1)">
+                fondle your bulging package
+                <elseif test="player.hasVagina()">
+                    rub against your outer lips
+                    <else>
+                        slip a finger along your crotch
+                    </else>
+                </elseif>
+            </if>
+            more than a few times.  You could swear you catch her licking her lips when she stands up, but she quickly turns away, saying, "<i>I've got one in the back that should fit perfectly!  Be right with you!</i>"
+
+            She disappears in the back for a few moments, then returns with <output>itype.longName</output> that looks as if it were tailor-made for you.
+
+            <i>"<output>itype.value</output>" gems and it can be yours,</i>" she says.
+        </text>
+        <lib name="flirtWithVictoria">
+            <text name="intro">
+                You take the clothes from her and give them a look over.
+                Setting them on the counter, you tell her that they're quite nice, but if she's interested you might have something that could fit her quite nicely as well in the back.
+            </text>
+            <text name="tooSmall">
+                Victoria smirks and answers, "<i>I measured your inseam, and what you're packing in there won't fit anywhere in a girl like me.
+                Maybe some other time, <output>player.mf("studmuffin", "sweet thing")</output>.  Did you actually want to buy something?</i>"
+
+                Do you still want to buy something?
+            </text>
+            <text name="scene">
+                It takes her a moment to realize just what it is you're suggesting before her face splits into a wide grin.  "<i>That right?  Well now, you can't say things like that without backin' 'em up, can you?"</i>  she says with a low chuckle, pressing her curvy body into you.  <i>"What do you say I close the shop up quick, and you can show me just 'ow nicely you can fit, mm?</i>"
+
+                Giving your [butt] a squeeze, she hops off to turn the shop's open sign around and locks the door before closing all of the curtains.  Turning back to you, she pushes her ample cleavage up into
+                <if test="player.tallness ge 65"> your stomach.
+                    <elseif test="player.tallness ge 55"> your chest.
+                        <else> your face.</else>
+                    </elseif>
+                </if>
+                <i>"Now then,  let's see what you've got!"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>"Well, well. Looks like I was right about you from the start,"</i> she says, licking her lips again.  <i>"Just a taste first, I think..."</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your <output>cockDescript(x)</output>, giving it a few rapid licks before pulling off with a pop.
+
+                <i>"Oh yes,  I think you'll do rather nicely.  In fact, I think I'm going to give you a special treat."</i>  Smirking up at you, the busty dog-girl unbuttons her top just beneath her ample chest.  Before you can puzzle out what it is she's doing, she takes your [cock] and stuffs it into the hole and up through her cleavage
+                <if test="player.cocks[x].cockLength ge 5"> until the tip is poking out the top</if>.
+                <if test="player.cocks[x].cockThickness ge 3">
+                     Her face scrunches up uncomfortably for a moment, your girth straining the seams of her shirt.  With a series of loud pops, her buttons all go flying in different directions, letting her ample, creamy flesh bounce free with a bountiful jiggle.  <i>"Bloody hell, that was my favorite top..."</i> she whines for a moment before squeezing her chest back together with her hands.
+                    <else>She presses her arms inward to increase the pressure on your cock even further, and gives you another wide smile.  <i>"Ready for this, love?"</i></else>
+                </if>
+
+                She begins to slowly move her disproportionately massive chest up and down your cock,
+                <if test="player.cocks[x].cockLength gt 5">
+                    making sure to give the <output>player.cockHead(x)</output> a quick suck every time it breaches her mounds.
+                    <else>
+                        pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.
+                    </else>
+                </if>
+
+                <i>"Hvvng fnn?"</i>  she asks, pausing her pillowy assault to lick over the end of your pecker once again.  You can only moan in response from the wonderful wet, squishy feeling washing over your sensitive organ.  <i>"That's what I thought,"</i> she says, releasing you with a wet pop.
+
+                Vicky continues her marshmallowy assault for what feels like hours, slowing down every time you give even the slightest indication that you're about to cum.  <i>"You might hate me for this now, love, but trust me.  It'll feel so much better once you finally do cum."</i>  She may be right, but it's agony to get so close to orgasm only to back away, and then draw close once more.  She's practically driving you crazy with lust with her tantalizingly slow tit-fuck.  As you feel your cum nearly boiling away in your [balls], only to have her back away once again, something inside of you snaps.
+
+                You wrench your dick free of the confines of her pillowy mounds, and grab her around her plush middle.  She gives a surprised yelp as you nearly throw her against the counter and lift her butt up into the air.  <i>"Ooooh, someone's excited!"</i>  she nearly cheers, looking over her shoulder and wagging her plush rear up at you as her tail swishes back and forth, showing that she's nearly as consumed with lust as you are.  Flipping her long skirt up over her back, you violently pull her panties aside before you force your <output>cockDescript(x)</output> deep within her gushing folds.
+
+                She squeals in surprise and pleasure as she's penetrated, thrusting her ample hips back at you as you begin to pound into her.  Her ass jiggles violently with every thrust, sending ripples through her creamy flesh.  You grip her around her soft middle as you slam against her hips, barely noticing every squeak she makes as her thick thighs are pounded into the side of the counter.  <i>"Ah!  Oh, Marae, that feels incredible!"</i>  she nearly screams as her monocle finally loses its grip on her face and goes flying, thankfully landing safely on a pile of scrap cloth.  If you were more sound of mind, you'd probably have dreaded the cost of repairing the broken eyepiece.
+
+                Somehow, miraculously, you're able to hold back long enough to work your hands up her soft body and grip onto her enormous tits, mashing them in your hands as you find her rock-hard nipples.  She seems to be enjoying the rough treatment - quite a bit in fact - as the moment you give her hard nubs a quick tweak you feel her already rather tight pussy clamp down on your cock HARD.  It becomes nearly impossible to move as she cums explosively, screaming incoherently as she sprays your lower body with her liquid pleasure.
+
+                The sudden resistance is all it takes to finally bring you over the edge, as with a loud roar of your own, you bury yourself deep inside of her still tightly clutching cunt and release.  [if (cumNormal = true) It would seem that what she said earlier was correct.  Your pent-up need surges up through your dick, firing your fertile seed straight into her unprotected womb.  She lets out a submissive whimper as your spurting dick triggers aftershocks within her exhausted body.  At last, her body relaxes, freeing your softening dick.][if (cumMedium = true) Thick, sticky, ropes of your cream fire deep within her grasping pussy, attempting to extinguish the fire you lit within her with your frantic rutting.  She whimpers beneath you as your ejaculation sends another wave of pleasure through her body, which clamps down even harder onto you than before.  Thankfully, it's not long before she releases you once again, going limp on the counter and breathing raggedly.][if (cumHigh = true) Your urethra distends as it funnels your thick, potent seed into the tightly gripping walls of Victoria's pussy.  She clenches down as the white torrent sends her into yet another orgasm, shuddering beneath you as her already thick stomach begins to distend with its load.  Her pussy continues to milk your dick of its load even as she rides the high of her last orgasm, her body desperate to draw out more of your thick cream.  Finally she releases you, your softening dick forced back out with a thick stream of your jizz, which begins to pool out onto the floor.][if (cumVeryHigh = true) You feel your dick swell as it nearly explodes within her, pouring thick streams of your seed deep into her fertile womb.  She lets out another loud squeal as her body clenches down into yet another orgasm, gripping your dick tighter than you ever thought possible as it tries to milk you for all you have.  Her plush stomach visibly distends with its contents as you dump your load within her, lifting her small body up from the surface of the counter somewhat.  Thankfully, her body soon relaxes, releasing your softening prick, which is followed by a thick, white fountain of jizz that soaks your legs and pools out onto the floor.]
+                <if test="silly()">
+                    [if (cumExtreme = true) You groan loudly as your cock pours gallon after gallon of jizz deep into her spasming pussy.  She screams as another powerful orgasm wracks her body, triggered by the enormous amount of jizz you're shooting into her.  Her belly audibly sloshes with each of her movements as it continues to expand from the enormous amount of fluid you're pumping into her.  She attempts to clutch down on you as tightly as she can, trying to retain your enormous load; but the moment she releases even a little bit, she shoots forward from the enormous pressure of jizz within her, flopping down face-first onto some clothes on the other side of the counter.  Your thick cream continues to shoot up from between her limp legs, almost like a fountain, before gravity pulls it back down and it splatters all over the interior of the store.]
+                    <else>
+                        [if (cumExtreme = true) You groan loudly as your cock pours gallon after gallon of jizz deep into her spasming pussy.  She screams as another powerful orgasm wracks her body, triggered by the enormous amount of jizz you're shooting into her.  Her belly audibly sloshes with each of her movements as it continues to expand from the enormous amount of fluid you're pumping into her.  Thick streams of your seed shoot out all around your dick as she continues to squeeze down on you, trying to keep as much of it inside her massively pregnant-looking belly as possible before she finally releases, squirting your dick back out of her with a pop, followed by a veritable geyser of white. Your entire lower body is painted white as it gushes out, soaking into your clothes and covering the floor as she visibly deflates.]
+                    </else>
+                </if>
+
+                Finally, your strength gives out and you fall backwards onto the floor, exhausted.  A few seconds later, Vicky slips backward off of the counter and lands on top of you.  Like you, she's completely unable to move, however unlike you it's more because she is completely insensate.  Her eyes have rolled back into her head and her tongue hangs out as she occasionally mutters something incoherent.
+
+                A few seconds later your body finally gives out completely and you pass out.  You wake up about an hour later, still on the floor with Vicky on the ground near you, leaning up against the counter with her legs splayed, cum still dripping from her used pussy.  <i>"I uh... s'pose you wanna leave now?"</i>  She asks, still sounding a bit loopy.  She climbs unsteadily to her feet, and walks, a bit bowlegged to the door, unlocking it before slumping back down the wall.  <i>"Do come back for a visit, love!"</i>  You pull your pants back up and crawl back out into the street.  Climbing back to your feet, you notice a few passersby chuckling at you before you close the door.  Before you leave, you think you can make out Victoria muttering, <i>"Gonna have to clean this place up..."</i>
+            </text>
+        </lib>
+    </lib>
+    <lib name="YvonneArmorShop">
+        <text name="inside">
+            The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.
+
+            "<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>" Yvonne asks, fanning herself.
+
+            <if test="player.hasKeyItem('Dragon Eggshell') ge 0">
+
+                Though the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  "<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>"
+                <if test="player.gems lt 200">
+
+                    You can't afford that!
+                </if>
+            </if>
+        </text>
+        <text name="confirmBuy">
+            <if test="itype.def">
+                Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.
+                She finishes and turns to you, smiling broadly, "<i>Now, that will be <output>itype.value</output> gems, unless you want to change your mind?</i>"
+                <else>
+                    Yvonne gives you a serious look, then nods.  She pulls the shield off a rack and shows it to you.
+                    She smiles broadly, "<i>Now, that will be <output>itype.value</output> gems, unless you want to change your mind?</i>"
+                </else>
+            </if>
+        </text>
+        <lib name="yvonneFlirt">
+            <text name="intro">
+                You step closer, glancing from her bulging, barely contained tits to her pouting lips and expressive, violet eyes.  A shock of sweat-matted auburn hair obscures part of her face, but the tall, buxom blacksmith nervously brushes it aside as she watches.  Once you're close enough to touch, you quietly and sincerely proclaim, "<i>You're the most beautiful piece of craftsmanship in this entire store.</i>"
+
+                Yvonne steps back, and you swear you can see a blush blooming through her fur, a fiery glow of embarrassment that spreads to the upper curve of her immense mammaries.  She folds her arms over her apron, unintentionally smushing those gigantic tits closer together and deepening her cleavage into a canyon. An immense sigh causes the plush plateau to sway pendulously as Yvonne answers,
+            </text>
+            <text name="noGo">
+                "<i>Sorry, but you don't look like you'd be much fun.</i>"
+            </text>
+            <text name="go">
+                <if test="flags[kFLAGS.YVONNE_FUCK_COUNTER] eq 0">
+                    "<i>Well, I could use a quick fuck.  If you meant what you said, go change the sign to say 'out' please.</i>"
+                    <else>
+                        "<i>You want to go again, huh?  I do love working up a sweat...</i>"
+                    </else>
+                </if>
+            </text>
+            <text name="backOut">
+                You politely decline, not wanting to interrupt her work.  Yvonne sighs and begins to pump the bellows, muttering, "<i>Then you'd better be buying something!</i>"
+            </text>
+        </lib>
+        <text name="fuckYvonneInZeBlacksmith">
+            You walk over to the door and find a sign hanging in front of the window.  The side facing indoors has 'out' on it.  There's also a 'closed' sign hanging to the side of the doorframe.  You take the simple wood plaque in hand and flip it over - can't have anybody walking in on your sexual hijinks, can you?
+
+            A fuzzy, calloused hand grabs you by the scuff of the neck, lifts you off the ground and pushes you against the wall, slamming you into it forcefully enough that some weapons hanging nearby rattle dangerously.  A hot puff of breath hits your cheek, Yvonne's wet, canine nose bumping against your ear as she pants in your face.  She closes, and you feel her bare, sweat-soaked breasts sliding up and down your back, holding you up as firmly as her iron grip.  Yvonne's long, smooth tongue licks you from collarbone to chin, lapping up the sweat that's already starting to bead, the heat of the simmering forge-fires and your companion's well-warmed, powerful frame long since getting to you.
+
+            A distinctly feminine scent wafts up to your nostrils, intermingled with the blacksmith's own pungent body-odor, strong enough to make your head swim.  Yvonne's free hand begins removing your [armor], the blacksmith's confident motions suggesting she's had plenty of experience at this.  The aroma of the super-stacked bitch's estrus increases to the point where it nearly overpowers her salty sweat-smell, her nipples pressing hard into your back.  [EachCock] grows hard from the forceful attention, pinned between the wall and your belly.  Finished with your gear, Yvonne nips your neck and says, "<i>Nice package,
+            <if test="player.cockArea(x) lt 20"> runt
+            <elseif test="player.cockArea(x) lt 40"><output> player.mf("boy", "girl")</output>
+                <elseif test="player.cockArea(x) lt 60">big <output>player.mf("boy", "girl")</output>
+                    <else> player.mf("stud", "breeder")</else>
+                </elseif></elseif></if>
+            .</i>"
+
+            The forge-mistress abruptly releases you and steps away, the supporting cushion of her breasts no longer there to help balance you.  After a moment of confused stumbling, you catch yourself and turn around, curious as to just what the buxom bitch is doing.
+
+            Yvonne is on the ground on all fours.  Her tail is sticking nearly straight up, waving back and forth excitedly as she presents her curvy rump to you.  Surprisingly, her ass is much less muscular than her upper body, with a pair of pillowy buttcheeks that nearly conceal her soaked cunny from view.  You aren't sure if it's lubricant from her arousal, or sweat from working the forge all day, but Yvonne's thighs are absolutely drenched with moisture; a veritable slip n' slide of wetness that beckons you to bury your bone in the canine's feminine entrance.  She glances back over her shoulder, a submissive glint in her eyes as she begs, "<i>Come on, be my alpha.  This bitch needs a hot, wet fuck.  Do it!</i>"  What an odd dichotomy - one moment she's throwing you around, the next, begging to be mounted.  For all her power, it seems Yvonne still wants to be taken as a meek bitch.
+
+            You sidle up to the larger woman and begin aligning [oneCock] with her mammoth buns, the sweltering, pheromone-laced stink pouring from her body making it difficult not to fall on top of her and rut.  Her huge tits are squished against the floor, squeezing out obscenely to either side of the blacksmith's lithe, muscular torso.  When you push inside, her slick wet cunt squeezes your <output>cockDescript(x)</output> powerfully but affectionately.  Her potent vaginal muscles work your <output>cockDescript(x)</output> over, tightly embracing your turgid dickflesh as you begin to fuck her properly, plowing her sweat and love-juice soaked folds even while you struggle to reach up for her incredible breasts.
+
+            You get a handhold on the soft chest-flesh and begin to massage at what you can find, releasing appreciative moans from your partner.  Unfortunately, her furiously-wagging tail bludgeons you across the nose over and over, and you're forced to block it with one arm so that you can ream her snatch unimpeded by the woman's canine instincts.  She growls, but doesn't stop you.  You can see the muscles in her arms quivering, shaking, struggling to maintain her posture in spite of the overwhelming pleasure your <output>cockDescript(x)</output> is inflicting upon her poor womanhood.
+
+            A shiver runs through the dog-morph's entire body, culminating in a cock-wringing contraction that ripples through her cunt, milking you with her slippery twat.  It works, and you lean over her prostrate form as you bottom out inside her, her sweat-matted fur smearing your face with her scent as you cum.
+            <if test="player.hasKnot(x)">
+                Your knot fills, locking you inside her, securely blocking any escape for the jizz you're now filling her depths with.  Yvonne sighs dreamily, "<i>Just right...</i>" while spunk slides into her birth canal to infiltrate her womb.[if (cumQuantity > 500) "  The pearly goop spatters into her womb with egg-inseminating force, filling her beyond her wildest expectations."][if (cumQuantity > 1000) "  The blacksmith cries out in pain and pleasure, her belly rounding with your liquid, taking on a more pregnant, stuffed-silly look."][if (cumQuantity > 2000) "  Thanks to your knot, not a single drop escapes, and soon Yvonne's belly is as fat as her tits, cum-bloated in the extreme, a sloshing auburn tub packed with ivory sperm."]
+                <else>
+                    Your jizz bubbles out to fill her depths, the spunk surging through her as it moves towards her womb.  Yvone sighs dreamily, "<i>Ahhhh...</i>" while you empty your [balls] inside her unprotected womanhood.[if (cumQuantity > 500) "  The pearly goop spatters into her uterus with egg-inseminating force, filling the bitch beyond her wildest expectations."][if (cumQuantity > 1000)   The blacksmith cries out in pain and pleasure, her belly rounding with your liquid, looking positively pregnant.  Her twat begins to dribble sperm, creampied beyond belief.][if (cumQuantity > 2000) "  Unfortunately, as your virility makes itself known, Yvonne's body hits its limit, and jets of ivory spooge squirt from all sides of her cunny, dribbling into a pearly puddle on the floor."]
+                </else>
+            </if>
+             With a thoroughly cream-stuffed twat beneath you, you <if test="player.hasKnot(x)">pop<else>pull</else></if> out, accompanied by a exhalation of female pleasure.
+
+            Yvonne staggers up on her footpaws, groaning the whole time, a trail of white dribbling on the floor behind her.  Her tail wags happily, and she grabs you, pulling you into her sweaty bosom as she affectionately squeezes your [butt].  You aren't released until you feel dizzy, half-suffocated by her preponderance of breast-tissues and potent pheromones.
+
+            Yvonne tosses you your gear, and you dress in a daze.  Before you've completely finished, she's pushing you out into the street, covered in sex-stink and stumbling over your own [feet].  She calls out after you, "<i>Thanks babe, I gotta mop this mess up!</i>"
+        </text>
+    </lib>
+    <lib name="WeaponShop">
+        <text name="inside">
+            The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.
+            His piercing blue eyes meet yours as he notices you, and he barks, "<i>Buy something or fuck off.</i>"
+
+            What do you buy?
+        </text>
+        <text name="confirmBuy">
+            The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, "<i>That'll be <output>itype.value</output> gems.</i>"
+        </text>
+        <lib name="scarredBlade">
+            <text name="start">
+                The blacksmith turns an appraising eye on you as you approach him without looking at any of the weapons on display.
+
+                "<i>What do you want?</i>" he says, with characteristic gruffness.
+
+                You pull out the dark purple crystal you received from Sheila and ask if it would be possible to alloy a blade from it.  He doesn't move to take it from your outstretched hand just yet, but you can see a hint of interest in the softening of his features.  "<i>That's a lethicite.  Where'd you get it?</i>" asks the smith.
+
+                "<i>Stole it from a demon,</i>" you lie.
+
+                He considers for a moment more before responding.  "<i>Well done, then.</i>"  At that, he takes the crystal gingerly from your hand.  "<i>Never worked with this before.  I promise nothing, but come back in two weeks.  I should have an update for you.</i>"
+
+            </text>
+            <text name="middle">
+                The weaponsmith looks up from the forge as you enter.  "<i>Oh, it's you.  I'm not done yet.</i>"  With a gesture, he dismisses you.  You can only content yourself with looking at the finished products.
+
+
+            </text>
+            <text name="end">
+                The smith looks up as you enter, and you could swear the already-thin, no-nonsense line of his mouth becomes even tighter.  "<i>It's you.  Come here.</i>"
+
+                Obligingly, you approach him, though the forge's heat is stifling.  "<i>I finished.  The crystal impregnated the metal easily, but the blade itself... just have a look.</i>"  He picks up a tatty scabbard from a pile of half-finished weapons and holds it to you - as he does, you notice for the first time the numerous bandages on his hands.  A bit wary, you unsheathe the blade halfway; it hisses against the oiled leather as you draw it.  The revealed form of the weapon is slim, curved rakishly, and glows with an umbral light against the backdrop of the lit forge, but its broad side is covered in deep lines.
+
+                "<i>Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade.</i>"
+
+                Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.
+
+                "<i>Damnedest thing,</i>" he repeats, breaking your train of thought.  "<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go."  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.</i>
+
+            </text>
+        </lib>
+    </lib>
+</story>
