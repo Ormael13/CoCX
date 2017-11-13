@@ -944,6 +944,9 @@ public function followersCount():Number {
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
+    for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
+    }
 	return counter;
 }
 
@@ -957,6 +960,9 @@ public function slavesCount():Number {
 	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (ceraphIsFollower()) counter++;
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+    for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.SLAVE)){counter++;}
+    }
 	return counter;
 }
 
@@ -973,6 +979,9 @@ public function loversCount():Number {
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 	if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+	for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.LOVER)){counter++;}
+    }
 	return counter;
 }
 
