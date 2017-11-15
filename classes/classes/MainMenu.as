@@ -64,7 +64,7 @@ public class MainMenu extends BaseContent {
 		startupScreenBody();
 
 		var resume:Function = null;
-		if (player.str > 0)  //we're in a game, allow resume.
+		if (player)  //we're in a game, allow resume.
 			resume = playerMenu;
 
 		var achievements:Achievements = new Achievements();
