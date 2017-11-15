@@ -72,7 +72,7 @@ package classes.Scenes.Monsters
 				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse

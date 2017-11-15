@@ -20,7 +20,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
 			//(Effect: Grab + Physical Damage)
 			var damage:int = 25 + rand(10);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 			combatRoundOver();
 		}
@@ -31,7 +31,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
 				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				}
 			}
 			else {
@@ -54,7 +54,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
 			//(Effect; Heavy Damage)
 			var damage:Number = 100 + rand(50);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		
@@ -78,7 +78,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire;
 			combatRoundOver();
 		}

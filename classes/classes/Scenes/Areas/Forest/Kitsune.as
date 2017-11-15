@@ -68,7 +68,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
 			}
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 15 + player.sens / 10);
 			combatRoundOver();
 		}

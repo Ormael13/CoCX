@@ -831,6 +831,38 @@ use namespace kGAMECLASS;
 			if (damageMultiplier < 0.2) damageMultiplier = 0;
 			return int(damage * damageMultiplier);
 		}
+		public function reduceMagicDamage(damage:Number):Number {
+			var magicdamageMultiplier:Number = 1;
+			//EZ MOAD half damage
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) magicdamageMultiplier /= 2;
+			//Difficulty modifier flags.
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) magicdamageMultiplier *= 1.15;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) magicdamageMultiplier *= 1.3;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) magicdamageMultiplier *= 1.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) magicdamageMultiplier *= 2;
+			
+			//Opponents can critical too!
+			var crit:Boolean = false;
+			var critChanceMonster:int = 5;
+			/*if (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50) {
+				if (kGAMECLASS.monster.inte <= 100) critChanceMonster += (kGAMECLASS.monster.inte - 50) / 5;
+				if (kGAMECLASS.monster.inte > 100) critChanceMonster += 10;
+			}
+			if (kGAMECLASS.monster.findPerk(PerkLib.VitalShot) >= 0 && kGAMECLASS.monster.inte >= 50) critChanceMonster += 10;
+			*/if (rand(100) < critChanceMonster) {
+				crit = true;
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			//Apply magic damage resistance percentage.
+			damage *= damageMagicalPercent() / 100;
+			if (magicdamageMultiplier < 0.2) magicdamageMultiplier = 0;
+			return int(damage * magicdamageMultiplier);
+		}
 		
 		public override function lustPercent():Number {
 			var lust:Number = 100;
@@ -922,6 +954,50 @@ use namespace kGAMECLASS;
 					dynStats("lus", 0); //Force display arrow.
 				}
 				else {
+					damage = reduceDamage(damage);
+					//Wrath
+					var gainedWrath:Number = 0;
+					gainedWrath += damage / 10;
+					gainedWrath = Math.round(gainedWrath);
+					wrath += gainedWrath;
+					if (wrath > maxWrath()) wrath = maxWrath();
+					//game.HPChange(-damage, display);
+					HP -= damage;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('hp');
+					dynStats("lus", 0); //Force display arrow.
+				}
+				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					dynStats("lus", int(damage / 2));
+				}
+				//Prevent negatives
+				if (HP<=0){
+					HP = 0;
+					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
+				}
+			}
+			return returnDamage;
+		}
+		public override function takeMagicDamage(damage:Number, display:Boolean = false):Number{
+			//Round
+			damage = Math.round(damage);
+			// we return "1 damage received" if it is in (0..1) but deduce no HP
+			var returnDamage:int = (damage>0 && damage<1)?1:damage;
+			if (damage>0){
+				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+					mana -= damage / 2;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('mana');
+					dynStats("lus", 0); //Force display arrow.
+				}
+				else {
+					damage = reduceDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
 					gainedWrath += damage / 10;

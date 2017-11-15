@@ -82,7 +82,7 @@ package classes.Scenes.NPCs
 					lust += 5 * lustVuln;
 				}
 			}
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takeMagicDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}

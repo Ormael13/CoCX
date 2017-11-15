@@ -64,8 +64,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 				damage = Math.round(damage);
-				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				damage = player.reduceMagicDamage(damage);
+				player.takeMagicDamage(damage, true);
 				tempSpeedLoss += 10;
 				player.dynStats("spe", -10);
 			}

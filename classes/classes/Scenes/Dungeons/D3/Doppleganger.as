@@ -166,7 +166,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 			}
 			else if (spell == "whitefire")
 			{
@@ -174,7 +174,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 				damage2 = Math.round(damage2);
-				player.takeDamage(damage2, true);
+				player.takeMagicDamage(damage2, true);
 			}
 			
 			addTalkShit();

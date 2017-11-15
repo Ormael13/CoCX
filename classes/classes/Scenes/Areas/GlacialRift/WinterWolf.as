@@ -53,11 +53,11 @@ package classes.Scenes.Areas.GlacialRift
 				else {
 					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeDamage(damage);
+					player.takeMagicDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeDamage(damage);
+				player.takeMagicDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
@@ -70,11 +70,11 @@ package classes.Scenes.Areas.GlacialRift
 				}
 				else {
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeDamage(damage);
+					player.takeMagicDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeDamage(damage);
+				player.takeMagicDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}

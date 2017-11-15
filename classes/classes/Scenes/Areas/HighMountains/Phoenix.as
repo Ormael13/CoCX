@@ -53,8 +53,8 @@ package classes.Scenes.Areas.HighMountains
 						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your [armor] badly. ");
 					}
 					damage = Math.round(damage);
-					damage = player.reduceDamage(damage);
-					player.takeDamage(damage, true);
+					damage = player.reduceMagicDamage(damage);
+					player.takeMagicDamage(damage, true);
 				}
 				removeStatusEffect(StatusEffects.Uber);
 			}

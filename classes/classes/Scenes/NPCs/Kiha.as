@@ -42,7 +42,7 @@ package classes.Scenes.NPCs
 				if(!game.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
@@ -77,7 +77,7 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
 			combatRoundOver();
@@ -108,7 +108,7 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
 			combatRoundOver();
@@ -144,7 +144,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 			flame = Math.round(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
-			flame = player.takeDamage(flame, true);
+			flame = player.takeMagicDamage(flame, true);
 		}
 
 		override protected function performCombatAction():void

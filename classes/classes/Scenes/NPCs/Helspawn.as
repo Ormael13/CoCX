@@ -87,7 +87,7 @@ private function calledShot():void {
 			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 			}
 		}
 

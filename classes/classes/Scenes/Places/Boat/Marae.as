@@ -68,7 +68,7 @@ package classes.Scenes.Places.Boat
 				if (player.cor >= 50) outputText("The intensity of the pain is unbearable. ");
 				var damage:int = 100 + str + (player.cor * 5);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
 			combatRoundOver();

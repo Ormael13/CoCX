@@ -185,7 +185,7 @@ package classes.Scenes.NPCs
 			}
 			damage *= 0.25;
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}

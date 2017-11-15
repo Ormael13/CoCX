@@ -76,7 +76,7 @@ package classes.Scenes.NPCs
 					}
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 1.6;
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
-					damage2 = player.takeDamage(damage2, true);
+					damage2 = player.takeMagicDamage(damage2, true);
 				}
 			}
 			combatRoundOver();

@@ -232,7 +232,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 
 			outputText(" (" + damage + ")");
 		}
@@ -769,7 +769,7 @@ package classes.Scenes.Dungeons.D3
 				damage = 100 + weaponAttack + str - rand(player.tou);
 			}
 
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 
 			outputText(" ("+ damage +")");
 		}
@@ -779,7 +779,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh.");
 
 			var damage:Number = 75 + weaponAttack + str;
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 			outputText(" (" + damage +")");
 		}
 

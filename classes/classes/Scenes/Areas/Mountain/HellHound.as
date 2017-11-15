@@ -44,7 +44,7 @@
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
 				}
 				temp = Math.round(temp);
-				player.takeDamage(temp, true);
+				player.takeMagicDamage(temp, true);
 				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {

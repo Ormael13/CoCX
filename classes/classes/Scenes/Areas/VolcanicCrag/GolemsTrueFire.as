@@ -21,7 +21,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
 			else
 			{
-				outputText(" They chits you square in the chest from a few different angles. ");
+				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();

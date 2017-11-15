@@ -71,7 +71,7 @@ package classes.Scenes.NPCs
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
-			var damage:Number = player.takeDamage(this.inte + rand(10), true);
+			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
 			outputText("\n");
 			combatRoundOver();
 		}

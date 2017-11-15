@@ -150,7 +150,7 @@ import classes.internals.WeightedDrop;
 					damage2 = Math.round(damage2);
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
-					damage2 = player.takeDamage(damage2, true);
+					damage2 = player.takeMagicDamage(damage2, true);
 					game.combatRoundOver();
 					return;
 				}
@@ -159,7 +159,7 @@ import classes.internals.WeightedDrop;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
 				outputText("You are burned badly by the flames! ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 			}
 			game.combatRoundOver();
 		}

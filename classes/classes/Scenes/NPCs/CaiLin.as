@@ -82,13 +82,13 @@ import classes.internals.*;
 					player.spe -= 6;
 					showStatDown( 'spe' );
 					player.createStatusEffect(StatusEffects.MedusaVenom, 0,0,6,0);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
 				else {
 					player.createStatusEffect(StatusEffects.MedusaVenom,0,0,0,0);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
-				player.takeDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 			else {
 				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
@@ -129,10 +129,10 @@ import classes.internals.*;
 					player.spe -= 3;
 					showStatDown( 'spe' );
 					player.addStatusValue(StatusEffects.MedusaVenom,3,3);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
-				else player.takeDamage(5+rand(5));
-				player.takeDamage(5+rand(5));
+				else player.takeMagicDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 		}
 		
@@ -227,7 +227,7 @@ import classes.internals.*;
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.CAILIN_SPELLS_CASTED]++;
 		}

@@ -66,8 +66,8 @@ package classes.Scenes
 			outputText("-New tier 14 intelligence lvl-up perk: Mythic Spirituality. Req. Half-step-to Mythic Spirituality perk, 450+ int and 300+ wis. Effect: Inrease max Mana by 15000\n");
 			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
 			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to maticore score.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New type of resistance added: Magic Resistance. Some of enemy attacks that use non physical attacks/specials will req. this resistance to reduce recived damage. Rising intelligence and wisdom will let PC rise it to 25%. Other ways to increase it higher would be having specific status effects or perks.\n");
+			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now (-10% dmg).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

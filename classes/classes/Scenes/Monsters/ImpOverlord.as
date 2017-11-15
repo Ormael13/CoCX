@@ -66,7 +66,7 @@ package classes.Scenes.Monsters
 					outputText("It's super effective!  ");
 				}
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
@@ -105,7 +105,7 @@ package classes.Scenes.Monsters
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
 			combatRoundOver();
 		}

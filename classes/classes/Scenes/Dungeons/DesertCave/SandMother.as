@@ -69,7 +69,7 @@ package classes.Scenes.Dungeons.DesertCave
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 			combatRoundOver();
 		}
@@ -102,7 +102,7 @@ package classes.Scenes.Dungeons.DesertCave
 		public function eatALightningBolt():void {
 			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
 			var damage:int = 30 + rand(10);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		//*Whisper:

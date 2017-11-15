@@ -29,7 +29,7 @@ package classes.Scenes.Areas.DeepSea
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("The kraken slaps you with her tentacles, dealing ");
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.DeepSea
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("The kraken slaps you with her tentacles, dealing ");
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
 			outputText(" damage!");

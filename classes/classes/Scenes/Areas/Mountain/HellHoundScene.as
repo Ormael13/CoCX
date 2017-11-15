@@ -327,7 +327,7 @@ package classes.Scenes.Areas.Mountain
 				// --- CORRUPTION < 40 (and not masocistic - I lost track if there is such a perk) ---
 				if (player.cor < 40 && player.findPerk(PerkLib.Masochist) < 0) {
 					outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that he looks disappointed and maybe even somewhat sorry.");
-					player.takeDamage(20);
+					player.takeMagicDamage(20);
 					dynStats("lus", -99);
 					//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate
 					cleanupAfterCombat();

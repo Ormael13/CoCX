@@ -498,6 +498,10 @@ package classes
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
+		public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
 		public function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
 			if (applyRes) lustDmg *= lustPercent()/100;
 			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
@@ -3709,6 +3713,28 @@ package classes
 			if (displayMode) return temp;
 			else return rand(temp);
 		}
+		public function damageIntelligenceModifier(displayMode:Boolean = false):Number {
+			var temp:Number = 0;
+			if (inte < 25) temp = (inte * 0.8);
+			else if (inte < 50) temp = 5 + ((inte-25) * 0.6);
+			else if (inte < 75) temp = 8.75 + ((inte-50) * 0.4);
+			else if (inte < 100) temp = 11.25 + ((inte-75) * 0.2);
+			else temp = 12.5;
+			//displayMode is for stats screen.
+			if (displayMode) return temp;
+			else return rand(temp);
+		}
+		public function damageWisdomModifier(displayMode:Boolean = false):Number {
+			var temp:Number = 0;
+			if (wis < 25) temp = (wis * 0.8);
+			else if (wis < 50) temp = 5 + ((wis-25) * 0.6);
+			else if (wis < 75) temp = 8.75 + ((wis-50) * 0.4);
+			else if (wis < 100) temp = 11.25 + ((wis-75) * 0.2);
+			else temp = 12.5;
+			//displayMode is for stats screen.
+			if (displayMode) return temp;
+			else return rand(temp);
+		}
 
 		public function damagePercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
 			var mult:Number = 100;
@@ -3727,7 +3753,6 @@ package classes
 				if (armorMod < 0) armorMod = 0;
 			}
 			mult -= armorMod;
-
 			//--PERKS--
 			//Take damage you masochist!
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
@@ -3755,7 +3780,6 @@ package classes
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
 				mult *= 0.9;
 			}
-
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
@@ -3767,6 +3791,43 @@ package classes
 			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
 				mult *= 0.7;
 			}
+			//Defend = 50-(99)% reduction
+			if (hasStatusEffect(StatusEffects.Defend)) {
+				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
+					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
+						else mult *= 0.25;
+					}
+					else mult *= 0.4;
+				}
+				else mult *= 0.5;
+			}
+			// Uma's Massage bonuses
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
+				mult *= sac.value2;
+			}
+			//Round things off.
+			mult = Math.round(mult);
+			//Caps damage reduction at 95/99%.
+			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
+			return mult;
+		}
+		public function damageMagicalPercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
+			var mult:Number = 100;
+			//--BASE--
+			//Intelligence/Wisdom modifier.
+			if (!displayMode) {
+				mult -= damageIntelligenceModifier();
+				mult -= damageWisdomModifier();
+				if (mult < 75) mult = 75;
+			}
+			//--PERKS--
+			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+				mult *= 0.9;
+			}
+			//--STATUS AFFECTS--
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
