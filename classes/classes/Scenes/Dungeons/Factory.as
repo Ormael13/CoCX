@@ -128,12 +128,27 @@ package classes.Scenes.Dungeons
 			outputText("These drugs aside, maybe there is something else here that can be of use?  A quick search becomes a not so quick search as you realize how much junk is in these boxes.");
 			if (player.inte < 50) {
 				outputText(" Sadly, everything is either useless, corruptive or both.");
-				doNext(roomPremiumStorage);
 			}
 			else {
 				outputText(" While most of this stuff is either dangerous to use or just plain junk, you stumble on a book of spells.  This appears to be a tome on the theories behind magical wards.  This could be useful!");
-				inventory.takeItem(consumables.WARDTOM, roomPremiumStorage);
+                outputText("You open the tome and begin to read.  The first chapter is a primer on white magic, while most of it is already familiar to you it briefly goes over a handful of theories that are new to you.");
+                if (player.inte < 100) {
+                    outputText(" You feel yourself smarter for this.");
+                    dynStats("int", 1 + rand(4));
+                }
+                else outputText(" However, this does little for your already considerable intellect.");
+                if (!player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+                    outputText(" After rereading the chapter a few times and a few experiments, you’ve worked out how to put these theories to use in combat.  <b>You have learned a new spell: Charged Armor</b>");
+                    player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
+                }
+                else outputText(" As interesting as the theory is, you already have mastered the practical applications");
+                outputText(".  The final few chapters...  After a quick skim, you believe that with enough stone and some time, you could set up a ward around your camp.");
+                if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("  Sort of like Tel’Adre’s defences in miniature.");
+
+                player.createKeyItem("Warding Tome", 0, 0, 0, 0);
+                flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 1;
 			}
+            doNext(roomPremiumStorage);
 		}
 		
 		private function drinkCoffee():void {

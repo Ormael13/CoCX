@@ -172,7 +172,6 @@ public final class ConsumableLib extends BaseContent
 		public const VITAL_T:Consumable = new VitalityTincture();
 		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
 		public const W_STICK:WingStick = new WingStick();
-		public const WARDTOM:SimpleConsumable = mk("WardTom", "WardingTome", "a Warding Tome", 60, "This is the book of warding magic you’ve recovered from the Factory.  Perhaps you could learn something useful from it.", m.wardingTome);
 		//Aqua Seed - prawdopodobnie nazwa dla Siren TF ; Bubble Lemonade - nazwa dla Dark Slime TF
 		//TRANSFORMATIVE ITEMS
 		public const ABYSSIN:SimpleConsumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 10, "Pitch black ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 3));
